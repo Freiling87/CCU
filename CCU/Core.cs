@@ -21,12 +21,29 @@ namespace CCU
         public const string pluginVersion = "0.1.0";
 
         public static ManualLogSource MyLogger;
-        // so you can reference it in patches
 
         public void Awake()
         {
-            MyLogger = Logger;
-            Logger.LogMessage("Hello World!");
+            RogueLibs.LoadFromAssembly();
+
+            RoguePatcher patcher = new RoguePatcher(this);
+
+            ChunkEditor.Awake();
+            Factions.Awake();
         }
+
     }
+
+    public static class cTrait
+	{
+        public const string
+            Faction1 = "Faction1",
+            Faction2 = "Faction2",
+            Faction3 = "Faction3",
+            Faction4 = "Faction4",
+            Faction5 = "Faction5",
+            Faction6 = "Faction6",
+            Faction7 = "Faction7",
+            Faction8 = "Faction8";
+	}
 }
