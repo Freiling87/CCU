@@ -25,25 +25,19 @@ namespace CCU
         public void Awake()
         {
             RogueLibs.LoadFromAssembly();
-
-            RoguePatcher patcher = new RoguePatcher(this);
-
-            ChunkEditor.Awake();
-            Factions.Awake();
         }
-
     }
 
     public static class cTrait
 	{
         public const string
-            Faction1 = "Faction1",
-            Faction2 = "Faction2",
-            Faction3 = "Faction3",
-            Faction4 = "Faction4",
-            Faction5 = "Faction5",
-            Faction6 = "Faction6",
-            Faction7 = "Faction7",
-            Faction8 = "Faction8";
-	}
+            Faction_1_Aligned = "Faction 1 Aligned",
+            Faction_1_Hostile = "Faction 1 Hostile",
+            Faction_2_Aligned = "Faction 2 Aligned",
+            Faction_2_Hostile = "Faction 2 Hostile",
+            Faction_3_Aligned = "Faction 3 Aligned",
+            Faction_3_Hostile = "Faction 3 Hostile",
+            Faction_4_Aligned = "Faction 4 Aligned",
+            Faction_4_Hostile = "Faction 4 Hostile";
+    }
 }
