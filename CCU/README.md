@@ -2,6 +2,8 @@
 Streets of Rogue Custom Content Utilities
 
 ## Core
+- Player/Creator editions
+  - Player edition hides traits in creation menus, simply to keep them un-cluttered
 
 ## Behaviors
 - NPC behavior traits

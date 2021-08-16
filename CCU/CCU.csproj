@@ -66,6 +66,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors.cs" />
+    <Compile Include="Appearances.cs" />
     <Compile Include="LevelEditor.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Factions.cs" />
