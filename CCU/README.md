@@ -1,12 +1,18 @@
 # Streets of Rogue Custom Content Utilities
 
-N.B.: Bold text indicates completed/functional features. Any feature names not bolded are planned but not yet implemented.
+N.B.: Asterisk indicates non-implemented features, currently planned.
 
 ## Core
-- Player/Creator editions
-  - Player edition hides traits in creation menus, simply to keep them un-cluttered
 
-## Appearances
+### Player/Creator editions
+
+Player edition hides designer content to keep their experience as close to vanilla as possible.
+
+- Hidden from Character Creation Menus
+- Hidden from Character Sheet page *
+- Hidden from HUD Trait list *
+
+## Appearances *
 
 Effects should be self-explanatory. Let me know if any are unclear.
 
@@ -18,8 +24,9 @@ Effects should be self-explanatory. Let me know if any are unclear.
 
 And so on. There will be traits for skin color, hair color, hair style, and facial hair.
 
-## Behaviors
-  - Increase Trait slots by 1, since it will not affect player character
+## Behaviors *
+
+- Increase Trait slots by 1, since it will not affect player character *
 
 Effects should be self-explanatory. Let me know if any are unclear.
 
@@ -91,9 +98,9 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |AI: Various Guilty
 |AI: Various Scumbag
 
-## Faction Traits
+## Faction Traits *
 
-- Treats ownership as shared (hopefully possible)
+- Combine Owner IDs (hopefully possible) *
 
 |Trait								|Effect													|
 |:----------------------------------|:------------------------------------------------------|
@@ -106,22 +113,25 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Faction 4 Aligned					|NPC aligned with all NPCs with same trait				|
 |Faction 4 Hostile					|NPC hostile to all NPCs with Faction 4 Aligned			|
 
-## Level Editor
+## Chunk Editor Keyboard Hotkeys
 
-|Input								|Function												|
-|:----------------------------------|:------------------------------------------------------|
-|Arrow Keys							|Set Object/NPC placement direction						|
-|Q, E								|Rotate Object/NPC placement direction					|
-|**[1 - 9]**		     			|Switch to Layer (Wall, Floor, Floor2, etc.)			|
-|Ctrl + [1 - 9]						|Switch to Layer and open Type Selector					|
-|Ctrl + Z							|Undo													|
-|Ctrl + Y							|Redo													|
-|**Ctrl + S** 						|Save current file										|
-|**Ctrl + O**						|Open file												|
-|**Ctrl + A**						|Select all in Layer (Toggle)							|
-|F5									|Quicksave current file (no confirmation)				|
-|F9									|Quickload current file (no confirmation)				|
-|Tab								|Move through input fields								|
+|Key 1				|Key 2				|Layer				|Function												|
+|:------------------|:-----------------:|:------------------|:------------------------------------------------------|
+|F5	*				|					|					|Quicksave current file (skip confirmation)
+|F9	*				|					|					|Quickload current file (skip confirmation)
+|[1 - 9]		    |					|					|Switch to Layer (Wall, Floor, Floor2, etc.)
+|[1 - 9] *			|Ctrl				|					|Switch to Layer and open Type Selector
+|Tab *				|					|					|Move through input fields				
+|Tab *				|Ctrl				|					|Move through input fields, reversed	
+|Shift *			|Ctrl				|Patrol				|Show only patrol points in the current Patrol ID
+|A					|Ctrl				|					|Select all in Layer (Toggle)			
+|O					|Ctrl				|					|Open file								
+|Q, E *				|					|Object<br>NPC		|Rotate direction<br><br>Works in Draw or Select mode
+|Q, E *				|					|Patrol				|Increase/Decrease Patrol Point ID<br><br>Works in Draw or Select mode
+|S 					|Ctrl				|					|Save current file						
+|Y *				|Ctrl				|					|Redo										
+|Z *				|Ctrl				|					|Undo									
+|Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
 
-## Others
+## Others *
 - Spawn objects placed regardless of district (currently limited to district-appropriate objects)

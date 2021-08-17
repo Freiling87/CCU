@@ -16,7 +16,7 @@ namespace CCU
 		public static GameController gc => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[] { })]
-        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject)
+        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject, InputField ___pointNumPatrolPoint)
         {
 			if (!gc.loadCompleteReally || gc.loadLevel.restartingGame)
 				return false;
@@ -36,48 +36,147 @@ namespace CCU
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S) && !__instance.InputFieldFocused())
 				__instance.ScrollS();
 
-			// Arrow Keys - Object Orientation
+			// Arrow Keys - Object Orientation Selection Toggle
 
 			if (Input.GetKey(KeyCode.UpArrow))
-				___directionObject.text = "N";
+			{
+				if (___directionObject.text == "N")
+					___directionObject.text = "None";
+				else
+					___directionObject.text = "N";
+			}
 			if (Input.GetKey(KeyCode.DownArrow))
-				___directionObject.text = "S";
+			{
+				if (___directionObject.text == "S")
+					___directionObject.text = "None";
+				else
+					___directionObject.text = "S";
+			}
 			if (Input.GetKey(KeyCode.RightArrow))
-				___directionObject.text = "E";
+			{
+				if (___directionObject.text == "E")
+					___directionObject.text = "None";
+				else
+					___directionObject.text = "E";
+			}
 			if (Input.GetKey(KeyCode.LeftArrow))
-				___directionObject.text = "W";
+			{
+				if (___directionObject.text == "W")
+					___directionObject.text = "None";
+				else
+					___directionObject.text = "W";
+			}
+
+			// Q & E - Object Orientation Rotation
+
+			// __instance.pointNumPatrolPoint.text
+			// levelEditorTile.patrolNum
+
+			if (Input.GetKey(KeyCode.Q))
+			{
+				if (__instance.currentLayer == "Agents" || __instance.currentLayer == "Objects")
+				{
+					if (___directionObject.text == "N")
+						___directionObject.text = "W";
+					else if (___directionObject.text == "W")
+						___directionObject.text = "S";
+					else if (___directionObject.text == "S")
+						___directionObject.text = "E";
+					else if (___directionObject.text == "E")
+						___directionObject.text = "N";
+				}
+				else if (__instance.currentLayer == "PatrolPoints")
+					___pointNumPatrolPoint.text = (int.Parse(___pointNumPatrolPoint.text) - 1).ToString();
+			}
+			if (Input.GetKey(KeyCode.E))
+			{
+				if (__instance.currentLayer == "Agents" || __instance.currentLayer == "Objects")
+				{
+					if (___directionObject.text == "N")
+						___directionObject.text = "E";
+					else if (___directionObject.text == "E")
+						___directionObject.text = "S";
+					else if (___directionObject.text == "S")
+						___directionObject.text = "W";
+					else if (___directionObject.text == "W")
+						___directionObject.text = "N";
+				}
+				else if (__instance.currentLayer == "PatrolPoints")
+					___pointNumPatrolPoint.text = (int.Parse(___pointNumPatrolPoint.text) + 1).ToString();
+			}
 
 			// Number keys - Layer
+			// Ctrl + Number keys - Layer + Selector menu
 
 			if (Input.GetKey(KeyCode.Alpha1))
 				__instance.PressedWallsButton();
+			if (Input.GetKey(KeyCode.Alpha1) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedWallsButton();
+				__instance.PressedLoadWalls();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha2))
 				__instance.PressedFloorsButton();
-			
+			if (Input.GetKey(KeyCode.Alpha2) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedFloorsButton();
+				__instance.PressedLoadFloors();
+			}
+
 			if (Input.GetKey(KeyCode.Alpha3))
 				__instance.PressedFloors2Button();
+			if (Input.GetKey(KeyCode.Alpha2) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedFloors2Button();
+				__instance.PressedLoadFloors();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha4))
 				__instance.PressedFloors3Button();
+			if (Input.GetKey(KeyCode.Alpha4) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedFloors3Button();
+				__instance.PressedLoadFloors();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha5))
 				__instance.PressedObjectsButton();
+			if (Input.GetKey(KeyCode.Alpha5) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedObjectsButton();
+				__instance.PressedLoadObjects();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha6))
 				__instance.PressedAgentsButton();
+			if (Input.GetKey(KeyCode.Alpha6) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedAgentsButton();
+				__instance.PressedLoadAgents();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha7))
 				__instance.PressedItemsButton();
+			if (Input.GetKey(KeyCode.Alpha7) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedItemsButton();
+				__instance.PressedLoadItems();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha8))
 				__instance.PressedLightsButton();
+			if (Input.GetKey(KeyCode.Alpha8) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			{
+				__instance.PressedLightsButton();
+				__instance.PressedLoadLights();
+			}
 
 			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
-			
+
 			// Saving & Loading
-			
+
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.O))
 				__instance.PressedLoadChunksFile();
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S))
@@ -178,6 +277,11 @@ namespace CCU
 		{
 			// LevelEditor.inputFieldList.isFocused
 			// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
+			
+			// levelEditor.floors2Button.transform.Find("ButtonEdges").GetComponent<Image>().color = Color.white;
+			// White is for currently click-activated, but might use another color to show which is tab-active, pending player confirmation
+
+			// __instance.inputFieldList
 
 			/*
 			 *		Wall
