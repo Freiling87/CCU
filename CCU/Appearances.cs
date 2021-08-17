@@ -14,6 +14,7 @@ namespace CCU
 
 	public static class Appearance
 	{
+		#region lists
 		private static List<string> FacialHairTraits = new List<string>()
 		{
 			cTrait.Appearance_FacialHair_Beard,
@@ -24,49 +25,134 @@ namespace CCU
 		};
 		private static List<string> HairColorTraits = new List<string>()
 		{
+			cTrait.Appearance_HairColor_Black,
+			cTrait.Appearance_HairColor_Blonde,
+			cTrait.Appearance_HairColor_Blue,
+			cTrait.Appearance_HairColor_Brown,
+			cTrait.Appearance_HairColor_Green,
+			cTrait.Appearance_HairColor_Grey,
+			cTrait.Appearance_HairColor_Orange,
+			cTrait.Appearance_HairColor_Pink,
+			cTrait.Appearance_HairColor_Purple,
+			cTrait.Appearance_HairColor_Red
 		};
 		private static List<string> HairstyleTraits = new List<string>()
 		{
+			cTrait.Appearance_Hairstyle_Afro,
+			cTrait.Appearance_Hairstyle_Bald,
+			cTrait.Appearance_Hairstyle_Balding,
+			cTrait.Appearance_Hairstyle_BangsLong,
+			cTrait.Appearance_Hairstyle_BangsMedium,
+			cTrait.Appearance_Hairstyle_Curtains,
+			cTrait.Appearance_Hairstyle_Cutoff,
+			cTrait.Appearance_Hairstyle_FlatLong,
+			cTrait.Appearance_Hairstyle_HoboBeard,
+			cTrait.Appearance_Hairstyle_Leia,
+			cTrait.Appearance_Hairstyle_MessyLong,
+			cTrait.Appearance_Hairstyle_Military,
+			cTrait.Appearance_Hairstyle_Mohawk,
+			cTrait.Appearance_Hairstyle_Normal,
+			cTrait.Appearance_Hairstyle_NormalHigh,
+			cTrait.Appearance_Hairstyle_Pompadour,
+			cTrait.Appearance_Hairstyle_Ponytail,
+			cTrait.Appearance_Hairstyle_PuffyLong,
+			cTrait.Appearance_Hairstyle_PuffyShort,
+			cTrait.Appearance_Hairstyle_Sidewinder,
+			cTrait.Appearance_Hairstyle_Spiky,
+			cTrait.Appearance_Hairstyle_SpikyShort,
+			cTrait.Appearance_Hairstyle_Suave,
+			cTrait.Appearance_Hairstyle_Wave
 		};
 		private static List<string> SkinColorTraits = new List<string>()
 		{
+			cTrait.Appearance_SkinColor_BlackSkin,
+			cTrait.Appearance_SkinColor_GoldSkin,
+			cTrait.Appearance_SkinColor_LightBlackSkin,
+			cTrait.Appearance_SkinColor_MixedSkin,
+			cTrait.Appearance_SkinColor_PaleSkin,
+			cTrait.Appearance_SkinColor_PinkSkin,
+			cTrait.Appearance_SkinColor_SuperPaleSkin,
+			cTrait.Appearance_SkinColor_WhiteSkin,
+			cTrait.Appearance_SkinColor_ZombieSkin1,
+			cTrait.Appearance_SkinColor_ZombieSkin2
 		};
-
-		internal static bool HasFacialHairTrait(Agent agent)
+		#endregion
+		#region Rollers
+		internal static void RollFacialHair(AgentHitbox agentHitBox, Agent agent)
 		{
+			List<string> pool = new List<string>();
+			var random = new System.Random();
+
 			foreach (string trait in FacialHairTraits)
 				if (agent.statusEffects.hasTrait(trait))
-					return true;
+					pool.Add(trait);
 
-			return false;
+			if (pool.Count == 0)
+				return;
+
+			string selection = pool[random.Next(pool.Count)];
+			agentHitBox.facialHairType = selection.Substring(selection.LastIndexOf("_"));
+			agentHitBox.agent.oma.facialHairType = agentHitBox.agent.oma.convertFacialHairTypeToInt(agentHitBox.facialHairType);
+
+			if (agentHitBox.facialHairType == "None" || agentHitBox.facialHairType == "" || agentHitBox.facialHairType == null)
+			{
+				agentHitBox.facialHair.gameObject.SetActive(false);
+				agentHitBox.facialHairWB.gameObject.SetActive(false);
+			}
+			else
+			{
+				agentHitBox.facialHair.gameObject.SetActive(true);
+				agentHitBox.facialHairWB.gameObject.SetActive(true);
+			}
 		}
-		public static bool HasHairColorTrait(Agent agent)
+		internal static void RollHairColor(AgentHitbox agentHitBox, Agent agent)
 		{
-			foreach (string trait in HairColorTraits)
-				if (agent.statusEffects.hasTrait(trait))
-					return true;
+			List<string> pool = new List<string>();
+			var random = new System.Random();
 
-			return false;
+			foreach (string trait in FacialHairTraits)
+				if (agent.statusEffects.hasTrait(trait))
+					pool.Add(trait);
+
+			if (pool.Count == 0)
+				return;
+
+			//agentHitBox.hairColor = pool[random.Next(pool.Count)];
 		}
-		public static bool HasHairstyleTrait(Agent agent)
+		internal static void RollHairstyle(AgentHitbox agentHitBox, Agent agent)
 		{
-			foreach (string trait in HairstyleTraits)
-				if (agent.statusEffects.hasTrait(trait))
-					return true;
+			List<string> pool = new List<string>();
+			var random = new System.Random();
 
-			return false;
+			foreach (string trait in FacialHairTraits)
+				if (agent.statusEffects.hasTrait(trait))
+					pool.Add(trait);
+
+			if (pool.Count == 0)
+				return;
+
+			agentHitBox.hairType = pool[random.Next(pool.Count)];
 		}
-		public static bool HasSkinTrait(Agent agent)
+		internal static void RollSkinColor(AgentHitbox agentHitBox, Agent agent)
 		{
-			foreach (string trait in SkinColorTraits)
-				if (agent.statusEffects.hasTrait(trait))
-					return true;
+			List<string> pool = new List<string>();
+			var random = new System.Random();
 
-			return false;
+			foreach (string trait in FacialHairTraits)
+				if (agent.statusEffects.hasTrait(trait))
+					pool.Add(trait);
+
+			if (pool.Count == 0)
+				return;
+
+			string selection = pool[random.Next(pool.Count)];
+			agentHitBox.GetColorFromString(selection, "Skin");
+			agentHitBox.skinColorName = selection;
 		}
+		#endregion
 	}
 
-    [HarmonyPatch(declaringType: typeof(AgentHitbox))]
+	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
     public static class AgentHitBox_Patches
     {
 		public static GameController gc => GameController.gameController;
@@ -83,19 +169,13 @@ namespace CCU
 
 				__instance.MustRefresh();
 
-				if (Appearance.HasSkinTrait(agent))
-					__instance.chooseSkinColor(agent.agentName);
-
-				if (Appearance.HasHairstyleTrait(agent))
-					__instance.chooseHairType(agent.agentName);
-
-				if (Appearance.HasFacialHairTrait(agent))
-					__instance.chooseFacialHairType(agent.agentName);
+				Appearance.RollFacialHair(__instance, agent);
+				//Appearance.RollHairstyle(__instance, agent);
+				//Appearance.RollSkinColor(__instance, agent);
 
 				__instance.SetCantShowHairUnderHeadPiece();
 
-				if (Appearance.HasHairColorTrait(agent))
-					__instance.chooseHairColor(agent.agentName, false);
+				//Appearance.RollHairColor(__instance, agent);
 
 				if (agent.isPlayer > 0 && !__instance.hasSetup && agent.localPlayer && !gc.fourPlayerMode)
 				{
@@ -119,63 +199,95 @@ namespace CCU
 		}
     }
 
-	public class Appearance_HairColor_Normal : CustomTrait
+	public class Appearance_FacialHair_Beard : CustomTrait
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Appearance_HairColor_Normal>()
-				.WithDescription(new CustomNameInfo("This NPC type will have varied hair colors when spawned as an NPC."))
-				.WithName(new CustomNameInfo("Appearance: Hair Color - Normal"))
+			RogueLibs.CreateCustomTrait<Appearance_FacialHair_Beard>()
+				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
+				.WithName(new CustomNameInfo("Appearance: Facial Hair - Beard"))
 				.WithUnlock(new TraitUnlock
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = Core.designerEdition,
+					IsAvailableInCC = true,
 					UnlockCost = 0,
 				});
 		}
 		public override void OnAdded() { }
 		public override void OnRemoved() { }
 	}
-	public class Appearance_HairColor_NormalNoGrey : CustomTrait
+	public class Appearance_FacialHair_Mustache : CustomTrait
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Appearance_HairColor_NormalNoGrey>()
-				.WithDescription(new CustomNameInfo("This NPC type will have varied hair colors when spawned as an NPC."))
-				.WithName(new CustomNameInfo("Appearance: Hair Color - Normal, No Grey"))
+			RogueLibs.CreateCustomTrait<Appearance_FacialHair_Mustache>()
+				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
+				.WithName(new CustomNameInfo("Appearance: Facial Hair - Mustache"))
 				.WithUnlock(new TraitUnlock
 				{
-					Cancellations =
-					{
-					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = Core.designerEdition,
+					IsAvailableInCC = true,
 					UnlockCost = 0,
 				});
 		}
 		public override void OnAdded() { }
 		public override void OnRemoved() { }
 	}
-	public class Appearance_HairColor_Wild : CustomTrait
+	public class Appearance_FacialHair_MustacheCircus : CustomTrait
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Appearance_HairColor_Wild>()
-				.WithDescription(new CustomNameInfo("This NPC type will have varied hair colors when spawned as an NPC."))
-				.WithName(new CustomNameInfo("Appearance: Hair Color - Wild"))
+			RogueLibs.CreateCustomTrait<Appearance_FacialHair_MustacheCircus>()
+				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
+				.WithName(new CustomNameInfo("Appearance: Facial Hair - Circus Mustache"))
 				.WithUnlock(new TraitUnlock
 				{
-					Cancellations =
-					{
-					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = Core.designerEdition,
+					IsAvailableInCC = true,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
+	public class Appearance_FacialHair_MustacheRedneck : CustomTrait
+	{
+		[RLSetup]
+		public static void Setup()
+		{
+			RogueLibs.CreateCustomTrait<Appearance_FacialHair_MustacheRedneck>()
+				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
+				.WithName(new CustomNameInfo("Appearance: Facial Hair - Redneck Mustache"))
+				.WithUnlock(new TraitUnlock
+				{
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = true,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
+	public class Appearance_FacialHair_None : CustomTrait
+	{
+		[RLSetup]
+		public static void Setup()
+		{
+			RogueLibs.CreateCustomTrait<Appearance_FacialHair_None>()
+				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
+				.WithName(new CustomNameInfo("Appearance: Facial Hair - None"))
+				.WithUnlock(new TraitUnlock
+				{
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = true,
 					UnlockCost = 0,
 				});
 		}
