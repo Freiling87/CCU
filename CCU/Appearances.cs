@@ -14,33 +14,32 @@ namespace CCU
 
 	public static class Appearance
 	{
+		private static List<string> FacialHairTraits = new List<string>()
+		{
+			cTrait.Appearance_FacialHair_Beard,
+			cTrait.Appearance_FacialHair_Mustache,
+			cTrait.Appearance_FacialHair_MustacheCircus,
+			cTrait.Appearance_FacialHair_MustacheRedneck,
+			cTrait.Appearance_FacialHair_None
+		};
 		private static List<string> HairColorTraits = new List<string>()
 		{
-			cTrait.Appearance_HairColor_Normal,
-			cTrait.Appearance_HairColor_NormalNoGrey,
-			cTrait.Appearance_HairColor_Wild
 		};
 		private static List<string> HairstyleTraits = new List<string>()
 		{
-			cTrait.Appearance_Hair_Balding,
-			cTrait.Appearance_Hair_Bangs,
-			cTrait.Appearance_Hair_CanHaveFacialHair,
-			cTrait.Appearance_Hair_Female,
-			cTrait.Appearance_Hair_Long,
-			cTrait.Appearance_Hair_Male,
-			cTrait.Appearance_Hair_NotHair,
-			cTrait.Appearance_Hair_Punk,
-			cTrait.Appearance_Hair_Short,
-			cTrait.Appearance_Hair_ShortFemale,
-			cTrait.Appearance_Hair_Stylish,
 		};
 		private static List<string> SkinColorTraits = new List<string>()
 		{
-			cTrait.Appearance_Skin_Any,
-			cTrait.Appearance_Skin_Shapeshifter,
-			cTrait.Appearance_Skin_Vampire,
-			cTrait.Appearance_Skin_Zombie
 		};
+
+		internal static bool HasFacialHairTrait(Agent agent)
+		{
+			foreach (string trait in FacialHairTraits)
+				if (agent.statusEffects.hasTrait(trait))
+					return true;
+
+			return false;
+		}
 		public static bool HasHairColorTrait(Agent agent)
 		{
 			foreach (string trait in HairColorTraits)
@@ -90,7 +89,7 @@ namespace CCU
 				if (Appearance.HasHairstyleTrait(agent))
 					__instance.chooseHairType(agent.agentName);
 
-				if (agent.statusEffects.hasTrait(cTrait.Appearance_FacialHair))
+				if (Appearance.HasFacialHairTrait(agent))
 					__instance.chooseFacialHairType(agent.agentName);
 
 				__instance.SetCantShowHairUnderHeadPiece();
@@ -130,11 +129,6 @@ namespace CCU
 				.WithName(new CustomNameInfo("Appearance: Hair Color - Normal"))
 				.WithUnlock(new TraitUnlock
 				{
-					Cancellations = 
-					{
-						cTrait.Appearance_HairColor_NormalNoGrey,
-						cTrait.Appearance_HairColor_Wild 
-					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
 					IsAvailableInCC = Core.designerEdition,
@@ -156,8 +150,6 @@ namespace CCU
 				{
 					Cancellations =
 					{
-						cTrait.Appearance_HairColor_Normal,
-						cTrait.Appearance_HairColor_Wild
 					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
@@ -180,8 +172,6 @@ namespace CCU
 				{
 					Cancellations =
 					{
-						cTrait.Appearance_HairColor_Normal,
-						cTrait.Appearance_HairColor_NormalNoGrey
 					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,

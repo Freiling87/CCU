@@ -1,7 +1,12 @@
+
 # Streets of Rogue Custom Content Utilities
+
+<p align="center">
 
 | :exclamation:  Asterisk indicates non-implemented features currently planned.   |
 |---------------------------------------------------------------------------------|
+
+</p>
 
 ## Core
 
@@ -21,9 +26,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Appearance: Hair Color - Normal					|
-|Appearance: Hair Color - Normal, No Grey			|
-|Appearance: Hair Color - Wild						|
+
 
 And so on. There will be traits for skin color, hair color, hair style, and facial hair.
 
