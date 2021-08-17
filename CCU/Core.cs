@@ -25,6 +25,8 @@ namespace CCU
 
         public void Awake()
         {
+            MyLogger = Logger;
+
             new Harmony(pluginGUID).PatchAll();
             RogueLibs.LoadFromAssembly();
         }
@@ -113,7 +115,7 @@ namespace CCU
             Appearance_Hair_Short = "Appearance_Hair_Short",
             Appearance_Hair_ShortFemale = "Appearance_Hair_ShortFemale",
             Appearance_Hair_Stylish = "Appearance_Hair_Stylish",
-            Appearance_Hair_Bizarro = "Appearance_Hair_Bizarro",
+            Appearance_Hair_NotHair = "Appearance_Hair_NotHair",
             Appearance_Skin_Any = "Appearance_Skin_Any",
             Appearance_Skin_Shapeshifter = "Appearance_Skin_Shapeshifter",
             Appearance_Skin_Vampire = "Appearance_Skin_Vampire",

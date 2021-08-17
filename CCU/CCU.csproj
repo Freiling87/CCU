@@ -80,4 +80,12 @@
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>set gameDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
+set dll="CCU.dll"
+if exist %25gameDirectory%25 (ECHO "Destination directory found") ELSE (ECHO "Destination directory not found")
+if exist %25dll%25 (ECHO "Mod DLL found") ELSE (ECHO "Mod DLL not found")
+if exist %25gameDirectory%25 copy /y %25dll%25 %25gameDirectory%25
+if exist %25gameDirectory%25 Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

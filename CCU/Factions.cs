@@ -48,7 +48,6 @@ namespace CCU
             return true;
         }
     }
-
     public class Faction_1_Aligned : CustomTrait
 	{
         [RLSetup]
@@ -154,7 +153,7 @@ namespace CCU
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_1_Hostile>()
+            RogueLibs.CreateCustomTrait<Faction_3_Hostile>()
                 .WithDescription(new CustomNameInfo("This character is Hostile to all characters aligned with Faction 3.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
                 .WithName(new CustomNameInfo("Faction 3 Hostile"))
                 .WithUnlock(new TraitUnlock
@@ -194,7 +193,7 @@ namespace CCU
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_1_Hostile>()
+            RogueLibs.CreateCustomTrait<Faction_4_Hostile>()
                 .WithDescription(new CustomNameInfo("This character is Hostile to all characters aligned with Faction 4.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
                 .WithName(new CustomNameInfo("Faction 4 Hostile"))
                 .WithUnlock(new TraitUnlock

@@ -15,8 +15,8 @@ namespace CCU
 	{
 		public static GameController gc => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName:"LevelEditor.FixedUpdate", argumentTypes: new Type[] { })]
-        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject)
+		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[] { })]
+        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription)
         {
 			if (!gc.loadCompleteReally || gc.loadLevel.restartingGame)
 				return false;
@@ -49,23 +49,31 @@ namespace CCU
 
 			// Number keys - Layer
 
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha1))
+			if (Input.GetKey(KeyCode.Alpha1))
 				__instance.PressedWallsButton();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha2))
+
+			if (Input.GetKey(KeyCode.Alpha2))
 				__instance.PressedFloorsButton();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha3))
+			
+			if (Input.GetKey(KeyCode.Alpha3))
 				__instance.PressedFloors2Button();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha4))
+
+			if (Input.GetKey(KeyCode.Alpha4))
 				__instance.PressedFloors3Button();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha5))
+
+			if (Input.GetKey(KeyCode.Alpha5))
 				__instance.PressedObjectsButton();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha6))
+
+			if (Input.GetKey(KeyCode.Alpha6))
 				__instance.PressedAgentsButton();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha7))
+
+			if (Input.GetKey(KeyCode.Alpha7))
 				__instance.PressedItemsButton();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha8))
+
+			if (Input.GetKey(KeyCode.Alpha8))
 				__instance.PressedLightsButton();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha9))
+
+			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			
 			// Saving & Loading
