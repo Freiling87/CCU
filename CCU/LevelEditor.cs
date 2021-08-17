@@ -16,7 +16,7 @@ namespace CCU
 		public static GameController gc => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[] { })]
-        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription)
+        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject)
         {
 			if (!gc.loadCompleteReally || gc.loadLevel.restartingGame)
 				return false;

@@ -61,7 +61,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_1_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 }) ;
 		}
@@ -81,7 +81,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_1_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }
@@ -101,7 +101,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_2_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }
@@ -121,7 +121,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_2_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }
@@ -141,7 +141,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_3_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }
@@ -161,7 +161,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_3_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }
@@ -181,7 +181,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_4_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }
@@ -201,7 +201,7 @@ namespace CCU
                     Cancellations = { cTrait.Faction_4_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }

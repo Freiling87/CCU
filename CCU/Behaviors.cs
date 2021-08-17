@@ -21,7 +21,7 @@ namespace CCU
                     Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
+                    IsAvailableInCC = Core.designerEdition,
                     UnlockCost = 0,
                 });
         }

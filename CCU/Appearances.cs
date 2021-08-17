@@ -137,7 +137,7 @@ namespace CCU
 					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 0,
 				});
 		}
@@ -161,7 +161,7 @@ namespace CCU
 					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 0,
 				});
 		}
@@ -185,7 +185,7 @@ namespace CCU
 					},
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 0,
 				});
 		}

@@ -118,7 +118,9 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Ctrl + Y							|Redo													|
 |**Ctrl + S** 						|Save current file										|
 |**Ctrl + O**						|Open file												|
-|**Ctrl + A**						|Select all in Layer									|
+|**Ctrl + A**						|Select all in Layer (Toggle)							|
+|F5									|Quicksave current file (no confirmation)				|
+|F9									|Quickload current file (no confirmation)				|
 |Tab								|Move through input fields								|
 
 ## Others
