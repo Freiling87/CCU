@@ -22,13 +22,15 @@ Player edition hides designer content to keep their experience as close to vanil
 
 ### Appearances *
 
-Effects should be self-explanatory. Let me know if any are unclear.
+There is a long list of traits for the following:
+- Facial Hair
+- Hair Color
+- Hair Style
+- Skin Color
 
-|Trait												|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
-
-
-And so on. There will be traits for skin color, hair color, hair style, and facial hair.
+You can add as many as you want to a custom character. When you do so:
+- Player Characters will always have the vanilla appearance you define in the editor. 
+- If you add any appearance traits, any NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
 
 ### Behaviors *
 

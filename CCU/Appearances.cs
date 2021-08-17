@@ -157,7 +157,7 @@ namespace CCU
     {
 		public static GameController gc => GameController.gameController;
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
         private static void SetupFeatures_Prefix(AgentHitbox __instance)
         {
 			Agent agent = __instance.agent;
