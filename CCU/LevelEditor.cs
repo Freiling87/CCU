@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CCU
 {
@@ -15,7 +16,7 @@ namespace CCU
 		public static GameController gc => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName:"LevelEditor.FixedUpdate", argumentTypes: new Type[] { })]
-        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription)
+        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject)
         {
 			if (!gc.loadCompleteReally || gc.loadLevel.restartingGame)
 				return false;
@@ -23,53 +24,58 @@ namespace CCU
 			if (__instance.loadMenu.activeSelf || ___helpScreen.activeSelf || ___initialSelection.activeSelf || ___workshopSubmission.activeSelf || gc.menuGUI.onMenu || ___longDescription.activeSelf)
 				return false;
 			
-			if (Input.GetKey(KeyCode.A) && !__instance.InputFieldFocused())
+			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A) && !__instance.InputFieldFocused())
 				__instance.ScrollW();
 			
-			if (Input.GetKey(KeyCode.D) && !__instance.InputFieldFocused())
+			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.D) && !__instance.InputFieldFocused())
 				__instance.ScrollE();
 			
-			if (Input.GetKey(KeyCode.W) && !__instance.InputFieldFocused())
+			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.W) && !__instance.InputFieldFocused())
 				__instance.ScrollN();
 			
-			if (Input.GetKey(KeyCode.S) && !__instance.InputFieldFocused())
+			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S) && !__instance.InputFieldFocused())
 				__instance.ScrollS();
 
-			// Additions
+			// Arrow Keys - Object Orientation
+
+			if (Input.GetKey(KeyCode.UpArrow))
+				___directionObject.text = "N";
+			if (Input.GetKey(KeyCode.DownArrow))
+				___directionObject.text = "S";
+			if (Input.GetKey(KeyCode.RightArrow))
+				___directionObject.text = "E";
+			if (Input.GetKey(KeyCode.LeftArrow))
+				___directionObject.text = "W";
+
+			// Number keys - Layer
 
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha1))
 				__instance.PressedWallsButton();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha2))
 				__instance.PressedFloorsButton();
-			
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha3))
 				__instance.PressedFloors2Button();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha4))
 				__instance.PressedFloors3Button();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha5))
 				__instance.PressedObjectsButton();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha6))
 				__instance.PressedAgentsButton();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha7))
 				__instance.PressedItemsButton();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha8))
 				__instance.PressedLightsButton();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
-
+			
+			// Saving & Loading
+			
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.O))
 				__instance.PressedLoadChunksFile();
-
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S))
 				__instance.PressedSave();
-
+			if (Input.GetKey(KeyCode.F5))
+				__instance.PressedSave2();
 			if (Input.GetKey(KeyCode.F9))
 			{
 				ButtonHelper buttonHelper = new ButtonHelper();
@@ -78,14 +84,13 @@ namespace CCU
 				__instance.LoadChunkFromFile(__instance.chunkName, buttonHelper);
 			}
 
-			if (Input.GetKey(KeyCode.F5))
-				__instance.PressedSave2();
+			// Misc.
 
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Y))
 			//	Redo();
 
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A))
-				SelectAll(__instance);
+				ToggleSelectAll(__instance);
 
 			if (Input.GetKey(KeyCode.Tab))
 				Tab();
@@ -121,7 +126,7 @@ namespace CCU
 
 			return false;
 		}
-		private static void SelectAll(LevelEditor levelEditor)
+		private static void ToggleSelectAll(LevelEditor levelEditor)
 		{
 			List<LevelEditorTile> list = null;
 			string layer = levelEditor.currentLayer;
@@ -147,19 +152,44 @@ namespace CCU
 			else if (layer == "Level")
 				list = levelEditor.chunkTiles;
 
+			bool SelectingAll = false;
+
 			foreach (LevelEditorTile levelEditorTile in list)
-			{
 				if (!levelEditor.selectedTiles.Contains(levelEditorTile) && !levelEditor.deselecting)
+				{
 					levelEditor.SelectTile(levelEditorTile, false);
-				else if (levelEditor.deselecting)
-					levelEditor.DeselectTile(levelEditorTile, false);
-			}
+					SelectingAll = true;
+				}
+
+			if (!SelectingAll)
+				levelEditor.ClearSelections(false);
 
 			levelEditor.UpdateInterface(false);
 		}
 		private static void Tab()
 		{
 			// LevelEditor.inputFieldList.isFocused
+			// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
+
+			/*
+			 *		Wall
+			 * 
+			 * 
+			 *		Floors
+			 * Spawn Chance
+			 * Owned By ID
+			 * 
+			 * 
+			 *		Object
+			 * Spawn Chance
+			 * Important
+			 * Owned By ID
+			 * 
+			 *		NPC
+			 * Spawn Chance 1 / 2 / 3
+			 * Important
+			 * Owned By ID
+			 */
 		}
     }
 }
