@@ -1,6 +1,7 @@
 # Streets of Rogue Custom Content Utilities
 
-N.B.: Asterisk indicates non-implemented features, currently planned.
+| :exclamation:  Asterisk indicates non-implemented features currently planned.   |
+|---------------------------------------------------------------------------------|
 
 ## Core
 
@@ -12,7 +13,9 @@ Player edition hides designer content to keep their experience as close to vanil
 - Hidden from Character Sheet page *
 - Hidden from HUD Trait list *
 
-## Appearances *
+## Custom NPC Utilities
+
+### Appearances *
 
 Effects should be self-explanatory. Let me know if any are unclear.
 
@@ -24,7 +27,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 
 And so on. There will be traits for skin color, hair color, hair style, and facial hair.
 
-## Behaviors *
+### Behaviors *
 
 - Increase Trait slots by 1, since it will not affect player character *
 
@@ -98,7 +101,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |AI: Various Guilty
 |AI: Various Scumbag
 
-## Faction Traits *
+### Factions *
 
 - Combine Owner IDs (hopefully possible) *
 
@@ -113,16 +116,26 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Faction 4 Aligned					|NPC aligned with all NPCs with same trait				|
 |Faction 4 Hostile					|NPC hostile to all NPCs with Faction 4 Aligned			|
 
-## Chunk Editor Keyboard Hotkeys
+### Steam Workshop Upload *
+
+- Pop up Yes/No dialogue asking if user wants to do the following:
+  - Automate screenshot of character portrait for thumbnail
+  - Automate screenshot of character stat screen
+  - Upload both screenshots into Character folder before upload
+  - Output a Text file with all character content for upload as a description
+
+## Chunk Editor Utilities
+
+### Hotkeys
 
 |Key 1				|Key 2				|Layer				|Function												|
-|:------------------|:-----------------:|:------------------|:------------------------------------------------------|
+|:------------------|:------------------|:------------------|:------------------------------------------------------|
 |F5	*				|					|					|Quicksave current file (skip confirmation)
 |F9	*				|					|					|Quickload current file (skip confirmation)
 |[1 - 9]		    |					|					|Switch to Layer (Wall, Floor, Floor2, etc.)
 |[1 - 9] *			|Ctrl				|					|Switch to Layer and open Type Selector
 |Tab *				|					|					|Move through input fields				
-|Tab *				|Ctrl				|					|Move through input fields, reversed	
+|Tab *				|Shift				|					|Move through input fields, reversed	
 |Shift *			|Ctrl				|Patrol				|Show only patrol points in the current Patrol ID
 |A					|Ctrl				|					|Select all in Layer (Toggle)			
 |O					|Ctrl				|					|Open file								
@@ -133,5 +146,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Z *				|Ctrl				|					|Undo									
 |Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
 
-## Others *
+## General *
 - Spawn objects placed regardless of district (currently limited to district-appropriate objects)
+
+## Steam Workshop Upload

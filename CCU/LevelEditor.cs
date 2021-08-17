@@ -26,18 +26,14 @@ namespace CCU
 			
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A) && !__instance.InputFieldFocused())
 				__instance.ScrollW();
-			
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.D) && !__instance.InputFieldFocused())
 				__instance.ScrollE();
-			
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.W) && !__instance.InputFieldFocused())
 				__instance.ScrollN();
-			
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S) && !__instance.InputFieldFocused())
 				__instance.ScrollS();
 
-			// Arrow Keys - Object Orientation Selection Toggle
-
+			#region Arrow Keys - Object Orientation Toggle
 			if (Input.GetKey(KeyCode.UpArrow))
 			{
 				if (___directionObject.text == "N")
@@ -66,12 +62,8 @@ namespace CCU
 				else
 					___directionObject.text = "W";
 			}
-
-			// Q & E - Object Orientation Rotation
-
-			// __instance.pointNumPatrolPoint.text
-			// levelEditorTile.patrolNum
-
+			#endregion
+			#region Q & E - Object Orientation Rotation / Patrol Point increment
 			if (Input.GetKey(KeyCode.Q))
 			{
 				if (__instance.currentLayer == "Agents" || __instance.currentLayer == "Objects")
@@ -104,10 +96,8 @@ namespace CCU
 				else if (__instance.currentLayer == "PatrolPoints")
 					___pointNumPatrolPoint.text = (int.Parse(___pointNumPatrolPoint.text) + 1).ToString();
 			}
-
-			// Number keys - Layer
-			// Ctrl + Number keys - Layer + Selector menu
-
+			#endregion
+			#region Number keys - Layer / Ctrl + Number keys - Layer + Selector menu
 			if (Input.GetKey(KeyCode.Alpha1))
 				__instance.PressedWallsButton();
 			if (Input.GetKey(KeyCode.Alpha1) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
@@ -174,38 +164,40 @@ namespace CCU
 
 			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
-
-			// Saving & Loading
-
+			#endregion
+			# region Saving & Loading
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.O))
 				__instance.PressedLoadChunksFile();
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S))
 				__instance.PressedSave();
 			if (Input.GetKey(KeyCode.F5))
-				__instance.PressedSave2();
+			{
+				if (__instance.ChunkNameUsed(__instance.chunkName))
+					__instance.SaveChunkData(true, false);
+				else
+					__instance.PressedSave();
+			}
 			if (Input.GetKey(KeyCode.F9))
 			{
-				ButtonHelper buttonHelper = new ButtonHelper();
-				buttonHelper.chunkData.shape = __instance.chunkShape;
-
-				__instance.LoadChunkFromFile(__instance.chunkName, buttonHelper);
+				//if (__instance.ChunkNameUsed(__instance.chunkName))
+				//	//Quickload here
+				// There is a long line of myButtonHelper passed through to the load function, I am not sure how to do it directly.
+				//else
+					__instance.PressedLoad();
 			}
-
-			// Misc.
-
+			#endregion
+			#region Misc.
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Y))
 			//	Redo();
-
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A))
+			if (Input.GetKey(KeyCode.A) &&(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 				ToggleSelectAll(__instance);
-
 			if (Input.GetKey(KeyCode.Tab))
-				Tab();
-
+				Tab(false);
+			if (Input.GetKey(KeyCode.Tab) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+				Tab(true);
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Z))
 			//	Undo();
-
-			// End Additions
+			#endregion
 
 			Vector3 vector = gc.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;
@@ -273,7 +265,7 @@ namespace CCU
 
 			levelEditor.UpdateInterface(false);
 		}
-		private static void Tab()
+		private static void Tab(bool reverse)
 		{
 			// LevelEditor.inputFieldList.isFocused
 			// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
@@ -283,24 +275,85 @@ namespace CCU
 
 			// __instance.inputFieldList
 
+			// UnityEngine.UI.InputField.ActivateInputField()
+
 			/*
 			 *		Wall
+			 * tileNameWall
+			 * spawnChanceWall
+			 * ownedByIDWall
+			 * extraVarWall
+			 * multipleInChunkWall
 			 * 
-			 * 
-			 *		Floors
-			 * Spawn Chance
-			 * Owned By ID
-			 * 
+			 *		Floors 1-3
+			 * tileNameFloor
+			 * spawnChanceFloor
+			 * ownedByIDFloor
+			 * extraVarFloor
+			 * multipleInChunkFloor
+			 * prisonFloor
+			 * layerFloor
+			 * directionFloor
 			 * 
 			 *		Object
-			 * Spawn Chance
-			 * Important
-			 * Owned By ID
+			 * tileNameObject
+			 * spawnChanceObject
+			 * importantObject
+			 * ownedByIDObject
+			 * extraVarObject
+			 * extraVarStringObject
+			 * extraVarString2Object
+			 * extraVarString3Object
+			 * directionObject
+			 * oneOfEachSceneObject
 			 * 
 			 *		NPC
-			 * Spawn Chance 1 / 2 / 3
-			 * Important
-			 * Owned By ID
+			 * tileNameAgent
+			 * spawnChanceAgent
+			 * spawnChance2Agent
+			 * spawnChance3Agent
+			 * importantAgent
+			 * ownerIDAgent
+			 * extraVarAgent
+			 * extraVarStringAgent
+			 * extraVarString2Agent
+			 * extraVarString3Agent
+			 * extraVarString4Agent
+			 * defaultGoalAgent
+			 * protectsPropertyAgent
+			 * patrolNumAgent
+			 * directionAgent
+			 * scenarioChunkAgent
+			 * scenarioChoiceAgent
+			 * 
+			 *		Light
+			 * tileNameLight
+			 * spawnChanceLight
+			 * lightSizeLight
+			 * lightSizeMedXLight
+			 * lightSizeMedYLight
+			 * onlyFullLight
+			 * onlyMedLight
+			 * 
+			 *		Patrol
+			 * tileNamePatrolPoint
+			 * spawnChancePatrolPoint
+			 * patrolNumPatrolPoint
+			 * pointNumPatrolPoint
+			 * 
+			 *		Item
+			 * tileNameItem
+			 * spawnChanceItem
+			 * ownedByIDItem
+			 * objectCountItem
+			 * 
+			 *		Chunk
+			 * tileNameChunk
+			 * tileNameChunkSelect
+			 * rotationChunk
+			 * directionXChunk
+			 * directionYChunk
+			 * specificQuestChunk
 			 */
 		}
     }
