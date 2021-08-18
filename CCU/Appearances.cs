@@ -173,7 +173,7 @@ namespace CCU
 	}
 	#region Patches
 	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
-    public static class AgentHitBox_Patches
+    public static class AgentHitbox_Patches
     {
 		public static GameController gc => GameController.gameController;
 		private static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
@@ -184,11 +184,11 @@ namespace CCU
 		private static IEnumerable<CodeInstruction> SetupFeatures_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
 		{
 			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
-			SetupFeaturesHook(generator).ApplySafe(instructions, Logger);
+			SetupFeatures_Hook(generator).ApplySafe(instructions, Logger);
 			return instructions;
 		}
 
-		public static CodeReplacementPatch SetupFeaturesHook(ILGenerator generator) =>
+		public static CodeReplacementPatch SetupFeatures_Hook(ILGenerator generator) =>
 			GetInteractionPatch(generator, nameof(RollCustomAppearance));
 
 		private static void RollCustomAppearance(AgentHitbox agentHitBox)
@@ -209,7 +209,7 @@ namespace CCU
 		{
 			Label continueLabel = generator.DefineLabel();
 
-			MethodInfo handlerMethod = AccessTools.Method(typeof(AgentHitbox), handler, new Type[1] { typeof(AgentHitbox) });
+			MethodInfo handlerMethod = AccessTools.Method(typeof(AgentHitbox_Patches), handler, new Type[1] { typeof(AgentHitbox) });
 
 			return new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -220,8 +220,8 @@ namespace CCU
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					// RollCustomAppearance(angentHitbox)
-					new CodeInstruction(OpCodes.Ldarg_0), // This?
+					// RollCustomAppearance(agentHitbox)
+					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Call, handlerMethod)
 
 				},
@@ -233,10 +233,69 @@ namespace CCU
 			);
 		}
     }
+
 	[HarmonyPatch(declaringType: typeof(CharacterSelect))]
 	public static class CharacterSelect_Patches
 	{
 		public static GameController gc => GameController.gameController;
+		private static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
+		private static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
+		private static ManualLogSource _logger;
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent), argumentTypes: new Type[3] { typeof(int), typeof(string), typeof(Agent) })]
+		private static IEnumerable<CodeInstruction> SetupSlot_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
+		{
+			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
+			SetupSlot_Hook(generator).ApplySafe(instructions, Logger);
+			return instructions;
+		}
+
+		public static CodeReplacementPatch SetupSlot_Hook(ILGenerator generator) =>
+			GetInteractionPatch(generator, nameof(IsAppearanceTrait));
+
+		private static bool IsAppearanceTrait(Trait trait) =>
+			(Appearance.AppearanceTraits.Contains(trait.traitName));
+
+		private static CodeReplacementPatch GetInteractionPatch(ILGenerator generator, string handler)
+		{
+			Label continueLabel = generator.DefineLabel();
+
+			MethodInfo handlerMethod = AccessTools.Method(typeof(CharacterSelect_Patches), handler, new Type[1] { typeof(string) });
+
+			return new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Sub),
+					new CodeInstruction(OpCodes.Ldelem_Ref),
+					new CodeInstruction(OpCodes.Stloc_S),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					// if (!IsAppearanceTrait(trait.traitName))
+					//		continue;
+
+					new CodeInstruction(OpCodes.Ldloc_S, 41),
+					new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Trait), nameof(Trait))),
+					new CodeInstruction(OpCodes.Call, handlerMethod),
+					new CodeInstruction(OpCodes.Brfalse_S, continueLabel)
+
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S),
+					new CodeInstruction(OpCodes.Ldc_I4_6)
+				}
+			);
+		}
+
+		// This is one of two transpiler patches I need to do. FML
+
+		//
+		///
+		////
+		///
+		//
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent), argumentTypes: new Type[3] { typeof(int), typeof(string), typeof(Agent) })]
 		public static bool SetupSlotAgent_Prefix(int n, string mySlotAgentType, Agent curPlayer, CharacterSelect __instance, bool ___removingCustomCharacter)

@@ -1,52 +1,59 @@
-<p align="center">
-
 # Streets of Rogue Custom Content Utilities
+
+SOR gives you a few options for creating custom content, but it does have some limitations. Here are a few things that are currently impossible with the Vanilla version:
+- Allying Custom NPCs in different chunks
+- Varying Custom NPC appearances
+- Giving Custom NPCs behaviors like pickpocketing, hiring, selling items, etc.
+- Hotkeys in the Chunk editor - *really?!*
+- Generate district-specific Objects like Flame Grates when placed, regardless of district
+
+CCU aims to address these limitations, giving more power to custom content designers, while keeping the player's experience un-cluttered with designer tools.
 
 |:exclamation: Asterisk indicates non-implemented features currently planned. :exclamation:|
 |:-------------------------------------------------------------------------------:|
-|All features are optional and modular.<br><br>Your content will still be playable without this mod - it just won't have the mod features. 
 
-</p>
+# The Mod Itself
 
-# Mod Core
+> What if my players don't want the mod? Will this break my stuff?
+
+Your content will still work just fine for vanilla players! They just won't get the *extra* features CCU adds.
+
+CCU is packaged into two editions. One for you, one for your players. If you make content with CCU, just link them to the Player Edition and advise them to install it for the full experience.
+
+Maybe even threaten them. "Or else" is a great phrase that is hard to use as evidence in court!
 
 ## Designer Edition
 
-The Designer Edition of the mod is virtually identical to the player edition, with the exception that your Character Creation menu will show all custom character traits.
+The Designer Edition of the mod is virtually identical to the player edition, with the exception that your Custom Character Creator's Trait Menu will show all of the new traits.
 
 ## Player Edition
 
-The **Player Edition** hides designer content to keep their experience as close to vanilla as possible:
-
-- Hidden from Character Creation Menus
-- Hidden from Character Sheet page *
-- Hidden from HUD Trait list *
-
-The traits will still be stored in the character, they just won't clutter up the player's side.
+The Player Edition allows players to play your content, while hiding it from view so it doesn't clutter the interface:
+- Hides CCU traits from Character Creation Menus
+- Hides CCU traits from Character Sheet page *
+- Hides CCU traits from HUD Trait list *
 
 # Custom NPC Utilities
 
-## Appearances *
+All CCU traits will not count toward the Trait Limit, since they do not affect player characters. *
 
-There is a long list of traits for the following:
+## Appearance Traits *
+
+There are traits for each variation within the following groups:
 - Facial Hair
 - Hair Color
 - Hair Style
 - Skin Color
 
 You can add as many as you want to a custom character. When you do so:
-- Player Characters will always have the vanilla appearance you define in the editor. 
-- If you add any appearance traits, any NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
+- **Player Characters** will not be affected by appearance traits. 
+- **NPCs** generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
 
-## Behaviors *
-
-- Increase Trait slots by 1, since it will not affect player character *
-
-Effects should be self-explanatory. Let me know if any are unclear.
+## Behavior Traits *
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|AI: Bartender BuyRound								|
+|AI: Bartender BuyRound
 |AI: Bartender Vendor
 |AI: Bouncer Bribeable
 |AI: Bouncer GuardDoor
@@ -80,8 +87,8 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |AI: Mayor Bodyguarded SuperCop
 |AI: Mobster InfluenceElection
 |AI: Mobster Shakedown
-|AI: Musician Bodyguarded Goo
-|AI: Musician Bodyguarded Supergoo
+|AI: Musician Bodyguarded Goon
+|AI: Musician Bodyguarded Supergoon
 |AI: Musician Turntables
 |AI: OfficeDrone OfferMotivation
 |AI: Scientist Identify
@@ -100,6 +107,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |AI: Thief BreakIn
 |AI: Thief HonorAmongThieves
 |AI: Thief Pickpocket
+|AI: Thief Vendor
 |AI: UpperCruster Bodyguarded
 |AI: UpperCruster OwnSlave
 |AI: UpperCruster Tattle
@@ -107,32 +115,30 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |AI: Vampire HostileToWerewolves
 |AI: Various AnnoyedAtSuspicious
 |AI: Various Coward
-|AI: Various Hire
-|AI: Various Extort
+|AI: Various Extortable
+|AI: Various Hireable
 |AI: Various Guilty
 |AI: Various Scumbag
 
-## Factions *
-
-- Combine Owner IDs (hopefully possible) *
+## Faction Traits *
 
 |Trait								|Effect													|
 |:----------------------------------|:------------------------------------------------------|
-|Faction 1 Aligned					|NPC aligned with all NPCs with same trait				|
-|Faction 1 Hostile					|NPC hostile to all NPCs with Faction 1 Aligned			|
-|Faction 2 Aligned					|NPC aligned with all NPCs with same trait				|
-|Faction 2 Hostile					|NPC hostile to all NPCs with Faction 2 Aligned			|
-|Faction 3 Aligned					|NPC aligned with all NPCs with same trait				|
-|Faction 3 Hostile					|NPC hostile to all NPCs with Faction 3 Aligned			|
-|Faction 4 Aligned					|NPC aligned with all NPCs with same trait				|
-|Faction 4 Hostile					|NPC hostile to all NPCs with Faction 4 Aligned			|
+|Faction 1 Aligned					|Aligned with all Agents with same trait
+|Faction 1 Hostile					|Hostile to all Agents with Faction 1 Aligned
+|Faction 2 Aligned					|Aligned with all Agents with same trait
+|Faction 2 Hostile					|Hostile to all Agents with Faction 2 Aligned
+|Faction 3 Aligned					|Aligned with all Agents with same trait
+|Faction 3 Hostile					|Hostile to all Agents with Faction 3 Aligned
+|Faction 4 Aligned					|Aligned with all Agents with same trait
+|Faction 4 Hostile					|Hostile to all Agents with Faction 4 Aligned
 
 ## Steam Workshop Upload *
 
 - Pop up Yes/No dialogue asking if user wants to do the following:
   - Automate screenshot of character portrait for thumbnail
   - Automate screenshot of character stat screen
-  - Upload both screenshots into Character folder before upload
+  - Upload both screenshots into Character folder and name appropriately before upload
   - Output a Text file with all character content for upload as a description
 
 # Chunk Editor Utilities
@@ -158,9 +164,11 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
 
 ## General *
-- Spawn objects placed regardless of district (currently limited to district-appropriate objects)
+- Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
 
-# Chunk Pack Editor Utilities
+# Chunk Pack Editor Utilities *
+
+No ideas for this one, yet. Taking requests.
 
 # Level Editor Utilities *
 
@@ -181,3 +189,5 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Arrow Keys *		|					|Object<br>NPC		|Set Chunk direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
 
 # Campaign Editor Utilities *
+
+No ideas for this one, yet. Taking requests.
