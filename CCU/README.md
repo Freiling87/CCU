@@ -1,26 +1,32 @@
+<p align="center">
 
 # Streets of Rogue Custom Content Utilities
 
-<p align="center">
-
-| :exclamation:  Asterisk indicates non-implemented features currently planned.   |
-|---------------------------------------------------------------------------------|
+|:exclamation: Asterisk indicates non-implemented features currently planned. :exclamation:|
+|:-------------------------------------------------------------------------------:|
+|All features are optional and modular.<br><br>Your content will still be playable without this mod - it just won't have the mod features. 
 
 </p>
 
-## Core
+# Mod Core
 
-### Player/Creator editions
+## Designer Edition
 
-Player edition hides designer content to keep their experience as close to vanilla as possible.
+The Designer Edition of the mod is virtually identical to the player edition, with the exception that your Character Creation menu will show all custom character traits.
+
+## Player Edition
+
+The **Player Edition** hides designer content to keep their experience as close to vanilla as possible:
 
 - Hidden from Character Creation Menus
 - Hidden from Character Sheet page *
 - Hidden from HUD Trait list *
 
-## Custom NPC Utilities
+The traits will still be stored in the character, they just won't clutter up the player's side.
 
-### Appearances *
+# Custom NPC Utilities
+
+## Appearances *
 
 There is a long list of traits for the following:
 - Facial Hair
@@ -32,7 +38,7 @@ You can add as many as you want to a custom character. When you do so:
 - Player Characters will always have the vanilla appearance you define in the editor. 
 - If you add any appearance traits, any NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
 
-### Behaviors *
+## Behaviors *
 
 - Increase Trait slots by 1, since it will not affect player character *
 
@@ -106,7 +112,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |AI: Various Guilty
 |AI: Various Scumbag
 
-### Factions *
+## Factions *
 
 - Combine Owner IDs (hopefully possible) *
 
@@ -121,7 +127,7 @@ Effects should be self-explanatory. Let me know if any are unclear.
 |Faction 4 Aligned					|NPC aligned with all NPCs with same trait				|
 |Faction 4 Hostile					|NPC hostile to all NPCs with Faction 4 Aligned			|
 
-### Steam Workshop Upload *
+## Steam Workshop Upload *
 
 - Pop up Yes/No dialogue asking if user wants to do the following:
   - Automate screenshot of character portrait for thumbnail
@@ -129,9 +135,9 @@ Effects should be self-explanatory. Let me know if any are unclear.
   - Upload both screenshots into Character folder before upload
   - Output a Text file with all character content for upload as a description
 
-## Chunk Editor Utilities
+# Chunk Editor Utilities
 
-### Hotkeys
+## Hotkeys
 
 |Key 1				|Key 2				|Layer				|Function												|
 |:------------------|:------------------|:------------------|:------------------------------------------------------|
@@ -154,4 +160,24 @@ Effects should be self-explanatory. Let me know if any are unclear.
 ## General *
 - Spawn objects placed regardless of district (currently limited to district-appropriate objects)
 
-## Steam Workshop Upload
+# Chunk Pack Editor Utilities
+
+# Level Editor Utilities *
+
+## Hotkeys *
+
+|Key 1				|Key 2				|Layer				|Function												|
+|:------------------|:------------------|:------------------|:------------------------------------------------------|
+|F5	*				|					|					|Quicksave current file (skip confirmation)
+|F9	*				|					|					|Quickload current file (skip confirmation)
+|Tab *				|					|					|Move through input fields				
+|Tab *				|Shift				|					|Move through input fields, reversed	
+|A *				|Ctrl				|					|Select all Chunks (Toggle)			
+|O *				|Ctrl				|					|Open file								
+|Q, E *				|					|Object<br>NPC		|Rotate Chunk<br><br>Works in Draw or Select mode
+|S *				|Ctrl				|					|Save current file						
+|Y *				|Ctrl				|					|Redo										
+|Z *				|Ctrl				|					|Undo									
+|Arrow Keys *		|					|Object<br>NPC		|Set Chunk direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
+
+# Campaign Editor Utilities *
