@@ -1,12 +1,17 @@
-﻿using HarmonyLib;
+﻿using BepInEx.Logging;
+using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using BTHarmonyUtils;
+using BTHarmonyUtils.TranspilerUtils;
 
 namespace CCU
 {
@@ -171,46 +176,61 @@ namespace CCU
     public static class AgentHitBox_Patches
     {
 		public static GameController gc => GameController.gameController;
+		private static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
+		private static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
+		private static ManualLogSource _logger;
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
-        public static void SetupFeatures_Prefix(AgentHitbox __instance)
-        {
-			Agent agent = __instance.agent;
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
+		private static IEnumerable<CodeInstruction> SetupFeatures_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
+		{
+			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
+			SetupFeaturesHook(generator).ApplySafe(instructions, Logger);
+			return instructions;
+		}
 
-			if (agent.agentName == "Custom")
+		public static CodeReplacementPatch SetupFeaturesHook(ILGenerator generator) =>
+			GetInteractionPatch(generator, nameof(RollCustomAppearance));
+
+		private static void RollCustomAppearance(AgentHitbox agentHitBox)
+		{
+			if (agentHitBox.agent.agentName == "Custom" && agentHitBox.agent.isPlayer == 0)
 			{
-				if (gc.streamingWorld && agent.isPlayer == 0)
-					UnityEngine.Random.InitState(agent.streamingChunkObjectID);
+				Appearance.RollFacialHair(agentHitBox, agentHitBox.agent);
+				Appearance.RollHairstyle(agentHitBox, agentHitBox.agent);
+				Appearance.RollSkinColor(agentHitBox, agentHitBox.agent);
 
-				__instance.MustRefresh();
+				agentHitBox.SetCantShowHairUnderHeadPiece();
 
-				Appearance.RollFacialHair(__instance, agent);
-				Appearance.RollHairstyle(__instance, agent);
-				Appearance.RollSkinColor(__instance, agent);
-
-				__instance.SetCantShowHairUnderHeadPiece();
-
-				Appearance.RollHairColor(__instance, agent);
-
-				if (agent.isPlayer > 0 && !__instance.hasSetup && agent.localPlayer && !gc.fourPlayerMode)
-				{
-					gc.sessionDataBig.hairType[agent.isPlayer] = __instance.hairType;
-					gc.sessionDataBig.hairColor[agent.isPlayer] = __instance.hairColorName;
-					gc.sessionDataBig.facialHairColor[agent.isPlayer] = __instance.facialHairColorName;
-					gc.sessionDataBig.facialHairType[agent.isPlayer] = __instance.facialHairType;
-					gc.sessionDataBig.skinColor[agent.isPlayer] = __instance.skinColorName;
-					gc.sessionDataBig.hairColor32[agent.isPlayer] = __instance.hairColor;
-					gc.sessionDataBig.facialHairColor32[agent.isPlayer] = __instance.facialHairColor;
-					gc.sessionDataBig.skinColor32[agent.isPlayer] = __instance.skinColor;
-				}
-				try
-				{
-					__instance.objectSprite.SetRenderer("Off");
-				}
-				catch { }
-
-				__instance.SetUsesNewHead();
+				Appearance.RollHairColor(agentHitBox, agentHitBox.agent);
 			}
+		}
+
+		private static CodeReplacementPatch GetInteractionPatch(ILGenerator generator, string handler)
+		{
+			Label continueLabel = generator.DefineLabel();
+
+			MethodInfo handlerMethod = AccessTools.Method(typeof(AgentHitbox), handler, new Type[1] { typeof(AgentHitbox) });
+
+			return new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					// IL_05C7: stelem    [UnityEngine.CoreModule]UnityEngine.Color32
+					new CodeInstruction(OpCodes.Stelem),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					// RollCustomAppearance(angentHitbox)
+					new CodeInstruction(OpCodes.Ldarg_0), // This?
+					new CodeInstruction(OpCodes.Call, handlerMethod)
+
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					// IL_05CC: nop
+					new CodeInstruction(OpCodes.Nop),
+				}
+			);
 		}
     }
 	[HarmonyPatch(declaringType: typeof(CharacterSelect))]
