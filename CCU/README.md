@@ -143,6 +143,9 @@ You can add as many as you want to a custom character. When you do so:
 
 # Chunk Editor Utilities
 
+## Fields 
+- Multiple In Chunk field for SpawnerAgent
+
 ## Hotkeys
 
 |Key 1				|Key 2				|Layer				|Function												|
