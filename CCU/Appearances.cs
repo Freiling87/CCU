@@ -170,6 +170,16 @@ namespace CCU
 		{
 		}
 		#endregion
+		#region Utilities
+		internal static List<Trait> FilterOutAppearanceTraits(List<Trait> traitList)
+		{
+			return traitList
+				.Where(trait => IsAppearanceTrait(trait))
+				.ToList();
+		}
+		internal static bool IsAppearanceTrait(Trait trait) =>
+			(Appearance.AppearanceTraits.Contains(trait.traitName));
+		#endregion
 	}
 	#region Patches
 	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
@@ -241,61 +251,6 @@ namespace CCU
 		private static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
 		private static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
 		private static ManualLogSource _logger;
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent), argumentTypes: new Type[3] { typeof(int), typeof(string), typeof(Agent) })]
-		private static IEnumerable<CodeInstruction> SetupSlot_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
-		{
-			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
-			SetupSlot_Hook(generator).ApplySafe(instructions, Logger);
-			return instructions;
-		}
-
-		public static CodeReplacementPatch SetupSlot_Hook(ILGenerator generator) =>
-			GetInteractionPatch(generator, nameof(IsAppearanceTrait));
-
-		private static bool IsAppearanceTrait(Trait trait) =>
-			(Appearance.AppearanceTraits.Contains(trait.traitName));
-
-		private static CodeReplacementPatch GetInteractionPatch(ILGenerator generator, string handler)
-		{
-			Label continueLabel = generator.DefineLabel();
-
-			MethodInfo handlerMethod = AccessTools.Method(typeof(CharacterSelect_Patches), handler, new Type[1] { typeof(string) });
-
-			return new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Sub),
-					new CodeInstruction(OpCodes.Ldelem_Ref),
-					new CodeInstruction(OpCodes.Stloc_S),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// if (!IsAppearanceTrait(trait.traitName))
-					//		continue;
-
-					new CodeInstruction(OpCodes.Ldloc_S, 41),
-					new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(Trait), nameof(Trait))),
-					new CodeInstruction(OpCodes.Call, handlerMethod),
-					new CodeInstruction(OpCodes.Brfalse_S, continueLabel)
-
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_S),
-					new CodeInstruction(OpCodes.Ldc_I4_6)
-				}
-			);
-		}
-
-		// This is one of two transpiler patches I need to do. FML
-
-		//
-		///
-		////
-		///
-		//
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent), argumentTypes: new Type[3] { typeof(int), typeof(string), typeof(Agent) })]
 		public static bool SetupSlotAgent_Prefix(int n, string mySlotAgentType, Agent curPlayer, CharacterSelect __instance, bool ___removingCustomCharacter)
@@ -1607,13 +1562,9 @@ namespace CCU
 						Text text14 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 						text14.text = text14.text + "\n<color=yellow>- " + gc.nameDB.GetName("Traits", "Interface") + " - </color>\n";
 
-						foreach (Trait trait in __instance.dummyAgent.statusEffects.TraitList)
+						foreach (Trait trait in Appearance.FilterOutAppearanceTraits(__instance.dummyAgent.statusEffects.TraitList)) // Filter out appearance traits
 						{
 							text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
-
-							// Omit Appearance Traits from character sheet
-							if (Appearance.AppearanceTraits.Contains(trait.traitName))
-								continue;
 
 							text12.text = string.Concat(new string[]
 							{
@@ -2104,7 +2055,7 @@ namespace CCU
 					text8.text = text8.text + "\n<color=yellow>- " + gc.nameDB.GetName("StartingTraits", "Interface") + " - </color>\n";
 					// - STARTING TRAITS -
 
-					foreach (Trait trait3 in ___statusEffects.TraitList)
+					foreach (Trait trait3 in Appearance.FilterOutAppearanceTraits(___statusEffects.TraitList)) // Filter out appearance traits
 					{
 						bool traitHidden = false;
 
@@ -2117,10 +2068,6 @@ namespace CCU
 						if (___statusEffects.hasStatusEffect(trait3.traitName))
 							traitHidden = true;
 
-						// Exclude Appearance Traits
-						if (Appearance.AppearanceTraits.Contains(trait3.traitName))
-							traitHidden = true;
-						
 						if (!traitHidden)
 						{
 							text2 = ___charText;
