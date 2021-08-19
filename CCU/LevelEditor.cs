@@ -15,7 +15,8 @@ namespace CCU
 	{
 		public static GameController gc => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[] { })]
+		#region Patches
+		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[0] { })]
         public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject, InputField ___pointNumPatrolPoint)
         {
 			if (!gc.loadCompleteReally || gc.loadLevel.restartingGame)
@@ -189,12 +190,12 @@ namespace CCU
 			#region Misc.
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Y))
 			//	Redo();
-			if (Input.GetKey(KeyCode.A) &&(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			if (Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 				ToggleSelectAll(__instance);
 			if (Input.GetKey(KeyCode.Tab))
-				Tab(false);
+				Tab(__instance, false);
 			if (Input.GetKey(KeyCode.Tab) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-				Tab(true);
+				Tab(__instance, true);
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Z))
 			//	Undo();
 			#endregion
@@ -225,6 +226,17 @@ namespace CCU
 
 			return false;
 		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName:"Start", argumentTypes: new Type[0] { })]
+		public static void Start_Postfix(LevelEditor __instance, GameObject ___wallInterface, GameObject ___floorInterface, GameObject ___itemInterface, GameObject ___objectInterface, GameObject ___agentInterface, GameObject ___lightInterface, GameObject ___patrolPointInterface)
+		{
+			InputField[] inputFields_Wall = ___wallInterface.transform.GetComponentsInChildren<InputField>(true);
+			fieldsItem = inputFields_Wall.OrderBy(i => i.transform.position.x).OrderBy(i => i.transform.position.y).ToList();
+
+			// Need a couple more filters here, see comments from BT 
+		}
+		#endregion
+
 		private static void ToggleSelectAll(LevelEditor levelEditor)
 		{
 			List<LevelEditorTile> list = null;
@@ -265,96 +277,59 @@ namespace CCU
 
 			levelEditor.UpdateInterface(false);
 		}
-		private static void Tab(bool reverse)
+
+		// LevelEditor.inputFieldList.isFocused
+		// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
+
+		// levelEditor.floors2Button.transform.Find("ButtonEdges").GetComponent<Image>().color = Color.white;
+		// White is for currently click-activated, but might use another color to show which is tab-active, pending player confirmation
+
+		// __instance.inputFieldList
+
+		// UnityEngine.UI.InputField.ActivateInputField()
+
+		private static List<InputField> fieldsAgent;
+		private static List<InputField> fieldsFloor;
+		private static List<InputField> fieldsItem;
+		private static List<InputField> fieldsLight;
+		private static List<InputField> fieldsObject;
+		private static List<InputField> fieldsPatrolPoint;
+		private static List<InputField> fieldsWall;
+		private static Dictionary<string, List<InputField>> fieldLists = new Dictionary<string, List<InputField>>()
 		{
-			// LevelEditor.inputFieldList.isFocused
-			// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
-			
-			// levelEditor.floors2Button.transform.Find("ButtonEdges").GetComponent<Image>().color = Color.white;
-			// White is for currently click-activated, but might use another color to show which is tab-active, pending player confirmation
+			// TODO: Double-check these strings
+			{ "Agents", fieldsAgent },
+			{ "Floors", fieldsFloor },
+			{ "Floors2", fieldsFloor },
+			{ "Floors3", fieldsFloor },
+			{ "Items", fieldsItem },
+			{ "Lights", fieldsLight },
+			{ "Objects", fieldsObject },
+			{ "PatrolPoints", fieldsPatrolPoint },
+			{ "Walls" , fieldsWall },
+		};
+		private static InputField ActiveInputField(LevelEditor levelEditor)
+		{
+			foreach (InputField field in levelEditor.inputFieldList)
+				if (field.isFocused)
+					return field;
 
-			// __instance.inputFieldList
+			return null;
+		}
+		private static void Tab(LevelEditor levelEditor, bool reverse)
+		{
+			List<InputField> fieldList = fieldLists[levelEditor.currentLayer];
+			InputField oldFocus = ActiveInputField(levelEditor);
 
-			// UnityEngine.UI.InputField.ActivateInputField()
-
-			/*
-			 *		Wall
-			 * tileNameWall
-			 * spawnChanceWall
-			 * ownedByIDWall
-			 * extraVarWall
-			 * multipleInChunkWall
-			 * 
-			 *		Floors 1-3
-			 * tileNameFloor
-			 * spawnChanceFloor
-			 * ownedByIDFloor
-			 * extraVarFloor
-			 * multipleInChunkFloor
-			 * prisonFloor
-			 * layerFloor
-			 * directionFloor
-			 * 
-			 *		Object
-			 * tileNameObject
-			 * spawnChanceObject
-			 * importantObject
-			 * ownedByIDObject
-			 * extraVarObject
-			 * extraVarStringObject
-			 * extraVarString2Object
-			 * extraVarString3Object
-			 * directionObject
-			 * oneOfEachSceneObject
-			 * 
-			 *		NPC
-			 * tileNameAgent
-			 * spawnChanceAgent
-			 * spawnChance2Agent
-			 * spawnChance3Agent
-			 * importantAgent
-			 * ownerIDAgent
-			 * extraVarAgent
-			 * extraVarStringAgent
-			 * extraVarString2Agent
-			 * extraVarString3Agent
-			 * extraVarString4Agent
-			 * defaultGoalAgent
-			 * protectsPropertyAgent
-			 * patrolNumAgent
-			 * directionAgent
-			 * scenarioChunkAgent
-			 * scenarioChoiceAgent
-			 * 
-			 *		Light
-			 * tileNameLight
-			 * spawnChanceLight
-			 * lightSizeLight
-			 * lightSizeMedXLight
-			 * lightSizeMedYLight
-			 * onlyFullLight
-			 * onlyMedLight
-			 * 
-			 *		Patrol
-			 * tileNamePatrolPoint
-			 * spawnChancePatrolPoint
-			 * patrolNumPatrolPoint
-			 * pointNumPatrolPoint
-			 * 
-			 *		Item
-			 * tileNameItem
-			 * spawnChanceItem
-			 * ownedByIDItem
-			 * objectCountItem
-			 * 
-			 *		Chunk
-			 * tileNameChunk
-			 * tileNameChunkSelect
-			 * rotationChunk
-			 * directionXChunk
-			 * directionYChunk
-			 * specificQuestChunk
-			 */
+			if (oldFocus is null)
+				fieldList[0].ActivateInputField();
+			else
+			{
+				if (!reverse)
+					fieldList[fieldList.IndexOf(oldFocus) + 1].ActivateInputField();
+				else
+					fieldList[fieldList.IndexOf(oldFocus) - 1].ActivateInputField();
+			}
 		}
     }
 }
