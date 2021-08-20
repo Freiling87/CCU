@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
+using BepInEx.Logging;
+using System.Reflection;
 
 namespace CCU
 {
@@ -14,6 +16,9 @@ namespace CCU
 	public static class LevelEditor_Patches
 	{
 		public static GameController gc => GameController.gameController;
+		public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
+		public static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
+		public static ManualLogSource _logger;
 
 		#region Patches
 		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[0] { })]
@@ -230,7 +235,13 @@ namespace CCU
 		[HarmonyPostfix, HarmonyPatch(methodName:"Start", argumentTypes: new Type[0] { })]
 		public static void Start_Postfix(LevelEditor __instance, GameObject ___wallInterface, GameObject ___floorInterface, GameObject ___itemInterface, GameObject ___objectInterface, GameObject ___agentInterface, GameObject ___lightInterface, GameObject ___patrolPointInterface)
 		{
+			_logger.Log(LogLevel.Info, "Loading Input fields...");
+
 			InputField[] inputFields_Wall = ___wallInterface.transform.GetComponentsInChildren<InputField>(true);
+
+			foreach (InputField field in inputFields_Wall)
+				_logger.Log(LogLevel.Info, field.name);
+
 			fieldsItem = inputFields_Wall.OrderBy(i => i.transform.position.x).OrderBy(i => i.transform.position.y).ToList();
 
 			// Need a couple more filters here, see comments from BT 
