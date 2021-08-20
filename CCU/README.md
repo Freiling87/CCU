@@ -153,7 +153,7 @@ You can add as many as you want to a custom character. When you do so:
 |F5	*				|					|					|Quicksave current file (skip confirmation)
 |F9	*				|					|					|Quickload current file (skip confirmation)
 |[1 - 9]		    |					|					|Switch to Layer (Wall, Floor, Floor2, etc.)
-|[1 - 9] *			|Ctrl				|					|Switch to Layer and open Type Selector
+|[1 - 9]			|Ctrl				|					|Switch to Layer and open Type Selector
 |Tab *				|					|					|Move through input fields				
 |Tab *				|Shift				|					|Move through input fields, reversed	
 |Shift *			|Ctrl				|Patrol				|Show only patrol points in the current Patrol ID

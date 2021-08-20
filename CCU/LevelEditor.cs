@@ -241,7 +241,7 @@ namespace CCU
 		{
 			List<LevelEditorTile> list = null;
 			string layer = levelEditor.currentLayer;
-			
+
 			if (layer == "Walls")
 				list = levelEditor.wallTiles;
 			else if (layer == "Floors")
