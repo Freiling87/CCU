@@ -153,7 +153,9 @@ You can add as many as you want to a custom character. When you do so:
 |[1 - 9] *			|Ctrl				|					|Switch to Layer and open Type Selector
 |Tab *				|					|					|Move through input fields				
 |Tab *				|Shift				|					|Move through input fields, reversed	
-|Shift *			|Ctrl				|Patrol				|Show only patrol points in the current Patrol ID
+|Shift *			|Ctrl				|Any with Owner IDs	|View filter to layer<br><br>Show OwnerIDs on all content
+|Shift *			|Ctrl				|Patrol				|Display Patrol ID on patrol points
+|Shift *			|Alt				|Patrol				|Show only patrol points in the current Patrol ID
 |A					|Ctrl				|					|Select all in Layer (Toggle)			
 |O					|Ctrl				|					|Open file								
 |Q, E *				|					|Object<br>NPC		|Rotate direction<br><br>Works in Draw or Select mode
