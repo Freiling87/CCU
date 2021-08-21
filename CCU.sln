@@ -8,11 +8,20 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Designer Edition - Hotkeys Only|Any CPU = Designer Edition - Hotkeys Only|Any CPU
+		Designer Edition|Any CPU = Designer Edition|Any CPU
+		Player Edition|Any CPU = Player Edition|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Designer Edition - Hotkeys Only|Any CPU.ActiveCfg = Designer Edition - Hotkeys Only|Any CPU
+		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Designer Edition - Hotkeys Only|Any CPU.Build.0 = Designer Edition - Hotkeys Only|Any CPU
+		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Designer Edition|Any CPU.ActiveCfg = Designer Edition|Any CPU
+		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Designer Edition|Any CPU.Build.0 = Designer Edition|Any CPU
+		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Player Edition|Any CPU.ActiveCfg = Player Edition|Any CPU
+		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Player Edition|Any CPU.Build.0 = Player Edition|Any CPU
 		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B5C7E24-C46E-4BCB-93AE-EDD38869AFFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
