@@ -2099,7 +2099,7 @@ namespace CCU
 		{
 			RogueLibs.CreateCustomTrait<Appearance_FacialHair_Beard>()
 				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo("Appearance: Facial Hair - Beard"))
+				.WithName(new CustomNameInfo(cTrait.Appearance_FacialHair_Beard))
 				.WithUnlock(new TraitUnlock
 				{
 					CharacterCreationCost = 0,
@@ -2118,7 +2118,7 @@ namespace CCU
 		{
 			RogueLibs.CreateCustomTrait<Appearance_FacialHair_Mustache>()
 				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo("Appearance: Facial Hair - Mustache"))
+				.WithName(new CustomNameInfo(cTrait.Appearance_FacialHair_Mustache))
 				.WithUnlock(new TraitUnlock
 				{
 					CharacterCreationCost = 0,
@@ -2137,7 +2137,7 @@ namespace CCU
 		{
 			RogueLibs.CreateCustomTrait<Appearance_FacialHair_MustacheCircus>()
 				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo("Appearance: Facial Hair - Circus Mustache"))
+				.WithName(new CustomNameInfo(cTrait.Appearance_FacialHair_MustacheCircus))
 				.WithUnlock(new TraitUnlock
 				{
 					CharacterCreationCost = 0,
@@ -2156,7 +2156,7 @@ namespace CCU
 		{
 			RogueLibs.CreateCustomTrait<Appearance_FacialHair_MustacheRedneck>()
 				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo("Appearance: Facial Hair - Redneck Mustache"))
+				.WithName(new CustomNameInfo(cTrait.Appearance_FacialHair_MustacheRedneck))
 				.WithUnlock(new TraitUnlock
 				{
 					CharacterCreationCost = 0,
@@ -2175,7 +2175,7 @@ namespace CCU
 		{
 			RogueLibs.CreateCustomTrait<Appearance_FacialHair_None>()
 				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo("Appearance: Facial Hair - None"))
+				.WithName(new CustomNameInfo(cTrait.Appearance_FacialHair_None))
 				.WithUnlock(new TraitUnlock
 				{
 					CharacterCreationCost = 0,

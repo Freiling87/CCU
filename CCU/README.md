@@ -133,6 +133,11 @@ You can add as many as you want to a custom character. When you do so:
 |Faction 4 Aligned					|Aligned with all Agents with same trait
 |Faction 4 Hostile					|Hostile to all Agents with Faction 4 Aligned
 
+## Roamer Traits *
+- Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
+  - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
+  - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
+
 ## Steam Workshop Upload *
 
 - Pop up Yes/No dialogue asking if user wants to do the following:
