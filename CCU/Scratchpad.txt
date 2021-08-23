@@ -36,3 +36,9 @@ ADD:
 	START chunk/level/campaign button
 	ALT trail for overhead menus
 	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
+
+
+TRAITS
+- CCP limit adjustment for CCU Traits
+	- CharacterCreation.traitCount in CreatePointTallyText();
+	- Line 532, need to make a custom list of this.traitsChosen where they are not on CCU trait list

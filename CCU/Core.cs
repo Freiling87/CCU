@@ -10,6 +10,7 @@ using UnityEngine;
 using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
+using System.Runtime.CompilerServices;
 
 namespace CCU
 {
@@ -22,15 +23,22 @@ namespace CCU
         public const string pluginVersion = "0.1.0";
         public const bool designerEdition = true;
 
-        public static ManualLogSource MyLogger;
+        public static GameController gc => GameController.gameController;
+        public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
+        public static new ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
+        public static ManualLogSource _logger;
 
         public void Awake()
         {
-            MyLogger = Logger;
+            LogMethodCall();
 
             new Harmony(pluginGUID).PatchAll();
             RogueLibs.LoadFromAssembly();
         }
+        public static void LogCheckpoint(string note, [CallerMemberName] string callerName = "") =>
+            _logger.LogInfo(callerName + ": " + note);
+        public static void LogMethodCall([CallerMemberName] string callerName = "") =>
+            _logger.LogInfo(callerName + ": Method Call");
     }
 
     public static class cTrait
