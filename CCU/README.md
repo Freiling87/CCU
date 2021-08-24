@@ -37,7 +37,7 @@ The Player Edition allows players to play your content, while hiding it from vie
 
 All CCU traits will not count toward the Trait Limit, since they do not affect player characters. *
 
-## Appearance Traits *
+## Appearance Traits * 
 
 There are traits for each variation within the following groups:
 - Facial Hair

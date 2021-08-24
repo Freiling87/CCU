@@ -1,15 +1,12 @@
-﻿[Error  : Unity Log] KeyNotFoundException: The given key was not present in the dictionary.
-Stack trace:
-System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) (at <c79628fadf574d3a8feae0871fad28ef>:0)
-CCU.LevelEditor_Patches.Tab (LevelEditor levelEditor, System.Boolean reverse) (at <0d0329bcb5914045bc17392ba763ba1d>:0)
-CCU.LevelEditor_Patches.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, UnityEngine.UI.InputField ___directionObject, UnityEngine.UI.InputField ___pointNumPatrolPoint) (at <0d0329bcb5914045bc17392ba763ba1d>:0)
-LevelEditor.FixedUpdate () (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-
+﻿[Info   :   BepInEx] Loading [Custom Content Utilities 0.1.0]
 [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 Stack trace:
-CCU.LevelEditor_Patches.Tab (LevelEditor levelEditor, System.Boolean reverse) (at <0d0329bcb5914045bc17392ba763ba1d>:0)
-CCU.LevelEditor_Patches.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, UnityEngine.UI.InputField ___directionObject, UnityEngine.UI.InputField ___pointNumPatrolPoint) (at <0d0329bcb5914045bc17392ba763ba1d>:0)
-LevelEditor.FixedUpdate () (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+CCU.Core.LogMethodCall (System.String callerName) (at <3aad7d0a933f486b8d7bc36adea33e63>:0)
+CCU.Core.Awake () (at <3aad7d0a933f486b8d7bc36adea33e63>:0)
+UnityEngine.GameObject:AddComponent(Type)
+BepInEx.Bootstrap.Chainloader:Start()
+UnityEngine.Application:.cctor()
+Rewired.InputManager_Base:Awake()
 
 
 Ctrl + O load shows all menus but doesn't load anything
