@@ -157,6 +157,7 @@ You can add as many as you want to a custom character. When you do so:
 |:------------------|:------------------|:------------------|:------------------------------------------------------|
 |F5	*				|					|					|Quicksave current file (skip confirmation)
 |F9	*				|					|					|Quickload current file (skip confirmation)
+|F12 *				|					|					|Run chunk
 |[1 - 9]		    |					|					|Switch to Layer (Wall, Floor, Floor2, etc.)
 |[1 - 9]			|Ctrl				|					|Switch to Layer and open Type Selector
 |Tab *				|					|					|Move through input fields				
@@ -172,6 +173,7 @@ You can add as many as you want to a custom character. When you do so:
 |Y *				|Ctrl				|					|Redo										
 |Z *				|Ctrl				|					|Undo									
 |Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
+|Middle Mouse *		|					|					|Drag Viewport
 
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)

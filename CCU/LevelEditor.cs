@@ -122,7 +122,7 @@ namespace CCU
 
 			if (Input.GetKey(KeyCode.Alpha3))
 				__instance.PressedFloors2Button();
-			if (Input.GetKey(KeyCode.Alpha2) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			if (Input.GetKey(KeyCode.Alpha3) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedFloors2Button();
 				__instance.PressedLoadFloors();

@@ -16,7 +16,7 @@ namespace CCU
     [HarmonyPatch(declaringType: typeof(Relationships))]
     public static class Relationships_Patches
 	{
-        public static GameController gc => GameController.gameController;
+        public static GameController GC => GameController.gameController;
         public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
         public static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
         public static ManualLogSource _logger;
@@ -66,10 +66,10 @@ namespace CCU
 		{
             RogueLibs.CreateCustomTrait<Faction_1_Aligned>()
                 .WithDescription(new CustomNameInfo("This character is Aligned with all characters who share the trait.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_1_Aligned))
+                .WithName(new CustomNameInfo(CTrait.Faction_1_Aligned))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_1_Hostile },
+                    Cancellations = { CTrait.Faction_1_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -86,10 +86,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_1_Hostile>()
                 .WithDescription(new CustomNameInfo("This character is Hostile to all characters aligned with Faction 1.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_1_Hostile))
+                .WithName(new CustomNameInfo(CTrait.Faction_1_Hostile))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_1_Aligned },
+                    Cancellations = { CTrait.Faction_1_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -106,10 +106,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_2_Aligned>()
                 .WithDescription(new CustomNameInfo("This character is Aligned with all characters who share the trait.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_2_Aligned))
+                .WithName(new CustomNameInfo(CTrait.Faction_2_Aligned))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_2_Hostile },
+                    Cancellations = { CTrait.Faction_2_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -126,10 +126,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_2_Hostile>()
                 .WithDescription(new CustomNameInfo("This character is Hostile to all characters aligned with Faction 2.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_2_Hostile))
+                .WithName(new CustomNameInfo(CTrait.Faction_2_Hostile))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_2_Aligned },
+                    Cancellations = { CTrait.Faction_2_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -146,10 +146,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_3_Aligned>()
                 .WithDescription(new CustomNameInfo("This character is Aligned with all characters who share the trait.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_3_Aligned))
+                .WithName(new CustomNameInfo(CTrait.Faction_3_Aligned))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_3_Hostile },
+                    Cancellations = { CTrait.Faction_3_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -166,10 +166,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_3_Hostile>()
                 .WithDescription(new CustomNameInfo("This character is Hostile to all characters aligned with Faction 3.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_3_Hostile))
+                .WithName(new CustomNameInfo(CTrait.Faction_3_Hostile))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_3_Aligned },
+                    Cancellations = { CTrait.Faction_3_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -186,10 +186,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_4_Aligned>()
                 .WithDescription(new CustomNameInfo("This character is Aligned with all characters who share the trait.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_4_Aligned))
+                .WithName(new CustomNameInfo(CTrait.Faction_4_Aligned))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_4_Hostile },
+                    Cancellations = { CTrait.Faction_4_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -206,10 +206,10 @@ namespace CCU
         {
             RogueLibs.CreateCustomTrait<Faction_4_Hostile>()
                 .WithDescription(new CustomNameInfo("This character is Hostile to all characters aligned with Faction 4.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo(cTrait.Faction_4_Hostile))
+                .WithName(new CustomNameInfo(CTrait.Faction_4_Hostile))
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { cTrait.Faction_4_Aligned },
+                    Cancellations = { CTrait.Faction_4_Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

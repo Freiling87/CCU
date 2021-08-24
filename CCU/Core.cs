@@ -23,7 +23,7 @@ namespace CCU
         public const string pluginVersion = "0.1.0";
         public const bool designerEdition = true;
 
-        public static GameController gc => GameController.gameController;
+        public static GameController GC => GameController.gameController;
         public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
         public static new ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
         public static ManualLogSource _logger;
@@ -41,7 +41,7 @@ namespace CCU
             _logger.LogInfo(callerName + ": Method Call");
     }
 
-    public static class cTrait
+    public static class CTrait
 	{
         public const string
             AI_Bartender_BuyRound = "AI: Bartender - Buy Round",

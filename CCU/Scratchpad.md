@@ -1,4 +1,6 @@
-﻿[Info   :   BepInEx] Loading [Custom Content Utilities 0.1.0]
+﻿# On Run
+
+[Info   :   BepInEx] Loading [Custom Content Utilities 0.1.0]
 [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 Stack trace:
 CCU.Core.LogMethodCall (System.String callerName) (at <3aad7d0a933f486b8d7bc36adea33e63>:0)
@@ -8,6 +10,9 @@ BepInEx.Bootstrap.Chainloader:Start()
 UnityEngine.Application:.cctor()
 Rewired.InputManager_Base:Awake()
 
+# LevelEditor
+
+## Chunk Editor Shortcuts
 
 Ctrl + O load shows all menus but doesn't load anything
 F9 load works but shows chunk selection menu
@@ -16,7 +21,6 @@ Ctrl + S works fine
 F5 Save works but shows menus
 
 Ctrl Numkeys
-2-3 are mixed up somewhere
 
 Q,E 
 	Default to North as from-direction if None
@@ -29,13 +33,11 @@ Ctrl A
 	Toggle off doesn't
 
 ADD:
-	Middle click to drag viewport
-	START chunk/level/campaign button
 	ALT trail for overhead menus
 	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
 
+# All Traits
 
-TRAITS
 - CCP limit adjustment for CCU Traits
 	- CharacterCreation.traitCount in CreatePointTallyText();
 	- Line 532, need to make a custom list of this.traitsChosen where they are not on CCU trait list
