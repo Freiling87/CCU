@@ -26,10 +26,10 @@ namespace CCU
         {
             Core.LogMethodCall();
 
-            if ((___agent.HasTrait(cTrait.Faction_1_Aligned) && otherAgent.HasTrait(cTrait.Faction_1_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_2_Aligned) && otherAgent.HasTrait(cTrait.Faction_2_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_3_Aligned) && otherAgent.HasTrait(cTrait.Faction_3_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_4_Aligned) && otherAgent.HasTrait(cTrait.Faction_4_Aligned)))
+            if ((___agent.HasTrait<Faction_1_Aligned>() && otherAgent.HasTrait<Faction_1_Aligned>()) ||
+                (___agent.HasTrait<Faction_2_Aligned>() && otherAgent.HasTrait<Faction_2_Aligned>()) ||
+                (___agent.HasTrait<Faction_3_Aligned>() && otherAgent.HasTrait<Faction_3_Aligned>()) ||
+                (___agent.HasTrait<Faction_4_Aligned>() && otherAgent.HasTrait<Faction_4_Aligned>()))
             {
                 __instance.SetRelInitial(otherAgent, "Aligned");
                 otherAgent.relationships.SetRelInitial(___agent, "Aligned");
@@ -39,14 +39,14 @@ namespace CCU
                 return false;
             }
 
-            if ((___agent.HasTrait(cTrait.Faction_1_Hostile) && otherAgent.HasTrait(cTrait.Faction_1_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_1_Aligned) && otherAgent.HasTrait(cTrait.Faction_1_Hostile)) ||
-                (___agent.HasTrait(cTrait.Faction_2_Hostile) && otherAgent.HasTrait(cTrait.Faction_2_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_2_Aligned) && otherAgent.HasTrait(cTrait.Faction_2_Hostile)) ||
-                (___agent.HasTrait(cTrait.Faction_3_Hostile) && otherAgent.HasTrait(cTrait.Faction_3_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_3_Aligned) && otherAgent.HasTrait(cTrait.Faction_3_Hostile)) ||
-                (___agent.HasTrait(cTrait.Faction_4_Hostile) && otherAgent.HasTrait(cTrait.Faction_4_Aligned)) ||
-                (___agent.HasTrait(cTrait.Faction_4_Aligned) && otherAgent.HasTrait(cTrait.Faction_4_Hostile)))
+            if ((___agent.HasTrait<Faction_1_Hostile>() && otherAgent.HasTrait<Faction_1_Aligned>()) ||
+                (___agent.HasTrait<Faction_1_Aligned>() && otherAgent.HasTrait<Faction_1_Hostile>()) ||
+                (___agent.HasTrait<Faction_2_Hostile>() && otherAgent.HasTrait<Faction_2_Aligned>()) ||
+                (___agent.HasTrait<Faction_2_Aligned>() && otherAgent.HasTrait<Faction_2_Hostile>()) ||
+                (___agent.HasTrait<Faction_3_Hostile>() && otherAgent.HasTrait<Faction_3_Aligned>()) ||
+                (___agent.HasTrait<Faction_3_Aligned>() && otherAgent.HasTrait<Faction_3_Hostile>()) ||
+                (___agent.HasTrait<Faction_4_Hostile>() && otherAgent.HasTrait<Faction_4_Aligned>()) ||
+                (___agent.HasTrait<Faction_4_Aligned>() && otherAgent.HasTrait<Faction_4_Hostile>()))
 			{
                 __instance.SetRelInitial(otherAgent, "Hateful");
                 otherAgent.relationships.SetRelInitial(___agent, "Hateful");
