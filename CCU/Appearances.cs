@@ -17,7 +17,9 @@ namespace CCU
 {
 	public static class Appearance
 	{
-		#region lists
+		#region Trait Lists
+		public static string indicator = " - "; // Indicates where string content in Trait name begins
+
 		public static List<string> AppearanceTraits = new List<string>()
 		{
 			cTrait.Appearance_FacialHair_Beard,
@@ -146,7 +148,7 @@ namespace CCU
 				return;
 
 			string selection = pool[random.Next(pool.Count)];
-			agentHitBox.facialHairType = selection.Substring(selection.LastIndexOf("_"));
+			agentHitBox.facialHairType = selection.Substring(selection.IndexOf(indicator) + indicator.Length);
 			agentHitBox.agent.oma.facialHairType = agentHitBox.agent.oma.convertFacialHairTypeToInt(agentHitBox.facialHairType);
 
 			if (agentHitBox.facialHairType == "None" || agentHitBox.facialHairType == "" || agentHitBox.facialHairType == null)
