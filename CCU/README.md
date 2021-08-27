@@ -177,7 +177,9 @@ You can add as many as you want to a custom character. When you do so:
 
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
-- 
+
+## Warnings *
+- Notify player when saving & edges are blocked
 
 # Chunk Pack Editor Utilities *
 
