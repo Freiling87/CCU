@@ -204,3 +204,9 @@ No ideas for this one, yet. Taking requests.
 # Campaign Editor Utilities *
 
 No ideas for this one, yet. Taking requests.
+
+# Player utilities *
+
+- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
+  - Gives credit to author
+  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
