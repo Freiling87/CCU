@@ -80,6 +80,5 @@ namespace CCU.Patches
 				}
 			);
 		}
-
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU
+namespace CCU.Traits.Behavior
 {
     public class AI_Pickpocket : CustomTrait
     {
@@ -18,8 +17,16 @@ namespace CCU
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<AI_Pickpocket>()
-                .WithDescription(new CustomNameInfo("This character will pick pockets if set to wander the city.\n\nWarning: This is for use by content creators only. Use by players, unless instructed by campaign author, may cause unintended consequences."))
-                .WithName(new CustomNameInfo("AI: Pickpocket"))
+                .WithDescription(new CustomNameInfo
+                {
+                    [LanguageCode.English] = "This character will pick pockets if set to wander the city.",
+                    [LanguageCode.Russian] = "",
+                })
+                .WithName(new CustomNameInfo
+                {
+                    [LanguageCode.English] = CTrait.AI_Thief_Pickpocket,
+                    [LanguageCode.Russian] = "",
+                })
                 .WithUnlock(new TraitUnlock
                 {
                     Cancellations = { },
@@ -31,17 +38,5 @@ namespace CCU
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
-    }
-
-    [HarmonyPatch(declaringType: typeof(BrainUpdate))]
-    public class BrainUpdate_Patches
-	{
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
-        public static bool MyUpdate_Prefix(BrainUpdate __instance)
-		{
-            // This has the wandering NPC code like pickpocketing, Hobo grabbing, etc.
-
-            return true;
-		}
     }
 }

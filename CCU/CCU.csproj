@@ -97,7 +97,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
+    <Compile Include="Patches\P_BrainUpdate.cs" />
     <Compile Include="Traits\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="LevelEditor.cs" />
     <Compile Include="Core.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="Patches\P_CharacterSheet.cs" />
     <Compile Include="Patches\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Traits\Behavior\Pickpocket.cs" />
     <Compile Include="Traits\FacialHair\Beard.cs" />
     <Compile Include="Traits\FacialHair\Mustache.cs" />
     <Compile Include="Traits\FacialHair\MustacheCircus.cs" />
@@ -127,7 +128,6 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Traits\Behavior\" />
     <Folder Include="Traits\HairColor\" />
     <Folder Include="Traits\Hairstyle\" />
     <Folder Include="Traits\SkinColor\" />
