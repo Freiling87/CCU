@@ -97,15 +97,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patches\P_BrainUpdate.cs" />
-    <Compile Include="Patches\P_LevelEditor.cs" />
+    <Compile Include="Patches\Behavior\P_BrainUpdate.cs" />
+    <Compile Include="Patches\LevelEditor\P_LevelEditor.cs" />
     <Compile Include="Traits\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="LevelEditorUtilities.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Patches\P_AgentHitbox.cs" />
-    <Compile Include="Patches\P_CharacterSelect.cs" />
-    <Compile Include="Patches\P_CharacterSheet.cs" />
-    <Compile Include="Patches\P_Relationships.cs" />
+    <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
+    <Compile Include="Patches\Interface\P_CharacterSelect.cs" />
+    <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
+    <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traits\Behavior\Pickpocket.cs" />
     <Compile Include="Traits\FacialHair\Beard.cs" />
