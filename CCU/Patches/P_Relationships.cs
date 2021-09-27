@@ -2,6 +2,7 @@
 using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
+using CCU.Traits.Factions;
 
 namespace CCU.Patches
 {

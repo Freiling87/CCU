@@ -1,4 +1,6 @@
-﻿# On Run
+﻿# Test Notes / Bugfixing
+
+# Initial Load
 
 [Info   :   BepInEx] Loading [Custom Content Utilities 0.1.0]
 [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
@@ -9,8 +11,6 @@ UnityEngine.GameObject:AddComponent(Type)
 BepInEx.Bootstrap.Chainloader:Start()
 UnityEngine.Application:.cctor()
 Rewired.InputManager_Base:Awake()
-
-# LevelEditor
 
 ## Chunk Editor Shortcuts
 
@@ -36,7 +36,17 @@ ADD:
 	ALT trail for overhead menus
 	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
 
-# All Traits
+## Faction Traits
+
+Test
+
+## Appearance Traits
+
+Test transpiler method, simply replace if it doesn't work. Use transpilers later.
+
+# Implementation
+
+## Traits
 
 - CCP limit adjustment for CCU Traits
 	- CharacterCreation.traitCount in CreatePointTallyText();

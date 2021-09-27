@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RogueLibsCore;
+using RogueLibsCore; 
 
-namespace CCU.Traits.T_Factions
+namespace CCU.Traits.Factions
 {
-    public class Faction_1_Aligned : CustomTrait
+    public class Faction_3_Aligned : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_1_Aligned>()
+            RogueLibs.CreateCustomTrait<Faction_3_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
@@ -20,12 +20,12 @@ namespace CCU.Traits.T_Factions
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Faction_1_Aligned,
+                    [LanguageCode.English] = CTrait.Faction_3_Aligned,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Faction_1_Hostile },
+                    Cancellations = { CTrait.Faction_3_Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

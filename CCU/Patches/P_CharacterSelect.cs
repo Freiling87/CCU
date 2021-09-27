@@ -1,263 +1,22 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits;
 using HarmonyLib;
-using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using BTHarmonyUtils;
-using BTHarmonyUtils.TranspilerUtils;
 
-namespace CCU
+namespace CCU.Patches
 {
-	public static class Appearance
+	[HarmonyPatch(declaringType: typeof(CharacterSelect))]
+	public static class P_CharacterSelect
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
-
-		#region Trait Lists
-		public static string indicator = " - "; // Indicates where string content in Trait name begins
-
-		public static List<string> AppearanceTraits = new List<string>()
-		{
-			CTrait.Appearance_FacialHair_Beard,
-			CTrait.Appearance_FacialHair_Mustache,
-			CTrait.Appearance_FacialHair_MustacheCircus,
-			CTrait.Appearance_FacialHair_MustacheRedneck,
-			CTrait.Appearance_FacialHair_None,
-			CTrait.Appearance_HairColor_Black,
-			CTrait.Appearance_HairColor_Blonde,
-			CTrait.Appearance_HairColor_Blue,
-			CTrait.Appearance_HairColor_Brown,
-			CTrait.Appearance_HairColor_Green,
-			CTrait.Appearance_HairColor_Grey,
-			CTrait.Appearance_HairColor_Orange,
-			CTrait.Appearance_HairColor_Pink,
-			CTrait.Appearance_HairColor_Purple,
-			CTrait.Appearance_HairColor_Red,
-			CTrait.Appearance_Hairstyle_Afro,
-			CTrait.Appearance_Hairstyle_Bald,
-			CTrait.Appearance_Hairstyle_Balding,
-			CTrait.Appearance_Hairstyle_BangsLong,
-			CTrait.Appearance_Hairstyle_BangsMedium,
-			CTrait.Appearance_Hairstyle_Curtains,
-			CTrait.Appearance_Hairstyle_Cutoff,
-			CTrait.Appearance_Hairstyle_FlatLong,
-			CTrait.Appearance_Hairstyle_HoboBeard,
-			CTrait.Appearance_Hairstyle_Leia,
-			CTrait.Appearance_Hairstyle_MessyLong,
-			CTrait.Appearance_Hairstyle_Military,
-			CTrait.Appearance_Hairstyle_Mohawk,
-			CTrait.Appearance_Hairstyle_Normal,
-			CTrait.Appearance_Hairstyle_NormalHigh,
-			CTrait.Appearance_Hairstyle_Pompadour,
-			CTrait.Appearance_Hairstyle_Ponytail,
-			CTrait.Appearance_Hairstyle_PuffyLong,
-			CTrait.Appearance_Hairstyle_PuffyShort,
-			CTrait.Appearance_Hairstyle_Sidewinder,
-			CTrait.Appearance_Hairstyle_Spiky,
-			CTrait.Appearance_Hairstyle_SpikyShort,
-			CTrait.Appearance_Hairstyle_Suave,
-			CTrait.Appearance_Hairstyle_Wave,
-			CTrait.Appearance_SkinColor_BlackSkin,
-			CTrait.Appearance_SkinColor_GoldSkin,
-			CTrait.Appearance_SkinColor_LightBlackSkin,
-			CTrait.Appearance_SkinColor_MixedSkin,
-			CTrait.Appearance_SkinColor_PaleSkin,
-			CTrait.Appearance_SkinColor_PinkSkin,
-			CTrait.Appearance_SkinColor_SuperPaleSkin,
-			CTrait.Appearance_SkinColor_WhiteSkin,
-			CTrait.Appearance_SkinColor_ZombieSkin1,
-			CTrait.Appearance_SkinColor_ZombieSkin2
-		};
-		private static List<Type> FacialHairTraits = new List<Type>()
-		{
-			typeof(Appearance_FacialHair_Beard),
-			typeof(Appearance_FacialHair_Mustache),
-			typeof(Appearance_FacialHair_MustacheCircus),
-			typeof(Appearance_FacialHair_MustacheRedneck),
-			typeof(Appearance_FacialHair_None)
-		};
-		private static List<string> HairColorTraits = new List<string>()
-		{
-			CTrait.Appearance_HairColor_Black,
-			CTrait.Appearance_HairColor_Blonde,
-			CTrait.Appearance_HairColor_Blue,
-			CTrait.Appearance_HairColor_Brown,
-			CTrait.Appearance_HairColor_Green,
-			CTrait.Appearance_HairColor_Grey,
-			CTrait.Appearance_HairColor_Orange,
-			CTrait.Appearance_HairColor_Pink,
-			CTrait.Appearance_HairColor_Purple,
-			CTrait.Appearance_HairColor_Red
-		};
-		private static List<string> HairstyleTraits = new List<string>()
-		{
-			CTrait.Appearance_Hairstyle_Afro,
-			CTrait.Appearance_Hairstyle_Bald,
-			CTrait.Appearance_Hairstyle_Balding,
-			CTrait.Appearance_Hairstyle_BangsLong,
-			CTrait.Appearance_Hairstyle_BangsMedium,
-			CTrait.Appearance_Hairstyle_Curtains,
-			CTrait.Appearance_Hairstyle_Cutoff,
-			CTrait.Appearance_Hairstyle_FlatLong,
-			CTrait.Appearance_Hairstyle_HoboBeard,
-			CTrait.Appearance_Hairstyle_Leia,
-			CTrait.Appearance_Hairstyle_MessyLong,
-			CTrait.Appearance_Hairstyle_Military,
-			CTrait.Appearance_Hairstyle_Mohawk,
-			CTrait.Appearance_Hairstyle_Normal,
-			CTrait.Appearance_Hairstyle_NormalHigh,
-			CTrait.Appearance_Hairstyle_Pompadour,
-			CTrait.Appearance_Hairstyle_Ponytail,
-			CTrait.Appearance_Hairstyle_PuffyLong,
-			CTrait.Appearance_Hairstyle_PuffyShort,
-			CTrait.Appearance_Hairstyle_Sidewinder,
-			CTrait.Appearance_Hairstyle_Spiky,
-			CTrait.Appearance_Hairstyle_SpikyShort,
-			CTrait.Appearance_Hairstyle_Suave,
-			CTrait.Appearance_Hairstyle_Wave
-		};
-		private static List<string> SkinColorTraits = new List<string>()
-		{
-			CTrait.Appearance_SkinColor_BlackSkin,
-			CTrait.Appearance_SkinColor_GoldSkin,
-			CTrait.Appearance_SkinColor_LightBlackSkin,
-			CTrait.Appearance_SkinColor_MixedSkin,
-			CTrait.Appearance_SkinColor_PaleSkin,
-			CTrait.Appearance_SkinColor_PinkSkin,
-			CTrait.Appearance_SkinColor_SuperPaleSkin,
-			CTrait.Appearance_SkinColor_WhiteSkin,
-			CTrait.Appearance_SkinColor_ZombieSkin1,
-			CTrait.Appearance_SkinColor_ZombieSkin2
-		};
-		#endregion
-		#region Rollers
-		internal static void RollFacialHair(AgentHitbox agentHitBox, Agent agent)
-		{
-			logger.LogInfo("RollFacialHair");
-
-			var random = new System.Random();
-
-			List<CustomTrait> pool = agent.GetTraits<CustomTrait>()
-				.Where(trait => FacialHairTraits.Contains(trait.GetType()))
-				.ToList();
-
-			if (pool.Count == 0)
-				return;
-
-			CustomTrait selection = pool[random.Next(pool.Count)];
-			string selectionName = selection.Trait.traitName;
-			agentHitBox.facialHairType = selectionName.Substring(selectionName.IndexOf(indicator) + indicator.Length);
-			agentHitBox.agent.oma.facialHairType = agentHitBox.agent.oma.convertFacialHairTypeToInt(agentHitBox.facialHairType);
-
-			if (agentHitBox.facialHairType == "None" || agentHitBox.facialHairType == "" || agentHitBox.facialHairType == null)
-			{
-				agentHitBox.facialHair.gameObject.SetActive(false);
-				agentHitBox.facialHairWB.gameObject.SetActive(false);
-			}
-			else
-			{
-				agentHitBox.facialHair.gameObject.SetActive(true);
-				agentHitBox.facialHairWB.gameObject.SetActive(true);
-			}
-		}
-		internal static void RollHairColor(AgentHitbox agentHitBox, Agent agent)
-		{
-		}
-		internal static void RollHairstyle(AgentHitbox agentHitBox, Agent agent)
-		{
-		}
-		internal static void RollSkinColor(AgentHitbox agentHitBox, Agent agent)
-		{
-		}
-		#endregion
-		#region Utilities
-		internal static List<Trait> OnlyAppearanceTraits(List<Trait> traitList)
-		{
-			return traitList
-				.Where(trait => AppearanceTraits.Contains(trait.traitName))
-				.ToList();
-		}
-		#endregion
-	}
-	#region Patches
-	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
-    public static class AgentHitbox_Patches
-    {
-		public static GameController GC => GameController.gameController;
-		public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
-		public static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
-		public static ManualLogSource _logger;
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
-		private static IEnumerable<CodeInstruction> SetupFeatures_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
-		{
-			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
-			SetupFeatures_Hook(generator).ApplySafe(instructions, Logger);
-			return instructions;
-		}
-
-		public static CodeReplacementPatch SetupFeatures_Hook(ILGenerator generator) =>
-			GetInteractionPatch(generator, nameof(RollCustomAppearance));
-
-		private static void RollCustomAppearance(AgentHitbox agentHitBox)
-		{
-			Logger.LogInfo("RollCustomAppearance");
-
-			if (agentHitBox.agent.agentName == "Custom" && agentHitBox.agent.isPlayer == 0)
-			{
-				Appearance.RollFacialHair(agentHitBox, agentHitBox.agent);
-				Appearance.RollHairstyle(agentHitBox, agentHitBox.agent);
-				Appearance.RollSkinColor(agentHitBox, agentHitBox.agent);
-
-				agentHitBox.SetCantShowHairUnderHeadPiece();
-
-				Appearance.RollHairColor(agentHitBox, agentHitBox.agent);
-			}
-		}
-
-		private static CodeReplacementPatch GetInteractionPatch(ILGenerator generator, string handler)
-		{
-			Label continueLabel = generator.DefineLabel();
-
-			MethodInfo handlerMethod = AccessTools.Method(typeof(AgentHitbox_Patches), handler, new Type[1] { typeof(AgentHitbox) });
-
-			return new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					// IL_05C7: stelem    [UnityEngine.CoreModule]UnityEngine.Color32
-					new CodeInstruction(OpCodes.Stelem),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// RollCustomAppearance(agentHitbox)
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Call, handlerMethod)
-
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// IL_05CC: nop
-					new CodeInstruction(OpCodes.Nop),
-				}
-			);
-		}
-    }
-
-	[HarmonyPatch(declaringType: typeof(CharacterSelect))]
-	public static class CharacterSelect_Patches
-	{
-		public static GameController GC => GameController.gameController;
-		private static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
-		private static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
-		private static ManualLogSource _logger;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent), argumentTypes: new Type[3] { typeof(int), typeof(string), typeof(Agent) })]
 		public static bool SetupSlotAgent_Prefix(int n, string mySlotAgentType, Agent curPlayer, CharacterSelect __instance, bool ___removingCustomCharacter)
@@ -295,10 +54,10 @@ namespace CCU
 				}
 				else
 					__instance.dummyAgent.agentName = mySlotAgentType;
-				
+
 				__instance.dummyAgent.SetupAgentStats("");
 				__instance.slotAgent[n].gameObject.SetActive(true);
-				
+
 				if (mySlotAgentType == "Cop2")
 					mySlotAgentType = "Cop";
 				if (mySlotAgentType == "Cop" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted(mySlotAgentType))
@@ -311,9 +70,9 @@ namespace CCU
 					mySlotAgentType = "Hobo";
 				if (mySlotAgentType == "Hobo" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted(mySlotAgentType))
 					mySlotAgentType = "UpperCruster";
-				
+
 				__instance.slotAgent[n].transform.parent.GetComponent<InvSlot>().characterSelectType = mySlotAgentType;
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 				{
 					Vector2 sizeDelta;
@@ -344,27 +103,27 @@ namespace CCU
 					__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().color = __instance.skinColor32[curPlayer.isPlayer - 1, n];
 				else
 					__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().color = Color.white;
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.skinColor;
 				else
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").GetComponent<Image>().color = __instance.skinColor32[curPlayer.isPlayer - 1, n];
-				
+
 				string text = "";
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 					text = __instance.dummyAgent.agentHitboxScript.hairType;
 				else
 					text = __instance.hairType[curPlayer.isPlayer - 1, n];
-				
+
 				if (__instance.dummyAgent.agentName == "Slavemaster")
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic["SlavemasterMaskSpecialS"];
 				else
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic[text + "S"];
-				
+
 				bool flag = false;
 				bool flag2 = false;
-				
+
 				foreach (RandomElement randomElement in GC.rnd.randomListTableStatic["NotHairStyles"].elementList)
 					if (randomElement.rName == __instance.hairType[curPlayer.isPlayer - 1, n])
 					{
@@ -372,13 +131,13 @@ namespace CCU
 
 						if (__instance.dummyAgent.agentName != "Custom")
 							flag = true;
-						
+
 						if (randomElement.rName != "Hoodie" && randomElement.rName != "AssassinMask" && randomElement.rName != "SlavemasterMask")
 						{
 							flag2 = true;
 							break;
 						}
-						
+
 						break;
 					}
 
@@ -400,10 +159,10 @@ namespace CCU
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").gameObject.SetActive(true);
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").gameObject.SetActive(true);
 				}
-				
+
 				Vector2 sizeDelta2 = new Vector2(__instance.gr.hairDic[text + "S"].bounds.size.x * 100f, __instance.gr.hairDic[text + "S"].bounds.size.y * 100f);
 				__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<RectTransform>().sizeDelta = sizeDelta2;
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 				{
 					if (__instance.dummyAgent.agentHitboxScript.facialHairType == "None")
@@ -415,7 +174,7 @@ namespace CCU
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").gameObject.SetActive(false);
 				else
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").gameObject.SetActive(true);
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 				{
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().sprite = __instance.gr.facialHairDic[__instance.dummyAgent.agentHitboxScript.facialHairType + "S"];
@@ -426,21 +185,21 @@ namespace CCU
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().sprite = __instance.gr.facialHairDic[__instance.facialHairType[curPlayer.isPlayer - 1, n] + "S"];
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().color = __instance.facialHairColor32[curPlayer.isPlayer - 1, n];
 				}
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 				{
 					__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm1").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.skinColor;
-				
+
 					if (__instance.dummyAgent.hasSpecialAbilityArm2)
 					{
 						string invItemName = __instance.dummyAgent.inventory.equippedSpecialAbility.invItemName;
 						__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().color = Color.white;
-					
+
 						if (invItemName == "WaterCannon" || invItemName == "LaserGun")
 							__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(64f, 64f);
 						else
 							__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(16f, 16f);
-						
+
 						__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().sprite = __instance.gr.itemDic[invItemName + "Melee"];
 					}
 					else
@@ -453,17 +212,17 @@ namespace CCU
 				else
 				{
 					__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm1").GetComponent<Image>().color = __instance.skinColor32[curPlayer.isPlayer - 1, n];
-					
+
 					if (__instance.dummyAgent.hasSpecialAbilityArm2)
 					{
 						string invItemName2 = __instance.dummyAgent.inventory.equippedSpecialAbility.invItemName;
 						__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().color = Color.white;
-					
+
 						if (invItemName2 == "WaterCannon" || invItemName2 == "LaserGun")
 							__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(64f, 64f);
 						else
 							__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(16f, 16f);
-						
+
 						__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().sprite = __instance.gr.itemDic[invItemName2 + "Melee"];
 					}
 					else
@@ -484,7 +243,7 @@ namespace CCU
 					__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg1").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.legsColor;
 					__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg2").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.legsColor;
 				}
-				
+
 				if (__instance.dummyAgent.statusEffects.hasTrait("RollerSkates"))
 				{
 					__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg1").transform.Find("Footwear1").gameObject.SetActive(true);
@@ -497,20 +256,20 @@ namespace CCU
 					__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg1").transform.Find("Footwear1").gameObject.SetActive(false);
 					__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg2").transform.Find("Footwear2").gameObject.SetActive(false);
 				}
-				
+
 				if (mySlotAgentType == "ShapeShifter")
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = Color.red;
 				else if (mySlotAgentType == "Zombie")
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = Color.yellow;
 				else
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.eyesColor;
-				
+
 				string text2 = "Eyes";
-				
+
 				if (__instance.dummyAgent.agentName == "Custom")
 				{
 					text2 = __instance.dummyAgent.customCharacterData.eyesType;
-				
+
 					if (text2 == "" || text2 == null)
 						text2 = "Eyes";
 				}
@@ -518,7 +277,7 @@ namespace CCU
 					text2 = "EyesCannibal";
 				else if (__instance.dummyAgent.agentName == "Zombie")
 					text2 = "EyesZombie";
-				
+
 				if (text2 == "EyesCannibal")
 				{
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").GetComponent<Image>().sprite = __instance.gr.headDic["HeadCannibal"];
@@ -536,7 +295,7 @@ namespace CCU
 				}
 
 				bool flag3 = false;
-				
+
 				using (List<RandomElement>.Enumerator enumerator = __instance.dummyAgent.agentHitboxScript.agent.gc.scriptObject.GetComponent<RandomSelection>().randomListTableStatic["CantShowUnderHeadPiece"].elementList.GetEnumerator())
 				{
 					while (enumerator.MoveNext())
@@ -546,15 +305,15 @@ namespace CCU
 							break;
 						}
 				}
-				
+
 				__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").gameObject.SetActive(false);
-				
+
 				if (__instance.dummyAgent.inventory.equippedArmorHead == null && __instance.dummyAgent.inventory.defaultArmorHead != null)
 				{
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").gameObject.SetActive(true);
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").GetComponent<Image>().sprite = __instance.gr.headPiecesDic[__instance.dummyAgent.inventory.defaultArmorHead.invItemName + "S"];
 				}
-				
+
 				if (__instance.armorBehindHair[n] && !flag2)
 				{
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").transform.SetParent(__instance.slotAgent[n].transform.Find("Body").transform);
@@ -632,10 +391,10 @@ namespace CCU
 					}
 					else
 						__instance.dummyAgent.agentName = mySlotAgentType;
-					
+
 					__instance.dummyAgent.SetupAgentStats("");
 					__instance.slotAgent[n].gameObject.SetActive(true);
-					
+
 					if (mySlotAgentType == "Cop2")
 						mySlotAgentType = "Cop";
 					if (mySlotAgentType == "Cop" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted(mySlotAgentType))
@@ -648,13 +407,13 @@ namespace CCU
 						mySlotAgentType = "Hobo";
 					if (mySlotAgentType == "Hobo" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted(mySlotAgentType))
 						mySlotAgentType = "UpperCruster";
-					
+
 					__instance.slotAgent[n].transform.parent.GetComponent<InvSlot>().characterSelectType = mySlotAgentType;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						Vector2 sizeDelta;
-					
+
 						if (__instance.dummyAgent.customCharacterData.bodyType.Contains("G_"))
 						{
 							__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().sprite = __instance.gr.bodyGDic[__instance.dummyAgent.customCharacterData.bodyType + "S"];
@@ -665,7 +424,7 @@ namespace CCU
 							__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().sprite = __instance.gr.bodyDic[__instance.dummyAgent.customCharacterData.bodyType + "S"];
 							sizeDelta = new Vector2(__instance.gr.bodyDic[__instance.dummyAgent.customCharacterData.bodyType + "S"].bounds.size.x * 100f, __instance.gr.bodyDic[__instance.dummyAgent.customCharacterData.bodyType + "S"].bounds.size.y * 100f);
 						}
-						
+
 						__instance.slotAgent[n].transform.transform.Find("Body").GetComponent<RectTransform>().sizeDelta = sizeDelta;
 					}
 					else
@@ -676,40 +435,40 @@ namespace CCU
 					}
 
 					Color32 c = Color.white;
-					
+
 					if (__instance.dummyAgent.agentName != "Custom")
 					{
 						__instance.dummyAgent.agentHitboxScript.chooseSkinColor(__instance.dummyAgent.agentName);
 					}
-					
+
 					c = __instance.dummyAgent.agentHitboxScript.skinColor;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.bodyColor;
 					else if (mySlotAgentType == "Wrestler" || mySlotAgentType == "ShapeShifter")
 						__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().color = c;
 					else
 						__instance.slotAgent[n].transform.Find("Body").GetComponent<Image>().color = Color.white;
-					
+
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").GetComponent<Image>().color = c;
 					string text3 = "";
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						text3 = __instance.dummyAgent.agentHitboxScript.hairType;
 					else
 						text3 = __instance.dummyAgent.agentHitboxScript.chooseHairType(__instance.dummyAgent.agentName);
-					
+
 					bool flag4 = false;
 					bool flag5 = false;
 					Color32 color = Color.white;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						color = __instance.dummyAgent.agentHitboxScript.hairColor;
 					else
 						color = __instance.dummyAgent.agentHitboxScript.chooseHairColor(__instance.dummyAgent.agentName, true);
-					
+
 					Color32 color2 = color;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						color2 = __instance.dummyAgent.agentHitboxScript.hairColor;
 					foreach (RandomElement randomElement2 in GC.rnd.randomListTableStatic["NotHairStyles"].elementList)
@@ -717,7 +476,7 @@ namespace CCU
 						if (randomElement2.rName == text3)
 						{
 							color = AgentHitbox.white;
-					
+
 							if (__instance.dummyAgent.agentName != "Custom")
 								flag4 = true;
 							if (randomElement2.rName != "Hoodie" && randomElement2.rName != "AssassinMask" && randomElement2.rName != "SlavemasterMask")
@@ -725,14 +484,14 @@ namespace CCU
 								flag5 = true;
 								break;
 							}
-							
+
 							break;
 						}
 					}
 
 					if (!flag4)
 						color = color2;
-					
+
 					if (flag5)
 					{
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").gameObject.SetActive(false);
@@ -743,22 +502,22 @@ namespace CCU
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").gameObject.SetActive(true);
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").gameObject.SetActive(true);
 					}
-					
+
 					if (__instance.dummyAgent.agentName == "Slavemaster")
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic["SlavemasterMaskSpecialS"];
 					else
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic[text3 + "S"];
-					
+
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().color = color;
 					Vector2 sizeDelta2 = new Vector2(__instance.gr.hairDic[text3 + "S"].bounds.size.x * 100f, __instance.gr.hairDic[text3 + "S"].bounds.size.y * 100f);
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<RectTransform>().sizeDelta = sizeDelta2;
 					string text4;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						text4 = __instance.dummyAgent.agentHitboxScript.facialHairType;
 					else
 						text4 = __instance.dummyAgent.agentHitboxScript.chooseFacialHairType(__instance.dummyAgent.agentName);
-					
+
 					if (text4 == "" || text4 == "None")
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").gameObject.SetActive(false);
 					else
@@ -766,20 +525,20 @@ namespace CCU
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").gameObject.SetActive(true);
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().sprite = __instance.gr.facialHairDic[text4 + "S"];
 					}
-					
+
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.hairColor;
 					__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm1").GetComponent<Image>().color = c;
-					
+
 					if (__instance.dummyAgent.hasSpecialAbilityArm2)
 					{
 						string invItemName3 = __instance.dummyAgent.inventory.equippedSpecialAbility.invItemName;
 						__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().color = Color.white;
-					
+
 						if (invItemName3 == "WaterCannon" || invItemName3 == "LaserGun")
 							__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(64f, 64f);
 						else
 							__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(16f, 16f);
-						
+
 						__instance.slotAgent[n].transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().sprite = __instance.gr.itemDic[invItemName3 + "Melee"];
 					}
 					else
@@ -799,7 +558,7 @@ namespace CCU
 						__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg1").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.legsColor;
 						__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg2").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.legsColor;
 					}
-					
+
 					if (__instance.dummyAgent.statusEffects.hasTrait("RollerSkates"))
 					{
 						__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg1").transform.Find("Footwear1").gameObject.SetActive(true);
@@ -812,20 +571,20 @@ namespace CCU
 						__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg1").transform.Find("Footwear1").gameObject.SetActive(false);
 						__instance.slotAgent[n].transform.Find("Legs").transform.Find("Leg2").transform.Find("Footwear2").gameObject.SetActive(false);
 					}
-					
+
 					if (mySlotAgentType == "ShapeShifter")
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = Color.red;
 					else if (mySlotAgentType == "Zombie")
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = Color.yellow;
 					else
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.eyesColor;
-					
+
 					string text5 = "Eyes";
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						text5 = __instance.dummyAgent.customCharacterData.eyesType;
-					
+
 						if (text5 == "" || text5 == null)
 							text5 = "Eyes";
 					}
@@ -833,7 +592,7 @@ namespace CCU
 						text5 = "EyesCannibal";
 					else if (__instance.dummyAgent.agentName == "Zombie")
 						text5 = "EyesZombie";
-					
+
 					if (text5 == "EyesCannibal")
 					{
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").GetComponent<Image>().sprite = __instance.gr.headDic["HeadCannibal"];
@@ -849,9 +608,9 @@ namespace CCU
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").GetComponent<Image>().sprite = __instance.gr.headDic["Head"];
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().sprite = __instance.gr.eyesDic[text5 + "S"];
 					}
-					
+
 					bool flag3 = false;
-					
+
 					using (List<RandomElement>.Enumerator enumerator = __instance.dummyAgent.agentHitboxScript.agent.gc.scriptObject.GetComponent<RandomSelection>().randomListTableStatic["CantShowUnderHeadPiece"].elementList.GetEnumerator())
 					{
 						while (enumerator.MoveNext())
@@ -861,15 +620,15 @@ namespace CCU
 								break;
 							}
 					}
-					
+
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").gameObject.SetActive(true);
 					__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").gameObject.SetActive(false);
-					
+
 					if (__instance.dummyAgent.inventory.equippedArmorHead == null && __instance.dummyAgent.inventory.defaultArmorHead != null)
 					{
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").gameObject.SetActive(true);
 						__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").GetComponent<Image>().sprite = __instance.gr.headPiecesDic[__instance.dummyAgent.inventory.defaultArmorHead.invItemName + "S"];
-					
+
 						if (__instance.dummyAgent.inventory.defaultArmorHead.behindHair && !flag5)
 						{
 							__instance.slotAgent[n].transform.Find("Head").transform.Find("Head").transform.SetParent(__instance.slotAgent[n].transform.Find("Body").transform);
@@ -897,15 +656,15 @@ namespace CCU
 							__instance.slotAgent[n].transform.Find("Head").transform.Find("HeadPiece").transform.SetParent(__instance.slotAgent[n].transform.Find("Body").transform);
 							__instance.slotAgent[n].transform.Find("Body").transform.Find("HeadPiece").transform.SetParent(__instance.slotAgent[n].transform.Find("Head").transform);
 						}
-						
+
 						if (__instance.dummyAgent.inventory.defaultArmorHead.cantShowHairAtAll)
 							__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.gui[0];
 						else if (flag3 && __instance.dummyAgent.inventory.defaultArmorHead.cantShowHair)
 							__instance.slotAgent[n].transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic[text3 + "S_U"];
-						
+
 						__instance.cantShowHair[n] = true;
 					}
-					
+
 					__instance.hairType[0, n] = __instance.dummyAgent.agentHitboxScript.hairType;
 					__instance.facialHairType[0, n] = __instance.dummyAgent.agentHitboxScript.facialHairType;
 					__instance.skinColor[0, n] = __instance.dummyAgent.agentHitboxScript.skinColorName;
@@ -923,7 +682,7 @@ namespace CCU
 							color = __instance.dummyAgent.agentHitboxScript.hairColor;
 						else
 							color = __instance.dummyAgent.agentHitboxScript.chooseHairColor(__instance.dummyAgent.agentName, true);
-					
+
 						color2 = color;
 					}
 
@@ -931,7 +690,7 @@ namespace CCU
 						color = __instance.dummyAgent.agentHitboxScript.hairColor;
 					else
 						__instance.dummyAgent.agentHitboxScript.chooseHairColor(__instance.dummyAgent.agentName, false);
-					
+
 					__instance.hairType[1, n] = __instance.dummyAgent.agentHitboxScript.hairType;
 					__instance.facialHairType[1, n] = __instance.dummyAgent.agentHitboxScript.facialHairType;
 					__instance.skinColor[1, n] = __instance.dummyAgent.agentHitboxScript.skinColorName;
@@ -942,14 +701,14 @@ namespace CCU
 					__instance.facialHairColor32[1, n] = color2;
 					__instance.dummyAgent.agentHitboxScript.hasSetup = false;
 					__instance.dummyAgent.agentHitboxScript.SetupFeatures();
-					
+
 					if (!flag4)
 					{
 						if (__instance.dummyAgent.agentName == "Custom")
 							color = __instance.dummyAgent.agentHitboxScript.hairColor;
 						else
 							color = __instance.dummyAgent.agentHitboxScript.chooseHairColor(__instance.dummyAgent.agentName, true);
-					
+
 						color2 = color;
 					}
 
@@ -970,7 +729,7 @@ namespace CCU
 							color = __instance.dummyAgent.agentHitboxScript.hairColor;
 						else
 							color = __instance.dummyAgent.agentHitboxScript.chooseHairColor(__instance.dummyAgent.agentName, true);
-					
+
 						color2 = color;
 					}
 
@@ -1022,7 +781,7 @@ namespace CCU
 
 							if (__instance.dummyAgent.customCharacterData.startingHeadPiece != "" && __instance.dummyAgent.customCharacterData.startingHeadPiece != null)
 								__instance.dummyAgent.agentInvDatabase.AddStartingHeadPiece(__instance.dummyAgent.customCharacterData.startingHeadPiece);
-							
+
 							flag6 = true;
 							gameObject = __instance.slotAgent[i];
 							num2 = i;
@@ -1031,7 +790,7 @@ namespace CCU
 
 					if (!flag6)
 						__instance.dummyAgent.agentName = mySlotAgentType;
-					
+
 					__instance.dummyAgent.SetupAgentStats("");
 					gameObject2.transform.Find("Body").gameObject.SetActive(true);
 					gameObject2.transform.Find("Head").transform.Find("Head").gameObject.SetActive(true);
@@ -1044,14 +803,14 @@ namespace CCU
 					gameObject2.transform.Find("Legs").transform.Find("Leg1").gameObject.SetActive(true);
 					gameObject2.transform.Find("Legs").transform.Find("Leg2").gameObject.SetActive(true);
 					__instance.curSelected[curPlayer.isPlayer - 1] = mySlotAgentType;
-					
+
 					if (mySlotAgentType == "Cop2" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted("Cop") && !__instance.slotAgentTypes.Contains("Cop2"))
 						mySlotAgentType = "Cop";
 					if (mySlotAgentType == "Guard2" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted("Guard") && !__instance.slotAgentTypes.Contains("Guard2"))
 						mySlotAgentType = "Guard";
 					if (mySlotAgentType == "UpperCruster" && GC.challenges.Contains("SuperSpecialCharacters") && GC.unlocks.isBigQuestCompleted("Hobo") && !__instance.slotAgentTypes.Contains("UpperCruster"))
 						mySlotAgentType = "Hobo";
-					
+
 					if (__instance.dummyAgent.agentName != "Custom")
 					{
 						using (List<string>.Enumerator enumerator2 = __instance.slotAgentTypes.GetEnumerator())
@@ -1063,10 +822,10 @@ namespace CCU
 									gameObject = __instance.slotAgent[num];
 									__instance.curSelectedNum[curPlayer.isPlayer - 1] = num;
 									num2 = num;
-								
+
 									break;
 								}
-					
+
 								num++;
 							}
 						}
@@ -1088,7 +847,7 @@ namespace CCU
 						__instance.MakeSelectablesInteractable(curPlayer.isPlayer - 1, false);
 					else
 						__instance.MakeSelectablesInteractable(curPlayer.isPlayer - 1, true);
-					
+
 					gameObject.gameObject.SetActive(true);
 					gameObject.transform.parent.GetComponent<InvSlot>().characterSelectType = mySlotAgentType;
 					gameObject2.transform.Find("Body").GetComponent<Image>().sprite = gameObject.transform.Find("Body").GetComponent<Image>().sprite;
@@ -1096,12 +855,12 @@ namespace CCU
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						Vector2 sizeDelta;
-					
+
 						if (__instance.dummyAgent.customCharacterData.bodyType.Contains("G_"))
 							sizeDelta = new Vector2(__instance.gr.bodyGDic[__instance.dummyAgent.customCharacterData.bodyType + "S"].bounds.size.x * 100f, __instance.gr.bodyGDic[__instance.dummyAgent.customCharacterData.bodyType + "S"].bounds.size.y * 100f);
 						else
 							sizeDelta = new Vector2(__instance.gr.bodyDic[__instance.dummyAgent.customCharacterData.bodyType + "S"].bounds.size.x * 100f, __instance.gr.bodyDic[__instance.dummyAgent.customCharacterData.bodyType + "S"].bounds.size.y * 100f);
-						
+
 						gameObject2.transform.transform.Find("Body").GetComponent<RectTransform>().sizeDelta = sizeDelta;
 					}
 					else
@@ -1116,44 +875,44 @@ namespace CCU
 						gameObject2.transform.Find("Body").GetComponent<Image>().color = __instance.skinColor32[curPlayer.isPlayer - 1, num];
 					else
 						gameObject2.transform.Find("Body").GetComponent<Image>().color = Color.white;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						gameObject2.transform.Find("Head").transform.Find("Head").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.skinColor;
 					else
 						gameObject2.transform.Find("Head").transform.Find("Head").GetComponent<Image>().color = __instance.skinColor32[curPlayer.isPlayer - 1, num];
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic[__instance.dummyAgent.agentHitboxScript.hairType + "S"];
 					else if (__instance.dummyAgent.agentName == "Slavemaster")
 						gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic["SlavemasterMaskSpecialS"];
 					else
 						gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic[__instance.hairType[curPlayer.isPlayer - 1, num] + "S"];
-					
+
 					string text6 = "";
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						text6 = __instance.dummyAgent.agentHitboxScript.hairType;
 					else
 						text6 = __instance.hairType[curPlayer.isPlayer - 1, num];
-					
+
 					bool flag7 = false;
 					bool flag8 = false;
-					
+
 					foreach (RandomElement randomElement3 in GC.rnd.randomListTableStatic["NotHairStyles"].elementList)
 					{
 						if (randomElement3.rName == text6)
 						{
 							gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<Image>().color = AgentHitbox.white;
-					
+
 							if (__instance.dummyAgent.agentName != "Custom")
 								flag7 = true;
 							if (randomElement3.rName != "Hoodie" && randomElement3.rName != "AssassinMask" && randomElement3.rName != "SlavemasterMask")
 							{
 								flag8 = true;
-							
+
 								break;
 							}
-							
+
 							break;
 						}
 					}
@@ -1165,7 +924,7 @@ namespace CCU
 						else
 							gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<Image>().color = __instance.hairColor32[curPlayer.isPlayer - 1, num];
 					}
-					
+
 					if (flag8)
 					{
 						gameObject2.transform.Find("Head").transform.Find("Head").gameObject.SetActive(false);
@@ -1176,10 +935,10 @@ namespace CCU
 						gameObject2.transform.Find("Head").transform.Find("Head").gameObject.SetActive(true);
 						gameObject2.transform.Find("Head").transform.Find("Eyes").gameObject.SetActive(true);
 					}
-					
+
 					Vector2 sizeDelta2 = new Vector2(__instance.gr.hairDic[text6 + "S"].bounds.size.x * 100f, __instance.gr.hairDic[text6 + "S"].bounds.size.y * 100f);
 					gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<RectTransform>().sizeDelta = sizeDelta2;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						if (__instance.dummyAgent.agentHitboxScript.facialHairType == "None")
@@ -1191,31 +950,31 @@ namespace CCU
 						gameObject2.transform.Find("Head").transform.Find("FacialHair").gameObject.SetActive(false);
 					else
 						gameObject2.transform.Find("Head").transform.Find("FacialHair").gameObject.SetActive(true);
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						gameObject2.transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().sprite = __instance.gr.facialHairDic[__instance.dummyAgent.agentHitboxScript.facialHairType + "S"];
 					else
 						gameObject2.transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().sprite = __instance.gr.facialHairDic[__instance.facialHairType[curPlayer.isPlayer - 1, num] + "S"];
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 						gameObject2.transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.hairColor;
 					else
 						gameObject2.transform.Find("Head").transform.Find("FacialHair").GetComponent<Image>().color = __instance.facialHairColor32[curPlayer.isPlayer - 1, num];
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						gameObject2.transform.Find("Arms").transform.Find("Arm1").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.skinColor;
-					
+
 						if (__instance.dummyAgent.hasSpecialAbilityArm2)
 						{
 							string invItemName4 = __instance.dummyAgent.inventory.equippedSpecialAbility.invItemName;
 							gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().color = Color.white;
-						
+
 							if (invItemName4 == "WaterCannon" || invItemName4 == "LaserGun")
 								gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(64f, 64f);
 							else
 								gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(16f, 16f);
-							
+
 							gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().sprite = __instance.gr.itemDic[invItemName4 + "Melee"];
 						}
 						else
@@ -1233,12 +992,12 @@ namespace CCU
 						{
 							string invItemName5 = __instance.dummyAgent.inventory.equippedSpecialAbility.invItemName;
 							gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().color = Color.white;
-						
+
 							if (invItemName5 == "WaterCannon" || invItemName5 == "LaserGun")
 								gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(64f, 64f);
 							else
 								gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<RectTransform>().sizeDelta = new Vector2(16f, 16f);
-							
+
 							gameObject2.transform.Find("Arms").transform.Find("Arm2").GetComponent<Image>().sprite = __instance.gr.itemDic[invItemName5 + "Melee"];
 						}
 						else
@@ -1259,7 +1018,7 @@ namespace CCU
 						gameObject2.transform.Find("Legs").transform.Find("Leg1").GetComponent<Image>().color = gameObject.transform.Find("Legs").transform.Find("Leg1").GetComponent<Image>().color;
 						gameObject2.transform.Find("Legs").transform.Find("Leg2").GetComponent<Image>().color = gameObject.transform.Find("Legs").transform.Find("Leg2").GetComponent<Image>().color;
 					}
-					
+
 					if (__instance.dummyAgent.statusEffects.hasTrait("RollerSkates"))
 					{
 						gameObject2.transform.Find("Legs").transform.Find("Leg1").transform.Find("Footwear1").gameObject.SetActive(true);
@@ -1272,20 +1031,20 @@ namespace CCU
 						gameObject2.transform.Find("Legs").transform.Find("Leg1").transform.Find("Footwear1").gameObject.SetActive(false);
 						gameObject2.transform.Find("Legs").transform.Find("Leg2").transform.Find("Footwear2").gameObject.SetActive(false);
 					}
-					
+
 					if (mySlotAgentType == "ShapeShifter")
 						gameObject2.transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = Color.red;
 					else if (mySlotAgentType == "Zombie")
 						gameObject2.transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = Color.yellow;
 					else
 						gameObject2.transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().color = __instance.dummyAgent.agentHitboxScript.eyesColor;
-					
+
 					string text7 = "Eyes";
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						text7 = __instance.dummyAgent.customCharacterData.eyesType;
-					
+
 						if (text7 == "" || text7 == null)
 							text7 = "Eyes";
 					}
@@ -1293,7 +1052,7 @@ namespace CCU
 						text7 = "EyesCannibal";
 					else if (__instance.dummyAgent.agentName == "Zombie")
 						text7 = "EyesZombie";
-					
+
 					if (text7 == "EyesCannibal")
 					{
 						gameObject2.transform.Find("Head").transform.Find("Head").GetComponent<Image>().sprite = __instance.gr.headDic["HeadCannibal"];
@@ -1309,12 +1068,12 @@ namespace CCU
 						gameObject2.transform.Find("Head").transform.Find("Head").GetComponent<Image>().sprite = __instance.gr.headDic["Head"];
 						gameObject2.transform.Find("Head").transform.Find("Eyes").GetComponent<Image>().sprite = __instance.gr.eyesDic[text7 + "S"];
 					}
-					
+
 					gameObject2.transform.Find("Head").transform.Find("HeadPiece").gameObject.SetActive(gameObject.transform.Find("Head").transform.Find("HeadPiece").gameObject.activeSelf);
 					gameObject2.transform.Find("Head").transform.Find("HeadPiece").gameObject.SetActive(gameObject.transform.Find("Head").transform.Find("HeadPiece").gameObject.activeSelf);
 					gameObject2.transform.Find("Head").transform.Find("HeadPiece").GetComponent<Image>().sprite = gameObject.transform.Find("Head").transform.Find("HeadPiece").GetComponent<Image>().sprite;
 					bool flag3 = false;
-					
+
 					using (List<RandomElement>.Enumerator enumerator = __instance.dummyAgent.agentHitboxScript.agent.gc.scriptObject.GetComponent<RandomSelection>().randomListTableStatic["CantShowUnderHeadPiece"].elementList.GetEnumerator())
 					{
 						while (enumerator.MoveNext())
@@ -1324,7 +1083,7 @@ namespace CCU
 								break;
 							}
 					}
-					
+
 					if (__instance.armorBehindHair[num2] && !flag8)
 					{
 						gameObject2.transform.Find("Head").transform.Find("Head").transform.SetParent(gameObject2.transform.Find("Body").transform);
@@ -1351,7 +1110,7 @@ namespace CCU
 						gameObject2.transform.Find("Head").transform.Find("HeadPiece").transform.SetParent(gameObject2.transform.Find("Body").transform);
 						gameObject2.transform.Find("Body").transform.Find("HeadPiece").transform.SetParent(gameObject2.transform.Find("Head").transform);
 					}
-					
+
 					if (__instance.dummyAgent.inventory.defaultArmorHead != null)
 					{
 						if (__instance.dummyAgent.inventory.defaultArmorHead.cantShowHairAtAll)
@@ -1359,7 +1118,7 @@ namespace CCU
 						else if (flag3 && __instance.dummyAgent.inventory.defaultArmorHead.cantShowHair)
 							gameObject2.transform.Find("Head").transform.Find("Hair").GetComponent<Image>().sprite = __instance.gr.hairDic[text6 + "S_U"];
 					}
-					
+
 					__instance.dummyAgent.agentHitboxScript.canHaveFacialHair = false;
 					__instance.dummyAgent.inventory.DestroyAllItems();
 					__instance.dummyAgent.inventory.startingHeadPiece = "";
@@ -1368,11 +1127,11 @@ namespace CCU
 					__instance.dummyAgent.statusEffects.TraitList.Clear();
 					__instance.dummyAgent.SetupAgentStats("");
 					__instance.characterSelectStatsText[curPlayer.isPlayer - 1].text = "";
-					
+
 					if (GC.multiplayerMode && !GC.sessionDataBig.passwordProtection && !GC.debugMode && __instance.agent.controllerType == "Gamepad" && __instance.agent.mainGUI.curSelected != null && __instance.agent.mainGUI.curSelected.GetComponent<InvSlot>() != null)
 					{
 						int slotNumber = __instance.agent.mainGUI.curSelected.GetComponent<InvSlot>().slotNumber;
-					
+
 						if (slotNumber >= 32 && GC.multiplayerMode && !GC.sessionDataBig.passwordProtection && GC.sessionDataBig.customCharacterSlotsDetails[slotNumber - 32] != null && GC.sessionDataBig.customCharacterSlotsDetails[slotNumber - 32].exceededPoints)
 							__instance.characterSelectStatsText[curPlayer.isPlayer - 1].text = "<color=orange>" + GC.nameDB.GetName("OnlyPasswordProtected", "Interface") + "</color>\n\n";
 					}
@@ -1382,20 +1141,20 @@ namespace CCU
 						Text text8 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 						text8.text = text8.text + "<color=red>" + GC.nameDB.GetName("ExceededPoints", "Interface") + "</color>\n\n";
 					}
-					
+
 					__instance.bigSlotText[curPlayer.isPlayer - 1].text = __instance.dummyAgent.agentRealName;
-					
+
 					if (GC.fourPlayerMode)
 					{
 						string text9 = __instance.dummyAgent.agentName;
-					
+
 						if (text9 == "UpperCruster")
 							text9 = "Hobo";
 						else if (text9 == "Cop2")
 							text9 = "Cop";
 						else if (text9 == "Guard2")
 							text9 = "Guard";
-						
+
 						if (GC.unlocks.isBigQuestCompleted(text9))
 						{
 							Text text10 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
@@ -1586,23 +1345,23 @@ namespace CCU
 					}
 
 					bool flag9 = false;
-					
+
 					foreach (InvItem invItem in __instance.dummyAgent.inventory.InvItemList)
 						if (invItem.invItemName != null && invItem.invItemName != "")
 							flag9 = true;
-					
+
 					if (flag9)
 					{
 						Text text15 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 						text15.text = text15.text + "\n<color=yellow>- " + GC.nameDB.GetName("StartingItems", "Interface") + " - </color>\n";
-					
+
 						foreach (InvItem invItem2 in __instance.dummyAgent.inventory.InvItemList)
 						{
 							if (invItem2.invItemName != null && invItem2.invItemName != "")
 							{
 								Text text16 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 								text16.text += invItem2.invItemRealName;
-						
+
 								if (invItem2.invItemCount > 1 && invItem2.itemType != "WeaponProjectile" && invItem2.itemType != "WeaponMelee" && !invItem2.isArmor && !invItem2.isArmorHead)
 								{
 									text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
@@ -1627,21 +1386,21 @@ namespace CCU
 						__instance.characterSelectDescriptionText[curPlayer.isPlayer - 1].text = __instance.dummyAgent.customCharacterData.characterDescription;
 					else
 						__instance.characterSelectDescriptionText[curPlayer.isPlayer - 1].text = GC.nameDB.GetName(__instance.dummyAgent.agentName, "Description") + "\n";
-					
+
 					__instance.characterSelectQuestBigText[curPlayer.isPlayer - 1].text = GC.nameDB.GetName(__instance.dummyAgent.agentName + "_BQ", "Unlock") + "\n" + GC.nameDB.GetName("D_" + __instance.dummyAgent.agentName + "_BQ", "Unlock");
-					
+
 					if ((GC.challenges.Contains("SuperSpecialCharacters") && __instance.dummyAgent.oma.superSpecialAbility) || __instance.dummyAgent.agentName == "Cop2" || __instance.dummyAgent.agentName == "Guard2" || __instance.dummyAgent.agentName == "UpperCruster")
 					{
 						__instance.characterSelectQuestBigText[curPlayer.isPlayer - 1].text = "<color=magenta>" + GC.nameDB.GetName("SuperSpecialAbility", "Interface") + "</color>";
 						string text18 = __instance.dummyAgent.agentName;
-					
+
 						if (text18 == "Cop2")
 							text18 = "Cop";
 						else if (text18 == "Guard2")
 							text18 = "Guard";
 						else if (text18 == "UpperCruster")
 							text18 = "Hobo";
-						
+
 						Text text19 = __instance.characterSelectQuestBigText[curPlayer.isPlayer - 1];
 						text19.text = text19.text + "\n" + GC.nameDB.GetName("BQC_" + text18, "Unlock");
 					}
@@ -1650,24 +1409,24 @@ namespace CCU
 						string text20 = __instance.dummyAgent.agentName;
 						bool flag10 = GC.unlocks.IsUnlocked(text20, "Agent");
 						__instance.characterSelectQuestBigText[curPlayer.isPlayer - 1].text = "<color=yellow>- " + GC.nameDB.GetName("BigQuest", "Interface") + " -</color>";
-						
+
 						if (text20 == "Cop2")
 							text20 = "Cop";
 						else if (text20 == "Guard2")
 							text20 = "Guard";
 						else if (text20 == "UpperCruster")
 							text20 = "Hobo";
-						
+
 						string text21 = text20;
-						
+
 						if (text20 == "Custom")
 						{
 							text21 = __instance.dummyAgent.bigQuest;
 							flag10 = true;
 						}
-						
+
 						string name = GC.nameDB.GetName(text21 + "_BQ", "Unlock");
-						
+
 						if (GC.freeVersion)
 						{
 							Text text22 = __instance.characterSelectQuestBigText[curPlayer.isPlayer - 1];
@@ -1691,13 +1450,13 @@ namespace CCU
 						{
 							Text text24 = __instance.characterSelectQuestBigText[curPlayer.isPlayer - 1];
 							text24.text = text24.text + "\n<color=cyan>" + name + "</color>";
-						
+
 							if (GC.unlocks.isBigQuestCompleted(text21))
 							{
 								Text text25 = __instance.characterSelectQuestBigText[curPlayer.isPlayer - 1];
 								text25.text = text25.text + "\n<color=lime>" + GC.nameDB.GetName("QuestCompleted", "Interface") + "</color>";
 							}
-							
+
 							Text text26 = __instance.characterSelectQuestBigText[curPlayer.isPlayer - 1];
 							text26.text = text26.text + "\n" + GC.nameDB.GetName("D_" + text21 + "_BQ", "Unlock");
 						}
@@ -1709,16 +1468,16 @@ namespace CCU
 					{
 						__instance.characterSelectStatsText[curPlayer.isPlayer - 1].text = "<color=yellow>- " + GC.nameDB.GetName("Prerequisites", "Unlock") + " - </color>\n" + GC.unlocks.GetSpecialUnlockInfo(__instance.dummyAgent.agentName, GC.unlocks.GetUnlock(__instance.dummyAgent.agentName, "Agent"));
 					}
-					
+
 					__instance.selectedInvSlot[curPlayer.isPlayer - 1] = gameObject.transform.parent.GetComponent<InvSlot>();
-					
+
 					if (curPlayer.controllerType == "Keyboard" || curPlayer.controllerType == "")
 						curPlayer.mainGUI.invInterface.selectionBoxMainTr.position = __instance.selectedInvSlot[curPlayer.isPlayer - 1].tr.position;
-					
+
 					if (__instance.dummyAgent.agentName == "Custom")
 					{
 						__instance.curSelectedNum[curPlayer.isPlayer - 1] = __instance.selectedInvSlot[curPlayer.isPlayer - 1].slotNumber;
-						
+
 						return false;
 					}
 				}
@@ -1741,13 +1500,13 @@ namespace CCU
 						__instance.characterSelectStatsText[curPlayer.isPlayer - 1].text = GC.nameDB.GetName("CreateMe", "Interface");
 					else
 						__instance.characterSelectStatsText[curPlayer.isPlayer - 1].text = "";
-					
+
 					__instance.characterSelectDescriptionText[curPlayer.isPlayer - 1].text = "";
-					
+
 					if (GC.multiplayerMode && !GC.sessionDataBig.passwordProtection && !GC.debugMode && __instance.agent.controllerType == "Gamepad" && __instance.agent.mainGUI.curSelected != null && __instance.agent.mainGUI.curSelected.GetComponent<InvSlot>() != null)
 					{
 						int slotNumber2 = __instance.agent.mainGUI.curSelected.GetComponent<InvSlot>().slotNumber;
-					
+
 						if (slotNumber2 >= 32 && GC.multiplayerMode && !GC.sessionDataBig.passwordProtection && GC.sessionDataBig.customCharacterSlotsDetails[slotNumber2 - 32] != null && GC.sessionDataBig.customCharacterSlotsDetails[slotNumber2 - 32].exceededPoints)
 							__instance.characterSelectStatsText[curPlayer.isPlayer - 1].text = "<color=orange>" + GC.nameDB.GetName("OnlyPasswordProtected", "Interface") + "</color>";
 					}
@@ -1773,436 +1532,4 @@ namespace CCU
 			return false;
 		}
 	}
-	[HarmonyPatch(declaringType: typeof(CharacterSheet))]
-	public static class CharacterSheet_Patches
-	{
-		public static GameController GC => GameController.gameController;
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(CharacterSheet.UpdateStats), argumentTypes: new Type[0] { })]
-		public static bool UpdateStats_Prefix(CharacterSheet __instance, Agent ___agent, Text ___charText, StatusEffects ___statusEffects)
-		{
-			if (!GC.gameEventsStarted)
-				return false;
-			
-			int num = GC.sessionData.skillLevel[___agent.isPlayer];
-			int num2 = GC.sessionData.skillPoints[___agent.isPlayer];
-			int num3 = ___agent.skillPoints.findLevelThreshold(num);
-			string text = ___agent.agentRealName;
-
-			if (___agent.possessing)
-				text = GC.nameDB.GetName("ShapeShifter", "Agent");
-			
-			___charText.text = "";
-			Text text2 = ___charText;
-			
-			text2.text = string.Concat(new object[]
-			{
-				text2.text,
-				"<color=yellow>- ",
-				GC.nameDB.GetName("Stats", "Interface"),
-				" - </color>\n",
-				text,
-				"\n",
-				GC.nameDB.GetName("Level", "Interface"),
-				" ",
-				num,
-				"\n",
-				GC.nameDB.GetName("SkillPoints", "Interface"),
-				": ",
-				num2,
-				"/",
-				num3,
-				"\n\n"
-			});
-
-			text2 = ___charText;
-
-			text2.text = string.Concat(new object[]
-			{
-				text2.text,
-				GC.nameDB.GetName("Endurance", "Interface"),
-				": ",
-				___agent.enduranceStatMod + 1,
-				"/4\n"
-			});
-
-			if (___agent.statusEffects.hasTrait("RollerSkates") || ___agent.statusEffects.hasTrait("RollerSkates2"))
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new string[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Speed", "Interface"),
-					": ",
-					GC.nameDB.GetName("RollerSkates", "StatusEffect"),
-					"\n"
-				});
-			}
-			else if (___agent.statusEffects.hasTrait("BigCollider"))
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new string[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Speed", "Interface"),
-					": ",
-					GC.nameDB.GetName("BigCollider", "StatusEffect"),
-					"\n"
-				});
-			}
-			else
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new object[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Speed", "Interface"),
-					": ",
-					___agent.speedStatMod + 1,
-					"/4\n"
-				});
-			}
-
-			if (___agent.statusEffects.hasTrait("CantAttack"))
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new string[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Strength", "Interface"),
-					": ",
-					GC.nameDB.GetName("CantAttack", "StatusEffect"),
-					"\n"
-				});
-			}
-			else if (___agent.statusEffects.hasTrait("AttacksOneDamage"))
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new string[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Strength", "Interface"),
-					": ",
-					GC.nameDB.GetName("AttacksOneDamage", "StatusEffect"),
-					"\n"
-				});
-			}
-			else
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new object[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Strength", "Interface"),
-					": ",
-					___agent.strengthStatMod + 1,
-					"/4\n"
-				});
-			}
-
-			if (___agent.statusEffects.hasTrait("CantAttack"))
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new string[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Accuracy", "Interface"),
-					": ",
-					GC.nameDB.GetName("CantAttack", "StatusEffect"),
-					"\n"
-				});
-			}
-			else if (___agent.statusEffects.hasTrait("AttacksOneDamage"))
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new string[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Accuracy", "Interface"),
-					": ",
-					GC.nameDB.GetName("AttacksOneDamage", "StatusEffect"),
-					"\n"
-				});
-			}
-			else
-			{
-				text2 = ___charText;
-
-				text2.text = string.Concat(new object[]
-				{
-					text2.text,
-					GC.nameDB.GetName("Accuracy", "Interface"),
-					": ",
-					___agent.accuracyStatMod + 1,
-					"/4\n"
-				});
-			}
-
-			if (___statusEffects.TraitList.Count != 0 || ___agent.inventory.equippedSpecialAbility != null)
-			{
-				if (___statusEffects.StatusEffectList.Count != 0)
-				{
-					Text text3 = ___charText;
-					text3.text = text3.text + "\n<color=yellow>- " + GC.nameDB.GetName("StatusEffects", "Interface") + " - </color>\n";
-					// - STATUS EFFECTS -
-
-					foreach (StatusEffect statusEffect in ___statusEffects.StatusEffectList)
-					{
-						text2 = ___charText;
-
-						text2.text = string.Concat(new string[]
-						{
-							text2.text,
-							"<color=cyan>",
-							GC.nameDB.GetName(statusEffect.statusEffectName, "StatusEffect"),
-							"</color>\n<color=white>",
-							GC.nameDB.GetName(statusEffect.statusEffectName, "Description"),
-							"</color>\n"
-						});
-					}
-				}
-
-				if (___agent.oma.superSpecialAbility && ___agent.agentName != "Custom")
-				{
-					string str = ___agent.agentName;
-
-					if (___agent.agentName == "Cop2")
-						str = "Cop";
-					else if (___agent.agentName == "Guard2")
-						str = "Guard";
-					else if (___agent.agentName == "UpperCruster")
-						str = "Hobo";
-					
-					Text text4 = ___charText;
-					text4.text = text4.text + "\n<color=yellow>- " + GC.nameDB.GetName("SuperSpecialAbilityAllcaps", "Interface") + " - </color>\n";
-					Text text5 = ___charText;
-					text5.text = text5.text + "<color=white>" + GC.nameDB.GetName("BQC_" + str, "Unlock") + "</color>\n";
-				}
-
-				if (___agent.inventory.equippedSpecialAbility != null)
-				{
-					Text text6 = ___charText;
-					text6.text = text6.text + "\n<color=yellow>- " + GC.nameDB.GetName("SpecialAbility", "Interface") + " - </color>\n";
-					text2 = ___charText;
-
-					text2.text = string.Concat(new string[]
-					{
-						text2.text,
-						"<color=cyan>",
-						GC.nameDB.GetName(___agent.inventory.equippedSpecialAbility.invItemName, "Item"),
-						"</color>\n<color=white>",
-						GC.nameDB.GetName(___agent.inventory.equippedSpecialAbility.invItemName, "Description"),
-						"</color>\n"
-					});
-				}
-
-				bool flag = false;
-
-				foreach (Trait trait in ___statusEffects.TraitList)
-					if (trait.addedInGame && !___statusEffects.hasStatusEffect(trait.traitName))
-					{
-						flag = true;
-						break;
-					}
-
-				if (flag)
-				{
-					Text text7 = ___charText;
-					text7.text = text7.text + "\n<color=yellow>- " + GC.nameDB.GetName("ExtraTraits", "Interface") + " - </color>\n";
-					// - EXTRA TRAITS -
-
-					foreach (Trait trait2 in ___statusEffects.TraitList)
-					{
-						bool originalTrait = false;
-
-						if (!trait2.addedInGame)
-							originalTrait = true;
-						
-						if (___statusEffects.hasStatusEffect(trait2.traitName))
-							originalTrait = true;
-
-						if (!originalTrait)
-						{
-							text2 = ___charText;
-
-							text2.text = string.Concat(new string[]
-							{
-								text2.text,
-								"<color=cyan>",
-								GC.nameDB.GetName(trait2.traitName, "StatusEffect"),
-								"</color>\n<color=white>",
-								GC.nameDB.GetName(trait2.traitName, "Description"),
-								"</color>\n"
-							});
-						}
-					}
-				}
-
-				bool flag3 = false;
-
-				if (___agent.possessing || ___agent.transforming)
-				{
-					using (List<Trait>.Enumerator enumerator2 = ___statusEffects.TraitList.GetEnumerator())
-						while (enumerator2.MoveNext())
-							if (!enumerator2.Current.addedInGame)
-								flag3 = true;
-				}
-
-				if ((!___agent.possessing && !___agent.transforming) || flag3)
-				{
-					Text text8 = ___charText;
-					text8.text = text8.text + "\n<color=yellow>- " + GC.nameDB.GetName("StartingTraits", "Interface") + " - </color>\n";
-					// - STARTING TRAITS -
-
-					foreach (Trait trait3 in Appearance.OnlyAppearanceTraits(___statusEffects.TraitList)) // Filter out appearance traits
-					{
-						bool traitHidden = false;
-
-						if (trait3.addedInGame)
-						{
-							traitHidden = true;
-							flag = true;
-						}
-
-						if (___statusEffects.hasStatusEffect(trait3.traitName))
-							traitHidden = true;
-
-						if (!traitHidden)
-						{
-							text2 = ___charText;
-						
-							text2.text = string.Concat(new string[]
-							{
-								text2.text,
-								"<color=cyan>",
-								GC.nameDB.GetName(trait3.traitName, "StatusEffect"),
-								"</color>\n<color=white>",
-								GC.nameDB.GetName(trait3.traitName, "Description"),
-								"</color>\n"
-							});
-						}
-					}
-				}
-			}
-
-			return false;
-		}
-	}
-	#endregion
-	#region Traits
-	#region Facial Hair
-	public class Appearance_FacialHair_Beard : CustomTrait
-	{
-		[RLSetup]
-		public static void Setup()
-		{
-			RogueLibs.CreateCustomTrait<Appearance_FacialHair_Beard>()
-				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo(CTrait.Appearance_FacialHair_Beard))
-				.WithUnlock(new TraitUnlock
-				{
-					CharacterCreationCost = 0,
-					IsAvailable = false,
-					IsAvailableInCC = true,
-					UnlockCost = 0,
-				});
-		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
-	}
-	public class Appearance_FacialHair_Mustache : CustomTrait
-	{
-		[RLSetup]
-		public static void Setup()
-		{
-			RogueLibs.CreateCustomTrait<Appearance_FacialHair_Mustache>()
-				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo(CTrait.Appearance_FacialHair_Mustache))
-				.WithUnlock(new TraitUnlock
-				{
-					CharacterCreationCost = 0,
-					IsAvailable = false,
-					IsAvailableInCC = true,
-					UnlockCost = 0,
-				});
-		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
-	}
-	public class Appearance_FacialHair_MustacheCircus : CustomTrait
-	{
-		[RLSetup]
-		public static void Setup()
-		{
-			RogueLibs.CreateCustomTrait<Appearance_FacialHair_MustacheCircus>()
-				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo(CTrait.Appearance_FacialHair_MustacheCircus))
-				.WithUnlock(new TraitUnlock
-				{
-					CharacterCreationCost = 0,
-					IsAvailable = false,
-					IsAvailableInCC = true,
-					UnlockCost = 0,
-				});
-		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
-	}
-	public class Appearance_FacialHair_MustacheRedneck : CustomTrait
-	{
-		[RLSetup]
-		public static void Setup()
-		{
-			RogueLibs.CreateCustomTrait<Appearance_FacialHair_MustacheRedneck>()
-				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo(CTrait.Appearance_FacialHair_MustacheRedneck))
-				.WithUnlock(new TraitUnlock
-				{
-					CharacterCreationCost = 0,
-					IsAvailable = false,
-					IsAvailableInCC = true,
-					UnlockCost = 0,
-				});
-		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
-	}
-	public class Appearance_FacialHair_None : CustomTrait
-	{
-		[RLSetup]
-		public static void Setup()
-		{
-			RogueLibs.CreateCustomTrait<Appearance_FacialHair_None>()
-				.WithDescription(new CustomNameInfo("When spawned as an NPC, this class will have a random appearance generated from all selected appearance traits."))
-				.WithName(new CustomNameInfo(CTrait.Appearance_FacialHair_None))
-				.WithUnlock(new TraitUnlock
-				{
-					CharacterCreationCost = 0,
-					IsAvailable = false,
-					IsAvailableInCC = true,
-					UnlockCost = 0,
-				});
-		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
-	}
-	#endregion
-	#region Hair Color
-
-	#endregion
-	#region Hairstyle
-
-	#endregion
-	#region Skin Color
-
-	#endregion
-	#endregion
 }
