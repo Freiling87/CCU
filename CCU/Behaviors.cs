@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using BepInEx.Logging;
+using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ namespace CCU
 {
     public class AI_Pickpocket : CustomTrait
     {
+        private static readonly ManualLogSource logger = CCULogger.GetLogger();
+        public static GameController GC => GameController.gameController;
+
         [RLSetup]
         public static void Setup()
         {

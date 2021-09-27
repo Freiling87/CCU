@@ -15,19 +15,17 @@ namespace CCU
 	[HarmonyPatch(declaringType: typeof(LevelEditor))]
 	public static class LevelEditor_Patches
 	{
-		public static GameController gc => GameController.gameController;
-		public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
-		public static ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
-		public static ManualLogSource _logger;
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		#region Patches
 		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[0] { })]
         public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject, InputField ___pointNumPatrolPoint)
         {
-			if (!gc.loadCompleteReally || gc.loadLevel.restartingGame)
+			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
 			
-			if (__instance.loadMenu.activeSelf || ___helpScreen.activeSelf || ___initialSelection.activeSelf || ___workshopSubmission.activeSelf || gc.menuGUI.onMenu || ___longDescription.activeSelf)
+			if (__instance.loadMenu.activeSelf || ___helpScreen.activeSelf || ___initialSelection.activeSelf || ___workshopSubmission.activeSelf || GC.menuGUI.onMenu || ___longDescription.activeSelf)
 				return false;
 			
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A) && !__instance.InputFieldFocused())
@@ -205,7 +203,7 @@ namespace CCU
 			//	Undo();
 			#endregion
 
-			Vector3 vector = gc.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
+			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;
 			int num2;
 
@@ -235,12 +233,12 @@ namespace CCU
 		[HarmonyPostfix, HarmonyPatch(methodName:"Start", argumentTypes: new Type[0] { })]
 		public static void Start_Postfix(LevelEditor __instance, GameObject ___wallInterface, GameObject ___floorInterface, GameObject ___itemInterface, GameObject ___objectInterface, GameObject ___agentInterface, GameObject ___lightInterface, GameObject ___patrolPointInterface)
 		{
-			_logger.Log(LogLevel.Info, "Loading Input fields...");
+			logger.Log(LogLevel.Info, "Loading Input fields...");
 
 			InputField[] inputFields_Wall = ___wallInterface.transform.GetComponentsInChildren<InputField>(true);
 
 			foreach (InputField field in inputFields_Wall)
-				_logger.Log(LogLevel.Info, field.name);
+				logger.Log(LogLevel.Info, field.name);
 
 			fieldsItem = inputFields_Wall.OrderBy(i => i.transform.position.x).OrderBy(i => i.transform.position.y).ToList();
 

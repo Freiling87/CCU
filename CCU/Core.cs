@@ -11,6 +11,7 @@ using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace CCU
 {
@@ -39,6 +40,20 @@ namespace CCU
             _logger.LogInfo(callerName + ": " + note);
         public static void LogMethodCall([CallerMemberName] string callerName = "") =>
             _logger.LogInfo(callerName + ": Method Call");
+    }
+
+    public static class CCULogger
+	{
+        private static string GetLoggerName(Type containingClass)
+        {
+            return $"CCU_{containingClass.Name}";
+        }
+
+        public static ManualLogSource GetLogger()
+        {
+            Type containingClass = new StackFrame(1, false).GetMethod().ReflectedType;
+            return BepInEx.Logging.Logger.CreateLogSource(GetLoggerName(containingClass));
+        }
     }
 
     public static class CTrait

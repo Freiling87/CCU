@@ -160,6 +160,7 @@ You can add as many as you want to a custom character. When you do so:
 |F12 *				|					|					|Run chunk
 |[1 - 9]		    |					|					|Switch to Layer (Wall, Floor, Floor2, etc.)
 |[1 - 9]			|Ctrl				|					|Switch to Layer and open Type Selector
+|Alt				|					|Object				|Security Cam: Highlight visible tiles<br>
 |Tab *				|					|					|Move through input fields				
 |Tab *				|Shift				|					|Move through input fields, reversed	
 |Shift *			|Ctrl				|Any with Owner IDs	|View filter to layer<br><br>Show OwnerIDs on all content
@@ -177,6 +178,7 @@ You can add as many as you want to a custom character. When you do so:
 
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
+- Red-tint any objects that might spawn inconsistently due to placement rules (e.g., Security Cams over gaps)
 
 ## Warnings *
 - Notify player when saving & edges are blocked

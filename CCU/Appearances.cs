@@ -17,8 +17,8 @@ namespace CCU
 {
 	public static class Appearance
 	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
-		public static ManualLogSource Logger => Core.Logger;
 
 		#region Trait Lists
 		public static string indicator = " - "; // Indicates where string content in Trait name begins
@@ -140,7 +140,7 @@ namespace CCU
 		#region Rollers
 		internal static void RollFacialHair(AgentHitbox agentHitBox, Agent agent)
 		{
-			Logger.LogInfo("RollFacialHair");
+			logger.LogInfo("RollFacialHair");
 
 			var random = new System.Random();
 
