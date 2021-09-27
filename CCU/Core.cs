@@ -24,10 +24,8 @@ namespace CCU
         public const string pluginVersion = "0.1.0";
         public const bool designerEdition = true;
 
+        private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
-        public static readonly string loggerName = $"CCU_{MethodBase.GetCurrentMethod().DeclaringType?.Name}";
-        public static new ManualLogSource Logger => _logger ?? (_logger = BepInEx.Logging.Logger.CreateLogSource(loggerName));
-        public static ManualLogSource _logger;
 
         public void Awake()
         {
@@ -37,9 +35,9 @@ namespace CCU
             RogueLibs.LoadFromAssembly();
         }
         public static void LogCheckpoint(string note, [CallerMemberName] string callerName = "") =>
-            _logger.LogInfo(callerName + ": " + note);
+            logger.LogInfo(callerName + ": " + note);
         public static void LogMethodCall([CallerMemberName] string callerName = "") =>
-            _logger.LogInfo(callerName + ": Method Call");
+            logger.LogInfo(callerName + ": Method Call");
     }
 
     public static class CCULogger

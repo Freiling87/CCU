@@ -10,9 +10,6 @@ namespace CCU.Traits.Behavior
 {
     public class Pickpocket : CustomTrait
     {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
-
         [RLSetup]
         public static void Setup()
         {
