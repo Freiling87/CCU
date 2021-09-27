@@ -10,24 +10,23 @@ using UnityEngine.UI;
 using BepInEx.Logging;
 using System.Reflection;
 
-namespace CCU
+namespace CCU.Patches
 {
 	[HarmonyPatch(declaringType: typeof(LevelEditor))]
-	public static class LevelEditor_Patches
+	public static class P_LevelEditor
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		#region Patches
-		[HarmonyPrefix, HarmonyPatch(methodName:"FixedUpdate", argumentTypes: new Type[0] { })]
-        public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject, InputField ___pointNumPatrolPoint)
-        {
+		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
+		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject, InputField ___pointNumPatrolPoint)
+		{
 			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
-			
+
 			if (__instance.loadMenu.activeSelf || ___helpScreen.activeSelf || ___initialSelection.activeSelf || ___workshopSubmission.activeSelf || GC.menuGUI.onMenu || ___longDescription.activeSelf)
 				return false;
-			
+
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A) && !__instance.InputFieldFocused())
 				__instance.ScrollW();
 			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.D) && !__instance.InputFieldFocused())
@@ -169,7 +168,7 @@ namespace CCU
 			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			#endregion
-			# region Saving & Loading
+			#region Saving & Loading
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.O))
 				__instance.PressedLoadChunksFile();
 			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S))
@@ -187,18 +186,18 @@ namespace CCU
 				//	//Quickload here
 				// There is a long line of myButtonHelper passed through to the load function, I am not sure how to do it directly.
 				//else
-					__instance.PressedLoad();
+				__instance.PressedLoad();
 			}
 			#endregion
 			#region Misc.
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Y))
 			//	Redo();
 			if (Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-				ToggleSelectAll(__instance);
+				LevelEditorUtilities.SelectAllToggle(__instance);
 			if (Input.GetKey(KeyCode.Tab))
-				Tab(__instance, false);
+				LevelEditorUtilities.Tab(__instance, false);
 			if (Input.GetKey(KeyCode.Tab) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-				Tab(__instance, true);
+				LevelEditorUtilities.Tab(__instance, true);
 			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Z))
 			//	Undo();
 			#endregion
@@ -230,7 +229,7 @@ namespace CCU
 			return false;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName:"Start", argumentTypes: new Type[0] { })]
+		[HarmonyPostfix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0] { })]
 		public static void Start_Postfix(LevelEditor __instance, GameObject ___wallInterface, GameObject ___floorInterface, GameObject ___itemInterface, GameObject ___objectInterface, GameObject ___agentInterface, GameObject ___lightInterface, GameObject ___patrolPointInterface)
 		{
 			logger.Log(LogLevel.Info, "Loading Input fields...");
@@ -240,105 +239,10 @@ namespace CCU
 			foreach (InputField field in inputFields_Wall)
 				logger.Log(LogLevel.Info, field.name);
 
-			fieldsItem = inputFields_Wall.OrderBy(i => i.transform.position.x).OrderBy(i => i.transform.position.y).ToList();
+			LevelEditorUtilities.fieldsItem = inputFields_Wall.OrderBy(i => i.transform.position.x).OrderBy(i => i.transform.position.y).ToList();
 
 			// Need a couple more filters here, see comments from BT 
 		}
-		#endregion
 
-		private static void ToggleSelectAll(LevelEditor levelEditor)
-		{
-			List<LevelEditorTile> list = null;
-			string layer = levelEditor.currentLayer;
-
-			if (layer == "Walls")
-				list = levelEditor.wallTiles;
-			else if (layer == "Floors")
-				list = levelEditor.floorTiles;
-			else if (layer == "Floors2")
-				list = levelEditor.floorTiles2;
-			else if (layer == "Floors3")
-				list = levelEditor.floorTiles3;
-			else if (layer == "Objects")
-				list = levelEditor.objectTiles;
-			else if (layer == "Items")
-				list = levelEditor.itemTiles;
-			else if (layer == "Agents")
-				list = levelEditor.agentTiles;
-			else if (layer == "Lights")
-				list = levelEditor.lightTiles;
-			else if (layer == "PatrolPoints")
-				list = levelEditor.patrolPointTiles;
-			else if (layer == "Level")
-				list = levelEditor.chunkTiles;
-
-			bool SelectingAll = false;
-
-			foreach (LevelEditorTile levelEditorTile in list)
-				if (!levelEditor.selectedTiles.Contains(levelEditorTile) && !levelEditor.deselecting)
-				{
-					levelEditor.SelectTile(levelEditorTile, false);
-					SelectingAll = true;
-				}
-
-			if (!SelectingAll)
-				levelEditor.ClearSelections(false);
-
-			levelEditor.UpdateInterface(false);
-		}
-
-		// LevelEditor.inputFieldList.isFocused
-		// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
-
-		// levelEditor.floors2Button.transform.Find("ButtonEdges").GetComponent<Image>().color = Color.white;
-		// White is for currently click-activated, but might use another color to show which is tab-active, pending player confirmation
-
-		// __instance.inputFieldList
-
-		// UnityEngine.UI.InputField.ActivateInputField()
-
-		private static List<InputField> fieldsAgent;
-		private static List<InputField> fieldsFloor;
-		private static List<InputField> fieldsItem;
-		private static List<InputField> fieldsLight;
-		private static List<InputField> fieldsObject;
-		private static List<InputField> fieldsPatrolPoint;
-		private static List<InputField> fieldsWall;
-		private static Dictionary<string, List<InputField>> fieldLists = new Dictionary<string, List<InputField>>()
-		{
-			// TODO: Double-check these strings
-			{ "Agents", fieldsAgent },
-			{ "Floors", fieldsFloor },
-			{ "Floors2", fieldsFloor },
-			{ "Floors3", fieldsFloor },
-			{ "Items", fieldsItem },
-			{ "Lights", fieldsLight },
-			{ "Objects", fieldsObject },
-			{ "PatrolPoints", fieldsPatrolPoint },
-			{ "Walls" , fieldsWall },
-		};
-		private static InputField ActiveInputField(LevelEditor levelEditor)
-		{
-			foreach (InputField field in levelEditor.inputFieldList)
-				if (field.isFocused)
-					return field;
-
-			return null;
-		}
-		private static void Tab(LevelEditor levelEditor, bool reverse)
-		{
-			List<InputField> fieldList = fieldLists[levelEditor.currentLayer];
-			InputField oldFocus = ActiveInputField(levelEditor);
-
-			if (oldFocus is null)
-				fieldList[0].ActivateInputField();
-			else
-			{
-				if (!reverse)
-					fieldList[fieldList.IndexOf(oldFocus) + 1].ActivateInputField();
-				else
-					fieldList[fieldList.IndexOf(oldFocus) - 1].ActivateInputField();
-			}
-		}
-    }
+	}
 }

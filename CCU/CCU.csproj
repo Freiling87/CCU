@@ -98,8 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Patches\P_BrainUpdate.cs" />
+    <Compile Include="Patches\P_LevelEditor.cs" />
     <Compile Include="Traits\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
-    <Compile Include="LevelEditor.cs" />
+    <Compile Include="LevelEditorUtilities.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Patches\P_AgentHitbox.cs" />
     <Compile Include="Patches\P_CharacterSelect.cs" />

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Behavior
 {
-    public class AI_Pickpocket : CustomTrait
+    public class Pickpocket : CustomTrait
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
@@ -16,10 +16,10 @@ namespace CCU.Traits.Behavior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<AI_Pickpocket>()
+            RogueLibs.CreateCustomTrait<Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character will pick pockets if set to wander the city.",
+                    [LanguageCode.English] = "If spawned as an NPC, this character will pick pockets if set to wander the city.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
