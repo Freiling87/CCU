@@ -27,7 +27,7 @@ namespace CCU.Traits.FacialHair
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 0,
 				});
 		}
