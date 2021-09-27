@@ -101,8 +101,16 @@
     <Compile Include="Appearances.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="LevelEditor.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Factions.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
+    <Compile Include="Patches\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Traits\T_Factions\Faction_1_Aligned.cs" />
+    <Compile Include="Traits\T_Factions\Faction_1_Hostile.cs" />
+    <Compile Include="Traits\T_Factions\Faction_2_Aligned.cs" />
+    <Compile Include="Traits\T_Factions\Faction_2_Hostile.cs" />
+    <Compile Include="Traits\T_Factions\Faction_3_Aligned.cs" />
+    <Compile Include="Traits\T_Factions\Faction_3_Hostile.cs" />
+    <Compile Include="Traits\T_Factions\Faction_4_Aligned.cs" />
+    <Compile Include="Traits\T_Factions\Faction_4_Hostile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -110,6 +118,7 @@
   <ItemGroup>
     <None Include="Scratchpad.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set gameDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
