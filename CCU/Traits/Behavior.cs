@@ -31,34 +31,14 @@ namespace CCU.Traits
 			typeof(Thief_HonestThief),
 			typeof(Thief_Pickpocket),
 		};
-
-		public static bool HasBehaviorTrait(Agent agent)
+		public static List<Type> VendorTraits = new List<Type>()
 		{
-			foreach (Type trait in BehaviorTraits)
-				if (agent.HasTrait<Trait>())
-					return true;
+			typeof(Thief_Vendor),
+		};
 
-			return false;
-		}
-		public static bool HasHireTrait(Agent agent)
+		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
 		{
-			foreach (Type trait in HireTraits)
-				if (agent.HasTrait<Trait>())
-					return true;
-
-			return false;
-		}
-		public static bool HasInteractionTrait(Agent agent)
-		{
-			foreach (Type trait in InteractionTraits)
-				if (agent.HasTrait<Trait>())
-					return true;
-
-			return false;
-		}
-		public static bool HasNoninteractionTrait(Agent agent)
-		{
-			foreach (Type trait in NoninteractionTraits)
+			foreach (Type trait in traitList)
 				if (agent.HasTrait<Trait>())
 					return true;
 

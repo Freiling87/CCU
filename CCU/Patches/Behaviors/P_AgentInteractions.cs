@@ -7,11 +7,16 @@ using RogueLibsCore;
 using CCU.Traits.Behaviors;
 using Random = UnityEngine.Random;
 using System.Reflection;
+using CCU.Traits;
 
 namespace CCU.Patches.Behaviors
 {
-	class P_AgentInteractions
+	[HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	public class P_AgentInteractions
 	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
 		[HarmonyPrefix, HarmonyPatch(methodName:nameof(AgentInteractions.DetermineButtons), argumentTypes:new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>)})]
 		public static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance, List<string> ___buttons, List<string> ___buttonsExtra, List<int> ___buttonPrices, Agent ___mostRecentAgent, Agent ___mostRecentInteractingAgent)
 		{
@@ -1889,7 +1894,7 @@ namespace CCU.Patches.Behaviors
 						}
 						#endregion	
 
-						else if (Traits.Behavior.HasInteractionTrait(agent))
+						else if (Traits.Behavior.HasTraitFromList(agent, Behavior.InteractionTraits))
 						{
 							// agent.SayDialogue("InteractB"); // No custom dialogue
 							agent.gc.audioHandler.Play(agent, "AgentTalk");
@@ -1908,7 +1913,7 @@ namespace CCU.Patches.Behaviors
 							}
 
 							// All Hire Traits
-							if (Traits.Behavior.HasHireTrait(agent))
+							if (Behavior.HasTraitFromList(agent, Behavior.HireTraits))
 							{
 								if (agent.employer == null)
 								{
