@@ -57,7 +57,7 @@ namespace CCU.Patches
 		{
 			Label continueLabel = generator.DefineLabel();
 
-			MethodInfo handlerMethod = AccessTools.Method(typeof(P_AgentHitbox), handler, new Type[1] { typeof(AgentHitbox) });
+			MethodInfo handlerMethod = CoreTools.Method(typeof(P_AgentHitbox), handler, new Type[1] { typeof(AgentHitbox) });
 
 			return new CodeReplacementPatch(
 				expectedMatches: 1,

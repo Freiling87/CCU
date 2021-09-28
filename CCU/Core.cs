@@ -1,12 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using BepInEx;
-using UnityEngine;
 using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -16,6 +10,7 @@ using System.Diagnostics;
 namespace CCU
 {
     [BepInPlugin(pluginGUID, pluginName, pluginVersion)]
+    [BepInProcess("StreetsOfRogue.exe")]
     [BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
     public class Core : BaseUnityPlugin
     {
@@ -38,6 +33,15 @@ namespace CCU
             logger.LogInfo(callerName + ": " + note);
         public static void LogMethodCall([CallerMemberName] string callerName = "") =>
             logger.LogInfo(callerName + ": Method Call");
+    }
+    public static class CoreTools
+    {
+        public static T GetMethodWithoutOverrides<T>(this MethodInfo method, object callFrom)
+                where T : Delegate
+        {
+            IntPtr ptr = method.MethodHandle.GetFunctionPointer();
+            return (T)Activator.CreateInstance(typeof(T), callFrom, ptr);
+        }
     }
 
     public static class CCULogger
@@ -107,10 +111,11 @@ namespace CCU
             AI_SlumDweller_CauseRuckus = "AI: Slum Dweller - Cause a Ruckus",
             AI_SlumDweller_CommonFolk = "AI: Slum Dweller - Common Folk",
             AI_Supercop_EnforceLaws = "AI: Supercop - Enforce Laws", // Might be identical to Cop
-            AI_Thief_BreakIn = "AI: Thief - Break-In",
-            AI_Thief_HonorAmongThieves = "AI: Thief - Honor Among Thieves",
-            AI_Thief_ManholeAmbush = "AI: Thief - Manhole Ambush",
+            AI_Thief_Hire = "AI: Thief - Break-In",
+            AI_Thief_HonestThief = "AI: Thief - Honor Among Thieves",
+            AI_Thief_AmbushManhole = "AI: Thief - Manhole Ambush",
             AI_Thief_Pickpocket = "AI: Thief - Pickpocket", // Requires Sticky Gloves?
+            AI_Thief_Vendor = "AI: Thief - Vendor",
             AI_UpperCruster_Bodyguarded = "AI: Upper Cruster - Bodyguarded",
             AI_UpperCruster_OwnSlave = "AI: Upper Cruster - Own Slave",
             AI_UpperCruster_Tattletale = "AI: Upper Cruster - Tattle-tale",

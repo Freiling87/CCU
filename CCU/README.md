@@ -103,11 +103,11 @@ You can add as many as you want to a custom character. When you do so:
 |AI: SlumDweller CommonFolk
 |AI: SlumDweller GrabMoney
 |AI: Supercop EnforceLaws
-|AI: Thief AmbushManhole
-|AI: Thief BreakIn
-|AI: Thief HonorAmongThieves
-|AI: Thief Pickpocket
-|AI: Thief Vendor
+|AI: Thief AmbushManhole // Only honors Honor Among Thieves if AI trait is selected
+|AI: Thief Hire
+|AI: Thief HonorAmongThieves 
+|AI: Thief Pickpocket // Only honors Honor Among Thieves if AI trait is selected
+|AI: Thief Vendor // Only requires Honor Among Thieves if the AI trait is selected
 |AI: UpperCruster Bodyguarded
 |AI: UpperCruster OwnSlave
 |AI: UpperCruster Tattle

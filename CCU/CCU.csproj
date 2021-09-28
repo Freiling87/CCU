@@ -92,12 +92,16 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>..\Libraries\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patches\Behavior\P_BrainUpdate.cs" />
+    <Compile Include="Patches\Behaviors\P_AgentInteractions.cs" />
+    <Compile Include="Patches\Behaviors\P_BrainUpdate.cs" />
     <Compile Include="Patches\LevelEditor\P_LevelEditor.cs" />
     <Compile Include="Traits\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="LevelEditorUtilities.cs" />
@@ -107,7 +111,11 @@
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Traits\Behavior\Pickpocket.cs" />
+    <Compile Include="Traits\Behavior.cs" />
+    <Compile Include="Traits\Behaviors\Thief_Hire.cs" />
+    <Compile Include="Traits\Behaviors\Thief_HonestThief.cs" />
+    <Compile Include="Traits\Behaviors\Thief_Pickpocket.cs" />
+    <Compile Include="Traits\Behaviors\Thief_Vendor.cs" />
     <Compile Include="Traits\FacialHair\Beard.cs" />
     <Compile Include="Traits\FacialHair\Mustache.cs" />
     <Compile Include="Traits\FacialHair\MustacheCircus.cs" />
