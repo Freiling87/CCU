@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
             RogueLibs.CreateCustomTrait<Vendor_Thief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character sells intrusion tools.\n\n{0} = Player needs Honor Among Thieves to buy from this NPC", CTrait.AI_TraitTrigger_HonorableThief),
+                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character sells intrusion tools.\n\n<color=green>{0}</color> = Player needs Honor Among Thieves to access shop", CTrait.AI_TraitTrigger_HonorableThief),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

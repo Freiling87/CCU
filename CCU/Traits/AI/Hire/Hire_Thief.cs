@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Hire
             RogueLibs.CreateCustomTrait<Hire_Thief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "If spawned as an NPC, this character can be hired to break into windows or doors.",
+                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

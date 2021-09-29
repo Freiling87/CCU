@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.RoamBehavior
             RogueLibs.CreateCustomTrait<RoamBehavior_Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character will pick pockets if set to wander the city.\n\n{0} = Will not pickpocket from player if they have Honor Among Thieves", CTrait.AI_TraitTrigger_HonorableThief),
+                    [LanguageCode.English] = String.Format("This character will pick pockets if set to wander the city.\n\n<color=green>{0}</color> = Will not pickpocket from player if they have Honor Among Thieves", CTrait.AI_TraitTrigger_HonorableThief),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
