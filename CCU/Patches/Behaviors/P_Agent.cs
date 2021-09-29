@@ -21,7 +21,7 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName:nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			if (Behavior.HasTraitFromList(__instance, Behavior.VendorTraits))
+			if (Behavior.HasTraitFromList(__instance, Behavior.VendorTypes))
 				__instance.SetupSpecialInvDatabase();
 
 			// May want to generalize into LOSCheckTraits, but this might be the only one that's on a coin toss (done in LoadLevel.SetupMore3_3 when spawning roamers)

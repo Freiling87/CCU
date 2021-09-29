@@ -104,13 +104,18 @@
     <Compile Include="Patches\Behaviors\P_AgentInteractions.cs" />
     <Compile Include="Patches\Behaviors\P_BrainUpdate.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
+    <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
+    <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Armorer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Assassin.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Bartender.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Blacksmith.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Buyer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConsumerElectronics.cs" />
-    <Compile Include="Traits\AI\Vendor\Vendor_Cop.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_ConvenienceStore.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_Contraband.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_CopStandard.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_CopSWAT.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Demolitionist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_DrugDealer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Banana.cs" />
@@ -133,12 +138,12 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Soldier.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_SportingGoods.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Teleportationist.cs" />
-    <Compile Include="Traits\AI\Vendor\Vendor_Tools.cs" />
-    <Compile Include="Traits\AI\Vendor\Vendor_OutdoorGear.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_HardwareStore.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_OutdoorOutfitter.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_ToyStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_UpperCruster.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Vampire.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Villain.cs" />
-    <Compile Include="Traits\AI\Vendor\Vendor_Weird.cs" />
     <Compile Include="Traits\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="LevelEditorUtilities.cs" />
     <Compile Include="Core.cs" />

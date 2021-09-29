@@ -35,11 +35,45 @@ namespace CCU.Traits
 			typeof(RoamBehavior_Pickpocket),
 			typeof(TraitTrigger_HonorableThief),
 		};
-		public static List<Type> VendorTraits = new List<Type>()
+		public static List<Type> VendorTypes = new List<Type>()
 		{
+			typeof(Vendor_Armorer),
+			typeof(Vendor_Assassin),
+			typeof(Vendor_Banana),
+			typeof(Vendor_Bartender),
+			typeof(Vendor_Blacksmith),
+			// typeof(Vendor_Buyer), // Exclude
+			typeof(Vendor_ConsumerElectronics),
+			typeof(Vendor_CopStandard),
+			typeof(Vendor_Demolitionist),
+			typeof(Vendor_DrugDealer),
+			typeof(Vendor_Firefighter),
+			typeof(Vendor_Gunsmith),
+			typeof(Vendor_HighTech),
+			typeof(Vendor_Hypnotist),
+			typeof(Vendor_JunkDealer),
+			typeof(Vendor_McFuds),
+			typeof(Vendor_MedicalSupplier),
+			typeof(Vendor_MiningGear),
+			typeof(Vendor_MovieTheater),
+			typeof(Vendor_Occultist),
+			typeof(Vendor_OutdoorOutfitter),
+			typeof(Vendor_PawnShop),
+			typeof(Vendor_PestControl),
+			typeof(Vendor_RiotDepot),
+			typeof(Vendor_Scientist),
+			typeof(Vendor_Shopkeeper),
+			typeof(Vendor_SlaveShop),
+			typeof(Vendor_Soldier),
+			typeof(Vendor_SportingGoods),
+			typeof(Vendor_Teleportationist),
 			typeof(Vendor_Thief),
+			typeof(Vendor_HardwareStore),
+			typeof(Vendor_UpperCruster),
+			typeof(Vendor_Vampire),
+			typeof(Vendor_Villain),
 		};
-
+		
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
 		{
 			Core.LogMethodCall();
@@ -49,6 +83,16 @@ namespace CCU.Traits
 					return true;
 
 			return false;
+		}
+		public static Type GetOnlyTraitFromList(Agent agent, List<Type> traitList)
+		{
+			Core.LogMethodCall();
+
+			foreach (Type trait in traitList)
+				if (agent.HasTrait<Trait>())
+					return trait;
+
+			return null;
 		}
 	}
 }

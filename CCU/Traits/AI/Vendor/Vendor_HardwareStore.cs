@@ -3,12 +3,12 @@ using System;
 
 namespace CCU.Traits.AI.Vendor
 {
-    public class Vendor_Tools : CustomTrait
+    public class Vendor_HardwareStore : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Tools>()
+            RogueLibs.CreateCustomTrait<Vendor_HardwareStore>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells tools."),
@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_ToolShop,
+                    [LanguageCode.English] = CTrait.AI_Vendor_HardwareStore,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

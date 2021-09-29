@@ -62,4 +62,9 @@ Test transpiler method, simply replace if it doesn't work. Use transpilers later
 - Special Inv filling: 
   - InvDatabase.FillSpecialInv
   - InvDatabase.AddRandItem
+    - @1246: base.CompareTag("SpecialInvDatabase")
+      - I am hoping this is taken care of automatically. Testing will show.
   - Keep an eye out for agent name checks, one of these will need to be patched
+  - InvDatabase.rnd.RandomSelect(rName, "Items")
+- Agent Loadouts
+  - InvDatabase.FillAgent

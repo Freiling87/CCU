@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.AI.Vendor
 {
-    public class Vendor_Weird : CustomTrait
+    public class Vendor_ConvenienceStore : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Weird>()
+            RogueLibs.CreateCustomTrait<Vendor_ConvenienceStore>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells weird shit."),
+                    [LanguageCode.English] = String.Format("This character sells stuff you might find in a corner store or bodega."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_WeirdStuff,
+                    [LanguageCode.English] = CTrait.AI_Vendor_ConvenienceStore,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
