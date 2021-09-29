@@ -12,8 +12,10 @@ namespace CCU.Patches.Inventory
 	class P_RandomItems
 	{
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(RandomItems.fillItems))]
-		public void fillItems_Postfix()
+		public static void fillItems_Postfix()
 		{
+			Core.LogMethodCall();
+
 			RandomSelection sel = GameObject.Find("ScriptObject").GetComponent<RandomSelection>();
 
 			RandomList rList = sel.CreateRandomList(CTrait.AI_Vendor_Armorer, "Items", "Item");
