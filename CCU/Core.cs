@@ -131,7 +131,7 @@ namespace CCU
 			// Trait Trigger
 			AI_TraitTrigger_CommonFolk = "AI: Trait Trigger - Common Folk",
 			AI_TraitTrigger_CoolCannibal = "AI: Trait Trigger - Cool Cannibal",
-			AI_TraitTrigger_CopAccess = "AI: Cop Access",
+			AI_TraitTrigger_CopAccess = "AI: Trait Trigger - Cop Access",
 			AI_TraitTrigger_HonorableThief = "AI: Trait Trigger - Honorable Thief",
 
 			// Vendor

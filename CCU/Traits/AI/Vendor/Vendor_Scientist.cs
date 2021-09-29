@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Scientist_Identify,
+                    [LanguageCode.English] = CTrait.AI_Vendor_Scientist,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

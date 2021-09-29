@@ -54,9 +54,17 @@ Test transpiler method, simply replace if it doesn't work. Use transpilers later
 
 ### Thief Hire
 
+On Interact:
+
+[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+[Info   :  CCU_Core] HasTraitFromList: Method Call
+
+Need more logging here to identify issue. 
+
 ### Thief Honorable
 
 ### Thief Pickpocket
+- Ran up to player but didn't pickpocket. I think they do need Sticky Glove.
 
 ### Thief Vendor
 - Special Inv filling: 
