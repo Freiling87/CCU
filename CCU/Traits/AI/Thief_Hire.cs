@@ -6,11 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.Behaviors
+namespace CCU.Traits.AI
 {
-    /* Changes located at:
-     *  
-     */
     public class Thief_Hire : CustomTrait
     {
         [RLSetup]

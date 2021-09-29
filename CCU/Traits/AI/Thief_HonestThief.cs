@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.Behaviors
+namespace CCU.Traits.AI
 {
     public class Thief_HonestThief : CustomTrait
     {

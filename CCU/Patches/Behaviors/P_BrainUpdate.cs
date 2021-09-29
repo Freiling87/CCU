@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.Behaviors;
+using CCU.Traits.AI;
 
 namespace CCU.Patches
 {

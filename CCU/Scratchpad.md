@@ -2,15 +2,19 @@
 
 # Initial Load
 
-[Info   :   BepInEx] Loading [Custom Content Utilities 0.1.0]
-[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-Stack trace:
-CCU.Core.LogMethodCall (System.String callerName) (at <3aad7d0a933f486b8d7bc36adea33e63>:0)
-CCU.Core.Awake () (at <3aad7d0a933f486b8d7bc36adea33e63>:0)
-UnityEngine.GameObject:AddComponent(Type)
-BepInEx.Bootstrap.Chainloader:Start()
-UnityEngine.Application:.cctor()
-Rewired.InputManager_Base:Awake()
+[Info   :  CCU_Core] Awake: Method Call
+[Error  :RogueLibsCore] System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+  at System.Text.StringBuilder.AppendFormatHelper (System.IFormatProvider provider, System.String format, System.ParamsArray args) [0x000ff] in <44afb4564e9347cf99a1865351ea8f4a>:0
+  at System.String.FormatHelper (System.IFormatProvider provider, System.String format, System.ParamsArray args) [0x00023] in <44afb4564e9347cf99a1865351ea8f4a>:0
+  at System.String.Format (System.String format, System.Object arg0) [0x00008] in <44afb4564e9347cf99a1865351ea8f4a>:0
+  at CCU.Traits.AI.Thief_Pickpocket.Setup () [0x00006] in <f615a5d8460c4c3cabe21c07fa476ebe>:0
+  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <44afb4564e9347cf99a1865351ea8f4a>:0
+   --- End of inner exception stack trace ---
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0004b] in <44afb4564e9347cf99a1865351ea8f4a>:0
+  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <44afb4564e9347cf99a1865351ea8f4a>:0
+  at RogueLibsCore.RogueLibs.LoadFromAssembly () [0x000ef] in <83ac4c56ae974fd1ab7e1062800cad5c>:0
+
 
 ## Chunk Editor Shortcuts
 
@@ -36,10 +40,6 @@ ADD:
 	ALT trail for overhead menus
 	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
 
-## Faction Traits
-
-Test
-
 ## Appearance Traits
 
 Test transpiler method, simply replace if it doesn't work. Use transpilers later.
@@ -51,3 +51,11 @@ Test transpiler method, simply replace if it doesn't work. Use transpilers later
 - CCP limit adjustment for CCU Traits
 	- CharacterCreation.traitCount in CreatePointTallyText();
 	- Line 532, need to make a custom list of this.traitsChosen where they are not on CCU trait list
+
+### Thief Hire
+
+### Thief Honorable
+
+### Thief Pickpocket
+
+### Thief Vendor

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.Behaviors
+namespace CCU.Traits.AI
 {
     public class Thief_Vendor : CustomTrait
     {
@@ -16,7 +16,7 @@ namespace CCU.Traits.Behaviors
             RogueLibs.CreateCustomTrait<Thief_Vendor>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character sells intrusion tools.\n\n{1} = Player needs Honor Among Thieves to buy from this NPC", CTrait.AI_Thief_HonestThief),
+                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character sells intrusion tools.\n\n{0} = Player needs Honor Among Thieves to buy from this NPC", CTrait.AI_Thief_HonestThief),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

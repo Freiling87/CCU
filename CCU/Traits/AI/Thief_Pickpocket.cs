@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.Behaviors
+namespace CCU.Traits.AI
 {
     public class Thief_Pickpocket : CustomTrait
     {
@@ -16,7 +16,7 @@ namespace CCU.Traits.Behaviors
             RogueLibs.CreateCustomTrait<Thief_Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character will pick pockets if set to wander the city.\n\n{1} = Will not pickpocket from player if they have Honor Among Thieves", CTrait.AI_Thief_HonestThief),
+                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character will pick pockets if set to wander the city.\n\n{0} = Will not pickpocket from player if they have Honor Among Thieves", CTrait.AI_Thief_HonestThief),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

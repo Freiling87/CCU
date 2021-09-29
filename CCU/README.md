@@ -120,7 +120,7 @@ You can add as many as you want to a custom character. When you do so:
 |AI: Various Guilty
 |AI: Various Scumbag
 
-## Faction Traits *
+## Faction Traits
 
 |Trait								|Effect													|
 |:----------------------------------|:------------------------------------------------------|

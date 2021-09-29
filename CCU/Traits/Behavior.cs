@@ -1,4 +1,4 @@
-﻿using CCU.Traits.Behaviors;
+﻿using CCU.Traits.AI;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -38,6 +38,8 @@ namespace CCU.Traits
 
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
 		{
+			Core.LogMethodCall();
+
 			foreach (Type trait in traitList)
 				if (agent.HasTrait<Trait>())
 					return true;

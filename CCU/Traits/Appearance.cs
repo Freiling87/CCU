@@ -141,7 +141,7 @@ namespace CCU.Traits
 		#region Rollers
 		internal static void RollFacialHair(AgentHitbox agentHitBox, Agent agent)
 		{
-			logger.LogInfo("RollFacialHair");
+			Core.LogMethodCall();
 
 			var random = new System.Random();
 
