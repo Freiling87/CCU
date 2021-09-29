@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.AI.Hire
 {
-    /* Changes located at:
-     *  
-     */
     public class Hire_Thief : CustomTrait
     {
         [RLSetup]

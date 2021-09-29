@@ -26,59 +26,59 @@ namespace CCU.Patches
 		// See chat logs for specifics of what to mod - I believe you just need to add a Linq statement to a single List.
 		// Target: AgentHitbox.SetupFeatures
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
-		private static IEnumerable<CodeInstruction> SetupFeatures_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
-		{
-			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
-			SetupFeatures_Hook(generator).ApplySafe(instructions, logger);
-			return instructions;
-		}
+		//[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures), argumentTypes: new Type[0] { })]
+		//private static IEnumerable<CodeInstruction> SetupFeatures_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
+		//{
+		//	List<CodeInstruction> instructions = instructionsEnumerable.ToList();
+		//	SetupFeatures_Hook(generator).ApplySafe(instructions, logger);
+		//	return instructions;
+		//}
 
-		public static CodeReplacementPatch SetupFeatures_Hook(ILGenerator generator) =>
-			GetInteractionPatch(generator, nameof(RollCustomAppearance));
+		//public static CodeReplacementPatch SetupFeatures_Hook(ILGenerator generator) =>
+		//	GetInteractionPatch(generator, nameof(RollCustomAppearance));
 
-		private static void RollCustomAppearance(AgentHitbox agentHitBox)
-		{
-			logger.LogInfo("RollCustomAppearance");
+		//private static void RollCustomAppearance(AgentHitbox agentHitBox)
+		//{
+		//	logger.LogInfo("RollCustomAppearance");
 
-			if (agentHitBox.agent.agentName == "Custom" && agentHitBox.agent.isPlayer == 0)
-			{
-				Appearance.RollFacialHair(agentHitBox, agentHitBox.agent);
-				Appearance.RollHairstyle(agentHitBox, agentHitBox.agent);
-				Appearance.RollSkinColor(agentHitBox, agentHitBox.agent);
+		//	if (agentHitBox.agent.agentName == "Custom" && agentHitBox.agent.isPlayer == 0)
+		//	{
+		//		Appearance.RollFacialHair(agentHitBox, agentHitBox.agent);
+		//		Appearance.RollHairstyle(agentHitBox, agentHitBox.agent);
+		//		Appearance.RollSkinColor(agentHitBox, agentHitBox.agent);
 
-				agentHitBox.SetCantShowHairUnderHeadPiece();
+		//		agentHitBox.SetCantShowHairUnderHeadPiece();
 
-				Appearance.RollHairColor(agentHitBox, agentHitBox.agent);
-			}
-		}
+		//		Appearance.RollHairColor(agentHitBox, agentHitBox.agent);
+		//	}
+		//}
 
-		private static CodeReplacementPatch GetInteractionPatch(ILGenerator generator, string handler)
-		{
-			Label continueLabel = generator.DefineLabel();
+		//private static CodeReplacementPatch GetInteractionPatch(ILGenerator generator, string handler)
+		//{
+		//	Label continueLabel = generator.DefineLabel();
 
-			MethodInfo handlerMethod = CoreTools.Method(typeof(P_AgentHitbox), handler, new Type[1] { typeof(AgentHitbox) });
+		//	MethodInfo handlerMethod = CoreTools.Method(typeof(P_AgentHitbox), handler, new Type[1] { typeof(AgentHitbox) });
 
-			return new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					// IL_05C7: stelem    [UnityEngine.CoreModule]UnityEngine.Color32
-					new CodeInstruction(OpCodes.Stelem),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// RollCustomAppearance(agentHitbox)
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Call, handlerMethod)
+		//	return new CodeReplacementPatch(
+		//		expectedMatches: 1,
+		//		prefixInstructionSequence: new List<CodeInstruction>
+		//		{
+		//			// IL_05C7: stelem    [UnityEngine.CoreModule]UnityEngine.Color32
+		//			new CodeInstruction(OpCodes.Stelem),
+		//		},
+		//		insertInstructionSequence: new List<CodeInstruction>
+		//		{
+		//			// RollCustomAppearance(agentHitbox)
+		//			new CodeInstruction(OpCodes.Ldarg_0),
+		//			new CodeInstruction(OpCodes.Call, handlerMethod)
 
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// IL_05CC: nop
-					new CodeInstruction(OpCodes.Nop),
-				}
-			);
-		}
+		//		},
+		//		postfixInstructionSequence: new List<CodeInstruction>
+		//		{
+		//			// IL_05CC: nop
+		//			new CodeInstruction(OpCodes.Nop),
+		//		}
+		//	);
+		//}
 	}
 }
