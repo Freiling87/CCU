@@ -6,22 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.Behaviors
+namespace CCU.Traits.AI.Hire
 {
-    public class Thief_Pickpocket : CustomTrait
+    /* Changes located at:
+     *  
+     */
+    public class Hire_Thief : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Thief_Pickpocket>()
+            RogueLibs.CreateCustomTrait<Hire_Thief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If spawned as an NPC, this character will pick pockets if set to wander the city.\n\n{1} = Will not pickpocket from player if they have Honor Among Thieves", CTrait.AI_Thief_HonestThief),
+                    [LanguageCode.English] = "If spawned as an NPC, this character can be hired to break into windows or doors.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Thief_Pickpocket,
+                    [LanguageCode.English] = CTrait.AI_Hire_Thief,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

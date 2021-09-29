@@ -1,4 +1,8 @@
-﻿using CCU.Traits.Behaviors;
+﻿using CCU.Traits.AI;
+using CCU.Traits.AI.Hire;
+using CCU.Traits.AI.RoamBehavior;
+using CCU.Traits.AI.TraitTrigger;
+using CCU.Traits.AI.Vendor;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -12,28 +16,28 @@ namespace CCU.Traits
 	{
 		public static List<Type> BehaviorTraits = new List<Type>()
 		{
-			typeof(Thief_Hire),
-			typeof(Thief_HonestThief),
-			typeof(Thief_Pickpocket),
-			typeof(Thief_Vendor),
+			typeof(Hire_Thief),
+			typeof(RoamBehavior_Pickpocket),
+			typeof(TraitTrigger_HonorableThief),
+			typeof(Vendor_Thief),
 		};
 		public static List<Type> HireTraits = new List<Type>()
 		{
-			typeof(Thief_Hire),
+			typeof(Hire_Thief),
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
-			typeof(Thief_Hire),
-			typeof(Thief_Vendor),
+			typeof(Hire_Thief),
+			typeof(Vendor_Thief),
 		};
 		public static List<Type> NoninteractionTraits = new List<Type>()
 		{
-			typeof(Thief_HonestThief),
-			typeof(Thief_Pickpocket),
+			typeof(RoamBehavior_Pickpocket),
+			typeof(TraitTrigger_HonorableThief),
 		};
 		public static List<Type> VendorTraits = new List<Type>()
 		{
-			typeof(Thief_Vendor),
+			typeof(Vendor_Thief),
 		};
 
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList)

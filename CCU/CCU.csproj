@@ -113,15 +113,15 @@
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traits\Behavior.cs" />
-    <Compile Include="Traits\AI\Thief_Hire.cs" />
-    <Compile Include="Traits\AI\Thief_HonestThief.cs" />
-    <Compile Include="Traits\AI\Thief_Pickpocket.cs" />
-    <Compile Include="Traits\AI\Thief_Vendor.cs" />
-    <Compile Include="Traits\FacialHair\Beard.cs" />
-    <Compile Include="Traits\FacialHair\Mustache.cs" />
-    <Compile Include="Traits\FacialHair\MustacheCircus.cs" />
-    <Compile Include="Traits\FacialHair\MustacheRedneck.cs" />
-    <Compile Include="Traits\FacialHair\NoFacialHair.cs" />
+    <Compile Include="Traits\AI\Hire\Hire_Thief.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_HonorableThief.cs" />
+    <Compile Include="Traits\AI\RoamBehavior\RoamBehavior_Pickpocket.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_Thief.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Beard.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Mustache.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\MustacheCircus.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\MustacheRedneck.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\NoFacialHair.cs" />
     <Compile Include="Traits\Factions\Faction_1_Aligned.cs" />
     <Compile Include="Traits\Factions\Faction_1_Hostile.cs" />
     <Compile Include="Traits\Factions\Faction_2_Aligned.cs" />
@@ -138,9 +138,9 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Traits\HairColor\" />
-    <Folder Include="Traits\Hairstyle\" />
-    <Folder Include="Traits\SkinColor\" />
+    <Folder Include="Traits\Appearance\HairColor\" />
+    <Folder Include="Traits\Appearance\Hairstyle\" />
+    <Folder Include="Traits\Appearance\SkinColor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

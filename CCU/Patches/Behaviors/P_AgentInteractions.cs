@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.Behaviors;
+using CCU.Traits.AI;
 using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
+using CCU.Traits.AI.Hire;
+using CCU.Traits.AI.Vendor;
+using CCU.Traits.AI.TraitTrigger;
 
 namespace CCU.Patches.Behaviors
 {
@@ -1899,9 +1902,9 @@ namespace CCU.Patches.Behaviors
 							// agent.SayDialogue("InteractB"); // No custom dialogue
 							agent.gc.audioHandler.Play(agent, "AgentTalk");
 
-							if (agent.HasTrait<Thief_Vendor>() &&
-								(!agent.HasTrait<Thief_HonestThief>() || 
-								(agent.HasTrait<Thief_HonestThief>() && (interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")))))
+							if (agent.HasTrait<Vendor_Thief>() &&
+								(!agent.HasTrait<TraitTrigger_HonorableThief>() || 
+								(agent.HasTrait<TraitTrigger_HonorableThief>() && (interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")))))
 							{
 								if (agent.hasSpecialInvDatabase) // TODO: Verify
 								{
@@ -1917,7 +1920,7 @@ namespace CCU.Patches.Behaviors
 							{
 								if (agent.employer == null)
 								{
-									if (agent.HasTrait<Thief_Hire>())
+									if (agent.HasTrait<Hire_Thief>())
 									{
 										if (agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 										{
@@ -1930,7 +1933,7 @@ namespace CCU.Patches.Behaviors
 								}
 								else if (!agent.oma.cantDoMoreTasks)
 								{
-									if (agent.HasTrait<Thief_Hire>())
+									if (agent.HasTrait<Hire_Thief>())
 										__instance.AddButton("LockpickDoor");
 								}
 							}

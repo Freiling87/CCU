@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.Behaviors;
+using CCU.Traits.AI;
+using CCU.Traits.AI.RoamBehavior;
+using CCU.Traits.AI.TraitTrigger;
 
 namespace CCU.Patches
 {
@@ -427,7 +429,7 @@ namespace CCU.Patches
 								}
 								if (___agent.losCheckAtIntervalsTime > 9)
 								{
-									if ((___agent.agentName == "Thief" || ___agent.HasTrait<Thief_Pickpocket>()) && !__instance.thiefNoSteal) // Pickpocket
+									if ((___agent.agentName == "Thief" || ___agent.HasTrait<RoamBehavior_Pickpocket>()) && !__instance.thiefNoSteal) // Pickpocket
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 										if (!___agent.hasEmployer)
@@ -438,7 +440,7 @@ namespace CCU.Patches
 												Agent agent6 = ___agent.losCheckAtIntervalsList[num5];
 												Relationship relationship = ___agent.relationships.GetRelationship(agent6);
 												bool honorFlag = 
-													((___agent.agentName == "Thief" || (___agent.HasTrait<Thief_Pickpocket>() && ___agent.HasTrait<Thief_HonestThief>())) && 
+													((___agent.agentName == "Thief" || (___agent.HasTrait<RoamBehavior_Pickpocket>() && ___agent.HasTrait<TraitTrigger_HonorableThief>())) && 
 													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")));
 
 												if (relationship.distance < 4f && !honorFlag && !agent6.mechEmpty && !agent6.objectAgent && relationship.relTypeCode != relStatus.Aligned && relationship.relTypeCode != relStatus.Loyal && relationship.relTypeCode != relStatus.Friendly && relationship.relTypeCode != relStatus.Hostile && ___agent.slaveOwners.Count == 0 && ___agent.prisoner == agent6.prisoner && !agent6.invisible && !agent6.disappeared && (___agent.prisoner <= 0 || ___agent.curTileData.chunkID == agent6.curTileData.chunkID) && !agent6.hasGettingArrestedByAgent && !___agent.hectoredAgents.Contains(agent6.agentID) && !__instance.gc.tileInfo.DifferentLockdownZones(___agent.curTileData, agent6.curTileData))
