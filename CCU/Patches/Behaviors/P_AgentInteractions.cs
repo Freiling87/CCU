@@ -27,6 +27,8 @@ namespace CCU.Patches.Behaviors
 			 * All Interaction Traits
 			 */
 
+			Core.LogMethodCall();
+
 			#region Collapse me
 			___buttons = buttons1;
 			___buttonsExtra = buttonsExtra1;
@@ -1897,7 +1899,7 @@ namespace CCU.Patches.Behaviors
 						}
 						#endregion	
 
-						else if (Traits.Behavior.HasTraitFromList(agent, Behavior.InteractionTraits))
+						else if (Behavior.HasTraitFromList(agent, Behavior.InteractionTraits))
 						{
 							// agent.SayDialogue("InteractB"); // No custom dialogue
 							agent.gc.audioHandler.Play(agent, "AgentTalk");

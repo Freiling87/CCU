@@ -175,6 +175,7 @@ You can add as many as you want to a custom character. When you do so:
 |Z *				|Ctrl				|					|Undo									
 |Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
 |Middle Mouse *		|					|					|Drag Viewport
+|Letter Keys		|					|Any with Type		|When Type Selector is open, scroll to alphabetical entry starting in key pressed.<br>Press again to cycle through entries under that letter.
 
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)

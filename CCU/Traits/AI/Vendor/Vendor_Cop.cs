@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.AI.Vendor
 {
-	public class Vendor_Thief : CustomTrait
+    public class Vendor_Cop : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Thief>()
+            RogueLibs.CreateCustomTrait<Vendor_Cop>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells intrusion tools.\n\n<color=green>{0}</color> = Player needs Honor Among Thieves to access shop", CTrait.AI_TraitTrigger_HonorableThief),
+                    [LanguageCode.English] = String.Format("This character sells police gear.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.AI_CopAccess),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Thief,
+                    [LanguageCode.English] = CTrait.AI_Vendor_Cop,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

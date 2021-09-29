@@ -59,3 +59,7 @@ Test transpiler method, simply replace if it doesn't work. Use transpilers later
 ### Thief Pickpocket
 
 ### Thief Vendor
+- Special Inv filling: 
+  - InvDatabase.FillSpecialInv
+  - InvDatabase.AddRandItem
+  - Keep an eye out for agent name checks, one of these will need to be patched
