@@ -11,7 +11,7 @@ namespace CCU.Traits.AI.Vendor
             RogueLibs.CreateCustomTrait<Vendor_CopStandard>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells standard police gear.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.AI_CopAccess),
+                    [LanguageCode.English] = String.Format("This character sells standard police gear.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.AI_TraitTrigger_CopAccess),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

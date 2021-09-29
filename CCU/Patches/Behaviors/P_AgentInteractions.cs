@@ -30,6 +30,7 @@ namespace CCU.Patches.Behaviors
 			Core.LogMethodCall();
 
 			#region Collapse me
+
 			___buttons = buttons1;
 			___buttonsExtra = buttonsExtra1;
 			___buttonPrices = buttonPrices1;
@@ -1904,11 +1905,19 @@ namespace CCU.Patches.Behaviors
 							// agent.SayDialogue("InteractB"); // No custom dialogue
 							agent.gc.audioHandler.Play(agent, "AgentTalk");
 
-							if (agent.HasTrait<Vendor_Thief>() &&
-								(!agent.HasTrait<TraitTrigger_HonorableThief>() || 
-								(agent.HasTrait<TraitTrigger_HonorableThief>() && (interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")))))
+							Type vendorTrait = Behavior.GetOnlyTraitFromList(agent, Behavior.VendorTypes);
+							logger.LogDebug("hasSpecialAbilityDatabase: " + agent.hasSpecialInvDatabase);
+
+							if (!(vendorTrait is null) && agent.hasSpecialInvDatabase)
 							{
-								if (agent.hasSpecialInvDatabase) // TODO: Verify
+								bool canBuy = true;
+
+								if (agent.HasTrait<TraitTrigger_CopAccess>() && (vendorTrait == typeof(Vendor_Contraband) || vendorTrait == typeof(Vendor_CopStandard) || vendorTrait == typeof(Vendor_CopSWAT)))
+									canBuy = interactingAgent.HasTrait("TheLaw");
+								if (agent.HasTrait<TraitTrigger_HonorableThief>() && vendorTrait == typeof(Vendor_Thief))
+									canBuy = interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2");
+								
+								if (canBuy)
 								{
 									__instance.AddButton("Buy");
 

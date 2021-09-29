@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.AI.Vendor
 {
-    public class Vendor_Contraband : CustomTrait
+    public class Vendor_Cannibal : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Contraband>()
+            RogueLibs.CreateCustomTrait<Vendor_Cannibal>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.AI_TraitTrigger_CopAccess),
+                    [LanguageCode.English] = String.Format("This character sells cannibal stuff."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Contraband,
+                    [LanguageCode.English] = CTrait.AI_Vendor_Cannibal,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

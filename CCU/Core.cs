@@ -70,12 +70,11 @@ namespace CCU
             AI_Cannibal_BushAmbush = "AI: Cannibal - Bush Ambush",
             AI_Cannibal_ManholeAmbush = "AI: Cannibal - Manhole Ambush",
             AI_Cannibal_HostileToSoldiers = "AI: Cannibal - Hostile to Soldiers", // Analogue in BM: Army of Negative One
-            AI_Cannibal_Uncool = "AI: Cannibal - Uncool", // Hostile to character except with Cool with Cannibals
+            AI_Cannibal_Aggressive = "AI: Cannibal - Uncool", // Hostile to character except with Cool with Cannibals
             AI_Clerk_Bank = "AI: Clerk - Bank Teller",
             AI_Clerk_BloodBank = "AI: Clerk - Blood Bank",
             AI_Clerk_DeportationCenter = "AI: Clerk - Deportation Center",
             AI_Clerk_Hotel = "AI: Clerk - Hotel",
-            AI_CopAccess = "AI: Cop Access", // Tentative. Requires The Law to get access to certain things like the Cop Vendor.
             AI_Cop_AcceptBribe = "AI: Cop - Accept Bribe",
             AI_Cop_EnforceLaws = "AI: Cop - Enforce Laws",
             AI_Cop_Lockdown = "AI: Cop - Lockdown Clearance", // Might not be a thing - could just be The Law
@@ -111,8 +110,6 @@ namespace CCU
             AI_Supercop_EnforceLaws = "AI: Supercop - Enforce Laws", // Might be identical to Cop
             AI_Thief_AmbushManhole = "AI: Thief - Manhole Ambush",
             AI_RoamBehavior_Pickpocket = "AI: Thief - Pickpocket", // Requires Sticky Gloves?
-            AI_TraitTrigger_HonorableThief = "AI: Trait Trigger - Honorable Thief",
-            AI_TraitTrigger_CommonFolk = "AI: Trait Trigger - Common Folk",
             AI_UpperCruster_Bodyguarded = "AI: Upper Cruster - Bodyguarded",
             AI_UpperCruster_OwnSlave = "AI: Upper Cruster - Own Slave",
             AI_UpperCruster_Tattletale = "AI: Upper Cruster - Tattle-tale",
@@ -124,14 +121,23 @@ namespace CCU
             AI_Various_Extort = "AI: Various - Extortable",
             AI_Various_Guilty = "AI: Various - Guilty",
             AI_Various_Scumbag = "AI: Various - Scumbag",
+			AI_Werewolf_HostileToVampires = "AI: Werewolf - Hostile to Vampires", // Analogue in BM: Vampire Vanquisher
 
-            AI_Vendor_Armorer = "AI: Vendor - Armorer",
+			// Trait Trigger
+			AI_TraitTrigger_CommonFolk = "AI: Trait Trigger - Common Folk",
+			AI_TraitTrigger_CoolCannibal = "AI: Trait Trigger - Cool Cannibal",
+			AI_TraitTrigger_CopAccess = "AI: Cop Access",
+			AI_TraitTrigger_HonorableThief = "AI: Trait Trigger - Honorable Thief",
+
+			// Vendor
+			AI_Vendor_Armorer = "AI: Vendor - Armorer",
             AI_Vendor_Assassin = "AI: Vendor - Assassin",
             AI_Vendor_Banana = "AI: Vendor - Banana",
 			AI_Vendor_Barbarian = "AI: Vendor - Barbarian",
             AI_Vendor_Bartender = "AI: Vendor - Bartender",
             AI_Vendor_Blacksmith = "AI: Vendor - Blacksmith",
             AI_Vendor_Buyer = "AI: Vendor - Buyer",
+			AI_Vendor_Cannibal = "AI: Vendor - Cannibal",
             AI_Vendor_ConsumerElectronics = "AI: Vendor - Consumer Electronics",
 			AI_Vendor_ConvenienceStore = "AI: Vendor - Convenience Store",
             AI_Vendor_Contraband = "AI: Vendor - Cop Confiscated Goods",
@@ -167,7 +173,6 @@ namespace CCU
             AI_Vendor_Vampire = "AI: Vendor - Vampire",
             AI_Vendor_Villain = "AI: Vendor - Villain",
 
-            AI_Werewolf_HostileToVampires = "AI: Werewolf - Hostile to Vampires", // Analogue in BM: Vampire Vanquisher
             Appearance_FacialHair_Beard = "Appearance: Facial Hair - Beard",
             Appearance_FacialHair_Mustache = "Appearance: Facial Hair - Mustache",
             Appearance_FacialHair_MustacheCircus = "Appearance: Facial Hair - MustacheCircus",

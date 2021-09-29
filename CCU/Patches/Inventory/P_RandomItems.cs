@@ -61,6 +61,13 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.Sledgehammer, 1);
 			sel.CreateRandomElement(rList, vItem.Sword, 3);
 
+			rList = sel.CreateRandomList(CTrait.AI_Vendor_Cannibal, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.Axe, 3);
+			sel.CreateRandomElement(rList, vItem.Beartrap, 3);
+			sel.CreateRandomElement(rList, vItem.Beer, 3);
+			sel.CreateRandomElement(rList, vItem.Rock, 3);
+			sel.CreateRandomElement(rList, vItem.Whiskey, 3);
+
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_ConsumerElectronics, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BoomBox, 2);
 			sel.CreateRandomElement(rList, vItem.FoodProcessor, 1);

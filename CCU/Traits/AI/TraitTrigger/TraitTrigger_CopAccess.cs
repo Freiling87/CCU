@@ -1,22 +1,27 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.Vendor
+namespace CCU.Traits.AI.TraitTrigger
 {
-    public class Vendor_Contraband : CustomTrait
+    public class TraitTrigger_CopAccess : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Contraband>()
+            RogueLibs.CreateCustomTrait<TraitTrigger_CopAccess>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.AI_TraitTrigger_CopAccess),
+                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}</color>: Will not sell to the player if they don't have The Law.", CTrait.AI_Vendor_Contraband, CTrait.AI_Vendor_CopStandard, CTrait.AI_Vendor_CopSWAT),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Contraband,
+                    [LanguageCode.English] = CTrait.AI_TraitTrigger_CopAccess,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

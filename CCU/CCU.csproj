@@ -106,12 +106,16 @@
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CommonFolk.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CoolCannibal.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CopAccess.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Armorer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Assassin.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Barbarian.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Bartender.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Blacksmith.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Buyer.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_Cannibal.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConsumerElectronics.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConvenienceStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Contraband.cs" />
