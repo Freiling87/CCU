@@ -40,6 +40,7 @@ namespace CCU.Traits
 			typeof(Vendor_Armorer),
 			typeof(Vendor_Assassin),
 			typeof(Vendor_Banana),
+			typeof(Vendor_Barbarian),
 			typeof(Vendor_Bartender),
 			typeof(Vendor_Blacksmith),
 			// typeof(Vendor_Buyer), // Exclude
@@ -60,6 +61,7 @@ namespace CCU.Traits
 			typeof(Vendor_OutdoorOutfitter),
 			typeof(Vendor_PawnShop),
 			typeof(Vendor_PestControl),
+			typeof(Vendor_ResistanceCommissary),
 			typeof(Vendor_RiotDepot),
 			typeof(Vendor_Scientist),
 			typeof(Vendor_Shopkeeper),

@@ -108,6 +108,7 @@
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Armorer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Assassin.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_Barbarian.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Bartender.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Blacksmith.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Buyer.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_MovieTheater.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Occultist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_PawnShop.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_ResistanceCommissary.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_RiotDepot.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_PestControl.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Scientist.cs" />

@@ -21,12 +21,14 @@ namespace CCU.Patches.Inventory
 			RandomList rList = sel.CreateRandomList(CTrait.AI_Vendor_Armorer, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.ArmorDurabilitySpray, 2);
 			sel.CreateRandomElement(rList, vItem.BulletproofVest, 3);
-			sel.CreateRandomElement(rList, vItem.Codpiece, 1);
+			sel.CreateRandomElement(rList, vItem.Codpiece, 2);
+			sel.CreateRandomElement(rList, vItem.FireproofSuit, 1);
 			sel.CreateRandomElement(rList, vItem.GasMask, 1);
 			sel.CreateRandomElement(rList, vItem.HardHat, 1);
 			sel.CreateRandomElement(rList, vItem.SoldierHelmet, 3);
 
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_Assassin, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.Blindenizer, 1);
 			sel.CreateRandomElement(rList, vItem.CardboardBox, 1);
 			sel.CreateRandomElement(rList, vItem.EarWarpWhistle, 1);
 			sel.CreateRandomElement(rList, vItem.KillProfiter, 1);
@@ -37,6 +39,15 @@ namespace CCU.Patches.Inventory
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_Banana, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.Banana, 9);
 			sel.CreateRandomElement(rList, vItem.BananaPeel, 1);
+
+			rList = sel.CreateRandomList(CTrait.AI_Vendor_Barbarian, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.Axe, 3);
+			sel.CreateRandomElement(rList, vItem.BaconCheeseburger, 3);
+			sel.CreateRandomElement(rList, vItem.Beer, 6);
+			sel.CreateRandomElement(rList, vItem.BraceletofStrength, 2);
+			sel.CreateRandomElement(rList, vItem.Codpiece, 3);
+			sel.CreateRandomElement(rList, vItem.HamSandwich, 3);
+			sel.CreateRandomElement(rList, vItem.Sword, 3);
 
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_Bartender, "Items", "Item"); // Vanilla
 			sel.CreateRandomElement(rList, "Alcohol", 3); // TODO: Check this out and possibly use it
@@ -146,7 +157,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.PortableSellOMatic, 1);
 			sel.CreateRandomElement(rList, vItem.MemoryMutilator, 2);
 			sel.CreateRandomElement(rList, vItem.ResearchGun, 2);
-			sel.CreateRandomElement(rList, vItem.SafeCrackingTool, 2);
+			sel.CreateRandomElement(rList, vItem.SafeBuster, 2);
 			sel.CreateRandomElement(rList, vItem.Translator, 3);
 
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_Hypnotist, "Items", "Item");
@@ -236,6 +247,10 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.GasMask, 3);
 			sel.CreateRandomElement(rList, vItem.KillProfiter, 1);
 			sel.CreateRandomElement(rList, vItem.TranquilizerGun, 2);
+
+			rList = sel.CreateRandomList(CTrait.AI_Vendor_ResistanceCommissary, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.FreeItemVoucher, 3);
+			sel.CreateRandomElement(rList, vItem.HiringVoucher, 3);
 
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_RiotDepot, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BaseballBat, 3);
