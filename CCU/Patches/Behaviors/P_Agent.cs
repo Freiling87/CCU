@@ -8,7 +8,7 @@ using CCU.Traits.AI;
 using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
-
+using CCU.Traits.AI.RoamBehavior;
 
 namespace CCU.Patches.Behaviors
 {
@@ -23,6 +23,10 @@ namespace CCU.Patches.Behaviors
 		{
 			if (Behavior.HasTraitFromList(__instance, Behavior.VendorTraits))
 				__instance.SetupSpecialInvDatabase();
+
+			// May want to generalize into LOSCheckTraits, but this might be the only one that's on a coin toss (done in LoadLevel.SetupMore3_3 when spawning roamers)
+			if (__instance.HasTrait<RoamBehavior_Pickpocket>() && GC.percentChance(50))
+				__instance.losCheckAtIntervals = true;
 		}
 	}
 }
