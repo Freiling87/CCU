@@ -65,18 +65,11 @@ namespace CCU
             AI_Bartender_BuyRound = "AI: Bartender - Buy Round",
             AI_Bouncer_AcceptBribe = "AI: Bouncer - Accept Bribe", // Requires Guard Door?
             AI_Bouncer_GuardDoor = "AI: Bouncer - Guard Door",
-            AI_ButlerBot_Clean = "AI: Butler Bot - Clean",
-            AI_Cannibal_Cannibalize = "AI: Cannibal - Cannibalize", // May require bite ability?
-            AI_Cannibal_BushAmbush = "AI: Cannibal - Bush Ambush",
-            AI_Cannibal_ManholeAmbush = "AI: Cannibal - Manhole Ambush",
-            AI_Cannibal_HostileToSoldiers = "AI: Cannibal - Hostile to Soldiers", // Analogue in BM: Army of Negative One
-            AI_Cannibal_Aggressive = "AI: Cannibal - Uncool", // Hostile to character except with Cool with Cannibals
             AI_Clerk_Bank = "AI: Clerk - Bank Teller",
             AI_Clerk_BloodBank = "AI: Clerk - Blood Bank",
             AI_Clerk_DeportationCenter = "AI: Clerk - Deportation Center",
             AI_Clerk_Hotel = "AI: Clerk - Hotel",
             AI_Cop_AcceptBribe = "AI: Cop - Accept Bribe",
-            AI_Cop_EnforceLaws = "AI: Cop - Enforce Laws",
             AI_Cop_Lockdown = "AI: Cop - Lockdown Clearance", // Might not be a thing - could just be The Law
             AI_CopBot_Enforcelaws = "AI: Cop Bot - Enforce Laws",
             AI_CopBot_VisionBeams = "AI: Cop Bot - Vision Beams",
@@ -86,42 +79,54 @@ namespace CCU
             AI_DrugDealer_UseDrugs = "AI: Drug Dealer - Use Drugs",
             AI_Firefighter_FightFire = "AI: Firefighter - Fight Fires",
             AI_Gangbanger_SpawnRoamingGangs = "AI: Gangbanger - Spawn Roaming Gangs",
-            AI_Hire_Generic = "AI: Hire - Generic", // Verify if Soldier/Gangbanger/etc. are indeed identical
-            AI_Hire_Gorilla = "AI: Hire - Gorilla",
-            AI_Hire_Hacker = "AI: Hire - Hacker",
-            AI_Hire_Thief = "AI: Hire - Thief",
             AI_Jock_ArenaManager = "AI: Jock - Arena Manager",
             AI_KillerRobot_Chase = "AI: Killer Robot - Chase",
             AI_Mayor_Bodyguarded_SuperCop = "AI: Mayor - Bodyguarded by Supercops",
             AI_Mobster_InfluenceElection = "AI: Mobster - Influence Election",
-            AI_Mobster_Shakedown = "AI: Mobster - Shakedown",
             AI_Musician_Bodyguarded_Goon = "AI: Musician - Bodyguarded by Goons",
             AI_Musician_Bodyguarded_Supergoon = "AI: Musician - Bodyguarded by Supergoons",
             AI_Musician_TurntablesGuard = "AI: Musician - Turntables Guard",
             AI_Musician_SongRequest = "AI: Musician - Song Request",
             AI_OfficeDrone_OfferMotivation = "AI: Office Drone - Offer Motivation",
             AI_Scientist_Identify = "AI: Scientist - Identify",
-            AI_Soldier_HostileToCannibals = "AI: Soldier - Hostile to Cannibals", // Analogue in BM: Cannibal Killer
             AI_Slave_Enslaved = "AI: Slave - Enslaved",
             AI_Slavemaster_SellSlaves = "AI: Slavemaster - Sell Slaves",
             AI_Slavemaster_OwnSlaves = "AI: Slavemaster - Own Slaves",
-            AI_SlumDweller_CashGrabber = "AI: Slum Dweller - Cash Grabber",
-            AI_SlumDweller_CauseRuckus = "AI: Slum Dweller - Cause a Ruckus",
             AI_Supercop_EnforceLaws = "AI: Supercop - Enforce Laws", // Might be identical to Cop
-            AI_Thief_AmbushManhole = "AI: Thief - Manhole Ambush",
-            AI_RoamBehavior_Pickpocket = "AI: Thief - Pickpocket", // Requires Sticky Gloves?
             AI_UpperCruster_Bodyguarded = "AI: Upper Cruster - Bodyguarded",
             AI_UpperCruster_OwnSlave = "AI: Upper Cruster - Own Slave",
             AI_UpperCruster_Tattletale = "AI: Upper Cruster - Tattle-tale",
-            AI_Vampire_Bite = "AI: Vampire - Bite",
-            AI_Vampire_HostileToWerewolves = "AI: Vampire - Hostile to Werewolves", // Analogue in BM: Werewolf Wrecker
             AI_Various_AnnoyedAtSuspicious = "AI: Various - Annoyed at Suspicious",
             AI_Various_Coward = "AI: Various - Coward",
-            AI_Various_DrugGrabber = "AI: Various - Drug Grabber",
             AI_Various_Extort = "AI: Various - Extortable",
             AI_Various_Guilty = "AI: Various - Guilty",
             AI_Various_Scumbag = "AI: Various - Scumbag",
-			AI_Werewolf_HostileToVampires = "AI: Werewolf - Hostile to Vampires", // Analogue in BM: Vampire Vanquisher
+
+			// Hire 
+			AI_Hire_Generic = "AI: Hire - Generic", // Verify if Soldier/Gangbanger/etc. are indeed identical
+			AI_Hire_Gorilla = "AI: Hire - Gorilla",
+			AI_Hire_Hacker = "AI: Hire - Hacker",
+			AI_Hire_SlumDweller = "AI: Hire - Slum Dweller",
+			AI_Hire_Thief = "AI: Hire - Thief",
+
+			// Relationships
+			AI_Relationships_Aggressive = "AI: Relationships - Aggressive", // Hostile to character except with Cool with Cannibals
+			AI_Relationships_HostileToCannibals = "AI: Relationships - Hostile to Cannibals", // Analogue in BM: Cannibal Killer
+			AI_Relationships_HostileToSoldiers = "AI: Relationships - Hostile to Soldiers", // Analogue in BM: Army of Negative One
+			AI_Relationships_HostileToVampires = "AI: Relationships - Hostile to Vampires", // Analogue in BM: Vampire Vanquisher
+			AI_Relationships_HostileToWerewolves = "AI: Relationships - Hostile to Werewolves", // Analogue in BM: Werewolf Wrecker
+
+			// Roam Behavior
+			AI_RoamBehavior_HideInBush = "AI: Roam Behavior - Hide In Bush",
+			AI_RoamBehavior_HideInManhole = "AI: Roam Behavior - Hide In Manhole",
+			AI_RoamBehavior_Clean = "AI: Roam Behavior - Clean",
+			AI_RoamBehavior_Cannibalize = "AI: Roam Behavior - Cannibalize", // May require bite ability?
+			AI_RoamBehavior_DrinkBlood = "AI: Roam Behavior - Drink Blood",
+			AI_RoamBehavior_EnforceLaws = "AI: Roam Behavior - Enforce Laws",
+			AI_RoamBehavior_GrabDrugs = "AI: Roam Behavior - Grab Drugs",
+			AI_RoamBehavior_GrabMoney = "AI: Roam Behavior - Grab Money",
+			AI_RoamBehavior_Pickpocket = "AI: Roam Behavior - Pickpocket", // Requires Sticky Gloves?
+			AI_RoamBehavior_Shakedown = "AI: Roam Behavior - Shakedown",
 
 			// Trait Trigger
 			AI_TraitTrigger_CommonFolk = "AI: Trait Trigger - Common Folk",
