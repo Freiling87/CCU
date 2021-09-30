@@ -54,17 +54,11 @@ Test transpiler method, simply replace if it doesn't work. Use transpilers later
 
 ### Thief Hire
 
-On Interact:
-
-[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-
-Need more logging here to identify issue. 
-
 ### Thief Honorable
+Worked for pickpocket
 
 ### Thief Pickpocket
-- Ran up to player but didn't pickpocket. I think they do need Sticky Glove.
+Works
 
 ### Thief Vendor
 - Special Inv filling: 
@@ -76,3 +70,9 @@ Need more logging here to identify issue.
   - InvDatabase.rnd.RandomSelect(rName, "Items")
 - Agent Loadouts
   - InvDatabase.FillAgent
+
+Not detecting trait: 
+	[Info   : Unity Log] ADDRELHATE: Custom (1140) (Agent) - Playerr (Agent)
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
