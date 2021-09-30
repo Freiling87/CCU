@@ -341,6 +341,9 @@ namespace CCU.Patches
 							{
 								___agent.losCheckAtIntervalsTime++;
 
+								// losCheckAtIntervals currently makes these traits incompatible with each other.
+								// TODO: Refactor this so that GrabMoney & GrabDrugs can function alongside the SA types.
+
 								if (___agent.losCheckAtIntervalsTime > 8)
 								{
 									if (___agent.agentName == "Hobo" || ___agent.HasTrait<Behavior_GrabMoney>()) // GrabMoney

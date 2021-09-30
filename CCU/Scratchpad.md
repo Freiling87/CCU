@@ -60,7 +60,7 @@ TODO: Move any behaviors linked to special abilities (Bite, Cannibalize, Sticky 
 Worked for pickpocket
 
 ### Thief Pickpocket
-Works
+Stopped working when I switched it to StickyGlove check. 
 
 ### Thief Vendor
 - Special Inv filling: 
