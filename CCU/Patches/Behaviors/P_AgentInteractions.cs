@@ -381,10 +381,12 @@ namespace CCU.Patches.Behaviors
 						}
 						return false;
 					}
+
 					if (!agent.gc.serverPlayer && agent.relationships.GetRelCode(interactingAgent) == relStatus.Annoyed && (agent.gang != interactingAgent.gangMugging || agent.gang == 0) && agent.doingMugging != interactingAgent.agentID && !interactingAgent.statusEffects.hasTrait("Mugger") && !interactingAgent.statusEffects.hasTrait("Mugger2"))
 					{
 						return false;
 					}
+					
 					if (agent.oma.modProtectsProperty > 0)
 					{
 						string rel = agent.relationships.GetRel(interactingAgent);
@@ -410,6 +412,7 @@ namespace CCU.Patches.Behaviors
 							}
 						}
 					}
+
 					if (!agent.CanUnderstandEachOther(interactingAgent, false, true))
 					{
 						if (agent.statusEffects.hasStatusEffect("HearingBlocked"))
@@ -424,6 +427,7 @@ namespace CCU.Patches.Behaviors
 						agent.movement.RotateToObject(interactingAgent.go);
 						return false;
 					}
+
 					if (interactingAgent.statusEffects.hasTrait("EveryoneHatesZombie") && agent.relationships.GetRel(interactingAgent) != "Aligned" && agent.relationships.GetRel(interactingAgent) != "Loyal" && agent.relationships.GetRel(interactingAgent) != "Friendly" && agent.relationships.GetRel(interactingAgent) != "Submissive" && !agent.zombified && agent.questGiverQuest == null && agent.questEnderQuest == null && !agent.oma.bodyGuarded)
 					{
 						if (agent.ModProtectsProperty2Check(interactingAgent))
@@ -437,23 +441,32 @@ namespace CCU.Patches.Behaviors
 						agent.movement.RotateToObject(interactingAgent.go);
 						return false;
 					}
-					if (agent.relationships.GetRelCode(interactingAgent) == relStatus.Annoyed && agent.relationships.GetStrikes(interactingAgent) > 1f && (agent.gang != interactingAgent.gangMugging || agent.gang == 0) && agent.doingMugging != interactingAgent.agentID && !interactingAgent.statusEffects.hasTrait("Mugger") && !interactingAgent.statusEffects.hasTrait("Mugger2") && !agent.oma.bodyGuarded)
-					{
+					
+					if (agent.relationships.GetRelCode(interactingAgent) == relStatus.Annoyed && 
+						agent.relationships.GetStrikes(interactingAgent) > 1f && 
+						(agent.gang != interactingAgent.gangMugging || agent.gang == 0) && 
+						agent.doingMugging != interactingAgent.agentID && 
+						!interactingAgent.statusEffects.hasTrait("Mugger") && 
+						!interactingAgent.statusEffects.hasTrait("Mugger2") && 
+						!agent.oma.bodyGuarded)
 						return false;
-					}
+
 					if (agent.extraVarString4 != "" && agent.extraVarString4 != null)
 					{
 						__instance.AddButton("TalkAgent");
 					}
+
 					if (agent.questGiverQuest != null && agent.questGiverQuest.questStatus != "Failed" && agent.questGiverQuest.questStatus != "Done")
 					{
 						__instance.AddButton("Quest");
 						flag = true;
 					}
+
 					if (agent.questEnderQuest != null && !flag && agent.questEnderQuest.questStatus == "Completed")
 					{
 						__instance.AddButton("Quest");
 					}
+
 					if (agent.oma.guardTarget && interactingAgent.bigQuest == "Guard")
 					{
 						bool flag3 = true;
@@ -470,21 +483,21 @@ namespace CCU.Patches.Behaviors
 							__instance.AddButton("StartGuardSequence");
 						}
 					}
+
 					if (agent.oma.hasCourierPackage && interactingAgent.bigQuest == "Courier" && (interactingAgent.inventory.HasItem("CourierPackage") || interactingAgent.inventory.HasItem("CourierPackageBroken")))
 					{
 						__instance.AddButton("GetCourierPackage");
 					}
 				}
+
 				bool flag4 = false;
 				bool flag5 = false;
+
 				if (agent.inventory.HasItem("Key"))
-				{
 					flag4 = true;
-				}
 				if (agent.inventory.HasItem("SafeCombination"))
-				{
 					flag5 = true;
-				}
+
 				if (agent.gc.multiplayerMode && !agent.gc.serverPlayer)
 				{
 					if (agent.oma.hasKey)
@@ -496,7 +509,10 @@ namespace CCU.Patches.Behaviors
 						flag5 = true;
 					}
 				}
-				if ((agent.relationships.GetRel(interactingAgent) == "Aligned" || agent.relationships.GetRel(interactingAgent) == "Loyal" || agent.relationships.GetRel(interactingAgent) == "Submissive") && agent.isPlayer == 0 && agent.startingChunkRealDescription != "Generic")
+
+				if ((agent.relationships.GetRel(interactingAgent) == "Aligned" || agent.relationships.GetRel(interactingAgent) == "Loyal" || agent.relationships.GetRel(interactingAgent) == "Submissive") && 
+					agent.isPlayer == 0 && 
+					agent.startingChunkRealDescription != "Generic")
 				{
 					if (flag4 && flag5)
 					{
@@ -526,6 +542,7 @@ namespace CCU.Patches.Behaviors
 						__instance.AddButton("BuySafeCombination", agent.determineMoneyCost("BuySafeCombination"));
 					}
 				}
+
 				bool flag6 = false;
 				bool flag7 = false;
 				bool flag8 = false;
@@ -533,60 +550,51 @@ namespace CCU.Patches.Behaviors
 				bool flag10 = false;
 				bool flag11 = false;
 				bool flag12 = false;
+
 				if (agent.employer == interactingAgent)
 				{
 					if (!agent.dead)
-					{
 						flag6 = true;
-					}
+					
 					if (agent.CanCommandStandGuard(agent, interactingAgent) && !agent.oma.bodyGuarded)
-					{
 						flag7 = true;
-					}
+					
 					if (agent.CanCommandAttack(agent, interactingAgent) && !agent.oma.bodyGuarded)
-					{
 						flag8 = true;
-					}
+					
 					if (agent.slaveOwners.Contains(interactingAgent) && !agent.oma.bodyGuarded)
-					{
 						flag9 = true;
-					}
+					
 					flag10 = true;
+					
 					if (agent.oma.bodyGuarded)
-					{
 						flag10 = false;
-					}
+					
 					if (agent.rescueForQuest != null && agent.rescueForQuest.questStatus != "Done")
-					{
 						flag10 = false;
-					}
+					
 					if (!agent.gc.serverPlayer && agent.oma.rescuingForQuest)
-					{
 						flag10 = false;
-					}
+					
 					if (agent.slaveOwners.Contains(interactingAgent))
-					{
 						flag10 = false;
-					}
+				
 					if (interactingAgent.statusEffects.hasTrait("MedicalProfessional"))
-					{
 						flag11 = true;
-					}
 				}
+
 				if (agent.formerEmployer == interactingAgent)
 				{
 					if (!agent.dead && !agent.formerSlaveOwners.Contains(interactingAgent))
-					{
 						flag6 = true;
-					}
 					if (interactingAgent.statusEffects.hasTrait("MedicalProfessional"))
-					{
 						flag11 = true;
-					}
 				}
+
 				bool flag13 = false;
 				Quest quest = null;
 				Quest quest2 = null;
+
 				if (!agent.gc.serverPlayer)
 				{
 					if (agent.oma.hasQuestItem && agent.oma.questNum != -1)
@@ -613,6 +621,7 @@ namespace CCU.Patches.Behaviors
 						quest2 = agent.killForQuest;
 					}
 				}
+
 				if (quest2 != null && quest2.questType == "KillAndRetrieve" && quest2.questStatus != "Failed" && quest2.questStatus != "NotAccepted")
 				{
 					using (List<InvItem>.Enumerator enumerator = agent.inventory.InvItemList.GetEnumerator())
@@ -626,6 +635,7 @@ namespace CCU.Patches.Behaviors
 						}
 					}
 				}
+
 				if (flag13)
 				{
 					if (agent.relationships.GetRel(interactingAgent) == "Aligned" || agent.relationships.GetRel(interactingAgent) == "Loyal" || agent.relationships.GetRel(interactingAgent) == "Submissive")
@@ -639,6 +649,7 @@ namespace CCU.Patches.Behaviors
 						__instance.AddButton("Threaten", " (" + agent.relationships.FindThreat(interactingAgent, false) + "%)");
 					}
 				}
+
 				if (agent.oma.mindControlled)
 				{
 					agent.SayDialogue("MindControlInteract");
@@ -662,10 +673,10 @@ namespace CCU.Patches.Behaviors
 					__instance.AddButton("GiveItem");
 					return false;
 				}
+
 				if (agent.sleeping)
-				{
 					agent.sleeping = false;
-				}
+
 				if ((agent.isPlayer > 0 || agent.playerColor != 0) && agent.ghost && !interactingAgent.ghost)
 				{
 					__instance.AddButton("ReviveTakeHealth");
@@ -690,8 +701,9 @@ namespace CCU.Patches.Behaviors
 					{
 						string agentName = agent.agentName;
 
-						// Standard Interactions
+						#endregion
 
+						#region Standard Interactions
 						if (agentName == "Alien")
 						{
 							if (interactingAgent.agentName == "Alien")
@@ -1898,7 +1910,7 @@ namespace CCU.Patches.Behaviors
 							}
 							goto IL_48BF;
 						}
-						#endregion	
+						#endregion
 
 						else if (Behavior.HasTraitFromList(agent, Behavior.InteractionTraits))
 						{

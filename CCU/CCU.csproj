@@ -113,6 +113,8 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Assassin.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Barbarian.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Bartender.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_BartenderDive.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_BartenderFancy.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Blacksmith.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Buyer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Cannibal.cs" />
@@ -132,9 +134,11 @@
     <Compile Include="Traits\AI\Vendor\Vendor_McFuds.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_MedicalSupplier.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_MiningGear.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_MonkeMart.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_MovieTheater.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Occultist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_PawnShop.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_Pharmacy.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ResistanceCommissary.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_RiotDepot.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_PestControl.cs" />

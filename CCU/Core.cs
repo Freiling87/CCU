@@ -134,7 +134,7 @@ namespace CCU
 			AI_Relationships_HostileToWerewolves = "AI: Relationships - Hostile to Werewolves", // Analogue in BM: Werewolf Wrecker
 		#endregion
 		#region Spawn
-			AI_Spawn_BodyguardedGoons = "AI: Spawn - Bodyguarded by Goons",
+			AI_Spawn_BodyguardedGoons = "AI: Spawn - Bodyguarded by Goons", // There is a "Bodyguard" trait in the source code apparently
 			AI_Spawn_BodyguardedSupercops = "AI: Spawn - Bodyguarded by Supercops",
 			AI_Spawn_BodyguardedSupergoons = "AI: Spawn - Bodyguarded by Supergoons",
 			AI_Spawn_Enslaved = "AI: Spawn - Enslaved",
@@ -155,7 +155,9 @@ namespace CCU
             AI_Vendor_Banana = "AI: Vendor - Banana",
 			AI_Vendor_Barbarian = "AI: Vendor - Barbarian",
             AI_Vendor_Bartender = "AI: Vendor - Bartender",
-            AI_Vendor_Blacksmith = "AI: Vendor - Blacksmith",
+			AI_Vendor_BartenderDive = "AI: Vendor - Bartender (Dive)",
+			AI_Vendor_BartenderFancy = "AI: Vendor - Bartender (Fancy)",
+			AI_Vendor_Blacksmith = "AI: Vendor - Blacksmith",
             AI_Vendor_Buyer = "AI: Vendor - Buyer",
 			AI_Vendor_Cannibal = "AI: Vendor - Cannibal",
             AI_Vendor_ConsumerElectronics = "AI: Vendor - Consumer Electronics",
@@ -173,11 +175,13 @@ namespace CCU
             AI_Vendor_McFuds = "AI: Vendor - McFud's",
             AI_Vendor_MedicalSupplier = "AI: Vendor - Medical Supplier",
             AI_Vendor_MiningGear = "AI: Vendor - Mining Gear",
-            AI_Vendor_MovieTheater = "AI: Vendor - Movie Theater",
+			AI_Vendor_MonkeMart = "AI: Vendor - Monke Mart",
+			AI_Vendor_MovieTheater = "AI: Vendor - Movie Theater",
             AI_Vendor_Occultist = "AI: Vendor - Occultist",
             AI_Vendor_OutdoorOutfitter = "AI: Vendor - Trapper Supply",
             AI_Vendor_PawnShop = "AI: Vendor - Pawn Shop",
             AI_Vendor_PestControl = "AI: Vendor - Pest Control",
+			AI_Vendor_Pharmacy = "AI: Vendor - Pharmacy",
 			AI_Vendor_ResistanceCommissary = "AI: Vendor - Resistance Commissary",
             AI_Vendor_RiotDepot = "AI: Vendor - Riot Depot",
             AI_Vendor_Scientist = "AI: Vendor - Scientist",
