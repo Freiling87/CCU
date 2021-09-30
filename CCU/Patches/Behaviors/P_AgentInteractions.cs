@@ -1931,7 +1931,7 @@ namespace CCU.Patches.Behaviors
 							{
 								if (agent.employer == null)
 								{
-									if (agent.HasTrait<Hire_Thief>())
+									if (agent.HasTrait<Hire_BreakIn>())
 									{
 										if (agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 										{
@@ -1944,7 +1944,7 @@ namespace CCU.Patches.Behaviors
 								}
 								else if (!agent.oma.cantDoMoreTasks)
 								{
-									if (agent.HasTrait<Hire_Thief>())
+									if (agent.HasTrait<Hire_BreakIn>())
 										__instance.AddButton("LockpickDoor");
 								}
 							}

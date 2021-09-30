@@ -16,18 +16,18 @@ namespace CCU.Traits
 	{
 		public static List<Type> BehaviorTraits = new List<Type>()
 		{
-			typeof(Hire_Thief),
+			typeof(Hire_BreakIn),
 			typeof(RoamBehavior_Pickpocket),
 			typeof(TraitTrigger_HonorableThief),
 			typeof(Vendor_Thief),
 		};
 		public static List<Type> HireTraits = new List<Type>()
 		{
-			typeof(Hire_Thief),
+			typeof(Hire_BreakIn),
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
-			typeof(Hire_Thief),
+			typeof(Hire_BreakIn),
 			typeof(Vendor_Thief),
 		};
 		public static List<Type> NoninteractionTraits = new List<Type>()

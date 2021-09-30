@@ -20,12 +20,12 @@ namespace CCU.Traits.Factions
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Faction_1_Aligned,
+                    [LanguageCode.English] = CTrait.AI_Relationships_Faction1Aligned,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Faction_1_Hostile },
+                    Cancellations = { CTrait.AI_Relationships_Faction1Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

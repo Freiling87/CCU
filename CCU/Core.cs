@@ -62,79 +62,94 @@ namespace CCU
     public static class CTrait
 	{
         public const string
-            AI_Bartender_BuyRound = "AI: Bartender - Buy Round",
-            AI_Bouncer_AcceptBribe = "AI: Bouncer - Accept Bribe", // Requires Guard Door?
-            AI_Bouncer_GuardDoor = "AI: Bouncer - Guard Door",
-            AI_Clerk_Bank = "AI: Clerk - Bank Teller",
-            AI_Clerk_BloodBank = "AI: Clerk - Blood Bank",
-            AI_Clerk_DeportationCenter = "AI: Clerk - Deportation Center",
-            AI_Clerk_Hotel = "AI: Clerk - Hotel",
-            AI_Cop_AcceptBribe = "AI: Cop - Accept Bribe",
-            AI_Cop_Lockdown = "AI: Cop - Lockdown Clearance", // Might not be a thing - could just be The Law
-            AI_CopBot_Enforcelaws = "AI: Cop Bot - Enforce Laws",
-            AI_CopBot_VisionBeams = "AI: Cop Bot - Vision Beams",
-            AI_Doctor_AdministerBloodBag = "AI: Doctor - Administer Blood Bag",
-            AI_Doctor_Heal = "AI: Doctor - Heal",
-            AI_Doctor_UseBloodBag = "AI: Doctor - Use Blood Bag",
-            AI_DrugDealer_UseDrugs = "AI: Drug Dealer - Use Drugs",
-            AI_Firefighter_FightFire = "AI: Firefighter - Fight Fires",
-            AI_Gangbanger_SpawnRoamingGangs = "AI: Gangbanger - Spawn Roaming Gangs",
-            AI_Jock_ArenaManager = "AI: Jock - Arena Manager",
-            AI_KillerRobot_Chase = "AI: Killer Robot - Chase",
-            AI_Mayor_Bodyguarded_SuperCop = "AI: Mayor - Bodyguarded by Supercops",
-            AI_Mobster_InfluenceElection = "AI: Mobster - Influence Election",
-            AI_Musician_Bodyguarded_Goon = "AI: Musician - Bodyguarded by Goons",
-            AI_Musician_Bodyguarded_Supergoon = "AI: Musician - Bodyguarded by Supergoons",
-            AI_Musician_TurntablesGuard = "AI: Musician - Turntables Guard",
-            AI_Musician_SongRequest = "AI: Musician - Song Request",
-            AI_OfficeDrone_OfferMotivation = "AI: Office Drone - Offer Motivation",
-            AI_Scientist_Identify = "AI: Scientist - Identify",
-            AI_Slave_Enslaved = "AI: Slave - Enslaved",
-            AI_Slavemaster_SellSlaves = "AI: Slavemaster - Sell Slaves",
-            AI_Slavemaster_OwnSlaves = "AI: Slavemaster - Own Slaves",
-            AI_Supercop_EnforceLaws = "AI: Supercop - Enforce Laws", // Might be identical to Cop
-            AI_UpperCruster_Bodyguarded = "AI: Upper Cruster - Bodyguarded",
-            AI_UpperCruster_OwnSlave = "AI: Upper Cruster - Own Slave",
-            AI_UpperCruster_Tattletale = "AI: Upper Cruster - Tattle-tale",
-            AI_Various_AnnoyedAtSuspicious = "AI: Various - Annoyed at Suspicious",
-            AI_Various_Coward = "AI: Various - Coward",
-            AI_Various_Extort = "AI: Various - Extortable",
-            AI_Various_Guilty = "AI: Various - Guilty",
-            AI_Various_Scumbag = "AI: Various - Scumbag",
-
-			// Hire 
+		#region AI
+		#region Behavior
+			AI_Behavior_CleanTrash = "AI: Behavior - Clean Trash",
+			AI_Behavior_Coward = "AI: Behavior - Coward",
+			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",
+			AI_Behavior_Guilty = "AI: Behavior - Guilty",
+			AI_Behavior_Cannibalize = "AI: Behavior - Cannibalize", // May require bite ability?
+			AI_Behavior_DrinkBlood = "AI: Behavior - Drink Blood",
+			AI_Behavior_EnforceLaws = "AI: Behavior - Enforce Laws",
+			AI_Behavior_EnforceLawsCopBot = "AI: Behavior - Enforce Laws Cop Bot",
+			AI_Behavior_EnforceLawsSupercop = "AI: Behavior - Enforce Laws Supercop", // Might be identical to Cop
+			AI_Behavior_FightFires = "AI: Behavior - Fight Fires",
+			AI_Behavior_GrabDrugs = "AI: Behavior - Grab Drugs",
+			AI_Behavior_GrabMoney = "AI: Behavior - Grab Money",
+			AI_Behavior_HogTurntables = "AI: Behavior - Turntables Guard",
+			AI_Behavior_Lockdown = "AI: Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
+			AI_Behavior_Pacifist = "AI: Behavior - Pacifist",
+			AI_Behavior_Pickpocket = "AI: Behavior - Pickpocket", // Requires Sticky Gloves?
+			AI_Behavior_Scumbag = "AI: Behavior - Scumbag",
+			AI_Behavior_SeekAndDestroy = "AI: Behavior - Seek & Destroy", // Killer Robot
+			AI_Behavior_Shakedown = "AI: Behavior - Shakedown",
+			AI_Behavior_Tattletale = "AI: Behavior - Tattle-tale",
+			AI_Behavior_UseDrugsInCombat = "AI: Behavior - Use Drugs",
+			AI_Behavior_VisionBeams = "AI: Behavior - Vision Beams",
+		#endregion
+		#region Hire
+			AI_Hire_CostBanana = "AI: Hire - Costs Banana",
+			AI_Hire_CostLess = "AI: Hire - Costs Less",
+			AI_Hire_CostMore = "AI: Hire - Costs More",
+			AI_Hire_BreakIn = "AI: Hire - Thief",
+			AI_Hire_CauseARuckus = "AI: Hire - Slum Dweller",
 			AI_Hire_Generic = "AI: Hire - Generic", // Verify if Soldier/Gangbanger/etc. are indeed identical
-			AI_Hire_Gorilla = "AI: Hire - Gorilla",
-			AI_Hire_Hacker = "AI: Hire - Hacker",
-			AI_Hire_SlumDweller = "AI: Hire - Slum Dweller",
-			AI_Hire_Thief = "AI: Hire - Thief",
-
-			// Relationships
+			AI_Hire_Hack = "AI: Hire - Hacker",
+			AI_Hire_Safecrack = "AI: Hire - Safecrack",
+			AI_Hire_Tamper = "AI: Hire - Tamper",
+		#endregion
+		#region Interaction 
+			AI_Interaction_AcceptBribeCop = "AI: Interaction - Accept Bribe",
+			AI_Interaction_AcceptBribeDoor = "AI: Interaction - Accept Bribe", // Requires Guard Door?
+			AI_Interaction_AdministerBloodBag = "AI: Interaction - Administer Blood Bag",
+			AI_Interaction_ArenaManager = "AI: Interaction - Arena Manager",
+			AI_Interaction_BankTeller = "AI: Interaction - Bank Teller",
+			AI_Interaction_BloodBank = "AI: Interaction - Blood Bank",
+			AI_Interaction_BuyRound = "AI: Interaction - Buy Round",
+			AI_Interaction_DeportationCenter = "AI: Interaction - Deportation Center",
+			AI_Interaction_Extortable = "AI: Interaction - Extortable",
+			AI_Interaction_Heal = "AI: Interaction - Heal",
+			AI_Interaction_Hotel = "AI: Interaction - Hotel",
+			AI_Interaction_Identify = "AI: Interaction - Identify",
+			AI_Interaction_InfluenceElection = "AI: Interaction - Influence Election",
+			AI_Interaction_OfferMotivation = "AI: Interaction - Offer Motivation",
+			AI_Interaction_PlayBadSong = "AI: Interaction - Song Request",
+			AI_Interaction_SellSlaves = "AI: Interaction - Sell Slaves",
+			AI_Interaction_UseBloodBag = "AI: Interaction - Use Blood Bag",
+		#endregion
+		#region Relationships
 			AI_Relationships_Aggressive = "AI: Relationships - Aggressive", // Hostile to character except with Cool with Cannibals
+			AI_Relationships_AnnoyedAtSuspicious = "AI: Relationships - Annoyed at Suspicious",
+			AI_Relationships_Faction1Aligned = "AI: Relationships - Faction 1 Aligned",
+			AI_Relationships_Faction1Hostile = "AI: Relationships - Faction 1 Hostile",
+			AI_Relationships_Faction2Aligned = "AI: Relationships - Faction 2 Aligned",
+			AI_Relationships_Faction2Hostile = "AI: Relationships - Faction 2 Hostile",
+			AI_Relationships_Faction3Aligned = "AI: Relationships - Faction 3 Aligned",
+			AI_Relationships_Faction3Hostile = "AI: Relationships - Faction 3 Hostile",
+			AI_Relationships_Faction4Aligned = "AI: Relationships - Faction 4 Aligned",
+			AI_Relationships_Faction4Hostile = "AI: Relationships - Faction 4 Hostile",
 			AI_Relationships_HostileToCannibals = "AI: Relationships - Hostile to Cannibals", // Analogue in BM: Cannibal Killer
 			AI_Relationships_HostileToSoldiers = "AI: Relationships - Hostile to Soldiers", // Analogue in BM: Army of Negative One
 			AI_Relationships_HostileToVampires = "AI: Relationships - Hostile to Vampires", // Analogue in BM: Vampire Vanquisher
 			AI_Relationships_HostileToWerewolves = "AI: Relationships - Hostile to Werewolves", // Analogue in BM: Werewolf Wrecker
-
-			// Roam Behavior
-			AI_RoamBehavior_HideInBush = "AI: Roam Behavior - Hide In Bush",
-			AI_RoamBehavior_HideInManhole = "AI: Roam Behavior - Hide In Manhole",
-			AI_RoamBehavior_Clean = "AI: Roam Behavior - Clean",
-			AI_RoamBehavior_Cannibalize = "AI: Roam Behavior - Cannibalize", // May require bite ability?
-			AI_RoamBehavior_DrinkBlood = "AI: Roam Behavior - Drink Blood",
-			AI_RoamBehavior_EnforceLaws = "AI: Roam Behavior - Enforce Laws",
-			AI_RoamBehavior_GrabDrugs = "AI: Roam Behavior - Grab Drugs",
-			AI_RoamBehavior_GrabMoney = "AI: Roam Behavior - Grab Money",
-			AI_RoamBehavior_Pickpocket = "AI: Roam Behavior - Pickpocket", // Requires Sticky Gloves?
-			AI_RoamBehavior_Shakedown = "AI: Roam Behavior - Shakedown",
-
-			// Trait Trigger
+		#endregion
+		#region Spawn
+			AI_Spawn_BodyguardedGoons = "AI: Spawn - Bodyguarded by Goons",
+			AI_Spawn_BodyguardedSupercops = "AI: Spawn - Bodyguarded by Supercops",
+			AI_Spawn_BodyguardedSupergoons = "AI: Spawn - Bodyguarded by Supergoons",
+			AI_Spawn_Enslaved = "AI: Spawn - Enslaved",
+			AI_Spawn_HideInBush = "AI: Spawn - Hide In Bush",
+			AI_Spawn_HideInManhole = "AI: Spawn - Hide In Manhole",
+			AI_Spawn_RoamingGang = "AI: Spawn - Roaming Gangs", // 
+			AI_Spawn_SlaveOwner = "AI: Spawn - Own Slaves",
+		#endregion
+		#region Trait Trigger
 			AI_TraitTrigger_CommonFolk = "AI: Trait Trigger - Common Folk",
 			AI_TraitTrigger_CoolCannibal = "AI: Trait Trigger - Cool Cannibal",
 			AI_TraitTrigger_CopAccess = "AI: Trait Trigger - Cop Access",
 			AI_TraitTrigger_HonorableThief = "AI: Trait Trigger - Honorable Thief",
-
-			// Vendor
+		#endregion
+		#region Vendor
 			AI_Vendor_Armorer = "AI: Vendor - Armorer",
             AI_Vendor_Assassin = "AI: Vendor - Assassin",
             AI_Vendor_Banana = "AI: Vendor - Banana",
@@ -177,13 +192,18 @@ namespace CCU
             AI_Vendor_UpperCruster = "AI: Vendor - Upper Cruster",
             AI_Vendor_Vampire = "AI: Vendor - Vampire",
             AI_Vendor_Villain = "AI: Vendor - Villain",
-
-            Appearance_FacialHair_Beard = "Appearance: Facial Hair - Beard",
+		#endregion
+		#endregion
+		#region Appearance
+		#region Facial Hair
+			Appearance_FacialHair_Beard = "Appearance: Facial Hair - Beard",
             Appearance_FacialHair_Mustache = "Appearance: Facial Hair - Mustache",
             Appearance_FacialHair_MustacheCircus = "Appearance: Facial Hair - MustacheCircus",
             Appearance_FacialHair_MustacheRedneck = "Appearance: Facial Hair - MustacheRedneck",
             Appearance_FacialHair_None = "Appearance: Facial Hair - None",
-            Appearance_HairColor_Brown = "Appearance: Hair Color - Brown",
+		#endregion
+		#region Hair Color
+			Appearance_HairColor_Brown = "Appearance: Hair Color - Brown",
             Appearance_HairColor_Black = "Appearance: Hair Color - Black",
             Appearance_HairColor_Blonde = "Appearance: Hair Color - Blonde",
             Appearance_HairColor_Blue = "Appearance: Hair Color - Blue",
@@ -193,7 +213,9 @@ namespace CCU
             Appearance_HairColor_Pink = "Appearance: Hair Color - Pink",
             Appearance_HairColor_Purple = "Appearance: Hair Color - Purple",
             Appearance_HairColor_Red = "Appearance: Hair Color - Red",
-            Appearance_Hairstyle_Afro = "Appearance: Hair Style - Afro",
+		#endregion
+		#region Hairstyle
+			Appearance_Hairstyle_Afro = "Appearance: Hair Style - Afro",
             Appearance_Hairstyle_Bald = "Appearance: Hair Style - Bald",
             Appearance_Hairstyle_Balding = "Appearance: Hair Style - Balding", 
             Appearance_Hairstyle_BangsLong = "Appearance: Hair Style - BangsLong",
@@ -217,7 +239,9 @@ namespace CCU
             Appearance_Hairstyle_SpikyShort = "Appearance: Hair Style - SpikyShort",
             Appearance_Hairstyle_Suave = "Appearance: Hair Style - Suave",
             Appearance_Hairstyle_Wave = "Appearance: Hair Style - Wave",
-            Appearance_SkinColor_SuperPaleSkin = "Appearance: Skin Color - SuperPaleSkin",
+		#endregion
+		#region Skin Color
+			Appearance_SkinColor_SuperPaleSkin = "Appearance: Skin Color - SuperPaleSkin",
             Appearance_SkinColor_PaleSkin = "Appearance: Skin Color - PaleSkin",
             Appearance_SkinColor_WhiteSkin = "Appearance: Skin Color - WhiteSkin",
             Appearance_SkinColor_PinkSkin = "Appearance: Skin Color - PinkSkin",
@@ -227,27 +251,28 @@ namespace CCU
             Appearance_SkinColor_BlackSkin = "Appearance: Skin Color - BlackSkin",
             Appearance_SkinColor_ZombieSkin1 = "Appearance: Skin Color - ZombieSkin1",
             Appearance_SkinColor_ZombieSkin2 = "Appearance: Skin Color - ZombieSkin2",
-            Chunk_KeyHolder = "Key Holder",
-            Chunk_SafeComboHolder = "Safe Combo Holder",
-            Faction_1_Aligned = "Faction 1 Aligned",
-            Faction_1_Hostile = "Faction 1 Hostile",
-            Faction_2_Aligned = "Faction 2 Aligned",
-            Faction_2_Hostile = "Faction 2 Hostile",
-            Faction_3_Aligned = "Faction 3 Aligned",
-            Faction_3_Hostile = "Faction 3 Hostile",
-            Faction_4_Aligned = "Faction 4 Aligned",
-            Faction_4_Hostile = "Faction 4 Hostile",
-            Loadout_Shapeshifter = "Loadout: Shapeshifter",
+		#endregion
+		#endregion
+		#region Loadout
+			Loadout_Shapeshifter = "Loadout: Shapeshifter",
             Loadout_Soldier = "Loadout: Soldier",
             Loadout_Thief = "Loadout: Thief",
             Loadout_Worker = "Loadout: Worker",
-            MapMarker_Bartender = "Map Marker: Bartender",
+		#endregion
+		#region Misc
+			Chunk_KeyHolder = "Key Holder",
+			Chunk_QuestGiver = "Quest Giver",
+			Chunk_SafeComboHolder = "Safe Combo Holder",
+		#endregion
+		#region Map Marker
+			MapMarker_Bartender = "Map Marker: Bartender",
             MapMarker_DrugDealer = "Map Marker: DrugDealer",
             MapMarker_Face = "Map Marker: Face",
             MapMarker_KillerRobot = "Map Marker: KillerRobot",
             MapMarker_QuestionMark = "Map Marker: QuestionMark",
             MapMarker_Shopkeeper = "Map Marker: Shopkeeper";
-    }
+		#endregion
+	}
 
 	public static class vItem // Vanilla Items
 	{

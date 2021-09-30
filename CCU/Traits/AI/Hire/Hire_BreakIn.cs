@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.AI.Hire
 {
-    public class Hire_Thief : CustomTrait
+    public class Hire_BreakIn : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_Thief>()
+            RogueLibs.CreateCustomTrait<Hire_BreakIn>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to break into windows or doors.",
@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Hire_Thief,
+                    [LanguageCode.English] = CTrait.AI_Hire_BreakIn,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

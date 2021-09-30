@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.RoamBehavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_RoamBehavior_Pickpocket,
+                    [LanguageCode.English] = CTrait.AI_Behavior_Pickpocket,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
