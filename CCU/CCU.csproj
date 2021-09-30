@@ -106,6 +106,8 @@
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Traits\AI\Behavior\Behavior_GrabDrugs.cs" />
+    <Compile Include="Traits\AI\Behavior\Behavior_GrabMoney.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CommonFolk.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CoolCannibal.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CopAccess.cs" />
@@ -165,7 +167,6 @@
     <Compile Include="Traits\Behavior.cs" />
     <Compile Include="Traits\AI\Hire\Hire_BreakIn.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_HonorableThief.cs" />
-    <Compile Include="Traits\AI\RoamBehavior\RoamBehavior_Pickpocket.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Thief.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Beard.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Mustache.cs" />

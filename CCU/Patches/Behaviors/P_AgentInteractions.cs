@@ -2140,12 +2140,15 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
 		private static void DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance)
 		{
+			Core.LogMethodCall();
+
 			if (Behavior.HasTraitFromList(agent, Behavior.InteractionTraits))
 			{
 				// agent.SayDialogue("InteractB"); // No custom dialogue
 				agent.gc.audioHandler.Play(agent, "AgentTalk");
 
 				Type vendorTrait = Behavior.GetOnlyTraitFromList(agent, Behavior.VendorTypes);
+
 				logger.LogDebug("hasSpecialAbilityDatabase: " + agent.hasSpecialInvDatabase);
 
 				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase)

@@ -1,7 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.AI;
 using CCU.Traits.AI.Hire;
-using CCU.Traits.AI.RoamBehavior;
+using CCU.Traits.AI.Behavior;
 using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.AI.Vendor;
 using RogueLibsCore;
@@ -21,7 +21,6 @@ namespace CCU.Traits
 		public static List<Type> BehaviorTraits = new List<Type>()
 		{
 			typeof(Hire_BreakIn),
-			typeof(RoamBehavior_Pickpocket),
 			typeof(TraitTrigger_HonorableThief),
 			typeof(Vendor_Thief),
 		};
@@ -33,11 +32,6 @@ namespace CCU.Traits
 		{
 			typeof(Hire_BreakIn),
 			typeof(Vendor_Thief),
-		};
-		public static List<Type> NoninteractionTraits = new List<Type>()
-		{
-			typeof(RoamBehavior_Pickpocket),
-			typeof(TraitTrigger_HonorableThief),
 		};
 		public static List<Type> VendorTypes = new List<Type>()
 		{
@@ -87,7 +81,7 @@ namespace CCU.Traits
 			typeof(Vendor_Vampire),
 			typeof(Vendor_Villain),
 		};
-		
+
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
 		{
 			Core.LogMethodCall();

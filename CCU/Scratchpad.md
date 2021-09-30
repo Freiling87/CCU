@@ -46,6 +46,8 @@ Test transpiler method, simply replace if it doesn't work. Use transpilers later
 
 # Implementation
 
+TODO: Move any behaviors linked to special abilities (Bite, Cannibalize, Sticky Glove) to link to the special ability
+
 ## Traits
 
 - CCP limit adjustment for CCU Traits

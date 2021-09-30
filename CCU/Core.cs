@@ -68,8 +68,6 @@ namespace CCU
 			AI_Behavior_Coward = "AI: Behavior - Coward",
 			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",
 			AI_Behavior_Guilty = "AI: Behavior - Guilty",
-			AI_Behavior_Cannibalize = "AI: Behavior - Cannibalize", // May require bite ability?
-			AI_Behavior_DrinkBlood = "AI: Behavior - Drink Blood",
 			AI_Behavior_EnforceLaws = "AI: Behavior - Enforce Laws",
 			AI_Behavior_EnforceLawsCopBot = "AI: Behavior - Enforce Laws Cop Bot",
 			AI_Behavior_EnforceLawsSupercop = "AI: Behavior - Enforce Laws Supercop", // Might be identical to Cop
@@ -79,12 +77,11 @@ namespace CCU
 			AI_Behavior_HogTurntables = "AI: Behavior - Turntables Guard",
 			AI_Behavior_Lockdown = "AI: Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
 			AI_Behavior_Pacifist = "AI: Behavior - Pacifist",
-			AI_Behavior_Pickpocket = "AI: Behavior - Pickpocket", // Requires Sticky Gloves?
 			AI_Behavior_Scumbag = "AI: Behavior - Scumbag",
 			AI_Behavior_SeekAndDestroy = "AI: Behavior - Seek & Destroy", // Killer Robot
-			AI_Behavior_Shakedown = "AI: Behavior - Shakedown",
+			// AI_Behavior_Shakedown = "AI: Behavior - Shakedown", // Gate behind Mugger trait
 			AI_Behavior_Tattletale = "AI: Behavior - Tattle-tale",
-			AI_Behavior_UseDrugsInCombat = "AI: Behavior - Use Drugs",
+			AI_Behavior_UseDrugsInCombat = "AI: Behavior - Use Drugs", // Gate behind Drug-A-Lug?
 			AI_Behavior_VisionBeams = "AI: Behavior - Vision Beams",
 		#endregion
 		#region Hire
@@ -575,5 +572,33 @@ namespace CCU
 				Crowbar,
 				Wrench,
 		};
+	}
+
+	public static class vSpecialAbility // Vanilla Special Abilities
+	{
+		public const string
+				Bite = "Bite",
+				Camouflage = "Camouflage",
+				Cannibalize = "Cannibalize",
+				Chaaarge = "Chaaarge!",
+				ChloroformHankie = "Chloroform Hankie",
+				CryProfusely = "Cry Profusely",
+				Enslave = "Enslave",
+				Handcuffs = "Handcuffs",
+				Joke = "Joke",
+				Laptop = "Laptop",
+				LaserGun = "Laser Gun",
+				MechTransformation = "Mech Transformation",
+				MindControl = "Mind Control",
+				Possess = "Possess",
+				PowerSap = "Power Sap",
+				PrimalLunge = "Primal Lunge",
+				SharpLunge = "Sharp Lunge",
+				StickyGlove = "Sticky Glove",
+				Stomp = "Stomp",
+				Toss = "Toss",
+				WaterCannon = "Water Cannon",
+				WerewolfTransformation = "Werewolf Transformation",
+				ZombieSpit = "Zombie Spit";
 	}
 }

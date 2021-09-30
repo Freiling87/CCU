@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.RoamBehavior
+namespace CCU.Traits.AI.Behavior
 {
-    public class RoamBehavior_Pickpocket : CustomTrait
+    public class Behavior_GrabMoney : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<RoamBehavior_Pickpocket>()
+            RogueLibs.CreateCustomTrait<Behavior_GrabMoney>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will pick pockets if set to wander the city.\n\n<color=green>{0}</color> = Will not pickpocket from player if they have Honor Among Thieves", CTrait.AI_TraitTrigger_HonorableThief),
+                    [LanguageCode.English] = String.Format("This character will grab money if they see it."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_Pickpocket,
+                    [LanguageCode.English] = CTrait.AI_Behavior_GrabMoney,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
