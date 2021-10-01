@@ -387,6 +387,22 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, "WindowCutter", 3);
 			sel.CreateRandomElement(rList, "BodySwapper", 3);
 
+			rList = sel.CreateRandomList(CTrait.AI_Vendor_ThiefMaster, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.QuickEscapeTeleporter, 3);
+			sel.CreateRandomElement(rList, vItem.SkeletonKey, 2);
+			sel.CreateRandomElement(rList, vItem.SafeCrackingTool, 2);
+			sel.CreateRandomElement(rList, vItem.TranquilizerGun, 2);
+			sel.CreateRandomElement(rList, vItem.WallBypasser, 3);
+			sel.CreateRandomElement(rList, vItem.WindowCutter, 3);
+
+			sel.CreateRandomElement(rList, "Crowbar", 3);
+			sel.CreateRandomElement(rList, "Lockpick", 3);
+			sel.CreateRandomElement(rList, "SafeBuster", 3);
+			sel.CreateRandomElement(rList, "CardboardBox", 3);
+			sel.CreateRandomElement(rList, "WallBypasser", 3);
+			sel.CreateRandomElement(rList, "WindowCutter", 3);
+			sel.CreateRandomElement(rList, "BodySwapper", 3);
+
 			rList = sel.CreateRandomList(CTrait.AI_Vendor_ThrowceryStore, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BananaPeel, 3);
 			sel.CreateRandomElement(rList, vItem.KillerThrower, 2);

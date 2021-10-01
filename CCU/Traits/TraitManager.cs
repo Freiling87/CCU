@@ -72,6 +72,7 @@ namespace CCU.Traits
 			typeof(Vendor_SportingGoods),
 			typeof(Vendor_Teleportationist),
 			typeof(Vendor_Thief),
+			typeof(Vendor_ThiefMaster),
 			typeof(Vendor_ThrowceryStore),
 			typeof(Vendor_ToyStore),
 			typeof(Vendor_UpperCruster),

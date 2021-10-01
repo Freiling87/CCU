@@ -91,9 +91,9 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Trait Trigger Trait				|Effect	|
 |:----------------------------------|:------|
 |Common Folk						|- NPC will be Loyal to those with Friend of the Common Folk
-|Cool Cannibal						|- NPC will no longer be Hostile if you have Cool With Cannibals
-|Cop Access							|- NPC will not sell to the player unless they have The Law
-|Honorable Thief					|- NPC will not Pickpocket the player if they have Honor Among Thieves<br>- If NPC is a Thief Vendor, player needs Honor Among Thieves to buy from them
+|Cool Cannibal						|- If NPC has Aggressive trait, will no longer be Hostile if you have Cool With Cannibals
+|Cop Access							|- If NPC has any Vendor trait, will not sell to the player unless they have The Law
+|Honorable Thief					|- If NPC has Sticky Glove, will not Pickpocket the player if they have Honor Among Thieves<br>- If NPC has any Vendor trait, will not sell to the player unless they have Honor Among Thieves
 
 ## Vendor Traits *
 
@@ -143,6 +143,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Sporting Goods						|Just Goods, no Bads
 |Teleportationist					|If it teleports, we sell-aports! (We're working on the slogan)
 |Thief								|Vanilla Thief shop inventory
+|Thief Master						|Advanced intrusion tools
 |Throwcery Store					|Thrown items & killer thrower
 |Toy Store							|Harmless stuff that you probably wouldn't have any use for
 |Upper Cruster						|Vanilla Upper Cruster store inventory

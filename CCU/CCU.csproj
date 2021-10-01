@@ -156,6 +156,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Teleportationist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_HardwareStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_OutdoorOutfitter.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_ThiefMaster.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ThrowceryStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ToyStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_UpperCruster.cs" />
@@ -194,6 +195,7 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
     <Folder Include="Traits\Appearance\SkinColor\" />

@@ -102,7 +102,6 @@ namespace CCU
 			AI_Interaction_ArenaManager = "AI: Interaction - Arena Manager",
 			AI_Interaction_BankTeller = "AI: Interaction - Bank Teller",
 			AI_Interaction_BloodBank = "AI: Interaction - Blood Bank",
-			AI_Interaction_VendorBuyer = "AI: Interaction - Vendor Buyer",
 			AI_Interaction_BuyRound = "AI: Interaction - Buy Round",
 			AI_Interaction_DeportationCenter = "AI: Interaction - Deportation Center",
 			AI_Interaction_Extortable = "AI: Interaction - Extortable",
@@ -118,6 +117,8 @@ namespace CCU
 			AI_Interaction_RepairMelee = "AI: Interaction - Repair Melee Weapons",
 			AI_Interaction_SellSlaves = "AI: Interaction - Sell Slaves",
 			AI_Interaction_UseBloodBag = "AI: Interaction - Use Blood Bag",
+			AI_Interaction_VendorBuyer = "AI: Interaction - Vendor Buyer",
+			AI_Interaction_VendorBuyerOnly = "AI: Interaction - Vendor Buyer Only", // Use with Vendor type to make them a buyer only
 		#endregion
 		#region Relationships
 			AI_Relationships_Aggressive = "AI: Relationships - Aggressive", // Hostile to character except with Cool with Cannibals
@@ -142,7 +143,7 @@ namespace CCU
 			AI_Spawn_Enslaved = "AI: Spawn - Enslaved",
 			AI_Spawn_HideInBush = "AI: Spawn - Hide In Bush",
 			AI_Spawn_HideInManhole = "AI: Spawn - Hide In Manhole",
-			AI_Spawn_RoamingGang = "AI: Spawn - Roaming Gangs", // 
+			AI_Spawn_RoamingGang = "AI: Spawn - Roaming Gangs",
 			AI_Spawn_SlaveOwner = "AI: Spawn - Own Slaves",
 		#endregion
 		#region Trait Trigger
@@ -196,6 +197,7 @@ namespace CCU
             AI_Vendor_SportingGoods = "AI: Vendor - Sporting Goods",
             AI_Vendor_Teleportationist = "AI: Vendor - Teleportationist",
             AI_Vendor_Thief = "AI: Vendor - Thief",
+			AI_Vendor_ThiefMaster = "AI: Vendor - Thief Master",
 			AI_Vendor_ThrowceryStore = "AI: Vendor - Throwcery Store",
 			AI_Vendor_ToyStore = "AI: Vendor - Toy Store",
             AI_Vendor_UpperCruster = "AI: Vendor - Upper Cruster",
@@ -204,6 +206,23 @@ namespace CCU
 		#endregion
 		#endregion
 		#region Appearance
+		#region Accessory
+			Appearance_Accessory_CopHat = "Appearance: Accessory - Cop Hat",
+			Appearance_Accessory_DoctorHeadlamp = "Appearance: Accessory - Doctor Headlamp",
+			Appearance_Accessory_Fedora = "Appearance: Accessory - Fedora",
+			Appearance_Accessory_FireHelmet = "Appearance: Accessory - Fire Helmet",
+			Appearance_Accessory_HackerGlasses = "Appearance: Accessory - Hacker Glasses",
+			Appearance_Accessory_HatBlue = "Appearance: Accessory - Hat (Blue)",
+			Appearance_Accessory_HatRed = "Appearance: Accessory - Hat (Red)",
+			Appearance_Accessory_Headphones = "Appearance: Accessory - Headphones",
+			Appearance_Accessory_None = "Appearance: Accessory - None",
+			Appearance_Accessory_Sunglasses = "Appearance: Accessory - Sunglasses",
+			Appearance_Accessory_SupercopHat = "Appearance: Accessory - Supercop Hat",
+			Appearance_Accessory_ThiefHat = "Appearance: Accessory - Thief Hat",
+		#endregion
+		#region Eyes
+
+		#endregion
 		#region Facial Hair
 			Appearance_FacialHair_Beard = "Appearance: Facial Hair - Beard",
             Appearance_FacialHair_Mustache = "Appearance: Facial Hair - Mustache",
@@ -224,30 +243,38 @@ namespace CCU
             Appearance_HairColor_Red = "Appearance: Hair Color - Red",
 		#endregion
 		#region Hairstyle
-			Appearance_Hairstyle_Afro = "Appearance: Hair Style - Afro",
-            Appearance_Hairstyle_Bald = "Appearance: Hair Style - Bald",
-            Appearance_Hairstyle_Balding = "Appearance: Hair Style - Balding", 
-            Appearance_Hairstyle_BangsLong = "Appearance: Hair Style - BangsLong",
-            Appearance_Hairstyle_BangsMedium = "Appearance: Hair Style - BangsMedium",
-            Appearance_Hairstyle_Curtains = "Appearance: Hair Style - Curtains",
-            Appearance_Hairstyle_Cutoff = "Appearance: Hair Style - Cutoff",
-            Appearance_Hairstyle_FlatLong = "Appearance: Hair Style - FlatLong",
-            Appearance_Hairstyle_Leia = "Appearance: Hair Style - Leia",
-            Appearance_Hairstyle_HoboBeard = "Appearance: Hair Style - HoboBeard",
-            Appearance_Hairstyle_MessyLong = "Appearance: Hair Style - MessyLong",
-            Appearance_Hairstyle_Military = "Appearance: Hair Style - Military",
-            Appearance_Hairstyle_Mohawk = "Appearance: Hair Style - Mohawk",
-            Appearance_Hairstyle_Normal = "Appearance: Hair Style - Normal",
-            Appearance_Hairstyle_NormalHigh = "Appearance: Hair Style - NormalHigh",
-            Appearance_Hairstyle_Pompadour = "Appearance: Hair Style - Pompadour",
-            Appearance_Hairstyle_Ponytail = "Appearance: Hair Style - Ponytail",
-            Appearance_Hairstyle_PuffyLong = "Appearance: Hair Style - PuffyLong",
-            Appearance_Hairstyle_PuffyShort = "Appearance: Hair Style - PuffyShort",
-            Appearance_Hairstyle_Sidewinder = "Appearance: Hair Style - Sidewinder",
-            Appearance_Hairstyle_Spiky = "Appearance: Hair Style - Spiky",
-            Appearance_Hairstyle_SpikyShort = "Appearance: Hair Style - SpikyShort",
-            Appearance_Hairstyle_Suave = "Appearance: Hair Style - Suave",
-            Appearance_Hairstyle_Wave = "Appearance: Hair Style - Wave",
+			Appearance_Hairstyle_Afro = "Appearance: Hairstyle - Afro",
+			Appearance_Hairstyle_AlienHead = "Appearance: Hairstyle - Alien Head",
+			Appearance_Hairstyle_AssassinMask = "Appearance: Hairstyle - Assassin Mask",
+            Appearance_Hairstyle_Bald = "Appearance: Hairstyle - Bald",
+            Appearance_Hairstyle_Balding = "Appearance: Hairstyle - Balding", 
+            Appearance_Hairstyle_BangsLong = "Appearance: Hairstyle - BangsLong",
+            Appearance_Hairstyle_BangsMedium = "Appearance: Hairstyle - BangsMedium",
+			Appearance_Hairstyle_ButlerBotHead = "Appearance: Hairstyle - Butler Bot Head",
+            Appearance_Hairstyle_Curtains = "Appearance: Hairstyle - Curtains",
+            Appearance_Hairstyle_Cutoff = "Appearance: Hairstyle - Cutoff",
+            Appearance_Hairstyle_FlatLong = "Appearance: Hairstyle - FlatLong",
+			Appearance_Hairstyle_GorillaHead = "Appearance: Hairstyle - Gorilla Head",
+			Appearance_Hairstyle_HoboBeard = "Appearance: Hairstyle - HoboBeard",
+			Appearance_Hairstyle_Hoodie = "Appearance: Hairstyle - Hoodie",
+			Appearance_Hairstyle_Leia = "Appearance: Hairstyle - Leia",
+            Appearance_Hairstyle_MessyLong = "Appearance: Hairstyle - MessyLong",
+            Appearance_Hairstyle_Military = "Appearance: Hairstyle - Military",
+            Appearance_Hairstyle_Mohawk = "Appearance: Hairstyle - Mohawk",
+            Appearance_Hairstyle_Normal = "Appearance: Hairstyle - Normal",
+            Appearance_Hairstyle_NormalHigh = "Appearance: Hairstyle - NormalHigh",
+            Appearance_Hairstyle_Pompadour = "Appearance: Hairstyle - Pompadour",
+            Appearance_Hairstyle_Ponytail = "Appearance: Hairstyle - Ponytail",
+            Appearance_Hairstyle_PuffyLong = "Appearance: Hairstyle - PuffyLong",
+            Appearance_Hairstyle_PuffyShort = "Appearance: Hairstyle - PuffyShort",
+			Appearance_Hairstyle_RobotHead = "Appearance: Hairstyle - Robot Head",
+            Appearance_Hairstyle_Sidewinder = "Appearance: Hairstyle - Sidewinder",
+			Appearance_Hairstyle_SlavemasterMask = "Appearance: Hairstyle - Slavemaster Mask",
+            Appearance_Hairstyle_Spiky = "Appearance: Hairstyle - Spiky",
+            Appearance_Hairstyle_SpikyShort = "Appearance: Hairstyle - SpikyShort",
+            Appearance_Hairstyle_Suave = "Appearance: Hairstyle - Suave",
+            Appearance_Hairstyle_Wave = "Appearance: Hairstyle - Wave",
+			Appearance_Hairstyle_WerewolfHead = "Appearance: Hairstyle - Werewolf Head",
 		#endregion
 		#region Skin Color
 			Appearance_SkinColor_SuperPaleSkin = "Appearance: Skin Color - SuperPaleSkin",
