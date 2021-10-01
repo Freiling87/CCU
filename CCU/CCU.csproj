@@ -164,7 +164,7 @@
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Traits\Behavior.cs" />
+    <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\AI\Hire\Hire_BreakIn.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_HonorableThief.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Thief.cs" />

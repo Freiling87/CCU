@@ -2142,12 +2142,12 @@ namespace CCU.Patches.Behaviors
 		{
 			Core.LogMethodCall();
 
-			if (Behavior.HasTraitFromList(agent, Behavior.InteractionTraits))
+			if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
 			{
 				// agent.SayDialogue("InteractB"); // No custom dialogue
 				agent.gc.audioHandler.Play(agent, "AgentTalk");
 
-				Type vendorTrait = Behavior.GetOnlyTraitFromList(agent, Behavior.VendorTypes);
+				Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypes);
 
 				logger.LogDebug("hasSpecialAbilityDatabase: " + agent.hasSpecialInvDatabase);
 
@@ -2170,7 +2170,7 @@ namespace CCU.Patches.Behaviors
 				}
 
 				// All Hire Traits
-				if (Behavior.HasTraitFromList(agent, Behavior.HireTraits))
+				if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits))
 				{
 					if (agent.employer == null)
 					{

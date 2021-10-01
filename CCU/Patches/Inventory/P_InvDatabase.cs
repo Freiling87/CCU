@@ -20,9 +20,9 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance)
 		{
-			if (__instance.CompareTag("Agent") && Behavior.HasTraitFromList(__instance.agent, Behavior.VendorTypes))
+			if (__instance.CompareTag("Agent") && TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypes))
 			{
-				string rName = Behavior.GetOnlyTraitFromList(__instance.agent, Behavior.VendorTypes).Name;
+				string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypes).Name;
 				string text = "";
 
 				int num = 0;

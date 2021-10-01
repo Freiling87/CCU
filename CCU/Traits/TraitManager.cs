@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits
 {
-	public static class Behavior
+	public static class TraitManager
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -93,7 +93,7 @@ namespace CCU.Traits
 				string displayText = unlock.GetName();
 				logger.LogDebug(displayText);
 
-				if (agent.HasTrait<Trait>())
+				if (agent.HasTrait(trait))
 				{
 					logger.LogDebug("Found match: " + displayText);
 
@@ -108,8 +108,19 @@ namespace CCU.Traits
 			Core.LogMethodCall();
 
 			foreach (Type trait in traitList)
-				if (agent.HasTrait<Trait>())
+			{
+				TraitInfo info = TraitInfo.Get(trait);
+				TraitUnlock unlock = RogueLibs.GetUnlock<TraitUnlock>(info.Name);
+				string displayText = unlock.GetName();
+				logger.LogDebug(displayText);
+
+				if (agent.HasTrait(trait))
+				{
+					logger.LogDebug("Found match: " + displayText);
+
 					return trait;
+				}
+			}
 
 			return null;
 		}
