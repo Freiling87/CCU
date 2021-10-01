@@ -1,22 +1,27 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.Vendor
+namespace CCU.Traits.AI.Hire
 {
-    public class Interaction_Buyer : CustomTrait
+    public class Hire_Bodyguard : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_Buyer>()
+            RogueLibs.CreateCustomTrait<Hire_Bodyguard>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires</color>: Any Vendor trait"),
+                    [LanguageCode.English] = "This character can be hired but doesn't have any special skills.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Interaction_VendorBuyer,
+                    [LanguageCode.English] = CTrait.AI_Hire_Bodyguard,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

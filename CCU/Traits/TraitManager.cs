@@ -24,8 +24,12 @@ namespace CCU.Traits
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
+			typeof(Hire_Bodyguard),
 			typeof(Hire_BreakIn),
-			typeof(Vendor_Thief),
+			typeof(Hire_CauseRuckus),
+			typeof(Hire_Hack),
+			typeof(Hire_Safecrack),
+			typeof(Hire_Tamper),
 		};
 		public static List<Type> VendorTypes = new List<Type>()
 		{

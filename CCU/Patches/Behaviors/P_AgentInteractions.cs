@@ -2142,7 +2142,7 @@ namespace CCU.Patches.Behaviors
 		{
 			Core.LogMethodCall();
 
-			if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
+			if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes))
 			{
 				// agent.SayDialogue("InteractB"); // No custom dialogue
 				agent.gc.audioHandler.Play(agent, "AgentTalk");
@@ -2151,14 +2151,16 @@ namespace CCU.Patches.Behaviors
 
 				logger.LogDebug("hasSpecialAbilityDatabase: " + agent.hasSpecialInvDatabase);
 
-				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase)
+				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase) // All Vendor Traits
 				{
 					bool canBuy = true;
 
-					if (agent.HasTrait<TraitTrigger_CopAccess>() && (vendorTrait == typeof(Vendor_Contraband) || vendorTrait == typeof(Vendor_CopStandard) || vendorTrait == typeof(Vendor_CopSWAT)))
+					if (agent.HasTrait<TraitTrigger_CopAccess>())
 						canBuy = interactingAgent.HasTrait("TheLaw");
-					if (agent.HasTrait<TraitTrigger_HonorableThief>() && vendorTrait == typeof(Vendor_Thief))
+					if (agent.HasTrait<TraitTrigger_HonorableThief>())
 						canBuy = interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2");
+					if (agent.HasTrait<TraitTrigger_CoolCannibal>())
+						canBuy = interactingAgent.statusEffects.hasTrait("CannibalsNeutral");
 
 					if (canBuy)
 					{
@@ -2172,18 +2174,31 @@ namespace CCU.Patches.Behaviors
 				// All Hire Traits
 				if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits))
 				{
-					if (agent.employer == null)
+					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 					{
-						if (agent.HasTrait<Hire_BreakIn>())
-						{
-							if (agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
-							{
-								if (interactingAgent.inventory.HasItem("HiringVoucher"))
-									__instance.AddButton("AssistMe", 6666);
+						if (interactingAgent.inventory.HasItem("HiringVoucher"))
+							__instance.AddButton("AssistMe", 6666);
 
-								__instance.AddButton("AssistMe", agent.determineMoneyCost("ThiefAssist"));
-							}
-						}
+						bool bananaCost = agent.HasTrait<Hire_CostBanana>();
+
+						float hireCostFactor = 1.0f;
+						if (agent.HasTrait<Hire_CostMore>())
+							hireCostFactor = 1.5f;
+						else if (agent.HasTrait<Hire_CostLess>())
+							hireCostFactor = 0.5f;
+
+						if (agent.HasTrait<Hire_Bodyguard>())
+							__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire") * hireCostFactor));
+						if (agent.HasTrait<Hire_BreakIn>())
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor));
+						if (agent.HasTrait<Hire_CauseRuckus>())
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("HoboAssist") * hireCostFactor));
+						if (agent.HasTrait<Hire_Hack>())
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("HackerAssist") * hireCostFactor));
+						if (agent.HasTrait<Hire_Safecrack>())
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SafecrackAssist") * hireCostFactor));
+						if (agent.HasTrait<Hire_Tamper>())
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("WorkerAssist") * hireCostFactor));
 					}
 					else if (!agent.oma.cantDoMoreTasks)
 					{

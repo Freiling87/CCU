@@ -88,11 +88,11 @@ namespace CCU
 			AI_Hire_CostBanana = "AI: Hire - Costs Banana",
 			AI_Hire_CostLess = "AI: Hire - Costs Less",
 			AI_Hire_CostMore = "AI: Hire - Costs More",
+			AI_Hire_Bodyguard = "AI: Hire - Bodyguard",
 			AI_Hire_BreakIn = "AI: Hire - Thief",
-			AI_Hire_CauseARuckus = "AI: Hire - Slum Dweller",
-			AI_Hire_Generic = "AI: Hire - Generic", // Verify if Soldier/Gangbanger/etc. are indeed identical
+			AI_Hire_CauseRuckus = "AI: Hire - Slum Dweller",
 			AI_Hire_Hack = "AI: Hire - Hacker",
-			AI_Hire_Safecrack = "AI: Hire - Safecrack",
+			AI_Hire_Safecrack = "AI: Hire - Safecrack", // Also need to extend vanilla thief behavior to this
 			AI_Hire_Tamper = "AI: Hire - Tamper",
 		#endregion
 		#region Interaction 
