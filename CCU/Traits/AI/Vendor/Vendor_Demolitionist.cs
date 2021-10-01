@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Demolitionist,
+                    [LanguageCode.English] = CTrait.AI_Vendor_DemolitionDepot,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

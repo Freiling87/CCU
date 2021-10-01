@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.AI.Vendor
 {
-    public class Vendor_Scientist : CustomTrait
+    public class Interaction_Buyer : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Scientist>()
+            RogueLibs.CreateCustomTrait<Interaction_Buyer>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells chemicals and experimental tools."),
+                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires</color>: Any Vendor trait"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_ResearchMaterials,
+                    [LanguageCode.English] = CTrait.AI_Interaction_VendorBuyer,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

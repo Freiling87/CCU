@@ -18,12 +18,6 @@ namespace CCU.Traits
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static List<Type> BehaviorTraits = new List<Type>()
-		{
-			typeof(Hire_BreakIn),
-			typeof(TraitTrigger_HonorableThief),
-			typeof(Vendor_Thief),
-		};
 		public static List<Type> HireTraits = new List<Type>()
 		{
 			typeof(Hire_BreakIn),
@@ -43,7 +37,6 @@ namespace CCU.Traits
 			typeof(Vendor_BartenderDive),
 			typeof(Vendor_BartenderFancy),
 			typeof(Vendor_Blacksmith),
-			// typeof(Vendor_Buyer), // Exclude
 			typeof(Vendor_Cannibal),
 			typeof(Vendor_ConsumerElectronics),
 			typeof(Vendor_Contraband),
@@ -52,9 +45,11 @@ namespace CCU.Traits
 			typeof(Vendor_Demolitionist),
 			typeof(Vendor_DrugDealer),
 			typeof(Vendor_Firefighter),
+			typeof(Vendor_FireSale),
 			typeof(Vendor_Gunsmith),
 			typeof(Vendor_HardwareStore),
 			typeof(Vendor_HighTech),
+			typeof(Vendor_HomeFortressOutlet),
 			typeof(Vendor_Hypnotist),
 			typeof(Vendor_JunkDealer),
 			typeof(Vendor_McFuds),
@@ -64,6 +59,7 @@ namespace CCU.Traits
 			typeof(Vendor_MovieTheater),
 			typeof(Vendor_Occultist),
 			typeof(Vendor_OutdoorOutfitter),
+			typeof(Vendor_PacifistProvisioner),
 			typeof(Vendor_PawnShop),
 			typeof(Vendor_PestControl),
 			typeof(Vendor_Pharmacy),
@@ -76,6 +72,7 @@ namespace CCU.Traits
 			typeof(Vendor_SportingGoods),
 			typeof(Vendor_Teleportationist),
 			typeof(Vendor_Thief),
+			typeof(Vendor_ThrowceryStore),
 			typeof(Vendor_ToyStore),
 			typeof(Vendor_UpperCruster),
 			typeof(Vendor_Vampire),

@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Cannibal,
+                    [LanguageCode.English] = CTrait.AI_Vendor_Anthropophagie,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

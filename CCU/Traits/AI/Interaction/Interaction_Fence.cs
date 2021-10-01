@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.AI.Vendor
 {
-    public class Vendor_Buyer : CustomTrait
+    public class Interaction_Fence : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vendor_Buyer>()
+            RogueLibs.CreateCustomTrait<Interaction_Fence>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell."),
+                    [LanguageCode.English] = String.Format("This character will buy items of any kind from the player, for a bad price."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Buyer,
+                    [LanguageCode.English] = CTrait.AI_Interaction_Fence,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

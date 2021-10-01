@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Barbarian,
+                    [LanguageCode.English] = CTrait.AI_Vendor_BarbarianMerchant,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

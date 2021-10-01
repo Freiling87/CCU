@@ -45,82 +45,22 @@ There are traits for each variation within the following groups:
 - Hair Style
 - Skin Color
 
-You can add as many as you want to a custom character. When you do so:
-- **Player Characters** will not be affected by appearance traits. 
-- **NPCs** generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
+You can add as many as you want to a custom character. When you do so, NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
 
-## Behavior Traits *
+## Behavior Traits
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|AI: Bartender BuyRound
-|AI: Bartender Vendor
-|AI: Bouncer Bribeable
-|AI: Bouncer GuardDoor
-|AI: ButlerBot Clean
-|AI: Cannibal Cannibalize
-|AI: Cannibal AmbushBush
-|AI: Cannibal AmbushManhole
-|AI: Cannibal HostileToSoldiers
-|AI: Clerk Bank
-|AI: Clerk BloodBank
-|AI: Clerk DeportationCenter
-|AI: Clerk Hotel
-|AI: Clerk MovieTheater
-|AI: Cop AcceptBribe
-|AI: Cop EnforceLaws
-|AI: Cop Lockdown
-|AI: CopBot Enforcelaws
-|AI: CopBot VisionBeams
-|AI: Doctor AdministerBloodBag
-|AI: Doctor Heal
-|AI: Doctor UseBloodBag
-|AI: DrugDealer UseDrugs
-|AI: DrugDealer Vendor
-|AI: Firefighter FightFire
-|AI: Gangbanger SpawnRoamingGangs
-|AI: Gorilla Hire
-|AI: Gorilla Vendor
-|AI: Hacker Hack
-|AI: Jock ArenaManager
-|AI: KillerRobot Chase
-|AI: Mayor Bodyguarded SuperCop
-|AI: Mobster InfluenceElection
-|AI: Mobster Shakedown
-|AI: Musician Bodyguarded Goon
-|AI: Musician Bodyguarded Supergoon
-|AI: Musician Turntables
-|AI: OfficeDrone OfferMotivation
-|AI: Scientist Identify
-|AI: Shapeshifter Possess
-|AI: Shopkeeper Vendor
-|AI: Soldier HostileToCannibals
-|AI: Soldier MallVendor
-|AI: Slave Enslaved
-|AI: Slavemaster SellSlaves
-|AI: Slavemaster OwnSlaves
-|AI: SlumDweller CauseRuckus
-|AI: SlumDweller CommonFolk
-|AI: SlumDweller GrabMoney
-|AI: Supercop EnforceLaws
-|AI: Thief AmbushManhole // Only honors Honor Among Thieves if AI trait is selected
-|AI: Thief Hire
-|AI: Thief HonorAmongThieves 
-|AI: Thief Pickpocket // Only honors Honor Among Thieves if AI trait is selected
-|AI: Thief Vendor // Only requires Honor Among Thieves if the AI trait is selected
-|AI: UpperCruster Bodyguarded
-|AI: UpperCruster OwnSlave
-|AI: UpperCruster Tattle
-|AI: Vampire Bite
-|AI: Vampire HostileToWerewolves
-|AI: Various AnnoyedAtSuspicious
-|AI: Various Coward
-|AI: Various Extortable
-|AI: Various Hireable
-|AI: Various Guilty
-|AI: Various Scumbag
+|Grab Drugs											|- If NPC sees Drugs, they'll try to grab them
+|Grab Money											|- If NPC sees Money, they'll try to grab it
 
-## Faction Traits
+## Hire Traits 
+
+|Trait												|Effect	|
+|:--------------------------------------------------|:------|
+|AI: Hire - Break In								|- NPC can be hired to break into a Door or Window
+
+## Relationship Traits
 
 |Trait								|Effect													|
 |:----------------------------------|:------------------------------------------------------|
@@ -137,6 +77,77 @@ You can add as many as you want to a custom character. When you do so:
 - Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
   - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
   - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
+
+## Special Ability Behaviors
+
+|Special Ability					|Effect	|
+|:----------------------------------|:------|
+|Bite								|- NPC will Drink Blood like Vampire
+|Cannibalize						|- NPC will Cannibalize like Cannibal
+|Sticky Glove						|- NPC will Pickpocket like Thief
+
+## Trait Trigger Traits
+
+|Trait Trigger Trait				|Effect	|
+|:----------------------------------|:------|
+|Common Folk						|- NPC will be Loyal to those with Friend of the Common Folk
+|Cool Cannibal						|- NPC will no longer be Hostile if you have Cool With Cannibals
+|Cop Access							|- NPC will not sell to the player unless they have The Law
+|Honorable Thief					|- NPC will not Pickpocket the player if they have Honor Among Thieves<br>- If NPC is a Thief Vendor, player needs Honor Among Thieves to buy from them
+
+## Vendor Traits *
+
+|Vendor Trait						|Inventory	|
+|:----------------------------------|:----------|
+|Anthropophagie						|Alcohol, Axes & Bear Traps
+|Armorer							|Armor, Durability Spray
+|Assassin							|Weaponry & Stealth tools
+|Banana Boutique					|Bananas & Peels
+|Barbarian Merchant					|Beer, Meat & Tools for Conquest
+|Bartender							|Vanilla Bartender shop inventory
+|Bartender (Dive)					|Inventory for seedier joints
+|Bartender (Fancy)					|Inventory for upscale establishments
+|Blacksmith							|Melee Weapons & Durability Spray
+|Consumer Electronics				|Appliances & Electronics for the modern idiot
+|Contraband							|Stuff confiscated from the City's Ne'er-do-wells<br>If Vendor has Cop Access trait, player will need The Law to buy from this Vendor
+|Convenience Store					|Beer, Smokes, and the last place your dad said he'd be before he left
+|Cop (Standard)						|Standard Patrolman's gear<br>If Vendor has Cop Access trait, player will need The Law to buy from this Vendor
+|Cop (SWAT)							|Doorkicker's gear<br>If Vendor has Cop Access trait, player will need The Law to buy from this Vendor
+|Demolition Depot					|Explosives
+|Drug Dealer						|Vanilla Drug Dealer shop inventory
+|Firefighter Five-and-Dime			|Firefighting & EMT equipment
+|Fire Sale							|Arsonist's tools
+|Gunsmith							|Guns, Mods & Ammo
+|Hardware Store						|Tools & safety equipment
+|High Tech							|High tech shit
+|Home Fortress Outlet				|Traps
+|Hypnotist							|Make people like you with this shit!
+|Junk Dealer						|Trash, used toilet paper (Resistance Vouchers), and occasionally a gem
+|McFud's							|Home of the Slopper!
+|Medical Supplier					|Medicine, scalpels, syringes
+|Mining Gear						|Safety Equipment, tools & explosives
+|Monke Mart							|Stuff for monke, gorgia, you name it
+|Movie Theater						|Vanilla Movie Theater inventory
+|Occultist							|Supernatural, ritualistic & spooky shit
+|Outdoor Outfitter					|Outdoor & Survival goods
+|Pacifist Provisioner				|Tools to avoid unnecessary casualties
+|Pawn Shop							|A mixed bag of stuff you'd find in a Pawn Shop
+|Pest Control						|Tools to help get rid of pesky vermin
+|Pharmacy							|Mostly medicine
+|Research Materials					|Weird guns & scientist stuff
+|Resistance Commissary				|Escape teleporter & Vouchers
+|Riot, Inc.							|All the ingredients in the Anarchist's Cookbook
+|Shopkeeper							|Vanilla Shopkeeper shop inventory
+|Slave Shop							|Tools for acquiring human merchandise
+|Soldier							|Vanilla Soldier shop inventory
+|Sporting Goods						|Just Goods, no Bads
+|Teleportationist					|If it teleports, we sell-aports! (We're working on the slogan)
+|Thief								|Vanilla Thief shop inventory
+|Throwcery Store					|Thrown items & killer thrower
+|Toy Store							|Harmless stuff that you probably wouldn't have any use for
+|Upper Cruster						|Vanilla Upper Cruster store inventory
+|Vampire							|Bloodsucker's supply
+|Villain							|For when you're not concerned about collateral damage
 
 ## Steam Workshop Upload *
 

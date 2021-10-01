@@ -118,7 +118,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_BartenderDive.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_BartenderFancy.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Blacksmith.cs" />
-    <Compile Include="Traits\AI\Vendor\Vendor_Buyer.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_Buyer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Cannibal.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConsumerElectronics.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConvenienceStore.cs" />
@@ -128,9 +128,12 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Demolitionist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_DrugDealer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Banana.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_Fence.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Firefighter.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_FireSale.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Gunsmith.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_HighTech.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_HomeFortressOutlet.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Hypnotist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_JunkDealer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_McFuds.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_MonkeMart.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_MovieTheater.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Occultist.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_PacifistProvisioner.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_PawnShop.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Pharmacy.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ResistanceCommissary.cs" />
@@ -152,6 +156,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Teleportationist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_HardwareStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_OutdoorOutfitter.cs" />
+    <Compile Include="Traits\AI\Vendor\Vendor_ThrowceryStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ToyStore.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_UpperCruster.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Vampire.cs" />
