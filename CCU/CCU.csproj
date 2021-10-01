@@ -100,12 +100,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCUNames.cs" />
     <Compile Include="Patches\Behaviors\P_Agent.cs" />
     <Compile Include="Patches\Behaviors\P_AgentInteractions.cs" />
     <Compile Include="Patches\Behaviors\P_BrainUpdate.cs" />
+    <Compile Include="Patches\Behaviors\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
     <Compile Include="Traits\AI\Behavior\Behavior_GrabDrugs.cs" />
     <Compile Include="Traits\AI\Behavior\Behavior_GrabMoney.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Bodyguard.cs" />

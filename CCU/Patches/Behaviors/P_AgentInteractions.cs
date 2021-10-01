@@ -2138,19 +2138,25 @@ namespace CCU.Patches.Behaviors
 		//}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
-		private static void DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance)
+		private static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance)
 		{
 			Core.LogMethodCall();
 
-			if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes))
+			if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits) || TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes))
 			{
 				// agent.SayDialogue("InteractB"); // No custom dialogue
 				agent.gc.audioHandler.Play(agent, "AgentTalk");
-
+				logger.LogDebug("hasSpecialInvDatabase: " + agent.hasSpecialInvDatabase);
 				Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypes);
 
-				logger.LogDebug("hasSpecialAbilityDatabase: " + agent.hasSpecialInvDatabase);
+				if (agent.HasTrait<Interaction_Moochable>() && interactingAgent.statusEffects.hasTrait("CanBorrowMoney"))
+					__instance.AddButton("BorrowMoney");
 
+				// TODO: Verify if Vendor is compatible with Hireable. If not, separate them.
+
+				// Interaction 
+
+				// Vendor 
 				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase) // All Vendor Traits
 				{
 					bool canBuy = true;
@@ -2171,7 +2177,7 @@ namespace CCU.Patches.Behaviors
 					}
 				}
 
-				// All Hire Traits
+				// Hire 
 				if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits))
 				{
 					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
@@ -2196,25 +2202,60 @@ namespace CCU.Patches.Behaviors
 						if (agent.HasTrait<Hire_Hack>())
 							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("HackerAssist") * hireCostFactor));
 						if (agent.HasTrait<Hire_Safecrack>())
-							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SafecrackAssist") * hireCostFactor));
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor)); // All pricing is identical anyway
 						if (agent.HasTrait<Hire_Tamper>())
-							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("WorkerAssist") * hireCostFactor));
+							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor)); // All pricing is identical anyway
 					}
 					else if (!agent.oma.cantDoMoreTasks)
 					{
 						if (agent.HasTrait<Hire_BreakIn>())
 							__instance.AddButton("LockpickDoor");
+						if (agent.HasTrait<Hire_CauseRuckus>())
+							__instance.AddButton("CauseRuckus");
+						if (agent.HasTrait<Hire_Hack>())
+							__instance.AddButton("HackSomething");
+						if (agent.HasTrait<Hire_Safecrack>())
+							__instance.AddButton("HireSafecrack");
+						if (agent.HasTrait<Hire_Tamper>())
+							__instance.AddButton("HireTamper");
 					}
 				}
 			}
+
+			return true;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName:nameof(AgentInteractions.PressedButton), argumentTypes:new[] { typeof(Agent), typeof(Agent), typeof(string), typeof(int) })]
 		public static bool PressedButton_Prefix(Agent agent, Agent interactingAgent, string buttonText, int buttonPrice, AgentInteractions __instance)
 		{
-			/* Don't need this one yet - not adding any custom button names. 
-			 * But if or when you do, you can do a simple prefix rather than a replacement, as there is no starting "legwork" in the original method.
+			/* ToDo:
+			 * 
+			 * Add custom names for nameDB.GetName(namehere, "Interface");
+			 * 
+			 * Prefix InvInterface.ShowTarget2
+			 * Prefix InvInterface.TargetAnywhere
+			 * Prefix PFOInteractions.TargetObject
 			 */
+
+
+			if (buttonText == "HireSafecrack")
+			{
+				__instance.interactor = interactingAgent;
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "HireSafecrackTarget");
+				agent.StopInteraction();
+
+				return false;
+			}
+			else if (buttonText == "HireTamper")
+			{
+				__instance.interactor = interactingAgent;
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "HireTamperTarget");
+				agent.StopInteraction();
+
+				return false;
+			}
 
 			return true;
 		}

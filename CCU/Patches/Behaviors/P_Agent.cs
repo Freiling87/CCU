@@ -28,8 +28,7 @@ namespace CCU.Patches.Behaviors
 			if ((__instance.specialAbility == vSpecialAbility.StickyGlove && GC.percentChance(50)) ||
 				__instance.specialAbility == vSpecialAbility.Bite ||
 				__instance.specialAbility == vSpecialAbility.Cannibalize ||
-				__instance.HasTrait<Behavior_GrabMoney>() ||
-				__instance.HasTrait<Behavior_GrabDrugs>())
+				TraitManager.HasTraitFromList(__instance, TraitManager.LOSTraits))
 				__instance.losCheckAtIntervals = true;
 		}
 	}
