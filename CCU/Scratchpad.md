@@ -1,20 +1,8 @@
-﻿# Test Notes / Bugfixing
+﻿# Run error logs
 
-# Initial Load
+Vendor traits are getting a nullref  but not sure how deep
 
-[Info   :  CCU_Core] Awake: Method Call
-[Error  :RogueLibsCore] System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
-  at System.Text.StringBuilder.AppendFormatHelper (System.IFormatProvider provider, System.String format, System.ParamsArray args) [0x000ff] in <44afb4564e9347cf99a1865351ea8f4a>:0
-  at System.String.FormatHelper (System.IFormatProvider provider, System.String format, System.ParamsArray args) [0x00023] in <44afb4564e9347cf99a1865351ea8f4a>:0
-  at System.String.Format (System.String format, System.Object arg0) [0x00008] in <44afb4564e9347cf99a1865351ea8f4a>:0
-  at CCU.Traits.AI.Thief_Pickpocket.Setup () [0x00006] in <f615a5d8460c4c3cabe21c07fa476ebe>:0
-  at (wrapper managed-to-native) System.Reflection.MonoMethod.InternalInvoke(System.Reflection.MonoMethod,object,object[],System.Exception&)
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00032] in <44afb4564e9347cf99a1865351ea8f4a>:0
-   --- End of inner exception stack trace ---
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0004b] in <44afb4564e9347cf99a1865351ea8f4a>:0
-  at System.Reflection.MethodBase.Invoke (System.Object obj, System.Object[] parameters) [0x00000] in <44afb4564e9347cf99a1865351ea8f4a>:0
-  at RogueLibsCore.RogueLibs.LoadFromAssembly () [0x000ef] in <83ac4c56ae974fd1ab7e1062800cad5c>:0
-
+# Notes / Bugfixing
 
 ## Chunk Editor Shortcuts
 

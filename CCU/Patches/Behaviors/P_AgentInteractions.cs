@@ -2138,17 +2138,19 @@ namespace CCU.Patches.Behaviors
 		//}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
-		private static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance)
+		private static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance, List<string> ___buttons)
 		{
 			Core.LogMethodCall();
 
 			if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits) || TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes))
 			{
+				int checkpoint = 0;
+
 				// agent.SayDialogue("InteractB"); // No custom dialogue
 				agent.gc.audioHandler.Play(agent, "AgentTalk");
 				logger.LogDebug("hasSpecialInvDatabase: " + agent.hasSpecialInvDatabase);
 				Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypes);
-
+				
 				if (agent.HasTrait<Interaction_Moochable>() && interactingAgent.statusEffects.hasTrait("CanBorrowMoney"))
 					__instance.AddButton("BorrowMoney");
 
@@ -2156,9 +2158,17 @@ namespace CCU.Patches.Behaviors
 
 				// Interaction 
 
+				if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
+				{
+					Core.LogCheckpoint("Interaction");
+
+				}
+
 				// Vendor 
 				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase) // All Vendor Traits
 				{
+					Core.LogCheckpoint("Vendor");
+
 					bool canBuy = true;
 
 					if (agent.HasTrait<TraitTrigger_CopAccess>())
@@ -2180,12 +2190,20 @@ namespace CCU.Patches.Behaviors
 				// Hire 
 				if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits))
 				{
+					Core.LogCheckpoint("Hire");
+
 					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 					{
+						Core.LogCheckpoint("Hire Initial");
+
 						if (interactingAgent.inventory.HasItem("HiringVoucher"))
 							__instance.AddButton("AssistMe", 6666);
 
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						bool bananaCost = agent.HasTrait<Hire_CostBanana>();
+
+						Core.LogCheckpoint(checkpoint++.ToString());
 
 						float hireCostFactor = 1.0f;
 						if (agent.HasTrait<Hire_CostMore>())
@@ -2193,21 +2211,42 @@ namespace CCU.Patches.Behaviors
 						else if (agent.HasTrait<Hire_CostLess>())
 							hireCostFactor = 0.5f;
 
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						if (agent.HasTrait<Hire_Bodyguard>())
-							__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire") * hireCostFactor));
+							__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire") * hireCostFactor)); // NullRefException
+
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						if (agent.HasTrait<Hire_BreakIn>())
 							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor));
+
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						if (agent.HasTrait<Hire_CauseRuckus>())
 							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("HoboAssist") * hireCostFactor));
+
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						if (agent.HasTrait<Hire_Hack>())
 							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("HackerAssist") * hireCostFactor));
+
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						if (agent.HasTrait<Hire_Safecrack>())
 							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor)); // All pricing is identical anyway
+
+						Core.LogCheckpoint(checkpoint++.ToString());
+
 						if (agent.HasTrait<Hire_Tamper>())
 							__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor)); // All pricing is identical anyway
+
+						Core.LogCheckpoint(checkpoint++.ToString());
 					}
 					else if (!agent.oma.cantDoMoreTasks)
 					{
+						Core.LogCheckpoint("Hire Order");
+
 						if (agent.HasTrait<Hire_BreakIn>())
 							__instance.AddButton("LockpickDoor");
 						if (agent.HasTrait<Hire_CauseRuckus>())
@@ -2220,6 +2259,10 @@ namespace CCU.Patches.Behaviors
 							__instance.AddButton("HireTamper");
 					}
 				}
+
+				logger.LogDebug("Count: " + ___buttons.Count);
+
+				return false;
 			}
 
 			return true;

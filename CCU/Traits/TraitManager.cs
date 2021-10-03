@@ -18,7 +18,7 @@ namespace CCU.Traits
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static List<Type> HireTraits = new List<Type>()
+		public static List<Type> HireTraits = new List<Type>() // Excludes cost modification traits
 		{
 			typeof(Hire_Bodyguard),
 			typeof(Hire_BreakIn),
@@ -27,9 +27,11 @@ namespace CCU.Traits
 			typeof(Hire_Safecrack),
 			typeof(Hire_Tamper),
 		};
-		public static List<Type> InteractionTraits = new List<Type>()
+		public static List<Type> InteractionTraits = new List<Type>() // Technically Vendors are a subtype of this so treat accordingly
 		{
 			typeof(Interaction_Fence),
+			typeof(Interaction_Moochable),
+			typeof(Interaction_VendorBuyer), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LOSTraits = new List<Type>()
 		{
@@ -112,6 +114,9 @@ namespace CCU.Traits
 		}
 		public static Type GetOnlyTraitFromList(Agent agent, List<Type> traitList)
 		{
+			if (traitList.Count() == 0)
+				return null;
+
 			Core.LogMethodCall();
 
 			foreach (Type trait in traitList)

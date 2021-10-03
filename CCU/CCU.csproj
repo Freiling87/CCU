@@ -119,6 +119,7 @@
     <Compile Include="Traits\AI\Hire\Hire_Hack.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Safecrack.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Tamper.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_Moochable.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CommonFolk.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CoolCannibal.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CopAccess.cs" />

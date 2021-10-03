@@ -59,7 +59,7 @@ namespace CCU
         }
     }
 
-    public static class CTrait
+    public static class CTrait 
 	{
         public const string
 		#region AI
@@ -86,7 +86,7 @@ namespace CCU
 		#endregion
 		#region Hire
 			AI_Hire_Bodyguard = "AI: Hire - Bodyguard",
-			AI_Hire_BreakIn = "AI: Hire - Thief",
+			AI_Hire_BreakIn = "AI: Hire - Break-in",
 			AI_Hire_CauseRuckus = "AI: Hire - Slum Dweller",
 			AI_Hire_CostBanana = "AI: Hire - Costs Banana",
 			AI_Hire_CostLess = "AI: Hire - Costs Less",
@@ -110,6 +110,7 @@ namespace CCU
 			AI_Interaction_Hotel = "AI: Interaction - Hotel",
 			AI_Interaction_Identify = "AI: Interaction - Identify",
 			AI_Interaction_InfluenceElection = "AI: Interaction - Influence Election",
+			AI_Interaction_Moochable = "AI: Interaction - Moochable",
 			AI_Interaction_OfferMotivation = "AI: Interaction - Offer Motivation",
 			AI_Interaction_PlayBadSong = "AI: Interaction - Song Request",
 			AI_Interaction_RefillGuns = "AI: Interaction - Refill Guns",
@@ -183,7 +184,7 @@ namespace CCU
 			AI_Vendor_MonkeMart = "AI: Vendor - Monke Mart",
 			AI_Vendor_MovieTheater = "AI: Vendor - Movie Theater",
             AI_Vendor_Occultist = "AI: Vendor - Occultist",
-            AI_Vendor_OutdoorOutfitter = "AI: Vendor - Trapper Supply",
+            AI_Vendor_OutdoorOutfitter = "AI: Vendor - Outdoor Outfitter",
 			AI_Vendor_PacifistProvisioner = "AI: Vendor - Pacifist Provisioner",
             AI_Vendor_PawnShop = "AI: Vendor - Pawn Shop",
             AI_Vendor_PestControl = "AI: Vendor - Pest Control",
