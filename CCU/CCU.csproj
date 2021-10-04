@@ -195,14 +195,14 @@
     <Compile Include="Traits\Appearance\FacialHair\MustacheCircus.cs" />
     <Compile Include="Traits\Appearance\FacialHair\MustacheRedneck.cs" />
     <Compile Include="Traits\Appearance\FacialHair\NoFacialHair.cs" />
-    <Compile Include="Traits\Factions\Faction_1_Aligned.cs" />
-    <Compile Include="Traits\Factions\Faction_1_Hostile.cs" />
-    <Compile Include="Traits\Factions\Faction_2_Aligned.cs" />
-    <Compile Include="Traits\Factions\Faction_2_Hostile.cs" />
-    <Compile Include="Traits\Factions\Faction_3_Aligned.cs" />
-    <Compile Include="Traits\Factions\Faction_3_Hostile.cs" />
-    <Compile Include="Traits\Factions\Faction_4_Aligned.cs" />
-    <Compile Include="Traits\Factions\Faction_4_Hostile.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_1_Aligned.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_1_Hostile.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_2_Aligned.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_2_Hostile.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_3_Aligned.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_3_Hostile.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_4_Aligned.cs" />
+    <Compile Include="Traits\AI\Relationships\Faction_4_Hostile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using BepInEx.Logging;
 using System.Reflection;
 
-namespace CCU.Patches
+namespace CCU.Patches.Interface
 {
 	[HarmonyPatch(declaringType: typeof(LevelEditor))]
 	public static class P_LevelEditor

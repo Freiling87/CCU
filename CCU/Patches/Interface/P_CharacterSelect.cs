@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CCU.Patches
+namespace CCU.Patches.Interface
 {
 	[HarmonyPatch(declaringType: typeof(CharacterSelect))]
 	public static class P_CharacterSelect

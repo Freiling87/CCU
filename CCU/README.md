@@ -35,7 +35,7 @@ The Player Edition allows players to play your content, while hiding it from vie
 
 # Custom NPC Utilities
 
-All CCU traits will not count toward the Trait Limit, since they do not affect player characters. *
+All CCU traits will not count toward the Trait Limit, since they do not affect player characters.
 
 ## Appearance Traits * 
 
@@ -51,14 +51,33 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Drink Blood										|- Enables blood drinking behavior<br>- Requires: Bite
+|Eat Corpse											|- Enables corpse eating behavior<br>- Requires: Cannibalize
 |Grab Drugs											|- If NPC sees Drugs, they'll try to grab them
 |Grab Money											|- If NPC sees Money, they'll try to grab it
+|Pickpocket											|- Enables pickpocketing behavior<br>- Requires: Sticky Glove
 
 ## Hire Traits 
 
 |Trait												|Effect	|
 |:--------------------------------------------------|:------|
-|AI: Hire - Break In								|- NPC can be hired to break into a Door or Window
+|Bodyguard											|- Hire as protection
+|Break In											|- Break into target Door or Window
+|Cause Ruckus										|- Cause a Ruckus
+|Cost Banana										|- Any Hire trait costs a Banana instead of Money
+|Cost Less											|- Hire cost decreased by 50%
+|Cost More											|- Hire cost increased by 50%
+|Hack												|- Hack target Object or Agent
+|Safecrack											|- Break into target Safe
+|Tamper												|- Tamper with target Object
+
+## Interaction Traits
+
+|Trait								|Effect	|
+|:----------------------------------|:------|
+|Fence								|- Agent will buy any items for a bad price
+|Moochable							|- Agent can be targeted with Moocher
+|Vendor Buyer						|- If Agent has a Vendor trait, they will also buy items from that item pool
 
 ## Relationship Traits
 
@@ -77,14 +96,6 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 - Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
   - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
   - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
-
-## Special Ability Behaviors
-
-|Special Ability					|Effect	|
-|:----------------------------------|:------|
-|Bite								|- NPC will Drink Blood like Vampire
-|Cannibalize						|- NPC will Cannibalize like Cannibal
-|Sticky Glove						|- NPC will Pickpocket like Thief
 
 ## Trait Trigger Traits
 

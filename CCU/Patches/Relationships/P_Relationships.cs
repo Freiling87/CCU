@@ -4,7 +4,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using CCU.Traits.Factions;
 
-namespace CCU.Patches
+namespace CCU.Patches.AgentRelationships
 {
     [HarmonyPatch(declaringType: typeof(Relationships))]
     public static class P_Relationships

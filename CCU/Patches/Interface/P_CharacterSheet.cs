@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 
-namespace CCU.Patches
+namespace CCU.Patches.Interface
 {
 	[HarmonyPatch(declaringType: typeof(CharacterSheet))]
 	public static class P_CharacterSheet

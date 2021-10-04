@@ -8,7 +8,7 @@ using CCU.Traits.AI;
 using CCU.Traits.AI.Behavior;
 using CCU.Traits.AI.TraitTrigger;
 
-namespace CCU.Patches
+namespace CCU.Patches.Behaviors
 {
     [HarmonyPatch(declaringType: typeof(BrainUpdate))]
     public class P_BrainUpdate
@@ -343,6 +343,8 @@ namespace CCU.Patches
 
 								if (___agent.losCheckAtIntervalsTime > 8 && GC.percentChance(50))
 								{
+									// TDOO: If this drags performance, refactor this section
+
 									if (___agent.agentName == "Hobo" || ___agent.HasTrait<Behavior_GrabMoney>()) // GrabMoney
 									{
 										___agent.losCheckAtIntervalsTime = 0;

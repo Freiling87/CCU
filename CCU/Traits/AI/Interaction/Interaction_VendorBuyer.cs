@@ -1,7 +1,7 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.AI.Vendor
+namespace CCU.Traits.AI.Interaction
 {
     public class Interaction_VendorBuyer : CustomTrait
     {

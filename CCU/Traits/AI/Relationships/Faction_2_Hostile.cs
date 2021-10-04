@@ -5,27 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace CCU.Traits.Factions
+namespace CCU.Traits.Relationships
 {
-    public class Faction_3_Hostile : CustomTrait
+    public class Faction_2_Hostile : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_3_Hostile>()
+            RogueLibs.CreateCustomTrait<Faction_2_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 3.",
+                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 2.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Relationships_Faction3Hostile,
+                    [LanguageCode.English] = CTrait.AI_Relationships_Faction2Hostile,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.AI_Relationships_Faction3Aligned },
+                    Cancellations = { CTrait.AI_Relationships_Faction2Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

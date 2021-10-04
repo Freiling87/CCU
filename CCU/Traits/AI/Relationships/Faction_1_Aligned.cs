@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace CCU.Traits.Factions
+namespace CCU.Traits.Relationships
 {
     public class Faction_1_Aligned : CustomTrait
     {

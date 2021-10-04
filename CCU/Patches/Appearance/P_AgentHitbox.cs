@@ -11,7 +11,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
 using CCU.Traits;
 
-namespace CCU.Patches
+namespace CCU.Patches.Appearance
 {
 	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
 	public static class P_AgentHitbox
