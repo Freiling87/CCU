@@ -15,8 +15,6 @@ namespace CCU.Patches.Inventory
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		// Postfix RemoveFromList & AddToList to increase/decrease CharacterCreation.traitLimit
-
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(CharacterCreation.AddToList), argumentTypes: new[] { typeof(string), typeof(string) })]
 		public static void AddToList_Postfix(string listType, string unlockName, CharacterCreation __instance)
 		{
@@ -27,8 +25,8 @@ namespace CCU.Patches.Inventory
 				__instance.traitLimit += 1;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(CharacterCreation.AddToList), argumentTypes: new[] { typeof(string), typeof(string) })]
-		public static void RemoveFromList(string listType, string unlockName, CharacterCreation __instance)
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(CharacterCreation.RemoveFromList), argumentTypes: new[] { typeof(string), typeof(string) })]
+		public static void RemoveFromList_Postfix(string listType, string unlockName, CharacterCreation __instance)
 		{
 			Core.LogMethodCall();
 			logger.LogDebug("\tlistType: " + listType + "\n\tunlockName: " + unlockName);
