@@ -34,11 +34,19 @@ ADD:
 
 ## Traits
 
-- CCP limit adjustment for CCU Traits
-	- CharacterCreation.traitCount in CreatePointTallyText();
-      - Maybe Postfix CharacterCreation.PressedButton to increase/decreate CharacterCreation.traitLimit
-	- Line 532, need to make a custom list of this.traitsChosen where they are not on CCU trait list
-    - 
+### Trait hiding
+
+#### Character Creation, Player Edition (CharacterCreation)
+
+Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
+
+#### Character Select (CharacterSelect)
+
+Attempted
+
+#### Character Sheet (CharacterSheet)
+
+Attempted
 
 ### Thief Hire
 
@@ -47,6 +55,8 @@ Worked for pickpocket
 
 ### Thief Pickpocket
 Stopped working when I switched it to StickyGlove check. 
+Double check this. If it needs a trait to work, then do that.
+Actually on second thought, switch it to the trait and just advise the special ability. This is more modular and allows more designer control - there might be some situation where they want the SA and not the behavior.
 
 ### Thief Vendor
 - Special Inv filling: 

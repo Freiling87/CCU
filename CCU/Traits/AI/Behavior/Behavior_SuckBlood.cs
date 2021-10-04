@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.TraitTrigger
+namespace CCU.Traits.AI.Behavior
 {
-    public class TraitTrigger_HonorableThief : CustomTrait
+    public class Behavior_SuckBlood : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_HonorableThief>()
+            RogueLibs.CreateCustomTrait<Behavior_SuckBlood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Honor Among Thieves trait.\n\n<color=green>{0}</color>: Will not pickpocket the player if they have Honor Among Thieves.\n\n<color=green>{1}</color>: Will not sell wares unless player has Honor Among Thieves.", CTrait.AI_Behavior_Pickpocket, CTrait.AI_Vendor_Thief),
+                    [LanguageCode.English] = String.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires</color>: {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_TraitTrigger_HonorableThief,
+                    [LanguageCode.English] = CTrait.AI_Behavior_SuckBlood,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

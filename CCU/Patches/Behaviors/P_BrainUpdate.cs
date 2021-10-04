@@ -341,10 +341,7 @@ namespace CCU.Patches
 							{
 								___agent.losCheckAtIntervalsTime++;
 
-								// losCheckAtIntervals currently makes these traits incompatible with each other.
-								// TODO: Refactor this so that GrabMoney & GrabDrugs can function alongside the SA types.
-
-								if (___agent.losCheckAtIntervalsTime > 8)
+								if (___agent.losCheckAtIntervalsTime > 8 && GC.percentChance(50))
 								{
 									if (___agent.agentName == "Hobo" || ___agent.HasTrait<Behavior_GrabMoney>()) // GrabMoney
 									{
@@ -366,12 +363,13 @@ namespace CCU.Patches
 													___agent.SetDefaultGoal("GoGet");
 													___agent.SetGoGettingTarget(item2);
 													___agent.stoleStuff = true;
-													break;
+													goto SkipAbilities;
 												}
 											}
 										}
 									}
-									else if (___agent.HasTrait<Behavior_GrabDrugs>()) // Grab Drugs
+									
+									if (___agent.HasTrait<Behavior_GrabDrugs>()) // Grab Drugs
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -392,12 +390,13 @@ namespace CCU.Patches
 													___agent.SetDefaultGoal("GoGet");
 													___agent.SetGoGettingTarget(item2);
 													___agent.stoleStuff = true;
-													break;
+													goto SkipAbilities;
 												}
 											}
 										}
 									}
-									else if (___agent.agentName == "Cannibal" || ___agent.specialAbility == vSpecialAbility.Cannibalize) // Cannibalize
+									
+									if (___agent.agentName == "Cannibal" || (___agent.specialAbility == vSpecialAbility.Cannibalize && ___agent.HasTrait<Behavior_EatCorpse>())) // Cannibalize
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -430,11 +429,8 @@ namespace CCU.Patches
 											}
 										}
 									}
-								}
 
-								if (___agent.losCheckAtIntervalsTime > 9)
-								{
-									if ((___agent.agentName == "Thief" || ___agent.specialAbility == vSpecialAbility.StickyGlove) && !__instance.thiefNoSteal) // Pickpocket
+									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>())) && !__instance.thiefNoSteal) // Pickpocket
 									{
 										logger.LogDebug("Pickpocket check Triggered");
 
@@ -447,7 +443,7 @@ namespace CCU.Patches
 												Agent agent6 = ___agent.losCheckAtIntervalsList[num5];
 												Relationship relationship = ___agent.relationships.GetRelationship(agent6);
 												bool honorFlag = 
-													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<TraitTrigger_HonorableThief>())) && 
+													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>() && ___agent.HasTrait<TraitTrigger_HonorableThief>())) && 
 													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")));
 
 												logger.LogDebug("HonorFlag: " + honorFlag);
@@ -465,7 +461,8 @@ namespace CCU.Patches
 											}
 										}
 									}
-									else if (___agent.agentName == "Vampire" || ___agent.specialAbility == vSpecialAbility.Bite) // Bite
+									
+									if (___agent.agentName == "Vampire" || (___agent.specialAbility == vSpecialAbility.Bite && ___agent.HasTrait<Behavior_SuckBlood>())) // Bite
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -494,6 +491,7 @@ namespace CCU.Patches
 										}
 									}
 
+									SkipAbilities:
 									___agent.losCheckAtIntervalsList.Clear();
 								}
 							}

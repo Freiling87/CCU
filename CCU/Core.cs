@@ -66,6 +66,7 @@ namespace CCU
 		#region Behavior
 			AI_Behavior_CleanTrash = "AI: Behavior - Clean Trash",
 			AI_Behavior_Coward = "AI: Behavior - Coward",
+			AI_Behavior_EatCorpse = "AI: Behavior - Eat Corpse",
 			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",
 			AI_Behavior_Guilty = "AI: Behavior - Guilty",
 			AI_Behavior_EnforceLaws = "AI: Behavior - Enforce Laws",
@@ -77,8 +78,10 @@ namespace CCU
 			AI_Behavior_HogTurntables = "AI: Behavior - Turntables Guard",
 			AI_Behavior_Lockdown = "AI: Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
 			AI_Behavior_Pacifist = "AI: Behavior - Pacifist",
+			AI_Behavior_Pickpocket = "AI: Behavior - Pickpocket",
 			AI_Behavior_Scumbag = "AI: Behavior - Scumbag",
 			AI_Behavior_SeekAndDestroy = "AI: Behavior - Seek & Destroy", // Killer Robot
+			AI_Behavior_SuckBlood = "AI: Behavior - Suck Blood",
 			// AI_Behavior_Shakedown = "AI: Behavior - Shakedown", // Gate behind Mugger trait
 			AI_Behavior_Tattletale = "AI: Behavior - Tattle-tale",
 			AI_Behavior_UseDrugsInCombat = "AI: Behavior - Use Drugs", // Gate behind Drug-A-Lug?
@@ -122,7 +125,7 @@ namespace CCU
 			AI_Interaction_VendorBuyerOnly = "AI: Interaction - Vendor Buyer Only", // Use with Vendor type to make them a buyer only
 		#endregion
 		#region Relationships
-			AI_Relationships_Aggressive = "AI: Relationships - Aggressive", // Hostile to character except with Cool with Cannibals
+			AI_Relationships_AggressiveCannibal = "AI: Relationships - Aggressive", // Hostile to character except with Cool with Cannibals
 			AI_Relationships_AnnoyedAtSuspicious = "AI: Relationships - Annoyed at Suspicious",
 			AI_Relationships_Faction1Aligned = "AI: Relationships - Faction 1 Aligned",
 			AI_Relationships_Faction1Hostile = "AI: Relationships - Faction 1 Hostile",
@@ -617,25 +620,25 @@ namespace CCU
 				Bite = "Bite",
 				Camouflage = "Camouflage",
 				Cannibalize = "Cannibalize",
-				Chaaarge = "Chaaarge!",
-				ChloroformHankie = "Chloroform Hankie",
-				CryProfusely = "Cry Profusely",
+				Chaaarge = "Charge",
+				ChloroformHankie = "ChloroformHankie",
+				CryProfusely = "TutorialAbility",
 				Enslave = "Enslave",
 				Handcuffs = "Handcuffs",
 				Joke = "Joke",
 				Laptop = "Laptop",
-				LaserGun = "Laser Gun",
-				MechTransformation = "Mech Transformation",
-				MindControl = "Mind Control",
+				LaserGun = "LaserGun",
+				MechTransformation = "MechTransform",
+				MindControl = "MindControl",
 				Possess = "Possess",
-				PowerSap = "Power Sap",
-				PrimalLunge = "Primal Lunge",
-				SharpLunge = "Sharp Lunge",
-				StickyGlove = "Sticky Glove",
+				PowerSap = "PowerSap",
+				PrimalLunge = "Lunge",
+				SharpLunge = "WerewolfLunge",
+				StickyGlove = "StealingGlove",
 				Stomp = "Stomp",
 				Toss = "Toss",
-				WaterCannon = "Water Cannon",
-				WerewolfTransformation = "Werewolf Transformation",
-				ZombieSpit = "Zombie Spit";
+				WaterCannon = "WaterCannon",
+				WerewolfTransformation = "WerewolfTransform",
+				ZombieSpit = "ZombieSpit";
 	}
 }

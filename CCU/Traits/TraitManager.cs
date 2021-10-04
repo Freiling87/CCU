@@ -56,8 +56,11 @@ namespace CCU.Traits
 		};
 		public static List<Type> LOSTraits = new List<Type>()
 		{
+			typeof(Behavior_EatCorpse),
 			typeof(Behavior_GrabDrugs),
-			typeof(Behavior_GrabMoney)
+			typeof(Behavior_GrabMoney),
+			typeof(Behavior_Pickpocket),
+			typeof(Behavior_SuckBlood),
 		};
 		public static List<Type> VendorTypes = new List<Type>()
 		{
