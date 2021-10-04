@@ -2,7 +2,7 @@
 using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
-using CCU.Traits.Factions;
+using CCU.Traits.Relationships;
 
 namespace CCU.Patches.AgentRelationships
 {

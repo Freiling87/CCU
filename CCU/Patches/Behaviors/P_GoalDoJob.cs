@@ -11,6 +11,17 @@ namespace CCU.Patches.Behaviors
 	[HarmonyPatch(declaringType: typeof(GoalDoJob))]
 	public static class P_GoalDoJob
 	{
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDoJob.Activate))]
+		public static void Activate_Postfix(GoalDoJob __instance)
+		{
+			if (__instance.curJob == "HireSafecrackTarget")
+			{
+				GoalSafecrackSafe subGoal2 = new GoalSafecrackSafe();
+				__instance.brain.AddSubgoal(__instance, subGoal2);
+				return;
+			}
+		}
+
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(GoalDoJob.Terminate))]
 		public static bool Terminate_Prefix (GoalDoJob __instance)
 		{

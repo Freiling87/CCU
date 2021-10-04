@@ -101,6 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
+    <Compile Include="Extensions\E_GoalDetails.cs" />
+    <Compile Include="GoalSafecrackSafe.cs" />
+    <Compile Include="GoalSafecrackSafeReal.cs" />
     <Compile Include="Patches\Behaviors\P_Agent.cs" />
     <Compile Include="Patches\Behaviors\P_AgentInteractions.cs" />
     <Compile Include="Patches\Behaviors\P_BrainUpdate.cs" />
