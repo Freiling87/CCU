@@ -64,6 +64,7 @@ namespace CCU.Patches
 				"/4\n"
 			});
 
+			#region ATTRIBUTES
 			if (___agent.statusEffects.hasTrait("RollerSkates") || ___agent.statusEffects.hasTrait("RollerSkates2"))
 			{
 				text2 = ___charText;
@@ -183,14 +184,15 @@ namespace CCU.Patches
 					"/4\n"
 				});
 			}
+			#endregion
 
 			if (___statusEffects.TraitList.Count != 0 || ___agent.inventory.equippedSpecialAbility != null)
 			{
+				#region STATUS EFFECTS
 				if (___statusEffects.StatusEffectList.Count != 0)
 				{
 					Text text3 = ___charText;
 					text3.text = text3.text + "\n<color=yellow>- " + GC.nameDB.GetName("StatusEffects", "Interface") + " - </color>\n";
-					// - STATUS EFFECTS -
 
 					foreach (StatusEffect statusEffect in ___statusEffects.StatusEffectList)
 					{
@@ -207,7 +209,8 @@ namespace CCU.Patches
 						});
 					}
 				}
-
+				#endregion
+				#region SPECIAL ABILITY
 				if (___agent.oma.superSpecialAbility && ___agent.agentName != "Custom")
 				{
 					string str = ___agent.agentName;
@@ -241,6 +244,7 @@ namespace CCU.Patches
 						"</color>\n"
 					});
 				}
+				#endregion
 
 				bool flag = false;
 
@@ -251,23 +255,26 @@ namespace CCU.Patches
 						break;
 					}
 
+				#region EXTRA TRAITS
 				if (flag)
 				{
 					Text text7 = ___charText;
 					text7.text = text7.text + "\n<color=yellow>- " + GC.nameDB.GetName("ExtraTraits", "Interface") + " - </color>\n";
-					// - EXTRA TRAITS -
 
 					foreach (Trait trait2 in ___statusEffects.TraitList)
 					{
-						bool originalTrait = false;
+						bool hidden = false;
 
 						if (!trait2.addedInGame)
-							originalTrait = true;
+							hidden = true;
 
 						if (___statusEffects.hasStatusEffect(trait2.traitName))
-							originalTrait = true;
+							hidden = true;
 
-						if (!originalTrait)
+						if (TraitManager.HiddenTraitNames.Contains(trait2.traitName)) // Remove Hidden Traits
+							hidden = true;
+
+						if (!hidden)
 						{
 							text2 = ___charText;
 
@@ -283,6 +290,7 @@ namespace CCU.Patches
 						}
 					}
 				}
+				#endregion
 
 				bool flag3 = false;
 
@@ -294,13 +302,13 @@ namespace CCU.Patches
 								flag3 = true;
 				}
 
+				#region STARTING TRAITS
 				if ((!___agent.possessing && !___agent.transforming) || flag3)
 				{
 					Text text8 = ___charText;
 					text8.text = text8.text + "\n<color=yellow>- " + GC.nameDB.GetName("StartingTraits", "Interface") + " - </color>\n";
-					// - STARTING TRAITS -
 
-					foreach (Trait trait3 in Appearance.OnlyAppearanceTraits(___statusEffects.TraitList)) // Filter out appearance traits
+					foreach (Trait trait3 in ___statusEffects.TraitList) 
 					{
 						bool traitHidden = false;
 
@@ -311,6 +319,9 @@ namespace CCU.Patches
 						}
 
 						if (___statusEffects.hasStatusEffect(trait3.traitName))
+							traitHidden = true;
+
+						if (TraitManager.HiddenTraitNames.Contains(trait3.traitName)) // Remove Hidden traits
 							traitHidden = true;
 
 						if (!traitHidden)
@@ -329,6 +340,7 @@ namespace CCU.Patches
 						}
 					}
 				}
+				#endregion
 			}
 
 			return false;

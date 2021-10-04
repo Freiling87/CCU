@@ -471,6 +471,7 @@ namespace CCU.Patches
 
 					if (__instance.dummyAgent.agentName == "Custom")
 						color2 = __instance.dummyAgent.agentHitboxScript.hairColor;
+
 					foreach (RandomElement randomElement2 in GC.rnd.randomListTableStatic["NotHairStyles"].elementList)
 					{
 						if (randomElement2.rName == text3)
@@ -479,6 +480,7 @@ namespace CCU.Patches
 
 							if (__instance.dummyAgent.agentName != "Custom")
 								flag4 = true;
+
 							if (randomElement2.rName != "Hoodie" && randomElement2.rName != "AssassinMask" && randomElement2.rName != "SlavemasterMask")
 							{
 								flag5 = true;
@@ -1328,7 +1330,7 @@ namespace CCU.Patches
 						Text text14 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 						text14.text = text14.text + "\n<color=yellow>- " + GC.nameDB.GetName("Traits", "Interface") + " - </color>\n";
 
-						foreach (Trait trait in Appearance.OnlyAppearanceTraits(__instance.dummyAgent.statusEffects.TraitList)) // Filter out appearance traits
+						foreach (Trait trait in Appearance.OnlyNonhiddenTraits(__instance.dummyAgent.statusEffects.TraitList)) // Filter out appearance traits
 						{
 							text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 

@@ -18,6 +18,27 @@ namespace CCU.Traits
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public static List<Type> HiddenTraits
+		{
+			get
+			{
+				List<Type> list = new List<Type>();
+
+				list.AddRange(HireTraits);
+				list.AddRange(InteractionTraits);
+				list.AddRange(LOSTraits);
+				list.AddRange(VendorTypes);
+
+				return list;
+			}
+		}
+		public static List<string> HiddenTraitNames
+		{
+			get
+			{
+				return HiddenTraits.ConvertAll(t => TraitInfo.Get(t).Name);
+			}
+		}
 		public static List<Type> HireTraits = new List<Type>() // Excludes cost modification traits
 		{
 			typeof(Hire_Bodyguard),
@@ -135,6 +156,14 @@ namespace CCU.Traits
 			}
 
 			return null;
+		}
+		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList)
+		{
+			List<string> traitNames = HiddenTraits.ConvertAll(t => TraitInfo.Get(t).Name);
+
+			return traitList
+				.Where(trait => !(traitNames.Contains(trait.traitName)))
+				.ToList();
 		}
 	}
 }

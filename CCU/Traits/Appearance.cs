@@ -138,7 +138,6 @@ namespace CCU.Traits
 			CTrait.Appearance_SkinColor_ZombieSkin2
 		};
 		#endregion
-		#region Rollers
 		internal static void RollFacialHair(AgentHitbox agentHitBox, Agent agent)
 		{
 			Core.LogMethodCall();
@@ -177,14 +176,5 @@ namespace CCU.Traits
 		internal static void RollSkinColor(AgentHitbox agentHitBox, Agent agent)
 		{
 		}
-		#endregion
-		#region Utilities
-		internal static List<Trait> OnlyAppearanceTraits(List<Trait> traitList)
-		{
-			return traitList
-				.Where(trait => AppearanceTraits.Contains(trait.traitName))
-				.ToList();
-		}
-		#endregion
 	}
 }
