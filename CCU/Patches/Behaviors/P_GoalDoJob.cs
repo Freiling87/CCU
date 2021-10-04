@@ -15,8 +15,8 @@ namespace CCU.Patches.Behaviors
 		public static bool Terminate_Prefix (GoalDoJob __instance)
 		{
 			MethodInfo terminate_base = AccessTools.DeclaredMethod(typeof(GoalDoJob).BaseType, "Terminate");
-
 			terminate_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
+
 			__instance.brain.RemoveAllSubgoals(__instance);
 
 			if (__instance.curJob == "Ruckus" || 
