@@ -1330,8 +1330,11 @@ namespace CCU.Patches
 						Text text14 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 						text14.text = text14.text + "\n<color=yellow>- " + GC.nameDB.GetName("Traits", "Interface") + " - </color>\n";
 
-						foreach (Trait trait in Appearance.OnlyNonhiddenTraits(__instance.dummyAgent.statusEffects.TraitList)) // Filter out appearance traits
+						foreach (Trait trait in __instance.dummyAgent.statusEffects.TraitList)
 						{
+							if (TraitManager.HiddenTraitNames.Contains(trait.traitName)) // Omit hidden traits
+								continue;
+
 							text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];
 
 							text12.text = string.Concat(new string[]
