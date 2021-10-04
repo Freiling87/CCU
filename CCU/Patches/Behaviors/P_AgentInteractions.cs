@@ -35,15 +35,13 @@ namespace CCU.Patches.Behaviors
 				___mostRecentAgent = agent;
 				___mostRecentInteractingAgent = interactingAgent;
 
-				int checkpoint = 0;
-
 				// agent.SayDialogue("InteractB"); // No custom dialogue
 				agent.gc.audioHandler.Play(agent, "AgentTalk");
 				logger.LogDebug("hasSpecialInvDatabase: " + agent.hasSpecialInvDatabase);
 				Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypes);
 				
 				if (agent.HasTrait<Interaction_Moochable>() && interactingAgent.statusEffects.hasTrait("CanBorrowMoney"))
-					__instance.AddButton("BorrowMoney");
+					__instance.AddButton("BorrowMoney"); 
 
 				// TODO: Verify if Vendor is compatible with Hireable. If not, separate them.
 

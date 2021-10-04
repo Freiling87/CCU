@@ -3,7 +3,8 @@
 - Hired NPC. Once hired, they couldn't move and framerate skipped
   - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
   - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
-  - It's possible this is actually an issue with 
+    - Nope, that wasn't it. 
+  - Occurs for both Bodyguard & targeted skill jobs
 
 [Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
 [Info   :  CCU_Core] HasTraitFromList: Method Call
@@ -13,34 +14,8 @@
 [Info   :  CCU_Core] HasTraitFromList: Method Call
 [Info   :  CCU_Core] DetermineButtons_Prefix: Hire
 [Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-[Info   :  CCU_Core] DetermineButtons_Prefix: 0
-[Info   :  CCU_Core] DetermineButtons_Prefix: 1
-[Info   :  CCU_Core] DetermineButtons_Prefix: 2
-[Info   :  CCU_Core] DetermineButtons_Prefix: 3
-[Info   :  CCU_Core] DetermineButtons_Prefix: 4
-[Info   :  CCU_Core] DetermineButtons_Prefix: 5
-[Info   :  CCU_Core] DetermineButtons_Prefix: 6
-[Info   :  CCU_Core] DetermineButtons_Prefix: 7
-[Info   :  CCU_Core] DetermineButtons_Prefix: 8
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent)
-[Error  : Unity Log] AI Update Error: Custom (1126) (Agent) ...
+[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
 
 - Shop worked, but was empty
 
@@ -89,6 +64,10 @@ Possible future bug: If you create a character in DE, and edit/resave them in PE
 
 #### Character Select (CharacterSelect)
 
+Aspects to hide from CharSelect screen:
+
+Behavior
+	Not sure
 Facial Hair
 	Doesn't Work
 Hire
@@ -102,7 +81,19 @@ Vendor
 
 #### Character Sheet (CharacterSheet)
 
-Attempted
+Behavior
+	Works
+Facial Hair
+	Doesn't Work
+Hire
+	Works
+Hire Specials (Not on list)
+	Doesn't work
+Relationships
+	Doesn't work
+Trait Trigger
+	Doesn't Work
+Vendor
 
 ### Thief Hire
 

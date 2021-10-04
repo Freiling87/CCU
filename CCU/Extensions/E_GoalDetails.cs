@@ -39,7 +39,7 @@ namespace CCU.Extensions
 					{
 						if (agent.assignedObject.objectName == "Safe" && ((Safe)agent.assignedObject).locked)
 						{
-							FinishSafecracker();
+							// FinishSafecracker();
 							// TODO: Base on FinishWindowCutter
 						}
 						

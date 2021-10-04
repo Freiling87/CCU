@@ -26,7 +26,7 @@ namespace CCU
 		{
 			base.Process();
 			this.agent.goalDetails.LockpickDoorReal();
-			GoalSafecrackSafeReal(agent.goalDetails, agent);
+			// TODO GoalSafecrackSafeReal(agent.goalDetails, agent);
 			if (Vector2.Distance(this.agent.curPosition, this.agent.assignedPos) > 0.92f)
 			{
 				this.gc.audioHandler.StopOnClients(this.agent, "Operating");
