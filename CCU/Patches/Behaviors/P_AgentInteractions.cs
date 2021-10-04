@@ -2138,15 +2138,12 @@ namespace CCU.Patches.Behaviors
 		//}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
-		private static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance, List<string> ___buttons, List<string> ___buttonsExtra, List<int> ___buttonPrices, Agent ___mostRecentAgent, Agent ___mostRecentInteractingAgent)
+		private static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance, ref List<string> ___buttons, ref List<string> ___buttonsExtra, ref List<int> ___buttonPrices, ref Agent ___mostRecentAgent, ref Agent ___mostRecentInteractingAgent)
 		{
 			Core.LogMethodCall();
 
 			if (agent != agent.gc.playerAgent && (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits) || TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes)))
 			{
-				MethodInfo db_Base = AccessTools.DeclaredMethod(typeof(AgentInteractions).BaseType, "DetermineButtons");
-				db_Base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
 				___buttons = buttons1;
 				___buttonsExtra = buttonsExtra1;
 				___buttonPrices = buttonPrices1;
