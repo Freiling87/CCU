@@ -35,7 +35,7 @@ The Player Edition allows players to play your content, while hiding it from vie
 
 # Custom NPC Utilities
 
-All CCU traits will not count toward the Trait Limit, since they do not affect player characters.
+All CCU traits will not count toward the Trait Limit, since they do not affect player characters. *
 
 ## Appearance Traits * 
 
@@ -161,7 +161,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Vampire							|Bloodsucker's supply
 |Villain							|For when you're not concerned about collateral damage
 
-## Steam Workshop Upload *
+## CC Steam Workshop Upload *
 
 - Pop up Yes/No dialogue asking if user wants to do the following:
   - Automate screenshot of character portrait for thumbnail

@@ -1,6 +1,9 @@
 ﻿# Run error logs
 
 - Hired NPC. Once hired, they couldn't move and framerate skipped
+  - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
+  - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
+  - It's possible this is actually an issue with 
 
 [Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
 [Info   :  CCU_Core] HasTraitFromList: Method Call

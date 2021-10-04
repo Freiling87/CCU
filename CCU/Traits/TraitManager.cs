@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CCU.Traits.AI.Interaction;
 
 namespace CCU.Traits
 {
