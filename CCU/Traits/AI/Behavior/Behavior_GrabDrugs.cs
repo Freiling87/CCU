@@ -33,7 +33,10 @@ namespace CCU.Traits.AI.Behavior
                     UnlockCost = 0,
                 });
         }
-        public override void OnAdded() { }
+        public override void OnAdded() 
+        {
+            
+        }
         public override void OnRemoved() { }
     }
 }

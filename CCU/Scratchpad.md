@@ -30,17 +30,15 @@ ADD:
 
 ## Appearance Traits
 
-Test transpiler method, simply replace if it doesn't work. Use transpilers later.
-
 # Implementation
-
-TODO: Move any behaviors linked to special abilities (Bite, Cannibalize, Sticky Glove) to link to the special ability
 
 ## Traits
 
 - CCP limit adjustment for CCU Traits
 	- CharacterCreation.traitCount in CreatePointTallyText();
+      - Maybe Postfix CharacterCreation.PressedButton to increase/decreate CharacterCreation.traitLimit
 	- Line 532, need to make a custom list of this.traitsChosen where they are not on CCU trait list
+    - 
 
 ### Thief Hire
 

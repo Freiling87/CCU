@@ -106,6 +106,7 @@
     <Compile Include="Patches\Behaviors\P_BrainUpdate.cs" />
     <Compile Include="Patches\Behaviors\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
+    <Compile Include="Patches\Inventory\P_CharacterCreation.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
