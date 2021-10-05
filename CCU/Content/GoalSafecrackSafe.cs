@@ -5,39 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace CCU
+namespace CCU.Content
 {
 	public class GoalSafecrackSafe : Goal
 	{
 		public GoalSafecrackSafe()
 		{
-			this.goalName = "SafecrackSafe";
+			goalName = CJob.SafecrackSafe;
 		}
 
 		public override void Activate()
 		{
 			base.Activate();
 			GoalPathTo goalPathTo = new GoalPathTo();
-			goalPathTo.pathToPosition = this.agent.assignedPos;
-			this.brain.AddSubgoal(this, goalPathTo);
+			goalPathTo.pathToPosition = agent.assignedPos;
+			brain.AddSubgoal(this, goalPathTo);
 			GoalRotateToObject goalRotateToObject = new GoalRotateToObject();
-			goalRotateToObject.playfieldObject = this.agent.assignedObject;
-			this.brain.AddSubgoal(this, goalRotateToObject);
+			goalRotateToObject.playfieldObject = agent.assignedObject;
+			brain.AddSubgoal(this, goalRotateToObject);
 			GoalSafecrackSafeReal subGoal = new GoalSafecrackSafeReal();
-			this.brain.AddSubgoal(this, subGoal);
+			brain.AddSubgoal(this, subGoal);
 		}
 
 		public override void Process()
 		{
 			base.Process();
-			this.brain.ProcessSubgoals(this);
-			this.brain.ReactivateIfFailed(this);
+			brain.ProcessSubgoals(this);
+			brain.ReactivateIfFailed(this);
 		}
 
 		public override void Terminate()
 		{
 			base.Terminate();
-			this.brain.RemoveAllSubgoals(this);
+			brain.RemoveAllSubgoals(this);
 		}
 
 		public Agent workingForAgent;

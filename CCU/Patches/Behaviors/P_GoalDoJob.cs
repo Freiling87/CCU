@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using CCU.Content;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,8 +39,8 @@ namespace CCU.Patches.Behaviors
 				__instance.curJob == "GetDrugs" || 
 				__instance.curJob == "GetDrink" || 
 				__instance.curJob == "UseATM" ||
-				__instance.curJob == "HireTamperTarget" ||
-				__instance.curJob == "HireSafecrackTarget")
+				__instance.curJob == CJob.SafecrackSafe ||
+				__instance.curJob == CJob.TamperSomething)
 				__instance.agent.StartCoroutine(__instance.agent.JobTransition());
 			
 			if (__instance.agent.following != null && __instance.agent.job == "")

@@ -55,9 +55,18 @@ namespace CCU
         public static ManualLogSource GetLogger()
         {
             Type containingClass = new StackFrame(1, false).GetMethod().ReflectedType;
-            return BepInEx.Logging.Logger.CreateLogSource(GetLoggerName(containingClass));
+            return Logger.CreateLogSource(GetLoggerName(containingClass));
         }
     }
+
+	public static class CJob
+	{
+		public const string
+			TamperSomething = "TamperSomething",
+			TamperSomethingReal = "TamperSomethingReal",
+			SafecrackSafe = "SafecrackSafe",
+			SafecrackSafeReal = "SafecrackSafeReal";
+	}
 
     public static class CTrait 
 	{

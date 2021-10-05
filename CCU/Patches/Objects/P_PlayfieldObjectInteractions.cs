@@ -24,12 +24,9 @@ namespace CCU.Patches.Objects
 		[HarmonyPrefix, HarmonyPatch(methodName:nameof(PlayfieldObjectInteractions.TargetObject), argumentTypes: new[] { typeof(PlayfieldObject), typeof(Agent), typeof(PlayfieldObject), typeof(string) })]
 		public static bool TargetObject_Prefix(PlayfieldObject playfieldObject, Agent interactingAgent, PlayfieldObject otherObject, string combineType, PlayfieldObjectInteractions __instance, ref bool __result)
 		{
-			// TODO: GoalDoJob.Terminate()
-
 			Agent agent = (Agent)playfieldObject;
 
-			if ((agent.commander.target.targetType == "HireSafecrackTarget" ||
-				agent.commander.target.targetType == "HireTamperTarget") &&
+			if ((agent.commander.target.targetType == CJob.SafecrackSafe || agent.commander.target.targetType == CJob.TamperSomething) &&
 				otherObject != null)
 			{
 				if (agent.gc.splitScreen && Vector2.Distance(agent.commander.curPosition, otherObject.curPosition) > 15f)
@@ -39,7 +36,7 @@ namespace CCU.Patches.Objects
 				{
 					ObjectReal objectReal = (ObjectReal)otherObject;
 
-					if (agent.commander.target.targetType == "HireSafecrackTarget")
+					if (agent.commander.target.targetType == CJob.SafecrackSafe)
 					{
 						bool isValidTarget = false;
 						bool isWindow = false;
@@ -70,7 +67,7 @@ namespace CCU.Patches.Objects
 						__result = false;
 						return false;
 					}
-					else if (agent.commander.target.targetType == "HireTamperTarget")
+					else if (agent.commander.target.targetType == CJob.TamperSomething)
 					{
 						if ((agent.ownerID != objectReal.owner || agent.startingChunk != objectReal.startingChunk || agent.ownerID == 0) && 
 							objectReal.functional && !objectReal.destroyed && !objectReal.destroying && objectReal.fire == null && !objectReal.someoneInteracting && !objectReal.startedFlashing)
@@ -97,30 +94,13 @@ namespace CCU.Patches.Objects
 			return true;
 		}
 
-		private static void HireTamper(Agent agent, Agent interactingAgent, ObjectReal myObject)
-		{
-			if (interactingAgent.gc.serverPlayer)
-			{
-				agent.job = "HireTamperTarget";
-				agent.jobCode = jobType.LockpickDoor; //
-				agent.StartCoroutine(agent.ChangeJobBig(""));
-				agent.assignedPos = myObject.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
-				agent.assignedObject = myObject.playfieldObjectReal;
-				agent.assignedAgent = null;
-				agent.gc.audioHandler.Play(agent, "AgentOK");
-
-				return;
-			}
-
-			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, "HireTamperTarget", myObject.objectNetID);
-		}
-
+		// Non-Patch
 		private static void HireSafecrack(Agent agent, Agent interactingAgent, ObjectReal myObject)
 		{
 			if (interactingAgent.gc.serverPlayer)
 			{
-				agent.job = "HireSafecrackTarget";
-				agent.jobCode = jobType.LockpickDoor; //
+				agent.job = CJob.SafecrackSafe;
+				agent.jobCode = jobType.Ruckus; // TODO
 				agent.StartCoroutine(agent.ChangeJobBig(""));
 				agent.assignedPos = myObject.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
 				agent.assignedObject = myObject.playfieldObjectReal;
@@ -130,7 +110,26 @@ namespace CCU.Patches.Objects
 				return;
 			}
 
-			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, "HireSafecrackTarget", myObject.objectNetID);
+			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.SafecrackSafe, myObject.objectNetID);
+		}
+
+		// Non-Patch
+		private static void HireTamper(Agent agent, Agent interactingAgent, ObjectReal myObject)
+		{
+			if (interactingAgent.gc.serverPlayer)
+			{
+				agent.job = CJob.TamperSomething;
+				agent.jobCode = jobType.Ruckus; // TODO
+				agent.StartCoroutine(agent.ChangeJobBig(""));
+				agent.assignedPos = myObject.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
+				agent.assignedObject = myObject.playfieldObjectReal;
+				agent.assignedAgent = null;
+				agent.gc.audioHandler.Play(agent, "AgentOK");
+
+				return;
+			}
+
+			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.TamperSomething, myObject.objectNetID);
 		}
 	}
 }

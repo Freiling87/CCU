@@ -169,5 +169,12 @@ namespace CCU.Traits
 				.Where(trait => !(traitNames.Contains(trait.traitName)))
 				.ToList();
 		}
+		public static void LogTraitList(Agent agent)
+		{
+			logger.LogDebug("TRAIT LIST: " + agent.agentName);
+
+			foreach (Trait trait in agent.statusEffects.TraitList)
+				logger.LogDebug("\t" + trait.traitName);
+		}
 	}
 }

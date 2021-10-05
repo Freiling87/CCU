@@ -54,15 +54,51 @@ ADD:
 ---
 # Implementation
 
-## Traits
+## Safecrack job
 
-### Trait hiding
+Here's what comes up for Lockpick job:
+	Agent
+√		.GetCodeFromJob
+√		.GetJobCode					Need to extend jobType enum
+√		.ObjectAction
+	AgentInteractions
+√		.DetermineButtons
+√		.LockpickDoor				
+√		.PressedButton				Passed name CauseRuckus to invInterface.ShowTarget, to avoid errors for now
+	GoalDoJob
+√		.Activate
+√		.Terminate
+	GoalDetails						E_GoalDetails
+√		.LockpickDoorReal
+	GoalLockpickDoor				GoalSafecrackSafe
+√		.Activate
+√		.Process
+√		.Terminate
+	GoalLockpickDoorReal			GoalSafecrackSafeReal
+√		.Activate
+√		.Process
+√		.Terminate
+	InvInterface
+√		.ShowTarget					Doesn't need patch, but uses GetName(myTargetType, "Interface"); so a Name will probably need to be made for our job types
+√		.ShowTarget2
+	ObjectMult
+		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
+	PlayfieldObjectInteractions
+√		.TargetObject
 
-#### Character Creation, Player Edition (CharacterCreation)
+Objects to Analyze/track:
+	Agent
+		job
+		jobCode
+		target.targetType
+
+## Trait hiding
+
+### Character Creation, Player Edition (CharacterCreation)
 
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
 
-#### Character Select (CharacterSelect)
+### Character Select (CharacterSelect)
 
 Aspects to hide from CharSelect screen:
 
@@ -79,7 +115,7 @@ Trait Trigger
 Vendor
 	Works
 
-#### Character Sheet (CharacterSheet)
+### Character Sheet (CharacterSheet)
 
 Behavior
 	Works
@@ -95,12 +131,12 @@ Trait Trigger
 	Doesn't Work
 Vendor
 
-### Thief Hire
+## Thief Hire
 
-### Thief Honorable
+## Thief Honorable
 Worked for pickpocket
 
-### Thief Vendor
+## Thief Vendor
 - Special Inv filling: 
   - InvDatabase.FillSpecialInv
   - InvDatabase.AddRandItem

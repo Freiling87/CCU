@@ -15,6 +15,7 @@ namespace CCU.Extensions
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// Based on LockpickDoorReal
 		public static void SafecrackSafeReal(GoalDetails goalDetails, Agent agent)
 		{
 			if (goalDetails.goalTimer2 <= 0f && Vector2.Distance(agent.curPosition, agent.assignedPos) <= 0.92f)
@@ -38,10 +39,7 @@ namespace CCU.Extensions
 					if (agent.assignedObject != null)
 					{
 						if (agent.assignedObject.objectName == "Safe" && ((Safe)agent.assignedObject).locked)
-						{
-							// FinishSafecracker();
-							// TODO: Base on FinishWindowCutter
-						}
+							FinishSafecracker((Safe)agent.assignedObject, agent);
 						
 						agent.isOperating = false;
 						GC.audioHandler.StopOnClients(agent, "Operating");
@@ -79,6 +77,26 @@ namespace CCU.Extensions
 				goalDetails.goalTimer2 = 5f;
 				agent.SayDialogue("CantPath");
 			}
+		}
+
+		// Based on Window.FinishWindowCutter
+		public static void FinishSafecracker(Safe safe, Agent causerAgent)
+		{
+			if (GC.serverPlayer)
+			{
+				safe.lastHitByAgent = causerAgent;
+				//safe.SpecialWindowDestroy(causerAgent);
+				safe.UnlockSafe(); //
+				safe.gc.spawnerMain.SpawnNoise(safe.tr.position, 0.5f, null, null, causerAgent);
+				safe.gc.OwnCheck(causerAgent, safe.go, "Normal", 0);
+				causerAgent.skillPoints.AddPoints("UnlockSafePoints");
+
+				return;
+			}
+
+			//safe.SpecialWindowDestroy(causerAgent);
+			safe.UnlockSafe(); //
+			causerAgent.objectMult.ObjectAction(safe.objectNetID, "FinishSafecrack");
 		}
 	}
 }

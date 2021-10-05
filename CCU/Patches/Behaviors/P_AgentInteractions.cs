@@ -26,6 +26,7 @@ namespace CCU.Patches.Behaviors
 		private static bool DetermineButtons_Prefix(Agent agent, Agent interactingAgent, List<string> buttons1, List<string> buttonsExtra1, List<int> buttonPrices1, AgentInteractions __instance, ref List<string> ___buttons, ref List<string> ___buttonsExtra, ref List<int> ___buttonPrices, ref Agent ___mostRecentAgent, ref Agent ___mostRecentInteractingAgent)
 		{
 			Core.LogMethodCall();
+			TraitManager.LogTraitList(agent);
 
 			if (agent != agent.gc.playerAgent && (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits) || TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes)))
 			{
@@ -124,9 +125,9 @@ namespace CCU.Patches.Behaviors
 						if (agent.HasTrait<Hire_Hack>())
 							__instance.AddButton("HackSomething");
 						if (agent.HasTrait<Hire_Safecrack>())
-							__instance.AddButton("HireSafecrack");
+							__instance.AddButton(CJob.SafecrackSafe);
 						if (agent.HasTrait<Hire_Tamper>())
-							__instance.AddButton("HireTamper");
+							__instance.AddButton(CJob.TamperSomething);
 					}
 				}
 
@@ -156,20 +157,20 @@ namespace CCU.Patches.Behaviors
 			__instance.allAttack = false;
 			__instance.allGoHere = false;
 
-			if (buttonText == "HireSafecrack")
+			if (buttonText == CJob.SafecrackSafe)
 			{
 				__instance.interactor = interactingAgent;
 				agent.commander = interactingAgent;
-				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "HireSafecrackTarget");
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "CauseRuckus"); // Todo: Replace with real name, but use this now in case it breaks it
 				agent.StopInteraction();
 
 				return false;
 			}
-			else if (buttonText == "HireTamper")
+			else if (buttonText == CJob.TamperSomething)
 			{
 				__instance.interactor = interactingAgent;
 				agent.commander = interactingAgent;
-				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "HireTamperTarget");
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "CauseRuckus"); // Todo: Replace with real name, but use this now in case it breaks it
 				agent.StopInteraction();
 
 				return false;
@@ -177,5 +178,26 @@ namespace CCU.Patches.Behaviors
 
 			return true;
 		}
+
+		// Non-Patch
+		public static void SafecrackSafe(Agent agent, Agent interactingAgent, PlayfieldObject mySafe)
+		{
+			if (interactingAgent.gc.serverPlayer)
+			{
+				agent.job = CJob.SafecrackSafe;
+				agent.jobCode = jobType.GetSupplies; // TODO
+				agent.StartCoroutine(agent.ChangeJobBig(""));
+				agent.assignedPos = mySafe.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
+				agent.assignedObject = mySafe.playfieldObjectReal;
+				agent.assignedAgent = null;
+				agent.gc.audioHandler.Play(agent, "AgentOK");
+
+				return;
+			}
+
+			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.SafecrackSafe, mySafe.objectNetID);
+		}
+
+
 	}
 }
