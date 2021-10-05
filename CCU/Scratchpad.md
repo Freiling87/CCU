@@ -1,5 +1,9 @@
 ﻿# Run error logs
 
+Load error:
+Agent.GetCodeFromJob needs to be a bool and set JobType to __result or whatever it was
+
+
 - Hired NPC. Once hired, they couldn't move and framerate skipped
   - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
   - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break

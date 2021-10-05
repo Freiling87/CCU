@@ -73,7 +73,7 @@ namespace CCU.Patches.Behaviors
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetJobCode), argumentTypes: new[] { typeof(string) })]
-		public jobType GetJobCode_Prefix(string jobString)
+		public static jobType GetJobCode_Prefix(string jobString)
 		{
 			jobType result = jobType.None;
 
