@@ -72,8 +72,51 @@ namespace CCU
 	{
         public const string
 		#region AI
+		#region Agent Group
+			AI_AgentGroup_AffectVanilla = "AI: Agent Group - Affect Vanilla", // Toggles use in campaign or vanilla gameplay 
+			AI_AgentGroup_AffectCampaign = "AI: Agent Group - Affect Campaign", // Will need an "Agent Lists Extended" mutator that can be added to vanilla or campaign to prevent affecting non-modded campaigns
+
+			AI_AgentGroup_AllTypes = "AI: Agent Group - All Types",
+			AI_AgentGroup_AllTypesNoFactions = "AI: Agent Group - All Types (No Factions)",
+			AI_AgentGroup_ApeTown = "AI: Agent Group - Ape Town",
+			AI_AgentGroup_ArenaBattler = "AI: Agent Group - Arena Battler",
+			AI_AgentGroup_Blahd = "AI: Agent Group - Blahd",
+			AI_AgentGroup_BlueCollars = "AI: Agent Group - Blue-Collars",
+			AI_AgentGroup_BusinessOwners = "AI: Agent Group - Business Owners",
+			AI_AgentGroup_Cannibal = "AI: Agent Group - Cannibal",
+			AI_AgentGroup_CaveAgent = "AI: Agent Group - Cave",
+			AI_AgentGroup_Creatures = "AI: Agent Group - Creatures",
+			AI_AgentGroup_Crepe = "AI: Agent Group - Crepe",
+			AI_AgentGroup_DowntownAgent = "AI: Agent Group - Downtown",
+			AI_AgentGroup_Entertainers = "AI: Agent Group - Entertainers",
+			AI_AgentGroup_Fighters = "AI: Agent Group - Fighters",
+			AI_AgentGroup_GangbangerType = "AI: Agent Group - Gangbangers",
+			AI_AgentGroup_GuardType = "AI: Agent Group - Guards",
+			AI_AgentGroup_HideoutAgent = "AI: Agent Group - Hideout",
+			AI_AgentGroup_HideoutAgentIndustrial = "AI: Agent Group - Hideout (Industrial)",
+			AI_AgentGroup_Hooligans = "AI: Agent Group - Hooligans",
+			AI_AgentGroup_HooligansNoGangbangers = "AI: Agent Group - Hooligans (No Gangbangers)",
+			AI_AgentGroup_Kidnapped = "AI: Agent Group - Kidnapped",
+			AI_AgentGroup_LawWorkers = "AI: Agent Group - Law Enforcers",
+			AI_AgentGroup_Magicians = "AI: Agent Group - Magicians",
+			AI_AgentGroup_ParkAgent = "AI: Agent Group - Park",
+			AI_AgentGroup_ParkHomeAgent = "AI: Agent Group - Park (Home)",
+			AI_AgentGroup_Poverty = "AI: Agent Group - Poverty",
+			AI_AgentGroup_Resistance = "AI: Agent Group - Resistance",
+			AI_AgentGroup_Sewers = "AI: Agent Group - Sewers",
+			AI_AgentGroup_SlumsAgent = "AI: Agent Group - Slums",
+			AI_AgentGroup_UndeadFeral = "AI: Agent Group - Undead (Feral)",
+			AI_AgentGroup_UndeadSentient = "AI: Agent Group - Undead (Sentient)",
+			AI_AgentGroup_Underdark = "AI: Agent Group - Underdark",
+			AI_AgentGroup_Unique = "AI: Agent Group - Unique",
+			AI_AgentGroup_UptownAgent = "AI: Agent Group - Uptown",
+			AI_AgentGroup_UptownHomeAgent = "AI: Agent Group - Uptown (Home)",
+			AI_AgentGroup_UptownNoGangs = "AI: Agent Group - Uptown (No Gangs)",
+			AI_AgentGroup_Vampire = "AI: Agent Group - Vampire",
+			AI_AgentGroup_WhiteCollars = "AI: Agent Group - White-Collars",
+		#endregion
 		#region Behavior
-			AI_Behavior_CleanTrash = "AI: Behavior - Clean Trash",
+		AI_Behavior_CleanTrash = "AI: Behavior - Clean Trash",
 			AI_Behavior_Coward = "AI: Behavior - Coward",
 			AI_Behavior_EatCorpse = "AI: Behavior - Eat Corpse",
 			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",

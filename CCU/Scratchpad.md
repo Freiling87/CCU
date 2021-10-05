@@ -1,5 +1,41 @@
 ﻿# Run error logs
 
+## Implementing Shops
+- Shop worked, but was empty
+
+InvDatabase
+√	.AddRandItem					AccessTools returning void
+	.FillAgent
+	.FillSpecialInv
+PlayfieldObject
+	.determineMoneyCost
+	.determineMoneyCostSelling
+RandomAgentItems
+√	.fillItems
+
+
+Analyzing: agent.hasSpecialInvDatabase
+
+Agent
+	.CanShakeDown
+	.RecycleStart2
+	.RevertAllVars
+AgentInteractions
+	.DetermineButtons
+ObjectMult
+	.InteractSuccess
+PlayfieldObject
+	.SetupSpecialInvDatabase
+PoolsScene
+	.ResetAgent
+StatusEffects
+	.SetupDeath
+
+
+Analyzing: agent.SpecialInvDatabase
+
+
+## Hire AI Update Error
 - Hired NPC. Once hired, they couldn't move and framerate skipped
   - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
   - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
@@ -16,8 +52,6 @@
 [Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
 [Info   :  CCU_Core] PressedButton_Prefix: Method Call
 [Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
-
-- Shop worked, but was empty
 
 ---
 # Notes / Bugfixing
@@ -48,6 +82,16 @@ ADD:
 
 ## Appearance Traits
 
+RandomSkinHair
+	fillSkinHair
+
+## Vendors
+Check out "VendorsDropShopItem" (Shop Drops), it looks like agent.specialInvDatabase is the right way to go
+
+- May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
+- Traits that will need compatibility:
+  - Shop Drops
+  - That one discount one
 
 ---
 # Implementation

@@ -96,6 +96,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 - Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
   - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
   - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
+  - LevelEditor.customCharacterList has all customs saved. Iterate through this and find appropriate traits, then add through RandomAgents.fillAgents
 
 ## Trait Trigger Traits
 
@@ -199,6 +200,9 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
 |Middle Mouse *		|					|					|Drag Viewport
 |Letter Keys		|					|Any with Type		|When Type Selector is open, scroll to alphabetical entry starting in key pressed.<br>Press again to cycle through entries under that letter.
+
+## Item Groups *
+- Know how you can select "Slum NPCs" as a type? Why can't we do that with items? Game already has most of the rLists made anyway 
 
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)

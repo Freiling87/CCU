@@ -8,6 +8,7 @@ using HarmonyLib;
 using CCU.Traits;
 using CCU.Traits.AI.Vendor;
 using System.Reflection;
+using Random = UnityEngine.Random;
 
 namespace CCU.Patches.Inventory
 {
@@ -18,7 +19,7 @@ namespace CCU.Patches.Inventory
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
-		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance)
+		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
 		{
 			if (__instance.CompareTag("Agent") && TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypes))
 			{
@@ -59,10 +60,10 @@ namespace CCU.Patches.Inventory
 
 				if (text != "Empty" && text != "")
 				{
-					//return __instance.AddItemReal(text);
+					// return __instance.AddItemReal(text);
 
 					MethodInfo addItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal", new Type[1] { typeof(string) });
-					addItemReal.GetMethodWithoutOverrides<Action<string>>(__instance).Invoke(text);
+					InvItem newItem = addItemReal.GetMethodWithoutOverrides<Action<string>>(__instance).Invoke(text);
 				}
 
 				return false;
