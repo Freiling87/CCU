@@ -73,7 +73,7 @@ namespace CCU.Patches.Behaviors
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetJobCode), argumentTypes: new[] { typeof(string) })]
-		public static jobType GetJobCode_Prefix(string jobString)
+		public static bool GetJobCode_Prefix(string jobString, ref jobType __result)
 		{
 			jobType result = jobType.None;
 
@@ -106,7 +106,8 @@ namespace CCU.Patches.Behaviors
 			else if (jobString != null && jobString.Length == 0)
 				result = jobType.None;
 
-			return result;
+			__result = result;
+			return false;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName:nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
