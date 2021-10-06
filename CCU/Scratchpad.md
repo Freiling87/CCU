@@ -4,11 +4,10 @@
 - Shop worked, but was empty
 
 Agent
-	.CanShakeDown
+√	.CanShakeDown					For Extortable
 InvDatabase
 √	.AddRandItem					AccessTools returning void
-	.FillAgent
-	.FillSpecialInv
+√	.FillSpecialInv					Skip
 PlayfieldObject
 	.determineMoneyCost
 	.determineMoneyCostSelling

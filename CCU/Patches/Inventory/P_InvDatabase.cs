@@ -21,8 +21,12 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
 		{
+			Core.LogMethodCall();
+
 			if (__instance.CompareTag("Agent") && TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypes))
 			{
+logger.LogDebug(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypes).Name);
+
 				string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypes).Name;
 				string text = "";
 
@@ -60,10 +64,8 @@ namespace CCU.Patches.Inventory
 
 				if (text != "Empty" && text != "")
 				{
-					// return __instance.AddItemReal(text);
-
 					MethodInfo addItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal", new Type[1] { typeof(string) });
-					InvItem newItem = addItemReal.GetMethodWithoutOverrides<Action<string>>(__instance).Invoke(text);
+					__result = addItemReal.GetMethodWithoutOverrides<Action<string>>(__instance).Invoke(text);
 				}
 
 				return false;
