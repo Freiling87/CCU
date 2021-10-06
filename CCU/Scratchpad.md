@@ -1,6 +1,35 @@
 ﻿#	Test Notes / Bugfixing
 ##		00 Initial Load Errors
 
+##		BrainUpdate 
+
+[Info   :  CCU_Core] HasTraitFromList: Method Call
+[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+[Error  : Unity Log] AI Update Error: Custom (1124) (Agent)
+##		Chunk Editor
+Tried to place Safe, then this: 
+	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
+	Stack trace:
+	tk2dRuntime.TileMap.RenderMeshBuilder.BuildForChunk (tk2dTileMap tileMap, tk2dRuntime.TileMap.SpriteChunk chunk, tk2dRuntime.TileMap.ColorChunk colorChunk, System.Boolean useColor, System.Boolean skipPrefabs, System.Int32 baseX, System.Int32 baseY) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	tk2dRuntime.TileMap.RenderMeshBuilder.Build (tk2dTileMap tileMap, System.Boolean editMode, System.Boolean forceBuild) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	tk2dTileMap.Build (tk2dTileMap+BuildFlags buildFlags) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	tk2dTileMap.Build () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LevelEditor.SetTileName () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LevelEditor.LeftClickAction (LevelEditorTile myTile) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LevelEditor.PressedMouseButton (System.Int32 buttonNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LevelEditor.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+
+	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
+	Stack trace:
+	tk2dRuntime.TileMap.RenderMeshBuilder.BuildForChunk (tk2dTileMap tileMap, tk2dRuntime.TileMap.SpriteChunk chunk, tk2dRuntime.TileMap.ColorChunk colorChunk, System.Boolean useColor, System.Boolean skipPrefabs, System.Int32 baseX, System.Int32 baseY) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	tk2dRuntime.TileMap.RenderMeshBuilder.Build (tk2dTileMap tileMap, System.Boolean editMode, System.Boolean forceBuild) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	tk2dTileMap.Build (tk2dTileMap+BuildFlags buildFlags) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	tk2dTileMap.Build () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LevelEditor.ReleasedMouseButton (System.Int32 buttonNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LevelEditor.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+
 ---
 ##		Chunk Editor Shortcuts
 
@@ -49,7 +78,7 @@ ADD:
 ##		Safecrack Job
 Ready to test
 ##		Vendor Shops
-Ready to test
+Still empty, need more logging. After PressedButton("Buy"), but the issue is more likely hasSpecialInvDatabase or specialInvDatabase. Is the bool ever flipped to true in patches?
 
 ---
 

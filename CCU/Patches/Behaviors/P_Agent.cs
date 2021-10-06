@@ -39,7 +39,7 @@ namespace CCU.Patches.Behaviors
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetCodeFromJob), argumentTypes: new[] { typeof(int) })]
-		public static string GetCodeFromJob_Prefix(int jobInt)
+		public static bool GetCodeFromJob_Prefix(int jobInt, ref string __result)
 		{
 			string result = "";
 
@@ -89,7 +89,8 @@ namespace CCU.Patches.Behaviors
 					break;
 			}
 
-			return result;
+			__result = result;
+			return false;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetJobCode), argumentTypes: new[] { typeof(string) })]
