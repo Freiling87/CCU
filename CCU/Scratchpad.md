@@ -9,31 +9,28 @@ InvDatabase
 √	.AddRandItem					AccessTools returning void
 √	.FillSpecialInv					Skip
 PlayfieldObject
-	.determineMoneyCost
-	.determineMoneyCostSelling
+√	.determineMoneyCost
 RandomAgentItems
 √	.fillItems
 
 
 Analyzing: agent.hasSpecialInvDatabase
+Analyzing: agent.SpecialInvDatabase
 
 Agent
-	.CanShakeDown
-	.RecycleStart2
-	.RevertAllVars
+√	.CanShakeDown
+√	.RecycleStart2					Skip
+√	.RevertAllVars					Skip
 AgentInteractions
-	.DetermineButtons
+√	.DetermineButtons
 ObjectMult
-	.InteractSuccess
+√	.InteractSuccess				Skip
 PlayfieldObject
-	.SetupSpecialInvDatabase
+√	.SetupSpecialInvDatabase		Skip
 PoolsScene
-	.ResetAgent
+√	.ResetAgent						Skip
 StatusEffects
-	.SetupDeath
-
-
-Analyzing: agent.SpecialInvDatabase
+√	.SetupDeath						Skip, Shopdrops will be automatic
 
 
 ## Hire AI Update Error

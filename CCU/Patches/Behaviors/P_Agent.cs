@@ -157,7 +157,11 @@ namespace CCU.Patches.Behaviors
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.VendorTypes))
+			{
+				logger.LogDebug("Vendor found: " + TraitManager.GetOnlyTraitFromList(__instance, TraitManager.VendorTypes));
+
 				__instance.SetupSpecialInvDatabase();
+			}
 
 			// May want to generalize into LOSCheckTraits, but this might be the only one that's on a coin toss (done in LoadLevel.SetupMore3_3 when spawning roamers)
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.LOSTraits))
