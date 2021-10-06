@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
 using CCU.Traits.AI.Behavior;
+using CCU.Traits.AI.Interaction;
 
 namespace CCU.Patches.Behaviors
 {
@@ -18,7 +19,26 @@ namespace CCU.Patches.Behaviors
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName:nameof(Agent.GetCodeFromJob), argumentTypes: new[] { typeof(int) })]
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
+		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
+		{
+			for (int i = 0; i < GC.agentList.Count; i++)
+			{
+				Agent agent = GC.agentList[i];
+
+				if (agent.startingChunk == __instance.startingChunk && agent.ownerID == __instance.ownerID && agent.ownerID != 255 && agent.ownerID != 99 && __instance.ownerID != 0 && agent.oma.shookDown)
+				{
+					__result = false;
+
+					return;
+				}
+			}
+
+			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Interaction_Extortable>())
+				__result = true;
+		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetCodeFromJob), argumentTypes: new[] { typeof(int) })]
 		public static string GetCodeFromJob_Prefix(int jobInt)
 		{
 			string result = "";
@@ -110,7 +130,7 @@ namespace CCU.Patches.Behaviors
 			return false;
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName:nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
 		public static bool ObjectAction_Prefix(string myAction, string extraString, float extraFloat, Agent causerAgent, PlayfieldObject extraObject, Agent __instance, ref bool ___noMoreObjectActions)
 		{
 			if (myAction == CJob.TamperSomething || myAction == CJob.SafecrackSafe)

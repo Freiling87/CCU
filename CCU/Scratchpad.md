@@ -3,6 +3,8 @@
 ## Implementing Shops
 - Shop worked, but was empty
 
+Agent
+	.CanShakeDown
 InvDatabase
 √	.AddRandItem					AccessTools returning void
 	.FillAgent
