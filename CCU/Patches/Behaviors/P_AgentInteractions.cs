@@ -58,6 +58,7 @@ namespace CCU.Patches.Behaviors
 				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase) // All Vendor Traits
 				{
 					Core.LogCheckpoint("Vendor");
+					logger.LogDebug(agent.specialInvDatabase.InvItemList.Count);
 
 					bool canBuy = true;
 
@@ -86,12 +87,6 @@ namespace CCU.Patches.Behaviors
 					{
 						Core.LogCheckpoint("Hire Initial");
 
-						float hireCostFactor = 1.0f;
-						if (agent.HasTrait<Hire_CostMore>())
-							hireCostFactor = 1.5f;
-						else if (agent.HasTrait<Hire_CostLess>())
-							hireCostFactor = 0.5f;
-
 						bool bananaCost = agent.HasTrait<Hire_CostBanana>();
 
 						if (agent.HasTrait<Hire_Bodyguard>())
@@ -99,7 +94,7 @@ namespace CCU.Patches.Behaviors
 							if (interactingAgent.inventory.HasItem("HiringVoucher"))
 								__instance.AddButton("AssistMe", 6666);
 							else
-								__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire") * hireCostFactor));
+								__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire")));
 						}
 						else if (
 							agent.HasTrait<Hire_BreakIn>() ||
@@ -111,7 +106,7 @@ namespace CCU.Patches.Behaviors
 							if (interactingAgent.inventory.HasItem("HiringVoucher"))
 								__instance.AddButton("AssistMe", 6666);
 							else
-								__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist") * hireCostFactor));
+								__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist")));
 						}
 					}
 					else if (!agent.oma.cantDoMoreTasks)

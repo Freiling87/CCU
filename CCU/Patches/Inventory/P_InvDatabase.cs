@@ -65,7 +65,7 @@ logger.LogDebug(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager
 				if (text != "Empty" && text != "")
 				{
 					MethodInfo addItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal", new Type[1] { typeof(string) });
-					__result = addItemReal.GetMethodWithoutOverrides<Action<string>>(__instance).Invoke(text);
+					__result = addItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(text);
 				}
 
 				return false;
