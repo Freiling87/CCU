@@ -1,60 +1,8 @@
-﻿# Run error logs
-
-## Implementing Shops
-- Shop worked, but was empty
-
-Agent
-√	.CanShakeDown					For Extortable
-InvDatabase
-√	.AddRandItem					AccessTools returning void
-√	.FillSpecialInv					Skip
-PlayfieldObject
-√	.determineMoneyCost
-RandomAgentItems
-√	.fillItems
-
-
-Analyzing: agent.hasSpecialInvDatabase
-Analyzing: agent.SpecialInvDatabase
-
-Agent
-√	.CanShakeDown
-√	.RecycleStart2					Skip
-√	.RevertAllVars					Skip
-AgentInteractions
-√	.DetermineButtons
-ObjectMult
-√	.InteractSuccess				Skip
-PlayfieldObject
-√	.SetupSpecialInvDatabase		Skip
-PoolsScene
-√	.ResetAgent						Skip
-StatusEffects
-√	.SetupDeath						Skip, Shopdrops will be automatic
-
-
-## Hire AI Update Error
-- Hired NPC. Once hired, they couldn't move and framerate skipped
-  - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
-  - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
-    - Nope, that wasn't it. 
-  - Occurs for both Bodyguard & targeted skill jobs
-
-[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
+﻿#	Test Notes / Bugfixing
+##		00 Initial Load Errors
 
 ---
-# Notes / Bugfixing
-
-## Chunk Editor Shortcuts
+##		Chunk Editor Shortcuts
 
 Ctrl + O load shows all menus but doesn't load anything
 F9 load works but shows chunk selection menu
@@ -78,23 +26,52 @@ ADD:
 	ALT trail for overhead menus
 	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
 
-## Appearance Traits
+---
+##		Hire AI Update Error
+- Hired NPC. Once hired, they couldn't move and framerate skipped
+  - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
+  - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
+    - Nope, that wasn't it. 
+  - Occurs for both Bodyguard & targeted skill jobs
 
-RandomSkinHair
-	fillSkinHair
-
-## Vendors
-Check out "VendorsDropShopItem" (Shop Drops), it looks like agent.specialInvDatabase is the right way to go
-
-- May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
-- Traits that will need compatibility:
-  - Shop Drops
-  - That one discount one
+[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+[Info   :  CCU_Core] HasTraitFromList: Method Call
+[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+[Info   :  CCU_Core] HasTraitFromList: Method Call
+[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
+[Info   :  CCU_Core] HasTraitFromList: Method Call
+[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
 
 ---
-# Implementation
+##		Safecrack Job
+Ready to test
+##		Vendor Shops
+Ready to test
 
-## Safecrack job
+---
+
+#	Implementation
+##		Appearance
+RandomSkinHair
+	fillSkinHair
+##		Behavior
+###			Eat Corpse
+###			Grab Drugs
+###			Grab Money
+###			Pickpocket
+###			Suck Blood
+##		Hire
+###			Bodyguard
+###			Break In
+###			Cause a Ruckus
+###			Cost - Banana
+###			Cost - Less
+###			Cost - More
+###			Hack
+###			Safecrack
 
 Here's what comes up for Lockpick job:
 	Agent
@@ -131,14 +108,37 @@ Objects to Analyze/track:
 		job
 		jobCode
 		target.targetType
+####			Tamper
+Pending results of Safecrack attempt
+##		Interaction
+###			Extortable
+###			Fence
+###			Moochable
+###			Vendor Buyer
+##		Item Groups
+uwumacaronitime's idea: Item groups similar to NPC groups
 
-## Trait hiding
+I can see this going two ways: 
+- As a trait for NPCs to generate with
+- As a designated item in the chunk creator for use in NPC & Object inventories. 
 
-### Character Creation, Player Edition (CharacterCreation)
+I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
+##		Loadout
+  - InvDatabase.FillAgent
+##		Relationships
+###			Faction Traits
+###			Vanilla Faction Traits
+For allying people and factions to Crepe/Blahd, etc.
+##		Trait Triggers
+###			Honorable Thief
+Worked for pickpocket
+##		UI - Trait Hiding
+
+###			Character Creation, Player Edition (CharacterCreation)
 
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
 
-### Character Select (CharacterSelect)
+###			Character Select (CharacterSelect)
 
 Aspects to hide from CharSelect screen:
 
@@ -155,7 +155,7 @@ Trait Trigger
 Vendor
 	Works
 
-### Character Sheet (CharacterSheet)
+###			Character Sheet (CharacterSheet)
 
 Behavior
 	Works
@@ -170,13 +170,45 @@ Relationships
 Trait Trigger
 	Doesn't Work
 Vendor
+##		Vendor
+###			General
+- Shop worked, but was empty
 
-## Thief Hire
+Agent
+√	.CanShakeDown					For Extortable
+InvDatabase
+√	.AddRandItem					AccessTools returning void
+√	.FillSpecialInv					Skip
+PlayfieldObject
+√	.determineMoneyCost
+RandomAgentItems
+√	.fillItems
 
-## Thief Honorable
-Worked for pickpocket
 
-## Thief Vendor
+Analyzing: agent.hasSpecialInvDatabase
+Analyzing: agent.SpecialInvDatabase
+
+Agent
+√	.CanShakeDown
+√	.RecycleStart2					Skip
+√	.RevertAllVars					Skip
+AgentInteractions
+√	.DetermineButtons
+ObjectMult
+√	.InteractSuccess				Skip
+PlayfieldObject
+√	.SetupSpecialInvDatabase		Skip
+PoolsScene
+√	.ResetAgent						Skip
+StatusEffects
+√	.SetupDeath						Skip, Shopdrops will be automatic
+
+
+- May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
+- Traits that will need compatibility:
+  - Shop Drops
+  - That one discount one
+###			Thief Vendor
 - Special Inv filling: 
   - InvDatabase.FillSpecialInv
   - InvDatabase.AddRandItem
@@ -184,6 +216,3 @@ Worked for pickpocket
       - I am hoping this is taken care of automatically. Testing will show.
   - Keep an eye out for agent name checks, one of these will need to be patched
   - InvDatabase.rnd.RandomSelect(rName, "Items")
-
-## Agent Loadouts
-  - InvDatabase.FillAgent
