@@ -25,7 +25,7 @@ namespace CCU.Patches.Inventory
 			string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypes).Name;
 			logger.LogDebug("\trName: " + rName);
 
-			if (__instance.CompareTag("Agent") && !(rName is null))
+			if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 			{
 				string text;
 

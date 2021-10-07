@@ -1,14 +1,6 @@
 ﻿#	Test Notes / Bugfixing
 ##		00 Initial Load Errors
 
-##		BrainUpdate 
-- On Hire:
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-	[Error  : Unity Log] AI Update Error: Custom (1124) (Agent)
-- Check out brain.AddSubgoal, as jobs are passed to it
 ##		Chunk Editor
 - Tried to place Safe, then this: 
 	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
@@ -50,6 +42,8 @@ ADD:
 
 ---
 ##		Hire AI Update Error
+- Don't test this with Safecrack yet - more vanilla ones will help identify issue
+
 - Hired NPC. Once hired, they couldn't move and framerate skipped
   - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
   - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
@@ -67,6 +61,7 @@ ADD:
 [Info   :  CCU_Core] PressedButton_Prefix: Method Call
 [Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
 
+- Check out brain.AddSubgoal, as jobs are passed to it
 ---
 ##		Safecrack Job
 Ready to test
