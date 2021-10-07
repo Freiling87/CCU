@@ -157,20 +157,19 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.LOSTraits))
+			{
+				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(33))
+					return;
+
+				__instance.losCheckAtIntervals = true;
+			}
+
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.VendorTypes))
 			{
 				logger.LogDebug("Vendor found: " + TraitManager.GetOnlyTraitFromList(__instance, TraitManager.VendorTypes));
 
 				__instance.SetupSpecialInvDatabase();
-			}
-
-			// May want to generalize into LOSCheckTraits, but this might be the only one that's on a coin toss (done in LoadLevel.SetupMore3_3 when spawning roamers)
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.LOSTraits))
-			{
-				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(50)) 
-					return;
-
-				__instance.losCheckAtIntervals = true;
 			}
 		}
 	}

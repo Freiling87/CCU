@@ -77,7 +77,8 @@ ADD:
 ##		Safecrack Job
 Ready to test
 ##		Vendor Shops
-Still empty, need more logging. After PressedButton("Buy"), but the issue is more likely hasSpecialInvDatabase or specialInvDatabase. Is the bool ever flipped to true in patches?
+Still empty, need more logging. After PressedButton("Buy")
+I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
 
 ---
 
