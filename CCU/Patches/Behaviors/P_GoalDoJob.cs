@@ -1,4 +1,5 @@
-﻿using CCU.Content;
+﻿using BepInEx.Logging;
+using CCU.Content;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace CCU.Patches.Behaviors
 	[HarmonyPatch(declaringType: typeof(GoalDoJob))]
 	public static class P_GoalDoJob
 	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDoJob.Activate))]
 		public static void Activate_Postfix(GoalDoJob __instance)
 		{
@@ -24,8 +28,12 @@ namespace CCU.Patches.Behaviors
 			}
 			else if (__instance.curJob == CJob.TamperSomething)
 			{
-				GoalTamperSomething subGoal2 = new GoalTamperSomething();
-				__instance.brain.AddSubgoal(__instance, subGoal2);
+				logger.LogDebug("Not Implemented yet");
+
+				//GoalTamperSomething subGoal2 = new GoalTamperSomething();
+				//__instance.brain.AddSubgoal(__instance, subGoal2);
+
+				return;
 			}
 		}
 

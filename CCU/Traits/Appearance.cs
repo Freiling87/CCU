@@ -14,7 +14,7 @@ using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.FacialHair;
 
-namespace CCU.Traits
+namespace CCU.Patches.Appearance
 {
 	public static class Appearance
 	{
@@ -138,13 +138,13 @@ namespace CCU.Traits
 			CTrait.Appearance_SkinColor_ZombieSkin2
 		};
 		#endregion
-		internal static void RollFacialHair(AgentHitbox agentHitBox, Agent agent)
+		public static void RollFacialHair(AgentHitbox agentHitBox)
 		{
 			Core.LogMethodCall();
 
 			var random = new System.Random();
 
-			List<CustomTrait> pool = agent.GetTraits<CustomTrait>()
+			List<CustomTrait> pool = agentHitBox.agent.GetTraits<CustomTrait>()
 				.Where(trait => FacialHairTraits.Contains(trait.GetType()))
 				.ToList();
 
@@ -167,13 +167,13 @@ namespace CCU.Traits
 				agentHitBox.facialHairWB.gameObject.SetActive(true);
 			}
 		}
-		internal static void RollHairColor(AgentHitbox agentHitBox, Agent agent)
+		public static void RollHairColor(AgentHitbox agentHitBox)
 		{
 		}
-		internal static void RollHairstyle(AgentHitbox agentHitBox, Agent agent)
+		public static void RollHairstyle(AgentHitbox agentHitBox)
 		{
 		}
-		internal static void RollSkinColor(AgentHitbox agentHitBox, Agent agent)
+		public static void RollSkinColor(AgentHitbox agentHitBox)
 		{
 		}
 	}

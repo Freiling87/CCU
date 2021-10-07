@@ -75,8 +75,15 @@ Ready to test
 
 #	Implementation
 ##		Appearance
+
+Search for "Custom" (Agent name
+AgentHitbox
+	.chooseFacialHairType
+CharacterSelect
+	.ChangeHairColor
 RandomSkinHair
-	fillSkinHair
+√	.fillSkinHair
+
 ##		Behavior
 ###			Eat Corpse
 ###			Grab Drugs

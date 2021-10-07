@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CCU.Traits.AI.Interaction;
+using CCU.Traits.FacialHair;
 
 namespace CCU.Traits
 {
@@ -19,6 +20,22 @@ namespace CCU.Traits
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public static List<Type> AppearanceTraits = new List<Type>()
+		{
+			typeof(Beard),
+			typeof(Mustache),
+			typeof(MustcheCircus),
+			typeof(MustacheRedneck),
+			typeof(NoFacialHair),
+		};
+		public static List<Type> FacialHairTraits = new List<Type>()
+		{
+			typeof(Beard),
+			typeof(Mustache),
+			typeof(MustcheCircus),
+			typeof(MustacheRedneck),
+			typeof(NoFacialHair),
+		};
 		public static List<Type> HiddenTraits
 		{
 			get
@@ -134,7 +151,7 @@ namespace CCU.Traits
 				string displayText = unlock.GetName();
 				logger.LogDebug(displayText);
 
-				if (agent.HasTrait(trait))
+				if (agent.HasTrait(displayText))
 				{
 					logger.LogDebug("Found match: " + displayText);
 
