@@ -66,9 +66,11 @@ ADD:
 ##		Safecrack Job
 Ready to test
 ##		Vendor Shops
-Still empty, need more logging. After PressedButton("Buy")
-I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
-
+- Still empty, need more logging. After PressedButton("Buy")
+  - Attempted
+- I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
+  - "ShopkeeperSpecialInv" used in RandomItems.fillItems
+  - Attempted
 ---
 
 #	Implementation

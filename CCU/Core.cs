@@ -35,6 +35,7 @@ namespace CCU
         public static void LogMethodCall([CallerMemberName] string callerName = "") =>
             logger.LogInfo(callerName + ": Method Call");
     }
+
     public static class CoreTools
     {
         public static T GetMethodWithoutOverrides<T>(this MethodInfo method, object callFrom)
@@ -346,10 +347,69 @@ namespace CCU
 		#endregion
 		#endregion
 		#region Loadout
-			Loadout_Shapeshifter = "Loadout: Shapeshifter",
-            Loadout_Soldier = "Loadout: Soldier",
-            Loadout_Thief = "Loadout: Thief",
-            Loadout_Worker = "Loadout: Worker",
+			// TODO: See RandomItems.fillItems for the Vanilla lists, and work from there.
+			Loadout_Alcohol = "Loadout: Alcohol (Any tier)",
+			Loadout_Alcohol1 = "Loadout: Alcohol Tier 1",
+			Loadout_Alcohol2 = "Loadout: Alcohol Tier 2",
+			Loadout_Alcohol3 = "Loadout: Alcohol Tier 3",
+			Loadout_Armor = "Loadout: Armor (Any tier)",
+			Loadout_Armor1 = "Loadout: Armor Tier 1",
+			Loadout_Armor2 = "Loadout: Armor Tier 2",
+			Loadout_Armor3 = "Loadout: Armor Tier 3",
+			Loadout_Drugs = "Loadout: Drugs (Any tier)",
+			Loadout_Drugs1 = "Loadout: Drugs Tier 1",
+			Loadout_Drugs2 = "Loadout: Drugs Tier 2",
+			Loadout_Drugs3 = "Loadout: Drugs Tier 3",
+			Loadout_Everyday = "Loadout: Everyday (Any tier)",
+			Loadout_Everyday1 = "Loadout: Everyday Tier 1",
+			Loadout_Everyday2 = "Loadout: Everyday Tier 2",
+			Loadout_Everyday3 = "Loadout: Everyday Tier 3",
+			Loadout_Food = "Loadout: Food (Any tier)",
+			Loadout_Food1 = "Loadout: Food Tier 1",
+			Loadout_Food2 = "Loadout: Food Tier 2",
+			Loadout_Food3 = "Loadout: Food Tier 3",
+			Loadout_Gun = "Loadout: Gun (Any tier)",
+			Loadout_Gun1 = "Loadout: Gun Tier 1",
+			Loadout_Gun2 = "Loadout: Gun Tier 2",
+			Loadout_Gun3 = "Loadout: Gun Tier 3",
+			Loadout_Health = "Loadout: Health (Any tier)",
+			Loadout_Health1 = "Loadout: Health Tier 1",
+			Loadout_Health2 = "Loadout: Health Tier 2",
+			Loadout_Health3 = "Loadout: Health Tier 3",
+			Loadout_Item = "Loadout: Item (Any tier)",
+			Loadout_ItemTier1 = "Loadout: Item Tier 1",
+			Loadout_ItemTier2 = "Loadout: Item Tier 2",
+			Loadout_ItemTier3 = "Loadout: Item Tier 3",
+			Loadout_Junk = "Loadout: Junk",
+			Loadout_Keys = "Loadout: Keys", // Important
+			Loadout_Medical = "Loadout: Medical (Any tier)",
+			Loadout_Medical1 = "Loadout: Medical Tier 1",
+			Loadout_Medical2 = "Loadout: Medical Tier 2",
+			Loadout_Medical3 = "Loadout: Medical Tier 3",
+			Loadout_Melee = "Loadout: Melee (Any tier)",
+			Loadout_Melee1 = "Loadout: Melee Tier 1",
+			Loadout_Melee2 = "Loadout: Melee Tier 2",
+			Loadout_Melee3 = "Loadout: Melee Tier 3",
+			Loadout_OneUseWeapon = "Loadout: One-Use Weapon (Any tier)",
+			Loadout_OneUseWeapon1 = "Loadout: One-Use Weapon Tier 1",
+			Loadout_OneUseWeapon2 = "Loadout: One-Use Weapon Tier 2",
+			Loadout_OneUseWeapon3 = "Loadout: One-Use Weapon Tier 3",
+			Loadout_Supplies = "Loadout: Supplies (Any tier)",
+			Loadout_Supplies1 = "Loadout: Supplies Tier 1",
+			Loadout_Supplies2 = "Loadout: Supplies Tier 2",
+			Loadout_Supplies3 = "Loadout: Supplies Tier 3",
+			Loadout_Tech = "Loadout: Tech (Any tier)",
+			Loadout_Tech1 = "Loadout: Tech Tier 1",
+			Loadout_Tech2 = "Loadout: Tech Tier 2",
+			Loadout_Tech3 = "Loadout: Tech Tier 3",
+			Loadout_Tool = "Loadout: Tool (Any tier)",
+			Loadout_Tool1 = "Loadout: Tool Tier 1",
+			Loadout_Tool2 = "Loadout: Tool Tier 2",
+			Loadout_Tool3 = "Loadout: Tool Tier 3",
+			Loadout_Weapon = "Loadout: Weapon (Any tier)",
+			Loadout_Weapon1 = "Loadout: Weapon Tier 1",
+			Loadout_Weapon2 = "Loadout: Weapon Tier 2",
+			Loadout_Weapon3 = "Loadout: Weapon Tier 3",
 		#endregion
 		#region Misc
 			Chunk_KeyHolder = "Key Holder",

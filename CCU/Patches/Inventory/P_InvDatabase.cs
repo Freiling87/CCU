@@ -103,5 +103,14 @@ namespace CCU.Patches.Inventory
 
 			return true;
 		}
+
+		// [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))] // TODO
+		public static void FillAgent_Postfix(InvDatabase __instance)
+		{
+			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.LoadoutTraits))
+			{
+
+			}
+		}
 	}
 }

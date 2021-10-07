@@ -55,6 +55,10 @@ namespace CCU.Traits
 			typeof(Interaction_Moochable),
 			typeof(Interaction_VendorBuyer), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
+		public static List<Type> LoadoutTraits = new List<Type>()
+		{
+
+		};
 		public static List<Type> LOSTraits = new List<Type>()
 		{
 			typeof(Behavior_EatCorpse),
@@ -116,27 +120,6 @@ namespace CCU.Traits
 			typeof(Vendor_Villain),
 		};
 
-		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
-		{
-			Core.LogMethodCall();
-
-			foreach (Type trait in traitList)
-			{
-				TraitInfo info = TraitInfo.Get(trait);
-				TraitUnlock unlock = RogueLibs.GetUnlock<TraitUnlock>(info.Name);
-				string displayText = unlock.GetName();
-				logger.LogDebug(displayText);
-
-				if (agent.HasTrait(trait))
-				{
-					logger.LogDebug("Found match: " + displayText);
-
-					return true;
-				}
-			}
-
-			return false;
-		}
 		public static Type GetOnlyTraitFromList(Agent agent, List<Type> traitList)
 		{
 			if (traitList.Count() == 0)
@@ -161,13 +144,26 @@ namespace CCU.Traits
 
 			return null;
 		}
-		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList)
+		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
 		{
-			List<string> traitNames = HiddenTraits.ConvertAll(t => TraitInfo.Get(t).Name);
+			Core.LogMethodCall();
 
-			return traitList
-				.Where(trait => !(traitNames.Contains(trait.traitName)))
-				.ToList();
+			foreach (Type trait in traitList)
+			{
+				TraitInfo info = TraitInfo.Get(trait);
+				TraitUnlock unlock = RogueLibs.GetUnlock<TraitUnlock>(info.Name);
+				string displayText = unlock.GetName();
+				logger.LogDebug(displayText);
+
+				if (agent.HasTrait(trait))
+				{
+					logger.LogDebug("Found match: " + displayText);
+
+					return true;
+				}
+			}
+
+			return false;
 		}
 		public static void LogTraitList(Agent agent)
 		{
@@ -175,6 +171,14 @@ namespace CCU.Traits
 
 			foreach (Trait trait in agent.statusEffects.TraitList)
 				logger.LogDebug("\t" + trait.traitName);
+		}
+		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList)
+		{
+			List<string> traitNames = HiddenTraits.ConvertAll(t => TraitInfo.Get(t).Name);
+
+			return traitList
+				.Where(trait => !(traitNames.Contains(trait.traitName)))
+				.ToList();
 		}
 	}
 }
