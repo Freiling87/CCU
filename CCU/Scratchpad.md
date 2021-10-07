@@ -2,7 +2,6 @@
 ##		00 Initial Load Errors
 
 ##		BrainUpdate 
-
 [Info   :  CCU_Core] HasTraitFromList: Method Call
 [Info   :  CCU_Core] DetermineButtons_Prefix: Hire
 [Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
@@ -110,7 +109,7 @@ Here's what comes up for Lockpick job:
 	AgentInteractions
 √		.DetermineButtons
 √		.LockpickDoor				
-√		.PressedButton				Passed name CauseRuckus to invInterface.ShowTarget, to avoid errors for now
+√		.PressedButton	
 	GoalDoJob
 √		.Activate
 √		.Terminate
@@ -137,6 +136,9 @@ Objects to Analyze/track:
 		job
 		jobCode
 		target.targetType
+
+In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
+
 ####			Tamper
 Pending results of Safecrack attempt
 ##		Interaction

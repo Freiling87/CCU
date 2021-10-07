@@ -26,8 +26,7 @@ namespace CCU.Patches.Objects
 		{
 			Agent agent = (Agent)playfieldObject;
 
-			if ((agent.commander.target.targetType == CJob.SafecrackSafe || agent.commander.target.targetType == CJob.TamperSomething) &&
-				otherObject != null)
+			if ((agent.commander.target.targetType == CJob.SafecrackSafe || agent.commander.target.targetType == CJob.TamperSomething) && otherObject != null)
 			{
 				if (agent.gc.splitScreen && Vector2.Distance(agent.commander.curPosition, otherObject.curPosition) > 15f)
 					return false;

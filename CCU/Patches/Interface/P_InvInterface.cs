@@ -21,6 +21,7 @@ namespace CCU.Patches.Interface
 		{
 			if (__instance.mainGUI.targetItem != null)
 			{
+				// Highlight Objects
 				for (int i = 0; i < GC.objectRealList.Count; i++)
 				{
 					ObjectReal objectReal = GC.objectRealList[i];
@@ -34,6 +35,7 @@ namespace CCU.Patches.Interface
 					}
 				}
 
+				// Highlight Agents
 				for (int j = 0; j < GC.agentList.Count; j++)
 				{
 					Agent agent = GC.agentList[j];
@@ -47,6 +49,7 @@ namespace CCU.Patches.Interface
 					}
 				}
 
+				// Rogue Vision
 				if (__instance.mainGUI.agent.hasRogueVision)
 				{
 					__instance.mainGUI.agent.brainUpdate.RogueVisionChecks();
@@ -56,6 +59,7 @@ namespace CCU.Patches.Interface
 			}
 			else if (__instance.mainGUI.targetObject != null)
 			{
+				// Highlight Objects
 				for (int k = 0; k < GC.itemList.Count; k++)
 				{
 					Item item = GC.itemList[k];
@@ -72,6 +76,7 @@ namespace CCU.Patches.Interface
 
 				string targetType = __instance.mainGUI.agent.target.targetType;
 
+				// Target Actions
 				if (targetType == "LockpickDoor")
 				{
 					for (int l = 0; l < GC.objectRealList.Count; l++)
@@ -135,6 +140,23 @@ namespace CCU.Patches.Interface
 						{
 							objectReal2.objectSprite.useWithItem2[__instance.mainGUI.agent.isPlayer - 1] = false;
 
+							if (__instance.mainGUI.targetObject.TargetObject(objectReal2, ""))
+								objectReal2.objectSprite.SetHighlight("Target", __instance.mainGUI.agent);
+						}
+					}
+
+					return false;
+				}
+				else if (targetType == CJob.TamperSomething)
+				{
+					for (int l = 0; l < GC.objectRealList.Count; l++)
+					{
+						ObjectReal objectReal2 = GC.objectRealList[l];
+						
+						if (vObject.TamperableObjects.Contains(objectReal2.objectName))
+						{
+							objectReal2.objectSprite.useWithItem2[__instance.mainGUI.agent.isPlayer - 1] = false;
+					
 							if (__instance.mainGUI.targetObject.TargetObject(objectReal2, ""))
 								objectReal2.objectSprite.SetHighlight("Target", __instance.mainGUI.agent);
 						}
