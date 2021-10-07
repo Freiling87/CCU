@@ -50,18 +50,26 @@ ADD:
     - Nope, that wasn't it. 
   - Occurs for both Bodyguard & targeted skill jobs
 
-[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+	[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
 
-- Check out brain.AddSubgoal, as jobs are passed to it
+- Check out brain.AddSubgoal, as jobs are passed to it3
+- After killing a bugged Agent:
+	CCU.Patches.Behaviors.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <2052eae91fad498b965def95486033b6>:0)
+	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	System.DefaultBinder.BindToMethod (System.Reflection.BindingFlags bindingAttr, System.Reflection.MethodBase[] match, System.Object[]& args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo cultureInfo, System.String[] names, System.Object& state) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <2052eae91fad498b965def95486033b6>:0)
 ---
 ##		Safecrack Job
 Ready to test
@@ -71,6 +79,18 @@ Ready to test
 - I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
   - "ShopkeeperSpecialInv" used in RandomItems.fillItems
   - Attempted
+- After putting in logging messages:
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+  - So none of them are firing. 
+
 ---
 
 #	Implementation
