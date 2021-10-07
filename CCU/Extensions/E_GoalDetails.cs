@@ -15,6 +15,29 @@ namespace CCU.Extensions
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// Based on Window.FinishWindowCutter
+		public static void FinishSafecracker(Safe safe, Agent causerAgent)
+		{
+			if (GC.serverPlayer)
+			{
+				safe.lastHitByAgent = causerAgent;
+				//safe.SpecialWindowDestroy(causerAgent);
+				safe.UnlockSafe(); // TODO: Verify
+				safe.gc.spawnerMain.SpawnNoise(safe.tr.position, 0.5f, null, null, causerAgent);
+				safe.gc.OwnCheck(causerAgent, safe.go, "Normal", 0);
+				causerAgent.skillPoints.AddPoints("UnlockSafePoints");
+
+				return;
+			}
+
+			//safe.SpecialWindowDestroy(causerAgent);
+			safe.UnlockSafe(); //
+			causerAgent.objectMult.ObjectAction(safe.objectNetID, "FinishSafecrack");
+		}
+
+		// TODO: FinishTamperSomething
+		// Will need a split where UnlockSafe is used based on Object type
+
 		// Based on LockpickDoorReal
 		public static void SafecrackSafeReal(GoalDetails goalDetails, Agent agent)
 		{
@@ -79,24 +102,6 @@ namespace CCU.Extensions
 			}
 		}
 
-		// Based on Window.FinishWindowCutter
-		public static void FinishSafecracker(Safe safe, Agent causerAgent)
-		{
-			if (GC.serverPlayer)
-			{
-				safe.lastHitByAgent = causerAgent;
-				//safe.SpecialWindowDestroy(causerAgent);
-				safe.UnlockSafe(); //
-				safe.gc.spawnerMain.SpawnNoise(safe.tr.position, 0.5f, null, null, causerAgent);
-				safe.gc.OwnCheck(causerAgent, safe.go, "Normal", 0);
-				causerAgent.skillPoints.AddPoints("UnlockSafePoints");
-
-				return;
-			}
-
-			//safe.SpecialWindowDestroy(causerAgent);
-			safe.UnlockSafe(); //
-			causerAgent.objectMult.ObjectAction(safe.objectNetID, "FinishSafecrack");
-		}
+		// TODO: TamperSomethingReal
 	}
 }

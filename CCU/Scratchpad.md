@@ -2,13 +2,15 @@
 ##		00 Initial Load Errors
 
 ##		BrainUpdate 
-[Info   :  CCU_Core] HasTraitFromList: Method Call
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-[Error  : Unity Log] AI Update Error: Custom (1124) (Agent)
+- On Hire:
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+	[Error  : Unity Log] AI Update Error: Custom (1124) (Agent)
+- Check out brain.AddSubgoal, as jobs are passed to it
 ##		Chunk Editor
-Tried to place Safe, then this: 
+- Tried to place Safe, then this: 
 	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
 	Stack trace:
 	tk2dRuntime.TileMap.RenderMeshBuilder.BuildForChunk (tk2dTileMap tileMap, tk2dRuntime.TileMap.SpriteChunk chunk, tk2dRuntime.TileMap.ColorChunk colorChunk, System.Boolean useColor, System.Boolean skipPrefabs, System.Int32 baseX, System.Int32 baseY) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
@@ -19,15 +21,7 @@ Tried to place Safe, then this:
 	LevelEditor.LeftClickAction (LevelEditorTile myTile) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	LevelEditor.PressedMouseButton (System.Int32 buttonNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	LevelEditor.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-
-	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
-	Stack trace:
-	tk2dRuntime.TileMap.RenderMeshBuilder.BuildForChunk (tk2dTileMap tileMap, tk2dRuntime.TileMap.SpriteChunk chunk, tk2dRuntime.TileMap.ColorChunk colorChunk, System.Boolean useColor, System.Boolean skipPrefabs, System.Int32 baseX, System.Int32 baseY) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	tk2dRuntime.TileMap.RenderMeshBuilder.Build (tk2dTileMap tileMap, System.Boolean editMode, System.Boolean forceBuild) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	tk2dTileMap.Build (tk2dTileMap+BuildFlags buildFlags) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	tk2dTileMap.Build () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LevelEditor.ReleasedMouseButton (System.Int32 buttonNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LevelEditor.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+  - Remove SpritepackLoader and see what happens
 
 ---
 ##		Chunk Editor Shortcuts
@@ -112,7 +106,7 @@ Here's what comes up for Lockpick job:
 √		.LockpickDoor				
 √		.PressedButton	
 	GoalDoJob
-√		.Activate
+√		.Activate					Check out 
 √		.Terminate
 	GoalDetails						E_GoalDetails
 √		.LockpickDoorReal
@@ -125,7 +119,7 @@ Here's what comes up for Lockpick job:
 √		.Process
 √		.Terminate
 	InvInterface
-√		.ShowTarget					Doesn't need patch, but uses GetName(myTargetType, "Interface"); so a Name will probably need to be made for our job types
+√		.ShowTarget					
 √		.ShowTarget2
 	ObjectMult
 		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
@@ -142,6 +136,7 @@ In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholde
 
 ####			Tamper
 Pending results of Safecrack attempt
+### Tamper
 ##		Interaction
 ###			Extortable
 ###			Fence

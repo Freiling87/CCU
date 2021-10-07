@@ -144,6 +144,8 @@ namespace CCU.Patches.Behaviors
 				{
 					if (myAction == CJob.SafecrackSafe)
 						P_AgentInteractions.SafecrackSafe(__instance, causerAgent, extraObject);
+					else if (myAction == CJob.TamperSomething)
+						P_AgentInteractions.TamperSomething(__instance, causerAgent, extraObject);
 
 					___noMoreObjectActions = false;
 				}

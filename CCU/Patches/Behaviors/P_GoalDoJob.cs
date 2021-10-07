@@ -15,11 +15,17 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDoJob.Activate))]
 		public static void Activate_Postfix(GoalDoJob __instance)
 		{
-			if (__instance.curJob == "HireSafecrackTarget")
+			if (__instance.curJob == CJob.SafecrackSafe)
 			{
 				GoalSafecrackSafe subGoal2 = new GoalSafecrackSafe();
 				__instance.brain.AddSubgoal(__instance, subGoal2);
+
 				return;
+			}
+			else if (__instance.curJob == CJob.TamperSomething)
+			{
+				GoalTamperSomething subGoal2 = new GoalTamperSomething();
+				__instance.brain.AddSubgoal(__instance, subGoal2);
 			}
 		}
 
