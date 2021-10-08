@@ -1,7 +1,9 @@
-﻿# Header Symbol Notes
-* = Has attempts ready to test
+﻿#	Header Symbol Notes
+\* = Has attempts ready to test
+
 √ = Fully implemented feature
 
+■ = Pause
 #	00 Initial Load Error Logs
 
 ---
@@ -53,20 +55,21 @@ CharacterSelect
 	.ChangeHairColor
 RandomSkinHair
 √	.fillSkinHair
-###			Accessory √
+###			Accessory ■
 - Try to make this only if people request it.
-###			Body Color √
+###			Body Color ■
 - Try to make this only if people request it.
-###			Body Type √
+###			Body Type ■
 - Try to make this only if people request it.
 ###			Facial Hair
-###			Hairstyle
+
+###			Hairstyle ■
 - Pending FacialHair test
-###			Hair Color
+###			Hair Color ■
 - Pending FacialHair test
-###			Legs Color √
+###			Legs Color ■
 - Try to make this only if people request it.
-###			Skin Color
+###			Skin Color ■
 - Pending FacialHair test
 ##		Behavior *
 ###			Eat Corpse *
