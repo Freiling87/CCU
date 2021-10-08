@@ -1,4 +1,8 @@
-﻿#	00 Initial Load Error Logs
+﻿# Header Symbol Notes
+* = Has attempts ready to test
+√ = Fully implemented feature
+
+#	00 Initial Load Error Logs
 
 ---
 #	Chunk Editor *
@@ -216,7 +220,16 @@ Possible future bug: If you create a character in DE, and edit/resave them in PE
 		Doesn't Work
 	Vendor
 ##		Vendor
-###			00
+###			00 No Button
+- "Buy" button no longer showing up
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+###			General
 Agent
 √	.CanShakeDown					For Extortable
 InvDatabase
