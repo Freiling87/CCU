@@ -103,7 +103,6 @@ CharacterSelect
 	.ChangeHairColor
 RandomSkinHair
 √	.fillSkinHair
-
 ##		Behavior
 ###			Eat Corpse
 ###			Grab Drugs

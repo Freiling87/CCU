@@ -11,6 +11,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
 using CCU.Traits;
 using Random = UnityEngine.Random;
+using CCU.Patches.Appearance;
 
 namespace CCU.Patches.Appearance
 {
@@ -27,7 +28,7 @@ namespace CCU.Patches.Appearance
 
 			if (TraitManager.HasTraitFromList(agent, TraitManager.FacialHairTraits))
 			{
-				RollFacialHair(__instance);
+				Appearance.RollFacialHair(__instance);
 			}
 			
 			if (__instance.canHaveFacialHair)
