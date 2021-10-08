@@ -1,8 +1,8 @@
 ﻿#	00 Initial Load Error Logs
 
 ---
-#	Chunk Editor
-##		00 Error Logs Unidentified
+#	Chunk Editor *
+##		00 Error Logs Unidentified *
 - Tried to place Safe, then this: 
 	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
 	Stack trace:
@@ -49,16 +49,29 @@ CharacterSelect
 	.ChangeHairColor
 RandomSkinHair
 √	.fillSkinHair
-##		Behavior
-###			Eat Corpse
-###			Grab Drugs
-###			Grab Money
-###			Pickpocket
-###			Suck Blood
+###			Accessory √
+- Try to make this only if people request it.
+###			Body Color √
+- Try to make this only if people request it.
+###			Body Type √
+- Try to make this only if people request it.
+###			Facial Hair
+###			Hairstyle
+- Pending FacialHair test
+###			Hair Color
+- Pending FacialHair test
+###			Legs Color √
+- Try to make this only if people request it.
+###			Skin Color
+- Pending FacialHair test
+##		Behavior *
+###			Eat Corpse *
+###			Grab Drugs *
+###			Grab Money *
+###			Pickpocket *
+###			Suck Blood *
 ##		Hire
 ###			00 General AI Update error
-- Don't test this with Safecrack yet - more vanilla ones will help identify issue
-
 - Hired NPC. Once hired, they couldn't move and framerate skipped
   - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
   - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
@@ -75,8 +88,7 @@ RandomSkinHair
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
 	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
 	[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
-
-- Check out brain.AddSubgoal, as jobs are passed to it3
+- Check out brain.AddSubgoal, as jobs are passed to it
 - After killing a bugged Agent:
 	CCU.Patches.Behaviors.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <2052eae91fad498b965def95486033b6>:0)
 	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
@@ -134,7 +146,7 @@ In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholde
 
 ####			Tamper
 Pending results of Safecrack attempt
-### Tamper
+###			Tamper
 ##		Interaction
 ###			Extortable
 ###			Fence
@@ -149,58 +161,60 @@ I can see this going two ways:
 - As a designated item in the chunk creator for use in NPC & Object inventories. 
 
 I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-###			ChunkKey
+###			ChunkKey *
 - Attempted - InvDatabase.FillAgent()
-###			ChunkMayorBadge
+###			ChunkMayorBadge *
 - Attempted - InvDatabase.FillAgent()
-###			ChunkSafeCombo
+###			ChunkSafeCombo *
 - Attempted - InvDatabase.FillAgent()
 ###			Guns_Common
 ##		Relationships
-###			Faction Traits
-###			Vanilla Faction Traits
-For allying people and factions to Crepe/Blahd, etc.
-##		Trait Triggers
-###			Honorable Thief
+###			Faction Blahd
+###			Faction Cannibal
+###			Faction Crepe
+###			Faction Gorilla
+###			Faction Law
+###			Faction Mafia
+###			Faction Soldier
+###			Factions 1-4 √
+##		Trait Triggers *
+###			Common Folk *
+###			Cool Cannibal *
+###			Cop Access *
+###			Honorable Thief *
 Worked for pickpocket
 ##		UI - Trait Hiding
-
 ###			Character Creation, Player Edition (CharacterCreation)
-
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
-
 ###			Character Select (CharacterSelect)
-
-Aspects to hide from CharSelect screen:
-
-Behavior
-	Not sure
-Facial Hair
-	Doesn't Work
-Hire
-	Works
-Hire Specials (Not on list)
-	Doesn't work
-Trait Trigger
-	Doesn't Work
-Vendor
-	Works
-
+- Aspects to hide from CharSelect screen:
+	Behavior
+		Not sure
+	Facial Hair
+		Doesn't Work
+	Hire
+		Works
+	Hire Specials (Not on list)
+		Doesn't work
+	Trait Trigger
+		Doesn't Work
+	Vendor
+		Works
 ###			Character Sheet (CharacterSheet)
-
-Behavior
-	Works
-Facial Hair
-	Doesn't Work
-Hire
-	Works
-Hire Specials (Not on list)
-	Doesn't work
-Relationships
-	Doesn't work
-Trait Trigger
-	Doesn't Work
-Vendor
+- Aspects to hide from Character Sheet:
+	Behavior
+		Works
+	Facial Hair
+		Doesn't Work
+	Hire
+		Works
+	Hire Specials (Not on list)
+		Doesn't work
+	Relationships
+		Doesn't work
+	Trait Trigger
+		Doesn't Work
+	Vendor
 ##		Vendor
 ###			00
 Agent
@@ -249,14 +263,11 @@ StatusEffects
 	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
   - So none of them are firing. 
 
-
-
-
 - May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
 - Traits that will need compatibility:
   - Shop Drops
   - That one discount one
-###			Thief Vendor
+###			Vendor Thief (Pilot type)
 - Special Inv filling: 
   - InvDatabase.FillSpecialInv
   - InvDatabase.AddRandItem
