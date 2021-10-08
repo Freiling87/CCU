@@ -110,7 +110,7 @@
     <Compile Include="Patches\Behaviors\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
-    <Compile Include="Patches\Inventory\P_CharacterCreation.cs" />
+    <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
@@ -192,6 +192,10 @@
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Traits\Loadout\ChunkKey.cs" />
+    <Compile Include="Traits\Loadout\ChunkMayorBadge.cs" />
+    <Compile Include="Traits\Loadout\ChunkSafeCombo.cs" />
+    <Compile Include="Traits\Loadout\Guns_Common.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\AI\Hire\Hire_BreakIn.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_HonorableThief.cs" />

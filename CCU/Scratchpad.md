@@ -1,7 +1,8 @@
-﻿#	Test Notes / Bugfixing
-##		00 Initial Load Errors
+﻿#	00 Initial Load Error Logs
 
-##		Chunk Editor
+---
+#	Chunk Editor
+##		00 Error Logs Unidentified
 - Tried to place Safe, then this: 
 	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
 	Stack trace:
@@ -16,8 +17,7 @@
   - Remove SpritepackLoader and see what happens
 
 ---
-##		Chunk Editor Shortcuts
-
+##		Hotkeys
 Ctrl + O load shows all menus but doesn't load anything
 F9 load works but shows chunk selection menu
 
@@ -39,9 +39,24 @@ Ctrl A
 ADD:
 	ALT trail for overhead menus
 	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
-
----
-##		Hire AI Update Error
+#	Traits
+##		Appearance
+###			00
+Search for "Custom" (Agent name
+AgentHitbox
+	.chooseFacialHairType
+CharacterSelect
+	.ChangeHairColor
+RandomSkinHair
+√	.fillSkinHair
+##		Behavior
+###			Eat Corpse
+###			Grab Drugs
+###			Grab Money
+###			Pickpocket
+###			Suck Blood
+##		Hire
+###			00 General AI Update error
 - Don't test this with Safecrack yet - more vanilla ones will help identify issue
 
 - Hired NPC. Once hired, they couldn't move and framerate skipped
@@ -70,46 +85,6 @@ ADD:
 	System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
 	System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
 	CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <2052eae91fad498b965def95486033b6>:0)
----
-##		Safecrack Job
-Ready to test
-##		Vendor Shops
-- Still empty, need more logging. After PressedButton("Buy")
-  - Attempted
-- I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
-  - "ShopkeeperSpecialInv" used in RandomItems.fillItems
-  - Attempted
-- After putting in logging messages:
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-  - So none of them are firing. 
-
----
-
-#	Implementation
-##		Appearance
-
-Search for "Custom" (Agent name
-AgentHitbox
-	.chooseFacialHairType
-CharacterSelect
-	.ChangeHairColor
-RandomSkinHair
-√	.fillSkinHair
-##		Behavior
-###			Eat Corpse
-###			Grab Drugs
-###			Grab Money
-###			Pickpocket
-###			Suck Blood
-##		Hire
 ###			Bodyguard
 ###			Break In
 ###			Cause a Ruckus
@@ -165,7 +140,8 @@ Pending results of Safecrack attempt
 ###			Fence
 ###			Moochable
 ###			Vendor Buyer
-##		Item Groups
+##		Loadout
+###			Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
 
 I can see this going two ways: 
@@ -173,8 +149,13 @@ I can see this going two ways:
 - As a designated item in the chunk creator for use in NPC & Object inventories. 
 
 I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-##		Loadout
-  - InvDatabase.FillAgent
+###			ChunkKey
+- Attempted - InvDatabase.FillAgent()
+###			ChunkMayorBadge
+- Attempted - InvDatabase.FillAgent()
+###			ChunkSafeCombo
+- Attempted - InvDatabase.FillAgent()
+###			Guns_Common
 ##		Relationships
 ###			Faction Traits
 ###			Vanilla Faction Traits
@@ -221,9 +202,7 @@ Trait Trigger
 	Doesn't Work
 Vendor
 ##		Vendor
-###			General
-- Shop worked, but was empty
-
+###			00
 Agent
 √	.CanShakeDown					For Extortable
 InvDatabase
@@ -252,6 +231,25 @@ PoolsScene
 √	.ResetAgent						Skip
 StatusEffects
 √	.SetupDeath						Skip, Shopdrops will be automatic
+###			00 Empty Inventory
+- Still empty, need more logging. After PressedButton("Buy")
+  - Attempted
+- I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
+  - "ShopkeeperSpecialInv" used in RandomItems.fillItems
+  - Attempted
+- After putting in logging messages:
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+  - So none of them are firing. 
+
+
 
 
 - May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
