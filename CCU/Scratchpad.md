@@ -151,8 +151,7 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
 	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
 	[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
-
-- Check out brain.AddSubgoal, as jobs are passed to it3
+- Check out brain.AddSubgoal, as jobs are passed to it
 - After killing a bugged Agent:
 	CCU.Patches.Behaviors.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <2052eae91fad498b965def95486033b6>:0)
 	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
@@ -351,9 +350,6 @@ StatusEffects
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
 	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
   - So none of them are firing. 
-
-
-
 
 - May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
 - Traits that will need compatibility:
