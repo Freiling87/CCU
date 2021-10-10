@@ -1,12 +1,31 @@
 ﻿# Header Symbol Notes
-* = Has attempts ready to test
-√ = Fully implemented feature
+
+Listed in order of Parent tier summary symbol priority
+
+C, T = Code this, Test this
+H = Hold, usually pending resolution of a separate or grouped issue
+√ = Fully implemented feature or group of features
 
 #	00 Initial Load Error Logs
 
 ---
+#	Campaign Editor √
+Nothing yet
+
+#	Character Editor
+##	C	Trait Hiding
+The notes for this are somewhere under #Traits and need to be moved
+##	C	Portrail Thumbnail Screenshot
+New
+##	C	Stat Screen Screenshot
+New
+##	C	User Settings panel for automation here
+New
+##	C	Character description text upload
+New
+
 #	Chunk Editor
-##		00 Error Logs Unidentified
+##	C	00 Error Logs Unidentified
 - Tried to place Safe, then this: 
 	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
 	Stack trace:
@@ -21,31 +40,78 @@
   - Remove SpritepackLoader and see what happens
 
 ---
-##		Hotkeys
+##	C	District Object De-Limitation
+E.g. Slime Barrels, Fire Grates
+##	C	Edges Blocked Warning on Save
+If it's not already a thing
+##	CT	Hotkeys
+###		C	Alt + Security Cam - Highlight Visible Tiles
+New
+###		√	Alt + NumKeys, NumPad - Menu Trails
+ALT trail for overhead menus
+This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
+###		T	Arrows - Not sure
+No effect
+###		T	Ctrl + A - Deselect All
+Doesn't work
+###		√	Ctrl + A - Select All
+Works
+###		T	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
+Not sure rn
+###		C	Ctrl + O - Open
 Ctrl + O load shows all menus but doesn't load anything
-F9 load works but shows chunk selection menu
+###		√	Ctrl + S - Save
+Works
+###		C	Ctrl + Y - Redo
+New
+###		C	Ctrol + Z - Undo
+New
+###		C	F5 - Quicksave
+Save works but shows menus
+###		C	F9 - Quickload
+load works but shows chunk selection menu
+###		C	F12 - Play Chunk
+New
+###		√	NumKeys - Select Layer
+Works
+###		C	Q, E - Rotate Draw Object
+Default to North as from-direction if None
+Not sure if any attempts
+###		C	Q, E - Match current direction to set to None
+New
+###		C	Shift + Ctrl - Filter View to Layer, and display Owner ID on all tiles
+New
+###		C	Shift + Ctrl - Display Patrol IDs (group, not sequence) on all Points
+New
+###		C	Shift + Alt - Display Patrol Sequence IDs on all Points in field Patrol ID 
+New
+###		T	Shift + Tab - Reverse-Tab through fields
+Not sure
+###		T	Tab - Tab through fields
+Not sure
+##	C	Item Groups
+For placement in containers/inventories
+##	C	Multiple In Chunk field for NPC Group selection
+New
+##	C	Red-Tint Out-Of-District Objects
+I.e., Show stuff that won't show up
 
-Ctrl + S works fine
-F5 Save works but shows menus
+#	Chunk Pack Editor √
+Nothing yet
 
-Ctrl Numkeys
+#	Level Editor
+##	C	Hotkeys
+Put the specifics in ### here
 
-Q,E 
-	Default to North as from-direction if None
+#	Player Utilities
+##	C	Show Chunk info on Mouseover in Map mode
+- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
+  - Gives credit to author
+  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
 
-Arrows 
-	No effect
-
-Ctrl A
-	Select all works
-	Toggle off doesn't
-
-ADD:
-	ALT trail for overhead menus
-	Maybe [1][2],etc. indicators on menu buttons as hotkey hints
 #	Traits
-##		Appearance
-###			00
+##	C	Appearance
+###		C	Facial Hair
 Search for "Custom" (Agent name
 AgentHitbox
 	.chooseFacialHairType
@@ -53,14 +119,20 @@ CharacterSelect
 	.ChangeHairColor
 RandomSkinHair
 √	.fillSkinHair
-##		Behavior
-###			Eat Corpse
-###			Grab Drugs
-###			Grab Money
-###			Pickpocket
-###			Suck Blood
-##		Hire
-###			00 General AI Update error
+###		C	Hair Color
+Go ahead and try. Knowing the code they all work differently anyway :)
+###		C	Hairstyle
+Go ahead and try. Knowing the code they all work differently anyway :)
+###		C	Skin Color
+Go ahead and try. Knowing the code they all work differently anyway :)
+##	T	Behavior
+###		T	Drink Blood
+###		T	Eat Corpse
+###		T	Grab Drugs
+###		T	Grab Money
+###		T	Pickpocket
+##	CT	Hire
+###		C	00 General AI Update error
 - Don't test this with Safecrack yet - more vanilla ones will help identify issue
 
 - Hired NPC. Once hired, they couldn't move and framerate skipped
@@ -89,14 +161,21 @@ RandomSkinHair
 	System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
 	System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
 	CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <2052eae91fad498b965def95486033b6>:0)
-###			Bodyguard
-###			Break In
-###			Cause a Ruckus
-###			Cost - Banana
-###			Cost - Less
-###			Cost - More
-###			Hack
-###			Safecrack
+###		H	Bodyguard
+Pending General AI Update Error resolution
+###		H	Break In
+Pending General AI Update Error resolution
+###		H	Cause a Ruckus
+Pending General AI Update Error resolution
+###		T	Cost - Banana
+Test
+###		T	Cost - Less
+Test
+###		T	Cost - More
+Test
+###		H	Hack
+Pending General AI Update Error resolution
+###		H	Safecrack
 
 Here's what comes up for Lockpick job:
 	Agent
@@ -139,13 +218,17 @@ In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholde
 ####			Tamper
 Pending results of Safecrack attempt
 ### Tamper
-##		Interaction
-###			Extortable
-###			Fence
-###			Moochable
-###			Vendor Buyer
-##		Loadout
-###			Item Groups
+##	C	Interaction
+###		C	Extortable
+New
+###		C	Fence
+New
+###		C	Moochable
+New
+###		C	Vendor Buyer
+New
+##	CT	Loadout
+###		C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
 
 I can see this going two ways: 
@@ -153,27 +236,35 @@ I can see this going two ways:
 - As a designated item in the chunk creator for use in NPC & Object inventories. 
 
 I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-###			ChunkKey
+###		T	ChunkKey
 - Attempted - InvDatabase.FillAgent()
-###			ChunkMayorBadge
+###		T	ChunkMayorBadge
 - Attempted - InvDatabase.FillAgent()
-###			ChunkSafeCombo
+###		T	ChunkSafeCombo
 - Attempted - InvDatabase.FillAgent()
-###			Guns_Common
-##		Relationships
-###			Faction Traits
-###			Vanilla Faction Traits
+###		C	Guns_Common
+##	C	NPC Groups
+###		C	Roamer LevelFeature
+###		C	Slum NPCs
+##	C	Relationships
+###		√	Faction Traits
+Complete
+###		C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
-##		Trait Triggers
-###			Honorable Thief
+##	CT	Trait Triggers
+###		C	Common Folk
+New
+###		C	Cool Cannibal
+New
+###		H	Cop	Access
+Pending Vendor issues resolution
+###		T	Honorable Thief
 Worked for pickpocket
-##		UI - Trait Hiding
-
-###			Character Creation, Player Edition (CharacterCreation)
+##	C	UI - Trait Hiding
+###		C	Character Creation, Player Edition (CharacterCreation)
 
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
-
-###			Character Select (CharacterSelect)
+###		C	Character Select (CharacterSelect)
 
 Aspects to hide from CharSelect screen:
 
@@ -189,8 +280,7 @@ Trait Trigger
 	Doesn't Work
 Vendor
 	Works
-
-###			Character Sheet (CharacterSheet)
+###		C	Character Sheet (CharacterSheet)
 
 Behavior
 	Works
@@ -205,8 +295,8 @@ Relationships
 Trait Trigger
 	Doesn't Work
 Vendor
-##		Vendor
-###			00 No Button
+##	CT	Vendor
+###		C	00 No Button
 - "Buy" button no longer showing up
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
@@ -215,7 +305,7 @@ Vendor
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-###			General
+###		√	General Notes
 Agent
 √	.CanShakeDown					For Extortable
 InvDatabase
@@ -244,7 +334,7 @@ PoolsScene
 √	.ResetAgent						Skip
 StatusEffects
 √	.SetupDeath						Skip, Shopdrops will be automatic
-###			00 Empty Inventory
+###		T	00 Empty Inventory
 - Still empty, need more logging. After PressedButton("Buy")
   - Attempted
 - I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
@@ -269,7 +359,7 @@ StatusEffects
 - Traits that will need compatibility:
   - Shop Drops
   - That one discount one
-###			Thief Vendor
+###		H	Thief Vendor
 - Special Inv filling: 
   - InvDatabase.FillSpecialInv
   - InvDatabase.AddRandItem
