@@ -125,12 +125,23 @@ No features planned yet
 Put the specifics in ### here
 
 #	C	Player Utilities
+##		C	Mutators to omit Vanilla content when custom is available
+- If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
+##		C	Save Chunk Pack configuration between loads
+- I.e., only deactivate chunk packs when the player says so!
 ##		C	Show Chunk info on Mouseover in Map mode
 - When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
 
 #	CT	Traits
+###		C	Agent Group
+####		H	Affect Campaign
+Pending pilot
+####		H	Affect Vanilla 
+Pending pilot
+####		C	Slum NPCs (Pilot)
+New
 ##		C	Appearance
 ###			C	Facial Hair
 Search for "Custom" (Agent name
@@ -152,6 +163,34 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 ###			T	Grab Drugs
 ###			T	Grab Money
 ###			T	Pickpocket
+##		C	Combat
+###			C	Coward
+New
+###			C	Fearless
+New
+###			C	Pacifist
+New
+###			C	Use Drugs in Combat
+New
+##		C	Generation
+###			C	Bodyguarded - Cops
+New
+###			C	Bodyguarded - Goons
+New
+###			C	Bodyguarded - Supercops
+New
+###			C	Bodyguarded - Supergoons
+New
+###			C	Enslaved
+New
+###			C	Hide In Bush
+New
+###			C	Hide In Manhole
+New
+###			C	Roaming Gang
+New
+###			C	Slave Owner
+NEw			
 ##		CT	Hire
 ###			C	00 General AI Update error
 - Don't test this with Safecrack yet - more vanilla ones will help identify issue
@@ -263,9 +302,39 @@ I am leaning towards implementing both of these. But whichever is chosen, make i
 ###			T	ChunkSafeCombo
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
+##		T	Map Marker
+###			√	General Notes
+- Check out:
+GC
+	.questMarkerList
+PlayfieldObject
+	.MinimapDisplay
+x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
+x	.SpawnedBigQuetsMarkerRecently	Not relevant
+	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
+Quest
+	.questMarkerPrefab
+QuestMarker
+	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
+###			T	Pilot
+- Prefixed PlayfieldObject.SpawnNewMapMarker
+###			H	Bartender
+Pending pilot
+###			H	Drug Dealer
+Pending pilot
+###			H	Killer Robot
+Pending pilot
+###			H	Question Mark
+Pending pilot
+###			H	Shopkeeper
+Pending pilot
+###			H	Portrait
+Pending customs
 ##		C	NPC Groups
 ###			C	Roamer LevelFeature
+New
 ###			C	Slum NPCs
+New
 ##		C	Relationships
 ###			√	Faction Traits
 Complete

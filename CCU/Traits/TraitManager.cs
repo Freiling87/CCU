@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using CCU.Traits.AI.Interaction;
 using CCU.Traits.FacialHair;
 using CCU.Traits.Relationships;
+using CCU.Traits.MapMarker;
 
 namespace CCU.Traits
 {
@@ -105,6 +106,10 @@ namespace CCU.Traits
 		public static List<Type> LoadoutTraits = new List<Type>()
 		{
 
+		};
+		public static List<Type> MapMarkerTraits = new List<Type>()
+		{
+			typeof(MapMarker_Pilot),
 		};
 		public static List<Type> RelationshipTraits = new List<Type>()
 		{

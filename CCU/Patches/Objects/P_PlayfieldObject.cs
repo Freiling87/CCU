@@ -34,5 +34,13 @@ namespace CCU.Patches.Objects
 			}
 			
 		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
+		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
+		{
+			if (__instance.CompareTag("Agent"))
+				if (TraitManager.HasTraitFromList((Agent)__instance, TraitManager.MapMarkerTraits))
+					__instance.MinimapDisplay();
+		}
 	}
 }

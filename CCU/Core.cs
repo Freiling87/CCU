@@ -312,6 +312,7 @@ namespace CCU
 			MapMarker_DrugDealer = "Map Marker: DrugDealer",
 			MapMarker_Face = "Map Marker: Face",
 			MapMarker_KillerRobot = "Map Marker: KillerRobot",
+			MapMarker_Pilot = "Map Marker: Pilot",
 			MapMarker_QuestionMark = "Map Marker: QuestionMark",
 			MapMarker_Shopkeeper = "Map Marker: Shopkeeper",
 		#endregion
@@ -360,7 +361,8 @@ namespace CCU
 			Spawn_AgentGroup_WhiteCollars = "Spawn: Agent Group - White-Collars",
 		#endregion
 		#region Generation
-			Spawn_BodyguardedGoons = "Spawn: Bodyguarded by Goons", // There is a "Bodyguard" trait in the source code apparently
+			Spawn_BodyguardedCops = "Spawn: Bodyguarded by Cops",
+			Spawn_BodyguardedGoons = "Spawn: Bodyguarded by Goons",
 			Spawn_BodyguardedSupercops = "Spawn: Bodyguarded by Supercops",
 			Spawn_BodyguardedSupergoons = "Spawn: Bodyguarded by Supergoons",
 			Spawn_Enslaved = "Spawn: Enslaved",

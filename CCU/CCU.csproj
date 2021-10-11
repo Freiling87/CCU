@@ -196,6 +196,7 @@
     <Compile Include="Traits\Loadout\ChunkMayorBadge.cs" />
     <Compile Include="Traits\Loadout\ChunkSafeCombo.cs" />
     <Compile Include="Traits\Loadout\Guns_Common.cs" />
+    <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\AI\Hire\Hire_BreakIn.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_HonorableThief.cs" />
