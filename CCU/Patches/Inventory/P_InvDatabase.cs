@@ -25,11 +25,14 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
 		{
+			if (__instance.agent is null)
+				return true;
+
 			Core.LogMethodCall();
 
 			string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
 
-			if (!(__instance.agent is null) && __instance.CompareTag("SpecialInvDatabase") && !(rName is null))
+			if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 			{
 				logger.LogDebug("\trName: " + rName);
 				string text;

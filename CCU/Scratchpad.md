@@ -20,22 +20,6 @@ H = Hold, usually pending resolution of a separate or grouped issue
 	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 
-###				2
-	[Info   : Unity Log] 100% - SETUPMORE4
-	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-	Parameter name: agent
-	Stack trace:
-	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.String traitName) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	CCU.Traits.TraitManager.GetOnlyTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <defe18e7ffdc4197a71d3338e3b00119>:0)
-	CCU.Patches.Inventory.P_InvDatabase.AddRandItem_Prefix (System.String itemNum, InvDatabase __instance, InvItem& __result) (at <defe18e7ffdc4197a71d3338e3b00119>:0)
-	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InvDatabase.FillChest (System.Boolean afterQuestAssigned) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InvDatabase.FillChest () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-
 ---
 
 #	√	Campaign Editor
@@ -45,33 +29,10 @@ No features planned yet
 ##		T	UI - Trait Hiding
 ###			T	Character Creation, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
-###			T	Character Select (CharacterSelect)
-Aspects to hide from CharSelect screen:
-####			T	Behavior
-Attempted
-####			T	Facial Hair
-Attempted
-####			T	Hire
-Attempted
-####			T	Hire Specials
-Attempted
-####			T	Trait Triggers
-Attempted
-####			T	Vendor
-Attempted
-###			T	Character Sheet (CharacterSheet)
-####			T	Behavior
-Attempted
-####			T	Facial Hair
-Attempted
-####			T	Hire
-Attempted
-####			T	Hire Specials
-Attempted
-####			T	Trait Triggers
-Attempted
-####			T	Vendor
-Attempted
+###			√	Character Select (CharacterSelect)
+Complete
+###			√	Character Sheet (CharacterSheet)
+Complete
 
 #	CT	Chunk Editor
 ##		C	00 Error Logs Unidentified
@@ -173,12 +134,15 @@ New
 ##		C	Appearance
 ###			C	Facial Hair
 Search for "Custom" (Agent name
+
 AgentHitbox
 	.chooseFacialHairType
 CharacterSelect
 	.ChangeHairColor
 RandomSkinHair
 √	.fillSkinHair
+####			C	Bugged Appearance
+Shows up with a little brown notch on the East side of the face regardless of orientation. It looks like the mustache but it's hard to tell.
 ###			C	Hair Color
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Hairstyle
