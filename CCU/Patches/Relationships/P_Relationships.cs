@@ -3,6 +3,7 @@ using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
 using CCU.Traits.Relationships;
+using CCU.Traits.AI.Combat;
 
 namespace CCU.Patches.AgentRelationships
 {
@@ -11,6 +12,22 @@ namespace CCU.Patches.AgentRelationships
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.AssessFlee), argumentTypes: new[] { typeof(Agent), typeof(int), typeof(int), typeof(float), typeof(float), typeof(Relationship) })]
+        public static void AssessFlee_Postfix(Agent otherAgent, int teamSize, int otherTeamSize, float dist, float relHate, Relationship rel, Agent ___agent, ref float __result)
+		{
+            if (___agent.HasTrait<Combat_Coward>())
+			{
+                ___agent.mustFlee = true;
+                ___agent.wontFlee = false;
+            }
+            else if (___agent.HasTrait<Combat_Fearless>())
+			{
+                ___agent.mustFlee = false;
+                ___agent.wontFlee = true;
+            }
+                
+		}
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new Type[1] { typeof(Agent) })]
         public static bool SetupRelationshipOriginal_Prefix(Agent otherAgent, Relationships __instance, Agent ___agent)

@@ -120,6 +120,8 @@
     <Compile Include="Traits\AI\Behavior\Behavior_GrabMoney.cs" />
     <Compile Include="Traits\AI\Behavior\Behavior_Pickpocket.cs" />
     <Compile Include="Traits\AI\Behavior\Behavior_SuckBlood.cs" />
+    <Compile Include="Traits\AI\Combat\Combat_Fearless.cs" />
+    <Compile Include="Traits\AI\Combat\Combat_Coward.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Bodyguard.cs" />
     <Compile Include="Traits\AI\Hire\Hire_CauseRuckus.cs" />
     <Compile Include="Traits\AI\Hire\Hire_CostBanana.cs" />
