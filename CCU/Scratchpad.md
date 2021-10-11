@@ -241,8 +241,8 @@ Relationships
 Attempted
 ###			C	Pacifist
 New
-###			C	Use Drugs in Combat
-New
+###			T	Use Drugs in Combat
+Attempted .combat.canTakeDrugs
 ##		C	Generation
 ###			C	Bodyguarded - Cops
 New
@@ -386,6 +386,7 @@ x	.SpawnedBigQuetsMarkerRecently	Not relevant
 Quest
 	.questMarkerPrefab
 QuestMarker
+	Entire class!
 	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
 ###			T	Pilot
 - Prefixed PlayfieldObject.SpawnNewMapMarker

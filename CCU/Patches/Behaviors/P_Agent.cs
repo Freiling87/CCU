@@ -161,6 +161,9 @@ namespace CCU.Patches.Behaviors
 
 				__instance.SetupSpecialInvDatabase();
 			}
+
+			if (__instance.HasTrait<Combat_UseDrugs>())
+				__instance.combat.canTakeDrugs = true;
 		}
 	}
 }
