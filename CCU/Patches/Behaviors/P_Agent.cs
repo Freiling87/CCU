@@ -8,8 +8,10 @@ using CCU.Traits.AI;
 using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
-using CCU.Traits.AI.Behavior;
+using CCU.Traits.AI.BehaviorLOS;
 using CCU.Traits.AI.Interaction;
+using CCU.Traits.AI.Combat;
+using CCU.Traits.AI.Behavior;
 
 namespace CCU.Patches.Behaviors
 {
@@ -164,6 +166,9 @@ namespace CCU.Patches.Behaviors
 
 			if (__instance.HasTrait<Combat_UseDrugs>())
 				__instance.combat.canTakeDrugs = true;
+
+			if (__instance.HasTrait<Behavior_Guilty>())
+				__instance.oma.mustBeGuilty = true;
 		}
 	}
 }

@@ -115,11 +115,12 @@
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
-    <Compile Include="Traits\AI\Behavior\Behavior_EatCorpse.cs" />
-    <Compile Include="Traits\AI\Behavior\Behavior_GrabDrugs.cs" />
-    <Compile Include="Traits\AI\Behavior\Behavior_GrabMoney.cs" />
-    <Compile Include="Traits\AI\Behavior\Behavior_Pickpocket.cs" />
-    <Compile Include="Traits\AI\Behavior\Behavior_SuckBlood.cs" />
+    <Compile Include="Traits\AI\BehaviorLOS\Behavior_EatCorpse.cs" />
+    <Compile Include="Traits\AI\BehaviorLOS\Behavior_GrabDrugs.cs" />
+    <Compile Include="Traits\AI\BehaviorLOS\Behavior_GrabMoney.cs" />
+    <Compile Include="Traits\AI\BehaviorLOS\Behavior_Pickpocket.cs" />
+    <Compile Include="Traits\AI\BehaviorLOS\Behavior_SuckBlood.cs" />
+    <Compile Include="Traits\AI\Behavior\Behavior_Guilty.cs" />
     <Compile Include="Traits\AI\Combat\Combat_Fearless.cs" />
     <Compile Include="Traits\AI\Combat\Combat_Coward.cs" />
     <Compile Include="Traits\AI\Combat\Combat_UseDrugs.cs" />

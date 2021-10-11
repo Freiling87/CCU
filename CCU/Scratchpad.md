@@ -218,6 +218,9 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
 ##		T	Behavior
+###			T	Guilty
+Attempted
+##		T	Behavior LOS
 ###			T	Drink Blood
 Attempted
 ###			T	Eat Corpse

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.Behavior
+namespace CCU.Traits.AI.BehaviorLOS
 {
     public class Behavior_GrabMoney : CustomTrait
     {

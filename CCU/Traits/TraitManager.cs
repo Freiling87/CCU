@@ -1,7 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.AI;
 using CCU.Traits.AI.Hire;
-using CCU.Traits.AI.Behavior;
+using CCU.Traits.AI.BehaviorLOS;
 using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.AI.Vendor;
 using RogueLibsCore;
