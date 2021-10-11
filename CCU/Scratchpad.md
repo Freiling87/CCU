@@ -6,7 +6,35 @@ C, T = Code this, Test this
 H = Hold, usually pending resolution of a separate or grouped issue
 √ = Fully implemented feature or group of features
 
-#		00 Initial Load Error Logs
+#	C	00 Initial Load Error Logs
+
+##		C	On Quickstart, before CharSelect:
+
+###				1
+	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	CCU.Patches.Inventory.P_InvDatabase.AddRandItem_Prefix (System.String itemNum, InvDatabase __instance, InvItem& __result) (at <ad877a3c182446eabfa8d33336aac4bc>:0)
+	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+
+###				2
+	[Info   : Unity Log] 100% - SETUPMORE4
+	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+	Parameter name: agent
+	Stack trace:
+	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.String traitName) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	CCU.Traits.TraitManager.GetOnlyTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <defe18e7ffdc4197a71d3338e3b00119>:0)
+	CCU.Patches.Inventory.P_InvDatabase.AddRandItem_Prefix (System.String itemNum, InvDatabase __instance, InvItem& __result) (at <defe18e7ffdc4197a71d3338e3b00119>:0)
+	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InvDatabase.FillChest (System.Boolean afterQuestAssigned) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InvDatabase.FillChest () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
 
 ---
 
