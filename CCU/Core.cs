@@ -98,7 +98,7 @@ namespace CCU
 			AI_Combat_Coward = "AI: Combat - Coward",
 			AI_Combat_Fearless = "AI: Combat - Fearless",
 			AI_Combat_Pacifist = "AI: Combat - Pacifist",
-			AI_Combat_UseDrugsInCombat = "AI: Combat - Use Drugs", // Gate behind Drug-A-Lug?
+			AI_Combat_UseDrugs = "AI: Combat - Use Drugs", // Gate behind Drug-A-Lug?
 		#endregion
 		#region Hire
 			AI_Hire_Bodyguard = "AI: Hire - Bodyguard",

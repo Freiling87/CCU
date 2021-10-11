@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
 using CCU.Traits.AI;
-using CCU.Traits.AI.Behavior;
+using CCU.Traits.AI.BehaviorLOS;
 using CCU.Traits.AI.TraitTrigger;
 
 namespace CCU.Patches.Behaviors

@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.Behavior
+namespace CCU.Traits.AI.BehaviorLOS
 {
-    public class Behavior_GrabMoney : CustomTrait
+    public class Behavior_SuckBlood : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_GrabMoney>()
+            RogueLibs.CreateCustomTrait<Behavior_SuckBlood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will grab money if they see it."),
+                    [LanguageCode.English] = String.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires</color>: {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_GrabMoney,
+                    [LanguageCode.English] = CTrait.AI_Behavior_SuckBlood,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

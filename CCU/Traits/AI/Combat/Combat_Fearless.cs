@@ -1,27 +1,22 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.Behavior
+namespace CCU.Traits.AI.Combat
 {
-    public class Behavior_Pickpocket : CustomTrait
+    public class Combat_Fearless : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_Pickpocket>()
+            RogueLibs.CreateCustomTrait<Combat_Fearless>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires</color>: {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.English] = String.Format("This character will never flee from combat."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_Pickpocket,
+                    [LanguageCode.English] = CTrait.AI_Combat_Fearless,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

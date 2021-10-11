@@ -111,7 +111,38 @@ No features planned yet
 
 #	C	Level Editor
 ##		C	Hotkeys
-Put the specifics in ### here
+###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
+New
+###			C	Arrow Keys - Clear Chunk Direction
+New
+###			C	Ctrl + A - De-select All Chunks if All Selected
+New
+###			C	Ctrl + A - Select All Chunks
+New
+###			C	Ctrl + H - Flip Chunk Horizontally
+New
+###			C	Ctrl + S - Save
+New
+###			C	Ctrl + O - Open
+New
+###			C	Ctrl + V - Flip Chunk Vertically
+New
+###			C	Ctrl + Y - Redo
+New
+###			C	Ctrl + Z - Redo
+New
+###			C	F5 - Quicksave
+New
+###			C	F9 - Quickload
+New
+###			C	Q, E - Rotate Chunk, Draw Mode
+New
+###			C	Q, E - Rotate Chunk, Select Mode
+New
+###			C	Tab - Tab through fields
+New
+###			C	Shift + Tab - Reverse-Tab through fields
+New
 
 #	C	Player Utilities
 ##		C	Mutators to omit Vanilla content when custom is available
@@ -133,7 +164,7 @@ Pending pilot
 New
 ##		C	Appearance
 ###			C	Facial Hair
-Search for "Custom" (Agent name
+Search for "Custom" (Agent name)
 
 AgentHitbox
 	.chooseFacialHairType
@@ -150,20 +181,34 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
 ##		T	Behavior
+###			T	Guilty
+Attempted
+##		T	Behavior LOS
 ###			T	Drink Blood
+Attempted
 ###			T	Eat Corpse
+Attempted
 ###			T	Grab Drugs
+Attempted
 ###			T	Grab Money
+Attempted
 ###			T	Pickpocket
-##		C	Combat
-###			C	Coward
-New
-###			C	Fearless
-New
+Attempted
+##		CT	Combat
+###			T	Coward
+Agent
+	.mustFlee
+	.scary
+	.wontFlee
+Relationships
+	.AssessFlee
+
+###			T	Fearless
+Attempted
 ###			C	Pacifist
 New
-###			C	Use Drugs in Combat
-New
+###			T	Use Drugs in Combat
+Attempted .combat.canTakeDrugs
 ##		C	Generation
 ###			C	Bodyguarded - Cops
 New
@@ -269,13 +314,13 @@ In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholde
 ####				Tamper
 Pending results of Safecrack attempt
 ### Tamper
-##		C	Interaction
-###			C	Extortable
-New
+##		CT	Interaction
+###			T	Extortable
+Attempted
 ###			C	Fence
 New
-###			C	Moochable
-New
+###			T	Moochable
+Attempted
 ###			C	Vendor Buyer
 New
 ##		CT	Loadout
@@ -307,6 +352,7 @@ x	.SpawnedBigQuetsMarkerRecently	Not relevant
 Quest
 	.questMarkerPrefab
 QuestMarker
+	Entire class!
 	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
 ###			T	Pilot
 - Prefixed PlayfieldObject.SpawnNewMapMarker
@@ -342,7 +388,7 @@ Pending Vendor issues resolution
 ###			T	Honorable Thief
 Worked for pickpocket
 ##		CT	Vendor
-###			C	00 No Button
+###			CT	00 No Button
 - "Buy" button no longer showing up
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
 	[Info   :  CCU_Core] HasTraitFromList: Method Call

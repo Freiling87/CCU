@@ -8,8 +8,10 @@ using CCU.Traits.AI;
 using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
-using CCU.Traits.AI.Behavior;
+using CCU.Traits.AI.BehaviorLOS;
 using CCU.Traits.AI.Interaction;
+using CCU.Traits.AI.Combat;
+using CCU.Traits.AI.Behavior;
 
 namespace CCU.Patches.Behaviors
 {
@@ -22,18 +24,6 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
-			for (int i = 0; i < GC.agentList.Count; i++)
-			{
-				Agent agent = GC.agentList[i];
-
-				if (agent.startingChunk == __instance.startingChunk && agent.ownerID == __instance.ownerID && agent.ownerID != 255 && agent.ownerID != 99 && __instance.ownerID != 0 && agent.oma.shookDown)
-				{
-					__result = false;
-
-					return;
-				}
-			}
-
 			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Interaction_Extortable>())
 				__result = true;
 		}
@@ -173,6 +163,12 @@ namespace CCU.Patches.Behaviors
 
 				__instance.SetupSpecialInvDatabase();
 			}
+
+			if (__instance.HasTrait<Combat_UseDrugs>())
+				__instance.combat.canTakeDrugs = true;
+
+			if (__instance.HasTrait<Behavior_Guilty>())
+				__instance.oma.mustBeGuilty = true;
 		}
 	}
 }
