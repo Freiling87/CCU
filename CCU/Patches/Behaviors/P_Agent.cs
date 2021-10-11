@@ -22,18 +22,6 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
-			for (int i = 0; i < GC.agentList.Count; i++)
-			{
-				Agent agent = GC.agentList[i];
-
-				if (agent.startingChunk == __instance.startingChunk && agent.ownerID == __instance.ownerID && agent.ownerID != 255 && agent.ownerID != 99 && __instance.ownerID != 0 && agent.oma.shookDown)
-				{
-					__result = false;
-
-					return;
-				}
-			}
-
 			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Interaction_Extortable>())
 				__result = true;
 		}
