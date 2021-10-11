@@ -103,7 +103,7 @@ namespace CCU
 		#region Hire
 			AI_Hire_Bodyguard = "AI: Hire - Bodyguard",
 			AI_Hire_BreakIn = "AI: Hire - Break-in",
-			AI_Hire_CauseRuckus = "AI: Hire - Slum Dweller",
+			AI_Hire_CauseRuckus = "AI: Hire - Cause a Ruckus",
 			AI_Hire_CostBanana = "AI: Hire - Costs Banana",
 			AI_Hire_CostLess = "AI: Hire - Costs Less",
 			AI_Hire_CostMore = "AI: Hire - Costs More",

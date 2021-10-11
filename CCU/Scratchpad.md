@@ -60,34 +60,37 @@ New
 ###			√	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			T	Arrows - Not sure
+###			C	Arrow Keys - Rotate
+No effect
+###			C	Arrow Keys - Match current direction to set Orientation to None
 No effect
 ###			T	Ctrl + A - Deselect All
 Doesn't work
 ###			√	Ctrl + A - Select All
 Works
-###			T	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
-Not sure rn
+###			C	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
+Works, but needs to switch to Draw mode as well
 ###			C	Ctrl + O - Open
-Ctrl + O load shows all menus but doesn't load anything
+Ctrl + O load shows all menus but doesn't load anything.
+F9 successfully loads, though. Not sure why.
 ###			√	Ctrl + S - Save
 Works
 ###			C	Ctrl + Y - Redo
 New
-###			C	Ctrol + Z - Undo
+###			C	Ctrl + Z - Undo
 New
 ###			C	F5 - Quicksave
-Save works but shows menus
+Save works but shows popup yes/no
 ###			C	F9 - Quickload
-load works but shows chunk selection menu
+Shows chunk selection menu
 ###			C	F12 - Play Chunk
 New
 ###			√	NumKeys - Select Layer
 Works
 ###			C	Q, E - Rotate Draw Object
 Default to North as from-direction if None
-Not sure if any attempts
-###			C	Q, E - Match current direction to set to None
+No effect
+###			C	Q, E - Rotate Select Object
 New
 ###			C	Shift + Ctrl - Filter View to Layer, and display Owner ID on all tiles
 New
@@ -96,9 +99,13 @@ New
 ###			C	Shift + Alt - Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
 ###			T	Shift + Tab - Reverse-Tab through fields
-Not sure
+No attempts
 ###			T	Tab - Tab through fields
-Not sure
+[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+Stack trace:
+CCU.LevelEditorUtilities.Tab (LevelEditor levelEditor, System.Boolean reverse) (at <ae32907916534692aa75127ab0d31add>:0)
+CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, UnityEngine.UI.InputField ___directionObject, UnityEngine.UI.InputField ___pointNumPatrolPoint) (at <ae32907916534692aa75127ab0d31add>:0)
+LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
@@ -163,6 +170,8 @@ Pending pilot
 ####		C	Slum NPCs (Pilot)
 New
 ##		C	Appearance
+This actually sorta worked, sorta. 
+When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
 ###			C	Facial Hair
 Search for "Custom" (Agent name)
 
@@ -180,35 +189,30 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
-##		T	Behavior
-###			T	Guilty
-Attempted
-##		T	Behavior LOS
-###			T	Drink Blood
-Attempted
-###			T	Eat Corpse
-Attempted
-###			T	Grab Drugs
-Attempted
-###			T	Grab Money
-Attempted
-###			T	Pickpocket
-Attempted
-##		CT	Combat
-###			T	Coward
-Agent
-	.mustFlee
-	.scary
-	.wontFlee
-Relationships
-	.AssessFlee
-
-###			T	Fearless
-Attempted
+##		C	Behavior
+###			√	Guilty
+Complete
+###			C	There are more here, just not added yet
+##		√	Behavior LOS
+###			√	Drink Blood
+Complete
+###			√	Eat Corpse
+Complete
+###			√	Grab Drugs
+Complete
+###			√	Grab Money
+Complete
+###			√	Pickpocket
+Complete
+##		C	Combat
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
 ###			C	Pacifist
 New
-###			T	Use Drugs in Combat
-Attempted .combat.canTakeDrugs
+###			√	Use Drugs in Combat
+Complete
 ##		C	Generation
 ###			C	Bodyguarded - Cops
 New
@@ -314,13 +318,13 @@ In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholde
 ####				Tamper
 Pending results of Safecrack attempt
 ### Tamper
-##		CT	Interaction
-###			T	Extortable
-Attempted
+##		C	Interaction
+###			C	Extortable
+No effect
 ###			C	Fence
 New
-###			T	Moochable
-Attempted
+###			C	Moochable
+No effect
 ###			C	Vendor Buyer
 New
 ##		CT	Loadout
@@ -448,6 +452,8 @@ StatusEffects
 - Traits that will need compatibility:
   - Shop Drops
   - That one discount one
+###			√	Cost Banana
+Complete
 ###			H	Thief Vendor
 - Special Inv filling: 
   - InvDatabase.FillSpecialInv
