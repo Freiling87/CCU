@@ -159,7 +159,7 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.LOSTraits))
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorLOSTraits))
 			{
 				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(33))
 					return;
@@ -167,9 +167,9 @@ namespace CCU.Patches.Behaviors
 				__instance.losCheckAtIntervals = true;
 			}
 
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.VendorTypes))
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.VendorTypeTraits))
 			{
-				logger.LogDebug("Vendor found: " + TraitManager.GetOnlyTraitFromList(__instance, TraitManager.VendorTypes));
+				logger.LogDebug("Vendor found: " + TraitManager.GetOnlyTraitFromList(__instance, TraitManager.VendorTypeTraits));
 
 				__instance.SetupSpecialInvDatabase();
 			}

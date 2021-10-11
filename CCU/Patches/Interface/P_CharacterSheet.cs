@@ -271,7 +271,7 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait2.traitName))
 							hidden = true;
 
-						if (TraitManager.HiddenTraitNames.Contains(trait2.traitName)) // Remove Hidden Traits
+						if (TraitManager.AllCCUTraitNamesGroup.Contains(trait2.traitName)) // Remove Hidden Traits
 							hidden = true;
 
 						if (!hidden)
@@ -321,7 +321,7 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait3.traitName))
 							traitHidden = true;
 
-						if (TraitManager.HiddenTraitNames.Contains(trait3.traitName)) // Remove Hidden traits
+						if (TraitManager.AllCCUTraitNamesGroup.Contains(trait3.traitName)) // Remove Hidden traits
 							traitHidden = true;
 
 						if (!traitHidden)

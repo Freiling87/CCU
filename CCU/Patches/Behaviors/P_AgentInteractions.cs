@@ -28,7 +28,7 @@ namespace CCU.Patches.Behaviors
 			Core.LogMethodCall();
 			TraitManager.LogTraitList(agent);
 
-			if (agent != agent.gc.playerAgent && (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits) || TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypes)))
+			if (agent != agent.gc.playerAgent && (TraitManager.HasTraitFromList(agent, TraitManager.HireTypeTraits) || TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits) || TraitManager.HasTraitFromList(agent, TraitManager.VendorTypeTraits)))
 			{
 				___buttons = buttons1;
 				___buttonsExtra = buttonsExtra1;
@@ -48,7 +48,7 @@ namespace CCU.Patches.Behaviors
 				}
 
 				// Vendor 
-				Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypes);
+				Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypeTraits);
 				logger.LogDebug("hasSpecialInvDatabase: " + agent.hasSpecialInvDatabase);
 				if (!(vendorTrait is null) && agent.hasSpecialInvDatabase) // All Vendor Traits
 				{
@@ -74,7 +74,7 @@ namespace CCU.Patches.Behaviors
 				}
 
 				// Hire 
-				if (TraitManager.HasTraitFromList(agent, TraitManager.HireTraits))
+				if (TraitManager.HasTraitFromList(agent, TraitManager.HireTypeTraits))
 				{
 					Core.LogCheckpoint("Hire");
 

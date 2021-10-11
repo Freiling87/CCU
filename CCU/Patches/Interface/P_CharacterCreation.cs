@@ -21,7 +21,7 @@ namespace CCU.Patches.Inventory
 			Core.LogMethodCall();	
 			logger.LogDebug("\tlistType: " + listType + "\n\tunlockName: " + unlockName);
 
-			if (listType == "Traits" && TraitManager.HiddenTraitNames.Contains(unlockName))
+			if (listType == "Traits" && TraitManager.AllCCUTraitNamesGroup.Contains(unlockName))
 				__instance.traitLimit += 1;
 		}
 
@@ -31,7 +31,7 @@ namespace CCU.Patches.Inventory
 			Core.LogMethodCall();
 			logger.LogDebug("\tlistType: " + listType + "\n\tunlockName: " + unlockName);
 
-			if (listType == "Traits" && TraitManager.HiddenTraitNames.Contains(unlockName))
+			if (listType == "Traits" && TraitManager.AllCCUTraitNamesGroup.Contains(unlockName))
 				__instance.traitLimit -= 1;
 		}
 	}

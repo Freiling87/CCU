@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CCU.Traits.AI.Interaction;
 using CCU.Traits.FacialHair;
+using CCU.Traits.Relationships;
 
 namespace CCU.Traits
 {
@@ -20,13 +21,56 @@ namespace CCU.Traits
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static List<Type> AppearanceTraits = new List<Type>()
+		public static List<Type> AllCCUTraitsGroup
 		{
-			typeof(Beard),
-			typeof(Mustache),
-			typeof(MustcheCircus),
-			typeof(MustacheRedneck),
-			typeof(NoFacialHair),
+			get
+			{
+				List<Type> list = new List<Type>();
+
+				list.AddRange(AppearanceTraitsGroup);
+
+				list.AddRange(BehaviorLOSTraits);
+				list.AddRange(BehaviorNonLOSTraits);
+				list.AddRange(HireCostTraits);
+				list.AddRange(HireTypeTraits);
+				list.AddRange(InteractionTraits);
+				list.AddRange(LoadoutTraits);
+				list.AddRange(RelationshipTraits);
+				list.AddRange(TraitTriggerTraits);
+				list.AddRange(VendorTypeTraits);
+
+				return list;
+			}
+		}
+		public static List<string> AllCCUTraitNamesGroup
+		{
+			get
+			{
+				return AllCCUTraitsGroup.ConvertAll(t => TraitInfo.Get(t).Name);
+			}
+		}
+		public static List<Type> AppearanceTraitsGroup
+		{
+			get
+			{
+				List<Type> list = new List<Type>();
+
+				list.AddRange(FacialHairTraits);
+
+				return list;
+			}
+		}
+
+		public static List<Type> BehaviorLOSTraits = new List<Type>()
+		{
+			typeof(Behavior_EatCorpse),
+			typeof(Behavior_GrabDrugs),
+			typeof(Behavior_GrabMoney),
+			typeof(Behavior_Pickpocket),
+			typeof(Behavior_SuckBlood),
+		};
+		public static List<Type> BehaviorNonLOSTraits = new List<Type>()
+		{
 		};
 		public static List<Type> FacialHairTraits = new List<Type>()
 		{
@@ -36,28 +80,13 @@ namespace CCU.Traits
 			typeof(MustacheRedneck),
 			typeof(NoFacialHair),
 		};
-		public static List<Type> HiddenTraits
+		public static List<Type> HireCostTraits = new List<Type>() // Excludes cost modification traits
 		{
-			get
-			{
-				List<Type> list = new List<Type>();
-
-				list.AddRange(HireTraits);
-				list.AddRange(InteractionTraits);
-				list.AddRange(LOSTraits);
-				list.AddRange(VendorTypes);
-
-				return list;
-			}
-		}
-		public static List<string> HiddenTraitNames
-		{
-			get
-			{
-				return HiddenTraits.ConvertAll(t => TraitInfo.Get(t).Name);
-			}
-		}
-		public static List<Type> HireTraits = new List<Type>() // Excludes cost modification traits
+			typeof(Hire_CostBanana),
+			typeof(Hire_CostLess),
+			typeof(Hire_CostMore),
+		};
+		public static List<Type> HireTypeTraits = new List<Type>() // Excludes cost modification traits
 		{
 			typeof(Hire_Bodyguard),
 			typeof(Hire_BreakIn),
@@ -68,6 +97,7 @@ namespace CCU.Traits
 		};
 		public static List<Type> InteractionTraits = new List<Type>() // Technically Vendors are a subtype of this so treat accordingly
 		{
+			typeof(Interaction_Extortable),
 			typeof(Interaction_Fence),
 			typeof(Interaction_Moochable),
 			typeof(Interaction_VendorBuyer), // TODO: Review this, may have special usage as it's not in Vendor list
@@ -76,15 +106,25 @@ namespace CCU.Traits
 		{
 
 		};
-		public static List<Type> LOSTraits = new List<Type>()
+		public static List<Type> RelationshipTraits = new List<Type>()
 		{
-			typeof(Behavior_EatCorpse),
-			typeof(Behavior_GrabDrugs),
-			typeof(Behavior_GrabMoney),
-			typeof(Behavior_Pickpocket),
-			typeof(Behavior_SuckBlood),
+			typeof(Faction_1_Aligned),
+			typeof(Faction_1_Hostile),
+			typeof(Faction_2_Aligned),
+			typeof(Faction_2_Hostile),
+			typeof(Faction_3_Aligned),
+			typeof(Faction_3_Hostile),
+			typeof(Faction_4_Aligned),
+			typeof(Faction_4_Hostile),
 		};
-		public static List<Type> VendorTypes = new List<Type>()
+		public static List<Type> TraitTriggerTraits = new List<Type>()
+		{
+			typeof(TraitTrigger_CommonFolk),
+			typeof(TraitTrigger_CoolCannibal),
+			typeof(TraitTrigger_CopAccess),
+			typeof(TraitTrigger_HonorableThief),
+		};
+		public static List<Type> VendorTypeTraits = new List<Type>()
 		{
 			typeof(Vendor_Armorer),
 			typeof(Vendor_Assassin),
@@ -191,7 +231,7 @@ namespace CCU.Traits
 		}
 		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList)
 		{
-			List<string> traitNames = HiddenTraits.ConvertAll(t => TraitInfo.Get(t).Name);
+			List<string> traitNames = AllCCUTraitsGroup.ConvertAll(t => TraitInfo.Get(t).Name);
 
 			return traitList
 				.Where(trait => !(traitNames.Contains(trait.traitName)))

@@ -1332,7 +1332,7 @@ namespace CCU.Patches.Interface
 
 						foreach (Trait trait in __instance.dummyAgent.statusEffects.TraitList)
 						{
-							if (TraitManager.HiddenTraitNames.Contains(trait.traitName)) // Omit hidden traits
+							if (TraitManager.AllCCUTraitNamesGroup.Contains(trait.traitName)) // Omit hidden traits
 								continue;
 
 							text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];

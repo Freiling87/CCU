@@ -13,16 +13,36 @@ H = Hold, usually pending resolution of a separate or grouped issue
 Nothing yet
 
 #	Character Editor
-##	C	Trait Hiding
-The notes for this are somewhere under #Traits and need to be moved
-##	C	Portrail Thumbnail Screenshot
-New
-##	C	Stat Screen Screenshot
-New
-##	C	User Settings panel for automation here
-New
-##	C	Character description text upload
-New
+##	C	UI - Trait Hiding
+###		T	Character Creation, Player Edition (CharacterCreation)
+Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
+###		T	Character Select (CharacterSelect)
+Aspects to hide from CharSelect screen:
+####		T	Behavior
+Attempted
+####		T	Facial Hair
+Attempted
+####		T	Hire
+Attempted
+####		T	Hire Specials
+Attempted
+####		T	Trait Triggers
+Attempted
+####		T	Vendor
+Attempted
+###		T	Character Sheet (CharacterSheet)
+####		T	Behavior
+Attempted
+####		T	Facial Hair
+Attempted
+####		T	Hire
+Attempted
+####		T	Hire Specials
+Attempted
+####		T	Trait Triggers
+Attempted
+####		T	Vendor
+Attempted
 
 #	Chunk Editor
 ##	C	00 Error Logs Unidentified
@@ -259,41 +279,6 @@ New
 Pending Vendor issues resolution
 ###		T	Honorable Thief
 Worked for pickpocket
-##	C	UI - Trait Hiding
-###		C	Character Creation, Player Edition (CharacterCreation)
-
-Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
-###		C	Character Select (CharacterSelect)
-
-Aspects to hide from CharSelect screen:
-
-Behavior
-	Not sure
-Facial Hair
-	Doesn't Work
-Hire
-	Works
-Hire Specials (Not on list)
-	Doesn't work
-Trait Trigger
-	Doesn't Work
-Vendor
-	Works
-###		C	Character Sheet (CharacterSheet)
-
-Behavior
-	Works
-Facial Hair
-	Doesn't Work
-Hire
-	Works
-Hire Specials (Not on list)
-	Doesn't work
-Relationships
-	Doesn't work
-Trait Trigger
-	Doesn't Work
-Vendor
 ##	CT	Vendor
 ###		C	00 No Button
 - "Buy" button no longer showing up

@@ -26,7 +26,7 @@ namespace CCU.Patches.Inventory
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
 		{
 			Core.LogMethodCall();
-			string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypes).Name;
+			string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
 			logger.LogDebug("\trName: " + rName);
 
 			if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
