@@ -57,7 +57,7 @@ If it's not already a thing
 ##		CT	Hotkeys
 ###			C	Alt + Security Cam - Highlight Visible Tiles
 New
-###			√	Alt + NumKeys, NumPad - Menu Trails
+###			C	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			C	Arrow Keys - Rotate
@@ -68,6 +68,8 @@ No effect
 Doesn't work
 ###			√	Ctrl + A - Select All
 Works
+###			C	Ctrl + Alt - Show Spawn Chances
+Filter to layer too?
 ###			C	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
 Works, but needs to switch to Draw mode as well
 ###			C	Ctrl + O - Open
@@ -112,6 +114,10 @@ For placement in containers/inventories
 New
 ##		C	Red-Tint Out-Of-District Objects
 I.e., Show stuff that won't show up
+##		H	Edit Mode Object Orientation
+I.e., show rotated sprite for any objects
+##		H	Play Mode Chunk Rotation
+This sounds hard
 
 #	√	Chunk Pack Editor √
 No features planned yet

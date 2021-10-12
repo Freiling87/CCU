@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using BepInEx.Logging;
 using System.Reflection;
+using CCU.Content;
 
 namespace CCU.Patches.Interface
 {

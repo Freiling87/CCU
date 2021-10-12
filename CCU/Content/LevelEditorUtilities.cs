@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using BepInEx.Logging;
 using System.Reflection;
 
-namespace CCU
+namespace CCU.Content
 {
 	public static class LevelEditorUtilities
 	{
@@ -84,14 +84,18 @@ namespace CCU
 			bool SelectingAll = false;
 
 			foreach (LevelEditorTile levelEditorTile in list)
-				if (!levelEditor.selectedTiles.Contains(levelEditorTile) && !levelEditor.deselecting)
+				if (!levelEditor.selectedTiles.Contains(levelEditorTile))
 				{
 					levelEditor.SelectTile(levelEditorTile, false);
 					SelectingAll = true;
 				}
 
 			if (!SelectingAll)
-				levelEditor.ClearSelections(false);
+				foreach (LevelEditorTile levelEditorTile in list)
+				{
+					levelEditor.DeselectTile(levelEditorTile, false);
+				}
+			// Instead of levelEditor.ClearSelections(false);
 
 			levelEditor.UpdateInterface(false);
 		}
