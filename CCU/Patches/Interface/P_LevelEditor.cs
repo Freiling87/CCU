@@ -20,7 +20,7 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
-		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, InputField ___directionObject, InputField ___pointNumPatrolPoint)
+		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription)
 		{
 			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
@@ -28,151 +28,112 @@ namespace CCU.Patches.Interface
 			if (__instance.loadMenu.activeSelf || ___helpScreen.activeSelf || ___initialSelection.activeSelf || ___workshopSubmission.activeSelf || GC.menuGUI.onMenu || ___longDescription.activeSelf)
 				return false;
 
-			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.A) && !__instance.InputFieldFocused())
+			string currentInterface = __instance.currentInterface;
+			bool ctrl = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
+			bool shift = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+			bool fieldFocused = __instance.InputFieldFocused();
+
+			#region WADS - Camera Pan
+			if (Input.GetKey(KeyCode.A) && !fieldFocused)
 				__instance.ScrollW();
-			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.D) && !__instance.InputFieldFocused())
+			if (Input.GetKey(KeyCode.D) && !fieldFocused)
 				__instance.ScrollE();
-			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.W) && !__instance.InputFieldFocused())
+			if (Input.GetKey(KeyCode.W) && !fieldFocused)
 				__instance.ScrollN();
-			if (!(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S) && !__instance.InputFieldFocused())
+			if (Input.GetKey(KeyCode.S) && !fieldFocused)
 				__instance.ScrollS();
-
-			#region Arrow Keys - Object Orientation Toggle
+			#endregion
+			#region Arrow Keys - Set/Toggle PlayfieldObject Orientation
 			if (Input.GetKey(KeyCode.UpArrow))
-			{
-				if (___directionObject.text == "N")
-					___directionObject.text = "None";
-				else
-					___directionObject.text = "N";
-			}
+				LevelEditorUtilities.SetOrientation(__instance, KeyCode.UpArrow);
 			if (Input.GetKey(KeyCode.DownArrow))
-			{
-				if (___directionObject.text == "S")
-					___directionObject.text = "None";
-				else
-					___directionObject.text = "S";
-			}
-			if (Input.GetKey(KeyCode.RightArrow))
-			{
-				if (___directionObject.text == "E")
-					___directionObject.text = "None";
-				else
-					___directionObject.text = "E";
-			}
+				LevelEditorUtilities.SetOrientation(__instance, KeyCode.DownArrow);
 			if (Input.GetKey(KeyCode.LeftArrow))
+				LevelEditorUtilities.SetOrientation(__instance, KeyCode.LeftArrow);
+			if (Input.GetKey(KeyCode.RightArrow))
+				LevelEditorUtilities.SetOrientation(__instance, KeyCode.RightArrow);
+			#endregion
+			#region Ctrl + E, Q - Rotate PlayfieldObject, Patrol Point increment
+			if (ctrl && Input.GetKey(KeyCode.E))
 			{
-				if (___directionObject.text == "W")
-					___directionObject.text = "None";
-				else
-					___directionObject.text = "W";
+				if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
+					LevelEditorUtilities.Rotate(__instance, KeyCode.E);
+				else if (currentInterface == "PatrolPoints")
+					LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
+			}
+			if (ctrl && Input.GetKey(KeyCode.Q))
+			{
+				if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
+					LevelEditorUtilities.Rotate(__instance, KeyCode.Q);
+				else if (currentInterface == "PatrolPoints")
+					LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
 			}
 			#endregion
-			#region Q & E - Object Orientation Rotation / Patrol Point increment
-			if (Input.GetKey(KeyCode.Q))
-			{
-				if (__instance.currentLayer == "Agents" || __instance.currentLayer == "Objects")
-				{
-					if (___directionObject.text == "N")
-						___directionObject.text = "W";
-					else if (___directionObject.text == "W")
-						___directionObject.text = "S";
-					else if (___directionObject.text == "S")
-						___directionObject.text = "E";
-					else if (___directionObject.text == "E")
-						___directionObject.text = "N";
-				}
-				else if (__instance.currentLayer == "PatrolPoints")
-					___pointNumPatrolPoint.text = (int.Parse(___pointNumPatrolPoint.text) - 1).ToString();
-			}
-			if (Input.GetKey(KeyCode.E))
-			{
-				if (__instance.currentLayer == "Agents" || __instance.currentLayer == "Objects")
-				{
-					if (___directionObject.text == "N")
-						___directionObject.text = "E";
-					else if (___directionObject.text == "E")
-						___directionObject.text = "S";
-					else if (___directionObject.text == "S")
-						___directionObject.text = "W";
-					else if (___directionObject.text == "W")
-						___directionObject.text = "N";
-				}
-				else if (__instance.currentLayer == "PatrolPoints")
-					___pointNumPatrolPoint.text = (int.Parse(___pointNumPatrolPoint.text) + 1).ToString();
-			}
-			#endregion
-			#region Number keys - Layer / Ctrl + Number keys - Layer + Selector menu
+			#region (Ctrl + ) Number keys - Set Layer (& Open Selector)
 			if (Input.GetKey(KeyCode.Alpha1))
-				__instance.PressedWallsButton();
-			if (Input.GetKey(KeyCode.Alpha1) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedWallsButton();
-				__instance.PressedLoadWalls();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadWalls();
+			}
 			if (Input.GetKey(KeyCode.Alpha2))
-				__instance.PressedFloorsButton();
-			if (Input.GetKey(KeyCode.Alpha2) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedFloorsButton();
-				__instance.PressedLoadFloors();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadFloors();
+			}
 			if (Input.GetKey(KeyCode.Alpha3))
-				__instance.PressedFloors2Button();
-			if (Input.GetKey(KeyCode.Alpha3) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedFloors2Button();
-				__instance.PressedLoadFloors();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadFloors();
+
+			}
 			if (Input.GetKey(KeyCode.Alpha4))
-				__instance.PressedFloors3Button();
-			if (Input.GetKey(KeyCode.Alpha4) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedFloors3Button();
-				__instance.PressedLoadFloors();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadFloors();
+			}
 			if (Input.GetKey(KeyCode.Alpha5))
-				__instance.PressedObjectsButton();
-			if (Input.GetKey(KeyCode.Alpha5) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedObjectsButton();
-				__instance.PressedLoadObjects();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadObjects();
+			}
 			if (Input.GetKey(KeyCode.Alpha6))
-				__instance.PressedAgentsButton();
-			if (Input.GetKey(KeyCode.Alpha6) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedAgentsButton();
-				__instance.PressedLoadAgents();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadAgents();
+			}
 			if (Input.GetKey(KeyCode.Alpha7))
-				__instance.PressedItemsButton();
-			if (Input.GetKey(KeyCode.Alpha7) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
 			{
 				__instance.PressedItemsButton();
-				__instance.PressedLoadItems();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadItems();
+			}
 			if (Input.GetKey(KeyCode.Alpha8))
+			{ 
 				__instance.PressedLightsButton();
-			if (Input.GetKey(KeyCode.Alpha8) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-			{
-				__instance.PressedLightsButton();
-				__instance.PressedLoadLights();
-			}
 
+				if (ctrl)
+					__instance.PressedLoadLights();
+			}
 			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			#endregion
 			#region Saving & Loading
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.O))
+			if (ctrl && Input.GetKey(KeyCode.O))
 				__instance.PressedLoadChunksFile();
-			if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.S))
+			if (ctrl && Input.GetKey(KeyCode.S))
 				__instance.PressedSave();
 			if (Input.GetKey(KeyCode.F5))
 			{
@@ -190,19 +151,15 @@ namespace CCU.Patches.Interface
 				__instance.PressedLoad();
 			}
 			#endregion
-			#region Misc.
-			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Y))
+			//if (ctrl && Input.GetKey(KeyCode.Y))
 			//	Redo();
-			if (Input.GetKey(KeyCode.A) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+			if (Input.GetKey(KeyCode.A) && ctrl)
 				LevelEditorUtilities.SelectAllToggle(__instance);
 			if (Input.GetKey(KeyCode.Tab))
-				LevelEditorUtilities.Tab(__instance, false);
-			if (Input.GetKey(KeyCode.Tab) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-				LevelEditorUtilities.Tab(__instance, true);
-			//if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) && Input.GetKey(KeyCode.Z))
+				LevelEditorUtilities.Tab(__instance, shift);
+			//if (ctrl && Input.GetKey(KeyCode.Z))
 			//	Undo();
-			#endregion
-
+			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;
 			int num2;
@@ -226,7 +183,7 @@ namespace CCU.Patches.Interface
 				__instance.previousMousePosY = vector.y;
 				__instance.EnteredTile();
 			}
-
+			#endregion
 			return false;
 		}
 

@@ -55,21 +55,27 @@ E.g. Slime Barrels, Fire Grates
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
+###			C	00 Move all Interface/Layer strings to an enum or string const
+e.g. "Objects" "PatrolPoints" etc.
 ###			C	Alt + Security Cam - Highlight Visible Tiles
 New
 ###			C	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			C	Arrow Keys - Rotate
-No effect
-###			C	Arrow Keys - Match current direction to set Orientation to None
-No effect
+###			T	Arrow Keys - Orient
+Attempted
+###			T	Arrow Keys - Match current direction to set to None
+Attempted
 ###			T	Ctrl + A - Deselect All
 Attempted
 ###			√	Ctrl + A - Select All
 Works
 ###			C	Ctrl + Alt - Show Spawn Chances
 Filter to layer too?
+###			T	Ctrl + E, Q - Increment Patrol Point
+Attempted
+###			T	Ctrl + E, Q - Rotate Object
+Attempted
 ###			C	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
 Works, but needs to switch to Draw mode as well
 ###			C	Ctrl + O - Open
@@ -81,6 +87,8 @@ Works
 New
 ###			C	Ctrl + Z - Undo
 New
+###			C	E, Q - Zoom In/Out
+New
 ###			C	F5 - Quicksave
 Save works but shows popup yes/no
 ###			C	F9 - Quickload
@@ -89,16 +97,11 @@ Shows chunk selection menu
 New
 ###			√	NumKeys - Select Layer
 Works
-###			C	Q, E - Rotate Draw Object
-Default to North as from-direction if None
-No effect
-###			C	Q, E - Rotate Select Object
+###			H	Shift + Ctrl - Filter + Display Owner IDs
 New
-###			C	Shift + Ctrl - Filter View to Layer, and display Owner ID on all tiles
+###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
 New
-###			C	Shift + Ctrl - Display Patrol IDs (group, not sequence) on all Points
-New
-###			C	Shift + Alt - Display Patrol Sequence IDs on all Points in field Patrol ID 
+###			H	Shift + Alt - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
 ###			T	Shift + Tab - Reverse-Tab through fields
 No attempts

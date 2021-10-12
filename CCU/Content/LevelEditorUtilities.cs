@@ -14,7 +14,7 @@ namespace CCU.Content
 {
 	public static class LevelEditorUtilities
 	{
-		public static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		// LevelEditor.inputFieldList.isFocused
@@ -50,6 +50,7 @@ namespace CCU.Content
 			{ "PatrolPoints", fieldsPatrolPoint },
 			{ "Walls" , fieldsWall },
 		};
+
 		public static InputField ActiveInputField(LevelEditor levelEditor)
 		{
 			foreach (InputField field in levelEditor.inputFieldList)
@@ -57,6 +58,85 @@ namespace CCU.Content
 					return field;
 
 			return null;
+		}
+		public static InputField GetDirectionInputField(LevelEditor levelEditor)
+		{
+			Core.LogMethodCall();
+
+			string curInt = levelEditor.currentInterface;
+
+			logger.LogDebug("\tcurInt: " + curInt);
+
+			FieldInfo field =
+				curInt == "Floors" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
+				curInt == "Agents" ? AccessTools.Field(typeof(LevelEditor), "directionAgent") :
+				curInt == "Objects" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
+				null;
+
+			logger.LogDebug("\tfield null: " + field is null);
+
+			try
+			{
+				return (InputField)field.GetValue(levelEditor);
+			}
+			catch
+			{
+				return null;
+			}
+		}
+		public static void IncrementPatrolPoint(LevelEditor levelEditor, KeyCode input)
+		{
+			Core.LogMethodCall();
+			logger.LogDebug("\tInput: " + input.ToString());
+
+			FieldInfo inputField = AccessTools.Field(typeof(LevelEditor), "pointNumPatrolPoint");
+			InputField pointNumPatrolPoint = (InputField)inputField.GetValue(levelEditor);
+
+			if (pointNumPatrolPoint.text == "")
+				pointNumPatrolPoint.text = "1";
+			else
+			{
+				int curVal = int.Parse(pointNumPatrolPoint.text);
+				pointNumPatrolPoint.text =
+					input == KeyCode.E ? (Math.Max(99, curVal + 1).ToString()) :
+					input == KeyCode.Q ? (Math.Min(1, curVal - 1).ToString()) :
+					"1";
+			}
+
+			logger.LogDebug("\tNew value: " + pointNumPatrolPoint.text);
+
+			levelEditor.SetPointNum();
+		}
+		public static void Rotate(LevelEditor levelEditor, KeyCode input)
+		{
+			Core.LogMethodCall();
+			logger.LogDebug("\tinput: " + input.ToString());
+
+			InputField inputField = GetDirectionInputField(levelEditor);
+			string curDir = inputField.text;
+			string newDir = "None";
+
+			if (input == KeyCode.E)
+				newDir =
+					curDir == "N" ? "E" :
+					curDir == "E" ? "S" :
+					curDir == "S" ? "W" :
+					curDir == "W" ? "N" :
+					"E";
+			else if (input == KeyCode.Q)
+				newDir =
+					curDir == "N" ? "W" :
+					curDir == "W" ? "S" :
+					curDir == "S" ? "E" :
+					curDir == "E" ? "N" :
+					"W";
+
+			logger.LogDebug("\tnewDir: " + newDir);
+
+			if (!(inputField is null))
+				inputField.text = newDir;
+
+			levelEditor.SetDirection();
 		}
 		public static void SelectAllToggle(LevelEditor levelEditor)
 		{
@@ -101,6 +181,30 @@ namespace CCU.Content
 			// Instead of levelEditor.ClearSelections(false);
 
 			levelEditor.UpdateInterface(false);
+		}
+		public static void SetOrientation(LevelEditor levelEditor, KeyCode input)
+		{
+			Core.LogMethodCall();
+			logger.LogDebug("\tinput: " + input.ToString());
+
+			InputField inputField = GetDirectionInputField(levelEditor);
+			string curDir = inputField.text;
+			string newDir =
+				input == KeyCode.UpArrow	? "N" :
+				input == KeyCode.DownArrow	? "S" :
+				input == KeyCode.LeftArrow	? "W" :
+				input == KeyCode.RightArrow ? "E" :
+				"None"; // This line unreachable but prettier this way
+
+			if (curDir == newDir)
+				newDir = "None";
+
+			logger.LogDebug("\tnewDir: " + newDir);
+
+			if (!(inputField is null))
+				inputField.text = newDir;
+
+			levelEditor.SetDirection();
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{
