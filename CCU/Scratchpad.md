@@ -62,20 +62,29 @@ New
 ###			C	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			T	Arrow Keys - Orient
-Attempted
-###			T	Arrow Keys - Match current direction to set to None
-Attempted
-###			T	Ctrl + A - Deselect All
-Attempted
-###			√	Ctrl + A - Select All
-Works
+###			C	Arrow Keys - Orient
+- No effect: 
+	[Info   :  CCU_Core] SetOrientation: Method Call
+	[Info   :  CCU_Core] GetDirectionInputField: Method Call
+###			C	Arrow Keys - Match current direction to set to None
+- No effect: 
+	[Info   :  CCU_Core] SetOrientation: Method Call
+	[Info   :  CCU_Core] GetDirectionInputField: Method Call
+###			H	Ctrl + A - Deselect All
+Pending resolution of Select All
+###			C	Ctrl + A - Select All
+- Broke! Now goes to normal A behavior
+  - Probably need to gate into ctrl & shift
 ###			C	Ctrl + Alt - Show Spawn Chances
 Filter to layer too?
-###			T	Ctrl + E, Q - Increment Patrol Point
-Attempted
-###			T	Ctrl + E, Q - Rotate Object
-Attempted
+###			C	Ctrl + E, Q - Increment Patrol Point
+- E Jumps directly to 100
+- Q Jumps directly to 1
+- Triggers too quickly (can be held down, needs a delay)
+###			C	Ctrl + E, Q - Rotate Object
+- No effect: 
+	[Info   :  CCU_Core] SetOrientation: Method Call
+	[Info   :  CCU_Core] GetDirectionInputField: Method Call
 ###			C	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
 Works, but needs to switch to Draw mode as well
 ###			C	Ctrl + O - Open
@@ -103,16 +112,12 @@ New
 New
 ###			H	Shift + Alt - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
-###			T	Shift + Tab - Reverse-Tab through fields
-No attempts
-###			T	Tab - Tab through fields
-- NullRef:
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	CCU.LevelEditorUtilities.Tab (LevelEditor levelEditor, System.Boolean reverse) (at <ae32907916534692aa75127ab0d31add>:0)
-	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, UnityEngine.UI.InputField ___directionObject, UnityEngine.UI.InputField ___pointNumPatrolPoint) (at <ae32907916534692aa75127ab0d31add>:0)
-	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-  - Attempted (nullref may have been current field focus)
+###			C	Shift + Tab - Reverse-Tab through fields
+- No effect:
+	[Info   :  CCU_Core] Tab: Method Call
+###			C	Tab - Tab through fields
+- No effect:
+	[Info   :  CCU_Core] Tab: Method Call
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
