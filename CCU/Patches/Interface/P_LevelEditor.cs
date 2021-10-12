@@ -29,20 +29,10 @@ namespace CCU.Patches.Interface
 				return false;
 
 			string currentInterface = __instance.currentInterface;
-			bool ctrl = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
-			bool shift = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+			bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
-			#region WADS - Camera Pan
-			if (Input.GetKey(KeyCode.A) && !fieldFocused)
-				__instance.ScrollW();
-			if (Input.GetKey(KeyCode.D) && !fieldFocused)
-				__instance.ScrollE();
-			if (Input.GetKey(KeyCode.W) && !fieldFocused)
-				__instance.ScrollN();
-			if (Input.GetKey(KeyCode.S) && !fieldFocused)
-				__instance.ScrollS();
-			#endregion
 			#region Arrow Keys - Set/Toggle PlayfieldObject Orientation
 			if (Input.GetKey(KeyCode.UpArrow))
 				LevelEditorUtilities.SetOrientation(__instance, KeyCode.UpArrow);
@@ -53,22 +43,42 @@ namespace CCU.Patches.Interface
 			if (Input.GetKey(KeyCode.RightArrow))
 				LevelEditorUtilities.SetOrientation(__instance, KeyCode.RightArrow);
 			#endregion
-			#region Ctrl + E, Q - Rotate PlayfieldObject, Patrol Point increment
-			if (ctrl && Input.GetKey(KeyCode.E))
+			if (ctrl)
 			{
-				if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
-					LevelEditorUtilities.Rotate(__instance, KeyCode.E);
-				else if (currentInterface == "PatrolPoints")
-					LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
+				#region Ctrl + E, Q - Rotate PlayfieldObject, Patrol Point increment
+				if (Input.GetKey(KeyCode.E))
+				{
+					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
+						LevelEditorUtilities.Rotate(__instance, KeyCode.E);
+					else if (currentInterface == "PatrolPoints")
+						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
+				}
+				if (Input.GetKey(KeyCode.Q))
+				{
+					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
+						LevelEditorUtilities.Rotate(__instance, KeyCode.Q);
+					else if (currentInterface == "PatrolPoints")
+						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
+				}
+				if (Input.GetKey(KeyCode.O))
+					__instance.PressedLoadChunksFile();
+				if (Input.GetKey(KeyCode.S))
+					__instance.PressedSave();
+				#endregion
 			}
-			if (ctrl && Input.GetKey(KeyCode.Q))
+			else
 			{
-				if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
-					LevelEditorUtilities.Rotate(__instance, KeyCode.Q);
-				else if (currentInterface == "PatrolPoints")
-					LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
+				#region WADS - Camera Pan
+				if (Input.GetKey(KeyCode.A) && !fieldFocused)
+					__instance.ScrollW();
+				if (Input.GetKey(KeyCode.D) && !fieldFocused)
+					__instance.ScrollE();
+				if (Input.GetKey(KeyCode.W) && !fieldFocused)
+					__instance.ScrollN();
+				if (Input.GetKey(KeyCode.S) && !fieldFocused)
+					__instance.ScrollS();
+				#endregion
 			}
-			#endregion
 			#region (Ctrl + ) Number keys - Set Layer (& Open Selector)
 			if (Input.GetKey(KeyCode.Alpha1))
 			{
@@ -130,11 +140,7 @@ namespace CCU.Patches.Interface
 			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			#endregion
-			#region Saving & Loading
-			if (ctrl && Input.GetKey(KeyCode.O))
-				__instance.PressedLoadChunksFile();
-			if (ctrl && Input.GetKey(KeyCode.S))
-				__instance.PressedSave();
+			#region F5, F9, F12
 			if (Input.GetKey(KeyCode.F5))
 			{
 				if (__instance.ChunkNameUsed(__instance.chunkName))
@@ -150,6 +156,8 @@ namespace CCU.Patches.Interface
 				//else
 				__instance.PressedLoad();
 			}
+			if (Input.GetKey(KeyCode.F12))
+				__instance.PressedPlayButton();
 			#endregion
 			//if (ctrl && Input.GetKey(KeyCode.Y))
 			//	Redo();

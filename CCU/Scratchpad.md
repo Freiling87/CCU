@@ -102,8 +102,8 @@ New
 Save works but shows popup yes/no
 ###			C	F9 - Quickload
 Shows chunk selection menu
-###			C	F12 - Play Chunk
-New
+###			T	F12 - Play Chunk
+Test
 ###			√	NumKeys - Select Layer
 Works
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
