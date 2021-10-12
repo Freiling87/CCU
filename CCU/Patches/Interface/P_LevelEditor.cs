@@ -33,19 +33,10 @@ namespace CCU.Patches.Interface
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
-			#region Arrow Keys - Set/Toggle PlayfieldObject Orientation
-			if (Input.GetKey(KeyCode.UpArrow))
-				LevelEditorUtilities.SetOrientation(__instance, KeyCode.UpArrow);
-			if (Input.GetKey(KeyCode.DownArrow))
-				LevelEditorUtilities.SetOrientation(__instance, KeyCode.DownArrow);
-			if (Input.GetKey(KeyCode.LeftArrow))
-				LevelEditorUtilities.SetOrientation(__instance, KeyCode.LeftArrow);
-			if (Input.GetKey(KeyCode.RightArrow))
-				LevelEditorUtilities.SetOrientation(__instance, KeyCode.RightArrow);
-			#endregion
 			if (ctrl)
 			{
-				#region Ctrl + E, Q - Rotate PlayfieldObject, Patrol Point increment
+				if (Input.GetKey(KeyCode.A))
+					LevelEditorUtilities.SelectAllToggle(__instance);
 				if (Input.GetKey(KeyCode.E))
 				{
 					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
@@ -53,6 +44,8 @@ namespace CCU.Patches.Interface
 					else if (currentInterface == "PatrolPoints")
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
 				}
+				if (Input.GetKey(KeyCode.O))
+					__instance.PressedLoadChunksFile();
 				if (Input.GetKey(KeyCode.Q))
 				{
 					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
@@ -60,25 +53,33 @@ namespace CCU.Patches.Interface
 					else if (currentInterface == "PatrolPoints")
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
 				}
-				if (Input.GetKey(KeyCode.O))
-					__instance.PressedLoadChunksFile();
 				if (Input.GetKey(KeyCode.S))
 					__instance.PressedSave();
-				#endregion
 			}
-			else
+			else if (!fieldFocused)
 			{
-				#region WADS - Camera Pan
-				if (Input.GetKey(KeyCode.A) && !fieldFocused)
+				if (Input.GetKey(KeyCode.UpArrow))
+					LevelEditorUtilities.SetOrientation(__instance, KeyCode.UpArrow);
+				if (Input.GetKey(KeyCode.DownArrow))
+					LevelEditorUtilities.SetOrientation(__instance, KeyCode.DownArrow);
+				if (Input.GetKey(KeyCode.LeftArrow))
+					LevelEditorUtilities.SetOrientation(__instance, KeyCode.LeftArrow);
+				if (Input.GetKey(KeyCode.RightArrow))
+					LevelEditorUtilities.SetOrientation(__instance, KeyCode.RightArrow);
+				if (Input.GetKey(KeyCode.A))
 					__instance.ScrollW();
-				if (Input.GetKey(KeyCode.D) && !fieldFocused)
+				if (Input.GetKey(KeyCode.D))
 					__instance.ScrollE();
-				if (Input.GetKey(KeyCode.W) && !fieldFocused)
-					__instance.ScrollN();
-				if (Input.GetKey(KeyCode.S) && !fieldFocused)
+				if (Input.GetKey(KeyCode.E))
+					__instance.ZoomIn();
+				if (Input.GetKey(KeyCode.Q))
+					__instance.ZoomOut();
+				if (Input.GetKey(KeyCode.S))
 					__instance.ScrollS();
-				#endregion
+				if (Input.GetKey(KeyCode.W))
+					__instance.ScrollN();
 			}
+
 			#region (Ctrl + ) Number keys - Set Layer (& Open Selector)
 			if (Input.GetKey(KeyCode.Alpha1))
 			{
@@ -159,14 +160,8 @@ namespace CCU.Patches.Interface
 			if (Input.GetKey(KeyCode.F12))
 				__instance.PressedPlayButton();
 			#endregion
-			//if (ctrl && Input.GetKey(KeyCode.Y))
-			//	Redo();
-			if (Input.GetKey(KeyCode.A) && ctrl)
-				LevelEditorUtilities.SelectAllToggle(__instance);
 			if (Input.GetKey(KeyCode.Tab))
 				LevelEditorUtilities.Tab(__instance, shift);
-			//if (ctrl && Input.GetKey(KeyCode.Z))
-			//	Undo();
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;

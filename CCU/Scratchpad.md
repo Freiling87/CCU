@@ -96,14 +96,14 @@ Works
 New
 ###			C	Ctrl + Z - Undo
 New
-###			C	E, Q - Zoom In/Out
-New
+###			T	E, Q - Zoom In/Out
+Attempted
 ###			C	F5 - Quicksave
 Save works but shows popup yes/no
 ###			C	F9 - Quickload
 Shows chunk selection menu
 ###			T	F12 - Play Chunk
-Test
+Attempted
 ###			√	NumKeys - Select Layer
 Works
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
