@@ -86,57 +86,80 @@ namespace CCU.Patches.Interface
 				__instance.PressedWallsButton();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadWalls();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha2))
 			{
 				__instance.PressedFloorsButton();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadFloors();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha3))
 			{
 				__instance.PressedFloors2Button();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadFloors();
-
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha4))
 			{
 				__instance.PressedFloors3Button();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadFloors();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha5))
 			{
 				__instance.PressedObjectsButton();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadObjects();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha6))
 			{
 				__instance.PressedAgentsButton();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadAgents();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha7))
 			{
 				__instance.PressedItemsButton();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadItems();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha8))
 			{ 
 				__instance.PressedLightsButton();
 
 				if (ctrl)
+				{
 					__instance.PressedLoadLights();
+					__instance.EnterDrawMode();
+				}
 			}
 			if (Input.GetKey(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();

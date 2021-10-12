@@ -19,7 +19,7 @@ H = Hold, usually pending resolution of a separate or grouped issue
 	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-
+ 
 ---
 
 #	√	Campaign Editor
@@ -59,7 +59,7 @@ If it's not already a thing
 e.g. "Objects" "PatrolPoints" etc.
 ###			C	Alt + Security Cam - Highlight Visible Tiles
 New
-###			C	Alt + NumKeys, NumPad - Menu Trails
+###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			C	Arrow Keys - Orient
@@ -72,40 +72,40 @@ This one is likely beyond my ability right now since we'd need to underline text
 	[Info   :  CCU_Core] GetDirectionInputField: Method Call
 ###			H	Ctrl + A - Deselect All
 Pending resolution of Select All
-###			C	Ctrl + A - Select All
-- Broke! Now goes to normal A behavior
-  - Probably need to gate into ctrl & shift
-###			C	Ctrl + Alt - Show Spawn Chances
-Filter to layer too?
+###			√	Ctrl + A - Select All
+Complete
+###			H	Ctrl + Alt - Show Spawn Chances
+- Pending Pilot NumberBox display
+- Filter to layer too?
 ###			C	Ctrl + E, Q - Increment Patrol Point
 - E Jumps directly to 100
 - Q Jumps directly to 1
 - Triggers too quickly (can be held down, needs a delay)
 ###			C	Ctrl + E, Q - Rotate Object
-- No effect: 
-	[Info   :  CCU_Core] SetOrientation: Method Call
+- No effect: [Info   :  CCU_Core] GetDirectionInputField: Method Call
+	[Info   :  CCU_Core] Rotate: Method CallCall
 	[Info   :  CCU_Core] GetDirectionInputField: Method Call
-###			C	Ctrl + NumKeys, NumPad - Select Layer & Open Draw Type Selector
-Works, but needs to switch to Draw mode as well
+###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
+Complete
 ###			C	Ctrl + O - Open
 Ctrl + O load shows all menus but doesn't load anything.
 F9 successfully loads, though. Not sure why.
 ###			√	Ctrl + S - Save
 Works
-###			C	Ctrl + Y - Redo
+###			H	Ctrl + Y - Redo
 New
-###			C	Ctrl + Z - Undo
+###			H	Ctrl + Z - Undo
 New
-###			T	E, Q - Zoom In/Out
-Attempted
+###			C	E, Q - Zoom In/Out
+Works, just needs an input delay
 ###			C	F5 - Quicksave
 Save works but shows popup yes/no
 ###			C	F9 - Quickload
-Shows chunk selection menu
-###			T	F12 - Play Chunk
-Attempted
+Shows chunk selection menu, needs to just revert current to saved
+###			√	F12 - Play Chunk
+Complete
 ###			√	NumKeys - Select Layer
-Works
+Complete
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
 New
 ###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
