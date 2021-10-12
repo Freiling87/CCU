@@ -33,7 +33,10 @@ namespace CCU.Content
 		public static List<InputField> fieldsLight;
 		public static List<InputField> fieldsObject;
 		public static List<InputField> fieldsPatrolPoint;
-		public static List<InputField> fieldsWall;
+		public static List<InputField> fieldsWall = new List<InputField>()
+		{
+			
+		};
 		public static Dictionary<string, List<InputField>> fieldLists = new Dictionary<string, List<InputField>>()
 		{
 			// TODO: Double-check these strings
@@ -101,18 +104,27 @@ namespace CCU.Content
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{
-			List<InputField> fieldList = fieldLists[levelEditor.currentLayer];
-			InputField oldFocus = ActiveInputField(levelEditor);
+			Core.LogMethodCall();
 
-			if (oldFocus is null)
-				fieldList[0].ActivateInputField();
-			else
+			List<InputField> fieldList = fieldLists[levelEditor.currentLayer]; // Can't use yet: 1. Your own lists aren't filled out yet; 2. Not sure how to access the stuff that goes on those lists; 3. Need to test with vanilla stuff anyway.
+			InputField oldFocus;
+
+			try
 			{
+				oldFocus = ActiveInputField(levelEditor); // May cause NullRef
+				logger.LogDebug("Active Field: " + oldFocus.name);
+
 				if (!reverse)
-					fieldList[fieldList.IndexOf(oldFocus) + 1].ActivateInputField();
+					levelEditor.inputFieldList[levelEditor.inputFieldList.IndexOf(oldFocus) + 1].ActivateInputField();
 				else
-					fieldList[fieldList.IndexOf(oldFocus) - 1].ActivateInputField();
+					levelEditor.inputFieldList[levelEditor.inputFieldList.IndexOf(oldFocus) - 1].ActivateInputField();
 			}
+			catch
+			{
+				levelEditor.inputFieldList[0].ActivateInputField();
+			}
+
+			logger.LogDebug("ActiveInputField: " + ActiveInputField(levelEditor));
 		}
 	}
 }

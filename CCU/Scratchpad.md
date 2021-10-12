@@ -65,7 +65,7 @@ No effect
 ###			C	Arrow Keys - Match current direction to set Orientation to None
 No effect
 ###			T	Ctrl + A - Deselect All
-Doesn't work
+Attempted
 ###			√	Ctrl + A - Select All
 Works
 ###			C	Ctrl + Alt - Show Spawn Chances
@@ -103,11 +103,13 @@ New
 ###			T	Shift + Tab - Reverse-Tab through fields
 No attempts
 ###			T	Tab - Tab through fields
-[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-Stack trace:
-CCU.LevelEditorUtilities.Tab (LevelEditor levelEditor, System.Boolean reverse) (at <ae32907916534692aa75127ab0d31add>:0)
-CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, UnityEngine.UI.InputField ___directionObject, UnityEngine.UI.InputField ___pointNumPatrolPoint) (at <ae32907916534692aa75127ab0d31add>:0)
-LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+- NullRef:
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	CCU.LevelEditorUtilities.Tab (LevelEditor levelEditor, System.Boolean reverse) (at <ae32907916534692aa75127ab0d31add>:0)
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, UnityEngine.UI.InputField ___directionObject, UnityEngine.UI.InputField ___pointNumPatrolPoint) (at <ae32907916534692aa75127ab0d31add>:0)
+	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+  - Attempted (nullref may have been current field focus)
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
