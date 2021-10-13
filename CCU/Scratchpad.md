@@ -63,9 +63,7 @@ New
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			C	Arrow Keys - Orient
-- No effect: 
-	[Info   :  CCU_Core] SetOrientation: Method Call
-	[Info   :  CCU_Core] GetDirectionInputField: Method Call
+This is apparently working, just needs to update the field text display on input
 ###			C	Arrow Keys - Match current direction to set to None
 - No effect: 
 	[Info   :  CCU_Core] SetOrientation: Method Call
