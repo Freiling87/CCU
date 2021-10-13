@@ -115,6 +115,7 @@
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
+    <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
     <Compile Include="Traits\AI\BehaviorLOS\Behavior_EatCorpse.cs" />
     <Compile Include="Traits\AI\BehaviorLOS\Behavior_GrabDrugs.cs" />
     <Compile Include="Traits\AI\BehaviorLOS\Behavior_GrabMoney.cs" />
