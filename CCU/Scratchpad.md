@@ -8,24 +8,13 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 #	C	00 Initial Load Error Logs
 
-##		C	On Quickstart, before CharSelect:
-
-###				1
-	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	CCU.Patches.Inventory.P_InvDatabase.AddRandItem_Prefix (System.String itemNum, InvDatabase __instance, InvItem& __result) (at <ad877a3c182446eabfa8d33336aac4bc>:0)
-	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
  
 ---
 
 #	√	Campaign Editor
 No features planned yet
 
-#	 T	Character Editor
+#	T	Character Editor
 ##		T	UI - Trait Hiding
 ###			T	Character Creation, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
@@ -35,7 +24,7 @@ Complete
 Complete
 
 #	CT	Chunk Editor
-##		C	00 Error Logs Unidentified
+##		T	00 Error Logs Unidentified
 - Tried to place Safe, then this: 
 	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
 	Stack trace:
@@ -50,8 +39,28 @@ Complete
   - Remove SpritepackLoader and see what happens
 
 ---
-##		C	District Object De-Limitation
-E.g. Slime Barrels, Fire Grates
+##		CT	District Object De-Limitation
+
+###		C	BasicFloor
+.Spawn (Fire Grate)
+###		C	Computer	
+.DetermineIfCanPoison
+###		C	FlameGrate
+.Start
+###		C	Manhole
+.Start
+###		C	Pipe
+.Start
+###		C	SawBlade
+.Start
+###		T	SlimeBarrel
+Attempted
+###		C	SwitchFloor
+Not sure about this one, may be too deeply hardcoded
+###		C	Tube
+.Start
+###		C	WaterPump
+.Start
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
@@ -62,13 +71,13 @@ New
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			C	Arrow Keys - Orient
-This is apparently working, just needs to update the field text display on input
-###			C	Arrow Keys - Match current direction to set to None
-- No effect: 
-	[Info   :  CCU_Core] SetOrientation: Method Call
-	[Info   :  CCU_Core] GetDirectionInputField: Method Call
-###			H	Ctrl + A - Deselect All
+###			T	Arrow Keys - Orient
+- Works, but does not reflect in InputField until re-selected.
+  - Attempted
+###			T	Arrow Keys - Match current direction to set to None
+- Works, but does not reflect in InputField until re-selected.
+  - Attempted
+###			C	Ctrl + A - Deselect All
 Pending resolution of Select All
 ###			√	Ctrl + A - Select All
 Complete
@@ -79,10 +88,9 @@ Complete
 - E Jumps directly to 100
 - Q Jumps directly to 1
 - Triggers too quickly (can be held down, needs a delay)
-###			C	Ctrl + E, Q - Rotate Object
-- No effect: [Info   :  CCU_Core] GetDirectionInputField: Method Call
-	[Info   :  CCU_Core] Rotate: Method CallCall
-	[Info   :  CCU_Core] GetDirectionInputField: Method Call
+###			T	Ctrl + E, Q - Rotate Object
+- Works, but does not reflect in InputField until re-selected.
+  - Attempted
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
 ###			C	Ctrl + O - Open
@@ -110,21 +118,19 @@ New
 New
 ###			H	Shift + Alt - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
-###			C	Shift + Tab - Reverse-Tab through fields
-- No effect:
-	[Info   :  CCU_Core] Tab: Method Call
-###			C	Tab - Tab through fields
-- No effect:
-	[Info   :  CCU_Core] Tab: Method Call
+###			T	Shift + Tab - Reverse-Tab through fields
+- Test again with logging fix
+###			T	Tab - Tab through fields
+- Test again with logging fix
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
 New
 ##		C	Red-Tint Out-Of-District Objects
 I.e., Show stuff that won't show up
-##		H	Edit Mode Object Orientation
+##		H	Orient Object Sprites in Edit Mode
 I.e., show rotated sprite for any objects
-##		H	Play Mode Chunk Rotation
+##		H	Rotate Chunks in Play Mode
 This sounds hard
 
 #	√	Chunk Pack Editor √

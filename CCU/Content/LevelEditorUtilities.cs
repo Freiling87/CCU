@@ -136,7 +136,8 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
-			levelEditor.SetDirection();
+			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+				levelEditorTile.direction = newDir;
 		}
 		public static void SelectAllToggle(LevelEditor levelEditor)
 		{
@@ -197,14 +198,15 @@ namespace CCU.Content
 				"None"; // This line unreachable but prettier this way
 
 			if (curDir == newDir)
-				newDir = "None";
+				newDir = ""; // "" instead of "None" for levelEditorTile.direction
 
 			logger.LogDebug("\tnewDir: " + newDir);
 
 			if (!(inputField is null))
 				inputField.text = newDir;
 
-			levelEditor.SetDirection();
+			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+				levelEditorTile.direction = newDir;
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{

@@ -95,6 +95,7 @@ namespace CCU
 			AI_Behavior_VisionBeams = "AI: Behavior - Vision Beams",
 		#endregion
 		#region Combat
+			AI_Combat_CauseLockdown = "AI: Combat - Cause Lockdown",
 			AI_Combat_Coward = "AI: Combat - Coward",
 			AI_Combat_Fearless = "AI: Combat - Fearless",
 			AI_Combat_Pacifist = "AI: Combat - Pacifist",
