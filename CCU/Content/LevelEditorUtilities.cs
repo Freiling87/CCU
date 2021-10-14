@@ -61,19 +61,13 @@ namespace CCU.Content
 		}
 		public static InputField GetDirectionInputField(LevelEditor levelEditor)
 		{
-			Core.LogMethodCall();
-
 			string curInt = levelEditor.currentInterface;
-
-			logger.LogDebug("\tcurInt: " + curInt);
 
 			FieldInfo field =
 				curInt == "Floors" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
 				curInt == "Agents" ? AccessTools.Field(typeof(LevelEditor), "directionAgent") :
 				curInt == "Objects" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
 				null;
-
-			logger.LogDebug("\tfield null: " + field is null);
 
 			try
 			{
@@ -131,10 +125,7 @@ namespace CCU.Content
 					curDir == "E" ? "N" :
 					"W";
 
-			logger.LogDebug("\tnewDir: " + newDir);
-
-			if (!(inputField is null))
-				inputField.text = newDir;
+			inputField.text = newDir;
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;

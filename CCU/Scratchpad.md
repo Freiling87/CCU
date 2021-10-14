@@ -88,9 +88,9 @@ Complete
 - E Jumps directly to 100
 - Q Jumps directly to 1
 - Triggers too quickly (can be held down, needs a delay)
-###			T	Ctrl + E, Q - Rotate Object
+###			C	Ctrl + E, Q - Rotate Object
 - Works, but does not reflect in InputField until re-selected.
-  - Attempted
+  - Still no work
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
 ###			C	Ctrl + O - Open
