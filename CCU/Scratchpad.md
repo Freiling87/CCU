@@ -71,7 +71,7 @@ New
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			C	Arrow Keys - Orient
+###			T	Arrow Keys - Orient
 - Attempted accessing LevelEditor.RotationObject.text
   - Need to figure out how to access a field OF a private field (.text)
     - New attempt
@@ -85,11 +85,17 @@ Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###				Ctrl + E, Q - Increment Patrol Point
-- E Jumps directly to 100
-- Q Jumps directly to 1
+###			T	Ctrl + E, Q - Increment Patrol Point
+- Addressed dumb starting at 100 error
 - Triggers too quickly (can be held down, needs a delay)
-###			C	Ctrl + E, Q - Rotate Object
+  - Try this: https://forum.unity.com/threads/getkey-is-too-fast.222127/#post-1481149
+###			H	Ctrl + C - Copy All Layers
+- Copy multiple objects
+  - All-layer copy as well?
+- I can think of a way to do this but it's very convoluted.
+###			H	Ctrl + Shift + C - Copy One Layer
+Hold
+###			T	Ctrl + E, Q - Rotate Object
 - Attempted accessing LevelEditor.RotationObject.text
   - Need to figure out how to access a field OF a private field (.text)
     - New attempt
@@ -100,6 +106,10 @@ Ctrl + O load shows all menus but doesn't load anything.
 F9 successfully loads, though. Not sure why.
 ###			√	Ctrl + S - Save
 Works
+###			H	Ctrl + V - Paste All Layers
+- Pending completion of Copy
+###			H	Ctrl + Shift + V - Paste One Layer
+Hold
 ###			H	Ctrl + Y - Redo
 New
 ###			H	Ctrl + Z - Undo
@@ -182,6 +192,26 @@ New
 - When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
+
+#	T	Promo Campaign
+
+##		T	Theme
+- Donny & Smamuel sitting next to each other in front of a glass wall, commenting on what's going on beyond it (in the screen)
+
+##		T	Level 1 - Home Base
+- Two dudes on computers, talking about their SOR campaigns
+  - DUMBASS DONNY plays without mods, we'll see his campaign first, also he is dumb
+  - SMART SMAMUEL plays with mods, and is cool and good and handsome
+- Smamuel: Hey so a bunch of your shit doesn't work man, you need mods. I put notes in your chunks if you wanna check it out.
+- Donny: Duhhhh, I'm dumb. What's a mod?
+##		T	Level 2 - Dumbass Donny's level
+- Chunk 1
+  - A custom Vampire not sucking blood
+  - A custom Cannibal not eating a corpse
+  - A custom pickpocket not picking pockets
+  - A custom Firefighter not fighting fires
+##		T	Level 3 - Smart Smamuel's level
+- 
 
 #	CT	Traits
 ###		C	Agent Group

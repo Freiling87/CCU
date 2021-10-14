@@ -92,8 +92,8 @@ namespace CCU.Content
 			{
 				int curVal = int.Parse(inputFieldField.text);
 				inputFieldField.text =
-					input == KeyCode.E ? (Math.Max(99, curVal + 1).ToString()) :
-					input == KeyCode.Q ? (Math.Min(1, curVal - 1).ToString()) :
+					input == KeyCode.E ? (Math.Min(99, curVal + 1).ToString()) :
+					input == KeyCode.Q ? (Math.Max(1, curVal - 1).ToString()) :
 					"1";
 			}
 
