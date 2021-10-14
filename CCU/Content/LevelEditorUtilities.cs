@@ -63,6 +63,7 @@ namespace CCU.Content
 		{
 			string curInt = levelEditor.currentInterface;
 
+			// 202110141401
 			FieldInfo field =
 				curInt == "Floors" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
 				curInt == "Agents" ? AccessTools.Field(typeof(LevelEditor), "directionAgent") :
@@ -83,7 +84,8 @@ namespace CCU.Content
 			Core.LogMethodCall();
 			logger.LogDebug("\tInput: " + input.ToString());
 
-			FieldInfo inputField = AccessTools.Field(typeof(LevelEditor), "pointNumPatrolPoint");
+			// 202110141401
+			FieldInfo inputField = AccessTools.Field(typeof(LevelEditor), "pointNumPatrolPoint.text");
 			InputField pointNumPatrolPoint = (InputField)inputField.GetValue(levelEditor);
 
 			if (pointNumPatrolPoint.text == "")
@@ -128,6 +130,7 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
+			// 202110141401
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			directionObject.SetValue(levelEditor, newDir);
 
@@ -200,8 +203,8 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
-			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
-			directionObject.SetValue(levelEditor, newDir);
+			// 202110141401
+			FieldInfo directionObject = AccessTools.DeclaredField(typeof(LevelEditor), "directionField");
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;

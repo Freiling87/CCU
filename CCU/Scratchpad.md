@@ -71,9 +71,10 @@ New
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			T	Arrow Keys - Orient
-- Works, but does not reflect in InputField until re-selected.
-  - Attempted
+###			C	Arrow Keys - Orient
+- Attempted accessing LevelEditor.RotationObject.text
+  - Need to figure out how to access a field OF a private field (.text)
+			// 202110141401
 ###			T	Arrow Keys - Match current direction to set to None
 - Works, but does not reflect in InputField until re-selected.
   - Attempted
@@ -84,13 +85,14 @@ Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###			C	Ctrl + E, Q - Increment Patrol Point
+###				Ctrl + E, Q - Increment Patrol Point
 - E Jumps directly to 100
 - Q Jumps directly to 1
 - Triggers too quickly (can be held down, needs a delay)
 ###			C	Ctrl + E, Q - Rotate Object
-- Works, but does not reflect in InputField until re-selected.
-  - Still no work
+- Attempted accessing LevelEditor.RotationObject.text
+  - Need to figure out how to access a field OF a private field (.text)
+			// 202110141401
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
 ###			C	Ctrl + O - Open
