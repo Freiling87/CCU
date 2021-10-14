@@ -125,7 +125,11 @@ namespace CCU.Content
 					curDir == "E" ? "N" :
 					"W";
 
-			inputField.text = newDir;
+			if (!(inputField is null))
+				inputField.text = newDir;
+
+			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
+			directionObject.SetValue(levelEditor, newDir);
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;
@@ -195,6 +199,9 @@ namespace CCU.Content
 
 			if (!(inputField is null))
 				inputField.text = newDir;
+
+			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
+			directionObject.SetValue(levelEditor, newDir);
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;

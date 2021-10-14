@@ -212,7 +212,6 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 ##		C	Behavior
 ###			√	Guilty
 Complete
-###			C	There are more here, just not added yet
 ##		√	Behavior LOS
 ###			√	Drink Blood
 Complete
