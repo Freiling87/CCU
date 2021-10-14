@@ -63,7 +63,6 @@ namespace CCU.Content
 		{
 			string curInt = levelEditor.currentInterface;
 
-			// 202110141401
 			FieldInfo field =
 				curInt == "Floors" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
 				curInt == "Agents" ? AccessTools.Field(typeof(LevelEditor), "directionAgent") :
@@ -84,22 +83,21 @@ namespace CCU.Content
 			Core.LogMethodCall();
 			logger.LogDebug("\tInput: " + input.ToString());
 
-			// 202110141401
 			FieldInfo inputField = AccessTools.Field(typeof(LevelEditor), "pointNumPatrolPoint.text");
-			InputField pointNumPatrolPoint = (InputField)inputField.GetValue(levelEditor);
+			InputField inputFieldField = (InputField)inputField.GetValue(levelEditor);
 
-			if (pointNumPatrolPoint.text == "")
-				pointNumPatrolPoint.text = "1";
+			if (inputFieldField.text == "")
+				inputFieldField.text = "1";
 			else
 			{
-				int curVal = int.Parse(pointNumPatrolPoint.text);
-				pointNumPatrolPoint.text =
+				int curVal = int.Parse(inputFieldField.text);
+				inputFieldField.text =
 					input == KeyCode.E ? (Math.Max(99, curVal + 1).ToString()) :
 					input == KeyCode.Q ? (Math.Min(1, curVal - 1).ToString()) :
 					"1";
 			}
 
-			logger.LogDebug("\tNew value: " + pointNumPatrolPoint.text);
+			logger.LogDebug("\tNew value: " + inputFieldField.text);
 
 			levelEditor.SetPointNum();
 		}
@@ -130,9 +128,9 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
-			// 202110141401
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
-			directionObject.SetValue(levelEditor, newDir);
+			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
+			directionObjectField.text = newDir;
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;
@@ -203,8 +201,9 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
-			// 202110141401
-			FieldInfo directionObject = AccessTools.DeclaredField(typeof(LevelEditor), "directionField");
+			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
+			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
+			directionObjectField.text = newDir;
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;

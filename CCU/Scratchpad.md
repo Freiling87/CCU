@@ -74,7 +74,7 @@ This one is likely beyond my ability right now since we'd need to underline text
 ###			C	Arrow Keys - Orient
 - Attempted accessing LevelEditor.RotationObject.text
   - Need to figure out how to access a field OF a private field (.text)
-			// 202110141401
+    - New attempt
 ###			T	Arrow Keys - Match current direction to set to None
 - Works, but does not reflect in InputField until re-selected.
   - Attempted
@@ -92,7 +92,7 @@ Complete
 ###			C	Ctrl + E, Q - Rotate Object
 - Attempted accessing LevelEditor.RotationObject.text
   - Need to figure out how to access a field OF a private field (.text)
-			// 202110141401
+    - New attempt
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
 ###			C	Ctrl + O - Open
