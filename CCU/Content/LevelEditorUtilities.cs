@@ -96,7 +96,7 @@ namespace CCU.Content
 			Core.LogMethodCall();
 			logger.LogDebug("\tInput: " + input.ToString());
 
-			FieldInfo inputField = AccessTools.Field(typeof(LevelEditor), "pointNumPatrolPoint.text");
+			FieldInfo inputField = AccessTools.Field(typeof(LevelEditor), "pointNumPatrolPoint");
 			InputField inputFieldField = (InputField)inputField.GetValue(levelEditor);
 
 			if (inputFieldField.text == "")

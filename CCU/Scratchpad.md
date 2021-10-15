@@ -79,8 +79,8 @@ If it's not already a thing
 Might not be needed, if current attempt is working fine
 ###			T	00 Reflect rotation on input
 - Attempted calling levelEditor.UpdateInterface()
-###			C	Alt + Security Cam - Highlight Visible Tiles
-New
+###			H	Alt + Security Cam - Highlight Visible Tiles
+Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
@@ -88,7 +88,7 @@ This one is likely beyond my ability right now since we'd need to underline text
 Complete
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
-###			C	Ctrl + A - Deselect All
+###			T	Ctrl + A - Deselect All
 - This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
 - Speaking of that, look for a Deselection method and see what he does in there.
 - Tried using levelEditor.ClearSelections, since it's pretty much the same thing. Not sure why I tried something different from the vanilla.
@@ -97,7 +97,7 @@ Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###			C	Ctrl + E, Q - Increment Patrol Point
+###			T	Ctrl + E, Q - Increment Patrol Point
 - Addressed dumb starting at 100 error
 - Triggers too quickly (can be held down, needs a delay)
   - Try this: https://forum.unity.com/threads/getkey-is-too-fast.222127/#post-1481149
@@ -109,6 +109,7 @@ Complete
 	CCU.Content.LevelEditorUtilities.IncrementPatrolPoint (LevelEditor levelEditor, UnityEngine.KeyCode input) (at <1ade6337c7c0432284df8c1094c16264>:0)
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription) (at <1ade6337c7c0432284df8c1094c16264>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+ 	- Think I found the error and addressed it
 ###			H	Ctrl + C - Copy, All Layers
 Hold
 ###			H	Ctrl + Shift + C - Copy, One Layer
