@@ -8,7 +8,6 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 #	C	00 Initial Load Error Logs
 
- 
 ---
 
 #	√	Campaign Editor
@@ -77,8 +76,19 @@ If it's not already a thing
 	}
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
-###			T	00 Reflect rotation on input
-- Attempted calling levelEditor.UpdateInterface()
+###			H	00 Display rotation on input
+Pending General Input issue
+###			C	General Input issue
+- Every key that uses Ctrl seems to have broken:
+	[Error  : Unity Log] ArgumentException: An item with the same key has already been added. Key: Floors3
+	Stack trace:
+	System.Collections.Generic.Dictionary`2[TKey,TValue].TryInsert (TKey key, TValue value, System.Collections.Generic.InsertionBehavior behavior) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Collections.Generic.Dictionary`2[TKey,TValue].Add (TKey key, TValue value) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	CCU.Content.LevelEditorUtilities..cctor () (at <00da859462d34d0589228533f9a32b72>:0)
+	Rethrow as TypeInitializationException: The type initializer for 'CCU.Content.LevelEditorUtilities' threw an exception.
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <00da859462d34d0589228533f9a32b72>:0)
+	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+  - Can't guarantee that's the actual issue, just see where Floors3 goes
 ###			H	Alt + Security Cam - Highlight Visible Tiles
 Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
@@ -88,7 +98,8 @@ This one is likely beyond my ability right now since we'd need to underline text
 Complete
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
-###			T	Ctrl + A - Deselect All
+###			H	Ctrl + A - Deselect All
+Pending general input issue
 - This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
 - Speaking of that, look for a Deselection method and see what he does in there.
 - Tried using levelEditor.ClearSelections, since it's pretty much the same thing. Not sure why I tried something different from the vanilla.
@@ -97,7 +108,8 @@ Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###			T	Ctrl + E, Q - Increment Patrol Point
+###			H	Ctrl + E, Q - Increment Patrol Point
+Pending general input issue
 - Addressed dumb starting at 100 error
 - Triggers too quickly (can be held down, needs a delay)
   - Try this: https://forum.unity.com/threads/getkey-is-too-fast.222127/#post-1481149
@@ -132,14 +144,19 @@ Hold
 New
 ###			H	Ctrl + Z - Undo
 New
-###			T	E, Q - Zoom In/Out
+###			H	E, Q - Zoom In/Out
+Pending general input issue
 Attempted input delay
 ###			T	F5 - Quicksave
-- Rewrite these test notes, differentiating between:
-  - Chunk Title already saved
-  - Chunk Title is new
-###			T	F9 - Quickload
+- Chunk Name already existing does not affect behavior
+- Pops up y/n confirmation
+###			C	F9 - Quickload
 - Crap-shoot attempt
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <00da859462d34d0589228533f9a32b72>:0)
+	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ###			√	F12 - Play Chunk
 Complete
 ###			C	Letter Keys - skip to letter on scrolling menu
