@@ -150,7 +150,7 @@ namespace CCU.Content
 
 			levelEditor.UpdateInterface(false);
 		}
-		public static void SelectAllToggle(LevelEditor levelEditor)
+		public static void ToggleSelectAllInLayer(LevelEditor levelEditor)
 		{
 			List<LevelEditorTile> list = null;
 			string layer = levelEditor.currentLayer;
@@ -186,11 +186,7 @@ namespace CCU.Content
 				}
 
 			if (!SelectingAll)
-				foreach (LevelEditorTile levelEditorTile in list)
-				{
-					levelEditor.DeselectTile(levelEditorTile, false);
-				}
-			// Instead of levelEditor.ClearSelections(false);
+				levelEditor.ClearSelections(false);
 
 			levelEditor.UpdateInterface(false);
 		}

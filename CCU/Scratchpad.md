@@ -91,6 +91,7 @@ Complete
 ###			C	Ctrl + A - Deselect All
 - This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
 - Speaking of that, look for a Deselection method and see what he does in there.
+- Tried using levelEditor.ClearSelections, since it's pretty much the same thing. Not sure why I tried something different from the vanilla.
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances

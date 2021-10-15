@@ -36,7 +36,7 @@ namespace CCU.Patches.Interface
 			if (ctrl)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
-					LevelEditorUtilities.SelectAllToggle(__instance);
+					LevelEditorUtilities.ToggleSelectAllInLayer(__instance);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
