@@ -39,18 +39,18 @@ namespace CCU.Patches.Interface
 					LevelEditorUtilities.SelectAllToggle(__instance);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
-						LevelEditorUtilities.Rotate(__instance, KeyCode.E);
-					else if (currentInterface == "PatrolPoints")
+					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
+						LevelEditorUtilities.RotateObject(__instance, KeyCode.E);
+					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
 				}
 				if (Input.GetKeyDown(KeyCode.O))
 					__instance.PressedLoadChunksFile();
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
-					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
-						LevelEditorUtilities.Rotate(__instance, KeyCode.Q);
-					else if (currentInterface == "PatrolPoints")
+					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
+						LevelEditorUtilities.RotateObject(__instance, KeyCode.Q);
+					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
 				}
 				if (Input.GetKeyDown(KeyCode.S))
@@ -59,13 +59,13 @@ namespace CCU.Patches.Interface
 			else if (!fieldFocused)
 			{
 				if (Input.GetKey(KeyCode.UpArrow))
-					LevelEditorUtilities.SetOrientation(__instance, KeyCode.UpArrow);
+					LevelEditorUtilities.OrientObject(__instance, KeyCode.UpArrow);
 				if (Input.GetKey(KeyCode.DownArrow))
-					LevelEditorUtilities.SetOrientation(__instance, KeyCode.DownArrow);
+					LevelEditorUtilities.OrientObject(__instance, KeyCode.DownArrow);
 				if (Input.GetKey(KeyCode.LeftArrow))
-					LevelEditorUtilities.SetOrientation(__instance, KeyCode.LeftArrow);
+					LevelEditorUtilities.OrientObject(__instance, KeyCode.LeftArrow);
 				if (Input.GetKey(KeyCode.RightArrow))
-					LevelEditorUtilities.SetOrientation(__instance, KeyCode.RightArrow);
+					LevelEditorUtilities.OrientObject(__instance, KeyCode.RightArrow);
 				if (Input.GetKey(KeyCode.A))
 					__instance.ScrollW();
 				if (Input.GetKey(KeyCode.D))
@@ -190,7 +190,7 @@ namespace CCU.Patches.Interface
 			int num;
 			int num2;
 
-			if (__instance.currentLayer == "Walls" || __instance.currentLayer == "Floors" || __instance.currentLayer == "Floors2" || __instance.currentLayer == "Floors3")
+			if (__instance.currentLayer == LevelEditorUtilities.LEInterfaces_Walls || __instance.currentLayer == LevelEditorUtilities.LEInterfaces_Floors || __instance.currentLayer == LevelEditorUtilities.LEInterfaces_Floors2 || __instance.currentLayer == LevelEditorUtilities.LEInterfaces_Floors3)
 			{
 				num = (int)((vector.x + 0.32f) / 0.64f);
 				num2 = (int)((vector.y + 0.32f) / 0.64f);

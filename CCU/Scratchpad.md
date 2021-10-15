@@ -65,22 +65,32 @@ Not sure about this one, may be too deeply hardcoded
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
-###			C	00 Add input rate limiter to all shortcuts
-New
-###			C	00 Move all Interface/Layer strings to an enum or string const
-e.g. "Objects" "PatrolPoints" etc.
+###			T	00 Add input rate limiter to all shortcuts
+- Attempted with GetKeyDown
+  - This will break probably as much as it fixes. Just relax and accept it.
+###			C	00 Implement BlazingTwist's nifty input gate
+- This seems like it will pretty accurately match common UI practices
+	List<KeyCode> keyCodes = new List<KeyCode>{KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.K};
+	if (keyCodes.All(Input.GetKey) && keyCodes.Any(Input.GetKeyDown)) 
+	{
+		// key combination pressed this frame
+	}
 ###			C	00 Use Traverse to access subfields of private
+Might not be needed, if current attempt is working fine
+###			T	00 Reflect rotation on input
+- Attempted calling levelEditor.UpdateInterface()
 ###			C	Alt + Security Cam - Highlight Visible Tiles
 New
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			T	Arrow Keys - Orient
-- Need more logging to diagnose
+###			√	Arrow Keys - Orient
+Complete
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
 ###			C	Ctrl + A - Deselect All
-Pending resolution of Select All
+- This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
+- Speaking of that, look for a Deselection method and see what he does in there.
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
@@ -90,23 +100,20 @@ Complete
 - Addressed dumb starting at 100 error
 - Triggers too quickly (can be held down, needs a delay)
   - Try this: https://forum.unity.com/threads/getkey-is-too-fast.222127/#post-1481149
-    - Lol I broke it
-		[Debug  :CCU_LevelEditorUtilities]      Input: E
-		[Warning:  HarmonyX] AccessTools.Field: Could not find field for type LevelEditor and name pointNumPatrolPoint.text
-		[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-		Stack trace:
-		CCU.Content.LevelEditorUtilities.IncrementPatrolPoint (LevelEditor levelEditor, UnityEngine.KeyCode input) (at <1ade6337c7c0432284df8c1094c16264>:0)
-		CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription) (at <1ade6337c7c0432284df8c1094c16264>:0)
-		LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+  - Lol I broke it
+	[Debug  :CCU_LevelEditorUtilities]      Input: E
+	[Warning:  HarmonyX] AccessTools.Field: Could not find field for type LevelEditor and name pointNumPatrolPoint.text
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	CCU.Content.LevelEditorUtilities.IncrementPatrolPoint (LevelEditor levelEditor, UnityEngine.KeyCode input) (at <1ade6337c7c0432284df8c1094c16264>:0)
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription) (at <1ade6337c7c0432284df8c1094c16264>:0)
+	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ###			H	Ctrl + C - Copy, All Layers
 Hold
 ###			H	Ctrl + Shift + C - Copy, One Layer
 Hold
-###			C	Ctrl + E, Q - Rotate Object
-- Attempted accessing LevelEditor.RotationObject.text
-  - Need to figure out how to access a field OF a private field (.text)
-    - New attempt
-      - Didn't work, try more logging
+###			√	Ctrl + E, Q - Rotate Object
+Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
 ###			C	Ctrl + O - Open

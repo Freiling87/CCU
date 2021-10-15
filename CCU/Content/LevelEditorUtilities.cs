@@ -40,16 +40,29 @@ namespace CCU.Content
 		public static Dictionary<string, List<InputField>> fieldLists = new Dictionary<string, List<InputField>>()
 		{
 			// TODO: Double-check these strings
-			{ "Agents", fieldsAgent },
-			{ "Floors", fieldsFloor },
-			{ "Floors2", fieldsFloor },
-			{ "Floors3", fieldsFloor },
-			{ "Items", fieldsItem },
-			{ "Lights", fieldsLight },
-			{ "Objects", fieldsObject },
-			{ "PatrolPoints", fieldsPatrolPoint },
-			{ "Walls" , fieldsWall },
+			{ LEInterfaces_Agents, fieldsAgent },
+			{ LEInterfaces_Floors, fieldsFloor },
+			{ LEInterfaces_Floors2, fieldsFloor },
+			{ LEInterfaces_Floors3, fieldsFloor },
+			{ LEInterfaces_Items, fieldsItem },
+			{ LEInterfaces_Lights, fieldsLight },
+			{ LEInterfaces_Objects, fieldsObject },
+			{ LEInterfaces_PatrolPoints, fieldsPatrolPoint },
+			{ LEInterfaces_Walls, fieldsWall },
 		};
+
+		public const string
+			LEInterfaces_Agents = "Agents",
+			LEInterfaces_Floors = "Floors",
+			LEInterfaces_Floors2 = "Floors3",
+			LEInterfaces_Floors3 = "Floors3",
+			LEInterfaces_Items = "Items",
+			LEInterfaces_Level = "Level",
+			LEInterfaces_Lights = "Lights",
+			LEInterfaces_Objects = "Objects",
+			LEInterfaces_PatrolPoints = "PatrolPoints",
+			LEInterfaces_Walls = "Walls"
+			;
 
 		public static InputField ActiveInputField(LevelEditor levelEditor)
 		{
@@ -64,9 +77,9 @@ namespace CCU.Content
 			string curInt = levelEditor.currentInterface;
 
 			FieldInfo field =
-				curInt == "Floors" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
-				curInt == "Agents" ? AccessTools.Field(typeof(LevelEditor), "directionAgent") :
-				curInt == "Objects" ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
+				curInt == LEInterfaces_Floors ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
+				curInt == LEInterfaces_Agents ? AccessTools.Field(typeof(LevelEditor), "directionAgent") :
+				curInt == LEInterfaces_Objects ? AccessTools.Field(typeof(LevelEditor), "directionFloor") :
 				null;
 
 			try
@@ -101,7 +114,7 @@ namespace CCU.Content
 
 			levelEditor.SetPointNum();
 		}
-		public static void Rotate(LevelEditor levelEditor, KeyCode input)
+		public static void RotateObject(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
 			logger.LogDebug("\tinput: " + input.ToString());
@@ -134,31 +147,33 @@ namespace CCU.Content
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;
+
+			levelEditor.UpdateInterface(false);
 		}
 		public static void SelectAllToggle(LevelEditor levelEditor)
 		{
 			List<LevelEditorTile> list = null;
 			string layer = levelEditor.currentLayer;
 
-			if (layer == "Walls")
+			if (layer == LEInterfaces_Walls)
 				list = levelEditor.wallTiles;
-			else if (layer == "Floors")
+			else if (layer == LEInterfaces_Floors)
 				list = levelEditor.floorTiles;
-			else if (layer == "Floors2")
+			else if (layer == LEInterfaces_Floors2)
 				list = levelEditor.floorTiles2;
-			else if (layer == "Floors3")
+			else if (layer == LEInterfaces_Floors3)
 				list = levelEditor.floorTiles3;
-			else if (layer == "Objects")
+			else if (layer == LEInterfaces_Objects)
 				list = levelEditor.objectTiles;
-			else if (layer == "Items")
+			else if (layer == LEInterfaces_Items)
 				list = levelEditor.itemTiles;
-			else if (layer == "Agents")
+			else if (layer == LEInterfaces_Agents)
 				list = levelEditor.agentTiles;
-			else if (layer == "Lights")
+			else if (layer == LEInterfaces_Lights)
 				list = levelEditor.lightTiles;
-			else if (layer == "PatrolPoints")
+			else if (layer == LEInterfaces_PatrolPoints)
 				list = levelEditor.patrolPointTiles;
-			else if (layer == "Level")
+			else if (layer == LEInterfaces_Level)
 				list = levelEditor.chunkTiles;
 
 			bool SelectingAll = false;
@@ -179,7 +194,7 @@ namespace CCU.Content
 
 			levelEditor.UpdateInterface(false);
 		}
-		public static void SetOrientation(LevelEditor levelEditor, KeyCode input)
+		public static void OrientObject(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
 			logger.LogDebug("\tinput: " + input.ToString());
@@ -207,6 +222,8 @@ namespace CCU.Content
 
 			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
 				levelEditorTile.direction = newDir;
+
+			levelEditor.UpdateInterface(false);
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{
