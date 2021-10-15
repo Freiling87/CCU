@@ -20,7 +20,7 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
-		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription)
+		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper __yesNoButtonHelper)
 		{
 			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
@@ -33,6 +33,7 @@ namespace CCU.Patches.Interface
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
+			#region Letters
 			if (ctrl)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
@@ -45,7 +46,7 @@ namespace CCU.Patches.Interface
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
 				}
 				if (Input.GetKeyDown(KeyCode.O))
-					__instance.PressedLoadChunksFile();
+					__instance.PressedLoad();
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
@@ -79,7 +80,7 @@ namespace CCU.Patches.Interface
 				if (Input.GetKey(KeyCode.W))
 					__instance.ScrollN();
 			}
-
+			#endregion
 			#region (Ctrl + ) Number keys - Set Layer (& Open Selector)
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
@@ -174,11 +175,14 @@ namespace CCU.Patches.Interface
 			}
 			if (Input.GetKeyDown(KeyCode.F9))
 			{
-				//if (__instance.ChunkNameUsed(__instance.chunkName))
-				//	//Quickload here
-				// There is a long line of myButtonHelper passed through to the load function, I am not sure how to do it directly.
-				//else
-				__instance.PressedLoad();
+				logger.LogDebug(
+					"\tAttempting Quickload: \n" +
+					"\t\tChunk Name: " + __instance.chunkName);
+
+				__instance.LoadChunkFromFile(__instance.chunkName, __yesNoButtonHelper);
+				//This almost certainly wont work on its own
+				//You need to set yesNoButtonHelper 
+				//It might be faster to simply manually call the menu up and issue commands to it.
 			}
 			if (Input.GetKeyDown(KeyCode.F12))
 				__instance.PressedPlayButton();

@@ -118,11 +118,12 @@ Hold
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
-###			C	Ctrl + O - Open
+###			√	Ctrl + O - Open
 Ctrl + O load shows all menus but doesn't load anything.
 F9 successfully loads, though. Not sure why.
+- Attempted, copied what F9 does here
 ###			√	Ctrl + S - Save
-Works
+Complete
 ###			H	Ctrl + V - Paste All Layers
 - Pending completion of Copy
 ###			H	Ctrl + Shift + V - Paste One Layer
@@ -131,12 +132,14 @@ Hold
 New
 ###			H	Ctrl + Z - Undo
 New
-###			C	E, Q - Zoom In/Out
-Works, just needs an input delay
-###			C	F5 - Quicksave
-Save works but shows popup yes/no
-###			C	F9 - Quickload
-Shows chunk selection menu, needs to just revert current to saved
+###			T	E, Q - Zoom In/Out
+Attempted input delay
+###			T	F5 - Quicksave
+- Rewrite these test notes, differentiating between:
+  - Chunk Title already saved
+  - Chunk Title is new
+###			T	F9 - Quickload
+- Crap-shoot attempt
 ###			√	F12 - Play Chunk
 Complete
 ###			√	NumKeys - Select Layer

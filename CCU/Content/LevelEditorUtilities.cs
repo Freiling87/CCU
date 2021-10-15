@@ -50,7 +50,6 @@ namespace CCU.Content
 			{ LEInterfaces_PatrolPoints, fieldsPatrolPoint },
 			{ LEInterfaces_Walls, fieldsWall },
 		};
-
 		public const string
 			LEInterfaces_Agents = "Agents",
 			LEInterfaces_Floors = "Floors",
@@ -114,6 +113,37 @@ namespace CCU.Content
 
 			levelEditor.SetPointNum();
 		}
+		public static void OrientObject(LevelEditor levelEditor, KeyCode input)
+		{
+			Core.LogMethodCall();
+			logger.LogDebug("\tinput: " + input.ToString());
+
+			InputField inputField = GetDirectionInputField(levelEditor);
+			string curDir = inputField.text;
+			string newDir =
+				input == KeyCode.UpArrow	? "N" :
+				input == KeyCode.DownArrow	? "S" :
+				input == KeyCode.LeftArrow	? "W" :
+				input == KeyCode.RightArrow ? "E" :
+				"None"; // This line unreachable but prettier this way
+
+			if (curDir == newDir)
+				newDir = ""; // "" instead of "None" for levelEditorTile.direction
+
+			logger.LogDebug("\tnewDir: " + newDir);
+
+			if (!(inputField is null))
+				inputField.text = newDir;
+
+			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
+			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
+			directionObjectField.text = newDir;
+
+			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+				levelEditorTile.direction = newDir;
+
+			levelEditor.UpdateInterface(false);
+		}
 		public static void RotateObject(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
@@ -149,6 +179,30 @@ namespace CCU.Content
 				levelEditorTile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
+		}
+		public static void Tab(LevelEditor levelEditor, bool reverse)
+		{
+			Core.LogMethodCall();
+
+			List<InputField> fieldList = fieldLists[levelEditor.currentLayer]; // Can't use yet: 1. Your own lists aren't filled out yet; 2. Not sure how to access the stuff that goes on those lists; 3. Need to test with vanilla stuff anyway.
+			InputField oldFocus;
+
+			try
+			{
+				oldFocus = ActiveInputField(levelEditor); // May cause NullRef
+				logger.LogDebug("Active Field: " + oldFocus.name);
+
+				if (!reverse)
+					levelEditor.inputFieldList[levelEditor.inputFieldList.IndexOf(oldFocus) + 1].ActivateInputField();
+				else
+					levelEditor.inputFieldList[levelEditor.inputFieldList.IndexOf(oldFocus) - 1].ActivateInputField();
+			}
+			catch
+			{
+				levelEditor.inputFieldList[0].ActivateInputField();
+			}
+
+			logger.LogDebug("ActiveInputField: " + ActiveInputField(levelEditor));
 		}
 		public static void ToggleSelectAllInLayer(LevelEditor levelEditor)
 		{
@@ -189,61 +243,6 @@ namespace CCU.Content
 				levelEditor.ClearSelections(false);
 
 			levelEditor.UpdateInterface(false);
-		}
-		public static void OrientObject(LevelEditor levelEditor, KeyCode input)
-		{
-			Core.LogMethodCall();
-			logger.LogDebug("\tinput: " + input.ToString());
-
-			InputField inputField = GetDirectionInputField(levelEditor);
-			string curDir = inputField.text;
-			string newDir =
-				input == KeyCode.UpArrow	? "N" :
-				input == KeyCode.DownArrow	? "S" :
-				input == KeyCode.LeftArrow	? "W" :
-				input == KeyCode.RightArrow ? "E" :
-				"None"; // This line unreachable but prettier this way
-
-			if (curDir == newDir)
-				newDir = ""; // "" instead of "None" for levelEditorTile.direction
-
-			logger.LogDebug("\tnewDir: " + newDir);
-
-			if (!(inputField is null))
-				inputField.text = newDir;
-
-			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
-			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
-			directionObjectField.text = newDir;
-
-			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-				levelEditorTile.direction = newDir;
-
-			levelEditor.UpdateInterface(false);
-		}
-		public static void Tab(LevelEditor levelEditor, bool reverse)
-		{
-			Core.LogMethodCall();
-
-			List<InputField> fieldList = fieldLists[levelEditor.currentLayer]; // Can't use yet: 1. Your own lists aren't filled out yet; 2. Not sure how to access the stuff that goes on those lists; 3. Need to test with vanilla stuff anyway.
-			InputField oldFocus;
-
-			try
-			{
-				oldFocus = ActiveInputField(levelEditor); // May cause NullRef
-				logger.LogDebug("Active Field: " + oldFocus.name);
-
-				if (!reverse)
-					levelEditor.inputFieldList[levelEditor.inputFieldList.IndexOf(oldFocus) + 1].ActivateInputField();
-				else
-					levelEditor.inputFieldList[levelEditor.inputFieldList.IndexOf(oldFocus) - 1].ActivateInputField();
-			}
-			catch
-			{
-				levelEditor.inputFieldList[0].ActivateInputField();
-			}
-
-			logger.LogDebug("ActiveInputField: " + ActiveInputField(levelEditor));
 		}
 	}
 }
