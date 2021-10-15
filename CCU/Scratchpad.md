@@ -142,6 +142,10 @@ Attempted input delay
 - Crap-shoot attempt
 ###			√	F12 - Play Chunk
 Complete
+###			C	Letter Keys - skip to letter on scrolling menu
+New
+###			H	Mouse3 - Drag Viewport
+New, and hell no
 ###			√	NumKeys - Select Layer
 Complete
 ###			H	Shift + Ctrl - Filter + Display Owner IDs

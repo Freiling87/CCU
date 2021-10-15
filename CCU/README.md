@@ -10,7 +10,7 @@ SOR gives you a few options for creating custom content, but it does have some l
 CCU aims to address these limitations, giving more power to custom content designers, while keeping the player's experience un-cluttered with designer tools.
 
 |:exclamation: Asterisk indicates non-implemented features currently planned. :exclamation:|
-|:-------------------------------------------------------------------------------:|
+|:----------------------------------------------------------------------------------------:|
 
 # The Mod Itself
 
@@ -177,29 +177,34 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 
 ## Hotkeys
 
-|Key 1				|Key 2				|Layer				|Function												|
-|:------------------|:------------------|:------------------|:------------------------------------------------------|
-|F5	*				|					|					|Quicksave current file (skip confirmation)
-|F9	*				|					|					|Quickload current file (skip confirmation)
-|F12 *				|					|					|Run chunk
-|[1 - 9]		    |					|					|Switch to Layer (Wall, Floor, Floor2, etc.)
-|[1 - 9]			|Ctrl				|					|Switch to Layer and open Type Selector
-|Alt				|					|Object				|Security Cam: Highlight visible tiles<br>
-|Tab *				|					|					|Move through input fields				
-|Tab *				|Shift				|					|Move through input fields, reversed	
-|Shift *			|Ctrl				|Any with Owner IDs	|View filter to layer<br><br>Show OwnerIDs on all content
-|Shift *			|Ctrl				|Patrol				|Display Patrol ID on patrol points
-|Shift *			|Alt				|Patrol				|Show only patrol points in the current Patrol ID
-|A					|Ctrl				|					|Select all in Layer (Toggle)			
-|O					|Ctrl				|					|Open file								
-|Q, E *				|					|Object<br>NPC		|Rotate direction<br><br>Works in Draw or Select mode
-|Q, E *				|					|Patrol				|Increase/Decrease Patrol Point ID<br><br>Works in Draw or Select mode
-|S 					|Ctrl				|					|Save current file						
-|Y *				|Ctrl				|					|Redo										
-|Z *				|Ctrl				|					|Undo									
-|Arrow Keys *		|					|Object<br>NPC		|Set direction<br><br>Press again to clear<br><br>Works in Draw or Select mode
-|Middle Mouse *		|					|					|Drag Viewport
-|Letter Keys		|					|Any with Type		|When Type Selector is open, scroll to alphabetical entry starting in key pressed.<br>Press again to cycle through entries under that letter.
+|Key 1				|Key 2				|Layer				|Mode (Draw/Select)	|Function												|
+|:------------------|:------------------|:------------------|:-----------------:|:------------------------------------------------------|
+|Arrow Keys			|					|Object<br>NPC		|D / S				|Set direction<br><br>Press again to clear
+|F5	*				|					|					|D / S				|Quicksave current file (skip confirmation)
+|F9	*				|					|					|D / S				|Quickload current file (skip confirmation)
+|F12				|					|					|D / S				|Run chunk
+|[1 - 9]		    |					|					|D / S				|Switch to Layer (Wall, Floor, Floor2, etc.)
+|[1 - 9]			|Ctrl				|					|D					|Switch to Layer and open Type Selector
+|Alt *				|					|Object				|S					|Security Cam: Highlight visible tiles
+|Tab *				|					|					|D / S				|Move through input fields & buttons
+|Tab *				|Shift				|					|D / S				|Move through input fields & buttons, reversed	
+|Shift *			|Ctrl				|Any with Owner IDs	|D / S				|View filter to layer<br><br>Show OwnerIDs on all content
+|Shift *			|Ctrl				|Patrol				|D / S				|Display Patrol ID on patrol points
+|Shift *			|Alt				|Patrol				|D / S				|Show only patrol points in the current Patrol ID
+|A					|Ctrl				|Any				|S					|Select all in Layer<br><br>Press again to Deselect All
+|C *				|Ctrl				|Any				|S					|Copy all layers
+|C *				|Ctrl + Shift		|Any				|S					|Copy only current layer
+|E, Q				|					|Any				|D / S				|Zoom In/Out
+|E, Q				|Ctrl				|Object<br>NPC		|D / S				|Rotate direction
+|E, Q				|					|Patrol				|D / S				|Increase/Decrease Patrol Point ID
+|O					|Ctrl				|					|D / S				|Open file
+|S 					|Ctrl				|					|D / S				|Save current file						
+|V *				|Ctrl				|Any				|D / S				|Paste all layers on clipboard
+|V *				|Ctrl + Shift		|Any				|D / S				|Past only current layer on clipboard
+|Y *				|Ctrl				|					|D / S				|Redo										
+|Z *				|Ctrl				|					|D / S				|Undo									
+|Middle Mouse *		|					|					|D / S				|Drag Viewport
+|Letter Keys		|					|Any with Type		|D / S				|When Type Selector is open, scroll to alphabetical entry starting in key pressed.<br>Press again to cycle through entries under that letter.
 
 ## Item Groups *
 - Know how you can select "Slum NPCs" as a type? Why can't we do that with items? Game already has most of the rLists made anyway 
