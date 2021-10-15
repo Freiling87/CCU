@@ -35,25 +35,25 @@ namespace CCU.Patches.Interface
 
 			if (ctrl)
 			{
-				if (Input.GetKey(KeyCode.A))
+				if (Input.GetKeyDown(KeyCode.A))
 					LevelEditorUtilities.SelectAllToggle(__instance);
-				if (Input.GetKey(KeyCode.E))
+				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
 						LevelEditorUtilities.Rotate(__instance, KeyCode.E);
 					else if (currentInterface == "PatrolPoints")
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
 				}
-				if (Input.GetKey(KeyCode.O))
+				if (Input.GetKeyDown(KeyCode.O))
 					__instance.PressedLoadChunksFile();
-				if (Input.GetKey(KeyCode.Q))
+				if (Input.GetKeyDown(KeyCode.Q))
 				{
 					if (currentInterface == "Objects" || currentInterface == "Agents" || currentInterface == "Floors")
 						LevelEditorUtilities.Rotate(__instance, KeyCode.Q);
 					else if (currentInterface == "PatrolPoints")
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
 				}
-				if (Input.GetKey(KeyCode.S))
+				if (Input.GetKeyDown(KeyCode.S))
 					__instance.PressedSave();
 			}
 			else if (!fieldFocused)
@@ -81,7 +81,7 @@ namespace CCU.Patches.Interface
 			}
 
 			#region (Ctrl + ) Number keys - Set Layer (& Open Selector)
-			if (Input.GetKey(KeyCode.Alpha1))
+			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
 				__instance.PressedWallsButton();
 
@@ -91,7 +91,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha2))
+			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
 				__instance.PressedFloorsButton();
 
@@ -101,7 +101,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha3))
+			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
 				__instance.PressedFloors2Button();
 
@@ -111,7 +111,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha4))
+			if (Input.GetKeyDown(KeyCode.Alpha4))
 			{
 				__instance.PressedFloors3Button();
 
@@ -121,7 +121,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha5))
+			if (Input.GetKeyDown(KeyCode.Alpha5))
 			{
 				__instance.PressedObjectsButton();
 
@@ -131,7 +131,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha6))
+			if (Input.GetKeyDown(KeyCode.Alpha6))
 			{
 				__instance.PressedAgentsButton();
 
@@ -141,7 +141,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha7))
+			if (Input.GetKeyDown(KeyCode.Alpha7))
 			{
 				__instance.PressedItemsButton();
 
@@ -151,7 +151,7 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha8))
+			if (Input.GetKeyDown(KeyCode.Alpha8))
 			{ 
 				__instance.PressedLightsButton();
 
@@ -161,18 +161,18 @@ namespace CCU.Patches.Interface
 					__instance.EnterDrawMode();
 				}
 			}
-			if (Input.GetKey(KeyCode.Alpha9))
+			if (Input.GetKeyDown(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			#endregion
 			#region F5, F9, F12
-			if (Input.GetKey(KeyCode.F5))
+			if (Input.GetKeyDown(KeyCode.F5))
 			{
 				if (__instance.ChunkNameUsed(__instance.chunkName))
 					__instance.SaveChunkData(true, false);
 				else
 					__instance.PressedSave();
 			}
-			if (Input.GetKey(KeyCode.F9))
+			if (Input.GetKeyDown(KeyCode.F9))
 			{
 				//if (__instance.ChunkNameUsed(__instance.chunkName))
 				//	//Quickload here
@@ -180,10 +180,10 @@ namespace CCU.Patches.Interface
 				//else
 				__instance.PressedLoad();
 			}
-			if (Input.GetKey(KeyCode.F12))
+			if (Input.GetKeyDown(KeyCode.F12))
 				__instance.PressedPlayButton();
 			#endregion
-			if (Input.GetKey(KeyCode.Tab))
+			if (Input.GetKeyDown(KeyCode.Tab))
 				LevelEditorUtilities.Tab(__instance, shift);
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -227,6 +227,5 @@ namespace CCU.Patches.Interface
 
 			// Need a couple more filters here, see comments from BT 
 		}
-
 	}
 }

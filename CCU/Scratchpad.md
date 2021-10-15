@@ -69,6 +69,7 @@ If it's not already a thing
 New
 ###			C	00 Move all Interface/Layer strings to an enum or string const
 e.g. "Objects" "PatrolPoints" etc.
+###			C	00 Use Traverse to access subfields of private
 ###			C	Alt + Security Cam - Highlight Visible Tiles
 New
 ###			H	Alt + NumKeys, NumPad - Menu Trails
@@ -157,6 +158,7 @@ Complete
 	[Info   :  CCU_Core] Tab: Method Call
 	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance3Agent
 	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance3Agent (UnityEngine.UI.InputField)
+- Review the output from LevelEditor.Start_Postfix, as it traverses a field list by name.
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
