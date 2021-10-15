@@ -22,6 +22,7 @@ Possible future bug: If you create a character in DE, and edit/resave them in PE
 Complete
 ###			√	Character Sheet (CharacterSheet)
 Complete
+###		C	Access from Chunk/Campaign Editor selector dropdown
 
 #	CT	Chunk Editor
 ##		T	00 Error Logs Unidentified
@@ -64,6 +65,8 @@ Not sure about this one, may be too deeply hardcoded
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
+###			C	00 Add input rate limiter to all shortcuts
+New
 ###			C	00 Move all Interface/Layer strings to an enum or string const
 e.g. "Objects" "PatrolPoints" etc.
 ###			C	Alt + Security Cam - Highlight Visible Tiles
@@ -72,12 +75,9 @@ New
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			T	Arrow Keys - Orient
-- Attempted accessing LevelEditor.RotationObject.text
-  - Need to figure out how to access a field OF a private field (.text)
-    - New attempt
-###			T	Arrow Keys - Match current direction to set to None
-- Works, but does not reflect in InputField until re-selected.
-  - Attempted
+- Need more logging to diagnose
+###			√	Arrow Keys - Match current direction to set to None
+Complete
 ###			C	Ctrl + A - Deselect All
 Pending resolution of Select All
 ###			√	Ctrl + A - Select All
@@ -85,20 +85,27 @@ Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###			T	Ctrl + E, Q - Increment Patrol Point
+###			C	Ctrl + E, Q - Increment Patrol Point
 - Addressed dumb starting at 100 error
 - Triggers too quickly (can be held down, needs a delay)
   - Try this: https://forum.unity.com/threads/getkey-is-too-fast.222127/#post-1481149
-###			H	Ctrl + C - Copy All Layers
-- Copy multiple objects
-  - All-layer copy as well?
-- I can think of a way to do this but it's very convoluted.
-###			H	Ctrl + Shift + C - Copy One Layer
+    - Lol I broke it
+		[Debug  :CCU_LevelEditorUtilities]      Input: E
+		[Warning:  HarmonyX] AccessTools.Field: Could not find field for type LevelEditor and name pointNumPatrolPoint.text
+		[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+		Stack trace:
+		CCU.Content.LevelEditorUtilities.IncrementPatrolPoint (LevelEditor levelEditor, UnityEngine.KeyCode input) (at <1ade6337c7c0432284df8c1094c16264>:0)
+		CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription) (at <1ade6337c7c0432284df8c1094c16264>:0)
+		LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+###			H	Ctrl + C - Copy, All Layers
 Hold
-###			T	Ctrl + E, Q - Rotate Object
+###			H	Ctrl + Shift + C - Copy, One Layer
+Hold
+###			C	Ctrl + E, Q - Rotate Object
 - Attempted accessing LevelEditor.RotationObject.text
   - Need to figure out how to access a field OF a private field (.text)
     - New attempt
+      - Didn't work, try more logging
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
 ###			C	Ctrl + O - Open
@@ -130,10 +137,26 @@ New
 New
 ###			H	Shift + Alt - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
-###			T	Shift + Tab - Reverse-Tab through fields
-- Test again with logging fix
-###			T	Tab - Tab through fields
-- Test again with logging fix
+###			√	Shift + Tab - Reverse-Tab through fields
+Complete
+###			H	Tab - Tab through fields
+- Pending Input Rate Limit
+- Technically works. Only moved between the three Spawn% fields in the horizontal group
+	[Info   :  CCU_Core] Tab: Method Call
+	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance3Agent
+	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance3Agent (UnityEngine.UI.InputField)
+	[Info   :  CCU_Core] Tab: Method Call
+	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance2Agent
+	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance2Agent (UnityEngine.UI.InputField)
+	[Info   :  CCU_Core] Tab: Method Call
+	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChanceAgent
+	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChanceAgent (UnityEngine.UI.InputField)
+	[Info   :  CCU_Core] Tab: Method Call
+	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance2Agent
+	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance2Agent (UnityEngine.UI.InputField)
+	[Info   :  CCU_Core] Tab: Method Call
+	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance3Agent
+	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance3Agent (UnityEngine.UI.InputField)
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
@@ -147,6 +170,10 @@ This sounds hard
 
 #	√	Chunk Pack Editor √
 No features planned yet
+
+#	C	General
+##		C	Color the colons
+In Trait descriptions, colons are colored
 
 #	C	Level Editor
 ##		C	Hotkeys
@@ -411,6 +438,7 @@ QuestMarker
 	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
 ###			T	Pilot
 - Prefixed PlayfieldObject.SpawnNewMapMarker
+  - Didn't work
 ###			H	Bartender
 Pending pilot
 ###			H	Drug Dealer
@@ -431,6 +459,8 @@ New
 ##		C	Relationships
 ###			√	Faction Traits
 Complete
+###			C	Faction Trait Limitation to Same Content
+Limit interaction to same campaign, and if not campaign then same chunk pack
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
 ##		CT	Trait Triggers
@@ -440,8 +470,8 @@ New
 New
 ###			H	Cop	Access
 Pending Vendor issues resolution
-###			T	Honorable Thief
-Worked for pickpocket
+###			H	Honorable Thief
+Pending Vendor issues resolution
 ##		CT	Vendor
 ###			CT	00 No Button
 - "Buy" button no longer showing up
