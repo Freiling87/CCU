@@ -194,14 +194,9 @@ namespace CCU.Traits
 				TraitInfo info = TraitInfo.Get(trait);
 				TraitUnlock unlock = RogueLibs.GetUnlock<TraitUnlock>(info.Name);
 				string displayText = unlock.GetName();
-				logger.LogDebug(displayText);
 
 				if (agent.HasTrait(displayText))
-				{
-					logger.LogDebug("Found match: " + displayText);
-
 					return trait;
-				}
 			}
 
 			return null;
