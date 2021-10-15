@@ -75,9 +75,8 @@ This one is likely beyond my ability right now since we'd need to underline text
 - Attempted accessing LevelEditor.RotationObject.text
   - Need to figure out how to access a field OF a private field (.text)
     - New attempt
-###			T	Arrow Keys - Match current direction to set to None
-- Works, but does not reflect in InputField until re-selected.
-  - Attempted
+###			√	Arrow Keys - Match current direction to set to None
+Complete
 ###			C	Ctrl + A - Deselect All
 Pending resolution of Select All
 ###			√	Ctrl + A - Select All
