@@ -76,31 +76,20 @@ If it's not already a thing
 	}
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
-###			H	00 Display rotation on input
-Pending General Input issue
-###			C	General Input issue
-- Every key that uses Ctrl seems to have broken:
-	[Error  : Unity Log] ArgumentException: An item with the same key has already been added. Key: Floors3
-	Stack trace:
-	System.Collections.Generic.Dictionary`2[TKey,TValue].TryInsert (TKey key, TValue value, System.Collections.Generic.InsertionBehavior behavior) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.Dictionary`2[TKey,TValue].Add (TKey key, TValue value) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.Content.LevelEditorUtilities..cctor () (at <00da859462d34d0589228533f9a32b72>:0)
-	Rethrow as TypeInitializationException: The type initializer for 'CCU.Content.LevelEditorUtilities' threw an exception.
-	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <00da859462d34d0589228533f9a32b72>:0)
-	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-  - Can't guarantee that's the actual issue, just see where Floors3 goes
 ###			H	Alt + Security Cam - Highlight Visible Tiles
 Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			√	Arrow Keys - Orient
-Complete
+###			C	Arrow Keys - Orient (Draw)
+Initial Rotate/Orient is called without error or any further logging
+###			C	Arrow Keys - Orient (Select)
+Needs rate limit since it doesn't use Ctrl
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
-###			H	Ctrl + A - Deselect All
-Pending general input issue
+###			C	Ctrl + A - Deselect All
 - This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
+  - Ruled this out - can still affect selections after trying to deselect this way
 - Speaking of that, look for a Deselection method and see what he does in there.
 - Tried using levelEditor.ClearSelections, since it's pretty much the same thing. Not sure why I tried something different from the vanilla.
 ###			√	Ctrl + A - Select All
@@ -108,25 +97,17 @@ Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###			H	Ctrl + E, Q - Increment Patrol Point
-Pending general input issue
-- Addressed dumb starting at 100 error
-- Triggers too quickly (can be held down, needs a delay)
-  - Try this: https://forum.unity.com/threads/getkey-is-too-fast.222127/#post-1481149
-  - Lol I broke it
-	[Debug  :CCU_LevelEditorUtilities]      Input: E
-	[Warning:  HarmonyX] AccessTools.Field: Could not find field for type LevelEditor and name pointNumPatrolPoint.text
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	CCU.Content.LevelEditorUtilities.IncrementPatrolPoint (LevelEditor levelEditor, UnityEngine.KeyCode input) (at <1ade6337c7c0432284df8c1094c16264>:0)
-	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription) (at <1ade6337c7c0432284df8c1094c16264>:0)
-	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
- 	- Think I found the error and addressed it
 ###			H	Ctrl + C - Copy, All Layers
 Hold
 ###			H	Ctrl + Shift + C - Copy, One Layer
 Hold
-###			√	Ctrl + E, Q - Rotate Object
+###			√	Ctrl + E, Q - Increment Patrol Point (Draw)
+Complete
+###			√	Ctrl + E, Q - Increment Patrol Point (Select)
+Complete
+###			C	Ctrl + E, Q - Rotate Object (Draw)
+Initial Rotate/Orient is called without error or any further logging
+###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
 Complete
@@ -151,14 +132,18 @@ Attempted input delay
 - Chunk Name already existing does not affect behavior
 - Pops up y/n confirmation
 ###			C	F9 - Quickload
-- Crap-shoot attempt
+- Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <00da859462d34d0589228533f9a32b72>:0)
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <6710980335a54a0ab90bed5e3b63c3b3>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+###			C	F9 - Abort function if no matching filename to field
+New
 ###			√	F12 - Play Chunk
 Complete
+###			C	F12 - Exit Playing Chunk
+New
 ###			C	Letter Keys - skip to letter on scrolling menu
 New
 ###			H	Mouse3 - Drag Viewport
@@ -174,6 +159,7 @@ New
 ###			√	Shift + Tab - Reverse-Tab through fields
 Complete
 ###			H	Tab - Tab through fields
+- First: Is this feature even wanted? Maybe it'd be more useful to tab through playfieldObjects instead. E.g. patrol points in order?
 - Pending Input Rate Limit
 - Technically works. Only moved between the three Spawn% fields in the horizontal group
 	[Info   :  CCU_Core] Tab: Method Call
@@ -306,7 +292,7 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 ##		C	Behavior
 ###			√	Guilty
 Complete
-##		√	Behavior LOS
+##		C	Behavior LOS
 ###			√	Drink Blood
 Complete
 ###			√	Eat Corpse
@@ -315,8 +301,12 @@ Complete
 Complete
 ###			√	Grab Money
 Complete
+###			C	Hobo Beg (Custom)
+Maybe just implement the whole Hey, You! overhaul here
 ###			√	Pickpocket
 Complete
+###			C	Shakedown
+New
 ##		C	Combat
 ###			√	Coward
 Complete

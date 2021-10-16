@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.TraitTrigger
             RogueLibs.CreateCustomTrait<TraitTrigger_CopAccess>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}</color>: Will not sell to the player if they don't have The Law.", CTrait.AI_Vendor_Contraband, CTrait.AI_Vendor_CopStandard, CTrait.AI_Vendor_CopSWAT),
+                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}:</color> Will not sell to the player if they don't have The Law.", CTrait.AI_Vendor_Contraband, CTrait.AI_Vendor_CopStandard, CTrait.AI_Vendor_CopSWAT),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

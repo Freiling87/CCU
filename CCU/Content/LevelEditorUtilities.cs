@@ -53,7 +53,7 @@ namespace CCU.Content
 		public const string
 			LEInterfaces_Agents = "Agents",
 			LEInterfaces_Floors = "Floors",
-			LEInterfaces_Floors2 = "Floors3",
+			LEInterfaces_Floors2 = "Floors2",
 			LEInterfaces_Floors3 = "Floors3",
 			LEInterfaces_Items = "Items",
 			LEInterfaces_Level = "Level",
