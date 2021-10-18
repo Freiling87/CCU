@@ -20,7 +20,7 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
-		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper)
+		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, InputField ___chunkNameField)
 		{
 			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
@@ -33,11 +33,16 @@ namespace CCU.Patches.Interface
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
-			#region Letters
-			if (ctrl)
+			#region (Ctrl + Shift + ) Letters - Various
+			if (ctrl && shift)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
-					LevelEditorUtilities.ToggleSelectAllInLayer(__instance);
+					LevelEditorUtilities.ToggleSelectAll(__instance, true);
+			}
+			else if (ctrl)
+			{
+				if (Input.GetKeyDown(KeyCode.A))
+					LevelEditorUtilities.ToggleSelectAll(__instance, false);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
@@ -57,23 +62,30 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.S))
 					__instance.PressedSave();
 			}
+			else if (shift)
+			{
+				if (Input.GetKeyDown(KeyCode.E))
+					LevelEditorUtilities.ZoomInFully(__instance);
+				if (Input.GetKeyDown(KeyCode.Q))
+					LevelEditorUtilities.ZoomOutFully(__instance);
+			}
 			else if (!fieldFocused)
 			{
-				if (Input.GetKey(KeyCode.UpArrow))
+				if (Input.GetKeyDown(KeyCode.UpArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.UpArrow);
-				if (Input.GetKey(KeyCode.DownArrow))
+				if (Input.GetKeyDown(KeyCode.DownArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.DownArrow);
-				if (Input.GetKey(KeyCode.LeftArrow))
+				if (Input.GetKeyDown(KeyCode.LeftArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.LeftArrow);
-				if (Input.GetKey(KeyCode.RightArrow))
+				if (Input.GetKeyDown(KeyCode.RightArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.RightArrow);
 				if (Input.GetKey(KeyCode.A))
 					__instance.ScrollW();
 				if (Input.GetKey(KeyCode.D))
 					__instance.ScrollE();
-				if (Input.GetKey(KeyCode.E))
+				if (Input.GetKeyDown(KeyCode.E))
 					__instance.ZoomIn();
-				if (Input.GetKey(KeyCode.Q))
+				if (Input.GetKeyDown(KeyCode.Q))
 					__instance.ZoomOut();
 				if (Input.GetKey(KeyCode.S))
 					__instance.ScrollS();
@@ -165,13 +177,19 @@ namespace CCU.Patches.Interface
 			if (Input.GetKeyDown(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			#endregion
-			#region F5, F9, F12
+			#region F1-F12, Tab
 			if (Input.GetKeyDown(KeyCode.F5))
 			{
 				if (__instance.ChunkNameUsed(__instance.chunkName))
+				{
 					__instance.SaveChunkData(true, false);
+					__instance.PressedYesButton();
+				}
 				else
+				{
 					__instance.PressedSave();
+					__instance.PressedYesButton();
+				}
 			}
 			if (Input.GetKeyDown(KeyCode.F9))
 			{
@@ -179,16 +197,18 @@ namespace CCU.Patches.Interface
 					"\tAttempting Quickload: \n" +
 					"\t\tChunk Name: " + __instance.chunkName);
 
-				__instance.LoadChunkFromFile(__instance.chunkName, ___yesNoButtonHelper);
+				__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
 				//This almost certainly wont work on its own
 				//You need to set yesNoButtonHelper 
 				//It might be faster to simply manually call the menu up and issue commands to it.
 			}
 			if (Input.GetKeyDown(KeyCode.F12))
 				__instance.PressedPlayButton();
+
+			// On hold until I'm convinced this feature needs to exist
+			//if (Input.GetKeyDown(KeyCode.Tab))
+			//	LevelEditorUtilities.Tab(__instance, shift);
 			#endregion
-			if (Input.GetKeyDown(KeyCode.Tab))
-				LevelEditorUtilities.Tab(__instance, shift);
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;

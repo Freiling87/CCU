@@ -67,16 +67,6 @@ Not sure about this one, may be too deeply hardcoded
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
-###			T	00 Add input rate limiter to all shortcuts
-- Attempted with GetKeyDown
-  - This will break probably as much as it fixes. Just relax and accept it.
-###			C	00 Implement BlazingTwist's nifty input gate
-- This seems like it will pretty accurately match common UI practices
-	List<KeyCode> keyCodes = new List<KeyCode>{KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.K};
-	if (keyCodes.All(Input.GetKey) && keyCodes.Any(Input.GetKeyDown)) 
-	{
-		// key combination pressed this frame
-	}
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
 ###			H	Alt + Security Cam - Highlight Visible Tiles
@@ -84,17 +74,16 @@ Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			C	Arrow Keys - Orient (Draw)
-Initial Rotate/Orient is called without error or any further logging
-###			C	Arrow Keys - Orient (Select)
-Needs rate limit since it doesn't use Ctrl
+###			T	Arrow Keys - Orient (Draw)
+- Initial Rotate/Orient is called without error or any further logging
+  - Added logging
+###			T	Arrow Keys - Orient (Select)
+- Needs rate limit since it doesn't use Ctrl
+  - Attempted
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
-###			C	Ctrl + A - Deselect All
-- This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
-  - Ruled this out - can still affect selections after trying to deselect this way
-- Speaking of that, look for a Deselection method and see what he does in there.
-- Tried using levelEditor.ClearSelections, since it's pretty much the same thing. Not sure why I tried something different from the vanilla.
+###			T	Ctrl + A - Deselect All
+- Attempted
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
@@ -108,8 +97,9 @@ Hold
 Complete
 ###			√	Ctrl + E, Q - Increment Patrol Point (Select)
 Complete
-###			C	Ctrl + E, Q - Rotate Object (Draw)
-Initial Rotate/Orient is called without error or any further logging
+###			T	Ctrl + E, Q - Rotate Object (Draw)
+- Initial Rotate/Orient is called without error or any further logging
+  - Added logging
 ###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
@@ -128,31 +118,34 @@ Hold
 New
 ###			H	Ctrl + Z - Undo
 New
-###			H	E, Q - Zoom In/Out
-Pending general input issue
-Attempted input delay
+###			T	E, Q - Zoom In/Out
+General input issue resolved
 ###			T	F5 - Quicksave
 - Chunk Name already existing does not affect behavior
 - Pops up y/n confirmation
-###			C	F9 - Quickload
+  - Attempted
+###			T	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <6710980335a54a0ab90bed5e3b63c3b3>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	- Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
 ###			C	F9 - Abort function if no matching filename to field
 New
 ###			√	F12 - Play Chunk
 Complete
-###			C	F12 - Exit Playing Chunk
-New
-###			C	Letter Keys - skip to letter on scrolling menu
-New
+###			H	F12 - Exit Playing Chunk
+On ice, pending user request
+###			H	Letter Keys - skip to letter on scrolling menu
+On ice, pending collaboration with someone who uderstands UI methods well
 ###			H	Mouse3 - Drag Viewport
 New, and hell no
 ###			√	NumKeys - Select Layer
 Complete
+###			T	Shift + E, Q - Max Zoom In/Out
+Attempted
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
 New
 ###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
@@ -162,7 +155,7 @@ New
 ###			√	Shift + Tab - Reverse-Tab through fields
 Complete
 ###			H	Tab - Tab through fields
-- First: Is this feature even wanted? Maybe it'd be more useful to tab through playfieldObjects instead. E.g. patrol points in order?
+- Putting this on ice - not sure how useful of a feature it is yet
 - Pending Input Rate Limit
 - Technically works. Only moved between the three Spawn% fields in the horizontal group
 	[Info   :  CCU_Core] Tab: Method Call
@@ -265,12 +258,12 @@ New
 - 
 
 #	CT	Traits
-###		C	Agent Group
-####		H	Affect Campaign
+##		C	Agent Group
+###		H	Affect Campaign
 Pending pilot
-####		H	Affect Vanilla 
+###		H	Affect Vanilla 
 Pending pilot
-####		C	Slum NPCs (Pilot)
+###		C	Slum NPCs (Pilot)
 New
 ##		C	Appearance
 This actually sorta worked, sorta. 
@@ -292,9 +285,6 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
-##		C	Behavior
-###			√	Guilty
-Complete
 ##		C	Behavior LOS
 ###			√	Drink Blood
 Complete
@@ -310,26 +300,42 @@ Maybe just implement the whole Hey, You! overhaul here
 Complete
 ###			C	Shakedown
 New
-##		C	Combat
+##		C	Behavior Passive
+###			√	Guilty
+Complete
+##		T	Bodyguarded
+- LoadLevel.SetupMore3_3 where "Musician"
+  - Attempted here
+  - But there are a few other hits in searching this string in the code:
+    - LoadLevel.SpawnStartingFollowers
+    - ObjectMult.StartWithFollowersBodyguardA
+      - Ignore this one, it's for the Player Bodyguard trait
+###			C	Bodyguarded - Cop
+New
+###			C	Bodyguarded - Blahd
+New
+###			C	Bodyguarded - Crepe
+New
+###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Mafia
+New
+###			C	Bodyguarded - Soldier
+New
+###			C	Bodyguarded - Supercop
+New
+###			C	Bodyguarded - Supergoon
+New
+##		√	Combat
 ###			√	Coward
 Complete
 ###			C	Explode On Death (Robot)
 New
 ###			√	Fearless
 Complete
-###			C	Pacifist
-New
 ###			√	Use Drugs in Combat
 Complete
-##		C	Generation
-###			C	Bodyguarded - Cops
-New
-###			C	Bodyguarded - Goons
-New
-###			C	Bodyguarded - Supercops
-New
-###			C	Bodyguarded - Supergoons
-New
+##		C	Spawn
 ###			C	Enslaved
 New
 ###			C	Hide In Bush

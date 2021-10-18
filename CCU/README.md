@@ -47,7 +47,7 @@ There are traits for each variation within the following groups:
 
 You can add as many as you want to a custom character. When you do so, NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
 
-## Behavior Traits
+## Behavior LOS Traits
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -56,6 +56,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Grab Drugs											|- If NPC sees Drugs, they'll try to grab them
 |Grab Money											|- If NPC sees Money, they'll try to grab it
 |Pickpocket											|- Enables pickpocketing behavior<br>- Requires: Sticky Glove
+|Shakedown Player *									|- Enables Mafia mugging behavior
 
 ## Hire Traits 
 
@@ -185,15 +186,15 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |F12				|					|					|D / S				|Run chunk<br>Exit Run Mode *
 |[1 - 9]		    |					|					|D / S				|Switch to Layer (Wall, Floor, Floor2, etc.)
 |[1 - 9]			|Ctrl				|					|D					|Switch to Layer and open Type Selector
-|Alt *				|					|Object				|S					|Security Cam: Highlight visible tiles
+|Alt *				|					|Object				|	 S				|Security Cam: Highlight visible tiles
 |Tab *				|					|					|D / S				|Move through input fields & buttons
 |Tab *				|Shift				|					|D / S				|Move through input fields & buttons, reversed	
 |Shift *			|Ctrl				|Any with Owner IDs	|D / S				|View filter to layer<br><br>Show OwnerIDs on all content
 |Shift *			|Ctrl				|Patrol				|D / S				|Display Patrol ID on patrol points
 |Shift *			|Alt				|Patrol				|D / S				|Show only patrol points in the current Patrol ID
-|A					|Ctrl				|Any				|S					|Select all in Layer<br><br>Press again to Deselect All
-|C *				|Ctrl				|Any				|S					|Copy all layers
-|C *				|Ctrl + Shift		|Any				|S					|Copy only current layer
+|A					|Ctrl				|Any				|	 S				|Select all in Layer<br><br>Press again to Deselect All
+|C *				|Ctrl				|Any				|	 S				|Copy all layers
+|C *				|Ctrl + Shift		|Any				|	 S				|Copy only current layer
 |E, Q				|					|Any				|D / S				|Zoom In/Out
 |E, Q				|Ctrl				|Object<br>NPC		|D / S				|Rotate direction
 |E, Q				|					|Patrol				|D / S				|Increase/Decrease Patrol Point ID

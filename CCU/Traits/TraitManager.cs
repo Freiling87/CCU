@@ -14,6 +14,7 @@ using CCU.Traits.AI.Interaction;
 using CCU.Traits.FacialHair;
 using CCU.Traits.Relationships;
 using CCU.Traits.MapMarker;
+using CCU.Traits.Spawn;
 
 namespace CCU.Traits
 {
@@ -32,6 +33,7 @@ namespace CCU.Traits
 
 				list.AddRange(BehaviorLOSTraits);
 				list.AddRange(BehaviorNonLOSTraits);
+				list.AddRange(BodyguardedTraits);
 				list.AddRange(HireCostTraits);
 				list.AddRange(HireTypeTraits);
 				list.AddRange(InteractionTraits);
@@ -72,6 +74,10 @@ namespace CCU.Traits
 		};
 		public static List<Type> BehaviorNonLOSTraits = new List<Type>()
 		{
+		};
+		public static List<Type> BodyguardedTraits = new List<Type>()
+		{
+			typeof(Bodyguarded_Pilot),
 		};
 		public static List<Type> FacialHairTraits = new List<Type>()
 		{

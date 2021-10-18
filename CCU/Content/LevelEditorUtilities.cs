@@ -135,12 +135,19 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
+			logger.LogDebug("\tinputField: " + inputField.name);
+			logger.LogDebug("\tits value: " + inputField.text);
+
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
 			directionObjectField.text = newDir;
 
-			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-				levelEditorTile.direction = newDir;
+			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
+			logger.LogDebug("\tits value: " + directionObjectField.text);
+
+			if (levelEditor.selectedTiles.Count() > 0)
+				foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+					levelEditorTile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
 		}
@@ -171,12 +178,19 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
+			logger.LogDebug("\tinputField: " + inputField.name);
+			logger.LogDebug("\tits value: " + inputField.text);
+
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
 			directionObjectField.text = newDir;
 
-			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-				levelEditorTile.direction = newDir;
+			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
+			logger.LogDebug("\tits value: " + directionObjectField.text);
+
+			if (levelEditor.selectedTiles.Count() > 0)
+				foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+					levelEditorTile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
 		}
@@ -204,11 +218,12 @@ namespace CCU.Content
 
 			logger.LogDebug("ActiveInputField: " + ActiveInputField(levelEditor));
 		}
-		public static void ToggleSelectAllInLayer(LevelEditor levelEditor)
+		public static void ToggleSelectAll(LevelEditor levelEditor, bool limitToLayer)
 		{
 			List<LevelEditorTile> list = null;
 			string layer = levelEditor.currentLayer;
 
+			#region
 			if (layer == LEInterfaces_Walls)
 				list = levelEditor.wallTiles;
 			else if (layer == LEInterfaces_Floors)
@@ -229,6 +244,7 @@ namespace CCU.Content
 				list = levelEditor.patrolPointTiles;
 			else if (layer == LEInterfaces_Level)
 				list = levelEditor.chunkTiles;
+			#endregion
 
 			bool SelectingAll = false;
 
@@ -240,9 +256,18 @@ namespace CCU.Content
 				}
 
 			if (!SelectingAll)
-				levelEditor.ClearSelections(false);
+				levelEditor.ClearSelections(true);
 
 			levelEditor.UpdateInterface(false);
+		}
+		public static void ZoomInFully(LevelEditor levelEditor) =>
+			GC.cameraScript.zoomLevel = 1f;
+		public static void ZoomOutFully(LevelEditor levelEditor)
+		{
+			if (levelEditor.levelMode)
+				GC.cameraScript.zoomLevel = 0.1f;
+			else if (!levelEditor.levelMode)
+				GC.cameraScript.zoomLevel = 0.4f;
 		}
 	}
 }

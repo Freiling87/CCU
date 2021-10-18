@@ -5,22 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace CCU.Traits.MapMarker
+namespace CCU.Traits.Spawn
 {
-	public class MapMarker_Pilot : CustomTrait
+	public class Bodyguarded_Pilot : CustomTrait
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<MapMarker_Pilot>()
+			RogueLibs.CreateCustomTrait<Bodyguarded_Pilot>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "This character should spawn with a Map Marker. Let's see what happens!",
+					[LanguageCode.English] = "This character should spawn with bodyguards. Let's see what happens!",
 					[LanguageCode.Russian] = "",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.MapMarker_Pilot,
+					[LanguageCode.English] = CTrait.Bodyguarded_Pilot,
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock
