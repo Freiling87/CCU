@@ -79,11 +79,8 @@ This one is likely beyond my ability right now since we'd need to underline text
   - Attempted
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
-###			C	Ctrl + A - Deselect All
-- This might be a matter of visual interface. Maybe UpdateInterface is called when selecting but not deselecting?
-  - Ruled this out - can still affect selections after trying to deselect this way
-- Speaking of that, look for a Deselection method and see what he does in there.
-- Tried using levelEditor.ClearSelections, since it's pretty much the same thing. Not sure why I tried something different from the vanilla.
+###			T	Ctrl + A - Deselect All
+- Attempted
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
@@ -120,7 +117,7 @@ New
 New
 ###			T	E, Q - Zoom In/Out
 General input issue resolved
-###			C	F5 - Quicksave
+###			T	F5 - Quicksave
 - Chunk Name already existing does not affect behavior
 - Pops up y/n confirmation
   - Attempted

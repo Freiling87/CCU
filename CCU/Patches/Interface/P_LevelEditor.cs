@@ -36,12 +36,13 @@ namespace CCU.Patches.Interface
 			#region (Ctrl + Shift + ) Letters - Various
 			if (ctrl && shift)
 			{
-				// None yet
+				if (Input.GetKeyDown(KeyCode.A))
+					LevelEditorUtilities.ToggleSelectAll(__instance, true);
 			}
 			else if (ctrl)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
-					LevelEditorUtilities.ToggleSelectAllInLayer(__instance);
+					LevelEditorUtilities.ToggleSelectAll(__instance, false);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
