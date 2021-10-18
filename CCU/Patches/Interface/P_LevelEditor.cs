@@ -34,7 +34,11 @@ namespace CCU.Patches.Interface
 			bool fieldFocused = __instance.InputFieldFocused();
 
 			#region Letters
-			if (ctrl)
+			if (ctrl && shift)
+			{
+
+			}
+			else if (ctrl)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
 					LevelEditorUtilities.ToggleSelectAllInLayer(__instance);
@@ -57,6 +61,13 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.S))
 					__instance.PressedSave();
 			}
+			else if (shift)
+			{
+				if (Input.GetKeyDown(KeyCode.E))
+					LevelEditorUtilities.ZoomInFully(__instance);
+				if (Input.GetKeyDown(KeyCode.Q))
+					LevelEditorUtilities.ZoomOutFully(__instance);
+			}
 			else if (!fieldFocused)
 			{
 				if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -71,9 +82,9 @@ namespace CCU.Patches.Interface
 					__instance.ScrollW();
 				if (Input.GetKey(KeyCode.D))
 					__instance.ScrollE();
-				if (Input.GetKey(KeyCode.E))
+				if (Input.GetKeyDown(KeyCode.E))
 					__instance.ZoomIn();
-				if (Input.GetKey(KeyCode.Q))
+				if (Input.GetKeyDown(KeyCode.Q))
 					__instance.ZoomOut();
 				if (Input.GetKey(KeyCode.S))
 					__instance.ScrollS();

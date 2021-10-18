@@ -64,16 +64,6 @@ Not sure about this one, may be too deeply hardcoded
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
-###			T	00 Add input rate limiter to all shortcuts
-- Attempted with GetKeyDown
-  - This will break probably as much as it fixes. Just relax and accept it.
-###			C	00 Implement BlazingTwist's nifty input gate
-- This seems like it will pretty accurately match common UI practices
-	List<KeyCode> keyCodes = new List<KeyCode>{KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.K};
-	if (keyCodes.All(Input.GetKey) && keyCodes.Any(Input.GetKeyDown)) 
-	{
-		// key combination pressed this frame
-	}
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
 ###			H	Alt + Security Cam - Highlight Visible Tiles
@@ -107,7 +97,7 @@ Hold
 Complete
 ###			√	Ctrl + E, Q - Increment Patrol Point (Select)
 Complete
-###			C	Ctrl + E, Q - Rotate Object (Draw)
+###			T	Ctrl + E, Q - Rotate Object (Draw)
 - Initial Rotate/Orient is called without error or any further logging
   - Added logging
 ###			√	Ctrl + E, Q - Rotate Object (Select)
@@ -128,9 +118,8 @@ Hold
 New
 ###			H	Ctrl + Z - Undo
 New
-###			H	E, Q - Zoom In/Out
-Pending general input issue
-Attempted input delay
+###			T	E, Q - Zoom In/Out
+General input issue resolved
 ###			T	F5 - Quicksave
 - Chunk Name already existing does not affect behavior
 - Pops up y/n confirmation
@@ -145,14 +134,16 @@ Attempted input delay
 New
 ###			√	F12 - Play Chunk
 Complete
-###			C	F12 - Exit Playing Chunk
-New
-###			C	Letter Keys - skip to letter on scrolling menu
-New
+###			H	F12 - Exit Playing Chunk
+On ice, pending user request
+###			H	Letter Keys - skip to letter on scrolling menu
+On ice, pending collaboration with someone who uderstands UI methods well
 ###			H	Mouse3 - Drag Viewport
 New, and hell no
 ###			√	NumKeys - Select Layer
 Complete
+###			T	Shift + E, Q - Max Zoom In/Out
+Attempted
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
 New
 ###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
