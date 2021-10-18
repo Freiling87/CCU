@@ -81,10 +81,11 @@ Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			C	Arrow Keys - Orient (Draw)
-Initial Rotate/Orient is called without error or any further logging
-###			C	Arrow Keys - Orient (Select)
-Needs rate limit since it doesn't use Ctrl
+###			T	Arrow Keys - Orient (Draw)
+- Initial Rotate/Orient is called without error or any further logging
+###			T	Arrow Keys - Orient (Select)
+- Needs rate limit since it doesn't use Ctrl
+  - Attempted
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
 ###			C	Ctrl + A - Deselect All

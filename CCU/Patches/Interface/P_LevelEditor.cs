@@ -59,13 +59,13 @@ namespace CCU.Patches.Interface
 			}
 			else if (!fieldFocused)
 			{
-				if (Input.GetKey(KeyCode.UpArrow))
+				if (Input.GetKeyDown(KeyCode.UpArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.UpArrow);
-				if (Input.GetKey(KeyCode.DownArrow))
+				if (Input.GetKeyDown(KeyCode.DownArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.DownArrow);
-				if (Input.GetKey(KeyCode.LeftArrow))
+				if (Input.GetKeyDown(KeyCode.LeftArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.LeftArrow);
-				if (Input.GetKey(KeyCode.RightArrow))
+				if (Input.GetKeyDown(KeyCode.RightArrow))
 					LevelEditorUtilities.OrientObject(__instance, KeyCode.RightArrow);
 				if (Input.GetKey(KeyCode.A))
 					__instance.ScrollW();
@@ -187,8 +187,9 @@ namespace CCU.Patches.Interface
 			if (Input.GetKeyDown(KeyCode.F12))
 				__instance.PressedPlayButton();
 			#endregion
-			if (Input.GetKeyDown(KeyCode.Tab))
-				LevelEditorUtilities.Tab(__instance, shift);
+			// On hold until I'm convinced this feature needs to exist
+			//if (Input.GetKeyDown(KeyCode.Tab))
+			//	LevelEditorUtilities.Tab(__instance, shift);
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;
