@@ -20,7 +20,7 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
-		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper)
+		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, InputField ___chunkNameField)
 		{
 			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
@@ -197,7 +197,7 @@ namespace CCU.Patches.Interface
 					"\tAttempting Quickload: \n" +
 					"\t\tChunk Name: " + __instance.chunkName);
 
-				__instance.LoadChunkFromFile(__instance.chunkName, ___yesNoButtonHelper);
+				__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
 				//This almost certainly wont work on its own
 				//You need to set yesNoButtonHelper 
 				//It might be faster to simply manually call the menu up and issue commands to it.

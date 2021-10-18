@@ -121,13 +121,14 @@ General input issue resolved
 - Chunk Name already existing does not affect behavior
 - Pops up y/n confirmation
   - Attempted
-###			C	F9 - Quickload
+###			T	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <6710980335a54a0ab90bed5e3b63c3b3>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	- Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
 ###			C	F9 - Abort function if no matching filename to field
 New
 ###			√	F12 - Play Chunk
