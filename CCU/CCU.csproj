@@ -116,6 +116,7 @@
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
     <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
+    <Compile Include="Patches\Spawn\P_LoadLevel.cs" />
     <Compile Include="Traits\AI\BehaviorLOS\Behavior_EatCorpse.cs" />
     <Compile Include="Traits\AI\BehaviorLOS\Behavior_GrabDrugs.cs" />
     <Compile Include="Traits\AI\BehaviorLOS\Behavior_GrabMoney.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Traits\Loadout\ChunkSafeCombo.cs" />
     <Compile Include="Traits\Loadout\Guns_Common.cs" />
     <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
+    <Compile Include="Traits\Spawn\Bodyguarded_Pilot.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\AI\Hire\Hire_BreakIn.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_HonorableThief.cs" />

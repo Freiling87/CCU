@@ -300,23 +300,30 @@ Maybe just implement the whole Hey, You! overhaul here
 Complete
 ###			C	Shakedown
 New
-##		C	Combat
+##		√	Combat
 ###			√	Coward
 Complete
 ###			√	Fearless
 Complete
-###			C	Pacifist
-New
 ###			√	Use Drugs in Combat
 Complete
 ##		C	Generation
-###			C	Bodyguarded - Cops
+- LoadLevel.SetupMore3_3 where "Musician"
+###			C	Bodyguarded - Cop
 New
-###			C	Bodyguarded - Goons
+###			C	Bodyguarded - Blahd
 New
-###			C	Bodyguarded - Supercops
+###			C	Bodyguarded - Crepe
 New
-###			C	Bodyguarded - Supergoons
+###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Mafia
+New
+###			C	Bodyguarded - Soldier
+New
+###			C	Bodyguarded - Supercop
+New
+###			C	Bodyguarded - Supergoon
 New
 ###			C	Enslaved
 New

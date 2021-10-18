@@ -362,10 +362,11 @@ namespace CCU
 			Spawn_AgentGroup_WhiteCollars = "Spawn: Agent Group - White-Collars",
 		#endregion
 		#region Generation
-			Spawn_BodyguardedCops = "Spawn: Bodyguarded by Cops",
-			Spawn_BodyguardedGoons = "Spawn: Bodyguarded by Goons",
-			Spawn_BodyguardedSupercops = "Spawn: Bodyguarded by Supercops",
-			Spawn_BodyguardedSupergoons = "Spawn: Bodyguarded by Supergoons",
+			Bodyguarded_Pilot = "Bodyguarded: Pilot",
+			Bodyguarded_Cops = "Bodyguarded: Cops",
+			Bodyguarded_Goons = "Bodyguarded: Goons",
+			Bodyguarded_Supercops = "Bodyguarded: Supercops",
+			Bodyguarded_Supergoons = "Bodyguarded: Supergoons",
 			Spawn_Enslaved = "Spawn: Enslaved",
 			Spawn_HideInBush = "Spawn: Hide In Bush",
 			Spawn_HideInManhole = "Spawn: Hide In Manhole",

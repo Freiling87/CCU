@@ -47,7 +47,7 @@ There are traits for each variation within the following groups:
 
 You can add as many as you want to a custom character. When you do so, NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
 
-## Behavior Traits
+## Behavior LOS Traits
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -56,6 +56,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Grab Drugs											|- If NPC sees Drugs, they'll try to grab them
 |Grab Money											|- If NPC sees Money, they'll try to grab it
 |Pickpocket											|- Enables pickpocketing behavior<br>- Requires: Sticky Glove
+|Shakedown Player *									|- Enables Mafia mugging behavior
 
 ## Hire Traits 
 
