@@ -33,10 +33,10 @@ namespace CCU.Patches.Interface
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
-			#region Letters
+			#region (Ctrl + Shift + ) Letters - Various
 			if (ctrl && shift)
 			{
-
+				// None yet
 			}
 			else if (ctrl)
 			{
@@ -176,13 +176,19 @@ namespace CCU.Patches.Interface
 			if (Input.GetKeyDown(KeyCode.Alpha9))
 				__instance.PressedPatrolPointsButton();
 			#endregion
-			#region F5, F9, F12
+			#region F1-F12, Tab
 			if (Input.GetKeyDown(KeyCode.F5))
 			{
 				if (__instance.ChunkNameUsed(__instance.chunkName))
+				{
 					__instance.SaveChunkData(true, false);
+					__instance.PressedYesButton();
+				}
 				else
+				{
 					__instance.PressedSave();
+					__instance.PressedYesButton();
+				}
 			}
 			if (Input.GetKeyDown(KeyCode.F9))
 			{
@@ -197,10 +203,11 @@ namespace CCU.Patches.Interface
 			}
 			if (Input.GetKeyDown(KeyCode.F12))
 				__instance.PressedPlayButton();
-			#endregion
+
 			// On hold until I'm convinced this feature needs to exist
 			//if (Input.GetKeyDown(KeyCode.Tab))
 			//	LevelEditorUtilities.Tab(__instance, shift);
+			#endregion
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;

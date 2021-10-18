@@ -120,9 +120,10 @@ New
 New
 ###			T	E, Q - Zoom In/Out
 General input issue resolved
-###			T	F5 - Quicksave
+###			C	F5 - Quicksave
 - Chunk Name already existing does not affect behavior
 - Pops up y/n confirmation
+  - Attempted
 ###			C	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
