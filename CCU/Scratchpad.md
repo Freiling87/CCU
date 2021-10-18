@@ -8,6 +8,9 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 #	C	00 Initial Load Error Logs
 
+##		C	Crash on hire
+- Probably just need to write the Interaction chain
+
 ---
 
 #	√	Campaign Editor
@@ -310,6 +313,8 @@ New
 ##		C	Combat
 ###			√	Coward
 Complete
+###			C	Explode On Death (Robot)
+New
 ###			√	Fearless
 Complete
 ###			C	Pacifist
@@ -486,6 +491,8 @@ New
 Complete
 ###			C	Faction Trait Limitation to Same Content
 Limit interaction to same campaign, and if not campaign then same chunk pack
+###			C	Musician Trait for random followers
+New
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
 ##		CT	Trait Triggers
