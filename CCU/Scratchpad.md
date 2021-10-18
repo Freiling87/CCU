@@ -83,6 +83,7 @@ ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			T	Arrow Keys - Orient (Draw)
 - Initial Rotate/Orient is called without error or any further logging
+  - Added logging
 ###			T	Arrow Keys - Orient (Select)
 - Needs rate limit since it doesn't use Ctrl
   - Attempted
@@ -107,7 +108,8 @@ Complete
 ###			√	Ctrl + E, Q - Increment Patrol Point (Select)
 Complete
 ###			C	Ctrl + E, Q - Rotate Object (Draw)
-Initial Rotate/Orient is called without error or any further logging
+- Initial Rotate/Orient is called without error or any further logging
+  - Added logging
 ###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector

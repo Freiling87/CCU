@@ -135,12 +135,19 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
+			logger.LogDebug("\tinputField: " + inputField.name);
+			logger.LogDebug("\tits value: " + inputField.text);
+
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
 			directionObjectField.text = newDir;
 
-			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-				levelEditorTile.direction = newDir;
+			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
+			logger.LogDebug("\tits value: " + directionObjectField.text);
+
+			if (levelEditor.selectedTiles.Count() > 0)
+				foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+					levelEditorTile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
 		}
@@ -171,12 +178,19 @@ namespace CCU.Content
 			if (!(inputField is null))
 				inputField.text = newDir;
 
+			logger.LogDebug("\tinputField: " + inputField.name);
+			logger.LogDebug("\tits value: " + inputField.text);
+
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
 			directionObjectField.text = newDir;
 
-			foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-				levelEditorTile.direction = newDir;
+			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
+			logger.LogDebug("\tits value: " + directionObjectField.text);
+
+			if (levelEditor.selectedTiles.Count() > 0)
+				foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
+					levelEditorTile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
 		}
