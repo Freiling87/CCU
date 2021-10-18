@@ -157,6 +157,7 @@ New
 ###			√	Shift + Tab - Reverse-Tab through fields
 Complete
 ###			H	Tab - Tab through fields
+- Putting this on ice - not sure how useful of a feature it is yet
 - Pending Input Rate Limit
 - Technically works. Only moved between the three Spawn% fields in the horizontal group
 	[Info   :  CCU_Core] Tab: Method Call
