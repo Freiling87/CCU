@@ -7,7 +7,6 @@ using CCU.Traits.AI.Combat;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using CCU.Traits;
-using CCU.Traits.MapMarker;
 using CCU.Traits.Spawn;
 
 namespace CCU.Patches.Spawn

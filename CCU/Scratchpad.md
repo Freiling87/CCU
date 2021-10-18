@@ -255,12 +255,12 @@ New
 - 
 
 #	CT	Traits
-###		C	Agent Group
-####		H	Affect Campaign
+##		C	Agent Group
+###		H	Affect Campaign
 Pending pilot
-####		H	Affect Vanilla 
+###		H	Affect Vanilla 
 Pending pilot
-####		C	Slum NPCs (Pilot)
+###		C	Slum NPCs (Pilot)
 New
 ##		C	Appearance
 This actually sorta worked, sorta. 
@@ -282,9 +282,6 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
-##		C	Behavior
-###			√	Guilty
-Complete
 ##		C	Behavior LOS
 ###			√	Drink Blood
 Complete
@@ -300,15 +297,16 @@ Maybe just implement the whole Hey, You! overhaul here
 Complete
 ###			C	Shakedown
 New
-##		√	Combat
-###			√	Coward
+##		C	Behavior Passive
+###			√	Guilty
 Complete
-###			√	Fearless
-Complete
-###			√	Use Drugs in Combat
-Complete
-##		C	Generation
+##		T	Bodyguarded
 - LoadLevel.SetupMore3_3 where "Musician"
+  - Attempted here
+  - But there are a few other hits in searching this string in the code:
+    - LoadLevel.SpawnStartingFollowers
+    - ObjectMult.StartWithFollowersBodyguardA
+      - Ignore this one, it's for the Player Bodyguard trait
 ###			C	Bodyguarded - Cop
 New
 ###			C	Bodyguarded - Blahd
@@ -325,6 +323,14 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
+##		√	Combat
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
+###			√	Use Drugs in Combat
+Complete
+##		C	Spawn
 ###			C	Enslaved
 New
 ###			C	Hide In Bush

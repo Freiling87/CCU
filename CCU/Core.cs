@@ -361,12 +361,14 @@ namespace CCU
 			Spawn_AgentGroup_Vampire = "Spawn: Agent Group - Vampire",
 			Spawn_AgentGroup_WhiteCollars = "Spawn: Agent Group - White-Collars",
 		#endregion
-		#region Generation
+		#region Bodyguarded
 			Bodyguarded_Pilot = "Bodyguarded: Pilot",
 			Bodyguarded_Cops = "Bodyguarded: Cops",
 			Bodyguarded_Goons = "Bodyguarded: Goons",
 			Bodyguarded_Supercops = "Bodyguarded: Supercops",
 			Bodyguarded_Supergoons = "Bodyguarded: Supergoons",
+		#endregion
+		#region Generation
 			Spawn_Enslaved = "Spawn: Enslaved",
 			Spawn_HideInBush = "Spawn: Hide In Bush",
 			Spawn_HideInManhole = "Spawn: Hide In Manhole",
@@ -375,7 +377,6 @@ namespace CCU
 		#endregion
 		#endregion
 	}
-
 	public static class vItem // Vanilla Items
 	{
 		public const string
@@ -675,7 +676,6 @@ namespace CCU
 				Wrench,
 		};
 	}
-
 	public static class vObject // Vanilla Objects
 	{
 		public const string
@@ -770,7 +770,6 @@ namespace CCU
 			vObject.SecurityCam,
 		};
 	}
-
 	public static class vSpecialAbility // Vanilla Special Abilities
 	{
 		public const string
