@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.BehaviorLOS
             RogueLibs.CreateCustomTrait<Behavior_SuckBlood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires</color>: {0}", vSpecialAbility.Bite),
+                    [LanguageCode.English] = String.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

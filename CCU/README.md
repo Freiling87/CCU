@@ -179,10 +179,10 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 
 |Key 1				|Key 2				|Layer				|Mode (Draw/Select)	|Function												|
 |:------------------|:------------------|:------------------|:-----------------:|:------------------------------------------------------|
-|Arrow Keys			|					|Object<br>NPC		|D / S				|Set direction<br><br>Press again to clear
+|Arrow Keys			|					|Object<br>NPC		|D / S				|Set direction<br><br>Match current direction to set to None
 |F5	*				|					|					|D / S				|Quicksave current file (skip confirmation)
-|F9	*				|					|					|D / S				|Quickload current file (skip confirmation)
-|F12				|					|					|D / S				|Run chunk
+|F9					|					|					|D / S				|Quickload file with matching Filename<br>Defaults to current chunk<br>If new name, opens a blank chunk
+|F12				|					|					|D / S				|Run chunk<br>Exit Run Mode *
 |[1 - 9]		    |					|					|D / S				|Switch to Layer (Wall, Floor, Floor2, etc.)
 |[1 - 9]			|Ctrl				|					|D					|Switch to Layer and open Type Selector
 |Alt *				|					|Object				|	 S				|Security Cam: Highlight visible tiles
@@ -204,10 +204,10 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Y *				|Ctrl				|					|D / S				|Redo										
 |Z *				|Ctrl				|					|D / S				|Undo									
 |Middle Mouse *		|					|					|D / S				|Drag Viewport
-|Letter Keys		|					|Any with Type		|D / S				|When Type Selector is open, scroll to alphabetical entry starting in key pressed.<br>Press again to cycle through entries under that letter.
+|Letter Keys *		|					|Any with Type		|D / S				|When Type Selector is open, scroll to alphabetical entry starting in key pressed.<br>Press again to cycle through entries under that letter.
 
 ## Item Groups *
-- Know how you can select "Slum NPCs" as a type? Why can't we do that with items? Game already has most of the rLists made anyway 
+- Know how you can select "Slum NPCs" as a type? Why can't we do that with items? 
 
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)

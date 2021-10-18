@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.BehaviorLOS
             RogueLibs.CreateCustomTrait<Behavior_EatCorpse>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires</color>: {0}", vSpecialAbility.Cannibalize),
+                    [LanguageCode.English] = String.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

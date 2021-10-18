@@ -11,7 +11,7 @@ namespace CCU.Traits.AI.Interaction
             RogueLibs.CreateCustomTrait<Interaction_VendorBuyer>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires</color>: Any Vendor trait"),
+                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires:</color> Any Vendor trait"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

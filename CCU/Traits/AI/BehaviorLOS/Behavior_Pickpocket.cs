@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.BehaviorLOS
             RogueLibs.CreateCustomTrait<Behavior_Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires</color>: {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.English] = String.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

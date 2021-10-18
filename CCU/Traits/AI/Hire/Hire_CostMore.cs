@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Hire
             RogueLibs.CreateCustomTrait<Hire_CostMore>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's hire cost is increased by 50%.\n\n<color=red>Requires</color>: Any Hire non-cost trait",
+                    [LanguageCode.English] = "This character's hire cost is increased by 50%.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
