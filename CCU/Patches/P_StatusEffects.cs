@@ -17,10 +17,15 @@ namespace CCU.Patches
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPostfix, HarmonyPatch(methodName:nameof(StatusEffects.ExplodeAfterDeathChecks))]
-		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance, ref bool ___result)
+		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
 			if (__instance.agent.HasTrait<Behavior_ExplodeOnDeath>())
-				___result = true;
+			{
+				if (!__instance.agent.disappeared)
+					__instance.agent.objectSprite.flashingRepeatedly = true;
+				//if (GC.serverPlayer)
+				//	__instance.StartCoroutine(__instance.ExplodeBody());  
+			}
 		}
 	}
 }

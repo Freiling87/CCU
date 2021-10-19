@@ -34,23 +34,7 @@ Complete
 ###		C	Access from Chunk/Campaign Editor selector dropdown
 
 #	CT	Chunk Editor
-##		T	00 Error Logs Unidentified
-- Tried to place Safe, then this: 
-	[Error  : Unity Log] IndexOutOfRangeException: Index was outside the bounds of the array.
-	Stack trace:
-	tk2dRuntime.TileMap.RenderMeshBuilder.BuildForChunk (tk2dTileMap tileMap, tk2dRuntime.TileMap.SpriteChunk chunk, tk2dRuntime.TileMap.ColorChunk colorChunk, System.Boolean useColor, System.Boolean skipPrefabs, System.Int32 baseX, System.Int32 baseY) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	tk2dRuntime.TileMap.RenderMeshBuilder.Build (tk2dTileMap tileMap, System.Boolean editMode, System.Boolean forceBuild) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	tk2dTileMap.Build (tk2dTileMap+BuildFlags buildFlags) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	tk2dTileMap.Build () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LevelEditor.SetTileName () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LevelEditor.LeftClickAction (LevelEditorTile myTile) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LevelEditor.PressedMouseButton (System.Int32 buttonNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LevelEditor.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-  - Remove SpritepackLoader and see what happens
-
----
 ##		CT	District Object De-Limitation
-
 ###		C	BasicFloor
 .Spawn (Fire Grate)
 ###		C	Computer	
@@ -82,15 +66,28 @@ Pending anyone indicating they actually could use this feature
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			C	Arrow Keys - Orient (Draw)
-- Not reflecting in Direction field
-  - Pending logging config fix
+- Draw mode ends up with blank for NewDir
+- Select mode doesn't (even when no selection)
+  - Draw:
+	[Debug  :CCU_LevelEditorUtilities]      input: RightArrow
+	[Debug  :CCU_LevelEditorUtilities]      newDir:
+	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
+	[Debug  :CCU_LevelEditorUtilities]      its value:
+	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
+	[Debug  :CCU_LevelEditorUtilities]      its value:
+  - Select:
+	[Debug  :CCU_LevelEditorUtilities]      input: RightArrow
+	[Debug  :CCU_LevelEditorUtilities]      newDir: E
+	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
+	[Debug  :CCU_LevelEditorUtilities]      its value: E
+	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
+	[Debug  :CCU_LevelEditorUtilities]      its value: E
 ###			√	Arrow Keys - Orient (Select)
 Complete
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
 ###			C	Ctrl + A - Deselect All
 - Try logging the count of selected objects, then go from there
-  - Pending logging config fix
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
@@ -104,9 +101,9 @@ Hold
 Complete
 ###			√	Ctrl + E, Q - Increment Patrol Point (Select)
 Complete
-###			C	Ctrl + E, Q - Rotate Object (Draw)
-- Not reflecting in Direction field
-  - Pending logging config fix
+###			H	Ctrl + E, Q - Rotate Object (Draw)
+- Track notes in Arrow keys as they seem to be the same issue
+- Pending resolution of that task
 ###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
@@ -129,17 +126,17 @@ New
 Complete
 ###			√	F5 - Quicksave
 Complete
-###			T	F9 - Quickload
-  - Pending logging config fix
-- Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
+###			C	F9 - Quickload
+- Works perfectly for a while, but then... it doesn't. 
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
 - This is still occurring after unpredictable intervals:
+	[Debug  :CCU_P_LevelEditor]     Attempting Quickload:
+        Chunk Name: 00TestChunk
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <2cf93e496da547c5942062d518cecca4>:0)
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <ca47c8100fc149198a1a46d28d85f694>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-
 ###			C	F9 - Abort function if no matching filename to field
 New
 ###			√	F12 - Play Chunk
@@ -329,16 +326,16 @@ New
 New
 ###			C	Vision Beams (Cop Bot)
 New
-##		CT	Behavior Passive
-###			T	Explode On Death
-Attempted
+##		C	Behavior Passive
+###			C	Explode On Death
+- requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
 ###			√	Guilty
 Complete
 ###			C	Hackable - Tamper With Aim
 New
 ###			C	Hackable - Go Haywire
 New
-##		T	Bodyguarded
+##		C	Bodyguarded
 - LoadLevel.SetupMore3_3 where "Musician"
   - Attempted here
   - But there are a few other hits in searching this string in the code:
@@ -538,7 +535,7 @@ I am leaning towards implementing both of these. But whichever is chosen, make i
 ###			T	ChunkSafeCombo
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
-##		T	Map Marker
+##		C	Map Marker
 ###			√	General Notes
 - Check out:
 GC
@@ -553,7 +550,7 @@ Quest
 QuestMarker
 	Entire class!
 	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
-###			T	Pilot
+###			C	Pilot
 - Prefixed PlayfieldObject.SpawnNewMapMarker
   - Didn't work
 ###			H	Bartender
@@ -596,7 +593,7 @@ New
 A la Bounty disaster
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
-##		CT	Trait Triggers
+##		C	Trait Triggers
 ###			C	Common Folk
 New
 ###			C	Cool Cannibal
