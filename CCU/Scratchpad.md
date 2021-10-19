@@ -576,8 +576,8 @@ New
 ##		C	Relationships
 ###			C	Aggressive (Cannibal)
 New
-###			C	Annoyed At Suspicious
-New
+###			T	Annoyed At Suspicious
+Attempted
 ###			√	Faction Traits
 Complete
 ###			C	Faction Trait Limitation to Same Content
