@@ -140,6 +140,10 @@
     <Compile Include="Traits\AI\Interaction\Interaction_Extortable.cs" />
     <Compile Include="Traits\AI\Interaction\Interaction_Moochable.cs" />
     <Compile Include="Traits\AI\Relationships\AnnoyedAtSuspicious.cs" />
+    <Compile Include="Traits\AI\Relationships\HostileToCannibals.cs" />
+    <Compile Include="Traits\AI\Relationships\HostileToSoldiers.cs" />
+    <Compile Include="Traits\AI\Relationships\HostileToVampires.cs" />
+    <Compile Include="Traits\AI\Relationships\HostileToWerewolves.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CommonFolk.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CoolCannibal.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CopAccess.cs" />

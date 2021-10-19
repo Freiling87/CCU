@@ -582,16 +582,18 @@ Attempted
 Complete
 ###			C	Faction Trait Limitation to Same Content
 Limit interaction to same campaign, and if not campaign then same chunk pack
-###			C	Hostile to Cannibals
-New
-###			C	Hostile to Soldiers
-New
-###			C	Hostile to Vampires
-New
-###			C	Hostile to Werewolves
-New
+###			T	Hostile to Cannibals
+Attempted
+###			T	Hostile to Soldiers
+Attempted
+###			T	Hostile to Vampires
+Attempted
+###			T	Hostile to Werewolves
+Attempted
 ###			C	Musician Trait for Random Stans
 New
+###			C	Secretly Hostile
+A la Bounty disaster
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
 ##		CT	Trait Triggers

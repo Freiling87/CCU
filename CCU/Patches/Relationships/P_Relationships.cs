@@ -4,6 +4,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using CCU.Traits.Relationships;
 using CCU.Traits.AI.Combat;
+using CCU.Traits;
 
 namespace CCU.Patches.AgentRelationships
 {
@@ -32,41 +33,52 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new [] { typeof(Agent) })]
         public static bool SetupRelationshipOriginal_Prefix(Agent otherAgent, Relationships __instance, Agent ___agent)
         {
-            if ((___agent.HasTrait<Faction_1_Aligned>() && otherAgent.HasTrait<Faction_1_Aligned>()) ||
-                (___agent.HasTrait<Faction_2_Aligned>() && otherAgent.HasTrait<Faction_2_Aligned>()) ||
-                (___agent.HasTrait<Faction_3_Aligned>() && otherAgent.HasTrait<Faction_3_Aligned>()) ||
-                (___agent.HasTrait<Faction_4_Aligned>() && otherAgent.HasTrait<Faction_4_Aligned>()))
-            {
-                Core.LogCheckpoint("A");
+            if (TraitManager.HasTraitFromList(___agent, TraitManager.RelationshipTraits))
+			{
+				#region Factions
+				if ((___agent.HasTrait<Faction_1_Aligned>() && otherAgent.HasTrait<Faction_1_Aligned>()) ||
+                    (___agent.HasTrait<Faction_2_Aligned>() && otherAgent.HasTrait<Faction_2_Aligned>()) ||
+                    (___agent.HasTrait<Faction_3_Aligned>() && otherAgent.HasTrait<Faction_3_Aligned>()) ||
+                    (___agent.HasTrait<Faction_4_Aligned>() && otherAgent.HasTrait<Faction_4_Aligned>()))
+                {
+                    __instance.SetRelInitial(otherAgent, "Aligned");
+                    __instance.SetRelHate(otherAgent, 0);
+                    otherAgent.relationships.SetRelInitial(___agent, "Aligned");
+                    otherAgent.relationships.SetRelHate(___agent, 0);
 
-                __instance.SetRelInitial(otherAgent, "Aligned");
-                __instance.SetRelHate(otherAgent, 0);
-                otherAgent.relationships.SetRelInitial(___agent, "Aligned");
-                otherAgent.relationships.SetRelHate(___agent, 0);
+                    return false;
+                }
 
-                return false;
-            }
+                if ((___agent.HasTrait<Faction_1_Hostile>() && otherAgent.HasTrait<Faction_1_Aligned>()) ||
+                    (___agent.HasTrait<Faction_1_Aligned>() && otherAgent.HasTrait<Faction_1_Hostile>()) ||
+                    (___agent.HasTrait<Faction_2_Hostile>() && otherAgent.HasTrait<Faction_2_Aligned>()) ||
+                    (___agent.HasTrait<Faction_2_Aligned>() && otherAgent.HasTrait<Faction_2_Hostile>()) ||
+                    (___agent.HasTrait<Faction_3_Hostile>() && otherAgent.HasTrait<Faction_3_Aligned>()) ||
+                    (___agent.HasTrait<Faction_3_Aligned>() && otherAgent.HasTrait<Faction_3_Hostile>()) ||
+                    (___agent.HasTrait<Faction_4_Hostile>() && otherAgent.HasTrait<Faction_4_Aligned>()) ||
+                    (___agent.HasTrait<Faction_4_Aligned>() && otherAgent.HasTrait<Faction_4_Hostile>()))
+                {
+                    __instance.SetRelInitial(otherAgent, "Hateful");
+                    __instance.SetRelHate(otherAgent, 5);
+                    otherAgent.relationships.SetRelInitial(___agent, "Hateful");
+                    otherAgent.relationships.SetRelHate(___agent, 5);
 
-            if ((___agent.HasTrait<Faction_1_Hostile>() && otherAgent.HasTrait<Faction_1_Aligned>()) ||
-                (___agent.HasTrait<Faction_1_Aligned>() && otherAgent.HasTrait<Faction_1_Hostile>()) ||
-                (___agent.HasTrait<Faction_2_Hostile>() && otherAgent.HasTrait<Faction_2_Aligned>()) ||
-                (___agent.HasTrait<Faction_2_Aligned>() && otherAgent.HasTrait<Faction_2_Hostile>()) ||
-                (___agent.HasTrait<Faction_3_Hostile>() && otherAgent.HasTrait<Faction_3_Aligned>()) ||
-                (___agent.HasTrait<Faction_3_Aligned>() && otherAgent.HasTrait<Faction_3_Hostile>()) ||
-                (___agent.HasTrait<Faction_4_Hostile>() && otherAgent.HasTrait<Faction_4_Aligned>()) ||
-                (___agent.HasTrait<Faction_4_Aligned>() && otherAgent.HasTrait<Faction_4_Hostile>()))
-            {
-                Core.LogCheckpoint("B");
+                    return false;
+                }
+				#endregion
+                if ((___agent.HasTrait<HostileToCannibals>() && otherAgent.agentName == VanillaAgents.Cannibal) ||
+                    (___agent.HasTrait<HostileToSoldiers>() && otherAgent.agentName == VanillaAgents.Soldier) ||
+                    (___agent.HasTrait<HostileToVampires>() && otherAgent.agentName == VanillaAgents.Vampire) ||
+                    (___agent.HasTrait<HostileToWerewolves>() && otherAgent.agentName == VanillaAgents.Werewolf))
+				{
+                    __instance.SetRelInitial(otherAgent, "Hateful");
+                    otherAgent.relationships.SetRelInitial(___agent, "Hateful");
+                    __instance.SetRelHate(otherAgent, 5);
+                    otherAgent.relationships.SetRelHate(___agent, 5);
+                }
+			}
 
-                __instance.SetRelInitial(otherAgent, "Hateful");
-                __instance.SetRelHate(otherAgent, 5);
-                otherAgent.relationships.SetRelInitial(___agent, "Hateful");
-                otherAgent.relationships.SetRelHate(___agent, 5);
-
-                return false;
-            }
-
-            return true;
+			return true;
         }
 
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
