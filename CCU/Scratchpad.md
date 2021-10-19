@@ -74,16 +74,15 @@ Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
 ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			T	Arrow Keys - Orient (Draw)
-- Initial Rotate/Orient is called without error or any further logging
-  - Added logging
-###			T	Arrow Keys - Orient (Select)
-- Needs rate limit since it doesn't use Ctrl
-  - Attempted
+###			C	Arrow Keys - Orient (Draw)
+- Not reflecting in Direction field
+  - Still no logs other than method call
+###			√	Arrow Keys - Orient (Select)
+Complete
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
-###			T	Ctrl + A - Deselect All
-- Attempted
+###			C	Ctrl + A - Deselect All
+- Try logging the count of selected objects, then go from there
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
@@ -97,9 +96,9 @@ Hold
 Complete
 ###			√	Ctrl + E, Q - Increment Patrol Point (Select)
 Complete
-###			T	Ctrl + E, Q - Rotate Object (Draw)
-- Initial Rotate/Orient is called without error or any further logging
-  - Added logging
+###			C	Ctrl + E, Q - Rotate Object (Draw)
+- Not reflecting in Direction field
+  - Still no logs other than method call
 ###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
@@ -118,20 +117,20 @@ Hold
 New
 ###			H	Ctrl + Z - Undo
 New
-###			T	E, Q - Zoom In/Out
-General input issue resolved
-###			T	F5 - Quicksave
-- Chunk Name already existing does not affect behavior
-- Pops up y/n confirmation
-  - Attempted
+###			√	E, Q - Zoom In/Out
+Complete
+###			√	F5 - Quicksave
+Complete
 ###			T	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
+- Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
+- This is still occurring after unpredictable intervals:
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper) (at <6710980335a54a0ab90bed5e3b63c3b3>:0)
+	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <2cf93e496da547c5942062d518cecca4>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	- Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
+
 ###			C	F9 - Abort function if no matching filename to field
 New
 ###			√	F12 - Play Chunk
@@ -144,8 +143,8 @@ On ice, pending collaboration with someone who uderstands UI methods well
 New, and hell no
 ###			√	NumKeys - Select Layer
 Complete
-###			T	Shift + E, Q - Max Zoom In/Out
-Attempted
+###			√	Shift + E, Q - Max Zoom In/Out
+Complete
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
 New
 ###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
@@ -580,4 +579,4 @@ Complete
     - @1246: base.CompareTag("SpecialInvDatabase")
       - I am hoping this is taken care of automatically. Testing will show.
   - Keep an eye out for agent name checks, one of these will need to be patched
-  - InvDatabase.rnd.RandomSelect(rName, "Items")
+  - InvDatabase.rnd.RandomSelect(rName, "Items") 
