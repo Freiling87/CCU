@@ -81,6 +81,7 @@ namespace CCU
 			AI_Behavior_EnforceLaws = "AI: Behavior - Enforce Laws",
 			AI_Behavior_EnforceLawsCopBot = "AI: Behavior - Enforce Laws Cop Bot",
 			AI_Behavior_EnforceLawsSupercop = "AI: Behavior - Enforce Laws Supercop", // Might be identical to Cop
+			AI_Behavior_ExplodeOnDeath = "AI: Behavior - Explode On Death",
 			AI_Behavior_FightFires = "AI: Behavior - Fight Fires",
 			AI_Behavior_GrabDrugs = "AI: Behavior - Grab Drugs",
 			AI_Behavior_GrabMoney = "AI: Behavior - Grab Money",

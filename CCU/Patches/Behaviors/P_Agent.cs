@@ -8,7 +8,7 @@ using CCU.Traits.AI;
 using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
-using CCU.Traits.AI.BehaviorLOS;
+using CCU.Traits.AI.Active;
 using CCU.Traits.AI.Interaction;
 using CCU.Traits.AI.Combat;
 using CCU.Traits.AI.Behavior;
@@ -149,7 +149,7 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorLOSTraits))
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
 				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(33))
 					return;

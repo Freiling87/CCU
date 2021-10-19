@@ -13,6 +13,13 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 ---
 
+##	C	00 Top-Priority Bugs
+
+###		T	Apply Logging level fix
+Config file, add Debug to log levels
+
+---
+
 #	√	Campaign Editor
 No features planned yet
 
@@ -76,13 +83,14 @@ ALT trail for overhead menus
 This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			C	Arrow Keys - Orient (Draw)
 - Not reflecting in Direction field
-  - Still no logs other than method call
+  - Pending logging config fix
 ###			√	Arrow Keys - Orient (Select)
 Complete
 ###			√	Arrow Keys - Match current direction to set to None
 Complete
 ###			C	Ctrl + A - Deselect All
 - Try logging the count of selected objects, then go from there
+  - Pending logging config fix
 ###			√	Ctrl + A - Select All
 Complete
 ###			H	Ctrl + Alt - Show Spawn Chances
@@ -98,7 +106,7 @@ Complete
 Complete
 ###			C	Ctrl + E, Q - Rotate Object (Draw)
 - Not reflecting in Direction field
-  - Still no logs other than method call
+  - Pending logging config fix
 ###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
@@ -122,6 +130,7 @@ Complete
 ###			√	F5 - Quicksave
 Complete
 ###			T	F9 - Quickload
+  - Pending logging config fix
 - Works perfectly for a while, but then... it doesn't. Not sure what changes. But I have noticed that loading a chunk through normal means re-sets it, so I think that pathway must be filling out the field that's getting nulled here. It's possible this is a garbage collection thing, too, in the way that I have no idea how that concept works so I couldn't say.
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
 - This is still occurring after unpredictable intervals:
@@ -284,7 +293,7 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
-##		C	Behavior LOS
+##		C	Behavior Active
 ###			√	Drink Blood
 Complete
 ###			√	Eat Corpse
@@ -299,9 +308,15 @@ Maybe just implement the whole Hey, You! overhaul here
 Complete
 ###			C	Shakedown
 New
-##		C	Behavior Passive
+##		CT	Behavior Passive
+###			T	Explode On Death
+Attempted
 ###			√	Guilty
 Complete
+###			C	Hackable - Tamper With Aim
+New
+###			C	Hackable - Go Haywire
+New
 ##		T	Bodyguarded
 - LoadLevel.SetupMore3_3 where "Musician"
   - Attempted here
@@ -328,8 +343,6 @@ New
 ##		√	Combat
 ###			√	Coward
 Complete
-###			C	Explode On Death (Robot)
-New
 ###			√	Fearless
 Complete
 ###			√	Use Drugs in Combat

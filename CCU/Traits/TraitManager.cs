@@ -1,7 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.AI;
 using CCU.Traits.AI.Hire;
-using CCU.Traits.AI.BehaviorLOS;
+using CCU.Traits.AI.Active;
 using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.AI.Vendor;
 using RogueLibsCore;
@@ -31,7 +31,7 @@ namespace CCU.Traits
 
 				list.AddRange(AppearanceTraitsGroup);
 
-				list.AddRange(BehaviorLOSTraits);
+				list.AddRange(BehaviorActiveTraits);
 				list.AddRange(BehaviorNonLOSTraits);
 				list.AddRange(BodyguardedTraits);
 				list.AddRange(HireCostTraits);
@@ -64,7 +64,7 @@ namespace CCU.Traits
 			}
 		}
 
-		public static List<Type> BehaviorLOSTraits = new List<Type>()
+		public static List<Type> BehaviorActiveTraits = new List<Type>()
 		{
 			typeof(Behavior_EatCorpse),
 			typeof(Behavior_GrabDrugs),

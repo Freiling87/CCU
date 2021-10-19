@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.BehaviorLOS
+namespace CCU.Traits.AI.Active
 {
-    public class Behavior_GrabDrugs : CustomTrait
+    public class Behavior_EatCorpse : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_GrabDrugs>()
+            RogueLibs.CreateCustomTrait<Behavior_EatCorpse>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will grab drugs if they see any."),
+                    [LanguageCode.English] = String.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_GrabDrugs,
+                    [LanguageCode.English] = CTrait.AI_Behavior_EatCorpse,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

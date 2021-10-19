@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.AI.BehaviorLOS
+namespace CCU.Traits.AI.Active
 {
-    public class Behavior_Pickpocket : CustomTrait
+    public class Behavior_GrabDrugs : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_Pickpocket>()
+            RogueLibs.CreateCustomTrait<Behavior_GrabDrugs>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.English] = String.Format("This character will grab drugs if they see any."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_Pickpocket,
+                    [LanguageCode.English] = CTrait.AI_Behavior_GrabDrugs,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
