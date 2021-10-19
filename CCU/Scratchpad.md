@@ -294,19 +294,40 @@ Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
 ##		C	Behavior Active
+###			C	Clean Trash
+New
 ###			√	Drink Blood
 Complete
 ###			√	Eat Corpse
 Complete
+###			C	Enforce Laws
+New
+###			C	Fight Fires
+New
 ###			√	Grab Drugs
 Complete
+###			C	Grab Everything
+New
+###			C	Grab Food
+New
 ###			√	Grab Money
 Complete
+###			C	Guard Door
+New
 ###			C	Hobo Beg (Custom)
 Maybe just implement the whole Hey, You! overhaul here
+###			C	Hog Turntables
+New
+Allow paid Musician behavior
 ###			√	Pickpocket
 Complete
-###			C	Shakedown
+###			C	Seek & Destroy (Killer Robot)
+New
+###			C	Shakedown Player
+New
+###			C	Tattle (Upper Cruster)
+New
+###			C	Vision Beams (Cop Bot)
 New
 ##		CT	Behavior Passive
 ###			T	Explode On Death
@@ -340,7 +361,9 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
-##		√	Combat
+##		C	Combat
+###			C	Cause Lockdown
+New
 ###			√	Coward
 Complete
 ###			√	Fearless
@@ -440,18 +463,64 @@ Objects to Analyze/track:
 		target.targetType
 
 In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-
-####				Tamper
-Pending results of Safecrack attempt
-### Tamper
+###			C	Tamper
+New 
 ##		C	Interaction
+###			C	Accept Bribe (Banana)
+New
+###			C	Accept Bribe (Beer/Whiskey)
+New
+###			C	Accept Bribe (Money)
+New
+###			C	Administer Blood Bag
+New
+###			C	Arena Manager
+New
+###			C	Bank Teller
+New
+###			C	Blood Bank Clerk
+New
+###			C	Buy Round
+New
+###			C	Deportation Center Clerk
+New
 ###			C	Extortable
 No effect
 ###			C	Fence
 New
+NOT a Vendor trait
+###			C	Heal
+New
+###			C	Hotel Clerk
+New
+###			C	Identify
+New
+###			C	Influence Election
+New
+###			C	Mayor Clerk
+New
 ###			C	Moochable
 No effect
+###			C	Offer Motivation
+New
+###			C	Permanent Hire
+- Multiple skill use
+- Stay until death
+###			C	Quest Giver
+New
+###			C	Refill Guns
+New
+###			C	Repair Armor
+New
+###			C	Repair Weapons
+New
+###			C	Sell Slaves
+New
+###			C	Use Bloodbag
+New
 ###			C	Vendor Buyer
+New
+###			C	Vendor Buyer Only
 New
 ##		CT	Loadout
 ###			C	Item Groups
@@ -505,11 +574,23 @@ New
 ###			C	Slum NPCs
 New
 ##		C	Relationships
+###			C	Aggressive (Cannibal)
+New
+###			C	Annoyed At Suspicious
+New
 ###			√	Faction Traits
 Complete
 ###			C	Faction Trait Limitation to Same Content
 Limit interaction to same campaign, and if not campaign then same chunk pack
-###			C	Musician Trait for random followers
+###			C	Hostile to Cannibals
+New
+###			C	Hostile to Soldiers
+New
+###			C	Hostile to Vampires
+New
+###			C	Hostile to Werewolves
+New
+###			C	Musician Trait for Random Stans
 New
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.

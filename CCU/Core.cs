@@ -76,22 +76,21 @@ namespace CCU
 		#region Behavior
 			AI_Behavior_CleanTrash = "AI: Behavior - Clean Trash",
 			AI_Behavior_EatCorpse = "AI: Behavior - Eat Corpse",
-			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",
-			AI_Behavior_Guilty = "AI: Behavior - Guilty",
 			AI_Behavior_EnforceLaws = "AI: Behavior - Enforce Laws",
 			AI_Behavior_EnforceLawsCopBot = "AI: Behavior - Enforce Laws Cop Bot",
-			AI_Behavior_EnforceLawsSupercop = "AI: Behavior - Enforce Laws Supercop", // Might be identical to Cop
 			AI_Behavior_ExplodeOnDeath = "AI: Behavior - Explode On Death",
 			AI_Behavior_FightFires = "AI: Behavior - Fight Fires",
 			AI_Behavior_GrabDrugs = "AI: Behavior - Grab Drugs",
 			AI_Behavior_GrabMoney = "AI: Behavior - Grab Money",
+			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",
+			AI_Behavior_Guilty = "AI: Behavior - Guilty",
 			AI_Behavior_HogTurntables = "AI: Behavior - Turntables Guard",
 			AI_Behavior_Lockdown = "AI: Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
 			AI_Behavior_Pickpocket = "AI: Behavior - Pickpocket",
-			AI_Behavior_Scumbag = "AI: Behavior - Scumbag",
-			AI_Behavior_SeekAndDestroy = "AI: Behavior - Seek & Destroy", // Killer Robot
+			AI_Behavior_Scumbag = "AI: Behavior - Scumbag", // Same as Guilty?
+			AI_Behavior_SeekAndDestroy = "AI: Behavior - Seek & Destroy",
 			AI_Behavior_SuckBlood = "AI: Behavior - Suck Blood",
-			// AI_Behavior_Shakedown = "AI: Behavior - Shakedown", // Gate behind Mugger trait
+			AI_Behavior_Shakedown = "AI: Behavior - Shakedown",
 			AI_Behavior_Tattletale = "AI: Behavior - Tattle-tale",
 			AI_Behavior_VisionBeams = "AI: Behavior - Vision Beams",
 		#endregion
@@ -99,7 +98,6 @@ namespace CCU
 			AI_Combat_CauseLockdown = "AI: Combat - Cause Lockdown",
 			AI_Combat_Coward = "AI: Combat - Coward",
 			AI_Combat_Fearless = "AI: Combat - Fearless",
-			AI_Combat_Pacifist = "AI: Combat - Pacifist",
 			AI_Combat_UseDrugs = "AI: Combat - Use Drugs", // Gate behind Drug-A-Lug?
 		#endregion
 		#region Hire

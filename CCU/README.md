@@ -62,10 +62,10 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Explode On Death									|- Explode on Death<br>- Are you confused?
+|Explode On Death *									|- Explode on Death<br>- Are you confused?
 |Guilty												|- Valid target for The Law, etc.
-|Hackable - Tamper with Aim							|- A la Killer Robot
-|Hackable - Go Haywire								|- A la Cop Bot
+|Hackable - Tamper with Aim *						|- A la Killer Robot
+|Hackable - Go Haywire *							|- A la Cop Bot
 
 ## Hire Traits 
 
