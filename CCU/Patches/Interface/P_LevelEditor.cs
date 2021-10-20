@@ -46,7 +46,7 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
-						LevelEditorUtilities.RotateObject(__instance, KeyCode.E);
+						LevelEditorUtilities.OrientObject(__instance, KeyCode.E);
 					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
 				}
@@ -55,7 +55,7 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
-						LevelEditorUtilities.RotateObject(__instance, KeyCode.Q);
+						LevelEditorUtilities.OrientObject(__instance, KeyCode.Q);
 					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.Q);
 				}

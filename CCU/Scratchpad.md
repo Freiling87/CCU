@@ -60,28 +60,13 @@ If it's not already a thing
 ##		CT	Hotkeys
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
-###			C	Arrow Keys - Orient (Draw)
+###			T	Arrow Keys - Orient (Draw)
 - Draw mode ends up with blank for NewDir
-- Select mode doesn't (even when no selection)
-  - Draw:
-	[Debug  :CCU_LevelEditorUtilities]      input: RightArrow
-	[Debug  :CCU_LevelEditorUtilities]      newDir:
-	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
-	[Debug  :CCU_LevelEditorUtilities]      its value:
-	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
-	[Debug  :CCU_LevelEditorUtilities]      its value:
-  - Select:
-	[Debug  :CCU_LevelEditorUtilities]      input: RightArrow
-	[Debug  :CCU_LevelEditorUtilities]      newDir: E
-	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
-	[Debug  :CCU_LevelEditorUtilities]      its value: E
-	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
-	[Debug  :CCU_LevelEditorUtilities]      its value: E
+- Combined Orient/Rotate, added new logging.
+###			H	Ctrl + E, Q - Rotate Object (Draw)
+- Same issue as Arrow Keys, resolve as one
 ###			T	Ctrl + A - Deselect All
 - Added logging
-###			H	Ctrl + E, Q - Rotate Object (Draw)
-- Track notes in Arrow keys as they seem to be the same issue
-- Pending resolution of that task
 ###			C	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. 
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
@@ -93,8 +78,6 @@ Might not be needed, if current attempt is working fine
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <ca47c8100fc149198a1a46d28d85f694>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-###			C	F9 - Abort function if no matching filename to field
-New
 ###			H	Alt + Security Cam - Highlight Visible Tiles
 Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
@@ -171,6 +154,8 @@ Complete
 Complete
 ###			√	F5 - Quicksave
 Complete
+###			√	F9 - Abort function if no matching filename to field
+This is pretty much automatic already, since it will just fail. But reactivate if you ever want to put up a warning message or some kind of UI indicator.
 ###			√	F12 - Play Chunk
 Complete
 ###			√	NumKeys - Select Layer

@@ -119,78 +119,47 @@ namespace CCU.Content
 			logger.LogDebug("\tinput: " + input.ToString());
 
 			InputField inputField = GetDirectionInputField(levelEditor);
+			logger.LogDebug("\tinputField: " + inputField.name);
+			logger.LogDebug("\tits value: " + inputField.text);
+
 			string curDir = inputField.text;
+			logger.LogDebug("\tcurDir: " + curDir);
+
 			string newDir =
 				input == KeyCode.UpArrow	? "N" :
 				input == KeyCode.DownArrow	? "S" :
 				input == KeyCode.LeftArrow	? "W" :
 				input == KeyCode.RightArrow ? "E" :
-				"None"; // This line unreachable but prettier this way
-
-			if (curDir == newDir)
-				newDir = ""; // "" instead of "None" for levelEditorTile.direction
-
-			logger.LogDebug("\tnewDir: " + newDir);
-
-			if (!(inputField is null))
-				inputField.text = newDir;
-
-			logger.LogDebug("\tinputField: " + inputField.name);
-			logger.LogDebug("\tits value: " + inputField.text);
-
-			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
-			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
-			directionObjectField.text = newDir;
-
-			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
-			logger.LogDebug("\tits value: " + directionObjectField.text);
-
-			if (levelEditor.selectedTiles.Count() > 0)
-				foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-					levelEditorTile.direction = newDir;
-
-			levelEditor.UpdateInterface(false);
-		}
-		public static void RotateObject(LevelEditor levelEditor, KeyCode input)
-		{
-			Core.LogMethodCall();
-			logger.LogDebug("\tinput: " + input.ToString());
-
-			InputField inputField = GetDirectionInputField(levelEditor);
-			string curDir = inputField.text;
-			string newDir = "None";
-
-			if (input == KeyCode.E)
-				newDir =
+				input == KeyCode.E ? (
 					curDir == "N" ? "E" :
 					curDir == "E" ? "S" :
 					curDir == "S" ? "W" :
 					curDir == "W" ? "N" :
-					"E";
-			else if (input == KeyCode.Q)
-				newDir =
+					"E") :
+				input == KeyCode.Q ? (
 					curDir == "N" ? "W" :
 					curDir == "W" ? "S" :
 					curDir == "S" ? "E" :
 					curDir == "E" ? "N" :
-					"W";
+					"W") :
+				"None";
+			logger.LogDebug("\tnewDir: " + newDir);
+
+			if (curDir == newDir)
+				newDir = ""; // "" instead of "None" for levelEditorTile.direction
 
 			if (!(inputField is null))
 				inputField.text = newDir;
 
-			logger.LogDebug("\tinputField: " + inputField.name);
-			logger.LogDebug("\tits value: " + inputField.text);
-
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
 			directionObjectField.text = newDir;
-
 			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
 			logger.LogDebug("\tits value: " + directionObjectField.text);
 
 			if (levelEditor.selectedTiles.Count() > 0)
-				foreach (LevelEditorTile levelEditorTile in levelEditor.selectedTiles)
-					levelEditorTile.direction = newDir;
+				foreach (LevelEditorTile tile in levelEditor.selectedTiles)
+					tile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
 		}
