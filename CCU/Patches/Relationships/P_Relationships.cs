@@ -5,6 +5,7 @@ using HarmonyLib;
 using CCU.Traits.Relationships;
 using CCU.Traits.AI.Combat;
 using CCU.Traits;
+using CCU.Traits.AI.TraitTrigger;
 
 namespace CCU.Patches.AgentRelationships
 {
@@ -86,6 +87,26 @@ namespace CCU.Patches.AgentRelationships
 		{
             if (___agent.HasTrait<AnnoyedAtSuspicious>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 __instance.SetStrikes(otherAgent, 2);
+
+            if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<TraitTrigger_CommonFolk>() && !otherAgent.guardSequence)
+                otherAgent.relationships.SetRelInitial(___agent, "Loyal");
+
+            if (___agent.HasTrait(VanillaTraits.FriendoftheFamily) && otherAgent.HasTrait<TraitTrigger_FamilyFriend>())
+                otherAgent.relationships.SetRelInitial(___agent, "Aligned");
+
+            if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<TraitTrigger_CoolCannibal>())
+            {
+                __instance.SetRelHate(otherAgent, 0);
+                __instance.SetRelInitial(otherAgent, "Neutral", true);
+                otherAgent.relationships.SetRelHate(___agent, 0);
+                otherAgent.relationships.SetRelInitial(___agent, "Neutral");
+            }
+
+            if (___agent.HasTrait(VanillaTraits.ScumbagSlaughterer) && otherAgent.HasTrait<TraitTrigger_Scumbag>())
+			{
+                otherAgent.relationships.GetRelationship(___agent).mechHate = true;
+                otherAgent.oma.mustBeGuilty = true;
+            }
         }
     }
 }

@@ -148,6 +148,8 @@
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CommonFolk.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CoolCannibal.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_CopAccess.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_FamilyFriend.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Scumbag.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Armorer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Assassin.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Barbarian.cs" />

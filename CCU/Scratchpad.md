@@ -579,14 +579,22 @@ A la Bounty disaster
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
 ##		C	Trait Triggers
-###			C	Common Folk
-New
-###			C	Cool Cannibal
-New
+###			T	Common Folk
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+###			T	Cool Cannibal
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ###			H	Cop	Access
 Pending Vendor issues resolution
+###			T	Family Friend
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ###			H	Honorable Thief
 Pending Vendor issues resolution
+###			T	Scumbag
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ##		CT	Vendor
 ###			CT	00 No Button
 - "Buy" button no longer showing up
