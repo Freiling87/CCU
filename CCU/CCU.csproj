@@ -167,7 +167,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Demolitionist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_DrugDealer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Banana.cs" />
-    <Compile Include="Traits\AI\Interaction\Interaction_Fence.cs" />
+    <Compile Include="Traits\AI\Interaction\Buyer_All.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Firefighter.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_FireSale.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Gunsmith.cs" />

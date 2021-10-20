@@ -105,7 +105,7 @@ namespace CCU.Traits
 		public static List<Type> InteractionTraits = new List<Type>() // Technically Vendors are a subtype of this so treat accordingly
 		{
 			typeof(Interaction_Extortable),
-			typeof(Interaction_Fence),
+			typeof(Buyer_All),
 			typeof(Interaction_Moochable),
 			typeof(Interaction_VendorBuyer), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
@@ -190,10 +190,10 @@ namespace CCU.Traits
 
 		public static Type GetOnlyTraitFromList(Agent agent, List<Type> traitList)
 		{
+			Core.LogMethodCall();
+
 			if (traitList.Count() == 0)
 				return null;
-
-			Core.LogMethodCall();
 
 			foreach (Type trait in traitList)
 			{
@@ -209,21 +209,9 @@ namespace CCU.Traits
 		}
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
 		{
-			Core.LogMethodCall();
-
 			foreach (Type trait in traitList)
-			{
-				TraitInfo info = TraitInfo.Get(trait);
-				TraitUnlock unlock = RogueLibs.GetUnlock<TraitUnlock>(info.Name);
-				string displayText = unlock.GetName();
-
 				if (agent.HasTrait(trait))
-				{
-					logger.LogDebug("Found match: " + displayText);
-
 					return true;
-				}
-			}
 
 			return false;
 		}

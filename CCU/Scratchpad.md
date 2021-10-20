@@ -13,10 +13,34 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 ---
 
-##	C	00 Top-Priority Bugs
+#	C	00 Top-Priority Bugs
 
-###		T	Apply Logging level fix
-Config file, add Debug to log levels
+###		C	Vendor error
+- Here:
+	[Info   :  CCU_Core] HasTraitFromList: Method Call
+	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
+	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	CCU.Patches.Inventory.P_InvDatabase.AddRandItem_Prefix (System.String itemNum, InvDatabase __instance, InvItem& __result) (at <2d5650d29b9141339f263611b9ba9c1e>:0)
+	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+###		C	HasTraitFromLlist
+
+[Info   :  CCU_Core] HasTraitFromList: Method Call
+[Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
+Stack trace:
+System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+CCU.Patches.Spawn.P_LoadLevel.SetupMore3_3_Postfix (LoadLevel __instance) (at <2d5650d29b9141339f263611b9ba9c1e>:0)
+LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+
+
 
 ---
 
@@ -60,13 +84,35 @@ If it's not already a thing
 ##		CT	Hotkeys
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
-###			T	Arrow Keys - Orient (Draw)
+###			C	Arrow Keys - Orient (Draw)
 - Draw mode ends up with blank for NewDir
-- Combined Orient/Rotate, added new logging.
+	[Info   :  CCU_Core] OrientObject: Method Call
+	[Debug  :CCU_LevelEditorUtilities]      input: UpArrow
+	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
+	[Debug  :CCU_LevelEditorUtilities]      its value:
+	[Debug  :CCU_LevelEditorUtilities]      curDir:
+	[Debug  :CCU_LevelEditorUtilities]      newDir: N
+	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
+	[Debug  :CCU_LevelEditorUtilities]      its value: N
+	[Info   :  CCU_Core] OrientObject: Method Call
+	[Debug  :CCU_LevelEditorUtilities]      input: UpArrow
+	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
+	[Debug  :CCU_LevelEditorUtilities]      its value: N
+	[Debug  :CCU_LevelEditorUtilities]      curDir: N
+	[Debug  :CCU_LevelEditorUtilities]      newDir: N
+	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
+	[Debug  :CCU_LevelEditorUtilities]      its value:
 ###			H	Ctrl + E, Q - Rotate Object (Draw)
 - Same issue as Arrow Keys, resolve as one
-###			T	Ctrl + A - Deselect All
-- Added logging
+###			C	Ctrl + A - Deselect All
+- Identical logs, confirm that it's the backend not working, not an interface update issue
+	[Info   :  CCU_Core] ToggleSelectAll: Method Call
+	[Debug  :CCU_LevelEditorUtilities]      Tile list count: 1024
+	[Debug  :CCU_LevelEditorUtilities]      Selected count: 4
+	[Debug  :CCU_LevelEditorUtilities]              Index 0: Test Dummy B
+	[Debug  :CCU_LevelEditorUtilities]              Index 1: Test Dummy C
+	[Debug  :CCU_LevelEditorUtilities]              Index 2: Test Dummy D
+	[Debug  :CCU_LevelEditorUtilities]              Index 3: Test Dummy A
 ###			C	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. 
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName

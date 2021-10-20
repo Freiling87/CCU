@@ -3,12 +3,12 @@ using System;
 
 namespace CCU.Traits.AI.Interaction
 {
-    public class Interaction_Fence : CustomTrait
+    public class Buyer_All : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_Fence>()
+            RogueLibs.CreateCustomTrait<Buyer_All>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will buy items of any kind from the player, for a bad price."),
@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_Fence,
+                    [LanguageCode.English] = CTrait.Interaction_BuyerAll,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
@@ -24,7 +24,7 @@ namespace CCU.Traits.AI.Interaction
                     Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
+                    IsAvailableInCC = Core.designerEdition, 
                     UnlockCost = 0,
                 });
         }
