@@ -220,35 +220,30 @@ namespace CCU.Content
 		}
 		public static void ToggleSelectAll(LevelEditor levelEditor, bool limitToLayer)
 		{
-			List<LevelEditorTile> list = null;
-			string layer = levelEditor.currentLayer;
+			Core.LogMethodCall();
 
-			#region
-			if (layer == LEInterfaces_Walls)
-				list = levelEditor.wallTiles;
-			else if (layer == LEInterfaces_Floors)
-				list = levelEditor.floorTiles;
-			else if (layer == LEInterfaces_Floors2)
-				list = levelEditor.floorTiles2;
-			else if (layer == LEInterfaces_Floors3)
-				list = levelEditor.floorTiles3;
-			else if (layer == LEInterfaces_Objects)
-				list = levelEditor.objectTiles;
-			else if (layer == LEInterfaces_Items)
-				list = levelEditor.itemTiles;
-			else if (layer == LEInterfaces_Agents)
-				list = levelEditor.agentTiles;
-			else if (layer == LEInterfaces_Lights)
-				list = levelEditor.lightTiles;
-			else if (layer == LEInterfaces_PatrolPoints)
-				list = levelEditor.patrolPointTiles;
-			else if (layer == LEInterfaces_Level)
-				list = levelEditor.chunkTiles;
-			#endregion
+			string layer = levelEditor.currentLayer;
+			List<LevelEditorTile> tilesThisLayer =
+				layer == LEInterfaces_Walls ? levelEditor.wallTiles :
+				layer == LEInterfaces_Floors ? levelEditor.floorTiles :
+				layer == LEInterfaces_Floors2 ? levelEditor.floorTiles2 :
+				layer == LEInterfaces_Floors3 ? levelEditor.floorTiles3 :
+				layer == LEInterfaces_Objects ? levelEditor.objectTiles :
+				layer == LEInterfaces_Items ? levelEditor.itemTiles :
+				layer == LEInterfaces_Agents ? levelEditor.agentTiles :
+				layer == LEInterfaces_Lights ? levelEditor.lightTiles :
+				layer == LEInterfaces_PatrolPoints ? levelEditor.patrolPointTiles :
+				layer == LEInterfaces_Level ? levelEditor.chunkTiles :
+				null;
 
 			bool SelectingAll = false;
 
-			foreach (LevelEditorTile levelEditorTile in list)
+			logger.LogDebug("\tTile list count: " + tilesThisLayer.Count());
+			logger.LogDebug("\tSelected count: " + levelEditor.selectedTiles.Count());
+			foreach (LevelEditorTile tile in levelEditor.selectedTiles)
+				logger.LogDebug("\t\tIndex " + levelEditor.selectedTiles.IndexOf(tile) + ": " + tile.tileName);
+
+			foreach (LevelEditorTile levelEditorTile in tilesThisLayer)
 				if (!levelEditor.selectedTiles.Contains(levelEditorTile))
 				{
 					levelEditor.SelectTile(levelEditorTile, false);

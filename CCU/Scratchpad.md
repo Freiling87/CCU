@@ -60,11 +60,6 @@ If it's not already a thing
 ##		CT	Hotkeys
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
-###			H	Alt + Security Cam - Highlight Visible Tiles
-Pending anyone indicating they actually could use this feature
-###			H	Alt + NumKeys, NumPad - Menu Trails
-ALT trail for overhead menus
-This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			C	Arrow Keys - Orient (Draw)
 - Draw mode ends up with blank for NewDir
 - Select mode doesn't (even when no selection)
@@ -82,50 +77,11 @@ This one is likely beyond my ability right now since we'd need to underline text
 	[Debug  :CCU_LevelEditorUtilities]      its value: E
 	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
 	[Debug  :CCU_LevelEditorUtilities]      its value: E
-###			√	Arrow Keys - Orient (Select)
-Complete
-###			√	Arrow Keys - Match current direction to set to None
-Complete
-###			C	Ctrl + A - Deselect All
-- Try logging the count of selected objects, then go from there
-###			√	Ctrl + A - Select All
-Complete
-###			H	Ctrl + Alt - Show Spawn Chances
-- Pending Pilot NumberBox display
-- Filter to layer too?
-###			H	Ctrl + C - Copy, All Layers
-Hold
-###			H	Ctrl + Shift + C - Copy, One Layer
-Hold
-###			√	Ctrl + E, Q - Increment Patrol Point (Draw)
-Complete
-###			√	Ctrl + E, Q - Increment Patrol Point (Select)
-Complete
+###			T	Ctrl + A - Deselect All
+- Added logging
 ###			H	Ctrl + E, Q - Rotate Object (Draw)
 - Track notes in Arrow keys as they seem to be the same issue
 - Pending resolution of that task
-###			√	Ctrl + E, Q - Rotate Object (Select)
-Complete
-###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
-Complete
-###			√	Ctrl + O - Open
-Ctrl + O load shows all menus but doesn't load anything.
-F9 successfully loads, though. Not sure why.
-- Attempted, copied what F9 does here
-###			√	Ctrl + S - Save
-Complete
-###			H	Ctrl + V - Paste All Layers
-- Pending completion of Copy
-###			H	Ctrl + Shift + V - Paste One Layer
-Hold
-###			H	Ctrl + Y - Redo
-New
-###			H	Ctrl + Z - Undo
-New
-###			√	E, Q - Zoom In/Out
-Complete
-###			√	F5 - Quicksave
-Complete
 ###			C	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. 
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
@@ -139,26 +95,38 @@ Complete
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ###			C	F9 - Abort function if no matching filename to field
 New
-###			√	F12 - Play Chunk
-Complete
+###			H	Alt + Security Cam - Highlight Visible Tiles
+Pending anyone indicating they actually could use this feature
+###			H	Alt + NumKeys, NumPad - Menu Trails
+ALT trail for overhead menus
+This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
+###			H	Ctrl + Alt - Show Spawn Chances
+- Pending Pilot NumberBox display
+- Filter to layer too?
+###			H	Ctrl + C - Copy, All Layers
+Hold
+###			H	Ctrl + Shift + C - Copy, One Layer
+Hold
+###			H	Ctrl + V - Paste All Layers
+- Pending completion of Copy
+###			H	Ctrl + Shift + V - Paste One Layer
+Hold
+###			H	Ctrl + Y - Redo
+New
+###			H	Ctrl + Z - Undo
+New
 ###			H	F12 - Exit Playing Chunk
 On ice, pending user request
 ###			H	Letter Keys - skip to letter on scrolling menu
 On ice, pending collaboration with someone who uderstands UI methods well
 ###			H	Mouse3 - Drag Viewport
 New, and hell no
-###			√	NumKeys - Select Layer
-Complete
-###			√	Shift + E, Q - Max Zoom In/Out
-Complete
 ###			H	Shift + Ctrl - Filter + Display Owner IDs
 New
 ###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
 New
 ###			H	Shift + Alt - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
-###			√	Shift + Tab - Reverse-Tab through fields
-Complete
 ###			H	Tab - Tab through fields
 - Putting this on ice - not sure how useful of a feature it is yet
 - Pending Input Rate Limit
@@ -179,6 +147,38 @@ Complete
 	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance3Agent
 	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance3Agent (UnityEngine.UI.InputField)
 - Review the output from LevelEditor.Start_Postfix, as it traverses a field list by name.
+###			√	Arrow Keys - Orient (Select)
+Complete
+###			√	Arrow Keys - Match current direction to set to None
+Complete
+###			√	Ctrl + A - Select All
+Complete
+###			√	Ctrl + E, Q - Increment Patrol Point (Draw)
+Complete
+###			√	Ctrl + E, Q - Increment Patrol Point (Select)
+Complete
+###			√	Ctrl + E, Q - Rotate Object (Select)
+Complete
+###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
+Complete
+###			√	Ctrl + O - Open
+Ctrl + O load shows all menus but doesn't load anything.
+F9 successfully loads, though. Not sure why.
+- Attempted, copied what F9 does here
+###			√	Ctrl + S - Save
+Complete
+###			√	E, Q - Zoom In/Out
+Complete
+###			√	F5 - Quicksave
+Complete
+###			√	F12 - Play Chunk
+Complete
+###			√	NumKeys - Select Layer
+Complete
+###			√	Shift + E, Q - Max Zoom In/Out
+Complete
+###			√	Shift + Tab - Reverse-Tab through fields
+Complete
 ##		C	Item Groups
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
