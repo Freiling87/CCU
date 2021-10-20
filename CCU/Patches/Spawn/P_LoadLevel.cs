@@ -49,7 +49,7 @@ namespace CCU.Patches.Spawn
 							string bodyguardType;
 
 							bodyguardType =
-								bodyguardTrait is Bodyguarded_Pilot ? "Guard" :
+								bodyguardTrait == typeof(Bodyguarded_Pilot) ? "Guard" :
 								"Assassin";
 
 							Agent bodyguard1 = GC.spawnerMain.SpawnAgent(spawnLoc, null, bodyguardType);
