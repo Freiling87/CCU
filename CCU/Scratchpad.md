@@ -14,7 +14,7 @@ H = Hold, usually pending resolution of a separate or grouped issue
 ---
 
 #	C	00 Top-Priority Bugs
-###		C	Vendor error
+###		T	Vendor error
 - Here:
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
 	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
@@ -28,9 +28,9 @@ H = Hold, usually pending resolution of a separate or grouped issue
  	- Added logging
 - I think this is coming from one of two places:
   - within AddRandItem
+    - Attempted
   - Before AddRandItem, not properly checking for a null
 ###		T	HasTraitFromLlist
-
 [Info   :  CCU_Core] HasTraitFromList: Method Call
 [Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
 Stack trace:
