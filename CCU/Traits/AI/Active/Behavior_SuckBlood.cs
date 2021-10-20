@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Active
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_SuckBlood,
+                    [LanguageCode.English] = CTrait.Behavior_SuckBlood,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

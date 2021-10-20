@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Hire_Tamper,
+                    [LanguageCode.English] = CTrait.Hire_Tamper,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

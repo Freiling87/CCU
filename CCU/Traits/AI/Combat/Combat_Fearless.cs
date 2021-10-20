@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Combat_Fearless,
+                    [LanguageCode.English] = CTrait.Combat_Fearless,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

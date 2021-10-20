@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_Guilty,
+                    [LanguageCode.English] = CTrait.Passive_Guilty,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

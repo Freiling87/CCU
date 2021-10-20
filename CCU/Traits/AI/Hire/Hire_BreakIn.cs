@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Hire_BreakIn,
+                    [LanguageCode.English] = CTrait.Hire_BreakIn,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

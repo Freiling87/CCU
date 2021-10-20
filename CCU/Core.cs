@@ -72,147 +72,48 @@ namespace CCU
     public static class CTrait 
 	{
 		public const string
-		#region AI
-		#region Behavior
-			AI_Behavior_CleanTrash = "AI: Behavior - Clean Trash",
-			AI_Behavior_EatCorpse = "AI: Behavior - Eat Corpse",
-			AI_Behavior_EnforceLaws = "AI: Behavior - Enforce Laws",
-			AI_Behavior_EnforceLawsCopBot = "AI: Behavior - Enforce Laws Cop Bot",
-			AI_Behavior_ExplodeOnDeath = "AI: Behavior - Explode On Death",
-			AI_Behavior_FightFires = "AI: Behavior - Fight Fires",
-			AI_Behavior_GrabDrugs = "AI: Behavior - Grab Drugs",
-			AI_Behavior_GrabMoney = "AI: Behavior - Grab Money",
-			AI_Behavior_GuardDoor = "AI: Behavior - Guard Door",
-			AI_Behavior_Guilty = "AI: Behavior - Guilty",
-			AI_Behavior_HogTurntables = "AI: Behavior - Turntables Guard",
-			AI_Behavior_Lockdown = "AI: Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
-			AI_Behavior_Pickpocket = "AI: Behavior - Pickpocket",
-			AI_Behavior_Scumbag = "AI: Behavior - Scumbag", // Same as Guilty?
-			AI_Behavior_SeekAndDestroy = "AI: Behavior - Seek & Destroy",
-			AI_Behavior_SuckBlood = "AI: Behavior - Suck Blood",
-			AI_Behavior_Shakedown = "AI: Behavior - Shakedown",
-			AI_Behavior_Tattletale = "AI: Behavior - Tattle-tale",
-			AI_Behavior_VisionBeams = "AI: Behavior - Vision Beams",
-		#endregion
-		#region Combat
-			AI_Combat_CauseLockdown = "AI: Combat - Cause Lockdown",
-			AI_Combat_Coward = "AI: Combat - Coward",
-			AI_Combat_Fearless = "AI: Combat - Fearless",
-			AI_Combat_UseDrugs = "AI: Combat - Use Drugs", // Gate behind Drug-A-Lug?
-		#endregion
-		#region Hire
-			AI_Hire_Bodyguard = "AI: Hire - Bodyguard",
-			AI_Hire_BreakIn = "AI: Hire - Break-in",
-			AI_Hire_CauseRuckus = "AI: Hire - Cause a Ruckus",
-			AI_Hire_CostBanana = "AI: Hire - Costs Banana",
-			AI_Hire_CostLess = "AI: Hire - Costs Less",
-			AI_Hire_CostMore = "AI: Hire - Costs More",
-			AI_Hire_Hack = "AI: Hire - Hacker",
-			AI_Hire_Safecrack = "AI: Hire - Safecrack", // Also need to extend vanilla thief behavior to this
-			AI_Hire_Tamper = "AI: Hire - Tamper",
-		#endregion
-		#region Interaction 
-			AI_Interaction_AcceptBribeCop = "AI: Interaction - Accept Bribe",
-			AI_Interaction_AcceptBribeDoor = "AI: Interaction - Accept Bribe", // Requires Guard Door?
-			AI_Interaction_AdministerBloodBag = "AI: Interaction - Administer Blood Bag",
-			AI_Interaction_ArenaManager = "AI: Interaction - Arena Manager",
-			AI_Interaction_BankTeller = "AI: Interaction - Bank Teller",
-			AI_Interaction_BloodBank = "AI: Interaction - Blood Bank",
-			AI_Interaction_BuyRound = "AI: Interaction - Buy Round",
-			AI_Interaction_DeportationCenter = "AI: Interaction - Deportation Center",
-			AI_Interaction_Extortable = "AI: Interaction - Extortable",
-			AI_Interaction_Fence = "AI: Interaction - Fence",
-			AI_Interaction_Heal = "AI: Interaction - Heal",
-			AI_Interaction_Hotel = "AI: Interaction - Hotel",
-			AI_Interaction_Identify = "AI: Interaction - Identify",
-			AI_Interaction_InfluenceElection = "AI: Interaction - Influence Election",
-			AI_Interaction_MayorClerk = "AI: Interaction - Mayor Clerk",
-			AI_Interaction_Moochable = "AI: Interaction - Moochable",
-			AI_Interaction_OfferMotivation = "AI: Interaction - Offer Motivation",
-			AI_Interaction_PlayBadSong = "AI: Interaction - Song Request",
-			AI_Interaction_QuestGiver = "AI: Interaction - Quest Giver",
-			AI_Interaction_RefillGuns = "AI: Interaction - Refill Guns",
-			AI_Interaction_RepairArmor = "AI: Interaction - Repair Armor",
-			AI_Interaction_RepairMelee = "AI: Interaction - Repair Melee Weapons",
-			AI_Interaction_SellSlaves = "AI: Interaction - Sell Slaves",
-			AI_Interaction_UseBloodBag = "AI: Interaction - Use Blood Bag",
-			AI_Interaction_VendorBuyer = "AI: Interaction - Vendor Buyer",
-			AI_Interaction_VendorBuyerOnly = "AI: Interaction - Vendor Buyer Only", // Use with Vendor type to make them a buyer only
-		#endregion
-		#region Relationships
-			AI_Relationships_AggressiveCannibal = "AI: Relationships - Aggressive", // Hostile to character except with Cool with Cannibals
-			AI_Relationships_AnnoyedAtSuspicious = "AI: Relationships - Annoyed at Suspicious",
-			AI_Relationships_Faction1Aligned = "AI: Relationships - Faction 1 Aligned",
-			AI_Relationships_Faction1Hostile = "AI: Relationships - Faction 1 Hostile",
-			AI_Relationships_Faction2Aligned = "AI: Relationships - Faction 2 Aligned",
-			AI_Relationships_Faction2Hostile = "AI: Relationships - Faction 2 Hostile",
-			AI_Relationships_Faction3Aligned = "AI: Relationships - Faction 3 Aligned",
-			AI_Relationships_Faction3Hostile = "AI: Relationships - Faction 3 Hostile",
-			AI_Relationships_Faction4Aligned = "AI: Relationships - Faction 4 Aligned",
-			AI_Relationships_Faction4Hostile = "AI: Relationships - Faction 4 Hostile",
-			AI_Relationships_HostileToCannibals = "AI: Relationships - Hostile to Cannibals", // Analogue in BM: Cannibal Killer
-			AI_Relationships_HostileToSoldiers = "AI: Relationships - Hostile to Soldiers", // Analogue in BM: Army of Negative One
-			AI_Relationships_HostileToVampires = "AI: Relationships - Hostile to Vampires", // Analogue in BM: Vampire Vanquisher
-			AI_Relationships_HostileToWerewolves = "AI: Relationships - Hostile to Werewolves", // Analogue in BM: Werewolf Wrecker
-		#endregion
-		#region Trait Trigger
-			AI_TraitTrigger_CommonFolk = "AI: Trait Trigger - Common Folk",
-			AI_TraitTrigger_CoolCannibal = "AI: Trait Trigger - Cool Cannibal",
-			AI_TraitTrigger_CopAccess = "AI: Trait Trigger - Cop Access",
-			AI_TraitTrigger_HonorableThief = "AI: Trait Trigger - Honorable Thief",
-		#endregion
-		#region Vendor
-			AI_Vendor_Armorer = "AI: Vendor - Armorer",
-			AI_Vendor_Assassin = "AI: Vendor - Assassin",
-			AI_Vendor_BananaBoutique = "AI: Vendor - Banana",
-			AI_Vendor_BarbarianMerchant = "AI: Vendor - Barbarian",
-			AI_Vendor_Bartender = "AI: Vendor - Bartender",
-			AI_Vendor_BartenderDive = "AI: Vendor - Bartender (Dive)",
-			AI_Vendor_BartenderFancy = "AI: Vendor - Bartender (Fancy)",
-			AI_Vendor_Blacksmith = "AI: Vendor - Blacksmith",
-			AI_Vendor_Anthropophagie = "AI: Vendor - Cannibal",
-			AI_Vendor_ConsumerElectronics = "AI: Vendor - Consumer Electronics",
-			AI_Vendor_ConvenienceStore = "AI: Vendor - Convenience Store",
-			AI_Vendor_Contraband = "AI: Vendor - Cop Confiscated Goods",
-			AI_Vendor_CopStandard = "AI: Vendor - Cop Patrolman's Equipment",
-			AI_Vendor_CopSWAT = "AI: Vendor - Cop SWAT Equipment",
-			AI_Vendor_DemolitionDepot = "AI: Vendor - Demolitionist",
-			AI_Vendor_DrugDealer = "AI: Vendor - Drug Dealer",
-			AI_Vendor_FirefighterFiveAndDime = "AI: Vendor - Firefighter",
-			AI_Vendor_FireSale = "AI: Vendor - Fire Sale",
-			AI_Vendor_Gunsmith = "AI: Vendor - Gunsmith",
-			AI_Vendor_HardwareStore = "AI: Vendor - Tool Shop",
-			AI_Vendor_HighTech = "AI: Vendor - HighTech",
-			AI_Vendor_HomeFortressOutlet = "AI: Vendor - Home Fortress Outlet",
-			AI_Vendor_Hypnotist = "AI: Vendor - Hypnotist",
-			AI_Vendor_JunkDealer = "AI: Vendor - Junk Dealer",
-			AI_Vendor_McFuds = "AI: Vendor - McFud's",
-			AI_Vendor_MedicalSupplier = "AI: Vendor - Medical Supplier",
-			AI_Vendor_MiningGear = "AI: Vendor - Mining Gear",
-			AI_Vendor_MonkeMart = "AI: Vendor - Monke Mart",
-			AI_Vendor_MovieTheater = "AI: Vendor - Movie Theater",
-			AI_Vendor_Occultist = "AI: Vendor - Occultist",
-			AI_Vendor_OutdoorOutfitter = "AI: Vendor - Outdoor Outfitter",
-			AI_Vendor_PacifistProvisioner = "AI: Vendor - Pacifist Provisioner",
-			AI_Vendor_PawnShop = "AI: Vendor - Pawn Shop",
-			AI_Vendor_PestControl = "AI: Vendor - Pest Control",
-			AI_Vendor_Pharmacy = "AI: Vendor - Pharmacy",
-			AI_Vendor_ResistanceCommissary = "AI: Vendor - Resistance Commissary",
-			AI_Vendor_RiotInc = "AI: Vendor - Riot Depot",
-			AI_Vendor_ResearchMaterials = "AI: Vendor - Scientist",
-			AI_Vendor_Shopkeeper = "AI: Vendor - Shopkeeper",
-			AI_Vendor_SlaveShop = "AI: Vendor - Slave Shop",
-			AI_Vendor_Soldier = "AI: Vendor - Soldier",
-			AI_Vendor_SportingGoods = "AI: Vendor - Sporting Goods",
-			AI_Vendor_Teleportationist = "AI: Vendor - Teleportationist",
-			AI_Vendor_Thief = "AI: Vendor - Thief",
-			AI_Vendor_ThiefMaster = "AI: Vendor - Thief Master",
-			AI_Vendor_ThrowceryStore = "AI: Vendor - Throwcery Store",
-			AI_Vendor_ToyStore = "AI: Vendor - Toy Store",
-			AI_Vendor_UpperCruster = "AI: Vendor - Upper Cruster",
-			AI_Vendor_Vampire = "AI: Vendor - Vampire",
-			AI_Vendor_Villain = "AI: Vendor - Villain",
-		#endregion
+		#region Agent Group
+			AgentGroup_AffectVanilla = "[CCU] Agent Group - Affect Vanilla", // Toggles use in campaign or vanilla gameplay 
+			AgentGroup_AffectCampaign = "[CCU] Agent Group - Affect Campaign", // Will need an "Agent Lists Extended" mutator that can be added to vanilla or campaign to prevent affecting non-modded campaigns
+
+			AgentGroup_AllTypes = "[CCU] Agent Group - All Types",
+			AgentGroup_AllTypesNoFactions = "[CCU] Agent Group - All Types (No Factions)",
+			AgentGroup_ApeTown = "[CCU] Agent Group - Ape Town",
+			AgentGroup_ArenaBattler = "[CCU] Agent Group - Arena Battler",
+			AgentGroup_Blahd = "[CCU] Agent Group - Blahd",
+			AgentGroup_BlueCollars = "[CCU] Agent Group - Blue-Collars",
+			AgentGroup_BusinessOwners = "[CCU] Agent Group - Business Owners",
+			AgentGroup_Cannibal = "[CCU] Agent Group - Cannibal",
+			AgentGroup_CaveAgent = "[CCU] Agent Group - Cave",
+			AgentGroup_Creatures = "[CCU] Agent Group - Creatures",
+			AgentGroup_Crepe = "[CCU] Agent Group - Crepe",
+			AgentGroup_DowntownAgent = "[CCU] Agent Group - Downtown",
+			AgentGroup_Entertainers = "[CCU] Agent Group - Entertainers",
+			AgentGroup_Fighters = "[CCU] Agent Group - Fighters",
+			AgentGroup_GangbangerType = "[CCU] Agent Group - Gangbangers",
+			AgentGroup_GuardType = "[CCU] Agent Group - Guards",
+			AgentGroup_HideoutAgent = "[CCU] Agent Group - Hideout",
+			AgentGroup_HideoutAgentIndustrial = "[CCU] Agent Group - Hideout (Industrial)",
+			AgentGroup_Hooligans = "[CCU] Agent Group - Hooligans",
+			AgentGroup_HooligansNoGangbangers = "[CCU] Agent Group - Hooligans (No Gangbangers)",
+			AgentGroup_Kidnapped = "[CCU] Agent Group - Kidnapped",
+			AgentGroup_LawWorkers = "[CCU] Agent Group - Law Enforcers",
+			AgentGroup_Magicians = "[CCU] Agent Group - Magicians",
+			AgentGroup_ParkAgent = "[CCU] Agent Group - Park",
+			AgentGroup_ParkHomeAgent = "[CCU] Agent Group - Park (Home)",
+			AgentGroup_Poverty = "[CCU] Agent Group - Poverty",
+			AgentGroup_Resistance = "[CCU] Agent Group - Resistance",
+			AgentGroup_Sewers = "[CCU] Agent Group - Sewers",
+			AgentGroup_SlumsAgent = "[CCU] Agent Group - Slums",
+			AgentGroup_UndeadFeral = "[CCU] Agent Group - Undead (Feral)",
+			AgentGroup_UndeadSentient = "[CCU] Agent Group - Undead (Sentient)",
+			AgentGroup_Underdark = "[CCU] Agent Group - Underdark",
+			AgentGroup_Unique = "[CCU] Agent Group - Unique",
+			AgentGroup_UptownAgent = "[CCU] Agent Group - Uptown",
+			AgentGroup_UptownHomeAgent = "[CCU] Agent Group - Uptown (Home)",
+			AgentGroup_UptownNoGangs = "[CCU] Agent Group - Uptown (No Gangs)",
+			AgentGroup_Vampire = "[CCU] Agent Group - Vampire",
+			AgentGroup_WhiteCollars = "[CCU] Agent Group - White-Collars",
 		#endregion
 		#region Appearance
 		#region Accessory
@@ -298,82 +199,184 @@ namespace CCU
 			Appearance_SkinColor_ZombieSkin2 = "Appearance: Skin Color - ZombieSkin2",
 		#endregion
 		#endregion
-		#region Loadout
-			Loadout_ChunkKey = "Loadout: Chunk Key Holder",
-			Loadout_ChunkMayorBadge = "Loadout: Chunk Mayor Badge",
-			Loadout_ChunkSafeCombo = "Loadout: Chunk Safe Combo Holder",
-			Loadout_Guns_Common = "Loadout: Guns (Common)",
-			Loadout_Guns_Heavy = "Loadout: Guns (Heavy)",
-			Loadout_Guns_Rare = "Loadout: Guns (Rare)",
-			Loadout_Guns_Weird = "Loadout: Guns (Weird)",
-		#endregion
-		#region Map Marker
-			MapMarker_Bartender = "Map Marker: Bartender",
-			MapMarker_DrugDealer = "Map Marker: DrugDealer",
-			MapMarker_Face = "Map Marker: Face",
-			MapMarker_KillerRobot = "Map Marker: KillerRobot",
-			MapMarker_Pilot = "Map Marker: Pilot",
-			MapMarker_QuestionMark = "Map Marker: QuestionMark",
-			MapMarker_Shopkeeper = "Map Marker: Shopkeeper",
-		#endregion
-		#region Spawn
-		#region Agent Group
-			Spawn_AgentGroup_AffectVanilla = "Spawn: Agent Group - Affect Vanilla", // Toggles use in campaign or vanilla gameplay 
-			Spawn_AgentGroup_AffectCampaign = "Spawn: Agent Group - Affect Campaign", // Will need an "Agent Lists Extended" mutator that can be added to vanilla or campaign to prevent affecting non-modded campaigns
-
-			Spawn_AgentGroup_AllTypes = "Spawn: Agent Group - All Types",
-			Spawn_AgentGroup_AllTypesNoFactions = "Spawn: Agent Group - All Types (No Factions)",
-			Spawn_AgentGroup_ApeTown = "Spawn: Agent Group - Ape Town",
-			Spawn_AgentGroup_ArenaBattler = "Spawn: Agent Group - Arena Battler",
-			Spawn_AgentGroup_Blahd = "Spawn: Agent Group - Blahd",
-			Spawn_AgentGroup_BlueCollars = "Spawn: Agent Group - Blue-Collars",
-			Spawn_AgentGroup_BusinessOwners = "Spawn: Agent Group - Business Owners",
-			Spawn_AgentGroup_Cannibal = "Spawn: Agent Group - Cannibal",
-			Spawn_AgentGroup_CaveAgent = "Spawn: Agent Group - Cave",
-			Spawn_AgentGroup_Creatures = "Spawn: Agent Group - Creatures",
-			Spawn_AgentGroup_Crepe = "Spawn: Agent Group - Crepe",
-			Spawn_AgentGroup_DowntownAgent = "Spawn: Agent Group - Downtown",
-			Spawn_AgentGroup_Entertainers = "Spawn: Agent Group - Entertainers",
-			Spawn_AgentGroup_Fighters = "Spawn: Agent Group - Fighters",
-			Spawn_AgentGroup_GangbangerType = "Spawn: Agent Group - Gangbangers",
-			Spawn_AgentGroup_GuardType = "Spawn: Agent Group - Guards",
-			Spawn_AgentGroup_HideoutAgent = "Spawn: Agent Group - Hideout",
-			Spawn_AgentGroup_HideoutAgentIndustrial = "Spawn: Agent Group - Hideout (Industrial)",
-			Spawn_AgentGroup_Hooligans = "Spawn: Agent Group - Hooligans",
-			Spawn_AgentGroup_HooligansNoGangbangers = "Spawn: Agent Group - Hooligans (No Gangbangers)",
-			Spawn_AgentGroup_Kidnapped = "Spawn: Agent Group - Kidnapped",
-			Spawn_AgentGroup_LawWorkers = "Spawn: Agent Group - Law Enforcers",
-			Spawn_AgentGroup_Magicians = "Spawn: Agent Group - Magicians",
-			Spawn_AgentGroup_ParkAgent = "Spawn: Agent Group - Park",
-			Spawn_AgentGroup_ParkHomeAgent = "Spawn: Agent Group - Park (Home)",
-			Spawn_AgentGroup_Poverty = "Spawn: Agent Group - Poverty",
-			Spawn_AgentGroup_Resistance = "Spawn: Agent Group - Resistance",
-			Spawn_AgentGroup_Sewers = "Spawn: Agent Group - Sewers",
-			Spawn_AgentGroup_SlumsAgent = "Spawn: Agent Group - Slums",
-			Spawn_AgentGroup_UndeadFeral = "Spawn: Agent Group - Undead (Feral)",
-			Spawn_AgentGroup_UndeadSentient = "Spawn: Agent Group - Undead (Sentient)",
-			Spawn_AgentGroup_Underdark = "Spawn: Agent Group - Underdark",
-			Spawn_AgentGroup_Unique = "Spawn: Agent Group - Unique",
-			Spawn_AgentGroup_UptownAgent = "Spawn: Agent Group - Uptown",
-			Spawn_AgentGroup_UptownHomeAgent = "Spawn: Agent Group - Uptown (Home)",
-			Spawn_AgentGroup_UptownNoGangs = "Spawn: Agent Group - Uptown (No Gangs)",
-			Spawn_AgentGroup_Vampire = "Spawn: Agent Group - Vampire",
-			Spawn_AgentGroup_WhiteCollars = "Spawn: Agent Group - White-Collars",
+		#region Behavior
+			Behavior_CleanTrash =				"[CCU] Behavior - Clean Trash",
+			Behavior_EatCorpse =				"[CCU] Behavior - Eat Corpse",
+			Behavior_EnforceLaws =				"[CCU] Behavior - Enforce Laws (Cop)",
+			Behavior_EnforceLawsCopBot =		"[CCU] Behavior - Enforce Laws (Cop Bot)",
+			Behavior_FightFires =				"[CCU] Behavior - Fight Fires",
+			Behavior_GrabDrugs =				"[CCU] Behavior - Grab Drugs",
+			Behavior_GrabMoney =				"[CCU] Behavior - Grab Money",
+			Behavior_GuardDoor =				"[CCU] Behavior - Guard Door",
+			Behavior_HogTurntables =			"[CCU] Behavior - Turntables Guard",
+			Behavior_Lockdown =					"[CCU] Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
+			Behavior_Pickpocket =				"[CCU] Behavior - Pickpocket",
+			Behavior_SeekAndDestroy =			"[CCU] Behavior - Seek & Destroy",
+			Behavior_SuckBlood =				"[CCU] Behavior - Suck Blood",
+			Behavior_Shakedown =				"[CCU] Behavior - Shakedown",
+			Behavior_Tattletale =				"[CCU] Behavior - Tattletale",
 		#endregion
 		#region Bodyguarded
-			Bodyguarded_Pilot = "Bodyguarded: Pilot",
-			Bodyguarded_Cops = "Bodyguarded: Cops",
-			Bodyguarded_Goons = "Bodyguarded: Goons",
-			Bodyguarded_Supercops = "Bodyguarded: Supercops",
-			Bodyguarded_Supergoons = "Bodyguarded: Supergoons",
+			Bodyguarded_Pilot = "[CCU] Bodyguarded: Pilot",
+			Bodyguarded_Cops = "[CCU] Bodyguarded: Cops",
+			Bodyguarded_Goons = "[CCU] Bodyguarded: Goons",
+			Bodyguarded_Supercops = "[CCU] Bodyguarded: Supercops",
+			Bodyguarded_Supergoons = "[CCU] Bodyguarded: Supergoons",
 		#endregion
-		#region Generation
-			Spawn_Enslaved = "Spawn: Enslaved",
-			Spawn_HideInBush = "Spawn: Hide In Bush",
-			Spawn_HideInManhole = "Spawn: Hide In Manhole",
-			Spawn_RoamingGang = "Spawn: Roaming Gangs",
-			Spawn_SlaveOwner = "Spawn: Own Slaves";
+		#region Buyer
+			Interaction_BuyerAll =				"[CCU] Interaction - Buyer All", // Nonspecific
+			Interaction_BuyerOnly =				"[CCU] Interaction - Buyer Only",
+			Interaction_BuyerVendor =			"[CCU] Interaction - Buyer Vendor", // Buy only items sold
 		#endregion
+		#region Combat
+			Combat_CauseLockdown =				"[CCU] Combat - Cause Lockdown",
+			Combat_Coward =						"[CCU] Combat - Coward",
+			Combat_Fearless =					"[CCU] Combat - Fearless",
+			Combat_UseDrugs =					"[CCU] Combat - Use Drugs", // Gate behind Drug-A-Lug?
+		#endregion
+		#region Hire
+			Hire_Bodyguard =					"[CCU] Hire - Bodyguard",
+			Hire_BreakIn =						"[CCU] Hire - Break In",
+			Hire_CauseRuckus =					"[CCU] Hire - Cause a Ruckus",
+			Hire_CostBanana =					"[CCU] Hire - Costs Banana",
+			Hire_CostLess =						"[CCU] Hire - Costs Less",
+			Hire_CostMore =						"[CCU] Hire - Costs More",
+			Hire_Hack =							"[CCU] Hire - Hack",
+			Hire_Safecrack =					"[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
+			Hire_Tamper =						"[CCU] Hire - Tamper",
+		#endregion
+		#region Interaction 
+			Interaction_AcceptBribeCop =		"[CCU] Interaction - Accept Bribe",
+			Interaction_AcceptBribeDoor =		"[CCU] Interaction - Accept Bribe", // Requires Guard Door?
+			Interaction_AdministerBloodBag =	"[CCU] Interaction - Administer Blood Bag",
+			Interaction_ArenaManager =			"[CCU] Interaction - Arena Manager",
+			Interaction_BankTeller =			"[CCU] Interaction - Bank Teller",
+			Interaction_BloodBank =				"[CCU] Interaction - Blood Bank",
+			Interaction_BuyRound =				"[CCU] Interaction - Buy Round",
+			Interaction_DeportationCenter =		"[CCU] Interaction - Deportation Center",
+			Interaction_Extortable =			"[CCU] Interaction - Extortable",
+			Interaction_Heal =					"[CCU] Interaction - Heal",
+			Interaction_Hotel =					"[CCU] Interaction - Hotel",
+			Interaction_Identify =				"[CCU] Interaction - Identify",
+			Interaction_InfluenceElection =		"[CCU] Interaction - Influence Election",
+			Interaction_MayorClerk =			"[CCU] Interaction - Mayor Clerk",
+			Interaction_Moochable =				"[CCU] Interaction - Moochable",
+			Interaction_OfferMotivation =		"[CCU] Interaction - Offer Motivation",
+			Interaction_PlayBadSong =			"[CCU] Interaction - Song Request",
+			Interaction_QuestGiver =			"[CCU] Interaction - Quest Giver",
+			Interaction_RefillGuns =			"[CCU] Interaction - Refill Guns",
+			Interaction_RepairArmor =			"[CCU] Interaction - Repair Armor",
+			Interaction_RepairMelee =			"[CCU] Interaction - Repair Melee Weapons",
+			Interaction_SellSlaves =			"[CCU] Interaction - Sell Slaves",
+			Interaction_UseBloodBag =			"[CCU] Interaction - Use Blood Bag",
+		#endregion
+		#region Loadout
+			Loadout_ChunkKey =					"[CCU] Loadout: Chunk Key Holder",
+			Loadout_ChunkMayorBadge =			"[CCU] Loadout: Chunk Mayor Badge",
+			Loadout_ChunkSafeCombo =			"[CCU] Loadout: Chunk Safe Combo Holder",
+			Loadout_Guns_Common =				"[CCU] Loadout: Guns (Common)",
+			Loadout_Guns_Heavy =				"[CCU] Loadout: Guns (Heavy)",
+			Loadout_Guns_Rare =					"[CCU] Loadout: Guns (Rare)",
+			Loadout_Guns_Weird =				"[CCU] Loadout: Guns (Weird)",
+		#endregion
+		#region Map Marker
+			MapMarker_Bartender =				"[CCU] Map Marker: Bartender",
+			MapMarker_DrugDealer =				"[CCU] Map Marker: DrugDealer",
+			MapMarker_Face =					"[CCU] Map Marker: Face",
+			MapMarker_KillerRobot =				"[CCU] Map Marker: KillerRobot",
+			MapMarker_Pilot =					"[CCU] Map Marker: Pilot",
+			MapMarker_QuestionMark =			"[CCU] Map Marker: QuestionMark",
+			MapMarker_Shopkeeper =				"[CCU] Map Marker: Shopkeeper",
+		#endregion
+		#region Passive
+			Passive_ExplodeOnDeath = "[CCU] Passive - Explode On Death",
+			Passive_Guilty = "[CCU] Passive - Guilty",
+			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
+			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",
+			Passive_VisionBeams = "[CCU] Passive - Vision Beams",
+		#endregion
+		#region Relationships
+			Relationships_AggressiveCannibal = "[CCU] Relationships - Aggressive (Cannibal)",   // Hostile to character except with Cool with Cannibals
+			Relationships_AnnoyedAtSuspicious = "[CCU] Relationships - Annoyed at Suspicious",
+			Relationships_Faction1Aligned = "[CCU] Relationships - Faction 1 Aligned",
+			Relationships_Faction1Hostile = "[CCU] Relationships - Faction 1 Hostile",
+			Relationships_Faction2Aligned = "[CCU] Relationships - Faction 2 Aligned",
+			Relationships_Faction2Hostile = "[CCU] Relationships - Faction 2 Hostile",
+			Relationships_Faction3Aligned = "[CCU] Relationships - Faction 3 Aligned",
+			Relationships_Faction3Hostile = "[CCU] Relationships - Faction 3 Hostile",
+			Relationships_Faction4Aligned = "[CCU] Relationships - Faction 4 Aligned",
+			Relationships_Faction4Hostile = "[CCU] Relationships - Faction 4 Hostile",
+			Relationships_HostileToCannibals = "[CCU] Relationships - Hostile to Cannibals",    // Analogue in BM: Cannibal Killer
+			Relationships_HostileToSoldiers = "[CCU] Relationships - Hostile to Soldiers",  // Analogue in BM: Army of Negative One
+			Relationships_HostileToVampires = "[CCU] Relationships - Hostile to Vampires",  // Analogue in BM: Vampire Vanquisher
+			Relationships_HostileToWerewolves = "[CCU] Relationships - Hostile to Werewolves",  // Analogue in BM: Werewolf Wrecker
+		#endregion
+		#region Spawn
+			Spawn_HideInBush =					"[CCU] Spawn: Hide In Bush",
+			Spawn_HideInManhole =				"[CCU] Spawn: Hide In Manhole",
+			Spawn_RoamingGang =					"[CCU] Spawn: Roaming Gangs",
+			Spawn_SlaveOwned =					"[CCU] Spawn: Slave",
+			Spawn_SlaveOwner =					"[CCU] Spawn: Slave Owner",
+		#endregion
+		#region Trait Trigger
+			TraitTrigger_CommonFolk =			"[CCU] Trait Trigger - Common Folk",
+			TraitTrigger_CoolCannibal =			"[CCU] Trait Trigger - Cool Cannibal",
+			TraitTrigger_CopAccess =			"[CCU] Trait Trigger - Cop Access",
+			TraitTrigger_FamilyFriend =			"[CCU] Trait Trigger - Family Friend",
+			TraitTrigger_HonorableThief =		"[CCU] Trait Trigger - Honorable Thief",
+			TraitTrigger_Scumbag =				"[CCU] Trait Trigger - Scumbag",
+		#endregion
+		#region Vendor
+		Vendor_Armorer =					"[CCU] Vendor - Armorer",
+			Vendor_Assassin =					"[CCU] Vendor - Assassin",
+			Vendor_BananaBoutique =				"[CCU] Vendor - Banana",
+			Vendor_BarbarianMerchant =			"[CCU] Vendor - Barbarian",
+			Vendor_Bartender =					"[CCU] Vendor - Bartender",
+			Vendor_BartenderDive =				"[CCU] Vendor - Bartender (Dive)",
+			Vendor_BartenderFancy =				"[CCU] Vendor - Bartender (Fancy)",
+			Vendor_Blacksmith =					"[CCU] Vendor - Blacksmith",
+			Vendor_Anthropophagie =				"[CCU] Vendor - Cannibal",
+			Vendor_ConsumerElectronics =		"[CCU] Vendor - Consumer Electronics",
+			Vendor_ConvenienceStore =			"[CCU] Vendor - Convenience Store",
+			Vendor_Contraband =					"[CCU] Vendor - Cop Confiscated Goods",
+			Vendor_CopStandard =				"[CCU] Vendor - Cop Patrolman's Equipment",
+			Vendor_CopSWAT =					"[CCU] Vendor - Cop SWAT Equipment",
+			Vendor_DemolitionDepot =			"[CCU] Vendor - Demolitionist",
+			Vendor_DrugDealer =					"[CCU] Vendor - Drug Dealer",
+			Vendor_FirefighterFiveAndDime =		"[CCU] Vendor - Firefighter",
+			Vendor_FireSale =					"[CCU] Vendor - Fire Sale",
+			Vendor_Gunsmith =					"[CCU] Vendor - Gunsmith",
+			Vendor_HardwareStore =				"[CCU] Vendor - Tool Shop",
+			Vendor_HighTech =					"[CCU] Vendor - HighTech",
+			Vendor_HomeFortressOutlet =			"[CCU] Vendor - Home Fortress Outlet",
+			Vendor_Hypnotist =					"[CCU] Vendor - Hypnotist",
+			Vendor_JunkDealer =					"[CCU] Vendor - Junk Dealer",
+			Vendor_McFuds =						"[CCU] Vendor - McFud's",
+			Vendor_MedicalSupplier =			"[CCU] Vendor - Medical Supplier",
+			Vendor_MiningGear =					"[CCU] Vendor - Mining Gear",
+			Vendor_MonkeMart =					"[CCU] Vendor - Monke Mart",
+			Vendor_MovieTheater =				"[CCU] Vendor - Movie Theater",
+			Vendor_Occultist =					"[CCU] Vendor - Occultist",
+			Vendor_OutdoorOutfitter =			"[CCU] Vendor - Outdoor Outfitter",
+			Vendor_PacifistProvisioner =		"[CCU] Vendor - Pacifist Provisioner",
+			Vendor_PawnShop =					"[CCU] Vendor - Pawn Shop",
+			Vendor_PestControl =				"[CCU] Vendor - Pest Control",
+			Vendor_Pharmacy =					"[CCU] Vendor - Pharmacy",
+			Vendor_ResistanceCommissary =		"[CCU] Vendor - Resistance Commissary",
+			Vendor_RiotInc =					"[CCU] Vendor - Riot Depot",
+			Vendor_ResearchMaterials =			"[CCU] Vendor - Scientist",
+			Vendor_Shopkeeper =					"[CCU] Vendor - Shopkeeper",
+			Vendor_SlaveShop =					"[CCU] Vendor - Slave Shop",
+			Vendor_Soldier =					"[CCU] Vendor - Soldier",
+			Vendor_SportingGoods =				"[CCU] Vendor - Sporting Goods",
+			Vendor_Teleportationist =			"[CCU] Vendor - Teleportationist",
+			Vendor_Thief =						"[CCU] Vendor - Thief",
+			Vendor_ThiefMaster =				"[CCU] Vendor - Thief Master",
+			Vendor_ThrowceryStore =				"[CCU] Vendor - Throwcery Store",
+			Vendor_ToyStore =					"[CCU] Vendor - Toy Store",
+			Vendor_UpperCruster =				"[CCU] Vendor - Upper Cruster",
+			Vendor_Vampire =					"[CCU] Vendor - Vampire",
+			Vendor_Villain =					"[CCU] Vendor - Villain";
 		#endregion
 	}
 	public static class vItem // Vanilla Items

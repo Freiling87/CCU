@@ -20,7 +20,7 @@ namespace CCU.Traits.Relationships
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Relationships_AnnoyedAtSuspicious,
+                    [LanguageCode.English] = CTrait.Relationships_AnnoyedAtSuspicious,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

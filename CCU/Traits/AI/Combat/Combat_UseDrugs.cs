@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Combat_UseDrugs,
+                    [LanguageCode.English] = CTrait.Combat_UseDrugs,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

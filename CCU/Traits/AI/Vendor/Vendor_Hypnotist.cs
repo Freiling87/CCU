@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Hypnotist,
+                    [LanguageCode.English] = CTrait.Vendor_Hypnotist,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

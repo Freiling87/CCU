@@ -20,7 +20,7 @@ namespace CCU.Traits.Relationships
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Relationships_HostileToVampires,
+                    [LanguageCode.English] = CTrait.Relationships_HostileToVampires,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

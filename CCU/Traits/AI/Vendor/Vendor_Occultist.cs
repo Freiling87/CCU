@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_Occultist,
+                    [LanguageCode.English] = CTrait.Vendor_Occultist,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

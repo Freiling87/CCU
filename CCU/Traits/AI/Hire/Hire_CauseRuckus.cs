@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Hire_CauseRuckus,
+                    [LanguageCode.English] = CTrait.Hire_CauseRuckus,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

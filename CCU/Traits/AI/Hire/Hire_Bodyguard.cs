@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Hire_Bodyguard,
+                    [LanguageCode.English] = CTrait.Hire_Bodyguard,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

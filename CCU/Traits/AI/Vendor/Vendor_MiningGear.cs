@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_MiningGear,
+                    [LanguageCode.English] = CTrait.Vendor_MiningGear,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

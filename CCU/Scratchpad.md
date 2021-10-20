@@ -309,17 +309,6 @@ New
 New
 ###			C	Tattle (Upper Cruster)
 New
-###			C	Vision Beams (Cop Bot)
-New
-##		C	Behavior Passive
-###			C	Explode On Death
-- requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
-###			√	Guilty
-Complete
-###			C	Hackable - Tamper With Aim
-New
-###			C	Hackable - Go Haywire
-New
 ##		C	Bodyguarded
 - LoadLevel.SetupMore3_3 where "Musician"
   - Attempted here
@@ -554,6 +543,17 @@ Pending customs
 ###			C	Roamer LevelFeature
 New
 ###			C	Slum NPCs
+New
+##		C	Passive
+###			C	Explode On Death
+- requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
+###			√	Guilty
+Complete
+###			C	Hackable - Tamper With Aim
+New
+###			C	Hackable - Go Haywire
+New
+###			C	Vision Beams (Cop Bot)
 New
 ##		C	Relationships
 ###			C	Aggressive (Cannibal)

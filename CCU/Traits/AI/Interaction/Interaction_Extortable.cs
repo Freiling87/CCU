@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Interaction_Extortable,
+                    [LanguageCode.English] = CTrait.Interaction_Extortable,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

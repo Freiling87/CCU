@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Active
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_EatCorpse,
+                    [LanguageCode.English] = CTrait.Behavior_EatCorpse,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

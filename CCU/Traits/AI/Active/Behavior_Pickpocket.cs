@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Active
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_Pickpocket,
+                    [LanguageCode.English] = CTrait.Behavior_Pickpocket,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -11,12 +11,12 @@ namespace CCU.Traits.AI.Vendor
             RogueLibs.CreateCustomTrait<Vendor_CopStandard>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells standard police gear.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.AI_TraitTrigger_CopAccess),
+                    [LanguageCode.English] = String.Format("This character sells standard police gear.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.TraitTrigger_CopAccess),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_CopStandard,
+                    [LanguageCode.English] = CTrait.Vendor_CopStandard,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

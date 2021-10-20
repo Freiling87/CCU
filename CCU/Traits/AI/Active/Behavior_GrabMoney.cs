@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.Active
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Behavior_GrabMoney,
+                    [LanguageCode.English] = CTrait.Behavior_GrabMoney,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

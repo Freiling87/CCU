@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Vendor
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Vendor_ThiefMaster,
+                    [LanguageCode.English] = CTrait.Vendor_ThiefMaster,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

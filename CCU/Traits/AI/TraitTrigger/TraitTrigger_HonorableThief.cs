@@ -16,12 +16,12 @@ namespace CCU.Traits.AI.TraitTrigger
             RogueLibs.CreateCustomTrait<TraitTrigger_HonorableThief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Honor Among Thieves trait.\n\n<color=green>{0}:</color> Will not pickpocket the player if they have Honor Among Thieves.\n\n<color=green>{1}:</color> Will not sell wares unless player has Honor Among Thieves.", CTrait.AI_Behavior_Pickpocket, CTrait.AI_Vendor_Thief),
+                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Honor Among Thieves trait.\n\n<color=green>{0}:</color> Will not pickpocket the player if they have Honor Among Thieves.\n\n<color=green>{1}:</color> Will not sell wares unless player has Honor Among Thieves.", CTrait.Behavior_Pickpocket, CTrait.Vendor_Thief),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_TraitTrigger_HonorableThief,
+                    [LanguageCode.English] = CTrait.TraitTrigger_HonorableThief,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

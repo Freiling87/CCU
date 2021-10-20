@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.TraitTrigger
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_TraitTrigger_CommonFolk,
+                    [LanguageCode.English] = CTrait.TraitTrigger_CommonFolk,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

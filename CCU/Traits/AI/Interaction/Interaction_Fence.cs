@@ -16,7 +16,7 @@ namespace CCU.Traits.AI.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_Interaction_Fence,
+                    [LanguageCode.English] = CTrait.Interaction_Fence,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

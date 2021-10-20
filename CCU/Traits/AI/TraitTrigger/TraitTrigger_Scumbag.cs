@@ -21,7 +21,7 @@ namespace CCU.Traits.AI.TraitTrigger
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.AI_TraitTrigger_Scumbag,
+                    [LanguageCode.English] = CTrait.TraitTrigger_Scumbag,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
