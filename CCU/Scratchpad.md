@@ -248,13 +248,13 @@ New
 - 
 
 #	CT	Traits
-##		C	Agent Group
+##		H	Agent Group
+###		H	Slum NPCs (Pilot)
+New
 ###		H	Affect Campaign
 Pending pilot
 ###		H	Affect Vanilla 
 Pending pilot
-###		C	Slum NPCs (Pilot)
-New
 ##		C	Appearance
 This actually sorta worked, sorta. 
 When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
@@ -626,12 +626,12 @@ PoolsScene
 √	.ResetAgent						Skip
 StatusEffects
 √	.SetupDeath						Skip, Shopdrops will be automatic
+###			T	00 FillItem bug
+- Added logging to RandomSelection methods to identify issue
 ###			T	00 Empty Inventory
 - Still empty, need more logging. After PressedButton("Buy")
-  - Attempted
 - I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
   - "ShopkeeperSpecialInv" used in RandomItems.fillItems
-  - Attempted
 - After putting in logging messages:
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
@@ -645,6 +645,7 @@ StatusEffects
   - So none of them are firing. 
 
 - May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
+- 
 - Traits that will need compatibility:
   - Shop Drops
   - That one discount one

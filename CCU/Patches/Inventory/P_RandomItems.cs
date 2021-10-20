@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
@@ -11,7 +12,10 @@ namespace CCU.Patches.Inventory
 	[HarmonyPatch(declaringType: typeof(RandomItems))]
 	class P_RandomItems
 	{
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(RandomItems.fillItems))]
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(RandomItems.fillItems))]
 		public static void fillItems_Postfix()
 		{
 			Core.LogMethodCall();
