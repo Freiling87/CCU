@@ -208,14 +208,8 @@ namespace CCU.Traits
 			logger.LogDebug("\tnull return");
 			return null;
 		}
-		public static bool HasTraitFromList(Agent agent, List<Type> traitList)
-		{
-			foreach (Type trait in traitList)
-				if (agent.HasTrait(trait))
-					return true;
-
-			return false;
-		}
+		public static bool HasTraitFromList(Agent agent, List<Type> traitList) =>
+			traitList.Where(p => agent.HasTrait(p)).Any();
 		public static void LogTraitList(Agent agent)
 		{
 			logger.LogDebug("TRAIT LIST: " + agent.agentName);
@@ -223,13 +217,9 @@ namespace CCU.Traits
 			foreach (Trait trait in agent.statusEffects.TraitList)
 				logger.LogDebug("\t" + trait.traitName);
 		}
-		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList)
-		{
-			List<string> traitNames = AllCCUTraitsGroup.ConvertAll(t => TraitInfo.Get(t).Name);
-
-			return traitList
-				.Where(trait => !(traitNames.Contains(trait.traitName)))
+		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList) =>
+			traitList
+				.Where(trait => !(AllCCUTraitsGroup.ConvertAll(t => TraitInfo.Get(t).Name).Contains(trait.traitName)))
 				.ToList();
-		}
 	}
 }
