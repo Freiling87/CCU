@@ -282,8 +282,6 @@ New
 Complete
 ###			√	Eat Corpse
 Complete
-###			C	Enforce Laws
-New
 ###			C	Fight Fires
 New
 ###			√	Grab Drugs
