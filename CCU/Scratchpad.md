@@ -14,7 +14,6 @@ H = Hold, usually pending resolution of a separate or grouped issue
 ---
 
 #	C	00 Top-Priority Bugs
-
 ###		C	Vendor error
 - Here:
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
@@ -26,7 +25,11 @@ H = Hold, usually pending resolution of a separate or grouped issue
 	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-###		C	HasTraitFromLlist
+ 	- Added logging
+- I think this is coming from one of two places:
+  - within AddRandItem
+  - Before AddRandItem, not properly checking for a null
+###		T	HasTraitFromLlist
 
 [Info   :  CCU_Core] HasTraitFromList: Method Call
 [Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
@@ -39,8 +42,6 @@ LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-
-
 
 ---
 

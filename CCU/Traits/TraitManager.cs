@@ -205,6 +205,7 @@ namespace CCU.Traits
 					return trait;
 			}
 
+			logger.LogDebug("\tnull return");
 			return null;
 		}
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList)

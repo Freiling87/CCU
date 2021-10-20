@@ -30,83 +30,61 @@ namespace CCU.Patches.Inventory
 
 			Core.LogMethodCall();
 
-			string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
-
-			if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
+			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypeTraits))
 			{
-				logger.LogDebug("\trName: " + rName);
-				string text;
+				string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
 
-				int num = 0;
-				bool foundItem = false;
-
-				do
+				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{
-					try
+					logger.LogDebug("\trName: " + rName);
+					string text;
+
+					int num = 0;
+					bool foundItem = false;
+
+					do
 					{
-						text = __instance.rnd.RandomSelect(rName, "Items");
-						text = __instance.SwapWeaponTypes(text);
+						try
+						{
+							text = __instance.rnd.RandomSelect(rName, "Items");
+							text = __instance.SwapWeaponTypes(text);
 
-						if (text != "")
-							foundItem = true;
-					}
-					catch
-					{
-						logger.LogDebug("\tCatch");
+							if (text != "")
+								foundItem = true;
+						}
+						catch
+						{
+							logger.LogDebug("\tCatch");
 
-						text = "Empty";
-					}
+							text = "Empty";
+						}
 
-					logger.LogDebug("\tText: " + text);
+						logger.LogDebug("\tText: " + text);
 
-					foreach (InvItem invItem in __instance.InvItemList)
-						if (invItem.invItemName == text && !invItem.canRepeatInShop)
+						foreach (InvItem invItem in __instance.InvItemList)
+							if (invItem.invItemName == text && !invItem.canRepeatInShop)
+								foundItem = false;
+
+						if (text == "FreeItemVoucher")
 							foundItem = false;
 
-					if (text == "FreeItemVoucher")
-						foundItem = false;
-
-					num++;
-				}
-				while (!foundItem && num < 100);
-
-				if (num == 100)
-					text = "Empty";
-
-				if (text != "Empty" && text != "")
-				{
-					//return this.AddItemReal(text);
-
-					//MethodInfo addItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal", new Type[1] { typeof(string) });
-					//__result = addItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(text);
-
-					// Just copying AddItemReal into here in case I'm doing something wrong with AccessTools
-					// TODO: Remove this code and just invoke the private method
-
-					InvItem invItem = __instance.AddItem(text, 1);
-					int invItemCount;
-					
-					if (invItem.invItemName == "Money")
-						invItemCount = __instance.FindMoneyAmt(false);
-					else if (invItem.itemType == "WeaponMelee" && __instance.CompareTag("Agent"))
-					{
-						if (GC.challenges.Contains("InfiniteMeleeDurability"))
-							invItemCount = 100;
-						else
-							invItemCount = int.Parse(__instance.rnd.RandomSelect("AgentMeleeDurability", "Others"));
+						num++;
 					}
-					else if (invItem.itemType == "WeaponMelee" && __instance.CompareTag("SpecialInvDatabase") && __instance.agent != null)
-						invItemCount = 200;
-					else
-						invItemCount = invItem.initCount;
-					
-					invItem.invItemCount = invItemCount;
+					while (!foundItem && num < 100);
 
-					__result = invItem;
+					if (num == 100)
+						text = "Empty";
+
+					if (text != "Empty" && text != "")
+					{
+						MethodInfo addItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal", new Type[1] { typeof(string) });
+						__result = addItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(text);
+
+						return false;
+					}
+
 					return false;
 				}
-
-				return false;
 			}
 
 			return true;
