@@ -8,9 +8,6 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 #	C	00 Initial Load Error Logs
 
-##		C	Crash on hire
-- Probably just need to write the Interaction chain
-
 ---
 
 #	C	00 Top-Priority Bugs
