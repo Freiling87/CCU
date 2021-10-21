@@ -460,8 +460,14 @@ Test
 Test
 ###			T	Cost - More
 Test
+###			C	Disarm Trap
+New
 ###			H	Hack
 Pending General AI Update Error resolution
+###			C	Pickpocket
+New
+###			C	Poison
+New
 ###			H	Safecrack
 
 Here's what comes up for Lockpick job:
@@ -612,6 +618,12 @@ New
 ###			C	Slum NPCs
 New
 ##		C	Passive
+###			C	Dead
+New
+###			C	Dead - Burned
+New
+###			C	Dead - Gibbed
+New
 ###			C	Explode On Death
 - requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
 ###			√	Guilty

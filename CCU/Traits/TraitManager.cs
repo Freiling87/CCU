@@ -17,6 +17,7 @@ using CCU.Traits.MapMarker;
 using CCU.Traits.Spawn;
 using CCU.Traits.AI.Behavior;
 using System.IO;
+using CCU.Traits.AI.Passive;
 
 namespace CCU.Traits
 {
@@ -76,6 +77,9 @@ namespace CCU.Traits
 		};
 		public static List<Type> PassiveTraits = new List<Type>()
 		{
+			typeof(Passive_Dead),
+			typeof(Passive_Dead_Burned),
+			typeof(Passive_Dead_Gibbed),
 			typeof(Behavior_ExplodeOnDeath),
 			typeof(Behavior_Guilty),
 		};
@@ -102,7 +106,10 @@ namespace CCU.Traits
 			typeof(Hire_Bodyguard),
 			typeof(Hire_BreakIn),
 			typeof(Hire_CauseRuckus),
+			typeof(Hire_DisarmTrap),
 			typeof(Hire_Hack),
+			typeof(Hire_Pickpocket),
+			typeof(Hire_Poison),
 			typeof(Hire_Safecrack),
 			typeof(Hire_Tamper),
 		};

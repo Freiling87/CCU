@@ -241,7 +241,10 @@ namespace CCU
 			Hire_CostBanana =					"[CCU] Hire - Costs Banana",
 			Hire_CostLess =						"[CCU] Hire - Costs Less",
 			Hire_CostMore =						"[CCU] Hire - Costs More",
+			Hire_DisarmTrap =					"[CCU] Hire - Disarm Trap",
 			Hire_Hack =							"[CCU] Hire - Hack",
+			Hire_Pickpocket =					"[CCU] Hire - Pickpocket",
+			Hire_Poison	=						"[CCU] Hire - Poison",
 			Hire_Safecrack =					"[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
 			Hire_Tamper =						"[CCU] Hire - Tamper",
 		#endregion
@@ -289,11 +292,14 @@ namespace CCU
 			MapMarker_Shopkeeper =				"[CCU] Map Marker: Shopkeeper",
 		#endregion
 		#region Passive
-			Passive_ExplodeOnDeath = "[CCU] Passive - Explode On Death",
-			Passive_Guilty = "[CCU] Passive - Guilty",
-			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
-			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",
-			Passive_VisionBeams = "[CCU] Passive - Vision Beams",
+			Passive_Dead =						"[CCU] Passive - Dead",
+			Passive_Dead_Burned =				"[CCU] Passive - Dead (Burned)",
+			Passive_Dead_Gibbed =				"[CCU] Passive - Dead (Gibbed)",
+			Passive_ExplodeOnDeath =			"[CCU] Passive - Explode On Death",
+			Passive_Guilty =					"[CCU] Passive - Guilty",
+			Passive_Hackable_Haywire =			"[CCU] Passive - Hackable (Haywire)",
+			Passive_Hackable_TamperWAim =		"[CCU] Passive - Hackable (Tamper w/ Aim)",
+			Passive_VisionBeams =				"[CCU] Passive - Vision Beams",
 		#endregion
 		#region Relationships
 			Relationships_AggressiveCannibal = "[CCU] Relationships - Aggressive (Cannibal)",   // Hostile to character except with Cool with Cannibals
