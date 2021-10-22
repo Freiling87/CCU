@@ -2097,7 +2097,7 @@ namespace CCU.Patches.Behaviors
 		// Non-Patch
 		public static void SafecrackSafe(Agent agent, Agent interactingAgent, PlayfieldObject mySafe)
 		{
-			if (interactingGC.serverPlayer)
+			if (GC.serverPlayer)
 			{
 				agent.job = CJob.SafecrackSafe;
 				agent.jobCode = jobType.GetSupplies; // TODO
@@ -2116,7 +2116,7 @@ namespace CCU.Patches.Behaviors
 		// Non-Patch
 		public static void TamperSomething(Agent agent, Agent interactingAgent, PlayfieldObject target)
 		{
-			if (interactingGC.serverPlayer)
+			if (GC.serverPlayer)
 			{
 				agent.job = CJob.SafecrackSafe;
 				agent.jobCode = jobType.GetSupplies; // TODO
