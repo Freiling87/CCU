@@ -83,12 +83,14 @@ Complete
 ###		C	Access from Chunk/Campaign Editor selector dropdown
 
 #	CT	Chunk Editor
-##		C	Additional Agent Behaviors
+##		C	Additional Agent Goals
 ###			C	Die
 New
 ###			C	Die + Burn
 New
 ###			C	Explode
+New
+###			c	Panic
 New
 ###			C	Sleep
 New

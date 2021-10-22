@@ -292,9 +292,6 @@ namespace CCU
 			MapMarker_Shopkeeper =				"[CCU] Map Marker: Shopkeeper",
 		#endregion
 		#region Passive
-			Passive_Dead =						"[CCU] Passive - Dead",
-			Passive_Dead_Burned =				"[CCU] Passive - Dead (Burned)",
-			Passive_Dead_Gibbed =				"[CCU] Passive - Dead (Gibbed)",
 			Passive_ExplodeOnDeath =			"[CCU] Passive - Explode On Death",
 			Passive_Guilty =					"[CCU] Passive - Guilty",
 			Passive_Hackable_Haywire =			"[CCU] Passive - Hackable (Haywire)",
