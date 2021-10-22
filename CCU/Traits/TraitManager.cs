@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CCU.Traits.AI.Interaction;
+using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.FacialHair;
 using CCU.Traits.Relationships;
 using CCU.Traits.MapMarker;
@@ -66,6 +66,19 @@ namespace CCU.Traits
 				return list;
 			}
 		}
+		public static List<Type> InteractionTraitsGroup
+		{
+			get
+			{
+				List<Type> list = new List<Type>();
+
+				list.AddRange(HireTypeTraits);
+				list.AddRange(InteractionTraits);
+				list.AddRange(VendorTypeTraits);
+
+				return list;
+			}
+		}
 
 		public static List<Type> ActiveTraits = new List<Type>()
 		{
@@ -115,9 +128,9 @@ namespace CCU.Traits
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
-			typeof(Interaction_Extortable),
+			typeof(TraitTrigger_Extortable),
 			typeof(Buyer_All),
-			typeof(Interaction_Moochable),
+			typeof(TraitTrigger_Moochable),
 			typeof(Interaction_VendorBuyer), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()

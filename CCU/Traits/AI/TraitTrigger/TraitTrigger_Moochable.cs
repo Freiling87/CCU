@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.AI.Interaction
+namespace CCU.Traits.AI.TraitTrigger
 {
-    public class Interaction_Extortable : CustomTrait
+    public class TraitTrigger_Moochable : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_Extortable>()
+            RogueLibs.CreateCustomTrait<TraitTrigger_Moochable>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = String.Format("This character can lend money, if the player has the Moocher trait."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_Extortable,
+                    [LanguageCode.English] = CTrait.TraitTrigger_Moochable,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

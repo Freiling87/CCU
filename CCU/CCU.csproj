@@ -141,8 +141,8 @@
     <Compile Include="Traits\AI\Hire\Hire_Hack.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Safecrack.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Tamper.cs" />
-    <Compile Include="Traits\AI\Interaction\Interaction_Extortable.cs" />
-    <Compile Include="Traits\AI\Interaction\Interaction_Moochable.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Extortable.cs" />
+    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Moochable.cs" />
     <Compile Include="Traits\AI\Passive\Passive_Dead_Burned.cs" />
     <Compile Include="Traits\AI\Passive\Passive_Dead_Gibbed.cs" />
     <Compile Include="Traits\AI\Passive\Passive_Dead.cs" />

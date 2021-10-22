@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
 using CCU.Traits.AI.Active;
-using CCU.Traits.AI.Interaction;
+using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.AI.Combat;
 using CCU.Traits.AI.Behavior;
 
@@ -24,7 +24,7 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
-			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Interaction_Extortable>())
+			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<TraitTrigger_Extortable>())
 				__result = true;
 		}
 
