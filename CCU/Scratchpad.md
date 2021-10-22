@@ -31,7 +31,7 @@ H = Hold, usually pending resolution of a separate or grouped issue
 - I think this is coming from one of two places:
   - within AddRandItem
     - Attempted
-  - Before AddRandItem, not properly checking for a null
+  - Before AddRandItem, not properly checking for a null 
 ###		T	HasTraitFromLlist
 - This method was modified, see if the bug is resolved
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
@@ -83,6 +83,18 @@ Complete
 ###		C	Access from Chunk/Campaign Editor selector dropdown
 
 #	CT	Chunk Editor
+##		C	Additional Agent Behaviors
+###			C	Die
+New
+###			C	Die + Burn
+New
+###			C	Explode
+New
+###			C	Sleep
+New
+Already exists?
+###			C	Wander between Agents in Chunk
+New
 ##		CT	District Object De-Limitation
 ###		C	BasicFloor
 .Spawn (Fire Grate)
@@ -511,8 +523,9 @@ Objects to Analyze/track:
 		target.targetType
 
 In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-###			C	Set Remote Bomb
-New
+###			C	Set Explosive
+On door or Safe: Plants door detonator
+Elsewhere: Remote bomb
 Gives you detonator when planted
 ###			C	Tamper
 New 
@@ -567,6 +580,9 @@ New
 New
 ###			C	Sell Slaves
 New
+###			C	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
 ###			C	Use Bloodbag
 New
 ###			C	Vendor Buyer
@@ -625,12 +641,6 @@ New
 ###			C	Slum NPCs
 New
 ##		C	Passive
-###			C	Dead
-New
-###			C	Dead - Burned
-New
-###			C	Dead - Gibbed
-New
 ###			C	Explode On Death
 - requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
 ###			√	Guilty
