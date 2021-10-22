@@ -124,10 +124,10 @@ namespace CCU.Traits
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
-			typeof(TraitTrigger_Extortable),
-			typeof(Buyer_All),
-			typeof(TraitTrigger_Moochable),
-			typeof(Interaction_VendorBuyer), // TODO: Review this, may have special usage as it's not in Vendor list
+			typeof(Interaction_Extortable),
+			typeof(Interaction_BuyerAll),
+			typeof(Interaction_Moochable),
+			typeof(Interaction_BuyerVendor), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()
 		{

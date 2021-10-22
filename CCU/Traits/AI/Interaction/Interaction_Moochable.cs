@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.AI.Interaction
 {
-    public class Interaction_VendorBuyer : CustomTrait
+    public class Interaction_Moochable : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_VendorBuyer>()
+            RogueLibs.CreateCustomTrait<Interaction_Moochable>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires:</color> Any Vendor trait"),
+                    [LanguageCode.English] = String.Format("This character can lend money, if the player has the Moocher trait."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_BuyerVendor,
+                    [LanguageCode.English] = CTrait.TraitTrigger_Moochable,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

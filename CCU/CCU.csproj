@@ -141,8 +141,8 @@
     <Compile Include="Traits\AI\Hire\Hire_Hack.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Safecrack.cs" />
     <Compile Include="Traits\AI\Hire\Hire_Tamper.cs" />
-    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Extortable.cs" />
-    <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Moochable.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_Extortable.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_Moochable.cs" />
     <Compile Include="Traits\AI\Relationships\AnnoyedAtSuspicious.cs" />
     <Compile Include="Traits\AI\Relationships\HostileToCannibals.cs" />
     <Compile Include="Traits\AI\Relationships\HostileToSoldiers.cs" />
@@ -160,7 +160,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_BartenderDive.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_BartenderFancy.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Blacksmith.cs" />
-    <Compile Include="Traits\AI\Interaction\Interaction_VendorBuyer.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_BuyerVendor.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Cannibal.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConsumerElectronics.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_ConvenienceStore.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="Traits\AI\Vendor\Vendor_Demolitionist.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_DrugDealer.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Banana.cs" />
-    <Compile Include="Traits\AI\Interaction\Buyer_All.cs" />
+    <Compile Include="Traits\AI\Interaction\Interaction_BuyerAll.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Firefighter.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_FireSale.cs" />
     <Compile Include="Traits\AI\Vendor\Vendor_Gunsmith.cs" />
