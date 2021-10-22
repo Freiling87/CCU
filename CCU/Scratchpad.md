@@ -504,6 +504,9 @@ Objects to Analyze/track:
 		target.targetType
 
 In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
+###			C	Set Remote Bomb
+New
+Gives you detonator when planted
 ###			C	Tamper
 New 
 ##		C	Interaction
