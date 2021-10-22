@@ -11,27 +11,46 @@ H = Hold, usually pending resolution of a separate or grouped issue
 ---
 
 #	C	00 Top-Priority Bugs
-###		T	Vendor error
-- Here:
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Debug  :CCU_TraitManager]      null return
-	[Debug  :CCU_P_Agent] Vendor found:
-	[Info   : Unity Log] RANDOM NUMBER 7: 824
-	[Info   : Unity Log] 50% - RANDOM NUMBER 8: 285
+###		T	New error
+- On Chunk editor load:
+	[Info   :  CCU_Core] RollFacialHair: Method Call
+	[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.AI.Vendor.Vendor_Thief
+	[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.AI.Vendor.Vendor_JunkDealer
+	[Info   : Unity Log] RANDOM NUMBER 7: 952
+	[Info   : Unity Log] 50% - RANDOM NUMBER 8: 628
 	[Info   : Unity Log] Hang Test 1 - True
 	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Debug  :CCU_TraitManager]      null return
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	[Debug  :CCU_P_InvDatabase]     rName: Vendor_JunkDealer
+	[Debug  :CCU_P_InvDatabase]     Catch
+	[Debug  :CCU_P_InvDatabase]     Text: Empty
+	- I think this means you're detecting traits across agents instead of within them.
+###		C	LoadLevel error
+- On Chunk play:
+	[Info   : Unity Log] 87% - SETUPMORE3_2
+	[Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
 	Stack trace:
-	CCU.Patches.Inventory.P_InvDatabase.AddRandItem_Prefix (System.String itemNum, InvDatabase __instance, InvItem& __result) (at <927250a200ec4d9f8efc8135c58ffa18>:0)
-	InvDatabase.AddRandItem (System.String itemNum) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InvDatabase.FillSpecialInv () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InvDatabase.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-- I think this is coming from one of two places:
-  - within AddRandItem
-    - Attempted
-  - Before AddRandItem, not properly checking for a null 
+	System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	CCU.Patches.Spawn.P_LoadLevel.SetupMore3_3_Postfix (LoadLevel __instance) (at <8063ea5eb5fd4bb0bfbed2e311e66363>:0)
+	LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+
+###		T	Vendor error
+- Here:
+	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
+	[Debug  :CCU_P_InvDatabase]     rName: Vendor_JunkDealer
+	[Debug  :CCU_P_InvDatabase]     Catch
+	[Debug  :CCU_P_InvDatabase]     Text: Empty
+	[Debug  :CCU_P_InvDatabase]     Catch
+	[Debug  :CCU_P_InvDatabase]     Text: Empty
+	[Debug  :CCU_P_InvDatabase]     Catch
+	[Debug  :CCU_P_InvDatabase]     Text: Empty
+	- It looks like that's not the right rName. When I logged existing rNames they were the const string values prefixed by [CCU]. 
+      - string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
+        - is accessing the wrong type of Name.
 ###		T	HasTraitFromLlist
 - This method was modified, see if the bug is resolved
 	[Info   :  CCU_Core] HasTraitFromList: Method Call

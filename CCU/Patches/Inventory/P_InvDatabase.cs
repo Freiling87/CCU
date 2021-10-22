@@ -32,7 +32,8 @@ namespace CCU.Patches.Inventory
 
 			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypeTraits))
 			{
-				string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
+				TraitInfo vendorTrait = TraitInfo.Get(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits));
+				string rName = vendorTrait.Name;
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{

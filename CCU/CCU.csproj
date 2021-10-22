@@ -143,9 +143,6 @@
     <Compile Include="Traits\AI\Hire\Hire_Tamper.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Extortable.cs" />
     <Compile Include="Traits\AI\TraitTrigger\TraitTrigger_Moochable.cs" />
-    <Compile Include="Traits\AI\Passive\Passive_Dead_Burned.cs" />
-    <Compile Include="Traits\AI\Passive\Passive_Dead_Gibbed.cs" />
-    <Compile Include="Traits\AI\Passive\Passive_Dead.cs" />
     <Compile Include="Traits\AI\Relationships\AnnoyedAtSuspicious.cs" />
     <Compile Include="Traits\AI\Relationships\HostileToCannibals.cs" />
     <Compile Include="Traits\AI\Relationships\HostileToSoldiers.cs" />

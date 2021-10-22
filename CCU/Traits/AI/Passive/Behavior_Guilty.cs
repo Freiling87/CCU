@@ -1,7 +1,7 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.AI.Behavior
+namespace CCU.Traits.AI.Passive
 {
     public class Behavior_Guilty : CustomTrait
     {

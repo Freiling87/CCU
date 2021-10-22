@@ -12,7 +12,6 @@ using CCU.Traits.AI.Hire;
 using CCU.Traits.AI.Vendor;
 using CCU.Traits.AI.TraitTrigger;
 using Google2u;
-using CCU.Traits.AI.TraitTrigger;
 using System.Collections;
 
 namespace CCU.Patches.Objects

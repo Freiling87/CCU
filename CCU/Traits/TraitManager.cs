@@ -10,14 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.FacialHair;
 using CCU.Traits.Relationships;
 using CCU.Traits.MapMarker;
 using CCU.Traits.Spawn;
-using CCU.Traits.AI.Behavior;
 using System.IO;
 using CCU.Traits.AI.Passive;
+using CCU.Traits.AI.Interaction;
 
 namespace CCU.Traits
 {
@@ -90,9 +89,6 @@ namespace CCU.Traits
 		};
 		public static List<Type> PassiveTraits = new List<Type>()
 		{
-			typeof(Passive_Dead),
-			typeof(Passive_Dead_Burned),
-			typeof(Passive_Dead_Gibbed),
 			typeof(Behavior_ExplodeOnDeath),
 			typeof(Behavior_Guilty),
 		};
