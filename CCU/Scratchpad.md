@@ -1,4 +1,14 @@
-﻿#		Header Symbol Notes
+﻿Behaviors
+	Active
+	Combat
+	Passive
+Interactions
+	Hire
+	Vendor
+Relationships
+	Faction
+
+#		Header Symbol Notes
 
 Listed in order of Parent tier summary symbol priority
 
@@ -356,6 +366,23 @@ New
 ##		T	Level 3 - Smart Smamuel's level
 - 
 
+#		T	Promo Campaign - Shadowrun
+##			T	Home base 
+In between each mission, a small hive city neighborhood with all the things a mercenary would need.
+###				T	The Bar
+Where the mercenaries hang out. All Talk interactions should tell you a bit about them.
+Ensure that Buying a Round will affect all hires.
+Feel free to use multiple copies of the same merc, since their appearances will vary! B)
+Give them a "Permanent hire" trait
+####				T	The Fence
+He'll buy your shit from you. This should be a *rare* opportunity to sell stuff.
+####				T	The Bartender
+Maybe something clever to say. Maybe not.
+####				√	The Mercs
+###				T	Doc's
+##			T	Mission Format
+
+
 #	CT	Traits
 ##		H	Agent Group
 ###		H	Slum NPCs (Pilot)
@@ -554,6 +581,12 @@ Gives you detonator when planted
 ###			C	Tamper
 New 
 ##		C	Interaction
+###			C	Rename
+Interaction is a group of traits, encompassing:
+- Hire
+- Vendor
+- These
+  - Currently under the Interaction group. Call them Requests or something?
 ###			C	Accept Bribe (Banana)
 New
 ###			C	Accept Bribe (Beer/Whiskey)

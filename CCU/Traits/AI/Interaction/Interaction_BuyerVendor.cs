@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.AI.TraitTrigger
+namespace CCU.Traits.AI.Interaction
 {
-    public class TraitTrigger_Extortable : CustomTrait
+    public class Interaction_BuyerVendor : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_Extortable>()
+            RogueLibs.CreateCustomTrait<Interaction_BuyerVendor>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires:</color> Any Vendor trait"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitTrigger_Extortable,
+                    [LanguageCode.English] = CTrait.Interaction_BuyerVendor,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

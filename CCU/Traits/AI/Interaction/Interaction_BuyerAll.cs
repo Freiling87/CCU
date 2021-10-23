@@ -3,12 +3,12 @@ using System;
 
 namespace CCU.Traits.AI.Interaction
 {
-    public class Buyer_All : CustomTrait
+    public class Interaction_BuyerAll : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buyer_All>()
+            RogueLibs.CreateCustomTrait<Interaction_BuyerAll>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will buy items of any kind from the player, for a bad price."),

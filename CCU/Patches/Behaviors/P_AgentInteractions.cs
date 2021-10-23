@@ -12,6 +12,7 @@ using CCU.Traits.AI.Hire;
 using CCU.Traits.AI.Vendor;
 using CCU.Traits.AI.TraitTrigger;
 using Google2u;
+using CCU.Traits.AI.Interaction;
 
 namespace CCU.Patches.Behaviors
 {
@@ -1810,46 +1811,51 @@ namespace CCU.Patches.Behaviors
 							
 							goto IL_48BF;
 						}
-						else // put "Custom" or whatever in here when you know what it is
+						else // put agentName == "Custom" or whatever in here when you know what it is
 						{
-							// WARNING - I just pasted the old prefix here. It should pretty much work but I didn't pay major attention so if there's a culprit later it might be here.
-
 							logger.LogDebug("=" + agentName + "=");
 
-							if (agent != GC.playerAgent && (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraitsGroup)))
+							if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraitsGroup))
 							{
-								___buttons = buttons1;
-								___buttonsExtra = buttonsExtra1;
-								___buttonPrices = buttonPrices1;
-								___mostRecentAgent = agent;
-								___mostRecentInteractingAgent = interactingAgent;
-								GC.audioHandler.Play(agent, "AgentTalk");
-
 								// Interaction 
 								if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
 								{
 									Core.LogCheckpoint("Interaction");
 
-									if (agent.HasTrait<TraitTrigger_Moochable>() && interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher))
+									if (agent.HasTrait<Interaction_BuyerAll>())
+										__instance.AddButton("SellAny"); // TODO
+
+									if (agent.HasTrait<Interaction_Extortable>() && agent.CanShakeDown())
+									{
+										int threat = agent.relationships.FindThreat(interactingAgent, false);
+
+										if ((agent.health <= agent.healthMax * 0.4f) ||
+											(agent.relationships.GetRel(interactingAgent) == "Aligned") ||
+											(agent.slaveOwners.Contains(interactingAgent)))
+											threat = 100;
+										
+										__instance.AddButton("Shakedown", " (" + threat + "%)");
+									}
+
+									if (agent.HasTrait<Interaction_Moochable>() && interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher))
 										__instance.AddButton("BorrowMoney");
 								}
 
 								// Vendor 
-								Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypeTraits);
+
 								logger.LogDebug("hasSpecialInvDatabase: " + agent.hasSpecialInvDatabase);
-								if (!(vendorTrait is null) && agent.hasSpecialInvDatabase) // All Vendor Traits
+
+								if (TraitManager.HasTraitFromList(agent, TraitManager.VendorTypeTraits) && agent.hasSpecialInvDatabase)
 								{
 									Core.LogCheckpoint("Vendor");
-									logger.LogDebug(agent.specialInvDatabase.InvItemList.Count);
 
-									bool canBuy = true;
+									Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypeTraits);
+									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
 
-									if (agent.HasTrait<TraitTrigger_CopAccess>())
-										canBuy = interactingAgent.HasTrait("TheLaw");
-									if (agent.HasTrait<TraitTrigger_HonorableThief>())
-										canBuy = interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2");
-									if (agent.HasTrait<TraitTrigger_CoolCannibal>())
-										canBuy = interactingAgent.statusEffects.hasTrait("CannibalsNeutral");
+									bool canBuy =
+										!(agent.HasTrait<TraitTrigger_CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral")) &&
+										!(agent.HasTrait<TraitTrigger_CopAccess>() && !interactingAgent.HasTrait("TheLaw")) &&
+										!(agent.HasTrait<TraitTrigger_HonorableThief>() && !(interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")));
 
 									if (canBuy)
 									{
@@ -2054,11 +2060,7 @@ namespace CCU.Patches.Behaviors
 
 				if (GC.streamingWorld)
 					__instance.AddButton("CreateQuestStreaming");
-				
-				return false;
 			}
-
-			////////////////////////////////////////////
 
 			return false;
 		}
