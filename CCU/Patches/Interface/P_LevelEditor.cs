@@ -50,6 +50,8 @@ namespace CCU.Patches.Interface
 					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
 						LevelEditorUtilities.IncrementPatrolPoint(__instance, KeyCode.E);
 				}
+				if (Input.GetKeyDown(KeyCode.N))
+					__instance.PressedNewButton();
 				if (Input.GetKeyDown(KeyCode.O))
 					__instance.PressedLoad();
 				if (Input.GetKeyDown(KeyCode.Q))
@@ -190,6 +192,11 @@ namespace CCU.Patches.Interface
 					__instance.PressedSave();
 					__instance.PressedYesButton();
 				}
+			}
+			if (Input.GetKeyDown(KeyCode.F2))
+			{
+				__instance.PressedNewButton();
+				__instance.PressedYesButton();
 			}
 			if (Input.GetKeyDown(KeyCode.F9))
 			{

@@ -190,6 +190,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Key 1				|Key 2				|Layer				|Mode (Draw/Select)	|Function												|
 |:------------------|:------------------|:------------------|:-----------------:|:------------------------------------------------------|
 |Arrow Keys			|					|Object<br>NPC		|D / S				|Set direction<br><br>Match current direction to set to None
+|F2					|					|Any				|D / S				|New file
 |F5	*				|					|					|D / S				|Quicksave current file (skip confirmation)
 |F9					|					|					|D / S				|Quickload file with matching Filename<br>Defaults to current chunk<br>If new name, opens a blank chunk
 |F12				|					|					|D / S				|Run chunk<br>Exit Run Mode *
@@ -207,6 +208,7 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |E, Q				|					|Any				|D / S				|Zoom In/Out
 |E, Q				|Ctrl				|Object<br>NPC		|D / S				|Rotate direction
 |E, Q				|					|Patrol				|D / S				|Increase/Decrease Patrol Point ID
+|N					|Ctrl				|Any				|D / S				|New file
 |O					|Ctrl				|					|D / S				|Open file
 |S 					|Ctrl				|					|D / S				|Save current file						
 |V *				|Ctrl				|Any				|D / S				|Paste all layers on clipboard

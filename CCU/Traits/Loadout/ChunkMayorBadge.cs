@@ -20,7 +20,7 @@ namespace CCU.Traits.Loadout
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Loadout_ChunkKey,
+					[LanguageCode.English] = CTrait.Loadout_ChunkMayorBadge,
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock

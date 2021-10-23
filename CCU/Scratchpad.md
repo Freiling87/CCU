@@ -12,32 +12,29 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 #	C	00 Top-Priority Bugs
 ###		T	New error
-- On Chunk editor load:
-	[Info   :  CCU_Core] RollFacialHair: Method Call
-	[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.AI.Vendor.Vendor_Thief
-	[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.AI.Vendor.Vendor_JunkDealer
-	[Info   : Unity Log] RANDOM NUMBER 7: 952
-	[Info   : Unity Log] 50% - RANDOM NUMBER 8: 628
-	[Info   : Unity Log] Hang Test 1 - True
-	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
-	[Debug  :CCU_P_InvDatabase]     rName: Vendor_JunkDealer
-	[Debug  :CCU_P_InvDatabase]     Catch
-	[Debug  :CCU_P_InvDatabase]     Text: Empty
-	- I think this means you're detecting traits across agents instead of within them.
-###		C	LoadLevel error
-- On Chunk play:
-	[Info   : Unity Log] 87% - SETUPMORE3_2
-	[Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
+On Interact with Orc Street Samurai:
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+	[Debug  :CCU_TraitManager] TRAIT LIST: Custom
+	[Debug  :CCU_TraitManager]      CantUseGuns
+	[Debug  :CCU_TraitManager]      Loud
+	[Debug  :CCU_TraitManager]      NoTechSkill
+	[Debug  :CCU_TraitManager]      IncreasedCritChance
+	[Debug  :CCU_TraitManager]      Combat_Fearless
+	[Debug  :CCU_TraitManager]      Combat_UseDrugs
+	[Debug  :CCU_TraitManager]      Hire_Bodyguard
+	[Debug  :CCU_TraitManager]      Behavior_Guilty
+	[Debug  :CCU_P_AgentInteractions] =Custom=
+	[Error  : Unity Log] InvalidDataException: Agent Custom (1132) was expected to have one trait from list, but has none.
 	Stack trace:
-	System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.Patches.Spawn.P_LoadLevel.SetupMore3_3_Postfix (LoadLevel __instance) (at <8063ea5eb5fd4bb0bfbed2e311e66363>:0)
-	LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-
+	CCU.Traits.TraitManager.GetOnlyTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <564910051a164833af95d20b2481ae64>:0)
+	CCU.Patches.Behaviors.P_AgentInteractions.DetermineButtons_Prefix (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1, AgentInteractions __instance, System.Collections.Generic.List`1[System.String]& ___buttons, System.Collections.Generic.List`1[System.String]& ___buttonsExtra, System.Collections.Generic.List`1[System.Int32]& ___buttonPrices, Agent& ___mostRecentAgent, Agent& ___mostRecentInteractingAgent) (at <564910051a164833af95d20b2481ae64>:0)
+	AgentInteractions.DetermineButtons (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Agent.DetermineButtons () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	PlayfieldObject.Interact (Agent agent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Agent.Interact (Agent otherAgent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InteractionHelper.UpdateInteractionHelper () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Updater.UpdateInterface () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Updater.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ###		T	Vendor error
 - Here:
 	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
@@ -142,6 +139,8 @@ If it's not already a thing
 ##		CT	Hotkeys
 ###			C	00 Use Traverse to access subfields of private
 Might not be needed, if current attempt is working fine
+###			C	Deactivate hotkeys if typing into inputfield
+New
 ###			C	Arrow Keys - Orient (Draw)
 - Draw mode ends up with blank for NewDir
 	[Info   :  CCU_Core] OrientObject: Method Call
@@ -171,6 +170,8 @@ Might not be needed, if current attempt is working fine
 	[Debug  :CCU_LevelEditorUtilities]              Index 1: Test Dummy C
 	[Debug  :CCU_LevelEditorUtilities]              Index 2: Test Dummy D
 	[Debug  :CCU_LevelEditorUtilities]              Index 3: Test Dummy A
+###			T	F2 - QuickNew
+Attempted
 ###			C	F9 - Quickload
 - Works perfectly for a while, but then... it doesn't. 
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
@@ -194,6 +195,8 @@ This one is likely beyond my ability right now since we'd need to underline text
 Hold
 ###			H	Ctrl + Shift + C - Copy, One Layer
 Hold
+###			√	Ctrl + N - New
+Complete
 ###			H	Ctrl + V - Paste All Layers
 - Pending completion of Copy
 ###			H	Ctrl + Shift + V - Paste One Layer
@@ -576,6 +579,11 @@ New
 NOT a Vendor trait
 ###			C	Heal
 New
+###			C	Hire for Level
+New
+###			C	Hire Permanently
+- Multiple skill useTHE 
+- Stay until death
 ###			C	Hotel Clerk
 New
 ###			C	Identify
@@ -588,9 +596,6 @@ New
 No effect
 ###			C	Offer Motivation
 New
-###			C	Permanent Hire
-- Multiple skill use
-- Stay until death
 ###			C	Quest Giver
 New
 ###			C	Refill Guns
@@ -670,6 +675,8 @@ Complete
 New
 ###			C	Hackable - Go Haywire
 New
+###			C	Invincible
+News
 ###			C	Vision Beams (Cop Bot)
 New
 ##		C	Relationships
@@ -690,6 +697,8 @@ Attempted
 ###			T	Hostile to Werewolves
 Attempted
 ###			C	Musician Trait for Random Stans
+New
+###			C	Never Hostile
 New
 ###			C	Secretly Hostile
 A la Bounty disaster
