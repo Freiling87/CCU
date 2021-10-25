@@ -36,8 +36,7 @@ namespace CCU.Patches.Objects
 			else
 				_ = __instance.wasSwitch; // Who fuckin' knows? But it ain't broke.
 
-			MethodInfo waitToStart = AccessTools.DeclaredMethod(typeof(SlimeBarrel), "WaitToStart");
-			__instance.StartCoroutine(waitToStart.GetMethodWithoutOverrides<Func<IEnumerator>>(__instance).Invoke());
+			__instance.StartCoroutine("WaitToStart");
 
 			return false;
 		}

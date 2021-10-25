@@ -28,11 +28,13 @@ namespace CCU.Patches.Interface
 			List<string> list2 = new List<string>();
 			list.Add("None");
 			//list2.Add("Arrested");
+			//list2.Add("CommitArson");
 			//list2.Add("Dead");
 			//list2.Add("DeadBurned");
 			//list2.Add("Explode");
 			//list2.Add("KnockedOut");
 			//list2.Add("Panic"); 
+			//list2.Add("RobotClean"); // In Vanilla
 			//list2.Add("WanderAgents");
 			//list2.Add("WanderAgentsAligned");
 			//list2.Add("WanderAgentsUnaligned");

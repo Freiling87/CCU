@@ -115,6 +115,9 @@ New
 ###			C	Berserk
 New
 Just saves having to do Floor tricks
+###			C	Commit Arson
+New
+In Vanilla
 ###			C	Die
 New
 ###			C	Die + Burn
@@ -132,12 +135,21 @@ Save that Agent ID and return them to them rather than following a new one
 New
 ###			c	Panic
 New
+###			C	Robot Clean
+New
+In vanilla
+###			C	Robot Follow
+New
+Killer Robot behavior in vanilla
 ###			C	Wander between Agents
 New
 ###			C	Wander between Agents (Aligned)
 New
 ###			C	Wander between Agents (Unaligned)
 New
+###			C	Yell
+New
+Will yell their Talk text? Unless you can get a second text box in there somewhere
 ##		CT	District Object De-Limitation
 ###		C	BasicFloor
 .Spawn (Fire Grate)
@@ -151,7 +163,7 @@ New
 .Start
 ###		C	SawBlade
 .Start
-###		C	SlimeBarrel
+###		T	SlimeBarrel
 - Haven't really tested yet but: 
 	System.DefaultBinder.BindToMethod (System.Reflection.BindingFlags bindingAttr, System.Reflection.MethodBase[] match, System.Object[]& args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo cultureInfo, System.String[] names, System.Object& state) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
 	System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
@@ -166,6 +178,7 @@ New
 	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
 	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	- Attempted calling private a different way
 ###		C	SwitchFloor
 Not sure about this one, may be too deeply hardcoded
 ###		C	Tube
