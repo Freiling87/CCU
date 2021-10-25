@@ -155,6 +155,21 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.MolotovCocktail, 4);
 			sel.CreateRandomElement(rList, vItem.OilContainer, 2);
 
+			rList = sel.CreateRandomList(CTrait.Vendor_GunDealer, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.AmmoProcessor, 2);
+			sel.CreateRandomElement(rList, vItem.KillAmmunizer, 1);
+			sel.CreateRandomElement(rList, vItem.MachineGun, 2);
+			sel.CreateRandomElement(rList, vItem.Pistol, 3);
+			sel.CreateRandomElement(rList, vItem.Revolver, 3);
+			sel.CreateRandomElement(rList, vItem.Shotgun, 3);
+
+			rList = sel.CreateRandomList(CTrait.Vendor_GunDealerHeavy, "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.Flamethrower, 2);
+			sel.CreateRandomElement(rList, vItem.Grenade, 4);
+			sel.CreateRandomElement(rList, vItem.KillAmmunizer, 1);
+			sel.CreateRandomElement(rList, vItem.MachineGun, 4);
+			sel.CreateRandomElement(rList, vItem.RocketLauncher, 2);
+
 			rList = sel.CreateRandomList(CTrait.Vendor_Gunsmith, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.AmmoProcessor, 2);
 			sel.CreateRandomElement(rList, vItem.AmmoStealer, 1);

@@ -175,6 +175,7 @@ namespace CCU.Traits
 			typeof(Vendor_Cannibal),
 			typeof(Vendor_ConsumerElectronics),
 			typeof(Vendor_Contraband),
+			typeof(Vendor_ConvenienceStore),
 			typeof(Vendor_CopStandard),
 			typeof(Vendor_CopSWAT),
 			typeof(Vendor_Demolitionist),

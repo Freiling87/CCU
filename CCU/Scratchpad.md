@@ -21,6 +21,40 @@ H = Hold, usually pending resolution of a separate or grouped issue
 ---
 
 #	C	00 Top-Priority Bugs
+###		C	Vendor
+- Goblin Pyro:
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
+	[Debug  :CCU_TraitManager] TRAIT LIST: Custom
+	[Debug  :CCU_TraitManager]      Combat_UseDrugs
+	[Debug  :CCU_TraitManager]      Behavior_GrabDrugs
+	[Debug  :CCU_TraitManager]      Hire_CauseRuckus
+	[Debug  :CCU_TraitManager]      Hire_DisarmTrap
+	[Debug  :CCU_TraitManager]      Behavior_ExplodeOnDeath
+	[Debug  :CCU_TraitManager]      Vendor_Demolitionist
+	[Debug  :CCU_TraitManager]      Addict
+	[Debug  :CCU_TraitManager]      Beard
+	[Debug  :CCU_TraitManager]      Mustache
+	[Debug  :CCU_TraitManager]      MustcheCircus
+	[Debug  :CCU_TraitManager]      MustacheRedneck
+	[Debug  :CCU_TraitManager]      NoFacialHair
+	[Debug  :CCU_TraitManager]      ExplosionsDontDamageCauser
+	[Debug  :CCU_TraitManager]      ExplosionsBreakEverything
+	[Debug  :CCU_TraitManager]      HardToSeeFromDistance
+	[Debug  :CCU_TraitManager]      FireproofSkin
+	[Debug  :CCU_TraitManager]      FastWhenHealthLow
+	[Debug  :CCU_TraitManager]      DestructionXP
+	[Debug  :CCU_TraitManager]      RegenerateHealthWhenLow
+	[Debug  :CCU_TraitManager]      HardToShoot
+	[Debug  :CCU_TraitManager]      TechExpert
+	[Debug  :CCU_TraitManager]      Diminutive
+	[Debug  :CCU_P_AgentInteractions] =Custom=
+	[Debug  :CCU_P_AgentInteractions] hasSpecialInvDatabase: True
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
+*	[Debug  :CCU_P_AgentInteractions]       Count: 5
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+    - The Starred list is the number of items in their specialinvdatabase. So it is loading correctly, it's just not put in the shop correctly.
+
 ###		T	New error
 On Interact with Orc Street Samurai:
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
@@ -98,15 +132,19 @@ On Interact with Orc Street Samurai:
 #	√	Campaign Editor
 No features planned yet
 
-#	T	Character Editor
-##		T	UI - Trait Hiding
+#	CT	Character Editor
+###		C	Access from Chunk/Campaign Editor selector dropdown
+New
+##		T	CCU Trait Hiding
 ###			T	Character Creation, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
 ###			√	Character Select (CharacterSelect)
 Complete
 ###			√	Character Sheet (CharacterSheet)
 Complete
-###		C	Access from Chunk/Campaign Editor selector dropdown
+##		C	Trait Alphabetization
+Sort them right after the save command is issued rather than after load, so preview works correctly.
+OR, have a "trait" button that automatically un-selects itself when clicked but sorts trait list.
 
 #	CT	Chunk Editor
 ##		C	Additional Agent Goals
@@ -136,8 +174,21 @@ New
 .Start
 ###		C	SawBlade
 .Start
-###		T	SlimeBarrel
-Attempted
+###		C	SlimeBarrel
+- Haven't really tested yet but: 
+	System.DefaultBinder.BindToMethod (System.Reflection.BindingFlags bindingAttr, System.Reflection.MethodBase[] match, System.Object[]& args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo cultureInfo, System.String[] names, System.Object& state) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
+	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
+	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
+	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
+	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
+	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ###		C	SwitchFloor
 Not sure about this one, may be too deeply hardcoded
 ###		C	Tube
@@ -702,6 +753,7 @@ New
 ##		C	Passive
 ###			C	Explode On Death
 - requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
+- There's an Exploding Bodies mutator, doofus! Copy that.
 ###			√	Guilty
 Complete
 ###			C	Hackable - Tamper With Aim

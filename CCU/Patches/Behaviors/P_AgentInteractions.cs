@@ -1913,8 +1913,6 @@ namespace CCU.Patches.Behaviors
 											__instance.AddButton(CJob.TamperSomething);
 									}
 								}
-
-								logger.LogDebug("Count: " + ___buttons.Count);
 							}
 						}
 

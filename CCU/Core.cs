@@ -330,7 +330,8 @@ namespace CCU
 			TraitTrigger_Scumbag =				"[CCU] Trait Trigger - Scumbag",
 		#endregion
 		#region Vendor
-		Vendor_Armorer =					"[CCU] Vendor - Armorer",
+			Vendor_Anthropophagie =				"[CCU] Vendor - Anthropophagie",
+			Vendor_Armorer =					"[CCU] Vendor - Armorer",
 			Vendor_Assassin =					"[CCU] Vendor - Assassin",
 			Vendor_BananaBoutique =				"[CCU] Vendor - Banana",
 			Vendor_BarbarianMerchant =			"[CCU] Vendor - Barbarian",
@@ -338,7 +339,6 @@ namespace CCU
 			Vendor_BartenderDive =				"[CCU] Vendor - Bartender (Dive)",
 			Vendor_BartenderFancy =				"[CCU] Vendor - Bartender (Fancy)",
 			Vendor_Blacksmith =					"[CCU] Vendor - Blacksmith",
-			Vendor_Anthropophagie =				"[CCU] Vendor - Cannibal",
 			Vendor_ConsumerElectronics =		"[CCU] Vendor - Consumer Electronics",
 			Vendor_ConvenienceStore =			"[CCU] Vendor - Convenience Store",
 			Vendor_Contraband =					"[CCU] Vendor - Cop Confiscated Goods",
@@ -348,6 +348,8 @@ namespace CCU
 			Vendor_DrugDealer =					"[CCU] Vendor - Drug Dealer",
 			Vendor_FirefighterFiveAndDime =		"[CCU] Vendor - Firefighter",
 			Vendor_FireSale =					"[CCU] Vendor - Fire Sale",
+			Vendor_GunDealer =					"[CCU] Vendor - Gun Dealer",
+			Vendor_GunDealerHeavy =				"[CCU] Vendor - Gun Dealer (Heavy)",
 			Vendor_Gunsmith =					"[CCU] Vendor - Gunsmith",
 			Vendor_HardwareStore =				"[CCU] Vendor - Tool Shop",
 			Vendor_HighTech =					"[CCU] Vendor - HighTech",

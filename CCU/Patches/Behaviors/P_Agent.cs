@@ -12,6 +12,7 @@ using CCU.Traits.AI.Active;
 using CCU.Traits.AI.TraitTrigger;
 using CCU.Traits.AI.Combat;
 using CCU.Traits.AI.Passive;
+using CCU.Traits.AI.Interaction;
 
 namespace CCU.Patches.Behaviors
 {

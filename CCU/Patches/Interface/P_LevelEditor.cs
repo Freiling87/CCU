@@ -33,7 +33,6 @@ namespace CCU.Patches.Interface
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
-			#region (Ctrl + Shift + ) Letters - Various
 			if (ctrl && shift)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
@@ -93,93 +92,94 @@ namespace CCU.Patches.Interface
 					__instance.ScrollS();
 				if (Input.GetKey(KeyCode.W))
 					__instance.ScrollN();
-			}
-			#endregion
-			#region (Ctrl + ) Number keys - Set Layer (& Open Selector)
-			if (Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				__instance.PressedWallsButton();
 
-				if (ctrl)
+				if (__instance.currentInterface != "Level")
 				{
-					__instance.PressedLoadWalls();
-					__instance.EnterDrawMode();
+					if (Input.GetKeyDown(KeyCode.Alpha1))
+					{
+						__instance.PressedWallsButton();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadWalls();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha2))
+					{
+						__instance.PressedFloorsButton();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadFloors();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha3))
+					{
+						__instance.PressedFloors2Button();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadFloors();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha4))
+					{
+						__instance.PressedFloors3Button();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadFloors();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha5))
+					{
+						__instance.PressedObjectsButton();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadObjects();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha6))
+					{
+						__instance.PressedAgentsButton();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadAgents();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha7))
+					{
+						__instance.PressedItemsButton();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadItems();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha8))
+					{
+						__instance.PressedLightsButton();
+
+						if (ctrl)
+						{
+							__instance.PressedLoadLights();
+							__instance.EnterDrawMode();
+						}
+					}
+					if (Input.GetKeyDown(KeyCode.Alpha9))
+						__instance.PressedPatrolPointsButton();
 				}
 			}
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				__instance.PressedFloorsButton();
 
-				if (ctrl)
-				{
-					__instance.PressedLoadFloors();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				__instance.PressedFloors2Button();
-
-				if (ctrl)
-				{
-					__instance.PressedLoadFloors();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha4))
-			{
-				__instance.PressedFloors3Button();
-
-				if (ctrl)
-				{
-					__instance.PressedLoadFloors();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha5))
-			{
-				__instance.PressedObjectsButton();
-
-				if (ctrl)
-				{
-					__instance.PressedLoadObjects();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha6))
-			{
-				__instance.PressedAgentsButton();
-
-				if (ctrl)
-				{
-					__instance.PressedLoadAgents();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha7))
-			{
-				__instance.PressedItemsButton();
-
-				if (ctrl)
-				{
-					__instance.PressedLoadItems();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha8))
-			{ 
-				__instance.PressedLightsButton();
-
-				if (ctrl)
-				{
-					__instance.PressedLoadLights();
-					__instance.EnterDrawMode();
-				}
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha9))
-				__instance.PressedPatrolPointsButton();
-			#endregion
-			#region F1-F12, Tab
 			if (Input.GetKeyDown(KeyCode.F5))
 			{
 				if (__instance.ChunkNameUsed(__instance.chunkName))
@@ -193,12 +193,12 @@ namespace CCU.Patches.Interface
 					__instance.PressedYesButton();
 				}
 			}
-			if (Input.GetKeyDown(KeyCode.F2))
+			else if (Input.GetKeyDown(KeyCode.F2))
 			{
 				__instance.PressedNewButton();
 				__instance.PressedYesButton();
 			}
-			if (Input.GetKeyDown(KeyCode.F9))
+			else if (Input.GetKeyDown(KeyCode.F9))
 			{
 				logger.LogDebug(
 					"\tAttempting Quickload: \n" +
@@ -209,13 +209,9 @@ namespace CCU.Patches.Interface
 				//You need to set yesNoButtonHelper 
 				//It might be faster to simply manually call the menu up and issue commands to it.
 			}
-			if (Input.GetKeyDown(KeyCode.F12))
+			else if (Input.GetKeyDown(KeyCode.F11))
 				__instance.PressedPlayButton();
 
-			// On hold until I'm convinced this feature needs to exist
-			//if (Input.GetKeyDown(KeyCode.Tab))
-			//	LevelEditorUtilities.Tab(__instance, shift);
-			#endregion
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);
 			int num;
