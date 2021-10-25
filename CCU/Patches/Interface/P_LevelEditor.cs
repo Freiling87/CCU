@@ -244,6 +244,7 @@ namespace CCU.Patches.Interface
 					"\tAttempting Quickload: \n" +
 					"\t\tChunk Name: " + __instance.chunkName);
 
+				__instance.PressedLoadChunksFile();
 				__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
 				//This almost certainly wont work on its own
 				//You need to set yesNoButtonHelper 

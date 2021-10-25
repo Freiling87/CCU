@@ -219,7 +219,8 @@ Attempted
  	- Attempted redesigning this 
 ###			T	F2 - QuickNew
 Attempted
-###			C	F9 - Quickload
+###			T	F9 - Quickload
+- Attempt: Calling ClickedLoadChunkButton or whatever first
 - Works perfectly for a while, but then... it doesn't. 
 - Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
 - This is still occurring after unpredictable intervals:
@@ -557,6 +558,9 @@ New
 ~8x normal hire price
 ###			C	Pickpocket
 New
+###			C	Place Time Bomb
+New
+Based on and consumes Time Bombs in inventory. NPC starts with one.
 ###			C	Poison
 New
 ###			H	Safecrack
