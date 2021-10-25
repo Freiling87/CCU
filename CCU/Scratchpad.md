@@ -399,8 +399,9 @@ ExitPoint.EmployeesExit prefix
 #	T	Promo Campaign - Shadowrun-but-not-really
 ##		T	Player Character
 "The Fixer," an old man who's not quite as tough as he used to be. But he has a lot of connections in the criminal world and knows how to put together a team. So this will direct the player to use a hiring-based playstyle.
-##		T	Home base 
-In between each mission, a small hive city neighborhood with all the things you would need.
+Remove Low-Cost Jobs and add No In-Fighting
+##		T	Home base (Perennial)
+In between each mission, a slummy neighborhood that changes every time you see it
 ###			T	The Bar
 Where the mercenaries hang out. All Talk interactions should tell you a bit about them.
 Ensure that Buying a Round will affect all hires.
@@ -410,14 +411,120 @@ Give them a "Permanent hire" trait
 He'll buy your shit from you. This should be a *rare* opportunity to sell stuff.
 ####			T	The Bartender
 Maybe something clever to say. Maybe not.
-####			√	The Mercs
+####			T	The Mercs
+- AHS Corp. Medbot
+  - Pacifist, can be hired and sell healing
+###			T	Hospital
+- MedBots slowly replace the doctors
+- Mission: Rescue the spare MedBot - adds them to your Vehicle
+###			T	Fire Station
+Privatized, and no one can afford them here
+###			T	Hazardous Waste Handler's Union Local No. 606
+One mutated guy who brags about his dad being a lifelong member
+Rumors that they run a cannibal ring
 ###			T	Doc's
-##		T	Mission Format
-##		T	Apollo Tower
+Skeezy place out back
+###			T	Another Doc
+Has to charge more because he doesn't work for criminals, and doesn't use robots
+Sells his clinic to a medical corp, soon is replaced by MedBots
+###			T	Coffin Hotel
+Micro-apartments with an evil landlord
+###			T	The "Vehicle"
+Will start small, later evolve to carry an "away squad" that can serve as a mobile home base for healing, etc.
+1 - Just a Van thing for a robbery
+2 - Now has a Driver and 
+##		T	The Projects
+Reuse some Building Blocks chunks if you need
+###			T	Exterior
+Slums
+Try to do something cool that encourages player to use Factions to solve a problem
+###			T	Basement
+Filled with Ghouls & shit
+Someone is doing occult shit and summoning undead, a separate basement separated by a cave tunnel
+Once you deal with them there's an elevator in that basement that leads to Cult Outpost
+###			T	Cult Outpost
 
+###			T	
+##		T	Fud Factory
+Semi-rural area, backwoods depressed town environs
+###			T	Ground Floor
+- Some redneck cabins out in the woods
+  - Ensure there are a couple Barbecues here
+  - They gripe about the factory poisoning the water and laying everyone off to employ robots
+  - Sell Bombs & traps
+  - Hire for cheap, all heavily armed
+  - Red Hats & Camo 
+- Disable Security Control Unit 
+  - Destroy Alarm Buttons
+    - If this actually works, that's an interesting strategy tension
+- Shipping Dept.
+  - Not a mission, but there's a lot of Fud in here if you can find a way to steal it. Heavily Secure.
+- Overclocked Generators
+  - There are four in a cross pattern, right at the edge of where a time bomb should be placed in the middle to hit all four. This isn't used yet, but later will be.
+- Two routes to get into facility
+  - Creek, there's a gap in the fence where it gets heavily wooded that opens on a less-secure area
+  - Front entry, more security
+- Goal: Freight Elevator
+###			T	Production Basement level
+- Agents:
+  - Robot Workers
+  - Humanish Technicians
+  - Robot Managers
+- Destroy 3 Power Boxes
+- Cave tunnel to some weird kooky cave shit, entrance hidden by a shelf
+###			T	Secret Sub-Basement Slave Quarters
+- Facility breeds humans for slaughter because demand for Fud is so high
+- Hellish Aesthetic
+- Agents:
+  - Fud Cattle Human
+  - Fud Veal Flavor Baby Meat Baby
+- Mission: Free Low-Fat Fud captives
+  - Prison is a circular hallway with a conveyor belt pushing them in circles for exercise
+- Mission: Kill Slavemasters & Rudy McFudy
+  - Surrounded by Work Pits
+###			T	Ground Floor
+- Emerge on Freight Elevator with a bunch of freed slaves who now roam the level, getting picked off by the security team that arrives
+  - Security team set to "Killer Robot" behavior? pwz
+  - If they are some real killers, the challenge could be to just make it to the van with no hope of fighting them off
+  - Might also want an "Infinite Continues" mutator for long-ass campaigns
+##		T	Apollo Corp. Tower
+###			T	Brief
+Describe what quests represent beforehand in terms of plan
+###			T	Ground Floor
+- Initiate Facility Silent Lockdown (Press Button task)
+- Destroy Offsite Security Team silent alarm conduit (Destroy Generator in base of a separate Radio Tower that you can see as you ascend or descend)
+- Eliminate Onsite Security Team (Neutralize)
+- Get to Employee Only Elevator
+  - Interior route, through Atrium, security checkpoints etc. Brute force
+  - Exterior route, stealth & distraction option
+###			T	Dormitories
+- Time to just fucking rob people 
+- But you also need an Access code from the Chief Engineer, who you have to neutralize one way or another
+- Show off affluent but empty lifestyle
+- Get to Freight Elevator in Kitchen area to reach Infrastructure level
 ###			T	Infrastructure Sub-Basement
+- Some underclass residential areas
+  - The only place in Apollo where you see green skin
+Mess with power to disable security safeguards of IT department
+###			T	IT Department
+- Living Quarters are utilitarian and futuristic, but coffin-like
+- Lots of Gnomes & Dwarves
+- Enable elevator access to Executive Suites
+- Robots & Turrets & Shit
+- This might be a good Killer Robot level, make it sort of mazelike
 ###			T	Executive Suites
+- Almost all Human & Elf, zero Green up here
+- It's a fuckin' PARTY up here. Execs and the hoi-polloi are living it up. There's still a lot of security but you should be able to play this as a social level.
+- Wood floors w/ rugs, fireplaces, etc. whatever looks as fancy as possible
+- Get Airship Key Fob for escape from the VP of Sales (Retrieve)
+- Kill someone to settle a personal grudge? Maybe tie it into an earlier part of the plot (Eliminate)
+- 
+Pool/Jacuzzi
+Bar
+Offices
 ###			T	Rooftop Escape
+- Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
+- Disable Swat team ship control override (Destroy Computer)
 
 #	CT	Traits
 ##		H	Agent Group
@@ -481,6 +588,87 @@ Use this on leader w/ Wander Level
 Use "Follow" behavior on agents placed behind them
 No need for "Roaming Gang" Trait itself
 ###			C	Tattle (Upper Cruster)
+New
+##		C	Behavior Passive
+###			C	Accept Bribe (Banana)
+New
+###			C	Accept Bribe (Beer/Whiskey)
+New
+###			C	Accept Bribe (Money)
+New
+###			C	Administer Blood Bag
+New
+###			C	Arena Manager
+New
+###			C	Bank Teller
+New
+###			C	Blood Bank Clerk
+New
+###			C	Buy Round
+New
+###			C	Deportation Center Clerk
+New
+###			C	Extortable
+No effect
+###			C	Fence
+New
+NOT a Vendor trait
+###			C	Heal
+New
+###			C	Hire for Level
+New
+###			C	Hire Permanently
+- Multiple skill useTHE 
+- Stay until death
+###			C	Hotel Clerk
+New
+###			C	Identify
+New
+###			C	Influence Election
+New
+###			C	Mayor Clerk
+New
+###			C	Moochable
+No effect
+###			C	Offer Motivation
+New
+###			C	Quest Giver
+New
+###			C	Refill Guns
+New
+###			C	Repair Armor
+New
+###			C	Repair Weapons
+New
+###			C	Sell Faction Reputation 1-4
+New
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+###			C	Sell Slaves
+New
+###			C	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			C	Train Traits - Defense
+New
+###			C	Train Traits - Guns
+New
+###			C	Train Traits - Melee
+New
+###			C	Train Traits - Movement
+New
+###			C	Train Traits - Social
+New
+###			C	Train Traits - Stealth
+New
+###			C	Train Traits - Trade
+New
+###			C	Use Bloodbag
+New
+###			C	Vendor Buyer
+New
+###			C	Vendor Buyer Only
 New
 ##		C	Bodyguarded
 - LoadLevel.SetupMore3_3 where "Musician"
@@ -625,88 +813,6 @@ Elsewhere: Remote bomb
 Gives you detonator when planted
 ###			C	Tamper
 New 
-##		C	Interaction
-###			C	Rename
-Interaction is a group of traits, encompassing:
-- Hire
-- Vendor
-- These
-  - Currently under the Interaction group. Call them Requests or something?
-###			C	Accept Bribe (Banana)
-New
-###			C	Accept Bribe (Beer/Whiskey)
-New
-###			C	Accept Bribe (Money)
-New
-###			C	Administer Blood Bag
-New
-###			C	Arena Manager
-New
-###			C	Bank Teller
-New
-###			C	Blood Bank Clerk
-New
-###			C	Buy Round
-New
-###			C	Deportation Center Clerk
-New
-###			C	Extortable
-No effect
-###			C	Fence
-New
-NOT a Vendor trait
-###			C	Heal
-New
-###			C	Hire for Level
-New
-###			C	Hire Permanently
-- Multiple skill useTHE 
-- Stay until death
-###			C	Hotel Clerk
-New
-###			C	Identify
-New
-###			C	Influence Election
-New
-###			C	Mayor Clerk
-New
-###			C	Moochable
-No effect
-###			C	Offer Motivation
-New
-###			C	Quest Giver
-New
-###			C	Refill Guns
-New
-###			C	Repair Armor
-New
-###			C	Repair Weapons
-New
-###			C	Sell Slaves
-New
-###			C	Summon Professional
-New
-Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			C	Train Traits - Defense
-New
-###			C	Train Traits - Guns
-New
-###			C	Train Traits - Melee
-New
-###			C	Train Traits - Movement
-New
-###			C	Train Traits - Social
-New
-###			C	Train Traits - Stealth
-New
-###			C	Train Traits - Trade
-New
-###			C	Use Bloodbag
-New
-###			C	Vendor Buyer
-New
-###			C	Vendor Buyer Only
-New
 ##		CT	Loadout
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
