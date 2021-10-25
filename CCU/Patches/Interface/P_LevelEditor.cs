@@ -103,7 +103,7 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.S))
 					__instance.PressedSave();
 			}
-			else if (shift)
+			else if (shift && !fieldFocused)
 			{
 				if (Input.GetKeyDown(KeyCode.E))
 					LevelEditorUtilities.ZoomInFully(__instance);

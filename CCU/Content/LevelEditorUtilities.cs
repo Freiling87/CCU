@@ -206,21 +206,19 @@ namespace CCU.Content
 				layer == LEInterfaces_Level ? levelEditor.chunkTiles :
 				null;
 
-			bool SelectingAll = false;
-
 			logger.LogDebug("\tTile list count: " + tilesThisLayer.Count());
 			logger.LogDebug("\tSelected count: " + levelEditor.selectedTiles.Count());
 			foreach (LevelEditorTile tile in levelEditor.selectedTiles)
 				logger.LogDebug("\t\tIndex " + levelEditor.selectedTiles.IndexOf(tile) + ": " + tile.tileName);
 
+			int oldSelects = levelEditor.selectedTiles.Count();
+
 			foreach (LevelEditorTile levelEditorTile in tilesThisLayer)
 				if (!levelEditor.selectedTiles.Contains(levelEditorTile))
-				{
 					levelEditor.SelectTile(levelEditorTile, false);
-					SelectingAll = true;
-				}
 
-			if (!SelectingAll)
+			// tilesThisLayer.Count() always seems to be 1024, so we can't use it to see if Select All is already active
+			if (levelEditor.selectedTiles.Count() == oldSelects)
 				levelEditor.ClearSelections(true);
 
 			levelEditor.UpdateInterface(false);

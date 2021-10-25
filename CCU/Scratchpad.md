@@ -185,8 +185,6 @@ Not sure about this one, may be too deeply hardcoded
 .Start
 ###		C	WaterPump
 .Start
-##		C	Edges Blocked Warning on Save
-If it's not already a thing
 ##		CT	Hotkeys
 ###			T	00 SetOrientation/SetDirection not updating in fields
 - Trying calling SetDirection() after these both
@@ -207,15 +205,9 @@ If it's not already a thing
 	[Debug  :CCU_LevelEditorUtilities]      newDir: N
 	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
 	[Debug  :CCU_LevelEditorUtilities]      its value:
-###			C	00 Use Traverse to access subfields of private
-Might not be needed, if current attempt is working fine
-###			C	Deactivate hotkeys if typing into inputfield
-New
-###			√	Arrow Keys - Orient (Draw)
-Complete
-###			√	Ctrl + E, Q - Rotate Object (Draw)
-Complete
-###			C	Ctrl + A - Deselect All
+###			T	Deactivate hotkeys if typing into inputfield
+Attempted
+###			T	Ctrl + A - Deselect All
 - Identical logs, confirm that it's the backend not working, not an interface update issue
 	[Info   :  CCU_Core] ToggleSelectAll: Method Call
 	[Debug  :CCU_LevelEditorUtilities]      Tile list count: 1024
@@ -224,6 +216,7 @@ Complete
 	[Debug  :CCU_LevelEditorUtilities]              Index 1: Test Dummy C
 	[Debug  :CCU_LevelEditorUtilities]              Index 2: Test Dummy D
 	[Debug  :CCU_LevelEditorUtilities]              Index 3: Test Dummy A
+ 	- Attempted redesigning this 
 ###			T	F2 - QuickNew
 Attempted
 ###			C	F9 - Quickload
@@ -249,8 +242,6 @@ This one is likely beyond my ability right now since we'd need to underline text
 Hold
 ###			H	Ctrl + Shift + C - Copy, One Layer
 Hold
-###			√	Ctrl + N - New
-Complete
 ###			H	Ctrl + V - Paste All Layers
 - Pending completion of Copy
 ###			H	Ctrl + Shift + V - Paste One Layer
@@ -291,6 +282,8 @@ New
 	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance3Agent
 	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance3Agent (UnityEngine.UI.InputField)
 - Review the output from LevelEditor.Start_Postfix, as it traverses a field list by name.
+###			√	Arrow Keys - Orient (Draw)
+Complete
 ###			√	Arrow Keys - Orient (Select)
 Complete
 ###			√	Arrow Keys - Match current direction to set to None
@@ -301,9 +294,13 @@ Complete
 Complete
 ###			√	Ctrl + E, Q - Increment Patrol Point (Select)
 Complete
+###			√	Ctrl + E, Q - Rotate Object (Draw)
+Complete
 ###			√	Ctrl + E, Q - Rotate Object (Select)
 Complete
 ###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
+Complete
+###			√	Ctrl + N - New
 Complete
 ###			√	Ctrl + O - Open
 Ctrl + O load shows all menus but doesn't load anything.
