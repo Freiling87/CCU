@@ -109,23 +109,34 @@ Sort them right after the save command is issued rather than after load, so prev
 OR, have a "trait" button that automatically un-selects itself when clicked but sorts trait list.
 
 #	CT	Chunk Editor
-##		C	Additional Agent Goals
+##		C	Agent Goals
 ###			C	Arrested
 New
+###			C	Berserk
+New
+Just saves having to do Floor tricks
 ###			C	Die
 New
 ###			C	Die + Burn
 New
+###			C	Escort
+New
+Follow Non-Owner without being hostile or warning
 ###			C	Explode
 New
+###			C	Follow
+New
+Follows the first Aligned Agent they see
+Save that Agent ID and return them to them rather than following a new one
 ###			C	Knocked Out
 New
 ###			c	Panic
 New
-###			C	Sleep
+###			C	Wander between Agents
 New
-Already exists?
-###			C	Wander between Agents in Chunk
+###			C	Wander between Agents (Aligned)
+New
+###			C	Wander between Agents (Unaligned)
 New
 ##		CT	District Object De-Limitation
 ###		C	BasicFloor
