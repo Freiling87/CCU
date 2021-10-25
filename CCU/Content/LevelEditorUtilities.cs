@@ -162,6 +162,7 @@ namespace CCU.Content
 					tile.direction = newDir;
 
 			levelEditor.UpdateInterface(false);
+			levelEditor.SetDirection();
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{

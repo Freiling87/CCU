@@ -54,7 +54,6 @@ H = Hold, usually pending resolution of a separate or grouped issue
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
     - The Starred list is the number of items in their specialinvdatabase. So it is loading correctly, it's just not put in the shop correctly.
-
 ###		T	New error
 On Interact with Orc Street Samurai:
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
@@ -92,45 +91,8 @@ On Interact with Orc Street Samurai:
 	- It looks like that's not the right rName. When I logged existing rNames they were the const string values prefixed by [CCU]. 
       - string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
         - is accessing the wrong type of Name.
-###		T	HasTraitFromLlist
-- This method was modified, see if the bug is resolved
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
-	Stack trace:
-	System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.Patches.Spawn.P_LoadLevel.SetupMore3_3_Postfix (LoadLevel __instance) (at <2d5650d29b9141339f263611b9ba9c1e>:0)
-	LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-###		T	idk
-- This method was modified, see if the bug is resolved
-	[Info   : Unity Log] 62% - SETUPMORE2
-	[Info   : Unity Log] Set BigQuest: Hobo
-	[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1150
-	[Info   : Unity Log] 75% - SETUPMORE3
-	[Info   : Unity Log] 1 False - True - False
-	[Info   : Unity Log] SETUPMORE3 2 False - True - False
-	[Info   : Unity Log] 87% - SETUPMORE3_2
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Debug  :CCU_TraitManager]      null return
-	[Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
-	Stack trace:
-	System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.Patches.Spawn.P_LoadLevel.SetupMore3_3_Postfix (LoadLevel __instance) (at <927250a200ec4d9f8efc8135c58ffa18>:0)
-	LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
 
 ---
-
-#	√	Campaign Editor
-No features planned yet
 
 #	CT	Character Editor
 ###		C	Access from Chunk/Campaign Editor selector dropdown
@@ -148,11 +110,15 @@ OR, have a "trait" button that automatically un-selects itself when clicked but 
 
 #	CT	Chunk Editor
 ##		C	Additional Agent Goals
+###			C	Arrested
+New
 ###			C	Die
 New
 ###			C	Die + Burn
 New
 ###			C	Explode
+New
+###			C	Knocked Out
 New
 ###			c	Panic
 New
@@ -198,11 +164,8 @@ Not sure about this one, may be too deeply hardcoded
 ##		C	Edges Blocked Warning on Save
 If it's not already a thing
 ##		CT	Hotkeys
-###			C	00 Use Traverse to access subfields of private
-Might not be needed, if current attempt is working fine
-###			C	Deactivate hotkeys if typing into inputfield
-New
-###			C	Arrow Keys - Orient (Draw)
+###			T	00 SetOrientation/SetDirection not updating in fields
+- Trying calling SetDirection() after these both
 - Draw mode ends up with blank for NewDir
 	[Info   :  CCU_Core] OrientObject: Method Call
 	[Debug  :CCU_LevelEditorUtilities]      input: UpArrow
@@ -220,8 +183,14 @@ New
 	[Debug  :CCU_LevelEditorUtilities]      newDir: N
 	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
 	[Debug  :CCU_LevelEditorUtilities]      its value:
-###			H	Ctrl + E, Q - Rotate Object (Draw)
-- Same issue as Arrow Keys, resolve as one
+###			C	00 Use Traverse to access subfields of private
+Might not be needed, if current attempt is working fine
+###			C	Deactivate hotkeys if typing into inputfield
+New
+###			√	Arrow Keys - Orient (Draw)
+Complete
+###			√	Ctrl + E, Q - Rotate Object (Draw)
+Complete
 ###			C	Ctrl + A - Deselect All
 - Identical logs, confirm that it's the backend not working, not an interface update issue
 	[Info   :  CCU_Core] ToggleSelectAll: Method Call
@@ -345,13 +314,6 @@ I.e., show rotated sprite for any objects
 ##		H	Rotate Chunks in Play Mode
 This sounds hard
 
-#	√	Chunk Pack Editor √
-No features planned yet
-
-#	C	General
-##		C	Color the colons
-In Trait descriptions, colons are colored
-
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
@@ -387,6 +349,12 @@ New
 ###			C	Shift + Tab - Reverse-Tab through fields
 New
 
+#	C	Mutators
+##		C	Homesickness Disabled
+Disable hire dismissal for this level
+##		C	Homesickness Mandatory
+Always dismiss hires at end of level, even if Homesickness Killer is active
+
 #	C	Player Utilities
 ##		C	Mutators to omit Vanilla content when custom is available
 - If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
@@ -397,42 +365,23 @@ New
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
 
-#	T	Promo Campaign
-
-##		T	Theme
-- Donny & Smamuel sitting next to each other in front of a glass wall, commenting on what's going on beyond it (in the screen)
-
-##		T	Level 1 - Home Base
-- Two dudes on computers, talking about their SOR campaigns
-  - DUMBASS DONNY plays without mods, we'll see his campaign first, also he is dumb
-  - SMART SMAMUEL plays with mods, and is cool and good and handsome
-- Smamuel: Hey so a bunch of your shit doesn't work man, you need mods. I put notes in your chunks if you wanna check it out.
-- Donny: Duhhhh, I'm dumb. What's a mod?
-##		T	Level 2 - Dumbass Donny's level
-- Chunk 1
-  - A custom Vampire not sucking blood
-  - A custom Cannibal not eating a corpse
-  - A custom pickpocket not picking pockets
-  - A custom Firefighter not fighting fires
-##		T	Level 3 - Smart Smamuel's level
-- 
-
-#		T	Promo Campaign - Shadowrun
-##			T	Home base 
-In between each mission, a small hive city neighborhood with all the things a mercenary would need.
-###				T	The Bar
+#	T	Promo Campaign - Shadowrun
+##		T	Player Character
+"The Fixer," an old man who's not quite as tough as he used to be. But he has a lot of connections in the criminal world and knows how to put together a team. So this will direct the player to use a hiring-based playstyle.
+##		T	Home base 
+In between each mission, a small hive city neighborhood with all the things you would need.
+###			T	The Bar
 Where the mercenaries hang out. All Talk interactions should tell you a bit about them.
 Ensure that Buying a Round will affect all hires.
 Feel free to use multiple copies of the same merc, since their appearances will vary! B)
 Give them a "Permanent hire" trait
-####				T	The Fence
+####			T	The Fence
 He'll buy your shit from you. This should be a *rare* opportunity to sell stuff.
-####				T	The Bartender
+####			T	The Bartender
 Maybe something clever to say. Maybe not.
-####				√	The Mercs
-###				T	Doc's
-##			T	Mission Format
-
+####			√	The Mercs
+###			T	Doc's
+##		T	Mission Format
 
 #	CT	Traits
 ##		H	Agent Group
@@ -582,6 +531,9 @@ Test
 New
 ###			H	Hack
 Pending General AI Update Error resolution
+###			C	Permanent Hire
+New
+~8x normal hire price
 ###			C	Pickpocket
 New
 ###			C	Poison
@@ -878,3 +830,9 @@ Complete
       - I am hoping this is taken care of automatically. Testing will show.
   - Keep an eye out for agent name checks, one of these will need to be patched
   - InvDatabase.rnd.RandomSelect(rName, "Items") 
+
+#	√	Campaign Editor
+No features planned yet
+
+#	√	Chunk Pack Editor
+No features planned yet
