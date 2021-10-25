@@ -330,7 +330,7 @@ New
 ##		C	Randomized Lights
 New
 ##		C	Red-Tint Out-Of-District Objects
-I.e., Show stuff that won't show up
+I.e., Show stuff that won't show up, unless you can disable that disabling behavior
 ##		H	Orient Object Sprites in Edit Mode
 I.e., show rotated sprite for any objects
 ##		H	Rotate Chunks in Play Mode
@@ -372,10 +372,15 @@ New
 New
 
 #	C	Mutators
+##		C	General Mutator Pilot
+Just make a dummy mutator and have it output a log message if it succeeds, to know it works.
+Besides the mutator flags themselves, you'll need to insert it into the designer UI to allow the player to access it.
 ##		C	Homesickness Disabled
 Disable hire dismissal for this level
+ExitPoint.EmployeesExit prefix
 ##		C	Homesickness Mandatory
 Always dismiss hires at end of level, even if Homesickness Killer is active
+ExitPoint.EmployeesExit prefix
 
 #	C	Player Utilities
 ##		C	Mutators to omit Vanilla content when custom is available
@@ -463,6 +468,9 @@ Complete
 New
 ###			C	Shakedown Player
 New
+Use this on leader w/ Wander Level
+Use "Follow" behavior on agents placed behind them
+No need for "Roaming Gang" Trait itself
 ###			C	Tattle (Upper Cruster)
 New
 ##		C	Bodyguarded
