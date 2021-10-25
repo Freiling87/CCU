@@ -133,6 +133,9 @@ Follows the first Aligned Agent they see
 Save that Agent ID and return them to them rather than following a new one
 ###			C	Knocked Out
 New
+###			C	Lookout
+New
+When alerted, will run towards nearest ally and alert them
 ###			c	Panic
 New
 ###			C	Robot Clean
@@ -371,14 +374,15 @@ New
 ###			C	Shift + Tab - Reverse-Tab through fields
 New
 
-#	C	Mutators
-##		C	General Mutator Pilot
-Just make a dummy mutator and have it output a log message if it succeeds, to know it works.
-Besides the mutator flags themselves, you'll need to insert it into the designer UI to allow the player to access it.
-##		C	Homesickness Disabled
+#	T	Mutators
+##		√	General
+- Show up in LevelEditor UI, may be a manually constructed list
+##		T	Homesickness Disabled
+- First attempt
 Disable hire dismissal for this level
 ExitPoint.EmployeesExit prefix
-##		C	Homesickness Mandatory
+##		T	Homesickness Mandatory
+- First attempt
 Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
 
@@ -392,7 +396,7 @@ ExitPoint.EmployeesExit prefix
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
 
-#	T	Promo Campaign - Shadowrun
+#	T	Promo Campaign - Shadowrun-but-not-really
 ##		T	Player Character
 "The Fixer," an old man who's not quite as tough as he used to be. But he has a lot of connections in the criminal world and knows how to put together a team. So this will direct the player to use a hiring-based playstyle.
 ##		T	Home base 
@@ -409,6 +413,11 @@ Maybe something clever to say. Maybe not.
 ####			√	The Mercs
 ###			T	Doc's
 ##		T	Mission Format
+##		T	Apollo Tower
+
+###			T	Infrastructure Sub-Basement
+###			T	Executive Suites
+###			T	Rooftop Escape
 
 #	CT	Traits
 ##		H	Agent Group
@@ -678,6 +687,20 @@ New
 ###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			C	Train Traits - Defense
+New
+###			C	Train Traits - Guns
+New
+###			C	Train Traits - Melee
+New
+###			C	Train Traits - Movement
+New
+###			C	Train Traits - Social
+New
+###			C	Train Traits - Stealth
+New
+###			C	Train Traits - Trade
+New
 ###			C	Use Bloodbag
 New
 ###			C	Vendor Buyer
@@ -693,6 +716,29 @@ I can see this going two ways:
 - As a designated item in the chunk creator for use in NPC & Object inventories. 
 
 I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
+
+Vanilla list:
+- Defense
+- Drugs
+- Food
+- Guns
+- GunAccessory
+- Melee
+- Movement
+- NonViolent
+- NonUsableTool
+- NonStandardWeapons
+- NonStandardWeapons2
+- NotRealWeapons
+- Passive
+- Social
+- Stealth
+- Supplies
+- Technology
+- Trade
+- Usable
+- Weapons
+- Weird
 ###			T	ChunkKey
 - Attempted - InvDatabase.FillAgent()
 ###			T	ChunkMayorBadge

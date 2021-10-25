@@ -69,6 +69,13 @@ namespace CCU
 			SafecrackSafeReal = "SafecrackSafeReal";
 	}
 
+	public static class CMutators
+	{
+		public const string
+			HomesicknessDisabled = "HomesicknessDisabled",
+			HomesicknessMandatory = "HomesicknessMandatory";
+	}
+
     public static class CTrait 
 	{
 		public const string

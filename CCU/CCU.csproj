@@ -104,6 +104,8 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Mutators\HomesicknessDisabled.cs" />
+    <Compile Include="Mutators\HomesicknessMandatory.cs" />
     <Compile Include="Patches\Behaviors\P_Agent.cs" />
     <Compile Include="Patches\Behaviors\P_AgentInteractions.cs" />
     <Compile Include="Patches\Behaviors\P_BrainUpdate.cs" />
@@ -112,8 +114,10 @@
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
     <Compile Include="Patches\Interface\P_QuestMarker.cs" />
+    <Compile Include="Patches\Interface\P_ScrollingMenu.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Patches\Objects\P_ExitPoint.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
     <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
