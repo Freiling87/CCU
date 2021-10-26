@@ -8,6 +8,8 @@ using CCU.Traits;
 using CCU.Traits.Hire;
 using CCU.Traits.TraitTrigger;
 using CCU.Traits.Interaction;
+using Rewired;
+using Random = UnityEngine.Random;
 
 namespace CCU.Patches.Behaviors
 {
@@ -608,7 +610,7 @@ namespace CCU.Patches.Behaviors
 					else
 					{
 						string agentName = agent.agentName;
-
+						#endregion
 						#region Vanilla Agents
 						if (agentName == "Alien")
 						{
@@ -1782,7 +1784,7 @@ namespace CCU.Patches.Behaviors
 						else if (agentName == "Worker")
 						{
 							agent.SayDialogue("Interact");
-							agent.gc.audioHandler.Play(agent, "AgentTalk");
+							GC.audioHandler.Play(agent, "AgentTalk");
 							goto IL_48BF;
 						}
 						else if (agentName == "Zombie")
@@ -2067,28 +2069,1827 @@ namespace CCU.Patches.Behaviors
 			Core.LogMethodCall();
 			logger.LogDebug("\tbuttonText: " + buttonText);
 
+			int num = 0;
+			bool flag = false;
 			__instance.interactor = null;
 			__instance.allAttack = false;
 			__instance.allGoHere = false;
 
-			if (buttonText == CJob.SafecrackSafe)
+			#region Home Base
+			if (buttonText == "AboutMe")
+			{
+				GC.cinematics.AboutMeSoldier();
+				return false;
+			}
+			else if (buttonText == "Achievements")
+			{
+				if (GC.coopMode || GC.fourPlayerMode)
+				{
+					interactingAgent.mainGUI.ShowScrollingMenuPersonal("Achievements", null);
+				}
+				else
+				{
+					agent.ShowScrollingMenu("Achievements");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Challenges")
+			{
+				if (GC.coopMode || GC.fourPlayerMode)
+				{
+					interactingAgent.mainGUI.ShowScrollingMenuPersonal("Challenges", null);
+				}
+				else
+				{
+					agent.ShowScrollingMenu("Challenges");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ClearSeed")
+			{
+				GC.sessionDataBig.userSetSeed = "";
+				GC.SetDailyRunText();
+				if (GC.multiplayerMode && GC.serverPlayer)
+				{
+					GC.playerAgent.objectMult.SendChatAnnouncement("RemovedSeed", "", "");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Loadouts")
+			{
+				if (GC.coopMode || GC.fourPlayerMode)
+				{
+					interactingAgent.mainGUI.ShowScrollingMenuPersonal("Loadouts", null);
+				}
+				else
+				{
+					agent.ShowScrollingMenu("Loadouts");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "MutatorConfigs")
+			{
+				if (GC.serverPlayer && interactingAgent.isPlayer == 1)
+				{
+					agent.ShowScrollingMenu("MutatorConfigs");
+				}
+				else
+				{
+					agent.SayDialogue("CantSetConfig");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "RewardConfigs")
+			{
+				if (GC.serverPlayer && interactingAgent.isPlayer == 1)
+				{
+					agent.ShowScrollingMenu("RewardConfigs");
+				}
+				else
+				{
+					agent.SayDialogue("CantSetConfig");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "SetSeed")
+			{
+				agent.mainGUI.ShowSetSeed(agent);
+				return false;
+			}
+			else if (buttonText == "TraitConfigs")
+			{
+				if (GC.serverPlayer && interactingAgent.isPlayer == 1)
+				{
+					agent.ShowScrollingMenu("TraitConfigs");
+				}
+				else
+				{
+					agent.SayDialogue("CantSetConfig");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "UnlockItems")
+			{
+				if (GC.coopMode || GC.fourPlayerMode)
+				{
+					interactingAgent.mainGUI.ShowScrollingMenuPersonal("Items", null);
+				}
+				else
+				{
+					agent.ShowScrollingMenu("Items");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "UnlockTraits")
+			{
+				if (GC.coopMode || GC.fourPlayerMode)
+				{
+					interactingAgent.mainGUI.ShowScrollingMenuPersonal("TraitUnlocks", null);
+				}
+				else
+				{
+					agent.ShowScrollingMenu("TraitUnlocks");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			#endregion
+			#region Follower Orders
+			else if (buttonText == "AllAttack")
+			{
+				__instance.allAttack = true;
+				__instance.interactor = interactingAgent;
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "AllAttack");
+				return false;
+			}
+			else if (buttonText == "AllFollow")
+			{
+				__instance.AllFollow(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AllGoHere")
+			{
+				__instance.allGoHere = true;
+				agent.SayDialogue("WhereToStand");
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "AllGoHere");
+				return false;
+			}
+			else if (buttonText == "AllStandGuard")
+			{
+				__instance.allGoHere = true;
+				agent.SayDialogue("WhereToStand");
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "AllGoHere");
+				return false;
+			}
+			else if (buttonText == "Attack")
 			{
 				__instance.interactor = interactingAgent;
 				agent.commander = interactingAgent;
-				interactingAgent.mainGUI.invInterface.ShowTarget(agent, CJob.SafecrackSafe);
-
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "Attack");
 				return false;
 			}
-			else if (buttonText == CJob.TamperSomething)
+			else if (buttonText == "CauseRuckus")
+			{
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "CauseRuckus");
+				return false;
+			}
+			else if (buttonText == "FollowMe")
+			{
+				__instance.FollowMe(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GoHere")
+			{
+				agent.SayDialogue("WhereToStand");
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "GoHere");
+				return false;
+			}
+			else if (buttonText == "HackSomething")
 			{
 				__instance.interactor = interactingAgent;
 				agent.commander = interactingAgent;
-				interactingAgent.mainGUI.invInterface.ShowTarget(agent, CJob.TamperSomething);
-
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "HackSomething");
 				return false;
 			}
+			else if (buttonText == "LockpickDoor")
+			{
+				__instance.interactor = interactingAgent;
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "LockpickDoor");
+				return false;
+			}
+			else if (buttonText == "StandGuard")
+			{
+				agent.SayDialogue("WhereToStand");
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "StandGuard");
+				return false;
+			}
+			else if (buttonText == "YouCanGo")
+			{
+				__instance.YouCanGo(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			#endregion
+			#region Multiplayer Shit
+			else if (buttonText == "BanEmote")
+			{
+				//GC.StartCoroutine(__instance.DoBan(agent, interactingAgent));
+				//agent.StopInteraction();
+				//return false;
+				return true;
+				// lol
+			}
+			else if (buttonText == "EndCoop")
+			{
+				GC.loadLevel.switchLevelMessage = "NoCoop";
+				GC.sessionDataBig.coopMode = false;
+				GC.sessionDataBig.fourPlayerMode = false;
+				GC.sessionDataBig.threePlayer = false;
+				GC.sessionDataBig.ResetCharacterLooks();
+				GC.loadLevel.reallyMustDoSceneChange = true;
+				GC.loadLevel.RestartGame(0);
+				return false;
+			}
+			else if (buttonText == "FollowMeEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("FollowMeEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "HelpEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("HelpEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "KickEmote")
+			{
+				//GC.StartCoroutine(__instance.DoKick(agent, interactingAgent));
+				//agent.StopInteraction();
+				//return false;
+				return true;
+				// lol
+			}
+			else if (buttonText == "LetsGoEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("LetsGoEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "NoEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("NoEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PlayerList")
+			{
+				agent.objectMult.ShowChatCommand("/who");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Start3Player")
+			{
+				bool flag2 = false;
+				if (GC.consoleVersion && ReInput.controllers.joystickCount < 3)
+				{
+					flag2 = true;
+					agent.SayDialogue("NeedMoreControllers");
+					agent.StopInteraction();
+				}
+				if (!flag2)
+				{
+					GC.saveGame.Invalidate(false);
+					GC.sessionDataBig.coopMode = false;
+					GC.sessionDataBig.fourPlayerMode = true;
+					GC.sessionDataBig.threePlayer = true;
+					GC.loadLevel.switchLevelMessage = "CoopMode";
+					GC.sessionDataBig.newCharacter = "Hobo";
+					GC.sessionDataBig.newCharacter2 = "Soldier";
+					GC.sessionDataBig.newCharacter3 = "Gangbanger";
+					GC.sessionDataBig.newCharacter4 = "Thief";
+					GC.sessionDataBig.ResetCharacterLooks();
+					GC.loadLevel.reallyMustDoSceneChange = true;
+					GC.loadLevel.RestartGame(0);
+					return false;
+				}
+				return false;
+			}
+			else if (buttonText == "Start4Player")
+			{
+				bool flag2 = false;
+				if (GC.consoleVersion && ReInput.controllers.joystickCount < 4)
+				{
+					flag2 = true;
+					agent.SayDialogue("NeedMoreControllers");
+					agent.StopInteraction();
+				}
+				if (!flag2)
+				{
+					GC.saveGame.Invalidate(false);
+					GC.sessionDataBig.coopMode = false;
+					GC.sessionDataBig.fourPlayerMode = true;
+					GC.sessionDataBig.threePlayer = false;
+					GC.loadLevel.switchLevelMessage = "CoopMode";
+					GC.sessionDataBig.newCharacter = "Hobo";
+					GC.sessionDataBig.newCharacter2 = "Soldier";
+					GC.sessionDataBig.newCharacter3 = "Gangbanger";
+					GC.sessionDataBig.newCharacter4 = "Thief";
+					GC.sessionDataBig.ResetCharacterLooks();
+					GC.loadLevel.reallyMustDoSceneChange = true;
+					GC.loadLevel.RestartGame(0);
+					return false;
+				}
+				return false;
+			}
+			else if (buttonText == "StartCoop")
+			{
+				bool flag2 = false;
+				if (GC.consoleVersion && ReInput.controllers.joystickCount < 2)
+				{
+					flag2 = true;
+					agent.SayDialogue("NeedMoreControllers");
+					agent.StopInteraction();
+				}
+				if (!flag2)
+				{
+					GC.saveGame.Invalidate(false);
+					GC.sessionDataBig.coopMode = true;
+					GC.sessionDataBig.fourPlayerMode = false;
+					GC.sessionDataBig.threePlayer = false;
+					GC.loadLevel.switchLevelMessage = "CoopMode";
+					GC.sessionDataBig.newCharacter = "Hobo";
+					GC.sessionDataBig.newCharacter2 = "Soldier";
+					GC.sessionDataBig.newCharacter3 = "Gangbanger";
+					GC.sessionDataBig.newCharacter4 = "Thief";
+					GC.sessionDataBig.ResetCharacterLooks();
+					GC.loadLevel.reallyMustDoSceneChange = true;
+					GC.loadLevel.RestartGame(0);
+					return false;
+				}
+				return false;
+			}
+			else if (buttonText == "StartOnline")
+			{
+				GC.loadLevel.QuitToMainMenu("OpenOnline");
+				return false;
+			}
+			else if (buttonText == "TakeItEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("TakeItEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThankYouEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("ThankYouEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "WaitHereEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("WaitHereEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "YesEmote")
+			{
+				agent.objectMult.SendChatMessageEmote("YesEmote");
+				agent.StopInteraction();
+				return false;
+			}
+			#endregion
+			#region Interactions
+			else if (buttonText == "AdministerBloodBag")
+			{
+				if (interactingAgent.statusEffects.hasTrait("OilRestoresHealth"))
+				{
+					agent.SayDialogue("CantHealOil");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.electronic)
+				{
+					agent.SayDialogue("CantHealElectronic");
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.AdministerBloodBag(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AdministerTreatment")
+			{
+				__instance.AdministerTreatment(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AlignWithMe")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.AlignWithMe(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AlignWithMeAndFriends")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.AlignWithMeAndFriends(agent, interactingAgent, true, false);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AskLeaveTown")
+			{
+				__instance.AskLeaveTown(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AskMayorHat")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.AskMayorHat(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "AssistMe")
+			{
+				num = agent.FindNumFollowing(interactingAgent);
+				if (interactingAgent.statusEffects.hasTrait("MoreFollowers") && num < 3)
+				{
+					flag = true;
+				}
+				else if (interactingAgent.statusEffects.hasTrait("ZombieArmy") && num < 5)
+				{
+					flag = true;
+				}
+				else if (interactingAgent.statusEffects.hasTrait("Unlikeable") && !interactingAgent.statusEffects.hasTrait("Likeable") && !interactingAgent.statusEffects.hasTrait("Likeable2") && !interactingAgent.statusEffects.hasTrait("NiceSmelling"))
+				{
+					agent.SayDialogue("WontJoinA");
+					agent.StopInteraction();
+				}
+				else if (interactingAgent.statusEffects.hasTrait("NoFollowers"))
+				{
+					agent.SayDialogue("WontJoinA");
+					agent.StopInteraction();
+				}
+				else if (num < 1)
+				{
+					flag = true;
+				}
+				else
+				{
+					agent.SayDialogue("WontJoinB");
+					agent.StopInteraction();
+				}
+				if (!flag)
+				{
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.AssistMe(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BecomeUpperCruster")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BecomeUpperCruster(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BlowUpHelmet")
+			{
+				if (agent.inventory.equippedArmorHead == null)
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				if (agent.inventory.equippedArmorHead.invItemName == "SlaveHelmet")
+				{
+					__instance.BlowUpHelmet(agent, interactingAgent);
+					return false;
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BorrowMoney")
+			{
+				if (!GC.sessionDataBig.challenges.Contains("Endless") && (GC.levelTheme == 4 || GC.levelTheme == 5))
+				{
+					agent.SayDialogue("CantBorrowHighFloor");
+					GC.audioHandler.Play(interactingAgent, "CantDo");
+					agent.StopInteraction();
+					return false;
+				}
+				if (GC.sessionData.debtAmount[interactingAgent.isPlayer - 1] >= 200)
+				{
+					agent.SayDialogue("CantBorrowAnyMore");
+					GC.audioHandler.Play(interactingAgent, "CantDo");
+					agent.StopInteraction();
+					return false;
+				}
+				InvItem invItem = new InvItem();
+				invItem.invItemName = "Money";
+				invItem.ItemSetup(true);
+				invItem.invItemCount = 50;
+				if (!interactingAgent.inventory.hasEmptySlotForItem(invItem))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+				}
+				else
+				{
+					interactingAgent.inventory.AddItem(invItem);
+					GC.sessionData.debtAmount[interactingAgent.isPlayer - 1] += 50;
+					if (!interactingAgent.statusEffects.hasStatusEffect("InDebt") && !interactingAgent.statusEffects.hasStatusEffect("InDebt2") && !interactingAgent.statusEffects.hasStatusEffect("InDebt3"))
+					{
+						interactingAgent.statusEffects.AddStatusEffect("InDebt", true, true);
+					}
+					__instance.BorrowMoney(agent, interactingAgent);
+					interactingAgent.statusEffects.myStatusEffectDisplay.RefreshStatusEffectText();
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Bribe")
+			{
+				__instance.Bribe(agent, interactingAgent, "Money", buttonPrice);
+				return false;
+			}
+			else if (buttonText == "BribeBeer")
+			{
+				__instance.Bribe(agent, interactingAgent, "Beer", 0);
+				return false;
+			}
+			else if (buttonText == "BribeCops")
+			{
+				if (interactingAgent.aboveTheLaw || interactingAgent.upperCrusty)
+				{
+					agent.SayDialogue("DontNeedMoney");
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BribeCops(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BribeDeportation")
+			{
+				__instance.Bribe(agent, interactingAgent, "Money", buttonPrice);
+				return false;
+			}
+			else if (buttonText == "BribeDeportationItem")
+			{
+				agent.ShowUseOn("BribeDeportationItem");
+				return false;
+			}
+			else if (buttonText == "BribeMayorBadge")
+			{
+				agent.ShowUseOn("BribeMayorBadge");
+				return false;
+			}
+			else if (buttonText == "BribeMayorBadgeMoney")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BribeMayorBadgeMoney(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BribeMayorElevator")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BribeMayorElevator(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BribeQuestItem")
+			{
+				agent.ShowUseOn("BribeQuestItem");
+				agent.SayDialogue("BribeQuestItem");
+				return false;
+			}
+			else if (buttonText == "BribeQuestMoney")
+			{
+				if ((GC.serverPlayer && !interactingAgent.inventory.hasEmptySlotForItem(agent.inventory.FindQuestItem())) || (!GC.serverPlayer && !interactingAgent.inventory.hasEmptySlot()))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BribeQuestMoney(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BribeWhiskey")
+			{
+				__instance.Bribe(agent, interactingAgent, "Whiskey", 0);
+				return false;
+			}
+			else if (buttonText == "Buy")
+			{
+				agent.ShowNPCChest();
+				return false;
+			}
+			else if (buttonText == "BuyItem")
+			{
+				agent.ShowNPCChest(agent.inventory, false);
+				return false;
+			}
+			else if (buttonText == "BuyKey")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BuyKey(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BuyKeyAndSafeCombination")
+			{
+				if (!interactingAgent.inventory.hasEmptySlots(2))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BuyKeyAndSafeCombination(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BuyKeyHotel")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BuyKey(agent, interactingAgent);
+				agent.SayDialogue("BoughtHotelKey");
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BuyRound")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BuyRound(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "BuySafeCombination")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.BuySafeCombination(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ChallengeToFight")
+			{
+				__instance.ChallengeToFight(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ContinueGame")
+			{
+				GC.loadLevel.continueGame = true;
+				GC.loadLevel.NextLevel();
+				return false;
+			}
+			else if (buttonText == "CreateQuestStreaming")
+			{
+				Random.InitState(GC.loadLevel.randomSeedNum);
+				GC.quests.setupQuests();
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "CureAddiction")
+			{
+				__instance.CureAddiction(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "DeactivateHelmet")
+			{
+				if (agent.inventory.equippedArmorHead == null)
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				if (agent.inventory.equippedArmorHead.invItemName == "SlaveHelmet")
+				{
+					__instance.RemoveSlaveHelmetHack(agent, interactingAgent);
+					return false;
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Donate")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				agent.SayDialogue(GC.Choose<string>("Donated_1", "Donated_2", new string[]
+				{
+			"Donated_3"
+				}));
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Done")
+			{
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ElectionBribe")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ElectionBribe(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "EndTutorial")
+			{
+				if (!GC.sessionDataBig.finishedTutorial)
+				{
+					GC.sessionDataBig.finishedTutorial = true;
+					GC.unlocks.SaveUnlockData(true);
+				}
+				GC.loadLevel.RestartGame(0);
+				return false;
+			}
+			else if (buttonText == "EnterMech")
+			{
+				interactingAgent.statusEffects.PressedSpecialAbility();
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "FollowersLeaveWeaponsBehind")
+			{
+				for (int l = 0; l < GC.agentList.Count; l++)
+				{
+					Agent agent4 = GC.agentList[l];
+					if (agent4.employer == interactingAgent && !agent4.inCombat && agent4.jobCode != jobType.GoHere && Vector2.Distance(agent.tr.position, agent4.tr.position) < 13.44f)
+					{
+						agent4.inventory.DropWeapons();
+					}
+				}
+				agent.RefreshButtons();
+				return false;
+			}
+			else if (buttonText == "FundResearch")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.FundResearch(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GetCourierPackage")
+			{
+				bool flag3 = false;
+				for (int i = 0; i < GC.playerAgentList.Count; i++)
+				{
+					Agent agent2 = GC.playerAgentList[i];
+					if (agent2 != interactingAgent && agent2.statusEffects.hasStatusEffect("DeliverPackage"))
+					{
+						flag3 = true;
+					}
+				}
+				if (flag3)
+				{
+					agent.SayDialogue("PackageNotForYou");
+				}
+				else
+				{
+					__instance.GetCourierPackage(agent, interactingAgent, 0, false);
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GetElectionResults")
+			{
+				__instance.GetElectionResults(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveBlood")
+			{
+				if (interactingAgent.electronic)
+				{
+					agent.SayDialogue("CantHealElectronic");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.statusEffects.hasTrait("OilRestoresHealth"))
+				{
+					if (interactingAgent.mechFilled)
+					{
+						interactingAgent.SayDialogue("CantMechUseAugmentationBooth");
+					}
+					else
+					{
+						interactingAgent.SayDialogue("CantReviveNoBlood");
+					}
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.GiveBlood(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveItem")
+			{
+				agent.ShowUseOn("GiveItem");
+				return false;
+			}
+			else if (buttonText == "GiveMechOil")
+			{
+				__instance.GiveMechOil(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveMeKey")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.GiveMeKey(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveMeKeyAndSafeCombination")
+			{
+				if (!interactingAgent.inventory.hasEmptySlots(2))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.GiveMeKeyAndSafeCombination(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveMeMayorBadge")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.GiveMeMayorBadge(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveMeQuestItem")
+			{
+				if ((GC.serverPlayer && !interactingAgent.inventory.hasEmptySlotForItem(agent.inventory.FindQuestItem())) || (!GC.serverPlayer && !interactingAgent.inventory.hasEmptySlot()))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.GiveMeQuestItem(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveMeSafeCombination")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.GiveMeSafeCombination(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "GiveMeSlave")
+			{
+				__instance.GiveSlave(agent, interactingAgent, false, num, buttonPrice, flag, false);
+				return false;
+			}
+			else if (buttonText == "Heal")
+			{
+				if (interactingAgent.statusEffects.hasTrait("OilRestoresHealth"))
+				{
+					agent.SayDialogue("CantHealOil");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.statusEffects.hasTrait("BloodRestoresHealth"))
+				{
+					agent.SayDialogue("CantHealVampire");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.electronic)
+				{
+					agent.SayDialogue("CantHealElectronic");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.health == interactingAgent.healthMax)
+				{
+					agent.SayDialogue("CantHeal");
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				agent.SayDialogue("Healed");
+				interactingAgent.statusEffects.ChangeHealth(interactingAgent.healthMax);
+				GC.audioHandler.Play(agent, "Heal");
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "HireAsProtection")
+			{
+				__instance.QualifyHireAsProtection(agent, interactingAgent, buttonPrice);
+				return false;
+			}
+			else if (buttonText == "Identify")
+			{
+				agent.ShowUseOn("Identify");
+				return false;
+			}
+			else if (buttonText == "InvestMoney")
+			{
+				if (!agent.moneySuccess(buttonPrice, false))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.InvestMoney(agent, interactingAgent, 50);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "InvestMoney2")
+			{
+				if (!agent.moneySuccess(buttonPrice, false))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.InvestMoney(agent, interactingAgent, 100);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "InvestMoney3")
+			{
+				if (!agent.moneySuccess(buttonPrice, false))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.InvestMoney(agent, interactingAgent, 200);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "JoinMe")
+			{
+				__instance.QualifyHireAsProtection(agent, interactingAgent, buttonPrice);
+				return false;
+			}
+			else if (buttonText == "LeaveWeaponsBehind")
+			{
+				interactingAgent.inventory.DropWeapons();
+				agent.RefreshButtons();
+				return false;
+			}
+			else if (buttonText == "MayorGiveHat")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.MayorGiveHat(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "MugDrugsAlcohol")
+			{
+				__instance.MugDrugsAlcohol(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "MugID")
+			{
+				__instance.MugID(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "MugItem")
+			{
+				agent.ShowUseOn("MugItem");
+				return false;
+			}
+			else if (buttonText == "MugMoney")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.MugMoney(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "MugSlave")
+			{
+				__instance.MugSlave(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "MugWeapons")
+			{
+				__instance.MugWeapons(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "OfferDrink")
+			{
+				agent.ShowUseOn("OfferDrink");
+				return false;
+			}
+			else if (buttonText == "OfferOfficeDrone")
+			{
+				agent.ShowUseOn("OfferOfficeDrone");
+				return false;
+			}
+			else if (buttonText == "PayBackDebt")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				interactingAgent.statusEffects.RemoveStatusEffect("InDebt");
+				interactingAgent.statusEffects.RemoveStatusEffect("InDebt2");
+				interactingAgent.statusEffects.RemoveStatusEffect("InDebt3");
+				GC.sessionData.debtAmount[interactingAgent.isPlayer - 1] = 0;
+				__instance.PayBackDebt(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PayCops")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.PayCops(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PayEntranceFee")
+			{
+				__instance.Bribe(agent, interactingAgent, "Money", buttonPrice);
+				return false;
+			}
+			else if (buttonText == "PayOutFight")
+			{
+				__instance.PayOutFight(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PlayBadMusic")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.PlayBadMusic(agent, interactingAgent);
+				agent.SetChangeElectionPoints(interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PlayMayorEvidence")
+			{
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.PlayMayorEvidence(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PromoteMeToSupercop")
+			{
+				__instance.PromoteMeToSupercop(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "PurchaseSlave")
+			{
+				__instance.GiveSlave(agent, interactingAgent, true, num, buttonPrice, flag, false);
+				return false;
+			}
+			else if (buttonText == "PutMoneyTowardHome")
+			{
+				if (interactingAgent.oma.bigQuestObjectCount >= 100)
+				{
+					interactingAgent.SayDialogue("CantPutMoreMoneyTowardHome");
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.PutMoneyTowardHome(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Quest")
+			{
+				Debug.Log("Getting Quest Info");
+				agent.HideObjectButtons();
+				interactingAgent.mainGUI.questSheetScript.otherAgent = agent;
+				interactingAgent.mainGUI.ShowQuestSheet(interactingAgent);
+				return false;
+			}
+			else if (buttonText == "RemoveHelmet")
+			{
+				agent.ShowUseOn("RemoveHelmet");
+				return false;
+			}
+			else if (buttonText == "RemoveHelmetSaw")
+			{
+				if (agent.inventory.equippedArmorHead == null)
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				if (agent.inventory.equippedArmorHead.invItemName == "SlaveHelmet" && interactingAgent.inventory.HasItem("Saw"))
+				{
+					agent.StartCoroutine(agent.Operating(interactingAgent, interactingAgent.inventory.FindItem("Saw"), 2f, true, "Removing"));
+					return false;
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "RemoveHelmetSlaveHelmetRemover")
+			{
+				if (agent.inventory.equippedArmorHead == null)
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				if (agent.inventory.equippedArmorHead.invItemName == "SlaveHelmet" && interactingAgent.inventory.HasItem("SlaveHelmetRemover"))
+				{
+					agent.StartCoroutine(agent.Operating(interactingAgent, interactingAgent.inventory.FindItem("SlaveHelmetRemover"), 2f, true, "Removing"));
+					return false;
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "RemoveHelmetWrench")
+			{
+				if (agent.inventory.equippedArmorHead == null)
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				if (agent.inventory.equippedArmorHead.invItemName == "SlaveHelmet" && interactingAgent.inventory.HasItem("Wrench"))
+				{
+					agent.StartCoroutine(agent.Operating(interactingAgent, interactingAgent.inventory.FindItem("Wrench"), 2f, true, "Removing"));
+					return false;
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Revive")
+			{
+				if (!__instance.HasSpaceToRevive(agent, interactingAgent))
+				{
+					agent.SayDialogue("CantReviveNoRoom");
+					GC.audioHandler.Play(interactingAgent, "CantDo");
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				if (GC.multiplayerMode)
+				{
+					agent.objectMult.ReturnFromGhost((int)agent.healthMax);
+				}
+				agent.statusEffects.ReturnFromGhost((int)agent.healthMax);
+				interactingAgent.deathMethod = "Revival";
+				interactingAgent.statusEffects.StartCoroutine(interactingAgent.statusEffects.ReturnFromGhost2());
+				interactingAgent.objectMult.SendChatAnnouncement("RevivedAgent", agent.playerUniqueID, string.Concat(agent.playerColor));
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ReviveBodyguard")
+			{
+				if (interactingAgent.shapeShifter && interactingAgent.possessing)
+				{
+					interactingAgent.SayDialogue("CantRevivePossessing");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.statusEffects.hasTrait("OilRestoresHealth"))
+				{
+					if (interactingAgent.mechFilled)
+					{
+						interactingAgent.SayDialogue("CantMechUseAugmentationBooth");
+					}
+					else
+					{
+						interactingAgent.SayDialogue("CantReviveNoBlood");
+					}
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.electronic)
+				{
+					interactingAgent.SayDialogue("CantReviveNoBlood");
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ReviveBodyguard(agent, interactingAgent);
+				int num3 = 30;
+				if (GC.challenges.Contains("LowHealth"))
+				{
+					num3 = 15;
+				}
+				if (interactingAgent.statusEffects.hasTrait("MusicianTakesLessHealth") || (interactingAgent.oma.superSpecialAbility && interactingAgent.agentName == "Bouncer"))
+				{
+					num3 = 15;
+					if (GC.challenges.Contains("LowHealth"))
+					{
+						num3 = 7;
+					}
+				}
+				if (interactingAgent.health <= (float)num3)
+				{
+					num3 = (int)interactingAgent.health - 1;
+				}
+				interactingAgent.deathMethod = "Revival";
+				interactingAgent.statusEffects.ignoreInvincible = true;
+				interactingAgent.statusEffects.ChangeHealth((float)(-(float)num3));
+				interactingAgent.statusEffects.ignoreInvincible = false;
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ReviveBodyguardShampoo")
+			{
+				InvItem invItem3 = interactingAgent.inventory.FindItem("ResurrectionShampoo");
+				if (invItem3 == null)
+				{
+					GC.audioHandler.Play(agent, "CantDo");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.shapeShifter && interactingAgent.possessing)
+				{
+					interactingAgent.SayDialogue("CantRevivePossessing");
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ReviveBodyguard(agent, interactingAgent);
+				interactingAgent.inventory.SubtractFromItemCount(invItem3, 1);
+				interactingAgent.deathMethod = "Revival";
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ReviveTakeHealth")
+			{
+				if (interactingAgent.shapeShifter && interactingAgent.possessing)
+				{
+					interactingAgent.SayDialogue("CantRevivePossessing");
+					agent.StopInteraction();
+					return false;
+				}
+				if (GC.challenges.Contains("LowHealth") && interactingAgent.health < 10f)
+				{
+					interactingAgent.SayDialogue("CantReviveWeak");
+					agent.StopInteraction();
+					return false;
+				}
+				if (!GC.challenges.Contains("LowHealth") && interactingAgent.health < 20f)
+				{
+					interactingAgent.SayDialogue("CantReviveWeak");
+					GC.audioHandler.Play(interactingAgent, "CantDo");
+					agent.StopInteraction();
+					return false;
+				}
+				if (__instance.HasSpaceToRevive(agent, interactingAgent))
+				{
+					int num6 = (int)(interactingAgent.health / 2f);
+					if (GC.multiplayerMode)
+					{
+						agent.objectMult.ReturnFromGhost(num6);
+					}
+					agent.statusEffects.ReturnFromGhost(num6);
+					interactingAgent.deathMethod = "Revival";
+					interactingAgent.statusEffects.ignoreInvincible = true;
+					interactingAgent.statusEffects.ChangeHealth((float)(-(float)num6));
+					interactingAgent.statusEffects.ignoreInvincible = false;
+					interactingAgent.statusEffects.StartCoroutine(interactingAgent.statusEffects.ReturnFromGhost2());
+					interactingAgent.objectMult.SendChatAnnouncement("RevivedAgent", agent.playerUniqueID, string.Concat(agent.playerColor));
+					agent.StopInteraction();
+					return false;
+				}
+				agent.SayDialogue("CantReviveNoRoom");
+				GC.audioHandler.Play(interactingAgent, "CantDo");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "RobotEnrage")
+			{
+				__instance.RobotEnrage(agent, interactingAgent);
+				return false;
+			}
+			else if (buttonText == "RunForOffice")
+			{
+				bool flag4 = true;
+				bool flag5 = false;
+				bool flag6 = true;
+				bool flag7 = false;
+				int j = 0;
+				while (j < GC.objectRealList.Count)
+				{
+					ObjectReal objectReal = GC.objectRealList[j];
+					if (objectReal.objectName == "Computer" && objectReal.startingChunkRealDescription == "MayorOffice")
+					{
+						if (!objectReal.destroyed)
+						{
+							flag4 = false;
+							break;
+						}
+						break;
+					}
+					else
+					{
+						j++;
+					}
+				}
+				int k = 0;
+				while (k < GC.agentList.Count)
+				{
+					if (GC.agentList[k].isMayor)
+					{
+						Agent agent3 = GC.agentList[k];
+						if (agent3.dead && !agent3.teleporting)
+						{
+							flag5 = true;
+						}
+						else if (agent3.inventory.equippedArmorHead != null)
+						{
+							if (agent3.inventory.equippedArmorHead.invItemName != "MayorHat")
+							{
+								flag6 = false;
+							}
+						}
+						else
+						{
+							flag6 = false;
+						}
+						if (agent3.relationships.GetRelCode(interactingAgent) == relStatus.Hostile)
+						{
+							flag7 = true;
+							break;
+						}
+						break;
+					}
+					else
+					{
+						k++;
+					}
+				}
+				if (flag5)
+				{
+					agent.SayDialogue("MayorDeadNoElection");
+				}
+				else if (!flag6)
+				{
+					agent.SayDialogue("MayorLostHat");
+				}
+				else if (flag7)
+				{
+					agent.SayDialogue("MayorHatesPlayer");
+				}
+				else if (flag4)
+				{
+					agent.SayDialogue("MayorComputerBroken");
+				}
+				else
+				{
+					__instance.RunForOffice(agent, interactingAgent, GC.sessionData.electionScore[interactingAgent.isPlayer]);
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Shakedown")
+			{
+				__instance.Shakedown(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "SignUpToFight")
+			{
+				__instance.SignUpToFight(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "SlaveBuyFreedom")
+			{
+				__instance.GiveSlave(agent, interactingAgent, true, num, buttonPrice, flag, true);
+				return false;
+			}
+			else if (buttonText == "StartGuardSequence")
+			{
+				agent.SayDialogue("StartGuardSequence");
+				agent.StopInteraction();
+				__instance.GuardSequence(agent, interactingAgent);
+				return false;
+			}
+			else if (buttonText == "StartTutorial")
+			{
+				GC.challenges.Clear();
+				GC.originalChallenges.Clear();
+				GC.SetDailyRunText();
+				GC.sessionDataBig.coopMode = false;
+				GC.sessionDataBig.fourPlayerMode = false;
+				GC.sessionDataBig.threePlayer = false;
+				GC.sessionDataBig.newCharacter = "Hobo";
+				GC.loadLevel.RestartGame(101);
+				return false;
+			}
+			else if (buttonText == "TalkAgent")
+			{
+				agent.ShowBigImage(agent.extraVarString4, "", null);
+				interactingAgent.worldSpaceGUI.HideObjectButtons();
+				return false;
+			}
+			else if (buttonText == "TamperRobotAim")
+			{
+				__instance.TamperRobotAim(agent, interactingAgent);
+				return false;
+			}
+			else if (buttonText == "TestStuf")
+			{
+				agent.job = "UseToilet";
+				agent.jobCode = jobType.UseToilet;
+				agent.StartCoroutine(agent.ChangeJobBig(""));
+				ObjectReal objectReal2 = null;
+				float num4 = 9999f;
+				for (int m = 0; m < GC.objectRealList.Count; m++)
+				{
+					ObjectReal objectReal3 = GC.objectRealList[m];
+					if (objectReal3.objectName == "Toilet")
+					{
+						float num5 = Vector2.Distance(agent.tr.position, objectReal3.tr.position);
+						if (num5 < num4)
+						{
+							num4 = num5;
+							objectReal2 = objectReal3;
+						}
+					}
+				}
+				if (objectReal2 != null)
+				{
+					agent.assignedPos = objectReal2.tr.position;
+					agent.assignedObject = objectReal2.playfieldObjectReal;
+					agent.assignedAgent = null;
+				}
+				agent.assignedAgent = null;
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Threaten")
+			{
+				if ((GC.serverPlayer && !interactingAgent.inventory.hasEmptySlotForItem(agent.inventory.FindQuestItem())) || (!GC.serverPlayer && !interactingAgent.inventory.hasEmptySlot()))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.Threaten(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenKey")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ThreatenKey(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenKeyAndSafeCombination")
+			{
+				if (!interactingAgent.inventory.hasEmptySlots(2))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ThreatenKeyAndSafeCombination(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenLeaveTown")
+			{
+				__instance.ThreatenLeaveTown(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenMayor")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ThreatenMayor(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenMayorBadge")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ThreatenMayorBadge(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenMoney")
+			{
+				InvItem invItem2 = new InvItem();
+				invItem2.invItemName = "Money";
+				invItem2.ItemSetup(true);
+				if (!interactingAgent.inventory.hasEmptySlotForItem(invItem2))
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+				}
+				else
+				{
+					__instance.ThreatenMoney(agent, interactingAgent);
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "ThreatenSafeCombination")
+			{
+				if (!interactingAgent.inventory.hasEmptySlot())
+				{
+					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
+					agent.StopInteraction();
+					return false;
+				}
+				__instance.ThreatenSafeCombination(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "Trade")
+			{
+				Debug.Log("Trading");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "TransfuseBlood")
+			{
+				if (interactingAgent.electronic)
+				{
+					interactingAgent.SayDialogue("CantReviveNoBlood");
+				}
+				else if (interactingAgent.statusEffects.hasTrait("OilRestoresHealth"))
+				{
+					if (interactingAgent.mechFilled)
+					{
+						interactingAgent.SayDialogue("CantMechUseAugmentationBooth");
+					}
+					else
+					{
+						interactingAgent.SayDialogue("CantReviveNoBlood");
+					}
+				}
+				else if (agent.health == agent.healthMax)
+				{
+					agent.SayDialogue("HealthFullCantUseItem");
+				}
+				else if (interactingAgent.health <= 1f)
+				{
+					GC.audioHandler.Play(agent, "CantDo");
+				}
+				else
+				{
+					int num7 = 10;
+					int healthChangeOriginal = num7;
+					if (interactingAgent.statusEffects.hasTrait("MusicianTakesLessHealth") || (interactingAgent.oma.superSpecialAbility && interactingAgent.agentName == "Bouncer"))
+					{
+						num7 = 5;
+					}
+					if (interactingAgent.health <= (float)num7)
+					{
+						num7 = (int)interactingAgent.health - 1;
+					}
+					interactingAgent.statusEffects.ignoreInvincible = true;
+					interactingAgent.deathMethod = "TransfuseBlood";
+					interactingAgent.statusEffects.ChangeHealth((float)(-(float)num7));
+					__instance.TransfuseBlood(agent, interactingAgent, healthChangeOriginal);
+					interactingAgent.statusEffects.ignoreInvincible = false;
+					GC.audioHandler.Play(agent, "UseSyringe");
+				}
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "UseBloodBag")
+			{
+				if (!interactingAgent.inventory.HasItem("BloodBag"))
+				{
+					GC.audioHandler.Play(interactingAgent, "CantDo");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.statusEffects.hasTrait("OilRestoresHealth"))
+				{
+					agent.SayDialogue("CantHealOil");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.electronic)
+				{
+					agent.SayDialogue("CantHealElectronic");
+					agent.StopInteraction();
+					return false;
+				}
+				if (interactingAgent.health == interactingAgent.healthMax)
+				{
+					agent.SayDialogue("CantHeal");
+					agent.StopInteraction();
+					return false;
+				}
+				if (!agent.moneySuccess(buttonPrice))
+				{
+					agent.StopInteraction();
+					return false;
+				}
+				InvItem invItem4 = interactingAgent.inventory.FindItem("BloodBag");
+				if (invItem4 != null)
+				{
+					interactingAgent.inventory.SubtractFromItemCount(invItem4, 1);
+				}
+				agent.SayDialogue("HealedBlood");
+				interactingAgent.statusEffects.ChangeHealth(20f);
+				GC.audioHandler.Play(agent, "Heal");
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "UseVoucher")
+			{
+				agent.ShowNPCChest();
+				interactingAgent.usingVoucher = true;
+				return false;
+			}
+			else if (buttonText == "WithdrawInvestment")
+			{
+				__instance.WithdrawInvestment(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			else if (buttonText == "YoureFree")
+			{
+				__instance.YoureFree(agent, interactingAgent);
+				agent.StopInteraction();
+				return false;
+			}
+			#endregion
 
-			return true;
+
+
+
+			string personalObjectButtonsType = agent.personalObjectButtonsType;
+
+			if (!(personalObjectButtonsType == "Kick"))
+			{
+				if (personalObjectButtonsType == "Ban")
+					agent.objectMult.KickPlayer(buttonText, true);
+			}
+			else
+				agent.objectMult.KickPlayer(buttonText, false);
+			
+			agent.StopInteraction();
+			return false;
 		}
 
 		// Non-Patch

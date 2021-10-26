@@ -489,7 +489,8 @@ Offices
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
 
-#	CT	Traits
+#	H	Traits
+PressedButton is now Vanilla to start from scratch, just FYI
 ##		H	Agent Group
 ###		H	Slum NPCs (Pilot)
 New
