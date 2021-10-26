@@ -21,13 +21,18 @@ namespace CCU.Patches.Spawn
         public static void SetupMore3_3_Postfix(LoadLevel __instance)
 		{
 			// Where is GangCount incremented? Might need to ++ it here
+			Core.LogMethodCall();
 
 			foreach (Agent vipAgent in GC.agentList)
 				if (TraitManager.HasTraitFromList(vipAgent, TraitManager.BodyguardedTraits))
 				{
+					Core.LogCheckpoint("A");
+
 					Type bodyguardTrait = TraitManager.GetOnlyTraitFromList(vipAgent, TraitManager.BodyguardedTraits);
 					Vector2 spawnLoc;
 					int num81 = 0;
+
+					Core.LogCheckpoint("B");
 
 					do
 					{
@@ -36,6 +41,8 @@ namespace CCU.Patches.Spawn
 					}
 					while (spawnLoc == Vector2.zero && num81 < 300);
 
+					Core.LogCheckpoint("C");
+
 					if (spawnLoc != Vector2.zero)
 					{
 						Agent.gangCount++;
@@ -43,6 +50,8 @@ namespace CCU.Patches.Spawn
 						vipAgent.modLeashes = 0;
 						Random.InitState(__instance.randomSeedNum);
 						int numGuards = Random.Range(2, 4);
+
+						Core.LogCheckpoint("D");
 
 						for (int j = 0; j < numGuards; j++)
 						{
@@ -61,6 +70,8 @@ namespace CCU.Patches.Spawn
 
 							for (int k = 0; k < GC.agentList.Count; k++)
 							{
+								Core.LogCheckpoint("E");
+
 								Agent gangAgent = GC.agentList[k];
 
 								if (gangAgent.gang == vipAgent.gang)
