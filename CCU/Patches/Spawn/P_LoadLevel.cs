@@ -68,22 +68,20 @@ namespace CCU.Patches.Spawn
 							bodyguard1.modLeashes = 0;
 							bodyguard1.modVigilant = 0;
 
-							for (int k = 0; k < GC.agentList.Count; k++)
+							foreach (Agent agent in GC.agentList)
 							{
 								Core.LogCheckpoint("E");
 
-								Agent gangAgent = GC.agentList[k];
-
-								if (gangAgent.gang == vipAgent.gang)
+								if (agent.gang == vipAgent.gang)
 								{
-									bodyguard1.relationships.SetRelInitial(gangAgent, "Aligned");
-									gangAgent.relationships.SetRelInitial(bodyguard1, "Aligned");
+									bodyguard1.relationships.SetRelInitial(agent, "Aligned");
+									agent.relationships.SetRelInitial(bodyguard1, "Aligned");
 
-									if (!gangAgent.gangMembers.Contains(bodyguard1))
-										gangAgent.gangMembers.Add(bodyguard1);
+									if (!agent.gangMembers.Contains(bodyguard1))
+										agent.gangMembers.Add(bodyguard1);
 
-									if (!bodyguard1.gangMembers.Contains(gangAgent))
-										bodyguard1.gangMembers.Add(gangAgent);
+									if (!bodyguard1.gangMembers.Contains(agent))
+										bodyguard1.gangMembers.Add(agent);
 								}
 							}
 						}

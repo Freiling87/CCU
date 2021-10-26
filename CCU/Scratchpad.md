@@ -17,36 +17,7 @@ H = Hold, usually pending resolution of a separate or grouped issue
 √ = Fully implemented feature or group of features
 
 #	C	00 Initial Load Error Logs
-- On load TestChunk:
-	[Info   : Unity Log] 87% - SETUPMORE3_2
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: Method Call
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: A
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: B
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: C
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: D
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Info   :  CCU_Core] SetupMore3_3_Postfix: E
-	[Error  : Unity Log] InvalidOperationException: Collection was modified; enumeration operation may not execute.
-	Stack trace:
-	System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.Patches.Spawn.P_LoadLevel.SetupMore3_3_Postfix (LoadLevel __instance) (at <ab4ed650140e4b34a07687f8d924bafd>:0)
-	LoadLevel.SetupMore3_3 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel.SetupMore3_2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	LoadLevel+<SetupMore3Wait>d__146.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+
 ---
 
 #	C	00 Top-Priority Bugs
