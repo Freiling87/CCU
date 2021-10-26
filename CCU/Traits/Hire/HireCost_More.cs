@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_CostMore : CustomTrait
+    public class HireCost_More : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_CostMore>()
+            RogueLibs.CreateCustomTrait<HireCost_More>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's hire cost is increased by 50%.\n\n<color=red>Requires:</color> Any Hire non-cost trait",

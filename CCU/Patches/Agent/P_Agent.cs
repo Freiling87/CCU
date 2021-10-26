@@ -145,7 +145,7 @@ namespace CCU.Patches.Behaviors
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.ActiveTraits))
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
 				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(33))
 					return;

@@ -17,12 +17,11 @@ namespace CCU.Patches.Objects
 		{
 			if (transactionType == "SoldierHire" || transactionType == "ThiefAssist") // These are the types used for hire traits
 			{
-				if (__instance.GetComponent<Agent>().HasTrait<Hire_CostLess>())
+				if (__instance.GetComponent<Agent>().HasTrait<HireCost_Less>())
 					__result = (int)((float)__result * 0.5f);
-				else if (__instance.GetComponent<Agent>().HasTrait<Hire_CostMore>())
+				else if (__instance.GetComponent<Agent>().HasTrait<HireCost_More>())
 					__result = (int)((float)__result * 1.5f);
 			}
-			
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]

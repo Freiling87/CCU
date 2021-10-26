@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_CostLess : CustomTrait
+    public class HireCost_Banana : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_CostLess>()
+            RogueLibs.CreateCustomTrait<HireCost_Banana>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's hire cost is reduced by 50%.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
+                    [LanguageCode.English] = "This character's hire cost is one banana.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_CostLess,
+                    [LanguageCode.English] = CTrait.Hire_CostBanana,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

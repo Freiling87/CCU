@@ -134,6 +134,8 @@
     <Compile Include="Traits\Behavior Active\Behavior_Pickpocket.cs" />
     <Compile Include="Traits\Behavior Active\Behavior_SuckBlood.cs" />
     <Compile Include="Traits\Hire\Hire_DisarmTrap.cs" />
+    <Compile Include="Traits\Hire\HireDuration_Permanent.cs" />
+    <Compile Include="Traits\Hire\HireDuration_PermanentOnly.cs" />
     <Compile Include="Traits\Hire\Hire_Pickpocket.cs" />
     <Compile Include="Traits\Hire\Hire_Poison.cs" />
     <Compile Include="Traits\Behavior Passive\Behavior_ExplodeOnDeath.cs" />
@@ -143,9 +145,9 @@
     <Compile Include="Traits\Combat\Combat_UseDrugs.cs" />
     <Compile Include="Traits\Hire\Hire_Bodyguard.cs" />
     <Compile Include="Traits\Hire\Hire_CauseRuckus.cs" />
-    <Compile Include="Traits\Hire\Hire_CostBanana.cs" />
-    <Compile Include="Traits\Hire\Hire_CostLess.cs" />
-    <Compile Include="Traits\Hire\Hire_CostMore.cs" />
+    <Compile Include="Traits\Hire\HireCost_Banana.cs" />
+    <Compile Include="Traits\Hire\HireCost_Less.cs" />
+    <Compile Include="Traits\Hire\HireCost_More.cs" />
     <Compile Include="Traits\Hire\Hire_Hack.cs" />
     <Compile Include="Traits\Hire\Hire_Safecrack.cs" />
     <Compile Include="Traits\Hire\Hire_Tamper.cs" />

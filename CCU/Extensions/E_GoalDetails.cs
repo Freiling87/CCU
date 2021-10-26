@@ -5,15 +5,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using HarmonyLib;
+using RogueLibsCore;
+using CCU.Traits.Hire;
 
 namespace CCU.Extensions
 {
 	// TODO: Learn how to do an actual class extension, lol
 
+	[HarmonyPatch(declaringType: typeof(GoalDetails))]
 	public static class E_GoalDetails
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDetails.LockpickDoorReal))]
+		public static void LockpickDoorReal_Postfix(GoalDetails __instance, ref Agent ___agent)
+		{
+			if (___agent.HasTrait<HireDuration_Permanent>() || ___agent.HasTrait<HireDuration_PermanentOnly>())
+			{
+				// TODO: Figure out how to track a bool here
+				// Or, make a PermHired status effect?
+			}
+		}
 
 		// Based on Window.FinishWindowCutter
 		public static void FinishSafecracker(Safe safe, Agent causerAgent)

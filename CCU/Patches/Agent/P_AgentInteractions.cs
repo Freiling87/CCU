@@ -1867,21 +1867,21 @@ namespace CCU.Patches.Behaviors
 									{
 										Core.LogCheckpoint("Hire Initial");
 
-										bool bananaCost = agent.HasTrait<Hire_CostBanana>();
+										bool bananaCost = agent.HasTrait<HireCost_Banana>();
 
 										if (agent.HasTrait<Hire_Bodyguard>())
 										{
 											if (interactingAgent.inventory.HasItem("HiringVoucher"))
 												__instance.AddButton("HireAsProtection", 6666);
 											else
-												__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire")));
+												__instance.AddButton("HireAsProtection", bananaCost ? 6789 : agent.determineMoneyCost("SoldierHire"));
 										}
-										else if (TraitManager.HasTraitFromList(agent, TraitManager.HireTypeTraits)) // This will exclude Bodyguard since it's checked for previously
+										else
 										{
 											if (interactingAgent.inventory.HasItem("HiringVoucher"))
 												__instance.AddButton("AssistMe", 6666);
 											else
-												__instance.AddButton("AssistMe", bananaCost ? 6789 : (int)(agent.determineMoneyCost("ThiefAssist")));
+												__instance.AddButton("AssistMe", bananaCost ? 6789 : (agent.determineMoneyCost("ThiefAssist")));
 										}
 									}
 									else if (!agent.oma.cantDoMoreTasks)
@@ -2280,6 +2280,13 @@ namespace CCU.Patches.Behaviors
 				interactingAgent.mainGUI.invInterface.ShowTarget(agent, "StandGuard");
 				return false;
 			}
+			else if (buttonText == CJob.TamperSomething)
+			{
+				__instance.interactor = interactingAgent;
+				agent.commander = interactingAgent;
+				interactingAgent.mainGUI.invInterface.ShowTarget(agent, CJob.TamperSomething);
+				return false;
+			}
 			else if (buttonText == "YouCanGo")
 			{
 				__instance.YouCanGo(agent, interactingAgent);
@@ -2592,7 +2599,7 @@ namespace CCU.Patches.Behaviors
 				agent.StopInteraction();
 				return false;
 			}
-			else if (buttonText == "BorrowMoney")
+			else if (buttonText == "BorrowMoney") // Mooch
 			{
 				if (!GC.sessionDataBig.challenges.Contains("Endless") && (GC.levelTheme == 4 || GC.levelTheme == 5))
 				{
@@ -2601,6 +2608,7 @@ namespace CCU.Patches.Behaviors
 					agent.StopInteraction();
 					return false;
 				}
+
 				if (GC.sessionData.debtAmount[interactingAgent.isPlayer - 1] >= 200)
 				{
 					agent.SayDialogue("CantBorrowAnyMore");
@@ -2608,25 +2616,26 @@ namespace CCU.Patches.Behaviors
 					agent.StopInteraction();
 					return false;
 				}
+
 				InvItem invItem = new InvItem();
 				invItem.invItemName = "Money";
 				invItem.ItemSetup(true);
 				invItem.invItemCount = 50;
+
 				if (!interactingAgent.inventory.hasEmptySlotForItem(invItem))
-				{
 					interactingAgent.inventory.PlayerFullResponse(interactingAgent);
-				}
 				else
 				{
 					interactingAgent.inventory.AddItem(invItem);
 					GC.sessionData.debtAmount[interactingAgent.isPlayer - 1] += 50;
+
 					if (!interactingAgent.statusEffects.hasStatusEffect("InDebt") && !interactingAgent.statusEffects.hasStatusEffect("InDebt2") && !interactingAgent.statusEffects.hasStatusEffect("InDebt3"))
-					{
 						interactingAgent.statusEffects.AddStatusEffect("InDebt", true, true);
-					}
+					
 					__instance.BorrowMoney(agent, interactingAgent);
 					interactingAgent.statusEffects.myStatusEffectDisplay.RefreshStatusEffectText();
 				}
+
 				agent.StopInteraction();
 				return false;
 			}
@@ -3874,9 +3883,6 @@ namespace CCU.Patches.Behaviors
 				return false;
 			}
 			#endregion
-
-
-
 
 			string personalObjectButtonsType = agent.personalObjectButtonsType;
 

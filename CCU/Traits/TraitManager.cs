@@ -30,8 +30,8 @@ namespace CCU.Traits
 
 				list.AddRange(AppearanceTraitsGroup);
 
-				list.AddRange(ActiveTraits);
-				list.AddRange(PassiveTraits);
+				list.AddRange(BehaviorActiveTraits);
+				list.AddRange(BehaviorPassiveTraits);
 				list.AddRange(BodyguardedTraits);
 				list.AddRange(HireCostTraits);
 				list.AddRange(HireTypeTraits);
@@ -76,7 +76,7 @@ namespace CCU.Traits
 			}
 		}
 
-		public static List<Type> ActiveTraits = new List<Type>()
+		public static List<Type> BehaviorActiveTraits = new List<Type>()
 		{
 			typeof(Behavior_EatCorpse),
 			typeof(Behavior_GrabDrugs),
@@ -84,7 +84,7 @@ namespace CCU.Traits
 			typeof(Behavior_Pickpocket),
 			typeof(Behavior_SuckBlood),
 		};
-		public static List<Type> PassiveTraits = new List<Type>()
+		public static List<Type> BehaviorPassiveTraits = new List<Type>()
 		{
 			typeof(Behavior_ExplodeOnDeath),
 			typeof(Behavior_Guilty),
@@ -108,9 +108,14 @@ namespace CCU.Traits
 		};
 		public static List<Type> HireCostTraits = new List<Type>()
 		{
-			typeof(Hire_CostBanana),
-			typeof(Hire_CostLess),
-			typeof(Hire_CostMore),
+			typeof(HireCost_Banana),
+			typeof(HireCost_Less),
+			typeof(HireCost_More),
+		};
+		public static List<Type> HireDurationTraits = new List<Type>()
+		{
+			typeof(HireDuration_Permanent),
+			typeof(HireDuration_PermanentOnly),
 		};
 		public static List<Type> HireTypeTraits = new List<Type>()
 		{

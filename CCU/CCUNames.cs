@@ -12,12 +12,27 @@ namespace CCU
 		[RLSetup]
 		public static void InitializeNames()
 		{
-			CustomName hireSafecrack = RogueLibs.CreateCustomName(CJob.SafecrackSafe, NameTypes.Interface, new CustomNameInfo
+			CustomName jobDisarmTrap = RogueLibs.CreateCustomName(CJob.DisarmTrap, NameTypes.Interface, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Disarm Trap",
+				[LanguageCode.Russian] = "",
+			});
+			CustomName jobPickpocket = RogueLibs.CreateCustomName(CJob.Pickpocket, NameTypes.Interface, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Pickpocket",
+				[LanguageCode.Russian] = "",
+			});
+			CustomName jobPoison = RogueLibs.CreateCustomName(CJob.Poison, NameTypes.Interface, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Poison",
+				[LanguageCode.Russian] = "",
+			});
+			CustomName jobSafecrack = RogueLibs.CreateCustomName(CJob.SafecrackSafe, NameTypes.Interface, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Safecrack",
 				[LanguageCode.Russian] = "",
 			});
-			CustomName hireTamper = RogueLibs.CreateCustomName(CJob.TamperSomething, NameTypes.Interface, new CustomNameInfo
+			CustomName jobTamper = RogueLibs.CreateCustomName(CJob.TamperSomething, NameTypes.Interface, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Tamper",
 				[LanguageCode.Russian] = "",

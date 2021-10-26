@@ -23,8 +23,8 @@ namespace CCU.Patches
 			{
 				if (!__instance.agent.disappeared)
 					__instance.agent.objectSprite.flashingRepeatedly = true;
-				//if (GC.serverPlayer)
-				//	__instance.StartCoroutine(__instance.ExplodeBody());  
+				if (GC.serverPlayer)
+					__instance.StartCoroutine("ExplodeBody");
 			}
 		}
 	}

@@ -276,18 +276,22 @@ namespace CCU
 			Hire_CostMore =						"[CCU] Hire - Costs More",
 			Hire_DisarmTrap =					"[CCU] Hire - Disarm Trap",
 			Hire_Hack =							"[CCU] Hire - Hack",
+			Hire_Permanent =					"[CCU] Hire - Permanent",
+			Hire_PermanentOnly =				"[CCU] Hire - Permanent Only",
 			Hire_Pickpocket =					"[CCU] Hire - Pickpocket",
 			Hire_Poison	=						"[CCU] Hire - Poison",
 			Hire_Safecrack =					"[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
 			Hire_Tamper =						"[CCU] Hire - Tamper",
 		#endregion
-		#region Interaction 
-			Interaction_AcceptBribeCop =		"[CCU] Interaction - Accept Bribe",
-			Interaction_AcceptBribeDoor =		"[CCU] Interaction - Accept Bribe", // Requires Guard Door?
+		#region Interaction
 			Interaction_AdministerBloodBag =	"[CCU] Interaction - Administer Blood Bag",
 			Interaction_ArenaManager =			"[CCU] Interaction - Arena Manager",
 			Interaction_BankTeller =			"[CCU] Interaction - Bank Teller",
 			Interaction_BloodBank =				"[CCU] Interaction - Blood Bank", 
+			Interaction_BribeCops =				"[CCU] Interaction - Bribe Cops",
+			Intearction_BribeEntryBeer =		"[CCU] Interaction - Bribe for Entry (Beer)",// Requires Passive Guard Door?
+			Interaction_BribeEntryMoney =		"[CCU] Interaction - Bribe for Entry (Money)", 
+			Interaction_BribeEntryWhiskey =		"[CCU] Interaction - Bribe for Entry (Whiskey)",
 			Interaction_BuyerAll =				"[CCU] Interaction - Buyer All", 
 			Interaction_BuyerOnly =				"[CCU] Interaction - Buyer Only",
 			Interaction_BuyerVendor =			"[CCU] Interaction - Buyer Vendor",
@@ -295,7 +299,9 @@ namespace CCU
 			Interaction_DeportationCenter =		"[CCU] Interaction - Deportation Center",
 			Interaction_Extortable =			"[CCU] Interaction - Extortable",
 			Interaction_Heal =					"[CCU] Interaction - Heal",
-			Interaction_Hotel =					"[CCU] Interaction - Hotel",
+			Interaction_HealAll =				"[CCU] Interaction - Heal All",
+			Interaction_HealOther =				"[CCU] Interaction - Heal Other",
+			Interaction_HotelManager =			"[CCU] Interaction - Hotel Manager",
 			Interaction_Identify =				"[CCU] Interaction - Identify",
 			Interaction_InfluenceElection =		"[CCU] Interaction - Influence Election",
 			Interaction_MayorClerk =			"[CCU] Interaction - Mayor Clerk",

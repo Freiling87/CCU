@@ -16,11 +16,7 @@ C, T = Code this, Test this
 H = Hold, usually pending resolution of a separate or grouped issue
 √ = Fully implemented feature or group of features
 
-#	C	00 Initial Load Error Logs
-
----
-
-#	C	00 Top-Priority Bugs
+#	T	00 Top-Priority Bugs
 ###		T	Vendor error
 - Attempted accessing private name
 
@@ -314,17 +310,20 @@ New
 #	T	Mutators
 ##		√	General
 - Show up in LevelEditor UI, may be a manually constructed list
-##		C	Campaign Branching
+- LoadLevel.loadStuff2 @ 171
+##		H	Campaign Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
-###			C	Usage Guide
-This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.			
-###			C	Level Alpha/Beta/Gamma/Delta
-Designates a level as a place to return to
+###			C	00 Hide from Non-Editor access
+- CreateMutatorListCampaign
+###			C	00 Usage Guide
+This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
 ###			C	Exit Alpha/Beta/Gamma/Delta
 Destination at Elevator
 ###			C	Exit +1/2/3/4
 Can have multiple, to allow Branching
-Adds options at Elevator
+Adds options at Elevator			
+###			C	Level Alpha/Beta/Gamma/Delta
+Designates a level as a place to return to
 ###			C	Set A/B/C/D false
 For level access
 ###			C	Set A/B/C/D true
@@ -348,12 +347,14 @@ For town levels
 #	C	Player Utilities
 ##		C	Mutators to omit Vanilla content when custom is available
 - If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
-##		C	Save Chunk Pack configuration between loads
+##		H	Save Chunk Pack configuration between loads
 - I.e., only deactivate chunk packs when the player says so!
-##		C	Show Chunk info on Mouseover in Map mode
+  - This is useful but doesn't belong in CCU, it belongs in a QOL mod
+##		H	Show Chunk info on Mouseover in Map mode
 - When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
+    - This is useful but doesn't belong in CCU, it belongs in a QOL mod
 
 #	T	Promo Campaign - Shadowrun-but-not-really
 ##		T	Player Character
@@ -489,7 +490,7 @@ Offices
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
 
-#	H	Traits
+#	T	Traits
 PressedButton is now Vanilla to start from scratch, just FYI
 ##		H	Agent Group
 ###		H	Slum NPCs (Pilot)
@@ -675,17 +676,6 @@ Complete
 Complete
 ###			√	Use Drugs in Combat
 Complete
-##		C	Spawn
-###			C	Enslaved
-New
-###			C	Hide In Bush
-New
-###			C	Hide In Manhole
-New
-###			C	Roaming Gang
-New
-###			C	Slave Owner
-NEw			
 ##		CT	Hire
 ###			C	00 General AI Update error
 - Don't test this with Safecrack yet - more vanilla ones will help identify issue
@@ -734,6 +724,8 @@ Pending General AI Update Error resolution
 ###			C	Permanent Hire
 New
 ~8x normal hire price
+###			C	Permanent Hire Only
+New
 ###			C	Pickpocket
 New
 ###			C	Place Time Bomb
@@ -786,6 +778,26 @@ Elsewhere: Remote bomb
 Gives you detonator when planted
 ###			C	Tamper
 New 
+##		C	Interaction
+###			C	Administer Bloodbag
+New
+###			C	Arena Manager
+New
+###			C	Accept Bribe Cop
+New
+###			C	Accept Bribe Cop
+New
+###			C	Accept Bribe Cop
+New
+###			C	Buyer All
+New
+###			C	Buyer Vendor
+New
+###			C	Extortable
+New
+###			C	Moochable
+New
+
 ##		CT	Loadout
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
@@ -860,10 +872,9 @@ Pending customs
 New
 ###			C	Slum NPCs
 New
-##		C	Passive
-###			C	Explode On Death
-- requires Coroutine from private IEnumerator ExplodeBody(). Commented out relevant section.
-- There's an Exploding Bodies mutator, doofus! Copy that.
+##		CT	Passive
+###			T	Explode On Death
+Attempted
 ###			√	Guilty
 Complete
 ###			C	Hackable - Tamper With Aim
@@ -875,15 +886,19 @@ New
 XP Penalty for neutralizing
 ###			C	Invincible
 New
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (Standard)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
 ###			C	Vision Beams (Cop Bot)
 New
-##		C	Relationships
+##		CT	Relationships
 ###			C	Aggressive (Cannibal)
 New
 ###			T	Annoyed At Suspicious
 Attempted
-###			√	Faction Traits
-Complete
+###			C	Faction Traits
+Expand to all relationship levels
 ###			C	Faction Trait Limitation to Same Content
 Limit interaction to same campaign, and if not campaign then same chunk pack
 ###			T	Hostile to Cannibals
@@ -902,7 +917,18 @@ New
 A la Bounty disaster
 ###			C	Vanilla Faction Traits
 For allying people and factions to Crepe/Blahd, etc.
-##		C	Trait Triggers
+##		C	Spawn
+###			C	Enslaved
+New
+###			C	Hide In Bush
+New
+###			C	Hide In Manhole
+New
+###			C	Roaming Gang
+New
+###			C	Slave Owner
+NEw			
+##		T	Trait Triggers
 ###			T	Common Folk
 Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.

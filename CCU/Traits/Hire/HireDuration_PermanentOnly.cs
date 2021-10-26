@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_CostBanana : CustomTrait
+    public class HireDuration_PermanentOnly : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_CostBanana>()
+            RogueLibs.CreateCustomTrait<HireDuration_PermanentOnly>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's hire cost is one banana.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
+                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate. This disables the original single-job hire option.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_CostBanana,
+                    [LanguageCode.English] = CTrait.Hire_PermanentOnly,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
