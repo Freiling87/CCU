@@ -21,6 +21,8 @@ namespace CCU.Patches.Inventory
 
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+		public static FieldInfo nameProviderField = AccessTools.Field(typeof(RogueLibs), "NameProvider");
+		public static CustomNameProvider nameProvider = (CustomNameProvider)nameProviderField.GetValue(null);
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
@@ -33,7 +35,7 @@ namespace CCU.Patches.Inventory
 			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypeTraits))
 			{
 				TraitInfo vendorTrait = TraitInfo.Get(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits));
-				string rName = vendorTrait.Name;
+				string rName = nameProvider.CustomNames[NameTypes.StatusEffect][vendorTrait.Name].English;
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{

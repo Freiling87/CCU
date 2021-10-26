@@ -21,76 +21,8 @@ H = Hold, usually pending resolution of a separate or grouped issue
 ---
 
 #	C	00 Top-Priority Bugs
-###		C	Vendor
-- Goblin Pyro:
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-	[Debug  :CCU_TraitManager] TRAIT LIST: Custom
-	[Debug  :CCU_TraitManager]      Combat_UseDrugs
-	[Debug  :CCU_TraitManager]      Behavior_GrabDrugs
-	[Debug  :CCU_TraitManager]      Hire_CauseRuckus
-	[Debug  :CCU_TraitManager]      Hire_DisarmTrap
-	[Debug  :CCU_TraitManager]      Behavior_ExplodeOnDeath
-	[Debug  :CCU_TraitManager]      Vendor_Demolitionist
-	[Debug  :CCU_TraitManager]      Addict
-	[Debug  :CCU_TraitManager]      Beard
-	[Debug  :CCU_TraitManager]      Mustache
-	[Debug  :CCU_TraitManager]      MustcheCircus
-	[Debug  :CCU_TraitManager]      MustacheRedneck
-	[Debug  :CCU_TraitManager]      NoFacialHair
-	[Debug  :CCU_TraitManager]      ExplosionsDontDamageCauser
-	[Debug  :CCU_TraitManager]      ExplosionsBreakEverything
-	[Debug  :CCU_TraitManager]      HardToSeeFromDistance
-	[Debug  :CCU_TraitManager]      FireproofSkin
-	[Debug  :CCU_TraitManager]      FastWhenHealthLow
-	[Debug  :CCU_TraitManager]      DestructionXP
-	[Debug  :CCU_TraitManager]      RegenerateHealthWhenLow
-	[Debug  :CCU_TraitManager]      HardToShoot
-	[Debug  :CCU_TraitManager]      TechExpert
-	[Debug  :CCU_TraitManager]      Diminutive
-	[Debug  :CCU_P_AgentInteractions] =Custom=
-	[Debug  :CCU_P_AgentInteractions] hasSpecialInvDatabase: True
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-*	[Debug  :CCU_P_AgentInteractions]       Count: 5
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-    - The Starred list is the number of items in their specialinvdatabase. So it is loading correctly, it's just not put in the shop correctly.
-###		T	New error
-On Interact with Orc Street Samurai:
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-	[Debug  :CCU_TraitManager] TRAIT LIST: Custom
-	[Debug  :CCU_TraitManager]      CantUseGuns
-	[Debug  :CCU_TraitManager]      Loud
-	[Debug  :CCU_TraitManager]      NoTechSkill
-	[Debug  :CCU_TraitManager]      IncreasedCritChance
-	[Debug  :CCU_TraitManager]      Combat_Fearless
-	[Debug  :CCU_TraitManager]      Combat_UseDrugs
-	[Debug  :CCU_TraitManager]      Hire_Bodyguard
-	[Debug  :CCU_TraitManager]      Behavior_Guilty
-	[Debug  :CCU_P_AgentInteractions] =Custom=
-	[Error  : Unity Log] InvalidDataException: Agent Custom (1132) was expected to have one trait from list, but has none.
-	Stack trace:
-	CCU.Traits.TraitManager.GetOnlyTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <564910051a164833af95d20b2481ae64>:0)
-	CCU.Patches.Behaviors.P_AgentInteractions.DetermineButtons_Prefix (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1, AgentInteractions __instance, System.Collections.Generic.List`1[System.String]& ___buttons, System.Collections.Generic.List`1[System.String]& ___buttonsExtra, System.Collections.Generic.List`1[System.Int32]& ___buttonPrices, Agent& ___mostRecentAgent, Agent& ___mostRecentInteractingAgent) (at <564910051a164833af95d20b2481ae64>:0)
-	AgentInteractions.DetermineButtons (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Agent.DetermineButtons () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	PlayfieldObject.Interact (Agent agent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Agent.Interact (Agent otherAgent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InteractionHelper.UpdateInteractionHelper () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Updater.UpdateInterface () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Updater.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 ###		T	Vendor error
-- Here:
-	[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
-	[Debug  :CCU_P_InvDatabase]     rName: Vendor_JunkDealer
-	[Debug  :CCU_P_InvDatabase]     Catch
-	[Debug  :CCU_P_InvDatabase]     Text: Empty
-	[Debug  :CCU_P_InvDatabase]     Catch
-	[Debug  :CCU_P_InvDatabase]     Text: Empty
-	[Debug  :CCU_P_InvDatabase]     Catch
-	[Debug  :CCU_P_InvDatabase]     Text: Empty
-	- It looks like that's not the right rName. When I logged existing rNames they were the const string values prefixed by [CCU]. 
-      - string rName = TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits).Name;
-        - is accessing the wrong type of Name.
+- Attempted accessing private name
 
 ---
 
@@ -131,25 +63,47 @@ New
 New
 Follows the first Aligned Agent they see
 Save that Agent ID and return them to them rather than following a new one
+###			C	Injured
+New
+Interact to spend a First Aid Kit and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
+Medical Professional: 50% chance to not spend Antidote
 ###			C	Knocked Out
 New
 ###			C	Lookout
 New
 When alerted, will run towards nearest ally and alert them
+###			C	Operate
+New
+Does "operating" animation like they're working on something
+Halt if talked to
 ###			c	Panic
 New
+###			c	Punch
+New
+Just punch an object one square in front of you forever
+Extremely limited, and noise will distract NPCs
 ###			C	Robot Clean
 New
 In vanilla
 ###			C	Robot Follow
 New
 Killer Robot behavior in vanilla
+###			C	Sick
+New
+Interact to spend an Antidote and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
+Medical Professional: 50% chance to not spend Antidote
+###			C	Statue
+New
+Invincible, stationary, etc.
 ###			C	Wander between Agents
 New
 ###			C	Wander between Agents (Aligned)
 New
 ###			C	Wander between Agents (Unaligned)
 New
+###			C	Wander between Objects & Operate
+New 
+See Operate
 ###			C	Yell
 New
 Will yell their Talk text? Unless you can get a second text box in there somewhere
@@ -191,23 +145,6 @@ Not sure about this one, may be too deeply hardcoded
 ##		CT	Hotkeys
 ###			T	00 SetOrientation/SetDirection not updating in fields
 - Trying calling SetDirection() after these both
-- Draw mode ends up with blank for NewDir
-	[Info   :  CCU_Core] OrientObject: Method Call
-	[Debug  :CCU_LevelEditorUtilities]      input: UpArrow
-	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
-	[Debug  :CCU_LevelEditorUtilities]      its value:
-	[Debug  :CCU_LevelEditorUtilities]      curDir:
-	[Debug  :CCU_LevelEditorUtilities]      newDir: N
-	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
-	[Debug  :CCU_LevelEditorUtilities]      its value: N
-	[Info   :  CCU_Core] OrientObject: Method Call
-	[Debug  :CCU_LevelEditorUtilities]      input: UpArrow
-	[Debug  :CCU_LevelEditorUtilities]      inputField: DirectionFloor
-	[Debug  :CCU_LevelEditorUtilities]      its value: N
-	[Debug  :CCU_LevelEditorUtilities]      curDir: N
-	[Debug  :CCU_LevelEditorUtilities]      newDir: N
-	[Debug  :CCU_LevelEditorUtilities]      directionObjectField: DirectionObject
-	[Debug  :CCU_LevelEditorUtilities]      its value:
 ###			T	Deactivate hotkeys if typing into inputfield
 Attempted
 ###			T	Ctrl + A - Deselect All
@@ -385,6 +322,9 @@ ExitPoint.EmployeesExit prefix
 - First attempt
 Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
+##		T	No Violence
+New
+Just disable use of weapons & violent abilities, for town levels
 
 #	C	Player Utilities
 ##		C	Mutators to omit Vanilla content when custom is available
@@ -435,18 +375,16 @@ Will start small, later evolve to carry an "away squad" that can serve as a mobi
 2 - Now has a Driver and 
 ##		T	The Projects
 Reuse some Building Blocks chunks if you need
-###			T	Exterior
-Slums
+###			T	Exterior (possibly skip)
+Slums city area
 Try to do something cool that encourages player to use Factions to solve a problem
+###			T	Ground Level
+Gang has taken over the building and now runs a secure perimiter around the building
 ###			T	Basement
-Filled with Ghouls & shit
-Someone is doing occult shit and summoning undead, a separate basement separated by a cave tunnel
-Once you deal with them there's an elevator in that basement that leads to Cult Outpost
-###			T	Cult Outpost
-
-###			T	
+Destroy Squank production facilities and steal caches of it
 ##		T	Fud Factory
 Semi-rural area, backwoods depressed town environs
+
 ###			T	Ground Floor
 - Some redneck cabins out in the woods
   - Ensure there are a couple Barbecues here
@@ -482,11 +420,18 @@ Semi-rural area, backwoods depressed town environs
   - Prison is a circular hallway with a conveyor belt pushing them in circles for exercise
 - Mission: Kill Slavemasters & Rudy McFudy
   - Surrounded by Work Pits
-###			T	Ground Floor
+###			T	Canning Plant
 - Emerge on Freight Elevator with a bunch of freed slaves who now roam the level, getting picked off by the security team that arrives
   - Security team set to "Killer Robot" behavior? pwz
   - If they are some real killers, the challenge could be to just make it to the van with no hope of fighting them off
   - Might also want an "Infinite Continues" mutator for long-ass campaigns
+- Cramped Hive quarters for employees, virtually a prison
+##		T	Underground
+###			T	Subway to Cave Tunnel
+###			T	Sewer City
+Make sure some Ghostblasters are sold here
+###			T	Catacombs
+Necromancer Lair
 ##		T	Apollo Corp. Tower
 ###			T	Brief
 Describe what quests represent beforehand in terms of plan
@@ -518,7 +463,6 @@ Mess with power to disable security safeguards of IT department
 - Wood floors w/ rugs, fireplaces, etc. whatever looks as fancy as possible
 - Get Airship Key Fob for escape from the VP of Sales (Retrieve)
 - Kill someone to settle a personal grudge? Maybe tie it into an earlier part of the plot (Eliminate)
-- 
 Pool/Jacuzzi
 Bar
 Offices
@@ -897,8 +841,11 @@ Complete
 New
 ###			C	Hackable - Go Haywire
 New
+###			C	Innocent
+New
+XP Penalty for neutralizing
 ###			C	Invincible
-News
+New
 ###			C	Vision Beams (Cop Bot)
 New
 ##		C	Relationships
