@@ -60,20 +60,51 @@ namespace CCU
         }
     }
 
-	public static class CJob
+	public static class CJob // These names are extra but I want to ensure they're unique
 	{
 		public const string
-			TamperSomething = "TamperSomething",
-			TamperSomethingReal = "TamperSomethingReal",
-			SafecrackSafe = "SafecrackSafe",
-			SafecrackSafeReal = "SafecrackSafeReal";
+			DisarmTrap =							"[CCU] Job - DisarmTrap",
+			Pickpocket =							"[CCU] Job - Pickpocket",
+			Poison =								"[CCU] Job - Poison",
+			SafecrackSafe =							"[CCU] Job - SafecrackSafe",
+			SafecrackSafeReal =						"[CCU] Job - SafecrackSafeReal",
+			TamperSomething =						"[CCU] Job - TamperSomething",
+			TamperSomethingReal =					"[CCU] Job - TamperSomethingReal";
 	}
 
 	public static class CMutators
 	{
 		public const string
-			HomesicknessDisabled = "HomesicknessDisabled",
-			HomesicknessMandatory = "HomesicknessMandatory";
+			HomesicknessDisabled =					"[CCU] Homesickness Disabled",
+			HomesicknessMandatory =					"[CCU] Homesickness Mandatory",
+			Level_Alpha =							"[CCU] Level Alpha",
+			Level_Beta =							"[CCU] Level Beta",
+			Level_Gamma =							"[CCU] Level Gamma",
+			Level_Delta =							"[CCU] Level Delta",
+			LevelExit_Alpha =						"[CCU] Level Exit Alpha",
+			LevelExit_Beta =						"[CCU] Level Exit Beta",
+			LevelExit_Gamma =						"[CCU] Level Exit Gamma",
+			LevelExit_Delta =						"[CCU] Level Exit Delta",
+			LevelExit_Plus1 =						"[CCU] Level Exit +1",
+			LevelExit_Plus2 =						"[CCU] Level Exit +2",
+			LevelExit_Plus3 =						"[CCU] Level Exit +3",
+			LevelExit_Plus4 =						"[CCU] Level Exit +4",
+			Require_False_A =						"[CCU] Require False: A",
+			Require_False_B =						"[CCU] Require False: B",
+			Require_False_C =						"[CCU] Require False: C",
+			Require_False_D =						"[CCU] Require False: D",
+			Require_True_A =						"[CCU] Require True: A",
+			Require_True_B =						"[CCU] Require True: B",
+			Require_True_C =						"[CCU] Require True: C",
+			Require_True_D =						"[CCU] Require True: D",
+			Set_False_A =							"[CCU] Set False: A",
+			Set_False_B =							"[CCU] Set False: B",
+			Set_False_C =							"[CCU] Set False: C",
+			Set_False_D =							"[CCU] Set False: D",
+			Set_True_A =							"[CCU] Set True: A",
+			Set_True_B =							"[CCU] Set True: B",
+			Set_True_C =							"[CCU] Set True: C",
+			Set_True_D =							"[CCU] Set True: D";
 	}
 
     public static class CTrait 

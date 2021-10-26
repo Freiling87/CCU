@@ -314,22 +314,24 @@ New
 #	T	Mutators
 ##		√	General
 - Show up in LevelEditor UI, may be a manually constructed list
-##		T	Campaign Branching
+##		C	Campaign Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
-###			T	Campaign Bookmark
+###			C	Usage Guide
+This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.			
+###			C	Level Alpha/Beta/Gamma/Delta
 Designates a level as a place to return to
-###			T	Exit Bookmark
-###			T	Exit +1 (Default)
-###			T	Exit +2
-###			T	Exit +3
-###			T	Exit +4
-###			T	Set A/B/C/D false
+###			C	Exit Alpha/Beta/Gamma/Delta
+Destination at Elevator
+###			C	Exit +1/2/3/4
+Can have multiple, to allow Branching
+Adds options at Elevator
+###			C	Set A/B/C/D false
 For level access
-###			T	Set A/B/C/D true
+###			C	Set A/B/C/D true
 For level access
-###			T	Require A/B/C/D false
+###			C	Require A/B/C/D false
 Gate level access
-###			T	Require A/B/C/D true
+###			C	Require A/B/C/D true
 Gate level access
 ##		T	Homesickness Disabled
 - First attempt
@@ -611,6 +613,7 @@ New
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
 ###			C	Sell Slaves
 New
 ###			C	Summon Professional

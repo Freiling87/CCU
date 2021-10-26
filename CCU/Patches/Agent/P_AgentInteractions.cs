@@ -23,6 +23,7 @@ namespace CCU.Patches.Behaviors
 			Core.LogMethodCall();
 			TraitManager.LogTraitList(agent);
 
+			#region Collapse to get to Button Lists
 			___buttons = buttons1;
 			___buttonsExtra = buttonsExtra1;
 			___buttonPrices = buttonPrices1;
@@ -608,6 +609,7 @@ namespace CCU.Patches.Behaviors
 					{
 						string agentName = agent.agentName;
 
+						#region Vanilla Agents
 						if (agentName == "Alien")
 						{
 							if (interactingAgent.agentName == "Alien")
@@ -1806,6 +1808,7 @@ namespace CCU.Patches.Behaviors
 							
 							goto IL_48BF;
 						}
+						#endregion
 						else // put agentName == "Custom" or whatever in here when you know what it is
 						{
 							logger.LogDebug("=" + agentName + "=");
@@ -1816,9 +1819,6 @@ namespace CCU.Patches.Behaviors
 								if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
 								{
 									Core.LogCheckpoint("Interaction");
-
-									if (agent.HasTrait<Interaction_BuyerAll>())
-										__instance.AddButton("SellAny"); // TODO
 
 									if (agent.HasTrait<Interaction_Extortable>() && agent.CanShakeDown())
 									{
@@ -1837,14 +1837,9 @@ namespace CCU.Patches.Behaviors
 								}
 
 								// Vendor 
-
-								logger.LogDebug("hasSpecialInvDatabase: " + agent.hasSpecialInvDatabase);
-
 								if (TraitManager.HasTraitFromList(agent, TraitManager.VendorTypeTraits) && agent.hasSpecialInvDatabase)
 								{
 									Core.LogCheckpoint("Vendor");
-
-									Type vendorTrait = TraitManager.GetOnlyTraitFromList(agent, TraitManager.VendorTypeTraits);
 									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
 
 									bool canBuy =
@@ -1879,12 +1874,7 @@ namespace CCU.Patches.Behaviors
 											else
 												__instance.AddButton("HireAsProtection", bananaCost ? 6789 : (int)(agent.determineMoneyCost("SoldierHire")));
 										}
-										else if (
-											agent.HasTrait<Hire_BreakIn>() ||
-											agent.HasTrait<Hire_CauseRuckus>() ||
-											agent.HasTrait<Hire_Hack>() ||
-											agent.HasTrait<Hire_Safecrack>() ||
-											agent.HasTrait<Hire_Tamper>())
+										else if (TraitManager.HasTraitFromList(agent, TraitManager.HireTypeTraits)) // This will exclude Bodyguard since it's checked for previously
 										{
 											if (interactingAgent.inventory.HasItem("HiringVoucher"))
 												__instance.AddButton("AssistMe", 6666);
@@ -1898,12 +1888,25 @@ namespace CCU.Patches.Behaviors
 
 										if (agent.HasTrait<Hire_BreakIn>())
 											__instance.AddButton("LockpickDoor");
+
 										if (agent.HasTrait<Hire_CauseRuckus>())
 											__instance.AddButton("CauseRuckus");
+										
+										if (agent.HasTrait<Hire_DisarmTrap>())
+											__instance.AddButton(CJob.DisarmTrap);
+										
 										if (agent.HasTrait<Hire_Hack>())
 											__instance.AddButton("HackSomething");
+
+										if (agent.HasTrait<Hire_Pickpocket>())
+											__instance.AddButton(CJob.Pickpocket);
+
+										if (agent.HasTrait<Hire_Poison>())
+											__instance.AddButton(CJob.Poison);
+
 										if (agent.HasTrait<Hire_Safecrack>())
 											__instance.AddButton(CJob.SafecrackSafe);
+										
 										if (agent.HasTrait<Hire_Tamper>())
 											__instance.AddButton(CJob.TamperSomething);
 									}

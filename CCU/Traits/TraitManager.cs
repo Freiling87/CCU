@@ -93,6 +93,11 @@ namespace CCU.Traits
 		{
 			typeof(Bodyguarded_Pilot),
 		};
+		public static List<Type> BuyerTraits = new List<Type>()
+		{
+			typeof(Interaction_BuyerAll),
+			typeof(Interaction_BuyerVendor),
+		};
 		public static List<Type> FacialHairTraits = new List<Type>()
 		{
 			typeof(Beard),
