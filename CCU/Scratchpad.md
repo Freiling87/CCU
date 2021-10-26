@@ -314,6 +314,23 @@ New
 #	T	Mutators
 ##		√	General
 - Show up in LevelEditor UI, may be a manually constructed list
+##		T	Campaign Branching
+Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
+###			T	Campaign Bookmark
+Designates a level as a place to return to
+###			T	Exit Bookmark
+###			T	Exit +1 (Default)
+###			T	Exit +2
+###			T	Exit +3
+###			T	Exit +4
+###			T	Set A/B/C/D false
+For level access
+###			T	Set A/B/C/D true
+For level access
+###			T	Require A/B/C/D false
+Gate level access
+###			T	Require A/B/C/D true
+Gate level access
 ##		T	Homesickness Disabled
 - First attempt
 Disable hire dismissal for this level
@@ -324,7 +341,7 @@ Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
 ##		T	No Violence
 New
-Just disable use of weapons & violent abilities, for town levels
+For town levels
 
 #	C	Player Utilities
 ##		C	Mutators to omit Vanilla content when custom is available
@@ -550,6 +567,8 @@ New
 New
 ###			C	Buy Round
 New
+###			C	Cybernetic Surgery
+Curated Trait-seller
 ###			C	Deportation Center Clerk
 New
 ###			C	Extortable
@@ -568,6 +587,9 @@ New
 New
 ###			C	Identify
 New
+###			C	Improve Relations w/ Faction 1-4
+New
+Costs $1000, improves your relations with that faction
 ###			C	Influence Election
 New
 ###			C	Mayor Clerk
@@ -584,7 +606,7 @@ New
 New
 ###			C	Repair Weapons
 New
-###			C	Sell Faction Reputation 1-4
+###			C	Sell Faction Intel 1-4
 New
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
@@ -594,8 +616,11 @@ New
 ###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			C	Train Attributes (Split to each)
+New
 ###			C	Train Traits - Defense
 New
+Sell traits for double their Upgrade Machine cost
 ###			C	Train Traits - Guns
 New
 ###			C	Train Traits - Melee
