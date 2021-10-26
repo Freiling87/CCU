@@ -1,18 +1,9 @@
 ﻿using BepInEx.Logging;
-using HarmonyLib;
+using CCU.Traits.Appearance.FacialHair;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.UI;
-using BTHarmonyUtils;
-using BTHarmonyUtils.TranspilerUtils;
-using CCU.Traits.FacialHair;
 
 namespace CCU.Patches.Appearance
 {
