@@ -206,34 +206,29 @@ namespace CCU
 			Appearance_SkinColor_ZombieSkin2 = "[CCU] Appearance: Skin Color - ZombieSkin2",
 		#endregion
 		#endregion
-		#region Behavior
-			Behavior_CleanTrash =				"[CCU] Behavior - Clean Trash",
-			Behavior_EatCorpse =				"[CCU] Behavior - Eat Corpse",
-			Behavior_EnforceLaws =				"[CCU] Behavior - Enforce Laws (Cop)",
-			Behavior_EnforceLawsCopBot =		"[CCU] Behavior - Enforce Laws (Cop Bot)",
-			Behavior_FightFires =				"[CCU] Behavior - Fight Fires",
-			Behavior_GrabDrugs =				"[CCU] Behavior - Grab Drugs",
-			Behavior_GrabMoney =				"[CCU] Behavior - Grab Money",
-			Behavior_GuardDoor =				"[CCU] Behavior - Guard Door",
-			Behavior_HogTurntables =			"[CCU] Behavior - Turntables Guard",
-			Behavior_Lockdown =					"[CCU] Behavior - Lockdown Clearance", // Might not be a thing - could just be The Law
-			Behavior_Pickpocket =				"[CCU] Behavior - Pickpocket",
-			Behavior_SeekAndDestroy =			"[CCU] Behavior - Seek & Destroy",
-			Behavior_SuckBlood =				"[CCU] Behavior - Suck Blood",
-			Behavior_Shakedown =				"[CCU] Behavior - Shakedown",
-			Behavior_Tattletale =				"[CCU] Behavior - Tattletale",
+		#region Active
+			Active_CleanTrash =					"[CCU] Active - Clean Trash",
+			Active_EatCorpse =					"[CCU] Active - Eat Corpse",
+			Active_EnforceLaws =				"[CCU] Active - Enforce Laws (Cop)",
+			Active_EnforceLawsCopBot =			"[CCU] Active - Enforce Laws (Cop Bot)",
+			Active_FightFires =					"[CCU] Active - Fight Fires",
+			Active_GrabDrugs =					"[CCU] Active - Grab Drugs",
+			Active_GrabMoney =					"[CCU] Active - Grab Money",
+			Active_GuardDoor =					"[CCU] Active - Guard Door",
+			Active_HogTurntables =				"[CCU] Active - Turntables Guard",
+			Active_Lockdown =					"[CCU] Active - Lockdown Clearance", // Might not be a thing - could just be The Law
+			Active_Pickpocket =					"[CCU] Active - Pickpocket",
+			Active_SeekAndDestroy =				"[CCU] Active - Seek & Destroy",
+			Active_SuckBlood =					"[CCU] Active - Suck Blood",
+			Active_Shakedown =					"[CCU] Active - Shakedown",
+			Active_Tattletale =					"[CCU] Active - Tattletale",
 		#endregion
 		#region Bodyguarded
-			Bodyguarded_Pilot = "[CCU] Bodyguarded: Pilot",
-			Bodyguarded_Cops = "[CCU] Bodyguarded: Cops",
-			Bodyguarded_Goons = "[CCU] Bodyguarded: Goons",
-			Bodyguarded_Supercops = "[CCU] Bodyguarded: Supercops",
-			Bodyguarded_Supergoons = "[CCU] Bodyguarded: Supergoons",
-		#endregion
-		#region Buyer
-			Interaction_BuyerAll =				"[CCU] Interaction - Buyer All", // Nonspecific
-			Interaction_BuyerOnly =				"[CCU] Interaction - Buyer Only",
-			Interaction_BuyerVendor =			"[CCU] Interaction - Buyer Vendor", // Buy only items sold
+			Bodyguarded_Pilot =					"[CCU] Bodyguarded: Pilot",
+			Bodyguarded_Cops =					"[CCU] Bodyguarded: Cops",
+			Bodyguarded_Goons =					"[CCU] Bodyguarded: Goons",
+			Bodyguarded_Supercops =				"[CCU] Bodyguarded: Supercops",
+			Bodyguarded_Supergoons =			"[CCU] Bodyguarded: Supergoons",
 		#endregion
 		#region Combat
 			Combat_CauseLockdown =				"[CCU] Combat - Cause Lockdown",
@@ -261,16 +256,19 @@ namespace CCU
 			Interaction_AdministerBloodBag =	"[CCU] Interaction - Administer Blood Bag",
 			Interaction_ArenaManager =			"[CCU] Interaction - Arena Manager",
 			Interaction_BankTeller =			"[CCU] Interaction - Bank Teller",
-			Interaction_BloodBank =				"[CCU] Interaction - Blood Bank",
+			Interaction_BloodBank =				"[CCU] Interaction - Blood Bank", 
+			Interaction_BuyerAll =				"[CCU] Interaction - Buyer All", 
+			Interaction_BuyerOnly =				"[CCU] Interaction - Buyer Only",
+			Interaction_BuyerVendor =			"[CCU] Interaction - Buyer Vendor",
 			Interaction_BuyRound =				"[CCU] Interaction - Buy Round",
 			Interaction_DeportationCenter =		"[CCU] Interaction - Deportation Center",
-			TraitTrigger_Extortable =			"[CCU] Interaction - Extortable",
+			Interaction_Extortable =			"[CCU] Interaction - Extortable",
 			Interaction_Heal =					"[CCU] Interaction - Heal",
 			Interaction_Hotel =					"[CCU] Interaction - Hotel",
 			Interaction_Identify =				"[CCU] Interaction - Identify",
 			Interaction_InfluenceElection =		"[CCU] Interaction - Influence Election",
 			Interaction_MayorClerk =			"[CCU] Interaction - Mayor Clerk",
-			TraitTrigger_Moochable =				"[CCU] Interaction - Moochable",
+			Interaction_Moochable =				"[CCU] Interaction - Moochable",
 			Interaction_OfferMotivation =		"[CCU] Interaction - Offer Motivation",
 			Interaction_PlayBadSong =			"[CCU] Interaction - Song Request",
 			Interaction_QuestGiver =			"[CCU] Interaction - Quest Giver",

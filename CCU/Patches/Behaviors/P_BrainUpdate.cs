@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.AI;
-using CCU.Traits.AI.Active;
-using CCU.Traits.AI.TraitTrigger;
+using CCU.Traits.TraitTrigger;
+using CCU.Traits.Active;
 
 namespace CCU.Patches.Behaviors
 {
-    [HarmonyPatch(declaringType: typeof(BrainUpdate))]
+	[HarmonyPatch(declaringType: typeof(BrainUpdate))]
     public class P_BrainUpdate
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();

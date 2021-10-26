@@ -1,22 +1,19 @@
 ﻿using BepInEx.Logging;
-using CCU.Traits.AI;
-using CCU.Traits.AI.Hire;
-using CCU.Traits.AI.Active;
-using CCU.Traits.AI.TraitTrigger;
-using CCU.Traits.AI.Vendor;
+using CCU.Traits.Hire;
+using CCU.Traits.TraitTrigger;
+using CCU.Traits.Vendor;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CCU.Traits.FacialHair;
 using CCU.Traits.Relationships;
 using CCU.Traits.MapMarker;
 using CCU.Traits.Spawn;
 using System.IO;
-using CCU.Traits.AI.Passive;
-using CCU.Traits.AI.Interaction;
+using CCU.Traits.Passive;
+using CCU.Traits.Interaction;
+using CCU.Traits.Active;
+using CCU.Traits.Appearance.FacialHair;
 
 namespace CCU.Traits
 {

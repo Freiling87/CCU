@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BepInEx.Logging;
 using RogueLibsCore;
 
-namespace CCU.Traits.FacialHair
+namespace CCU.Traits.Appearance.FacialHair
 {
 	public class MustacheRedneck : CustomTrait
 	{

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace CCU.Traits.FacialHair
+namespace CCU.Traits.Appearance.FacialHair
 {
 	public class NoFacialHair : CustomTrait
 	{

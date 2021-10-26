@@ -4,15 +4,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.AI;
-using Random = UnityEngine.Random;
-using System.Reflection;
 using CCU.Traits;
-using CCU.Traits.AI.Hire;
-using CCU.Traits.AI.Vendor;
-using CCU.Traits.AI.TraitTrigger;
-using Google2u;
-using CCU.Traits.AI.Interaction;
+using CCU.Traits.Hire;
+using CCU.Traits.TraitTrigger;
+using CCU.Traits.Interaction;
 
 namespace CCU.Patches.Behaviors
 {

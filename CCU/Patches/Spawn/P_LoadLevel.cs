@@ -3,7 +3,7 @@ using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
 using CCU.Traits.Relationships;
-using CCU.Traits.AI.Combat;
+using CCU.Traits.Combat;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using CCU.Traits;

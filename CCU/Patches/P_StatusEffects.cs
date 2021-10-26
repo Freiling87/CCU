@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BepInEx.Logging;
-using CCU.Traits.AI.Passive;
+using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
 

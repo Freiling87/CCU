@@ -1,18 +1,13 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using System;
-using System.Collections.Generic;
-using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.AI;
-using Random = UnityEngine.Random;
 using System.Reflection;
 using CCU.Traits;
-using CCU.Traits.AI.Active;
-using CCU.Traits.AI.TraitTrigger;
-using CCU.Traits.AI.Combat;
-using CCU.Traits.AI.Passive;
-using CCU.Traits.AI.Interaction;
+using CCU.Traits.Combat;
+using CCU.Traits.Passive;
+using CCU.Traits.Interaction;
+using CCU.Traits.Active;
 
 namespace CCU.Patches.Behaviors
 {

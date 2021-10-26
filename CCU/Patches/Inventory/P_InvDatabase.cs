@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BepInEx.Logging;
 using HarmonyLib;
 using CCU.Traits;
-using CCU.Traits.AI.Vendor;
+using CCU.Traits.Vendor;
 using System.Reflection;
 using Random = UnityEngine.Random;
 using RogueLibsCore;
