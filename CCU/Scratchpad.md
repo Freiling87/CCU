@@ -125,21 +125,7 @@ Will yell their Talk text? Unless you can get a second text box in there somewhe
 ###		C	SawBlade
 .Start
 ###		T	SlimeBarrel
-- Haven't really tested yet but: 
-	System.DefaultBinder.BindToMethod (System.Reflection.BindingFlags bindingAttr, System.Reflection.MethodBase[] match, System.Object[]& args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo cultureInfo, System.String[] names, System.Object& state) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
-	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
-	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
-	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
-	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Objects.P_SlimeBarrel.Start (SlimeBarrel __instance) (at <f8fe071de5a046f18a2599c39a4d8e95>:0)
-	SlimeBarrel.Start () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	- Attempted calling private a different way
+- New Attempt
 ###		C	SwitchFloor
 Not sure about this one, may be too deeply hardcoded
 ###		C	Tube
