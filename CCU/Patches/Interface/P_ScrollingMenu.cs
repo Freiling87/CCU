@@ -16,10 +16,10 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(ScrollingMenu.CanHaveTrait), argumentTypes: new[] { typeof(Unlock) })]
-		public static bool canHaveTrait_Prefix(Unlock myUnlock, ref bool ___result)
+		public static bool canHaveTrait_Prefix(Unlock myUnlock, ref bool __result)
 		{
 			if (GC.challenges.Contains(CMutators.HomesicknessDisabled) && myUnlock.unlockName == VanillaTraits.HomesicknessKiller)
-				___result = false;
+				__result = false;
 			
 			return false;
 		}
