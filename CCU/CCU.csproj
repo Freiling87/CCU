@@ -108,6 +108,7 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Mutators\DarkerDarkness.cs" />
     <Compile Include="Mutators\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\HomesicknessMandatory.cs" />
     <Compile Include="Mutators\NoObjectLights.cs" />
@@ -257,6 +258,7 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Patches\Environment\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />

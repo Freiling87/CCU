@@ -75,6 +75,7 @@ namespace CCU
 	public static class CMutators
 	{
 		public const string
+			DarkerDarkness =						"[CCU] Darker Darkness",
 			HomesicknessDisabled =					"[CCU] Homesickness Disabled",
 			HomesicknessMandatory =					"[CCU] Homesickness Mandatory",
 			Level_Alpha =							"[CCU] Level Alpha",

@@ -322,7 +322,7 @@ Complete
 Opens Load selector menu
 
 #	T	Mutators
-##		√	General
+##		√	General Mutator List
 - Show up in LevelEditor UI, may be a manually constructed list
 - LoadLevel.loadStuff2 @ 171
 ##		H	Campaign Branching
@@ -357,7 +357,9 @@ Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
 ##		CT	Lighting
 ###			C	Darker Darkness
-Ambiance
+- Attempted
+- Next to try:
+  - SetNewLightingAmbient from WerewolfTransform
 ###			T	No Agent Lights
 Test
 ###			T	No Item/Wreckage Lights
