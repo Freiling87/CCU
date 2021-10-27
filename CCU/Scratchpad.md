@@ -251,6 +251,9 @@ For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
 New
 ##		H	Object Additions
+###			C	Air Conditioner
+Enable "Fumigating" w/ staff in gas masks as option
+GasVent.fumigationSelected
 ###			C	Fire Hydrant
 Ability to be already shooting water according to direction
 ###			C	Flaming Barrel
@@ -343,19 +346,39 @@ For level access
 Gate level access
 ###			C	Require A/B/C/D true
 Gate level access
-##		T	Homesickness Disabled
+##		T	Followers
+###			T	Homesickness Disabled
 - First attempt
 Disable hire dismissal for this level
 ExitPoint.EmployeesExit prefix
-##		T	Homesickness Mandatory
+###			T	Homesickness Mandatory
 - First attempt
 Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
+##		CT	Lighting
+###			C	Darker Darkness
+Ambiance
+###			T	No Agent Lights
+Test
+###			T	No Item/Wreckage Lights
+Test
+###			T	No Object Lights
+Test
+##		C	Particles
+###			C	Floral-er Flora
+New
+###			C	Litter-ally the worst
+Import
 ##		T	No Violence
 New
 For town levels
 
 #	C	Player Utilities
+##		C	Mouse3 Bind to command followers
+- Target
+  - Ground - All Stand Guard
+  - Agent - All Attack
+  - Self - All Follow
 ##		C	Mutators to omit Vanilla content when custom is available
 - If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
 ##		H	Save Chunk Pack configuration between loads

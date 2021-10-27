@@ -110,10 +110,14 @@
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Mutators\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\HomesicknessMandatory.cs" />
+    <Compile Include="Mutators\NoObjectLights.cs" />
+    <Compile Include="Mutators\NoItemLights.cs" />
+    <Compile Include="Mutators\NoAgentLights.cs" />
     <Compile Include="Patches\Agent\P_Agent.cs" />
     <Compile Include="Patches\Agent\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agent\P_BrainUpdate.cs" />
     <Compile Include="Patches\Agent\P_GoalDoJob.cs" />
+    <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
