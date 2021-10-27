@@ -116,6 +116,7 @@ namespace CCU
 			NoObjectLights =						"[CCU] No Object Lights",
 		#endregion
 		#region Wreckage
+			AmbienterAmbience =						"[CCU] Ambient-er Ambience",
 			FloralerFlora =							"[CCU] Floral-er Flora",
 			LitterallyTheWorst =					"[CCU] Litter-ally the Worst",
 			ShittierToilets =						"[CCU] Shittier Toilets",

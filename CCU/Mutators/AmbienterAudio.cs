@@ -9,19 +9,19 @@ using RogueLibsCore;
 
 namespace CCU.Mutators
 {
-	class FloralerFlora
+	class AmbienterAmbience
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.FloralerFlora, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.AmbienterAmbience, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.FloralerFlora,
+					[LanguageCode.English] = CMutators.AmbienterAmbience,
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Spawns leaves around all plants.",
+					[LanguageCode.English] = "Enables some previously un-used ambient audio, particularly for Casinos and Graveyards.",
 				});
 		}
 	}

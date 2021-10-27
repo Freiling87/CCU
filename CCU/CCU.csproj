@@ -108,6 +108,7 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Mutators\AmbienterAudio.cs" />
     <Compile Include="Mutators\DarkerDarkness.cs" />
     <Compile Include="Mutators\FloralerFlora.cs" />
     <Compile Include="Mutators\HomesicknessDisabled.cs" />
