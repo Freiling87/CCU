@@ -21,7 +21,7 @@ namespace CCU.Traits.Appearance.FacialHair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Appearance_FacialHair_MustacheRedneck,
+					[LanguageCode.English] = CTrait.FacialHair_MustacheRedneck,
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock

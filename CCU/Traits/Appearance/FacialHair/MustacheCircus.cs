@@ -7,12 +7,12 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Appearance.FacialHair
 {
-	public class MustcheCircus : CustomTrait
+	public class MustacheCircus : CustomTrait
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<MustcheCircus>()
+			RogueLibs.CreateCustomTrait<MustacheCircus>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this trait to the appearance pool. If this character is generated as an NPC, their appearance will be randomized between all appearance traits in the pool.",
@@ -20,7 +20,7 @@ namespace CCU.Traits.Appearance.FacialHair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Appearance_FacialHair_MustacheCircus,
+					[LanguageCode.English] = CTrait.FacialHair_MustacheCircus,
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock

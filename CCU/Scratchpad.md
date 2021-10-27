@@ -76,6 +76,12 @@ Does "operating" animation like they're working on something
 Halt if talked to
 ###			c	Panic
 New
+###			C	Protect (Lax)
+New
+Find nearest Important NPC, and stay near them. Allow interaction.
+###			C	Protect (Strict)
+New
+Find nearest Important NPC, and stay near them. Prohibit interaction.
 ###			c	Punch
 New
 Just punch an object one square in front of you forever
@@ -258,6 +264,16 @@ Complete
 For placement in containers/inventories
 ##		C	Multiple In Chunk field for NPC Group selection
 New
+##		H	Object Additions
+###			C	Fire Hydrant
+Ability to be already shooting water according to direction
+###			C	Flaming Barrel
+- Gibs (Black)
+- Oil (Dark Green)
+- Ooze (Yellow)
+- Water (Blue)
+###			C	Movie Screen
+Allow Text like Sign
 ##		C	Randomized Lights
 New
 ##		C	Red-Tint Out-Of-District Objects
@@ -267,6 +283,7 @@ I.e., show rotated sprite for any objects
 ##		H	Rotate Chunks in Play Mode
 This sounds hard
  
+
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode

@@ -102,7 +102,7 @@ namespace CCU.Traits
 		{
 			typeof(Beard),
 			typeof(Mustache),
-			typeof(MustcheCircus),
+			typeof(MustacheCircus),
 			typeof(MustacheRedneck),
 			typeof(NoFacialHair),
 		};

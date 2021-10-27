@@ -20,7 +20,7 @@ namespace CCU.Traits.Appearance.FacialHair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Appearance_FacialHair_None,
+					[LanguageCode.English] = CTrait.FacialHair_None,
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock
