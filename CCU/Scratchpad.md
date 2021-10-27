@@ -329,6 +329,8 @@ Opens Load selector menu
 ###			C	Ambienter Ambience
 New
 Gate behind presence of objects/agents, e.g. disable Casino if all Slots are destroyed
+##			C	Big Quest Exempt
+Deactivate Big Quest for level, freeze mark counts
 ##		H	Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
 ###			C	00 Hide from Non-Editor access
