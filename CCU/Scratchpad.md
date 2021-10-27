@@ -9,13 +9,11 @@ Relationships
 	Faction
 
 #		Header Symbol Notes
-
-Listed in order of Parent tier summary symbol priority
-
-C, T = Code this, Test this
-N = Next release
-H = Hold, usually pending resolution of a separate or grouped issue
-√ = Fully implemented feature or group of features
+Listed in order of Parent tier summary symbol priority:
+	C, T = Code this, Test this
+	N = Next release
+	H = Hold, usually pending resolution of a separate or grouped issue
+	√ = Fully implemented feature or group of features
 
 #	T	00 Top-Priority Bugs
 ###		T	Bodyguard Load Error
