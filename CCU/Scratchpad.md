@@ -9,18 +9,16 @@ Relationships
 	Faction
 
 #		Header Symbol Notes
-
-Listed in order of Parent tier summary symbol priority
-
-C, T = Code this, Test this
-N = Next release
-H = Hold, usually pending resolution of a separate or grouped issue
-√ = Fully implemented feature or group of features
+Listed in order of Parent tier summary symbol priority:
+	C, T = Code this, Test this
+	N = Next release
+	H = Hold, usually pending resolution of a separate or grouped issue
+	√ = Fully implemented feature or group of features
 
 #	T	00 Top-Priority Bugs
 ###		T	Bodyguard Load Error
-Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
-
+- Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
+  - Rearranged algorithm
 ---
 
 #	CT	Character Editor
@@ -273,6 +271,26 @@ I.e., show rotated sprite for any objects
 This sounds hard
  
 
+#	C	Documentation
+##		C	Keyboard Layout Diagrams
+###			√	Chunk Editor
+http://www.keyboard-layout-editor.com/#/gists/2f3df5c48d93b5cbb24ebddca302ffd6
+###			C	Level Editor
+New
+##		C	Text files
+###			C	Main ReadMe Page
+####			C	Initial Pitch & addressing common concerns
+####			C	Editor Section
+####			C	Mutator Section
+####			C	Traits Section
+###			C	Chunk Editor Page
+###			C	Level Editor Page
+###			C	Promo Campaign Page
+###			C	Mutator Page
+####			C	Examples
+###			C	Trait Page
+####			C	Examples
+
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
@@ -377,22 +395,25 @@ Test
 ###			T	No Object Lights
 Test
 ##		C	Wreckage
-###			C	Floral-er Flora
+##			C	Bachelor-er Pads
+Trash indoors
+###			C	Dirtier Districts (Litter-ally the Worst)
 New
-###			C	Litter-ally the worst
+Rename in code
+###			C	Floral-er Flora
 New
 ###			C	Shittier Toilets
 New
 ###			C	Trashier Trashcans
 New
 
-#	C	Player Utilities
-##		C	Mouse3 Bind to command followers
+#	H	Player Utilities
+##		H	Mouse3 Bind to command followers
 - Target
   - Ground - All Stand Guard
   - Agent - All Attack
   - Self - All Follow
-##		C	Mutators to omit Vanilla content when custom is available
+##		H	Mutators to omit Vanilla content when custom is available
 - If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
 ##		H	Save Chunk Pack configuration between loads
 - I.e., only deactivate chunk packs when the player says so!
@@ -698,6 +719,8 @@ New
     - LoadLevel.SpawnStartingFollowers
     - ObjectMult.StartWithFollowersBodyguardA
       - Ignore this one, it's for the Player Bodyguard trait
+###			C	Bodyguard Quantity Traits?
+One / few / many, that's it
 ###			C	Bodyguarded - Cop
 New
 ###			C	Bodyguarded - Blahd
@@ -705,6 +728,8 @@ New
 ###			C	Bodyguarded - Crepe
 New
 ###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Gorilla
 New
 ###			C	Bodyguarded - Mafia
 New

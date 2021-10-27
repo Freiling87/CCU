@@ -271,6 +271,9 @@
     <Folder Include="Traits\Appearance\Hairstyle\" />
     <Folder Include="Traits\Appearance\SkinColor\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\Images\ChunkEditor.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>set gameDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"

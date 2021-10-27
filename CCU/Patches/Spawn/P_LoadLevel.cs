@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 using CCU.Traits;
 using CCU.Traits.Spawn;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace CCU.Patches.Spawn
 {
@@ -21,47 +22,35 @@ namespace CCU.Patches.Spawn
         //[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3")]
         public static void SetupMore3_3_Postfix(LoadLevel __instance)
 		{
-			// Where is GangCount incremented? Might need to ++ it here
 			Core.LogMethodCall();
-			logger.LogDebug("TOTAL AGENT COUNT: " + GC.agentList.Count());
+			List<Agent> vips = new List<Agent>();
 
-			foreach (Agent vipAgent in GC.agentList)
-			{
-				logger.LogDebug("Index: " + GC.agentList.IndexOf(vipAgent));
-				if (TraitManager.HasTraitFromList(vipAgent, TraitManager.BodyguardedTraits))
+			foreach (Agent agent in GC.agentList)
+				if (TraitManager.HasTraitFromList(agent, TraitManager.BodyguardedTraits) && agent.gang == 0)
+					vips.Add(agent);
+
+			if (vips.Count() > 0)
+				foreach(Agent vip in vips)
 				{
-					Core.LogCheckpoint("A");
-
-					Type bodyguardTrait = TraitManager.GetOnlyTraitFromList(vipAgent, TraitManager.BodyguardedTraits);
+					Type bodyguardTrait = TraitManager.GetOnlyTraitFromList(vip, TraitManager.BodyguardedTraits);
 					Vector2 spawnLoc;
-					int num81 = 0;
-
-					Core.LogCheckpoint("B");
+					int attempts = 0;
 
 					do
-					{
-						spawnLoc = GC.tileInfo.FindLocationNearLocation(vipAgent.tr.position, null, 0.32f, 1.28f, true, true);
-						num81++;
-					}
-					while (spawnLoc == Vector2.zero && num81 < 300);
-
-					Core.LogCheckpoint("C");
+						spawnLoc = GC.tileInfo.FindLocationNearLocation(vip.tr.position, null, 0.32f, 1.28f, true, true);
+					while (spawnLoc == Vector2.zero && attempts++ < 300);
 
 					if (spawnLoc != Vector2.zero)
 					{
 						Agent.gangCount++;
-						vipAgent.gang = Agent.gangCount;
-						vipAgent.modLeashes = 0;
+						vip.gang = Agent.gangCount;
+						vip.modLeashes = 0;
 						Random.InitState(__instance.randomSeedNum);
 						int numGuards = Random.Range(2, 4);
 
-						Core.LogCheckpoint("D");
-
-						for (int j = 0; j < numGuards; j++)
+						for (int i = 0; i < numGuards; i++)
 						{
-							string bodyguardType;
-
-							bodyguardType =
+							string bodyguardType =
 								bodyguardTrait == typeof(Bodyguarded_Pilot) ? "Guard" :
 								"Assassin";
 
@@ -74,9 +63,7 @@ namespace CCU.Patches.Spawn
 
 							foreach (Agent gangmember in GC.agentList)
 							{
-								Core.LogCheckpoint("E");
-
-								if (gangmember.gang == vipAgent.gang)
+								if (gangmember.gang == vip.gang)
 								{
 									bodyguard1.relationships.SetRelInitial(gangmember, "Aligned");
 									gangmember.relationships.SetRelInitial(bodyguard1, "Aligned");
@@ -88,14 +75,9 @@ namespace CCU.Patches.Spawn
 										bodyguard1.gangMembers.Add(gangmember);
 								}
 							}
-							Core.LogCheckpoint("F");
 						}
-						Core.LogCheckpoint("G");
 					}
-					Core.LogCheckpoint("H");
 				}
-				Core.LogCheckpoint("I");
-			}
 		}
     }
 }
