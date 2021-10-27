@@ -19,8 +19,8 @@ H = Hold, usually pending resolution of a separate or grouped issue
 
 #	T	00 Top-Priority Bugs
 ###		T	Bodyguard Load Error
-Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
-
+- Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
+  - Rearranged algorithm
 ---
 
 #	CT	Character Editor
@@ -719,6 +719,8 @@ New
     - LoadLevel.SpawnStartingFollowers
     - ObjectMult.StartWithFollowersBodyguardA
       - Ignore this one, it's for the Player Bodyguard trait
+###			C	Bodyguard Quantity Traits?
+One / few / many, that's it
 ###			C	Bodyguarded - Cop
 New
 ###			C	Bodyguarded - Blahd
@@ -726,6 +728,8 @@ New
 ###			C	Bodyguarded - Crepe
 New
 ###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Gorilla
 New
 ###			C	Bodyguarded - Mafia
 New
