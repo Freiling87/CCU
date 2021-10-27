@@ -75,9 +75,11 @@ namespace CCU
 	public static class CMutators
 	{
 		public const string
-			DarkerDarkness =						"[CCU] Darker Darkness",
+		#region Followers
 			HomesicknessDisabled =					"[CCU] Homesickness Disabled",
 			HomesicknessMandatory =					"[CCU] Homesickness Mandatory",
+		#endregion
+		#region Level Branching
 			Level_Alpha =							"[CCU] Level Alpha",
 			Level_Beta =							"[CCU] Level Beta",
 			Level_Gamma =							"[CCU] Level Gamma",
@@ -90,9 +92,6 @@ namespace CCU
 			LevelExit_Plus2 =						"[CCU] Level Exit +2",
 			LevelExit_Plus3 =						"[CCU] Level Exit +3",
 			LevelExit_Plus4 =						"[CCU] Level Exit +4",
-			NoAgentLights =							"[CCU] No Agent Lights",
-			NoItemLights =							"[CCU] No Item Lights",
-			NoObjectLights =						"[CCU] No Object Lights",
 			Require_False_A =						"[CCU] Require False: A",
 			Require_False_B =						"[CCU] Require False: B",
 			Require_False_C =						"[CCU] Require False: C",
@@ -108,7 +107,20 @@ namespace CCU
 			Set_True_A =							"[CCU] Set True: A",
 			Set_True_B =							"[CCU] Set True: B",
 			Set_True_C =							"[CCU] Set True: C",
-			Set_True_D =							"[CCU] Set True: D";
+			Set_True_D =							"[CCU] Set True: D",
+		#endregion
+		#region Lighting
+			DarkerDarkness =						"[CCU] Darker Darkness",
+			NoAgentLights =							"[CCU] No Agent Lights",
+			NoItemLights =							"[CCU] No Item Lights",
+			NoObjectLights =						"[CCU] No Object Lights",
+		#endregion
+		#region Wreckage
+			FloralerFlora =							"[CCU] Floral-er Flora",
+			LitterallyTheWorst =					"[CCU] Litter-ally the Worst",
+			ShittierToilets =						"[CCU] Shittier Toilets",
+			TrashierTrashcans =						"[CCU] Trashier Trashcans";
+		#endregion
 	}
 
     public static class CTrait 

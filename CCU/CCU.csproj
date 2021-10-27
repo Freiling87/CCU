@@ -109,11 +109,15 @@
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Mutators\DarkerDarkness.cs" />
+    <Compile Include="Mutators\FloralerFlora.cs" />
     <Compile Include="Mutators\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\HomesicknessMandatory.cs" />
+    <Compile Include="Mutators\LitterallyTheWorst.cs" />
     <Compile Include="Mutators\NoObjectLights.cs" />
     <Compile Include="Mutators\NoItemLights.cs" />
     <Compile Include="Mutators\NoAgentLights.cs" />
+    <Compile Include="Mutators\ShittierToilets.cs" />
+    <Compile Include="Mutators\TrashierTrashcans.cs" />
     <Compile Include="Patches\Agent\P_Agent.cs" />
     <Compile Include="Patches\Agent\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agent\P_BrainUpdate.cs" />
