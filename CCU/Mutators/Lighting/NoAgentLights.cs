@@ -7,21 +7,21 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using RogueLibsCore;
 
-namespace CCU.Mutators
+namespace CCU.Mutators.Lighting
 {
-	class ShittierToilets
+	class NoAgentLights
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.ShittierToilets, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.NoAgentLights, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.ShittierToilets,
+					[LanguageCode.English] = CMutators.NoAgentLights,
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Spawns turds around toilets. ESSENTIAL.",
+					[LanguageCode.English] = "Agents no longer create light around themselves.",
 				});
 		}
 	}

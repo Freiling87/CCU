@@ -7,21 +7,21 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using RogueLibsCore;
 
-namespace CCU.Mutators
+namespace CCU.Mutators.Followers
 {
-	class TrashierTrashcans
+	class HomesicknessDisabled
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.TrashierTrashcans, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.HomesicknessDisabled, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.TrashierTrashcans,
+					[LanguageCode.English] = CMutators.HomesicknessDisabled,
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Spawns litter around Trashcans.",
+					[LanguageCode.English] = "Followers never stay behind when you leave a level.",
 				});
 		}
 	}

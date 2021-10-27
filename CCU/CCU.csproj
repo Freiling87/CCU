@@ -108,17 +108,17 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
-    <Compile Include="Mutators\AmbienterAudio.cs" />
-    <Compile Include="Mutators\DarkerDarkness.cs" />
-    <Compile Include="Mutators\FloralerFlora.cs" />
-    <Compile Include="Mutators\HomesicknessDisabled.cs" />
-    <Compile Include="Mutators\HomesicknessMandatory.cs" />
-    <Compile Include="Mutators\LitterallyTheWorst.cs" />
-    <Compile Include="Mutators\NoObjectLights.cs" />
-    <Compile Include="Mutators\NoItemLights.cs" />
-    <Compile Include="Mutators\NoAgentLights.cs" />
-    <Compile Include="Mutators\ShittierToilets.cs" />
-    <Compile Include="Mutators\TrashierTrashcans.cs" />
+    <Compile Include="Mutators\Audio\AmbienterAmbience.cs" />
+    <Compile Include="Mutators\Lighting\DarkerDarkness.cs" />
+    <Compile Include="Mutators\Wreckage\FloralerFlora.cs" />
+    <Compile Include="Mutators\Followers\HomesicknessDisabled.cs" />
+    <Compile Include="Mutators\Followers\HomesicknessMandatory.cs" />
+    <Compile Include="Mutators\Wreckage\LitterallyTheWorst.cs" />
+    <Compile Include="Mutators\Lighting\NoObjectLights.cs" />
+    <Compile Include="Mutators\Lighting\NoItemLights.cs" />
+    <Compile Include="Mutators\Lighting\NoAgentLights.cs" />
+    <Compile Include="Mutators\Wreckage\ShittierToilets.cs" />
+    <Compile Include="Mutators\Wreckage\TrashierTrashcans.cs" />
     <Compile Include="Patches\Agent\P_Agent.cs" />
     <Compile Include="Patches\Agent\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agent\P_BrainUpdate.cs" />
@@ -263,6 +263,8 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mutators\Branching\" />
+    <Folder Include="Mutators\Gameplay\" />
     <Folder Include="Patches\Environment\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />

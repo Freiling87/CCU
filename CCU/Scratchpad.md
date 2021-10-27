@@ -325,7 +325,11 @@ Opens Load selector menu
 ##		√	General Mutator List
 - Show up in LevelEditor UI, may be a manually constructed list
 - LoadLevel.loadStuff2 @ 171
-##		H	Campaign Branching
+##		C	Audio
+###			C	Ambienter Ambience
+New
+Gate behind presence of objects/agents, e.g. disable Casino if all Slots are destroyed
+##		H	Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
@@ -355,8 +359,12 @@ ExitPoint.EmployeesExit prefix
 - First attempt
 Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
-##		CT	Lighting
-###			C	Darker Darkness
+##		C	Gameplay
+###			C	No Violence
+New
+For town levels
+##		T	Lighting
+###			T	Darker Darkness
 - Attempted
 - Next to try:
   - SetNewLightingAmbient from WerewolfTransform
@@ -366,14 +374,15 @@ Test
 Test
 ###			T	No Object Lights
 Test
-##		C	Particles
+##		C	Wreckage
 ###			C	Floral-er Flora
 New
 ###			C	Litter-ally the worst
-Import
-##		T	No Violence
 New
-For town levels
+###			C	Shittier Toilets
+New
+###			C	Trashier Trashcans
+New
 
 #	C	Player Utilities
 ##		C	Mouse3 Bind to command followers

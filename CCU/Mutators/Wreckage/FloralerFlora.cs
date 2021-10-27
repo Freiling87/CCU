@@ -7,21 +7,21 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using RogueLibsCore;
 
-namespace CCU.Mutators
+namespace CCU.Mutators.Wreckage
 {
-	class HomesicknessDisabled
+	class FloralerFlora
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.HomesicknessDisabled, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.FloralerFlora, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.HomesicknessDisabled,
+					[LanguageCode.English] = CMutators.FloralerFlora,
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Followers never stay behind when you leave a level.",
+					[LanguageCode.English] = "Spawns leaves around all plants.",
 				});
 		}
 	}

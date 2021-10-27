@@ -7,21 +7,21 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using RogueLibsCore;
 
-namespace CCU.Mutators
+namespace CCU.Mutators.Lighting
 {
-	class HomesicknessMandatory
+	class NoObjectLights
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.HomesicknessMandatory, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.NoObjectLights, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.HomesicknessMandatory,
+					[LanguageCode.English] = CMutators.NoObjectLights,
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Followers always stay behind when you leave a level.",
+					[LanguageCode.English] = "Objects no longer create light around themselves.",
 				});
 		}
 	}

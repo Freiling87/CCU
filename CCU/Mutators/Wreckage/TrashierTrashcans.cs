@@ -7,21 +7,21 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using RogueLibsCore;
 
-namespace CCU.Mutators
+namespace CCU.Mutators.Wreckage
 {
-	class LitterallyTheWorst
+	class TrashierTrashcans
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.LitterallyTheWorst, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.TrashierTrashcans, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.LitterallyTheWorst,
+					[LanguageCode.English] = CMutators.TrashierTrashcans,
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Spawns trash in exterior areas.",
+					[LanguageCode.English] = "Spawns litter around Trashcans.",
 				});
 		}
 	}
