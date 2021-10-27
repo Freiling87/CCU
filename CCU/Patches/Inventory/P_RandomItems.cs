@@ -217,7 +217,7 @@ namespace CCU.Patches.Inventory
 			rList = sel.CreateRandomList(CTrait.Vendor_Hypnotist, "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.Cologne, 1);
 			sel.CreateRandomElement(rList, vItem.Haterator, 2);
-			sel.CreateRandomElement(rList, vItem.Hypnotizer, 2);
+			sel.CreateRandomElement(rList, vItem.Hypnotizer, 4);
 			sel.CreateRandomElement(rList, vItem.HypnotizerII, 2);
 			sel.CreateRandomElement(rList, vItem.MemoryMutilator, 2);
 
@@ -429,12 +429,13 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.Shuriken, 3);
 
 			rList = sel.CreateRandomList(CTrait.Vendor_ToyStore, "Items", "Item");
-			sel.CreateRandomElement(rList, vItem.BananaPeel, 1);
+			sel.CreateRandomElement(rList, vItem.BananaPeel, 4);
 			sel.CreateRandomElement(rList, vItem.Blindenizer, 1);
 			sel.CreateRandomElement(rList, vItem.EarWarpWhistle, 1);
-			sel.CreateRandomElement(rList, vItem.Shuriken, 1);
-			sel.CreateRandomElement(rList, vItem.WalkieTalkie, 1);
-			sel.CreateRandomElement(rList, vItem.WaterPistol, 1);
+			sel.CreateRandomElement(rList, vItem.HologramBigfoot, 1);
+			sel.CreateRandomElement(rList, vItem.Shuriken, 2);
+			sel.CreateRandomElement(rList, vItem.WalkieTalkie, 2);
+			sel.CreateRandomElement(rList, vItem.WaterPistol, 3);
 
 			rList = sel.CreateRandomList(CTrait.Vendor_UpperCruster, "Items", "Item"); // Vanilla
 			sel.CreateRandomElement(rList, "Cologne", 3);

@@ -8,6 +8,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using CCU.Traits;
 using CCU.Traits.Spawn;
+using System.Linq;
 
 namespace CCU.Patches.Spawn
 {
@@ -17,13 +18,16 @@ namespace CCU.Patches.Spawn
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        [HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3")]
+        //[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3")]
         public static void SetupMore3_3_Postfix(LoadLevel __instance)
 		{
 			// Where is GangCount incremented? Might need to ++ it here
 			Core.LogMethodCall();
+			logger.LogDebug("TOTAL AGENT COUNT: " + GC.agentList.Count());
 
 			foreach (Agent vipAgent in GC.agentList)
+			{
+				logger.LogDebug("Index: " + GC.agentList.IndexOf(vipAgent));
 				if (TraitManager.HasTraitFromList(vipAgent, TraitManager.BodyguardedTraits))
 				{
 					Core.LogCheckpoint("A");
@@ -68,25 +72,30 @@ namespace CCU.Patches.Spawn
 							bodyguard1.modLeashes = 0;
 							bodyguard1.modVigilant = 0;
 
-							foreach (Agent agent in GC.agentList)
+							foreach (Agent gangmember in GC.agentList)
 							{
 								Core.LogCheckpoint("E");
 
-								if (agent.gang == vipAgent.gang)
+								if (gangmember.gang == vipAgent.gang)
 								{
-									bodyguard1.relationships.SetRelInitial(agent, "Aligned");
-									agent.relationships.SetRelInitial(bodyguard1, "Aligned");
+									bodyguard1.relationships.SetRelInitial(gangmember, "Aligned");
+									gangmember.relationships.SetRelInitial(bodyguard1, "Aligned");
 
-									if (!agent.gangMembers.Contains(bodyguard1))
-										agent.gangMembers.Add(bodyguard1);
+									if (!gangmember.gangMembers.Contains(bodyguard1))
+										gangmember.gangMembers.Add(bodyguard1);
 
-									if (!bodyguard1.gangMembers.Contains(agent))
-										bodyguard1.gangMembers.Add(agent);
+									if (!bodyguard1.gangMembers.Contains(gangmember))
+										bodyguard1.gangMembers.Add(gangmember);
 								}
 							}
+							Core.LogCheckpoint("F");
 						}
+						Core.LogCheckpoint("G");
 					}
+					Core.LogCheckpoint("H");
 				}
+				Core.LogCheckpoint("I");
+			}
 		}
     }
 }

@@ -11,7 +11,7 @@ namespace CCU.Patches.Objects
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
+		//[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
 		public static bool Start(SlimeBarrel __instance)
 		{
 			MethodInfo start_base = AccessTools.DeclaredMethod(typeof(SlimeBarrel).BaseType, "Start");

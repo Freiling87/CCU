@@ -13,20 +13,21 @@ Relationships
 Listed in order of Parent tier summary symbol priority
 
 C, T = Code this, Test this
+N = Next release
 H = Hold, usually pending resolution of a separate or grouped issue
 √ = Fully implemented feature or group of features
 
 #	T	00 Top-Priority Bugs
-###		T	Vendor error
-- Attempted accessing private name
+###		T	Bodyguard Load Error
+Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
 
 ---
 
 #	CT	Character Editor
-###		C	Access from Chunk/Campaign Editor selector dropdown
-New
+###		N	Access from Chunk/Campaign Editor selector dropdown
+Next release
 ##		T	CCU Trait Hiding
-###			T	Character Creation, Player Edition (CharacterCreation)
+###			T	Character Creator, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
 ###			√	Character Select (CharacterSelect)
 Complete
@@ -37,7 +38,8 @@ Sort them right after the save command is issued rather than after load, so prev
 OR, have a "trait" button that automatically un-selects itself when clicked but sorts trait list.
 
 #	CT	Chunk Editor
-##		C	Agent Goals
+##		H	Agent Goals
+Next release
 ###			C	Arrested
 New
 ###			C	Berserk
@@ -103,7 +105,7 @@ See Operate
 ###			C	Yell
 New
 Will yell their Talk text? Unless you can get a second text box in there somewhere
-##		CT	District Object De-Limitation
+##		H	District Object De-Limitation
 ###		C	BasicFloor
 .Spawn (Fire Grate)
 ###		C	Computer	
@@ -139,22 +141,15 @@ Not sure about this one, may be too deeply hardcoded
 ###		C	WaterPump
 .Start
 ##		CT	Hotkeys
-###			T	00 SetOrientation/SetDirection not updating in fields
+###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
 - Trying calling SetDirection() after these both
-###			T	Deactivate hotkeys if typing into inputfield
-Attempted
-###			T	Ctrl + A - Deselect All
-- Identical logs, confirm that it's the backend not working, not an interface update issue
-	[Info   :  CCU_Core] ToggleSelectAll: Method Call
-	[Debug  :CCU_LevelEditorUtilities]      Tile list count: 1024
-	[Debug  :CCU_LevelEditorUtilities]      Selected count: 4
-	[Debug  :CCU_LevelEditorUtilities]              Index 0: Test Dummy B
-	[Debug  :CCU_LevelEditorUtilities]              Index 1: Test Dummy C
-	[Debug  :CCU_LevelEditorUtilities]              Index 2: Test Dummy D
-	[Debug  :CCU_LevelEditorUtilities]              Index 3: Test Dummy A
- 	- Attempted redesigning this 
-###			T	F2 - QuickNew
-Attempted
+  - DW
+###			C	Return to Editor
+When you die testing, you get an option "Q - Editor" 
+###			√	Ctrl + A - Deselect All
+Complete
+###			√	F2 - QuickNew
+Complete
 ###			T	F9 - Quickload
 - Attempt: Calling ClickedLoadChunkButton or whatever first
 - Works perfectly for a while, but then... it doesn't. 
@@ -271,41 +266,54 @@ I.e., Show stuff that won't show up, unless you can disable that disabling behav
 I.e., show rotated sprite for any objects
 ##		H	Rotate Chunks in Play Mode
 This sounds hard
-
+ 
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
-New
-###			C	Arrow Keys - Clear Chunk Direction
-New
-###			C	Ctrl + A - De-select All Chunks if All Selected
-New
+Need separate version
+###			H	Arrow Keys - Clear Chunk Direction
+Pending resolution of Original
+###			H	Ctrl + A - De-select All Chunks if All Selected
+Pending resolution of Select All, but seems to work here
 ###			C	Ctrl + A - Select All Chunks
+- Only selects one:
+  - Select All:
+		[Info   :  CCU_Core] ToggleSelectAll: Method Call
+		[Debug  :CCU_LevelEditorUtilities]      Tile list count: 100
+		[Debug  :CCU_LevelEditorUtilities]      Selected count: 0
+  - Deselect all (actually worked):
+		[Info   :  CCU_Core] ToggleSelectAll: Method Call
+		[Debug  :CCU_LevelEditorUtilities]      Tile list count: 100
+		[Debug  :CCU_LevelEditorUtilities]      Selected count: 1
+		[Debug  :CCU_LevelEditorUtilities]              Index 0: TestChunkExit
+		[Error  : Unity Log] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+		Parameter name: index
+		Stack trace:
+		System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		LevelEditor.UpdateInterface (System.Boolean setDefaults) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+		LevelEditor.ClearSelections (System.Boolean setDefaults) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+		CCU.Content.LevelEditorUtilities.ToggleSelectAll (LevelEditor levelEditor, System.Boolean limitToLayer) (at <60860e74db334df19fb9b913ab023427>:0)
+		CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <60860e74db334df19fb9b913ab023427>:0)
+		LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+###			C	Up/Down - Flip Chunk over X axis
 New
-###			C	Ctrl + H - Flip Chunk Horizontally
+###			C	Ctrl + E, Q - Toggle Rotation
 New
-###			C	Ctrl + S - Save
+###			√	Ctrl + S - Save
+Complete
+###			√	Ctrl + O - Open
+Complete
+###			C	Left/Right - Flip over Y axis
 New
-###			C	Ctrl + O - Open
-New
-###			C	Ctrl + V - Flip Chunk Vertically
-New
-###			C	Ctrl + Y - Redo
-New
-###			C	Ctrl + Z - Redo
-New
-###			C	F5 - Quicksave
-New
+###			H	Ctrl + Y - Redo
+Pending the skills to do this
+###			H	Ctrl + Z - Redo
+Pending the skills to do this
+###			√	F5 - Quicksave
+Complete
 ###			C	F9 - Quickload
-New
-###			C	Q, E - Rotate Chunk, Draw Mode
-New
-###			C	Q, E - Rotate Chunk, Select Mode
-New
-###			C	Tab - Tab through fields
-New
-###			C	Shift + Tab - Reverse-Tab through fields
-New
+Opens Load selector menu
 
 #	T	Mutators
 ##		√	General

@@ -1822,7 +1822,7 @@ namespace CCU.Patches.Behaviors
 								{
 									Core.LogCheckpoint("Interaction");
 
-									if (agent.HasTrait<Interaction_Extortable>() && agent.CanShakeDown())
+									if (agent.HasTrait<Interaction_Extortable>() && agent.CanShakeDown() && (interactingAgent.HasTrait("Shakedowner") || interactingAgent.HasTrait("Shakedowner")))
 									{
 										int threat = agent.relationships.FindThreat(interactingAgent, false);
 
