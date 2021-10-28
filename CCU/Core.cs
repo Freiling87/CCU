@@ -392,6 +392,10 @@ namespace CCU
 			TraitTrigger_HonorableThief =		"[CCU] Trait Trigger - Honorable Thief",
 			TraitTrigger_Scumbag =				"[CCU] Trait Trigger - Scumbag",
 		#endregion
+		#region Utility
+			Utility_SortByName =				"[CCU] ! Sort by Name",
+			Utility_SortByValue =				"[CCU] ! Sort by Value",
+		#endregion
 		#region Vendor
 			Vendor_Anthropophagie =				"[CCU] Vendor - Anthropophagie",
 			Vendor_Armorer =					"[CCU] Vendor - Armorer",

@@ -1,21 +1,15 @@
-﻿Behaviors
-	Active
-	Combat
-	Passive
-Interactions
-	Hire
-	Vendor
-Relationships
+﻿Relationships
 	Faction
 
-#		Header Symbol Notes
+#	P	Header Symbol Notes
 Listed in order of Parent tier summary symbol priority:
+	P = Pinned to top (for notes)
 	C, T = Code this, Test this
 	N = Next release
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-#	CT	00 Top-Priority Bugs
+#	P	00 Top-Priority Bugs
 
 ---
 
@@ -32,6 +26,7 @@ Complete
 ##		C	Trait Alphabetization
 Sort them right after the save command is issued rather than after load, so preview works correctly.
 OR, have a "trait" button that automatically un-selects itself when clicked but sorts trait list.
+- SCrollingMenu.PushedButton Postfix 
 
 #	CT	Chunk Editor
 ##		H	Agent Goals
@@ -905,7 +900,7 @@ Vanilla list:
 ###			T	ChunkSafeCombo
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
-##		C	Map Marker
+##		CT	Map Marker
 ###			T	Agent Assumption Bug
 - Error:
 	[Info   : Unity Log] 62% - SETUPMORE2
