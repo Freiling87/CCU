@@ -15,18 +15,12 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-#	C	00 Top-Priority Bugs
+#	CT	00 Top-Priority Bugs
 ###		T	Bodyguard Load Error
 - Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
   - Rearranged algorithm
     - No more errors, but no bodyguards spawned. only tried it in level editor though.
       - Reattempted
-###		C	AI Update Error
-- In the failed try block:
-    agent = this.AIOffsetGroups[curGroup][j];
-	agent.brainUpdate.MyUpdate();
-	agent.combat.CombatCheck();
-	agent.pathfindingAI.UpdateTargetPosition();
 ###		C	
 - Error:
 	[Info   : Unity Log] 62% - SETUPMORE2
@@ -798,15 +792,11 @@ Complete
 ###			√	Use Drugs in Combat
 Complete
 ##		CT	Hire
-###			C	00 General AI Update error
-- Don't test this with Safecrack yet - more vanilla ones will help identify issue
-
-- Hired NPC. Once hired, they couldn't move and framerate skipped
-  - The error message goes to A MoveNext that calls BrainUpdate.MyUpdate, so that's our main culprit
-  - However, there's a possibility the real issue is in agent.pathfindingAI.UpdateTargetPosition(), and adding these missing declarations in PressedButton_Prefix will resolve a pathfinding issue that was causing the break
-    - Nope, that wasn't it. 
-  - Occurs for both Bodyguard & targeted skill jobs
-
+###			T	00 General AI Update error
+- Trying:
+  - Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
+- Hired NPC. Once hired, they couldn't move and framerate skipped.
+- Also occurs with Vanilla hires.
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
 	[Info   :  CCU_Core] HasTraitFromList: Method Call
 	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
@@ -817,15 +807,14 @@ Complete
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
 	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
 	[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
-- Check out brain.AddSubgoal, as jobs are passed to it
-- After killing a bugged Agent:
-	CCU.Patches.Behaviors.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <2052eae91fad498b965def95486033b6>:0)
-	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	System.DefaultBinder.BindToMethod (System.Reflection.BindingFlags bindingAttr, System.Reflection.MethodBase[] match, System.Object[]& args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo cultureInfo, System.String[] names, System.Object& state) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <2052eae91fad498b965def95486033b6>:0)
+- In the failed Try{} block:
+  - agent = this.AIOffsetGroups[curGroup][j];
+  - agent.brainUpdate.MyUpdate();
+    - Added logging
+  - agent.combat.CombatCheck();
+    - Added logging
+  - agent.pathfindingAI.UpdateTargetPosition();
+    - Added logging
 ###			H	Bodyguard
 Pending General AI Update Error resolution
 ###			H	Break In

@@ -119,10 +119,12 @@
     <Compile Include="Mutators\Lighting\NoAgentLights.cs" />
     <Compile Include="Mutators\Wreckage\ShittierToilets.cs" />
     <Compile Include="Mutators\Wreckage\TrashierTrashcans.cs" />
-    <Compile Include="Patches\Agent\P_Agent.cs" />
-    <Compile Include="Patches\Agent\P_AgentInteractions.cs" />
-    <Compile Include="Patches\Agent\P_BrainUpdate.cs" />
-    <Compile Include="Patches\Agent\P_GoalDoJob.cs" />
+    <Compile Include="Patches\Agents\P_Agent.cs" />
+    <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
+    <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
+    <Compile Include="Patches\Agents\P_Combat.cs" />
+    <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
+    <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />

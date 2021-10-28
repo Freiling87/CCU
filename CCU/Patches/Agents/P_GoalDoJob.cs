@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Patches.Behaviors
+namespace CCU.Patches.Agents
 {
 	[HarmonyPatch(declaringType: typeof(GoalDoJob))]
 	public static class P_GoalDoJob

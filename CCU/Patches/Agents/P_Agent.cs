@@ -9,7 +9,7 @@ using CCU.Traits.Passive;
 using CCU.Traits.Interaction;
 using CCU.Traits.Active;
 
-namespace CCU.Patches.Behaviors
+namespace CCU.Patches.Agents
 {
 	[HarmonyPatch(declaringType: typeof(Agent))]
 	public class P_Agent

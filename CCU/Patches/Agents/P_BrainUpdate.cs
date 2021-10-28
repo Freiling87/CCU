@@ -7,10 +7,10 @@ using RogueLibsCore;
 using CCU.Traits.TraitTrigger;
 using CCU.Traits.Active;
 
-namespace CCU.Patches.Behaviors
+namespace CCU.Patches.Agents
 {
 	[HarmonyPatch(declaringType: typeof(BrainUpdate))]
-    public class P_BrainUpdate
+    public static class P_BrainUpdate
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
@@ -18,7 +18,12 @@ namespace CCU.Patches.Behaviors
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
         public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain)
         {
+			Core.LogMethodCall();
+			return true; // TEMPORARY - JUST TO DIAGNOSE AI UPDATE ERROR BUG ******
+
 			/* Contains:
+			 * - GrabMoney
+			 * - GrabDrugs
 			 * - Pickpocket
 			 */
 
@@ -370,7 +375,7 @@ namespace CCU.Patches.Behaviors
 										}
 									}
 									
-									if (___agent.HasTrait<Behavior_GrabDrugs>()) // Grab Drugs
+									if (___agent.HasTrait<Behavior_GrabDrugs>())
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -397,7 +402,7 @@ namespace CCU.Patches.Behaviors
 										}
 									}
 									
-									if (___agent.agentName == "Cannibal" || (___agent.specialAbility == vSpecialAbility.Cannibalize && ___agent.HasTrait<Behavior_EatCorpse>())) // Cannibalize
+									if (___agent.agentName == "Cannibal" || (___agent.specialAbility == vSpecialAbility.Cannibalize && ___agent.HasTrait<Behavior_EatCorpse>()))
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -431,7 +436,7 @@ namespace CCU.Patches.Behaviors
 										}
 									}
 
-									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>())) && !__instance.thiefNoSteal) // Pickpocket
+									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>())) && !__instance.thiefNoSteal)
 									{
 										logger.LogDebug("Pickpocket check Triggered");
 
@@ -463,7 +468,7 @@ namespace CCU.Patches.Behaviors
 										}
 									}
 									
-									if (___agent.agentName == "Vampire" || (___agent.specialAbility == vSpecialAbility.Bite && ___agent.HasTrait<Behavior_SuckBlood>())) // Bite
+									if (___agent.agentName == "Vampire" || (___agent.specialAbility == vSpecialAbility.Bite && ___agent.HasTrait<Behavior_SuckBlood>()))
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -496,6 +501,7 @@ namespace CCU.Patches.Behaviors
 									___agent.losCheckAtIntervalsList.Clear();
 								}
 							}
+
 							if (__instance.gc.loadComplete)
 							{
 								__instance.GoalArbitrate();
@@ -548,7 +554,7 @@ namespace CCU.Patches.Behaviors
 							}
 						}
 
-						if (__instance.gc.serverPlayer && ___agent.oma.hidden && ___agent.isPlayer == 0)
+						if (__instance.gc.serverPlayer && ___agent.oma.hidden && ___agent.isPlayer == 0) // Ambush
 						{
 							List<Agent> activeBrainAgentList = __instance.gc.activeBrainAgentList;
 						
@@ -573,7 +579,7 @@ namespace CCU.Patches.Behaviors
 										if (agent10.underBox)
 											relationship3.sawUnderBox = true;
 										
-										if (___agent.agentName == "Thief") // AmbushManhole
+										if (___agent.agentName == "Thief") 
 										{
 											___agent.SetDefaultGoal("Steal");
 											___agent.SetStealingFromAgent(agent10);

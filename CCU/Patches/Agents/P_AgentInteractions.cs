@@ -11,7 +11,7 @@ using CCU.Traits.Interaction;
 using Rewired;
 using Random = UnityEngine.Random;
 
-namespace CCU.Patches.Behaviors
+namespace CCU.Patches.Agents
 {
 	[HarmonyPatch(declaringType: typeof(AgentInteractions))]
 	public class P_AgentInteractions
