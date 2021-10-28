@@ -268,6 +268,7 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Documentation\" />
     <Folder Include="Mutators\Branching\" />
     <Folder Include="Mutators\Gameplay\" />
     <Folder Include="Patches\Environment\" />
@@ -277,7 +278,9 @@
     <Folder Include="Traits\Appearance\SkinColor\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documentation\Images\ChunkEditor.png" />
+    <Content Include="Images\CCU_16x16.png" />
+    <Content Include="Images\CCU_64x64.png" />
+    <Content Include="Images\ChunkEditor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

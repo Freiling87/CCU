@@ -13,7 +13,7 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 
-#	CT	Character Editor
+#	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
 Next release
 ##		T	CCU Trait Hiding
@@ -23,7 +23,7 @@ Possible future bug: If you create a character in DE, and edit/resave them in PE
 Complete
 ###			√	Character Sheet (CharacterSheet)
 Complete
-##		C	Trait Alphabetization
+##		N	Trait Alphabetization
 Sort them right after the save command is issued rather than after load, so preview works correctly.
 OR, have a "trait" button that automatically un-selects itself when clicked but sorts trait list.
 - SCrollingMenu.PushedButton Postfix 
@@ -282,6 +282,11 @@ New
 ###			C	Trait Page
 ####			C	Examples
 
+#	C	Images
+##		√	Logo 16x16
+##		C	Logo 64_64
+##		C	Steam Thumbnail caption
+
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
@@ -339,8 +344,6 @@ Opens Load selector menu
 ###			C	Ambienter Ambience
 New
 Gate behind presence of objects/agents, e.g. disable Casino if all Slots are destroyed
-##			C	Big Quest Exempt
-Deactivate Big Quest for level, freeze mark counts
 ##		H	Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
 ###			C	00 Hide from Non-Editor access
@@ -391,9 +394,13 @@ Test
 Test
 ###			T	No Object Lights
 Test
-##		C	Utility
+##		C	Quests
+###			C	Big Quest Exempt
+Deactivate Big Quest for level, freeze mark counts
+##		N	Utility
 ###			C	Sort active Mutators by Name
-New
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
 ##		C	Wreckage
 ###			C	Bachelor-er Pads
 Trash indoors
@@ -406,6 +413,9 @@ New
 New
 ###			C	Trashier Trashcans
 New
+
+#	C	Player Edition
+- WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
 #	H	Player Utilities
 ##		H	Mouse3 Bind to command followers
