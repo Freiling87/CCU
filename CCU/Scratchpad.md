@@ -754,16 +754,54 @@ Complete
   - Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
 - Hired NPC. Once hired, they couldn't move and framerate skipped.
 - Also occurs with Vanilla hires.
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-	[Error  : Unity Log] AI Update Error: Custom (1130) (Agent) ← Same error
+	[Debug  :CCU_P_AgentInteractions]       buttonText: AssistMe
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
+	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+	[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
 - In the failed Try{} block:
   - agent = this.AIOffsetGroups[curGroup][j];
   - agent.brainUpdate.MyUpdate();
@@ -941,6 +979,7 @@ Vanilla list:
 	QuestMarker:Start()
 - Fix:
   - Gate this part behind checking if it's an agent
+    - Didn't work, still occurs
 ###			√	General Notes
 - Check out:
 GC

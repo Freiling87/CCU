@@ -120,11 +120,14 @@ namespace CCU
 			FloralerFlora =							"[CCU] Floral-er Flora",
 			LitterallyTheWorst =					"[CCU] Litter-ally the Worst",
 			ShittierToilets =						"[CCU] Shittier Toilets",
-			TrashierTrashcans =						"[CCU] Trashier Trashcans";
+			TrashierTrashcans =						"[CCU] Trashier Trashcans",
+		#endregion
+		#region Utility
+			SortMutatorsByName =					"! Sort Mutators by Name";
 		#endregion
 	}
 
-    public static class CTrait 
+	public static class CTrait 
 	{
 		public const string
 		#region Agent Group
