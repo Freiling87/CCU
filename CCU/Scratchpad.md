@@ -16,10 +16,11 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #	C	00 Top-Priority Bugs
-###		C	Bodyguard Load Error
+###		T	Bodyguard Load Error
 - Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
   - Rearranged algorithm
     - No more errors, but no bodyguards spawned. only tried it in level editor though.
+      - Reattempted
 ###		C	AI Update Error
 - In the failed try block:
     agent = this.AIOffsetGroups[curGroup][j];
