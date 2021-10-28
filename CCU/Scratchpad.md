@@ -15,10 +15,54 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-#	T	00 Top-Priority Bugs
-###		T	Bodyguard Load Error
+#	C	00 Top-Priority Bugs
+###		C	Bodyguard Load Error
 - Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
   - Rearranged algorithm
+    - No more errors, but no bodyguards spawned. only tried it in level editor though.
+###		C	AI Update Error
+- In the failed try block:
+    agent = this.AIOffsetGroups[curGroup][j];
+	agent.brainUpdate.MyUpdate();
+	agent.combat.CombatCheck();
+	agent.pathfindingAI.UpdateTargetPosition();
+###		C	
+- Error:
+	[Info   : Unity Log] 62% - SETUPMORE2
+	[Info   : Unity Log] Set BigQuest: Hobo
+	[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1044
+	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+	Parameter name: agent
+	Stack trace:
+	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
+	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+
+	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+	Parameter name: agent
+	Stack trace:
+	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
+	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+	QuestMarker:StartReal()
+	<WaitToStart>d__70:MoveNext()
+	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+	QuestMarker:Start()
+- Fix:
+  - Gate this part behind checking if it's an agent
 ---
 
 #	CT	Character Editor
@@ -136,14 +180,7 @@ Not sure about this one, may be too deeply hardcoded
   - DW
 ###			C	Return to Editor
 When you die testing, you get an option "Q - Editor" 
-###			√	Ctrl + A - Deselect All
-Complete
-###			√	F2 - QuickNew
-Complete
-###			T	F9 - Quickload
-- Attempt: Calling ClickedLoadChunkButton or whatever first
-- Works perfectly for a while, but then... it doesn't. 
-- Attempting pulling name from __instance.chunkNameField (___chunkNameField).text rather than __instance.chunkName
+###			C	F9 - Quickload
 - This is still occurring after unpredictable intervals:
 	[Debug  :CCU_P_LevelEditor]     Attempting Quickload:
         Chunk Name: 00TestChunk
@@ -152,6 +189,11 @@ Complete
 	LevelEditor.LoadChunkFromFile (System.String chunkName, ButtonHelper myButtonHelper) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <ca47c8100fc149198a1a46d28d85f694>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+- Log it.
+###			√	Ctrl + A - Deselect All
+Complete
+###			√	F2 - QuickNew
+Complete
 ###			H	Alt + Security Cam - Highlight Visible Tiles
 Pending anyone indicating they actually could use this feature
 ###			H	Alt + NumKeys, NumPad - Menu Trails
@@ -339,7 +381,8 @@ Complete
 ###			C	F9 - Quickload
 Opens Load selector menu
 
-#	T	Mutators
+#	C	Mutators
+!!! All of these are on hold pending adding to mutator list for level editor
 ##		√	General Mutator List
 - Show up in LevelEditor UI, may be a manually constructed list
 - LoadLevel.loadStuff2 @ 171
@@ -370,7 +413,8 @@ For level access
 Gate level access
 ###			C	Require A/B/C/D true
 Gate level access
-##		T	Followers
+##		H	Followers
+Pending resolution of hire AI Update error
 ###			T	Homesickness Disabled
 - First attempt
 Disable hire dismissal for this level
@@ -385,9 +429,13 @@ New
 For town levels
 ##		T	Lighting
 ###			T	Darker Darkness
+- Doesn't show on trait list, looks like RL3 doesn't do it for the editor?
+  - Report that to abbysssal
 - Attempted
 - Next to try:
   - SetNewLightingAmbient from WerewolfTransform
+- Alternative: 
+  - "Filter" mutators, allowing designer to choose color filters. Want orange for your fallout mod?
 ###			T	No Agent Lights
 Test
 ###			T	No Item/Wreckage Lights
@@ -395,7 +443,7 @@ Test
 ###			T	No Object Lights
 Test
 ##		C	Wreckage
-##			C	Bachelor-er Pads
+###			C	Bachelor-er Pads
 Trash indoors
 ###			C	Dirtier Districts (Litter-ally the Worst)
 New
@@ -572,6 +620,7 @@ This actually sorta worked, sorta.
 When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
 ###			C	Facial Hair
 Search for "Custom" (Agent name)
+Didn't work
 
 AgentHitbox
 	.chooseFacialHairType
@@ -579,8 +628,9 @@ CharacterSelect
 	.ChangeHairColor
 RandomSkinHair
 √	.fillSkinHair
-####			C	Bugged Appearance
-Shows up with a little brown notch on the East side of the face regardless of orientation. It looks like the mustache but it's hard to tell.
+###			√	Bugged Appearance
+- Shows up with a little brown notch on the East side of the face regardless of orientation. It looks like the mustache but it's hard to tell.
+  - Has not recurred.
 ###			C	Hair Color
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Hairstyle
@@ -713,9 +763,7 @@ New
 ###			C	Vendor Buyer Only
 New
 ##		C	Bodyguarded
-- LoadLevel.SetupMore3_3 where "Musician"
-  - Attempted here
-  - But there are a few other hits in searching this string in the code:
+  - But there are a few other hits that came up in a string search (possibly "Musician"):
     - LoadLevel.SpawnStartingFollowers
     - ObjectMult.StartWithFollowersBodyguardA
       - Ignore this one, it's for the Player Bodyguard trait
@@ -866,10 +914,9 @@ New
 ###			C	Buyer Vendor
 New
 ###			C	Extortable
-New
+I think this may be in two categories
 ###			C	Moochable
-New
-
+I think this may be in two categories
 ##		CT	Loadout
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
@@ -927,6 +974,7 @@ QuestMarker
 ###			C	Pilot
 - Prefixed PlayfieldObject.SpawnNewMapMarker
   - Didn't work
+    - There's a note up in general that should be here
 ###			H	Bartender
 Pending pilot
 ###			H	Drug Dealer
@@ -939,14 +987,14 @@ Pending pilot
 Pending pilot
 ###			H	Portrait
 Pending customs
-##		C	NPC Groups
+##		N	NPC Groups
 ###			C	Roamer LevelFeature
 New
 ###			C	Slum NPCs
 New
 ##		CT	Passive
-###			T	Explode On Death
-Attempted
+###			C	Explode On Death
+Works but... exploded when arrested 
 ###			√	Guilty
 Complete
 ###			C	Hackable - Tamper With Aim
