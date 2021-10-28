@@ -393,8 +393,8 @@ namespace CCU
 			TraitTrigger_Scumbag =				"[CCU] Trait Trigger - Scumbag",
 		#endregion
 		#region Utility
-			Utility_SortByName =				"[CCU] ! Sort by Name",
-			Utility_SortByValue =				"[CCU] ! Sort by Value",
+			Utility_SortTraitsByName =				"[CCU] ! Sort by Name",
+			Utility_SortTraitsByValue =				"[CCU] ! Sort by Value",
 		#endregion
 		#region Vendor
 			Vendor_Anthropophagie =				"[CCU] Vendor - Anthropophagie",

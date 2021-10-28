@@ -110,6 +110,7 @@
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Mutators\Audio\AmbienterAmbience.cs" />
     <Compile Include="Mutators\Lighting\DarkerDarkness.cs" />
+    <Compile Include="Mutators\Utility\SortMutatorsByName.cs" />
     <Compile Include="Mutators\Wreckage\FloralerFlora.cs" />
     <Compile Include="Mutators\Followers\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\Followers\HomesicknessMandatory.cs" />
@@ -175,8 +176,8 @@
     <Compile Include="Traits\TraitTrigger\TraitTrigger_CopAccess.cs" />
     <Compile Include="Traits\TraitTrigger\TraitTrigger_FamilyFriend.cs" />
     <Compile Include="Traits\TraitTrigger\TraitTrigger_Scumbag.cs" />
-    <Compile Include="Traits\Utility\Utility_SortByName.cs" />
-    <Compile Include="Traits\Utility\Utility_SortByValue.cs" />
+    <Compile Include="Traits\Utility\SortTraitsByName.cs" />
+    <Compile Include="Traits\Utility\SortTraitsByValue.cs" />
     <Compile Include="Traits\Vendor\Vendor_Armorer.cs" />
     <Compile Include="Traits\Vendor\Vendor_Assassin.cs" />
     <Compile Include="Traits\Vendor\Vendor_Barbarian.cs" />

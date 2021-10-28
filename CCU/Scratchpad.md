@@ -391,6 +391,9 @@ Test
 Test
 ###			T	No Object Lights
 Test
+##		C	Utility
+###			C	Sort active Mutators by Name
+New
 ##		C	Wreckage
 ###			C	Bachelor-er Pads
 Trash indoors
@@ -1046,6 +1049,11 @@ Pending Vendor issues resolution
 ###			T	Scumbag
 Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+##		C	Utility
+###			C	Sort active Traits by Name
+New
+###			C	Sort active Traits by Value
+New
 ##		CT	Vendor
 ###			CT	00 No Button
 - "Buy" button no longer showing up

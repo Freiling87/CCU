@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Utility
 {
-    public class Utility_SortByName : CustomTrait
+    public class SortTraitsByValue : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Utility_SortByName>()
+            RogueLibs.CreateCustomTrait<SortTraitsByValue>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Sorts all currently added traits by Name, Ascending.",
+                    [LanguageCode.English] = "Sorts all currently added traits by Value, Ascending.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Utility_SortByName,
+                    [LanguageCode.English] = CTrait.Utility_SortTraitsByValue,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
