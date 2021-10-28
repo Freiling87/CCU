@@ -16,48 +16,7 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #	CT	00 Top-Priority Bugs
-###		T	Bodyguard Load Error
-- Adding bodyguard agents to map is modifying GC.AgentList. Add them after the main loop
-  - Rearranged algorithm
-    - No more errors, but no bodyguards spawned. only tried it in level editor though.
-      - Reattempted
-###		C	
-- Error:
-	[Info   : Unity Log] 62% - SETUPMORE2
-	[Info   : Unity Log] Set BigQuest: Hobo
-	[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1044
-	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-	Parameter name: agent
-	Stack trace:
-	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
-	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
 
-	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-	Parameter name: agent
-	Stack trace:
-	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
-	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	QuestMarker:StartReal()
-	<WaitToStart>d__70:MoveNext()
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	QuestMarker:Start()
-- Fix:
-  - Gate this part behind checking if it's an agent
 ---
 
 #	CT	Character Editor
@@ -947,6 +906,43 @@ Vanilla list:
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
 ##		C	Map Marker
+###			T	Agent Assumption Bug
+- Error:
+	[Info   : Unity Log] 62% - SETUPMORE2
+	[Info   : Unity Log] Set BigQuest: Hobo
+	[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1044
+	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+	Parameter name: agent
+	Stack trace:
+	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
+	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+
+	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+	Parameter name: agent
+	Stack trace:
+	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
+	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
+	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+	QuestMarker:StartReal()
+	<WaitToStart>d__70:MoveNext()
+	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+	QuestMarker:Start()
+- Fix:
+  - Gate this part behind checking if it's an agent
 ###			√	General Notes
 - Check out:
 GC
