@@ -69,11 +69,43 @@ namespace CCU.Patches.Interface
 				return false;
 
 			string currentInterface = __instance.currentInterface;
+			bool alt = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
 			bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
-			if (ctrl && shift)
+			if (alt)
+			{
+				if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+				{
+					if (ctrl)
+						__instance.PressedChunksButton2();
+					else
+						__instance.PressedChunksButton();
+				}
+				else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+				{
+					if (ctrl)
+						__instance.PressedChunkPacksButton2();
+					else
+						__instance.PressedChunkPacksButton();
+				}
+				else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+				{
+					if (ctrl)
+						__instance.PressedLevelsButton2();
+					else
+						__instance.PressedLevelsButton();
+				}
+				else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+				{
+					if (ctrl)
+						__instance.PressedCampaignsButton2();
+					else
+						__instance.PressedCampaignsButton();
+				}
+			}
+			else if (ctrl && shift)
 			{
 				if (Input.GetKeyDown(KeyCode.A))
 					LevelEditorUtilities.ToggleSelectAll(__instance, true);

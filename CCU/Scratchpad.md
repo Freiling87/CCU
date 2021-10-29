@@ -13,10 +13,24 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 
+#	C	All Editors
+General utilities that work across editors
+##		C	Hotkeys
+###			C	Return to Editor
+When you die testing, you get an option "Q - Editor" 
+###			C	Alt + 1/2/3/4 - Switch to Editor
+New
+###			C	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
+New
+###			C	Enter or Space - Yes on YesNo menu
+New
+###			C	Escape - No on YesNo menu
+New
+
 #	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
 Next release
-##		T	CCU Trait Hiding
+##		T	Trait Hiding
 ###			T	Character Creator, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
 ###			√	Character Select (CharacterSelect)
@@ -29,8 +43,7 @@ OR, have a "trait" button that automatically un-selects itself when clicked but 
 - SCrollingMenu.PushedButton Postfix 
 
 #	CT	Chunk Editor
-##		H	Agent Goals
-Next release
+##		N	Agent Goals
 ###			C	Arrested
 New
 ###			C	Berserk
@@ -90,6 +103,8 @@ Medical Professional: 50% chance to not spend Antidote
 ###			C	Statue
 New
 Invincible, stationary, etc.
+###			C	Wander behaviors (all) set to work within Prisons
+New
 ###			C	Wander between Agents
 New
 ###			C	Wander between Agents (Aligned)
@@ -102,7 +117,7 @@ See Operate
 ###			C	Yell
 New
 Will yell their Talk text? Unless you can get a second text box in there somewhere
-##		H	District Object De-Limitation
+##		N	District Object De-Limitation
 ###		C	BasicFloor
 .Spawn (Fire Grate)
 ###		C	Computer	
@@ -127,8 +142,6 @@ Not sure about this one, may be too deeply hardcoded
 ###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
 - Trying calling SetDirection() after these both
   - DW
-###			C	Return to Editor
-When you die testing, you get an option "Q - Editor" 
 ###			C	F9 - Quickload
 - This is still occurring after unpredictable intervals:
 	[Debug  :CCU_P_LevelEditor]     Attempting Quickload:
@@ -139,6 +152,8 @@ When you die testing, you get an option "Q - Editor"
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <ca47c8100fc149198a1a46d28d85f694>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 - Log it.
+###			H	Ctrl + Shift + A - Select all in Layer only
+What I mean here is that the normal Ctrl + A should select in all layers. Is that possible?
 ###			√	Ctrl + A - Deselect All
 Complete
 ###			√	F2 - QuickNew
@@ -235,32 +250,16 @@ Complete
 Complete
 ###			√	Shift + Tab - Reverse-Tab through fields
 Complete
-##		C	Item Groups
-For placement in containers/inventories
-##		C	Multiple In Chunk field for NPC Group selection
+##		N	Multiple In Chunk field for NPC Group selection
 New
-##		H	Object Additions
-###			C	Air Conditioner
-Enable "Fumigating" w/ staff in gas masks as option
-GasVent.fumigationSelected
-###			C	Fire Hydrant
-Ability to be already shooting water according to direction
-###			C	Flaming Barrel
-- Gibs (Black)
-- Oil (Dark Green)
-- Ooze (Yellow)
-- Water (Blue)
-###			C	Movie Screen
-Allow Text like Sign
 ##		C	Randomized Lights
 New
-##		C	Red-Tint Out-Of-District Objects
+##		H	Red-Tint Out-Of-District Objects
 I.e., Show stuff that won't show up, unless you can disable that disabling behavior
 ##		H	Orient Object Sprites in Edit Mode
 I.e., show rotated sprite for any objects
 ##		H	Rotate Chunks in Play Mode
 This sounds hard
- 
 
 #	C	Documentation
 ##		C	Keyboard Layout Diagrams
@@ -286,6 +285,9 @@ New
 ##		√	Logo 16x16
 ##		C	Logo 64_64
 ##		C	Steam Thumbnail caption
+
+#	N	Item Groups
+Next release
 
 #	C	Level Editor
 ##		C	Hotkeys
@@ -320,20 +322,20 @@ Pending resolution of Select All, but seems to work here
 New
 ###			C	Ctrl + E, Q - Toggle Rotation
 New
-###			√	Ctrl + S - Save
-Complete
-###			√	Ctrl + O - Open
-Complete
 ###			C	Left/Right - Flip over Y axis
 New
 ###			H	Ctrl + Y - Redo
 Pending the skills to do this
 ###			H	Ctrl + Z - Redo
 Pending the skills to do this
-###			√	F5 - Quicksave
-Complete
 ###			C	F9 - Quickload
 Opens Load selector menu
+###			√	Ctrl + S - Save
+Complete
+###			√	Ctrl + O - Open
+Complete
+###			√	F5 - Quicksave
+Complete
 
 #	C	Mutators
 !!! All of these are on hold pending adding to mutator list for level editor
@@ -397,7 +399,7 @@ Test
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
-##		N	Utility
+##		C	Utility
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
@@ -413,6 +415,20 @@ New
 New
 ###			C	Trashier Trashcans
 New
+
+#	N	Object Additions
+##		C	Air Conditioner
+Enable "Fumigating" w/ staff in gas masks as option
+GasVent.fumigationSelected
+##		C	Fire Hydrant
+Ability to be already shooting water according to direction
+##		C	Flaming Barrel
+- Gibs (Black)
+- Oil (Dark Green)
+- Ooze (Yellow)
+- Water (Blue)
+##		C	Movie Screen
+Allow Text like Sign
 
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
