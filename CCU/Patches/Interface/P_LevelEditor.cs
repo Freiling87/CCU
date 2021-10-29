@@ -60,7 +60,7 @@ namespace CCU.Patches.Interface
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
-		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, InputField ___chunkNameField)
+		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, InputField ___chunkNameField, GameObject ___yesNoSelection)
 		{
 			if (!GC.loadCompleteReally || GC.loadLevel.restartingGame)
 				return false;
@@ -74,6 +74,13 @@ namespace CCU.Patches.Interface
 			bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 			bool fieldFocused = __instance.InputFieldFocused();
 
+			if (___yesNoSelection.activeSelf)
+			{
+				if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Space))
+					__instance.PressedYesButton();
+				else if (Input.GetKey(KeyCode.Escape))
+					__instance.PressedNoButton();
+			}
 			if (alt)
 			{
 				if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
@@ -251,39 +258,41 @@ namespace CCU.Patches.Interface
 						__instance.PressedPatrolPointsButton();
 				}
 			}
-
-			if (Input.GetKeyDown(KeyCode.F5))
+			else
 			{
-				if (__instance.ChunkNameUsed(__instance.chunkName))
+				if (Input.GetKeyDown(KeyCode.F5))
 				{
-					__instance.SaveChunkData(true, false);
+					if (__instance.ChunkNameUsed(__instance.chunkName))
+					{
+						__instance.SaveChunkData(true, false);
+						__instance.PressedYesButton();
+					}
+					else
+					{
+						__instance.PressedSave();
+						__instance.PressedYesButton();
+					}
+				}
+				else if (Input.GetKeyDown(KeyCode.F2))
+				{
+					__instance.PressedNewButton();
 					__instance.PressedYesButton();
 				}
-				else
+				else if (Input.GetKeyDown(KeyCode.F9))
 				{
-					__instance.PressedSave();
-					__instance.PressedYesButton();
-				}
-			}
-			else if (Input.GetKeyDown(KeyCode.F2))
-			{
-				__instance.PressedNewButton();
-				__instance.PressedYesButton();
-			}
-			else if (Input.GetKeyDown(KeyCode.F9))
-			{
-				logger.LogDebug(
-					"\tAttempting Quickload: \n" +
-					"\t\tChunk Name: " + __instance.chunkName);
+					logger.LogDebug(
+						"\tAttempting Quickload: \n" +
+						"\t\tChunk Name: " + __instance.chunkName);
 
-				__instance.PressedLoadChunksFile();
-				__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
-				//This almost certainly wont work on its own
-				//You need to set yesNoButtonHelper 
-				//It might be faster to simply manually call the menu up and issue commands to it.
+					__instance.PressedLoadChunksFile();
+					__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
+					//This almost certainly wont work on its own
+					//You need to set yesNoButtonHelper 
+					//It might be faster to simply manually call the menu up and issue commands to it.
+				}
+				else if (Input.GetKeyDown(KeyCode.F11))
+					__instance.PressedPlayButton();
 			}
-			else if (Input.GetKeyDown(KeyCode.F11))
-				__instance.PressedPlayButton();
 
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);

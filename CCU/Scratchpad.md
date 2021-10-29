@@ -13,7 +13,7 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 
-#	C	All Editors
+#	CT	All Editors
 General utilities that work across editors
 ##		C	Hotkeys
 ###			C	Return to Editor
@@ -22,10 +22,10 @@ When you die testing, you get an option "Q - Editor"
 New
 ###			C	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
 New
-###			C	Enter or Space - Yes on YesNo menu
-New
-###			C	Escape - No on YesNo menu
-New
+###			T	Enter or Space - Yes on YesNo menu
+Attempted
+###			T	Escape - No on YesNo menu
+Attempted
 
 #	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
