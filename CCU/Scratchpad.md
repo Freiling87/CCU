@@ -49,8 +49,10 @@ Attempted
 New
 ####		C	Border Color
 New
+####		C	Hardcode replacement
+Will need to find-replace any hardcoded colors in text, like "Required:" on traits, to fit primary, secondary, etc. colors per theme
 ####		T	Text Color
-ATtempted
+Attempted
 ####		C	Text Font
 New
 
