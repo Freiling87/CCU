@@ -79,6 +79,9 @@ namespace CCU
 			HomesicknessDisabled =					"[CCU] Homesickness Disabled",
 			HomesicknessMandatory =					"[CCU] Homesickness Mandatory",
 		#endregion
+		#region Interface
+			DontResizeButtonText =					"[CCU] Interface - Don't resize button text";
+		#endregion
 		#region Level Branching
 			Level_Alpha =							"[CCU] Level Alpha",
 			Level_Beta =							"[CCU] Level Beta",

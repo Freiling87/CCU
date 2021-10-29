@@ -17,8 +17,11 @@ Listed in order of Parent tier summary symbol priority:
 General utilities that work across editors
 ##		CT	Hotkeys
 ###			C	Return to Editor
-When you die testing, you get an option "Q - Editor" 
-levelEditor.ReturnToLevelEditor();
+- When you die testing, you get an option "Q - Editor", this is to mimic that.
+- Try:
+  - Patch whatever you do into PlayerControl.Update
+  - levelEditor.ReturnToLevelEditor();
+  - See also MenuGUI Class in case above doesn't work
 ###			T	Alt + 1/2/3/4 - Switch to Editor
 New
 ###			T	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
@@ -32,11 +35,18 @@ Need to test this with *all* menus, because you're not guaranteed that they're a
 See also levelEditor.CloseNotification(), CloseHelpScreen()...
 ###			C	Letters - Scroll Menu to section starting with letter
 New
-##		C	Options
-###			C	Align ScrollingButton text left instead of center
+##		CT	Interface
+###			T	Align ScrollingButton text left instead of center
 New
+- Try:
+  - MenuLayout.DoLayout_Postfix?
+    - MenuLayout.style.alignment = TextAnchor.MiddleLeft;	
 ###			C	User-chosen number of buttons in list (& text height)
 Vanilla is 16, the absolute max might be 32 but that depends on legibility
+- Try:
+  - MenuLayout.DoLayout_Postfix?
+    - MenuLayout.ySpace = 4;
+    - May also need to target MenuLayout.height
 ###			C	Keep ScrollingButton text size uniform rather than fit-to-width
 New
 buttonData.resizeTextForBestFit = false;

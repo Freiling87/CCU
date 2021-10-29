@@ -127,6 +127,7 @@
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
+    <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
