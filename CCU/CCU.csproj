@@ -90,6 +90,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
@@ -98,6 +101,9 @@
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\BunnyMod\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
@@ -109,6 +115,10 @@
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Mutators\Audio\AmbienterAmbience.cs" />
+    <Compile Include="Mutators\Interface\ScrollingButtonHeight50.cs" />
+    <Compile Include="Mutators\Interface\ScrollingButtonHeight75.cs" />
+    <Compile Include="Mutators\Interface\ScrollingButtonTextAlignLeft.cs" />
+    <Compile Include="Mutators\Interface\ScrollingButtonTextSizeStatic.cs" />
     <Compile Include="Mutators\Lighting\DarkerDarkness.cs" />
     <Compile Include="Mutators\Utility\SortMutatorsByName.cs" />
     <Compile Include="Mutators\Wreckage\FloralerFlora.cs" />
@@ -131,6 +141,7 @@
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
+    <Compile Include="Patches\Interface\P_MenuLayout.cs" />
     <Compile Include="Patches\Interface\P_QuestMarker.cs" />
     <Compile Include="Patches\Interface\P_ScrollingMenu.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />

@@ -17,7 +17,7 @@ namespace CCU.Patches.Interface
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(ButtonHelper.RefreshContent), argumentTypes: new[] { typeof(ButtonData) })]
 		public static bool RefreshContent_Prefix(ButtonData myData, ButtonHelper __instance)
 		{
-			if (GC.challenges.Contains(CMutators.DontResizeButtonText))
+			if (GC.challenges.Contains(CMutators.ScrollingButtonTextSizeStatic))
 				myData.resizeTextForBestFit = false;
 
 			return true;

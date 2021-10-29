@@ -20,7 +20,7 @@ namespace CCU
         public const string pluginVersion = "0.1.0";
         public const bool designerEdition = true;
 
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
+        public static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
         public void Awake()
@@ -80,7 +80,21 @@ namespace CCU
 			HomesicknessMandatory =					"[CCU] Homesickness Mandatory",
 		#endregion
 		#region Interface
-			DontResizeButtonText =					"[CCU] Interface - Don't resize button text";
+			ScrollingButtonHeight50 =				"[CCU] Interface - Scrolling Button Height 50%",
+			ScrollingButtonHeight75 =				"[CCU] Interface - Scrolling Button Height 75%",
+			ScrollingButtonTextAlignLeft =			"[CCU] Interface - Scrolling Button Text Align Left",
+			ScrollingButtonTextSizeStatic =			"[CCU] Interface - Scrolling Button Text Size Static",
+		#endregion
+		#region Interface Themes
+																											//		BACKGROUND			TEXT COLOR		FONT
+			InterfaceTheme_BloodMoon =				"[CCU] Interface Theme - Blood Moon",					//	Burgundy			Moon White			Gothic
+			InterfaceTheme_Cyberpunk =				"[CCU] Interface Theme - Cyberpunk",					//	Black				Pink or Cyan		
+			InterfaceTheme_Drone =					"[CCU] Interface Theme - Drone",						//	Post-It Yellow		Pencil Black		Boring
+			InterfaceTheme_GovernmentIssue =		"[CCU] Interface Theme - Government Issue",				//	OD Green			White				Stenciled
+			InterfaceTheme_McFuds =					"[CCU] Interface Theme - McFud's",						//	Firetruck Red		Yellow				Something LOUD
+			InterfaceTheme_Mojave =					"[CCU] Interface Theme - Mojave",						//	Orange-ish Black	Amber				Monospace
+			InterfaceTheme_Parchment =				"[CCU] Interface Theme - Parchment",					//	Parchment			Charcoal Black		Something scripty
+			InterfaceTheme_Radioactive =			"[CCU] Interface Theme - Radioactive",					//	Yello				Black				Stenciled
 		#endregion
 		#region Level Branching
 			Level_Alpha =							"[CCU] Level Alpha",

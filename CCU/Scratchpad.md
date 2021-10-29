@@ -35,21 +35,24 @@ Need to test this with *all* menus, because you're not guaranteed that they're a
 See also levelEditor.CloseNotification(), CloseHelpScreen()...
 ###			C	Letters - Scroll Menu to section starting with letter
 New
-##		CT	Interface
-###			T	Align ScrollingButton text left instead of center
+
+##	CT	All Interface
+###		T	ScrollingButton
+####		T	ScrollingButton Text Align Left
+Attempted
+####		T	ScrollingButton Height
+Attempted
+####		T	Keep ScrollingButton text size uniform rather than fit-to-width
+Attempted
+###		C	Visual Themes
+####		C	Background Color
 New
-- Try:
-  - MenuLayout.DoLayout_Postfix?
-    - MenuLayout.style.alignment = TextAnchor.MiddleLeft;	
-###			C	User-chosen number of buttons in list (& text height)
-Vanilla is 16, the absolute max might be 32 but that depends on legibility
-- Try:
-  - MenuLayout.DoLayout_Postfix?
-    - MenuLayout.ySpace = 4;
-    - May also need to target MenuLayout.height
-###			C	Keep ScrollingButton text size uniform rather than fit-to-width
+####		C	Border Color
 New
-buttonData.resizeTextForBestFit = false;
+####		C	Text Color
+New
+####		C	Text Font
+New
 
 #	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
@@ -416,6 +419,8 @@ For town levels
   - SetNewLightingAmbient from WerewolfTransform
 - Alternative: 
   - "Filter" mutators, allowing designer to choose color filters. Want orange for your fallout mod?
+- Check out GameController.SetControllersAndLighting(), GC.lightingType == "None"
+- RenderSettings.ambientLight
 ###			T	No Agent Lights
 Test
 ###			T	No Item/Wreckage Lights
@@ -868,16 +873,24 @@ Pending General AI Update Error resolution
 Pending General AI Update Error resolution
 ###			H	Cause a Ruckus
 Pending General AI Update Error resolution
+###			C	Chloroform
+New
 ###			T	Cost - Banana
 Test
 ###			T	Cost - Less
 Test
 ###			T	Cost - More
 Test
+###			C	Devour Corpse
+New
 ###			C	Disarm Trap
+New
+###			C	Drink Blood
 New
 ###			H	Hack
 Pending General AI Update Error resolution
+###			C	Handcuff
+New
 ###			C	Permanent Hire
 New
 ~8x normal hire price
