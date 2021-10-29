@@ -15,17 +15,31 @@ Listed in order of Parent tier summary symbol priority:
 
 #	CT	All Editors
 General utilities that work across editors
-##		C	Hotkeys
+##		CT	Hotkeys
 ###			C	Return to Editor
 When you die testing, you get an option "Q - Editor" 
-###			C	Alt + 1/2/3/4 - Switch to Editor
+levelEditor.ReturnToLevelEditor();
+###			T	Alt + 1/2/3/4 - Switch to Editor
 New
-###			C	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
+###			T	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
 New
 ###			T	Enter or Space - Yes on YesNo menu
 Attempted
+Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 ###			T	Escape - No on YesNo menu
 Attempted
+Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
+See also levelEditor.CloseNotification(), CloseHelpScreen()...
+###			C	Letters - Scroll Menu to section starting with letter
+New
+##		C	Options
+###			C	Align ScrollingButton text left instead of center
+New
+###			C	User-chosen number of buttons in list (& text height)
+Vanilla is 16, the absolute max might be 32 but that depends on legibility
+###			C	Keep ScrollingButton text size uniform rather than fit-to-width
+New
+buttonData.resizeTextForBestFit = false;
 
 #	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
@@ -142,6 +156,8 @@ Not sure about this one, may be too deeply hardcoded
 ###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
 - Trying calling SetDirection() after these both
   - DW
+- Depending on how many frames it shows up in, you could try PressedLoadDirectionList() and send input to that. It might even be sub-frame so the user might not tell the difference.
+  - Pilot this route on a single direction, to see the difference.
 ###			C	F9 - Quickload
 - This is still occurring after unpredictable intervals:
 	[Debug  :CCU_P_LevelEditor]     Attempting Quickload:

@@ -116,15 +116,20 @@ namespace CCU.Content
 		public static void OrientObject(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
-			logger.LogDebug("\tinput: " + input.ToString());
-
 			InputField inputField = GetDirectionInputField(levelEditor);
-			logger.LogDebug("\tinputField: " + inputField.name);
-			logger.LogDebug("\tits value: " + inputField.text);
+
+			if (input == KeyCode.LeftArrow)
+			{
+				logger.LogDebug("Testing Orientation Workaround for Left Arrow:");
+				levelEditor.PressedLoadDirectionList();
+				foreach (ButtonData buttonData in levelEditor.buttonsDataLoad)
+				{
+					logger.LogDebug(buttonData.scrollingButtonType); // I think this is actually just the string that serves as text label and UID
+				}
+				// Not sure how to get ButtonData from this.
+			}
 
 			string curDir = inputField.text;
-			logger.LogDebug("\tcurDir: " + curDir);
-
 			string newDir =
 				input == KeyCode.UpArrow	? "N" :
 				input == KeyCode.DownArrow	? "S" :
@@ -142,8 +147,7 @@ namespace CCU.Content
 					curDir == "S" ? "E" :
 					curDir == "E" ? "N" :
 					"W") :
-				"None";
-			logger.LogDebug("\tnewDir: " + newDir);
+				"Error: SOMETHING IS FUCKED UP AND I THINK IT'S YOU";
 
 			if (curDir == newDir)
 				newDir = ""; // "" instead of "None" for levelEditorTile.direction
@@ -154,6 +158,11 @@ namespace CCU.Content
 			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
 			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
 			directionObjectField.text = newDir;
+			logger.LogDebug("\tinput: " + input.ToString());
+			logger.LogDebug("\tinputField: " + inputField.name);
+			logger.LogDebug("\tits value: " + inputField.text);
+			logger.LogDebug("\tcurDir: " + curDir);
+			logger.LogDebug("\tnewDir: " + newDir);
 			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
 			logger.LogDebug("\tits value: " + directionObjectField.text);
 
