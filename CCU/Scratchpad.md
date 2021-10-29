@@ -49,8 +49,8 @@ Attempted
 New
 ####		C	Border Color
 New
-####		C	Text Color
-New
+####		T	Text Color
+ATtempted
 ####		C	Text Font
 New
 
