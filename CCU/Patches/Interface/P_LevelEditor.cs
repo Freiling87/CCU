@@ -258,41 +258,39 @@ namespace CCU.Patches.Interface
 						__instance.PressedPatrolPointsButton();
 				}
 			}
-			else
+			
+			if (Input.GetKeyDown(KeyCode.F5))
 			{
-				if (Input.GetKeyDown(KeyCode.F5))
+				if (__instance.ChunkNameUsed(__instance.chunkName))
 				{
-					if (__instance.ChunkNameUsed(__instance.chunkName))
-					{
-						__instance.SaveChunkData(true, false);
-						__instance.PressedYesButton();
-					}
-					else
-					{
-						__instance.PressedSave();
-						__instance.PressedYesButton();
-					}
-				}
-				else if (Input.GetKeyDown(KeyCode.F2))
-				{
-					__instance.PressedNewButton();
+					__instance.SaveChunkData(true, false);
 					__instance.PressedYesButton();
 				}
-				else if (Input.GetKeyDown(KeyCode.F9))
+				else
 				{
-					logger.LogDebug(
-						"\tAttempting Quickload: \n" +
-						"\t\tChunk Name: " + __instance.chunkName);
-
-					__instance.PressedLoadChunksFile();
-					__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
-					//This almost certainly wont work on its own
-					//You need to set yesNoButtonHelper 
-					//It might be faster to simply manually call the menu up and issue commands to it.
+					__instance.PressedSave();
+					__instance.PressedYesButton();
 				}
-				else if (Input.GetKeyDown(KeyCode.F11))
-					__instance.PressedPlayButton();
 			}
+			else if (Input.GetKeyDown(KeyCode.F2))
+			{
+				__instance.PressedNewButton();
+				__instance.PressedYesButton();
+			}
+			else if (Input.GetKeyDown(KeyCode.F9))
+			{
+				logger.LogDebug(
+					"\tAttempting Quickload: \n" +
+					"\t\tChunk Name: " + __instance.chunkName);
+
+				__instance.PressedLoadChunksFile();
+				__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
+				//This almost certainly wont work on its own
+				//You need to set yesNoButtonHelper 
+				//It might be faster to simply manually call the menu up and issue commands to it.
+			}
+			else if (Input.GetKeyDown(KeyCode.F11))
+				__instance.PressedPlayButton();
 
 			#region Mouse tracking
 			Vector3 vector = GC.cameraScript.actualCamera.ScreenCamera.ScreenToWorldPoint(Input.mousePosition);

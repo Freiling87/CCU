@@ -11,7 +11,7 @@ namespace CCU.Patches.Interface
 		{
 			if (__instance.myObject.CompareTag("Agent"))
 			{
-				Agent agent = __instance.GetComponent<Agent>();
+				Agent agent = __instance.tr.parent.GetComponent<Agent>();
 
 				if (/*.nonQuestAgent && */ TraitManager.HasTraitFromList(agent, TraitManager.MapMarkerTraits) && __instance.playerSeen)
 				{

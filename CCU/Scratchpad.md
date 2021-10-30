@@ -10,7 +10,55 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #	P	00 Top-Priority Bugs
+##		C	
+[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_Demolitionist
+[Info   :  CCU_Core] RollFacialHair: Method Call
+[Info   :  CCU_Core] RollFacialHair: Method Call
+[Info   :  CCU_Core] RollFacialHair: Method Call
+[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_DrugDealer
+[Info   :  CCU_Core] RollFacialHair: Method Call
+[Info   :  CCU_Core] RollFacialHair: Method Call
+[Info   :  CCU_Core] RollFacialHair: Method Call
+[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_Thief
+[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_JunkDealer
+[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+Parameter name: agent
+Stack trace:
+RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
+CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <b52bad853e4d4f35b6a3008144047656>:0)
+System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
+CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <b52bad853e4d4f35b6a3008144047656>:0)
+CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <b52bad853e4d4f35b6a3008144047656>:0)
+QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+QuestMarker:StartReal()
+<WaitToStart>d__70:MoveNext()
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+QuestMarker:Start()
 
+##		C
+[Info   : Unity Log] 62% - SETUPMORE2
+[Info   : Unity Log] Set BigQuest: Hobo
+[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1150
+[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+Parameter name: agent
+Stack trace:
+RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
+CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <473e3adfa937412496fc28d9f19b88f6>:0)
+System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
+CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <473e3adfa937412496fc28d9f19b88f6>:0)
+CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <473e3adfa937412496fc28d9f19b88f6>:0)
+QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+
+[Info   : Unity Log] 75% - SETUPMORE3
+
+[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
 ---
 
 #	CT	All Editors
@@ -22,21 +70,21 @@ General utilities that work across editors
   - Patch whatever you do into PlayerControl.Update
   - levelEditor.ReturnToLevelEditor();
   - See also MenuGUI Class in case above doesn't work
-###			T	Alt + 1/2/3/4 - Switch to Editor
-New
-###			T	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
-New
 ###			T	Enter or Space - Yes on YesNo menu
-Attempted
 Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 ###			T	Escape - No on YesNo menu
-Attempted
-Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
-See also levelEditor.CloseNotification(), CloseHelpScreen()...
+- Works, but seems to either trigger per-frame, or go directly to the meta-menu when you press escape from the editor. Find a way to halt the input once it's done it once.
+- Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
+- See also levelEditor.CloseNotification(), CloseHelpScreen()...
 ###			C	Letters - Scroll Menu to section starting with letter
 New
+###			√	Alt + 1/2/3/4 - Switch to Editor
+Complete
+###			√	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
+Complete
 
-##	CT	All Interface
+##	H	All Interface
+On hold until I can get mutators to show up in the menu.
 ###		T	ScrollingButton
 ####		T	ScrollingButton Text Align Left
 Attempted
@@ -173,6 +221,13 @@ Not sure about this one, may be too deeply hardcoded
   - DW
 - Depending on how many frames it shows up in, you could try PressedLoadDirectionList() and send input to that. It might even be sub-frame so the user might not tell the difference.
   - Pilot this route on a single direction, to see the difference.
+- Menu came up, and got this output:
+	[Debug  :CCU_LevelEditorUtilities] None
+	[Debug  :CCU_LevelEditorUtilities] North
+	[Debug  :CCU_LevelEditorUtilities] South
+	[Debug  :CCU_LevelEditorUtilities] East
+	[Debug  :CCU_LevelEditorUtilities] West
+	- Next step: Submit the input automatically to that menu based on keypress.
 ###			C	F9 - Quickload
 - This is still occurring after unpredictable intervals:
 	[Debug  :CCU_P_LevelEditor]     Attempting Quickload:
@@ -617,8 +672,7 @@ Offices
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
 
-#	T	Traits
-PressedButton is now Vanilla to start from scratch, just FYI
+#	CT	Traits
 ##		H	Agent Group
 ###		H	Slum NPCs (Pilot)
 New
@@ -774,10 +828,12 @@ New
 ###			C	Vendor Buyer Only
 New
 ##		C	Bodyguarded
-  - But there are a few other hits that came up in a string search (possibly "Musician"):
-    - LoadLevel.SpawnStartingFollowers
-    - ObjectMult.StartWithFollowersBodyguardA
-      - Ignore this one, it's for the Player Bodyguard trait
+- There are a few other hits that came up in a string search (possibly "Musician"):
+  - LoadLevel.SpawnStartingFollowers
+  - ObjectMult.StartWithFollowersBodyguardA
+    - Ignore this one, it's for the Player Bodyguard trait
+###			C	Pilot Trait
+No errors, but no effect. Logging time
 ###			C	Bodyguard Quantity Traits?
 One / few / many, that's it
 ###			C	Bodyguarded - Cop
@@ -807,68 +863,17 @@ Complete
 Complete
 ###			√	Use Drugs in Combat
 Complete
-##		CT	Hire
-###			T	00 General AI Update error
-- Trying:
-  - Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
-- Hired NPC. Once hired, they couldn't move and framerate skipped.
-- Also occurs with Vanilla hires.
-	[Debug  :CCU_P_AgentInteractions]       buttonText: AssistMe
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Info   :  CCU_Core] CombatCheck_Prefix: Method Call
-	[Info   :  CCU_Core] UpdateTargetPosition_Prefix: Method Call
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-	[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
-- In the failed Try{} block:
-  - agent = this.AIOffsetGroups[curGroup][j];
-  - agent.brainUpdate.MyUpdate();
-    - Added logging
-  - agent.combat.CombatCheck();
-    - Added logging
-  - agent.pathfindingAI.UpdateTargetPosition();
-    - Added logging
+##		C	Hire
+###			C	00 General AI Update error
+- Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
+	[Error  : Unity Log] AI Update Error: Thief (1130) (Agent)		←
+  - Long story short, I pared it down to this - of the four statements called in the try-block, MyUpdate seems to be the culprit. This log will get confusing because you're seeing output from multiple agents. I've narrowed it to only the hiree here.
+####			√	Try Disabling Completely
+- Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
+  - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.
+####			C	Make Vanilla Replacment + Logging patch of BrainUpdate.MyUpdate
+New
 ###			H	Bodyguard
 Pending General AI Update Error resolution
 ###			H	Break In
@@ -1008,46 +1013,8 @@ Vanilla list:
 ###			T	ChunkSafeCombo
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
-##		CT	Map Marker
-###			T	Agent Assumption Bug
-- Error:
-	[Info   : Unity Log] 62% - SETUPMORE2
-	[Info   : Unity Log] Set BigQuest: Hobo
-	[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1044
-	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-	Parameter name: agent
-	Stack trace:
-	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
-	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-
-	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-	Parameter name: agent
-	Stack trace:
-	RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
-	CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <31b69145882c4eb4ae22fe099cb9c0dd>:0)
-	QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	QuestMarker:StartReal()
-	<WaitToStart>d__70:MoveNext()
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	QuestMarker:Start()
-- Fix:
-  - Gate this part behind checking if it's an agent
-    - Didn't work, still occurs
-###			√	General Notes
+##		C	Map Marker
+###			P	General Notes
 - Check out:
 GC
 	.questMarkerList
@@ -1062,9 +1029,7 @@ QuestMarker
 	Entire class!
 	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
 ###			C	Pilot
-- Prefixed PlayfieldObject.SpawnNewMapMarker
-  - Didn't work
-    - There's a note up in general that should be here
+No more errors, but no map marker. 
 ###			H	Bartender
 Pending pilot
 ###			H	Drug Dealer
@@ -1082,7 +1047,7 @@ Pending customs
 New
 ###			C	Slum NPCs
 New
-##		CT	Passive
+##		C	Passive
 ###			C	Explode On Death
 Works but... exploded when arrested 
 ###			√	Guilty
@@ -1160,78 +1125,11 @@ Only SetRelationshipInitial - search for other occurrences of this trait in the 
 New
 ###			C	Sort active Traits by Value
 New
-##		CT	Vendor
-###			CT	00 No Button
-- "Buy" button no longer showing up
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
+##		C	Vendor
 ###			√	General Notes
-Agent
-√	.CanShakeDown					For Extortable
-InvDatabase
-√	.AddRandItem					AccessTools returning void
-√	.FillSpecialInv					Skip
-PlayfieldObject
-√	.determineMoneyCost
-RandomAgentItems
-√	.fillItems
-
-
-Analyzing: agent.hasSpecialInvDatabase
-Analyzing: agent.SpecialInvDatabase
-
-Agent
-√	.CanShakeDown
-√	.RecycleStart2					Skip
-√	.RevertAllVars					Skip
-AgentInteractions
-√	.DetermineButtons
-ObjectMult
-√	.InteractSuccess				Skip
-PlayfieldObject
-√	.SetupSpecialInvDatabase		Skip
-PoolsScene
-√	.ResetAgent						Skip
-StatusEffects
-√	.SetupDeath						Skip, Shopdrops will be automatic
-###			T	00 FillItem bug
-- Added logging to RandomSelection methods to identify issue
-###			T	00 Empty Inventory
-- Still empty, need more logging. After PressedButton("Buy")
-- I think they do have a SpecialInvDatabase, but the lists aren't working. I think it's pulling names via agentname instead of your intended way.
-  - "ShopkeeperSpecialInv" used in RandomItems.fillItems
-- After putting in logging messages:
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] GetOnlyTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Vendor
-	[Info   :  CCU_Core] HasTraitFromList: Method Call
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Initial
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-  - So none of them are firing. 
-
-- May need to put in behavior that Musician can visit Vendors and gifts a matching item type. 
-- 
-- Traits that will need compatibility:
-  - Shop Drops
-  - That one discount one
-###			√	Cost Banana
-Complete
-###			H	Thief Vendor
-- Special Inv filling: 
-  - InvDatabase.FillSpecialInv
-  - InvDatabase.AddRandItem
-    - @1246: base.CompareTag("SpecialInvDatabase")
-      - I am hoping this is taken care of automatically. Testing will show.
-  - Keep an eye out for agent name checks, one of these will need to be patched
-  - InvDatabase.rnd.RandomSelect(rName, "Items") 
+###			C	Cost Banana
+New (erroneously marked as complete, must have meant hire)
+###			C	Get full list of Vendor traits to test and complete category
 
 #	√	Campaign Editor
 No features planned yet

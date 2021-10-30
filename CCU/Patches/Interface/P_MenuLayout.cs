@@ -16,7 +16,7 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(MenuLayout.DoLayout))]
-		public static void DoLayout_Postfix(MenuLayout __instance, ref int ___height, ref GUIStyle ___style, ref GUIStyle ___styleSelected, ref int ___yspace)
+		public static void DoLayout_Postfix(MenuLayout __instance, ref int ___height, ref GUIStyle ___style, ref GUIStyle ___styleSelected, ref int ___ySpace)
 		{
 			if (GC.challenges.Contains(CMutators.ScrollingButtonTextAlignLeft))
 			{
@@ -28,12 +28,12 @@ namespace CCU.Patches.Interface
 			if (GC.challenges.Contains(CMutators.ScrollingButtonHeight50))
 			{
 				___height /= 2;
-				___yspace /= 2;
+				___ySpace /= 2;
 			}
 			else if (GC.challenges.Contains(CMutators.ScrollingButtonHeight75))
 			{
 				___height = (int)(___height * .75f);
-				___yspace = (int)(___yspace * .75f);
+				___ySpace = (int)(___ySpace * .75f);
 			}
 		}
 	}

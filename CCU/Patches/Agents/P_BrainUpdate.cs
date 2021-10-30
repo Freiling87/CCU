@@ -15,11 +15,12 @@ namespace CCU.Patches.Agents
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
+        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
         public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain)
-        {
+		{
 			Core.LogMethodCall();
 			return true; // TEMPORARY - JUST TO DIAGNOSE AI UPDATE ERROR BUG ******
+
 
 			/* Contains:
 			 * - GrabMoney
