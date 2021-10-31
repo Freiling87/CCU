@@ -9,19 +9,19 @@ using RogueLibsCore;
 
 namespace CCU.Mutators.Lighting
 {
-	class NoItemLights
+	public static class NoItemLights
 	{
 		[RLSetup]
-		static void Start()
+		public static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.NoItemLights, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.NoItemLights,
+					[LanguageCode.English] = "Items no longer create light around themselves.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Items no longer create light around themselves.",
+					[LanguageCode.English] = CMutators.NoItemLights,
 				});
 		}
 	}

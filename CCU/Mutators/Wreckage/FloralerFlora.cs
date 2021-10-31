@@ -17,11 +17,11 @@ namespace CCU.Mutators.Wreckage
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.FloralerFlora, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.FloralerFlora,
+					[LanguageCode.English] = "Spawns leaves around all plants.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Spawns leaves around all plants.",
+					[LanguageCode.English] = CMutators.FloralerFlora,
 				});
 		}
 	}

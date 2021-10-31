@@ -17,11 +17,11 @@ namespace CCU.Mutators.Wreckage
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.ShittierToilets, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.ShittierToilets,
+					[LanguageCode.English] = "Spawns turds around toilets. ESSENTIAL.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Spawns turds around toilets. ESSENTIAL.",
+					[LanguageCode.English] = CMutators.ShittierToilets,
 				});
 		}
 	}

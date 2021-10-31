@@ -17,11 +17,11 @@ namespace CCU.Mutators.Interface
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.ScrollingButtonTextSizeStatic, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.ScrollingButtonTextSizeStatic,
+					[LanguageCode.English] = "Disables text-resizing in Scrolling Button menus.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Disables text-resizing in Scrolling Button menus.",
+					[LanguageCode.English] = CMutators.ScrollingButtonTextSizeStatic,
 				});
 		}
 	}

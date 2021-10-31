@@ -17,11 +17,11 @@ namespace CCU.Mutators.Audio
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.AmbienterAmbience, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.AmbienterAmbience,
+					[LanguageCode.English] = "Enables some previously un-used ambient audio, particularly for Casinos and Graveyards.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Enables some previously un-used ambient audio, particularly for Casinos and Graveyards.",
+					[LanguageCode.English] = CMutators.AmbienterAmbience
 				});
 		}
 	}

@@ -9,19 +9,19 @@ using RogueLibsCore;
 
 namespace CCU.Mutators.Lighting
 {
-	class NoAgentLights
+	public static class NoAgentLights
 	{
 		[RLSetup]
-		static void Start()
+		public static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.NoAgentLights, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.NoAgentLights,
+					[LanguageCode.English] = "Agents no longer create light around themselves.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Agents no longer create light around themselves.",
+					[LanguageCode.English] = CMutators.NoAgentLights,
 				});
 		}
 	}

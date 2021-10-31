@@ -17,11 +17,11 @@ namespace CCU.Mutators.Utility
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.SortMutatorsByName, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.SortMutatorsByName,
+					[LanguageCode.English] = "Sorts active Mutators by name."
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Sorts active Mutators by name.",
+					[LanguageCode.English] = CMutators.SortMutatorsByName,
 				});
 		}
 	}

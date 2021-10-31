@@ -17,11 +17,11 @@ namespace CCU.Mutators.Interface
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.ScrollingButtonTextAlignLeft, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.ScrollingButtonTextAlignLeft,
+					[LanguageCode.English] = "Left-Aligns text in Scrolling Button menus.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Left-Aligns text in Scrolling Button menus.",
+					[LanguageCode.English] = CMutators.ScrollingButtonTextAlignLeft,
 				});
 		}
 	}

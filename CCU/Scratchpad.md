@@ -86,12 +86,12 @@ Complete
 ##	H	All Interface
 On hold until I can get mutators to show up in the menu.
 ###		T	ScrollingButton
-####		T	ScrollingButton Text Align Left
-Attempted
-####		T	ScrollingButton Height
-Attempted
-####		T	Keep ScrollingButton text size uniform rather than fit-to-width
-Attempted
+####		C	ScrollingButton Text Align Left
+DW
+####		C	ScrollingButton Height
+DW
+####		C	Keep ScrollingButton text size uniform rather than fit-to-width
+Worked, but default size is way too big. You'd need to decrease font size as well.
 ###		C	Visual Themes
 ####		C	Background Color
 New
@@ -468,22 +468,16 @@ ExitPoint.EmployeesExit prefix
 New
 For town levels
 ##		T	Lighting
-###			T	Darker Darkness
-- Doesn't show on trait list, looks like RL3 doesn't do it for the editor?
-  - Report that to abbysssal
-- Attempted
-- Next to try:
-  - SetNewLightingAmbient from WerewolfTransform
-- Alternative: 
-  - "Filter" mutators, allowing designer to choose color filters. Want orange for your fallout mod?
-- Check out GameController.SetControllersAndLighting(), GC.lightingType == "None"
-- RenderSettings.ambientLight
-###			T	No Agent Lights
-Test
-###			T	No Item/Wreckage Lights
-Test
+###			C	Darker Darkness
+Just... worked. What??
+But this is *really* dark, maybe add a halfway one too.
+Maybe other ambient light mods, like an orange one to mock Fallout, etc.
+###			C	No Agent Lights
+Didn't work, and made the agent move feet-first
+###			C	No Item/Wreckage Lights
+Didn't work
 ###			T	No Object Lights
-Test
+Didn't work
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts

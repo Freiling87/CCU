@@ -9,19 +9,19 @@ using RogueLibsCore;
 
 namespace CCU.Mutators.Lighting
 {
-	class DarkerDarkness
+	public static class DarkerDarkness
 	{
 		[RLSetup]
-		static void Start()
+		public static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.DarkerDarkness, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.DarkerDarkness,
+					[LanguageCode.English] = "Ambient lighting is reduced",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Ambient lighting is reduced.",
+					[LanguageCode.English] = CMutators.DarkerDarkness,
 				});
 		}
 	}

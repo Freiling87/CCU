@@ -17,11 +17,11 @@ namespace CCU.Mutators.Followers
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.HomesicknessDisabled, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = CMutators.HomesicknessDisabled,
+					[LanguageCode.English] = "Followers never stay behind when you leave a level.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Followers never stay behind when you leave a level.",
+					[LanguageCode.English] = CMutators.HomesicknessDisabled,
 				});
 		}
 	}
