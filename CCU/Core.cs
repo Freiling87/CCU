@@ -7,6 +7,7 @@ using HarmonyLib;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace CCU
 {
@@ -56,9 +57,15 @@ namespace CCU
         public static ManualLogSource GetLogger()
         {
             Type containingClass = new StackFrame(1, false).GetMethod().ReflectedType;
-            return Logger.CreateLogSource(GetLoggerName(containingClass));
+            return BepInEx.Logging.Logger.CreateLogSource(GetLoggerName(containingClass));
         }
     }
+
+	public static class CColors
+	{
+		public static Color32 NewMoon = new Color32(0, 0, 0, 128);
+		public static Color32 Sepia = new Color32(203, 180, 153, 128);
+	}
 
 	public static class CJob // These names are extra but I want to ensure they're unique
 	{
@@ -126,8 +133,19 @@ namespace CCU
 			Set_True_C =							"[CCU] Set True: C",
 			Set_True_D =							"[CCU] Set True: D",
 		#endregion
-		#region Lighting
-			DarkerDarkness =						"[CCU] Darker Darkness",
+		#region Ambient Light
+			Antique =								"[CCU] Ambient Lighting - Antique", // Old color tV?
+			BlackWhite =							"[CCU] Ambient Lighting - Black & White",
+			Goodsprings =							"[CCU] Ambient Lighting - Goodsprings", // FONV Orange filter
+			HalfMoon =								"[CCU] Ambient Lighting - Half Moon",
+			Neptune =								"[CCU] Ambient Lighting - Neptune",
+			NuclearWinter =							"[CCU] Ambient Lighting - Nuclear Winter",
+			NewMoon =								"[CCU] Ambient Lighting - New Moon",
+			Rage =									"[CCU] Ambient Lighting - Rage",
+			Sepia =									"[CCU] Ambient Lighting - Sepia",
+			SunnyDay =								"[CCU] Ambient Lighting - Sunny Day", // Disable Lamps?
+		#endregion
+		#region Light Sources
 			NoAgentLights =							"[CCU] No Agent Lights",
 			NoItemLights =							"[CCU] No Item Lights",
 			NoObjectLights =						"[CCU] No Object Lights",

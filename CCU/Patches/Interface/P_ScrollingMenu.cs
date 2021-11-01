@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using RogueLibsCore;
 using HarmonyLib;
 using BepInEx.Logging;
+using UnityEngine;
+using CCU.Mutators;
 
 namespace CCU.Patches.Interface
 {
@@ -29,10 +31,18 @@ namespace CCU.Patches.Interface
 		{
 			if (__instance.menuType == "Challenges" || __instance.menuType == "MutatorConfigs")
 			{
-				if (GC.challenges.Contains(CMutators.DarkerDarkness))
-					GC.cameraScript.lightingSystem.EnableAmbientLight = false;
-				else
-					GC.cameraScript.lightingSystem.EnableAmbientLight = true;
+				//if (GC.challenges.Contains(CMutators.NewMoon))
+				//	GC.cameraScript.lightingSystem.EnableAmbientLight = false;
+				//else
+				//	GC.cameraScript.lightingSystem.EnableAmbientLight = true;
+
+				if (MutatorManager.IsMutatorFromListActive(MutatorManager.AmbientLight))
+				{
+					if (GC.challenges.Contains(CMutators.NewMoon))
+						RenderSettings.ambientLight = CColors.NewMoon; // Hopefully this is same as switching off ambient lighting
+					else if (GC.challenges.Contains(CMutators.Sepia))
+						RenderSettings.ambientLight = CColors.Sepia;
+				}
 			}
 		}
 	}

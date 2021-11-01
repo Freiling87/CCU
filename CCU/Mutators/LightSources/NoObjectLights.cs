@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using RogueLibsCore;
 
-namespace CCU.Mutators.Lighting
+namespace CCU.Mutators.LightSources
 {
 	public static class NoObjectLights
 	{
