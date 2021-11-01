@@ -142,6 +142,10 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetLightBrightness), argumentTypes: new[] { typeof(bool) })]
+		public static bool SetLightBrightness(bool isDead) =>
+			!GC.challenges.Contains(CMutators.NoAgentLights);
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
