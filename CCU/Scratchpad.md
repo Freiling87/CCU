@@ -416,6 +416,7 @@ ExitPoint.EmployeesExit prefix
 New
 For town levels
 ##		C	Lighting
+DW
 ###			C	Darker Darkness
 Just... worked. What??
 But this is *really* dark, maybe add a halfway one too.
