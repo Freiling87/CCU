@@ -1,7 +1,4 @@
-﻿Relationships
-	Faction
-
-#	P	Header Symbol Notes
+﻿#	P	00 Header Symbol Notes
 Listed in order of Parent tier summary symbol priority:
 	P = Pinned to top (for notes)
 	C, T = Code this, Test this
@@ -10,55 +7,7 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #	P	00 Top-Priority Bugs
-##		C	
-[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_Demolitionist
-[Info   :  CCU_Core] RollFacialHair: Method Call
-[Info   :  CCU_Core] RollFacialHair: Method Call
-[Info   :  CCU_Core] RollFacialHair: Method Call
-[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_DrugDealer
-[Info   :  CCU_Core] RollFacialHair: Method Call
-[Info   :  CCU_Core] RollFacialHair: Method Call
-[Info   :  CCU_Core] RollFacialHair: Method Call
-[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_Thief
-[Debug  :CCU_P_Agent] Vendor found: CCU.Traits.Vendor.Vendor_JunkDealer
-[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-Parameter name: agent
-Stack trace:
-RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
-CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <b52bad853e4d4f35b6a3008144047656>:0)
-System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
-CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <b52bad853e4d4f35b6a3008144047656>:0)
-CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <b52bad853e4d4f35b6a3008144047656>:0)
-QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-QuestMarker:StartReal()
-<WaitToStart>d__70:MoveNext()
-UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-QuestMarker:Start()
 
-##		C
-[Info   : Unity Log] 62% - SETUPMORE2
-[Info   : Unity Log] Set BigQuest: Hobo
-[Info   : Unity Log] Player Info: Playerr (Agent) - Hobo - 0 - True -  - 1150
-[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-Parameter name: agent
-Stack trace:
-RogueLibsCore.RogueExtensions.HasTrait (Agent agent, System.Type traitType) (at <d35155fde6a3417a9000d4114e51e814>:0)
-CCU.Traits.TraitManager+<>c__DisplayClass26_0.<HasTraitFromList>b__0 (System.Type p) (at <473e3adfa937412496fc28d9f19b88f6>:0)
-System.Linq.Enumerable.Any[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) (at <55b3683038794c198a24e8a1362bfc61>:0)
-CCU.Traits.TraitManager.HasTraitFromList (Agent agent, System.Collections.Generic.List`1[T] traitList) (at <473e3adfa937412496fc28d9f19b88f6>:0)
-CCU.Patches.Interface.P_QuestMarker.CheckifSeen2_Postfix (QuestMarker __instance) (at <473e3adfa937412496fc28d9f19b88f6>:0)
-QuestMarker.CheckIfSeen2 () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-QuestMarker.CheckIfSeen () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-QuestMarker+<CheckIfMapFilled>d__74.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-
-[Info   : Unity Log] 75% - SETUPMORE3
-
-[Info   :  CCU_Core] AddRandItem_Prefix: Method Call
 ---
 
 #	CT	All Editors
@@ -67,8 +16,10 @@ General utilities that work across editors
 ###			C	Return to Editor
 - When you die testing, you get an option "Q - Editor", this is to mimic that.
 - Try:
-  - Patch whatever you do into PlayerControl.Update
+  - LoadLevel.NextLevel() might be a good shortcut
+    - Patch this into PlayerControl.Update
   - levelEditor.ReturnToLevelEditor();
+    - Called by NextLevel, so it's probably better to do the latter since it will handle weird cases
   - See also MenuGUI Class in case above doesn't work
 ###			T	Enter or Space - Yes on YesNo menu
 Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
@@ -372,9 +323,6 @@ New
 ##		C	Logo 64_64
 ##		C	Steam Thumbnail caption
 
-#	N	Item Groups
-Next release
-
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
@@ -467,7 +415,7 @@ ExitPoint.EmployeesExit prefix
 ###			C	No Violence
 New
 For town levels
-##		T	Lighting
+##		C	Lighting
 ###			C	Darker Darkness
 Just... worked. What??
 But this is *really* dark, maybe add a halfway one too.
@@ -476,7 +424,7 @@ Maybe other ambient light mods, like an orange one to mock Fallout, etc.
 Didn't work, and made the agent move feet-first
 ###			C	No Item/Wreckage Lights
 Didn't work
-###			T	No Object Lights
+###			C	No Object Lights
 Didn't work
 ##		C	Quests
 ###			C	Big Quest Exempt
@@ -498,39 +446,8 @@ New
 ###			C	Trashier Trashcans
 New
 
-#	N	Object Additions
-##		C	Air Conditioner
-Enable "Fumigating" w/ staff in gas masks as option
-GasVent.fumigationSelected
-##		C	Fire Hydrant
-Ability to be already shooting water according to direction
-##		C	Flaming Barrel
-- Gibs (Black)
-- Oil (Dark Green)
-- Ooze (Yellow)
-- Water (Blue)
-##		C	Movie Screen
-Allow Text like Sign
-
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-
-#	H	Player Utilities
-##		H	Mouse3 Bind to command followers
-- Target
-  - Ground - All Stand Guard
-  - Agent - All Attack
-  - Self - All Follow
-##		H	Mutators to omit Vanilla content when custom is available
-- If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
-##		H	Save Chunk Pack configuration between loads
-- I.e., only deactivate chunk packs when the player says so!
-  - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-##		H	Show Chunk info on Mouseover in Map mode
-- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
-  - Gives credit to author
-  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
-    - This is useful but doesn't belong in CCU, it belongs in a QOL mod
 
 #	T	Promo Campaign - Shadowrun-but-not-really
 ##		T	Player Character
@@ -1124,6 +1041,42 @@ New
 ###			C	Cost Banana
 New (erroneously marked as complete, must have meant hire)
 ###			C	Get full list of Vendor traits to test and complete category
+
+#	N	Item Groups
+Next release
+
+#	N	Object Additions
+##		C	Air Conditioner
+Enable "Fumigating" w/ staff in gas masks as option
+GasVent.fumigationSelected
+##		C	Fire Hydrant
+Ability to be already shooting water according to direction
+##		C	Flaming Barrel
+- Gibs (Black)
+- Oil (Dark Green)
+- Ooze (Yellow)
+- Water (Blue)
+##		C	Movie Screen
+Allow Text like Sign
+
+#	N	Player Utilities
+This might need to be its own mod
+##		H	Mouse3 Bind to command followers
+- Target
+  - Ground - All Stand Guard
+  - Agent - All Attack
+  - Self - All Follow
+- Could also be an item or SA
+##		H	Mutators to omit Vanilla content when custom is available
+- If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
+##		H	Save Chunk Pack configuration between loads
+- I.e., only deactivate chunk packs when the player says so!
+  - This is useful but doesn't belong in CCU, it belongs in a QOL mod
+##		H	Show Chunk info on Mouseover in Map mode
+- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
+  - Gives credit to author
+  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
+    - This is useful but doesn't belong in CCU, it belongs in a QOL mod
 
 #	√	Campaign Editor
 No features planned yet
