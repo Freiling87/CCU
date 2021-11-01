@@ -8,10 +8,11 @@ using BepInEx.Logging;
 using CCU.Mutators.AmbientLight;
 using HarmonyLib;
 using RogueLibsCore;
+using UnityEngine;
 
 namespace CCU.Mutators
 {
-	class MutatorManager
+	public static class MutatorManager
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -66,7 +67,12 @@ namespace CCU.Mutators
 			return result;
 		}
 
-		public static List<Type> AmbientLight = new List<Type>()
+		public static Dictionary<Type, Color32> AmbientLightColors = new Dictionary<Type, Color32>()
+		{
+			{ typeof(NewMoon), CColors.NewMoon },
+			{ typeof(Sepia), CColors.Sepia },
+		};
+		public static List<Type> AmbientLightMutators = new List<Type>()
 		{
 			typeof(Sepia),
 		};

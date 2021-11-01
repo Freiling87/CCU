@@ -29,21 +29,10 @@ namespace CCU.Patches.Interface
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(ScrollingMenu.PushedButton), argumentTypes: new[] { typeof(ButtonHelper) })]
 		public static void PushedButton_Postfix(ButtonHelper myButton, ScrollingMenu __instance)
 		{
-			if (__instance.menuType == "Challenges" || __instance.menuType == "MutatorConfigs")
-			{
-				//if (GC.challenges.Contains(CMutators.NewMoon))
-				//	GC.cameraScript.lightingSystem.EnableAmbientLight = false;
-				//else
-				//	GC.cameraScript.lightingSystem.EnableAmbientLight = true;
-
-				if (MutatorManager.IsMutatorFromListActive(MutatorManager.AmbientLight))
-				{
-					if (GC.challenges.Contains(CMutators.NewMoon))
-						RenderSettings.ambientLight = CColors.NewMoon; // Hopefully this is same as switching off ambient lighting
-					else if (GC.challenges.Contains(CMutators.Sepia))
-						RenderSettings.ambientLight = CColors.Sepia;
-				}
-			}
+			if (GC.challenges.Contains(CMutators.NewMoon))
+				GC.cameraScript.lightingSystem.EnableAmbientLight = false;
+			else
+				GC.cameraScript.lightingSystem.EnableAmbientLight = true;
 		}
 	}
 }

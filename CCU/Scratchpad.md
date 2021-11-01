@@ -415,12 +415,12 @@ ExitPoint.EmployeesExit prefix
 ###			C	No Violence
 New
 For town levels
-##		C	Lighting
-DW
-###			C	Darker Darkness
-Just... worked. What??
-But this is *really* dark, maybe add a halfway one too.
-Maybe other ambient light mods, like an orange one to mock Fallout, etc.
+##		T	Ambient Light
+Second attempt
+###			T	New Moon
+Test with Werewolf
+###			T	Sepia
+Attempted
 ###			C	No Agent Lights
 Didn't work, and made the agent move feet-first
 ###			C	No Item/Wreckage Lights
