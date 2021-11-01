@@ -33,7 +33,22 @@ namespace CCU.Traits.Utility
                     UnlockCost = 0,
                 });
         }
-        public override void OnAdded() { }
+        public override void OnAdded() 
+        {
+            List<Trait> traits = new List<Trait>();
+
+            foreach (Trait trait in Owner.statusEffects.TraitList)
+			{
+                if (!(trait is SortTraitsByName))
+                    traits.Add(trait);
+                Owner.statusEffects.RemoveTrait(trait.traitName);
+			}
+
+            traits.Sort();
+
+            foreach(Trait trait in traits)
+                Owner.statusEffects.AddTrait(trait.traitName);
+        }
         public override void OnRemoved() { }
     }
 }

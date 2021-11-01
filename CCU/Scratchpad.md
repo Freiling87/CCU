@@ -65,10 +65,8 @@ Possible future bug: If you create a character in DE, and edit/resave them in PE
 Complete
 ###			√	Character Sheet (CharacterSheet)
 Complete
-##		N	Trait Alphabetization
-Sort them right after the save command is issued rather than after load, so preview works correctly.
-OR, have a "trait" button that automatically un-selects itself when clicked but sorts trait list.
-- SCrollingMenu.PushedButton Postfix 
+##		T	Trait Alphabetization
+- Attempted
 
 #	CT	Chunk Editor
 ##		N	Agent Goals
@@ -451,6 +449,22 @@ New
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
 #	T	Promo Campaign - Shadowrun-but-not-really
+##		C	Music Pack
+###			C	Actually Making a Music Pack
+How
+###			C	Tracks
+Cyberpunk / Darkwave?
+
+		Track					Artist							Note
+	Neo Tokyo				Perturbator					Super Tense
+	Onna Musha				Vector Seven					Peaceful
+	Black Bauhinia		Vector Seven					Dark
+	Breach					Vector Seven					Not quite sure
+	Arasaka Headquarters	Vector Seven					Sounds Stealthy
+	Carnage				Vector Seven					Name fits but maybe not intense enough
+	Acid Spit				Mega Drive						Fast
+	Crimewave				Mega Drive						Dark, Urban
+	Orbital Strike		Mega Drive						Robotty
 ##		T	Player Character
 "The Fixer," an old man who's not quite as tough as he used to be. But he has a lot of connections in the criminal world and knows how to put together a team. So this will direct the player to use a hiring-based playstyle.
 Remove Low-Cost Jobs and add No In-Fighting
