@@ -24,10 +24,19 @@ namespace CCU.Patches.Appearance
 		{
 			Core.LogMethodCall();
 
-			if ((GC.challenges.Contains(CMutators.NoAgentLights) && myObject.CompareTag("Agent")) ||
-				(GC.challenges.Contains(CMutators.NoItemLights) && (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage"))) ||
-				(GC.challenges.Contains(CMutators.NoObjectLights) && myObject.CompareTag("Object")))
-				return false;
+			if (GC.challenges.Contains(CMutators.NoAgentLights) && myObject.CompareTag("Agent"))
+			{
+			}
+
+			if (GC.challenges.Contains(CMutators.NoItemLights) && (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage")))
+			{
+			}
+
+			if (GC.challenges.Contains(CMutators.NoObjectLights) && myObject.CompareTag("ObjectReal"))
+			{
+				ObjectReal objectReal = (ObjectReal)myObject;
+				objectReal.noLight = true;
+			}
 
 			return true;
 		}

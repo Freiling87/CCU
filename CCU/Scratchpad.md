@@ -432,11 +432,10 @@ New
 For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-##		C	Ambient Light
-- Second attempt
-  - DW, that's Unity, not SOR
-    - Removed CameraScript file
-- See also: LoadLevel.SetNormalLighting & SetRogueVisionLighting
+##		CT	Ambient Light
+- See also: 
+  - LoadLevel.SetNormalLighting 
+  - SetRogueVisionLighting
 ###			T	New Moon
 Test with Werewolf
 ###			C	Sepia
@@ -452,10 +451,15 @@ DW, removed
     - Agent.RecycleAwake
       - Attempted
   - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
-###			C	No Item/Wreckage Lights
-Didn't work
-###			C	No Object Lights
-Didn't work
+###			T	No Item/Wreckage Lights
+- SpawnerMain.SetLighting2
+  - Tried this another way
+###			T	No Object Lights
+- SpawnerMain.SetLighting2
+  - Not sure here
+- ObjectReal.noLight 
+  - Attempted
+    - This may be overbroad, as I believe Item and Agent inherit from OR
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts

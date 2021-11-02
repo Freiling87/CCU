@@ -141,6 +141,7 @@
     <Compile Include="Patches\Agents\P_Combat.cs" />
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
+    <Compile Include="Patches\Appearance\P_ObjectReal.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
     <Compile Include="Patches\Interface\P_PlayerControl.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
