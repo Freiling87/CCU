@@ -143,7 +143,6 @@
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
     <Compile Include="Patches\Interface\P_PlayerControl.cs" />
-    <Compile Include="Patches\P_CameraScript.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />

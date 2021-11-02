@@ -10,21 +10,24 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 
-#	CT	All Editors
+#	C	All Editors
 General utilities that work across editors
-##		CT	Hotkeys
-###			T	F11 - Return to Editor
-- Try:
-  - LoadLevel.NextLevel() might be a good shortcut
-    - Patch this into PlayerControl.Update
-    - Issue with this one is that it will be limited to chunk-testing rather than campaign testing
-  - levelEditor.ReturnToLevelEditor();
-    - Patched this into PlayerControl.Update
+##		C	Hotkeys
+###			C	F11 - Return to Editor
+- LoadLevel.NextLevel() might be a good shortcut
+  - Patch this into PlayerControl.Update
+  - Issue with this one is that it will be limited to chunk-testing rather than campaign testing
+- levelEditor.ReturnToLevelEditor();
+  - Patched this into PlayerControl.Update
+   	- In Editor: Reloads editor
+    - In Testing: Works
     - Called by NextLevel, so it's probably better to do the latter since it will handle weird cases
-  - See also MenuGUI Class in case above doesn't work
-###			T	Enter or Space - Yes on YesNo menu
+- See also MenuGUI Class in case above doesn't work
+###			C	Enter or Space - Yes on YesNo menu
 Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
-###			T	Escape - No on YesNo menu
+- Load Chunk
+  - Esc works, not Enter
+###			C	Escape - No on YesNo menu
 - Works, but seems to either trigger per-frame, or go directly to the meta-menu when you press escape from the editor. Find a way to halt the input once it's done it once.
 - Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 - See also levelEditor.CloseNotification(), CloseHelpScreen()...
@@ -81,22 +84,14 @@ Complete
 ##		T	Trait Alphabetization
 - Attempted
 
-#	CT	Chunk Editor
-##		CT	Hotkeys
-###			T	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
+#	C	Chunk Editor
+##		C	Hotkeys
+###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
 - Trying calling SetDirection() after these both
-  - DW
+  - Remove this now that other works
 - Attempting test on LEFT ARROW ONLY, without ability to toggle off yet.
-- Depending on how many frames it shows up in, you could try PressedLoadDirectionList() and send input to that. It might even be sub-frame so the user might not tell the difference.
-  - Pilot this route on a single direction, to see the difference.
-- Menu came up, and got this output:
-	[Debug  :CCU_LevelEditorUtilities] None
-	[Debug  :CCU_LevelEditorUtilities] North
-	[Debug  :CCU_LevelEditorUtilities] South
-	[Debug  :CCU_LevelEditorUtilities] East
-	[Debug  :CCU_LevelEditorUtilities] West
-	- Next step: Submit the input automatically to that menu based on keypress.
-###			T	F9 - Quickload
+  - This worked. Distribute the changes.
+###			C	F9 - Quickload
 - Maybe try this through calling menus and sending a ButtonHelper as Pressed.
   - Proposed:
 	// Get current file name
@@ -106,6 +101,10 @@ Complete
 	// Maybe those popup dialogues are easier than you think?
     - Attempted
       - Omitting PressedYesNoButton() after PressedScrollingMenuButton(), because I am not sure yet if it even asks for confirmation, or if so, if it always asks or only does so when there are no changes to the current chunk's saved version.
+      - Logging messages showed, but no effect whatsoever:
+			[Debug  :CCU_P_LevelEditor]     Attempting Quickload:
+			Chunk Name: 00TestChunk
+		
 // MenuGUI.OpenYesNoScreen, the non-yesno equivalent
 - Probably also need a general static method you can call to send a button you determine by name, since you'll likely need to reuse it somewhere.
 - Confirmed ButtonHelper is not a Singleton class, however LevelEditor declares yesNoButtonHelper
@@ -432,15 +431,19 @@ New
 For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-##		T	Ambient Light
-Second attempt
-SEe also: LoadLevle.SetNormalLighting & SetRogueVisionLighting
+##		C	Ambient Light
+- Second attempt
+  - DW, that's Unity, not SOR
+    - Removed CameraScript file
+- See also: LoadLevel.SetNormalLighting & SetRogueVisionLighting
 ###			T	New Moon
 Test with Werewolf
-###			T	Sepia
+###			C	Sepia
 Attempted
+DW, removed
 ###			C	No Agent Lights
-Didn't work, and made the agent move feet-first
+- Didn't work, and made the agent move feet-first
+  - Same outcome for both locations of attempt
 ###			C	No Item/Wreckage Lights
 Didn't work
 ###			C	No Object Lights
