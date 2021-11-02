@@ -442,9 +442,16 @@ Test with Werewolf
 ###			C	Sepia
 Attempted
 DW, removed
-###			C	No Agent Lights
+###			T	No Agent Lights
 - Didn't work, and made the agent move feet-first
   - Same outcome for both locations of attempt
+- Agent.hasLight
+  - Postfix to false in
+    - Agent.Awake
+      - Attempted
+    - Agent.RecycleAwake
+      - Attempted
+  - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
 ###			C	No Item/Wreckage Lights
 Didn't work
 ###			C	No Object Lights

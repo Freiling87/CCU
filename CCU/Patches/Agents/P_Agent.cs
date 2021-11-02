@@ -17,6 +17,15 @@ namespace CCU.Patches.Agents
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		[HarmonyPostfix, HarmonyPatch(methodName: "Awake")]
+		public static void Awake_Postfix(Agent __instance)
+		{
+			Core.LogMethodCall();
+
+			if (GC.challenges.Contains(CMutators.NoAgentLights))
+				__instance.hasLight = false;
+		}
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
@@ -120,6 +129,8 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
 		public static bool ObjectAction_Prefix(string myAction, string extraString, float extraFloat, Agent causerAgent, PlayfieldObject extraObject, Agent __instance, ref bool ___noMoreObjectActions)
 		{
+			Core.LogMethodCall();
+
 			if (myAction == CJob.TamperSomething || myAction == CJob.SafecrackSafe)
 			{
 				// base.ObjectAction(myAction, extraString, extraFloat, causerAgent, extraObject);
@@ -142,27 +153,35 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.RecycleAwake))]
+		public static void RecycleAwake_Postfix(Agent __instance)
+		{
+			Core.LogMethodCall();
+
+			if (GC.challenges.Contains(CMutators.NoAgentLights))
+				__instance.hasLight = false;
+		}
+
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetLightBrightness), argumentTypes: new[] { typeof(bool) })]
-		public static bool SetLightBrightness(bool isDead) =>
-			!GC.challenges.Contains(CMutators.NoAgentLights);
+		public static bool SetLightBrightness_Prefix(bool isDead)
+		{
+			Core.LogMethodCall();
+			return !GC.challenges.Contains(CMutators.NoAgentLights);
+		}
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
-				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(33))
+				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(50))
 					return;
 
 				__instance.losCheckAtIntervals = true;
 			}
 
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.VendorTypeTraits))
-			{
-				logger.LogDebug("Vendor found: " + TraitManager.GetOnlyTraitFromList(__instance, TraitManager.VendorTypeTraits));
-
 				__instance.SetupSpecialInvDatabase();
-			}
 
 			if (__instance.HasTrait<Combat_UseDrugs>())
 				__instance.combat.canTakeDrugs = true;
