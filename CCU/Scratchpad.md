@@ -433,14 +433,16 @@ For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ##		CT	Ambient Light
-- See also: 
-  - LoadLevel.SetNormalLighting 
-  - SetRogueVisionLighting
+- CameraScript.SetLighting
+  - DW
+- StatusEffects.WerewolfTransform
+- StatusEffects.WerewolfTransformBack
+- LoadLevel.SetNormalLighting 
+- LoadLevel.SetRogueVisionLighting
 ###			T	New Moon
 Test with Werewolf
 ###			C	Sepia
-Attempted
-DW, removed
+New
 ###			T	No Agent Lights
 - Didn't work, and made the agent move feet-first
   - Same outcome for both locations of attempt

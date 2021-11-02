@@ -143,6 +143,7 @@
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
     <Compile Include="Patches\Appearance\P_ObjectReal.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
+    <Compile Include="Patches\Environment\P_CameraScript.cs" />
     <Compile Include="Patches\Interface\P_PlayerControl.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
@@ -291,7 +292,6 @@
     <Folder Include="Documentation\" />
     <Folder Include="Mutators\Branching\" />
     <Folder Include="Mutators\Gameplay\" />
-    <Folder Include="Patches\Environment\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
