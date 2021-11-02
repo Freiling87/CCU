@@ -119,44 +119,40 @@ Complete
 	CCU.Patches.Interface.P_LevelEditor.FixedUpdate_Prefix (LevelEditor __instance, UnityEngine.GameObject ___helpScreen, UnityEngine.GameObject ___initialSelection, UnityEngine.GameObject ___workshopSubmission, UnityEngine.GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, UnityEngine.UI.InputField ___chunkNameField) (at <ca47c8100fc149198a1a46d28d85f694>:0)
 	LevelEditor.FixedUpdate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 - Log it.
-###			H	Ctrl + Shift + A - Select all in Layer only
+###			H	A-Z - skip to letter on scrolling menu
+On ice, pending collaboration with someone who uderstands UI methods well
+###			H	A + Ctrl + Shift - Select all in Layer only
 What I mean here is that the normal Ctrl + A should select in all layers. Is that possible?
-###			√	Ctrl + A - Deselect All
-Complete
-###			√	F2 - QuickNew
-Complete
-###			H	Alt + Security Cam - Highlight Visible Tiles
+###			H	C + Ctrl - Copy, All Layers
+Hold
+###			H	C + Ctrl + Shift - Copy, One Layer
+Hold
+###			H	V + Ctrl - Paste All Layers
+- Pending completion of Copy
+###			H	V + Ctrl + Shift - Paste One Layer
+Hold
+###			H	Y + Ctrl - Redo
+New
+###			H	Z + Ctrl - Undo
+New
+###			H	Alt - Security Cam: Highlight Visible Tiles
 Pending anyone indicating they actually could use this feature
-###			H	Alt + NumKeys, NumPad - Menu Trails
-ALT trail for overhead menus
-This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
-###			H	Ctrl + Alt - Show Spawn Chances
+###			H	Alt + Ctrl - Show Spawn Chances
 - Pending Pilot NumberBox display
 - Filter to layer too?
-###			H	Ctrl + C - Copy, All Layers
-Hold
-###			H	Ctrl + Shift + C - Copy, One Layer
-Hold
-###			H	Ctrl + V - Paste All Layers
-- Pending completion of Copy
-###			H	Ctrl + Shift + V - Paste One Layer
-Hold
-###			H	Ctrl + Y - Redo
+###			H	Alt + Shift - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
 New
-###			H	Ctrl + Z - Undo
+###			H	Ctrl + Shift - Filter & Display Owner IDs
+New
+###			H	Ctrl + Shift - Filter & Display Patrol IDs (group, not sequence) on all Points
 New
 ###			H	F12 - Exit Playing Chunk
 On ice, pending user request
-###			H	Letter Keys - skip to letter on scrolling menu
-On ice, pending collaboration with someone who uderstands UI methods well
 ###			H	Mouse3 - Drag Viewport
 New, and hell no
-###			H	Shift + Ctrl - Filter + Display Owner IDs
-New
-###			H	Shift + Ctrl - Filter + Display Patrol IDs (group, not sequence) on all Points
-New
-###			H	Shift + Alt - Filter + Display Patrol Sequence IDs on all Points in field Patrol ID 
-New
+###			H	NumKeys, NumPad + Alt - Menu Trails
+ALT trail for overhead menus
+This one is likely beyond my ability right now since we'd need to underline text in menus or make popup shortcut letter boxes. 
 ###			H	Tab - Tab through fields
 - Putting this on ice - not sure how useful of a feature it is yet
 - Pending Input Rate Limit
@@ -177,45 +173,37 @@ New
 	[Debug  :CCU_LevelEditorUtilities] Active Field: SpawnChance3Agent
 	[Debug  :CCU_LevelEditorUtilities] ActiveInputField: SpawnChance3Agent (UnityEngine.UI.InputField)
 - Review the output from LevelEditor.Start_Postfix, as it traverses a field list by name.
-###			√	Arrow Keys - Orient (Draw)
-Complete
-###			√	Arrow Keys - Orient (Select)
-Complete
-###			√	Arrow Keys - Match current direction to set to None
-Complete
-###			√	Ctrl + A - Select All
-Complete
-###			√	Ctrl + E, Q - Increment Patrol Point (Draw)
-Complete
-###			√	Ctrl + E, Q - Increment Patrol Point (Select)
-Complete
-###			√	Ctrl + E, Q - Rotate Object (Draw)
-Complete
-###			√	Ctrl + E, Q - Rotate Object (Select)
-Complete
-###			√	Ctrl + NumKeys - Select Layer & Open Draw Type Selector
-Complete
-###			√	Ctrl + N - New
-Complete
-###			√	Ctrl + O - Open
-Ctrl + O load shows all menus but doesn't load anything.
-F9 successfully loads, though. Not sure why.
-- Attempted, copied what F9 does here
-###			√	Ctrl + S - Save
+###			√	A + Ctrl - De/Select All
 Complete
 ###			√	E, Q - Zoom In/Out
+Complete
+###			√	E, Q + Ctrl - Increment Patrol Point
+Complete
+###			√	E, Q + Ctrl - Rotate Direction Field Value
+Complete
+###			√	E, Q + Shift - Max Zoom In/Out
+Complete
+###			√	N + Ctrl - New
+Complete
+###			√	O + Ctrl - Open
+Complete
+###			√	S + Ctrl - Save
+Complete
+###			√	Arrow Keys - Set Direction Field Value, or Toggle if matching
+Complete
+###			√	F2 - QuickNew
 Complete
 ###			√	F5 - Quicksave
 Complete
 ###			√	F9 - Abort function if no matching filename to field
 This is pretty much automatic already, since it will just fail. But reactivate if you ever want to put up a warning message or some kind of UI indicator.
-###			√	F12 - Play Chunk
+###			√	F11 - Play Chunk
 Complete
 ###			√	NumKeys - Select Layer
 Complete
-###			√	Shift + E, Q - Max Zoom In/Out
+###			√	NumKeys + Ctrl - Select Layer & Open Draw Type Selector
 Complete
-###			√	Shift + Tab - Reverse-Tab through fields
+###			√	Tab + Shift- Reverse-Tab through fields
 Complete
 ##		C	Randomized Lights
 New
