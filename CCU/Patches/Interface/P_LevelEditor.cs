@@ -283,11 +283,12 @@ namespace CCU.Patches.Interface
 					"\tAttempting Quickload: \n" +
 					"\t\tChunk Name: " + __instance.chunkName);
 
+				//__instance.PressedLoadChunksFile();
+				//__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
+
+				string loadName = __instance.chunkName;
 				__instance.PressedLoadChunksFile();
-				__instance.LoadChunkFromFile(___chunkNameField.text, ___yesNoButtonHelper);
-				//This almost certainly wont work on its own
-				//You need to set yesNoButtonHelper 
-				//It might be faster to simply manually call the menu up and issue commands to it.
+				LevelEditorUtilities.PressScrollingMenuButton(loadName);
 			}
 			else if (Input.GetKeyDown(KeyCode.F11))
 				__instance.PressedPlayButton();

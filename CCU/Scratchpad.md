@@ -96,8 +96,17 @@ Complete
 	[Debug  :CCU_LevelEditorUtilities] East
 	[Debug  :CCU_LevelEditorUtilities] West
 	- Next step: Submit the input automatically to that menu based on keypress.
-###			C	F9 - Quickload
+###			T	F9 - Quickload
 - Maybe try this through calling menus and sending a ButtonHelper as Pressed.
+  - Proposed:
+	// Get current file name
+	// Open SCrollingmenu
+	// TRY send pressedbutton
+	// If no match, some kind of UI feedback to indicate it
+	// Maybe those popup dialogues are easier than you think?
+    - Attempted
+      - Omitting PressedYesNoButton() after PressedScrollingMenuButton(), because I am not sure yet if it even asks for confirmation, or if so, if it always asks or only does so when there are no changes to the current chunk's saved version.
+// MenuGUI.OpenYesNoScreen, the non-yesno equivalent
 - Probably also need a general static method you can call to send a button you determine by name, since you'll likely need to reuse it somewhere.
 - Confirmed ButtonHelper is not a Singleton class, however LevelEditor declares yesNoButtonHelper
     - ButtonHelper.PressedScrollingMenuButton
