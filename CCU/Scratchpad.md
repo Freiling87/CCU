@@ -13,12 +13,13 @@ Listed in order of Parent tier summary symbol priority:
 #	CT	All Editors
 General utilities that work across editors
 ##		CT	Hotkeys
-###			C	Return to Editor
-- When you die testing, you get an option "Q - Editor", this is to mimic that.
+###			T	F11 - Return to Editor
 - Try:
   - LoadLevel.NextLevel() might be a good shortcut
     - Patch this into PlayerControl.Update
+    - Issue with this one is that it will be limited to chunk-testing rather than campaign testing
   - levelEditor.ReturnToLevelEditor();
+    - Patched this into PlayerControl.Update
     - Called by NextLevel, so it's probably better to do the latter since it will handle weird cases
   - See also MenuGUI Class in case above doesn't work
 ###			T	Enter or Space - Yes on YesNo menu
@@ -413,6 +414,9 @@ ExitPoint.EmployeesExit prefix
 ###			C	No Violence
 New
 For town levels
+##		C	Interface
+In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
+
 ##		T	Ambient Light
 Second attempt
 SEe also: LoadLevle.SetNormalLighting & SetRogueVisionLighting

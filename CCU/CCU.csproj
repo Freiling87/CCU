@@ -108,6 +108,9 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\Libraries\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
+    <Compile Include="Patches\Interface\P_PlayerControl.cs" />
     <Compile Include="Patches\P_CameraScript.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
