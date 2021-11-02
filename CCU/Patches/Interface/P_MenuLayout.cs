@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HarmonyLib;
 using BepInEx.Logging;
 using UnityEngine;
+using CCU.Mutators;
 
 namespace CCU.Patches.Interface
 {
@@ -15,26 +16,40 @@ namespace CCU.Patches.Interface
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(MenuLayout.DoLayout))]
+		public static bool DoLayout_Prefix(MenuLayout __instance, ref GUIStyle ___style)
+		{
+			if (MutatorManager.IsMutatorFromListActive(MutatorManager.FontSizeMutators))
+			{
+				if (GC.challenges.Contains(CMutators.ScrollingButtonHeight50))
+				{
+					___style.fontSize = 8;
+				}
+				else if (GC.challenges.Contains(CMutators.ScrollingButtonHeight75))
+				{
+					___style.fontSize = 12;
+				}
+			}
+
+			return true;
+		}
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(MenuLayout.DoLayout))]
 		public static void DoLayout_Postfix(MenuLayout __instance, ref int ___height, ref GUIStyle ___style, ref GUIStyle ___styleSelected, ref int ___ySpace)
 		{
+			Core.LogMethodCall();
+
+			logger.LogDebug("\t\t___style.alignment: " + ___style.alignment);
+			logger.LogDebug("\t\t___styleSelected.alignment: " + ___styleSelected.alignment);
+
 			if (GC.challenges.Contains(CMutators.ScrollingButtonTextAlignLeft))
 			{
 				___style.alignment = TextAnchor.MiddleLeft;
 				___styleSelected.alignment = TextAnchor.MiddleLeft;
-
 			}
 
-			if (GC.challenges.Contains(CMutators.ScrollingButtonHeight50))
-			{
-				___height /= 2;
-				___ySpace /= 2;
-			}
-			else if (GC.challenges.Contains(CMutators.ScrollingButtonHeight75))
-			{
-				___height = (int)(___height * .75f);
-				___ySpace = (int)(___ySpace * .75f);
-			}
+			logger.LogDebug("\t\t___style.alignment: " + ___style.alignment);
+			logger.LogDebug("\t\t___styleSelected.alignment: " + ___styleSelected.alignment);
 		}
 	}
 }

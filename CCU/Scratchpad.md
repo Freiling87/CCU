@@ -34,16 +34,16 @@ Complete
 ###			√	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
 Complete
 
-##	H	All Interface
-On hold until I can get mutators to show up in the menu.
+##	CT	All Interface
 ###		T	ScrollingButton
-####		C	ScrollingButton Text Align Left
-DW
-####		C	ScrollingButton Height
-DW
-####		C	Keep ScrollingButton text size uniform rather than fit-to-width
+####		T	ScrollingButton Text Align Left
+Added logging only
+####		T	ScrollingButton Height
+Attempted, font size only first
+####		T	Keep ScrollingButton text size uniform rather than fit-to-width
 Worked, but default size is way too big. You'd need to decrease font size as well.
-###		C	Visual Themes
+Messed with fonts
+###		CT	Visual Themes
 ####		C	Background Color
 New
 ####		C	Border Color
@@ -52,8 +52,6 @@ New
 Will need to find-replace any hardcoded colors in text, like "Required:" on traits, to fit primary, secondary, etc. colors per theme
 ####		T	Text Color
 Attempted
-####		C	Text Font
-New
 
 #	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
@@ -69,101 +67,6 @@ Complete
 - Attempted
 
 #	CT	Chunk Editor
-##		N	Agent Goals
-###			C	Arrested
-New
-###			C	Berserk
-New
-Just saves having to do Floor tricks
-###			C	Commit Arson
-New
-In Vanilla
-###			C	Die
-New
-###			C	Die + Burn
-New
-###			C	Escort
-New
-Follow Non-Owner without being hostile or warning
-###			C	Explode
-New
-###			C	Follow
-New
-Follows the first Aligned Agent they see
-Save that Agent ID and return them to them rather than following a new one
-###			C	Injured
-New
-Interact to spend a First Aid Kit and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
-Medical Professional: 50% chance to not spend Antidote
-###			C	Knocked Out
-New
-###			C	Lookout
-New
-When alerted, will run towards nearest ally and alert them
-###			C	Operate
-New
-Does "operating" animation like they're working on something
-Halt if talked to
-###			c	Panic
-New
-###			C	Protect (Lax)
-New
-Find nearest Important NPC, and stay near them. Allow interaction.
-###			C	Protect (Strict)
-New
-Find nearest Important NPC, and stay near them. Prohibit interaction.
-###			c	Punch
-New
-Just punch an object one square in front of you forever
-Extremely limited, and noise will distract NPCs
-###			C	Robot Clean
-New
-In vanilla
-###			C	Robot Follow
-New
-Killer Robot behavior in vanilla
-###			C	Sick
-New
-Interact to spend an Antidote and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
-Medical Professional: 50% chance to not spend Antidote
-###			C	Statue
-New
-Invincible, stationary, etc.
-###			C	Wander behaviors (all) set to work within Prisons
-New
-###			C	Wander between Agents
-New
-###			C	Wander between Agents (Aligned)
-New
-###			C	Wander between Agents (Unaligned)
-New
-###			C	Wander between Objects & Operate
-New 
-See Operate
-###			C	Yell
-New
-Will yell their Talk text? Unless you can get a second text box in there somewhere
-##		N	District Object De-Limitation
-###		C	BasicFloor
-.Spawn (Fire Grate)
-###		C	Computer	
-.DetermineIfCanPoison
-###		C	FlameGrate
-.Start
-###		C	Manhole
-.Start
-###		C	Pipe
-.Start
-###		C	SawBlade
-.Start
-###		T	SlimeBarrel
-- New Attempt
-###		C	SwitchFloor
-Not sure about this one, may be too deeply hardcoded
-###		C	Tube
-.Start
-###		C	WaterPump
-.Start
 ##		CT	Hotkeys
 ###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
 - Trying calling SetDirection() after these both
@@ -285,9 +188,104 @@ Complete
 Complete
 ###			√	Shift + Tab - Reverse-Tab through fields
 Complete
-##		N	Multiple In Chunk field for NPC Group selection
-New
 ##		C	Randomized Lights
+New
+##		N	Agent Goals
+###			C	Arrested
+New
+###			C	Berserk
+New
+Just saves having to do Floor tricks
+###			C	Commit Arson
+New
+In Vanilla
+###			C	Die
+New
+###			C	Die + Burn
+New
+###			C	Escort
+New
+Follow Non-Owner without being hostile or warning
+###			C	Explode
+New
+###			C	Follow
+New
+Follows the first Aligned Agent they see
+Save that Agent ID and return them to them rather than following a new one
+###			C	Injured
+New
+Interact to spend a First Aid Kit and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
+Medical Professional: 50% chance to not spend Antidote
+###			C	Knocked Out
+New
+###			C	Lookout
+New
+When alerted, will run towards nearest ally and alert them
+###			C	Operate
+New
+Does "operating" animation like they're working on something
+Halt if talked to
+###			c	Panic
+New
+###			C	Protect (Lax)
+New
+Find nearest Important NPC, and stay near them. Allow interaction.
+###			C	Protect (Strict)
+New
+Find nearest Important NPC, and stay near them. Prohibit interaction.
+###			c	Punch
+New
+Just punch an object one square in front of you forever
+Extremely limited, and noise will distract NPCs
+###			C	Robot Clean
+New
+In vanilla
+###			C	Robot Follow
+New
+Killer Robot behavior in vanilla
+###			C	Sick
+New
+Interact to spend an Antidote and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
+Medical Professional: 50% chance to not spend Antidote
+###			C	Statue
+New
+Invincible, stationary, etc.
+###			C	Wander behaviors (all) set to work within Prisons
+New
+###			C	Wander between Agents
+New
+###			C	Wander between Agents (Aligned)
+New
+###			C	Wander between Agents (Unaligned)
+New
+###			C	Wander between Objects & Operate
+New 
+See Operate
+###			C	Yell
+New
+Will yell their Talk text? Unless you can get a second text box in there somewhere
+##		N	District Object De-Limitation
+###		C	BasicFloor
+.Spawn (Fire Grate)
+###		C	Computer	
+.DetermineIfCanPoison
+###		C	FlameGrate
+.Start
+###		C	Manhole
+.Start
+###		C	Pipe
+.Start
+###		C	SawBlade
+.Start
+###		T	SlimeBarrel
+- New Attempt
+###		C	SwitchFloor
+Not sure about this one, may be too deeply hardcoded
+###		C	Tube
+.Start
+###		C	WaterPump
+.Start
+##		N	Multiple In Chunk field for NPC Group selection
 New
 ##		H	Red-Tint Out-Of-District Objects
 I.e., Show stuff that won't show up, unless you can disable that disabling behavior
@@ -317,6 +315,8 @@ New
 ####			C	Examples
 
 #	C	Images
+##		C	Font
+Munro is the general interface font.
 ##		√	Logo 16x16
 ##		C	Logo 64_64
 ##		C	Steam Thumbnail caption
@@ -415,6 +415,7 @@ New
 For town levels
 ##		T	Ambient Light
 Second attempt
+SEe also: LoadLevle.SetNormalLighting & SetRogueVisionLighting
 ###			T	New Moon
 Test with Werewolf
 ###			T	Sepia

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BepInEx.Logging;
 using CCU.Mutators.AmbientLight;
+using CCU.Mutators.Interface;
 using HarmonyLib;
 using RogueLibsCore;
 using UnityEngine;
@@ -75,6 +76,12 @@ namespace CCU.Mutators
 		public static List<Type> AmbientLightMutators = new List<Type>()
 		{
 			typeof(Sepia),
+		};
+		public static List<Type> FontSizeMutators = new List<Type>()
+		{
+			typeof(ScrollingButtonHeight50),
+			typeof(ScrollingButtonHeight75),
+			typeof(ScrollingButtonTextSizeStatic),
 		};
 	}
 }
