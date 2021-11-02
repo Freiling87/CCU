@@ -15,21 +15,21 @@ namespace CCU.Patches.Agents
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
-        public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain)
-		{
-			Core.LogMethodCall();
-			return true; // TEMPORARY - JUST TO DIAGNOSE AI UPDATE ERROR BUG ******
-
-
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
+        public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain, int testWhyIsThisStillBreaking)
+		{	
 			/* Contains:
 			 * - GrabMoney
 			 * - GrabDrugs
 			 * - Pickpocket
 			 */
+			Core.LogMethodCall();
+			logger.LogDebug("Checkpoint A");
 
 			if (__instance.slowAIWait > 0 && !___agent.dead)
 			{
+				logger.LogDebug("Checkpoint B1");
+
 				__instance.slowAIWait--;
 
 				if (___brain.Goals.Count > 0)
@@ -37,6 +37,8 @@ namespace CCU.Patches.Agents
 			}
 			else
 			{
+				logger.LogDebug("Checkpoint B2");
+
 				int num = 4;
 			
 				if (!___agent.agentActive)
@@ -61,7 +63,9 @@ namespace CCU.Patches.Agents
 					___agent.curPosX = ___agent.curPosition.x;
 					___agent.curPosY = ___agent.curPosition.y;
 				}
-				
+
+				logger.LogDebug("Checkpoint C");
+
 				if (__instance.gc.tileInfo.wallsDirtied || !___agent.previousActiveState || ___agent.haterated || ___agent.dead)
 					___agent.notMovedSinceLastAIUpdate = false;
 				else if (___agent.previousPosition == ___agent.curPosition)
@@ -78,7 +82,9 @@ namespace CCU.Patches.Agents
 				}
 				else
 					___agent.notMovedSinceLastAIUpdate = false;
-				
+
+				logger.LogDebug("Checkpoint D");
+
 				if (__instance.gc.multiplayerMode && __instance.gc.serverPlayer)
 				{
 					bool flag = true;
@@ -114,6 +120,8 @@ namespace CCU.Patches.Agents
 					}
 				}
 
+				logger.LogDebug("Checkpoint E");
+
 				if (__instance.gc.multiplayerMode && ___agent != __instance.gc.playerAgent && __instance.gc.playerAgent != null && ___agent.networkTransform != null)
 				{
 					if (__instance.gc.serverPlayer && ___agent.isPlayer != 0 && !___agent.localPlayer)
@@ -121,19 +129,22 @@ namespace CCU.Patches.Agents
 					else if (!__instance.gc.serverPlayer)
 						___agent.networkTransform.interpolateMovement = Mathf.Clamp(1f - (float)__instance.gc.playerAgent.clientPing / 1000f * 2f, 0.2f, 1f);
 				}
-				
+
+				logger.LogDebug("Checkpoint F");
 				if (!___agent.overHole && !___agent.overWall && !___agent.overDanger)
 				{
 					___agent.mostRecentLandPos2 = ___agent.mostRecentLandPos;
 					___agent.mostRecentLandPos = ___agent.curPosition;
 				}
-				
+
+				logger.LogDebug("Checkpoint G");
 				if (!___agent.overHole && !___agent.overWall)
 				{
 					___agent.mostRecentLandPosLight2 = ___agent.mostRecentLandPosLight;
 					___agent.mostRecentLandPosLight = ___agent.curPosition;
 				}
-				
+
+				logger.LogDebug("Checkpoint H");
 				if (___agent.isPlayer > 0 && !___agent.outOfControl)
 				{
 					___agent.SetBrainActive(true);
@@ -536,6 +547,7 @@ namespace CCU.Patches.Agents
 					}
 				}
 
+				logger.LogDebug("Checkpoint I");
 				if (!___agent.fakeNotActiveStreaming)
 				{
 					if (___brain.active && !__instance.gc.cinematic)
@@ -686,13 +698,18 @@ namespace CCU.Patches.Agents
 						}
 					}
 				}
+
+				logger.LogDebug("Checkpoint J");
 			}
 
+			logger.LogDebug("Checkpoint Y");
 			___agent.previousActiveState = ___agent.brain.active;
 			___agent.previousPosition = ___agent.curPosition;
 			___agent.previousPreviousAngle = ___agent.previousAngle;
 			___agent.previousAngle = ___agent.curAngle;
 			___agent.justGotUp = false;
+
+			logger.LogDebug("Checkpoint Z");
 
 			return false;	
 		}

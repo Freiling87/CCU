@@ -77,6 +77,7 @@ Next release
 ##		T	Trait Hiding
 ###			T	Character Creator, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
+Breaking mods up means the player edition should be 
 ###			√	Character Select (CharacterSelect)
 Complete
 ###			√	Character Sheet (CharacterSheet)
@@ -812,8 +813,9 @@ Complete
 Complete
 ###			√	Use Drugs in Combat
 Complete
-##		C	Hire
-###			C	00 General AI Update error
+##		CT	Hire
+###			T	00 General AI Update error
+- Added Logging to Brain_MyUpdate
 - Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
 	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
 	[Error  : Unity Log] AI Update Error: Thief (1130) (Agent)		←
