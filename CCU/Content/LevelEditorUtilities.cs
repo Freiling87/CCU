@@ -71,7 +71,7 @@ namespace CCU.Content
 
 			return null;
 		}
-		public static InputField GetDirectionInputField(LevelEditor levelEditor)
+		public static InputField DirectionInputField(LevelEditor levelEditor)
 		{
 			string curInt = levelEditor.currentInterface;
 
@@ -90,7 +90,16 @@ namespace CCU.Content
 				return null;
 			}
 		}
-		public static void IncrementPatrolPoint(LevelEditor levelEditor, KeyCode input)
+		public static void PressScrollingMenuButton(string buttonText)
+		{
+			foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
+				if (buttonHelper.scrollingButtonType == buttonText)
+				{
+					buttonHelper.PressedScrollingMenuButton();
+					break;
+				}
+		}
+		public static void SetPatrolPointInputFieldValue(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
 			logger.LogDebug("\tInput: " + input.ToString());
@@ -113,20 +122,39 @@ namespace CCU.Content
 
 			levelEditor.SetPointNum();
 		}
-		public static void OrientObject(LevelEditor levelEditor, KeyCode input)
+		public static void SetDirectionInputField(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
-			InputField inputField = GetDirectionInputField(levelEditor);
+			InputField inputField = DirectionInputField(levelEditor);
 
 			if (input == KeyCode.LeftArrow)
 			{
 				logger.LogDebug("Testing Orientation Workaround for Left Arrow:");
 				levelEditor.PressedLoadDirectionList();
+
+				logger.LogDebug("\tbuttonsDataLoad:");
+
 				foreach (ButtonData buttonData in levelEditor.buttonsDataLoad)
-				{
-					logger.LogDebug(buttonData.scrollingButtonType); // I think this is actually just the string that serves as text label and UID
-				}
-				// Not sure how to get ButtonData from this.
+					logger.LogDebug("\t\t" + buttonData.scrollingButtonType); // I think this is actually just the string that serves as text label and UID
+
+				logger.LogDebug("\tbuttonHelpersList:");
+				foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
+					logger.LogDebug("\t\t" + buttonHelper.scrollingButtonType); // I think this is the name of the button Text Label
+
+				logger.LogDebug("\tmenuButtonHelpersList:");
+				foreach (MenuButtonHelper menuButtonHelper in GC.menuButtonHelpersList)
+					logger.LogDebug("\t\t" + menuButtonHelper.scrollingButtonType);
+
+				// Shot in the dark:
+				logger.LogDebug("\tAttempting send button West");
+				foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
+					if (buttonHelper.scrollingButtonType == "West")
+						buttonHelper.PressedScrollingMenuButton();
+
+				// TODO: Use PressScrollingMenuButton once you've confirmed both of these work.
+
+				logger.LogDebug("\tReturning");
+				return;
 			}
 
 			string curDir = inputField.text;

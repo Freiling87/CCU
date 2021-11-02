@@ -29,7 +29,18 @@ Need to test this with *all* menus, because you're not guaranteed that they're a
 - Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 - See also levelEditor.CloseNotification(), CloseHelpScreen()...
 ###			C	Letters - Scroll Menu to section starting with letter
-New
+- ScrollingMenu.OpenScrollingMenu: 
+  - __instance.scrollBarDetails.value = 1f;
+    - Possibly where initial scroll location is set?
+- Detect whether ScrollingMenu is active/open
+  - ButtonHelper.scrollingMenu != null
+  - Detect input
+    - Get all ScrollingButtons from ScrollingMenu, count to letter
+      - GC.buttonHelpersList
+      - GC.menuButtonHelpersList
+      - ScrollingMenu.numButtonsOnScreen
+      - Set ScrollBar to that y-axis
+        - ScrollBar.Set
 ###			√	Alt + 1/2/3/4 - Switch to Editor
 Complete
 ###			√	Alt + Ctrl + 1/2/3/4 - Quickswitch to Editor
@@ -46,13 +57,16 @@ Worked, but default size is way too big. You'd need to decrease font size as wel
 Messed with fonts
 ###		CT	Visual Themes
 ####		C	Background Color
-New
+- UnityEngine.CanvasRenderer.SetColor
 ####		C	Border Color
 New
 ####		C	Hardcode replacement
 Will need to find-replace any hardcoded colors in text, like "Required:" on traits, to fit primary, secondary, etc. colors per theme
 ####		T	Text Color
-Attempted
+- Attempted
+- See also:
+  - UnityEngine.Canvas
+    - I think this is the global UI aesthetic
 
 #	T	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
@@ -69,9 +83,10 @@ Complete
 
 #	CT	Chunk Editor
 ##		CT	Hotkeys
-###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
+###			T	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
 - Trying calling SetDirection() after these both
   - DW
+- Attempting test on LEFT ARROW ONLY, without ability to toggle off yet.
 - Depending on how many frames it shows up in, you could try PressedLoadDirectionList() and send input to that. It might even be sub-frame so the user might not tell the difference.
   - Pilot this route on a single direction, to see the difference.
 - Menu came up, and got this output:
@@ -82,6 +97,10 @@ Complete
 	[Debug  :CCU_LevelEditorUtilities] West
 	- Next step: Submit the input automatically to that menu based on keypress.
 ###			C	F9 - Quickload
+- Maybe try this through calling menus and sending a ButtonHelper as Pressed.
+- Probably also need a general static method you can call to send a button you determine by name, since you'll likely need to reuse it somewhere.
+- Confirmed ButtonHelper is not a Singleton class, however LevelEditor declares yesNoButtonHelper
+    - ButtonHelper.PressedScrollingMenuButton
 - This is still occurring after unpredictable intervals:
 	[Debug  :CCU_P_LevelEditor]     Attempting Quickload:
         Chunk Name: 00TestChunk
@@ -416,7 +435,6 @@ New
 For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-
 ##		T	Ambient Light
 Second attempt
 SEe also: LoadLevle.SetNormalLighting & SetRogueVisionLighting
@@ -1053,9 +1071,11 @@ Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ##		C	Utility
 ###			C	Sort active Traits by Name
-New
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
 ###			C	Sort active Traits by Value
-New
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
 ##		C	Vendor
 ###			√	General Notes
 ###			C	Cost Banana
