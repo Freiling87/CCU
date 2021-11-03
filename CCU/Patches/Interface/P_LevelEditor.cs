@@ -76,9 +76,9 @@ namespace CCU.Patches.Interface
 
 			if (___yesNoSelection.activeSelf)
 			{
-				if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Space))
+				if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Space))
 					__instance.PressedYesButton();
-				else if (Input.GetKey(KeyCode.Escape))
+				else if (Input.GetKeyDown(KeyCode.Escape))
 					__instance.PressedNoButton();
 			}
 			if (alt)

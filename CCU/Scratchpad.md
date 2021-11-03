@@ -1,4 +1,4 @@
-﻿#	P	00 Header Symbol Notes
+﻿#	P	Header Symbol Notes
 Listed in order of Parent tier summary symbol priority:
 	P = Pinned to top (for notes)
 	C, T = Code this, Test this
@@ -6,19 +6,18 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-#	P	00 Top-Priority Bugs
+#	P	Top-Priority Bugs
 
 ---
 
-#	P	00 General Reminders & To-Dos
+#	P	General Reminders & To-Dos
 
 - I merged Passive and Interaction, but I'm thinking they need to be split back up. 
   - There was also a specific reason to make Extortable & Moochable into Passive instead of Interaction or Trait Trigger, but I can't remember it. Write it here if you do.
 ---
 
 #	C	All Editors
-General utilities that work across editors
-##		C	Hotkeys
+##		T	Hotkeys
 ###			C	F11 - Return to Editor
 - LoadLevel.NextLevel() might be a good shortcut
   - Patch this into PlayerControl.Update
@@ -29,11 +28,13 @@ General utilities that work across editors
     - In Testing: Works
     - Called by NextLevel, so it's probably better to do the latter since it will handle weird cases
 - See also MenuGUI Class in case above doesn't work
-###			C	Enter or Space - Yes on YesNo menu
+###			T	Enter or Space - Yes on YesNo menu
+- Changed to GetKeyDown to rate-limit
 Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 - Load Chunk
   - Esc works, not Enter
-###			C	Escape - No on YesNo menu
+###			T	Escape - No on YesNo menu
+- Changed to GetKeyDown to rate-limit
 - Works, but seems to either trigger per-frame, or go directly to the meta-menu when you press escape from the editor. Find a way to halt the input once it's done it once.
 - Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 - See also levelEditor.CloseNotification(), CloseHelpScreen()...
