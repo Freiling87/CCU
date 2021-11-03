@@ -7,9 +7,9 @@ using RogueLibsCore;
 using CCU.Traits;
 using CCU.Traits.Hire;
 using CCU.Traits.TraitTrigger;
-using CCU.Traits.Interaction;
 using Rewired;
 using Random = UnityEngine.Random;
+using CCU.Traits.Passive;
 
 namespace CCU.Patches.Agents
 {

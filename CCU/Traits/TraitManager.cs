@@ -11,7 +11,6 @@ using CCU.Traits.MapMarker;
 using CCU.Traits.Spawn;
 using System.IO;
 using CCU.Traits.Passive;
-using CCU.Traits.Interaction;
 using CCU.Traits.Active;
 using CCU.Traits.Appearance.FacialHair;
 

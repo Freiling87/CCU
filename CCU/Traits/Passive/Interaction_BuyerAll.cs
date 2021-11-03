@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Passive
 {
-    public class Interaction_BuyerVendor : CustomTrait
+    public class Interaction_BuyerAll : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_BuyerVendor>()
+            RogueLibs.CreateCustomTrait<Interaction_BuyerAll>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires:</color> Any Vendor trait"),
+                    [LanguageCode.English] = String.Format("This character will buy items of any kind from the player, for a bad price."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_BuyerVendor,
+                    [LanguageCode.English] = CTrait.Interaction_BuyerAll,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
@@ -24,7 +24,7 @@ namespace CCU.Traits.Interaction
                     Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
+                    IsAvailableInCC = Core.designerEdition, 
                     UnlockCost = 0,
                 });
         }

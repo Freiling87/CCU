@@ -185,8 +185,8 @@
     <Compile Include="Traits\Hire\Hire_Hack.cs" />
     <Compile Include="Traits\Hire\Hire_Safecrack.cs" />
     <Compile Include="Traits\Hire\Hire_Tamper.cs" />
-    <Compile Include="Traits\Interaction\Interaction_Extortable.cs" />
-    <Compile Include="Traits\Interaction\Interaction_Moochable.cs" />
+    <Compile Include="Traits\Passive\Interaction_Extortable.cs" />
+    <Compile Include="Traits\Passive\Interaction_Moochable.cs" />
     <Compile Include="Traits\Relationships\AnnoyedAtSuspicious.cs" />
     <Compile Include="Traits\Relationships\HostileToCannibals.cs" />
     <Compile Include="Traits\Relationships\HostileToSoldiers.cs" />
@@ -206,7 +206,7 @@
     <Compile Include="Traits\Vendor\Vendor_BartenderDive.cs" />
     <Compile Include="Traits\Vendor\Vendor_BartenderFancy.cs" />
     <Compile Include="Traits\Vendor\Vendor_Blacksmith.cs" />
-    <Compile Include="Traits\Interaction\Interaction_BuyerVendor.cs" />
+    <Compile Include="Traits\Passive\Interaction_BuyerVendor.cs" />
     <Compile Include="Traits\Vendor\Vendor_Cannibal.cs" />
     <Compile Include="Traits\Vendor\Vendor_ConsumerElectronics.cs" />
     <Compile Include="Traits\Vendor\Vendor_ConvenienceStore.cs" />
@@ -216,7 +216,7 @@
     <Compile Include="Traits\Vendor\Vendor_Demolitionist.cs" />
     <Compile Include="Traits\Vendor\Vendor_DrugDealer.cs" />
     <Compile Include="Traits\Vendor\Vendor_Banana.cs" />
-    <Compile Include="Traits\Interaction\Interaction_BuyerAll.cs" />
+    <Compile Include="Traits\Passive\Interaction_BuyerAll.cs" />
     <Compile Include="Traits\Vendor\Vendor_Firefighter.cs" />
     <Compile Include="Traits\Vendor\Vendor_FireSale.cs" />
     <Compile Include="Traits\Vendor\Vendor_Gunsmith.cs" />

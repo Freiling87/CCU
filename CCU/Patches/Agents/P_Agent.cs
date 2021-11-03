@@ -6,7 +6,6 @@ using System.Reflection;
 using CCU.Traits;
 using CCU.Traits.Combat;
 using CCU.Traits.Passive;
-using CCU.Traits.Interaction;
 using CCU.Traits.Active;
 
 namespace CCU.Patches.Agents

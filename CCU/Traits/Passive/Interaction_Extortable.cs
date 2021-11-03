@@ -1,7 +1,7 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Passive
 {
     public class Interaction_Extortable : CustomTrait
     {

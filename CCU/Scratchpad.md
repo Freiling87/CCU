@@ -492,7 +492,487 @@ New
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
-#	T	Promo Campaign - Shadowrun-but-not-really
+#	C	Traits
+##		C	Active
+###			C	Clean Trash
+New
+###			C	Fight Fires
+New
+###			C	Grab Everything
+New
+###			C	Grab Food
+New
+###			C	Guard Door
+New
+###			C	Hobo Beg (Custom)
+Maybe just implement the whole Hey, You! overhaul here
+###			C	Hog Turntables
+New
+Allow paid Musician behavior
+###			C	Seek & Destroy (Killer Robot)
+New
+###			C	Shakedown Player
+New
+Use this on leader w/ Wander Level
+Use "Follow" behavior on agents placed behind them
+No need for "Roaming Gang" Trait itself
+###			C	Tattle (Upper Cruster)
+New
+###			√	Drink Blood
+Complete
+###			√	Eat Corpse
+Complete
+###			√	Grab Drugs
+Complete
+###			√	Grab Money
+Complete
+###			√	Pickpocket
+Complete
+##		C	Appearance
+This actually sorta worked, sorta. 
+When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
+- Search for "Custom" (Agent name)
+	AgentHitbox
+		.chooseFacialHairType
+	CharacterSelect
+		.ChangeHairColor
+	RandomSkinHair
+	√	.fillSkinHair
+###			C	Facial Hair
+- Just saw this:
+	[Info   :  CCU_Core] RollFacialHair: Method Call
+	[Error  : Unity Log] KeyNotFoundException: The given key was not present in the dictionary.
+	Stack trace:
+	System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	HealthBar.SetupFace () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	HealthBar+<SetupFaceAfterTick>d__44.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
+###			C	Hair Color
+Go ahead and try. Knowing the code they all work differently anyway :)
+###			C	Hairstyle
+Go ahead and try. Knowing the code they all work differently anyway :)
+###			C	Skin Color
+Go ahead and try. Knowing the code they all work differently anyway :)
+###			√	Bugged Appearance
+- Shows up with a little brown notch on the East side of the face regardless of orientation. It looks like the mustache but it's hard to tell.
+  - Has not recurred.
+##		C	Bodyguarded
+- There are a few other hits that came up in a string search (possibly "Musician"):
+  - LoadLevel.SpawnStartingFollowers
+  - ObjectMult.StartWithFollowersBodyguardA
+    - Ignore this one, it's for the Player Bodyguard trait
+###			C	Pilot Trait
+No errors, but no effect. Logging time
+###			C	Bodyguard Quantity Traits?
+One / few / many, that's it
+###			C	Bodyguarded - Cop
+New
+###			C	Bodyguarded - Blahd
+New
+###			C	Bodyguarded - Crepe
+New
+###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Gorilla
+New
+###			C	Bodyguarded - Mafia
+New
+###			C	Bodyguarded - Soldier
+New
+###			C	Bodyguarded - Supercop
+New
+###			C	Bodyguarded - Supergoon
+New
+##		C	Combat
+###			C	Cause Lockdown
+New
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
+###			√	Use Drugs in Combat
+Complete
+##		C	Factions
+###			√	Aligned to Faction 1-4
+Complete
+###			C	Annoyed at Faction 1-4
+###			C	Friendly to Faction 1-4
+###			√	Hostile to Faction 1-4
+Complete
+##		C	Hire
+###			C	00 General AI Update error
+- Added Logging to Brain_MyUpdate
+- Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
+	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
+	[Error  : Unity Log] AI Update Error: Thief (1130) (Agent)		←
+  - Long story short, I pared it down to this - of the four statements called in the try-block, MyUpdate seems to be the culprit. This log will get confusing because you're seeing output from multiple agents. I've narrowed it to only the hiree here.
+	- So here's where it breaks:
+		[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+		[Debug  :CCU_P_BrainUpdate] Checkpoint A
+		[Debug  :CCU_P_BrainUpdate] Checkpoint B2
+		[Debug  :CCU_P_BrainUpdate] Checkpoint C
+		[Debug  :CCU_P_BrainUpdate] Checkpoint D
+		[Debug  :CCU_P_BrainUpdate] Checkpoint E
+		[Debug  :CCU_P_BrainUpdate] Checkpoint F
+		[Debug  :CCU_P_BrainUpdate] Checkpoint G
+		[Debug  :CCU_P_BrainUpdate] Checkpoint H ←
+		[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
+- When a busted hiree dies, I get a loop that consists of this part a hundred or so times:
+	CCU.Patches.Agents.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
+	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	- Interspersed with this every hundred or so times of seeing the other:
+		System.Reflection.MonoCMethod.InternalInvoke (System.Object obj, System.Object[] parameters) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Reflection.MonoCMethod.DoInvoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Reflection.MonoCMethod.Invoke (System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
+  - Anyway, there might be a hunt in Terminate_Prefix that can point to why the brain is breaking. I think it has to do with assigning goals/jobs somehow.
+####			√	Try Disabling Completely
+- Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
+  - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.
+####			C	Make Vanilla Replacment + Logging patch of BrainUpdate.MyUpdate
+New
+###			H	Bodyguard
+Pending General AI Update Error resolution
+###			H	Break In
+Pending General AI Update Error resolution
+###			H	Cause a Ruckus
+Pending General AI Update Error resolution
+###			C	Chloroform
+New
+###			T	Cost - Banana
+Test
+###			T	Cost - Less
+Test
+###			T	Cost - More
+Test
+###			C	Devour Corpse
+New
+###			C	Disarm Trap
+New
+###			C	Drink Blood
+New
+###			H	Hack
+Pending General AI Update Error resolution
+###			C	Handcuff
+New
+###			C	Permanent Hire
+New
+~8x normal hire price
+###			C	Permanent Hire Only
+New
+###			C	Pickpocket
+New
+###			C	Place Time Bomb
+New
+Based on and consumes Time Bombs in inventory. NPC starts with one.
+###			C	Poison
+New
+###			H	Safecrack
+
+Here's what comes up for Lockpick job:
+	Agent
+√		.GetCodeFromJob
+√		.GetJobCode					Need to extend jobType enum
+√		.ObjectAction
+	AgentInteractions
+√		.DetermineButtons
+√		.LockpickDoor				
+√		.PressedButton	
+	GoalDoJob
+√		.Activate					Check out 
+√		.Terminate
+	GoalDetails						E_GoalDetails
+√		.LockpickDoorReal
+	GoalLockpickDoor				GoalSafecrackSafe
+√		.Activate
+√		.Process
+√		.Terminate
+	GoalLockpickDoorReal			GoalSafecrackSafeReal
+√		.Activate
+√		.Process
+√		.Terminate
+	InvInterface
+√		.ShowTarget					
+√		.ShowTarget2
+	ObjectMult
+		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
+	PlayfieldObjectInteractions
+√		.TargetObject
+
+Objects to Analyze/track:
+	Agent
+		job
+		jobCode
+		target.targetType
+
+In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
+###			C	Set Explosive
+On door or Safe: Plants door detonator
+Elsewhere: Remote bomb
+Gives you detonator when planted
+###			C	Tamper
+New 
+##		C	Map Marker
+###			P	General Notes
+- Check out:
+GC
+	.questMarkerList
+PlayfieldObject
+	.MinimapDisplay
+x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
+x	.SpawnedBigQuetsMarkerRecently	Not relevant
+	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
+Quest
+	.questMarkerPrefab
+QuestMarker
+	Entire class!
+	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
+###			C	Pilot
+No more errors, but no map marker. 
+###			H	Bartender
+Pending pilot
+###			H	Drug Dealer
+Pending pilot
+###			H	Killer Robot
+Pending pilot
+###			H	Question Mark
+Pending pilot
+###			H	Shopkeeper
+Pending pilot
+###			H	Portrait
+Pending customs
+##		C	Passive
+###			C	Accept Bribe (Banana)
+New
+###			C	Accept Bribe (Beer/Whiskey)
+New
+###			C	Accept Bribe (Money)
+New
+###			C	Administer Blood Bag
+New
+###			C	Arena Manager
+New
+###			C	Bank Teller
+New
+###			C	Blood Bank Clerk
+New
+###			C	Buy Round
+New
+###			C	Cybernetic Surgery
+Curated Trait-seller
+###			C	Deportation Center Clerk
+New
+###			C	Explode On Death
+Works but... exploded when arrested 
+###			T	Extortable
+Test
+###			C	Fence
+New
+NOT a Vendor trait
+###			C	Hackable - Tamper With Aim
+New
+###			C	Hackable - Go Haywire
+New
+###			C	Heal
+New
+###			C	Hire for Level
+New
+###			C	Hire Permanently
+- Multiple skill useTHE 
+- Stay until death
+###			C	Hotel Clerk
+New
+###			C	Identify
+New
+###			C	Improve Relations w/ Faction 1-4
+New
+Costs $1000, improves your relations with that faction
+###			C	Influence Election
+New
+###			C	Innocent
+New
+XP Penalty for neutralizing
+###			C	Invincible
+New
+###			C	Mayor Clerk
+New
+###			T	Moochable
+Test
+###			C	Offer Motivation
+New
+###			C	Quest Giver
+New
+###			C	Refill Guns
+New
+###			C	Repair Armor
+New
+###			C	Repair Weapons
+New
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			C	Reviver
+If hired and surviving, will revive the player once
+###			C	Sell Faction Intel 1-4
+New
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
+###			C	Sell Slaves
+New
+###			C	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			C	Train Attributes (Split to each)
+New
+###			C	Train Traits - Defense
+New
+Sell traits for double their Upgrade Machine cost
+###			C	Train Traits - Guns
+New
+###			C	Train Traits - Melee
+New
+###			C	Train Traits - Movement
+New
+###			C	Train Traits - Social
+New
+###			C	Train Traits - Stealth
+New
+###			C	Train Traits - Trade
+New
+###			C	Use Bloodbag
+New
+###			C	Vendor Buyer
+New
+###			C	Vendor Buyer Only
+New
+###			C	Vision Beams (Cop Bot)
+New
+###			√	Guilty
+Complete
+##		CT	Relationships
+###			C	Aggressive (Cannibal)
+New
+###			T	Annoyed At Suspicious
+Attempted
+###			C	Faction Traits
+Expand to all relationship levels
+###			C	Faction Trait Limitation to Same Content
+Limit interaction to same campaign, and if not campaign then same chunk pack
+###			T	Hostile to Cannibals
+Attempted
+###			T	Hostile to Soldiers
+Attempted
+###			T	Hostile to Vampires
+Attempted
+###			T	Hostile to Werewolves
+Attempted
+###			C	Musician Trait for Random Stans
+New
+###			C	Never Hostile
+New
+###			C	Secretly Hostile
+A la Bounty disaster
+###			C	Vanilla Faction Traits
+For allying people and factions to Crepe/Blahd, etc.
+##		C	Spawn
+###			C	Enslaved
+New
+###			C	Hide In Bush
+New
+###			C	Hide In Manhole
+New
+###			C	Roaming Gang
+New
+###			C	Slave Owner
+NEw			
+##		T	Trait Triggers
+###			T	Common Folk
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+###			T	Cool Cannibal
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+###			H	Cop	Access
+Pending Vendor issues resolution
+###			T	Family Friend
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+###			H	Honorable Thief
+Pending Vendor issues resolution
+###			T	Scumbag
+Attempted
+Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+##		C	Utility
+###			C	Sort active Traits by Name
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
+- DW
+###			C	Sort active Traits by Value
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
+##		C	Vendor
+###			√	General Notes
+###			C	Cost Banana
+New (erroneously marked as complete, must have meant hire)
+###			C	Get full list of Vendor traits to test and complete category
+##		N	Agent Group
+###			C	Slum NPCs (Pilot)
+New
+###			H	Affect Campaign
+Pending pilot
+###			H	Affect Vanilla 
+Pending pilot
+###			C	Roamer Level Feature
+New
+##		N	Loadout
+###			C	Item Groups
+uwumacaronitime's idea: Item groups similar to NPC groups
+
+I can see this going two ways: 
+- As a trait for NPCs to generate with
+- As a designated item in the chunk creator for use in NPC & Object inventories. 
+
+I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
+
+Vanilla list:
+- Defense
+- Drugs
+- Food
+- Guns
+- GunAccessory
+- Melee
+- Movement
+- NonViolent
+- NonUsableTool
+- NonStandardWeapons
+- NonStandardWeapons2
+- NotRealWeapons
+- Passive
+- Social
+- Stealth
+- Supplies
+- Technology
+- Trade
+- Usable
+- Weapons
+- Weird
+###			T	ChunkKey
+- Attempted - InvDatabase.FillAgent()
+###			T	ChunkMayorBadge
+- Attempted - InvDatabase.FillAgent()
+###			T	ChunkSafeCombo
+- Attempted - InvDatabase.FillAgent()
+###			C	Guns_Common
+New
+
+#	H	Demo Campaign - Shadowrun-but-not-really
+Remember, simultaneous release would be a bad thing. Get it to a playable state so you can consistently test features with it, but don't need it finished yet.
 ##		C	Music Pack
 ###			C	Actually Making a Music Pack
 How
@@ -641,500 +1121,6 @@ Offices
 ###			T	Rooftop Escape
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
-
-#	CT	Traits
-##		H	Agent Group
-###		H	Slum NPCs (Pilot)
-New
-###		H	Affect Campaign
-Pending pilot
-###		H	Affect Vanilla 
-Pending pilot
-##		C	Appearance
-This actually sorta worked, sorta. 
-When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
-- Just saw this:
-	[Info   :  CCU_Core] RollFacialHair: Method Call
-	[Error  : Unity Log] KeyNotFoundException: The given key was not present in the dictionary.
-	Stack trace:
-	System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	HealthBar.SetupFace () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	HealthBar+<SetupFaceAfterTick>d__44.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-###			C	Facial Hair
-Search for "Custom" (Agent name)
-Didn't work
-
-AgentHitbox
-	.chooseFacialHairType
-CharacterSelect
-	.ChangeHairColor
-RandomSkinHair
-√	.fillSkinHair
-###			√	Bugged Appearance
-- Shows up with a little brown notch on the East side of the face regardless of orientation. It looks like the mustache but it's hard to tell.
-  - Has not recurred.
-###			C	Hair Color
-Go ahead and try. Knowing the code they all work differently anyway :)
-###			C	Hairstyle
-Go ahead and try. Knowing the code they all work differently anyway :)
-###			C	Skin Color
-Go ahead and try. Knowing the code they all work differently anyway :)
-##		C	Behavior Active
-###			C	Clean Trash
-New
-###			√	Drink Blood
-Complete
-###			√	Eat Corpse
-Complete
-###			C	Fight Fires
-New
-###			√	Grab Drugs
-Complete
-###			C	Grab Everything
-New
-###			C	Grab Food
-New
-###			√	Grab Money
-Complete
-###			C	Guard Door
-New
-###			C	Hobo Beg (Custom)
-Maybe just implement the whole Hey, You! overhaul here
-###			C	Hog Turntables
-New
-Allow paid Musician behavior
-###			√	Pickpocket
-Complete
-###			C	Seek & Destroy (Killer Robot)
-New
-###			C	Shakedown Player
-New
-Use this on leader w/ Wander Level
-Use "Follow" behavior on agents placed behind them
-No need for "Roaming Gang" Trait itself
-###			C	Tattle (Upper Cruster)
-New
-##		C	Behavior Passive
-###			C	Accept Bribe (Banana)
-New
-###			C	Accept Bribe (Beer/Whiskey)
-New
-###			C	Accept Bribe (Money)
-New
-###			C	Administer Blood Bag
-New
-###			C	Arena Manager
-New
-###			C	Bank Teller
-New
-###			C	Blood Bank Clerk
-New
-###			C	Buy Round
-New
-###			C	Cybernetic Surgery
-Curated Trait-seller
-###			C	Deportation Center Clerk
-New
-###			C	Extortable
-No effect
-###			C	Fence
-New
-NOT a Vendor trait
-###			C	Heal
-New
-###			C	Hire for Level
-New
-###			C	Hire Permanently
-- Multiple skill useTHE 
-- Stay until death
-###			C	Hotel Clerk
-New
-###			C	Identify
-New
-###			C	Improve Relations w/ Faction 1-4
-New
-Costs $1000, improves your relations with that faction
-###			C	Influence Election
-New
-###			C	Mayor Clerk
-New
-###			C	Moochable
-No effect
-###			C	Offer Motivation
-New
-###			C	Quest Giver
-New
-###			C	Refill Guns
-New
-###			C	Repair Armor
-New
-###			C	Repair Weapons
-New
-###			C	Sell Faction Intel 1-4
-New
-Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
-"Improve Faction Relations"
-Should only allow for 1 of these to simplify algorithm
-But this means you'll need further faction traits
-###			C	Sell Slaves
-New
-###			C	Summon Professional
-New
-Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			C	Train Attributes (Split to each)
-New
-###			C	Train Traits - Defense
-New
-Sell traits for double their Upgrade Machine cost
-###			C	Train Traits - Guns
-New
-###			C	Train Traits - Melee
-New
-###			C	Train Traits - Movement
-New
-###			C	Train Traits - Social
-New
-###			C	Train Traits - Stealth
-New
-###			C	Train Traits - Trade
-New
-###			C	Use Bloodbag
-New
-###			C	Vendor Buyer
-New
-###			C	Vendor Buyer Only
-New
-##		C	Bodyguarded
-- There are a few other hits that came up in a string search (possibly "Musician"):
-  - LoadLevel.SpawnStartingFollowers
-  - ObjectMult.StartWithFollowersBodyguardA
-    - Ignore this one, it's for the Player Bodyguard trait
-###			C	Pilot Trait
-No errors, but no effect. Logging time
-###			C	Bodyguard Quantity Traits?
-One / few / many, that's it
-###			C	Bodyguarded - Cop
-New
-###			C	Bodyguarded - Blahd
-New
-###			C	Bodyguarded - Crepe
-New
-###			C	Bodyguarded - Goon
-New
-###			C	Bodyguarded - Gorilla
-New
-###			C	Bodyguarded - Mafia
-New
-###			C	Bodyguarded - Soldier
-New
-###			C	Bodyguarded - Supercop
-New
-###			C	Bodyguarded - Supergoon
-New
-##		C	Combat
-###			C	Cause Lockdown
-New
-###			√	Coward
-Complete
-###			√	Fearless
-Complete
-###			√	Use Drugs in Combat
-Complete
-##		CT	Hire
-###			C	00 General AI Update error
-- Added Logging to Brain_MyUpdate
-- Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
-	[Error  : Unity Log] AI Update Error: Thief (1130) (Agent)		←
-  - Long story short, I pared it down to this - of the four statements called in the try-block, MyUpdate seems to be the culprit. This log will get confusing because you're seeing output from multiple agents. I've narrowed it to only the hiree here.
-	- So here's where it breaks:
-		[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-		[Debug  :CCU_P_BrainUpdate] Checkpoint A
-		[Debug  :CCU_P_BrainUpdate] Checkpoint B2
-		[Debug  :CCU_P_BrainUpdate] Checkpoint C
-		[Debug  :CCU_P_BrainUpdate] Checkpoint D
-		[Debug  :CCU_P_BrainUpdate] Checkpoint E
-		[Debug  :CCU_P_BrainUpdate] Checkpoint F
-		[Debug  :CCU_P_BrainUpdate] Checkpoint G
-		[Debug  :CCU_P_BrainUpdate] Checkpoint H ←
-		[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
-- When a busted hiree dies, I get a loop that consists of this part a hundred or so times:
-	CCU.Patches.Agents.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
-	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	- Interspersed with this every hundred or so times of seeing the other:
-		System.Reflection.MonoCMethod.InternalInvoke (System.Object obj, System.Object[] parameters) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Reflection.MonoCMethod.DoInvoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Reflection.MonoCMethod.Invoke (System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
-  - Anyway, there might be a hunt in Terminate_Prefix that can point to why the brain is breaking. I think it has to do with assigning goals/jobs somehow.
-####			√	Try Disabling Completely
-- Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
-  - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.
-####			C	Make Vanilla Replacment + Logging patch of BrainUpdate.MyUpdate
-New
-###			H	Bodyguard
-Pending General AI Update Error resolution
-###			H	Break In
-Pending General AI Update Error resolution
-###			H	Cause a Ruckus
-Pending General AI Update Error resolution
-###			C	Chloroform
-New
-###			T	Cost - Banana
-Test
-###			T	Cost - Less
-Test
-###			T	Cost - More
-Test
-###			C	Devour Corpse
-New
-###			C	Disarm Trap
-New
-###			C	Drink Blood
-New
-###			H	Hack
-Pending General AI Update Error resolution
-###			C	Handcuff
-New
-###			C	Permanent Hire
-New
-~8x normal hire price
-###			C	Permanent Hire Only
-New
-###			C	Pickpocket
-New
-###			C	Place Time Bomb
-New
-Based on and consumes Time Bombs in inventory. NPC starts with one.
-###			C	Poison
-New
-###			H	Safecrack
-
-Here's what comes up for Lockpick job:
-	Agent
-√		.GetCodeFromJob
-√		.GetJobCode					Need to extend jobType enum
-√		.ObjectAction
-	AgentInteractions
-√		.DetermineButtons
-√		.LockpickDoor				
-√		.PressedButton	
-	GoalDoJob
-√		.Activate					Check out 
-√		.Terminate
-	GoalDetails						E_GoalDetails
-√		.LockpickDoorReal
-	GoalLockpickDoor				GoalSafecrackSafe
-√		.Activate
-√		.Process
-√		.Terminate
-	GoalLockpickDoorReal			GoalSafecrackSafeReal
-√		.Activate
-√		.Process
-√		.Terminate
-	InvInterface
-√		.ShowTarget					
-√		.ShowTarget2
-	ObjectMult
-		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
-	PlayfieldObjectInteractions
-√		.TargetObject
-
-Objects to Analyze/track:
-	Agent
-		job
-		jobCode
-		target.targetType
-
-In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-###			C	Set Explosive
-On door or Safe: Plants door detonator
-Elsewhere: Remote bomb
-Gives you detonator when planted
-###			C	Tamper
-New 
-##		C	Interaction
-###			C	Administer Bloodbag
-New
-###			C	Arena Manager
-New
-###			C	Accept Bribe Cop
-New
-###			C	Accept Bribe Cop
-New
-###			C	Accept Bribe Cop
-New
-###			C	Buyer All
-New
-###			C	Buyer Vendor
-New
-###			C	Extortable
-I think this may be in two categories
-###			C	Moochable
-I think this may be in two categories
-##		CT	Loadout
-###			C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
-###			T	ChunkKey
-- Attempted - InvDatabase.FillAgent()
-###			T	ChunkMayorBadge
-- Attempted - InvDatabase.FillAgent()
-###			T	ChunkSafeCombo
-- Attempted - InvDatabase.FillAgent()
-###			C	Guns_Common
-##		C	Map Marker
-###			P	General Notes
-- Check out:
-GC
-	.questMarkerList
-PlayfieldObject
-	.MinimapDisplay
-x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
-x	.SpawnedBigQuetsMarkerRecently	Not relevant
-	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
-Quest
-	.questMarkerPrefab
-QuestMarker
-	Entire class!
-	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
-###			C	Pilot
-No more errors, but no map marker. 
-###			H	Bartender
-Pending pilot
-###			H	Drug Dealer
-Pending pilot
-###			H	Killer Robot
-Pending pilot
-###			H	Question Mark
-Pending pilot
-###			H	Shopkeeper
-Pending pilot
-###			H	Portrait
-Pending customs
-##		N	NPC Groups
-###			C	Roamer LevelFeature
-New
-###			C	Slum NPCs
-New
-##		C	Passive
-###			C	Explode On Death
-Works but... exploded when arrested 
-###			√	Guilty
-Complete
-###			C	Hackable - Tamper With Aim
-New
-###			C	Hackable - Go Haywire
-New
-###			C	Innocent
-New
-XP Penalty for neutralizing
-###			C	Invincible
-New
-###			C	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			C	Reviveable (Standard)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			C	Vision Beams (Cop Bot)
-New
-##		CT	Relationships
-###			C	Aggressive (Cannibal)
-New
-###			T	Annoyed At Suspicious
-Attempted
-###			C	Faction Traits
-Expand to all relationship levels
-###			C	Faction Trait Limitation to Same Content
-Limit interaction to same campaign, and if not campaign then same chunk pack
-###			T	Hostile to Cannibals
-Attempted
-###			T	Hostile to Soldiers
-Attempted
-###			T	Hostile to Vampires
-Attempted
-###			T	Hostile to Werewolves
-Attempted
-###			C	Musician Trait for Random Stans
-New
-###			C	Never Hostile
-New
-###			C	Secretly Hostile
-A la Bounty disaster
-###			C	Vanilla Faction Traits
-For allying people and factions to Crepe/Blahd, etc.
-##		C	Spawn
-###			C	Enslaved
-New
-###			C	Hide In Bush
-New
-###			C	Hide In Manhole
-New
-###			C	Roaming Gang
-New
-###			C	Slave Owner
-NEw			
-##		T	Trait Triggers
-###			T	Common Folk
-Attempted
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			T	Cool Cannibal
-Attempted
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			H	Cop	Access
-Pending Vendor issues resolution
-###			T	Family Friend
-Attempted
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			H	Honorable Thief
-Pending Vendor issues resolution
-###			T	Scumbag
-Attempted
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-##		C	Utility
-###			C	Sort active Traits by Name
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-- DW
-###			C	Sort active Traits by Value
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-##		C	Vendor
-###			√	General Notes
-###			C	Cost Banana
-New (erroneously marked as complete, must have meant hire)
-###			C	Get full list of Vendor traits to test and complete category
 
 #	N	Item Groups
 Next release
