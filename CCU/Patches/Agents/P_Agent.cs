@@ -179,7 +179,7 @@ namespace CCU.Patches.Agents
 				__instance.losCheckAtIntervals = true;
 			}
 
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.VendorTypeTraits))
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.MerchantTypeTraits))
 				__instance.SetupSpecialInvDatabase();
 
 			if (__instance.HasTrait<Combat_UseDrugs>())

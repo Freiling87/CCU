@@ -90,8 +90,10 @@ Breaking mods up means the player edition should be
 Complete
 ###			√	Character Sheet (CharacterSheet)
 Complete
-##		T	Trait Alphabetization
+##		C	Trait Alphabetization
 - Attempted
+  - DW
+  - 
 
 #	C	Chunk Editor
 ##		C	Hotkeys
@@ -394,16 +396,17 @@ Complete
 ###			√	F5 - Quicksave
 Complete
 
-#	C	Mutators
-!!! All of these are on hold pending adding to mutator list for level editor
+#	CT	Mutators
+##		T	Level Editor Mutator List
+Attempted
 ##		√	General Mutator List
 - Show up in LevelEditor UI, may be a manually constructed list
 - LoadLevel.loadStuff2 @ 171
 ##		C	Audio
-###			C	Ambienter Ambience
+###			M	Ambienter Ambience
 New
 Gate behind presence of objects/agents, e.g. disable Casino if all Slots are destroyed
-##		H	Branching
+##		C	Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
@@ -494,6 +497,16 @@ New
 New
 ###			C	Trashier Trashcans
 New
+
+#	C	Mod Split
+##		C	Ambience Mutators
+- Wreckage
+- Lighting
+- Ambient Audio
+##		C	Civil Engineering
+- Wall mods
+- Floor mods
+- City Size
 
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.

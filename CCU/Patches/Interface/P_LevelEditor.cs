@@ -59,6 +59,22 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.CreateMutatorListLevel))]
+		public static bool CreateMutatorList_Level(LevelEditor __instance, ref float ___numButtonsLoad)
+		{
+			List<string> list = new List<string>();
+
+			list.AddRange(vMutator.VanillaMutators); // This list is copied from this method so it shouldn't break anything
+			list.AddRange(CMutators.LevelOnlyMutators);
+
+			__instance.ActivateLoadMenu(); 
+			___numButtonsLoad = (float)list.Count;
+			__instance.OpenObjectLoad(list);
+			__instance.StartCoroutine("SetScrollbarPlacement");
+
+			return false;
+		}
+
 		[HarmonyPrefix, HarmonyPatch(methodName: "FixedUpdate", argumentTypes: new Type[0] { })]
 		public static bool FixedUpdate_Prefix(LevelEditor __instance, GameObject ___helpScreen, GameObject ___initialSelection, GameObject ___workshopSubmission, GameObject ___longDescription, ButtonHelper ___yesNoButtonHelper, InputField ___chunkNameField, GameObject ___yesNoSelection)
 		{

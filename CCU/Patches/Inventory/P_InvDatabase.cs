@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BepInEx.Logging;
 using HarmonyLib;
 using CCU.Traits;
-using CCU.Traits.Vendor;
 using System.Reflection;
 using Random = UnityEngine.Random;
 using RogueLibsCore;
@@ -32,9 +31,9 @@ namespace CCU.Patches.Inventory
 
 			Core.LogMethodCall();
 
-			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.VendorTypeTraits))
+			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.MerchantTypeTraits))
 			{
-				TraitInfo vendorTrait = TraitInfo.Get(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.VendorTypeTraits));
+				TraitInfo vendorTrait = TraitInfo.Get(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.MerchantTypeTraits));
 				string rName = nameProvider.CustomNames[NameTypes.StatusEffect][vendorTrait.Name].English;
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))

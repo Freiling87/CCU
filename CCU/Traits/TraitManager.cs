@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.Hire;
 using CCU.Traits.TraitTrigger;
-using CCU.Traits.Vendor;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +12,7 @@ using System.IO;
 using CCU.Traits.Passive;
 using CCU.Traits.Active;
 using CCU.Traits.Appearance.FacialHair;
+using CCU.Traits.MerchantType;
 
 namespace CCU.Traits
 {
@@ -38,7 +38,7 @@ namespace CCU.Traits
 				list.AddRange(LoadoutTraits);
 				list.AddRange(RelationshipTraits);
 				list.AddRange(TraitTriggerTraits);
-				list.AddRange(VendorTypeTraits);
+				list.AddRange(MerchantTypeTraits);
 
 				return list;
 			}
@@ -69,7 +69,7 @@ namespace CCU.Traits
 
 				list.AddRange(HireTypeTraits);
 				list.AddRange(InteractionTraits);
-				list.AddRange(VendorTypeTraits);
+				list.AddRange(MerchantTypeTraits);
 
 				return list;
 			}
@@ -168,58 +168,58 @@ namespace CCU.Traits
 			typeof(TraitTrigger_HonorableThief),
 			typeof(TraitTrigger_Scumbag),
 		};
-		public static List<Type> VendorTypeTraits = new List<Type>()
+		public static List<Type> MerchantTypeTraits = new List<Type>()
 		{
-			typeof(Vendor_Armorer),
-			typeof(Vendor_Assassin),
-			typeof(Vendor_Banana),
-			typeof(Vendor_Barbarian),
-			typeof(Vendor_Bartender),
-			typeof(Vendor_BartenderDive),
-			typeof(Vendor_BartenderFancy),
-			typeof(Vendor_Blacksmith),
-			typeof(Vendor_Cannibal),
-			typeof(Vendor_ConsumerElectronics),
-			typeof(Vendor_Contraband),
-			typeof(Vendor_ConvenienceStore),
-			typeof(Vendor_CopStandard),
-			typeof(Vendor_CopSWAT),
-			typeof(Vendor_Demolitionist),
-			typeof(Vendor_DrugDealer),
-			typeof(Vendor_Firefighter),
-			typeof(Vendor_FireSale),
-			typeof(Vendor_Gunsmith),
-			typeof(Vendor_HardwareStore),
-			typeof(Vendor_HighTech),
-			typeof(Vendor_HomeFortressOutlet),
-			typeof(Vendor_Hypnotist),
-			typeof(Vendor_JunkDealer),
-			typeof(Vendor_McFuds),
-			typeof(Vendor_MedicalSupplier),
-			typeof(Vendor_MiningGear),
-			typeof(Vendor_MonkeMart),
-			typeof(Vendor_MovieTheater),
-			typeof(Vendor_Occultist),
-			typeof(Vendor_OutdoorOutfitter),
-			typeof(Vendor_PacifistProvisioner),
-			typeof(Vendor_PawnShop),
-			typeof(Vendor_PestControl),
-			typeof(Vendor_Pharmacy),
-			typeof(Vendor_ResistanceCommissary),
-			typeof(Vendor_RiotDepot),
-			typeof(Vendor_Scientist),
-			typeof(Vendor_Shopkeeper),
-			typeof(Vendor_SlaveShop),
-			typeof(Vendor_Soldier),
-			typeof(Vendor_SportingGoods),
-			typeof(Vendor_Teleportationist),
-			typeof(Vendor_Thief),
-			typeof(Vendor_ThiefMaster),
-			typeof(Vendor_ThrowceryStore),
-			typeof(Vendor_ToyStore),
-			typeof(Vendor_UpperCruster),
-			typeof(Vendor_Vampire),
-			typeof(Vendor_Villain),
+			typeof(MerchantType_Armorer),
+			typeof(MerchantType_Assassin),
+			typeof(MerchantType_Banana),
+			typeof(MerchantType_Barbarian),
+			typeof(MerchantType_Bartender),
+			typeof(MerchantType_BartenderDive),
+			typeof(MerchantType_BartenderFancy),
+			typeof(MerchantType_Blacksmith),
+			typeof(MerchantType_Cannibal),
+			typeof(MerchantType_ConsumerElectronics),
+			typeof(MerchantType_Contraband),
+			typeof(MerchantType_ConvenienceStore),
+			typeof(MerchantType_CopStandard),
+			typeof(MerchantType_CopSWAT),
+			typeof(MerchantType_Demolitionist),
+			typeof(MerchantType_DrugDealer),
+			typeof(MerchantType_Firefighter),
+			typeof(MerchantType_FireSale),
+			typeof(MerchantType_Gunsmith),
+			typeof(MerchantType_HardwareStore),
+			typeof(MerchantType_HighTech),
+			typeof(MerchantType_HomeFortressOutlet),
+			typeof(MerchantType_Hypnotist),
+			typeof(MerchantType_JunkDealer),
+			typeof(MerchantType_McFuds),
+			typeof(MerchantType_MedicalSupplier),
+			typeof(MerchantType_MiningGear),
+			typeof(MerchantType_MonkeMart),
+			typeof(MerchantType_MovieTheater),
+			typeof(MerchantType_Occultist),
+			typeof(MerchantType_OutdoorOutfitter),
+			typeof(MerchantType_PacifistProvisioner),
+			typeof(MerchantType_PawnShop),
+			typeof(MerchantType_PestControl),
+			typeof(MerchantType_Pharmacy),
+			typeof(MerchantType_ResistanceCommissary),
+			typeof(MerchantType_RiotDepot),
+			typeof(MerchantType_Scientist),
+			typeof(MerchantType_Shopkeeper),
+			typeof(MerchantType_SlaveShop),
+			typeof(MerchantType_Soldier),
+			typeof(MerchantType_SportingGoods),
+			typeof(MerchantType_Teleportationist),
+			typeof(MerchantType_Thief),
+			typeof(MerchantType_ThiefMaster),
+			typeof(MerchantType_ThrowceryStore),
+			typeof(MerchantType_ToyStore),
+			typeof(MerchantType_UpperCruster),
+			typeof(MerchantType_Vampire),
+			typeof(MerchantType_Villain),
 		};
 
 		public static Type GetOnlyTraitFromList(Agent agent, List<Type> traitList)

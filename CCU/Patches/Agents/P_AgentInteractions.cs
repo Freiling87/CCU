@@ -1839,7 +1839,7 @@ namespace CCU.Patches.Agents
 								}
 
 								// Vendor 
-								if (TraitManager.HasTraitFromList(agent, TraitManager.VendorTypeTraits) && agent.hasSpecialInvDatabase)
+								if (TraitManager.HasTraitFromList(agent, TraitManager.MerchantTypeTraits) && agent.hasSpecialInvDatabase)
 								{
 									Core.LogCheckpoint("Vendor");
 									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
@@ -1961,7 +1961,7 @@ namespace CCU.Patches.Agents
 				{
 					if (interactingAgent.statusEffects.hasTrait("ArtOfTheDeal"))
 					{
-						// WTAF, Matt
+						// Won't compile, and no apparent purpose
 						//for (int i = 0; i < agent.inventory.InvItemList.Count; i++)
 						//{
 						//	InvItem invItem2 = agent.inventory.InvItemList[i];
@@ -1969,7 +1969,7 @@ namespace CCU.Patches.Agents
 						//	if (!invItem2.questItem && invItem2.invItemName != "Money")
 						//		int itemValue = invItem2.itemValue;
 						//}
-					
+
 						if (!interactingAgent.ghost)
 							__instance.AddButton("BuyItem");
 					}

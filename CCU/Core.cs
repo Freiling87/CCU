@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace CCU
 {
@@ -66,7 +67,6 @@ namespace CCU
 		public static Color32 NewMoon = new Color32(0, 0, 0, 128);
 		public static Color32 Sepia = new Color32(203, 180, 153, 128);
 	}
-
 	public static class CJob // These names are extra but I want to ensure they're unique
 	{
 		public const string
@@ -78,7 +78,6 @@ namespace CCU
 			TamperSomething =						"[CCU] Job - TamperSomething",
 			TamperSomethingReal =					"[CCU] Job - TamperSomethingReal";
 	}
-
 	public static class CMutators
 	{
 		public const string
@@ -160,8 +159,24 @@ namespace CCU
 		#region Utility
 			SortMutatorsByName =					"! Sort Mutators by Name";
 		#endregion
-	}
 
+		public static List<string> LevelOnlyMutators = new List<string>()
+		{
+
+		};
+
+		private static List<string> AllCustomMutators() =>
+			typeof(CMutators).GetFields().Cast<string>().ToList().Where(s => s.GetType() is string);
+
+		//foreach (var constant in typeof(TestClass).GetFields())
+		//{
+		//	if (constant.IsLiteral && !constant.IsInitOnly)
+		//	{
+		//		lstOfConstants.Add((string)constant.GetValue(null));
+		//	}
+
+		//}
+		}
 	public static class CTrait 
 	{
 		public const string
@@ -795,6 +810,78 @@ namespace CCU
 		{
 				Crowbar,
 				Wrench,
+		};
+	}
+	public static class vMutator // Vanilla Mutators
+	{
+		public const string
+			AssassinsEveryLevel = "AssassinsEveryLevel",
+			BigKnockbackForAll = "BigKnockbackForAll",
+			CannibalsDontAttack = "CannibalsDontAttack",
+			DoctorsMoreImportant = "DoctorsMoreImportant",
+			EveryoneHatesYou = "EveryoneHatesYou",
+			ExplodingBodies = "ExplodingBodies",
+			FullHealth = "FullHealth",
+			GorillaTown = "GorillaTown",
+			HalfHealth = "HalfHealth",
+			HighCost = "HighCost",
+			InfiniteAmmo = "InfiniteAmmo",
+			InfiniteAmmoNormalWeapons = "InfiniteAmmoNormalWeapons",
+			InfiniteMeleeDurability = "InfiniteMeleeDurability",
+			LowHealth = "LowHealth",
+			ManyWerewolf = "ManyWerewolf",
+			MixedUpLevels = "MixedUpLevels",
+			MoneyRewards = "MoneyRewards",
+			NoCops = "NoCops",
+			NoCowards = "NoCowards",
+			NoGuns = "NoGuns",
+			NoLimits = "NoLimits",
+			NoMelee = "NoMelee",
+			RocketLaunchers = "RocketLaunchers",
+			RogueVision = "RogueVision",
+			SlowDown = "SlowDown",
+			SpeedUp = "SpeedUp",
+			SupercopsReplaceCops = "SupercopsReplaceCops",
+			TimeLimit = "TimeLimit",
+			TimeLimit2 = "TimeLimit2",
+			TimeLimitQuestsGiveMoreTime = "TimeLimitQuestsGiveMoreTime",
+			ZombieMutator = "ZombieMutator",
+			ZombiesWelcome = "ZombiesWelcome";
+
+		public static List<string> VanillaMutators = new List<string>()
+		{
+			AssassinsEveryLevel,
+			BigKnockbackForAll,
+			CannibalsDontAttack,
+			DoctorsMoreImportant,
+			EveryoneHatesYou,
+			ExplodingBodies,
+			FullHealth,
+			GorillaTown,
+			HalfHealth,
+			HighCost,
+			InfiniteAmmo,
+			InfiniteAmmoNormalWeapons,
+			InfiniteMeleeDurability,
+			LowHealth,
+			ManyWerewolf,
+			MixedUpLevels,
+			MoneyRewards,
+			NoCops,
+			NoCowards,
+			NoGuns,
+			NoLimits,
+			NoMelee,
+			RocketLaunchers,
+			RogueVision,
+			SlowDown,
+			SpeedUp,
+			SupercopsReplaceCops,
+			TimeLimit,
+			TimeLimit2,
+			TimeLimitQuestsGiveMoreTime,
+			ZombieMutator,
+			ZombiesWelcome,
 		};
 	}
 	public static class vObject // Vanilla Objects
