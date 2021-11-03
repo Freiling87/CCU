@@ -147,6 +147,7 @@ namespace CCU.Patches.Agents
 				logger.LogDebug("Checkpoint H");
 				if (___agent.isPlayer > 0 && !___agent.outOfControl)
 				{
+					logger.LogDebug("Checkpoint Ha1");
 					___agent.SetBrainActive(true);
 				
 					if (!___agent.curTileData.prisonOpened)
@@ -156,6 +157,7 @@ namespace CCU.Patches.Agents
 				}
 				else if (!__instance.gc.serverPlayer && !__instance.gc.clientControlling && !___agent.clientOutOfControl)
 				{
+					logger.LogDebug("Checkpoint Hb1");
 					___agent.SetBrainActive(true);
 				
 					if (Vector2.Distance(__instance.gc.cameraScript.playerAgent.curPosition, ___agent.curPosition) > 16f)
@@ -167,9 +169,13 @@ namespace CCU.Patches.Agents
 						__instance.TurnOnCollision();
 				}
 				else if (___agent.objectAgent || ___agent.hologram || ___agent.mechEmpty)
+				{
+					logger.LogDebug("Checkpoint Hc1");
 					___agent.SetBrainActive(true);
+				}
 				else
 				{
+					logger.LogDebug("Checkpoint Hd1");
 					bool flag2 = false;
 
 					if (__instance.gc.multiplayerMode)
@@ -277,6 +283,8 @@ namespace CCU.Patches.Agents
 						}
 					}
 
+					logger.LogDebug("Checkpoint Hd2");
+
 					if (flag2 && ___agent.gang != 0 && __instance.gc.loadCompleteReally)
 					{
 						for (int l = 0; l < ___agent.gangMembers.Count; l++)
@@ -305,9 +313,11 @@ namespace CCU.Patches.Agents
 					
 					if (___agent.fakeNotActiveStreaming)
 						flag2 = true;
-					
+
+					logger.LogDebug("Checkpoint Hd3");
 					if (flag2 && !___agent.killerRobot && !___agent.outOfControl && !__instance.chunkStatic && ___agent.pathing == 0 && !___agent.mechEmpty)
 					{
+						logger.LogDebug("Checkpoint Hd4a");
 						___agent.SetBrainActive(false);
 						__instance.slowAIWait = 0;
 					
@@ -316,6 +326,7 @@ namespace CCU.Patches.Agents
 					}
 					else
 					{
+						logger.LogDebug("Checkpoint Hd4b");
 						if (!__instance.collidersEnabled)
 							__instance.TurnOnCollision();
 						

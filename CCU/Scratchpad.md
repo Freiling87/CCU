@@ -608,8 +608,8 @@ Complete
 ###			C	Friendly to Faction 1-4
 ###			√	Hostile to Faction 1-4
 Complete
-##		C	Hire
-###			C	00 General AI Update error
+##		T	Hire
+###			T	00 General AI Update error
 - Added Logging to Brain_MyUpdate
 - Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
 	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
@@ -626,6 +626,11 @@ Complete
 		[Debug  :CCU_P_BrainUpdate] Checkpoint G
 		[Debug  :CCU_P_BrainUpdate] Checkpoint H ←
 		[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
+   	- Ideas:
+      - Hd1 looks like the most extensive section.
+        - Gang stuff is in here
+        - losCheckAtIntervals is as well
+        - Added more logging.
 - When a busted hiree dies, I get a loop that consists of this part a hundred or so times:
 	CCU.Patches.Agents.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
 	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
