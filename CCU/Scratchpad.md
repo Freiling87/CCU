@@ -10,6 +10,9 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 
+#	P	00 General Reminders
+Trait section could use the zen-gardening the other section was given earlier.
+
 #	C	All Editors
 General utilities that work across editors
 ##		C	Hotkeys
@@ -312,7 +315,7 @@ I.e., show rotated sprite for any objects
 This sounds hard
 
 #	C	Documentation
-##		C	Keyboard Layout Diagrams
+##		C	Keyboard Layout Diagrams 
 ###			√	Chunk Editor
 http://www.keyboard-layout-editor.com/#/gists/2f3df5c48d93b5cbb24ebddca302ffd6
 ###			C	Level Editor
@@ -432,36 +435,40 @@ New
 For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-##		CT	Ambient Light
+##		C	Ambient Light
 - CameraScript.SetLighting
   - DW
 - StatusEffects.WerewolfTransform
 - StatusEffects.WerewolfTransformBack
 - LoadLevel.SetNormalLighting 
 - LoadLevel.SetRogueVisionLighting
-###			T	New Moon
-Test with Werewolf
 ###			C	Sepia
 New
-###			T	No Agent Lights
+###			C	No Agent Lights
+- The most recent attempt didn't make them move feet-first, but they still all have lights.
 - Didn't work, and made the agent move feet-first
   - Same outcome for both locations of attempt
 - Agent.hasLight
   - Postfix to false in
     - Agent.Awake
       - Attempted
+        - DW
     - Agent.RecycleAwake
       - Attempted
+        - DW
   - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
-###			T	No Item/Wreckage Lights
+- Exclude Ghosts!
+###			C	No Item/Wreckage Lights
 - SpawnerMain.SetLighting2
   - Tried this another way
-###			T	No Object Lights
-- SpawnerMain.SetLighting2
-  - Not sure here
-- ObjectReal.noLight 
-  - Attempted
-    - This may be overbroad, as I believe Item and Agent inherit from OR
+    - DW
+###			C	No Object Lights
+- Works!
+- Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
+- Fire sources are fine since the particle creates the light anyway.
+###			√	New Moon
+Complete
+Confirmed Werewolf returns it to how you want it.
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
@@ -646,6 +653,14 @@ Pending pilot
 ##		C	Appearance
 This actually sorta worked, sorta. 
 When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
+- Just saw this:
+	[Info   :  CCU_Core] RollFacialHair: Method Call
+	[Error  : Unity Log] KeyNotFoundException: The given key was not present in the dictionary.
+	Stack trace:
+	System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	HealthBar.SetupFace () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	HealthBar+<SetupFaceAfterTick>d__44.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
 ###			C	Facial Hair
 Search for "Custom" (Agent name)
 Didn't work
@@ -827,12 +842,35 @@ Complete
 ###			√	Use Drugs in Combat
 Complete
 ##		CT	Hire
-###			T	00 General AI Update error
+###			C	00 General AI Update error
 - Added Logging to Brain_MyUpdate
 - Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
 	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
 	[Error  : Unity Log] AI Update Error: Thief (1130) (Agent)		←
   - Long story short, I pared it down to this - of the four statements called in the try-block, MyUpdate seems to be the culprit. This log will get confusing because you're seeing output from multiple agents. I've narrowed it to only the hiree here.
+	- So here's where it breaks:
+		[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
+		[Debug  :CCU_P_BrainUpdate] Checkpoint A
+		[Debug  :CCU_P_BrainUpdate] Checkpoint B2
+		[Debug  :CCU_P_BrainUpdate] Checkpoint C
+		[Debug  :CCU_P_BrainUpdate] Checkpoint D
+		[Debug  :CCU_P_BrainUpdate] Checkpoint E
+		[Debug  :CCU_P_BrainUpdate] Checkpoint F
+		[Debug  :CCU_P_BrainUpdate] Checkpoint G
+		[Debug  :CCU_P_BrainUpdate] Checkpoint H ←
+		[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
+- When a busted hiree dies, I get a loop that consists of this part a hundred or so times:
+	CCU.Patches.Agents.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
+	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	- Interspersed with this every hundred or so times of seeing the other:
+		System.Reflection.MonoCMethod.InternalInvoke (System.Object obj, System.Object[] parameters) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Reflection.MonoCMethod.DoInvoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Reflection.MonoCMethod.Invoke (System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+		CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
+  - Anyway, there might be a hunt in Terminate_Prefix that can point to why the brain is breaking. I think it has to do with assigning goals/jobs somehow.
 ####			√	Try Disabling Completely
 - Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
   - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.
@@ -1088,6 +1126,7 @@ Only SetRelationshipInitial - search for other occurrences of this trait in the 
 ###			C	Sort active Traits by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
+- DW
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.

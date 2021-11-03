@@ -16,7 +16,7 @@ namespace CCU.Patches.Agents
         public static GameController GC => GameController.gameController;
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
-        public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain, int testWhyIsThisStillBreaking)
+        public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain)
 		{	
 			/* Contains:
 			 * - GrabMoney
