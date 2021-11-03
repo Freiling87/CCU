@@ -18,7 +18,8 @@ Listed in order of Parent tier summary symbol priority:
 
 #	C	All Editors
 ##		T	Hotkeys
-###			C	F11 - Return to Editor
+###			T	F11 - Return to Editor
+- Tried adding a check for GC.loadCompleteReally
 - LoadLevel.NextLevel() might be a good shortcut
   - Patch this into PlayerControl.Update
   - Issue with this one is that it will be limited to chunk-testing rather than campaign testing
