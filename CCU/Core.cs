@@ -208,7 +208,7 @@ namespace CCU
 			AgentGroup_Vampire = "[CCU] Agent Group - Vampire",
 			AgentGroup_WhiteCollars = "[CCU] Agent Group - White-Collars",
 		#endregion
-		#region Appearance
+		#region Appearance				Group
 		#region Accessory
 			Accessory_CopHat =					"[CCU] Accessory - Cop Hat",
 			Accessory_DoctorHeadlamp =			"[CCU] Accessory - Doctor Headlamp",
@@ -344,7 +344,7 @@ namespace CCU
 			Interaction_BankTeller =			"[CCU] Interaction - Bank Teller",
 			Interaction_BloodBank =				"[CCU] Interaction - Blood Bank", 
 			Interaction_BribeCops =				"[CCU] Interaction - Bribe Cops",
-			Intearction_BribeEntryBeer =		"[CCU] Interaction - Bribe for Entry (Beer)",// Requires Passive Guard Door?
+			Interaction_BribeEntryBeer =		"[CCU] Interaction - Bribe for Entry (Beer)",// Requires Passive Guard Door?
 			Interaction_BribeEntryMoney =		"[CCU] Interaction - Bribe for Entry (Money)", 
 			Interaction_BribeEntryWhiskey =		"[CCU] Interaction - Bribe for Entry (Whiskey)",
 			Interaction_BuyerAll =				"[CCU] Interaction - Buyer All", 
@@ -388,16 +388,78 @@ namespace CCU
 			MapMarker_QuestionMark =			"[CCU] Map Marker: QuestionMark",
 			MapMarker_Shopkeeper =				"[CCU] Map Marker: Shopkeeper",
 		#endregion
+		#region Merchant				Group
+		#region Merchant Buyer
+
+		#endregion
+		#region Merchant Type
+			MerchantType_Anthropophagie =			"[CCU] Merchant Type - Anthropophagie",
+			MerchantType_Armorer =					"[CCU] Merchant Type - Armorer",
+			MerchantType_Assassin =					"[CCU] Merchant Type - Assassin",
+			MerchantType_BananaBoutique =			"[CCU] Merchant Type - Banana",
+			MerchantType_BarbarianMerchant =		"[CCU] Merchant Type - Barbarian",
+			MerchantType_Bartender =				"[CCU] Merchant Type - Bartender",
+			MerchantType_BartenderDive =			"[CCU] Merchant Type - Bartender (Dive)",
+			MerchantType_BartenderFancy =			"[CCU] Merchant Type - Bartender (Fancy)",
+			MerchantType_Blacksmith =				"[CCU] Merchant Type - Blacksmith",
+			MerchantType_ConsumerElectronics =		"[CCU] Merchant Type - Consumer Electronics",
+			MerchantType_ConvenienceStore =			"[CCU] Merchant Type - Convenience Store",
+			MerchantType_Contraband =				"[CCU] Merchant Type - Cop Confiscated Goods",
+			MerchantType_CopStandard =				"[CCU] Merchant Type - Cop Patrolman's Equipment",
+			MerchantType_CopSWAT =					"[CCU] Merchant Type - Cop SWAT Equipment",
+			MerchantType_DemolitionDepot =			"[CCU] Merchant Type - Demolitionist",
+			MerchantType_DrugDealer =				"[CCU] Merchant Type - Drug Dealer",
+			MerchantType_FirefighterFiveAndDime =	"[CCU] Merchant Type - Firefighter",
+			MerchantType_FireSale =					"[CCU] Merchant Type - Fire Sale",
+			MerchantType_GunDealer =				"[CCU] Merchant Type - Gun Dealer",
+			MerchantType_GunDealerHeavy =			"[CCU] Merchant Type - Gun Dealer (Heavy)",
+			MerchantType_Gunsmith =					"[CCU] Merchant Type - Gunsmith",
+			MerchantType_HardwareStore =			"[CCU] Merchant Type - Tool Shop",
+			MerchantType_HighTech =					"[CCU] Merchant Type - HighTech",
+			MerchantType_HomeFortressOutlet =		"[CCU] Merchant Type - Home Fortress Outlet",
+			MerchantType_Hypnotist =				"[CCU] Merchant Type - Hypnotist",
+			MerchantType_JunkDealer =				"[CCU] Merchant Type - Junk Dealer",
+			MerchantType_McFuds =					"[CCU] Merchant Type - McFud's",
+			MerchantType_MedicalSupplier =			"[CCU] Merchant Type - Medical Supplier",
+			MerchantType_MiningGear =				"[CCU] Merchant Type - Mining Gear",
+			MerchantType_MonkeMart =				"[CCU] Merchant Type - Monke Mart",
+			MerchantType_MovieTheater =				"[CCU] Merchant Type - Movie Theater",
+			MerchantType_Occultist =				"[CCU] Merchant Type - Occultist",
+			MerchantType_OutdoorOutfitter =			"[CCU] Merchant Type - Outdoor Outfitter",
+			MerchantType_PacifistProvisioner =		"[CCU] Merchant Type - Pacifist Provisioner",
+			MerchantType_PawnShop =					"[CCU] Merchant Type - Pawn Shop",
+			MerchantType_PestControl =				"[CCU] Merchant Type - Pest Control",
+			MerchantType_Pharmacy =					"[CCU] Merchant Type - Pharmacy",
+			MerchantType_ResistanceCommissary =		"[CCU] Merchant Type - Resistance Commissary",
+			MerchantType_RiotInc =					"[CCU] Merchant Type - Riot Depot",
+			MerchantType_ResearchMaterials =		"[CCU] Merchant Type - Scientist",
+			MerchantType_Shopkeeper =				"[CCU] Merchant Type - Shopkeeper",
+			MerchantType_SlaveShop =				"[CCU] Merchant Type - Slave Shop",
+			MerchantType_Soldier =					"[CCU] Merchant Type - Soldier",
+			MerchantType_SportingGoods =			"[CCU] Merchant Type - Sporting Goods",
+			MerchantType_Teleportationist =			"[CCU] Merchant Type - Teleportationist",
+			MerchantType_Thief =					"[CCU] Merchant Type - Thief",
+			MerchantType_ThiefMaster =				"[CCU] Merchant Type - Thief Master",
+			MerchantType_ThrowceryStore =			"[CCU] Merchant Type - Throwcery Store",
+			MerchantType_ToyStore =					"[CCU] Merchant Type - Toy Store",
+			MerchantType_UpperCruster =				"[CCU] Merchant Type - Upper Cruster",
+			MerchantType_Vampire =					"[CCU] Merchant Type - Vampire",
+			MerchantType_Villain =					"[CCU] Merchant Type - Villain",
+		#endregion
+		#region Merchant Vendor
+
+		#endregion
+		#endregion
 		#region Passive
-			Passive_ExplodeOnDeath =			"[CCU] Passive - Explode On Death",
-			Passive_ExplodeOnDeathLarge =		"[CCU] Passive - Explode On Death (Large)",
-			Passive_ExplodeOnDeathMolotov =		"[CCU] Passive - Explode On Death (Molotov)",
-			Passive_ExplodeOnDeathSlime =		"[CCU] Passive - Explode On Death (Slime)",
-			Passive_ExplodeOnDeathWater =		"[CCU] Passive - Explode On Death (Water)",
-			Passive_Guilty =					"[CCU] Passive - Guilty",
-			Passive_Hackable_Haywire =			"[CCU] Passive - Hackable (Haywire)",
-			Passive_Hackable_TamperWAim =		"[CCU] Passive - Hackable (Tamper w/ Aim)",
-			Passive_VisionBeams =				"[CCU] Passive - Vision Beams",
+			Passive_ExplodeOnDeath =				"[CCU] Passive - Explode On Death",
+			Passive_ExplodeOnDeathLarge =			"[CCU] Passive - Explode On Death (Large)",
+			Passive_ExplodeOnDeathMolotov =			"[CCU] Passive - Explode On Death (Molotov)",
+			Passive_ExplodeOnDeathSlime =			"[CCU] Passive - Explode On Death (Slime)",
+			Passive_ExplodeOnDeathWater =			"[CCU] Passive - Explode On Death (Water)",
+			Passive_Guilty =						"[CCU] Passive - Guilty",
+			Passive_Hackable_Haywire =				"[CCU] Passive - Hackable (Haywire)",
+			Passive_Hackable_TamperWAim =			"[CCU] Passive - Hackable (Tamper w/ Aim)",
+			Passive_VisionBeams =					"[CCU] Passive - Vision Beams",
 		#endregion
 		#region Relationships
 			Relationships_AggressiveCannibal =	"[CCU] Relationships - Aggressive (Cannibal)",   // Hostile to character except with Cool with Cannibals
@@ -434,60 +496,7 @@ namespace CCU
 			Utility_SortTraitsByName =				"[CCU] ! Sort by Name",
 			Utility_SortTraitsByValue =				"[CCU] ! Sort by Value",
 		#endregion
-		#region Vendor
-			Vendor_Anthropophagie =				"[CCU] Vendor - Anthropophagie",
-			Vendor_Armorer =					"[CCU] Vendor - Armorer",
-			Vendor_Assassin =					"[CCU] Vendor - Assassin",
-			Vendor_BananaBoutique =				"[CCU] Vendor - Banana",
-			Vendor_BarbarianMerchant =			"[CCU] Vendor - Barbarian",
-			Vendor_Bartender =					"[CCU] Vendor - Bartender",
-			Vendor_BartenderDive =				"[CCU] Vendor - Bartender (Dive)",
-			Vendor_BartenderFancy =				"[CCU] Vendor - Bartender (Fancy)",
-			Vendor_Blacksmith =					"[CCU] Vendor - Blacksmith",
-			Vendor_ConsumerElectronics =		"[CCU] Vendor - Consumer Electronics",
-			Vendor_ConvenienceStore =			"[CCU] Vendor - Convenience Store",
-			Vendor_Contraband =					"[CCU] Vendor - Cop Confiscated Goods",
-			Vendor_CopStandard =				"[CCU] Vendor - Cop Patrolman's Equipment",
-			Vendor_CopSWAT =					"[CCU] Vendor - Cop SWAT Equipment",
-			Vendor_DemolitionDepot =			"[CCU] Vendor - Demolitionist",
-			Vendor_DrugDealer =					"[CCU] Vendor - Drug Dealer",
-			Vendor_FirefighterFiveAndDime =		"[CCU] Vendor - Firefighter",
-			Vendor_FireSale =					"[CCU] Vendor - Fire Sale",
-			Vendor_GunDealer =					"[CCU] Vendor - Gun Dealer",
-			Vendor_GunDealerHeavy =				"[CCU] Vendor - Gun Dealer (Heavy)",
-			Vendor_Gunsmith =					"[CCU] Vendor - Gunsmith",
-			Vendor_HardwareStore =				"[CCU] Vendor - Tool Shop",
-			Vendor_HighTech =					"[CCU] Vendor - HighTech",
-			Vendor_HomeFortressOutlet =			"[CCU] Vendor - Home Fortress Outlet",
-			Vendor_Hypnotist =					"[CCU] Vendor - Hypnotist",
-			Vendor_JunkDealer =					"[CCU] Vendor - Junk Dealer",
-			Vendor_McFuds =						"[CCU] Vendor - McFud's",
-			Vendor_MedicalSupplier =			"[CCU] Vendor - Medical Supplier",
-			Vendor_MiningGear =					"[CCU] Vendor - Mining Gear",
-			Vendor_MonkeMart =					"[CCU] Vendor - Monke Mart",
-			Vendor_MovieTheater =				"[CCU] Vendor - Movie Theater",
-			Vendor_Occultist =					"[CCU] Vendor - Occultist",
-			Vendor_OutdoorOutfitter =			"[CCU] Vendor - Outdoor Outfitter",
-			Vendor_PacifistProvisioner =		"[CCU] Vendor - Pacifist Provisioner",
-			Vendor_PawnShop =					"[CCU] Vendor - Pawn Shop",
-			Vendor_PestControl =				"[CCU] Vendor - Pest Control",
-			Vendor_Pharmacy =					"[CCU] Vendor - Pharmacy",
-			Vendor_ResistanceCommissary =		"[CCU] Vendor - Resistance Commissary",
-			Vendor_RiotInc =					"[CCU] Vendor - Riot Depot",
-			Vendor_ResearchMaterials =			"[CCU] Vendor - Scientist",
-			Vendor_Shopkeeper =					"[CCU] Vendor - Shopkeeper",
-			Vendor_SlaveShop =					"[CCU] Vendor - Slave Shop",
-			Vendor_Soldier =					"[CCU] Vendor - Soldier",
-			Vendor_SportingGoods =				"[CCU] Vendor - Sporting Goods",
-			Vendor_Teleportationist =			"[CCU] Vendor - Teleportationist",
-			Vendor_Thief =						"[CCU] Vendor - Thief",
-			Vendor_ThiefMaster =				"[CCU] Vendor - Thief Master",
-			Vendor_ThrowceryStore =				"[CCU] Vendor - Throwcery Store",
-			Vendor_ToyStore =					"[CCU] Vendor - Toy Store",
-			Vendor_UpperCruster =				"[CCU] Vendor - Upper Cruster",
-			Vendor_Vampire =					"[CCU] Vendor - Vampire",
-			Vendor_Villain =					"[CCU] Vendor - Villain";
-		#endregion
+			NoMoreSemiColons =						"lol";
 	}
 	public static class vItem // Vanilla Items
 	{

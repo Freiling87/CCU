@@ -94,8 +94,8 @@ namespace CCU.Traits
 		};
 		public static List<Type> BuyerTraits = new List<Type>()
 		{
-			typeof(Interaction_BuyerAll),
-			typeof(Interaction_BuyerVendor),
+			typeof(Buyer_All),
+			typeof(Buyer_MerchantType),
 		};
 		public static List<Type> FacialHairTraits = new List<Type>()
 		{
@@ -131,9 +131,9 @@ namespace CCU.Traits
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
 			typeof(Interaction_Extortable),
-			typeof(Interaction_BuyerAll),
+			typeof(Buyer_All),
 			typeof(Interaction_Moochable),
-			typeof(Interaction_BuyerVendor), // TODO: Review this, may have special usage as it's not in Vendor list
+			typeof(Buyer_MerchantType), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()
 		{

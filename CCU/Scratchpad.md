@@ -10,8 +10,11 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 
-#	P	00 General Reminders
-Trait section could use the zen-gardening the other section was given earlier.
+#	P	00 General Reminders & To-Dos
+
+- I merged Passive and Interaction, but I'm thinking they need to be split back up. 
+  - There was also a specific reason to make Extortable & Moochable into Passive instead of Interaction or Trait Trigger, but I can't remember it. Write it here if you do.
+---
 
 #	C	All Editors
 General utilities that work across editors
@@ -419,6 +422,7 @@ For level access
 Gate level access
 ###			C	Require A/B/C/D true
 Gate level access
+###			C	Traits for Level Branching
 ##		H	Followers
 Pending resolution of hire AI Update error
 ###			T	Homesickness Disabled
@@ -528,7 +532,7 @@ Complete
 Complete
 ###			√	Pickpocket
 Complete
-##		C	Appearance
+##		C	Appearance				Group
 This actually sorta worked, sorta. 
 When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
 - Search for "Custom" (Agent name)
@@ -583,6 +587,11 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
+###		C	Branching
+####		C	If Paid then A/B/C/D True
+New
+####		C	If Killed then A/B/C/D True
+Etc.
 ##		C	Combat
 ###			C	Cause Lockdown
 New
@@ -744,7 +753,46 @@ Pending pilot
 Pending pilot
 ###			H	Portrait
 Pending customs
-##		C	Passive
+##		C	Merchant (Buyer/Vendor)		Group
+###			C	Buyer
+Move VendorBuyer traits to this group
+####			C	Buyer All
+New
+####			C	Buyer Only
+For using VendorTypes to define Buyer Vendor Type, while blocking actual Vendor behavior
+####			C	Buyer Vendor Type
+New
+####			C	Pay Banana
+New
+####			C	Pay More
+New
+####			C	Pay Less
+New
+###			C	Merchant
+####			C	Buyer/Merchant/Vendor Trait Refactor
+- Vendor & Buyer traits have a weird setup right now, with Buyer having a strange secondary relationship to Vendor that will lead to some arcane trait configurations.
+    - Change Vendor Types to Merchant Types
+    - Keep the actual passive behaviors as Buyer & Vendor.
+      - Add Requirement: Merchant Type Trait
+  - Will need Buyer Vendor to access the rLists/rNames you defined. There are two paths I see:
+    - Re-access those and learn whatever strange setup they have
+    - Or convert Merchant Type rName/rList rote code into an equally rote Dictionary<string, int> stored in TraitManager or elsewhere
+      - Would imply developing a method that enters that into the rList/rName format, to replace the existing code with something that at least follows DRY principle. 
+      - But if you have to write one for the Buyer traits anyway, the above will practically be written at the same time.
+###			C	Vendor
+####			√	General Notes
+####			C	Cost Banana
+New (erroneously marked as complete, must have meant hire)
+####			C	Get full list of Vendor traits to test and complete category
+##		N	Agent Group
+###			C	Slum NPCs (Pilot)
+New
+###			H	Affect Campaign
+Pending pilot
+###			H	Affect Vanilla 
+Pending pilot
+###			C	Roamer Level Feature
+New##		C	Passive
 ###			C	Accept Bribe (Banana)
 New
 ###			C	Accept Bribe (Beer/Whiskey)
@@ -847,10 +895,6 @@ New
 New
 ###			C	Use Bloodbag
 New
-###			C	Vendor Buyer
-New
-###			C	Vendor Buyer Only
-New
 ###			C	Vision Beams (Cop Bot)
 New
 ###			√	Guilty
@@ -916,20 +960,6 @@ Only SetRelationshipInitial - search for other occurrences of this trait in the 
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-##		C	Vendor
-###			√	General Notes
-###			C	Cost Banana
-New (erroneously marked as complete, must have meant hire)
-###			C	Get full list of Vendor traits to test and complete category
-##		N	Agent Group
-###			C	Slum NPCs (Pilot)
-New
-###			H	Affect Campaign
-Pending pilot
-###			H	Affect Vanilla 
-Pending pilot
-###			C	Roamer Level Feature
-New
 ##		N	Loadout
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
