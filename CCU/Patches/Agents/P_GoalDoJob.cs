@@ -40,11 +40,15 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(GoalDoJob.Terminate))]
 		public static bool Terminate_Prefix (GoalDoJob __instance)
 		{
+			Core.LogMethodCall();
+			logger.LogDebug("\tCheckpoint 1");
 			MethodInfo terminate_base = AccessTools.DeclaredMethod(typeof(GoalDoJob).BaseType, "Terminate"); 
 			terminate_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
 
+			logger.LogDebug("\tCheckpoint 2");
 			__instance.brain.RemoveAllSubgoals(__instance);
 
+			logger.LogDebug("\tCheckpoint 3");
 			if (__instance.curJob == "Ruckus" || 
 				__instance.curJob == "HackSomething" || 
 				__instance.curJob == "LockpickDoor" || 
@@ -56,21 +60,26 @@ namespace CCU.Patches.Agents
 				__instance.curJob == CJob.SafecrackSafe ||
 				__instance.curJob == CJob.TamperSomething)
 				__instance.agent.StartCoroutine(__instance.agent.JobTransition());
-			
+
+			logger.LogDebug("\tCheckpoint 4");
 			if (__instance.agent.following != null && __instance.agent.job == "")
 			{
+				logger.LogDebug("\tCheckpoint 5a");
 				__instance.agent.job = "Follow";
 				__instance.agent.jobCode = jobType.Follow;
 			}
 			else
 			{
+				logger.LogDebug("\tCheckpoint 5b");
 				__instance.agent.job = "";
 				__instance.agent.jobCode = jobType.None;
 			}
-			
+
+			logger.LogDebug("\tCheckpoint 6");
 			if (__instance.curJob == "Attack" && __instance.agent.curTraversable != "Normal")
 				__instance.agent.SetTraversable("Normal");
 
+			logger.LogDebug("\tCheckpoint 7");
 			return false;
 		}
 	}

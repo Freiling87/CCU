@@ -609,7 +609,7 @@ Complete
 ###			√	Hostile to Faction 1-4
 Complete
 ##		T	Hire
-###			T	00 General AI Update error
+###			PT	General AI Update error
 - Added Logging to Brain_MyUpdate
 - Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
 	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
@@ -626,11 +626,11 @@ Complete
 		[Debug  :CCU_P_BrainUpdate] Checkpoint G
 		[Debug  :CCU_P_BrainUpdate] Checkpoint H ←
 		[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
-   	- Ideas:
       - Hd1 looks like the most extensive section.
         - Gang stuff is in here
         - losCheckAtIntervals is as well
         - Added more logging.
+###			PT	Errors on brain-broken agent death
 - When a busted hiree dies, I get a loop that consists of this part a hundred or so times:
 	CCU.Patches.Agents.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
 	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
@@ -643,6 +643,8 @@ Complete
 		System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
 		CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
   - Anyway, there might be a hunt in Terminate_Prefix that can point to why the brain is breaking. I think it has to do with assigning goals/jobs somehow.
+    - Added logging
+- This may be resolved with AI Update Error
 ####			√	Try Disabling Completely
 - Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
   - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.
