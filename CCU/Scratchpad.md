@@ -17,9 +17,10 @@ Listed in order of Parent tier summary symbol priority:
 ---
 
 #	C	All Editors
-##		T	Hotkeys
-###			T	F11 - Return to Editor
+##		CT	Hotkeys
+###			C	F11 - Return to Editor
 - Tried adding a check for GC.loadCompleteReally
+  - DW
 - LoadLevel.NextLevel() might be a good shortcut
   - Patch this into PlayerControl.Update
   - Issue with this one is that it will be limited to chunk-testing rather than campaign testing
@@ -29,16 +30,17 @@ Listed in order of Parent tier summary symbol priority:
     - In Testing: Works
     - Called by NextLevel, so it's probably better to do the latter since it will handle weird cases
 - See also MenuGUI Class in case above doesn't work
-###			T	Enter or Space - Yes on YesNo menu
+###			C	Enter or Space - Yes on YesNo menu
 - Changed to GetKeyDown to rate-limit
 Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 - Load Chunk
   - Esc works, not Enter
-###			T	Escape - No on YesNo menu
+###			C	Escape - No on YesNo menu
 - Changed to GetKeyDown to rate-limit
 - Works, but seems to either trigger per-frame, or go directly to the meta-menu when you press escape from the editor. Find a way to halt the input once it's done it once.
 - Need to test this with *all* menus, because you're not guaranteed that they're all made the same 
 - See also levelEditor.CloseNotification(), CloseHelpScreen()...
+- On Load Chunk, it actually closed the Chunk name selector window before the yesno window. How do I direct it?
 ###			C	Letters - Scroll Menu to section starting with letter
 - ScrollingMenu.OpenScrollingMenu: 
   - __instance.scrollBarDetails.value = 1f;
@@ -79,11 +81,11 @@ Will need to find-replace any hardcoded colors in text, like "Required:" on trai
   - UnityEngine.Canvas
     - I think this is the global UI aesthetic
 
-#	T	Character Editor
+#	C	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
 Next release
-##		T	Trait Hiding
-###			T	Character Creator, Player Edition (CharacterCreation)
+##		C	Trait Hiding
+###			C	Character Creator, Player Edition (CharacterCreation)
 Possible future bug: If you create a character in DE, and edit/resave them in PE (hidden traits won't be visible), will it remove or keep their hidden traits?
 Breaking mods up means the player edition should be 
 ###			√	Character Select (CharacterSelect)
@@ -93,7 +95,6 @@ Complete
 ##		C	Trait Alphabetization
 - Attempted
   - DW
-  - 
 
 #	C	Chunk Editor
 ##		C	Hotkeys
@@ -397,8 +398,10 @@ Complete
 Complete
 
 #	CT	Mutators
-##		T	Level Editor Mutator List
-Attempted
+##		C	Level Editor Mutator List
+- Vanilla replacement worked, pending custom content
+- [Error  : Unity Log] Coroutine 'SetScrollbarPlacement' couldn't be started!
+  - This didn't affect anything but I'd like it resolved
 ##		√	General Mutator List
 - Show up in LevelEditor UI, may be a manually constructed list
 - LoadLevel.loadStuff2 @ 171
@@ -511,7 +514,9 @@ New
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
-#	C	Traits
+#	CT	Traits
+##		PC	Blank Traits Menu
+No ScrollingButtons appear on Trait Choice menu
 ##		C	Active
 ###			C	Clean Trash
 New
@@ -624,42 +629,7 @@ Complete
 ###			√	Hostile to Faction 1-4
 Complete
 ##		T	Hire
-###			PT	General AI Update error
-- Added Logging to Brain_MyUpdate
-- Hired NPC. Once hired, they couldn't move and framerate skipped. Also occurs with Vanilla hires.
-	[Info   :  CCU_Core] MyUpdate_Prefix: Method Call				←
-	[Error  : Unity Log] AI Update Error: Thief (1130) (Agent)		←
-  - Long story short, I pared it down to this - of the four statements called in the try-block, MyUpdate seems to be the culprit. This log will get confusing because you're seeing output from multiple agents. I've narrowed it to only the hiree here.
-	- So here's where it breaks:
-		[Info   :  CCU_Core] MyUpdate_Prefix: Method Call
-		[Debug  :CCU_P_BrainUpdate] Checkpoint A
-		[Debug  :CCU_P_BrainUpdate] Checkpoint B2
-		[Debug  :CCU_P_BrainUpdate] Checkpoint C
-		[Debug  :CCU_P_BrainUpdate] Checkpoint D
-		[Debug  :CCU_P_BrainUpdate] Checkpoint E
-		[Debug  :CCU_P_BrainUpdate] Checkpoint F
-		[Debug  :CCU_P_BrainUpdate] Checkpoint G
-		[Debug  :CCU_P_BrainUpdate] Checkpoint H ←
-		[Error  : Unity Log] AI Update Error: Thief (1124) (Agent)
-      - Hd1 looks like the most extensive section.
-        - Gang stuff is in here
-        - losCheckAtIntervals is as well
-        - Added more logging.
-###			PT	Errors on brain-broken agent death
-- When a busted hiree dies, I get a loop that consists of this part a hundred or so times:
-	CCU.Patches.Agents.P_GoalDoJob.Terminate_Prefix (GoalDoJob __instance) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
-	GoalDoJob.Terminate () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	- Interspersed with this every hundred or so times of seeing the other:
-		System.Reflection.MonoCMethod.InternalInvoke (System.Object obj, System.Object[] parameters) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Reflection.MonoCMethod.DoInvoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Reflection.MonoCMethod.Invoke (System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.RuntimeType.CreateInstanceImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes, System.Threading.StackCrawlMark& stackMark) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Activator.CreateInstance (System.Type type, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Object[] args, System.Globalization.CultureInfo culture, System.Object[] activationAttributes) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		System.Activator.CreateInstance (System.Type type, System.Object[] args) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-		CCU.CoreTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <5e3aaa504b1249b89ff0d707e96502ad>:0)
-  - Anyway, there might be a hunt in Terminate_Prefix that can point to why the brain is breaking. I think it has to do with assigning goals/jobs somehow.
-    - Added logging
-- This may be resolved with AI Update Error
+
 ####			√	Try Disabling Completely
 - Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
   - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.

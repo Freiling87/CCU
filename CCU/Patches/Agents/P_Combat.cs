@@ -16,12 +16,5 @@ namespace CCU.Patches.Agents
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Combat.CombatCheck))]
-		public static bool CombatCheck_Prefix(Combat __instance)
-		{
-			Core.LogMethodCall();
-			return true;
-		}
 	}
 }
