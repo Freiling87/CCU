@@ -165,8 +165,8 @@ namespace CCU
 
 		};
 
-		private static List<string> AllCustomMutators() =>
-			typeof(CMutators).GetFields().Cast<string>().ToList().Where(s => s.GetType() is string);
+		//private static List<string> AllCustomMutators() =>
+		//	typeof(CMutators).GetFields().Cast<string>().ToList().Where(s => s.GetType() is string);
 
 		//foreach (var constant in typeof(TestClass).GetFields())
 		//{

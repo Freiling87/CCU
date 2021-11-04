@@ -13,12 +13,5 @@ namespace CCU.Patches.Agents
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(PathfindingAI.UpdateTargetPosition))]
-		public static bool UpdateTargetPosition_Prefix(PathfindingAI __instance)
-		{
-			Core.LogMethodCall();
-			return true;
-		}
 	}
 }
