@@ -17,7 +17,7 @@ namespace CCU.Mutators.LightSources
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(CMutators.NoObjectGlow, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Objects no longer flash yellow if you have items you can use on them.",
+					[LanguageCode.English] = "Objects no longer flash yellow if you have items you can use on them.\n\nThis is already an option, but the mutator allows you to mandate it in your campaign if you don't want stuff glowing in the dark.",
 				})
 				.WithName(new CustomNameInfo
 				{

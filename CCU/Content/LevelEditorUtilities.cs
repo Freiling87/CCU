@@ -17,16 +17,6 @@ namespace CCU.Content
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		// LevelEditor.inputFieldList.isFocused
-		// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
-
-		// levelEditor.floors2Button.transform.Find("ButtonEdges").GetComponent<Image>().color = Color.white;
-		// White is for currently click-activated, but might use another color to show which is tab-active, pending player confirmation
-
-		// __instance.inputFieldList
-
-		// UnityEngine.UI.InputField.ActivateInputField()
-
 		public static List<InputField> fieldsAgent;
 		public static List<InputField> fieldsFloor;
 		public static List<InputField> fieldsItem;

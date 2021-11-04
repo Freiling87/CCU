@@ -71,6 +71,15 @@ Messed with fonts
 ###		CT	Visual Themes
 ####		C	Background Color
 - UnityEngine.CanvasRenderer.SetColor
+// LevelEditor.inputFieldList.isFocused
+// InputField.ActivateInputField() & possibly DeadctivateInputField() at the end
+
+// levelEditor.floors2Button.transform.Find("ButtonEdges").GetComponent<Image>().color = Color.white;
+// White is for currently click-activated, but might use another color to show which is tab-active, pending player confirmation
+
+// __instance.inputFieldList
+
+// UnityEngine.UI.InputField.ActivateInputField()
 ####		C	Border Color
 New
 ####		C	Hardcode replacement
@@ -408,6 +417,11 @@ New
 Gate behind presence of objects/agents, e.g. disable Casino if all Slots are destroyed
 ##		C	Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
+
+CampaignData
+	levelNameList		List of strings
+	levelList			List of LevelData
+	mutatorList			List of strings
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
 ###			C	00 Usage Guide
@@ -444,7 +458,7 @@ New
 For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-##		C	Ambient Light
+##		CT	Light Sources
 - CameraScript.SetLighting
   - DW
 - StatusEffects.WerewolfTransform
@@ -471,10 +485,11 @@ New
 - SpawnerMain.SetLighting2
   - Tried this another way
     - DW
-###			C	No Object Glow
+###			T	No Object Glow
 This is the yellow glow for when you have usable items with an object. As you collect more, eventually everything glows.
 - gc.objectGlowDisabled
 - gc.sessionDataBig.objectGlowDisabled
+- Attempted, GC.Awake3 Prefix
 ###			C	No Object Lights
 - Works!
 - Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
