@@ -10,6 +10,7 @@ using CCU.Traits;
 using CCU.Traits.Spawn;
 using System.Linq;
 using System.Collections.Generic;
+using CCU.Mutators;
 
 namespace CCU.Patches.Spawn
 {
@@ -18,6 +19,32 @@ namespace CCU.Patches.Spawn
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2))]
+		public static bool LoadStuff2_Prefix(LoadLevel __instance)
+		{
+			if (GC.customCampaign && MutatorManager.IsMutatorFromListActive(MutatorManager.CampaignMutators))
+			{
+				foreach (LevelData levelData in __instance.customCampaign.levelList)
+				{
+					foreach (string mutator in levelData.levelMutators)
+					{
+						foreach (Type ccuMutator in MutatorManager.CampaignMutators)
+						{
+							string ccuMutatorName = MutatorManager.MutatorName(ccuMutator);
+
+							if (mutator == ccuMutatorName)
+							{
+								logger.LogDebug("There is definitely a better way to do this! :)");
+							}
+						}
+					}
+				}
+
+			}
+
+			return true;
+		}
 
         //[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3")]
         public static void SetupMore3_3_Postfix(LoadLevel __instance)

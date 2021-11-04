@@ -77,6 +77,13 @@ namespace CCU.Mutators
 		{
 			typeof(Sepia),
 		};
+		public static List<Type> CampaignMutators = new List<Type>()
+		{
+		};
+		public static List<Type> LevelMutators = new List<Type>()
+		{
+
+		};
 		public static List<Type> FontSizeMutators = new List<Type>()
 		{
 			typeof(ScrollingButtonHeight50),

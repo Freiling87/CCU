@@ -422,6 +422,10 @@ CampaignData
 	levelNameList		List of strings
 	levelList			List of LevelData
 	mutatorList			List of strings
+
+- LoadLevel
+  - loadStuff2 @ 199
+    - this.customLevel = this.customCampaign.levelList[n];
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
 ###			C	00 Usage Guide
