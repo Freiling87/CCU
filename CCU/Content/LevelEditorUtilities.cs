@@ -125,81 +125,43 @@ namespace CCU.Content
 		public static void SetDirectionInputField(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
+
 			InputField inputField = DirectionInputField(levelEditor);
-
-			if (input == KeyCode.LeftArrow)
-			{
-				logger.LogDebug("Testing Orientation Workaround for Left Arrow:");
-				levelEditor.PressedLoadDirectionList();
-
-				logger.LogDebug("\tbuttonsDataLoad:");
-
-				foreach (ButtonData buttonData in levelEditor.buttonsDataLoad)
-					logger.LogDebug("\t\t" + buttonData.scrollingButtonType); // I think this is actually just the string that serves as text label and UID
-
-				logger.LogDebug("\tbuttonHelpersList:");
-				foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
-					logger.LogDebug("\t\t" + buttonHelper.scrollingButtonType); // I think this is the name of the button Text Label
-
-				logger.LogDebug("\tmenuButtonHelpersList:");
-				foreach (MenuButtonHelper menuButtonHelper in GC.menuButtonHelpersList)
-					logger.LogDebug("\t\t" + menuButtonHelper.scrollingButtonType);
-
-				// Shot in the dark:
-				logger.LogDebug("\tAttempting send button West");
-				foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
-					if (buttonHelper.scrollingButtonType == "West")
-						buttonHelper.PressedScrollingMenuButton();
-
-				// TODO: Use PressScrollingMenuButton once you've confirmed both of these work.
-
-				logger.LogDebug("\tReturning");
-				return;
-			}
-
 			string curDir = inputField.text;
+
 			string newDir =
-				input == KeyCode.UpArrow	? "N" :
-				input == KeyCode.DownArrow	? "S" :
-				input == KeyCode.LeftArrow	? "W" :
-				input == KeyCode.RightArrow ? "E" :
+				input == KeyCode.UpArrow	? "North" :
+				input == KeyCode.DownArrow	? "South" :
+				input == KeyCode.LeftArrow	? "West" :
+				input == KeyCode.RightArrow ? "East" :
 				input == KeyCode.E ? (
-					curDir == "N" ? "E" :
-					curDir == "E" ? "S" :
-					curDir == "S" ? "W" :
-					curDir == "W" ? "N" :
-					"E") :
+					curDir == "N" ? "East" :
+					curDir == "E" ? "South" :
+					curDir == "S" ? "West" :
+					curDir == "W" ? "North" :
+					"East") :
 				input == KeyCode.Q ? (
-					curDir == "N" ? "W" :
-					curDir == "W" ? "S" :
-					curDir == "S" ? "E" :
-					curDir == "E" ? "N" :
-					"W") :
+					curDir == "N" ? "West" :
+					curDir == "W" ? "South" :
+					curDir == "S" ? "East" :
+					curDir == "E" ? "North" :
+					"West") :
 				"Error: SOMETHING IS FUCKED UP AND I THINK IT'S YOU";
 
-			if (curDir == newDir)
-				newDir = ""; // "" instead of "None" for levelEditorTile.direction
+			if ((curDir == "N" && newDir == "North") ||
+				(curDir == "S" && newDir == "South") ||
+				(curDir == "E" && newDir == "East") ||
+				(curDir == "W" && newDir == "West"))
+				newDir = "";
 
-			if (!(inputField is null))
-				inputField.text = newDir;
+			levelEditor.PressedLoadDirectionList();
 
-			FieldInfo directionObject = AccessTools.Field(typeof(LevelEditor), "directionObject");
-			InputField directionObjectField = (InputField)directionObject.GetValue(levelEditor);
-			directionObjectField.text = newDir;
-			logger.LogDebug("\tinput: " + input.ToString());
-			logger.LogDebug("\tinputField: " + inputField.name);
-			logger.LogDebug("\tits value: " + inputField.text);
-			logger.LogDebug("\tcurDir: " + curDir);
-			logger.LogDebug("\tnewDir: " + newDir);
-			logger.LogDebug("\tdirectionObjectField: " + directionObjectField.name);
-			logger.LogDebug("\tits value: " + directionObjectField.text);
-
-			if (levelEditor.selectedTiles.Count() > 0)
-				foreach (LevelEditorTile tile in levelEditor.selectedTiles)
-					tile.direction = newDir;
-
-			levelEditor.UpdateInterface(false);
-			levelEditor.SetDirection();
+			foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
+				if (buttonHelper.scrollingButtonType == newDir)
+				{
+					buttonHelper.PressedScrollingMenuButton();
+					break;
+				}
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{

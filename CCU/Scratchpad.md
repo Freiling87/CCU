@@ -97,12 +97,9 @@ Complete
   - DW
 
 #	C	Chunk Editor
-##		C	Hotkeys
-###			C	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
-- Trying calling SetDirection() after these both
-  - Remove this now that other works
-- Attempting test on LEFT ARROW ONLY, without ability to toggle off yet.
-  - This worked. Distribute the changes.
+##		CT	Hotkeys
+###			T	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
+- Distributed the changes from the LeftArrow approach. Test that it was done right.
 ###			C	F9 - Quickload
 - Maybe try this through calling menus and sending a ButtonHelper as Pressed.
   - Proposed:
@@ -474,6 +471,10 @@ New
 - SpawnerMain.SetLighting2
   - Tried this another way
     - DW
+###			C	No Object Glow
+This is the yellow glow for when you have usable items with an object. As you collect more, eventually everything glows.
+- gc.objectGlowDisabled
+- gc.sessionDataBig.objectGlowDisabled
 ###			C	No Object Lights
 - Works!
 - Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
@@ -510,6 +511,14 @@ New
 - Wall mods
 - Floor mods
 - City Size
+##		C	CCU Mods
+
+###			C	AI Traits
+
+###			C	Campaign Mutators
+
+###			C	Editor Hotkeys
+
 
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.

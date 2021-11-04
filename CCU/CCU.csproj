@@ -124,6 +124,7 @@
     <Compile Include="Mutators\Interface\ScrollingButtonTextAlignLeft.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonTextSizeStatic.cs" />
     <Compile Include="Mutators\Ambient Light\NewMoon.cs" />
+    <Compile Include="Mutators\LightSources\NoObjectGlow.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
     <Compile Include="Mutators\Utility\SortMutatorsByName.cs" />
     <Compile Include="Mutators\Wreckage\FloralerFlora.cs" />

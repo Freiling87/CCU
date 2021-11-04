@@ -147,6 +147,7 @@ namespace CCU
 		#region Light Sources
 			NoAgentLights =							"[CCU] No Agent Lights",
 			NoItemLights =							"[CCU] No Item Lights",
+			NoObjectGlow =							"[CCU] No Object Glow",
 			NoObjectLights =						"[CCU] No Object Lights",
 		#endregion
 		#region Wreckage
