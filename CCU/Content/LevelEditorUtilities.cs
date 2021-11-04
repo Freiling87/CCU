@@ -90,16 +90,7 @@ namespace CCU.Content
 				return null;
 			}
 		}
-		public static void PressScrollingMenuButton(string buttonText)
-		{
-			foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
-				if (buttonHelper.scrollingButtonType == buttonText)
-				{
-					buttonHelper.PressedScrollingMenuButton();
-					break;
-				}
-		}
-		public static void SetPatrolPointInputFieldValue(LevelEditor levelEditor, KeyCode input)
+		public static void IncrementPatrolPointId(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
 			logger.LogDebug("\tInput: " + input.ToString());
@@ -122,7 +113,16 @@ namespace CCU.Content
 
 			levelEditor.SetPointNum();
 		}
-		public static void SetDirectionInputField(LevelEditor levelEditor, KeyCode input)
+		public static void PressScrollingMenuButton(string buttonText)
+		{
+			foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
+				if (buttonHelper.scrollingButtonType == buttonText)
+				{
+					buttonHelper.PressedScrollingMenuButton();
+					break;
+				}
+		}
+		public static void SetDirection(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
 

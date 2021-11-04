@@ -140,9 +140,9 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
-						LevelEditorUtilities.SetDirectionInputField(__instance, KeyCode.E);
+						LevelEditorUtilities.SetDirection(__instance, KeyCode.E);
 					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
-						LevelEditorUtilities.SetPatrolPointInputFieldValue(__instance, KeyCode.E);
+						LevelEditorUtilities.IncrementPatrolPointId(__instance, KeyCode.E);
 				}
 				if (Input.GetKeyDown(KeyCode.N))
 					__instance.PressedNewButton();
@@ -151,9 +151,9 @@ namespace CCU.Patches.Interface
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
 					if (currentInterface == LevelEditorUtilities.LEInterfaces_Agents || currentInterface == LevelEditorUtilities.LEInterfaces_Floors || currentInterface == LevelEditorUtilities.LEInterfaces_Objects)
-						LevelEditorUtilities.SetDirectionInputField(__instance, KeyCode.Q);
+						LevelEditorUtilities.SetDirection(__instance, KeyCode.Q);
 					else if (currentInterface == LevelEditorUtilities.LEInterfaces_PatrolPoints)
-						LevelEditorUtilities.SetPatrolPointInputFieldValue(__instance, KeyCode.Q);
+						LevelEditorUtilities.IncrementPatrolPointId(__instance, KeyCode.Q);
 				}
 				if (Input.GetKeyDown(KeyCode.S))
 					__instance.PressedSave();
@@ -168,13 +168,13 @@ namespace CCU.Patches.Interface
 			else if (!fieldFocused)
 			{
 				if (Input.GetKeyDown(KeyCode.UpArrow))
-					LevelEditorUtilities.SetDirectionInputField(__instance, KeyCode.UpArrow);
+					LevelEditorUtilities.SetDirection(__instance, KeyCode.UpArrow);
 				if (Input.GetKeyDown(KeyCode.DownArrow))
-					LevelEditorUtilities.SetDirectionInputField(__instance, KeyCode.DownArrow);
+					LevelEditorUtilities.SetDirection(__instance, KeyCode.DownArrow);
 				if (Input.GetKeyDown(KeyCode.LeftArrow))
-					LevelEditorUtilities.SetDirectionInputField(__instance, KeyCode.LeftArrow);
+					LevelEditorUtilities.SetDirection(__instance, KeyCode.LeftArrow);
 				if (Input.GetKeyDown(KeyCode.RightArrow))
-					LevelEditorUtilities.SetDirectionInputField(__instance, KeyCode.RightArrow);
+					LevelEditorUtilities.SetDirection(__instance, KeyCode.RightArrow);
 				if (Input.GetKey(KeyCode.A))
 					__instance.ScrollW();
 				if (Input.GetKey(KeyCode.D))
