@@ -806,15 +806,7 @@ New
 ####			C	Cost Banana
 New (erroneously marked as complete, must have meant hire)
 ####			C	Get full list of Vendor traits to test and complete category
-##		N	Agent Group
-###			C	Slum NPCs (Pilot)
-New
-###			H	Affect Campaign
-Pending pilot
-###			H	Affect Vanilla 
-Pending pilot
-###			C	Roamer Level Feature
-New##		C	Passive
+##		C	Passive
 ###			C	Accept Bribe (Banana)
 New
 ###			C	Accept Bribe (Beer/Whiskey)
@@ -895,6 +887,10 @@ Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
 ###			C	Sell Slaves
 New
+###			C	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
 ###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
@@ -982,6 +978,15 @@ Only SetRelationshipInitial - search for other occurrences of this trait in the 
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
+##		N	Agent Group
+###			C	Slum NPCs (Pilot)
+New
+###			H	Affect Campaign
+Pending pilot
+###			H	Affect Vanilla 
+Pending pilot
+###			C	Roamer Level Feature
+New
 ##		N	Loadout
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
@@ -1041,6 +1046,7 @@ Cyberpunk / Darkwave?
 	Acid Spit				Mega Drive						Fast
 	Crimewave				Mega Drive						Dark, Urban
 	Orbital Strike		Mega Drive						Robotty
+	Drums A-Go-Go			Hollywood Persuaders			1960s campy heist, blues-box, but still a good energy
 ##		T	Player Character
 "The Fixer," an old man who's not quite as tough as he used to be. But he has a lot of connections in the criminal world and knows how to put together a team. So this will direct the player to use a hiring-based playstyle.
 Remove Low-Cost Jobs and add No In-Fighting

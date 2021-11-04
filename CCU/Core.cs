@@ -346,6 +346,7 @@ namespace CCU
 			Hire_CostMore =						"[CCU] Hire - Costs More",
 			Hire_DisarmTrap =					"[CCU] Hire - Disarm Trap",
 			Hire_Hack =							"[CCU] Hire - Hack",
+			Hire_JoinIfFreed =					"[CCU] Hire - Join if Freed (Prisoner)",
 			Hire_Permanent =					"[CCU] Hire - Permanent",
 			Hire_PermanentOnly =				"[CCU] Hire - Permanent Only",
 			Hire_Pickpocket =					"[CCU] Hire - Pickpocket",
