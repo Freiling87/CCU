@@ -18,12 +18,10 @@ Listed in order of Parent tier summary symbol priority:
 
 #	C	All Editors
 ##		CT	Hotkeys
-###			C	F11 - Return to Editor
+###			CT	F11 - Return to Editor
 - Tried adding a check for GC.loadCompleteReally
-  - DW
-- LoadLevel.NextLevel() might be a good shortcut
-  - Patch this into PlayerControl.Update
-  - Issue with this one is that it will be limited to chunk-testing rather than campaign testing
+  - Tried adding !GC.loadLevel.restartingGame, noticed it's used in leveleditor check
+    - If this one doesn't work, just ice the feature since it's not really important
 - levelEditor.ReturnToLevelEditor();
   - Patched this into PlayerControl.Update
    	- In Editor: Reloads editor
@@ -446,8 +444,7 @@ Gate level access
 ###			C	Require A/B/C/D true
 Gate level access
 ###			C	Traits for Level Branching
-##		H	Followers
-Pending resolution of hire AI Update error
+##		T	Followers
 ###			T	Homesickness Disabled
 - First attempt
 Disable hire dismissal for this level

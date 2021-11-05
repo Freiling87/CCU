@@ -92,7 +92,7 @@ namespace CCU
 			ScrollingButtonTextSizeStatic =			"[CCU] Interface - Scrolling Button Text Size Static",
 		#endregion
 		#region Interface Themes
-																											//		BACKGROUND			TEXT COLOR		FONT
+																											//		BACKGROUND			TEXT COLOR			FONT
 			InterfaceTheme_BloodMoon =				"[CCU] Interface Theme - Blood Moon",					//	Burgundy			Moon White			Gothic
 			InterfaceTheme_Cyberpunk =				"[CCU] Interface Theme - Cyberpunk",					//	Black				Pink or Cyan		
 			InterfaceTheme_Drone =					"[CCU] Interface Theme - Drone",						//	Post-It Yellow		Pencil Black		Boring
@@ -177,7 +177,15 @@ namespace CCU
 		//	}
 
 		//}
-		}
+
+		public static List<string> AllCustomMutators() =>
+			typeof(CMutators).GetFields()
+				.Where(field => field.IsLiteral && !field.IsInitOnly)
+				.Select(field => (string)field.GetValue(null))
+				.ToList();
+	}
+
+	}
 	public static class CTrait 
 	{
 		public const string

@@ -19,7 +19,7 @@ namespace CCU.Patches.Interface
 		[HarmonyPrefix, HarmonyPatch("Update")]
 		public static bool Update_Prefix(PlayerControl __instance)
 		{
-			if (GC.loadCompleteReally && GC.wasLevelEditing && Input.GetKeyDown(KeyCode.F11))
+			if (GC.loadCompleteReally && GC.wasLevelEditing && !GC.loadLevel.restartingGame && Input.GetKeyDown(KeyCode.F11))
 				GC.levelEditor.ReturnToLevelEditor();
 
 			return true;
