@@ -535,13 +535,12 @@ New
 
 ###			C	Editor Hotkeys
 
-
 #	C	Player Edition
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
 #	CT	Traits
 ##		PC	Blank Traits Menu
-No ScrollingButtons appear on Trait Choice menu
+No ScrollingButtons appear on Trait Choice menuc
 ##		C	Active
 ###			C	Clean Trash
 New

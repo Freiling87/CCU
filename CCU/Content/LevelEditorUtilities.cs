@@ -136,9 +136,7 @@ namespace CCU.Content
 
 			levelEditor.PressedLoadDirectionList();
 
-			GC.buttonHelpersList
-				.First(buttonHelper => buttonHelper.scrollingButtonType == newDir)
-				.PressedScrollingMenuButton();
+			PressScrollingMenuButton(newDir);
 		}
 		public static void Tab(LevelEditor levelEditor, bool reverse)
 		{
