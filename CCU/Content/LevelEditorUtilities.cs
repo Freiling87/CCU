@@ -53,14 +53,9 @@ namespace CCU.Content
 			LEInterfaces_Walls = "Walls"
 			;
 
-		public static InputField ActiveInputField(LevelEditor levelEditor)
-		{
-			foreach (InputField field in levelEditor.inputFieldList)
-				if (field.isFocused)
-					return field;
-
-			return null;
-		}
+		public static InputField ActiveInputField(LevelEditor levelEditor) =>
+			levelEditor.inputFieldList
+				.First(inputField => inputField.isFocused);
 		public static InputField DirectionInputField(LevelEditor levelEditor)
 		{
 			string curInt = levelEditor.currentInterface;
@@ -103,15 +98,10 @@ namespace CCU.Content
 
 			levelEditor.SetPointNum();
 		}
-		public static void PressScrollingMenuButton(string buttonText)
-		{
-			foreach (ButtonHelper buttonHelper in GC.buttonHelpersList)
-				if (buttonHelper.scrollingButtonType == buttonText)
-				{
-					buttonHelper.PressedScrollingMenuButton();
-					break;
-				}
-		}
+		public static void PressScrollingMenuButton(string buttonText) =>
+			GC.buttonHelpersList
+			.First(buttonHelper => buttonHelper.scrollingButtonType == buttonText)
+			.PressedScrollingMenuButton();
 		public static void SetDirection(LevelEditor levelEditor, KeyCode input)
 		{
 			Core.LogMethodCall();
@@ -211,12 +201,8 @@ namespace CCU.Content
 		}
 		public static void ZoomInFully(LevelEditor levelEditor) =>
 			GC.cameraScript.zoomLevel = 1f;
-		public static void ZoomOutFully(LevelEditor levelEditor)
-		{
-			if (levelEditor.levelMode)
-				GC.cameraScript.zoomLevel = 0.1f;
-			else if (!levelEditor.levelMode)
-				GC.cameraScript.zoomLevel = 0.4f;
-		}
+		public static void ZoomOutFully(LevelEditor levelEditor) =>
+			GC.cameraScript.zoomLevel =
+				levelEditor.levelMode ? 0.1f : 0.4f;
 	}
 }
