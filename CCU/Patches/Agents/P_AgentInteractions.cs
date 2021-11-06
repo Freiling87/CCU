@@ -1844,12 +1844,12 @@ namespace CCU.Patches.Agents
 									Core.LogCheckpoint("Vendor");
 									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
 
-									bool canBuy =
-										!(agent.HasTrait<TraitGate_CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral")) &&
-										!(agent.HasTrait<TraitGate_CopAccess>() && !interactingAgent.HasTrait("TheLaw")) &&
-										!(agent.HasTrait<TraitGate_HonorableThief>() && !(interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")));
+									bool cantBuy =
+										(agent.HasTrait<TraitGate_CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral") && interactingAgent.agentName != VanillaAgents.Cannibal) ||
+										(agent.HasTrait<TraitGate_CopAccess>() && !interactingAgent.HasTrait("TheLaw") && interactingAgent.agentName != VanillaAgents.Cop && interactingAgent.agentName != VanillaAgents.CopBot && interactingAgent.agentName != VanillaAgents.SuperCop) ||
+										(agent.HasTrait<TraitGate_HonorableThief>() && !interactingAgent.statusEffects.hasTrait("HonorAmongThieves") && interactingAgent.statusEffects.hasTrait("HonorAmongThieves2"));
 
-									if (canBuy)
+									if (!cantBuy)
 									{
 										__instance.AddButton("Buy");
 

@@ -29,8 +29,6 @@ namespace CCU.Patches.Inventory
 			if (__instance.agent is null)
 				return true;
 
-			Core.LogMethodCall();
-
 			if (TraitManager.HasTraitFromList(__instance.agent, TraitManager.MerchantTypeTraits))
 			{
 				TraitInfo vendorTrait = TraitInfo.Get(TraitManager.GetOnlyTraitFromList(__instance.agent, TraitManager.MerchantTypeTraits));
@@ -38,9 +36,7 @@ namespace CCU.Patches.Inventory
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{
-					logger.LogDebug("\trName: " + rName);
 					string text;
-
 					int num = 0;
 					bool foundItem = false;
 
@@ -56,12 +52,8 @@ namespace CCU.Patches.Inventory
 						}
 						catch
 						{
-							logger.LogDebug("\tCatch");
-
 							text = "Empty";
 						}
-
-						logger.LogDebug("\tText: " + text);
 
 						foreach (InvItem invItem in __instance.InvItemList)
 							if (invItem.invItemName == text && !invItem.canRepeatInShop)

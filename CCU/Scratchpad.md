@@ -580,27 +580,14 @@ Complete
 ###			√	Pickpocket
 Complete
 ##		C	Appearance				Group
-This actually sorta worked, sorta. 
-When run in the chunk editor, an Appearance-Traited character did have a randomized appearance. But all features were randomized and none were limited to the traits selected.
-- Search for "Custom" (Agent name)
-	AgentHitbox
-		.chooseFacialHairType
-	CharacterSelect
-		.ChangeHairColor
-	RandomSkinHair
-	√	.fillSkinHair
-###			C	Facial Hair
-- Just saw this:
-	[Info   :  CCU_Core] RollFacialHair: Method Call
-	[Error  : Unity Log] KeyNotFoundException: The given key was not present in the dictionary.
-	Stack trace:
-	System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	HealthBar.SetupFace () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	HealthBar+<SetupFaceAfterTick>d__44.MoveNext () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <451019b49f1347529b43a32c5de769af>:0)
-###			C	Hair Color
-Go ahead and try. Knowing the code they all work differently anyway :)
-###			C	Hairstyle
+###			C	Full-randomization bug
+- Whole appearance is randomized when any appearance trait is added.
+  - Should be a simple fix since it's doing less rather than more.
+###			C	Factory Approach
+- Since codewise these are entirely formulaic, it would be best to DRY and use Abbysssal's factory.
+###			√	Facial Hair
+Worked
+###			C	Hair Type
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
 Go ahead and try. Knowing the code they all work differently anyway :)
@@ -655,8 +642,7 @@ Complete
 ###			C	Friendly to Faction 1-4
 ###			√	Hostile to Faction 1-4
 Complete
-##		T	Hire
-###			T	Bodyguard
+##		CT	Hire
 ###			C	Cause a Ruckus
 - Almost completely works, but character doesn't do animation
 ###			C	Chloroform
@@ -738,7 +724,10 @@ Gives you detonator when planted
 ###			C	Tamper
 - Interface works but reticle is green for non-tamperable items.
   - Log message "Not implemented yet", fair enough
+###			√	Bodyguard
+Complete
 ###			√	Break In
+Complete
 ###			√	Hack
 Complete
 ##		C	Map Marker
@@ -756,6 +745,8 @@ Quest
 QuestMarker
 	Entire class!
 	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
+
+- Also, check out the GPYess trait and see where that comes up.
 ###			C	Pilot
 No more errors, but no map marker. 
 ###			H	Bartender
@@ -949,23 +940,37 @@ New
 ###			C	Slave Owner
 NEw			
 ##		T	Trait Gates
-###			T	Common Folk
-Attempted
+###			C	Customizers
+- Lock Merchant behind Trait Gate
+- Lock Hire behind Trait Gate
+###			CT	Common Folk
+- Dummy A
+  - Not blocked by lacking trait
+Hobos Aligned
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			T	Cool Cannibal
-Attempted
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			T	Family Friend
-Attempted
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			H	Honorable Thief
-Pending Vendor issues resolution
+###			CT	Cool Cannibal
+- Dummy D
+  - Blocked
+- Disable Cannibal Hostility
+  - Pending that trait
+- Also set gates to playing vanilla cannibal (lacks CWC trait)
+###			C	Family Friend
+- Aligned
+  - Works
+- Shop Gate
+  - Not gated
+- Also set gates to playing vanilla Mobster
+w###			√	Honorable Thief
+Complete
 ###			T	Scumbag
-Attempted
+Hostile to Scumbag Slaughterer
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ###			√	Cop	Access
 Complete
 ##		C	Utility
+###			C	Hide Traits in Collapsed Groups
+- While in Character Creator, hide traits in Collapsed Groups
+  - Once all traits are in they're going to get hard to manage. 
 ###			C	Sort active Traits by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.

@@ -13,6 +13,7 @@ using CCU.Traits.Passive;
 using CCU.Traits.Active;
 using CCU.Traits.Appearance.FacialHair;
 using CCU.Traits.MerchantType;
+using CCU.Traits.Combat;
 
 namespace CCU.Traits
 {
@@ -32,13 +33,15 @@ namespace CCU.Traits
 				list.AddRange(BehaviorActiveTraits);
 				list.AddRange(BehaviorPassiveTraits);
 				list.AddRange(BodyguardedTraits);
+				list.AddRange(CombatTraits);
 				list.AddRange(HireCostTraits);
 				list.AddRange(HireTypeTraits);
 				list.AddRange(InteractionTraits);
 				list.AddRange(LoadoutTraits);
+				list.AddRange(MapMarkerTraits);
+				list.AddRange(MerchantTypeTraits);
 				list.AddRange(RelationshipTraits);
 				list.AddRange(TraitGateTraits);
-				list.AddRange(MerchantTypeTraits);
 
 				return list;
 			}
@@ -48,17 +51,6 @@ namespace CCU.Traits
 			get
 			{
 				return AllCCUTraitsGroup.ConvertAll(t => TraitInfo.Get(t).Name);
-			}
-		}
-		public static List<Type> AppearanceTraitsGroup
-		{
-			get
-			{
-				List<Type> list = new List<Type>();
-
-				list.AddRange(FacialHairTraits);
-
-				return list;
 			}
 		}
 		public static List<Type> InteractionTraitsGroup
@@ -75,6 +67,63 @@ namespace CCU.Traits
 			}
 		}
 
+		#region Appearance Trait 
+		public static List<Type> AppearanceTraitsGroup
+		{
+			get
+			{
+				List<Type> list = new List<Type>();
+
+				list.AddRange(AccessoryTraits);
+				list.AddRange(BodyColorTraits);
+				list.AddRange(BodyTypeTraits);
+				list.AddRange(EyesColorTraits);
+				list.AddRange(EyesTypeTraits);
+				list.AddRange(FacialHairTraits);
+				list.AddRange(HairColorTraits);
+				list.AddRange(HairTypeTraits);
+				list.AddRange(LegColorTraits);
+				list.AddRange(SkinColorTraits);
+
+				return list;
+			}
+		}
+		public static List<Type> AccessoryTraits = new List<Type>()
+		{
+		};
+		public static List<Type> BodyColorTraits = new List<Type>()
+		{
+		};
+		public static List<Type> BodyTypeTraits = new List<Type>()
+		{
+		};
+		public static List<Type> EyesColorTraits = new List<Type>()
+		{
+		};
+		public static List<Type> EyesTypeTraits = new List<Type>()
+		{
+		};
+		public static List<Type> FacialHairTraits = new List<Type>()
+		{
+			typeof(Beard),
+			typeof(Mustache),
+			typeof(MustacheCircus),
+			typeof(MustacheRedneck),
+			typeof(NoFacialHair),
+		};
+		public static List<Type> HairColorTraits = new List<Type>()
+		{
+		};
+		public static List<Type> HairTypeTraits = new List<Type>()
+		{
+		};
+		public static List<Type> LegColorTraits = new List<Type>()
+		{
+		};
+		public static List<Type> SkinColorTraits = new List<Type>()
+		{
+		};
+#endregion
 		public static List<Type> BehaviorActiveTraits = new List<Type>()
 		{
 			typeof(Behavior_EatCorpse),
@@ -97,13 +146,11 @@ namespace CCU.Traits
 			typeof(Buyer_All),
 			typeof(Buyer_MerchantType),
 		};
-		public static List<Type> FacialHairTraits = new List<Type>()
+		public static List<Type> CombatTraits = new List<Type>()
 		{
-			typeof(Beard),
-			typeof(Mustache),
-			typeof(MustacheCircus),
-			typeof(MustacheRedneck),
-			typeof(NoFacialHair),
+			typeof(Combat_Coward),
+			typeof(Combat_Fearless),
+			typeof(Combat_Fearless)
 		};
 		public static List<Type> HireCostTraits = new List<Type>()
 		{

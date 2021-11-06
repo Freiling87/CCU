@@ -13,8 +13,6 @@ namespace CCU.Patches.Appearance
 		public static GameController GC => GameController.gameController;
 
 		#region Trait Lists
-		public static string indicator = " - "; // Indicates where string content in Trait name begins
-
 		public static List<string> AppearanceTraits = new List<string>()
 		{
 			CTrait.FacialHair_Beard,
@@ -133,19 +131,24 @@ namespace CCU.Patches.Appearance
 		{
 			Core.LogMethodCall();
 
-			var random = new System.Random();
+			var random = new Random();
 
 			List<CustomTrait> pool = agentHitBox.agent.GetTraits<CustomTrait>()
 				.Where(trait => FacialHairTraits.Contains(trait.GetType()))
 				.ToList();
+
+			logger.LogDebug("\tpool: " + pool.Count);
 
 			if (pool.Count == 0)
 				return;
 
 			CustomTrait selection = pool[random.Next(pool.Count)];
 			string selectionName = selection.Trait.traitName;
-			agentHitBox.facialHairType = selectionName.Substring(selectionName.IndexOf(indicator) + indicator.Length);
+			logger.LogDebug("\tselectionName: " + selectionName);
+			agentHitBox.facialHairType = selectionName.Substring(selectionName.IndexOf(" - ") + 1);
+			logger.LogDebug("\tfacialHairType: " + agentHitBox.facialHairType);
 			agentHitBox.agent.oma.facialHairType = agentHitBox.agent.oma.convertFacialHairTypeToInt(agentHitBox.facialHairType);
+			logger.LogDebug("\tfacialHairType = " + agentHitBox.agent.oma.facialHairType);
 
 			if (agentHitBox.facialHairType == "None" || agentHitBox.facialHairType == "" || agentHitBox.facialHairType == null)
 			{
