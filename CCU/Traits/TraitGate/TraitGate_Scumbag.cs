@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.TraitTrigger
+namespace CCU.Traits.TraitGate
 {
-    public class TraitTrigger_Scumbag : CustomTrait
+    public class TraitGate_Scumbag : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_Scumbag>()
+            RogueLibs.CreateCustomTrait<TraitGate_Scumbag>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC will be a valid target for Scumbag Slaughterer."),
@@ -21,7 +21,7 @@ namespace CCU.Traits.TraitTrigger
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitTrigger_Scumbag,
+                    [LanguageCode.English] = CTrait.TraitGate_Scumbag,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

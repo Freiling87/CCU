@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.TraitTrigger
+namespace CCU.Traits.TraitGate
 {
-    public class TraitTrigger_CommonFolk : CustomTrait
+    public class TraitGate_CopAccess : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_CommonFolk>()
+            RogueLibs.CreateCustomTrait<TraitGate_CopAccess>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC will be Loyal to a player with Friend of the Common Folk."),
+                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}:</color> Will not sell to the player if they don't have The Law.", CTrait.MerchantType_Contraband, CTrait.MerchantType_CopStandard, CTrait.MerchantType_CopSWAT),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitTrigger_CommonFolk,
+                    [LanguageCode.English] = CTrait.TraitGate_CopAccess,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

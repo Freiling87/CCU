@@ -108,9 +108,9 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
   - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
   - LevelEditor.customCharacterList has all customs saved. Iterate through this and find appropriate traits, then add through RandomAgents.fillAgents
 
-## Trait Trigger Traits
+## Trait Gate Traits
 
-|Trait Trigger Trait				|Effect	|
+|Trait Gate Trait					|Effect	|
 |:----------------------------------|:------|
 |Common Folk						|- NPC will be Loyal to those with Friend of the Common Folk
 |Cool Cannibal						|- If NPC has Aggressive trait, will no longer be Hostile if you have Cool With Cannibals

@@ -11,7 +11,7 @@ namespace CCU.Traits.MerchantType
             RogueLibs.CreateCustomTrait<MerchantType_Contraband>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.TraitTrigger_CopAccess),
+                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", CTrait.TraitGate_CopAccess),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

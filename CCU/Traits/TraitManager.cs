@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.Hire;
-using CCU.Traits.TraitTrigger;
+using CCU.Traits.TraitGate;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace CCU.Traits
 				list.AddRange(InteractionTraits);
 				list.AddRange(LoadoutTraits);
 				list.AddRange(RelationshipTraits);
-				list.AddRange(TraitTriggerTraits);
+				list.AddRange(TraitGateTraits);
 				list.AddRange(MerchantTypeTraits);
 
 				return list;
@@ -159,14 +159,14 @@ namespace CCU.Traits
 			typeof(HostileToVampires),
 			typeof(HostileToWerewolves),
 		};
-		public static List<Type> TraitTriggerTraits = new List<Type>()
+		public static List<Type> TraitGateTraits = new List<Type>()
 		{
-			typeof(TraitTrigger_CommonFolk),
-			typeof(TraitTrigger_CoolCannibal),
-			typeof(TraitTrigger_CopAccess),
-			typeof(TraitTrigger_FamilyFriend),
-			typeof(TraitTrigger_HonorableThief),
-			typeof(TraitTrigger_Scumbag),
+			typeof(TraitGate_CommonFolk),
+			typeof(TraitGate_CoolCannibal),
+			typeof(TraitGate_CopAccess),
+			typeof(TraitGate_FamilyFriend),
+			typeof(TraitGate_HonorableThief),
+			typeof(TraitGate_Scumbag),
 		};
 		public static List<Type> MerchantTypeTraits = new List<Type>()
 		{

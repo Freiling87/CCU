@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
-using CCU.Traits.TraitTrigger;
+using CCU.Traits.TraitGate;
 using CCU.Traits.Active;
 
 namespace CCU.Patches.Agents
@@ -446,7 +446,7 @@ namespace CCU.Patches.Agents
 												Agent agent6 = ___agent.losCheckAtIntervalsList[num5];
 												Relationship relationship = ___agent.relationships.GetRelationship(agent6);
 												bool honorFlag = 
-													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>() && ___agent.HasTrait<TraitTrigger_HonorableThief>())) && 
+													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>() && ___agent.HasTrait<TraitGate_HonorableThief>())) && 
 													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")));
 
 												logger.LogDebug("HonorFlag: " + honorFlag);

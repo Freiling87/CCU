@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.TraitTrigger
+namespace CCU.Traits.TraitGate
 {
-    public class TraitTrigger_CopAccess : CustomTrait
+    public class TraitGate_CoolCannibal : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_CopAccess>()
+            RogueLibs.CreateCustomTrait<TraitGate_CoolCannibal>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}:</color> Will not sell to the player if they don't have The Law.", CTrait.MerchantType_Contraband, CTrait.MerchantType_CopStandard, CTrait.MerchantType_CopSWAT),
+                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}:</color> Will not target the player if they have Cool with Cannibals.\n\n<color=green>{3}:</color> Will not sell wares unless player has Cool With Cannibals.", CTrait.Spawn_HideInBush, CTrait.Spawn_HideInManhole, CTrait.Relationships_AggressiveCannibal, CTrait.MerchantType_Anthropophagie),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitTrigger_CopAccess,
+                    [LanguageCode.English] = CTrait.TraitGate_CoolCannibal,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

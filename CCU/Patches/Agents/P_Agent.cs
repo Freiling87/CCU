@@ -164,7 +164,6 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetLightBrightness), argumentTypes: new[] { typeof(bool) })]
 		public static bool SetLightBrightness_Prefix(bool isDead)
 		{
-			Core.LogMethodCall();
 			return !GC.challenges.Contains(CMutators.NoAgentLights);
 		}
 

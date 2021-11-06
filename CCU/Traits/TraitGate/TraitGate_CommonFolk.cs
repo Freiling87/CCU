@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.TraitTrigger
+namespace CCU.Traits.TraitGate
 {
-    public class TraitTrigger_CoolCannibal : CustomTrait
+    public class TraitGate_CommonFolk : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_CoolCannibal>()
+            RogueLibs.CreateCustomTrait<TraitGate_CommonFolk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}:</color> Will not target the player if they have Cool with Cannibals.\n\n<color=green>{3}:</color> Will not sell wares unless player has Cool With Cannibals.", CTrait.Spawn_HideInBush, CTrait.Spawn_HideInManhole, CTrait.Relationships_AggressiveCannibal, CTrait.MerchantType_Anthropophagie),
+                    [LanguageCode.English] = String.Format("This NPC will be Loyal to a player with Friend of the Common Folk."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitTrigger_CoolCannibal,
+                    [LanguageCode.English] = CTrait.TraitGate_CommonFolk,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

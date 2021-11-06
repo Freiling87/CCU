@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.TraitTrigger
+namespace CCU.Traits.TraitGate
 {
-    public class TraitTrigger_FamilyFriend : CustomTrait
+    public class TraitGate_FamilyFriend : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitTrigger_FamilyFriend>()
+            RogueLibs.CreateCustomTrait<TraitGate_FamilyFriend>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC will be Aligned to a player with Friend of the Family."),
@@ -21,7 +21,7 @@ namespace CCU.Traits.TraitTrigger
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitTrigger_FamilyFriend,
+                    [LanguageCode.English] = CTrait.TraitGate_FamilyFriend,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

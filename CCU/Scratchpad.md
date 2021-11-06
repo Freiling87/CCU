@@ -454,6 +454,9 @@ ExitPoint.EmployeesExit prefix
 Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
 ##		C	Gameplay
+###			C	Big Quest Stopping Point
+- Cyan_Light:
+  - The ability to specify a "big quest stopping point" in custom campaigns, essentially the vanilla mayor village effect of ending the quest and turning on super special abilities if you've completed it but you get to set which level this happens on in the campaign interface.
 ###			C	No Violence
 New
 For town levels
@@ -653,18 +656,9 @@ Complete
 ###			√	Hostile to Faction 1-4
 Complete
 ##		T	Hire
-
-####			√	Try Disabling Completely
-- Disabled BrainUpdate.MyUpdate patch method. This holds the Active LOS behaviors (which work fine), but I don't think I tested Hiring before it was added.
-  - Error still occurred, so I think the silver lining is that I can leave those intact unless the attempt below directs us directly to it.
-####			C	Make Vanilla Replacment + Logging patch of BrainUpdate.MyUpdate
-New
-###			H	Bodyguard
-Pending General AI Update Error resolution
-###			H	Break In
-Pending General AI Update Error resolution
-###			H	Cause a Ruckus
-Pending General AI Update Error resolution
+###			T	Bodyguard
+###			C	Cause a Ruckus
+- Almost completely works, but character doesn't do animation
 ###			C	Chloroform
 New
 ###			T	Cost - Banana
@@ -675,12 +669,10 @@ Test
 Test
 ###			C	Devour Corpse
 New
-###			C	Disarm Trap
+###			C	Disarm Trapdd
 New
 ###			C	Drink Blood
 New
-###			H	Hack
-Pending General AI Update Error resolution
 ###			C	Handcuff
 New
 ###			C	Permanent Hire
@@ -694,8 +686,13 @@ New
 New
 Based on and consumes Time Bombs in inventory. NPC starts with one.
 ###			C	Poison
-New
-###			H	Safecrack
+New 
+###			C	Safecrack
+- Reticle does not activate 
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
 
 Here's what comes up for Lockpick job:
 	Agent
@@ -739,7 +736,11 @@ On door or Safe: Plants door detonator
 Elsewhere: Remote bomb
 Gives you detonator when planted
 ###			C	Tamper
-New 
+- Interface works but reticle is green for non-tamperable items.
+  - Log message "Not implemented yet", fair enough
+###			√	Break In
+###			√	Hack
+Complete
 ##		C	Map Marker
 ###			P	General Notes
 - Check out:
@@ -947,15 +948,13 @@ New
 New
 ###			C	Slave Owner
 NEw			
-##		T	Trait Triggers
+##		T	Trait Gates
 ###			T	Common Folk
 Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ###			T	Cool Cannibal
 Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			H	Cop	Access
-Pending Vendor issues resolution
 ###			T	Family Friend
 Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
@@ -964,6 +963,8 @@ Pending Vendor issues resolution
 ###			T	Scumbag
 Attempted
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+###			√	Cop	Access
+Complete
 ##		C	Utility
 ###			C	Sort active Traits by Name
 - ScrollingMenu.PushedButton @ 0006

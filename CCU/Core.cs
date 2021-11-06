@@ -12,55 +12,55 @@ using System.Linq;
 
 namespace CCU
 {
-    [BepInPlugin(pluginGUID, pluginName, pluginVersion)]
-    [BepInProcess("StreetsOfRogue.exe")]
-    [BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
-    public class Core : BaseUnityPlugin
-    {
-        public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
-        public const string pluginName = "Custom Content Utilities";
-        public const string pluginVersion = "0.1.0";
-        public const bool designerEdition = true;
-
-        public static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
-
-        public void Awake()
-        {
-            LogMethodCall();
-
-            new Harmony(pluginGUID).PatchAll();
-            RogueLibs.LoadFromAssembly();
-        }
-        public static void LogCheckpoint(string note, [CallerMemberName] string callerName = "") =>
-            logger.LogInfo(callerName + ": " + note);
-        public static void LogMethodCall([CallerMemberName] string callerName = "") =>
-            logger.LogInfo(callerName + ": Method Call");
-    }
-
-    public static class CoreTools
-    {
-        public static T GetMethodWithoutOverrides<T>(this MethodInfo method, object callFrom)
-                where T : Delegate
-        {
-            IntPtr ptr = method.MethodHandle.GetFunctionPointer();
-            return (T)Activator.CreateInstance(typeof(T), callFrom, ptr);
-        }
-    }
-
-    public static class CCULogger
+	[BepInPlugin(pluginGUID, pluginName, pluginVersion)]
+	[BepInProcess("StreetsOfRogue.exe")]
+	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
+	public class Core : BaseUnityPlugin
 	{
-        private static string GetLoggerName(Type containingClass)
-        {
-            return $"CCU_{containingClass.Name}";
-        }
+		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
+		public const string pluginName = "Custom Content Utilities";
+		public const string pluginVersion = "0.1.0";
+		public const bool designerEdition = true;
 
-        public static ManualLogSource GetLogger()
-        {
-            Type containingClass = new StackFrame(1, false).GetMethod().ReflectedType;
-            return BepInEx.Logging.Logger.CreateLogSource(GetLoggerName(containingClass));
-        }
-    }
+		public static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		public void Awake()
+		{
+			LogMethodCall();
+
+			new Harmony(pluginGUID).PatchAll();
+			RogueLibs.LoadFromAssembly();
+		}
+		public static void LogCheckpoint(string note, [CallerMemberName] string callerName = "") =>
+			logger.LogInfo(callerName + ": " + note);
+		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
+			logger.LogInfo(callerName + ": Method Call");
+	}
+
+	public static class CoreTools
+	{
+		public static T GetMethodWithoutOverrides<T>(this MethodInfo method, object callFrom)
+				where T : Delegate
+		{
+			IntPtr ptr = method.MethodHandle.GetFunctionPointer();
+			return (T)Activator.CreateInstance(typeof(T), callFrom, ptr);
+		}
+	}
+
+	public static class CCULogger
+	{
+		private static string GetLoggerName(Type containingClass)
+		{
+			return $"CCU_{containingClass.Name}";
+		}
+
+		public static ManualLogSource GetLogger()
+		{
+			Type containingClass = new StackFrame(1, false).GetMethod().ReflectedType;
+			return BepInEx.Logging.Logger.CreateLogSource(GetLoggerName(containingClass));
+		}
+	}
 
 	public static class CColors
 	{
@@ -70,95 +70,95 @@ namespace CCU
 	public static class CJob // These names are extra but I want to ensure they're unique
 	{
 		public const string
-			DisarmTrap =							"[CCU] Job - DisarmTrap",
-			Pickpocket =							"[CCU] Job - Pickpocket",
-			Poison =								"[CCU] Job - Poison",
-			SafecrackSafe =							"[CCU] Job - SafecrackSafe",
-			SafecrackSafeReal =						"[CCU] Job - SafecrackSafeReal",
-			TamperSomething =						"[CCU] Job - TamperSomething",
-			TamperSomethingReal =					"[CCU] Job - TamperSomethingReal";
+			DisarmTrap = "[CCU] Job - DisarmTrap",
+			Pickpocket = "[CCU] Job - Pickpocket",
+			Poison = "[CCU] Job - Poison",
+			SafecrackSafe = "[CCU] Job - SafecrackSafe",
+			SafecrackSafeReal = "[CCU] Job - SafecrackSafeReal",
+			TamperSomething = "[CCU] Job - TamperSomething",
+			TamperSomethingReal = "[CCU] Job - TamperSomethingReal";
 	}
 	public static class CMutators
 	{
 		public const string
 		#region Followers
-			HomesicknessDisabled =					"[CCU] Homesickness Disabled",
-			HomesicknessMandatory =					"[CCU] Homesickness Mandatory",
+			HomesicknessDisabled = "[CCU] Homesickness Disabled",
+			HomesicknessMandatory = "[CCU] Homesickness Mandatory",
 		#endregion
 		#region Interface
-			ScrollingButtonHeight50 =				"[CCU] Interface - Scrolling Button Height 50%",
-			ScrollingButtonHeight75 =				"[CCU] Interface - Scrolling Button Height 75%",
-			ScrollingButtonTextAlignLeft =			"[CCU] Interface - Scrolling Button Text Align Left",
-			ScrollingButtonTextSizeStatic =			"[CCU] Interface - Scrolling Button Text Size Static",
+			ScrollingButtonHeight50 = "[CCU] Interface - Scrolling Button Height 50%",
+			ScrollingButtonHeight75 = "[CCU] Interface - Scrolling Button Height 75%",
+			ScrollingButtonTextAlignLeft = "[CCU] Interface - Scrolling Button Text Align Left",
+			ScrollingButtonTextSizeStatic = "[CCU] Interface - Scrolling Button Text Size Static",
 		#endregion
 		#region Interface Themes
-																											//		BACKGROUND			TEXT COLOR			FONT
-			InterfaceTheme_BloodMoon =				"[CCU] Interface Theme - Blood Moon",					//	Burgundy			Moon White			Gothic
-			InterfaceTheme_Cyberpunk =				"[CCU] Interface Theme - Cyberpunk",					//	Black				Pink or Cyan		
-			InterfaceTheme_Drone =					"[CCU] Interface Theme - Drone",						//	Post-It Yellow		Pencil Black		Boring
-			InterfaceTheme_GovernmentIssue =		"[CCU] Interface Theme - Government Issue",				//	OD Green			White				Stenciled
-			InterfaceTheme_McFuds =					"[CCU] Interface Theme - McFud's",						//	Firetruck Red		Yellow				Something LOUD
-			InterfaceTheme_Mojave =					"[CCU] Interface Theme - Mojave",						//	Orange-ish Black	Amber				Monospace
-			InterfaceTheme_Parchment =				"[CCU] Interface Theme - Parchment",					//	Parchment			Charcoal Black		Something scripty
-			InterfaceTheme_Radioactive =			"[CCU] Interface Theme - Radioactive",					//	Yello				Black				Stenciled
+			//		BACKGROUND			TEXT COLOR			FONT
+			InterfaceTheme_BloodMoon = "[CCU] Interface Theme - Blood Moon",                    //	Burgundy			Moon White			Gothic
+			InterfaceTheme_Cyberpunk = "[CCU] Interface Theme - Cyberpunk",                 //	Black				Pink or Cyan		
+			InterfaceTheme_Drone = "[CCU] Interface Theme - Drone",                     //	Post-It Yellow		Pencil Black		Boring
+			InterfaceTheme_GovernmentIssue = "[CCU] Interface Theme - Government Issue",                //	OD Green			White				Stenciled
+			InterfaceTheme_McFuds = "[CCU] Interface Theme - McFud's",                      //	Firetruck Red		Yellow				Something LOUD
+			InterfaceTheme_Mojave = "[CCU] Interface Theme - Mojave",                       //	Orange-ish Black	Amber				Monospace
+			InterfaceTheme_Parchment = "[CCU] Interface Theme - Parchment",                 //	Parchment			Charcoal Black		Something scripty
+			InterfaceTheme_Radioactive = "[CCU] Interface Theme - Radioactive",                 //	Yello				Black				Stenciled
 		#endregion
 		#region Level Branching
-			Level_Alpha =							"[CCU] Level Alpha",
-			Level_Beta =							"[CCU] Level Beta",
-			Level_Gamma =							"[CCU] Level Gamma",
-			Level_Delta =							"[CCU] Level Delta",
-			LevelExit_Alpha =						"[CCU] Level Exit Alpha",
-			LevelExit_Beta =						"[CCU] Level Exit Beta",
-			LevelExit_Gamma =						"[CCU] Level Exit Gamma",
-			LevelExit_Delta =						"[CCU] Level Exit Delta",
-			LevelExit_Plus1 =						"[CCU] Level Exit +1",
-			LevelExit_Plus2 =						"[CCU] Level Exit +2",
-			LevelExit_Plus3 =						"[CCU] Level Exit +3",
-			LevelExit_Plus4 =						"[CCU] Level Exit +4",
-			Require_False_A =						"[CCU] Require False: A",
-			Require_False_B =						"[CCU] Require False: B",
-			Require_False_C =						"[CCU] Require False: C",
-			Require_False_D =						"[CCU] Require False: D",
-			Require_True_A =						"[CCU] Require True: A",
-			Require_True_B =						"[CCU] Require True: B",
-			Require_True_C =						"[CCU] Require True: C",
-			Require_True_D =						"[CCU] Require True: D",
-			Set_False_A =							"[CCU] Set False: A",
-			Set_False_B =							"[CCU] Set False: B",
-			Set_False_C =							"[CCU] Set False: C",
-			Set_False_D =							"[CCU] Set False: D",
-			Set_True_A =							"[CCU] Set True: A",
-			Set_True_B =							"[CCU] Set True: B",
-			Set_True_C =							"[CCU] Set True: C",
-			Set_True_D =							"[CCU] Set True: D",
+			Level_Alpha = "[CCU] Level Alpha",
+			Level_Beta = "[CCU] Level Beta",
+			Level_Gamma = "[CCU] Level Gamma",
+			Level_Delta = "[CCU] Level Delta",
+			LevelExit_Alpha = "[CCU] Level Exit Alpha",
+			LevelExit_Beta = "[CCU] Level Exit Beta",
+			LevelExit_Gamma = "[CCU] Level Exit Gamma",
+			LevelExit_Delta = "[CCU] Level Exit Delta",
+			LevelExit_Plus1 = "[CCU] Level Exit +1",
+			LevelExit_Plus2 = "[CCU] Level Exit +2",
+			LevelExit_Plus3 = "[CCU] Level Exit +3",
+			LevelExit_Plus4 = "[CCU] Level Exit +4",
+			Require_False_A = "[CCU] Require False: A",
+			Require_False_B = "[CCU] Require False: B",
+			Require_False_C = "[CCU] Require False: C",
+			Require_False_D = "[CCU] Require False: D",
+			Require_True_A = "[CCU] Require True: A",
+			Require_True_B = "[CCU] Require True: B",
+			Require_True_C = "[CCU] Require True: C",
+			Require_True_D = "[CCU] Require True: D",
+			Set_False_A = "[CCU] Set False: A",
+			Set_False_B = "[CCU] Set False: B",
+			Set_False_C = "[CCU] Set False: C",
+			Set_False_D = "[CCU] Set False: D",
+			Set_True_A = "[CCU] Set True: A",
+			Set_True_B = "[CCU] Set True: B",
+			Set_True_C = "[CCU] Set True: C",
+			Set_True_D = "[CCU] Set True: D",
 		#endregion
 		#region Ambient Light
-			Antique =								"[CCU] Ambient Lighting - Antique", // Old color tV?
-			BlackWhite =							"[CCU] Ambient Lighting - Black & White",
-			Goodsprings =							"[CCU] Ambient Lighting - Goodsprings", // FONV Orange filter
-			HalfMoon =								"[CCU] Ambient Lighting - Half Moon",
-			Neptune =								"[CCU] Ambient Lighting - Neptune",
-			NuclearWinter =							"[CCU] Ambient Lighting - Nuclear Winter",
-			NewMoon =								"[CCU] Ambient Lighting - New Moon",
-			Rage =									"[CCU] Ambient Lighting - Rage",
-			Sepia =									"[CCU] Ambient Lighting - Sepia",
-			SunnyDay =								"[CCU] Ambient Lighting - Sunny Day", // Disable Lamps?
+			Antique = "[CCU] Ambient Lighting - Antique", // Old color tV?
+			BlackWhite = "[CCU] Ambient Lighting - Black & White",
+			Goodsprings = "[CCU] Ambient Lighting - Goodsprings", // FONV Orange filter
+			HalfMoon = "[CCU] Ambient Lighting - Half Moon",
+			Neptune = "[CCU] Ambient Lighting - Neptune",
+			NuclearWinter = "[CCU] Ambient Lighting - Nuclear Winter",
+			NewMoon = "[CCU] Ambient Lighting - New Moon",
+			Rage = "[CCU] Ambient Lighting - Rage",
+			Sepia = "[CCU] Ambient Lighting - Sepia",
+			SunnyDay = "[CCU] Ambient Lighting - Sunny Day", // Disable Lamps?
 		#endregion
 		#region Light Sources
-			NoAgentLights =							"[CCU] No Agent Lights",
-			NoItemLights =							"[CCU] No Item Lights",
-			NoObjectGlow =							"[CCU] No Object Glow",
-			NoObjectLights =						"[CCU] No Object Lights",
+			NoAgentLights = "[CCU] No Agent Lights",
+			NoItemLights = "[CCU] No Item Lights",
+			NoObjectGlow = "[CCU] No Object Glow",
+			NoObjectLights = "[CCU] No Object Lights",
 		#endregion
 		#region Wreckage
-			AmbienterAmbience =						"[CCU] Ambient-er Ambience",
-			FloralerFlora =							"[CCU] Floral-er Flora",
-			LitterallyTheWorst =					"[CCU] Litter-ally the Worst",
-			ShittierToilets =						"[CCU] Shittier Toilets",
-			TrashierTrashcans =						"[CCU] Trashier Trashcans",
+			AmbienterAmbience = "[CCU] Ambient-er Ambience",
+			FloralerFlora = "[CCU] Floral-er Flora",
+			LitterallyTheWorst = "[CCU] Litter-ally the Worst",
+			ShittierToilets = "[CCU] Shittier Toilets",
+			TrashierTrashcans = "[CCU] Trashier Trashcans",
 		#endregion
 		#region Utility
-			SortMutatorsByName =					"! Sort Mutators by Name";
+			SortMutatorsByName = "! Sort Mutators by Name";
 		#endregion
 
 		public static List<string> LevelOnlyMutators = new List<string>()
@@ -184,9 +184,7 @@ namespace CCU
 				.Select(field => (string)field.GetValue(null))
 				.ToList();
 	}
-
-	}
-	public static class CTrait 
+	public static class CTrait
 	{
 		public const string
 		#region Agent Group
@@ -234,294 +232,294 @@ namespace CCU
 		#endregion
 		#region Appearance				Group
 		#region Accessory
-			Accessory_CopHat =					"[CCU] Accessory - Cop Hat",
-			Accessory_DoctorHeadlamp =			"[CCU] Accessory - Doctor Headlamp",
-			Accessory_Fedora =					"[CCU] Accessory - Fedora",
-			Accessory_FireHelmet =				"[CCU] Accessory - Fire Helmet",
-			Accessory_HackerGlasses =			"[CCU] Accessory - Hacker Glasses",
-			Accessory_HatBlue =					"[CCU] Accessory - Hat (Blue)",
-			Accessory_HatRed =					"[CCU] Accessory - Hat (Red)",
-			Accessory_Headphones =				"[CCU] Accessory - Headphones",
-			Accessory_None =					"[CCU] Accessory - None",
-			Accessory_Sunglasses =				"[CCU] Accessory - Sunglasses",
-			Accessory_SupercopHat =				"[CCU] Accessory - Supercop Hat",
-			Accessory_ThiefHat =				"[CCU] Accessory - Thief Hat",
+			Accessory_CopHat = "[CCU] Accessory - Cop Hat",
+			Accessory_DoctorHeadlamp = "[CCU] Accessory - Doctor Headlamp",
+			Accessory_Fedora = "[CCU] Accessory - Fedora",
+			Accessory_FireHelmet = "[CCU] Accessory - Fire Helmet",
+			Accessory_HackerGlasses = "[CCU] Accessory - Hacker Glasses",
+			Accessory_HatBlue = "[CCU] Accessory - Hat (Blue)",
+			Accessory_HatRed = "[CCU] Accessory - Hat (Red)",
+			Accessory_Headphones = "[CCU] Accessory - Headphones",
+			Accessory_None = "[CCU] Accessory - None",
+			Accessory_Sunglasses = "[CCU] Accessory - Sunglasses",
+			Accessory_SupercopHat = "[CCU] Accessory - Supercop Hat",
+			Accessory_ThiefHat = "[CCU] Accessory - Thief Hat",
 		#endregion
 		#region Eyes
 
 		#endregion
 		#region Facial Hair
-			FacialHair_Beard =					"[CCU] Facial Hair - Beard",
-			FacialHair_Mustache =				"[CCU] Facial Hair - Mustache",
-			FacialHair_MustacheCircus =			"[CCU] Facial Hair - MustacheCircus",
-			FacialHair_MustacheRedneck =		"[CCU] Facial Hair - MustacheRedneck",
-			FacialHair_None =					"[CCU] Facial Hair - None",
+			FacialHair_Beard = "[CCU] Facial Hair - Beard",
+			FacialHair_Mustache = "[CCU] Facial Hair - Mustache",
+			FacialHair_MustacheCircus = "[CCU] Facial Hair - MustacheCircus",
+			FacialHair_MustacheRedneck = "[CCU] Facial Hair - MustacheRedneck",
+			FacialHair_None = "[CCU] Facial Hair - None",
 		#endregion
 		#region Hair Color
-			HairColor_Brown =					"[CCU] Hair Color - Brown",
-			HairColor_Black =					"[CCU] Hair Color - Black",
-			HairColor_Blonde =					"[CCU] Hair Color - Blonde",
-			HairColor_Blue =					"[CCU] Hair Color - Blue",
-			HairColor_Green =					"[CCU] Hair Color - Green",
-			HairColor_Grey =					"[CCU] Hair Color - Grey",
-			HairColor_Orange =					"[CCU] Hair Color - Orange",
-			HairColor_Pink =					"[CCU] Hair Color - Pink",
-			HairColor_Purple =					"[CCU] Hair Color - Purple",
-			HairColor_Red =						"[CCU] Hair Color - Red",
+			HairColor_Brown = "[CCU] Hair Color - Brown",
+			HairColor_Black = "[CCU] Hair Color - Black",
+			HairColor_Blonde = "[CCU] Hair Color - Blonde",
+			HairColor_Blue = "[CCU] Hair Color - Blue",
+			HairColor_Green = "[CCU] Hair Color - Green",
+			HairColor_Grey = "[CCU] Hair Color - Grey",
+			HairColor_Orange = "[CCU] Hair Color - Orange",
+			HairColor_Pink = "[CCU] Hair Color - Pink",
+			HairColor_Purple = "[CCU] Hair Color - Purple",
+			HairColor_Red = "[CCU] Hair Color - Red",
 		#endregion
 		#region Hairstyle
-			Hairstyle_Afro =					"[CCU] Hairstyle - Afro",
-			Hairstyle_AlienHead =				"[CCU] Hairstyle - Alien Head",
-			Hairstyle_AssassinMask =			"[CCU] Hairstyle - Assassin Mask",
-			Hairstyle_Bald =					"[CCU] Hairstyle - Bald",
-			Hairstyle_Balding =					"[CCU] Hairstyle - Balding",
-			Hairstyle_BangsLong =				"[CCU] Hairstyle - BangsLong",
-			Hairstyle_BangsMedium =				"[CCU] Hairstyle - BangsMedium",
-			Hairstyle_ButlerBot =				"[CCU] Hairstyle - Butler Bot Head",
-			Hairstyle_Curtains =				"[CCU] Hairstyle - Curtains",
-			Hairstyle_Cutoff =					"[CCU] Hairstyle - Cutoff",
-			Hairstyle_FlatLong =				"[CCU] Hairstyle - FlatLong",
-			Hairstyle_GorillaHead =				"[CCU] Hairstyle - Gorilla Head",
-			Hairstyle_HoboBeard =				"[CCU] Hairstyle - HoboBeard",
-			Hairstyle_Hoodie =					"[CCU] Hairstyle - Hoodie",
-			Hairstyle_Leia =					"[CCU] Hairstyle - Leia",
-			Hairstyle_MessyLong =				"[CCU] Hairstyle - MessyLong",
-			Hairstyle_Military =				"[CCU] Hairstyle - Military",
-			Hairstyle_Mohawk =					"[CCU] Hairstyle - Mohawk",
-			Hairstyle_Normal =					"[CCU] Hairstyle - Normal",
-			Hairstyle_NormalHigh =				"[CCU] Hairstyle - NormalHigh",
-			Hairstyle_Pompadour =				"[CCU] Hairstyle - Pompadour",
-			Hairstyle_Ponytail =				"[CCU] Hairstyle - Ponytail",
-			Hairstyle_PuffyLong =				"[CCU] Hairstyle - PuffyLong",
-			Hairstyle_PuffyShort =				"[CCU] Hairstyle - PuffyShort",
-			Hairstyle_RobotHead =				"[CCU] Hairstyle - Robot Head",
-			Hairstyle_Sidewinder =				"[CCU] Hairstyle - Sidewinder",
-			Hairstyle_SlaverMask =				"[CCU] Hairstyle - Slavemaster Mask",
-			Hairstyle_Spiky =					"[CCU] Hairstyle - Spiky",
-			Hairstyle_SpikyShort =				"[CCU] Hairstyle - SpikyShort",
-			Hairstyle_Suave =					"[CCU] Hairstyle - Suave",
-			Hairstyle_Wave =					"[CCU] Hairstyle - Wave",
-			Hairstyle_WerewolfHead =			"[CCU] Hairstyle - Werewolf Head",
+			Hairstyle_Afro = "[CCU] Hairstyle - Afro",
+			Hairstyle_AlienHead = "[CCU] Hairstyle - Alien Head",
+			Hairstyle_AssassinMask = "[CCU] Hairstyle - Assassin Mask",
+			Hairstyle_Bald = "[CCU] Hairstyle - Bald",
+			Hairstyle_Balding = "[CCU] Hairstyle - Balding",
+			Hairstyle_BangsLong = "[CCU] Hairstyle - BangsLong",
+			Hairstyle_BangsMedium = "[CCU] Hairstyle - BangsMedium",
+			Hairstyle_ButlerBot = "[CCU] Hairstyle - Butler Bot Head",
+			Hairstyle_Curtains = "[CCU] Hairstyle - Curtains",
+			Hairstyle_Cutoff = "[CCU] Hairstyle - Cutoff",
+			Hairstyle_FlatLong = "[CCU] Hairstyle - FlatLong",
+			Hairstyle_GorillaHead = "[CCU] Hairstyle - Gorilla Head",
+			Hairstyle_HoboBeard = "[CCU] Hairstyle - HoboBeard",
+			Hairstyle_Hoodie = "[CCU] Hairstyle - Hoodie",
+			Hairstyle_Leia = "[CCU] Hairstyle - Leia",
+			Hairstyle_MessyLong = "[CCU] Hairstyle - MessyLong",
+			Hairstyle_Military = "[CCU] Hairstyle - Military",
+			Hairstyle_Mohawk = "[CCU] Hairstyle - Mohawk",
+			Hairstyle_Normal = "[CCU] Hairstyle - Normal",
+			Hairstyle_NormalHigh = "[CCU] Hairstyle - NormalHigh",
+			Hairstyle_Pompadour = "[CCU] Hairstyle - Pompadour",
+			Hairstyle_Ponytail = "[CCU] Hairstyle - Ponytail",
+			Hairstyle_PuffyLong = "[CCU] Hairstyle - PuffyLong",
+			Hairstyle_PuffyShort = "[CCU] Hairstyle - PuffyShort",
+			Hairstyle_RobotHead = "[CCU] Hairstyle - Robot Head",
+			Hairstyle_Sidewinder = "[CCU] Hairstyle - Sidewinder",
+			Hairstyle_SlaverMask = "[CCU] Hairstyle - Slavemaster Mask",
+			Hairstyle_Spiky = "[CCU] Hairstyle - Spiky",
+			Hairstyle_SpikyShort = "[CCU] Hairstyle - SpikyShort",
+			Hairstyle_Suave = "[CCU] Hairstyle - Suave",
+			Hairstyle_Wave = "[CCU] Hairstyle - Wave",
+			Hairstyle_WerewolfHead = "[CCU] Hairstyle - Werewolf Head",
 		#endregion
 		#region Skin Color	
-			SkinColor_SuperPale =				"[CCU] Skin Color - SuperPaleSkin",
-			SkinColor_Pale =					"[CCU] Skin Color - PaleSkin",
-			SkinColor_White =					"[CCU] Skin Color - WhiteSkin",
-			SkinColor_Pink =					"[CCU] Skin Color - PinkSkin",
-			SkinColor_Gold =					"[CCU] Skin Color - GoldSkin",
-			SkinColor_Mixed =					"[CCU] Skin Color - MixedSkin",
-			SkinColor_LightBlack =				"[CCU] Skin Color - LightBlackSkin",
-			SkinColor_Black =					"[CCU] Skin Color - BlackSkin",
-			SkinColor_Zombie1 =					"[CCU] Skin Color - ZombieSkin1",
-			SkinColor_Zombie2 =					"[CCU] Skin Color - ZombieSkin2",
+			SkinColor_SuperPale = "[CCU] Skin Color - SuperPaleSkin",
+			SkinColor_Pale = "[CCU] Skin Color - PaleSkin",
+			SkinColor_White = "[CCU] Skin Color - WhiteSkin",
+			SkinColor_Pink = "[CCU] Skin Color - PinkSkin",
+			SkinColor_Gold = "[CCU] Skin Color - GoldSkin",
+			SkinColor_Mixed = "[CCU] Skin Color - MixedSkin",
+			SkinColor_LightBlack = "[CCU] Skin Color - LightBlackSkin",
+			SkinColor_Black = "[CCU] Skin Color - BlackSkin",
+			SkinColor_Zombie1 = "[CCU] Skin Color - ZombieSkin1",
+			SkinColor_Zombie2 = "[CCU] Skin Color - ZombieSkin2",
 		#endregion
 		#endregion
 		#region Active
-			Active_CleanTrash =					"[CCU] Active - Clean Trash",
-			Active_EatCorpse =					"[CCU] Active - Eat Corpse",
-			Active_EnforceLaws =				"[CCU] Active - Enforce Laws (Cop)",
-			Active_EnforceLawsCopBot =			"[CCU] Active - Enforce Laws (Cop Bot)",
-			Active_FightFires =					"[CCU] Active - Fight Fires",
-			Active_GrabDrugs =					"[CCU] Active - Grab Drugs",
-			Active_GrabMoney =					"[CCU] Active - Grab Money",
-			Active_GuardDoor =					"[CCU] Active - Guard Door",
-			Active_HogTurntables =				"[CCU] Active - Turntables Guard",
-			Active_Lockdown =					"[CCU] Active - Lockdown Clearance", // Might not be a thing - could just be The Law
-			Active_Pickpocket =					"[CCU] Active - Pickpocket",
-			Active_SeekAndDestroy =				"[CCU] Active - Seek & Destroy",
-			Active_SuckBlood =					"[CCU] Active - Suck Blood",
-			Active_Shakedown =					"[CCU] Active - Shakedown",
-			Active_Tattletale =					"[CCU] Active - Tattletale",
+			Active_CleanTrash = "[CCU] Active - Clean Trash",
+			Active_EatCorpse = "[CCU] Active - Eat Corpse",
+			Active_EnforceLaws = "[CCU] Active - Enforce Laws (Cop)",
+			Active_EnforceLawsCopBot = "[CCU] Active - Enforce Laws (Cop Bot)",
+			Active_FightFires = "[CCU] Active - Fight Fires",
+			Active_GrabDrugs = "[CCU] Active - Grab Drugs",
+			Active_GrabMoney = "[CCU] Active - Grab Money",
+			Active_GuardDoor = "[CCU] Active - Guard Door",
+			Active_HogTurntables = "[CCU] Active - Turntables Guard",
+			Active_Lockdown = "[CCU] Active - Lockdown Clearance", // Might not be a thing - could just be The Law
+			Active_Pickpocket = "[CCU] Active - Pickpocket",
+			Active_SeekAndDestroy = "[CCU] Active - Seek & Destroy",
+			Active_SuckBlood = "[CCU] Active - Suck Blood",
+			Active_Shakedown = "[CCU] Active - Shakedown",
+			Active_Tattletale = "[CCU] Active - Tattletale",
 		#endregion
 		#region Bodyguarded
-			Bodyguarded_Pilot =					"[CCU] Bodyguarded: Pilot",
-			Bodyguarded_Cops =					"[CCU] Bodyguarded: Cops",
-			Bodyguarded_Goons =					"[CCU] Bodyguarded: Goons",
-			Bodyguarded_Supercops =				"[CCU] Bodyguarded: Supercops",
-			Bodyguarded_Supergoons =			"[CCU] Bodyguarded: Supergoons",
+			Bodyguarded_Pilot = "[CCU] Bodyguarded - Pilot",
+			Bodyguarded_Cops = "[CCU] Bodyguarded - Cops",
+			Bodyguarded_Goons = "[CCU] Bodyguarded - Goons",
+			Bodyguarded_Supercops = "[CCU] Bodyguarded - Supercops",
+			Bodyguarded_Supergoons = "[CCU] Bodyguarded - Supergoons",
 		#endregion
 		#region Combat
-			Combat_CauseLockdown =				"[CCU] Combat - Cause Lockdown",
-			Combat_Coward =						"[CCU] Combat - Coward",
-			Combat_Fearless =					"[CCU] Combat - Fearless",
-			Combat_UseDrugs =					"[CCU] Combat - Use Drugs", // Gate behind Drug-A-Lug?
+			Combat_CauseLockdown = "[CCU] Combat - Cause Lockdown",
+			Combat_Coward = "[CCU] Combat - Coward",
+			Combat_Fearless = "[CCU] Combat - Fearless",
+			Combat_UseDrugs = "[CCU] Combat - Use Drugs", // Gate behind Drug-A-Lug?
 		#endregion
 		#region Hire
-			Hire_Bodyguard =					"[CCU] Hire - Bodyguard",
-			Hire_BreakIn =						"[CCU] Hire - Break In",
-			Hire_CauseRuckus =					"[CCU] Hire - Cause a Ruckus",
-			Hire_CostBanana =					"[CCU] Hire - Costs Banana",
-			Hire_CostLess =						"[CCU] Hire - Costs Less",
-			Hire_CostMore =						"[CCU] Hire - Costs More",
-			Hire_DisarmTrap =					"[CCU] Hire - Disarm Trap",
-			Hire_Hack =							"[CCU] Hire - Hack",
-			Hire_JoinIfFreed =					"[CCU] Hire - Join if Freed (Prisoner)",
-			Hire_Permanent =					"[CCU] Hire - Permanent",
-			Hire_PermanentOnly =				"[CCU] Hire - Permanent Only",
-			Hire_Pickpocket =					"[CCU] Hire - Pickpocket",
-			Hire_Poison	=						"[CCU] Hire - Poison",
-			Hire_Safecrack =					"[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
-			Hire_Tamper =						"[CCU] Hire - Tamper",
+			Hire_Bodyguard = "[CCU] Hire - Bodyguard",
+			Hire_BreakIn = "[CCU] Hire - Break In",
+			Hire_CauseRuckus = "[CCU] Hire - Cause a Ruckus",
+			Hire_CostBanana = "[CCU] Hire - Costs Banana",
+			Hire_CostLess = "[CCU] Hire - Costs Less",
+			Hire_CostMore = "[CCU] Hire - Costs More",
+			Hire_DisarmTrap = "[CCU] Hire - Disarm Trap",
+			Hire_Hack = "[CCU] Hire - Hack",
+			Hire_JoinIfFreed = "[CCU] Hire - Join if Freed (Prisoner)",
+			Hire_Permanent = "[CCU] Hire - Permanent",
+			Hire_PermanentOnly = "[CCU] Hire - Permanent Only",
+			Hire_Pickpocket = "[CCU] Hire - Pickpocket",
+			Hire_Poison = "[CCU] Hire - Poison",
+			Hire_Safecrack = "[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
+			Hire_Tamper = "[CCU] Hire - Tamper",
 		#endregion
 		#region Interaction
-			Interaction_AdministerBloodBag =	"[CCU] Interaction - Administer Blood Bag",
-			Interaction_ArenaManager =			"[CCU] Interaction - Arena Manager",
-			Interaction_BankTeller =			"[CCU] Interaction - Bank Teller",
-			Interaction_BloodBank =				"[CCU] Interaction - Blood Bank", 
-			Interaction_BribeCops =				"[CCU] Interaction - Bribe Cops",
-			Interaction_BribeEntryBeer =		"[CCU] Interaction - Bribe for Entry (Beer)",// Requires Passive Guard Door?
-			Interaction_BribeEntryMoney =		"[CCU] Interaction - Bribe for Entry (Money)", 
-			Interaction_BribeEntryWhiskey =		"[CCU] Interaction - Bribe for Entry (Whiskey)",
-			Interaction_BuyerAll =				"[CCU] Interaction - Buyer All", 
-			Interaction_BuyerOnly =				"[CCU] Interaction - Buyer Only",
-			Interaction_BuyerVendor =			"[CCU] Interaction - Buyer Vendor",
-			Interaction_BuyRound =				"[CCU] Interaction - Buy Round",
-			Interaction_DeportationCenter =		"[CCU] Interaction - Deportation Center",
-			Interaction_Extortable =			"[CCU] Interaction - Extortable",
-			Interaction_Heal =					"[CCU] Interaction - Heal",
-			Interaction_HealAll =				"[CCU] Interaction - Heal All",
-			Interaction_HealOther =				"[CCU] Interaction - Heal Other",
-			Interaction_HotelManager =			"[CCU] Interaction - Hotel Manager",
-			Interaction_Identify =				"[CCU] Interaction - Identify",
-			Interaction_InfluenceElection =		"[CCU] Interaction - Influence Election",
-			Interaction_MayorClerk =			"[CCU] Interaction - Mayor Clerk",
-			Interaction_Moochable =				"[CCU] Interaction - Moochable",
-			Interaction_OfferMotivation =		"[CCU] Interaction - Offer Motivation",
-			Interaction_PlayBadSong =			"[CCU] Interaction - Song Request",
-			Interaction_QuestGiver =			"[CCU] Interaction - Quest Giver",
-			Interaction_RefillGuns =			"[CCU] Interaction - Refill Guns",
-			Interaction_RepairArmor =			"[CCU] Interaction - Repair Armor",
-			Interaction_RepairMelee =			"[CCU] Interaction - Repair Melee Weapons",
-			Interaction_SellSlaves =			"[CCU] Interaction - Sell Slaves",
-			Interaction_UseBloodBag =			"[CCU] Interaction - Use Blood Bag",
+			Interaction_AdministerBloodBag = "[CCU] Interaction - Administer Blood Bag",
+			Interaction_ArenaManager = "[CCU] Interaction - Arena Manager",
+			Interaction_BankTeller = "[CCU] Interaction - Bank Teller",
+			Interaction_BloodBank = "[CCU] Interaction - Blood Bank",
+			Interaction_BribeCops = "[CCU] Interaction - Bribe Cops",
+			Interaction_BribeEntryBeer = "[CCU] Interaction - Bribe for Entry (Beer)",// Requires Passive Guard Door?
+			Interaction_BribeEntryMoney = "[CCU] Interaction - Bribe for Entry (Money)",
+			Interaction_BribeEntryWhiskey = "[CCU] Interaction - Bribe for Entry (Whiskey)",
+			Interaction_BuyerAll = "[CCU] Interaction - Buyer All",
+			Interaction_BuyerOnly = "[CCU] Interaction - Buyer Only",
+			Interaction_BuyerVendor = "[CCU] Interaction - Buyer Vendor",
+			Interaction_BuyRound = "[CCU] Interaction - Buy Round",
+			Interaction_DeportationCenter = "[CCU] Interaction - Deportation Center",
+			Interaction_Extortable = "[CCU] Interaction - Extortable",
+			Interaction_Heal = "[CCU] Interaction - Heal",
+			Interaction_HealAll = "[CCU] Interaction - Heal All",
+			Interaction_HealOther = "[CCU] Interaction - Heal Other",
+			Interaction_HotelManager = "[CCU] Interaction - Hotel Manager",
+			Interaction_Identify = "[CCU] Interaction - Identify",
+			Interaction_InfluenceElection = "[CCU] Interaction - Influence Election",
+			Interaction_MayorClerk = "[CCU] Interaction - Mayor Clerk",
+			Interaction_Moochable = "[CCU] Interaction - Moochable",
+			Interaction_OfferMotivation = "[CCU] Interaction - Offer Motivation",
+			Interaction_PlayBadSong = "[CCU] Interaction - Song Request",
+			Interaction_QuestGiver = "[CCU] Interaction - Quest Giver",
+			Interaction_RefillGuns = "[CCU] Interaction - Refill Guns",
+			Interaction_RepairArmor = "[CCU] Interaction - Repair Armor",
+			Interaction_RepairMelee = "[CCU] Interaction - Repair Melee Weapons",
+			Interaction_SellSlaves = "[CCU] Interaction - Sell Slaves",
+			Interaction_UseBloodBag = "[CCU] Interaction - Use Blood Bag",
 		#endregion
 		#region Loadout
-			Loadout_ChunkKey =					"[CCU] Loadout: Chunk Key Holder",
-			Loadout_ChunkMayorBadge =			"[CCU] Loadout: Chunk Mayor Badge",
-			Loadout_ChunkSafeCombo =			"[CCU] Loadout: Chunk Safe Combo Holder",
-			Loadout_Guns_Common =				"[CCU] Loadout: Guns (Common)",
-			Loadout_Guns_Heavy =				"[CCU] Loadout: Guns (Heavy)",
-			Loadout_Guns_Rare =					"[CCU] Loadout: Guns (Rare)",
-			Loadout_Guns_Weird =				"[CCU] Loadout: Guns (Weird)",
+			Loadout_ChunkKey = "[CCU] Loadout: Chunk Key Holder",
+			Loadout_ChunkMayorBadge = "[CCU] Loadout: Chunk Mayor Badge",
+			Loadout_ChunkSafeCombo = "[CCU] Loadout: Chunk Safe Combo Holder",
+			Loadout_Guns_Common = "[CCU] Loadout: Guns (Common)",
+			Loadout_Guns_Heavy = "[CCU] Loadout: Guns (Heavy)",
+			Loadout_Guns_Rare = "[CCU] Loadout: Guns (Rare)",
+			Loadout_Guns_Weird = "[CCU] Loadout: Guns (Weird)",
 		#endregion
 		#region Map Marker
-			MapMarker_Bartender =				"[CCU] Map Marker: Bartender",
-			MapMarker_DrugDealer =				"[CCU] Map Marker: DrugDealer",
-			MapMarker_Face =					"[CCU] Map Marker: Face",
-			MapMarker_KillerRobot =				"[CCU] Map Marker: KillerRobot",
-			MapMarker_Pilot =					"[CCU] Map Marker: Pilot",
-			MapMarker_QuestionMark =			"[CCU] Map Marker: QuestionMark",
-			MapMarker_Shopkeeper =				"[CCU] Map Marker: Shopkeeper",
+			MapMarker_Bartender = "[CCU] Map Marker: Bartender",
+			MapMarker_DrugDealer = "[CCU] Map Marker: DrugDealer",
+			MapMarker_Face = "[CCU] Map Marker: Face",
+			MapMarker_KillerRobot = "[CCU] Map Marker: KillerRobot",
+			MapMarker_Pilot = "[CCU] Map Marker: Pilot",
+			MapMarker_QuestionMark = "[CCU] Map Marker: QuestionMark",
+			MapMarker_Shopkeeper = "[CCU] Map Marker: Shopkeeper",
 		#endregion
 		#region Merchant				Group
 		#region Merchant Buyer
 
 		#endregion
 		#region Merchant Type
-			MerchantType_Anthropophagie =			"[CCU] Merchant Type - Anthropophagie",
-			MerchantType_Armorer =					"[CCU] Merchant Type - Armorer",
-			MerchantType_Assassin =					"[CCU] Merchant Type - Assassin",
-			MerchantType_BananaBoutique =			"[CCU] Merchant Type - Banana",
-			MerchantType_BarbarianMerchant =		"[CCU] Merchant Type - Barbarian",
-			MerchantType_Bartender =				"[CCU] Merchant Type - Bartender",
-			MerchantType_BartenderDive =			"[CCU] Merchant Type - Bartender (Dive)",
-			MerchantType_BartenderFancy =			"[CCU] Merchant Type - Bartender (Fancy)",
-			MerchantType_Blacksmith =				"[CCU] Merchant Type - Blacksmith",
-			MerchantType_ConsumerElectronics =		"[CCU] Merchant Type - Consumer Electronics",
-			MerchantType_ConvenienceStore =			"[CCU] Merchant Type - Convenience Store",
-			MerchantType_Contraband =				"[CCU] Merchant Type - Cop Confiscated Goods",
-			MerchantType_CopStandard =				"[CCU] Merchant Type - Cop Patrolman's Equipment",
-			MerchantType_CopSWAT =					"[CCU] Merchant Type - Cop SWAT Equipment",
-			MerchantType_DemolitionDepot =			"[CCU] Merchant Type - Demolitionist",
-			MerchantType_DrugDealer =				"[CCU] Merchant Type - Drug Dealer",
-			MerchantType_FirefighterFiveAndDime =	"[CCU] Merchant Type - Firefighter",
-			MerchantType_FireSale =					"[CCU] Merchant Type - Fire Sale",
-			MerchantType_GunDealer =				"[CCU] Merchant Type - Gun Dealer",
-			MerchantType_GunDealerHeavy =			"[CCU] Merchant Type - Gun Dealer (Heavy)",
-			MerchantType_Gunsmith =					"[CCU] Merchant Type - Gunsmith",
-			MerchantType_HardwareStore =			"[CCU] Merchant Type - Tool Shop",
-			MerchantType_HighTech =					"[CCU] Merchant Type - HighTech",
-			MerchantType_HomeFortressOutlet =		"[CCU] Merchant Type - Home Fortress Outlet",
-			MerchantType_Hypnotist =				"[CCU] Merchant Type - Hypnotist",
-			MerchantType_JunkDealer =				"[CCU] Merchant Type - Junk Dealer",
-			MerchantType_McFuds =					"[CCU] Merchant Type - McFud's",
-			MerchantType_MedicalSupplier =			"[CCU] Merchant Type - Medical Supplier",
-			MerchantType_MiningGear =				"[CCU] Merchant Type - Mining Gear",
-			MerchantType_MonkeMart =				"[CCU] Merchant Type - Monke Mart",
-			MerchantType_MovieTheater =				"[CCU] Merchant Type - Movie Theater",
-			MerchantType_Occultist =				"[CCU] Merchant Type - Occultist",
-			MerchantType_OutdoorOutfitter =			"[CCU] Merchant Type - Outdoor Outfitter",
-			MerchantType_PacifistProvisioner =		"[CCU] Merchant Type - Pacifist Provisioner",
-			MerchantType_PawnShop =					"[CCU] Merchant Type - Pawn Shop",
-			MerchantType_PestControl =				"[CCU] Merchant Type - Pest Control",
-			MerchantType_Pharmacy =					"[CCU] Merchant Type - Pharmacy",
-			MerchantType_ResistanceCommissary =		"[CCU] Merchant Type - Resistance Commissary",
-			MerchantType_RiotInc =					"[CCU] Merchant Type - Riot Depot",
-			MerchantType_ResearchMaterials =		"[CCU] Merchant Type - Scientist",
-			MerchantType_Shopkeeper =				"[CCU] Merchant Type - Shopkeeper",
-			MerchantType_SlaveShop =				"[CCU] Merchant Type - Slave Shop",
-			MerchantType_Soldier =					"[CCU] Merchant Type - Soldier",
-			MerchantType_SportingGoods =			"[CCU] Merchant Type - Sporting Goods",
-			MerchantType_Teleportationist =			"[CCU] Merchant Type - Teleportationist",
-			MerchantType_Thief =					"[CCU] Merchant Type - Thief",
-			MerchantType_ThiefMaster =				"[CCU] Merchant Type - Thief Master",
-			MerchantType_ThrowceryStore =			"[CCU] Merchant Type - Throwcery Store",
-			MerchantType_ToyStore =					"[CCU] Merchant Type - Toy Store",
-			MerchantType_UpperCruster =				"[CCU] Merchant Type - Upper Cruster",
-			MerchantType_Vampire =					"[CCU] Merchant Type - Vampire",
-			MerchantType_Villain =					"[CCU] Merchant Type - Villain",
+			MerchantType_Anthropophagie = "[CCU] Merchant Type - Anthropophagie",
+			MerchantType_Armorer = "[CCU] Merchant Type - Armorer",
+			MerchantType_Assassin = "[CCU] Merchant Type - Assassin",
+			MerchantType_BananaBoutique = "[CCU] Merchant Type - Banana",
+			MerchantType_BarbarianMerchant = "[CCU] Merchant Type - Barbarian",
+			MerchantType_Bartender = "[CCU] Merchant Type - Bartender",
+			MerchantType_BartenderDive = "[CCU] Merchant Type - Bartender (Dive)",
+			MerchantType_BartenderFancy = "[CCU] Merchant Type - Bartender (Fancy)",
+			MerchantType_Blacksmith = "[CCU] Merchant Type - Blacksmith",
+			MerchantType_ConsumerElectronics = "[CCU] Merchant Type - Consumer Electronics",
+			MerchantType_ConvenienceStore = "[CCU] Merchant Type - Convenience Store",
+			MerchantType_Contraband = "[CCU] Merchant Type - Cop Confiscated Goods",
+			MerchantType_CopStandard = "[CCU] Merchant Type - Cop Patrolman's Equipment",
+			MerchantType_CopSWAT = "[CCU] Merchant Type - Cop SWAT Equipment",
+			MerchantType_DemolitionDepot = "[CCU] Merchant Type - Demolitionist",
+			MerchantType_DrugDealer = "[CCU] Merchant Type - Drug Dealer",
+			MerchantType_FirefighterFiveAndDime = "[CCU] Merchant Type - Firefighter",
+			MerchantType_FireSale = "[CCU] Merchant Type - Fire Sale",
+			MerchantType_GunDealer = "[CCU] Merchant Type - Gun Dealer",
+			MerchantType_GunDealerHeavy = "[CCU] Merchant Type - Gun Dealer (Heavy)",
+			MerchantType_Gunsmith = "[CCU] Merchant Type - Gunsmith",
+			MerchantType_HardwareStore = "[CCU] Merchant Type - Tool Shop",
+			MerchantType_HighTech = "[CCU] Merchant Type - HighTech",
+			MerchantType_HomeFortressOutlet = "[CCU] Merchant Type - Home Fortress Outlet",
+			MerchantType_Hypnotist = "[CCU] Merchant Type - Hypnotist",
+			MerchantType_JunkDealer = "[CCU] Merchant Type - Junk Dealer",
+			MerchantType_McFuds = "[CCU] Merchant Type - McFud's",
+			MerchantType_MedicalSupplier = "[CCU] Merchant Type - Medical Supplier",
+			MerchantType_MiningGear = "[CCU] Merchant Type - Mining Gear",
+			MerchantType_MonkeMart = "[CCU] Merchant Type - Monke Mart",
+			MerchantType_MovieTheater = "[CCU] Merchant Type - Movie Theater",
+			MerchantType_Occultist = "[CCU] Merchant Type - Occultist",
+			MerchantType_OutdoorOutfitter = "[CCU] Merchant Type - Outdoor Outfitter",
+			MerchantType_PacifistProvisioner = "[CCU] Merchant Type - Pacifist Provisioner",
+			MerchantType_PawnShop = "[CCU] Merchant Type - Pawn Shop",
+			MerchantType_PestControl = "[CCU] Merchant Type - Pest Control",
+			MerchantType_Pharmacy = "[CCU] Merchant Type - Pharmacy",
+			MerchantType_ResistanceCommissary = "[CCU] Merchant Type - Resistance Commissary",
+			MerchantType_RiotInc = "[CCU] Merchant Type - Riot Depot",
+			MerchantType_ResearchMaterials = "[CCU] Merchant Type - Scientist",
+			MerchantType_Shopkeeper = "[CCU] Merchant Type - Shopkeeper",
+			MerchantType_SlaveShop = "[CCU] Merchant Type - Slave Shop",
+			MerchantType_Soldier = "[CCU] Merchant Type - Soldier",
+			MerchantType_SportingGoods = "[CCU] Merchant Type - Sporting Goods",
+			MerchantType_Teleportationist = "[CCU] Merchant Type - Teleportationist",
+			MerchantType_Thief = "[CCU] Merchant Type - Thief",
+			MerchantType_ThiefMaster = "[CCU] Merchant Type - Thief Master",
+			MerchantType_ThrowceryStore = "[CCU] Merchant Type - Throwcery Store",
+			MerchantType_ToyStore = "[CCU] Merchant Type - Toy Store",
+			MerchantType_UpperCruster = "[CCU] Merchant Type - Upper Cruster",
+			MerchantType_Vampire = "[CCU] Merchant Type - Vampire",
+			MerchantType_Villain = "[CCU] Merchant Type - Villain",
 		#endregion
 		#region Merchant Vendor
 
 		#endregion
 		#endregion
 		#region Passive
-			Passive_ExplodeOnDeath =				"[CCU] Passive - Explode On Death",
-			Passive_ExplodeOnDeathLarge =			"[CCU] Passive - Explode On Death (Large)",
-			Passive_ExplodeOnDeathMolotov =			"[CCU] Passive - Explode On Death (Molotov)",
-			Passive_ExplodeOnDeathSlime =			"[CCU] Passive - Explode On Death (Slime)",
-			Passive_ExplodeOnDeathWater =			"[CCU] Passive - Explode On Death (Water)",
-			Passive_Guilty =						"[CCU] Passive - Guilty",
-			Passive_Hackable_Haywire =				"[CCU] Passive - Hackable (Haywire)",
-			Passive_Hackable_TamperWAim =			"[CCU] Passive - Hackable (Tamper w/ Aim)",
-			Passive_VisionBeams =					"[CCU] Passive - Vision Beams",
+			Passive_ExplodeOnDeath = "[CCU] Passive - Explode On Death",
+			Passive_ExplodeOnDeathLarge = "[CCU] Passive - Explode On Death (Large)",
+			Passive_ExplodeOnDeathMolotov = "[CCU] Passive - Explode On Death (Molotov)",
+			Passive_ExplodeOnDeathSlime = "[CCU] Passive - Explode On Death (Slime)",
+			Passive_ExplodeOnDeathWater = "[CCU] Passive - Explode On Death (Water)",
+			Passive_Guilty = "[CCU] Passive - Guilty",
+			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
+			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",
+			Passive_VisionBeams = "[CCU] Passive - Vision Beams",
 		#endregion
 		#region Relationships
-			Relationships_AggressiveCannibal =	"[CCU] Relationships - Aggressive (Cannibal)",   // Hostile to character except with Cool with Cannibals
+			Relationships_AggressiveCannibal = "[CCU] Relationships - Aggressive (Cannibal)",   // Hostile to character except with Cool with Cannibals
 			Relationships_AnnoyedAtSuspicious = "[CCU] Relationships - Annoyed at Suspicious",
-			Relationships_Faction1Aligned =		"[CCU] Relationships - Faction 1 Aligned",
-			Relationships_Faction1Hostile =		"[CCU] Relationships - Faction 1 Hostile",
-			Relationships_Faction2Aligned =		"[CCU] Relationships - Faction 2 Aligned",
-			Relationships_Faction2Hostile =		"[CCU] Relationships - Faction 2 Hostile",
-			Relationships_Faction3Aligned =		"[CCU] Relationships - Faction 3 Aligned",
-			Relationships_Faction3Hostile =		"[CCU] Relationships - Faction 3 Hostile",
-			Relationships_Faction4Aligned =		"[CCU] Relationships - Faction 4 Aligned",
-			Relationships_Faction4Hostile =		"[CCU] Relationships - Faction 4 Hostile",
-			Relationships_HostileToCannibals =	"[CCU] Relationships - Hostile to Cannibals",    // Analogue in BM: Cannibal Killer
-			Relationships_HostileToSoldiers =	"[CCU] Relationships - Hostile to Soldiers",  // Analogue in BM: Army of Negative One
-			Relationships_HostileToVampires =	"[CCU] Relationships - Hostile to Vampires",  // Analogue in BM: Vampire Vanquisher
+			Relationships_Faction1Aligned = "[CCU] Relationships - Faction 1 Aligned",
+			Relationships_Faction1Hostile = "[CCU] Relationships - Faction 1 Hostile",
+			Relationships_Faction2Aligned = "[CCU] Relationships - Faction 2 Aligned",
+			Relationships_Faction2Hostile = "[CCU] Relationships - Faction 2 Hostile",
+			Relationships_Faction3Aligned = "[CCU] Relationships - Faction 3 Aligned",
+			Relationships_Faction3Hostile = "[CCU] Relationships - Faction 3 Hostile",
+			Relationships_Faction4Aligned = "[CCU] Relationships - Faction 4 Aligned",
+			Relationships_Faction4Hostile = "[CCU] Relationships - Faction 4 Hostile",
+			Relationships_HostileToCannibals = "[CCU] Relationships - Hostile to Cannibals",    // Analogue in BM: Cannibal Killer
+			Relationships_HostileToSoldiers = "[CCU] Relationships - Hostile to Soldiers",  // Analogue in BM: Army of Negative One
+			Relationships_HostileToVampires = "[CCU] Relationships - Hostile to Vampires",  // Analogue in BM: Vampire Vanquisher
 			Relationships_HostileToWerewolves = "[CCU] Relationships - Hostile to Werewolves",  // Analogue in BM: Werewolf Wrecker
 		#endregion
 		#region Spawn
-			Spawn_HideInBush =					"[CCU] Spawn: Hide In Bush",
-			Spawn_HideInManhole =				"[CCU] Spawn: Hide In Manhole",
-			Spawn_RoamingGang =					"[CCU] Spawn: Roaming Gangs",
-			Spawn_SlaveOwned =					"[CCU] Spawn: Slave",
-			Spawn_SlaveOwner =					"[CCU] Spawn: Slave Owner",
+			Spawn_HideInBush = "[CCU] Spawn: Hide In Bush",
+			Spawn_HideInManhole = "[CCU] Spawn: Hide In Manhole",
+			Spawn_RoamingGang = "[CCU] Spawn: Roaming Gangs",
+			Spawn_SlaveOwned = "[CCU] Spawn: Slave",
+			Spawn_SlaveOwner = "[CCU] Spawn: Slave Owner",
 		#endregion
-		#region Trait Trigger
-			TraitTrigger_CommonFolk =			"[CCU] Trait Trigger - Common Folk",
-			TraitTrigger_CoolCannibal =			"[CCU] Trait Trigger - Cool Cannibal",
-			TraitTrigger_CopAccess =			"[CCU] Trait Trigger - Cop Access",
-			TraitTrigger_FamilyFriend =			"[CCU] Trait Trigger - Family Friend",
-			TraitTrigger_HonorableThief =		"[CCU] Trait Trigger - Honorable Thief",
-			TraitTrigger_Scumbag =				"[CCU] Trait Trigger - Scumbag",
+		#region Trait Gate
+			TraitGate_CommonFolk = "[CCU] Trait Gate - Common Folk",
+			TraitGate_CoolCannibal = "[CCU] Trait Gate - Cool Cannibal",
+			TraitGate_CopAccess = "[CCU] Trait Gate - Cop Access",
+			TraitGate_FamilyFriend = "[CCU] Trait Gate - Family Friend",
+			TraitGate_HonorableThief = "[CCU] Trait Gate - Honorable Thief",
+			TraitGate_Scumbag = "[CCU] Trait Gate - Scumbag",
 		#endregion
 		#region Utility
-			Utility_SortTraitsByName =				"[CCU] ! Sort by Name",
-			Utility_SortTraitsByValue =				"[CCU] ! Sort by Value",
+			Utility_SortTraitsByName = "[CCU] ! Sort by Name",
+			Utility_SortTraitsByValue = "[CCU] ! Sort by Value",
 		#endregion
-			NoMoreSemiColons =						"lol";
+			NoMoreSemiColons = "lol";
 	}
 	public static class vItem // Vanilla Items
 	{

@@ -6,7 +6,7 @@ using UnityEngine;
 using RogueLibsCore;
 using CCU.Traits;
 using CCU.Traits.Hire;
-using CCU.Traits.TraitTrigger;
+using CCU.Traits.TraitGate;
 using Rewired;
 using Random = UnityEngine.Random;
 using CCU.Traits.Passive;
@@ -1845,9 +1845,9 @@ namespace CCU.Patches.Agents
 									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
 
 									bool canBuy =
-										!(agent.HasTrait<TraitTrigger_CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral")) &&
-										!(agent.HasTrait<TraitTrigger_CopAccess>() && !interactingAgent.HasTrait("TheLaw")) &&
-										!(agent.HasTrait<TraitTrigger_HonorableThief>() && !(interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")));
+										!(agent.HasTrait<TraitGate_CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral")) &&
+										!(agent.HasTrait<TraitGate_CopAccess>() && !interactingAgent.HasTrait("TheLaw")) &&
+										!(agent.HasTrait<TraitGate_HonorableThief>() && !(interactingAgent.statusEffects.hasTrait("HonorAmongThieves") || interactingAgent.statusEffects.hasTrait("HonorAmongThieves2")));
 
 									if (canBuy)
 									{

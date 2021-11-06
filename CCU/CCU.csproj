@@ -193,11 +193,11 @@
     <Compile Include="Traits\Relationships\HostileToSoldiers.cs" />
     <Compile Include="Traits\Relationships\HostileToVampires.cs" />
     <Compile Include="Traits\Relationships\HostileToWerewolves.cs" />
-    <Compile Include="Traits\TraitTrigger\TraitTrigger_CommonFolk.cs" />
-    <Compile Include="Traits\TraitTrigger\TraitTrigger_CoolCannibal.cs" />
-    <Compile Include="Traits\TraitTrigger\TraitTrigger_CopAccess.cs" />
-    <Compile Include="Traits\TraitTrigger\TraitTrigger_FamilyFriend.cs" />
-    <Compile Include="Traits\TraitTrigger\TraitTrigger_Scumbag.cs" />
+    <Compile Include="Traits\TraitGate\TraitGate_CommonFolk.cs" />
+    <Compile Include="Traits\TraitGate\TraitGate_CoolCannibal.cs" />
+    <Compile Include="Traits\TraitGate\TraitGate_CopAccess.cs" />
+    <Compile Include="Traits\TraitGate\TraitGate_FamilyFriend.cs" />
+    <Compile Include="Traits\TraitGate\TraitGate_Scumbag.cs" />
     <Compile Include="Traits\Utility\SortTraitsByName.cs" />
     <Compile Include="Traits\Utility\SortTraitsByValue.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Armorer.cs" />
@@ -267,7 +267,7 @@
     <Compile Include="Traits\Spawn\Bodyguarded_Pilot.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\Hire\Hire_BreakIn.cs" />
-    <Compile Include="Traits\TraitTrigger\TraitTrigger_HonorableThief.cs" />
+    <Compile Include="Traits\TraitGate\TraitGate_HonorableThief.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Thief.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Beard.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Mustache.cs" />
