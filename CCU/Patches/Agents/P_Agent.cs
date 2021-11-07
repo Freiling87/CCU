@@ -186,6 +186,11 @@ namespace CCU.Patches.Agents
 
 			if (__instance.HasTrait<Behavior_Guilty>())
 				__instance.oma.mustBeGuilty = true;
+
+			if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
+				__instance.canGoBetweenLevels = true;
+			else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
+				__instance.canGoBetweenLevels = false;
 		}
 	}
 }
