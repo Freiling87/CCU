@@ -22,14 +22,16 @@ namespace CCU.Patches.Appearance
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
 		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
 		{
-			Core.LogMethodCall();
-
 			if (GC.challenges.Contains(CMutators.NoAgentLights) && myObject.CompareTag("Agent"))
 			{
+				Agent agent = (Agent)myObject;
+				agent.hasLight = false;
 			}
 
 			if (GC.challenges.Contains(CMutators.NoItemLights) && (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage")))
 			{
+				Item item = (Item)myObject;
+				item.hasLightTemp = false;
 			}
 
 			if (GC.challenges.Contains(CMutators.NoObjectLights) && myObject.CompareTag("ObjectReal"))
