@@ -15,6 +15,11 @@ Listed in order of Parent tier summary symbol priority:
   - Wander, Patrol, Knock
     - NPCs just stand in place
 - The error persists even after leaving industrial, so something is actually breaking
+##		C	Blood Junkie Fast Heal button wasn't using blood bags
+- First time it occurred, need to log
+  - Also can't manually drink them
+##		C	Infinite use hire?
+- Slum Dweller had offered Ruckus twice, not sure if that's ever possible in vanilla
 
 ---
 
@@ -512,9 +517,8 @@ This is the yellow glow for when you have usable items with an object. As you co
 - Works!
 - Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
 - Fire sources are fine since the particle creates the light anyway.
-###			√	New Moon
-Complete
-Confirmed Werewolf returns it to how you want it.
+###			C	New Moon
+- Does not persist across saves
 ###			C	Player Agent Light Size
 New
 ##		C	Quests

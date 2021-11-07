@@ -11,7 +11,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using CCU.Mutators;
 
-namespace CCU.Patches.Appearance
+namespace CCU.Patches.Appearance 
 {
 	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
 	public static class P_SpawnerMain
