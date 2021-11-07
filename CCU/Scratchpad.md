@@ -7,6 +7,14 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #	P	Top-Priority Bugs
+##		C	Uh AI broke
+- Once I got to Industrial
+  - Interactions proceed normally
+  - Combat normal if provoked, but only within a certain distance, otherwise they stand or walk in place
+  - Shopkeepers do not move, even if hostiled, but do go Submissive
+  - Wander, Patrol, Knock
+    - NPCs just stand in place
+- The error persists even after leaving industrial, so something is actually breaking
 
 ---
 
@@ -446,9 +454,14 @@ Gate level access
 ###			C	Traits for Level Branching
 ##		T	Followers
 ###			T	Homesickness Disabled
-- First attempt
-Disable hire dismissal for this level
-ExitPoint.EmployeesExit prefix
+- Attempting with setting CanGobetweenLevels after SetupAgentStats, but I think you'll need it in multiple places.
+- This is acting unexpectedly, but next time you test be clear on the rules.
+- NPCs who WILL follow:
+  - Freed Prisoners
+  - Spawned Clones
+  - Friend Phone
+- I'm beginning to think maybe I just misunderstood something when I first saw this bug. Try it again and see what happens.
+- Now, the *failure* to skip homesickness with the mutator surprised me
 ###			T	Homesickness Mandatory
 - First attempt
 Always dismiss hires at end of level, even if Homesickness Killer is active
@@ -462,6 +475,7 @@ New
 For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
+###			C	No Minimap
 ##		CT	Light Sources
 - CameraScript.SetLighting
   - DW
@@ -501,6 +515,8 @@ This is the yellow glow for when you have usable items with an object. As you co
 ###			√	New Moon
 Complete
 Confirmed Werewolf returns it to how you want it.
+###			C	Player Agent Light Size
+New
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
@@ -542,8 +558,6 @@ New
 - WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
 #	CT	Traits
-##		PC	Blank Traits Menu
-No ScrollingButtons appear on Trait Choice menuc
 ##		C	Active
 ###			C	Clean Trash
 New
@@ -585,8 +599,11 @@ Complete
   - Should be a simple fix since it's doing less rather than more.
 ###			C	Factory Approach
 - Since codewise these are entirely formulaic, it would be best to DRY and use Abbysssal's factory.
-###			√	Facial Hair
-Worked
+###			C	Facial Hair
+- Main feature
+  - Works
+- Vanilla facial hair no longer seems to spawn
+  - I think you just need to check for whether the agent is a player, and omit them from appearance traits.
 ###			C	Hair Type
 Go ahead and try. Knowing the code they all work differently anyway :)
 ###			C	Skin Color
@@ -599,6 +616,7 @@ Go ahead and try. Knowing the code they all work differently anyway :)
   - LoadLevel.SpawnStartingFollowers
   - ObjectMult.StartWithFollowersBodyguardA
     - Ignore this one, it's for the Player Bodyguard trait
+- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
 ###			C	Pilot Trait
 No errors, but no effect. Logging time
 ###			C	Bodyguard Quantity Traits?

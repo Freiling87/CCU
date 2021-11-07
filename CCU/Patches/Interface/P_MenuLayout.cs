@@ -39,17 +39,11 @@ namespace CCU.Patches.Interface
 		{
 			Core.LogMethodCall();
 
-			logger.LogDebug("\t\t___style.alignment: " + ___style.alignment);
-			logger.LogDebug("\t\t___styleSelected.alignment: " + ___styleSelected.alignment);
-
 			if (GC.challenges.Contains(CMutators.ScrollingButtonTextAlignLeft))
 			{
 				___style.alignment = TextAnchor.MiddleLeft;
 				___styleSelected.alignment = TextAnchor.MiddleLeft;
 			}
-
-			logger.LogDebug("\t\t___style.alignment: " + ___style.alignment);
-			logger.LogDebug("\t\t___styleSelected.alignment: " + ___styleSelected.alignment);
 		}
 	}
 }

@@ -20,10 +20,13 @@ namespace CCU.Patches.Interface
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(ScrollingMenu.CanHaveTrait), argumentTypes: new[] { typeof(Unlock) })]
 		public static bool canHaveTrait_Prefix(Unlock myUnlock, ref bool __result)
 		{
-			if (GC.challenges.Contains(CMutators.HomesicknessDisabled) && myUnlock.unlockName == VanillaTraits.HomesicknessKiller)
+			if ((GC.challenges.Contains(CMutators.HomesicknessDisabled) || GC.challenges.Contains(CMutators.HomesicknessMandatory)) && myUnlock.unlockName == VanillaTraits.HomesicknessKiller)
+			{
 				__result = false;
+				return false;
+			}
 			
-			return false;
+			return true;
 		}
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(ScrollingMenu.PushedButton), argumentTypes: new[] { typeof(ButtonHelper) })]

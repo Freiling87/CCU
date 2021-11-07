@@ -25,10 +25,10 @@ namespace CCU.Patches.Objects
 
 				if (employee != myAgent && employee.employer == myAgent)
 				{
-					if (myAgent.isPlayer == 0)
-						employee.agentInteractions.LetGo(employee, employee.employer);
-					else if (!GC.challenges.Contains(CMutators.HomesicknessMandatory) && (employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait("AgentsFollowToNextLevel") || GC.challenges.Contains(CMutators.HomesicknessDisabled)))
+					if (employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait(VanillaTraits.HomesicknessKiller) || GC.challenges.Contains(CMutators.HomesicknessDisabled))
 						employee.wantsToExit = true;
+					else if (myAgent.isPlayer == 0)
+						employee.agentInteractions.LetGo(employee, employee.employer);
 					else
 					{
 						employee.SayDialogue("CantCome");
