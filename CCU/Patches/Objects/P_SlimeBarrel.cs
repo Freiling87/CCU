@@ -11,7 +11,7 @@ namespace CCU.Patches.Objects
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
+		//[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
 		public static bool Start(SlimeBarrel __instance)
 		{
 			MethodInfo start_base = AccessTools.DeclaredMethod(typeof(SlimeBarrel).BaseType, "Start");
@@ -23,7 +23,7 @@ namespace CCU.Patches.Objects
 			//	__instance.RemoveMe();
 			//}
 			//else
-				_ = __instance.wasSwitch; // Who fuckin' knows? But it ain't broke.
+			//	_ = __instance.wasSwitch; // Who fuckin' knows? But it ain't broke.
 
 			MethodInfo waitToStart_base = AccessTools.DeclaredMethod(typeof(SlimeBarrel).BaseType, "WaitToStart");
 			waitToStart_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();

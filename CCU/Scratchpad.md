@@ -20,6 +20,31 @@ Listed in order of Parent tier summary symbol priority:
   - Also can't manually drink them
 ##		C	Infinite use hire?
 - Slum Dweller had offered Ruckus twice, not sure if that's ever possible in vanilla
+##		C	Mech Broken
+- When re-entering mech, it works fine but the sprite doesn't move:
+	[Info   : Unity Log] HideInventory Sound Debug: False - False - False - False - False - False
+	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
+	Parameter name: key
+	Stack trace:
+	System.Collections.Generic.Dictionary`2[TKey,TValue].FindEntry (TKey key) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	System.Collections.Generic.Dictionary`2[TKey,TValue].TryGetValue (TKey key, TValue& value) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
+	RogueLibsCore.CustomItemFactory.TryCreate (InvItem instance, RogueLibsCore.IHook`1[InvItem]& hook) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	RogueLibsCore.RogueLibsPlugin.InvItem_SetupDetails (InvItem __instance) (at <d35155fde6a3417a9000d4114e51e814>:0)
+	InvItem.SetupDetails (System.Boolean notNew) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Agent.SetupAgentStats (System.String transformationType) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	SpawnerMain.TransformAgent (Agent myAgent, System.String agentType, System.String transformationType) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	StatusEffects.MechTransform (Agent chosenMech) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	StatusEffects.MechTransformStart (Agent chosenMech) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	StatusEffects.PressedMechTransform () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	StatusEffects.PressedSpecialAbility () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	CCU.Patches.Agents.P_AgentInteractions.DetermineButtons_Prefix (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1, AgentInteractions __instance, System.Collections.Generic.List`1[System.String]& ___buttons, System.Collections.Generic.List`1[System.String]& ___buttonsExtra, System.Collections.Generic.List`1[System.Int32]& ___buttonPrices, Agent& ___mostRecentAgent, Agent& ___mostRecentInteractingAgent) (at <ff2bba522a4541fd913dcede4cf1f47e>:0)
+	AgentInteractions.DetermineButtons (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Agent.DetermineButtons () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	PlayfieldObject.Interact (Agent agent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Agent.Interact (Agent otherAgent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	InteractionHelper.UpdateInteractionHelper () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Updater.UpdateInterface () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
+	Updater.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 
 ---
 
