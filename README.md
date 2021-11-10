@@ -1,5 +1,4 @@
 # CCU - Custom Content Utilities
-# A Streets of Rogue Mod for content creators
 
 SOR gives you a few options for creating custom content, but it does have some limitations. Here are a few things that are currently impossible with the Vanilla version:
 - Allying Custom NPCs in different chunks
