@@ -157,9 +157,7 @@ namespace CCU
 			ShittierToilets = "[CCU] Shittier Toilets",
 			TrashierTrashcans = "[CCU] Trashier Trashcans",
 		#endregion
-		#region Utility
-			SortMutatorsByName = "! Sort Mutators by Name";
-		#endregion
+			NoMoreSemiColon = "I'm really sick of you, semi-colon!";
 
 		public static List<string> LevelOnlyMutators = new List<string>()
 		{
@@ -516,8 +514,6 @@ namespace CCU
 			TraitGate_Scumbag = "[CCU] Trait Gate - Scumbag",
 		#endregion
 		#region Utility
-			Utility_SortTraitsByName = "[CCU] ! Sort by Name",
-			Utility_SortTraitsByValue = "[CCU] ! Sort by Value",
 		#endregion
 			NoMoreSemiColons = "lol";
 	}

@@ -126,7 +126,6 @@
     <Compile Include="Mutators\Ambient Light\NewMoon.cs" />
     <Compile Include="Mutators\LightSources\NoObjectGlow.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
-    <Compile Include="Mutators\Utility\SortMutatorsByName.cs" />
     <Compile Include="Mutators\Wreckage\FloralerFlora.cs" />
     <Compile Include="Mutators\Followers\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\Followers\HomesicknessMandatory.cs" />
@@ -145,7 +144,6 @@
     <Compile Include="Patches\Appearance\P_ObjectReal.cs" />
     <Compile Include="Patches\Appearance\P_SpawnerMain.cs" />
     <Compile Include="Patches\Environment\P_CameraScript.cs" />
-    <Compile Include="Patches\Interface\P_PlayerControl.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
@@ -198,8 +196,6 @@
     <Compile Include="Traits\TraitGate\TraitGate_CopAccess.cs" />
     <Compile Include="Traits\TraitGate\TraitGate_FamilyFriend.cs" />
     <Compile Include="Traits\TraitGate\TraitGate_Scumbag.cs" />
-    <Compile Include="Traits\Utility\SortTraitsByName.cs" />
-    <Compile Include="Traits\Utility\SortTraitsByValue.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Armorer.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Assassin.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Barbarian.cs" />
@@ -252,7 +248,6 @@
     <Compile Include="Traits\Merchant Type\MerchantType_Vampire.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Villain.cs" />
     <Compile Include="Traits\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
-    <Compile Include="Content\LevelEditorUtilities.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
     <Compile Include="Patches\Interface\P_CharacterSelect.cs" />
@@ -293,10 +288,12 @@
     <Folder Include="Documentation\" />
     <Folder Include="Mutators\Branching\" />
     <Folder Include="Mutators\Gameplay\" />
+    <Folder Include="Mutators\Utility\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
     <Folder Include="Traits\Appearance\SkinColor\" />
+    <Folder Include="Traits\Utility\" />
     <Folder Include="Traits\Vendor\" />
   </ItemGroup>
   <ItemGroup>

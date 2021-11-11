@@ -116,7 +116,8 @@ namespace CCU.Patches.Appearance
 							flag = true;
 			}
 			
-			if (agent.agentName == "Custom" && !TraitManager.HasTraitFromList(agent, TraitManager.AppearanceTraitsGroup))
+			if ((agent.agentName == "Custom" && !TraitManager.HasTraitFromList(agent, TraitManager.AppearanceTraitsGroup)) ||
+				agent.isPlayer != 0)
 				__instance.hasSetup = true; // Bypasses vanilla appearance randomization
 			
 			if (__instance.hasSetup == false) 
