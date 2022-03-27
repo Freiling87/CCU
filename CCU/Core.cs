@@ -494,8 +494,6 @@ namespace CCU
 			TraitGate_Scumbag = "[CCU] Trait Gate - Scumbag",
 		#endregion
 		#region Utility
-			Utility_SortTraitsByName = "[CCU] ! Sort by Name",
-			Utility_SortTraitsByValue = "[CCU] ! Sort by Value",
 		#endregion
 			NoMoreSemiColons = "lol";
 	}
