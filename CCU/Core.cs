@@ -62,11 +62,7 @@ namespace CCU
 		}
 	}
 
-	public static class CColors
-	{
-		public static Color32 NewMoon = new Color32(0, 0, 0, 128);
-		public static Color32 Sepia = new Color32(203, 180, 153, 128);
-	}
+
 	public static class CJob // These names are extra but I want to ensure they're unique
 	{
 		public const string
@@ -132,30 +128,12 @@ namespace CCU
 			Set_True_C = "[CCU] Set True: C",
 			Set_True_D = "[CCU] Set True: D",
 		#endregion
-		#region Ambient Light
-			Antique = "[CCU] Ambient Lighting - Antique", // Old color tV?
-			BlackWhite = "[CCU] Ambient Lighting - Black & White",
-			Goodsprings = "[CCU] Ambient Lighting - Goodsprings", // FONV Orange filter
-			HalfMoon = "[CCU] Ambient Lighting - Half Moon",
-			Neptune = "[CCU] Ambient Lighting - Neptune",
-			NuclearWinter = "[CCU] Ambient Lighting - Nuclear Winter",
-			NewMoon = "[CCU] Ambient Lighting - New Moon",
-			Rage = "[CCU] Ambient Lighting - Rage",
-			Sepia = "[CCU] Ambient Lighting - Sepia",
-			SunnyDay = "[CCU] Ambient Lighting - Sunny Day", // Disable Lamps?
-		#endregion
+
 		#region Light Sources
 			NoAgentLights = "[CCU] No Agent Lights",
 			NoItemLights = "[CCU] No Item Lights",
 			NoObjectGlow = "[CCU] No Object Glow",
 			NoObjectLights = "[CCU] No Object Lights",
-		#endregion
-		#region Wreckage
-			AmbienterAmbience = "[CCU] Ambient-er Ambience",
-			FloralerFlora = "[CCU] Floral-er Flora",
-			LitterallyTheWorst = "[CCU] Litter-ally the Worst",
-			ShittierToilets = "[CCU] Shittier Toilets",
-			TrashierTrashcans = "[CCU] Trashier Trashcans",
 		#endregion
 		#region Utility
 			SortMutatorsByName = "! Sort Mutators by Name";

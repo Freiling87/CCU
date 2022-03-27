@@ -5,7 +5,6 @@ Listed in order of Parent tier summary symbol priority:
 	N = Next release
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-
 #	P	Top-Priority Bugs
 ##		C	Uh AI broke
 - Once I got to Industrial
@@ -47,13 +46,11 @@ Listed in order of Parent tier summary symbol priority:
 	Updater.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 
 ---
-
 #	P	General Reminders & To-Dos
 
 - I merged Passive and Interaction, but I'm thinking they need to be split back up. 
   - There was also a specific reason to make Extortable & Moochable into Passive instead of Interaction or Trait Trigger, but I can't remember it. Write it here if you do.
 ---
-
 #	C	All Editors
 ##		CT	Hotkeys
 ###			CT	F11 - Return to Editor
@@ -125,7 +122,6 @@ Will need to find-replace any hardcoded colors in text, like "Required:" on trai
 - See also:
   - UnityEngine.Canvas
     - I think this is the global UI aesthetic
-
 #	C	Character Editor
 ###		N	Access from Chunk/Campaign Editor selector dropdown
 Next release
@@ -140,7 +136,6 @@ Complete
 ##		C	Trait Alphabetization
 - Attempted
   - DW
-
 #	C	Chunk Editor
 ##		CT	Hotkeys
 ###			T	00 SetOrientation/SetDirection not updating in fields for Draw Mode only
@@ -363,7 +358,6 @@ I.e., Show stuff that won't show up, unless you can disable that disabling behav
 I.e., show rotated sprite for any objects
 ##		H	Rotate Chunks in Play Mode
 This sounds hard
-
 #	C	Documentation
 ##		C	Keyboard Layout Diagrams 
 ###			√	Chunk Editor
@@ -383,14 +377,12 @@ New
 ####			C	Examples
 ###			C	Trait Page
 ####			C	Examples
-
 #	C	Images
 ##		C	Font
 Munro is the general interface font.
 ##		√	Logo 16x16
 ##		C	Logo 64_64
 ##		C	Steam Thumbnail caption
-
 #	C	Level Editor
 ##		C	Hotkeys
 ###			C	Arrow Keys - Set Chunk Direction, Draw or Select Mode
@@ -438,7 +430,6 @@ Complete
 Complete
 ###			√	F5 - Quicksave
 Complete
-
 #	CT	Mutators
 ##		C	Level Editor Mutator List
 - Vanilla replacement worked, pending custom content
@@ -702,12 +693,14 @@ Test
 Test
 ###			C	Devour Corpse
 New
-###			C	Disarm Trapdd
+###			C	Disarm Trap
 New
 ###			C	Drink Blood
 New
 ###			C	Handcuff
 New
+###			C	Mug
+One-time use, mug target NPC
 ###			C	Permanent Hire
 New
 ~8x normal hire price

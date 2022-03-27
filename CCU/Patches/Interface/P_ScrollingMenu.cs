@@ -28,14 +28,5 @@ namespace CCU.Patches.Interface
 			
 			return true;
 		}
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(ScrollingMenu.PushedButton), argumentTypes: new[] { typeof(ButtonHelper) })]
-		public static void PushedButton_Postfix(ButtonHelper myButton, ScrollingMenu __instance)
-		{
-			if (GC.challenges.Contains(CMutators.NewMoon))
-				GC.cameraScript.lightingSystem.EnableAmbientLight = false;
-			else
-				GC.cameraScript.lightingSystem.EnableAmbientLight = true;
-		}
 	}
 }

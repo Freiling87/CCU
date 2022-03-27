@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using BepInEx.Logging;
-using CCU.Mutators.AmbientLight;
 using CCU.Mutators.Interface;
 using HarmonyLib;
 using RogueLibsCore;
@@ -68,15 +67,7 @@ namespace CCU.Mutators
 			return result;
 		}
 
-		public static Dictionary<Type, Color32> AmbientLightColors = new Dictionary<Type, Color32>()
-		{
-			{ typeof(NewMoon), CColors.NewMoon },
-			{ typeof(Sepia), CColors.Sepia },
-		};
-		public static List<Type> AmbientLightMutators = new List<Type>()
-		{
-			typeof(Sepia),
-		};
+
 		public static List<Type> CampaignMutators = new List<Type>()
 		{
 		};
