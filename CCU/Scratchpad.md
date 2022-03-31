@@ -588,10 +588,11 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
-###		C	Branching
-####		C	If Paid then A/B/C/D True
+##		C	Branching
+Might need to limit this to a single flag, since having multiple true at the same time would complicate things
+###			C	If Paid then Flag A/B/C/D True
 New
-####		C	If Killed then A/B/C/D True
+###			C	If Killed then Flag A/B/C/D True
 Etc.
 ##		C	Combat
 ###			C	Cause Lockdown
@@ -602,6 +603,16 @@ Complete
 Complete
 ###			√	Use Drugs in Combat
 Complete
+##		C	Cost
+This should apply not only to hire, but any transactions with that NPC.
+###			T	Cost - Banana
+Test
+###			C	Cost - Free
+Free followers, aligned suppliers, etc.
+###			T	Cost - Less
+Test
+###			T	Cost - More
+Test
 ##		C	Factions
 ###			√	Aligned to Faction 1-4
 Complete
@@ -614,14 +625,6 @@ Complete
 - Almost completely works, but character doesn't do animation
 ###			C	Chloroform
 New
-###			T	Cost - Banana
-Test
-###			T	Cost - Less
-Test
-###			T	Cost - More
-Test
-###			C	Cost - None
-Free followers, aligned suppliers, etc.
 ###			C	Devour Corpse
 New
 ###			C	Disarm Trap
@@ -632,11 +635,6 @@ New
 New
 ###			C	Mug
 One-time use, mug target NPC
-###			C	Permanent Hire
-New
-~8x normal hire price
-###			C	Permanent Hire Only
-New
 ###			C	Pickpocket
 New
 ###			C	Place Time Bomb
@@ -701,6 +699,16 @@ Complete
 Complete
 ###			√	Hack
 Complete
+##		C	Hire Duration
+###			C	Fairweather
+Hiree will leave if they're damaged in combat
+###			C	Homesick
+###			C	No Homesickness
+###			C	Permanent Hire
+New
+~8x normal hire price
+###			C	Permanent Hire Only
+New
 ##		C	Map Marker
 ###			P	General Notes
 - Check out:
@@ -902,10 +910,8 @@ For allying people and factions to Crepe/Blahd, etc.
 ##		C	Spawn
 ###			C	Enslaved
 New
-###			C	Hide In Bush
-New
-###			C	Hide In Manhole
-New
+###			C	Hide In Object
+Detect Bush/Manhole on same tile
 ###			C	Roaming Gang
 New
 ###			C	Slave Owner

@@ -128,13 +128,6 @@ namespace CCU
 			Set_True_C = "[CCU] Set True: C",
 			Set_True_D = "[CCU] Set True: D",
 		#endregion
-
-		#region Light Sources
-			NoAgentLights = "[CCU] No Agent Lights",
-			NoItemLights = "[CCU] No Item Lights",
-			NoObjectGlow = "[CCU] No Object Glow",
-			NoObjectLights = "[CCU] No Object Lights",
-		#endregion
 		#region Utility
 			SortMutatorsByName = "! Sort Mutators by Name";
 		#endregion

@@ -16,15 +16,6 @@ namespace CCU.Patches.Agents
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPostfix, HarmonyPatch(methodName: "Awake")]
-		public static void Awake_Postfix(Agent __instance)
-		{
-			Core.LogMethodCall();
-
-			if (GC.challenges.Contains(CMutators.NoAgentLights))
-				__instance.hasLight = false;
-		}
-
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
@@ -150,21 +141,6 @@ namespace CCU.Patches.Agents
 			}
 
 			return true;
-		}
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.RecycleAwake))]
-		public static void RecycleAwake_Postfix(Agent __instance)
-		{
-			Core.LogMethodCall();
-
-			if (GC.challenges.Contains(CMutators.NoAgentLights))
-				__instance.hasLight = false;
-		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetLightBrightness), argumentTypes: new[] { typeof(bool) })]
-		public static bool SetLightBrightness_Prefix(bool isDead)
-		{
-			return !GC.challenges.Contains(CMutators.NoAgentLights);
 		}
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
