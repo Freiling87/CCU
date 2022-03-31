@@ -491,9 +491,10 @@ ExitPoint.EmployeesExit prefix
 ###			C	Big Quest Stopping Point
 - Cyan_Light:
   - The ability to specify a "big quest stopping point" in custom campaigns, essentially the vanilla mayor village effect of ending the quest and turning on super special abilities if you've completed it but you get to set which level this happens on in the campaign interface.
-###			C	No Violence
+###			C	No Funny Business
 New
 For town levels
+###
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
@@ -1174,7 +1175,6 @@ Semi-rural area, backwoods depressed town environs
 - Emerge on Freight Elevator with a bunch of freed slaves who now roam the level, getting picked off by the security team that arrives
   - Security team set to "Killer Robot" behavior? pwz
   - If they are some real killers, the challenge could be to just make it to the van with no hope of fighting them off
-  - Might also want an "Infinite Continues" mutator for long-ass campaigns
 - Cramped Hive quarters for employees, virtually a prison
 ##		T	Underground
 ###			T	Subway to Cave Tunnel
