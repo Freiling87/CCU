@@ -432,16 +432,13 @@ Complete
 Complete
 #	CT	Mutators
 ##		C	Level Editor Mutator List
+- I think this has since been addressed in Roguelibs, as of 3.5.0b
 - Vanilla replacement worked, pending custom content
 - [Error  : Unity Log] Coroutine 'SetScrollbarPlacement' couldn't be started!
   - This didn't affect anything but I'd like it resolved
 ##		√	General Mutator List
 - Show up in LevelEditor UI, may be a manually constructed list
 - LoadLevel.loadStuff2 @ 171
-##		C	Audio
-###			M	Ambienter Ambience
-New
-Gate behind presence of objects/agents, e.g. disable Casino if all Slots are destroyed
 ##		C	Branching
 Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
 
@@ -498,46 +495,6 @@ For town levels
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
-##		CT	Light Sources
-- CameraScript.SetLighting
-  - DW
-- StatusEffects.WerewolfTransform
-- StatusEffects.WerewolfTransformBack
-- LoadLevel.SetNormalLighting 
-- LoadLevel.SetRogueVisionLighting
-###			C	Sepia
-New
-###			C	No Agent Lights
-- The most recent attempt didn't make them move feet-first, but they still all have lights.
-- Didn't work, and made the agent move feet-first
-  - Same outcome for both locations of attempt
-- Agent.hasLight
-  - Postfix to false in
-    - Agent.Awake
-      - Attempted
-        - DW
-    - Agent.RecycleAwake
-      - Attempted
-        - DW
-  - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
-- Exclude Ghosts!
-###			C	No Item/Wreckage Lights
-- SpawnerMain.SetLighting2
-  - Tried this another way
-    - DW
-###			T	No Object Glow
-This is the yellow glow for when you have usable items with an object. As you collect more, eventually everything glows.
-- gc.objectGlowDisabled
-- gc.sessionDataBig.objectGlowDisabled
-- Attempted, GC.Awake3 Prefix
-###			C	No Object Lights
-- Works!
-- Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
-- Fire sources are fine since the particle creates the light anyway.
-###			C	New Moon
-- Does not persist across saves
-###			C	Player Agent Light Size
-New
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
@@ -545,38 +502,9 @@ Deactivate Big Quest for level, freeze mark counts
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-##		C	Wreckage
-###			C	Bachelor-er Pads
-Trash indoors
-###			C	Dirtier Districts (Litter-ally the Worst)
-New
-Rename in code
-###			C	Floral-er Flora
-New
-###			C	Shittier Toilets
-New
-###			C	Trashier Trashcans
-New
-
-#	C	Mod Split
-##		C	Ambience Mutators
-- Wreckage
-- Lighting
-- Ambient Audio
-##		C	Civil Engineering
-- Wall mods
-- Floor mods
-- City Size
-##		C	CCU Mods
-
-###			C	AI Traits
-
-###			C	Campaign Mutators
-
-###			C	Editor Hotkeys
 
 #	C	Player Edition
-- WHenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
+- Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 
 #	CT	Traits
 ##		C	Active
@@ -692,6 +620,8 @@ Test
 Test
 ###			T	Cost - More
 Test
+###			C	Cost - None
+Free followers, aligned suppliers, etc.
 ###			C	Devour Corpse
 New
 ###			C	Disarm Trap
@@ -1219,6 +1149,57 @@ Offices
 ###			T	Rooftop Escape
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
+
+#		Demo Campaign - Wetwork
+Progression & Patterns
+  - Removal of base negative traits will affect certain early paths. 
+    - Three as an example: Loud, Antisocial, Tech Illiterate
+    - There should always be alternatives to killing non-targets, even if they're goons
+    - Have up to 4 paths depending on which negatives the player has removed.
+  - It should be clear to the player which enemies will go Annoyed versus Hostile.
+  - Weapon gating
+    - Very limited/controlled access to weapons
+      - Mechanism: Heavily guarded weapon detector on subway platform entrances
+    - Silenced pistol
+    - Silenced revolver is a one-hit kill with Wetworker, eliminating guesswork
+    - Sniping is only possible in the later levels, but it's fun as shit so it's worth the wait. 
+      - Start it out loud, and give a silencer later.
+
+Player Character
+		Endurance	3
+		Speed		3
+		Ranged		3
+		Melee		3
+	Traits
+		Tech Illiterate
+		Loud
+		Antisocial
+		Pacifist
+		Sniper - Limited to Pistol, call it a Rifle ban
+		Wetworker (Doubletapper)
+		Backstabber
+		Sneaky Fingers - Tamper Kills!
+	Special Ability
+		Sticky Glove - You can control the circumstances where it's useful, at least
+Items
+	Generally Disposable - There should be a gate or two where the only way through is to ditch your weapons.
+	Silenced Pistol - "Remember, always Double-Tap! A downed target is still a deadly one."
+	Silenced Revolver - Allows Sniping, so it only comes into play halfway through the campaign.
+
+Levels
+First, get costs of Negative Trait removals to determine what will be doable at what point
+1 - Ghetto
+Do a string of burglaries while LOUD
+Teach the player about the security camera sound trick
+	Riskier with windows, since they're most likely to point AT a door and be next to a window
+Rogue vision, night time. You don't know where chests will spawn.
+
+"My contact called me and said his courier would be in a subway station bathroom."
+Just a quick level with dialogue to 
+
+|Level	|Area					|Notes	|
+|:-----:|:----------------------|:------|
+|	1	|Subway					|- Meet a contact, maybe see cool shit on the way. Free him from a "prison" like a subway bathroom.
 
 #	N	Item Groups
 Next release
