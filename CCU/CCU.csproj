@@ -144,7 +144,6 @@
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
-    <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
     <Compile Include="Patches\P_GameController.cs" />
     <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
