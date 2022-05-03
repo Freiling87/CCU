@@ -6,6 +6,8 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	P	Top-Priority Bugs
+##		C	Manhole spawned in home base
+This was with SORCE running as well
 ##		C	Uh AI broke
 - Once I got to Industrial
   - Interactions proceed normally
@@ -308,6 +310,10 @@ In vanilla
 ###			C	Robot Follow
 New
 Killer Robot behavior in vanilla
+###			C	Shidding
+If there's a nearby Toilet, they sit on it.
+They treat their vision area as Property.
+If there's no toilet, some other random behavior.
 ###			C	Sick
 New
 Interact to spend an Antidote and revive them, getting an XP bonus and Friendly. Plus whatever that NPC can do.
@@ -485,12 +491,10 @@ Gate level access
 Always dismiss hires at end of level, even if Homesickness Killer is active
 ExitPoint.EmployeesExit prefix
 ##		C	Gameplay
-###			C	Big Quest Stopping Point
-- Cyan_Light:
-  - The ability to specify a "big quest stopping point" in custom campaigns, essentially the vanilla mayor village effect of ending the quest and turning on super special abilities if you've completed it but you get to set which level this happens on in the campaign interface.
 ###			C	No Funny Business
 New
-For town levels
+For town levels. Ensures no one will be killed.
+You will need to eliminate spontaneous hostiles for this to work, though.
 ###
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
@@ -498,6 +502,14 @@ In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
+###			C	Big Quest Mandatory
+Lose the game if you don't complete your Big Quest for this floor
+Allows the creator to have greater control over the flow of the campaign
+E.g., custom character with Doctor's big quest
+###			C	Big Quest Stopping Point
+Equivalent to Mayor's Village, where super special abilities activate if you completed the Big Quest
+###			C	Major Contract
+Main quest rewards are multiplied by 10
 ##		C	Utility
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006

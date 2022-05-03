@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCU</RootNamespace>
     <AssemblyName>CCU</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -122,7 +122,6 @@
     <Compile Include="Mutators\Interface\ScrollingButtonTextAlignLeft.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonTextSizeStatic.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
-    <Compile Include="Mutators\Utility\SortMutatorsByName.cs" />
     <Compile Include="Mutators\Followers\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\Followers\HomesicknessMandatory.cs" />
     <Compile Include="Patches\Agents\P_Agent.cs" />
@@ -131,7 +130,6 @@
     <Compile Include="Patches\Agents\P_Combat.cs" />
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
-    <Compile Include="Patches\Interface\P_PlayerControl.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
@@ -276,6 +274,7 @@
     <Folder Include="Documentation\" />
     <Folder Include="Mutators\Branching\" />
     <Folder Include="Mutators\Gameplay\" />
+    <Folder Include="Mutators\Utility\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
