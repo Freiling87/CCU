@@ -156,6 +156,8 @@
     <Compile Include="Traits\Hire\HireDuration_PermanentOnly.cs" />
     <Compile Include="Traits\Hire\Hire_Pickpocket.cs" />
     <Compile Include="Traits\Hire\Hire_Poison.cs" />
+    <Compile Include="Traits\Merchant\Merchant_Buyer.cs" />
+    <Compile Include="Traits\Merchant\Merchant_Vendor.cs" />
     <Compile Include="Traits\Passive\Behavior_ExplodeOnDeath.cs" />
     <Compile Include="Traits\Passive\Behavior_Guilty.cs" />
     <Compile Include="Traits\Combat\Combat_Fearless.cs" />

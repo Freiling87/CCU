@@ -168,52 +168,6 @@ Complete
 Complete
 ###			√	Pickpocket
 Complete
-##		H	Appearance
-###			C	Full-randomization bug
-- Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more.
-###			C	Facial Hair
-####			C	Vanilla facial hair no longer spawns
-New
-###			C	Hair Type
-New
-###			C	Skin Color
-New
-##		H	Bodyguarded
-New
-- There are a few other hits that came up in a string search (possibly "Musician"):
-  - LoadLevel.SpawnStartingFollowers
-  - ObjectMult.StartWithFollowersBodyguardA
-    - Ignore this one, it's for the Player Bodyguard trait
-- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
-###			C	Pilot Trait
-No errors, but no effect.
-###			C	Bodyguard Quantity Traits?
-One / few / many, that's it
-###			C	Bodyguarded - Cop
-New
-###			C	Bodyguarded - Blahd
-New
-###			C	Bodyguarded - Crepe
-New
-###			C	Bodyguarded - Goon
-New
-###			C	Bodyguarded - Gorilla
-New
-###			C	Bodyguarded - Mafia
-New
-###			C	Bodyguarded - Soldier
-New
-###			C	Bodyguarded - Supercop
-New
-###			C	Bodyguarded - Supergoon
-New
-##		H	Booleans
-Might need to limit this to a single flag, since having multiple true at the same time would complicate things
-###			C	If Paid then Flag A/B/C/D True
-New
-###			C	If Killed then Flag A/B/C/D True
-Etc.
 ##		C	Combat
 ###			C	Cause Lockdown (Supercop)
 New
@@ -223,23 +177,6 @@ Complete
 Complete
 ###			√	Use Drugs in Combat
 Complete
-##		H	Cost
-These should apply to Hiring as well as Vendor traits
-###			C	Cost - Alcohol
-A la Bouncer
-###			T	Cost - Banana
-Test
-###			C	Cost - Free
-Free followers, aligned suppliers, etc.
-###			T	Cost - Less
-Test
-###			T	Cost - More
-Test
-##		√H	Factions
-###			H	Annoyed at Faction 1-4
-###			H	Friendly to Faction 1-4
-###			√	Aligned to Faction 1-4
-###			√	Hostile to Faction 1-4
 ##		CT	Hire
 ###			C	Cause a Ruckus
 ####			C	Animation doesn't fire
@@ -318,47 +255,6 @@ Complete
 Complete
 ###			√	Hack
 Complete
-##		H	Hire Duration
-###			C	Fairweather
-Hiree will leave if they're damaged in combat
-###			C	Homesick
-###			C	No Homesickness
-###			C	Permanent Hire
-New
-~8x normal hire price
-###			C	Permanent Hire Only
-New
-##		H	Map Marker
-###			P	General Notes
-- Check out:
-GC
-	.questMarkerList
-PlayfieldObject
-	.MinimapDisplay
-x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
-x	.SpawnedBigQuetsMarkerRecently	Not relevant
-	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
-Quest
-	.questMarkerPrefab
-QuestMarker
-	Entire class!
-	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
-
-- Also, check out the GPYess trait and see where that comes up.
-###			C	Pilot
-No more errors, but no map marker. 
-###			H	Bartender
-Pending pilot
-###			H	Drug Dealer
-Pending pilot
-###			H	Killer Robot
-Pending pilot
-###			H	Question Mark
-Pending pilot
-###			H	Shopkeeper
-Pending pilot
-###			H	Portrait
-Pending customs
 ##		C	Merchant (Buyer/Vendor)
 ###			H	Buyer
 Move VendorBuyer traits to this group
@@ -375,20 +271,10 @@ New
 ####			C	Pay Less
 New
 ###			C	Merchant Trait Refactor
-These notes are a little unclear, but it's been a while. 
-
-- Vendor & Buyer traits have a weird setup right now, with Buyer having a strange secondary relationship to Vendor that will lead to some arcane trait configurations.
-    - Returning after working on SORCE: What are these "weird configurations?"
-    - Plan:
-      - Change Vendor Types to Merchant Types
-      - Keep the actual passive behaviors as Buyer & Vendor.
-        - Add Requirement: Merchant Type Trait
-  - Will need Buyer Vendor to access the rLists/rNames you defined. 
-    - There are two paths I see:
-      - Re-access those and learn whatever strange setup they have
-      - Or convert Merchant Type rName/rList rote code into an equally rote Dictionary<string, int> stored in TraitManager or elsewhere
-        - Would imply developing a method that enters that into the rList/rName format, to replace the existing code with something that at least follows DRY principle. 
-        - But if you have to write one for the Buyer traits anyway, the above will practically be written at the same time.
+- Merchant Type
+- Merchant
+  - Buyer
+  - Vendor
 ###			C	Vendor
 ####			C	Get full list of Vendor traits to test and complete category
 ##		C	Passive
@@ -510,15 +396,6 @@ New
 New
 ###			C	Secretly Hostile
 A la Bounty disaster
-##		H	Spawn
-###			C	Enslaved
-New
-###			C	Hide In Object
-Detect Bush/Manhole on same tile
-###			C	Roaming Gang
-New
-###			C	Slave Owner
-NEw			
 ##		T	Trait Gates
 ###			C	Customizers
 - Lock Merchant behind Trait Gate
@@ -547,6 +424,114 @@ Hostile to Scumbag Slaughterer
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ###			√	Cop	Access
 Complete
+##		H	Appearance
+###			C	Full-randomization bug
+- Whole appearance is randomized when any appearance trait is added.
+  - Should be a simple fix since it's doing less rather than more.
+###			C	Facial Hair
+####			C	Vanilla facial hair no longer spawns
+New
+###			C	Hair Type
+New
+###			C	Skin Color
+New
+##		H	Bodyguarded
+New
+- There are a few other hits that came up in a string search (possibly "Musician"):
+  - LoadLevel.SpawnStartingFollowers
+  - ObjectMult.StartWithFollowersBodyguardA
+    - Ignore this one, it's for the Player Bodyguard trait
+- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
+###			C	Pilot Trait
+No errors, but no effect.
+###			C	Bodyguard Quantity Traits?
+One / few / many, that's it
+###			C	Bodyguarded - Cop
+New
+###			C	Bodyguarded - Blahd
+New
+###			C	Bodyguarded - Crepe
+New
+###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Gorilla
+New
+###			C	Bodyguarded - Mafia
+New
+###			C	Bodyguarded - Soldier
+New
+###			C	Bodyguarded - Supercop
+New
+###			C	Bodyguarded - Supergoon
+New
+##		H	Booleans
+Might need to limit this to a single flag, since having multiple true at the same time would complicate things
+###			C	If Paid then Flag A/B/C/D True
+New
+###			C	If Killed then Flag A/B/C/D True
+Etc.
+##		H	Cost
+These should apply to Hiring as well as Vendor traits
+###			C	Cost - Alcohol
+A la Bouncer
+###			T	Cost - Banana
+Test
+###			C	Cost - Free
+Free followers, aligned suppliers, etc.
+###			T	Cost - Less
+Test
+###			T	Cost - More
+Test
+##		H	Hire Duration
+###			C	Fairweather
+Hiree will leave if they're damaged in combat
+###			C	Homesick
+###			C	No Homesickness
+###			C	Permanent Hire
+New
+~8x normal hire price
+###			C	Permanent Hire Only
+New
+##		H	Map Marker
+###			P	General Notes
+- Check out:
+GC
+	.questMarkerList
+PlayfieldObject
+	.MinimapDisplay
+x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
+x	.SpawnedBigQuetsMarkerRecently	Not relevant
+	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
+Quest
+	.questMarkerPrefab
+QuestMarker
+	Entire class!
+	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
+
+- Also, check out the GPYess trait and see where that comes up.
+###			C	Pilot
+No more errors, but no map marker. 
+###			H	Bartender
+Pending pilot
+###			H	Drug Dealer
+Pending pilot
+###			H	Killer Robot
+Pending pilot
+###			H	Question Mark
+Pending pilot
+###			H	Shopkeeper
+Pending pilot
+###			H	Portrait
+Pending customs
+##		H	Spawn
+###			C	Enslaved
+New
+###			C	Hide In Object
+Detect Bush/Manhole on same tile
+###			C	Roaming Gang
+New
+###			C	Slave Owner
+NEw			
 ##		H	Utility
 ###			C	Hide Traits in Collapsed Groups
 - While in Character Creator, hide traits in Collapsed Groups
@@ -607,9 +592,45 @@ Vanilla list:
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
 New
-#	H	Item Groups
+##		√H	Factions
+###			H	Annoyed at Faction 1-4
+###			H	Friendly to Faction 1-4
+###			√	Aligned to Faction 1-4
+###			√	Hostile to Faction 1-4
+#		H	Item Groups
 Next release
-#	H	Demo Campaign - Shadowrun-but-not-really
+#		H	Object Additions
+##			C	Air Conditioner
+Enable "Fumigating" w/ staff in gas masks as option
+GasVent.fumigationSelected
+##			C	Fire Hydrant
+Ability to be already shooting water according to direction
+##			C	Flaming Barrel
+- Gibs (Black)
+- Oil (Dark Green)
+- Ooze (Yellow)
+- Water (Blue)
+##			C	Movie Screen
+Allow Text like Sign
+#		H	Player Utilities
+This might need to be its own mod
+##		H	Mouse3 Bind to command followers
+- Target
+  - Ground - All Stand Guard
+  - Agent - All Attack
+  - Self - All Follow
+- Could also be an item or SA
+##		H	Mutators to omit Vanilla content when custom is available
+- If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
+##		H	Save Chunk Pack configuration between loads
+- I.e., only deactivate chunk packs when the player says so!
+  - This is useful but doesn't belong in CCU, it belongs in a QOL mod
+##		H	Show Chunk info on Mouseover in Map mode
+- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
+  - Gives credit to author
+  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
+    - This is useful but doesn't belong in CCU, it belongs in a QOL mod
+#		H	Demo Campaign - Shadowrun-but-not-really
 Remember, simultaneous release would be a bad thing. Get it to a playable state so you can consistently test features with it, but don't need it finished yet.
 ##		C	Music Pack
 ###			C	Actually Making a Music Pack
@@ -759,7 +780,7 @@ Offices
 ###			T	Rooftop Escape
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
-#		Demo Campaign - Wetwork
+#		H	Demo Campaign - Wetwork
 Progression & Patterns
   - Removal of base negative traits will affect certain early paths. 
     - Three as an example: Loud, Antisocial, Tech Illiterate
@@ -809,34 +830,3 @@ Just a quick level with dialogue to
 |Level	|Area					|Notes	|
 |:-----:|:----------------------|:------|
 |	1	|Subway					|- Meet a contact, maybe see cool shit on the way. Free him from a "prison" like a subway bathroom.
-#		H	Object Additions
-##		C	Air Conditioner
-Enable "Fumigating" w/ staff in gas masks as option
-GasVent.fumigationSelected
-##		C	Fire Hydrant
-Ability to be already shooting water according to direction
-##		C	Flaming Barrel
-- Gibs (Black)
-- Oil (Dark Green)
-- Ooze (Yellow)
-- Water (Blue)
-##		C	Movie Screen
-Allow Text like Sign
-#	H	Player Utilities
-This might need to be its own mod
-##		H	Mouse3 Bind to command followers
-- Target
-  - Ground - All Stand Guard
-  - Agent - All Attack
-  - Self - All Follow
-- Could also be an item or SA
-##		H	Mutators to omit Vanilla content when custom is available
-- If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
-##		H	Save Chunk Pack configuration between loads
-- I.e., only deactivate chunk packs when the player says so!
-  - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-##		H	Show Chunk info on Mouseover in Map mode
-- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
-  - Gives credit to author
-  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
-    - This is useful but doesn't belong in CCU, it belongs in a QOL mod
