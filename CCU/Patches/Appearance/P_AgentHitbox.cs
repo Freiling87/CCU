@@ -39,8 +39,9 @@ namespace CCU.Patches.Appearance
 				if (agent.agentName == "Werewolf")
 					__instance.facialHairType = "Beard";
 					goto IL_28B;
-				
-				try
+
+#pragma warning disable CS0162 // Unreachable code detected
+                try
 				{
 					if ((GC.serverPlayer || GC.clientControlling || agent.localPlayer || !(agent.name != "DummyAgent")) && 
 						agent.agentName != "Custom")
@@ -60,7 +61,8 @@ namespace CCU.Patches.Appearance
 
 					goto IL_28B;
 				}
-			}
+#pragma warning restore CS0162 // Unreachable code detected
+            }
 
 			__instance.facialHair.gameObject.SetActive(false);
 			__instance.facialHairWB.gameObject.SetActive(false);

@@ -1,10 +1,5 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Traits.Active
 {
@@ -16,7 +11,7 @@ namespace CCU.Traits.Active
             RogueLibs.CreateCustomTrait<Behavior_GrabDrugs>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will grab drugs if they see any."),
+                    [LanguageCode.English] = string.Format("This character will grab drugs if they see any."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

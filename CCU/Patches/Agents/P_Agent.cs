@@ -148,9 +148,11 @@ namespace CCU.Patches.Agents
 		{
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
+				// Thieves have their LOScheck set to 50% in vanilla
 				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(50))
 					return;
 
+				// All others excluded
 				__instance.losCheckAtIntervals = true;
 			}
 

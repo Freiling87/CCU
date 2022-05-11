@@ -274,21 +274,13 @@ namespace CCU.Traits
 			List<Type> matchingTraits = traitList.Where(trait => agent.HasTrait(trait)).ToList();
 
 			if (matchingTraits.Count > 1)
-			{
 				throw new InvalidDataException($"Agent {agent.name} was expected to have one trait from list,"
 						+ $"but has {matchingTraits.Count} : [{string.Join(", ", matchingTraits.Select(trait => trait.Name))}]");
-			}
-			if (matchingTraits.Count == 0)
-			{
+			else if (matchingTraits.Count == 0)
 				throw new InvalidDataException($"Agent {agent.name} was expected to have one trait from list, but has none.");
-			}
 
-			// use this one if you expect exactly one match
-			return matchingTraits.First();
-
-			// use this one if you expect zero or 1 matches
-			return matchingTraits.FirstOrDefault();
-		}
+            return matchingTraits.FirstOrDefault();
+        }
 		public static bool HasTraitFromList(Agent agent, List<Type> traitList) =>
 			traitList.Any(p => agent.HasTrait(p));
 		public static void LogTraitList(Agent agent)

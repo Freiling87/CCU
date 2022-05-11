@@ -1,13 +1,14 @@
-﻿#	P	Header Symbol Notes
-Listed in order of Parent tier summary symbol priority:
-	P = Pinned to top (for notes)
-	C, T = Code this, Test this
-	N = Next release
-	H = Hold, usually pending resolution of a separate or grouped issue
-	√ = Fully implemented feature or group of features
-#	P	Top-Priority Bugs
-##		C	Manhole spawned in home base
-This was with SORCE running as well
+﻿#		Insane Markdown note format
+This file is meant to be viewed in raw format. I just use markdown because its collapsible headers are really useful.
+
+|Tag				|Meaning	|
+|:-----------------:|:----------|
+|√					|Feature Complete
+|!					|Urgent
+|C					|To Code (Includes any non-testing task)
+|H					|On hold (Should have specifics in header)
+|T					|To Test
+#		Top-Priority Bugs
 ##		C	Uh AI broke
 - Once I got to Industrial
   - Interactions proceed normally
@@ -520,32 +521,30 @@ Main quest rewards are multiplied by 10
 
 #	CT	Traits
 ##		C	Active
-###			C	Clean Trash
-New
-###			C	Fight Fires
-New
 ###			C	Grab Everything
 New
 ###			C	Grab Food
 New
-###			C	Guard Door
-New
-###			C	Hobo Beg (Custom)
-Maybe just implement the whole Hey, You! overhaul here
-###			C	Hog Turntables
-New
-Allow paid Musician behavior
 ###			C	Seek & Destroy (Killer Robot)
 New
-###			C	Shakedown Player
+###			H	Clean Trash
+New
+###			H	Fight Fires
+New
+###			H	Guard Door
+New
+###			H	Hobo Beg (Custom)
+Maybe just implement the whole Hey, You! overhaul here
+###			H	Hog Turntables
+New
+Allow paid Musician behavior
+###			H	Shakedown Player
 New
 Use this on leader w/ Wander Level
 Use "Follow" behavior on agents placed behind them
 No need for "Roaming Gang" Trait itself
-###			C	Tattle (Upper Cruster)
+###			H	Tattle (Upper Cruster)
 New
-###			√	Drink Blood
-Complete
 ###			√	Eat Corpse
 Complete
 ###			√	Grab Drugs
@@ -553,6 +552,8 @@ Complete
 ###			√	Grab Money
 Complete
 ###			√	Pickpocket
+Complete
+###			√	Suck Blood
 Complete
 ##		C	Appearance				Group
 ###			C	Full-randomization bug

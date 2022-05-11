@@ -1,10 +1,4 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Active
 {
@@ -16,7 +10,7 @@ namespace CCU.Traits.Active
             RogueLibs.CreateCustomTrait<Behavior_SuckBlood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
+                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

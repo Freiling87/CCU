@@ -1,10 +1,4 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Active
 {
@@ -16,7 +10,7 @@ namespace CCU.Traits.Active
             RogueLibs.CreateCustomTrait<Behavior_EatCorpse>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
+                    [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
