@@ -136,6 +136,8 @@ Main quest rewards are multiplied by 10
 ##		T	Active
 ###			T	Seek & Destroy (Killer Robot)
 Attempted
+###			C	Enforcer
+Agent.enforcer
 ###			H	Clean Trash
 New
 ###			H	Fight Fires
@@ -317,10 +319,15 @@ Test
 New
 ###			C	Sell Slaves
 New
+###			C	Status Immunity
+Agent.preventStatusEffects
 ###			C	Use Bloodbag
 New
 ###			C	Vision Beams (Cop Bot)
 New
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Improve Relations w/ Faction 1-4
@@ -369,6 +376,8 @@ New
 New
 ###			H	Train Traits - Trade
 New
+###			H	Upper Crusty
+Agent.upperCrusty
 ###			√	Guilty
 Complete
 ##		CT	Relationships

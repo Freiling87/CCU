@@ -161,6 +161,9 @@ namespace CCU.Patches.Agents
 
 			if (__instance.HasTrait<Behavior_SeekAndDestroy>())
 				__instance.killerRobot = true;
+
+			if (__instance.HasTrait<Behavior_Enforcer>())
+				__instance.enforcer = true;
 			#endregion
 			#region Combat
 			if (__instance.HasTrait<Combat_UseDrugs>())

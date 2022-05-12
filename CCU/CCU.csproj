@@ -150,6 +150,7 @@
     <Compile Include="Traits\Active\Behavior_GrabDrugs.cs" />
     <Compile Include="Traits\Active\Behavior_GrabMoney.cs" />
     <Compile Include="Traits\Active\Behavior_Pickpocket.cs" />
+    <Compile Include="Traits\Active\Behavior_Enforcer.cs" />
     <Compile Include="Traits\Active\Behavior_SeekAndDestroy.cs" />
     <Compile Include="Traits\Active\Behavior_SuckBlood.cs" />
     <Compile Include="Traits\Hire\Hire_DisarmTrap.cs" />
