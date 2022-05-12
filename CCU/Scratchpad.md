@@ -133,9 +133,9 @@ Main quest rewards are multiplied by 10
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #	CT	Traits
-##		C	Active
-###			C	Seek & Destroy (Killer Robot)
-New
+##		T	Active
+###			T	Seek & Destroy (Killer Robot)
+Attempted
 ###			H	Clean Trash
 New
 ###			H	Fight Fires

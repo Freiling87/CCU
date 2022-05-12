@@ -51,12 +51,11 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Drink Blood										|- Enables blood drinking behavior<br>- Requires: Bite
 |Eat Corpse											|- Enables corpse eating behavior<br>- Requires: Cannibalize
 |Grab Drugs											|- If NPC sees Drugs, they'll try to grab them
 |Grab Money											|- If NPC sees Money, they'll try to grab it
 |Pickpocket											|- Enables pickpocketing behavior<br>- Requires: Sticky Glove
-|Shakedown Player *									|- Enables Mafia mugging behavior
+|Suck Blood											|- Enables blood drinking behavior<br>- Requires: Bite
 
 ## Behavior Passive Traits
 
