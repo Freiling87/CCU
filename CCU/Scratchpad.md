@@ -147,7 +147,8 @@ Agent.enforcer
 ###			H	Clean Trash
 New
 ###			H	Fight Fires
-New
+Agent.firefighter
+Agent.fightsFires
 ###			H	Grab Everything
 New
 ###			H	Grab Food
@@ -159,6 +160,12 @@ Maybe just implement the whole Hey, You! overhaul here
 ###			H	Hog Turntables
 New
 Allow paid Musician behavior
+###			H	Mutinous
+Agent.mutinous
+###			H	SecretHate
+Agent.secretHate
+Agent.choseSecretHate
+I think this is Bounty behavior
 ###			H	Shakedown Player
 New
 Use this on leader w/ Wander Level
@@ -325,6 +332,8 @@ Test
 New
 ###			C	Sell Slaves
 New
+###			C	Shapeshifted
+Agent.SecretShapeshifter
 ###			C	Status Immunity
 Agent.preventStatusEffects
 ###			C	Use Bloodbag
@@ -334,6 +343,8 @@ New
 ###			C	Zombified
 Agent.zombified
 Agent.customZombified
+###			C	Z-Infected
+Agent.zombieWhenDead
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Improve Relations w/ Faction 1-4
@@ -391,6 +402,8 @@ Complete
 New
 ###			T	Annoyed At Suspicious
 Attempted
+###			C	Don't Change Relationships (Rename)
+Agent.dontChangeRelationships
 ###			C	Faction Traits
 Expand to all relationship levels
 ###			C	Faction Trait Limitation to Same Content
@@ -409,6 +422,9 @@ New
 New
 ###			C	Secretly Hostile
 A la Bounty disaster
+Agent.bountyHunter
+Agent.secretHate
+Agent.choseSecretHate
 ##		T	Trait Gates
 ###			C	Customizers
 - Lock Merchant behind Trait Gate
