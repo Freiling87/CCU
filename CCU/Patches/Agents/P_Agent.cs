@@ -176,6 +176,9 @@ namespace CCU.Patches.Agents
             #region Passive
             if (__instance.HasTrait<Behavior_Guilty>())
 				__instance.oma.mustBeGuilty = true;
+
+			if (__instance.HasTrait<AccidentProne>())
+				__instance.dontStopForDanger = true;
             #endregion
 
             if (GC.challenges.Contains(CMutators.HomesicknessDisabled))

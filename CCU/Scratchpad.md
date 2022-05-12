@@ -133,7 +133,13 @@ Main quest rewards are multiplied by 10
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #	CT	Traits
+REORGANIZE:
+- Remove name prefixes
+- Rename Passive to Interaction
+- Rename Active to Behavior
 ##		T	Active
+###			T	Accident-Prone
+Attempted
 ###			T	Seek & Destroy (Killer Robot)
 Attempted
 ###			C	Enforcer

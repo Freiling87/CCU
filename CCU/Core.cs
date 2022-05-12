@@ -286,6 +286,7 @@ namespace CCU
 		#endregion
 		#endregion
 		#region Active
+			AccidentProne = "[CCU] Active - Accident-Prone",
 			Active_CleanTrash = "[CCU] Active - Clean Trash",
 			Active_EatCorpse = "[CCU] Active - Eat Corpse",
 			Active_EnforceLaws = "[CCU] Active - Enforce Laws (Cop)",
