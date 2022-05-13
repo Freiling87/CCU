@@ -4,8 +4,6 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Top-Priority Bugs
-##		C	Manhole spawned in home base
-This was with SORCE running as well
 ##		C	Uh AI broke
 - Once I got to Industrial
   - Interactions proceed normally
@@ -52,86 +50,6 @@ This was with SORCE running as well
 ---
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#	H	Mutators
-Focus on Traits for this version.
-##		C	00 Mutator List Population
-###			C	Level Editor Mutator List
-- I think this has since been addressed in Roguelibs, as of 3.5.0b
-- Vanilla replacement worked, pending custom content
-- [Error  : Unity Log] Coroutine 'SetScrollbarPlacement' couldn't be started!
-  - This didn't affect anything but I'd like it resolved
-###			C	00 Hide from Non-Editor access
-- CreateMutatorListCampaign
-###			√	General Mutator List
-- Show up in LevelEditor UI, may be a manually constructed list
-- LoadLevel.loadStuff2 @ 171
-##		C	Branching
-Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
-
-CampaignData
-	levelNameList		List of strings
-	levelList			List of LevelData
-	mutatorList			List of strings
-
-- LoadLevel
-  - loadStuff2 @ 199
-    - this.customLevel = this.customCampaign.levelList[n];
-###			C	00 Usage Guide
-This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
-###			C	Exit Alpha/Beta/Gamma/Delta
-Destination at Elevator
-###			C	Exit +1/2/3/4
-Can have multiple, to allow Branching
-Adds options at Elevator			
-###			C	Level Alpha/Beta/Gamma/Delta
-Designates a level as a place to return to
-###			C	Set A/B/C/D false
-For level access
-###			C	Set A/B/C/D true
-For level access
-###			C	Require A/B/C/D false
-Gate level access
-###			C	Require A/B/C/D true
-Gate level access
-###			C	Traits for Level Branching
-##		T	Followers
-###			T	Homesickness Disabled
-- Attempting with setting CanGobetweenLevels after SetupAgentStats, but I think you'll need it in multiple places.
-- This is acting unexpectedly, but next time you test be clear on the rules.
-- NPCs who WILL follow:
-  - Freed Prisoners
-  - Spawned Clones
-  - Friend Phone
-- I'm beginning to think maybe I just misunderstood something when I first saw this bug. Try it again and see what happens.
-- Now, the *failure* to skip homesickness with the mutator surprised me
-###			T	Homesickness Mandatory
-- First attempt
-Always dismiss hires at end of level, even if Homesickness Killer is active
-ExitPoint.EmployeesExit prefix
-##		C	Gameplay
-###			C	No Funny Business
-New
-For town levels. Ensures no one will be killed.
-You will need to eliminate spontaneous hostiles for this to work, though.
-###
-##		C	Interface
-In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-###			C	No Minimap
-##		C	Quests
-###			C	Big Quest Exempt
-Deactivate Big Quest for level, freeze mark counts
-###			C	Big Quest Mandatory
-Lose the game if you don't complete your Big Quest for this floor
-Allows the creator to have greater control over the flow of the campaign
-E.g., custom character with Doctor's big quest
-###			C	Big Quest Stopping Point
-Equivalent to Mayor's Village, where super special abilities activate if you completed the Big Quest
-###			C	Major Contract
-Main quest rewards are multiplied by 10
-##		C	Utility
-###			C	Sort active Mutators by Name
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
 #	CT	Traits
 ##		C	Active
 ###			C	Seek & Destroy (Killer Robot)
@@ -177,6 +95,7 @@ Complete
 Complete
 ##		CT	Hire
 ###			C	Cause a Ruckus
+Test Dummy 
 ####			C	Animation doesn't fire
 ###			H	Chloroform
 New
@@ -595,6 +514,86 @@ New
 ###			H	Friendly to Faction 1-4
 ###			√	Aligned to Faction 1-4
 ###			√	Hostile to Faction 1-4
+#	H	Mutators
+Focus on Traits for this version.
+##		C	00 Mutator List Population
+###			C	Level Editor Mutator List
+- I think this has since been addressed in Roguelibs, as of 3.5.0b
+- Vanilla replacement worked, pending custom content
+- [Error  : Unity Log] Coroutine 'SetScrollbarPlacement' couldn't be started!
+  - This didn't affect anything but I'd like it resolved
+###			C	00 Hide from Non-Editor access
+- CreateMutatorListCampaign
+###			√	General Mutator List
+- Show up in LevelEditor UI, may be a manually constructed list
+- LoadLevel.loadStuff2 @ 171
+##		C	Branching
+Basically allows options at Exit Elevator to choose the next level, and/or skipping levels on the level list
+
+CampaignData
+	levelNameList		List of strings
+	levelList			List of LevelData
+	mutatorList			List of strings
+
+- LoadLevel
+  - loadStuff2 @ 199
+    - this.customLevel = this.customCampaign.levelList[n];
+###			C	00 Usage Guide
+This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
+###			C	Exit Alpha/Beta/Gamma/Delta
+Destination at Elevator
+###			C	Exit +1/2/3/4
+Can have multiple, to allow Branching
+Adds options at Elevator			
+###			C	Level Alpha/Beta/Gamma/Delta
+Designates a level as a place to return to
+###			C	Set A/B/C/D false
+For level access
+###			C	Set A/B/C/D true
+For level access
+###			C	Require A/B/C/D false
+Gate level access
+###			C	Require A/B/C/D true
+Gate level access
+###			C	Traits for Level Branching
+##		T	Followers
+###			T	Homesickness Disabled
+- Attempting with setting CanGobetweenLevels after SetupAgentStats, but I think you'll need it in multiple places.
+- This is acting unexpectedly, but next time you test be clear on the rules.
+- NPCs who WILL follow:
+  - Freed Prisoners
+  - Spawned Clones
+  - Friend Phone
+- I'm beginning to think maybe I just misunderstood something when I first saw this bug. Try it again and see what happens.
+- Now, the *failure* to skip homesickness with the mutator surprised me
+###			T	Homesickness Mandatory
+- First attempt
+Always dismiss hires at end of level, even if Homesickness Killer is active
+ExitPoint.EmployeesExit prefix
+##		C	Gameplay
+###			C	No Funny Business
+New
+For town levels. Ensures no one will be killed.
+You will need to eliminate spontaneous hostiles for this to work, though.
+###
+##		C	Interface
+In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
+###			C	No Minimap
+##		C	Quests
+###			C	Big Quest Exempt
+Deactivate Big Quest for level, freeze mark counts
+###			C	Big Quest Mandatory
+Lose the game if you don't complete your Big Quest for this floor
+Allows the creator to have greater control over the flow of the campaign
+E.g., custom character with Doctor's big quest
+###			C	Big Quest Stopping Point
+Equivalent to Mayor's Village, where super special abilities activate if you completed the Big Quest
+###			C	Major Contract
+Main quest rewards are multiplied by 10
+##		C	Utility
+###			C	Sort active Mutators by Name
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
 #		H	Item Groups
 Next release
 #		H	Object Additions
