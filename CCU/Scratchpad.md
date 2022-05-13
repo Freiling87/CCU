@@ -47,17 +47,29 @@ Listed in order of Parent tier summary symbol priority:
 #		General Reminders & To-Dos
 - I merged Passive and Interaction, but I'm thinking they need to be split back up. 
   - There was also a specific reason to make Extortable & Moochable into Passive instead of Interaction or Trait Trigger, but I can't remember it. Write it here if you do.
+- Dynamic display name generation
+  - name = GenerateCCUName(trait) →
+    - [CCU] + Last namespace + Nameof(trait)
 ---
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		C	Active
-###			C	Seek & Destroy (Killer Robot)
-New
+REORGANIZE:
+- Remove name prefixes
+- Rename Passive to Interaction
+- Rename Active to Behavior
+##		T	Active
+###			T	Accident-Prone
+Attempted
+###			T	Seek & Destroy (Killer Robot)
+Attempted
+###			C	Enforcer
+Agent.enforcer
 ###			H	Clean Trash
 New
 ###			H	Fight Fires
-New
+Agent.firefighter
+Agent.fightsFires
 ###			H	Grab Everything
 New
 ###			H	Grab Food
@@ -69,6 +81,12 @@ Maybe just implement the whole Hey, You! overhaul here
 ###			H	Hog Turntables
 New
 Allow paid Musician behavior
+###			H	Mutinous
+Agent.mutinous
+###			H	SecretHate
+Agent.secretHate
+Agent.choseSecretHate
+I think this is Bounty behavior
 ###			H	Shakedown Player
 New
 Use this on leader w/ Wander Level
@@ -84,9 +102,9 @@ Complete
 Complete
 ###			√	Pickpocket
 Complete
-##		C	Combat
-###			C	Cause Lockdown (Supercop)
-New
+##		T	Combat
+###			T	Cause Lockdown (Supercop)
+Attempted
 ###			√	Coward
 Complete
 ###			√	Fearless
@@ -111,8 +129,6 @@ New
 One-time use, mug target NPC
 ###			H	Pickpocket
 New
-###			H	Place Time Bomb
-Based on and consumes Time Bombs in inventory. NPC starts with one.
 ###			H	Poison
 New 
 ###			H	Safecrack
@@ -163,6 +179,8 @@ In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholde
 On door or Safe: Plants door detonator
 Elsewhere: Remote bomb
 Gives you detonator when planted
+###			H	Set Time Bomb
+Based on and consumes Time Bombs in inventory. NPC starts with one.
 ###			H	Tamper
 - Interface works but reticle is green for non-tamperable items.
   - Log message "Not implemented yet", fair enough
@@ -236,10 +254,19 @@ Test
 New
 ###			C	Sell Slaves
 New
+###			C	Shapeshifted
+Agent.SecretShapeshifter
+###			C	Status Immunity
+Agent.preventStatusEffects
 ###			C	Use Bloodbag
 New
 ###			C	Vision Beams (Cop Bot)
 New
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			C	Z-Infected
+Agent.zombieWhenDead
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Improve Relations w/ Faction 1-4
@@ -288,6 +315,8 @@ New
 New
 ###			H	Train Traits - Trade
 New
+###			H	Upper Crusty
+Agent.upperCrusty
 ###			√	Guilty
 Complete
 ##		CT	Relationships
@@ -295,6 +324,8 @@ Complete
 New
 ###			T	Annoyed At Suspicious
 Attempted
+###			C	Don't Change Relationships (Rename)
+Agent.dontChangeRelationships
 ###			C	Faction Traits
 Expand to all relationship levels
 ###			C	Faction Trait Limitation to Same Content
@@ -313,6 +344,9 @@ New
 New
 ###			C	Secretly Hostile
 A la Bounty disaster
+Agent.bountyHunter
+Agent.secretHate
+Agent.choseSecretHate
 ##		T	Trait Gates
 ###			C	Customizers
 - Lock Merchant behind Trait Gate

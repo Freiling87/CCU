@@ -146,7 +146,10 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
+			# region Active
+			// TODO: Change this to a Linq OfType expression
+			// RogueFramework.Unlocks.OfType<ACtiveTrait> etc.
+            if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
 				// Thieves have their LOScheck set to 50% in vanilla
 				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(50))
@@ -156,16 +159,29 @@ namespace CCU.Patches.Agents
 				__instance.losCheckAtIntervals = true;
 			}
 
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.MerchantTypeTraits))
-				__instance.SetupSpecialInvDatabase();
+			if (__instance.HasTrait<Behavior_SeekAndDestroy>())
+				__instance.killerRobot = true;
 
+			if (__instance.HasTrait<Behavior_Enforcer>())
+				__instance.enforcer = true;
+			#endregion
+			#region Combat
 			if (__instance.HasTrait<Combat_UseDrugs>())
 				__instance.combat.canTakeDrugs = true;
-
-			if (__instance.HasTrait<Behavior_Guilty>())
+			#endregion
+			#region Merchant
+			if (TraitManager.HasTraitFromList(__instance, TraitManager.MerchantTypeTraits))
+				__instance.SetupSpecialInvDatabase();
+            #endregion
+            #region Passive
+            if (__instance.HasTrait<Behavior_Guilty>())
 				__instance.oma.mustBeGuilty = true;
 
-			if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
+			if (__instance.HasTrait<AccidentProne>())
+				__instance.dontStopForDanger = true;
+            #endregion
+
+            if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
 				__instance.canGoBetweenLevels = true;
 			else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
 				__instance.canGoBetweenLevels = false;

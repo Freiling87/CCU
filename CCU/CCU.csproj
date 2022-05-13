@@ -130,6 +130,7 @@
     <Compile Include="Patches\Agents\P_Combat.cs" />
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
     <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
+    <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
@@ -150,8 +151,10 @@
     <Compile Include="Traits\Active\Behavior_GrabDrugs.cs" />
     <Compile Include="Traits\Active\Behavior_GrabMoney.cs" />
     <Compile Include="Traits\Active\Behavior_Pickpocket.cs" />
+    <Compile Include="Traits\Active\Behavior_Enforcer.cs" />
     <Compile Include="Traits\Active\Behavior_SeekAndDestroy.cs" />
     <Compile Include="Traits\Active\Behavior_SuckBlood.cs" />
+    <Compile Include="Traits\Combat\Lockdowner.cs" />
     <Compile Include="Traits\Hire\Hire_DisarmTrap.cs" />
     <Compile Include="Traits\Hire\HireDuration_Permanent.cs" />
     <Compile Include="Traits\Hire\HireDuration_PermanentOnly.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="Traits\Hire\Hire_Poison.cs" />
     <Compile Include="Traits\Merchant\Merchant_Buyer.cs" />
     <Compile Include="Traits\Merchant\Merchant_Vendor.cs" />
+    <Compile Include="Traits\Active\AccidentProne.cs" />
     <Compile Include="Traits\Passive\Behavior_ExplodeOnDeath.cs" />
     <Compile Include="Traits\Passive\Behavior_Guilty.cs" />
     <Compile Include="Traits\Combat\Combat_Fearless.cs" />

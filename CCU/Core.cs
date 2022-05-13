@@ -286,6 +286,7 @@ namespace CCU
 		#endregion
 		#endregion
 		#region Active
+			AccidentProne = "[CCU] Active - Accident-Prone",
 			Active_CleanTrash = "[CCU] Active - Clean Trash",
 			Active_EatCorpse = "[CCU] Active - Eat Corpse",
 			Active_EnforceLaws = "[CCU] Active - Enforce Laws (Cop)",
@@ -295,7 +296,6 @@ namespace CCU
 			Active_GrabMoney = "[CCU] Active - Grab Money",
 			Active_GuardDoor = "[CCU] Active - Guard Door",
 			Active_HogTurntables = "[CCU] Active - Turntables Guard",
-			Active_Lockdown = "[CCU] Active - Lockdown Clearance", // Might not be a thing - could just be The Law
 			Active_Pickpocket = "[CCU] Active - Pickpocket",
 			Active_SeekAndDestroy = "[CCU] Active - Seek & Destroy",
 			Active_SuckBlood = "[CCU] Active - Suck Blood",
@@ -310,10 +310,10 @@ namespace CCU
 			Bodyguarded_Supergoons = "[CCU] Bodyguarded - Supergoons",
 		#endregion
 		#region Combat
-			Combat_CauseLockdown = "[CCU] Combat - Cause Lockdown",
+			Lockdowner = "[CCU] Combat - Lockdowner",
 			Combat_Coward = "[CCU] Combat - Coward",
 			Combat_Fearless = "[CCU] Combat - Fearless",
-			Combat_UseDrugs = "[CCU] Combat - Use Drugs", // Gate behind Drug-A-Lug?
+			Combat_UseDrugs = "[CCU] Combat - Use Drugs",
 		#endregion
 		#region Hire
 			Hire_Bodyguard = "[CCU] Hire - Bodyguard",
