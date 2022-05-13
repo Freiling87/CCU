@@ -1,10 +1,5 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Traits.TraitGate
 {

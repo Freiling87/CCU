@@ -1,27 +1,22 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Passive
 {
-    public class HireCost_More : CustomTrait
+    public class Guilty : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HireCost_More>()
+            RogueLibs.CreateCustomTrait<Guilty>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's hire cost is increased by 50%.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
+                    [LanguageCode.English] = String.Format("This character is designated Guilty for The Law or Scumbag Slaughterer."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_CostMore,
+                    [LanguageCode.English] = CTrait.Passive_Guilty,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

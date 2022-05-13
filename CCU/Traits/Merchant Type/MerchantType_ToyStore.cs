@@ -11,7 +11,7 @@ namespace CCU.Traits.MerchantType
             RogueLibs.CreateCustomTrait<MerchantType_ToyStore>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells toys."),
+                    [LanguageCode.English] = String.Format("This character sells toys. Not adult toys."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

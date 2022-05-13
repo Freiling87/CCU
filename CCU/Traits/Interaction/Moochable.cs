@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Interaction
 {
-    public class Behavior_ExplodeOnDeath : CustomTrait
+    public class Moochable : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_ExplodeOnDeath>()
+            RogueLibs.CreateCustomTrait<Moochable>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character explodes when killed."),
+                    [LanguageCode.English] = String.Format("This character can lend money, if the player has the Moocher trait."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Passive_ExplodeOnDeath,
+                    [LanguageCode.English] = CTrait.Interaction_Moochable,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

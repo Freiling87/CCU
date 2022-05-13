@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.Cost
 {
-    public class Behavior_SeekAndDestroy : CustomTrait
+    public class CostMore : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_SeekAndDestroy>()
+            RogueLibs.CreateCustomTrait<CostMore>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),
+                    [LanguageCode.English] = "This character's costs are increased by 50%.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_SeekAndDestroy,
+                    [LanguageCode.English] = CTrait.CostMore,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

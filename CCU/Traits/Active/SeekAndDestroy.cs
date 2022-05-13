@@ -2,20 +2,20 @@
 
 namespace CCU.Traits.Active
 {
-    public class Behavior_GrabMoney : CustomTrait
+    public class SeekAndDestroy : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_GrabMoney>()
+            RogueLibs.CreateCustomTrait<SeekAndDestroy>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will grab money if they see it."),
+                    [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_GrabMoney,
+                    [LanguageCode.English] = CTrait.Active_SeekAndDestroy,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

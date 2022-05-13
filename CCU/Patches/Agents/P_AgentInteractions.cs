@@ -10,6 +10,8 @@ using CCU.Traits.TraitGate;
 using Rewired;
 using Random = UnityEngine.Random;
 using CCU.Traits.Passive;
+using CCU.Traits.Cost;
+using CCU.Traits.Interaction;
 
 namespace CCU.Patches.Agents
 {
@@ -1822,7 +1824,7 @@ namespace CCU.Patches.Agents
 								{
 									Core.LogCheckpoint("Interaction");
 
-									if (agent.HasTrait<Interaction_Extortable>() && agent.CanShakeDown() && (interactingAgent.HasTrait("Shakedowner") || interactingAgent.HasTrait("Shakedowner")))
+									if (agent.HasTrait<Extortable>() && agent.CanShakeDown() && (interactingAgent.HasTrait("Shakedowner") || interactingAgent.HasTrait("Shakedowner")))
 									{
 										int threat = agent.relationships.FindThreat(interactingAgent, false);
 
@@ -1834,7 +1836,7 @@ namespace CCU.Patches.Agents
 										__instance.AddButton("Shakedown", " (" + threat + "%)");
 									}
 
-									if (agent.HasTrait<Interaction_Moochable>() && interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher))
+									if (agent.HasTrait<Moochable>() && interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher))
 										__instance.AddButton("BorrowMoney");
 								}
 
@@ -1867,9 +1869,9 @@ namespace CCU.Patches.Agents
 									{
 										Core.LogCheckpoint("Hire Initial");
 
-										bool bananaCost = agent.HasTrait<HireCost_Banana>();
+										bool bananaCost = agent.HasTrait<CostBanana>();
 
-										if (agent.HasTrait<Hire_Bodyguard>())
+										if (agent.HasTrait<Bodyguard>())
 										{
 											if (interactingAgent.inventory.HasItem("HiringVoucher"))
 												__instance.AddButton("HireAsProtection", 6666);
@@ -1888,28 +1890,28 @@ namespace CCU.Patches.Agents
 									{
 										Core.LogCheckpoint("Hire Order");
 
-										if (agent.HasTrait<Hire_BreakIn>())
+										if (agent.HasTrait<BreakIn>())
 											__instance.AddButton("LockpickDoor");
 
-										if (agent.HasTrait<Hire_CauseRuckus>())
+										if (agent.HasTrait<CauseARuckus>())
 											__instance.AddButton("CauseRuckus");
 										
-										if (agent.HasTrait<Hire_DisarmTrap>())
+										if (agent.HasTrait<DisarmTrap>())
 											__instance.AddButton(CJob.DisarmTrap);
 										
-										if (agent.HasTrait<Hire_Hack>())
+										if (agent.HasTrait<Hack>())
 											__instance.AddButton("HackSomething");
 
-										if (agent.HasTrait<Hire_Pickpocket>())
+										if (agent.HasTrait<Pickpocket>())
 											__instance.AddButton(CJob.Pickpocket);
 
-										if (agent.HasTrait<Hire_Poison>())
+										if (agent.HasTrait<Poison>())
 											__instance.AddButton(CJob.Poison);
 
-										if (agent.HasTrait<Hire_Safecrack>())
+										if (agent.HasTrait<Safecrack>())
 											__instance.AddButton(CJob.SafecrackSafe);
 										
-										if (agent.HasTrait<Hire_Tamper>())
+										if (agent.HasTrait<Tamper>())
 											__instance.AddButton(CJob.TamperSomething);
 									}
 								}

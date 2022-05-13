@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Active
 {
-    public class Behavior_Guilty : CustomTrait
+    public class EatCorpse : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_Guilty>()
+            RogueLibs.CreateCustomTrait<EatCorpse>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character is designated Guilty for The Law or Scumbag Slaughterer."),
+                    [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Passive_Guilty,
+                    [LanguageCode.English] = CTrait.Active_EatCorpse,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

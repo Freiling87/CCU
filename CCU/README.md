@@ -1,5 +1,4 @@
-# Streets of Rogue Custom Content Utilities
-
+#		Streets of Rogue Custom Content Utilities
 SOR gives you a few options for creating custom content, but it does have some limitations. Here are a few things that are currently impossible with the Vanilla version:
 - Allying Custom NPCs in different chunks
 - Varying Custom NPC appearances
@@ -9,11 +8,7 @@ SOR gives you a few options for creating custom content, but it does have some l
 
 CCU aims to address these limitations, giving more power to custom content designers, while keeping the player's experience un-cluttered with designer tools.
 
-|:exclamation: Asterisk indicates non-implemented features currently planned. :exclamation:|
-|:----------------------------------------------------------------------------------------:|
-
-# The Mod Itself
-
+#		The Mod Itself
 > What if my players don't want the mod? Will this break my stuff?
 
 Your content will still work just fine for vanilla players! They just won't get the *extra* features CCU adds.
@@ -21,24 +16,17 @@ Your content will still work just fine for vanilla players! They just won't get 
 CCU is packaged into two editions. One for you, one for your players. If you make content with CCU, just link them to the Player Edition and advise them to install it for the full experience.
 
 Maybe even threaten them. "Or else" is a great phrase that is hard to use as evidence in court!
-
-## Designer Edition
-
+##			Designer Edition
 The Designer Edition of the mod is virtually identical to the player edition, with the exception that your Custom Character Creator's Trait Menu will show all of the new traits.
-
-## Player Edition
-
+##			Player Edition
 The Player Edition allows players to play your content, while hiding it from view so it doesn't clutter the interface:
 - Hides CCU traits from Character Creation Menus
 - Hides CCU traits from Character Sheet page *
 - Hides CCU traits from HUD Trait list *
-
-# Custom NPC Utilities
-
+#		Custom NPC Utilities
 All CCU traits will not count toward the Trait Limit, since they do not affect player characters. *
-
-## Appearance Traits * 
-
+##			Traits
+###				Appearance * 
 There are traits for each variation within the following groups:
 - Facial Hair
 - Hair Color
@@ -46,52 +34,50 @@ There are traits for each variation within the following groups:
 - Skin Color
 
 You can add as many as you want to a custom character. When you do so, NPCs generated from this character will have those aspects of their appearance randomized from the pool of traits you selected. This includes NPCs placed in custom Chunks, as well as those generated from Clone Machines or Loneliness Killer.
-
-## Behavior Active Traits
-
+###				Behavior
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Eat Corpse											|- Enables corpse eating behavior<br>- Requires: Cannibalize
-|Grab Drugs											|- If NPC sees Drugs, they'll try to grab them
-|Grab Money											|- If NPC sees Money, they'll try to grab it
-|Pickpocket											|- Enables pickpocketing behavior<br>- Requires: Sticky Glove
-|Suck Blood											|- Enables blood drinking behavior<br>- Requires: Bite
-
-## Behavior Passive Traits
-
+|Eat Corpse											|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
+|Grab Drugs											|- Grab Drugs, like Me
+|Grab Money											|- Grab Money, like Slum Dweller
+|Pickpocket											|- Pick pockets, like Thief<br>- Requires: Sticky Glove
+|Seek & Destroy										|- Stalk & attack players, like Killer Robot
+|Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite
+###				Cost
+These apply to all costs for the Agent (Hire, Vendor, Identify, etc.)
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Explode On Death *									|- Explode on Death<br>- Are you confused?
-|Guilty												|- Valid target for The Law, etc.
-|Hackable - Tamper with Aim *						|- A la Killer Robot
-|Hackable - Go Haywire *							|- A la Cop Bot
-
-## Hire Traits 
-
+|Cost Alcohol										|- Costs Alcohol instead of Money
+|Cost Banana										|- Costs Bananas instead of Money
+|Cost Less											|- Costs decreased by 50%
+|Cost More											|- Costs increased by 50%
+|Cost Zero											|- Costs reduced to zero
+###				Hire
 |Trait												|Effect	|
 |:--------------------------------------------------|:------|
 |Bodyguard											|- Hire as protection
 |Break In											|- Break into target Door or Window
 |Cause Ruckus										|- Cause a Ruckus
-|Cost Banana										|- Any Hire trait costs a Banana instead of Money
-|Cost Less											|- Hire cost decreased by 50%
-|Cost More											|- Hire cost increased by 50%
 |Hack												|- Hack target Object or Agent
 |Safecrack											|- Break into target Safe
 |Tamper												|- Tamper with target Object
-
-## Interaction Traits
-
-|Trait								|Effect	|
-|:----------------------------------|:------|
-|Fence								|- Agent will buy any items for a bad price
-|Moochable							|- Agent can be targeted with Moocher
-|Vendor Buyer						|- If Agent has a Vendor trait, they will also buy items from that item pool
-
-## Relationship Traits
-
+###				Interaction
+|Trait												|Effect	|
+|:--------------------------------------------------|:------|
+|Extortable											|- Valid target for Extortionist
+|Moochable											|- Valid target for Moocher
+|Vendor Buyer										|- If Agent has a Vendor trait, they will also buy items from that item pool
+###				Passive
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Explode On Death									|- Explode on Death
+|Guilty												|- Valid target for The Law, etc.
+|Hackable - Tamper with Aim *						|- A la Killer Robot
+|Hackable - Go Haywire *							|- A la Cop Bot
+###				Relationships
 |Trait								|Effect													|
 |:----------------------------------|:------------------------------------------------------|
+|Annoyed at Suspicious				|
 |Faction 1 Aligned					|Aligned with all Agents with same trait
 |Faction 1 Hostile					|Hostile to all Agents with Faction 1 Aligned
 |Faction 2 Aligned					|Aligned with all Agents with same trait
@@ -100,7 +86,10 @@ You can add as many as you want to a custom character. When you do so, NPCs gene
 |Faction 3 Hostile					|Hostile to all Agents with Faction 3 Aligned
 |Faction 4 Aligned					|Aligned with all Agents with same trait
 |Faction 4 Hostile					|Hostile to all Agents with Faction 4 Aligned
-
+|Hostile to Cannibals				|
+|Hostile to Soldiers				|
+|Hostile to Vampires				|
+|Hostile to Werewolves				|
 ## Roamer Traits *
 - Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
   - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]

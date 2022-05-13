@@ -1,10 +1,5 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Traits.TraitGate
 {
@@ -16,7 +11,7 @@ namespace CCU.Traits.TraitGate
             RogueLibs.CreateCustomTrait<TraitGate_Scumbag>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC will be a valid target for Scumbag Slaughterer."),
+                    [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

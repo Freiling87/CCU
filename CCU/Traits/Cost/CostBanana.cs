@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.Cost
 {
-    public class Behavior_Pickpocket : CustomTrait
+    public class CostBanana : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_Pickpocket>()
+            RogueLibs.CreateCustomTrait<CostBanana>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.English] = "This character's costs are converted to Bananas.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_Pickpocket,
+                    [LanguageCode.English] = CTrait.CostBanana,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

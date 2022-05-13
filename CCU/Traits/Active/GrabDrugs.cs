@@ -1,27 +1,22 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Active
 {
-    public class Hire_Poison : CustomTrait
+    public class GrabDrugs : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_Poison>()
+            RogueLibs.CreateCustomTrait<GrabDrugs>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",
+                    [LanguageCode.English] = string.Format("This character will grab drugs if they see any."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_Poison,
+                    [LanguageCode.English] = CTrait.Active_GrabDrugs,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

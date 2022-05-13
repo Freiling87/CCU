@@ -1,22 +1,27 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.Hire
 {
-    public class Behavior_GrabDrugs : CustomTrait
+    public class CauseARuckus : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_GrabDrugs>()
+            RogueLibs.CreateCustomTrait<CauseARuckus>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will grab drugs if they see any."),
+                    [LanguageCode.English] = "This character can be hired to cause a distraction, or a Ruckus, if you will.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_GrabDrugs,
+                    [LanguageCode.English] = CTrait.CauseARuckus,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

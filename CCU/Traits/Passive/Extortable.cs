@@ -1,27 +1,22 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Passive
 {
-    public class Hire_CauseRuckus : CustomTrait
+    public class Extortable : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_CauseRuckus>()
+            RogueLibs.CreateCustomTrait<Extortable>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to cause a distraction.",
+                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_CauseRuckus,
+                    [LanguageCode.English] = CTrait.Interaction_Extortable,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Active
 {
-    public class Hire_Hack : CustomTrait
+    public class GrabMoney : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_Hack>()
+            RogueLibs.CreateCustomTrait<GrabMoney>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to hack with their laptop.",
+                    [LanguageCode.English] = string.Format("This character will grab money if they see it."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_Hack,
+                    [LanguageCode.English] = CTrait.Active_GrabMoney,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

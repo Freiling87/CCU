@@ -50,169 +50,30 @@ Listed in order of Parent tier summary symbol priority:
 - Dynamic display name generation
   - name = GenerateCCUName(trait) →
     - [CCU] + Last namespace + Nameof(trait)
----
+##		H	Config Files
+###				Custom faction list
+Allows player to define uniquely named factions.
+Generate traits based on these names
+Allow multiple faction list files in a folder, to increase ease of compatibility.
+###				Custom Flag list
+Allow player to name booleans uniquely.
+These should be grouped by Campaign, since that's the only place they're valid.
+The config file should match the name of the campaign, if they allow the same characters.
+###				Custom Level Tag List?
+Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-REORGANIZE:
-- Remove name prefixes
-- Rename Passive to Interaction
-- Rename Active to Behavior
-##		T	Active
-###			T	Accident-Prone
-Attempted
-###			T	Seek & Destroy (Killer Robot)
-Attempted
-###			C	Enforcer
-Agent.enforcer
-###			H	Clean Trash
-New
-###			H	Fight Fires
-Agent.firefighter
-Agent.fightsFires
-###			H	Grab Everything
-New
-###			H	Grab Food
-New
-###			H	Guard Door
-New
-###			H	Hobo Beg (Custom)
-Maybe just implement the whole Hey, You! overhaul here
-###			H	Hog Turntables
-New
-Allow paid Musician behavior
-###			H	Mutinous
-Agent.mutinous
-###			H	SecretHate
-Agent.secretHate
-Agent.choseSecretHate
-I think this is Bounty behavior
-###			H	Shakedown Player
-New
-Use this on leader w/ Wander Level
-Use "Follow" behavior on agents placed behind them
-No need for "Roaming Gang" Trait itself
-###			H	Tattle (Upper Cruster)
-New
-###			√	Eat Corpse
-Complete
-###			√	Grab Drugs
-Complete
-###			√	Grab Money
-Complete
-###			√	Pickpocket
-Complete
 ##		T	Combat
 ###			T	Cause Lockdown (Supercop)
-Attempted
+Can't get these to fire, even with vanilla supercop. Pending advice from Cyan, most likely.
 ###			√	Coward
 Complete
 ###			√	Fearless
 Complete
 ###			√	Use Drugs in Combat
 Complete
-##		CT	Hire
-###			C	Cause a Ruckus
-Test Dummy 
-####			C	Animation doesn't fire
-###			H	Chloroform
-New
-###			H	Devour Corpse
-New
-###			H	Disarm Trap
-New
-###			H	Drink Blood
-New
-###			H	Handcuff
-New
-###			H	Mug
-One-time use, mug target NPC
-###			H	Pickpocket
-New
-###			H	Poison
-New 
-###			H	Safecrack
-- Reticle does not activate 
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
-
-Here's what comes up for Lockpick job:
-	Agent
-√		.GetCodeFromJob
-√		.GetJobCode					Need to extend jobType enum
-√		.ObjectAction
-	AgentInteractions
-√		.DetermineButtons
-√		.LockpickDoor				
-√		.PressedButton	
-	GoalDoJob
-√		.Activate					Check out 
-√		.Terminate
-	GoalDetails						E_GoalDetails
-√		.LockpickDoorReal
-	GoalLockpickDoor				GoalSafecrackSafe
-√		.Activate
-√		.Process
-√		.Terminate
-	GoalLockpickDoorReal			GoalSafecrackSafeReal
-√		.Activate
-√		.Process
-√		.Terminate
-	InvInterface
-√		.ShowTarget					
-√		.ShowTarget2
-	ObjectMult
-		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
-	PlayfieldObjectInteractions
-√		.TargetObject
-
-Objects to Analyze/track:
-	Agent
-		job
-		jobCode
-		target.targetType
-
-In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-###			H	Set Explosive
-On door or Safe: Plants door detonator
-Elsewhere: Remote bomb
-Gives you detonator when planted
-###			H	Set Time Bomb
-Based on and consumes Time Bombs in inventory. NPC starts with one.
-###			H	Tamper
-- Interface works but reticle is green for non-tamperable items.
-  - Log message "Not implemented yet", fair enough
-###			√	Bodyguard
-Complete
-###			√	Break In
-Complete
-###			√	Hack
-Complete
-##		C	Merchant (Buyer/Vendor)
-###			H	Buyer
-Move VendorBuyer traits to this group
-####			C	Buyer All
-New
-####			C	Buyer Only
-For using VendorTypes to define Buyer Vendor Type, while blocking actual Vendor behavior
-####			C	Buyer Vendor Type
-New
-####			C	Pay Banana
-New
-####			C	Pay More
-New
-####			C	Pay Less
-New
-###			C	Merchant Trait Refactor
-- Merchant Type
-- Merchant
-  - Buyer
-  - Vendor
-###			C	Vendor
-####			C	Get full list of Vendor traits to test and complete category
-##		C	Passive
+##		C	Interaction
 ###			C	Administer Blood Bag
 New
 ###			C	Arena Manager
@@ -220,6 +81,8 @@ New
 ###			C	Bank Teller
 New
 ###			C	Buy Round
+New
+###			C	Buy Slave
 New
 ###			C	Clerk - Blood Bank
 New
@@ -229,44 +92,18 @@ New
 New
 ###			C	Clerk - Mayor's Office
 New
-###			C	Explode On Death
-Works but... exploded when arrested 
-###			T	Extortable
-Test
-###			C	Hackable - Tamper With Aim
-New
-###			C	Hackable - Go Haywire
-New
 ###			C	Heal
 New
 ###			C	Identify
 New
 ###			C	Influence Election
 New
-###			C	Innocent
-New
-XP Penalty for neutralizing
-###			C	Invincible
-New
 ###			T	Moochable
 Test
 ###			C	Offer Motivation
 New
-###			C	Sell Slaves
-New
-###			C	Shapeshifted
-Agent.SecretShapeshifter
-###			C	Status Immunity
-Agent.preventStatusEffects
 ###			C	Use Bloodbag
 New
-###			C	Vision Beams (Cop Bot)
-New
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			C	Z-Infected
-Agent.zombieWhenDead
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Improve Relations w/ Faction 1-4
@@ -280,21 +117,11 @@ New
 New
 ###			H	Repair Weapons
 New
-###			H	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			H	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			H	Reviver
-If hired and surviving, will revive the player once
 ###			H	Sell Faction Intel 1-4
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
-###			H	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
 ###			H	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
@@ -315,6 +142,41 @@ New
 New
 ###			H	Train Traits - Trade
 New
+##		C	Passive
+###			C	Explode On Death
+Works but... exploded when arrested
+###			T	Extortable
+Test
+###			C	Hackable - Tamper With Aim
+New
+###			C	Hackable - Go Haywire
+New
+###			C	Innocent
+New
+XP Penalty for neutralizing
+###			C	Invincible
+New
+###			C	Possessed
+Agent.SecretShapeshifter
+###			C	Status Immunity
+Agent.preventStatusEffects
+###			C	Vision Beams (Cop Bot)
+New
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			C	Z-Infected
+Agent.zombieWhenDead
+###			H	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			H	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			H	Reviver
+If hired and surviving, will revive the player once
+###			H	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
 ###			H	Upper Crusty
 Agent.upperCrusty
 ###			√	Guilty
@@ -322,6 +184,9 @@ Complete
 ##		CT	Relationships
 ###			C	Aggressive (Cannibal)
 New
+###			C	Class Unity
+Like Class Solidarity, except Aligned
+Note that Solidarity includes a No Infighting effect.
 ###			T	Annoyed At Suspicious
 Attempted
 ###			C	Don't Change Relationships (Rename)
@@ -365,15 +230,14 @@ Only SetRelationshipInitial - search for other occurrences of this trait in the 
 ###			C	Family Friend
 - Aligned
   - Works
-- Shop Gate
-  - Not gated
 - Also set gates to playing vanilla Mobster
-w###			√	Honorable Thief
-Complete
 ###			T	Scumbag
+Are you sure MustBeGuilty is all that's needed?
 Hostile to Scumbag Slaughterer
 Only SetRelationshipInitial - search for other occurrences of this trait in the code.
 ###			√	Cop	Access
+Complete
+###			√	Honorable Thief
 Complete
 ##		H	Appearance
 ###			C	Full-randomization bug
@@ -436,13 +300,14 @@ Test
 ##		H	Hire Duration
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
-###			C	Homesick
-###			C	No Homesickness
-###			C	Permanent Hire
+###			C	Homesickness Mandatory
+Overrides Homesickness Killer
+###			C	Homesickness Disabled
+###			C	Permanent
 New
 ~8x normal hire price
-###			C	Permanent Hire Only
-New
+###			C	Permanent Only
+As above, but removes the single-use hire option.
 ##		H	Map Marker
 ###			P	General Notes
 - Check out:
@@ -474,6 +339,19 @@ Pending pilot
 Pending pilot
 ###			H	Portrait
 Pending customs
+##		H	Merchant
+###			H	Buyer
+New
+###			H	Buyer Only
+New
+###			H	Large Inventory
+New
+###			H	Refresh Inventory
+New
+###			H	Small Inventory
+New
+###			C	Vendor
+####			C	Get full list of Vendor traits to test and complete category
 ##		H	Spawn
 ###			C	Enslaved
 New
@@ -543,11 +421,132 @@ Vanilla list:
 - Attempted - InvDatabase.FillAgent()
 ###			C	Guns_Common
 New
+##		√H	Behavior
+###			H	Clean Trash
+New
+###			H	Fight Fires
+Agent.firefighter
+Agent.fightsFires
+###			H	Grab Everything
+New
+###			H	Grab Food
+New
+###			H	Guard Door
+New
+###			H	Hobo Beg (Custom)
+Maybe just implement the whole Hey, You! overhaul here
+###			H	Hog Turntables
+New
+Allow paid Musician behavior
+###			H	Mutinous
+Agent.mutinous
+###			H	SecretHate
+Agent.secretHate
+Agent.choseSecretHate
+I think this is Bounty behavior
+###			H	Shakedown Player
+New
+Use this on leader w/ Wander Level
+Use "Follow" behavior on agents placed behind them
+No need for "Roaming Gang" Trait itself
+###			H	Tattle (Upper Cruster)
+New
+###			√H	Accident-Prone
+Works for: Crusher, Fire Spewer, Saw Blade
+Doesn't work for: Slime, Floor Trigger, ??
+###			√	Eat Corpse
+Complete
+###			√	Grab Drugs
+Complete
+###			√	Grab Money
+Complete
+###			√	Pickpocket
+Complete
+###			√	Seek & Destroy (Killer Robot)
+Complete
 ##		√H	Factions
 ###			H	Annoyed at Faction 1-4
 ###			H	Friendly to Faction 1-4
 ###			√	Aligned to Faction 1-4
 ###			√	Hostile to Faction 1-4
+##		√H	Hire
+###			H	Chloroform
+New
+###			H	Devour Corpse
+New
+###			H	Disarm Trap
+New
+###			H	Drink Blood
+New
+###			H	Handcuff
+New
+###			H	Mug
+One-time use, mug target NPC
+###			H	Pickpocket
+New
+###			H	Poison
+New 
+###			H	Safecrack
+- Reticle does not activate 
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
+
+Here's what comes up for Lockpick job:
+	Agent
+√		.GetCodeFromJob
+√		.GetJobCode					Need to extend jobType enum
+√		.ObjectAction
+	AgentInteractions
+√		.DetermineButtons
+√		.LockpickDoor				
+√		.PressedButton	
+	GoalDoJob
+√		.Activate					Check out 
+√		.Terminate
+	GoalDetails						E_GoalDetails
+√		.LockpickDoorReal
+	GoalLockpickDoor				GoalSafecrackSafe
+√		.Activate
+√		.Process
+√		.Terminate
+	GoalLockpickDoorReal			GoalSafecrackSafeReal
+√		.Activate
+√		.Process
+√		.Terminate
+	InvInterface
+√		.ShowTarget					
+√		.ShowTarget2
+	ObjectMult
+		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
+	PlayfieldObjectInteractions
+√		.TargetObject
+
+Objects to Analyze/track:
+	Agent
+		job
+		jobCode
+		target.targetType
+
+In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
+###			H	Set Explosive
+On door or Safe: Plants door detonator
+Elsewhere: Remote bomb
+Gives you detonator when planted
+###			H	Set Time Bomb
+Based on and consumes Time Bombs in inventory. NPC starts with one.
+###			H	Tamper
+- Interface works but reticle is green for non-tamperable items.
+  - Log message "Not implemented yet", fair enough
+###			√H	Cause a Ruckus
+####			C	Doesn't say Dialogue
+###			√	Bodyguard
+Complete
+###			√	Break In
+Complete
+###			√	Hack
+Complete
 #	H	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population

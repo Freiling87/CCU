@@ -11,7 +11,8 @@ namespace CCU.Traits.Active
             RogueLibs.CreateCustomTrait<AccidentProne>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will not path around traps."),
+                    [LanguageCode.English] = String.Format("This character will not path around Crushers, Fire Spewers, and Sawblades\n\n." +
+                        "Working on the other traps."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

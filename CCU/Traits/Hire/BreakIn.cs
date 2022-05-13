@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_DisarmTrap : CustomTrait
+    public class BreakIn : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_DisarmTrap>()
+            RogueLibs.CreateCustomTrait<BreakIn>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to disarm a trap.",
+                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_DisarmTrap,
+                    [LanguageCode.English] = CTrait.BreakIn,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

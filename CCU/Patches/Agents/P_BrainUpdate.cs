@@ -346,7 +346,7 @@ namespace CCU.Patches.Agents
 								{
 									// TDOO: If this drags performance, refactor this section
 
-									if (___agent.agentName == "Hobo" || ___agent.HasTrait<Behavior_GrabMoney>()) // GrabMoney
+									if (___agent.agentName == "Hobo" || ___agent.HasTrait<GrabMoney>()) // GrabMoney
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 								
@@ -372,7 +372,7 @@ namespace CCU.Patches.Agents
 										}
 									}
 									
-									if (___agent.HasTrait<Behavior_GrabDrugs>())
+									if (___agent.HasTrait<GrabDrugs>())
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -399,7 +399,7 @@ namespace CCU.Patches.Agents
 										}
 									}
 									
-									if (___agent.agentName == "Cannibal" || (___agent.specialAbility == vSpecialAbility.Cannibalize && ___agent.HasTrait<Behavior_EatCorpse>()))
+									if (___agent.agentName == "Cannibal" || (___agent.specialAbility == vSpecialAbility.Cannibalize && ___agent.HasTrait<EatCorpse>()))
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 
@@ -433,7 +433,7 @@ namespace CCU.Patches.Agents
 										}
 									}
 
-									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>())) && !__instance.thiefNoSteal)
+									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pickpocket>())) && !__instance.thiefNoSteal)
 									{
 										logger.LogDebug("Pickpocket check Triggered");
 
@@ -446,7 +446,7 @@ namespace CCU.Patches.Agents
 												Agent agent6 = ___agent.losCheckAtIntervalsList[num5];
 												Relationship relationship = ___agent.relationships.GetRelationship(agent6);
 												bool honorFlag = 
-													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Behavior_Pickpocket>() && ___agent.HasTrait<TraitGate_HonorableThief>())) && 
+													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pickpocket>() && ___agent.HasTrait<TraitGate_HonorableThief>())) && 
 													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")));
 
 												logger.LogDebug("HonorFlag: " + honorFlag);
@@ -465,7 +465,7 @@ namespace CCU.Patches.Agents
 										}
 									}
 									
-									if (___agent.agentName == "Vampire" || (___agent.specialAbility == vSpecialAbility.Bite && ___agent.HasTrait<Behavior_SuckBlood>()))
+									if (___agent.agentName == "Vampire" || (___agent.specialAbility == vSpecialAbility.Bite && ___agent.HasTrait<SuckBlood>()))
 									{
 										___agent.losCheckAtIntervalsTime = 0;
 

@@ -1,10 +1,5 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Traits.TraitGate
 {
@@ -16,7 +11,10 @@ namespace CCU.Traits.TraitGate
             RogueLibs.CreateCustomTrait<TraitGate_HonorableThief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Honor Among Thieves trait.\n\n<color=green>{0}:</color> Will not pickpocket the player if they have Honor Among Thieves.\n\n<color=green>{1}:</color> Will not sell wares unless player has Honor Among Thieves.", CTrait.Active_Pickpocket, CTrait.MerchantType_Thief),
+                    [LanguageCode.English] = String.Format("This Agent's behaviors will react to the player's Honor Among Thieves trait.\n\n" + 
+                    "<color=green>Interactions</color>\n" +
+                    CTrait.Pickpocket + ": Will not target the player if they have Honor Among Thieves.\n" +
+                    CTrait.MerchantType_Thief+ ": Will not sell items unless player has Honor Among Thieves."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

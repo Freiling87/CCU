@@ -1,10 +1,5 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Traits.TraitGate
 {
@@ -16,7 +11,10 @@ namespace CCU.Traits.TraitGate
             RogueLibs.CreateCustomTrait<TraitGate_CoolCannibal>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait.\n\n<color=green>{0}</color>, <color=green>{1}</color>, <color=green>{2}:</color> Will not target the player if they have Cool with Cannibals.\n\n<color=green>{3}:</color> Will not sell wares unless player has Cool With Cannibals.", CTrait.Spawn_HideInBush, CTrait.Spawn_HideInManhole, CTrait.Relationships_AggressiveCannibal, CTrait.MerchantType_Anthropophagie),
+                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait.\n\n" + 
+                    "<color=green>Interactions</color>\n" +
+                    CTrait.HideInObject + ", " + CTrait.Relationships_AggressiveCannibal + ": Will not target the player if they have Cool with Cannibals.\n" +
+                    CTrait.MerchantType_Anthropophagie + ": Will not sell wares unless player has Cool With Cannibals"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

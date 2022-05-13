@@ -14,6 +14,9 @@ using CCU.Traits.Active;
 using CCU.Traits.Appearance.FacialHair;
 using CCU.Traits.MerchantType;
 using CCU.Traits.Combat;
+using CCU.Traits.Cost;
+using CCU.Traits.HireDuration;
+using CCU.Traits.Interaction;
 
 namespace CCU.Traits
 {
@@ -126,25 +129,20 @@ namespace CCU.Traits
 #endregion
 		public static List<Type> BehaviorActiveTraits = new List<Type>()
 		{
-			typeof(Behavior_EatCorpse),
-			typeof(Behavior_GrabDrugs),
-			typeof(Behavior_GrabMoney),
-			typeof(Behavior_Pickpocket),
-			typeof(Behavior_SuckBlood),
+			typeof(EatCorpse),
+			typeof(GrabDrugs),
+			typeof(GrabMoney),
+			typeof(Active.Pickpocket),
+			typeof(SuckBlood),
 		};
 		public static List<Type> BehaviorPassiveTraits = new List<Type>()
 		{
-			typeof(Behavior_ExplodeOnDeath),
-			typeof(Behavior_Guilty),
+			typeof(ExplodeOnDeath),
+			typeof(Guilty),
 		};
 		public static List<Type> BodyguardedTraits = new List<Type>()
 		{
 			typeof(Bodyguarded_Pilot),
-		};
-		public static List<Type> BuyerTraits = new List<Type>()
-		{
-			typeof(Buyer_All),
-			typeof(Buyer_MerchantType),
 		};
 		public static List<Type> CombatTraits = new List<Type>()
 		{
@@ -154,32 +152,33 @@ namespace CCU.Traits
 		};
 		public static List<Type> HireCostTraits = new List<Type>()
 		{
-			typeof(HireCost_Banana),
-			typeof(HireCost_Less),
-			typeof(HireCost_More),
+			typeof(CostAlcohol),
+			typeof(CostBanana),
+			typeof(CostLess),
+			typeof(CostMore),
+			typeof(CostZero),
 		};
 		public static List<Type> HireDurationTraits = new List<Type>()
 		{
-			typeof(HireDuration_Permanent),
-			typeof(HireDuration_PermanentOnly),
+			typeof(HirePermanent),
+			typeof(HirePermanentOnly),
 		};
 		public static List<Type> HireTypeTraits = new List<Type>()
 		{
-			typeof(Hire_Bodyguard),
-			typeof(Hire_BreakIn),
-			typeof(Hire_CauseRuckus),
-			typeof(Hire_DisarmTrap),
-			typeof(Hire_Hack),
-			typeof(Hire_Pickpocket),
-			typeof(Hire_Poison),
-			typeof(Hire_Safecrack),
-			typeof(Hire_Tamper),
+			typeof(Bodyguard),
+			typeof(BreakIn),
+			typeof(CauseARuckus),
+			typeof(DisarmTrap),
+			typeof(Hack),
+			typeof(Hire.Pickpocket),
+			typeof(Poison),
+			typeof(Safecrack),
+			typeof(Tamper),
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
-			typeof(Interaction_Extortable),
-			typeof(Buyer_All),
-			typeof(Interaction_Moochable),
+			typeof(Extortable),
+			typeof(Moochable),
 			typeof(Buyer_MerchantType), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()

@@ -1,27 +1,23 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Merchant
 {
-    public class HireCost_Banana : CustomTrait
+    public class BuyerOnly : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HireCost_Banana>()
+            RogueLibs.CreateCustomTrait<BuyerOnly>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's hire cost is one banana.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
+                    [LanguageCode.English] = String.Format("This character will buy items from the player. This trait removes the option to buy items from the Agent.\n\n" +
+                    "<color=red>Requires:</color> Any Merchant Type trait."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_CostBanana,
+                    [LanguageCode.English] = CTrait.BuyerOnly,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

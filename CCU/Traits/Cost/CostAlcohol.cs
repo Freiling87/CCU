@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Cost
 {
-    public class Interaction_Moochable : CustomTrait
+    public class CostAlcohol : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_Moochable>()
+            RogueLibs.CreateCustomTrait<CostAlcohol>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can lend money, if the player has the Moocher trait."),
+                    [LanguageCode.English] = "This character's costs are converted to Alcohol.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_Moochable,
+                    [LanguageCode.English] = CTrait.CostAlcohol,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

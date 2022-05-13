@@ -1,21 +1,22 @@
 ﻿using RogueLibsCore;
+using System;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.Passive
 {
-    public class Behavior_Enforcer : CustomTrait
+    public class ExplodeOnDeath : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_Enforcer>()
+            RogueLibs.CreateCustomTrait<ExplodeOnDeath>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will enforce the law, like Cops."),
+                    [LanguageCode.English] = String.Format("This character explodes when killed."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_EnforceLaws,
+                    [LanguageCode.English] = CTrait.Passive_ExplodeOnDeath,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

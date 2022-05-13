@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Cost
 {
-    public class Buyer_MerchantType : CustomTrait
+    public class CostLess : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buyer_MerchantType>()
+            RogueLibs.CreateCustomTrait<CostLess>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can buy items from the player if they're the same type of objects they sell.\n\n<color=red>Requires:</color> Any Vendor trait"),
+                    [LanguageCode.English] = "This character's costs are decreased by 50%.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_BuyerVendor,
+                    [LanguageCode.English] = CTrait.CostLess,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

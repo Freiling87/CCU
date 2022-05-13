@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Active
 {
-    public class HireDuration_PermanentOnly : CustomTrait
+    public class SuckBlood : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HireDuration_PermanentOnly>()
+            RogueLibs.CreateCustomTrait<SuckBlood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate. This disables the original single-job hire option.",
+                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_PermanentOnly,
+                    [LanguageCode.English] = CTrait.SuckBlood,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

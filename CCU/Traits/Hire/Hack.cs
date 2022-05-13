@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_Bodyguard : CustomTrait
+    public class Hack : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_Bodyguard>()
+            RogueLibs.CreateCustomTrait<Hack>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired but doesn't have any special skills.",
+                    [LanguageCode.English] = "This character can be hired to hack something remotely.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_Bodyguard,
+                    [LanguageCode.English] = CTrait.Hack,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

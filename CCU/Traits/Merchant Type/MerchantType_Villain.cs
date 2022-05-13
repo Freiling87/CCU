@@ -11,7 +11,7 @@ namespace CCU.Traits.MerchantType
             RogueLibs.CreateCustomTrait<MerchantType_Villain>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells things that are dastardly to use."),
+                    [LanguageCode.English] = String.Format("This character sells things that are dastardly to use. If they have a mustache, they will twirl it deviously."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

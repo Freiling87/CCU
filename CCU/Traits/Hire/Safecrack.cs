@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_Safecrack : CustomTrait
+    public class Safecrack : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_Safecrack>()
+            RogueLibs.CreateCustomTrait<Safecrack>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into safes.",
+                    [LanguageCode.English] = "This character can be hired to break into safes up-close and silently.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_Safecrack,
+                    [LanguageCode.English] = CTrait.Safecrack,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

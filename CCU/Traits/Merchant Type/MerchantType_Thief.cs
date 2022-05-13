@@ -11,7 +11,7 @@ namespace CCU.Traits.MerchantType
             RogueLibs.CreateCustomTrait<MerchantType_Thief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells intrusion tools.\n\n<color=green>{0}</color> = Player needs Honor Among Thieves to access shop", CTrait.TraitGate_HonorableThief),
+                    [LanguageCode.English] = String.Format("This character sells intrusion tools."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Active
 {
-    public class Interaction_Extortable : CustomTrait
+    public class Pickpocket : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Interaction_Extortable>()
+            RogueLibs.CreateCustomTrait<Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_Extortable,
+                    [LanguageCode.English] = CTrait.Active_Pickpocket,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

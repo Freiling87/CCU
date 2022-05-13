@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class HireCost_Less : CustomTrait
+    public class Tamper : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HireCost_Less>()
+            RogueLibs.CreateCustomTrait<Tamper>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's hire cost is reduced by 50%.\n\n<color=red>Requires:</color> Any Hire non-cost trait",
+                    [LanguageCode.English] = "This character can be hired to tamper with machinery and electronics.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_CostLess,
+                    [LanguageCode.English] = CTrait.Tamper,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

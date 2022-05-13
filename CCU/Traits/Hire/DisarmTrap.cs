@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class HireDuration_Permanent : CustomTrait
+    public class DisarmTrap : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HireDuration_Permanent>()
+            RogueLibs.CreateCustomTrait<DisarmTrap>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate.",
+                    [LanguageCode.English] = "This character can be hired to disarm a trap.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_Permanent,
+                    [LanguageCode.English] = CTrait.DisarmTrap,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

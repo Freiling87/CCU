@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.HireDuration
 {
-    public class Hire_BreakIn : CustomTrait
+    public class HirePermanentOnly : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_BreakIn>()
+            RogueLibs.CreateCustomTrait<HirePermanentOnly>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
+                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate. This trait replaces the vanilla hire option.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_BreakIn,
+                    [LanguageCode.English] = CTrait.Permanent,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire
 {
-    public class Hire_Pickpocket : CustomTrait
+    public class Poison : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hire_Pickpocket>()
+            RogueLibs.CreateCustomTrait<Poison>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to pick someone's pockets.",
+                    [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hire_Pickpocket,
+                    [LanguageCode.English] = CTrait.Poison,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,21 +1,27 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.Hire
 {
-    public class Behavior_EatCorpse : CustomTrait
+    public class Pickpocket : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Behavior_EatCorpse>()
+            RogueLibs.CreateCustomTrait<Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
+                    [LanguageCode.English] = "This character can be hired to pick someone's pockets.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_EatCorpse,
+                    [LanguageCode.English] = CTrait.Pickpocket,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
