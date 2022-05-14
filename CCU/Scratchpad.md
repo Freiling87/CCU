@@ -51,10 +51,6 @@ Listed in order of Parent tier summary symbol priority:
   - name = GenerateCCUName(trait) →
     - [CCU] + Last namespace + Nameof(trait)
 ##		H	Config Files
-###				Custom faction list
-Allows player to define uniquely named factions.
-Generate traits based on these names
-Allow multiple faction list files in a folder, to increase ease of compatibility.
 ###				Custom Flag list
 Allow player to name booleans uniquely.
 These should be grouped by Campaign, since that's the only place they're valid.
@@ -64,15 +60,6 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		T	Combat
-###			T	Cause Lockdown (Supercop)
-Can't get these to fire, even with vanilla supercop. Pending advice from Cyan, most likely.
-###			√	Coward
-Complete
-###			√	Fearless
-Complete
-###			√	Use Drugs in Combat
-Complete
 ##		C	Interaction
 ###			C	Administer Blood Bag
 New
@@ -80,6 +67,8 @@ New
 New
 ###			C	Bank Teller
 New
+###			C	Bribe Cops
+###			C	Bribe for Access
 ###			C	Buy Round
 New
 ###			C	Buy Slave
@@ -144,7 +133,7 @@ New
 New
 ##		C	Passive
 ###			C	Explode On Death
-Works but... exploded when arrested
+####			C	Explodes when Arrested
 ###			T	Extortable
 Test
 ###			C	Hackable - Tamper With Aim
@@ -181,63 +170,60 @@ Make stationary, Invincible, non-reactive
 Agent.upperCrusty
 ###			√	Guilty
 Complete
-##		CT	Relationships
+##		C	Relationships
 ###			C	Aggressive (Cannibal)
 New
+###			C	Player Hostile
+###			C	Player Annoyed
+###			C	Player Friendly
+###			C	Player Loyal
+###			C	Player Aligned
 ###			C	Class Unity
 Like Class Solidarity, except Aligned
 Note that Solidarity includes a No Infighting effect.
-###			T	Annoyed At Suspicious
-Attempted
 ###			C	Don't Change Relationships (Rename)
 Agent.dontChangeRelationships
-###			C	Faction Traits
-Expand to all relationship levels
-###			C	Faction Trait Limitation to Same Content
-Limit interaction to same campaign, and if not campaign then same chunk pack
-###			T	Hostile to Cannibals
-Attempted
-###			T	Hostile to Soldiers
-Attempted
-###			T	Hostile to Vampires
-Attempted
-###			T	Hostile to Werewolves
-Attempted
-###			C	Musician Trait for Random Stans
+###			C	Hostile to Cannibals
+####			C	Include Cool Cannibal
+###			C	Hostile to Werewolves
+Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
+###			H	Never Hostile
 New
-###			C	Never Hostile
-New
-###			C	Secretly Hostile
+###			H	Secretly Hostile
 A la Bounty disaster
 Agent.bountyHunter
 Agent.secretHate
 Agent.choseSecretHate
-##		T	Trait Gates
-###			C	Customizers
-- Lock Merchant behind Trait Gate
-- Lock Hire behind Trait Gate
-###			CT	Common Folk
-- Dummy A
-  - Not blocked by lacking trait
-Hobos Aligned
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			CT	Cool Cannibal
+###			√	Hostile to Soldiers
+Complete
+###			√	Hostile to Vampires
+Complete
+##		C	Trait Gates
+###			C	Cool Cannibal
 - Dummy D
-  - Blocked
-- Disable Cannibal Hostility
-  - Pending that trait
-- Also set gates to playing vanilla cannibal (lacks CWC trait)
-###			C	Family Friend
-- Aligned
-  - Works
-- Also set gates to playing vanilla Mobster
-###			T	Scumbag
-Are you sure MustBeGuilty is all that's needed?
-Hostile to Scumbag Slaughterer
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
+####			C	Interact with Cannibal Hostility CCU trait
+Need to create Cannibal hostility trait before you can fully test this one.
+###			C	Crust Enjoyer
+If you have Upper Crusty, this character is Loyal
+###			H	Gate Vendor
+Won't sell unless you have appropriate trait
+###			H	Gate Hire
+Won't hire unless you have appropriate trait
+###			C	Bashable
+###			C	Crushable
+###			C	Slayable
+###			C	Specific Species
+###			√	Common Folk
+Complete
 ###			√	Cop	Access
 Complete
+###			√	Family Friend
+Complete
 ###			√	Honorable Thief
+Complete
+###			√	Scumbag
+Complete
+###			√	Suspicious Suspecter
 Complete
 ##		H	Appearance
 ###			C	Full-randomization bug
@@ -424,6 +410,10 @@ New
 ##		√H	Behavior
 ###			H	Clean Trash
 New
+###			H	Confiscate Contraband
+Should also spawn Confiscation Center (See SORCE)
+###			H	Deport Non-Citizens
+Should also spawn Deportation Center (See SORCE)
 ###			H	Fight Fires
 Agent.firefighter
 Agent.fightsFires
@@ -444,7 +434,7 @@ Agent.mutinous
 Agent.secretHate
 Agent.choseSecretHate
 I think this is Bounty behavior
-###			H	Shakedown Player
+###			H	Shakedown Player (Mobster)
 New
 Use this on leader w/ Wander Level
 Use "Follow" behavior on agents placed behind them
@@ -464,11 +454,43 @@ Complete
 Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
-##		√H	Factions
-###			H	Annoyed at Faction 1-4
-###			H	Friendly to Faction 1-4
-###			√	Aligned to Faction 1-4
-###			√	Hostile to Faction 1-4
+##		√H	Combat
+###			H	Lockdowner
+Can't get these to fire, even with vanilla supercop. Pending advice from Cyan, most likely.
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
+###			√	Use Drugs in Combat
+Complete
+##		√H	Faction
+###			H	Config Files for unique player-defined factions
+Generate traits based on these names
+Allow multiple faction list files in a folder, to increase ease of compatibility.
+###			H	00 Refactor
+These should inherit from a shared class
+public override char Faction => '1', etc.
+public override string Relationship => VRelationship.Aligned, etc.
+###			H	Faction 1 Annoyed
+###			H	Faction 1 Friendly
+###			H	Faction 1 Loyal
+###			H	Faction 2 Annoyed
+###			H	Faction 2 Friendly
+###			H	Faction 2 Loyal
+###			H	Faction 3 Annoyed
+###			H	Faction 3 Friendly
+###			H	Faction 3 Loyal
+###			H	Faction 4 Annoyed
+###			H	Faction 4 Friendly
+###			H	Faction 4 Loyal
+###			√	Faction 1 Aligned
+###			√	Faction 1 Hostile
+###			√	Faction 2 Aligned
+###			√	Faction 2 Hostile
+###			√	Faction 3 Aligned
+###			√	Faction 3 Hostile
+###			√	Faction 4 Aligned
+###			√	Faction 4 Hostile
 ##		√H	Hire
 ###			H	Chloroform
 New
@@ -547,7 +569,7 @@ Complete
 Complete
 ###			√	Hack
 Complete
-#	H	Mutators
+#		H	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population
 ###			C	Level Editor Mutator List
@@ -860,3 +882,34 @@ Just a quick level with dialogue to
 |Level	|Area					|Notes	|
 |:-----:|:----------------------|:------|
 |	1	|Subway					|- Meet a contact, maybe see cool shit on the way. Free him from a "prison" like a subway bathroom.
+#		Notes dump - Anything below here
+Removed from Readme
+
+##			Roamer Traits
+- Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
+  - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
+  - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
+  - LevelEditor.customCharacterList has all customs saved. Iterate through this and find appropriate traits, then add through RandomAgents.fillAgents
+## CC Steam Workshop Upload
+
+- Pop up Yes/No dialogue asking if user wants to do the following:
+  - Automate screenshot of character portrait for thumbnail
+  - Automate screenshot of character stat screen
+  - Upload both screenshots into Character folder and name appropriately before upload
+  - Output a Text file with all character content for upload as a description 
+# Chunk Editor Utilities
+To Sorquol
+## Fields 
+- Multiple In Chunk field for SpawnerAgent
+
+## Item Groups *
+- Know how you can select "Slum NPCs" as a type? Why can't we do that with items? 
+
+## General *
+- Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
+- Red-tint any objects that might spawn inconsistently due to placement rules (e.g., Security Cams over gaps)
+# No header here
+The Player Edition is identical to the Designer Edition, but hides CCU content from view so it doesn't clutter the interface:
+- Hides CCU traits from Character Creation Menus
+- Hides CCU traits from Character Sheet page *
+- Hides CCU traits from HUD Trait list *

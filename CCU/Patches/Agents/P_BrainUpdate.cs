@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
 using CCU.Traits.TraitGate;
-using CCU.Traits.Active;
+using CCU.Traits.Behavior;
 
 namespace CCU.Patches.Agents
 {
@@ -433,7 +433,8 @@ namespace CCU.Patches.Agents
 										}
 									}
 
-									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pickpocket>())) && !__instance.thiefNoSteal)
+									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pickpocket>())) && 
+										!__instance.thiefNoSteal)
 									{
 										logger.LogDebug("Pickpocket check Triggered");
 
@@ -445,9 +446,10 @@ namespace CCU.Patches.Agents
 											{
 												Agent agent6 = ___agent.losCheckAtIntervalsList[num5];
 												Relationship relationship = ___agent.relationships.GetRelationship(agent6);
-												bool honorFlag = 
-													((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pickpocket>() && ___agent.HasTrait<TraitGate_HonorableThief>())) && 
-													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")));
+												bool honorFlag =
+													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")) &&
+													(___agent.agentName == "Thief" || 
+														(___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pickpocket>() && ___agent.HasTrait<HonorableThief>()));
 
 												logger.LogDebug("HonorFlag: " + honorFlag);
 

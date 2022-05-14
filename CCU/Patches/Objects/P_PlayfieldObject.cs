@@ -3,6 +3,7 @@ using HarmonyLib;
 using RogueLibsCore;
 using CCU.Traits;
 using CCU.Traits.Hire;
+using CCU.Traits.Cost;
 
 namespace CCU.Patches.Objects
 {

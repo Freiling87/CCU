@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.TraitGate
 {
-    public class GrabDrugs : CustomTrait
+    public class CommonFolk : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<GrabDrugs>()
+            RogueLibs.CreateCustomTrait<CommonFolk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will grab drugs if they see any."),
+                    [LanguageCode.English] = String.Format("This NPC will be Loyal to a player with Friend of the Common Folk."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_GrabDrugs,
+                    [LanguageCode.English] = CTrait.TraitGate_CommonFolk,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

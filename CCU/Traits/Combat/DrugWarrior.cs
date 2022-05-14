@@ -1,21 +1,22 @@
 ﻿using RogueLibsCore;
+using System;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.Combat
 {
-    public class SuckBlood : CustomTrait
+    public class DrugWarrior : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<SuckBlood>()
+            RogueLibs.CreateCustomTrait<DrugWarrior>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
+                    [LanguageCode.English] = String.Format("This character will use a random drug when entering combat."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.SuckBlood,
+                    [LanguageCode.English] = CTrait.Combat_UseDrugs,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

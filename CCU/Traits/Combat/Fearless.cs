@@ -3,20 +3,20 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Combat_Coward : CustomTrait
+    public class Fearless : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Combat_Coward>()
+            RogueLibs.CreateCustomTrait<Fearless>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will always flee from combat."),
+                    [LanguageCode.English] = String.Format("This character will never flee from combat."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Combat_Coward,
+                    [LanguageCode.English] = CTrait.Combat_Fearless,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

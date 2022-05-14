@@ -1,25 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Behavior
 {
-    public class TraitGate_CoolCannibal : CustomTrait
+    public class EatCorpse : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitGate_CoolCannibal>()
+            RogueLibs.CreateCustomTrait<EatCorpse>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait.\n\n" + 
-                    "<color=green>Interactions</color>\n" +
-                    CTrait.HideInObject + ", " + CTrait.Relationships_AggressiveCannibal + ": Will not target the player if they have Cool with Cannibals.\n" +
-                    CTrait.MerchantType_Anthropophagie + ": Will not sell wares unless player has Cool With Cannibals"),
+                    [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_CoolCannibal,
+                    [LanguageCode.English] = CTrait.EatCorpse,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

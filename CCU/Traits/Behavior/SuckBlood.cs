@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Behavior
 {
-    public class AnnoyedAtSuspicious : CustomTrait
+    public class SuckBlood : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<AnnoyedAtSuspicious>()
+            RogueLibs.CreateCustomTrait<SuckBlood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Annoyed at characters with the Suspicious trait.",
+                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_AnnoyedAtSuspicious,
+                    [LanguageCode.English] = CTrait.SuckBlood,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

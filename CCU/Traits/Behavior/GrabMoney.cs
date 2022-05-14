@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Behavior
 {
-    public class Faction_1_Aligned : CustomTrait
+    public class GrabMoney : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_1_Aligned>()
+            RogueLibs.CreateCustomTrait<GrabMoney>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
+                    [LanguageCode.English] = string.Format("This character will grab money if they see it."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction1Aligned,
+                    [LanguageCode.English] = CTrait.GrabMoney,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction1Hostile },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

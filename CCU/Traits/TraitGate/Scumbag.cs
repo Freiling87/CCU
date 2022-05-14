@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Active
+namespace CCU.Traits.TraitGate
 {
-    public class Pickpocket : CustomTrait
+    public class Scumbag : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pickpocket>()
+            RogueLibs.CreateCustomTrait<Scumbag>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Active_Pickpocket,
+                    [LanguageCode.English] = CTrait.TraitGate_Scumbag,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

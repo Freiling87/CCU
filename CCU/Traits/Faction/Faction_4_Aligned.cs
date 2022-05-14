@@ -1,27 +1,26 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Combat
+namespace CCU.Traits.Faction
 {
-    public class Combat_Fearless : CustomTrait
+    public class Faction_4_Aligned : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Combat_Fearless>()
+            RogueLibs.CreateCustomTrait<Faction_4_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will never flee from combat."),
+                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Combat_Fearless,
+                    [LanguageCode.English] = CTrait.Relationships_Faction4Aligned,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { CTrait.Relationships_Faction4Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

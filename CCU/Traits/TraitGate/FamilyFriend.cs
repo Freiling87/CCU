@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
+using System;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.TraitGate
 {
-    public class Faction_3_Hostile : CustomTrait
+    public class FamilyFriend : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_3_Hostile>()
+            RogueLibs.CreateCustomTrait<FamilyFriend>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 3.",
+                    [LanguageCode.English] = String.Format("This NPC will be Aligned to a player with Friend of the Family."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction3Hostile,
+                    [LanguageCode.English] = CTrait.TraitGate_FamilyFriend,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction3Aligned },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Faction
 {
-    public class Faction_2_Hostile : CustomTrait
+    public class Faction_1_Aligned : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_2_Hostile>()
+            RogueLibs.CreateCustomTrait<Faction_1_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 2.",
+                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction2Hostile,
+                    [LanguageCode.English] = CTrait.Relationships_Faction1Aligned,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction2Aligned },
+                    Cancellations = { CTrait.Relationships_Faction1Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -3,23 +3,22 @@ using System;
 
 namespace CCU.Traits.TraitGate
 {
-    public class TraitGate_HonorableThief : CustomTrait
+    public class CopAccess : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitGate_HonorableThief>()
+            RogueLibs.CreateCustomTrait<CopAccess>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This Agent's behaviors will react to the player's Honor Among Thieves trait.\n\n" + 
+                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n" + 
                     "<color=green>Interactions</color>\n" +
-                    CTrait.Pickpocket + ": Will not target the player if they have Honor Among Thieves.\n" +
-                    CTrait.MerchantType_Thief+ ": Will not sell items unless player has Honor Among Thieves."),
+                    CTrait.MerchantType_Contraband + ", " + CTrait.MerchantType_CopStandard + ", " + CTrait.MerchantType_CopSWAT + ": Will not sell to the player if they don't have The Law."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_HonorableThief,
+                    [LanguageCode.English] = CTrait.TraitGate_CopAccess,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

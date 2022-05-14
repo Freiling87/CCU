@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Combat
+namespace CCU.Traits.TraitGate
 {
-    public class Combat_UseDrugs : CustomTrait
+    public class Suspicioner : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Combat_UseDrugs>()
+            RogueLibs.CreateCustomTrait<Suspicioner>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will use a random drug when entering combat."),
+                    [LanguageCode.English] = "This character is Annoyed at characters with the Suspicious trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Combat_UseDrugs,
+                    [LanguageCode.English] = CTrait.Relationships_AnnoyedAtSuspicious,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,29 +1,26 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Faction
 {
-    public class TraitGate_CopAccess : CustomTrait
+    public class Faction_1_Hostile : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitGate_CopAccess>()
+            RogueLibs.CreateCustomTrait<Faction_1_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Certain NPC behaviors will only be accessible if the player has The Law.\n\n" + 
-                    "<color=green>Interactions</color>\n" +
-                    CTrait.MerchantType_Contraband + ", " + CTrait.MerchantType_CopStandard + ", " + CTrait.MerchantType_CopSWAT + ": Will not sell to the player if they don't have The Law."),
+                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 1.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_CopAccess,
+                    [LanguageCode.English] = CTrait.Relationships_Faction1Hostile,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { CTrait.Relationships_Faction1Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

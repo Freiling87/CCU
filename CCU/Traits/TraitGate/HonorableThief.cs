@@ -3,20 +3,23 @@ using System;
 
 namespace CCU.Traits.TraitGate
 {
-    public class TraitGate_Scumbag : CustomTrait
+    public class HonorableThief : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitGate_Scumbag>()
+            RogueLibs.CreateCustomTrait<HonorableThief>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer."),
+                    [LanguageCode.English] = String.Format("This Agent's behaviors will react to the player's Honor Among Thieves trait.\n\n" + 
+                    "<color=green>Interactions</color>\n" +
+                    CTrait.Pickpocket + ": Will not target the player if they have Honor Among Thieves.\n" +
+                    CTrait.MerchantType_Thief+ ": Will not sell items unless player has Honor Among Thieves."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_Scumbag,
+                    [LanguageCode.English] = CTrait.TraitGate_HonorableThief,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Faction
 {
     public class Faction_4_Hostile : CustomTrait
     {

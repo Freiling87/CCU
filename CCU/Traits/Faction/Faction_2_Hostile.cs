@@ -1,27 +1,26 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Faction
 {
-    public class TraitGate_CommonFolk : CustomTrait
+    public class Faction_2_Hostile : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitGate_CommonFolk>()
+            RogueLibs.CreateCustomTrait<Faction_2_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC will be Loyal to a player with Friend of the Common Folk."),
+                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 2.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_CommonFolk,
+                    [LanguageCode.English] = CTrait.Relationships_Faction2Hostile,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { CTrait.Relationships_Faction2Aligned },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

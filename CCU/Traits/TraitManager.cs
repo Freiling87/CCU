@@ -10,13 +10,14 @@ using CCU.Traits.MapMarker;
 using CCU.Traits.Spawn;
 using System.IO;
 using CCU.Traits.Passive;
-using CCU.Traits.Active;
+using CCU.Traits.Behavior;
 using CCU.Traits.Appearance.FacialHair;
 using CCU.Traits.MerchantType;
 using CCU.Traits.Combat;
 using CCU.Traits.Cost;
 using CCU.Traits.HireDuration;
 using CCU.Traits.Interaction;
+using CCU.Traits.Faction;
 
 namespace CCU.Traits
 {
@@ -132,7 +133,7 @@ namespace CCU.Traits
 			typeof(EatCorpse),
 			typeof(GrabDrugs),
 			typeof(GrabMoney),
-			typeof(Active.Pickpocket),
+			typeof(Behavior.Pickpocket),
 			typeof(SuckBlood),
 		};
 		public static List<Type> BehaviorPassiveTraits = new List<Type>()
@@ -146,9 +147,9 @@ namespace CCU.Traits
 		};
 		public static List<Type> CombatTraits = new List<Type>()
 		{
-			typeof(Combat_Coward),
-			typeof(Combat_Fearless),
-			typeof(Combat_Fearless)
+			typeof(Coward),
+			typeof(Fearless),
+			typeof(Fearless)
 		};
 		public static List<Type> HireCostTraits = new List<Type>()
 		{
@@ -179,7 +180,7 @@ namespace CCU.Traits
 		{
 			typeof(Extortable),
 			typeof(Moochable),
-			typeof(Buyer_MerchantType), // TODO: Review this, may have special usage as it's not in Vendor list
+			//typeof(Buyer_MerchantType), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()
 		{
@@ -191,7 +192,7 @@ namespace CCU.Traits
 		};
 		public static List<Type> RelationshipTraits = new List<Type>()
 		{
-			typeof(AnnoyedAtSuspicious),
+			typeof(Suspicioner),
 			typeof(Faction_1_Aligned),
 			typeof(Faction_1_Hostile),
 			typeof(Faction_2_Aligned),
@@ -207,12 +208,12 @@ namespace CCU.Traits
 		};
 		public static List<Type> TraitGateTraits = new List<Type>()
 		{
-			typeof(TraitGate_CommonFolk),
-			typeof(TraitGate_CoolCannibal),
-			typeof(TraitGate_CopAccess),
-			typeof(TraitGate_FamilyFriend),
-			typeof(TraitGate_HonorableThief),
-			typeof(TraitGate_Scumbag),
+			typeof(CommonFolk),
+			typeof(CoolCannibal),
+			typeof(CopAccess),
+			typeof(FamilyFriend),
+			typeof(HonorableThief),
+			typeof(Scumbag),
 		};
 		public static List<Type> MerchantTypeTraits = new List<Type>()
 		{

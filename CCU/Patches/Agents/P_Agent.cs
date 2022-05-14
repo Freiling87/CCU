@@ -6,7 +6,7 @@ using System.Reflection;
 using CCU.Traits;
 using CCU.Traits.Combat;
 using CCU.Traits.Passive;
-using CCU.Traits.Active;
+using CCU.Traits.Behavior;
 using CCU.Traits.Interaction;
 
 namespace CCU.Patches.Agents
@@ -164,7 +164,7 @@ namespace CCU.Patches.Agents
 				__instance.killerRobot = true;
 			#endregion
 			#region Combat
-			if (__instance.HasTrait<Combat_UseDrugs>())
+			if (__instance.HasTrait<DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant

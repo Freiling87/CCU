@@ -1,27 +1,26 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Faction
 {
-    public class TraitGate_FamilyFriend : CustomTrait
+    public class Faction_3_Aligned : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<TraitGate_FamilyFriend>()
+            RogueLibs.CreateCustomTrait<Faction_3_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC will be Aligned to a player with Friend of the Family."),
+                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_FamilyFriend,
+                    [LanguageCode.English] = CTrait.Relationships_Faction3Aligned,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { CTrait.Relationships_Faction3Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
