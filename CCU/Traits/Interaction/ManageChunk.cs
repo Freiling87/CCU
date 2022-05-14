@@ -1,22 +1,25 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Interaction
 {
-    public class Extortable : CustomTrait
+    public class ManageChunk : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Extortable>()
+            RogueLibs.CreateCustomTrait<ManageChunk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = String.Format("This character will manage chunks they're placed in:\n" +
+                    "- Arena\n" +
+                    "- Deportation Center\n" +
+                    "- Hotel\n"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Extortable,
+                    [LanguageCode.English] = CTrait.ManageChunk,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

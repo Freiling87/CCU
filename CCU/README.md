@@ -52,9 +52,26 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 ###				Interaction
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Extortable											|- Valid target for Extortionist
+|Administer Blood Bag								|- Lose 20HP for a Blood Bag
+|Bribe Cops											|- Pay to bribe cops
+|Bribe for Entry									|- Pay to make owners Friendly
+|Bribe for Entry (Alcohol)							|- Give Alchol to make owners Friendly
+|Borrow Money										|- Gain debt for $50
+|Buy Round											|- Pay to make everyone in chunk Friendly
+|Buy Slave											|- Pay to buy Slave
+|Donate Blood										|- Lose 20HP for $20
+|Heal Player										|- Pay to heal self
+|Identify											|- Pay to identify items
+|Influence Election									|- Pay to influence election
+|Leave Weapons Behind								|- Drop all weapons
+|Manage Chunk										|- Manage Arena, Deportation Center, or Hotel
 |Moochable											|- Valid target for Moocher
-|Vendor Buyer										|- If Agent has a Vendor trait, they will also buy items from that item pool
+|Offer Motivation									|- Give small item to make Friendly
+|Pay Debt											|- Pay off Debt
+|Play Bad Song										|- Pay to play bad song
+|Start Election										|- Interact to start Election
+|Use Blood Bag										|- Give Blood Bag to heal for 20HP
+|Visitor's Badge									|- Carries Mayor's Visitor Badge
 ###				Merchant Type
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -112,6 +129,7 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Explode On Death									|- Explode on Death
+|Extortable											|- Valid target for Extortionist
 |Guilty												|- Valid target for Cop Big Quest
 |Hackable - Tamper with Aim							|- A la Killer Robot
 |Hackable - Go Haywire								|- A la Cop Bot

@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Interaction
 {
-    public class Extortable : CustomTrait
+    public class InfluenceElection : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Extortable>()
+            RogueLibs.CreateCustomTrait<InfluenceElection>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = String.Format("This character can be paid to sway the vote."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Extortable,
+                    [LanguageCode.English] = CTrait.InfluenceElection,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Interaction
 {
-    public class Extortable : CustomTrait
+    public class BuyRound : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Extortable>()
+            RogueLibs.CreateCustomTrait<BuyRound>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = String.Format("This character can be paid to serve a round of drinks to everyone in the chunk."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Extortable,
+                    [LanguageCode.English] = CTrait.BuyRound,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

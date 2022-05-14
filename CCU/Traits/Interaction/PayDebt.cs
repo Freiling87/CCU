@@ -1,22 +1,23 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Interaction
 {
-    public class Extortable : CustomTrait
+    public class PayDebt : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Extortable>()
+            RogueLibs.CreateCustomTrait<PayDebt>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be extorted for income, if the player has the Extortionist trait."),
+                    [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
+                    "Note: If you want them to lend money as well, use {0} too." + CTrait.BorrowMoney),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Extortable,
+                    [LanguageCode.English] = CTrait.PayDebt,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

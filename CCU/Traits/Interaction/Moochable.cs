@@ -16,7 +16,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Interaction_Moochable,
+                    [LanguageCode.English] = CTrait.Moochable,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

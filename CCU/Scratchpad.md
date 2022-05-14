@@ -60,15 +60,15 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		C	Interaction
+##		CT	Interaction
 ###			C	Administer Blood Bag
 New
 ###			C	Arena Manager
 New
-###			C	Bank Teller
+###			C	Clerk - Bank
 New
 ###			C	Bribe Cops
-###			C	Bribe for Access
+###			C	Bribe Doorman
 ###			C	Buy Round
 New
 ###			C	Buy Slave
@@ -93,8 +93,18 @@ Test
 New
 ###			C	Use Bloodbag
 New
+###			C	Visitor's Badge
+Set Bribe options on separate traits
 ###			H	Cybernetic Surgery
 Curated Trait-seller
+###			H	Heal All
+Like Doctor heal, but all in party with calculated price
+###			H	Heal Other
+Like Doctor heal, but activates reticle so you can select a party member or other.
+###			H	Heal Partial
+Like Doctor heal, but at a Blood Bag level.
+####			C	Mouseover Price
+Show price to heal targeted agent before selection
 ###			H	Improve Relations w/ Faction 1-4
 New
 Costs $1000, improves your relations with that faction
@@ -131,6 +141,8 @@ New
 New
 ###			H	Train Traits - Trade
 New
+###			H	Untrusting
+This character must be Friendly or better to unlock Interaction options
 ##		C	Passive
 ###			C	Explode On Death
 ####			C	Explodes when Arrested
@@ -455,13 +467,20 @@ Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
 ##		√H	Combat
-###			H	Lockdowner
-Can't get these to fire, even with vanilla supercop. Pending advice from Cyan, most likely.
+###			√H	Drug Warrior
+####			C	Subtypes
+Uses only a specific drug on entering combat:
+						Always Crit
+	Angel Duster		Invincible
+						Invisible
+	Stimpacker			Regenerate Health
+	Cokehead			Speed
+	Roid Rager			Strength
+###			H	Lockdowner (R.I.P.)
+Apparently Lockdown walls are broken in custom levels.
 ###			√	Coward
 Complete
 ###			√	Fearless
-Complete
-###			√	Use Drugs in Combat
 Complete
 ##		√H	Faction
 ###			H	Config Files for unique player-defined factions
