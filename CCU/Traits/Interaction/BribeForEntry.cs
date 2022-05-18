@@ -1,17 +1,20 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BribeForEntry : CustomTrait
+    public class BribeForEntry : T_Interaction
     {
+        public override string ButtonText => VButtonText.BribeForEntry;
+
         [RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<BribeForEntry>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if bribed with cash."),
+                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

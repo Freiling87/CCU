@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Identify : CustomTrait
+    public class Identify : T_Interaction
     {
+        public override string ButtonText => VButtonText.Identify;
+
         [RLSetup]
         public static void Setup()
         {

@@ -4,7 +4,7 @@ namespace CCU.Traits.Cost
 {
     public class CostBanana : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<CostBanana>()

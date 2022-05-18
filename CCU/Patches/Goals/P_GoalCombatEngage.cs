@@ -12,13 +12,13 @@ namespace CCU.Patches.Goals
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        [HarmonyPostfix, HarmonyPatch(methodName:nameof(GoalCombatEngage.Process), argumentTypes: new Type[0] { })]
+        /// <summary>
+        /// Lockdowner (Shelved, possibly a vanilla bug with lockdown walls on custom levels)
+        /// </summary>
+        /// <param name="__instance"></param>
+        //[HarmonyPostfix, HarmonyPatch(methodName:nameof(GoalCombatEngage.Process), argumentTypes: new Type[0] { })]
         public static void Process_Postfix(GoalCombatEngage __instance)
         {
-            logger.LogDebug("Process_Postfix");
-            logger.LogDebug("hasLockdownWalls: " + GC.loadLevel.hasLockdownWalls);
-            
-
             if (__instance.gc.loadLevel.hasLockdownWalls && 
                 __instance.agent.HasTrait<Lockdowner>() && 
                 __instance.agent.curTileData.lockdownZone == __instance.battlingAgent.curTileData.lockdownZone && !__instance.agent.curTileData.lockdownWall && !__instance.agent.curTileData.dangerousToWalk && 

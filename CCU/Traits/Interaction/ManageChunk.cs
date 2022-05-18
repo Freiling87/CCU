@@ -3,8 +3,10 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class ManageChunk : CustomTrait
+    public class ManageChunk : T_Interaction
     {
+        public override string ButtonText => "";
+
         [RLSetup]
         public static void Setup()
         {

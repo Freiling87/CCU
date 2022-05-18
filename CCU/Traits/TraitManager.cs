@@ -179,7 +179,7 @@ namespace CCU.Traits
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
 			typeof(Extortable),
-			typeof(Moochable),
+			typeof(BorrowMoneyMoocher),
 			//typeof(Buyer_MerchantType), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()

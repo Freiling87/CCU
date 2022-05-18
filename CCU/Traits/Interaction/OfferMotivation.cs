@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class OfferMotivation : CustomTrait
+    public class OfferMotivation : T_Interaction
     {
+        public override string ButtonText => VButtonText.OfferMotivation;
+
         [RLSetup]
         public static void Setup()
         {

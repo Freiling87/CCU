@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class UseBloodBag : CustomTrait
+    public class UseBloodBag : T_Interaction
     {
+        public override string ButtonText => VButtonText.UseBloodBag;
+
         [RLSetup]
         public static void Setup()
         {

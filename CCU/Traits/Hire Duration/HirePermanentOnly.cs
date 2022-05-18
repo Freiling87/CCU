@@ -21,7 +21,7 @@ namespace CCU.Traits.HireDuration
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Permanent,
+                    [LanguageCode.English] = CTrait.PermanentOnly,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

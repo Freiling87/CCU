@@ -349,7 +349,7 @@ namespace CCU
 			Identify = "[CCU] Interaction - Identify",
 			InfluenceElection = "[CCU] Interaction - Influence Election",
 			LeaveWeaponsBehind = "[CCU] Interaction - Leave Weapons Behind",
-			ManageChunk = "[CCU] Interaction - Arena Manager", // Arena, Deportation Center, Hotel
+			ManageChunk = "[CCU] Interaction - Manage Chunk", // Arena, Deportation Center, Hotel
 			Moochable = "[CCU] Interaction - Moochable",
 			OfferMotivation = "[CCU] Interaction - Offer Motivation",
 			PayDebt = "[CCU] Interaction - Pay Debt",
@@ -440,7 +440,7 @@ namespace CCU
 			Passive_ExplodeOnDeathMolotov = "[CCU] Passive - Explode On Death (Molotov)",
 			Passive_ExplodeOnDeathSlime = "[CCU] Passive - Explode On Death (Slime)",
 			Passive_ExplodeOnDeathWater = "[CCU] Passive - Explode On Death (Water)",
-			Extortable = "[CCU] Interaction - Extortable",
+			Extortable = "[CCU] Passive - Extortable",
 			Passive_Guilty = "[CCU] Passive - Guilty",
 			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
 			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",

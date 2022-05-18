@@ -1,10 +1,15 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class LeaveWeaponsBehind : CustomTrait
+    public class LeaveWeaponsBehind : T_Interaction
     {
+        public override string ButtonText => VButtonText.LeaveWeaponsBehind;
+
+        // Should include FollowersLeaveWeaponsBehind
+
         [RLSetup]
         public static void Setup()
         {

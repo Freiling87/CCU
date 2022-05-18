@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class InfluenceElection : CustomTrait
+    public class InfluenceElection : T_Interaction
     {
+        public override string ButtonText => VButtonText.InfluenceElection;
+
         [RLSetup]
         public static void Setup()
         {

@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BribeForEntryAlcohol : CustomTrait
+    public class BribeForEntryAlcohol : T_Interaction
     {
+        public override string ButtonText => VButtonText.BribeForEntryAlcohol_1;
+
         [RLSetup]
         public static void Setup()
         {

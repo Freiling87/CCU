@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BuySlave : CustomTrait
+    public class BuySlave : T_Interaction
     {
+        public override string ButtonText => VButtonText.PurchaseSlave;
+
         [RLSetup]
         public static void Setup()
         {

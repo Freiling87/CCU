@@ -14,6 +14,7 @@ namespace CCU.Extensions
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// TODO: Move to Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDetails.LockpickDoorReal))]
 		public static void LockpickDoorReal_Postfix(GoalDetails __instance, ref Agent ___agent)
 		{

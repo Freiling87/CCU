@@ -4,7 +4,7 @@ namespace CCU.Traits.Cost
 {
     public class CostAlcohol : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<CostAlcohol>()

@@ -53,10 +53,10 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Administer Blood Bag								|- Lose 20HP for a Blood Bag
+|Borrow Money										|- Gain debt for $50
 |Bribe Cops											|- Pay to bribe cops
 |Bribe for Entry									|- Pay to make owners Friendly
 |Bribe for Entry (Alcohol)							|- Give Alchol to make owners Friendly
-|Borrow Money										|- Gain debt for $50
 |Buy Round											|- Pay to make everyone in chunk Friendly
 |Buy Slave											|- Pay to buy Slave
 |Donate Blood										|- Lose 20HP for $20

@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class PayDebt : CustomTrait
+    public class PayDebt : T_Interaction
     {
+        public override string ButtonText => VButtonText.PayDebt;
+
         [RLSetup]
         public static void Setup()
         {
@@ -12,7 +15,7 @@ namespace CCU.Traits.Interaction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
-                    "Note: If you want them to lend money as well, use {0} too." + CTrait.BorrowMoney),
+                    "Note: If you want them to lend money as well, use {0} too.", CTrait.BorrowMoney),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

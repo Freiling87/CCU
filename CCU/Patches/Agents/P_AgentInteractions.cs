@@ -12,6 +12,7 @@ using Random = UnityEngine.Random;
 using CCU.Traits.Passive;
 using CCU.Traits.Cost;
 using CCU.Traits.Interaction;
+using System.Linq;
 
 namespace CCU.Patches.Agents
 {
@@ -1816,6 +1817,7 @@ namespace CCU.Patches.Agents
 						else // put agentName == "Custom" or whatever in here when you know what it is
 						{
 							logger.LogDebug("=" + agentName + "=");
+							string relationship = agent.relationships.GetRel(interactingAgent);
 
 							if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraitsGroup))
 							{
@@ -1876,10 +1878,72 @@ namespace CCU.Patches.Agents
 								}
 
 								// Interaction 
-								if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
+								foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
 								{
-									if (agent.HasTrait<Moochable>() && interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher))
-										__instance.AddButton("BorrowMoney");
+									// Simple Exceptions
+									if ((interaction is BorrowMoneyMoocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
+										(interaction is BribeCops && (interactingAgent.aboveTheLaw || !interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))) ||
+										((interaction is BribeForEntry || interaction is BribeForEntryAlcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
+										(interaction is InfluenceElection && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
+										(interaction is LeaveWeaponsBehind && !interactingAgent.inventory.HasWeapons()) ||
+										(interaction is OfferMotivation && agent.oma.offeredOfficeDrone) ||
+										(interaction is PayDebt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
+																&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt2)
+																&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
+										(interaction is UseBloodBag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
+										continue;
+
+									// Complex Exceptions
+									if (interaction is BuyRound)
+									{
+										List<Agent> patrons = new List<Agent>();
+										for (int i = 0; i < agent.gc.agentList.Count; i++)
+										{
+											Agent possiblePatron = agent.gc.agentList[i];
+
+											if (possiblePatron.startingChunk == agent.startingChunk && possiblePatron != agent && possiblePatron.prisoner == 0 && !possiblePatron.dead && !possiblePatron.zombified && !possiblePatron.oma.mindControlled && possiblePatron.gc.tileInfo.GetTileData(possiblePatron.tr.position).chunkID == possiblePatron.startingChunk)
+											{
+												if (relationship != "Hateful" && relationship != "Aligned" && relationship != "Loyal" && relationship != "Submissive" &&
+													!possiblePatron.statusEffects.hasTrait("BloodRestoresHealth") && !possiblePatron.statusEffects.hasTrait("OilRestoresHealth"))
+													patrons.Add(possiblePatron);
+											}
+										}
+
+										if (!patrons.Any())
+											continue;
+									}
+									else if (interaction is BuySlave)
+									{
+										bool hasSlaves = false;
+
+										for (int i = 0; i < agent.gc.agentList.Count; i++)
+										{
+											Agent possibleSlave = agent.gc.agentList[i];
+
+											if (possibleSlave.agentName == "Slave" && possibleSlave.slaveOwners.Contains(agent) && (possibleSlave.rescueForQuest != null || (!possibleSlave.gc.serverPlayer && possibleSlave.oma.rescuingForQuest)))
+											{
+												hasSlaves = true;
+												break;
+											}
+										}
+
+										if (!hasSlaves)
+											continue;
+									}
+									else if (interaction is PlayBadMusic)
+									{
+										bool turntables = false;
+										foreach (ObjectReal objectReal in GC.objectRealList)
+										{
+											if (objectReal.objectName == vObject.Turntables && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
+												turntables = true;
+										}
+
+										if (!turntables)
+											continue;
+									}
+
+									__instance.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.ButtonText));
 								}
 
 								// Merchant 

@@ -114,9 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
+    <Compile Include="Extensions\E_Agent.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Localization\VButtonText.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonHeight50.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonHeight75.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonTextAlignLeft.cs" />
@@ -162,10 +164,12 @@
     <Compile Include="Traits\Hire\Pickpocket.cs" />
     <Compile Include="Traits\Hire\Poison.cs" />
     <Compile Include="Traits\Interaction\AdministerBloodBag.cs" />
+    <Compile Include="Traits\Interaction\BorrowMoney.cs" />
+    <Compile Include="Traits\Interaction\T_Interaction.cs" />
+    <Compile Include="Traits\Interaction\PlayBadMusic.cs" />
     <Compile Include="Traits\Interaction\PayDebt.cs" />
     <Compile Include="Traits\Interaction\ManageChunk.cs" />
     <Compile Include="Traits\Interaction\BribeForEntryAlcohol.cs" />
-    <Compile Include="Traits\Interaction\BorrowMoney.cs" />
     <Compile Include="Traits\Interaction\BribeCops.cs" />
     <Compile Include="Traits\Interaction\BribeForEntry.cs" />
     <Compile Include="Traits\Interaction\BuyRound.cs" />
@@ -177,8 +181,6 @@
     <Compile Include="Traits\Interaction\UseBloodbag.cs" />
     <Compile Include="Traits\Interaction\OfferMotivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
-    <Compile Include="Traits\Interaction\StartElection.cs" />
-    <Compile Include="Traits\Interaction\VisitorsBadge.cs" />
     <Compile Include="Traits\Merchant\Merchant_Buyer.cs" />
     <Compile Include="Traits\Merchant\Merchant_BuyerOnly.cs" />
     <Compile Include="Traits\Behavior\AccidentProne.cs" />
@@ -196,7 +198,9 @@
     <Compile Include="Traits\Hire\Safecrack.cs" />
     <Compile Include="Traits\Hire\Tamper.cs" />
     <Compile Include="Traits\Passive\Extortable.cs" />
-    <Compile Include="Traits\Interaction\Moochable.cs" />
+    <Compile Include="Traits\Interaction\BorrowMoneyMoocher.cs" />
+    <Compile Include="Traits\Passive\HackableHaywire.cs" />
+    <Compile Include="Traits\Passive\HackableTamperWithAim.cs" />
     <Compile Include="Traits\TraitGate\Suspicioner.cs" />
     <Compile Include="Traits\Relationships\HostileToCannibals.cs" />
     <Compile Include="Traits\Relationships\HostileToSoldiers.cs" />

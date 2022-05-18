@@ -45,11 +45,17 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 #		General Reminders & To-Dos
-- I merged Passive and Interaction, but I'm thinking they need to be split back up. 
-  - There was also a specific reason to make Extortable & Moochable into Passive instead of Interaction or Trait Trigger, but I can't remember it. Write it here if you do.
-- Dynamic display name generation
+##			C	Trait Class Refactor
+###				C	CCU Trait
+####			C	List<string> CCU_Categories
+To avoid having to maintain string lists, use Linq expressions instead from RogueFramework.Unlocks
+####				C	CCU_DisplayName()
   - name = GenerateCCUName(trait) →
     - [CCU] + Last namespace + Nameof(trait)
+###				C	Interaction Trait
+Subclass of CCU trait
+string: ButtonText
+This will handle most cases
 ##		H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
@@ -60,41 +66,46 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		CT	Interaction
-###			C	Administer Blood Bag
+##		H	Interaction
+###			C	Shelf?
+This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
+Plus, it sounds like Agent Intearctions might be next in line for RogueLibs.
+SORRY, category!
+###			C	00 Cost Display
+Bananas & alcohol are hardcoded
+To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
+You might be able to simply remove 
+###			C	Blood Bag - Administer
+Might need extratext to work
+Setting to Hospital chunk didn't work
+###			C	Blood Bag - Donate
+Might need extratext to work
+###			C	Blood Bag - Use
 New
-###			C	Arena Manager
-New
-###			C	Clerk - Bank
-New
+###			C	Borrow Money
+Moocher one worked, but not this one
+Setting to Bank chunk didn't work
 ###			C	Bribe Cops
-###			C	Bribe Doorman
+Check gates
+###			C	Bribe For Entry
+Check gates
+###			C	Bribe For Entry (Alcohol)
+Check gates
 ###			C	Buy Round
-New
-###			C	Buy Slave
-New
-###			C	Clerk - Blood Bank
-New
-###			C	Clerk - Deportation Center
-New
-###			C	Clerk - Hotel
-New
-###			C	Clerk - Mayor's Office
-New
-###			C	Heal
-New
+####			C	Add Cost
+Didn't show up with vanilla text
+###			H	Buy Slave
+Pending actual assignment of owned slaves
+###			C	Heal (Player)
+Not showing up after cost text added
 ###			C	Identify
+Interface works, but unidentified items are not enabled to click
+###			C	Manage Chunk
 New
-###			C	Influence Election
+###			C	Pay Debt
+Technically works but didn't show/charge a cost
+###			C	Play Bad Music
 New
-###			T	Moochable
-Test
-###			C	Offer Motivation
-New
-###			C	Use Bloodbag
-New
-###			C	Visitor's Badge
-Set Bribe options on separate traits
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Heal All
@@ -121,6 +132,8 @@ Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
+###			H	Start Election
+New
 ###			H	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
@@ -143,11 +156,21 @@ New
 New
 ###			H	Untrusting
 This character must be Friendly or better to unlock Interaction options
+###			H	Visitor's Badge
+Set Bribe options on separate traits
+###			√	Borrow Money (Moocher)
+Complete
+###			√	Influence Election
+Complete
+###			√	Leave Weapons Behind
+Complete
+###			√	Offer Motivation
+Complete
 ##		C	Passive
 ###			C	Explode On Death
 ####			C	Explodes when Arrested
-###			T	Extortable
-Test
+###			√	Extortable
+Complete
 ###			C	Hackable - Tamper With Aim
 New
 ###			C	Hackable - Go Haywire
