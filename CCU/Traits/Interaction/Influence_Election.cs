@@ -4,22 +4,22 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BribeForEntry : T_Interaction
+    public class Influence_Election : T_Interaction
     {
-        public override string ButtonText => VButtonText.BribeForEntry;
+        public override string ButtonText => VButtonText.InfluenceElection;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BribeForEntry>()
+            RogueLibs.CreateCustomTrait<Influence_Election>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),
+                    [LanguageCode.English] = String.Format("This character can be paid to sway the vote."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BribeForEntry,
+                    [LanguageCode.English] = DisplayName<Influence_Election>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

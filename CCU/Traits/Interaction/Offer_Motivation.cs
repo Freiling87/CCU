@@ -4,22 +4,22 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class HealPlayer : T_Interaction
+    public class Offer_Motivation : T_Interaction
     {
-        public override string ButtonText => VButtonText.Heal;
+        public override string ButtonText => VButtonText.OfferMotivation;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HealPlayer>()
+            RogueLibs.CreateCustomTrait<Offer_Motivation>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can heal, for money.\n\nThey may or may not keep it real."),
+                    [LanguageCode.English] = String.Format("This character can be given small items, and will become Friendly."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.HealPlayer,
+                    [LanguageCode.English] = DisplayName<Offer_Motivation>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

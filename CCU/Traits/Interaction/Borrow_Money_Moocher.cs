@@ -1,27 +1,25 @@
 ﻿using RogueLibsCore;
 using System;
+using SORCE.Localization;
 
 namespace CCU.Traits.Interaction
 {
-    public class ManageChunk : T_Interaction
+    public class Borrow_Money_Moocher : T_Interaction
     {
-        public override string ButtonText => "";
+        public override string ButtonText => VButtonText.BorrowMoney;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<ManageChunk>()
+            RogueLibs.CreateCustomTrait<Borrow_Money_Moocher>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will manage chunks they're placed in:\n" +
-                    "- Arena\n" +
-                    "- Deportation Center\n" +
-                    "- Hotel\n"),
+                    [LanguageCode.English] = String.Format("This character can lend money, if the player has the Moocher trait."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.ManageChunk,
+                    [LanguageCode.English] = DisplayName<Borrow_Money_Moocher>("Borrow Money (Moocher)"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

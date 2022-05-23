@@ -1,7 +1,7 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.MerchantType
+namespace CCU.Traits.Merchant_Type
 {
     public class MerchantType_Villain : CustomTrait
     {

@@ -4,23 +4,22 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class PayDebt : T_Interaction
+    public class Bribe_for_Entry : T_Interaction
     {
-        public override string ButtonText => VButtonText.PayDebt;
+        public override string ButtonText => VButtonText.BribeForEntry;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<PayDebt>()
+            RogueLibs.CreateCustomTrait<Bribe_for_Entry>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
-                    "Note: If you want them to lend money as well, use {0} too.", CTrait.BorrowMoney),
+                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PayDebt,
+                    [LanguageCode.English] = DisplayName<Bribe_for_Entry>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -4,22 +4,22 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class DonateBlood : T_Interaction
+    public class UseBloodBag : T_Interaction
     {
-        public override string ButtonText => VButtonText.DonateBlood;
+        public override string ButtonText => VButtonText.UseBloodBag;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<DonateBlood>()
+            RogueLibs.CreateCustomTrait<UseBloodBag>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can administer blood bags for cash."),
+                    [LanguageCode.English] = String.Format("This character can help the player use a Blood Bag in their inventory."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.DonateBlood,
+                    [LanguageCode.English] = DisplayName<UseBloodBag>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

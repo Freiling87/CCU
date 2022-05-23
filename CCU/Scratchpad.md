@@ -4,14 +4,6 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Top-Priority Bugs
-##		C	Uh AI broke
-- Once I got to Industrial
-  - Interactions proceed normally
-  - Combat normal if provoked, but only within a certain distance, otherwise they stand or walk in place
-  - Shopkeepers do not move, even if hostiled, but do go Submissive
-  - Wander, Patrol, Knock
-    - NPCs just stand in place
-- The error persists even after leaving industrial, so something is actually breaking
 ##		C	Blood Junkie Fast Heal button wasn't using blood bags
 - First time it occurred, need to log
   - Also can't manually drink them

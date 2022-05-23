@@ -4,24 +4,22 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class LeaveWeaponsBehind : T_Interaction
+    public class Bribe_for_Entry_Alcohol : T_Interaction
     {
-        public override string ButtonText => VButtonText.LeaveWeaponsBehind;
-
-        // Should include FollowersLeaveWeaponsBehind
+        public override string ButtonText => VButtonText.BribeForEntryAlcohol_1;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<LeaveWeaponsBehind>()
+            RogueLibs.CreateCustomTrait<Bribe_for_Entry_Alcohol>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be interacted with to drop all weapons in the Player's inventory."),
+                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if bribed with alcohol."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.LeaveWeaponsBehind,
+                    [LanguageCode.English] = DisplayName<Bribe_for_Entry_Alcohol>("Bribe for Entry (Alcohol)"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -4,22 +4,24 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class UseBloodBag : T_Interaction
+    public class Leave_Weapons_Behind : T_Interaction
     {
-        public override string ButtonText => VButtonText.UseBloodBag;
+        public override string ButtonText => VButtonText.LeaveWeaponsBehind;
+
+        // Should include FollowersLeaveWeaponsBehind
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<UseBloodBag>()
+            RogueLibs.CreateCustomTrait<Leave_Weapons_Behind>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can help the player use a Blood Bag in their inventory."),
+                    [LanguageCode.English] = String.Format("This character can be interacted with to drop all weapons in the Player's inventory."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.UseBloodBag,
+                    [LanguageCode.English] = DisplayName<Leave_Weapons_Behind>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

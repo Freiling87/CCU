@@ -1,25 +1,25 @@
 ﻿using RogueLibsCore;
-using System;
 using SORCE.Localization;
+using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BorrowMoney : T_Interaction
+    public class Buy_Slave : T_Interaction
     {
-        public override string ButtonText => VButtonText.BorrowMoney;
+        public override string ButtonText => VButtonText.PurchaseSlave;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BorrowMoney>()
+            RogueLibs.CreateCustomTrait<Buy_Slave>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can lend money."),
+                    [LanguageCode.English] = String.Format("If this character owns any Slaves, they will sell them."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BorrowMoney,
+                    [LanguageCode.English] = DisplayName<Buy_Slave>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

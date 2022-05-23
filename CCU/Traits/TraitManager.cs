@@ -6,16 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CCU.Traits.Relationships;
-using CCU.Traits.MapMarker;
+using CCU.Traits.Map_Marker;
 using CCU.Traits.Spawn;
 using System.IO;
 using CCU.Traits.Passive;
 using CCU.Traits.Behavior;
 using CCU.Traits.Appearance.FacialHair;
-using CCU.Traits.MerchantType;
+using CCU.Traits.Merchant_Type;
 using CCU.Traits.Combat;
 using CCU.Traits.Cost;
-using CCU.Traits.HireDuration;
+using CCU.Traits.Hire_Duration;
 using CCU.Traits.Interaction;
 using CCU.Traits.Faction;
 
@@ -166,20 +166,20 @@ namespace CCU.Traits
 		};
 		public static List<Type> HireTypeTraits = new List<Type>()
 		{
-			typeof(Bodyguard),
-			typeof(BreakIn),
-			typeof(CauseARuckus),
-			typeof(DisarmTrap),
-			typeof(Hack),
+			typeof(Muscle),
+			typeof(Security_Expert),
+			typeof(Decoy),
+			typeof(Trapper),
+			typeof(Hacker),
 			typeof(Hire.Pickpocket),
-			typeof(Poison),
-			typeof(Safecrack),
-			typeof(Tamper),
+			typeof(Poisoner),
+			typeof(Safecracker),
+			typeof(Saboteur),
 		};
 		public static List<Type> InteractionTraits = new List<Type>()
 		{
 			typeof(Extortable),
-			typeof(BorrowMoneyMoocher),
+			typeof(Borrow_Money_Moocher),
 			//typeof(Buyer_MerchantType), // TODO: Review this, may have special usage as it's not in Vendor list
 		};
 		public static List<Type> LoadoutTraits = new List<Type>()

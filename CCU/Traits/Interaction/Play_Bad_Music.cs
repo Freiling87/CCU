@@ -1,25 +1,25 @@
 ﻿using RogueLibsCore;
-using System;
 using SORCE.Localization;
+using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BorrowMoneyMoocher : T_Interaction
+    public class Play_Bad_Music : T_Interaction
     {
-        public override string ButtonText => VButtonText.BorrowMoney;
+        public override string ButtonText => VButtonText.PlayBadMusic;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BorrowMoneyMoocher>()
+            RogueLibs.CreateCustomTrait<Play_Bad_Music>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can lend money, if the player has the Moocher trait."),
+                    [LanguageCode.English] = String.Format("This character can be paid to play a bad song, clearing the chunk out."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Moochable,
+                    [LanguageCode.English] = DisplayName<Play_Bad_Music>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

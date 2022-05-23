@@ -1,25 +1,25 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
 using System;
+using SORCE.Localization;
 
 namespace CCU.Traits.Interaction
 {
-    public class BribeCops : T_Interaction
+    public class Borrow_Money : T_Interaction
     {
-        public override string ButtonText => VButtonText.BribeCops;
+        public override string ButtonText => VButtonText.BorrowMoney;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BribeCops>()
+            RogueLibs.CreateCustomTrait<Borrow_Money>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will accept cash to bribe law enforcement."),
+                    [LanguageCode.English] = String.Format("This character can lend money."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BribeCops,
+                    [LanguageCode.English] = DisplayName<Borrow_Money>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

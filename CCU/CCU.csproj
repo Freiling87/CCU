@@ -103,7 +103,7 @@
       <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\CCU\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
@@ -118,6 +118,7 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Localization\LocalizationTools.cs" />
     <Compile Include="Localization\VButtonText.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonHeight50.cs" />
     <Compile Include="Mutators\Interface\ScrollingButtonHeight75.cs" />
@@ -159,27 +160,27 @@
     <Compile Include="Traits\Cost\CostAlcohol.cs" />
     <Compile Include="Traits\Cost\CostZero.cs" />
     <Compile Include="Traits\Hire Duration\HirePermanentOnly.cs" />
-    <Compile Include="Traits\Hire\DisarmTrap.cs" />
+    <Compile Include="Traits\Hire\Trapper.cs" />
     <Compile Include="Traits\Hire Duration\HirePermanent.cs" />
     <Compile Include="Traits\Hire\Pickpocket.cs" />
-    <Compile Include="Traits\Hire\Poison.cs" />
-    <Compile Include="Traits\Interaction\AdministerBloodBag.cs" />
-    <Compile Include="Traits\Interaction\BorrowMoney.cs" />
+    <Compile Include="Traits\Hire\Poisoner.cs" />
+    <Compile Include="Traits\Interaction\Administer_Blood_Bag.cs" />
+    <Compile Include="Traits\Interaction\Borrow_Money.cs" />
     <Compile Include="Traits\Interaction\T_Interaction.cs" />
-    <Compile Include="Traits\Interaction\PlayBadMusic.cs" />
-    <Compile Include="Traits\Interaction\PayDebt.cs" />
-    <Compile Include="Traits\Interaction\ManageChunk.cs" />
-    <Compile Include="Traits\Interaction\BribeForEntryAlcohol.cs" />
-    <Compile Include="Traits\Interaction\BribeCops.cs" />
-    <Compile Include="Traits\Interaction\BribeForEntry.cs" />
-    <Compile Include="Traits\Interaction\BuyRound.cs" />
-    <Compile Include="Traits\Interaction\BuySlave.cs" />
-    <Compile Include="Traits\Interaction\DonateBlood.cs" />
-    <Compile Include="Traits\Interaction\HealPlayer.cs" />
-    <Compile Include="Traits\Interaction\LeaveWeaponsBehind.cs" />
-    <Compile Include="Traits\Interaction\InfluenceElection.cs" />
-    <Compile Include="Traits\Interaction\UseBloodbag.cs" />
-    <Compile Include="Traits\Interaction\OfferMotivation.cs" />
+    <Compile Include="Traits\Interaction\Play_Bad_Music.cs" />
+    <Compile Include="Traits\Interaction\Pay_Debt.cs" />
+    <Compile Include="Traits\Interaction\Manage_Chunk.cs" />
+    <Compile Include="Traits\Interaction\Bribe_for_Entry_Alcohol.cs" />
+    <Compile Include="Traits\Interaction\Bribe_Cops.cs" />
+    <Compile Include="Traits\Interaction\Bribe_for_Entry.cs" />
+    <Compile Include="Traits\Interaction\Buy_Round.cs" />
+    <Compile Include="Traits\Interaction\Buy_Slave.cs" />
+    <Compile Include="Traits\Interaction\Donate_Blood.cs" />
+    <Compile Include="Traits\Interaction\Heal_Player.cs" />
+    <Compile Include="Traits\Interaction\Leave_Weapons_Behind.cs" />
+    <Compile Include="Traits\Interaction\Influence_Election.cs" />
+    <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
+    <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
     <Compile Include="Traits\Merchant\Merchant_Buyer.cs" />
     <Compile Include="Traits\Merchant\Merchant_BuyerOnly.cs" />
@@ -189,16 +190,16 @@
     <Compile Include="Traits\Combat\Fearless.cs" />
     <Compile Include="Traits\Combat\Coward.cs" />
     <Compile Include="Traits\Combat\DrugWarrior.cs" />
-    <Compile Include="Traits\Hire\Bodyguard.cs" />
-    <Compile Include="Traits\Hire\CauseARuckus.cs" />
+    <Compile Include="Traits\Hire\Muscle.cs" />
+    <Compile Include="Traits\Hire\Decoy.cs" />
     <Compile Include="Traits\Cost\CostBanana.cs" />
     <Compile Include="Traits\Cost\CostLess.cs" />
     <Compile Include="Traits\Cost\CostMore.cs" />
-    <Compile Include="Traits\Hire\Hack.cs" />
-    <Compile Include="Traits\Hire\Safecrack.cs" />
-    <Compile Include="Traits\Hire\Tamper.cs" />
+    <Compile Include="Traits\Hire\Hacker.cs" />
+    <Compile Include="Traits\Hire\Safecracker.cs" />
+    <Compile Include="Traits\Hire\Saboteur.cs" />
     <Compile Include="Traits\Passive\Extortable.cs" />
-    <Compile Include="Traits\Interaction\BorrowMoneyMoocher.cs" />
+    <Compile Include="Traits\Interaction\Borrow_Money_Moocher.cs" />
     <Compile Include="Traits\Passive\HackableHaywire.cs" />
     <Compile Include="Traits\Passive\HackableTamperWithAim.cs" />
     <Compile Include="Traits\TraitGate\Suspicioner.cs" />
@@ -274,7 +275,7 @@
     <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
     <Compile Include="Traits\Spawn\Bodyguarded_Pilot.cs" />
     <Compile Include="Traits\TraitManager.cs" />
-    <Compile Include="Traits\Hire\BreakIn.cs" />
+    <Compile Include="Traits\Hire\Security_Expert.cs" />
     <Compile Include="Traits\TraitGate\HonorableThief.cs" />
     <Compile Include="Traits\Merchant Type\MerchantType_Thief.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Beard.cs" />

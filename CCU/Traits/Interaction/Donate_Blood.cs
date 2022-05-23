@@ -4,22 +4,22 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BuyRound : T_Interaction
+    public class Donate_Blood : T_Interaction
     {
-        public override string ButtonText => VButtonText.BuyRound;
+        public override string ButtonText => VButtonText.DonateBlood;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BuyRound>()
+            RogueLibs.CreateCustomTrait<Donate_Blood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be paid to serve a round of drinks to everyone in the chunk."),
+                    [LanguageCode.English] = String.Format("This character can administer blood bags for cash."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BuyRound,
+                    [LanguageCode.English] = DisplayName<Donate_Blood>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,25 +1,27 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
 using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class BribeForEntryAlcohol : T_Interaction
+    public class Manage_Chunk : T_Interaction
     {
-        public override string ButtonText => VButtonText.BribeForEntryAlcohol_1;
+        public override string ButtonText => "";
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BribeForEntryAlcohol>()
+            RogueLibs.CreateCustomTrait<Manage_Chunk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if bribed with alcohol."),
+                    [LanguageCode.English] = String.Format("This character will manage chunks they're placed in:\n" +
+                    "- Arena\n" +
+                    "- Deportation Center\n" +
+                    "- Hotel\n"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BribeForEntryAlcohol,
+                    [LanguageCode.English] = DisplayName<Manage_Chunk>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

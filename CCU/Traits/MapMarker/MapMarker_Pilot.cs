@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace CCU.Traits.MapMarker
+namespace CCU.Traits.Map_Marker
 {
 	public class MapMarker_Pilot : CustomTrait
 	{
