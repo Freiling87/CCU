@@ -1,18 +1,12 @@
-﻿using System;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx.Logging;
-using CCU.Mutators.Interface;
-using HarmonyLib;
-using RogueLibsCore;
-using UnityEngine;
 
 namespace CCU.Mutators
 {
-	public static class MutatorManager
+    public static class MutatorManager
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -74,12 +68,6 @@ namespace CCU.Mutators
 		public static List<Type> LevelMutators = new List<Type>()
 		{
 
-		};
-		public static List<Type> FontSizeMutators = new List<Type>()
-		{
-			typeof(ScrollingButtonHeight50),
-			typeof(ScrollingButtonHeight75),
-			typeof(ScrollingButtonTextSizeStatic),
 		};
 	}
 }

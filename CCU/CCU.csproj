@@ -120,10 +120,6 @@
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Localization\LocalizationTools.cs" />
     <Compile Include="Localization\VButtonText.cs" />
-    <Compile Include="Mutators\Interface\ScrollingButtonHeight50.cs" />
-    <Compile Include="Mutators\Interface\ScrollingButtonHeight75.cs" />
-    <Compile Include="Mutators\Interface\ScrollingButtonTextAlignLeft.cs" />
-    <Compile Include="Mutators\Interface\ScrollingButtonTextSizeStatic.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
     <Compile Include="Mutators\Followers\HomesicknessDisabled.cs" />
     <Compile Include="Mutators\Followers\HomesicknessMandatory.cs" />
@@ -322,6 +318,7 @@
     <Folder Include="Documentation\" />
     <Folder Include="Mutators\Branching\" />
     <Folder Include="Mutators\Gameplay\" />
+    <Folder Include="Mutators\Interface\" />
     <Folder Include="Mutators\Utility\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />

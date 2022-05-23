@@ -656,18 +656,9 @@ Gate level access
 ###			C	Traits for Level Branching
 ##		T	Followers
 ###			T	Homesickness Disabled
-- Attempting with setting CanGobetweenLevels after SetupAgentStats, but I think you'll need it in multiple places.
-- This is acting unexpectedly, but next time you test be clear on the rules.
-- NPCs who WILL follow:
-  - Freed Prisoners
-  - Spawned Clones
-  - Friend Phone
-- I'm beginning to think maybe I just misunderstood something when I first saw this bug. Try it again and see what happens.
-- Now, the *failure* to skip homesickness with the mutator surprised me
+Test
 ###			T	Homesickness Mandatory
-- First attempt
-Always dismiss hires at end of level, even if Homesickness Killer is active
-ExitPoint.EmployeesExit prefix
+Test
 ##		C	Gameplay
 ###			C	No Funny Business
 New
