@@ -4,8 +4,6 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Top-Priority Bugs
-##		C	Manhole spawned in home base
-This was with SORCE running as well
 ##		C	Uh AI broke
 - Once I got to Industrial
   - Interactions proceed normally
@@ -47,15 +45,573 @@ This was with SORCE running as well
 
 ---
 #		General Reminders & To-Dos
-- I merged Passive and Interaction, but I'm thinking they need to be split back up. 
-  - There was also a specific reason to make Extortable & Moochable into Passive instead of Interaction or Trait Trigger, but I can't remember it. Write it here if you do.
-- Dynamic display name generation
+##			C	Trait Class Refactor
+###				C	CCU Trait
+####			C	List<string> CCU_Categories
+To avoid having to maintain string lists, use Linq expressions instead from RogueFramework.Unlocks
+####				C	CCU_DisplayName()
   - name = GenerateCCUName(trait) →
     - [CCU] + Last namespace + Nameof(trait)
----
+###				C	Interaction Trait
+Subclass of CCU trait
+string: ButtonText
+This will handle most cases
+##		H	Config Files
+###				Custom Flag list
+Allow player to name booleans uniquely.
+These should be grouped by Campaign, since that's the only place they're valid.
+The config file should match the name of the campaign, if they allow the same characters.
+###				Custom Level Tag List?
+Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#	H	Mutators
+#	CT	Traits
+##		H	Interaction
+###			C	Shelf?
+This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
+Plus, it sounds like Agent Intearctions might be next in line for RogueLibs.
+SORRY, category!
+###			C	00 Cost Display
+Bananas & alcohol are hardcoded
+To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
+You might be able to simply remove 
+###			C	Blood Bag - Administer
+Might need extratext to work
+Setting to Hospital chunk didn't work
+###			C	Blood Bag - Donate
+Might need extratext to work
+###			C	Blood Bag - Use
+New
+###			C	Borrow Money
+Moocher one worked, but not this one
+Setting to Bank chunk didn't work
+###			C	Bribe Cops
+Check gates
+###			C	Bribe For Entry
+Check gates
+###			C	Bribe For Entry (Alcohol)
+Check gates
+###			C	Buy Round
+####			C	Add Cost
+Didn't show up with vanilla text
+###			H	Buy Slave
+Pending actual assignment of owned slaves
+###			C	Heal (Player)
+Not showing up after cost text added
+###			C	Identify
+Interface works, but unidentified items are not enabled to click
+###			C	Manage Chunk
+New
+###			C	Pay Debt
+Technically works but didn't show/charge a cost
+###			C	Play Bad Music
+New
+###			H	Cybernetic Surgery
+Curated Trait-seller
+###			H	Heal All
+Like Doctor heal, but all in party with calculated price
+###			H	Heal Other
+Like Doctor heal, but activates reticle so you can select a party member or other.
+###			H	Heal Partial
+Like Doctor heal, but at a Blood Bag level.
+####			C	Mouseover Price
+Show price to heal targeted agent before selection
+###			H	Improve Relations w/ Faction 1-4
+New
+Costs $1000, improves your relations with that faction
+###			H	Quest Giver
+New
+###			H	Refill Guns
+New
+###			H	Repair Armor
+New
+###			H	Repair Weapons
+New
+###			H	Sell Faction Intel 1-4
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
+###			H	Start Election
+New
+###			H	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			H	Train Attributes (Split to each)
+New
+###			H	Train Traits - Defense
+New
+Sell traits for double their Upgrade Machine cost
+###			H	Train Traits - Guns
+New
+###			H	Train Traits - Melee
+New
+###			H	Train Traits - Movement
+New
+###			H	Train Traits - Social
+New
+###			H	Train Traits - Stealth
+New
+###			H	Train Traits - Trade
+New
+###			H	Untrusting
+This character must be Friendly or better to unlock Interaction options
+###			H	Visitor's Badge
+Set Bribe options on separate traits
+###			√	Borrow Money (Moocher)
+Complete
+###			√	Influence Election
+Complete
+###			√	Leave Weapons Behind
+Complete
+###			√	Offer Motivation
+Complete
+##		C	Passive
+###			C	Explode On Death
+####			C	Explodes when Arrested
+###			√	Extortable
+Complete
+###			C	Hackable - Tamper With Aim
+New
+###			C	Hackable - Go Haywire
+New
+###			C	Innocent
+New
+XP Penalty for neutralizing
+###			C	Invincible
+New
+###			C	Possessed
+Agent.SecretShapeshifter
+###			C	Status Immunity
+Agent.preventStatusEffects
+###			C	Vision Beams (Cop Bot)
+New
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			C	Z-Infected
+Agent.zombieWhenDead
+###			H	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			H	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			H	Reviver
+If hired and surviving, will revive the player once
+###			H	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
+###			H	Upper Crusty
+Agent.upperCrusty
+###			√	Guilty
+Complete
+##		C	Relationships
+###			C	Aggressive (Cannibal)
+New
+###			C	Player Hostile
+###			C	Player Annoyed
+###			C	Player Friendly
+###			C	Player Loyal
+###			C	Player Aligned
+###			C	Class Unity
+Like Class Solidarity, except Aligned
+Note that Solidarity includes a No Infighting effect.
+###			C	Don't Change Relationships (Rename)
+Agent.dontChangeRelationships
+###			C	Hostile to Cannibals
+####			C	Include Cool Cannibal
+###			C	Hostile to Werewolves
+Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
+###			H	Never Hostile
+New
+###			H	Secretly Hostile
+A la Bounty disaster
+Agent.bountyHunter
+Agent.secretHate
+Agent.choseSecretHate
+###			√	Hostile to Soldiers
+Complete
+###			√	Hostile to Vampires
+Complete
+##		C	Trait Gates
+###			C	Cool Cannibal
+- Dummy D
+####			C	Interact with Cannibal Hostility CCU trait
+Need to create Cannibal hostility trait before you can fully test this one.
+###			C	Crust Enjoyer
+If you have Upper Crusty, this character is Loyal
+###			H	Gate Vendor
+Won't sell unless you have appropriate trait
+###			H	Gate Hire
+Won't hire unless you have appropriate trait
+###			C	Bashable
+###			C	Crushable
+###			C	Slayable
+###			C	Specific Species
+###			√	Common Folk
+Complete
+###			√	Cop	Access
+Complete
+###			√	Family Friend
+Complete
+###			√	Honorable Thief
+Complete
+###			√	Scumbag
+Complete
+###			√	Suspicious Suspecter
+Complete
+##		H	Appearance
+###			C	Full-randomization bug
+- Whole appearance is randomized when any appearance trait is added.
+  - Should be a simple fix since it's doing less rather than more.
+###			C	Facial Hair
+####			C	Vanilla facial hair no longer spawns
+New
+###			C	Hair Type
+New
+###			C	Skin Color
+New
+##		H	Bodyguarded
+New
+- There are a few other hits that came up in a string search (possibly "Musician"):
+  - LoadLevel.SpawnStartingFollowers
+  - ObjectMult.StartWithFollowersBodyguardA
+    - Ignore this one, it's for the Player Bodyguard trait
+- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
+###			C	Pilot Trait
+No errors, but no effect.
+###			C	Bodyguard Quantity Traits?
+One / few / many, that's it
+###			C	Bodyguarded - Cop
+New
+###			C	Bodyguarded - Blahd
+New
+###			C	Bodyguarded - Crepe
+New
+###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Gorilla
+New
+###			C	Bodyguarded - Mafia
+New
+###			C	Bodyguarded - Soldier
+New
+###			C	Bodyguarded - Supercop
+New
+###			C	Bodyguarded - Supergoon
+New
+##		H	Booleans
+Might need to limit this to a single flag, since having multiple true at the same time would complicate things
+###			C	If Paid then Flag A/B/C/D True
+New
+###			C	If Killed then Flag A/B/C/D True
+Etc.
+##		H	Cost
+These should apply to Hiring as well as Vendor traits
+###			C	Cost - Alcohol
+A la Bouncer
+###			T	Cost - Banana
+Test
+###			C	Cost - Free
+Free followers, aligned suppliers, etc.
+###			T	Cost - Less
+Test
+###			T	Cost - More
+Test
+##		H	Hire Duration
+###			C	Fairweather
+Hiree will leave if they're damaged in combat
+###			C	Homesickness Mandatory
+Overrides Homesickness Killer
+###			C	Homesickness Disabled
+###			C	Permanent
+New
+~8x normal hire price
+###			C	Permanent Only
+As above, but removes the single-use hire option.
+##		H	Map Marker
+###			P	General Notes
+- Check out:
+GC
+	.questMarkerList
+PlayfieldObject
+	.MinimapDisplay
+x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
+x	.SpawnedBigQuetsMarkerRecently	Not relevant
+	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
+Quest
+	.questMarkerPrefab
+QuestMarker
+	Entire class!
+	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
+
+- Also, check out the GPYess trait and see where that comes up.
+###			C	Pilot
+No more errors, but no map marker. 
+###			H	Bartender
+Pending pilot
+###			H	Drug Dealer
+Pending pilot
+###			H	Killer Robot
+Pending pilot
+###			H	Question Mark
+Pending pilot
+###			H	Shopkeeper
+Pending pilot
+###			H	Portrait
+Pending customs
+##		H	Merchant
+###			H	Buyer
+New
+###			H	Buyer Only
+New
+###			H	Large Inventory
+New
+###			H	Refresh Inventory
+New
+###			H	Small Inventory
+New
+###			C	Vendor
+####			C	Get full list of Vendor traits to test and complete category
+##		H	Spawn
+###			C	Enslaved
+New
+###			C	Hide In Object
+Detect Bush/Manhole on same tile
+###			C	Roaming Gang
+New
+###			C	Slave Owner
+NEw			
+##		H	Utility
+###			C	Hide Traits in Collapsed Groups
+- While in Character Creator, hide traits in Collapsed Groups
+  - Once all traits are in they're going to get hard to manage. 
+###			C	Sort active Traits by Name
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
+- DW
+###			C	Sort active Traits by Value
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
+##		H	Agent Group
+###			C	Slum NPCs (Pilot)
+New
+###			H	Affect Campaign
+Pending pilot
+###			H	Affect Vanilla 
+Pending pilot
+###			C	Roamer Level Feature
+New
+##		H	Loadout
+###			C	Item Groups
+uwumacaronitime's idea: Item groups similar to NPC groups
+
+I can see this going two ways: 
+- As a trait for NPCs to generate with
+- As a designated item in the chunk creator for use in NPC & Object inventories. 
+
+I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
+
+Vanilla list:
+- Defense
+- Drugs
+- Food
+- Guns
+- GunAccessory
+- Melee
+- Movement
+- NonViolent
+- NonUsableTool
+- NonStandardWeapons
+- NonStandardWeapons2
+- NotRealWeapons
+- Passive
+- Social
+- Stealth
+- Supplies
+- Technology
+- Trade
+- Usable
+- Weapons
+- Weird
+###			T	ChunkKey
+- Attempted - InvDatabase.FillAgent()
+###			T	ChunkMayorBadge
+- Attempted - InvDatabase.FillAgent()
+###			T	ChunkSafeCombo
+- Attempted - InvDatabase.FillAgent()
+###			C	Guns_Common
+New
+##		√H	Behavior
+###			H	Clean Trash
+New
+###			H	Confiscate Contraband
+Should also spawn Confiscation Center (See SORCE)
+###			H	Deport Non-Citizens
+Should also spawn Deportation Center (See SORCE)
+###			H	Fight Fires
+Agent.firefighter
+Agent.fightsFires
+###			H	Grab Everything
+New
+###			H	Grab Food
+New
+###			H	Guard Door
+New
+###			H	Hobo Beg (Custom)
+Maybe just implement the whole Hey, You! overhaul here
+###			H	Hog Turntables
+New
+Allow paid Musician behavior
+###			H	Mutinous
+Agent.mutinous
+###			H	SecretHate
+Agent.secretHate
+Agent.choseSecretHate
+I think this is Bounty behavior
+###			H	Shakedown Player (Mobster)
+New
+Use this on leader w/ Wander Level
+Use "Follow" behavior on agents placed behind them
+No need for "Roaming Gang" Trait itself
+###			H	Tattle (Upper Cruster)
+New
+###			√H	Accident-Prone
+Works for: Crusher, Fire Spewer, Saw Blade
+Doesn't work for: Slime, Floor Trigger, ??
+###			√	Eat Corpse
+Complete
+###			√	Grab Drugs
+Complete
+###			√	Grab Money
+Complete
+###			√	Pickpocket
+Complete
+###			√	Seek & Destroy (Killer Robot)
+Complete
+##		√H	Combat
+###			√H	Drug Warrior
+####			C	Subtypes
+Uses only a specific drug on entering combat:
+						Always Crit
+	Angel Duster		Invincible
+						Invisible
+	Stimpacker			Regenerate Health
+	Cokehead			Speed
+	Roid Rager			Strength
+###			H	Lockdowner (R.I.P.)
+Apparently Lockdown walls are broken in custom levels.
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
+##		√H	Faction
+###			H	Config Files for unique player-defined factions
+Generate traits based on these names
+Allow multiple faction list files in a folder, to increase ease of compatibility.
+###			H	00 Refactor
+These should inherit from a shared class
+public override char Faction => '1', etc.
+public override string Relationship => VRelationship.Aligned, etc.
+###			H	Faction 1 Annoyed
+###			H	Faction 1 Friendly
+###			H	Faction 1 Loyal
+###			H	Faction 2 Annoyed
+###			H	Faction 2 Friendly
+###			H	Faction 2 Loyal
+###			H	Faction 3 Annoyed
+###			H	Faction 3 Friendly
+###			H	Faction 3 Loyal
+###			H	Faction 4 Annoyed
+###			H	Faction 4 Friendly
+###			H	Faction 4 Loyal
+###			√	Faction 1 Aligned
+###			√	Faction 1 Hostile
+###			√	Faction 2 Aligned
+###			√	Faction 2 Hostile
+###			√	Faction 3 Aligned
+###			√	Faction 3 Hostile
+###			√	Faction 4 Aligned
+###			√	Faction 4 Hostile
+##		√H	Hire
+###			H	Chloroform
+New
+###			H	Devour Corpse
+New
+###			H	Disarm Trap
+New
+###			H	Drink Blood
+New
+###			H	Handcuff
+New
+###			H	Mug
+One-time use, mug target NPC
+###			H	Pickpocket
+New
+###			H	Poison
+New 
+###			H	Safecrack
+- Reticle does not activate 
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
+
+Here's what comes up for Lockpick job:
+	Agent
+√		.GetCodeFromJob
+√		.GetJobCode					Need to extend jobType enum
+√		.ObjectAction
+	AgentInteractions
+√		.DetermineButtons
+√		.LockpickDoor				
+√		.PressedButton	
+	GoalDoJob
+√		.Activate					Check out 
+√		.Terminate
+	GoalDetails						E_GoalDetails
+√		.LockpickDoorReal
+	GoalLockpickDoor				GoalSafecrackSafe
+√		.Activate
+√		.Process
+√		.Terminate
+	GoalLockpickDoorReal			GoalSafecrackSafeReal
+√		.Activate
+√		.Process
+√		.Terminate
+	InvInterface
+√		.ShowTarget					
+√		.ShowTarget2
+	ObjectMult
+		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
+	PlayfieldObjectInteractions
+√		.TargetObject
+
+Objects to Analyze/track:
+	Agent
+		job
+		jobCode
+		target.targetType
+
+In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
+###			H	Set Explosive
+On door or Safe: Plants door detonator
+Elsewhere: Remote bomb
+Gives you detonator when planted
+###			H	Set Time Bomb
+Based on and consumes Time Bombs in inventory. NPC starts with one.
+###			H	Tamper
+- Interface works but reticle is green for non-tamperable items.
+  - Log message "Not implemented yet", fair enough
+###			√H	Cause a Ruckus
+####			C	Doesn't say Dialogue
+###			√	Bodyguard
+Complete
+###			√	Break In
+Complete
+###			√	Hack
+Complete
+#		H	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population
 ###			C	Level Editor Mutator List
@@ -135,506 +691,6 @@ Main quest rewards are multiplied by 10
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-#	CT	Traits
-REORGANIZE:
-- Remove name prefixes
-- Rename Passive to Interaction
-- Rename Active to Behavior
-- Move Cost traits to their own category
-##		T	Active
-###			T	Accident-Prone
-Attempted
-###			T	Seek & Destroy (Killer Robot)
-Attempted
-###			C	Enforcer
-Agent.enforcer
-###			H	Clean Trash
-New
-###			H	Fight Fires
-Agent.firefighter
-Agent.fightsFires
-###			H	Grab Everything
-New
-###			H	Grab Food
-New
-###			H	Guard Door
-New
-###			H	Hobo Beg (Custom)
-Maybe just implement the whole Hey, You! overhaul here
-###			H	Hog Turntables
-New
-Allow paid Musician behavior
-###			H	Mutinous
-Agent.mutinous
-###			H	SecretHate
-Agent.secretHate
-Agent.choseSecretHate
-I think this is Bounty behavior
-###			H	Shakedown Player
-New
-Use this on leader w/ Wander Level
-Use "Follow" behavior on agents placed behind them
-No need for "Roaming Gang" Trait itself
-###			H	Tattle (Upper Cruster)
-New
-###			√	Eat Corpse
-Complete
-###			√	Grab Drugs
-Complete
-###			√	Grab Money
-Complete
-###			√	Pickpocket
-Complete
-##		T	Combat
-###			T	Cause Lockdown (Supercop)
-Attempted
-###			√	Coward
-Complete
-###			√	Fearless
-Complete
-###			√	Use Drugs in Combat
-Complete
-##		CT	Hire
-###			P	General Notes
-First draft of the general stream of methods used here.
-	Agent.DetermineButtons
-	Agent.PressedButton
-	
-###			C	Cause a Ruckus
-####			C	Animation doesn't fire
-###			H	Chloroform
-New
-###			H	Devour Corpse
-New
-###			H	Disarm Trap
-New
-###			H	Drink Blood
-New
-###			H	Handcuff
-New
-###			H	Mug
-One-time use, mug target NPC
-###			H	Pickpocket
-New
-###			H	Poison
-New 
-###			H	Safecrack
-- Reticle does not activate 
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
-
-Here's what comes up for Lockpick job:
-	Agent
-√		.GetCodeFromJob
-√		.GetJobCode					Need to extend jobType enum
-√		.ObjectAction
-	AgentInteractions
-√		.DetermineButtons
-√		.LockpickDoor				
-√		.PressedButton	
-	GoalDoJob
-√		.Activate					Check out 
-√		.Terminate
-	GoalDetails						E_GoalDetails
-√		.LockpickDoorReal
-	GoalLockpickDoor				GoalSafecrackSafe
-√		.Activate
-√		.Process
-√		.Terminate
-	GoalLockpickDoorReal			GoalSafecrackSafeReal
-√		.Activate
-√		.Process
-√		.Terminate
-	InvInterface
-√		.ShowTarget					
-√		.ShowTarget2
-	ObjectMult
-		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
-	PlayfieldObjectInteractions
-√		.TargetObject
-
-Objects to Analyze/track:
-	Agent
-		job
-		jobCode
-		target.targetType
-
-In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-###			H	Set Explosive
-On door or Safe: Plants door detonator
-Elsewhere: Remote bomb
-Gives you detonator when planted
-###			H	Set Time Bomb
-Based on and consumes Time Bombs in inventory. NPC starts with one.
-###			H	Tamper
-- Interface works but reticle is green for non-tamperable items.
-  - Log message "Not implemented yet", fair enough
-###			√	Bodyguard
-Complete
-###			√	Break In
-Complete
-###			√	Hack
-Complete
-##		C	Merchant (Buyer/Vendor)
-###			H	Buyer
-Move VendorBuyer traits to this group
-####			C	Buyer All
-New
-####			C	Buyer Only
-For using VendorTypes to define Buyer Vendor Type, while blocking actual Vendor behavior
-####			C	Buyer Vendor Type
-New
-####			C	Pay Banana
-New
-####			C	Pay More
-New
-####			C	Pay Less
-New
-###			C	Merchant Trait Refactor
-- Merchant Type
-- Merchant
-  - Buyer
-  - Vendor
-###			C	Vendor
-####			C	Get full list of Vendor traits to test and complete category
-##		C	Passive
-###			C	Administer Blood Bag
-New
-###			C	Arena Manager
-New
-###			C	Bank Teller
-New
-###			C	Buy Round
-New
-###			C	Clerk - Blood Bank
-New
-###			C	Clerk - Deportation Center
-New
-###			C	Clerk - Hotel
-New
-###			C	Clerk - Mayor's Office
-New
-###			C	Explode On Death
-Works but... exploded when arrested 
-###			T	Extortable
-Test
-###			C	Hackable - Tamper With Aim
-New
-###			C	Hackable - Go Haywire
-New
-###			C	Heal
-New
-###			C	Identify
-New
-###			C	Influence Election
-New
-###			C	Innocent
-New
-XP Penalty for neutralizing
-###			C	Invincible
-New
-###			T	Moochable
-Test
-###			C	Offer Motivation
-New
-###			C	Sell Slaves
-New
-###			C	Shapeshifted
-Agent.SecretShapeshifter
-###			C	Status Immunity
-Agent.preventStatusEffects
-###			C	Use Bloodbag
-New
-###			C	Vision Beams (Cop Bot)
-New
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			C	Z-Infected
-Agent.zombieWhenDead
-###			H	Cybernetic Surgery
-Curated Trait-seller
-###			H	Improve Relations w/ Faction 1-4
-New
-Costs $1000, improves your relations with that faction
-###			H	Quest Giver
-New
-###			H	Refill Guns
-New
-###			H	Repair Armor
-New
-###			H	Repair Weapons
-New
-###			H	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			H	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			H	Reviver
-If hired and surviving, will revive the player once
-###			H	Sell Faction Intel 1-4
-Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
-"Improve Faction Relations"
-Should only allow for 1 of these to simplify algorithm
-But this means you'll need further faction traits
-###			H	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-###			H	Summon Professional
-New
-Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			H	Train Attributes (Split to each)
-New
-###			H	Train Traits - Defense
-New
-Sell traits for double their Upgrade Machine cost
-###			H	Train Traits - Guns
-New
-###			H	Train Traits - Melee
-New
-###			H	Train Traits - Movement
-New
-###			H	Train Traits - Social
-New
-###			H	Train Traits - Stealth
-New
-###			H	Train Traits - Trade
-New
-###			H	Upper Crusty
-Agent.upperCrusty
-###			√	Guilty
-Complete
-##		CT	Relationships
-###			C	Aggressive (Cannibal)
-New
-###			T	Annoyed At Suspicious
-Attempted
-###			C	Don't Change Relationships (Rename)
-Agent.dontChangeRelationships
-###			C	Faction Traits
-Expand to all relationship levels
-###			C	Faction Trait Limitation to Same Content
-Limit interaction to same campaign, and if not campaign then same chunk pack
-###			T	Hostile to Cannibals
-Attempted
-###			T	Hostile to Soldiers
-Attempted
-###			T	Hostile to Vampires
-Attempted
-###			T	Hostile to Werewolves
-Attempted
-###			C	Musician Trait for Random Stans
-New
-###			C	Never Hostile
-New
-###			C	Secretly Hostile
-A la Bounty disaster
-Agent.bountyHunter
-Agent.secretHate
-Agent.choseSecretHate
-##		T	Trait Gates
-###			C	Customizers
-- Lock Merchant behind Trait Gate
-- Lock Hire behind Trait Gate
-###			CT	Common Folk
-- Dummy A
-  - Not blocked by lacking trait
-Hobos Aligned
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			CT	Cool Cannibal
-- Dummy D
-  - Blocked
-- Disable Cannibal Hostility
-  - Pending that trait
-- Also set gates to playing vanilla cannibal (lacks CWC trait)
-###			C	Family Friend
-- Aligned
-  - Works
-- Shop Gate
-  - Not gated
-- Also set gates to playing vanilla Mobster
-w###			√	Honorable Thief
-Complete
-###			T	Scumbag
-Hostile to Scumbag Slaughterer
-Only SetRelationshipInitial - search for other occurrences of this trait in the code.
-###			√	Cop	Access
-Complete
-##		H	Appearance
-###			C	Full-randomization bug
-- Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more.
-###			C	Facial Hair
-####			C	Vanilla facial hair no longer spawns
-New
-###			C	Hair Type
-New
-###			C	Skin Color
-New
-##		H	Bodyguarded
-New
-- There are a few other hits that came up in a string search (possibly "Musician"):
-  - LoadLevel.SpawnStartingFollowers
-  - ObjectMult.StartWithFollowersBodyguardA
-    - Ignore this one, it's for the Player Bodyguard trait
-- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
-###			C	Pilot Trait
-No errors, but no effect.
-###			C	Bodyguard Quantity Traits?
-One / few / many, that's it
-###			C	Bodyguarded - Cop
-New
-###			C	Bodyguarded - Blahd
-New
-###			C	Bodyguarded - Crepe
-New
-###			C	Bodyguarded - Goon
-New
-###			C	Bodyguarded - Gorilla
-New
-###			C	Bodyguarded - Mafia
-New
-###			C	Bodyguarded - Soldier
-New
-###			C	Bodyguarded - Supercop
-New
-###			C	Bodyguarded - Supergoon
-New
-##		H	Booleans
-Might need to limit this to a single flag, since having multiple true at the same time would complicate things
-###			C	If Paid then Flag A/B/C/D True
-New
-###			C	If Killed then Flag A/B/C/D True
-Etc.
-##		H	Cost
-These should apply to Hiring as well as Vendor traits
-###			C	Cost - Alcohol
-A la Bouncer
-###			T	Cost - Banana
-Test
-###			C	Cost - Free
-Free followers, aligned suppliers, etc.
-###			T	Cost - Less
-Test
-###			T	Cost - More
-Test
-##		H	Hire Duration
-###			C	Fairweather
-Hiree will leave if they're damaged in combat
-###			C	Homesick
-###			C	No Homesickness
-###			C	Permanent Hire
-New
-~8x normal hire price
-###			C	Permanent Hire Only
-New
-##		H	Map Marker
-###			P	General Notes
-- Check out:
-GC
-	.questMarkerList
-PlayfieldObject
-	.MinimapDisplay
-x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
-x	.SpawnedBigQuetsMarkerRecently	Not relevant
-	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
-Quest
-	.questMarkerPrefab
-QuestMarker
-	Entire class!
-	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
-
-- Also, check out the GPYess trait and see where that comes up.
-###			C	Pilot
-No more errors, but no map marker. 
-###			H	Bartender
-Pending pilot
-###			H	Drug Dealer
-Pending pilot
-###			H	Killer Robot
-Pending pilot
-###			H	Question Mark
-Pending pilot
-###			H	Shopkeeper
-Pending pilot
-###			H	Portrait
-Pending customs
-##		H	Spawn
-###			C	Enslaved
-New
-###			C	Hide In Object
-Detect Bush/Manhole on same tile
-###			C	Roaming Gang
-New
-###			C	Slave Owner
-NEw			
-##		H	Utility
-###			C	Hide Traits in Collapsed Groups
-- While in Character Creator, hide traits in Collapsed Groups
-  - Once all traits are in they're going to get hard to manage. 
-###			C	Sort active Traits by Name
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-- DW
-###			C	Sort active Traits by Value
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-##		H	Agent Group
-###			C	Slum NPCs (Pilot)
-New
-###			H	Affect Campaign
-Pending pilot
-###			H	Affect Vanilla 
-Pending pilot
-###			C	Roamer Level Feature
-New
-##		H	Loadout
-###			C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
-###			T	ChunkKey
-- Attempted - InvDatabase.FillAgent()
-###			T	ChunkMayorBadge
-- Attempted - InvDatabase.FillAgent()
-###			T	ChunkSafeCombo
-- Attempted - InvDatabase.FillAgent()
-###			C	Guns_Common
-New
-##		√H	Factions
-###			H	Annoyed at Faction 1-4
-###			H	Friendly to Faction 1-4
-###			√	Aligned to Faction 1-4
-###			√	Hostile to Faction 1-4
 #		H	Item Groups
 Next release
 #		H	Object Additions
@@ -868,3 +924,34 @@ Just a quick level with dialogue to
 |Level	|Area					|Notes	|
 |:-----:|:----------------------|:------|
 |	1	|Subway					|- Meet a contact, maybe see cool shit on the way. Free him from a "prison" like a subway bathroom.
+#		Notes dump - Anything below here
+Removed from Readme
+
+##			Roamer Traits
+- Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
+  - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
+  - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
+  - LevelEditor.customCharacterList has all customs saved. Iterate through this and find appropriate traits, then add through RandomAgents.fillAgents
+## CC Steam Workshop Upload
+
+- Pop up Yes/No dialogue asking if user wants to do the following:
+  - Automate screenshot of character portrait for thumbnail
+  - Automate screenshot of character stat screen
+  - Upload both screenshots into Character folder and name appropriately before upload
+  - Output a Text file with all character content for upload as a description 
+# Chunk Editor Utilities
+To Sorquol
+## Fields 
+- Multiple In Chunk field for SpawnerAgent
+
+## Item Groups *
+- Know how you can select "Slum NPCs" as a type? Why can't we do that with items? 
+
+## General *
+- Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
+- Red-tint any objects that might spawn inconsistently due to placement rules (e.g., Security Cams over gaps)
+# No header here
+The Player Edition is identical to the Designer Edition, but hides CCU content from view so it doesn't clutter the interface:
+- Hides CCU traits from Character Creation Menus
+- Hides CCU traits from Character Sheet page *
+- Hides CCU traits from HUD Trait list *

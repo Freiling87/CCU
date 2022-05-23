@@ -6,6 +6,7 @@ using CCU.Traits.Relationships;
 using CCU.Traits.Combat;
 using CCU.Traits;
 using CCU.Traits.TraitGate;
+using CCU.Traits.Faction;
 
 namespace CCU.Patches.AgentRelationships
 {
@@ -18,12 +19,12 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.AssessFlee), argumentTypes: new[] { typeof(Agent), typeof(int), typeof(int), typeof(float), typeof(float), typeof(Relationship) })]
         public static void AssessFlee_Postfix(Agent otherAgent, int teamSize, int otherTeamSize, float dist, float relHate, Relationship rel, Agent ___agent, ref float __result)
 		{
-            if (___agent.HasTrait<Combat_Coward>())
+            if (___agent.HasTrait<Coward>())
 			{
                 ___agent.mustFlee = true;
                 ___agent.wontFlee = false;
             }
-            else if (___agent.HasTrait<Combat_Fearless>())
+            else if (___agent.HasTrait<Fearless>())
 			{
                 ___agent.mustFlee = false;
                 ___agent.wontFlee = true;
@@ -67,7 +68,7 @@ namespace CCU.Patches.AgentRelationships
                     return false;
                 }
 				#endregion
-                if ((___agent.HasTrait<HostileToCannibals>() && otherAgent.agentName == VanillaAgents.Cannibal) ||
+                if ((___agent.HasTrait<HostileToCannibals>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<CoolCannibal>())) ||
                     (___agent.HasTrait<HostileToSoldiers>() && otherAgent.agentName == VanillaAgents.Soldier) ||
                     (___agent.HasTrait<HostileToVampires>() && otherAgent.agentName == VanillaAgents.Vampire) ||
                     (___agent.HasTrait<HostileToWerewolves>() && otherAgent.agentName == VanillaAgents.Werewolf))
@@ -85,16 +86,16 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
-            if (___agent.HasTrait<AnnoyedAtSuspicious>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
+            if (___agent.HasTrait<Suspicioner>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 __instance.SetStrikes(otherAgent, 2);
 
-            if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<TraitGate_CommonFolk>() && !otherAgent.guardSequence)
+            if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<CommonFolk>() && !otherAgent.guardSequence)
                 otherAgent.relationships.SetRelInitial(___agent, "Loyal");
 
-            if (___agent.HasTrait(VanillaTraits.FriendoftheFamily) && otherAgent.HasTrait<TraitGate_FamilyFriend>())
+            if (___agent.HasTrait(VanillaTraits.FriendoftheFamily) && otherAgent.HasTrait<FamilyFriend>())
                 otherAgent.relationships.SetRelInitial(___agent, "Aligned");
 
-            if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<TraitGate_CoolCannibal>())
+            if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<CoolCannibal>())
             {
                 __instance.SetRelHate(otherAgent, 0);
                 __instance.SetRelInitial(otherAgent, "Neutral", true);
@@ -102,9 +103,10 @@ namespace CCU.Patches.AgentRelationships
                 otherAgent.relationships.SetRelInitial(___agent, "Neutral");
             }
 
-            if (___agent.HasTrait(VanillaTraits.ScumbagSlaughterer) && otherAgent.HasTrait<TraitGate_Scumbag>())
+            if (___agent.HasTrait(VanillaTraits.ScumbagSlaughterer) && otherAgent.HasTrait<Scumbag>())
 			{
                 otherAgent.relationships.GetRelationship(___agent).mechHate = true;
+                otherAgent.relationships.SetRelInitial(___agent, "Hateful");
                 otherAgent.oma.mustBeGuilty = true;
             }
         }

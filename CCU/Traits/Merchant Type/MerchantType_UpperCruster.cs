@@ -11,7 +11,7 @@ namespace CCU.Traits.MerchantType
             RogueLibs.CreateCustomTrait<MerchantType_UpperCruster>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells fancy shit."),
+                    [LanguageCode.English] = String.Format("This character sells fancy shit by top brands made by slaves."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

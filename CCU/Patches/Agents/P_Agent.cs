@@ -6,7 +6,8 @@ using System.Reflection;
 using CCU.Traits;
 using CCU.Traits.Combat;
 using CCU.Traits.Passive;
-using CCU.Traits.Active;
+using CCU.Traits.Behavior;
+using CCU.Traits.Interaction;
 
 namespace CCU.Patches.Agents
 {
@@ -19,7 +20,7 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
-			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Interaction_Extortable>())
+			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Extortable>())
 				__result = true;
 		}
 
@@ -152,21 +153,18 @@ namespace CCU.Patches.Agents
             if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
 				// Thieves have their LOScheck set to 50% in vanilla
-				if (__instance.HasTrait<Behavior_Pickpocket>() && GC.percentChance(50))
+				if (__instance.HasTrait<Pickpocket>() && GC.percentChance(50))
 					return;
 
 				// All others excluded
 				__instance.losCheckAtIntervals = true;
 			}
 
-			if (__instance.HasTrait<Behavior_SeekAndDestroy>())
+			if (__instance.HasTrait<SeekAndDestroy>())
 				__instance.killerRobot = true;
-
-			if (__instance.HasTrait<Behavior_Enforcer>())
-				__instance.enforcer = true;
 			#endregion
 			#region Combat
-			if (__instance.HasTrait<Combat_UseDrugs>())
+			if (__instance.HasTrait<DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant
@@ -174,7 +172,7 @@ namespace CCU.Patches.Agents
 				__instance.SetupSpecialInvDatabase();
             #endregion
             #region Passive
-            if (__instance.HasTrait<Behavior_Guilty>())
+            if (__instance.HasTrait<Guilty>())
 				__instance.oma.mustBeGuilty = true;
 
 			if (__instance.HasTrait<AccidentProne>())

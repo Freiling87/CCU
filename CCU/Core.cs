@@ -286,21 +286,21 @@ namespace CCU
 		#endregion
 		#endregion
 		#region Active
-			AccidentProne = "[CCU] Active - Accident-Prone",
-			Active_CleanTrash = "[CCU] Active - Clean Trash",
-			Active_EatCorpse = "[CCU] Active - Eat Corpse",
-			Active_EnforceLaws = "[CCU] Active - Enforce Laws (Cop)",
-			Active_EnforceLawsCopBot = "[CCU] Active - Enforce Laws (Cop Bot)",
-			Active_FightFires = "[CCU] Active - Fight Fires",
-			Active_GrabDrugs = "[CCU] Active - Grab Drugs",
-			Active_GrabMoney = "[CCU] Active - Grab Money",
-			Active_GuardDoor = "[CCU] Active - Guard Door",
-			Active_HogTurntables = "[CCU] Active - Turntables Guard",
-			Active_Pickpocket = "[CCU] Active - Pickpocket",
-			Active_SeekAndDestroy = "[CCU] Active - Seek & Destroy",
-			Active_SuckBlood = "[CCU] Active - Suck Blood",
-			Active_Shakedown = "[CCU] Active - Shakedown",
-			Active_Tattletale = "[CCU] Active - Tattletale",
+			AccidentProne = "[CCU] Behavior - Accident-Prone",
+			CleanTrash = "[CCU] Behavior - Clean Trash",
+			EatCorpse = "[CCU] Behavior - Eat Corpse",
+			EnforceLaws = "[CCU] Behavior - Enforce Laws (Cop)",
+			EnforceLawsCopBot = "[CCU] Behavior - Enforce Laws (Cop Bot)",
+			FightFires = "[CCU] Behavior - Fight Fires",
+			GrabDrugs = "[CCU] Behavior - Grab Drugs",
+			GrabMoney = "[CCU] Behavior - Grab Money",
+			GuardDoor = "[CCU] Behavior - Guard Door",
+			HogTurntables = "[CCU] Behavior - Turntables Guard",
+			Pickpocket = "[CCU] Behavior - Pickpocket",
+			SeekAndDestroy = "[CCU] Behavior - Seek & Destroy",
+			SuckBlood = "[CCU] Behavior - Suck Blood",
+			Shakedown = "[CCU] Behavior - Shakedown",
+			Tattletale = "[CCU] Behavior - Tattletale",
 		#endregion
 		#region Bodyguarded
 			Bodyguarded_Pilot = "[CCU] Bodyguarded - Pilot",
@@ -315,54 +315,48 @@ namespace CCU
 			Combat_Fearless = "[CCU] Combat - Fearless",
 			Combat_UseDrugs = "[CCU] Combat - Use Drugs",
 		#endregion
+		#region Cost
+			CostAlcohol = "[CCU] Cost - Alcohol",
+			CostBanana = "[CCU] Cost - Banana",
+			CostLess = "[CCU] Cost - Less",
+			CostMore = "[CCU] Cost - More",
+			CostZero = "[CCU] Cost - Zero",
+		#endregion
 		#region Hire
-			Hire_Bodyguard = "[CCU] Hire - Bodyguard",
-			Hire_BreakIn = "[CCU] Hire - Break In",
-			Hire_CauseRuckus = "[CCU] Hire - Cause a Ruckus",
-			Hire_CostBanana = "[CCU] Hire - Costs Banana",
-			Hire_CostLess = "[CCU] Hire - Costs Less",
-			Hire_CostMore = "[CCU] Hire - Costs More",
-			Hire_DisarmTrap = "[CCU] Hire - Disarm Trap",
-			Hire_Hack = "[CCU] Hire - Hack",
-			Hire_JoinIfFreed = "[CCU] Hire - Join if Freed (Prisoner)",
-			Hire_Permanent = "[CCU] Hire - Permanent",
-			Hire_PermanentOnly = "[CCU] Hire - Permanent Only",
-			Hire_Pickpocket = "[CCU] Hire - Pickpocket",
-			Hire_Poison = "[CCU] Hire - Poison",
-			Hire_Safecrack = "[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
-			Hire_Tamper = "[CCU] Hire - Tamper",
+			Bodyguard = "[CCU] Hire - Bodyguard",
+			BreakIn = "[CCU] Hire - Break In",
+			CauseARuckus = "[CCU] Hire - Cause a Ruckus",
+			DisarmTrap = "[CCU] Hire - Disarm Trap",
+			Hack = "[CCU] Hire - Hack",
+			JoinIfFreed = "[CCU] Hire - Join if Freed (Prisoner)",
+			Permanent = "[CCU] Hire Duration - Permanent",
+			PermanentOnly = "[CCU] Hire Duration - Permanent Only",
+			PickpocketHired = "[CCU] Hire - Pickpocket",
+			Poison = "[CCU] Hire - Poison",
+			Safecrack = "[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
+			Tamper = "[CCU] Hire - Tamper",
 		#endregion
 		#region Interaction
-			Interaction_AdministerBloodBag = "[CCU] Interaction - Administer Blood Bag",
-			Interaction_ArenaManager = "[CCU] Interaction - Arena Manager",
-			Interaction_BankTeller = "[CCU] Interaction - Bank Teller",
-			Interaction_BloodBank = "[CCU] Interaction - Blood Bank",
-			Interaction_BribeCops = "[CCU] Interaction - Bribe Cops",
-			Interaction_BribeEntryBeer = "[CCU] Interaction - Bribe for Entry (Beer)",// Requires Passive Guard Door?
-			Interaction_BribeEntryMoney = "[CCU] Interaction - Bribe for Entry (Money)",
-			Interaction_BribeEntryWhiskey = "[CCU] Interaction - Bribe for Entry (Whiskey)",
-			Interaction_BuyerAll = "[CCU] Interaction - Buyer All",
-			Interaction_BuyerOnly = "[CCU] Interaction - Buyer Only",
-			Interaction_BuyerVendor = "[CCU] Interaction - Buyer Vendor",
-			Interaction_BuyRound = "[CCU] Interaction - Buy Round",
-			Interaction_DeportationCenter = "[CCU] Interaction - Deportation Center",
-			Interaction_Extortable = "[CCU] Interaction - Extortable",
-			Interaction_Heal = "[CCU] Interaction - Heal",
-			Interaction_HealAll = "[CCU] Interaction - Heal All",
-			Interaction_HealOther = "[CCU] Interaction - Heal Other",
-			Interaction_HotelManager = "[CCU] Interaction - Hotel Manager",
-			Interaction_Identify = "[CCU] Interaction - Identify",
-			Interaction_InfluenceElection = "[CCU] Interaction - Influence Election",
-			Interaction_MayorClerk = "[CCU] Interaction - Mayor Clerk",
-			Interaction_Moochable = "[CCU] Interaction - Moochable",
-			Interaction_OfferMotivation = "[CCU] Interaction - Offer Motivation",
-			Interaction_PlayBadSong = "[CCU] Interaction - Song Request",
-			Interaction_QuestGiver = "[CCU] Interaction - Quest Giver",
-			Interaction_RefillGuns = "[CCU] Interaction - Refill Guns",
-			Interaction_RepairArmor = "[CCU] Interaction - Repair Armor",
-			Interaction_RepairMelee = "[CCU] Interaction - Repair Melee Weapons",
-			Interaction_SellSlaves = "[CCU] Interaction - Sell Slaves",
-			Interaction_UseBloodBag = "[CCU] Interaction - Use Blood Bag",
+			AdministerBloodBag = "[CCU] Interaction - Administer Blood Bag",
+			BribeCops = "[CCU] Interaction - Bribe Cops",
+			BribeForEntry = "[CCU] Interaction - Bribe for Entry",
+			BribeForEntryAlcohol = "[CCU] Interaction - Bribe for Entry (Alcohol)",
+			BorrowMoney = "[CCU] Interaction - Borrow Money",
+			BuyRound = "[CCU] Interaction - Buy Round",
+			BuySlave = "[CCU] Interaction - Sell Slaves",
+			DonateBlood = "[CCU] Interaction - Donate Blood",
+			HealPlayer = "[CCU] Interaction - Heal",
+			Identify = "[CCU] Interaction - Identify",
+			InfluenceElection = "[CCU] Interaction - Influence Election",
+			LeaveWeaponsBehind = "[CCU] Interaction - Leave Weapons Behind",
+			ManageChunk = "[CCU] Interaction - Manage Chunk", // Arena, Deportation Center, Hotel
+			Moochable = "[CCU] Interaction - Moochable",
+			OfferMotivation = "[CCU] Interaction - Offer Motivation",
+			PayDebt = "[CCU] Interaction - Pay Debt",
+			PlayBadSong = "[CCU] Interaction - Song Request",
+			StartElection = "[CCU] Interaction - Start Election",
+			UseBloodBag = "[CCU] Interaction - Use Blood Bag",
+			VisitorsBadge = "[CCU] Interaction - Visitor's Badge",
 		#endregion
 		#region Loadout
 			Loadout_ChunkKey = "[CCU] Loadout: Chunk Key Holder",
@@ -381,13 +375,13 @@ namespace CCU
 			MapMarker_Pilot = "[CCU] Map Marker: Pilot",
 			MapMarker_QuestionMark = "[CCU] Map Marker: QuestionMark",
 			MapMarker_Shopkeeper = "[CCU] Map Marker: Shopkeeper",
-		#endregion
-		#region Merchant				Group
-		#region Merchant Buyer
-
-		#endregion
-		#region Merchant Type
-			MerchantType_Anthropophagie = "[CCU] Merchant Type - Anthropophagie",
+        #endregion
+        #region Merchant
+			Buyer = "[CCU] Merchant - Buyer",
+			BuyerOnly = "[CCU] Merchant - Buyer Only",
+        #endregion
+        #region Merchant Type
+            MerchantType_Anthropophagie = "[CCU] Merchant Type - Anthropophagie",
 			MerchantType_Armorer = "[CCU] Merchant Type - Armorer",
 			MerchantType_Assassin = "[CCU] Merchant Type - Assassin",
 			MerchantType_BananaBoutique = "[CCU] Merchant Type - Banana",
@@ -440,16 +434,13 @@ namespace CCU
 			MerchantType_Vampire = "[CCU] Merchant Type - Vampire",
 			MerchantType_Villain = "[CCU] Merchant Type - Villain",
 		#endregion
-		#region Merchant Vendor
-
-		#endregion
-		#endregion
 		#region Passive
 			Passive_ExplodeOnDeath = "[CCU] Passive - Explode On Death",
 			Passive_ExplodeOnDeathLarge = "[CCU] Passive - Explode On Death (Large)",
 			Passive_ExplodeOnDeathMolotov = "[CCU] Passive - Explode On Death (Molotov)",
 			Passive_ExplodeOnDeathSlime = "[CCU] Passive - Explode On Death (Slime)",
 			Passive_ExplodeOnDeathWater = "[CCU] Passive - Explode On Death (Water)",
+			Extortable = "[CCU] Passive - Extortable",
 			Passive_Guilty = "[CCU] Passive - Guilty",
 			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
 			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",
@@ -472,10 +463,9 @@ namespace CCU
 			Relationships_HostileToWerewolves = "[CCU] Relationships - Hostile to Werewolves",  // Analogue in BM: Werewolf Wrecker
 		#endregion
 		#region Spawn
-			Spawn_HideInBush = "[CCU] Spawn: Hide In Bush",
-			Spawn_HideInManhole = "[CCU] Spawn: Hide In Manhole",
+			HideInObject = "[CCU] Spawn: Hide In Bush",
 			Spawn_RoamingGang = "[CCU] Spawn: Roaming Gangs",
-			Spawn_SlaveOwned = "[CCU] Spawn: Slave",
+			Spawn_SlaveOwned = "[CCU] Spawn: Slave", // Should these be in Relationships instead?
 			Spawn_SlaveOwner = "[CCU] Spawn: Slave Owner",
 		#endregion
 		#region Trait Gate

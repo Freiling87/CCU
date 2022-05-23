@@ -1,28 +1,24 @@
 ﻿using BepInEx.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+using CCU.Traits.HireDuration;
 using HarmonyLib;
 using RogueLibsCore;
-using CCU.Traits.Hire;
+using UnityEngine;
 
 namespace CCU.Extensions
 {
-	// TODO: Learn how to do an actual class extension, lol
+    // TODO: Learn how to do an actual class extension, lol
 
-	[HarmonyPatch(declaringType: typeof(GoalDetails))]
+    [HarmonyPatch(declaringType: typeof(GoalDetails))]
 	public static class E_GoalDetails
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// TODO: Move to Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDetails.LockpickDoorReal))]
 		public static void LockpickDoorReal_Postfix(GoalDetails __instance, ref Agent ___agent)
 		{
-			if (___agent.HasTrait<HireDuration_Permanent>() || ___agent.HasTrait<HireDuration_PermanentOnly>())
+			if (___agent.HasTrait<HirePermanent>() || ___agent.HasTrait<HirePermanentOnly>())
 			{
 				// TODO: Figure out how to track a bool here
 				// Or, make a PermHired status effect?

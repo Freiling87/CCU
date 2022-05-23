@@ -10,6 +10,9 @@ using CCU.Traits.TraitGate;
 using Rewired;
 using Random = UnityEngine.Random;
 using CCU.Traits.Passive;
+using CCU.Traits.Cost;
+using CCU.Traits.Interaction;
+using System.Linq;
 
 namespace CCU.Patches.Agents
 {
@@ -1814,50 +1817,10 @@ namespace CCU.Patches.Agents
 						else // put agentName == "Custom" or whatever in here when you know what it is
 						{
 							logger.LogDebug("=" + agentName + "=");
+							string relationship = agent.relationships.GetRel(interactingAgent);
 
 							if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraitsGroup))
 							{
-								// Interaction 
-								if (TraitManager.HasTraitFromList(agent, TraitManager.InteractionTraits))
-								{
-									Core.LogCheckpoint("Interaction");
-
-									if (agent.HasTrait<Interaction_Extortable>() && agent.CanShakeDown() && (interactingAgent.HasTrait("Shakedowner") || interactingAgent.HasTrait("Shakedowner")))
-									{
-										int threat = agent.relationships.FindThreat(interactingAgent, false);
-
-										if ((agent.health <= agent.healthMax * 0.4f) ||
-											(agent.relationships.GetRel(interactingAgent) == "Aligned") ||
-											(agent.slaveOwners.Contains(interactingAgent)))
-											threat = 100;
-										
-										__instance.AddButton("Shakedown", " (" + threat + "%)");
-									}
-
-									if (agent.HasTrait<Interaction_Moochable>() && interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher))
-										__instance.AddButton("BorrowMoney");
-								}
-
-								// Vendor 
-								if (TraitManager.HasTraitFromList(agent, TraitManager.MerchantTypeTraits) && agent.hasSpecialInvDatabase)
-								{
-									Core.LogCheckpoint("Vendor");
-									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
-
-									bool cantBuy =
-										(agent.HasTrait<TraitGate_CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral") && interactingAgent.agentName != VanillaAgents.Cannibal) ||
-										(agent.HasTrait<TraitGate_CopAccess>() && !interactingAgent.HasTrait("TheLaw") && interactingAgent.agentName != VanillaAgents.Cop && interactingAgent.agentName != VanillaAgents.CopBot && interactingAgent.agentName != VanillaAgents.SuperCop) ||
-										(agent.HasTrait<TraitGate_HonorableThief>() && !interactingAgent.statusEffects.hasTrait("HonorAmongThieves") && interactingAgent.statusEffects.hasTrait("HonorAmongThieves2"));
-
-									if (!cantBuy)
-									{
-										__instance.AddButton("Buy");
-
-										if (interactingAgent.inventory.HasItem("FreeItemVoucher"))
-											__instance.AddButton("UseVoucher");
-									}
-								}
-
 								// Hire 
 								if (TraitManager.HasTraitFromList(agent, TraitManager.HireTypeTraits))
 								{
@@ -1867,9 +1830,9 @@ namespace CCU.Patches.Agents
 									{
 										Core.LogCheckpoint("Hire Initial");
 
-										bool bananaCost = agent.HasTrait<HireCost_Banana>();
+										bool bananaCost = agent.HasTrait<CostBanana>();
 
-										if (agent.HasTrait<Hire_Bodyguard>())
+										if (agent.HasTrait<Bodyguard>())
 										{
 											if (interactingAgent.inventory.HasItem("HiringVoucher"))
 												__instance.AddButton("HireAsProtection", 6666);
@@ -1888,30 +1851,132 @@ namespace CCU.Patches.Agents
 									{
 										Core.LogCheckpoint("Hire Order");
 
-										if (agent.HasTrait<Hire_BreakIn>())
+										if (agent.HasTrait<BreakIn>())
 											__instance.AddButton("LockpickDoor");
 
-										if (agent.HasTrait<Hire_CauseRuckus>())
+										if (agent.HasTrait<CauseARuckus>())
 											__instance.AddButton("CauseRuckus");
-										
-										if (agent.HasTrait<Hire_DisarmTrap>())
+
+										if (agent.HasTrait<DisarmTrap>())
 											__instance.AddButton(CJob.DisarmTrap);
-										
-										if (agent.HasTrait<Hire_Hack>())
+
+										if (agent.HasTrait<Hack>())
 											__instance.AddButton("HackSomething");
 
-										if (agent.HasTrait<Hire_Pickpocket>())
+										if (agent.HasTrait<Pickpocket>())
 											__instance.AddButton(CJob.Pickpocket);
 
-										if (agent.HasTrait<Hire_Poison>())
+										if (agent.HasTrait<Poison>())
 											__instance.AddButton(CJob.Poison);
 
-										if (agent.HasTrait<Hire_Safecrack>())
+										if (agent.HasTrait<Safecrack>())
 											__instance.AddButton(CJob.SafecrackSafe);
-										
-										if (agent.HasTrait<Hire_Tamper>())
+
+										if (agent.HasTrait<Tamper>())
 											__instance.AddButton(CJob.TamperSomething);
 									}
+								}
+
+								// Interaction 
+								foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
+								{
+									// Simple Exceptions
+									if ((interaction is BorrowMoneyMoocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
+										(interaction is BribeCops && (interactingAgent.aboveTheLaw || !interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))) ||
+										((interaction is BribeForEntry || interaction is BribeForEntryAlcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
+										(interaction is InfluenceElection && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
+										(interaction is LeaveWeaponsBehind && !interactingAgent.inventory.HasWeapons()) ||
+										(interaction is OfferMotivation && agent.oma.offeredOfficeDrone) ||
+										(interaction is PayDebt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
+																&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt2)
+																&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
+										(interaction is UseBloodBag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
+										continue;
+
+									// Complex Exceptions
+									if (interaction is BuyRound)
+									{
+										List<Agent> patrons = new List<Agent>();
+										for (int i = 0; i < agent.gc.agentList.Count; i++)
+										{
+											Agent possiblePatron = agent.gc.agentList[i];
+
+											if (possiblePatron.startingChunk == agent.startingChunk && possiblePatron != agent && possiblePatron.prisoner == 0 && !possiblePatron.dead && !possiblePatron.zombified && !possiblePatron.oma.mindControlled && possiblePatron.gc.tileInfo.GetTileData(possiblePatron.tr.position).chunkID == possiblePatron.startingChunk)
+											{
+												if (relationship != "Hateful" && relationship != "Aligned" && relationship != "Loyal" && relationship != "Submissive" &&
+													!possiblePatron.statusEffects.hasTrait("BloodRestoresHealth") && !possiblePatron.statusEffects.hasTrait("OilRestoresHealth"))
+													patrons.Add(possiblePatron);
+											}
+										}
+
+										if (!patrons.Any())
+											continue;
+									}
+									else if (interaction is BuySlave)
+									{
+										bool hasSlaves = false;
+
+										for (int i = 0; i < agent.gc.agentList.Count; i++)
+										{
+											Agent possibleSlave = agent.gc.agentList[i];
+
+											if (possibleSlave.agentName == "Slave" && possibleSlave.slaveOwners.Contains(agent) && (possibleSlave.rescueForQuest != null || (!possibleSlave.gc.serverPlayer && possibleSlave.oma.rescuingForQuest)))
+											{
+												hasSlaves = true;
+												break;
+											}
+										}
+
+										if (!hasSlaves)
+											continue;
+									}
+									else if (interaction is PlayBadMusic)
+									{
+										bool turntables = false;
+										foreach (ObjectReal objectReal in GC.objectRealList)
+										{
+											if (objectReal.objectName == vObject.Turntables && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
+												turntables = true;
+										}
+
+										if (!turntables)
+											continue;
+									}
+
+									__instance.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.ButtonText));
+								}
+
+								// Merchant 
+								if (TraitManager.HasTraitFromList(agent, TraitManager.MerchantTypeTraits) && agent.hasSpecialInvDatabase)
+								{
+									Core.LogCheckpoint("Vendor");
+									logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
+
+									bool cantBuy =
+										(agent.HasTrait<CoolCannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral") && interactingAgent.agentName != VanillaAgents.Cannibal) ||
+										(agent.HasTrait<CopAccess>() && !interactingAgent.HasTrait("TheLaw") && interactingAgent.agentName != VanillaAgents.Cop && interactingAgent.agentName != VanillaAgents.CopBot && interactingAgent.agentName != VanillaAgents.SuperCop) ||
+										(agent.HasTrait<HonorableThief>() && !interactingAgent.statusEffects.hasTrait("HonorAmongThieves") && interactingAgent.statusEffects.hasTrait("HonorAmongThieves2"));
+
+									if (!cantBuy)
+									{
+										__instance.AddButton("Buy");
+
+										if (interactingAgent.inventory.HasItem("FreeItemVoucher"))
+											__instance.AddButton("UseVoucher");
+									}
+								}
+
+								// Passive
+								if (agent.HasTrait<Extortable>() && agent.CanShakeDown() && (interactingAgent.HasTrait("Shakedowner") || interactingAgent.HasTrait("Shakedowner")))
+								{
+									int threat = agent.relationships.FindThreat(interactingAgent, false);
+
+									if ((agent.health <= agent.healthMax * 0.4f) ||
+										(agent.relationships.GetRel(interactingAgent) == "Aligned") ||
+										(agent.slaveOwners.Contains(interactingAgent)))
+										threat = 100;
+
+									__instance.AddButton("Shakedown", " (" + threat + "%)");
 								}
 							}
 						}

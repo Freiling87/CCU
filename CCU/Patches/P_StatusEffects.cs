@@ -19,7 +19,7 @@ namespace CCU.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName:nameof(StatusEffects.ExplodeAfterDeathChecks))]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
-			if (__instance.agent.HasTrait<Behavior_ExplodeOnDeath>())
+			if (__instance.agent.HasTrait<ExplodeOnDeath>())
 			{
 				if (!__instance.agent.disappeared)
 					__instance.agent.objectSprite.flashingRepeatedly = true;

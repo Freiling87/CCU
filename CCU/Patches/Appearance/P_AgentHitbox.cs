@@ -21,7 +21,7 @@ namespace CCU.Patches.Appearance
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.chooseFacialHairType), argumentTypes: new[] { typeof(string) })]
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.chooseFacialHairType), argumentTypes: new[] { typeof(string) })]
 		public static bool ChooseFacialHairType_Prefix(string agentName, AgentHitbox __instance, ref string __result)
 		{
 			Agent agent = __instance.agent;
@@ -84,7 +84,7 @@ namespace CCU.Patches.Appearance
 			return true;
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures))]
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures))]
 		public static bool SetupFeatures_Prefix(AgentHitbox __instance)
 		{
 			Agent agent = __instance.agent;

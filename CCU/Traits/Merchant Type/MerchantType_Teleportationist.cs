@@ -11,7 +11,7 @@ namespace CCU.Traits.MerchantType
             RogueLibs.CreateCustomTrait<MerchantType_Teleportationist>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells teleportation tools."),
+                    [LanguageCode.English] = String.Format("This character sells teleportation tools. Get them before they're gone!"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
