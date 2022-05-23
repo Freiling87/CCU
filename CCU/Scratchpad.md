@@ -612,7 +612,7 @@ Complete
 Complete
 ###			√	Hack
 Complete
-#		H	Mutators
+#		CT	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population
 ###			C	Level Editor Mutator List
@@ -638,13 +638,13 @@ CampaignData
     - this.customLevel = this.customCampaign.levelList[n];
 ###			C	00 Usage Guide
 This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
+###			C	Designate Alpha/Beta/Gamma/Delta
+Designates a level as a place to return to
 ###			C	Exit Alpha/Beta/Gamma/Delta
 Destination at Elevator
 ###			C	Exit +1/2/3/4
 Can have multiple, to allow Branching
 Adds options at Elevator			
-###			C	Level Alpha/Beta/Gamma/Delta
-Designates a level as a place to return to
 ###			C	Set A/B/C/D false
 For level access
 ###			C	Set A/B/C/D true
@@ -661,10 +661,8 @@ Test
 Test
 ##		C	Gameplay
 ###			C	No Funny Business
-New
 For town levels. Ensures no one will be killed.
 You will need to eliminate spontaneous hostiles for this to work, though.
-###
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
