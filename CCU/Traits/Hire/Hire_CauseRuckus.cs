@@ -16,7 +16,7 @@ namespace CCU.Traits.Hire
             RogueLibs.CreateCustomTrait<Hire_CauseRuckus>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to cause a distraction.",
+                    [LanguageCode.English] = "This character can be hired to cause a ruckus.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

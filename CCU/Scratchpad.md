@@ -140,6 +140,7 @@ REORGANIZE:
 - Remove name prefixes
 - Rename Passive to Interaction
 - Rename Active to Behavior
+- Move Cost traits to their own category
 ##		T	Active
 ###			T	Accident-Prone
 Attempted
@@ -194,6 +195,11 @@ Complete
 ###			√	Use Drugs in Combat
 Complete
 ##		CT	Hire
+###			P	General Notes
+First draft of the general stream of methods used here.
+	Agent.DetermineButtons
+	Agent.PressedButton
+	
 ###			C	Cause a Ruckus
 ####			C	Animation doesn't fire
 ###			H	Chloroform
