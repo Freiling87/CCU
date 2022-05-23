@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Relationships
 {
-    public class HostileToSoldiers : CustomTrait
+    public class Hostile_To_Cannibal : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HostileToSoldiers>()
+            RogueLibs.CreateCustomTrait<Hostile_To_Cannibal>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to Soldiers.",
+                    [LanguageCode.English] = "This character is Hostile to Cannibals.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_HostileToSoldiers,
+                    [LanguageCode.English] = CTrait.Relationships_HostileToCannibals,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

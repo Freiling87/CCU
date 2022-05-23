@@ -7,20 +7,20 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Relationships
 {
-    public class HostileToVampires : CustomTrait
+    public class Hostile_To_Soldier : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HostileToVampires>()
+            RogueLibs.CreateCustomTrait<Hostile_To_Soldier>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to Vampires.",
+                    [LanguageCode.English] = "This character is Hostile to Soldiers.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_HostileToVampires,
+                    [LanguageCode.English] = CTrait.Relationships_HostileToSoldiers,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

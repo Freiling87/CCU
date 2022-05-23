@@ -23,5 +23,17 @@ namespace CCU.Patches
 					__instance.StartCoroutine("ExplodeBody");
 			}
 		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.IsInnocent), argumentTypes: new[] { typeof(Agent) })]
+		public static bool IsInnocent(Agent playerGettingPoints, StatusEffects __instance, ref bool __result)
+		{
+			if (__instance.agent.HasTrait<Innocent>())
+			{
+				__result = true;
+				return false;
+			}
+
+			return true;
+        }
 	}
 }

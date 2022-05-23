@@ -461,6 +461,13 @@ namespace CCU
 			Relationships_HostileToSoldiers = "[CCU] Relationships - Hostile to Soldiers",  // Analogue in BM: Army of Negative One
 			Relationships_HostileToVampires = "[CCU] Relationships - Hostile to Vampires",  // Analogue in BM: Vampire Vanquisher
 			Relationships_HostileToWerewolves = "[CCU] Relationships - Hostile to Werewolves",  // Analogue in BM: Werewolf Wrecker
+			PlayerSubmissive = "[CCU] Relationships - Player-Submissive",
+			PlayerHostile = "[CCU] Relationships - Player-Hostile",
+			PlayerAligned = "[CCU] Relationships - Player-Aligned",
+			PlayerFriendly = "[CCU] Relationships - Player-Friendly",
+			PlayerLoyal = "[CCU] Relationships - Player-Loyal",
+			PlayerAnnoyed = "[CCU] Relationships - Player-Annoyed",
+			PlayerNeutral = "[CCU] Relationships - Player-Neutral",
 		#endregion
 		#region Spawn
 			HideInObject = "[CCU] Spawn: Hide In Bush",

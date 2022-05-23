@@ -68,10 +68,10 @@ namespace CCU.Patches.AgentRelationships
                     return false;
                 }
 				#endregion
-                if ((___agent.HasTrait<HostileToCannibals>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<CoolCannibal>())) ||
-                    (___agent.HasTrait<HostileToSoldiers>() && otherAgent.agentName == VanillaAgents.Soldier) ||
-                    (___agent.HasTrait<HostileToVampires>() && otherAgent.agentName == VanillaAgents.Vampire) ||
-                    (___agent.HasTrait<HostileToWerewolves>() && otherAgent.agentName == VanillaAgents.Werewolf))
+                if ((___agent.HasTrait<Hostile_To_Cannibal>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<CoolCannibal>())) ||
+                    (___agent.HasTrait<Hostile_To_Soldier>() && otherAgent.agentName == VanillaAgents.Soldier) ||
+                    (___agent.HasTrait<Hostile_To_Vampire>() && otherAgent.agentName == VanillaAgents.Vampire) ||
+                    (___agent.HasTrait<Hostile_To_Werewolf>() && otherAgent.agentName == VanillaAgents.Werewolf))
 				{
                     __instance.SetRelInitial(otherAgent, "Hateful");
                     otherAgent.relationships.SetRelInitial(___agent, "Hateful");
@@ -86,28 +86,74 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
+            string relationship = "";
+
             if (___agent.HasTrait<Suspicioner>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
-                __instance.SetStrikes(otherAgent, 2);
+                relationship = "Annoyed";
 
             if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<CommonFolk>() && !otherAgent.guardSequence)
-                otherAgent.relationships.SetRelInitial(___agent, "Loyal");
+                relationship = "Loyal";
 
             if (___agent.HasTrait(VanillaTraits.FriendoftheFamily) && otherAgent.HasTrait<FamilyFriend>())
-                otherAgent.relationships.SetRelInitial(___agent, "Aligned");
+                relationship = "Aligned";
 
             if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<CoolCannibal>())
-            {
-                __instance.SetRelHate(otherAgent, 0);
-                __instance.SetRelInitial(otherAgent, "Neutral", true);
-                otherAgent.relationships.SetRelHate(___agent, 0);
-                otherAgent.relationships.SetRelInitial(___agent, "Neutral");
-            }
+                relationship = "Neutral";
 
             if (___agent.HasTrait(VanillaTraits.ScumbagSlaughterer) && otherAgent.HasTrait<Scumbag>())
 			{
-                otherAgent.relationships.GetRelationship(___agent).mechHate = true;
-                otherAgent.relationships.SetRelInitial(___agent, "Hateful");
+                relationship = "Hateful";
                 otherAgent.oma.mustBeGuilty = true;
+            }
+
+            if (otherAgent.isPlayer != 0)
+            {
+                if (___agent.HasTrait<Player_Aligned>())
+                    relationship = "Aligned";
+                else if (___agent.HasTrait<Player_Annoyed>())
+                    relationship = "Annoyed";
+                else if (___agent.HasTrait<Player_Friendly>())
+                    relationship = "Friendly";
+                else if (___agent.HasTrait<Player_Hostile>())
+                    relationship = "Hateful";
+                else if (___agent.HasTrait<Player_Loyal>())
+                    relationship = "Loyal";
+                else if (___agent.HasTrait<Player_Neutral>())
+                    relationship = "Neutral";
+                else if (___agent.HasTrait<Player_Submissive>())
+                    relationship = "Submissive";
+            }
+
+            switch (relationship)
+            {
+                case "":
+                    break;
+                case "Aligned":
+                    otherAgent.relationships.SetRelInitial(___agent, "Aligned");
+                    break;
+                case "Annoyed":
+                    __instance.SetStrikes(otherAgent, 2);
+                    break;
+                case "Hateful":
+                    __instance.SetRel(otherAgent, "Hateful");
+                    __instance.SetRelHate(otherAgent, 5);
+                    otherAgent.relationships.GetRelationship(___agent).mechHate = true;
+                    otherAgent.relationships.SetRelInitial(___agent, "Hateful");
+                    break;
+                case "Loyal":
+                    otherAgent.relationships.SetRelInitial(___agent, "Loyal");
+                    break;
+                case "Neutral":
+                    __instance.SetRelHate(otherAgent, 0);
+                    __instance.SetRelInitial(otherAgent, "Neutral", true);
+                    otherAgent.relationships.SetRelHate(___agent, 0);
+                    otherAgent.relationships.SetRelInitial(___agent, "Neutral");
+                    break;
+                case "Submissive":
+                    ___agent.relationships.SetRel(otherAgent, "Submissive");
+                    ___agent.relationships.SetSecretHate(otherAgent, false);
+                    otherAgent.relationships.SetRel(___agent, "Neutral");
+                    break;
             }
         }
     }

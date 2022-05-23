@@ -204,6 +204,9 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<Zombie_Infected>())
 				__instance.zombieWhenDead = true;
             #endregion
+            #region Relationships
+			if (__instance.HasTrait<Relationless>())
+            #endregion
 
             if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
 				__instance.canGoBetweenLevels = true;

@@ -201,10 +201,10 @@ namespace CCU.Traits
 			typeof(Faction_3_Hostile),
 			typeof(Faction_4_Aligned),
 			typeof(Faction_4_Hostile),
-			typeof(HostileToCannibals),
-			typeof(HostileToSoldiers),
-			typeof(HostileToVampires),
-			typeof(HostileToWerewolves),
+			typeof(Hostile_To_Cannibal),
+			typeof(Hostile_To_Soldier),
+			typeof(Hostile_To_Vampire),
+			typeof(Hostile_To_Werewolf),
 		};
 		public static List<Type> TraitGateTraits = new List<Type>()
 		{

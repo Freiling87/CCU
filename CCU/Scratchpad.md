@@ -166,6 +166,8 @@ Complete
 ##		T	Passive
 ###			T	Crusty
 Agent.upperCrusty
+###			T	Innocent
+####			C	XP Penalty for neutralizing innocent
 ###			T	Possessed
 Attempted
 ###			T	Status Effect Immune
@@ -174,9 +176,6 @@ Attempted
 Attempted
 ###			T	Z-Infected
 Agent.zombieWhenDead
-###			H	Innocent
-New
-XP Penalty for neutralizing
 ###			H	Invincible
 New
 ###			H	Reviveable (Infinite)
@@ -199,33 +198,30 @@ Not too concerned, considering this is vanilla for Slaves.
 Complete
 ###			√	Guilty
 Complete
-##		C	Relationships
-###			C	Aggressive (Cannibal)
-New
-###			C	Player Hostile
-###			C	Player Annoyed
-###			C	Player Friendly
-###			C	Player Loyal
-###			C	Player Aligned
+##		CT	Relationships
+###			C	Hostile to Werewolf
+Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
+###			T	Player Aligned
+###			T	Player Annoyed
+###			T	Player Friendly
+###			T	Player Hostile
+####			C	Cool Cannibal Interaction
+###			T	Player Loyal
+###			T	Player Submissive
+###			T	Relationless
 ###			C	Class Unity
 Like Class Solidarity, except Aligned
 Note that Solidarity includes a No Infighting effect.
-###			C	Don't Change Relationships (Rename)
-Agent.dontChangeRelationships
-###			C	Hostile to Cannibals
-####			C	Include Cool Cannibal
-###			C	Hostile to Werewolves
-Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
-###			H	Never Hostile
-New
 ###			H	Secretly Hostile
 A la Bounty disaster
 Agent.bountyHunter
 Agent.secretHate
 Agent.choseSecretHate
-###			√	Hostile to Soldiers
+###			√	Hostile to Cannibal
 Complete
-###			√	Hostile to Vampires
+###			√	Hostile to Soldier
+Complete
+###			√	Hostile to Vampire
 Complete
 ##		C	Trait Gates
 ###			C	Cool Cannibal
