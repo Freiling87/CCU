@@ -9,6 +9,7 @@ using CCU.Traits.Passive;
 using CCU.Traits.Behavior;
 using CCU.Traits.Interaction;
 using CCU.Traits.Hack;
+using CCU.Traits.Relationships;
 
 namespace CCU.Patches.Agents
 {
@@ -203,9 +204,10 @@ namespace CCU.Patches.Agents
 
 			if (__instance.HasTrait<Zombie_Infected>())
 				__instance.zombieWhenDead = true;
-            #endregion
-            #region Relationships
+			#endregion
+			#region Relationships
 			if (__instance.HasTrait<Relationless>())
+				__instance.dontChangeRelationships = true;
             #endregion
 
             if (GC.challenges.Contains(CMutators.HomesicknessDisabled))

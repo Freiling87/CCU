@@ -201,6 +201,7 @@ Complete
 ##		CT	Relationships
 ###			C	Hostile to Werewolf
 Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
+Check out agent.originalWerewolf & secretWerewolf
 ###			T	Player Aligned
 ###			T	Player Annoyed
 ###			T	Player Friendly
@@ -223,21 +224,31 @@ Complete
 Complete
 ###			√	Hostile to Vampire
 Complete
-##		C	Trait Gates
-###			C	Cool Cannibal
+##		CT	Trait Gates
+###			T	Cool Cannibal
 - Dummy D
-####			C	Interact with Cannibal Hostility CCU trait
-Need to create Cannibal hostility trait before you can fully test this one.
-###			C	Crust Enjoyer
+- Now this can be tested with Player Hostile
+###			T	Bashable
+####			T	Alignment
+####			T	Hostility
+####			T	XP Bonus
+###			T	Crushable
+####			T	Alignment
+####			T	Hostility
+####			T	XP Bonus
+###			T	Slayable
+####			T	Hostility
+####			T	XP Bonus
+###			T	Specific Species
+####			T	Hostility
+####			T	XP Bonus
+###			H	Crust Enjoyer
 If you have Upper Crusty, this character is Loyal
+I think this is actually automatic with Enforcer
 ###			H	Gate Vendor
 Won't sell unless you have appropriate trait
 ###			H	Gate Hire
 Won't hire unless you have appropriate trait
-###			C	Bashable
-###			C	Crushable
-###			C	Slayable
-###			C	Specific Species
 ###			√	Common Folk
 Complete
 ###			√	Cop	Access

@@ -71,14 +71,25 @@ namespace CCU.Patches.AgentRelationships
                 if ((___agent.HasTrait<Hostile_To_Cannibal>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<CoolCannibal>())) ||
                     (___agent.HasTrait<Hostile_To_Soldier>() && otherAgent.agentName == VanillaAgents.Soldier) ||
                     (___agent.HasTrait<Hostile_To_Vampire>() && otherAgent.agentName == VanillaAgents.Vampire) ||
-                    (___agent.HasTrait<Hostile_To_Werewolf>() && otherAgent.agentName == VanillaAgents.Werewolf))
+                    (___agent.HasTrait<Hostile_To_Werewolf>() && otherAgent.agentName == VanillaAgents.Werewolf) ||
+                    (___agent.HasTrait<Bashable>() && (otherAgent.agentName == VanillaAgents.GangsterCrepe || otherAgent.HasTrait(VanillaTraits.BlahdBasher))) ||
+                    (___agent.HasTrait<Crushable>() && (otherAgent.agentName == VanillaAgents.GangsterBlahd || otherAgent.HasTrait(VanillaTraits.CrepeCrusher))) ||
+                    (___agent.HasTrait<Slayable>() && (otherAgent.agentName == VanillaAgents.Gorilla || otherAgent.HasTrait("HatesScientist"))) ||
+                    (___agent.HasTrait<Specistist>() && (otherAgent.agentName == VanillaAgents.Scientist || otherAgent.HasTrait(VanillaTraits.Specist))) )
 				{
                     __instance.SetRelInitial(otherAgent, "Hateful");
                     otherAgent.relationships.SetRelInitial(___agent, "Hateful");
                     __instance.SetRelHate(otherAgent, 5);
                     otherAgent.relationships.SetRelHate(___agent, 5);
                 }
-			}
+                else if (
+                    (___agent.HasTrait<Bashable>() && (otherAgent.agentName == VanillaAgents.GangsterBlahd || otherAgent.HasTrait(VanillaTraits.CrepeCrusher))) ||
+                    (___agent.HasTrait<Crushable>() && (otherAgent.agentName == VanillaAgents.GangsterCrepe || otherAgent.HasTrait(VanillaTraits.BlahdBasher))))
+                {
+                    __instance.SetRelInitial(otherAgent, "Aligned");
+                    otherAgent.relationships.SetRelInitial(___agent, "Aligned");
+                }
+            }
 
 			return true;
         }
@@ -129,6 +140,7 @@ namespace CCU.Patches.AgentRelationships
                 case "":
                     break;
                 case "Aligned":
+                    __instance.SetRelInitial(otherAgent, "Aligned");
                     otherAgent.relationships.SetRelInitial(___agent, "Aligned");
                     break;
                 case "Annoyed":

@@ -218,6 +218,10 @@
     <Compile Include="Traits\Relationships\Player_Annoyed.cs" />
     <Compile Include="Traits\Relationships\Player_Loyal.cs" />
     <Compile Include="Traits\Relationships\Player_Hostile.cs" />
+    <Compile Include="Traits\TraitGate\Specistist.cs" />
+    <Compile Include="Traits\TraitGate\Slayable.cs" />
+    <Compile Include="Traits\TraitGate\Crushable.cs" />
+    <Compile Include="Traits\TraitGate\Bashable.cs" />
     <Compile Include="Traits\TraitGate\Suspicioner.cs" />
     <Compile Include="Traits\Relationships\Hostile_To_Cannibal.cs" />
     <Compile Include="Traits\Relationships\Hostile_To_Soldier.cs" />
