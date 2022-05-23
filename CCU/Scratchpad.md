@@ -163,23 +163,22 @@ Complete
 Complete
 ###			√	Offer Motivation
 Complete
-##		C	Passive
-###			C	Innocent
+##		T	Passive
+###			T	Crusty
+Agent.upperCrusty
+###			T	Possessed
+Attempted
+###			T	Status Effect Immune
+Attempted
+###			T	Vision Beams (Cop Bot)
+Attempted
+###			T	Z-Infected
+Agent.zombieWhenDead
+###			H	Innocent
 New
 XP Penalty for neutralizing
-###			C	Invincible
+###			H	Invincible
 New
-###			C	Possessed
-Agent.SecretShapeshifter
-###			C	Status Immunity
-Agent.preventStatusEffects
-###			C	Vision Beams (Cop Bot)
-New
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			C	Z-Infected
-Agent.zombieWhenDead
 ###			H	Reviveable (Infinite)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
 ###			H	Reviveable (One)
@@ -190,8 +189,9 @@ If hired and surviving, will revive the player once
 Remove colors
 Tint white
 Make stationary, Invincible, non-reactive
-###			H	Upper Crusty
-Agent.upperCrusty
+###			H	Zombified
+Agent.zombified
+Agent.customZombified
 ###			√	Explode On Death
 ####			H	Explodes when Arrested
 Not too concerned, considering this is vanilla for Slaves.

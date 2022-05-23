@@ -192,6 +192,11 @@
     <Compile Include="Traits\Merchant\Merchant_Buyer.cs" />
     <Compile Include="Traits\Merchant\Merchant_BuyerOnly.cs" />
     <Compile Include="Traits\Behavior\AccidentProne.cs" />
+    <Compile Include="Traits\Passive\Possessed.cs" />
+    <Compile Include="Traits\Passive\Crusty.cs" />
+    <Compile Include="Traits\Passive\Zombie_Infected.cs" />
+    <Compile Include="Traits\Passive\Vision_Beams.cs" />
+    <Compile Include="Traits\Passive\Status_Effect_Immune.cs" />
     <Compile Include="Traits\Passive\ExplodeOnDeath.cs" />
     <Compile Include="Traits\Passive\Guilty.cs" />
     <Compile Include="Traits\Combat\Fearless.cs" />

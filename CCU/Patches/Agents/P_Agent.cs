@@ -176,13 +176,33 @@ namespace CCU.Patches.Agents
 			#region Merchant
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.MerchantTypeTraits))
 				__instance.SetupSpecialInvDatabase();
-            #endregion
-            #region Passive
-            if (__instance.HasTrait<Guilty>())
-				__instance.oma.mustBeGuilty = true;
-
+			#endregion
+			#region Passive
 			if (__instance.HasTrait<AccidentProne>())
 				__instance.dontStopForDanger = true;
+
+			if (__instance.HasTrait<Crusty>())
+				__instance.upperCrusty = true;
+
+			if (__instance.HasTrait<Guilty>())
+				__instance.oma.mustBeGuilty = true;
+
+			if (__instance.HasTrait<Possessed>())
+            {
+				__instance.secretShapeShifter = true;
+				__instance.oma.secretShapeShifter = true;
+				__instance.oma.mustBeGuilty = true;
+				__instance.agentHitboxScript.GetColorFromString("Red", "Eyes");
+			}				
+
+			if (__instance.HasTrait<Status_Effect_Immune>())
+				__instance.preventStatusEffects = true;
+
+			if (__instance.HasTrait<Vision_Beams>())
+				__instance.agentSecurityBeams.enabled = true;
+
+			if (__instance.HasTrait<Zombie_Infected>())
+				__instance.zombieWhenDead = true;
             #endregion
 
             if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
