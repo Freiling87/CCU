@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class DisarmTrap : CustomTrait
+    public class Poisoner : CustomTrait
     {
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<DisarmTrap>()
+            RogueLibs.CreateCustomTrait<Poisoner>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to disarm a trap.",
+                    [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.DisarmTrap,
+                    [LanguageCode.English] = CTrait.Poison,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

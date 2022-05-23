@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class Hack : CustomTrait
+    public class Trapper : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hack>()
+            RogueLibs.CreateCustomTrait<Trapper>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to hack something remotely.",
+                    [LanguageCode.English] = "This character can be hired to disarm a trap.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hack,
+                    [LanguageCode.English] = CTrait.DisarmTrap,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

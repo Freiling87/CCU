@@ -1,27 +1,26 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
+using SORCE.Localization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hack
 {
-    public class Poison : CustomTrait
+    public class Tamper_with_Aim : T_Hack
     {
-        //[RLSetup]
+        public override string ButtonText => VButtonText.Hack_TamperAim;
+
+        [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Poison>()
+            RogueLibs.CreateCustomTrait<Tamper_with_Aim>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",
+                    [LanguageCode.English] = String.Format("This character can be hacked to tamper with their ranged weapon aim.\n\n" +
+                    "<color=red>Requires:</color> Electronic"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Poison,
+                    [LanguageCode.English] = DisplayName<Tamper_with_Aim>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

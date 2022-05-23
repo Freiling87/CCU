@@ -12,6 +12,8 @@
 			BribeForEntryAlcohol_2 = "BribeWhiskey",
 			BuyRound = "BuyRound",
 			DonateBlood = "GiveBlood",
+			Hack_Haywire = "RobotEnrage",
+			Hack_TamperAim = "TamperRobotAim",
 			Heal = "Heal",
 			GiveItem = "GiveItem",
 			Identify = "Identify",

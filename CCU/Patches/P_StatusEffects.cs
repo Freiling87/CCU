@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx.Logging;
+﻿using BepInEx.Logging;
 using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
 
 namespace CCU.Patches
 {
-	[HarmonyPatch(declaringType:typeof(StatusEffects))]
+    [HarmonyPatch(declaringType:typeof(StatusEffects))]
 	class P_StatusEffects
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -23,6 +18,7 @@ namespace CCU.Patches
 			{
 				if (!__instance.agent.disappeared)
 					__instance.agent.objectSprite.flashingRepeatedly = true;
+
 				if (GC.serverPlayer)
 					__instance.StartCoroutine("ExplodeBody");
 			}

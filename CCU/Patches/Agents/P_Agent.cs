@@ -8,6 +8,7 @@ using CCU.Traits.Combat;
 using CCU.Traits.Passive;
 using CCU.Traits.Behavior;
 using CCU.Traits.Interaction;
+using CCU.Traits.Hack;
 
 namespace CCU.Patches.Agents
 {
@@ -163,8 +164,13 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<SeekAndDestroy>())
 				__instance.killerRobot = true;
 			#endregion
-			#region Combat
-			if (__instance.HasTrait<DrugWarrior>())
+			#region Interaction
+			if (__instance.HasTrait<Go_Haywire>() ||
+				__instance.HasTrait<Tamper_with_Aim>())
+				__instance.hackable = true;
+            #endregion
+            #region Combat
+            if (__instance.HasTrait<DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant

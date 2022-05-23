@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class Bodyguard : CustomTrait
+    public class Saboteur : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bodyguard>()
+            RogueLibs.CreateCustomTrait<Saboteur>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired as a bodyguard.",
+                    [LanguageCode.English] = "This character can be hired to tamper with machinery and electronics.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Bodyguard,
+                    [LanguageCode.English] = CTrait.Tamper,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -58,6 +58,11 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
+##		T	Hack
+###			T	Go Haywire
+Attempted
+###			T	Tamper With Aim
+Attempted
 ##		H	Interaction
 ###			C	Shelf?
 This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
@@ -159,14 +164,6 @@ Complete
 ###			√	Offer Motivation
 Complete
 ##		C	Passive
-###			C	Explode On Death
-####			C	Explodes when Arrested
-###			√	Extortable
-Complete
-###			C	Hackable - Tamper With Aim
-New
-###			C	Hackable - Go Haywire
-New
 ###			C	Innocent
 New
 XP Penalty for neutralizing
@@ -195,6 +192,11 @@ Tint white
 Make stationary, Invincible, non-reactive
 ###			H	Upper Crusty
 Agent.upperCrusty
+###			√	Explode On Death
+####			H	Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			√	Extortable
+Complete
 ###			√	Guilty
 Complete
 ##		C	Relationships

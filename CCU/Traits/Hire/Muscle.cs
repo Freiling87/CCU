@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class CauseARuckus : CustomTrait
+    public class Muscle : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<CauseARuckus>()
+            RogueLibs.CreateCustomTrait<Muscle>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to cause a distraction, or a Ruckus, if you will.",
+                    [LanguageCode.English] = "This character can be hired as a bodyguard.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.CauseARuckus,
+                    [LanguageCode.English] = CTrait.Bodyguard,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

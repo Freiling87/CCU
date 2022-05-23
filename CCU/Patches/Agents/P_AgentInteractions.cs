@@ -13,6 +13,7 @@ using CCU.Traits.Passive;
 using CCU.Traits.Cost;
 using CCU.Traits.Interaction;
 using System.Linq;
+using CCU.Traits.Hack;
 
 namespace CCU.Patches.Agents
 {
@@ -1876,6 +1877,11 @@ namespace CCU.Patches.Agents
 											__instance.AddButton(CJob.TamperSomething);
 									}
 								}
+
+								// Hack
+								if (interactingAgent.interactionHelper.interactingFar)
+									foreach (T_Hack hack in agent.GetTraits<T_Hack>())
+										__instance.AddButton(hack.ButtonText);
 
 								// Interaction 
 								foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())

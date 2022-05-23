@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class BreakIn : CustomTrait
+    public class Decoy : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BreakIn>()
+            RogueLibs.CreateCustomTrait<Decoy>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
+                    [LanguageCode.English] = "This character can be hired to cause a distraction, or a Ruckus, if you will.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BreakIn,
+                    [LanguageCode.English] = CTrait.CauseARuckus,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

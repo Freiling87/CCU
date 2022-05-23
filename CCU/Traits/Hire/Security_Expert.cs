@@ -1,27 +1,21 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class Safecrack : CustomTrait
+    public class Security_Expert : CustomTrait
     {
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Safecrack>()
+            RogueLibs.CreateCustomTrait<Security_Expert>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into safes up-close and silently.",
+                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Safecrack,
+                    [LanguageCode.English] = CTrait.BreakIn,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
