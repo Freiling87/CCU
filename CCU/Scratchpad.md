@@ -944,15 +944,8 @@ Removed from Readme
 To Sorquol
 ## Fields 
 - Multiple In Chunk field for SpawnerAgent
-
 ## Item Groups *
 - Know how you can select "Slum NPCs" as a type? Why can't we do that with items? 
-
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
 - Red-tint any objects that might spawn inconsistently due to placement rules (e.g., Security Cams over gaps)
-# No header here
-The Player Edition is identical to the Designer Edition, but hides CCU content from view so it doesn't clutter the interface:
-- Hides CCU traits from Character Creation Menus
-- Hides CCU traits from Character Sheet page *
-- Hides CCU traits from HUD Trait list *

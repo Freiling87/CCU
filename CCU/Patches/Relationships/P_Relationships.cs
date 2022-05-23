@@ -131,6 +131,8 @@ namespace CCU.Patches.AgentRelationships
                     relationship = "Loyal";
                 else if (___agent.HasTrait<Player_Neutral>())
                     relationship = "Neutral";
+                else if (___agent.HasTrait<Player_Secret_Hate>())
+                    relationship = "SecretHate";
                 else if (___agent.HasTrait<Player_Submissive>())
                     relationship = "Submissive";
             }
@@ -160,6 +162,11 @@ namespace CCU.Patches.AgentRelationships
                     __instance.SetRelInitial(otherAgent, "Neutral", true);
                     otherAgent.relationships.SetRelHate(___agent, 0);
                     otherAgent.relationships.SetRelInitial(___agent, "Neutral");
+                    break;
+                case "SecretHate":
+                    otherAgent.relationships.SetSecretHate(___agent, true);
+                    otherAgent.choseSecretHate = true;
+                    otherAgent.hasSecretHate = true;
                     break;
                 case "Submissive":
                     ___agent.relationships.SetRel(otherAgent, "Submissive");

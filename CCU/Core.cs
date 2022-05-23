@@ -469,6 +469,7 @@ namespace CCU
 			PlayerLoyal = "[CCU] Relationships - Player-Loyal",
 			PlayerAnnoyed = "[CCU] Relationships - Player-Annoyed",
 			PlayerNeutral = "[CCU] Relationships - Player-Neutral",
+			PlayerSecretHate = "[CCU] Relationships - Player-Secret Hate",
 			Relationships_Relationless = "[CCU] Relationships - Relationless",
 		#endregion
 		#region Spawn
