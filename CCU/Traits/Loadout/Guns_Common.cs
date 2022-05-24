@@ -9,7 +9,7 @@ namespace CCU.Traits.Loadout
 {
 	public class Guns_Common : CustomTrait
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			RogueLibs.CreateCustomTrait<Guns_Common>()

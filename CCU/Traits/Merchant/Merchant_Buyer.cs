@@ -5,7 +5,7 @@ namespace CCU.Traits.Merchant
 {
     public class Buyer : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Buyer>()

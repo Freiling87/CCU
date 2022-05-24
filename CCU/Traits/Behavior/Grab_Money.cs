@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Behavior
 {
-    public class Security_Expert : CustomTrait
+    public class Grab_Money : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Security_Expert>()
+            RogueLibs.CreateCustomTrait<Grab_Money>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
+                    [LanguageCode.English] = string.Format("This character will grab money if they see it."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BreakIn,
+                    [LanguageCode.English] = CTrait.GrabMoney,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

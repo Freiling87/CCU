@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Appearance.FacialHair
 {
-	public class MustacheRedneck : CustomTrait
+    public class MustacheRedneck : CustomTrait
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			RogueLibs.CreateCustomTrait<MustacheRedneck>()

@@ -2,20 +2,23 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class SeekAndDestroy : CustomTrait
+    /// <summary>
+    /// Don't rename this: needs to be distinct from Hire trait name
+    /// </summary>
+    public class Pick_Pockets : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<SeekAndDestroy>()
+            RogueLibs.CreateCustomTrait<Pick_Pockets>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),
+                    [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.SeekAndDestroy,
+                    [LanguageCode.English] = CTrait.Pickpocket,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

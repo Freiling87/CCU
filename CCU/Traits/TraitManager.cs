@@ -130,11 +130,11 @@ namespace CCU.Traits
 #endregion
 		public static List<Type> BehaviorActiveTraits = new List<Type>()
 		{
-			typeof(EatCorpse),
-			typeof(GrabDrugs),
-			typeof(GrabMoney),
-			typeof(Behavior.Pickpocket),
-			typeof(SuckBlood),
+			typeof(Eat_Corpses),
+			typeof(Grab_Drugs),
+			typeof(Grab_Money),
+			typeof(Behavior.Pick_Pockets),
+			typeof(Suck_Blood),
 		};
 		public static List<Type> BehaviorPassiveTraits = new List<Type>()
 		{
@@ -167,7 +167,7 @@ namespace CCU.Traits
 		public static List<Type> HireTypeTraits = new List<Type>()
 		{
 			typeof(Muscle),
-			typeof(Security_Expert),
+			typeof(Intruder),
 			typeof(Decoy),
 			typeof(Trapper),
 			typeof(Hacker),
@@ -192,7 +192,7 @@ namespace CCU.Traits
 		};
 		public static List<Type> RelationshipTraits = new List<Type>()
 		{
-			typeof(Suspicioner),
+			typeof(Suspecter),
 			typeof(Faction_1_Aligned),
 			typeof(Faction_1_Hostile),
 			typeof(Faction_2_Aligned),

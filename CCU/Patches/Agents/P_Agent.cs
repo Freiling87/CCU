@@ -157,14 +157,14 @@ namespace CCU.Patches.Agents
             if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
 			{
 				// Thieves have their LOScheck set to 50% in vanilla
-				if (__instance.HasTrait<Pickpocket>() && GC.percentChance(50))
+				if (__instance.HasTrait<Pick_Pockets>() && GC.percentChance(50))
 					return;
 
 				// All others excluded
 				__instance.losCheckAtIntervals = true;
 			}
 
-			if (__instance.HasTrait<SeekAndDestroy>())
+			if (__instance.HasTrait<Seek_and_Destroy>())
 				__instance.killerRobot = true;
 			#endregion
 			#region Interaction

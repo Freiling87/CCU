@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Appearance.FacialHair
 {
-	public class MustacheCircus : CustomTrait
+    public class MustacheCircus : CustomTrait
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			RogueLibs.CreateCustomTrait<MustacheCircus>()

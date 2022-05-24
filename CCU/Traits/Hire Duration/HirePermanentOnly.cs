@@ -10,7 +10,7 @@ namespace CCU.Traits.Hire_Duration
 {
     public class HirePermanentOnly : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<HirePermanentOnly>()

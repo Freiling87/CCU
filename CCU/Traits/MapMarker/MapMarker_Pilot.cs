@@ -9,7 +9,7 @@ namespace CCU.Traits.Map_Marker
 {
 	public class MapMarker_Pilot : CustomTrait
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			RogueLibs.CreateCustomTrait<MapMarker_Pilot>()

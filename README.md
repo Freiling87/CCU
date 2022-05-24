@@ -25,30 +25,26 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 ###				Behavior
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades
 |Eat Corpse											|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
 |Grab Drugs											|- Grab Drugs, like Me
 |Grab Money											|- Grab Money, like Slum Dweller
-|Pickpocket											|- Pick pockets, like Thief<br>- Requires: Sticky Glove
+|Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
 |Seek & Destroy										|- Stalk & attack players, like Killer Robot
 |Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite
-###				Faction
+###				Combat
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Faction 1 Aligned									|Aligned with same trait
-|Faction 1 Hostile									|Hostile to Faction 1 Aligned
-|Faction 2 Aligned									|Aligned with same trait
-|Faction 2 Hostile									|Hostile to Faction 2 Aligned
-|Faction 3 Aligned									|Aligned with same trait
-|Faction 3 Hostile									|Hostile to Faction 3 Aligned
-|Faction 4 Aligned									|Aligned with same trait
-|Faction 4 Hostile									|Hostile to Faction 4 Aligned
+|Coward												|- Always flees from combat
+|Drug Warrior										|- Uses drugs when initiating combat
+|Fearless											|- Never flees from combat
 ###				Hire
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Bodyguard											|- Hire as protection
-|Break In											|- Break into target Door or Window
-|Cause Ruckus										|- Cause a Ruckus
-|Hack												|- Hack target Object or hackable Agent
+|Decoy												|- Cause a Ruckus
+|Hacker												|- Hack target Object or hackable Agent
+|Intruder											|- Break into target Door or Window
+|Muscle												|- Hire as protection
 ###				Interaction
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -128,28 +124,54 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 ###				Passive
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Crusty												|- Same as Upper-Crusty
 |Explode On Death									|- Explode on Death
 |Extortable											|- Valid target for Extortionist
 |Guilty												|- Valid target for Cop Big Quest
-|Hackable - Tamper with Aim							|- A la Killer Robot
-|Hackable - Go Haywire								|- A la Cop Bot
-###				Relationships
+|Innocent											|- Gets away with murder
+|Possessed											|- Has Shapeshifter
+|Status Effect-Immune								|- Guess, genius
+|Z-Infected											|- Zombifies on death
+###				Relationships - Faction
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Faction 1 Aligned									|Aligned with same trait
+|Faction 1 Hostile									|Hostile to Faction 1 Aligned
+|Faction 2 Aligned									|Aligned with same trait
+|Faction 2 Hostile									|Hostile to Faction 2 Aligned
+|Faction 3 Aligned									|Aligned with same trait
+|Faction 3 Hostile									|Hostile to Faction 3 Aligned
+|Faction 4 Aligned									|Aligned with same trait
+|Faction 4 Hostile									|Hostile to Faction 4 Aligned
+###				Relationships - General
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Hostile to Cannibals								|
 |Hostile to Soldiers								|
 |Hostile to Vampires								|
 |Hostile to Werewolves								|
+|Relationless										|
+###				Relationships - Player
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Player-Aligned
+|Player-Annoyed
+|Player-Friendly
+|Player-Hostile
+|Player-Loyal
+|Player-Neutral
+|Player-Submissive
 ###				Trait Gate
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Bashable											|- Hostile to Blahd Basher<br>- XP bonus when neutralized by Blahd Basher
+|Bashable											|- Hostile to Blahd Basher<br>- XP bonus when neutralized by Blahd Basher<br>- Aligned to Blahds
 |Common Folk										|- Loyal to Friend of the Common Folk
 |Cool Cannibal										|- Neutral to Cool With Cannibals<br>- If Merchant, will only sell to Cool With Cannibals
-|Cop Access											|- If Merchant, will only sell to The Law
-|Crushable											|- Hostile to Crepe Crusher<br>- XP bonus when neutralized by Crepe Crusher
+|Cop Access											|- If Merchant Type is cop-related, will only sell to The Law
+|Crushable											|- Hostile to Crepe Crusher<br>- XP bonus when neutralized by Crepe Crusher<br>- Aligned to Crepes
+|Family Friend										|- Aligned to Friend of the Family
 |Honorable Thief									|- Will not Pickpocket Honor Among Thieves<br>- If Merchant, will only sell to Honor Among Thieves
 |Scumbag											|- Hostile to Scumbag Slaughterer
 |Slayable											|- Hostile to Scientist Slaughterer<br>- XP bonus when neutralized by Scientist Slaughterer
-|Specific Species									|- Hostile to Specist<br>- XP bonus when neutralized by Specist
+|Specistist											|- Hostile to Specist<br>- XP bonus when neutralized by Specist
 |Suspecter											|- Annoyed at Suspicious

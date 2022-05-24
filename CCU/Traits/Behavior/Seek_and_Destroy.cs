@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Behavior
 {
-    public class Suspicioner : CustomTrait
+    public class Seek_and_Destroy : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Suspicioner>()
+            RogueLibs.CreateCustomTrait<Seek_and_Destroy>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Annoyed at characters with the Suspicious trait.",
+                    [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_AnnoyedAtSuspicious,
+                    [LanguageCode.English] = CTrait.SeekAndDestroy,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

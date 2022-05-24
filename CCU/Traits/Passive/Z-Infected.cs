@@ -1,21 +1,22 @@
 ﻿using RogueLibsCore;
+using System;
 
-namespace CCU.Traits.Behavior
+namespace CCU.Traits.Passive
 {
-    public class EatCorpse : CustomTrait
+    public class Zombie_Infected : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<EatCorpse>()
+            RogueLibs.CreateCustomTrait<Zombie_Infected>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
+                    [LanguageCode.English] = String.Format("This character is infected with the Z-Virus. They are not a zombie yet, but will become one when killed."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.EatCorpse,
+                    [LanguageCode.English] = "[CCU] Passive - Z-Infected",
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

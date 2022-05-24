@@ -9,7 +9,7 @@ namespace CCU.Traits.Loadout
 {
 	public class ChunkSafeCombo : CustomTrait
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			RogueLibs.CreateCustomTrait<ChunkSafeCombo>()

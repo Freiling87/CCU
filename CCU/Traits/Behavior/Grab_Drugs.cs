@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
 namespace CCU.Traits.Behavior
 {
-    public class Pickpocket : CustomTrait
+    public class Grab_Drugs : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pickpocket>()
+            RogueLibs.CreateCustomTrait<Grab_Drugs>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.English] = string.Format("This character will grab drugs if they see any."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Pickpocket,
+                    [LanguageCode.English] = CTrait.GrabDrugs,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

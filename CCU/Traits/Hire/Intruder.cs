@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Behavior
+namespace CCU.Traits.Hire
 {
-    public class GrabDrugs : CustomTrait
+    public class Intruder : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<GrabDrugs>()
+            RogueLibs.CreateCustomTrait<Intruder>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will grab drugs if they see any."),
+                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.GrabDrugs,
+                    [LanguageCode.English] = CTrait.BreakIn,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

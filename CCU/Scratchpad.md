@@ -58,14 +58,7 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		H	Hack
-###			C	00 Interrupts
-Works with Electronic, but hacking bar is interrupted
-###			T	Go Haywire
-Attempted
-###			T	Tamper With Aim
-Attempted
-##		H	Interaction
+##		C	Interaction
 ###			C	Shelf?
 This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
 Plus, it sounds like Agent Intearctions might be next in line for RogueLibs.
@@ -165,6 +158,13 @@ Complete
 Complete
 ###			√	Offer Motivation
 Complete
+##		H	Hack
+###			C	00 Interrupts
+Works with Electronic, but hacking bar is interrupted
+###			T	Go Haywire
+Attempted
+###			T	Tamper With Aim
+Attempted
 ##		H	Appearance
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
@@ -487,11 +487,11 @@ Based on and consumes Time Bombs in inventory. NPC starts with one.
 ###			H	Tamper
 - Interface works but reticle is green for non-tamperable items.
   - Log message "Not implemented yet", fair enough
-###			√H	Cause a Ruckus
-####			C	Doesn't say Dialogue
 ###			√	Bodyguard
 Complete
 ###			√	Break In
+Complete
+###			√	Cause a Ruckus
 Complete
 ###			√	Hack
 Complete

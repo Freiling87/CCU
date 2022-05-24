@@ -2,20 +2,20 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class GrabMoney : CustomTrait
+    public class Suck_Blood : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<GrabMoney>()
+            RogueLibs.CreateCustomTrait<Suck_Blood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will grab money if they see it."),
+                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.GrabMoney,
+                    [LanguageCode.English] = CTrait.SuckBlood,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

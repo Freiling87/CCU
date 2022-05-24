@@ -1853,7 +1853,7 @@ namespace CCU.Patches.Agents
 									{
 										Core.LogCheckpoint("Hire Order");
 
-										if (agent.HasTrait<Security_Expert>())
+										if (agent.HasTrait<Intruder>())
 											__instance.AddButton("LockpickDoor");
 
 										if (agent.HasTrait<Decoy>())

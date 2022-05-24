@@ -69,7 +69,7 @@ namespace CCU.Patches.AgentRelationships
                 AgentsFactionHostile(___agent, otherAgent))
                 relationship = "Hateful";
 
-            if (___agent.HasTrait<Suspicioner>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
+            if (___agent.HasTrait<Suspecter>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 relationship = "Annoyed";
 
             if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<CoolCannibal>())

@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Behavior
+namespace CCU.Traits.TraitGate
 {
-    public class SuckBlood : CustomTrait
+    public class Suspecter : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<SuckBlood>()
+            RogueLibs.CreateCustomTrait<Suspecter>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
+                    [LanguageCode.English] = "This character is Annoyed at characters with the Suspicious trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.SuckBlood,
+                    [LanguageCode.English] = CTrait.Relationships_AnnoyedAtSuspicious,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
