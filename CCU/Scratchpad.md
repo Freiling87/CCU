@@ -58,7 +58,9 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		T	Hack
+##		H	Hack
+###			C	00 Interrupts
+Works with Electronic, but hacking bar is interrupted
 ###			T	Go Haywire
 Attempted
 ###			T	Tamper With Aim
@@ -92,7 +94,7 @@ Check gates
 ####			C	Add Cost
 Didn't show up with vanilla text
 ###			H	Buy Slave
-Pending actual assignment of owned slaves
+Pending actual assignment of owned slaves 
 ###			C	Heal (Player)
 Not showing up after cost text added
 ###			C	Identify
@@ -162,104 +164,6 @@ Complete
 ###			√	Leave Weapons Behind
 Complete
 ###			√	Offer Motivation
-Complete
-##		T	Passive
-###			T	Crusty
-Agent.upperCrusty
-###			T	Innocent
-####			C	XP Penalty for neutralizing innocent
-###			T	Possessed
-Attempted
-###			T	Status Effect Immune
-Attempted
-###			T	Vision Beams (Cop Bot)
-Attempted
-###			T	Z-Infected
-Agent.zombieWhenDead
-###			H	Invincible
-New
-###			H	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			H	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			H	Reviver
-If hired and surviving, will revive the player once
-###			H	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-###			H	Zombified
-Agent.zombified
-Agent.customZombified
-###			√	Explode On Death
-####			H	Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
-###			√	Extortable
-Complete
-###			√	Guilty
-Complete
-##		CT	Relationships
-###			C	Hostile to Werewolf
-Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
-Check out agent.originalWerewolf & secretWerewolf
-###			T	Player Aligned
-###			T	Player Annoyed
-###			T	Player Friendly
-###			T	Player Hostile
-####			C	Cool Cannibal Interaction
-###			T	Player Loyal
-###			T	Player Submissive
-###			T	Relationless
-###			C	Class Unity
-Like Class Solidarity, except Aligned
-Note that Solidarity includes a No Infighting effect.
-###			H	Secretly Hostile
-A la Bounty disaster
-Agent.bountyHunter
-Agent.secretHate
-Agent.choseSecretHate
-###			√	Hostile to Cannibal
-Complete
-###			√	Hostile to Soldier
-Complete
-###			√	Hostile to Vampire
-Complete
-##		CT	Trait Gates
-###			T	Cool Cannibal
-- Dummy D
-- Now this can be tested with Player Hostile
-###			T	Bashable
-####			T	Alignment
-####			T	Hostility
-####			T	XP Bonus
-###			T	Crushable
-####			T	Alignment
-####			T	Hostility
-####			T	XP Bonus
-###			T	Slayable
-####			T	Hostility
-####			T	XP Bonus
-###			T	Specific Species
-####			T	Hostility
-####			T	XP Bonus
-###			H	Crust Enjoyer
-If you have Upper Crusty, this character is Loyal
-I think this is actually automatic with Enforcer
-###			H	Gate Vendor
-Won't sell unless you have appropriate trait
-###			H	Gate Hire
-Won't hire unless you have appropriate trait
-###			√	Common Folk
-Complete
-###			√	Cop	Access
-Complete
-###			√	Family Friend
-Complete
-###			√	Honorable Thief
-Complete
-###			√	Scumbag
-Complete
-###			√	Suspicious Suspecter
 Complete
 ##		H	Appearance
 ###			C	Full-randomization bug
@@ -331,6 +235,7 @@ New
 ###			C	Permanent Only
 As above, but removes the single-use hire option.
 ##		H	Map Marker
+Statuseffects.agent.SpawnNewMapMarker()
 ###			P	General Notes
 - Check out:
 GC
@@ -379,6 +284,12 @@ New
 New
 ###			C	Hide In Object
 Detect Bush/Manhole on same tile
+###			C	Respawn
+Never-ending waves of enemies
+####			C	Respawn Delay
+0, 3, 15, 30, 60, 120, 180 seconds
+####			C	Respawn Quantity
+1, 3, 10, Infinite
 ###			C	Roaming Gang
 New
 ###			C	Slave Owner
@@ -506,34 +417,6 @@ Apparently Lockdown walls are broken in custom levels.
 Complete
 ###			√	Fearless
 Complete
-##		√H	Faction
-###			H	Config Files for unique player-defined factions
-Generate traits based on these names
-Allow multiple faction list files in a folder, to increase ease of compatibility.
-###			H	00 Refactor
-These should inherit from a shared class
-public override char Faction => '1', etc.
-public override string Relationship => VRelationship.Aligned, etc.
-###			H	Faction 1 Annoyed
-###			H	Faction 1 Friendly
-###			H	Faction 1 Loyal
-###			H	Faction 2 Annoyed
-###			H	Faction 2 Friendly
-###			H	Faction 2 Loyal
-###			H	Faction 3 Annoyed
-###			H	Faction 3 Friendly
-###			H	Faction 3 Loyal
-###			H	Faction 4 Annoyed
-###			H	Faction 4 Friendly
-###			H	Faction 4 Loyal
-###			√	Faction 1 Aligned
-###			√	Faction 1 Hostile
-###			√	Faction 2 Aligned
-###			√	Faction 2 Hostile
-###			√	Faction 3 Aligned
-###			√	Faction 3 Hostile
-###			√	Faction 4 Aligned
-###			√	Faction 4 Hostile
 ##		√H	Hire
 ###			H	Chloroform
 New
@@ -612,6 +495,127 @@ Complete
 Complete
 ###			√	Hack
 Complete
+##		√H	Passive
+###			H	Vision Beams (Cop Bot)
+DW
+###			H	Invincible
+New
+###			H	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			H	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			H	Reviver
+If hired and surviving, will revive the player once
+###			H	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
+###			H	Zombified
+Agent.zombified
+Agent.customZombified
+###			√	Crusty
+Complete
+###			√	Explode On Death
+####			H	Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			√	Extortable
+Complete
+###			√	Guilty
+Complete
+###			√	Innocent
+Complete
+###			√	Possessed
+Complete
+###			√	Status Effect Immune
+Complete
+###			√	Z-Infected
+Complete
+##		√H	Relationships - Faction
+###			H	Config Files for unique player-defined factions
+Generate traits based on these names
+Allow multiple faction list files in a folder, to increase ease of compatibility.
+###			H	00 Refactor
+These should inherit from a shared class
+public override char Faction => '1', etc.
+public override string Relationship => VRelationship.Aligned, etc.
+###			H	Faction 1 Annoyed
+###			H	Faction 1 Friendly
+###			H	Faction 1 Loyal
+###			H	Faction 2 Annoyed
+###			H	Faction 2 Friendly
+###			H	Faction 2 Loyal
+###			H	Faction 3 Annoyed
+###			H	Faction 3 Friendly
+###			H	Faction 3 Loyal
+###			H	Faction 4 Annoyed
+###			H	Faction 4 Friendly
+###			H	Faction 4 Loyal
+###			√	Faction 1 Aligned
+###			√	Faction 1 Hostile
+###			√	Faction 2 Aligned
+###			√	Faction 2 Hostile
+###			√	Faction 3 Aligned
+###			√	Faction 3 Hostile
+###			√	Faction 4 Aligned
+###			√	Faction 4 Hostile
+##		√H	Relationships - General
+###			H	Class Unity
+Like Class Solidarity, except Aligned
+Note that Solidarity includes a No Infighting effect.
+###			√	Hostile to Cannibal
+Complete
+###			√	Hostile to Soldier
+Complete
+###			√	Hostile to Vampire
+Complete
+###			√	Hostile to Werewolf
+Complete
+###			√	Relationless
+Complete
+##		√H	Relationships - Player
+###			H	Player Secret Hate
+###			√	Player Aligned
+Complete
+###			√	Player Annoyed
+Complete
+###			√	Player Friendly
+Complete
+###			√	Player Hostile
+Complete
+###			√	Player Loyal
+Complete
+###			√	Player Submissive 
+Complete
+##		√H	Trait Gates
+###			H	Crust Enjoyer
+If you have Upper Crusty, this character is Loyal
+I think this is actually automatic with Enforcer
+###			H	Gate Vendor
+Won't sell unless you have appropriate trait
+###			H	Gate Hire
+Won't hire unless you have appropriate trait
+###			√	Cool Cannibal
+Complete
+###			√	Bashable
+Complete
+###			√	Common Folk
+Complete
+###			√	Crushable
+Complete
+###			√	Cop	Access
+Complete
+###			√	Family Friend
+Complete
+###			√	Honorable Thief
+Complete
+###			√	Scumbag
+Complete
+###			√	Slayable
+Complete
+###			√	Specific Species
+Complete
+###			√	Suspicious Suspecter
+Complete
 #		CT	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population
@@ -655,8 +659,9 @@ Gate level access
 Gate level access
 ###			C	Traits for Level Branching
 ##		T	Followers
-###			T	Homesickness Disabled
-Test
+###				00	Add conflicts
+###			C	Homesickness Disabled
+####			C	Set to Aligned
 ###			T	Homesickness Mandatory
 Test
 ##		C	Gameplay

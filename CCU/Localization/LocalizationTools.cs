@@ -2,7 +2,5 @@
 {
     class LocalizationTools
     {
-        public static string UnderscoresToSpaces(string input) =>
-            input.Replace('_', ' ');
     }
 }

@@ -1,26 +1,26 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Rel_Faction
 {
-    public class Player_Aligned : CustomTrait
+    public class Faction_2_Aligned : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Aligned>()
+            RogueLibs.CreateCustomTrait<Faction_2_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned to players.",
+                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerAligned,
+                    [LanguageCode.English] = CTrait.Relationships_Faction2Aligned,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { CTrait.Relationships_Faction2Hostile },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -2,7 +2,7 @@
 using RogueLibsCore;
 using BepInEx.Logging;
 using HarmonyLib;
-using CCU.Traits.Relationships;
+using CCU.Traits.Rel_Player;
 using CCU.Traits.Combat;
 using UnityEngine;
 using Random = UnityEngine.Random;

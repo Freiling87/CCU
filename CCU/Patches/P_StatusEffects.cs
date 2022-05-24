@@ -15,10 +15,11 @@ namespace CCU.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
         {
-			if (myAgent.HasTrait<Bashable>() && __instance.agent.HasTrait(VanillaTraits.BlahdBasher) ||
-				myAgent.HasTrait<Crushable>() && __instance.agent.HasTrait(VanillaTraits.CrepeCrusher) ||
-				myAgent.HasTrait<Slayable>() && __instance.agent.HasTrait("HatesScientist") ||
-				myAgent.HasTrait<Specistist>() && __instance.agent.HasTrait(VanillaTraits.Specist))
+			if ((__instance.agent.HasTrait<Bashable>() && (myAgent.HasTrait(VanillaTraits.BlahdBasher) || myAgent.agentName == VanillaAgents.GangsterCrepe)) ||
+				(__instance.agent.HasTrait<CoolCannibal>() && (myAgent.agentName == VanillaAgents.Soldier)) ||
+				(__instance.agent.HasTrait<Crushable>() && (myAgent.HasTrait(VanillaTraits.CrepeCrusher) || myAgent.agentName == VanillaAgents.GangsterBlahd)) ||
+				(__instance.agent.HasTrait<Slayable>() && myAgent.HasTrait("HatesScientist")) ||
+				(__instance.agent.HasTrait<Specistist>() && myAgent.HasTrait(VanillaTraits.Specist)) )
             {
 				__result = true;
 				return false;

@@ -1,26 +1,26 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Faction
+namespace CCU.Traits.Rel_Player
 {
-    public class Faction_4_Aligned : CustomTrait
+    public class Player_Submissive : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_4_Aligned>()
+            RogueLibs.CreateCustomTrait<Player_Submissive>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
+                    [LanguageCode.English] = "This character is Submissive to Players.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction4Aligned,
+                    [LanguageCode.English] = CTrait.PlayerSubmissive,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction4Hostile },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

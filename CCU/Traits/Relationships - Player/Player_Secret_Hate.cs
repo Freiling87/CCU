@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Rel_Player
 {
-    public class Player_Neutral : CustomTrait
+    public class Player_Secret_Hate : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Neutral>()
+            RogueLibs.CreateCustomTrait<Player_Secret_Hate>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Neutral to players.",
+                    [LanguageCode.English] = "This character will ambush Players.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerNeutral,
+                    [LanguageCode.English] = CTrait.PlayerSecretHate,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

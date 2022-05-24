@@ -18,6 +18,7 @@
 			GiveItem = "GiveItem",
 			Identify = "Identify",
 			InfluenceElection = "ElectionBribe",
+			JoinMe = "JoinMe",
 			LeaveWeaponsBehind = "LeaveWeaponsBehind",
 			OfferMotivation = "OfferOfficeDrone",
 			PayDebt = "PayBackDebt",

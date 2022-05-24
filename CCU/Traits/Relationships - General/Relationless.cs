@@ -1,26 +1,26 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Faction
+namespace CCU.Traits.Rel_General
 {
-    public class Faction_3_Hostile : CustomTrait
+    public class Relationless : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_3_Hostile>()
+            RogueLibs.CreateCustomTrait<Relationless>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 3.",
+                    [LanguageCode.English] = "This character is always Neutral, like Butler Bot.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction3Hostile,
+                    [LanguageCode.English] = CTrait.Relationships_Relationless,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction3Aligned },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

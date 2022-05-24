@@ -5,7 +5,7 @@ namespace CCU.Traits.Combat
 {
     public class Lockdowner : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Lockdowner>()

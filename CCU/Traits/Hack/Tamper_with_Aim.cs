@@ -8,7 +8,7 @@ namespace CCU.Traits.Hack
     {
         public override string ButtonText => VButtonText.Hack_TamperAim;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Tamper_with_Aim>()

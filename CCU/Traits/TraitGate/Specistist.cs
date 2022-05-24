@@ -11,7 +11,7 @@ namespace CCU.Traits.TraitGate
             RogueLibs.CreateCustomTrait<Specistist>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC is intolerant of Specists, and gives an XP bonus if they neutralize them."),
+                    [LanguageCode.English] = String.Format("This NPC is problematically intolerant of Specists' beliefs, and gives an XP bonus if they neutralize them."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

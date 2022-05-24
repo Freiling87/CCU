@@ -14,6 +14,7 @@ using CCU.Traits.Cost;
 using CCU.Traits.Interaction;
 using System.Linq;
 using CCU.Traits.Hack;
+using SORCE.Localization;
 
 namespace CCU.Patches.Agents
 {
@@ -1876,6 +1877,10 @@ namespace CCU.Patches.Agents
 										if (agent.HasTrait<Saboteur>())
 											__instance.AddButton(CJob.TamperSomething);
 									}
+
+									if ((agent.HasTrait<Bashable>() && (interactingAgent.agentName == VanillaAgents.GangsterBlahd || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))) ||
+										(agent.HasTrait<Crushable>() && (interactingAgent.agentName == VanillaAgents.GangsterCrepe || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))) )
+										__instance.AddButton(VButtonText.JoinMe);
 								}
 
 								// Hack

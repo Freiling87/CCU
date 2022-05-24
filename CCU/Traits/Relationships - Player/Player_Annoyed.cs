@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Rel_Player
 {
-    public class Player_Hostile : CustomTrait
+    public class Player_Annoyed : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Hostile>()
+            RogueLibs.CreateCustomTrait<Player_Annoyed>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned to players.",
+                    [LanguageCode.English] = "This character is Annoyed at players.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerAligned,
+                    [LanguageCode.English] = CTrait.PlayerAnnoyed,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

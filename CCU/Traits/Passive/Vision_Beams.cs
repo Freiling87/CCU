@@ -5,7 +5,7 @@ namespace CCU.Traits.Passive
 {
     public class Vision_Beams : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Vision_Beams>()

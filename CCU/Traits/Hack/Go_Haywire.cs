@@ -8,7 +8,7 @@ namespace CCU.Traits.Hack
     {
         public override string ButtonText => VButtonText.Hack_Haywire;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Go_Haywire>()

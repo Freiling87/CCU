@@ -114,7 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
-    <Compile Include="Extensions\E_Agent.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
-    <Compile Include="Patches\Interface\P_MenuLayout.cs" />
     <Compile Include="Patches\Interface\P_QuestMarker.cs" />
     <Compile Include="Patches\Interface\P_ScrollingMenu.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
@@ -206,24 +204,24 @@
     <Compile Include="Traits\Interaction\Borrow_Money_Moocher.cs" />
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Secret_Hate.cs" />
-    <Compile Include="Traits\Relationships\Relationless.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Neutral.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Submissive.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Friendly.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Aligned.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Annoyed.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Loyal.cs" />
-    <Compile Include="Traits\Player Relationships\Player_Hostile.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Secret_Hate.cs" />
+    <Compile Include="Traits\Relationships - General\Relationless.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Neutral.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Submissive.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Friendly.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Annoyed.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Loyal.cs" />
+    <Compile Include="Traits\Relationships - Player\Player_Hostile.cs" />
     <Compile Include="Traits\TraitGate\Specistist.cs" />
     <Compile Include="Traits\TraitGate\Slayable.cs" />
     <Compile Include="Traits\TraitGate\Crushable.cs" />
     <Compile Include="Traits\TraitGate\Bashable.cs" />
     <Compile Include="Traits\TraitGate\Suspicioner.cs" />
-    <Compile Include="Traits\Relationships\Hostile_To_Cannibal.cs" />
-    <Compile Include="Traits\Relationships\Hostile_To_Soldier.cs" />
-    <Compile Include="Traits\Relationships\Hostile_To_Vampire.cs" />
-    <Compile Include="Traits\Relationships\Hostile_To_Werewolf.cs" />
+    <Compile Include="Traits\Relationships - General\Hostile_To_Cannibal.cs" />
+    <Compile Include="Traits\Relationships - General\Hostile_To_Soldier.cs" />
+    <Compile Include="Traits\Relationships - General\Hostile_To_Vampire.cs" />
+    <Compile Include="Traits\Relationships - General\Hostile_To_Werewolf.cs" />
     <Compile Include="Traits\TraitGate\CommonFolk.cs" />
     <Compile Include="Traits\TraitGate\CoolCannibal.cs" />
     <Compile Include="Traits\TraitGate\CopAccess.cs" />
@@ -299,17 +297,14 @@
     <Compile Include="Traits\Appearance\FacialHair\MustacheCircus.cs" />
     <Compile Include="Traits\Appearance\FacialHair\MustacheRedneck.cs" />
     <Compile Include="Traits\Appearance\FacialHair\NoFacialHair.cs" />
-    <Compile Include="Traits\Faction\Faction_1_Aligned.cs" />
-    <Compile Include="Traits\Faction\Faction_1_Hostile.cs" />
-    <Compile Include="Traits\Faction\Faction_2_Aligned.cs" />
-    <Compile Include="Traits\Faction\Faction_2_Hostile.cs" />
-    <Compile Include="Traits\Faction\Faction_3_Aligned.cs" />
-    <Compile Include="Traits\Faction\Faction_3_Hostile.cs" />
-    <Compile Include="Traits\Faction\Faction_4_Aligned.cs" />
-    <Compile Include="Traits\Faction\Faction_4_Hostile.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md" />
+    <Compile Include="Traits\Relationships - Faction\Faction_1_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_1_Hostile.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_2_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_2_Hostile.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_3_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_3_Hostile.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_4_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_4_Hostile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scratchpad.md" />

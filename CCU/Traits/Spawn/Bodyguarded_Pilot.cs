@@ -9,7 +9,7 @@ namespace CCU.Traits.Spawn
 {
 	public class Bodyguarded_Pilot : CustomTrait
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			RogueLibs.CreateCustomTrait<Bodyguarded_Pilot>()

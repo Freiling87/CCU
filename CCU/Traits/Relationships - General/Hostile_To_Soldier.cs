@@ -1,26 +1,26 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Faction
+namespace CCU.Traits.Rel_General
 {
-    public class Faction_3_Aligned : CustomTrait
+    public class Hostile_To_Soldier : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_3_Aligned>()
+            RogueLibs.CreateCustomTrait<Hostile_To_Soldier>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
+                    [LanguageCode.English] = "This character is Hostile to Soldiers.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction3Aligned,
+                    [LanguageCode.English] = CTrait.Relationships_HostileToSoldiers,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction3Hostile },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

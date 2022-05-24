@@ -9,7 +9,9 @@ using CCU.Traits.Passive;
 using CCU.Traits.Behavior;
 using CCU.Traits.Interaction;
 using CCU.Traits.Hack;
-using CCU.Traits.Relationships;
+using CCU.Traits.Rel_Player;
+using CCU.Traits.Rel_General;
+using CCU.Traits.TraitGate;
 
 namespace CCU.Patches.Agents
 {
@@ -194,7 +196,7 @@ namespace CCU.Patches.Agents
 				__instance.oma.secretShapeShifter = true;
 				__instance.oma.mustBeGuilty = true;
 				__instance.agentHitboxScript.GetColorFromString("Red", "Eyes");
-			}				
+			}
 
 			if (__instance.HasTrait<Status_Effect_Immune>())
 				__instance.preventStatusEffects = true;
@@ -208,9 +210,13 @@ namespace CCU.Patches.Agents
 			#region Relationships
 			if (__instance.HasTrait<Relationless>())
 				__instance.dontChangeRelationships = true;
-            #endregion
+			#endregion
+			#region Trait Gates
+			if (__instance.HasTrait<Scumbag>())
+				__instance.oma.mustBeGuilty = true;
+			#endregion
 
-            if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
+			if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
 				__instance.canGoBetweenLevels = true;
 			else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
 				__instance.canGoBetweenLevels = false;

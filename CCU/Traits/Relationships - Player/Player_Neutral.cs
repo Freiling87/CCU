@@ -1,21 +1,21 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Relationships
+namespace CCU.Traits.Rel_Player
 {
-    public class Player_Friendly : CustomTrait
+    public class Player_Neutral : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Friendly>()
+            RogueLibs.CreateCustomTrait<Player_Neutral>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Friendly to Players.",
+                    [LanguageCode.English] = "This character is Neutral to players.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerFriendly,
+                    [LanguageCode.English] = CTrait.PlayerNeutral,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

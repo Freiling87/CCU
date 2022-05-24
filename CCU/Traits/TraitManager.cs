@@ -1,27 +1,27 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits.Appearance.FacialHair;
+using CCU.Traits.Behavior;
+using CCU.Traits.Combat;
+using CCU.Traits.Cost;
 using CCU.Traits.Hire;
+using CCU.Traits.Hire_Duration;
+using CCU.Traits.Interaction;
+using CCU.Traits.Map_Marker;
+using CCU.Traits.Merchant_Type;
+using CCU.Traits.Passive;
+using CCU.Traits.Rel_Faction;
+using CCU.Traits.Rel_General;
+using CCU.Traits.Spawn;
 using CCU.Traits.TraitGate;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using CCU.Traits.Relationships;
-using CCU.Traits.Map_Marker;
-using CCU.Traits.Spawn;
 using System.IO;
-using CCU.Traits.Passive;
-using CCU.Traits.Behavior;
-using CCU.Traits.Appearance.FacialHair;
-using CCU.Traits.Merchant_Type;
-using CCU.Traits.Combat;
-using CCU.Traits.Cost;
-using CCU.Traits.Hire_Duration;
-using CCU.Traits.Interaction;
-using CCU.Traits.Faction;
+using System.Linq;
 
 namespace CCU.Traits
 {
-	public static class TraitManager
+    public static class TraitManager
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;

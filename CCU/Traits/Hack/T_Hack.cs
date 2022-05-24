@@ -9,10 +9,7 @@ namespace CCU.Traits.Hack
 
         public abstract string ButtonText { get; }
         public static string DisplayName<T>(string custom = null) =>
-            "[CCU] " +
-            LocalizationTools.UnderscoresToSpaces(typeof(T).Namespace) + " - " +
-            custom != null
-                ? custom
-                : LocalizationTools.UnderscoresToSpaces(typeof(T).Name);
+            "[CCU] " + (typeof(T).Namespace).Split('.')[2] + " - " +
+            (custom ?? (typeof(T).Name).Replace('_', ' '));
     }
-}
+}  

@@ -1,4 +1,5 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
 using SORCE.Localization;
 using System;
 
@@ -15,9 +16,9 @@ namespace CCU.Traits.Interaction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can give you a blood bag, at the cost of 20 HP."),
-                    [LanguageCode.Russian] = "",
+                    [LanguageCode.Russian] = "", 
                 })
-                .WithName(new CustomNameInfo
+                .WithName(new CustomNameInfo 
                 {
                     [LanguageCode.English] = DisplayName<Administer_Blood_Bag>(),
                     [LanguageCode.Russian] = "",
@@ -28,7 +29,7 @@ namespace CCU.Traits.Interaction
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
+                    UnlockCost = 0, 
                 });
         }
         public override void OnAdded() { }
