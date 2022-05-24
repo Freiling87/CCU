@@ -13,6 +13,7 @@ using CCU.Traits.Passive;
 using CCU.Traits.Cost;
 using CCU.Traits.Interaction;
 using System.Linq;
+using CCU.Traits.Hack;
 
 namespace CCU.Patches.Agents
 {
@@ -1832,7 +1833,7 @@ namespace CCU.Patches.Agents
 
 										bool bananaCost = agent.HasTrait<CostBanana>();
 
-										if (agent.HasTrait<Bodyguard>())
+										if (agent.HasTrait<Muscle>())
 										{
 											if (interactingAgent.inventory.HasItem("HiringVoucher"))
 												__instance.AddButton("HireAsProtection", 6666);
@@ -1851,50 +1852,55 @@ namespace CCU.Patches.Agents
 									{
 										Core.LogCheckpoint("Hire Order");
 
-										if (agent.HasTrait<BreakIn>())
+										if (agent.HasTrait<Security_Expert>())
 											__instance.AddButton("LockpickDoor");
 
-										if (agent.HasTrait<CauseARuckus>())
+										if (agent.HasTrait<Decoy>())
 											__instance.AddButton("CauseRuckus");
 
-										if (agent.HasTrait<DisarmTrap>())
+										if (agent.HasTrait<Trapper>())
 											__instance.AddButton(CJob.DisarmTrap);
 
-										if (agent.HasTrait<Hack>())
+										if (agent.HasTrait<Hacker>())
 											__instance.AddButton("HackSomething");
 
 										if (agent.HasTrait<Pickpocket>())
 											__instance.AddButton(CJob.Pickpocket);
 
-										if (agent.HasTrait<Poison>())
+										if (agent.HasTrait<Poisoner>())
 											__instance.AddButton(CJob.Poison);
 
-										if (agent.HasTrait<Safecrack>())
+										if (agent.HasTrait<Safecracker>())
 											__instance.AddButton(CJob.SafecrackSafe);
 
-										if (agent.HasTrait<Tamper>())
+										if (agent.HasTrait<Saboteur>())
 											__instance.AddButton(CJob.TamperSomething);
 									}
 								}
+
+								// Hack
+								if (interactingAgent.interactionHelper.interactingFar)
+									foreach (T_Hack hack in agent.GetTraits<T_Hack>())
+										__instance.AddButton(hack.ButtonText);
 
 								// Interaction 
 								foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
 								{
 									// Simple Exceptions
-									if ((interaction is BorrowMoneyMoocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
-										(interaction is BribeCops && (interactingAgent.aboveTheLaw || !interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))) ||
-										((interaction is BribeForEntry || interaction is BribeForEntryAlcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
-										(interaction is InfluenceElection && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
-										(interaction is LeaveWeaponsBehind && !interactingAgent.inventory.HasWeapons()) ||
-										(interaction is OfferMotivation && agent.oma.offeredOfficeDrone) ||
-										(interaction is PayDebt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
+									if ((interaction is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
+										(interaction is Bribe_Cops && (interactingAgent.aboveTheLaw || !interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))) ||
+										((interaction is Bribe_for_Entry || interaction is Bribe_for_Entry_Alcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
+										(interaction is Influence_Election && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
+										(interaction is Leave_Weapons_Behind && !interactingAgent.inventory.HasWeapons()) ||
+										(interaction is Offer_Motivation && agent.oma.offeredOfficeDrone) ||
+										(interaction is Pay_Debt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
 																&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt2)
 																&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
 										(interaction is UseBloodBag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
 										continue;
 
 									// Complex Exceptions
-									if (interaction is BuyRound)
+									if (interaction is Buy_Round)
 									{
 										List<Agent> patrons = new List<Agent>();
 										for (int i = 0; i < agent.gc.agentList.Count; i++)
@@ -1912,7 +1918,7 @@ namespace CCU.Patches.Agents
 										if (!patrons.Any())
 											continue;
 									}
-									else if (interaction is BuySlave)
+									else if (interaction is Buy_Slave)
 									{
 										bool hasSlaves = false;
 
@@ -1930,7 +1936,7 @@ namespace CCU.Patches.Agents
 										if (!hasSlaves)
 											continue;
 									}
-									else if (interaction is PlayBadMusic)
+									else if (interaction is Play_Bad_Music)
 									{
 										bool turntables = false;
 										foreach (ObjectReal objectReal in GC.objectRealList)

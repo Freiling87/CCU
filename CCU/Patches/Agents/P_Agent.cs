@@ -8,6 +8,8 @@ using CCU.Traits.Combat;
 using CCU.Traits.Passive;
 using CCU.Traits.Behavior;
 using CCU.Traits.Interaction;
+using CCU.Traits.Hack;
+using CCU.Traits.Relationships;
 
 namespace CCU.Patches.Agents
 {
@@ -163,20 +165,49 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<SeekAndDestroy>())
 				__instance.killerRobot = true;
 			#endregion
-			#region Combat
-			if (__instance.HasTrait<DrugWarrior>())
+			#region Interaction
+			if (__instance.HasTrait<Go_Haywire>() ||
+				__instance.HasTrait<Tamper_with_Aim>())
+				__instance.hackable = true;
+            #endregion
+            #region Combat
+            if (__instance.HasTrait<DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant
 			if (TraitManager.HasTraitFromList(__instance, TraitManager.MerchantTypeTraits))
 				__instance.SetupSpecialInvDatabase();
-            #endregion
-            #region Passive
-            if (__instance.HasTrait<Guilty>())
-				__instance.oma.mustBeGuilty = true;
-
+			#endregion
+			#region Passive
 			if (__instance.HasTrait<AccidentProne>())
 				__instance.dontStopForDanger = true;
+
+			if (__instance.HasTrait<Crusty>())
+				__instance.upperCrusty = true;
+
+			if (__instance.HasTrait<Guilty>())
+				__instance.oma.mustBeGuilty = true;
+
+			if (__instance.HasTrait<Possessed>())
+            {
+				__instance.secretShapeShifter = true;
+				__instance.oma.secretShapeShifter = true;
+				__instance.oma.mustBeGuilty = true;
+				__instance.agentHitboxScript.GetColorFromString("Red", "Eyes");
+			}				
+
+			if (__instance.HasTrait<Status_Effect_Immune>())
+				__instance.preventStatusEffects = true;
+
+			if (__instance.HasTrait<Vision_Beams>())
+				__instance.agentSecurityBeams.enabled = true;
+
+			if (__instance.HasTrait<Zombie_Infected>())
+				__instance.zombieWhenDead = true;
+			#endregion
+			#region Relationships
+			if (__instance.HasTrait<Relationless>())
+				__instance.dontChangeRelationships = true;
             #endregion
 
             if (GC.challenges.Contains(CMutators.HomesicknessDisabled))

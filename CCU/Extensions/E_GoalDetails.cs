@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Traits.HireDuration;
+using CCU.Traits.Hire_Duration;
 using HarmonyLib;
 using RogueLibsCore;
 using UnityEngine;

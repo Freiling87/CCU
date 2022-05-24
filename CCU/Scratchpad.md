@@ -4,14 +4,6 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Top-Priority Bugs
-##		C	Uh AI broke
-- Once I got to Industrial
-  - Interactions proceed normally
-  - Combat normal if provoked, but only within a certain distance, otherwise they stand or walk in place
-  - Shopkeepers do not move, even if hostiled, but do go Submissive
-  - Wander, Patrol, Knock
-    - NPCs just stand in place
-- The error persists even after leaving industrial, so something is actually breaking
 ##		C	Blood Junkie Fast Heal button wasn't using blood bags
 - First time it occurred, need to log
   - Also can't manually drink them
@@ -66,6 +58,11 @@ Not so sure about the utility of this. I don't think players should need more th
 ##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
+##		T	Hack
+###			T	Go Haywire
+Attempted
+###			T	Tamper With Aim
+Attempted
 ##		H	Interaction
 ###			C	Shelf?
 This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
@@ -166,31 +163,21 @@ Complete
 Complete
 ###			√	Offer Motivation
 Complete
-##		C	Passive
-###			C	Explode On Death
-####			C	Explodes when Arrested
-###			√	Extortable
-Complete
-###			C	Hackable - Tamper With Aim
-New
-###			C	Hackable - Go Haywire
-New
-###			C	Innocent
-New
-XP Penalty for neutralizing
-###			C	Invincible
-New
-###			C	Possessed
-Agent.SecretShapeshifter
-###			C	Status Immunity
-Agent.preventStatusEffects
-###			C	Vision Beams (Cop Bot)
-New
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			C	Z-Infected
+##		T	Passive
+###			T	Crusty
+Agent.upperCrusty
+###			T	Innocent
+####			C	XP Penalty for neutralizing innocent
+###			T	Possessed
+Attempted
+###			T	Status Effect Immune
+Attempted
+###			T	Vision Beams (Cop Bot)
+Attempted
+###			T	Z-Infected
 Agent.zombieWhenDead
+###			H	Invincible
+New
 ###			H	Reviveable (Infinite)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
 ###			H	Reviveable (One)
@@ -201,53 +188,67 @@ If hired and surviving, will revive the player once
 Remove colors
 Tint white
 Make stationary, Invincible, non-reactive
-###			H	Upper Crusty
-Agent.upperCrusty
+###			H	Zombified
+Agent.zombified
+Agent.customZombified
+###			√	Explode On Death
+####			H	Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			√	Extortable
+Complete
 ###			√	Guilty
 Complete
-##		C	Relationships
-###			C	Aggressive (Cannibal)
-New
-###			C	Player Hostile
-###			C	Player Annoyed
-###			C	Player Friendly
-###			C	Player Loyal
-###			C	Player Aligned
+##		CT	Relationships
+###			C	Hostile to Werewolf
+Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
+Check out agent.originalWerewolf & secretWerewolf
+###			T	Player Aligned
+###			T	Player Annoyed
+###			T	Player Friendly
+###			T	Player Hostile
+####			C	Cool Cannibal Interaction
+###			T	Player Loyal
+###			T	Player Submissive
+###			T	Relationless
 ###			C	Class Unity
 Like Class Solidarity, except Aligned
 Note that Solidarity includes a No Infighting effect.
-###			C	Don't Change Relationships (Rename)
-Agent.dontChangeRelationships
-###			C	Hostile to Cannibals
-####			C	Include Cool Cannibal
-###			C	Hostile to Werewolves
-Hostile from start, but this isn't how it works Vanilla. I think they need to see you transform.
-###			H	Never Hostile
-New
 ###			H	Secretly Hostile
 A la Bounty disaster
 Agent.bountyHunter
 Agent.secretHate
 Agent.choseSecretHate
-###			√	Hostile to Soldiers
+###			√	Hostile to Cannibal
 Complete
-###			√	Hostile to Vampires
+###			√	Hostile to Soldier
 Complete
-##		C	Trait Gates
-###			C	Cool Cannibal
+###			√	Hostile to Vampire
+Complete
+##		CT	Trait Gates
+###			T	Cool Cannibal
 - Dummy D
-####			C	Interact with Cannibal Hostility CCU trait
-Need to create Cannibal hostility trait before you can fully test this one.
-###			C	Crust Enjoyer
+- Now this can be tested with Player Hostile
+###			T	Bashable
+####			T	Alignment
+####			T	Hostility
+####			T	XP Bonus
+###			T	Crushable
+####			T	Alignment
+####			T	Hostility
+####			T	XP Bonus
+###			T	Slayable
+####			T	Hostility
+####			T	XP Bonus
+###			T	Specific Species
+####			T	Hostility
+####			T	XP Bonus
+###			H	Crust Enjoyer
 If you have Upper Crusty, this character is Loyal
+I think this is actually automatic with Enforcer
 ###			H	Gate Vendor
 Won't sell unless you have appropriate trait
 ###			H	Gate Hire
 Won't hire unless you have appropriate trait
-###			C	Bashable
-###			C	Crushable
-###			C	Slayable
-###			C	Specific Species
 ###			√	Common Folk
 Complete
 ###			√	Cop	Access
@@ -611,7 +612,7 @@ Complete
 Complete
 ###			√	Hack
 Complete
-#		H	Mutators
+#		CT	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population
 ###			C	Level Editor Mutator List
@@ -637,13 +638,13 @@ CampaignData
     - this.customLevel = this.customCampaign.levelList[n];
 ###			C	00 Usage Guide
 This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
+###			C	Designate Alpha/Beta/Gamma/Delta
+Designates a level as a place to return to
 ###			C	Exit Alpha/Beta/Gamma/Delta
 Destination at Elevator
 ###			C	Exit +1/2/3/4
 Can have multiple, to allow Branching
 Adds options at Elevator			
-###			C	Level Alpha/Beta/Gamma/Delta
-Designates a level as a place to return to
 ###			C	Set A/B/C/D false
 For level access
 ###			C	Set A/B/C/D true
@@ -655,24 +656,13 @@ Gate level access
 ###			C	Traits for Level Branching
 ##		T	Followers
 ###			T	Homesickness Disabled
-- Attempting with setting CanGobetweenLevels after SetupAgentStats, but I think you'll need it in multiple places.
-- This is acting unexpectedly, but next time you test be clear on the rules.
-- NPCs who WILL follow:
-  - Freed Prisoners
-  - Spawned Clones
-  - Friend Phone
-- I'm beginning to think maybe I just misunderstood something when I first saw this bug. Try it again and see what happens.
-- Now, the *failure* to skip homesickness with the mutator surprised me
+Test
 ###			T	Homesickness Mandatory
-- First attempt
-Always dismiss hires at end of level, even if Homesickness Killer is active
-ExitPoint.EmployeesExit prefix
+Test
 ##		C	Gameplay
 ###			C	No Funny Business
-New
 For town levels. Ensures no one will be killed.
 You will need to eliminate spontaneous hostiles for this to work, though.
-###
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
@@ -943,15 +933,8 @@ Removed from Readme
 To Sorquol
 ## Fields 
 - Multiple In Chunk field for SpawnerAgent
-
 ## Item Groups *
 - Know how you can select "Slum NPCs" as a type? Why can't we do that with items? 
-
 ## General *
 - Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
 - Red-tint any objects that might spawn inconsistently due to placement rules (e.g., Security Cams over gaps)
-# No header here
-The Player Edition is identical to the Designer Edition, but hides CCU content from view so it doesn't clutter the interface:
-- Hides CCU traits from Character Creation Menus
-- Hides CCU traits from Character Sheet page *
-- Hides CCU traits from HUD Trait list *

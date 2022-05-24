@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Identify,
+                    [LanguageCode.English] = DisplayName<Identify>(),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

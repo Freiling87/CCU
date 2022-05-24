@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CCU.Traits.HireDuration
+namespace CCU.Traits.Hire_Duration
 {
     public class HirePermanentOnly : CustomTrait
     {

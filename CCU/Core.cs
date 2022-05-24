@@ -444,6 +444,7 @@ namespace CCU
 			Passive_Guilty = "[CCU] Passive - Guilty",
 			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
 			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",
+			Passive_Innocent = "[CCU] Passive - Innocent",
 			Passive_VisionBeams = "[CCU] Passive - Vision Beams",
 		#endregion
 		#region Relationships
@@ -461,6 +462,15 @@ namespace CCU
 			Relationships_HostileToSoldiers = "[CCU] Relationships - Hostile to Soldiers",  // Analogue in BM: Army of Negative One
 			Relationships_HostileToVampires = "[CCU] Relationships - Hostile to Vampires",  // Analogue in BM: Vampire Vanquisher
 			Relationships_HostileToWerewolves = "[CCU] Relationships - Hostile to Werewolves",  // Analogue in BM: Werewolf Wrecker
+			PlayerSubmissive = "[CCU] Relationships - Player-Submissive",
+			PlayerHostile = "[CCU] Relationships - Player-Hostile",
+			PlayerAligned = "[CCU] Relationships - Player-Aligned",
+			PlayerFriendly = "[CCU] Relationships - Player-Friendly",
+			PlayerLoyal = "[CCU] Relationships - Player-Loyal",
+			PlayerAnnoyed = "[CCU] Relationships - Player-Annoyed",
+			PlayerNeutral = "[CCU] Relationships - Player-Neutral",
+			PlayerSecretHate = "[CCU] Relationships - Player-Secret Hate",
+			Relationships_Relationless = "[CCU] Relationships - Relationless",
 		#endregion
 		#region Spawn
 			HideInObject = "[CCU] Spawn: Hide In Bush",
@@ -475,6 +485,10 @@ namespace CCU
 			TraitGate_FamilyFriend = "[CCU] Trait Gate - Family Friend",
 			TraitGate_HonorableThief = "[CCU] Trait Gate - Honorable Thief",
 			TraitGate_Scumbag = "[CCU] Trait Gate - Scumbag",
+			TraitGate_Specistist = "[CCU] Trait Gate - Specistist",
+			TraitGate_Slayable = "[CCU] Trait Gate - Slayable",
+			TraitGate_Crushable = "[CCU] Trait Gate - Crushable",
+			TraitGate_Bashable = "[CCU] Trait Gate - Bashable",
 		#endregion
 		#region Utility
 		#endregion

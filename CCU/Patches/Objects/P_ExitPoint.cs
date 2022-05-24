@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BepInEx.Logging;
 using HarmonyLib;
-using RogueLibsCore;
-using BepInEx;
-using BepInEx.Logging;
 
 namespace CCU.Patches.Objects
 {
-	[HarmonyPatch(declaringType:typeof(ExitPoint))]
+    [HarmonyPatch(declaringType:typeof(ExitPoint))]
 	class P_ExitPoint
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -25,10 +18,15 @@ namespace CCU.Patches.Objects
 
 				if (employee != myAgent && employee.employer == myAgent)
 				{
-					if (employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait(VanillaTraits.HomesicknessKiller) || GC.challenges.Contains(CMutators.HomesicknessDisabled))
-						employee.wantsToExit = true;
-					else if (myAgent.isPlayer == 0)
+					if (myAgent.isPlayer == 0)
 						employee.agentInteractions.LetGo(employee, employee.employer);
+					else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
+					{
+						employee.SayDialogue("CantCome");
+						employee.agentInteractions.LetGo(employee, employee.employer);
+					}
+					else if (GC.challenges.Contains(CMutators.HomesicknessDisabled) || employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait("AgentsFollowToNextLevel"))
+						employee.wantsToExit = true;
 					else
 					{
 						employee.SayDialogue("CantCome");

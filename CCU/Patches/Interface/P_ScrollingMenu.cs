@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using BepInEx.Logging;
 using HarmonyLib;
-using BepInEx.Logging;
-using UnityEngine;
-using CCU.Mutators;
+using RogueLibsCore;
 
 namespace CCU.Patches.Interface
 {
-	[HarmonyPatch(declaringType: typeof(ScrollingMenu))]
+    [HarmonyPatch(declaringType: typeof(ScrollingMenu))]
 	class P_ScrollingMenu
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
