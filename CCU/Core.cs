@@ -14,14 +14,13 @@ using System.Collections;
 namespace CCU
 {
 	[BepInPlugin(pluginGUID, pluginName, pluginVersion)]
-	[BepInProcess("StreetsOfRogue.exe")]
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
 	public class Core : BaseUnityPlugin
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
 		public const string pluginName = "Custom Content Utilities";
 		public const string pluginVersion = "0.1.0";
-		public const bool designerEdition = false;
+		public const bool designerEdition = true;
 
 		public static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
