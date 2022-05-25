@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Borrow_Money_Moocher>("Borrow Money (Moocher)"),
+                    [LanguageCode.English] = DisplayName(typeof(Borrow_Money_Moocher), ("Borrow Money (Moocher)")),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

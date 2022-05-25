@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class Grab_Drugs : CustomTrait
+    public class Grab_Drugs : T_Behavior
     {
+        public override bool LosCheck => true;
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.GrabDrugs,
+                    [LanguageCode.English] = DisplayName(typeof(Grab_Drugs)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

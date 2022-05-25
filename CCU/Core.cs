@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Collections;
 
 namespace CCU
 {
@@ -20,7 +21,7 @@ namespace CCU
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
 		public const string pluginName = "Custom Content Utilities";
 		public const string pluginVersion = "0.1.0";
-		public const bool designerEdition = true;
+		public const bool designerEdition = false;
 
 		public static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -62,6 +63,30 @@ namespace CCU
 		}
 	}
 
+	public static class CoroutineExecutor
+	{
+		private class ExecutorBehaviour : MonoBehaviour { }
+
+		private static GameObject executorGO;
+		private static ExecutorBehaviour executorBehaviour;
+
+		private static void EnsureExists()
+		{
+			if (executorGO != null)
+			{
+				return;
+			}
+			executorGO = new GameObject("CoroutineExecutorObject");
+			executorBehaviour = executorGO.AddComponent<ExecutorBehaviour>();
+            UnityEngine.Object.DontDestroyOnLoad(executorGO);
+		}
+
+		public static Coroutine StartCoroutine(IEnumerator routine)
+		{
+			EnsureExists();
+			return executorBehaviour.StartCoroutine(routine);
+		}
+	}
 
 	public static class CJob // These names are extra but I want to ensure they're unique
 	{
@@ -286,19 +311,12 @@ namespace CCU
 		#endregion
 		#endregion
 		#region Active
-			AccidentProne = "[CCU] Behavior - Accident-Prone",
 			CleanTrash = "[CCU] Behavior - Clean Trash",
-			EatCorpse = "[CCU] Behavior - Eat Corpse",
 			EnforceLaws = "[CCU] Behavior - Enforce Laws (Cop)",
 			EnforceLawsCopBot = "[CCU] Behavior - Enforce Laws (Cop Bot)",
 			FightFires = "[CCU] Behavior - Fight Fires",
-			GrabDrugs = "[CCU] Behavior - Grab Drugs",
-			GrabMoney = "[CCU] Behavior - Grab Money",
 			GuardDoor = "[CCU] Behavior - Guard Door",
 			HogTurntables = "[CCU] Behavior - Turntables Guard",
-			Pickpocket = "[CCU] Behavior - Pickpocket",
-			SeekAndDestroy = "[CCU] Behavior - Seek & Destroy",
-			SuckBlood = "[CCU] Behavior - Suck Blood",
 			Shakedown = "[CCU] Behavior - Shakedown",
 			Tattletale = "[CCU] Behavior - Tattletale",
 		#endregion
@@ -309,54 +327,10 @@ namespace CCU
 			Bodyguarded_Supercops = "[CCU] Bodyguarded - Supercops",
 			Bodyguarded_Supergoons = "[CCU] Bodyguarded - Supergoons",
 		#endregion
-		#region Combat
-			Lockdowner = "[CCU] Combat - Lockdowner",
-			Combat_Coward = "[CCU] Combat - Coward",
-			Combat_Fearless = "[CCU] Combat - Fearless",
-			Combat_UseDrugs = "[CCU] Combat - Use Drugs",
-		#endregion
-		#region Cost
-			CostAlcohol = "[CCU] Cost - Alcohol",
-			CostBanana = "[CCU] Cost - Banana",
-			CostLess = "[CCU] Cost - Less",
-			CostMore = "[CCU] Cost - More",
-			CostZero = "[CCU] Cost - Zero",
-		#endregion
 		#region Hire
-			Bodyguard = "[CCU] Hire - Bodyguard",
-			BreakIn = "[CCU] Hire - Break In",
-			CauseARuckus = "[CCU] Hire - Cause a Ruckus",
-			DisarmTrap = "[CCU] Hire - Disarm Trap",
-			Hack = "[CCU] Hire - Hack",
 			JoinIfFreed = "[CCU] Hire - Join if Freed (Prisoner)",
 			Permanent = "[CCU] Hire Duration - Permanent",
 			PermanentOnly = "[CCU] Hire Duration - Permanent Only",
-			PickpocketHired = "[CCU] Hire - Pickpocket",
-			Poison = "[CCU] Hire - Poison",
-			Safecrack = "[CCU] Hire - Safecrack", // Also need to extend vanilla thief behavior to this
-			Tamper = "[CCU] Hire - Tamper",
-		#endregion
-		#region Interaction
-			AdministerBloodBag = "[CCU] Interaction - Administer Blood Bag",
-			BribeCops = "[CCU] Interaction - Bribe Cops",
-			BribeForEntry = "[CCU] Interaction - Bribe for Entry",
-			BribeForEntryAlcohol = "[CCU] Interaction - Bribe for Entry (Alcohol)",
-			BorrowMoney = "[CCU] Interaction - Borrow Money",
-			BuyRound = "[CCU] Interaction - Buy Round",
-			BuySlave = "[CCU] Interaction - Sell Slaves",
-			DonateBlood = "[CCU] Interaction - Donate Blood",
-			HealPlayer = "[CCU] Interaction - Heal",
-			Identify = "[CCU] Interaction - Identify",
-			InfluenceElection = "[CCU] Interaction - Influence Election",
-			LeaveWeaponsBehind = "[CCU] Interaction - Leave Weapons Behind",
-			ManageChunk = "[CCU] Interaction - Manage Chunk", // Arena, Deportation Center, Hotel
-			Moochable = "[CCU] Interaction - Moochable",
-			OfferMotivation = "[CCU] Interaction - Offer Motivation",
-			PayDebt = "[CCU] Interaction - Pay Debt",
-			PlayBadSong = "[CCU] Interaction - Song Request",
-			StartElection = "[CCU] Interaction - Start Election",
-			UseBloodBag = "[CCU] Interaction - Use Blood Bag",
-			VisitorsBadge = "[CCU] Interaction - Visitor's Badge",
 		#endregion
 		#region Loadout
 			Loadout_ChunkKey = "[CCU] Loadout: Chunk Key Holder",
@@ -376,121 +350,16 @@ namespace CCU
 			MapMarker_QuestionMark = "[CCU] Map Marker: QuestionMark",
 			MapMarker_Shopkeeper = "[CCU] Map Marker: Shopkeeper",
         #endregion
-        #region Merchant
-			Buyer = "[CCU] Merchant - Buyer",
-			BuyerOnly = "[CCU] Merchant - Buyer Only",
-        #endregion
-        #region Merchant Type
-            MerchantType_Anthropophagie = "[CCU] Merchant Type - Anthropophagie",
-			MerchantType_Armorer = "[CCU] Merchant Type - Armorer",
-			MerchantType_Assassin = "[CCU] Merchant Type - Assassin",
-			MerchantType_BananaBoutique = "[CCU] Merchant Type - Banana",
-			MerchantType_BarbarianMerchant = "[CCU] Merchant Type - Barbarian",
-			MerchantType_Bartender = "[CCU] Merchant Type - Bartender",
-			MerchantType_BartenderDive = "[CCU] Merchant Type - Bartender (Dive)",
-			MerchantType_BartenderFancy = "[CCU] Merchant Type - Bartender (Fancy)",
-			MerchantType_Blacksmith = "[CCU] Merchant Type - Blacksmith",
-			MerchantType_ConsumerElectronics = "[CCU] Merchant Type - Consumer Electronics",
-			MerchantType_ConvenienceStore = "[CCU] Merchant Type - Convenience Store",
-			MerchantType_Contraband = "[CCU] Merchant Type - Cop Confiscated Goods",
-			MerchantType_CopStandard = "[CCU] Merchant Type - Cop Patrolman's Equipment",
-			MerchantType_CopSWAT = "[CCU] Merchant Type - Cop SWAT Equipment",
-			MerchantType_DemolitionDepot = "[CCU] Merchant Type - Demolitionist",
-			MerchantType_DrugDealer = "[CCU] Merchant Type - Drug Dealer",
-			MerchantType_FirefighterFiveAndDime = "[CCU] Merchant Type - Firefighter",
-			MerchantType_FireSale = "[CCU] Merchant Type - Fire Sale",
-			MerchantType_GunDealer = "[CCU] Merchant Type - Gun Dealer",
-			MerchantType_GunDealerHeavy = "[CCU] Merchant Type - Gun Dealer (Heavy)",
-			MerchantType_Gunsmith = "[CCU] Merchant Type - Gunsmith",
-			MerchantType_HardwareStore = "[CCU] Merchant Type - Tool Shop",
-			MerchantType_HighTech = "[CCU] Merchant Type - HighTech",
-			MerchantType_HomeFortressOutlet = "[CCU] Merchant Type - Home Fortress Outlet",
-			MerchantType_Hypnotist = "[CCU] Merchant Type - Hypnotist",
-			MerchantType_JunkDealer = "[CCU] Merchant Type - Junk Dealer",
-			MerchantType_McFuds = "[CCU] Merchant Type - McFud's",
-			MerchantType_MedicalSupplier = "[CCU] Merchant Type - Medical Supplier",
-			MerchantType_MiningGear = "[CCU] Merchant Type - Mining Gear",
-			MerchantType_MonkeMart = "[CCU] Merchant Type - Monke Mart",
-			MerchantType_MovieTheater = "[CCU] Merchant Type - Movie Theater",
-			MerchantType_Occultist = "[CCU] Merchant Type - Occultist",
-			MerchantType_OutdoorOutfitter = "[CCU] Merchant Type - Outdoor Outfitter",
-			MerchantType_PacifistProvisioner = "[CCU] Merchant Type - Pacifist Provisioner",
-			MerchantType_PawnShop = "[CCU] Merchant Type - Pawn Shop",
-			MerchantType_PestControl = "[CCU] Merchant Type - Pest Control",
-			MerchantType_Pharmacy = "[CCU] Merchant Type - Pharmacy",
-			MerchantType_ResistanceCommissary = "[CCU] Merchant Type - Resistance Commissary",
-			MerchantType_RiotInc = "[CCU] Merchant Type - Riot Depot",
-			MerchantType_ResearchMaterials = "[CCU] Merchant Type - Scientist",
-			MerchantType_Shopkeeper = "[CCU] Merchant Type - Shopkeeper",
-			MerchantType_SlaveShop = "[CCU] Merchant Type - Slave Shop",
-			MerchantType_Soldier = "[CCU] Merchant Type - Soldier",
-			MerchantType_SportingGoods = "[CCU] Merchant Type - Sporting Goods",
-			MerchantType_Teleportationist = "[CCU] Merchant Type - Teleportationist",
-			MerchantType_Thief = "[CCU] Merchant Type - Thief",
-			MerchantType_ThiefMaster = "[CCU] Merchant Type - Thief Master",
-			MerchantType_ThrowceryStore = "[CCU] Merchant Type - Throwcery Store",
-			MerchantType_ToyStore = "[CCU] Merchant Type - Toy Store",
-			MerchantType_UpperCruster = "[CCU] Merchant Type - Upper Cruster",
-			MerchantType_Vampire = "[CCU] Merchant Type - Vampire",
-			MerchantType_Villain = "[CCU] Merchant Type - Villain",
-		#endregion
 		#region Passive
-			Passive_ExplodeOnDeath = "[CCU] Passive - Explode On Death",
-			Passive_ExplodeOnDeathLarge = "[CCU] Passive - Explode On Death (Large)",
 			Passive_ExplodeOnDeathMolotov = "[CCU] Passive - Explode On Death (Molotov)",
 			Passive_ExplodeOnDeathSlime = "[CCU] Passive - Explode On Death (Slime)",
 			Passive_ExplodeOnDeathWater = "[CCU] Passive - Explode On Death (Water)",
-			Extortable = "[CCU] Passive - Extortable",
-			Passive_Guilty = "[CCU] Passive - Guilty",
-			Passive_Hackable_Haywire = "[CCU] Passive - Hackable (Haywire)",
-			Passive_Hackable_TamperWAim = "[CCU] Passive - Hackable (Tamper w/ Aim)",
-			Passive_Innocent = "[CCU] Passive - Innocent",
-			Passive_VisionBeams = "[CCU] Passive - Vision Beams",
-		#endregion
-		#region Relationships
-			Relationships_AggressiveCannibal = "[CCU] Relationships - Aggressive (Cannibal)",   // Hostile to character except with Cool with Cannibals
-			Relationships_AnnoyedAtSuspicious = "[CCU] Relationships - Annoyed at Suspicious",
-			Relationships_Faction1Aligned = "[CCU] Relationships - Faction 1 Aligned",
-			Relationships_Faction1Hostile = "[CCU] Relationships - Faction 1 Hostile",
-			Relationships_Faction2Aligned = "[CCU] Relationships - Faction 2 Aligned",
-			Relationships_Faction2Hostile = "[CCU] Relationships - Faction 2 Hostile",
-			Relationships_Faction3Aligned = "[CCU] Relationships - Faction 3 Aligned",
-			Relationships_Faction3Hostile = "[CCU] Relationships - Faction 3 Hostile",
-			Relationships_Faction4Aligned = "[CCU] Relationships - Faction 4 Aligned",
-			Relationships_Faction4Hostile = "[CCU] Relationships - Faction 4 Hostile",
-			Relationships_HostileToCannibals = "[CCU] Relationships - Hostile to Cannibals",    // Analogue in BM: Cannibal Killer
-			Relationships_HostileToSoldiers = "[CCU] Relationships - Hostile to Soldiers",  // Analogue in BM: Army of Negative One
-			Relationships_HostileToVampires = "[CCU] Relationships - Hostile to Vampires",  // Analogue in BM: Vampire Vanquisher
-			Relationships_HostileToWerewolves = "[CCU] Relationships - Hostile to Werewolves",  // Analogue in BM: Werewolf Wrecker
-			PlayerSubmissive = "[CCU] Relationships - Player-Submissive",
-			PlayerHostile = "[CCU] Relationships - Player-Hostile",
-			PlayerAligned = "[CCU] Relationships - Player-Aligned",
-			PlayerFriendly = "[CCU] Relationships - Player-Friendly",
-			PlayerLoyal = "[CCU] Relationships - Player-Loyal",
-			PlayerAnnoyed = "[CCU] Relationships - Player-Annoyed",
-			PlayerNeutral = "[CCU] Relationships - Player-Neutral",
-			PlayerSecretHate = "[CCU] Relationships - Player-Secret Hate",
-			Relationships_Relationless = "[CCU] Relationships - Relationless",
 		#endregion
 		#region Spawn
 			HideInObject = "[CCU] Spawn: Hide In Bush",
 			Spawn_RoamingGang = "[CCU] Spawn: Roaming Gangs",
 			Spawn_SlaveOwned = "[CCU] Spawn: Slave", // Should these be in Relationships instead?
 			Spawn_SlaveOwner = "[CCU] Spawn: Slave Owner",
-		#endregion
-		#region Trait Gate
-			TraitGate_CommonFolk = "[CCU] Trait Gate - Common Folk",
-			TraitGate_CoolCannibal = "[CCU] Trait Gate - Cool Cannibal",
-			TraitGate_CopAccess = "[CCU] Trait Gate - Cop Access",
-			TraitGate_FamilyFriend = "[CCU] Trait Gate - Family Friend",
-			TraitGate_HonorableThief = "[CCU] Trait Gate - Honorable Thief",
-			TraitGate_Scumbag = "[CCU] Trait Gate - Scumbag",
-			TraitGate_Specistist = "[CCU] Trait Gate - Specistist",
-			TraitGate_Slayable = "[CCU] Trait Gate - Slayable",
-			TraitGate_Crushable = "[CCU] Trait Gate - Crushable",
-			TraitGate_Bashable = "[CCU] Trait Gate - Bashable",
-		#endregion
-		#region Utility
 		#endregion
 			NoMoreSemiColons = "lol";
 	}

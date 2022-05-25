@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Poisoner : CustomTrait
+    public class Poisoner : T_Hire
     {
+        public override string ButtonText => CJob.Poison;
+
         //[RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Poison,
+                    [LanguageCode.English] = DisplayName(typeof(Poisoner)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

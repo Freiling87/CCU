@@ -20,7 +20,7 @@ namespace CCU.Traits.Hack
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Tamper_with_Aim>(),
+                    [LanguageCode.English] = DisplayName(typeof(Tamper_with_Aim)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

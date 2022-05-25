@@ -1,9 +1,9 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Trait_Gate
 {
-    public class Crushable : CustomTrait
+    public class Crushable : T_TraitGate
     {
         [RLSetup]
         public static void Setup()
@@ -16,7 +16,7 @@ namespace CCU.Traits.TraitGate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_Crushable,
+                    [LanguageCode.English] = DisplayName(typeof(Crushable)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

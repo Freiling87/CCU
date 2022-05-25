@@ -7,7 +7,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Map_Marker
 {
-	public class MapMarker_Pilot : CustomTrait
+	public class MapMarker_Pilot : T_MapMarker
 	{
 		//[RLSetup]
 		public static void Setup()
@@ -20,7 +20,7 @@ namespace CCU.Traits.Map_Marker
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.MapMarker_Pilot,
+					[LanguageCode.English] = DisplayName(typeof(MapMarker_Pilot)),
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock

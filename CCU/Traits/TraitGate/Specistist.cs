@@ -1,9 +1,9 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Trait_Gate
 {
-    public class Specistist : CustomTrait
+    public class Specistist : T_TraitGate
     {
         [RLSetup]
         public static void Setup()
@@ -16,7 +16,7 @@ namespace CCU.Traits.TraitGate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_Specistist,
+                    [LanguageCode.English] = DisplayName(typeof(Specistist)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

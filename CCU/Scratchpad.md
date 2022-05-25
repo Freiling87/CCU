@@ -36,18 +36,12 @@ Listed in order of Parent tier summary symbol priority:
 	Updater.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
 
 ---
-#		General Reminders & To-Dos
-##			C	Trait Class Refactor
-###				C	CCU Trait
-####			C	List<string> CCU_Categories
-To avoid having to maintain string lists, use Linq expressions instead from RogueFramework.Unlocks
-####				C	CCU_DisplayName()
-  - name = GenerateCCUName(trait) →
-    - [CCU] + Last namespace + Nameof(trait)
-###				C	Interaction Trait
-Subclass of CCU trait
-string: ButtonText
-This will handle most cases
+#	C	General
+##	C	Player Edition Testing
+New
+##		C	Cancellations
+##		C	Dedicated section on Character Sheet
+Should not be too hard, as the one method where it's filled out is pretty transparent
 ##		H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
@@ -55,9 +49,41 @@ These should be grouped by Campaign, since that's the only place they're valid.
 The config file should match the name of the campaign, if they allow the same characters.
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
-##	C	Player Edition
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
+##		C	Combat
+###			C	Drug Warrior
+####			C	Subtypes
+WELP, this will be pretty easy from the look of it.
+
+StatusEffects.ChooseRandomDrugDealerStatusEffect_Prefix
+
+Uses only a specific drug on entering combat:
+						Always Crit
+	Angel Duster		Invincible
+						Invisible
+	Stimpacker			Regenerate Health
+	Cokehead			Speed
+	Roid Rager			Strength
+###			H	Lockdowner (R.I.P.)
+Apparently Lockdown walls are broken in custom levels.
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
+##		C	Cost
+###			C	00 Apply to Hire cost
+Works on Shop costs
+###			H	Cost - Alcohol
+A la Bouncer
+###			H	Cost - Banana
+Test
+###			√	Cost - Less
+Complete
+###			√	Cost - More
+Complete
+###			√	Cost - Zero
+Complete
 ##		C	Interaction
 ###			C	Shelf?
 This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
@@ -211,18 +237,6 @@ Might need to limit this to a single flag, since having multiple true at the sam
 New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
-##		H	Cost
-These should apply to Hiring as well as Vendor traits
-###			C	Cost - Alcohol
-A la Bouncer
-###			T	Cost - Banana
-Test
-###			C	Cost - Free
-Free followers, aligned suppliers, etc.
-###			T	Cost - Less
-Test
-###			T	Cost - More
-Test
 ##		H	Hire Duration
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
@@ -401,22 +415,6 @@ Complete
 Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
-##		√H	Combat
-###			√H	Drug Warrior
-####			C	Subtypes
-Uses only a specific drug on entering combat:
-						Always Crit
-	Angel Duster		Invincible
-						Invisible
-	Stimpacker			Regenerate Health
-	Cokehead			Speed
-	Roid Rager			Strength
-###			H	Lockdowner (R.I.P.)
-Apparently Lockdown walls are broken in custom levels.
-###			√	Coward
-Complete
-###			√	Fearless
-Complete
 ##		√H	Hire
 ###			H	Chloroform
 New
@@ -495,6 +493,30 @@ Complete
 Complete
 ###			√	Hack
 Complete
+##		√H	Explode On Death
+Note 2205240553: Only the vanilla one is scoped right now. Priority is early release, patch later.
+###			H	00 Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			C	Big
+###			C	Dizzy
+###			C	EMP
+Ignore PowerSap, as it's same effect
+###			C	Huge
+###			C	Molotov
+###			C	NoiseOnly
+###			C	Normal
+Renaming, refactor, etc.
+###			C	Oil
+This doesn't exist but should follow water logic...?
+###			C	Ooze
+###			C	Ridiculous
+###			C	Slime
+###			C	Stomp
+Might not work, have hardcoded junk with jumping
+###			C	Warp
+###			C	Water
+##		√	Merchant Type
+Complete
 ##		√H	Passive
 ###			H	Vision Beams (Cop Bot)
 DW
@@ -515,9 +537,6 @@ Agent.zombified
 Agent.customZombified
 ###			√	Crusty
 Complete
-###			√	Explode On Death
-####			H	Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
 ###			√	Extortable
 Complete
 ###			√	Guilty

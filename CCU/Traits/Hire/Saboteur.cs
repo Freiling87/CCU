@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Saboteur : CustomTrait
+    public class Saboteur : T_Hire
     {
+        public override string ButtonText => CJob.TamperSomething;
+
         //[RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Tamper,
+                    [LanguageCode.English] = DisplayName(typeof(Saboteur)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

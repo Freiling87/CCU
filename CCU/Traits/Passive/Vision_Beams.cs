@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Vision_Beams : CustomTrait
+    public class Vision_Beams : T_CCU
     {
         //[RLSetup]
         public static void Setup()
@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "[CCU] Passive - Vision Beams",
+                    [LanguageCode.English] = DisplayName(typeof(Vision_Beams)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

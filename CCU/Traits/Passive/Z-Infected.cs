@@ -3,12 +3,12 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Zombie_Infected : CustomTrait
+    public class Z_Infected : T_CCU
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Zombie_Infected>()
+            RogueLibs.CreateCustomTrait<Z_Infected>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is infected with the Z-Virus. They are not a zombie yet, but will become one when killed."),
@@ -16,12 +16,12 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "[CCU] Passive - Z-Infected",
+                    [LanguageCode.English] = DisplayName(typeof(Z_Infected),("Z-Infected")),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Possessed)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -1,8 +1,12 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Passive;
-using CCU.Traits.TraitGate;
+using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
+using System.Collections;
+using System.Linq;
+using UnityEngine;
 
 namespace CCU.Patches
 {
@@ -16,7 +20,7 @@ namespace CCU.Patches
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
         {
 			if ((__instance.agent.HasTrait<Bashable>() && (myAgent.HasTrait(VanillaTraits.BlahdBasher) || myAgent.agentName == VanillaAgents.GangsterCrepe)) ||
-				(__instance.agent.HasTrait<CoolCannibal>() && (myAgent.agentName == VanillaAgents.Soldier)) ||
+				(__instance.agent.HasTrait<Cool_Cannibal>() && (myAgent.agentName == VanillaAgents.Soldier)) ||
 				(__instance.agent.HasTrait<Crushable>() && (myAgent.HasTrait(VanillaTraits.CrepeCrusher) || myAgent.agentName == VanillaAgents.GangsterBlahd)) ||
 				(__instance.agent.HasTrait<Slayable>() && myAgent.HasTrait("HatesScientist")) ||
 				(__instance.agent.HasTrait<Specistist>() && myAgent.HasTrait(VanillaTraits.Specist)) )
@@ -31,11 +35,12 @@ namespace CCU.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName:nameof(StatusEffects.ExplodeAfterDeathChecks))]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
-			if (__instance.agent.HasTrait<ExplodeOnDeath>())
+			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().Any())
 			{
 				if (!__instance.agent.disappeared)
 					__instance.agent.objectSprite.flashingRepeatedly = true;
 
+				// TODO: See note 2205240553
 				if (GC.serverPlayer)
 					__instance.StartCoroutine("ExplodeBody");
 			}

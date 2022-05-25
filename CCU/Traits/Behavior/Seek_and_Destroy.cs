@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class Seek_and_Destroy : CustomTrait
+    public class Seek_and_Destroy : T_Behavior
     {
+        public override bool LosCheck => false;
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.SeekAndDestroy,
+                    [LanguageCode.English] = DisplayName(typeof(Seek_and_Destroy), "Seek & Destroy"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -13,7 +13,7 @@ namespace CCU.Traits.Interaction
             RogueLibs.CreateCustomTrait<Manage_Chunk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will manage chunks they're placed in:\n" +
+                    [LanguageCode.English] = String.Format("This character will do Clerk behaviors if they're placed in certain chunks:\n" +
                     "- Arena\n" +
                     "- Deportation Center\n" +
                     "- Hotel\n"),
@@ -21,7 +21,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Manage_Chunk>(),
+                    [LanguageCode.English] = DisplayName(typeof(Manage_Chunk)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

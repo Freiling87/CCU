@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Trapper : CustomTrait
+    public class Trapper : T_Hire
     {
+        public override string ButtonText => CJob.DisarmTrap;
+
         //[RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.DisarmTrap,
+                    [LanguageCode.English] = DisplayName(typeof(Trapper)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

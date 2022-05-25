@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<UseBloodBag>(),
+                    [LanguageCode.English] = DisplayName(typeof(UseBloodBag)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

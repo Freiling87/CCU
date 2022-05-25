@@ -1,8 +1,10 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits;
 using CCU.Traits.Cost;
+using CCU.Traits.Map_Marker;
 using HarmonyLib;
 using RogueLibsCore;
+using System.Linq;
 
 namespace CCU.Patches.Objects
 {
@@ -16,27 +18,28 @@ namespace CCU.Patches.Objects
 		public static void DetermineMoneyCost_Postfix(int moneyAmt, string transactionType, PlayfieldObject __instance, ref int __result)
 		{
 			// Need initial Cost → Item conversion
+			// NOTE: Ensure moneyAmt isn't used inappropriately in here, since I'm not sure you can modify its value
 
 			Agent agent = __instance.GetComponent<Agent>();
-			bool bananas = moneyAmt >= 6789 && moneyAmt < 6825;
-			bool alcohol = moneyAmt >= 8008135 && moneyAmt < 8008171;
+			//bool bananas = moneyAmt >= 6789 && moneyAmt < 6825;
+			//bool alcohol = moneyAmt >= 8008135 && moneyAmt < 8008171;
 
-			if (alcohol)
-				moneyAmt = MoneyToAlcohol(moneyAmt);
-			else if (bananas)
-				moneyAmt = MoneyToBananas(moneyAmt);
+			//if (alcohol)
+			//	moneyAmt = MoneyToAlcohol(moneyAmt);
+			//else if (bananas)
+			//	moneyAmt = MoneyToBananas(moneyAmt);
 
-			if (agent.HasTrait<CostLess>())
+			if (agent.HasTrait<Less>())
 				__result = (int)((float)__result * 0.5f);
-			else if (agent.HasTrait<CostMore>())
+			else if (agent.HasTrait<More>())
 				__result = (int)((float)__result * 1.5f);
+			else if (agent.HasTrait<Zero>())
+				__result = 0;
 
-			if (alcohol)
-				moneyAmt = AlcoholToMoney(moneyAmt);
-			else if (bananas)
-				moneyAmt = BananasToMoney(moneyAmt);
-
-			__result = moneyAmt;
+			//if (alcohol)
+			//	moneyAmt = AlcoholToMoney(moneyAmt);
+			//else if (bananas)
+			//	moneyAmt = BananasToMoney(moneyAmt);
 		}
 
 		public static int AlcoholToMoney(int moneyAmt) =>
@@ -125,8 +128,12 @@ namespace CCU.Patches.Objects
 		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
 		{
 			if (__instance.CompareTag("Agent"))
-				if (TraitManager.HasTraitFromList((Agent)__instance, TraitManager.MapMarkerTraits))
+			{
+				Agent agent = (Agent)__instance;
+
+				if (agent.GetTraits<T_MapMarker>().Any())
 					__instance.MinimapDisplay();
+			}
 		}
 	}
 }

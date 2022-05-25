@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Rel_General
 {
-    public class Hostile_To_Werewolf : CustomTrait
+    public class Hostile_To_Werewolf : T_Rel_General
     {
         [RLSetup]
         public static void Setup()
@@ -15,7 +15,7 @@ namespace CCU.Traits.Rel_General
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_HostileToWerewolves,
+                    [LanguageCode.English] = DisplayName(typeof(Hostile_To_Werewolf)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Crusty : CustomTrait
+    public class Crusty : T_CCU
     {
         [RLSetup]
         public static void Setup()
@@ -11,12 +11,12 @@ namespace CCU.Traits.Passive
             RogueLibs.CreateCustomTrait<Crusty>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character has the social benefits of being upper-class."),
+                    [LanguageCode.English] = String.Format("This character has the privileges of the upper class."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "[CCU] Passive - Crusty",
+                    [LanguageCode.English] = DisplayName(typeof(Crusty)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,15 +1,11 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire
 {
-    public class Pickpocket : CustomTrait
+    public class Pickpocket : T_Hire
     {
+        public override string ButtonText => CJob.Pickpocket;
+
         //[RLSetup]
         public static void Setup()
         {
@@ -21,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Pickpocket,
+                    [LanguageCode.English] = DisplayName(typeof(Pickpocket)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

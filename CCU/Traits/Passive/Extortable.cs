@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Extortable : CustomTrait
+    public class Extortable : T_CCU
     {
         [RLSetup]
         public static void Setup()
@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Extortable,
+                    [LanguageCode.English] = DisplayName(typeof(Extortable)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

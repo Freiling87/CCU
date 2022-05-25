@@ -5,8 +5,10 @@ namespace CCU.Traits.Behavior
     /// <summary>
     /// Don't rename this: needs to be distinct from Hire trait name
     /// </summary>
-    public class Pick_Pockets : CustomTrait
+    public class Pick_Pockets : T_Behavior
     {
+        public override bool LosCheck => true;
+
         [RLSetup]
         public static void Setup()
         {
@@ -18,12 +20,12 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Pickpocket,
+                    [LanguageCode.English] = DisplayName(typeof(Pick_Pockets)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Eat_Corpses)), DisplayName(typeof(Suck_Blood)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

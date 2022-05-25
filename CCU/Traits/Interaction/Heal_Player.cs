@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Heal_Player>(),
+                    [LanguageCode.English] = DisplayName(typeof(Heal_Player)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

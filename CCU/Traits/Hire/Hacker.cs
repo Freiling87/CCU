@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Hacker : CustomTrait
+    public class Hacker : T_Hire
     {
+        public override string ButtonText => "HackSomething";
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Hack,
+                    [LanguageCode.English] = DisplayName(typeof(Hacker)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

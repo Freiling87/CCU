@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Guilty : CustomTrait
+    public class Guilty : T_CCU
     {
         [RLSetup]
         public static void Setup()
@@ -16,12 +16,12 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Passive_Guilty,
+                    [LanguageCode.English] = DisplayName(typeof(Guilty)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Innocent)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

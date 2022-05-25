@@ -4,7 +4,7 @@ using CCU.Traits.Combat;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Rel_General;
 using CCU.Traits.Rel_Player;
-using CCU.Traits.TraitGate;
+using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -57,7 +57,7 @@ namespace CCU.Patches.AgentRelationships
                     relationship = "Submissive";
             }
 
-            if ((___agent.HasTrait<Hostile_To_Cannibal>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<CoolCannibal>())) ||
+            if ((___agent.HasTrait<Hostile_To_Cannibal>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<Cool_Cannibal>())) ||
                 (___agent.HasTrait<Hostile_To_Soldier>() && otherAgent.agentName == VanillaAgents.Soldier) ||
                 (___agent.HasTrait<Hostile_To_Vampire>() && otherAgent.agentName == VanillaAgents.Vampire) ||
                 (___agent.HasTrait<Hostile_To_Werewolf>() && otherAgent.agentName == VanillaAgents.WerewolfTransformed) ||
@@ -72,15 +72,15 @@ namespace CCU.Patches.AgentRelationships
             if (___agent.HasTrait<Suspecter>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == "Neutral" && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 relationship = "Annoyed";
 
-            if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<CoolCannibal>())
+            if (otherAgent.HasTrait(VanillaTraits.CoolwithCannibals) && ___agent.HasTrait<Cool_Cannibal>())
                 relationship = "Neutral";
 
-            if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<CommonFolk>() && !otherAgent.guardSequence)
+            if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<Common_Folk>() && !otherAgent.guardSequence)
                 relationship = "Loyal";
 
             if ((___agent.HasTrait<Bashable>() && otherAgent.agentName == VanillaAgents.GangsterBlahd) ||
                 (___agent.HasTrait<Crushable>() && otherAgent.agentName == VanillaAgents.GangsterCrepe) ||
-                (___agent.HasTrait<FamilyFriend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily))) ||
+                (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily))) ||
                 AgentsFactionAligned(___agent, otherAgent))
                 relationship = "Aligned";
 

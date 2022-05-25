@@ -1,9 +1,11 @@
-﻿using HarmonyLib;
-using CCU.Traits;
+﻿using CCU.Traits.Map_Marker;
+using HarmonyLib;
+using RogueLibsCore;
+using System.Linq;
 
 namespace CCU.Patches.Interface
 {
-	[HarmonyPatch(declaringType: typeof(QuestMarker))]
+    [HarmonyPatch(declaringType: typeof(QuestMarker))]
 	class P_QuestMarker
 	{
 		[HarmonyPostfix, HarmonyPatch(methodName: "CheckIfSeen2")]
@@ -13,7 +15,7 @@ namespace CCU.Patches.Interface
 			{
 				Agent agent = __instance.tr.parent.GetComponent<Agent>();
 
-				if (/*.nonQuestAgent && */ TraitManager.HasTraitFromList(agent, TraitManager.MapMarkerTraits) && __instance.playerSeen)
+				if (/*.nonQuestAgent && */ agent.GetTraits<T_MapMarker>().Any() && __instance.playerSeen)
 				{
 					__instance.nonQuestAgentSprite = __instance.gr.minimapImages[14];
 					__instance.smallImage2.sprite = __instance.nonQuestAgentSprite;

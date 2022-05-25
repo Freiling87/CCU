@@ -21,7 +21,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Leave_Weapons_Behind>(),
+                    [LanguageCode.English] = DisplayName(typeof(Leave_Weapons_Behind)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

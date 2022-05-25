@@ -1,16 +1,13 @@
-﻿using System;
-using RogueLibsCore;
-using BepInEx.Logging;
+﻿using BepInEx.Logging;
+using CCU.Mutators;
+using CCU.Traits.Bodyguarded;
 using HarmonyLib;
-using CCU.Traits.Rel_Player;
-using CCU.Traits.Combat;
+using RogueLibsCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using CCU.Traits;
-using CCU.Traits.Spawn;
-using System.Linq;
-using System.Collections.Generic;
-using CCU.Mutators;
 
 namespace CCU.Patches.Spawn
 {
@@ -53,7 +50,7 @@ namespace CCU.Patches.Spawn
 			List<Agent> vips = new List<Agent>();
 
 			foreach (Agent agent in GC.agentList)
-				if (TraitManager.HasTraitFromList(agent, TraitManager.BodyguardedTraits) && agent.gang == 0)
+				if (agent.GetTraits<T_Bodyguarded>().Any() && agent.gang == 0)
 					vips.Add(agent);
 
 			logger.LogDebug("\tVIP count: " + vips.Count());
@@ -63,7 +60,7 @@ namespace CCU.Patches.Spawn
 				{
 					logger.LogDebug("Processing Bodyguarded Agent :" + vip.agentName);
 
-					Type bodyguardTrait = TraitManager.GetOnlyTraitFromList(vip, TraitManager.BodyguardedTraits);
+					T_Bodyguarded bodyguardTrait = vip.GetTrait<T_Bodyguarded>();
 					Vector2 spawnLoc;
 					int attempts = 0;
 
@@ -83,14 +80,10 @@ namespace CCU.Patches.Spawn
 
 						for (int i = 0; i < numGuards; i++)
 						{
-							string bodyguardType =
-								bodyguardTrait == typeof(Bodyguarded_Pilot) ? "Guard" :
-								"Assassin";
+							logger.LogDebug("\tBodyguard Trait: " + bodyguardTrait.TextName);
+							logger.LogDebug("\tBodyguard Type: " + bodyguardTrait.BodyguardType);
 
-							logger.LogDebug("\tBodyguard Trait: " + bodyguardTrait.Name);
-							logger.LogDebug("\tBodyguard Type: " + bodyguardType);
-
-							Agent bodyguard = GC.spawnerMain.SpawnAgent(spawnLoc, null, bodyguardType);
+							Agent bodyguard = GC.spawnerMain.SpawnAgent(spawnLoc, null, bodyguardTrait.BodyguardType);
 							bodyguard.movement.RotateToAngleTransform(Random.Range(0f, 360f));
 							bodyguard.SetDefaultGoal("WanderFar");
 							bodyguard.gang = vip.gang;

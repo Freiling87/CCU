@@ -12,6 +12,7 @@ using System.Reflection.Emit;
 using CCU.Traits;
 using Random = UnityEngine.Random;
 using CCU.Patches.Appearance;
+using CCU.Traits.Facial_Hair;
 
 namespace CCU.Patches.Appearance
 {
@@ -26,7 +27,7 @@ namespace CCU.Patches.Appearance
 		{
 			Agent agent = __instance.agent;
 
-			if (TraitManager.HasTraitFromList(agent, TraitManager.FacialHairTraits))
+			if (agent.GetTraits<T_FacialHair>().Any())
 			{
 				Appearance.RollFacialHair(__instance);
 			}

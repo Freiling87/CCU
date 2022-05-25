@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Coward : CustomTrait
+    public class Coward : T_Combat
     {
         [RLSetup]
         public static void Setup()
@@ -16,12 +16,12 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Combat_Coward,
+                    [LanguageCode.English] = DisplayName(typeof(Coward)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Coward)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

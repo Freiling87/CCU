@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Lockdowner : CustomTrait
+    public class Lockdowner : T_Combat
     {
         //[RLSetup]
         public static void Setup()
@@ -16,7 +16,7 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Lockdowner,
+                    [LanguageCode.English] = DisplayName(typeof(Lockdowner)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

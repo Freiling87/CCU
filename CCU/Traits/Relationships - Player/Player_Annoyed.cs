@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Rel_Player
 {
-    public class Player_Annoyed : CustomTrait
+    public class Player_Annoyed : T_Rel_Player
     {
         [RLSetup]
         public static void Setup()
@@ -15,7 +15,7 @@ namespace CCU.Traits.Rel_Player
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerAnnoyed,
+                    [LanguageCode.English] = DisplayName(typeof(Player_Annoyed)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Decoy : CustomTrait
+    public class Decoy : T_Hire
     {
+        public override string ButtonText => "CauseRuckus";
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.CauseARuckus,
+                    [LanguageCode.English] = DisplayName(typeof(Decoy)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

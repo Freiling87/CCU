@@ -20,7 +20,7 @@ namespace CCU.Traits.Hack
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Go_Haywire>(),
+                    [LanguageCode.English] = DisplayName(typeof(Go_Haywire)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

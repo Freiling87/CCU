@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Traits.Appearance.FacialHair;
+using CCU.Traits.Facial_Hair;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -65,14 +65,6 @@ namespace CCU.Patches.Appearance
 			CTrait.SkinColor_Zombie1,
 			CTrait.SkinColor_Zombie2
 		};
-		private static List<Type> FacialHairTraits = new List<Type>()
-		{
-			typeof(Beard),
-			typeof(Mustache),
-			typeof(MustacheCircus),
-			typeof(MustacheRedneck),
-			typeof(NoFacialHair)
-		};
 		private static List<string> HairColorTraits = new List<string>()
 		{
 			CTrait.HairColor_Black,
@@ -133,9 +125,11 @@ namespace CCU.Patches.Appearance
 
 			var random = new Random();
 
-			List<CustomTrait> pool = agentHitBox.agent.GetTraits<CustomTrait>()
-				.Where(trait => FacialHairTraits.Contains(trait.GetType()))
-				.ToList();
+			// TODO: This was changed to account for class refactor, but the code is untested.
+			// The previous setup was to treat the trait names as the strings for facial hair types
+			// Instead, you'll need to get override strings from T_FacialHair children.
+			// Basically, don't expect anything below to work until you redo it.
+			List<T_FacialHair> pool = agentHitBox.agent.GetTraits<T_FacialHair>().ToList();
 
 			logger.LogDebug("\tpool: " + pool.Count);
 
@@ -143,12 +137,9 @@ namespace CCU.Patches.Appearance
 				return;
 
 			CustomTrait selection = pool[random.Next(pool.Count)];
-			string selectionName = selection.Trait.traitName;
-			logger.LogDebug("\tselectionName: " + selectionName);
-			agentHitBox.facialHairType = selectionName.Substring(selectionName.IndexOf(" - ") + 1);
-			logger.LogDebug("\tfacialHairType: " + agentHitBox.facialHairType);
+			string selectionName = selection.Trait.traitName; 
+			agentHitBox.facialHairType = selectionName.Substring(selectionName.IndexOf(" - ") + 1); 
 			agentHitBox.agent.oma.facialHairType = agentHitBox.agent.oma.convertFacialHairTypeToInt(agentHitBox.facialHairType);
-			logger.LogDebug("\tfacialHairType = " + agentHitBox.agent.oma.facialHairType);
 
 			if (agentHitBox.facialHairType == "None" || agentHitBox.facialHairType == "" || agentHitBox.facialHairType == null)
 			{

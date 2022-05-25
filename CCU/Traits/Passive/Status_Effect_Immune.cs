@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Status_Effect_Immune : CustomTrait
+    public class Status_Effect_Immune : T_CCU
     {
         [RLSetup]
         public static void Setup()
@@ -11,12 +11,12 @@ namespace CCU.Traits.Passive
             RogueLibs.CreateCustomTrait<Status_Effect_Immune>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character is immune to all status effects."),
+                    [LanguageCode.English] = String.Format("This character is immune to all status effects... but they still have feelings."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "[CCU] Passive - Status Effect Immune",
+                    [LanguageCode.English] = DisplayName(typeof(Status_Effect_Immune)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

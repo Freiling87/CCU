@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class Suck_Blood : CustomTrait
+    public class Suck_Blood : T_Behavior
     {
+        public override bool LosCheck => true;
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,12 +17,12 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.SuckBlood,
+                    [LanguageCode.English] = DisplayName(typeof(Suck_Blood)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Eat_Corpses)), DisplayName(typeof(Pick_Pockets)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

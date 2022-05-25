@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Donate_Blood>(),
+                    [LanguageCode.English] = DisplayName(typeof(Donate_Blood)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Merchant
 {
-    public class Buyer : CustomTrait
+    public class Buyer : T_Merchant
     {
         //[RLSetup]
         public static void Setup()
@@ -17,7 +17,7 @@ namespace CCU.Traits.Merchant
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Buyer,
+                    [LanguageCode.English] = DisplayName(typeof(Buyer)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

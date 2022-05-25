@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Bribe_for_Entry>(),
+                    [LanguageCode.English] = DisplayName(typeof(Bribe_for_Entry)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

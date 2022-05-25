@@ -15,7 +15,7 @@ namespace CCU.Traits.Loadout
 			RogueLibs.CreateCustomTrait<ChunkMayorBadge>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = String.Format("When placed in a Mayor's Office chunk, this character will by default hold the Visitor's Badge. If multiple characters have this trait, one will be chosen randomly.\n\n<color=orange>Recommended:</color> {0}", CTrait.VisitorsBadge),
+					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Safe Combo Holder. If multiple characters have this trait, one will be chosen randomly.",
 					[LanguageCode.Russian] = "",
 				})
 				.WithName(new CustomNameInfo

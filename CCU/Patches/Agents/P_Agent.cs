@@ -11,7 +11,9 @@ using CCU.Traits.Interaction;
 using CCU.Traits.Hack;
 using CCU.Traits.Rel_Player;
 using CCU.Traits.Rel_General;
-using CCU.Traits.TraitGate;
+using CCU.Traits.Trait_Gate;
+using System.Linq;
+using CCU.Traits.Merchant_Type;
 
 namespace CCU.Patches.Agents
 {
@@ -152,9 +154,7 @@ namespace CCU.Patches.Agents
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
 			# region Active
-			// TODO: Change this to a Linq OfType expression
-			// RogueFramework.Unlocks.OfType<ACtiveTrait> etc.
-            if (TraitManager.HasTraitFromList(__instance, TraitManager.BehaviorActiveTraits))
+            if (__instance.GetTraits<T_Behavior>().Where(c => c.LosCheck).Any())
 			{
 				// Thieves have their LOScheck set to 50% in vanilla
 				if (__instance.HasTrait<Pick_Pockets>() && GC.percentChance(50))
@@ -173,11 +173,11 @@ namespace CCU.Patches.Agents
 				__instance.hackable = true;
             #endregion
             #region Combat
-            if (__instance.HasTrait<DrugWarrior>())
+            if (__instance.HasTrait<Drug_Warrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant
-			if (TraitManager.HasTraitFromList(__instance, TraitManager.MerchantTypeTraits))
+			if (__instance.GetTraits<T_MerchantType>().Any())
 				__instance.SetupSpecialInvDatabase();
 			#endregion
 			#region Passive
@@ -204,7 +204,7 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<Vision_Beams>())
 				__instance.agentSecurityBeams.enabled = true;
 
-			if (__instance.HasTrait<Zombie_Infected>())
+			if (__instance.HasTrait<Z_Infected>())
 				__instance.zombieWhenDead = true;
 			#endregion
 			#region Relationships

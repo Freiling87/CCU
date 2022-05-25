@@ -1,9 +1,9 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Trait_Gate
 {
-    public class Scumbag : CustomTrait
+    public class Scumbag : T_TraitGate
     {
         [RLSetup]
         public static void Setup()
@@ -11,12 +11,12 @@ namespace CCU.Traits.TraitGate
             RogueLibs.CreateCustomTrait<Scumbag>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer."),
+                    [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer, and will be hostile to them."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.TraitGate_Scumbag,
+                    [LanguageCode.English] = DisplayName(typeof(Scumbag)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits;
 using HarmonyLib;
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1332,7 +1333,7 @@ namespace CCU.Patches.Interface
 
 						foreach (Trait trait in __instance.dummyAgent.statusEffects.TraitList)
 						{
-							if (TraitManager.AllCCUTraitNamesGroup.Contains(trait.traitName)) // Omit hidden traits
+							if (trait.GetHook<T_CCU>() != null) // Hide CCU traits
 								continue;
 
 							text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];

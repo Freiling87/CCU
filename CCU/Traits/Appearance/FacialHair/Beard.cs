@@ -1,8 +1,8 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Appearance.FacialHair
+namespace CCU.Traits.Facial_Hair
 {
-    public class Beard : CustomTrait
+    public class Beard : T_FacialHair
 	{
 		//[RLSetup]
 		public static void Setup()
@@ -15,7 +15,7 @@ namespace CCU.Traits.Appearance.FacialHair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.FacialHair_Beard,
+					[LanguageCode.English] = DisplayName(typeof(Beard)),
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock

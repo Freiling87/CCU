@@ -19,7 +19,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName<Buy_Slave>(),
+                    [LanguageCode.English] = DisplayName(typeof(Buy_Slave)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Intruder : CustomTrait
+    public class Intruder : T_Hire
     {
+        public override string ButtonText => "LockpickDoor";
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.BreakIn,
+                    [LanguageCode.English] = DisplayName(typeof(Intruder)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_1_Hostile : CustomTrait
+    public class Faction_1_Hostile : T_Rel_Faction
     {
         [RLSetup]
         public static void Setup()
@@ -15,12 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_Faction1Hostile,
+                    [LanguageCode.English] = DisplayName(typeof(Faction_1_Hostile)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { CTrait.Relationships_Faction1Aligned },
+                    Cancellations = { DisplayName(typeof(Faction_1_Aligned)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

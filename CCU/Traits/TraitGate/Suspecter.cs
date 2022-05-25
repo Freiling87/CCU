@@ -1,8 +1,8 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.TraitGate
+namespace CCU.Traits.Trait_Gate
 {
-    public class Suspecter : CustomTrait
+    public class Suspecter : T_TraitGate
     {
         [RLSetup]
         public static void Setup()
@@ -15,7 +15,7 @@ namespace CCU.Traits.TraitGate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Relationships_AnnoyedAtSuspicious,
+                    [LanguageCode.English] = DisplayName(typeof(Suspecter)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

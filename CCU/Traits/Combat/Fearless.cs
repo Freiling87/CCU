@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Fearless : CustomTrait
+    public class Fearless : T_Combat
     {
         [RLSetup]
         public static void Setup()
@@ -16,12 +16,12 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Combat_Fearless,
+                    [LanguageCode.English] = DisplayName(typeof(Fearless)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Fearless)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

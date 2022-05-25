@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Rel_Player
 {
-    public class Player_Friendly : CustomTrait
+    public class Player_Friendly : T_Rel_Player
     {
         [RLSetup]
         public static void Setup()
@@ -15,7 +15,7 @@ namespace CCU.Traits.Rel_Player
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerFriendly,
+                    [LanguageCode.English] = DisplayName(typeof(Player_Friendly)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

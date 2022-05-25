@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Rel_Player
 {
-    public class Player_Secret_Hate : CustomTrait
+    public class Player_Secret_Hate : T_Rel_Player
     {
         //[RLSetup]
         public static void Setup()
@@ -15,7 +15,7 @@ namespace CCU.Traits.Rel_Player
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PlayerSecretHate,
+                    [LanguageCode.English] = DisplayName(typeof(Player_Secret_Hate)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

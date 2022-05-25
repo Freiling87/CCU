@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits;
 using HarmonyLib;
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -271,7 +272,7 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait2.traitName))
 							hidden = true;
 
-						if (TraitManager.AllCCUTraitNamesGroup.Contains(trait2.traitName)) // Remove Hidden Traits
+						if (trait2.GetHook<T_CCU>() != null) // Remove Hidden Traits
 							hidden = true;
 
 						if (!hidden)
@@ -321,7 +322,7 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait3.traitName))
 							traitHidden = true;
 
-						if (TraitManager.AllCCUTraitNamesGroup.Contains(trait3.traitName)) // Remove Hidden traits
+						if (trait3.GetHook<T_CCU>() != null) // Remove CCU traits
 							traitHidden = true;
 
 						if (!traitHidden)

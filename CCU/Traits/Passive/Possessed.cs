@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Possessed : CustomTrait
+    public class Possessed : T_CCU
     {
         [RLSetup]
         public static void Setup()
@@ -11,17 +11,17 @@ namespace CCU.Traits.Passive
             RogueLibs.CreateCustomTrait<Possessed>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character has a Shapeshifter firmly lodged up their ass."),
+                    [LanguageCode.English] = String.Format("This character has a Shapeshifter firmly lodged up their ass.\n\nThat's their excuse, what's yours?!"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "[CCU] Passive - Possessed",
+                    [LanguageCode.English] = DisplayName(typeof(Possessed)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Z_Infected)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -2,8 +2,10 @@
 
 namespace CCU.Traits.Hire
 {
-    public class Muscle : CustomTrait
+    public class Muscle : T_Hire
     {
+        public override string ButtonText => null;
+
         [RLSetup]
         public static void Setup()
         {
@@ -15,7 +17,7 @@ namespace CCU.Traits.Hire
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Bodyguard,
+                    [LanguageCode.English] = DisplayName(typeof(Muscle)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
