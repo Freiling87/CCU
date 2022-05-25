@@ -1,30 +1,31 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
+using System.Linq;
 
 namespace CCU.Traits.Explode_On_Death
 {
-    public class Fiery_Explosion : T_ExplodeOnDeath
+    public class Warp : T_ExplodeOnDeath
     {
-        public override string ExplosionType => VExplosionType.Molotov;
+        public override string ExplosionType => VExplosionType.Warp;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Fiery_Explosion>()
+            RogueLibs.CreateCustomTrait<Warp>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("On death, this character explodes like the Molotovs your mother used to make!"),
+                    [LanguageCode.English] = String.Format("All the good ancient curses were taken. This one teleports anyone present for its holder's death to a mildly inconvenient location nearby. OoOoOoOh!"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Fiery_Explosion)),
+                    [LanguageCode.English] = DisplayName(typeof(Warp)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Warp)).Select(c => c.TextName).ToList(),
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

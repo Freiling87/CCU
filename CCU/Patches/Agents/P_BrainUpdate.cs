@@ -436,8 +436,6 @@ namespace CCU.Patches.Agents
 									if ((___agent.agentName == "Thief" || (___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pick_Pockets>())) && 
 										!__instance.thiefNoSteal)
 									{
-										logger.LogDebug("Pickpocket check Triggered");
-
 										___agent.losCheckAtIntervalsTime = 0;
 										if (!___agent.hasEmployer)
 										{
@@ -450,8 +448,6 @@ namespace CCU.Patches.Agents
 													(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")) &&
 													(___agent.agentName == "Thief" || 
 														(___agent.specialAbility == vSpecialAbility.StickyGlove && ___agent.HasTrait<Pick_Pockets>() && ___agent.HasTrait<Honorable_Thief>()));
-
-												logger.LogDebug("HonorFlag: " + honorFlag);
 
 												if (relationship.distance < 4f && !honorFlag && !agent6.mechEmpty && !agent6.objectAgent && relationship.relTypeCode != relStatus.Aligned && relationship.relTypeCode != relStatus.Loyal && relationship.relTypeCode != relStatus.Friendly && relationship.relTypeCode != relStatus.Hostile && ___agent.slaveOwners.Count == 0 && ___agent.prisoner == agent6.prisoner && !agent6.invisible && !agent6.disappeared && (___agent.prisoner <= 0 || ___agent.curTileData.chunkID == agent6.curTileData.chunkID) && !agent6.hasGettingArrestedByAgent && !___agent.hectoredAgents.Contains(agent6.agentID) && !__instance.gc.tileInfo.DifferentLockdownZones(___agent.curTileData, agent6.curTileData))
 												{

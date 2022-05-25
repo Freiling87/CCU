@@ -17,28 +17,28 @@ namespace CCU.Patches.Spawn
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2))]
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2))]
 		public static bool LoadStuff2_Prefix(LoadLevel __instance)
 		{
-			if (GC.customCampaign && MutatorManager.IsMutatorFromListActive(MutatorManager.CampaignMutators))
-			{
-				foreach (LevelData levelData in __instance.customCampaign.levelList)
-				{
-					foreach (string mutator in levelData.levelMutators)
-					{
-						foreach (Type ccuMutator in MutatorManager.CampaignMutators)
-						{
-							string ccuMutatorName = MutatorManager.MutatorName(ccuMutator);
+			//if (GC.customCampaign && MutatorManager.IsMutatorFromListActive(MutatorManager.CampaignMutators))
+			//{
+			//	foreach (LevelData levelData in __instance.customCampaign.levelList)
+			//	{
+			//		foreach (string mutator in levelData.levelMutators)
+			//		{
+			//			foreach (Type ccuMutator in MutatorManager.CampaignMutators)
+			//			{
+			//				string ccuMutatorName = MutatorManager.MutatorName(ccuMutator);
 
-							if (mutator == ccuMutatorName)
-							{
-								logger.LogDebug("There is definitely a better way to do this! :)");
-							}
-						}
-					}
-				}
+			//				if (mutator == ccuMutatorName)
+			//				{
+			//					logger.LogDebug("There is definitely a better way to do this! :)");
+			//				}
+			//			}
+			//		}
+			//	}
 
-			}
+			//}
 
 			return true;
 		}

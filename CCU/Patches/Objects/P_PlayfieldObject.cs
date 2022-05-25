@@ -47,11 +47,11 @@ namespace CCU.Patches.Objects
 		public static int BananasToMoney(int moneyAmt) =>
 			moneyAmt + 6788;
 		public static int MoneyToAlcohol(int moneyAmt) =>
-			moneyAmt - 8008134;
+			moneyAmt - 8008134; 
 		public static int MoneyToBananas(int moneyAmt) =>
 			moneyAmt - 6788;
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.moneySuccess), argumentTypes: new[] { typeof(int), typeof(bool) })]
+        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.moneySuccess), argumentTypes: new[] { typeof(int), typeof(bool) })]
         public static bool MoneySuccess_Prefix(int moneyAmt, bool countTowardStats, PlayfieldObject __instance, ref bool __result)
         {
 			if (moneyAmt >= 6789 && moneyAmt < 6825) // 1-36 banaan
@@ -124,7 +124,7 @@ namespace CCU.Patches.Objects
 			return true;
         }
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
+		//d [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
 		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
 		{
 			if (__instance.CompareTag("Agent"))

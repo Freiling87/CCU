@@ -25,7 +25,6 @@ namespace CCU.Patches.Goals
                 (AlarmButton.lockdownTimer < 5f || !__instance.gc.lockdown) && 
                 __instance.battlingAgent.isPlayer != 0)
             {
-                logger.LogDebug("A");
                 __instance.agent.CauseLockdown();
             }
         }

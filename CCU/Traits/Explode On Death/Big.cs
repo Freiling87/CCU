@@ -1,30 +1,31 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
+using System.Linq;
 
 namespace CCU.Traits.Explode_On_Death
 {
-    public class Huge_Explosion : T_ExplodeOnDeath
+    public class Big : T_ExplodeOnDeath
     {
-        public override string ExplosionType => VExplosionType.Huge;
+        public override string ExplosionType => VExplosionType.Big;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Huge_Explosion>()
+            RogueLibs.CreateCustomTrait<Big>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("On death, this character explodes. 32 Slaves' worth!!"),
+                    [LanguageCode.English] = String.Format("On death, this character explodes. About 4 Slaves' worth. "),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Huge_Explosion)),
+                    [LanguageCode.English] = DisplayName(typeof(Big)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Huge)), DisplayName(typeof(Normal)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -60,14 +60,5 @@ namespace CCU.Mutators
 
 			return result;
 		}
-
-
-		public static List<Type> CampaignMutators = new List<Type>()
-		{
-		};
-		public static List<Type> LevelMutators = new List<Type>()
-		{
-
-		};
 	}
 }

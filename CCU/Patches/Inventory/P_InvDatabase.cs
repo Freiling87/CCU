@@ -27,17 +27,13 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
 		{
-			logger.LogDebug("AddRandItem_Prefix");
 			if (__instance.agent is null)
 				return true;
 
 			if (__instance.agent.GetTraits<T_MerchantType>().Any())
 			{
-				logger.LogDebug("A");
 				T_MerchantType hook = __instance.agent.GetTrait<T_MerchantType>();
 				string rName = hook.DisplayName;
-				logger.LogDebug(hook.TextName);
-				logger.LogDebug("rName: " + rName);
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{

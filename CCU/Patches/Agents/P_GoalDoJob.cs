@@ -28,8 +28,6 @@ namespace CCU.Patches.Agents
 			}
 			else if (__instance.curJob == CJob.TamperSomething)
 			{
-				logger.LogDebug("Not implemented yet");
-
 				//GoalTamperSomething subGoal2 = new GoalTamperSomething();
 				//__instance.brain.AddSubgoal(__instance, subGoal2);
 

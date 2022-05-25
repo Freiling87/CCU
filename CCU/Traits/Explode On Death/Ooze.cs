@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace CCU.Traits.Explode_On_Death
 {
-    public class Big_Explosion : T_ExplodeOnDeath
+    public class Ooze : T_ExplodeOnDeath
     {
-        public override string ExplosionType => VExplosionType.Big;
+        public override string ExplosionType => VExplosionType.Ooze;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Big_Explosion>()
+            RogueLibs.CreateCustomTrait<Ooze>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character explodes. About 4 Slaves' worth."),
@@ -20,12 +20,12 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Big_Explosion)),
+                    [LanguageCode.English] = DisplayName(typeof(Ooze)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Big_Explosion)).Select(c => c.TextName).ToList(),
+                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Ooze)).Select(c => c.TextName).ToList(),
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

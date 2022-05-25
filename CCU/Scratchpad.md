@@ -71,19 +71,6 @@ Apparently Lockdown walls are broken in custom levels.
 Complete
 ###			√	Fearless
 Complete
-##		C	Cost
-###			C	00 Apply to Hire cost
-Works on Shop costs
-###			H	Cost - Alcohol
-A la Bouncer
-###			H	Cost - Banana
-Test
-###			√	Cost - Less
-Complete
-###			√	Cost - More
-Complete
-###			√	Cost - Zero
-Complete
 ##		C	Interaction
 ###			C	Shelf?
 This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
@@ -415,6 +402,55 @@ Complete
 Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
+##		√H	Cost
+###			H	Cost - Alcohol
+A la Bouncer
+###			H	Cost - Banana
+Test
+###			√	Cost - Less
+Complete
+###			√	Cost - More
+Complete
+###			√	Cost - Zero
+Complete
+##		√H	Explode On Death
+###			C	00 Destroy body
+For all non-normal explosion types
+This will complete about half the holds in here.
+###			H	00 Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			H	Dizzy
+Body remained
+###			H	EMP
+Works, but body remained
+###			H	Firebomb
+Didn't do anything
+###			H	Noise Only
+Doesn't work
+Also not interesting
+###			H	Oil
+This doesn't exist but should follow water logic. Plus there are many other uses.
+###			H	Ooze
+Only did particle effect
+###			H	Ridiculous
+Only did particle effect, didn't end slow-mo, no kills.
+This is the Bomb disaster one, so it will need special attention.
+###			H	Slime
+Only did particle effect
+###			H	Stomp
+Did particle effect
+Pushed body away
+Didn't stun anyone
+###			H	Warp
+Complete
+###			H	Water
+Body remained
+###			√	Big
+Complete
+###			√	Normal
+Complete
+###			√	Huge
+Complete
 ##		√H	Hire
 ###			H	Chloroform
 New
@@ -493,28 +529,6 @@ Complete
 Complete
 ###			√	Hack
 Complete
-##		√H	Explode On Death
-Note 2205240553: Only the vanilla one is scoped right now. Priority is early release, patch later.
-###			H	00 Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
-###			C	Big
-###			C	Dizzy
-###			C	EMP
-Ignore PowerSap, as it's same effect
-###			C	Huge
-###			C	Molotov
-###			C	NoiseOnly
-###			C	Normal
-Renaming, refactor, etc.
-###			C	Oil
-This doesn't exist but should follow water logic...?
-###			C	Ooze
-###			C	Ridiculous
-###			C	Slime
-###			C	Stomp
-Might not work, have hardcoded junk with jumping
-###			C	Warp
-###			C	Water
 ##		√	Merchant Type
 Complete
 ##		√H	Passive
