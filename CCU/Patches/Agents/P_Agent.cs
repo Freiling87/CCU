@@ -14,6 +14,7 @@ using CCU.Traits.Rel_General;
 using CCU.Traits.Trait_Gate;
 using System.Linq;
 using CCU.Traits.Merchant_Type;
+using CCU.Traits.Drug_Warrior;
 
 namespace CCU.Patches.Agents
 {
@@ -173,7 +174,7 @@ namespace CCU.Patches.Agents
 				__instance.hackable = true;
             #endregion
             #region Combat
-            if (__instance.HasTrait<Drug_Warrior>())
+            if (__instance.HasTrait<T_DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant

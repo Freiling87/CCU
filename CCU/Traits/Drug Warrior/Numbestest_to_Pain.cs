@@ -1,23 +1,25 @@
-﻿using CCU.Traits.Trait_Gate;
+﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Drug_Warrior
 {
-    public class Cop_Contraband : T_MerchantType
+    public class Numbestest_to_Pain : T_DrugWarrior
     {
+        public override string DrugEffect => VStatusEffect.NumbtoPain;
+
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cop_Contraband>()
+            RogueLibs.CreateCustomTrait<Numbestest_to_Pain>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", ShortNameDocumentationOnly(typeof(Cop_Access))),
+                    [LanguageCode.English] = String.Format("This character gains a 66% damage resistance upon entering combat."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_Contraband), "Cop (Contraband)"),
+                    [LanguageCode.English] = DisplayName(typeof(Numbestest_to_Pain)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

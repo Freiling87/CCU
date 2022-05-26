@@ -1,23 +1,25 @@
-﻿using CCU.Traits.Trait_Gate;
+﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Drug_Warrior
 {
-    public class Cop_Contraband : T_MerchantType
+    public class Invincibilist : T_DrugWarrior
     {
+        public override string DrugEffect => VStatusEffect.Invincible;
+
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cop_Contraband>()
+            RogueLibs.CreateCustomTrait<Invincibilist>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", ShortNameDocumentationOnly(typeof(Cop_Access))),
+                    [LanguageCode.English] = String.Format("This character will become Invincible upon entering combat. And yes, it's spelled right."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_Contraband), "Cop (Contraband)"),
+                    [LanguageCode.English] = DisplayName(typeof(Invincibilist)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

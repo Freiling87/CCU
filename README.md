@@ -38,6 +38,50 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 |Coward												|- Always flees from combat
 |Drug Warrior										|- Uses drugs when initiating combat
 |Fearless											|- Never flees from combat
+###				Cost
+This affects all costs from the agent: Hire, Interaction, Merchant
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Less												|- Costs reduced by 50%
+|More												|- Costs increased by 50%
+|Zero												|- Costs reduced by 100%
+###				Drug Warrior
+Upon entering combat, the agent will apply a status effect to themselves, similarly to how the Drug Dealer acts in vanilla.
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Armor-Plated										|Resist Bullets
+|Berserker											|Rage
+|Colognier											|Perfumerous
+|Confusionist										|Confused
+|Electrocutioner									|Electro-Touch
+|Fainting Goat Warrior								|Tranquilizer
+|Fireproofer										|Resist Fire
+|Flasher											|Fast
+|Gambler											|Feelin' Lucky
+|Harshmellow										|Withdrawal
+|Immortalish										|Resurrection
+|Invincibilist										|Invincible
+|Invisibilist										|Invisible
+|Maimer												|Always Crit
+|Numb to Pain										|20% damage resistance
+|Number to Pain										|33% damage resistance
+|Numbest to Pain									|50% damage resistance
+|Numbestest to Pain									|66% damage resistance
+|Recoverist											|Stable System
+|Some Bark											|Loud
+|Stimpacker											|Health regeneration
+|Stimpackerer										|Fast health regeneration
+|Sure I Can											|Killer Thrower
+|The Impermanent Hunk								|Strength
+|The Incredible Bulk								|Giant
+|The Last Whiff										|Nicotine
+|Wildcard											|Random (Vanilla Drug Dealer)
+###				Explode on Death
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Big												|Big explosion
+|Huge												|Huge explosion
+|Normal												|Normal explosion
 ###				Hire
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|

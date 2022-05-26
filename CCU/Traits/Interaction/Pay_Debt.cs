@@ -15,7 +15,7 @@ namespace CCU.Traits.Interaction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
-                    "Note: If you want them to lend money as well, use {0} too.", ShortName(typeof(Borrow_Money))),
+                    "Note: If you want them to lend money as well, use {0} too.", ShortNameDocumentationOnly(typeof(Borrow_Money))),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

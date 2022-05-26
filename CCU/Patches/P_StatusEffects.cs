@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Passive;
 using CCU.Traits.Trait_Gate;
@@ -38,6 +39,24 @@ namespace CCU.Patches
 
 			return true;
 		}
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect), argumentTypes: new Type[0] { })]
+		public static bool ChooseRandomDrugDealerStatusEffect_Prefix(StatusEffects __instance, ref string __result)
+        {
+			T_DrugWarrior trait = __instance.agent.GetTrait<T_DrugWarrior>();
+			
+			if (trait != null)
+            {
+				__result =
+                    trait is Traits.Drug_Warrior.Wildcard
+                    ? __instance.ChooseRandomDrugDealerStatusEffect()
+					: trait.DrugEffect;
+				
+				return false;
+            }
+
+			return true;
+        }
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks))]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)

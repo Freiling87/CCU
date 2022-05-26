@@ -1,23 +1,25 @@
-﻿using CCU.Traits.Trait_Gate;
+﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Drug_Warrior
 {
-    public class Cop_Contraband : T_MerchantType
+    public class Fainting_Goat_Warrior : T_DrugWarrior
     {
+        public override string DrugEffect => VStatusEffect.Tranquilized;
+
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cop_Contraband>()
+            RogueLibs.CreateCustomTrait<Fainting_Goat_Warrior>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", ShortNameDocumentationOnly(typeof(Cop_Access))),
+                    [LanguageCode.English] = String.Format("This character will become Tranquilized upon entering combat. Shoulda done cardio."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_Contraband), "Cop (Contraband)"),
+                    [LanguageCode.English] = DisplayName(typeof(Fainting_Goat_Warrior)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

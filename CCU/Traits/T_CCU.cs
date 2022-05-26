@@ -11,7 +11,7 @@ namespace CCU.Traits
             " - " +
             (custom ?? (type.Name).Replace('_', ' '));
 
-        public static string ShortName(Type type) =>
+        public static string ShortNameDocumentationOnly(Type type) =>
             (type.Namespace).Split('.')[2].Replace('_', ' ') + 
             " - " +
             (type.Name).Replace('_', ' ');

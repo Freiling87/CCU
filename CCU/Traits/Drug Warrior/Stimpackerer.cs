@@ -1,22 +1,25 @@
-﻿using RogueLibsCore;
+﻿using CCU.Localization;
+using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Combat
+namespace CCU.Traits.Drug_Warrior
 {
-    public class Drug_Warrior : T_Combat
+    public class Stimpackerer : T_DrugWarrior
     {
+        public override string DrugEffect => VStatusEffect.RegenerateHealthFaster;
+
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Drug_Warrior>()
+            RogueLibs.CreateCustomTrait<Stimpackerer>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will use a random drug when entering combat."),
+                    [LanguageCode.English] = String.Format("This character will start regenerating health *quickly* upon entering combat."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Drug_Warrior)),
+                    [LanguageCode.English] = DisplayName(typeof(Stimpackerer)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

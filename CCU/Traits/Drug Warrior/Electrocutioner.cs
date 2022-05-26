@@ -1,23 +1,25 @@
-﻿using CCU.Traits.Trait_Gate;
+﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Drug_Warrior
 {
-    public class Cop_Contraband : T_MerchantType
+    public class Electrocutioner : T_DrugWarrior
     {
+        public override string DrugEffect => VStatusEffect.ElectroTouch;
+
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cop_Contraband>()
+            RogueLibs.CreateCustomTrait<Electrocutioner>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff they confiscated.\n\n<color=green>{0}</color> = Player needs The Law to access shop", ShortNameDocumentationOnly(typeof(Cop_Access))),
+                    [LanguageCode.English] = String.Format("This character will gain Electro-Touch upon entering combat, and then say some hokey pun about how they're going to show the hero something shocking. Yawn."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_Contraband), "Cop (Contraband)"),
+                    [LanguageCode.English] = DisplayName(typeof(Electrocutioner)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

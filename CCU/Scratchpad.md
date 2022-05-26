@@ -37,6 +37,8 @@ Listed in order of Parent tier summary symbol priority:
 
 ---
 #	C	General
+##	C!	00 Names
+Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. And 
 ##	C	Player Edition Testing
 New
 ##		C	Cancellations
@@ -413,6 +415,8 @@ Complete
 Complete
 ###			√	Cost - Zero
 Complete
+##		√H	Drug Warrior
+I think I'm gonna crowdsource the QA on this to release sooner.
 ##		√H	Explode On Death
 ###			C	00 Destroy body
 For all non-normal explosion types
