@@ -36,7 +36,6 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Coward												|- Always flees from combat
-|Drug Warrior										|- Uses drugs when initiating combat
 |Fearless											|- Never flees from combat
 ###				Cost
 This affects all costs from the agent: Hire, Interaction, Merchant
