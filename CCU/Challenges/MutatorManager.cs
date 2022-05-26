@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CCU.Mutators
+namespace CCU.Challenges
 {
     public static class MutatorManager
 	{

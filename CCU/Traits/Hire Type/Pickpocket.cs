@@ -1,6 +1,6 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hire_Type
 {
     public class Pickpocket : T_Hire
     {

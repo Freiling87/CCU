@@ -1,23 +1,23 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hire_Type
 {
-    public class Intruder : T_Hire
+    public class Muscle : T_Hire
     {
-        public override string ButtonText => "LockpickDoor";
+        public override string ButtonText => null;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Intruder>()
+            RogueLibs.CreateCustomTrait<Muscle>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into windows or doors.",
+                    [LanguageCode.English] = "This character can be hired as a bodyguard.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Intruder)),
+                    [LanguageCode.English] = DisplayName(typeof(Muscle)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

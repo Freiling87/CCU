@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RogueLibsCore;
 using CCU.Traits;
-using CCU.Traits.Hire;
+using CCU.Traits.Hire_Type;
 using CCU.Traits.Trait_Gate;
 using Rewired;
 using Random = UnityEngine.Random;

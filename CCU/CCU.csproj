@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCU</RootNamespace>
     <AssemblyName>CCU</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
+    <Compile Include="Challenges\C_CCU.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
@@ -121,9 +122,10 @@
     <Compile Include="Localization\VButtonText.cs" />
     <Compile Include="Localization\VExplosionType.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
-    <Compile Include="Mutators\MutatorManager.cs" />
-    <Compile Include="Mutators\Followers\HomesicknessDisabled.cs" />
-    <Compile Include="Mutators\Followers\HomesicknessMandatory.cs" />
+    <Compile Include="Challenges\Branching\C_Branching.cs" />
+    <Compile Include="Challenges\MutatorManager.cs" />
+    <Compile Include="Challenges\Followers\HomesicknessDisabled.cs" />
+    <Compile Include="Challenges\Followers\HomesicknessMandatory.cs" />
     <Compile Include="Patches\Agents\P_Agent.cs" />
     <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
@@ -202,16 +204,16 @@
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
     <Compile Include="Traits\Hire Duration\HirePermanentOnly.cs" />
     <Compile Include="Traits\Hire Duration\HirePermanent.cs" />
-    <Compile Include="Traits\Hire\Muscle.cs" />
-    <Compile Include="Traits\Hire\Intruder.cs" />
-    <Compile Include="Traits\Hire\Decoy.cs" />
-    <Compile Include="Traits\Hire\Trapper.cs" />
-    <Compile Include="Traits\Hire\Hacker.cs" />
-    <Compile Include="Traits\Hire\Pickpocket.cs" />
-    <Compile Include="Traits\Hire\Poisoner.cs" />
-    <Compile Include="Traits\Hire\Safecracker.cs" />
-    <Compile Include="Traits\Hire\Saboteur.cs" />
-    <Compile Include="Traits\Hire\T_Hire.cs" />
+    <Compile Include="Traits\Hire Type\Muscle.cs" />
+    <Compile Include="Traits\Hire Type\Intruder.cs" />
+    <Compile Include="Traits\Hire Type\Decoy.cs" />
+    <Compile Include="Traits\Hire Type\Trapper.cs" />
+    <Compile Include="Traits\Hire Type\Hacker.cs" />
+    <Compile Include="Traits\Hire Type\Pickpocket.cs" />
+    <Compile Include="Traits\Hire Type\Poisoner.cs" />
+    <Compile Include="Traits\Hire Type\Safecracker.cs" />
+    <Compile Include="Traits\Hire Type\Saboteur.cs" />
+    <Compile Include="Traits\Hire Type\T_Hire.cs" />
     <Compile Include="Traits\Interaction\Administer_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Borrow_Money.cs" />
     <Compile Include="Traits\Hack\T_Hack.cs" />
@@ -369,11 +371,10 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Challenges\Gameplay\" />
+    <Folder Include="Challenges\Interface\" />
+    <Folder Include="Challenges\Utility\" />
     <Folder Include="Documentation\" />
-    <Folder Include="Mutators\Branching\" />
-    <Folder Include="Mutators\Gameplay\" />
-    <Folder Include="Mutators\Interface\" />
-    <Folder Include="Mutators\Utility\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />

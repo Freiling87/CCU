@@ -1,4 +1,4 @@
-﻿namespace CCU.Traits.Hire
+﻿namespace CCU.Traits.Hire_Type
 {
     public abstract class T_Hire : T_CCU
     {

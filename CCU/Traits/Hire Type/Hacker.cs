@@ -1,23 +1,23 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hire_Type
 {
-    public class Muscle : T_Hire
+    public class Hacker : T_Hire
     {
-        public override string ButtonText => null;
+        public override string ButtonText => "HackSomething";
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Muscle>()
+            RogueLibs.CreateCustomTrait<Hacker>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired as a bodyguard.",
+                    [LanguageCode.English] = "This character can be hired to hack something remotely.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Muscle)),
+                    [LanguageCode.English] = DisplayName(typeof(Hacker)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

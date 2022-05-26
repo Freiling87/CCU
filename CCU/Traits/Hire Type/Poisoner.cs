@@ -1,23 +1,23 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hire_Type
 {
-    public class Safecracker : T_Hire
+    public class Poisoner : T_Hire
     {
-        public override string ButtonText => CJob.SafecrackSafe;
+        public override string ButtonText => CJob.Poison;
 
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Safecracker>()
+            RogueLibs.CreateCustomTrait<Poisoner>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to break into safes up-close and silently.",
+                    [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Safecracker)),
+                    [LanguageCode.English] = DisplayName(typeof(Poisoner)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

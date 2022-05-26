@@ -1,6 +1,6 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Mutators.Followers
+namespace CCU.Challenges.Followers
 {
     class HomesicknessDisabled
 	{

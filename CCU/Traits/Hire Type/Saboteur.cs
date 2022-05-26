@@ -1,23 +1,23 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hire_Type
 {
-    public class Decoy : T_Hire
+    public class Saboteur : T_Hire
     {
-        public override string ButtonText => "CauseRuckus";
+        public override string ButtonText => CJob.TamperSomething;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Decoy>()
+            RogueLibs.CreateCustomTrait<Saboteur>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to cause a distraction, or a Ruckus, if you will.",
+                    [LanguageCode.English] = "This character can be hired to tamper with machinery and electronics.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Decoy)),
+                    [LanguageCode.English] = DisplayName(typeof(Saboteur)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

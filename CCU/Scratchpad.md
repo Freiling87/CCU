@@ -3,39 +3,6 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#		Top-Priority Bugs
-##		C	Blood Junkie Fast Heal button wasn't using blood bags
-- First time it occurred, need to log
-  - Also can't manually drink them
-##		C	Infinite use hire?
-- Slum Dweller had offered Ruckus twice, not sure if that's ever possible in vanilla
-##		C	Mech Broken
-- When re-entering mech, it works fine but the sprite doesn't move:
-	[Info   : Unity Log] HideInventory Sound Debug: False - False - False - False - False - False
-	[Error  : Unity Log] ArgumentNullException: Value cannot be null.
-	Parameter name: key
-	Stack trace:
-	System.Collections.Generic.Dictionary`2[TKey,TValue].FindEntry (TKey key) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	System.Collections.Generic.Dictionary`2[TKey,TValue].TryGetValue (TKey key, TValue& value) (at <44afb4564e9347cf99a1865351ea8f4a>:0)
-	RogueLibsCore.CustomItemFactory.TryCreate (InvItem instance, RogueLibsCore.IHook`1[InvItem]& hook) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	RogueLibsCore.RogueLibsPlugin.InvItem_SetupDetails (InvItem __instance) (at <d35155fde6a3417a9000d4114e51e814>:0)
-	InvItem.SetupDetails (System.Boolean notNew) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Agent.SetupAgentStats (System.String transformationType) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	SpawnerMain.TransformAgent (Agent myAgent, System.String agentType, System.String transformationType) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	StatusEffects.MechTransform (Agent chosenMech) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	StatusEffects.MechTransformStart (Agent chosenMech) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	StatusEffects.PressedMechTransform () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	StatusEffects.PressedSpecialAbility () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	CCU.Patches.Agents.P_AgentInteractions.DetermineButtons_Prefix (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1, AgentInteractions __instance, System.Collections.Generic.List`1[System.String]& ___buttons, System.Collections.Generic.List`1[System.String]& ___buttonsExtra, System.Collections.Generic.List`1[System.Int32]& ___buttonPrices, Agent& ___mostRecentAgent, Agent& ___mostRecentInteractingAgent) (at <ff2bba522a4541fd913dcede4cf1f47e>:0)
-	AgentInteractions.DetermineButtons (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Agent.DetermineButtons () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	PlayfieldObject.Interact (Agent agent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Agent.Interact (Agent otherAgent) (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	InteractionHelper.UpdateInteractionHelper () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Updater.UpdateInterface () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-	Updater.Update () (at <cc65d589faac4fcd9b0b87048bb034d5>:0)
-
----
 #	C	General
 ##	C!	00 Names
 Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. And 
@@ -220,7 +187,7 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
-##		H	Booleans
+##		H	Campaign Flags
 Might need to limit this to a single flag, since having multiple true at the same time would complicate things
 ###			C	If Paid then Flag A/B/C/D True
 New
@@ -673,26 +640,36 @@ CampaignData
 	levelNameList		List of strings
 	levelList			List of LevelData
 	mutatorList			List of strings
+GC.sessionDataBig.curLevelEndless - 1
+	Seems to be the main int counter of what level you're on
 
 - LoadLevel
   - loadStuff2 @ 199
     - this.customLevel = this.customCampaign.levelList[n];
+
+663:
+	if (this.customCampaign.levelList[n].levelName == this.customCampaign.levelNameList[this.gc.sessionDataBig.curLevelEndless - 1])
+		Transpile-replace the right side of this assignment to a custom method call that determines the new target level's int ID in the campaign level list
+
 ###			C	00 Usage Guide
 This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
-###			C	Designate Alpha/Beta/Gamma/Delta
-Designates a level as a place to return to
-###			C	Exit Alpha/Beta/Gamma/Delta
+###			C	Designate Level Label Alpha/Beta/Gamma/Delta
+Labels a level
+Mutually exclusive
+###			C	Exit Mandate Level Labelled Alpha/Beta/Gamma/Delta per Flag A/B/C/D
+If target boolean is true, exit to target level
+###			C	Exit Option Alpha/Beta/Gamma/Delta
 Destination at Elevator
-###			C	Exit +1/2/3/4
+###			C	Exit Option +1/2/3/4
 Can have multiple, to allow Branching
-Adds options at Elevator			
-###			C	Set A/B/C/D false
+Adds options at Elevator
+###			C	Set Flag A/B/C/D false
 For level access
-###			C	Set A/B/C/D true
+###			C	Set Flag A/B/C/D true
 For level access
-###			C	Require A/B/C/D false
+###			C	Level Entry Requires A/B/C/D false
 Gate level access
-###			C	Require A/B/C/D true
+###			C	Level Entry Requires A/B/C/D true
 Gate level access
 ###			C	Traits for Level Branching
 ##		T	Followers

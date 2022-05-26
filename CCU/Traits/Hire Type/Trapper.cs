@@ -1,23 +1,23 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire
+namespace CCU.Traits.Hire_Type
 {
-    public class Hacker : T_Hire
+    public class Trapper : T_Hire
     {
-        public override string ButtonText => "HackSomething";
+        public override string ButtonText => CJob.DisarmTrap;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hacker>()
+            RogueLibs.CreateCustomTrait<Trapper>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired to hack something remotely.",
+                    [LanguageCode.English] = "This character can be hired to disarm a trap.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Hacker)),
+                    [LanguageCode.English] = DisplayName(typeof(Trapper)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
