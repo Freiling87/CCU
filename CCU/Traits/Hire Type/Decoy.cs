@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 
 namespace CCU.Traits.Hire_Type
 {
-    public class Decoy : T_Hire
+    public class Decoy : T_HireType
     {
-        public override string ButtonText => "CauseRuckus";
+        public override string HiredActionButtonText => VButtonText.Hired_CauseRuckus;
+        public override string HireButtonText => VButtonText.Hire_Expert;
+        public override object HireCost => VDetermineMoneyCost.Hire_Thief;
 
         [RLSetup]
         public static void Setup()

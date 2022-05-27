@@ -118,6 +118,7 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Localization\VDetermineMoneyCost.cs" />
     <Compile Include="Localization\LocalizationTools.cs" />
     <Compile Include="Localization\VButtonText.cs" />
     <Compile Include="Localization\VExplosionType.cs" />
@@ -211,7 +212,7 @@
     <Compile Include="Traits\Hire Type\Poisoner.cs" />
     <Compile Include="Traits\Hire Type\Safecracker.cs" />
     <Compile Include="Traits\Hire Type\Saboteur.cs" />
-    <Compile Include="Traits\Hire Type\T_Hire.cs" />
+    <Compile Include="Traits\Hire Type\T_HireType.cs" />
     <Compile Include="Traits\Interaction\Administer_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Borrow_Money.cs" />
     <Compile Include="Traits\Hack\T_Hack.cs" />

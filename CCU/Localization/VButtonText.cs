@@ -5,6 +5,7 @@
 		public const string
         #region Agent Interaction
             AdministerBloodBag = "AdministerBloodBag",
+			AlignWithMe = "AlignWithMe",
 			BorrowMoney = "BorrowMoney",
 			BribeCops = "BribeCops",
 			BribeForEntry = "Bribe",
@@ -15,6 +16,11 @@
 			Hack_Haywire = "RobotEnrage",
 			Hack_TamperAim = "TamperRobotAim",
 			Heal = "Heal",
+			Hire_Expert = "AssistMe",
+			Hire_Muscle = "HireAsProtection",
+			Hired_CauseRuckus = "CauseRuckus",
+			Hired_HackSomething = "HackSomething",
+			Hired_LockpickDoor = "LockpickDoor",
 			GiveItem = "GiveItem",
 			Identify = "Identify",
 			InfluenceElection = "ElectionBribe",

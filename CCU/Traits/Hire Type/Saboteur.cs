@@ -1,10 +1,13 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 
 namespace CCU.Traits.Hire_Type
 {
-    public class Saboteur : T_Hire
+    public class Saboteur : T_HireType
     {
-        public override string ButtonText => CJob.TamperSomething;
+        public override string HiredActionButtonText => CJob.TamperSomething;
+        public override string HireButtonText => VButtonText.Hire_Expert;
+        public override object HireCost => VDetermineMoneyCost.Hire_Hacker;
 
         //[RLSetup]
         public static void Setup()

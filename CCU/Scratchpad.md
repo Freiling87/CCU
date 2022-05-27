@@ -417,6 +417,8 @@ Complete
 ###			√	Huge
 Complete
 ##		√H	Hire Type
+###			C	00 Split off Hire Base Cost
+Not referring to final cost, but the Hacker/Soldier cost tiers
 ###			H	Chloroform
 New
 ###			H	Devour Corpse

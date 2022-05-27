@@ -76,57 +76,50 @@ namespace CCU.Patches.Agents
 			logger.LogDebug("AddCustomAgentInteractionButtons");
 			logger.LogDebug("=" + agent.agentName + "=");
 
+			if (agent.agentName != "Custom")
+				return;
+
 			AgentInteractions agentInteractions = agent.agentInteractions;
 			Agent interactingAgent = agent.interactingAgent;
 			string relationship = agent.relationships.GetRel(interactingAgent);
 
-			if (agent.agentName != "Custom")
-				return;
-
 			// Hire 
-			if (agent.GetTraits<T_Hire>().Any())
+			if (agent.GetTraits<T_HireType>().Any())
 			{
-				Core.LogCheckpoint("Hire");
-
 				if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 				{
-					Core.LogCheckpoint("Hire Initial");
-
-					bool bananaCost = agent.HasTrait<Banana>();
-
-					if (agent.HasTrait<Muscle>())
+					if ((agent.HasTrait<Bashable>() && (interactingAgent.agentName == VanillaAgents.GangsterBlahd || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))) ||
+						(agent.HasTrait<Crushable>() && (interactingAgent.agentName == VanillaAgents.GangsterCrepe || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))))
+						agentInteractions.AddButton(VButtonText.JoinMe);
+                    else
 					{
-						if (interactingAgent.inventory.HasItem("HiringVoucher"))
-							agentInteractions.AddButton("HireAsProtection", 6666);
-						else
-							agentInteractions.AddButton("HireAsProtection", bananaCost ? 6789 : agent.determineMoneyCost("SoldierHire"));
-					}
-					else
-					{
-						if (interactingAgent.inventory.HasItem("HiringVoucher"))
-							agentInteractions.AddButton("AssistMe", 6666);
-						else
-							agentInteractions.AddButton("AssistMe", bananaCost ? 6789 : (agent.determineMoneyCost("ThiefAssist")));
+						string hireButtonText =
+							agent.GetTraits<T_HireType>().Where(t => t.HireButtonText == VButtonText.Hire_Muscle).Any()
+							? VButtonText.Hire_Muscle
+							: VButtonText.Hire_Expert;
+
+						string cost =
+							agent.GetTraits<T_HireType>().Where(t => t.HireButtonText == VButtonText.Hire_Muscle).Any()
+							? VDetermineMoneyCost.Hire_Soldier
+							: VDetermineMoneyCost.Hire_Hacker;
+
+						agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost((string)cost));
+
+						if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
+							agentInteractions.AddButton(hireButtonText, 6666);
 					}
 				}
-				else if (!agent.oma.cantDoMoreTasks)
+				else if (!agent.oma.cantDoMoreTasks) // Ordering already-hired Agent
 				{
-					Core.LogCheckpoint("Hire Order");
-
-					if (agent.HasTrait<T_Hire>())
-						foreach (T_Hire trait in agent.GetTraits<T_Hire>().Where(t => t.ButtonText != null))
-							agentInteractions.AddButton(trait.ButtonText);
+					foreach (T_HireType hiredTrait in agent.GetTraits<T_HireType>().Where(t => t.HiredActionButtonText != null))
+						agentInteractions.AddButton(hiredTrait.HiredActionButtonText);
 				}
-
-				if ((agent.HasTrait<Bashable>() && (interactingAgent.agentName == VanillaAgents.GangsterBlahd || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))) ||
-					(agent.HasTrait<Crushable>() && (interactingAgent.agentName == VanillaAgents.GangsterCrepe || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))))
-					agentInteractions.AddButton(VButtonText.JoinMe);
 			}
 
-			// Hack
-			if (interactingAgent.interactionHelper.interactingFar)
-				foreach (T_Hack hack in agent.GetTraits<T_Hack>())
-					agentInteractions.AddButton(hack.ButtonText);
+			//// Hack
+			//if (interactingAgent.interactionHelper.interactingFar)
+			//	foreach (T_Hack hack in agent.GetTraits<T_Hack>())
+			//		agentInteractions.AddButton(hack.ButtonText);
 
 			// Interaction 
 			foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
