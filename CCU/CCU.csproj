@@ -129,9 +129,7 @@
     <Compile Include="Patches\Agents\P_Agent.cs" />
     <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
-    <Compile Include="Patches\Agents\P_Combat.cs" />
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
-    <Compile Include="Patches\Agents\P_PathfindingAI.cs" />
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
