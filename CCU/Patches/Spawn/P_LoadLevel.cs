@@ -34,21 +34,22 @@ namespace CCU.Patches.RenameMe
 					//	else
 					//		this.customLevel = this.customCampaign.levelList[n];
 
-					new CodeInstruction(OpCodes.Ldloca_S, 14),			// [n]
+					new CodeInstruction(OpCodes.Ldloc_S, 14),			// [n]
 				},
-				postfixInstructionSequence: new List<CodeInstruction>
+                postfixInstructionSequence: new List<CodeInstruction>
+                {
+                    new CodeInstruction(OpCodes.Callvirt),
+                    new CodeInstruction(OpCodes.Stfld),
+                    new CodeInstruction(OpCodes.Ldloc_2),
+                    new CodeInstruction(OpCodes.Ldfld),
+                    new CodeInstruction(OpCodes.Ldc_I4_1),
+                    new CodeInstruction(OpCodes.Stfld),
+                    new CodeInstruction(OpCodes.Ldstr, "Loaded Custom Level: ")
+                },
+                insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Callvirt),
-					new CodeInstruction(OpCodes.Stfld),
-					new CodeInstruction(OpCodes.Ldloc_2),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldc_I4_1),
-					new CodeInstruction(OpCodes.Stfld),
-					new CodeInstruction(OpCodes.Ldstr, "Loaded Custom Level: ")
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Call, NextLevelIndex),
+					new CodeInstruction(OpCodes.Ldloc_S, 14),			//	[n]
+					new CodeInstruction(OpCodes.Call, NextLevelIndex),	//	int
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -57,6 +58,10 @@ namespace CCU.Patches.RenameMe
 
 		private static int NextLevelIndex(int n)
         {
+			// This runs on campaign start, so this will need to be here to avoid unexpected returns.
+			if (n == 0)
+				return 0;
+
 			logger.LogDebug("NextLevelIndex");
 			
 			List<LevelData> levelList = GC.loadLevel.customCampaign.levelList;
@@ -68,7 +73,17 @@ namespace CCU.Patches.RenameMe
 			foreach (LevelData levelData in levelList)
 				logger.LogDebug("\t" + levelList.IndexOf(levelData) + ".\t" + levelData.levelName);
 
-			return n; // Returning vanilla until I have more info
+			// LOG OUTPUT:
+			//[Debug: CCU_P_LoadLevel_loadStuff2] NextLevelIndex
+			//[Debug: CCU_P_LoadLevel_loadStuff2] Current Level, I THINK: 0
+			//[Debug: CCU_P_LoadLevel_loadStuff2] Campaign levelList:
+			//[Debug: CCU_P_LoadLevel_loadStuff2] 0.      !!! Test Level 1
+			//[Debug: CCU_P_LoadLevel_loadStuff2]    1.      !!! Test Level 2
+			//[Debug: CCU_P_LoadLevel_loadStuff2]    2.      !!! Test Level 3
+			//[Debug: CCU_P_LoadLevel_loadStuff2]    3.      !!! Test Level 4
+			//[Debug: CCU_P_LoadLevel_loadStuff2]    4.      !!! Test Level 5
+
+			return n;
 		}
 	}
 }
