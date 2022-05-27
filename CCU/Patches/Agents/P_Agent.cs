@@ -138,9 +138,9 @@ namespace CCU.Patches.Agents
 				if (!___noMoreObjectActions)
 				{
 					if (myAction == CJob.SafecrackSafe)
-						P_AgentInteractions.SafecrackSafe(__instance, causerAgent, extraObject);
+						P_AgentInteractions_DetermineButtons.SafecrackSafe(__instance, causerAgent, extraObject);
 					else if (myAction == CJob.TamperSomething)
-						P_AgentInteractions.TamperSomething(__instance, causerAgent, extraObject);
+						P_AgentInteractions_DetermineButtons.TamperSomething(__instance, causerAgent, extraObject);
 
 					___noMoreObjectActions = false;
 				}

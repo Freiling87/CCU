@@ -15,15 +15,17 @@ namespace CCU.Patches.Agents
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
+		/// <summary>
+		/// LOSCheck Behavior traits
+		/// TODO: Transpilerize
+		/// </summary>
+		/// <param name="__instance"></param>
+		/// <param name="___agent"></param>
+		/// <param name="___brain"></param>
+		/// <returns></returns>
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
-        public static bool MyUpdate_Prefix(BrainUpdate __instance, Agent ___agent, Brain ___brain)
+        public static bool MyUpdate_Replacement(BrainUpdate __instance, Agent ___agent, Brain ___brain)
 		{	
-			/* Contains:
-			 * - GrabMoney
-			 * - GrabDrugs
-			 * - Pickpocket
-			 */
-
 			if (__instance.slowAIWait > 0 && !___agent.dead)
 			{
 				__instance.slowAIWait--;

@@ -124,7 +124,7 @@ namespace CCU.Patches.Objects
 			return true;
         }
 
-		//d [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
+		// [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
 		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
 		{
 			if (__instance.CompareTag("Agent"))
