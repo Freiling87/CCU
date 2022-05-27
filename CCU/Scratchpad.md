@@ -20,26 +20,6 @@ The config file should match the name of the campaign, if they allow the same ch
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
-##		C	Combat
-###			C	Drug Warrior
-####			C	Subtypes
-WELP, this will be pretty easy from the look of it.
-
-StatusEffects.ChooseRandomDrugDealerStatusEffect_Prefix
-
-Uses only a specific drug on entering combat:
-						Always Crit
-	Angel Duster		Invincible
-						Invisible
-	Stimpacker			Regenerate Health
-	Cokehead			Speed
-	Roid Rager			Strength
-###			H	Lockdowner (R.I.P.)
-Apparently Lockdown walls are broken in custom levels.
-###			√	Coward
-Complete
-###			√	Fearless
-Complete
 ##		C	Interaction
 ###			C	Shelf?
 This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
@@ -194,16 +174,23 @@ New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
 ##		H	Hire Duration
-###			C	Fairweather
+###			C	Fairweather Flunkie
 Hiree will leave if they're damaged in combat
+"I didn't sign up for this! You're nuts!"
+###			C	Faithful Flunkie
+Hiree will never "Not feel too good" and quit.
+###			C	Homesickness Disabled
+Automatic Homesickness Killer
 ###			C	Homesickness Mandatory
 Overrides Homesickness Killer
-###			C	Homesickness Disabled
-###			C	Permanent
+###			C	Permanent Hire
 New
 ~8x normal hire price
-###			C	Permanent Only
+Does not affect damage threshold
+###			C	Permanent Hire Only
 As above, but removes the single-use hire option.
+###			C	Timed Hire: 30s
+Is this one even interesting?
 ##		H	Map Marker
 Statuseffects.agent.SpawnNewMapMarker()
 ###			P	General Notes
@@ -371,6 +358,13 @@ Complete
 Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
+##		√H	Combat
+###			H	Lockdowner (R.I.P.)
+Apparently Lockdown walls are broken in custom levels.
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
 ##		√H	Cost
 ###			H	Cost - Alcohol
 A la Bouncer
@@ -422,7 +416,7 @@ Complete
 Complete
 ###			√	Huge
 Complete
-##		√H	Hire
+##		√H	Hire Type
 ###			H	Chloroform
 New
 ###			H	Devour Corpse
@@ -620,7 +614,7 @@ Complete
 Complete
 ###			√	Suspicious Suspecter
 Complete
-#		CT	Mutators
+#	H	Mutators
 Focus on Traits for this version.
 ##		C	00 Mutator List Population
 ###			C	Level Editor Mutator List
@@ -653,19 +647,19 @@ GC.sessionDataBig.curLevelEndless - 1
 
 ###			C	00 Usage Guide
 This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
-###			C	Designate Level Label Alpha/Beta/Gamma/Delta
+###			C	Label Alpha/Beta/Gamma/Delta
 Labels a level
 Mutually exclusive
-###			C	Exit Mandate Level Labelled Alpha/Beta/Gamma/Delta per Flag A/B/C/D
+###			C	Exit Alpha/Beta/Gamma/Delta per Flag A/B/C/D
 If target boolean is true, exit to target level
-###			C	Exit Option Alpha/Beta/Gamma/Delta
+###			C	Exit Alpha/Beta/Gamma/Delta
 Destination at Elevator
-###			C	Exit Option +1/2/3/4
+###			C	Exit +1/2/3/4
 Can have multiple, to allow Branching
 Adds options at Elevator
-###			C	Set Flag A/B/C/D false
+###			C	Flag A/B/C/D false
 For level access
-###			C	Set Flag A/B/C/D true
+###			C	Flag A/B/C/D true
 For level access
 ###			C	Level Entry Requires A/B/C/D false
 Gate level access

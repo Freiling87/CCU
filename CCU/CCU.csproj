@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCU</RootNamespace>
     <AssemblyName>CCU</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -165,7 +165,7 @@
     <Compile Include="Traits\Drug Warrior\Colognier.cs" />
     <Compile Include="Traits\Drug Warrior\Fainting_Goat_Warrior.cs" />
     <Compile Include="Traits\Drug Warrior\The_Impermanent_Hunk.cs" />
-    <Compile Include="Traits\Drug Warrior\The_Incredible_Bulk.cs" />
+    <Compile Include="Traits\Drug Warrior\An_Inimitable_Bulk.cs" />
     <Compile Include="Traits\Drug Warrior\Gambler.cs" />
     <Compile Include="Traits\Drug Warrior\Flasher.cs" />
     <Compile Include="Traits\Drug Warrior\Electrocutioner.cs" />

@@ -4,22 +4,22 @@ using System;
 
 namespace CCU.Traits.Drug_Warrior
 {
-    public class The_Incredible_Bulk : T_DrugWarrior
+    public class An_Inimitable_Bulk : T_DrugWarrior
     {
         public override string DrugEffect => VStatusEffect.Giant;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<The_Incredible_Bulk>()
+            RogueLibs.CreateCustomTrait<An_Inimitable_Bulk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will become Giant upon entering combat. Smashing and/or Bashing are their prerogative."),
+                    [LanguageCode.English] = String.Format("This character gains Giant when entering combat. They're angry because they can't pronounce the name of this trait out loud. And, I presume, you will not like them when they are angry."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(The_Incredible_Bulk)),
+                    [LanguageCode.English] = DisplayName(typeof(An_Inimitable_Bulk)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
