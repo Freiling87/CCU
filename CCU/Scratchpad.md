@@ -20,8 +20,6 @@ Not so sure about the utility of this. I don't think players should need more th
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
 ##		C	Interaction
-###			C	00 Button Persistence
-A few of them still appear after one-use options. See that they disappear when they would in vanilla
 ###			C	Administer Blood Bag
 Vanilla persists, this is mostly complete
 ####		C	Missing Extra Text on button
@@ -62,9 +60,6 @@ Like Doctor heal, but activates reticle so you can select a party member or othe
 Like Doctor heal, but at a Blood Bag level.
 ####			C	Mouseover Price
 Show price to heal targeted agent before selection
-###			H	Improve Relations w/ Faction 1-4
-New
-Costs $1000, improves your relations with that faction
 ###			H	Quest Giver
 New
 ###			H	Refill Guns
@@ -85,6 +80,9 @@ New
 ###			H	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			H	This One's On Me
+Buy a round for a patron and anyone with the same owner ID in the chunk.
+No drink for that guy in the corner. Fuck that guy.
 ###			H	Train Attributes (Split to each)
 New
 ###			H	Train Traits - Defense
@@ -398,7 +396,8 @@ Complete
 ###			√	Zero
 Complete
 ##		√H	Drug Warrior
-I think I'm gonna crowdsource the QA on this to release sooner.
+###			C	Suicide Bomber
+Initiate a 15s timer, then detonate a Huge explosion
 ##		√H	Explode On Death
 ###			C	00 Destroy body
 For all non-normal explosion types

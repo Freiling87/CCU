@@ -32,8 +32,8 @@ namespace CCU.Patches.Inventory
 
 			if (__instance.agent.GetTraits<T_MerchantType>().Any())
 			{
-				T_MerchantType hook = __instance.agent.GetTrait<T_MerchantType>();
-				string rName = hook.DisplayName;
+				T_MerchantType trait = __instance.agent.GetTrait<T_MerchantType>();
+				string rName = trait.DisplayName;
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{

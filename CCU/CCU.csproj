@@ -124,6 +124,7 @@
     <Compile Include="Localization\VButtonText.cs" />
     <Compile Include="Localization\VExplosionType.cs" />
     <Compile Include="Localization\VRelationship.cs" />
+    <Compile Include="Localization\CStatusEffect.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
     <Compile Include="Challenges\Branching\C_Branching.cs" />
     <Compile Include="Challenges\MutatorManager.cs" />
@@ -162,6 +163,9 @@
     <Compile Include="Traits\Cost Currency\Flesh.cs" />
     <Compile Include="Traits\Cost Currency\Blood.cs" />
     <Compile Include="Traits\Cost Currency\T_CostCurrency.cs" />
+    <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Big.cs" />
+    <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Huge.cs" />
+    <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Normal.cs" />
     <Compile Include="Traits\Drug Warrior\Harshmellow.cs" />
     <Compile Include="Traits\Drug Warrior\Fireproofer.cs" />
     <Compile Include="Traits\Drug Warrior\Berserker.cs" />

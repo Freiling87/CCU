@@ -222,5 +222,18 @@ namespace CCU.Patches.Agents
 			else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
 				__instance.canGoBetweenLevels = false;
 		}
+
+        [HarmonyPostfix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0])]
+		public static void Start_Postfix(Agent __instance)
+        {
+			__instance.AddHook<P_Agent_Hook>();
+        }
+	}
+
+    public class P_Agent_Hook : HookBase<PlayfieldObject>
+    {
+		public int SuicideVestTimer;
+
+		protected override void Initialize() { }
 	}
 }
