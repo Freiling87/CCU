@@ -237,7 +237,7 @@
     <Compile Include="Traits\Interaction\Pay_Entrance_Fee.cs" />
     <Compile Include="Traits\Interaction\Buy_Round.cs" />
     <Compile Include="Traits\Interaction\Buy_Slave.cs" />
-    <Compile Include="Traits\Interaction\Donate_Blood.cs" />
+    <Compile Include="Traits\Interaction\Give_Blood.cs" />
     <Compile Include="Traits\Interaction\Heal_Player.cs" />
     <Compile Include="Traits\Interaction\Leave_Weapons_Behind.cs" />
     <Compile Include="Traits\Interaction\Influence_Election.cs" />

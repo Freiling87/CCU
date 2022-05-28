@@ -140,7 +140,7 @@ namespace CCU.Patches.Agents
 					(interaction is Pay_Debt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
 											&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt2)
 											&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
-					(interaction is UseBloodBag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
+					(interaction is Use_Blood_Bag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
 					continue;
 
 				// Complex Exceptions

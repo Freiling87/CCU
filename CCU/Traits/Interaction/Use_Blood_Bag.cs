@@ -4,7 +4,7 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class UseBloodBag : T_Interaction
+    public class Use_Blood_Bag : T_Interaction
     {
         public override string ButtonText => VButtonText.UseBloodBag;
         public override string InteractionCost => null;
@@ -12,7 +12,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<UseBloodBag>()
+            RogueLibs.CreateCustomTrait<Use_Blood_Bag>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can help the player use a Blood Bag in their inventory."),
@@ -20,7 +20,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(UseBloodBag)),
+                    [LanguageCode.English] = DisplayName(typeof(Use_Blood_Bag)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
