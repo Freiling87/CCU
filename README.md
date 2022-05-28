@@ -37,7 +37,7 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 |:--------------------------------------------------|:------------------------------------------------------|
 |Coward												|- Always flees from combat
 |Fearless											|- Never flees from combat
-###				Cost
+###				Cost Scale
 This affects all costs from the agent: Hire, Interaction, Merchant
 
 |Trait												|Effect													|
@@ -113,6 +113,12 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Start Election										|- Interact to start Election
 |Use Blood Bag										|- Give Blood Bag to heal for 20HP
 |Visitor's Badge									|- Carries Mayor's Visitor Badge
+###				Interaction Gate
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Untrusting											|- Will not interact with Agents Neutral or worse
+|Untrustinger										|- Will not interact with Agents Friendly or worse
+|Untrustingest										|- Will not interact with Agents Loyal or worse
 ###				Merchant Type
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|

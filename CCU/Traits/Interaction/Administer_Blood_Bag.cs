@@ -8,6 +8,7 @@ namespace CCU.Traits.Interaction
     public class Administer_Blood_Bag : T_Interaction
     {
         public override string ButtonText => VButtonText.AdministerBloodBag;
+        public override string InteractionCost => VDetermineMoneyCost.HP_20;
 
         [RLSetup]
         public static void Setup()

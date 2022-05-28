@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Bribe_Cops : T_Interaction
     {
         public override string ButtonText => VButtonText.BribeCops;
+        public override string InteractionCost => VDetermineMoneyCost.BribeCops;
 
         [RLSetup]
         public static void Setup()

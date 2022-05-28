@@ -1,27 +1,24 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
 using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Interaction_Gate
 {
-    public class Pay_Debt : T_Interaction
+    public class Insular : T_InteractionGate
     {
-        public override string ButtonText => VButtonText.PayDebt;
-        public override string InteractionCost => null;
+        public override int MinimumRelationship => 3;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pay_Debt>()
+            RogueLibs.CreateCustomTrait<Insular>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
-                    "Note: If you want them to lend money as well, use {0} too.", ShortNameDocumentationOnly(typeof(Borrow_Money))),
+                    [LanguageCode.English] = String.Format("This character will not interact with anyone who has a relationship with their faction at Neutral or worse."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pay_Debt)),
+                    [LanguageCode.English] = DisplayName(typeof(Insular)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

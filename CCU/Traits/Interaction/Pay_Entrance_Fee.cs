@@ -1,26 +1,31 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
+using System;
 
-namespace CCU.Traits.Cost
+namespace CCU.Traits.Interaction
 {
-    public class Banana : T_Cost
+    public class Pay_Entrance_Fee : T_Interaction
     {
-        //[RLSetup]
+        public override string ButtonText => VButtonText.PayEntranceFee;
+        public override string InteractionCost => VDetermineMoneyCost.Bribe;
+
+        [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Banana>()
+            RogueLibs.CreateCustomTrait<Pay_Entrance_Fee>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's costs are converted to Bananas.",
+                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Banana)),
+                    [LanguageCode.English] = DisplayName(typeof(Pay_Entrance_Fee)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Alcohol)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

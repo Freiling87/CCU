@@ -6,7 +6,7 @@ namespace CCU.Traits.Hire_Type
     public class Muscle : T_HireType
     {
         public override string HiredActionButtonText => null;
-        public override string HireButtonText => VButtonText.Hire_Muscle;
+        public override string ButtonText => VButtonText.Hire_Muscle;
         public override object HireCost => VDetermineMoneyCost.Hire_Soldier;
 
         [RLSetup]

@@ -5,7 +5,7 @@
         public T_HireType() : base() { }
 
         public abstract string HiredActionButtonText { get; }
-        public abstract string HireButtonText { get; }
+        public abstract string ButtonText { get; }
         public abstract object HireCost { get; }
     }
 }

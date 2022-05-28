@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Offer_Motivation : T_Interaction
     {
         public override string ButtonText => VButtonText.OfferMotivation;
+        public override string InteractionCost => null;
 
         [RLSetup]
         public static void Setup()

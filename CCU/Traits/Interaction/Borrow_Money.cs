@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Borrow_Money : T_Interaction
     {
         public override string ButtonText => VButtonText.BorrowMoney;
+        public override string InteractionCost => null;
 
         [RLSetup]
         public static void Setup()
@@ -24,7 +25,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { "Borrow Money (Moocher)" },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

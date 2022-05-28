@@ -4,11 +4,10 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	C	General
-##	C!	00 Names
-Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. And 
-##	C	Player Edition Testing
-New
-##		C	Cancellations
+##		C!	00 Names
+Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. 
+##		C	Add Cancellations
+###			C	Verify DisplayName isn't breaking them
 ##		C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
 ##		H	Config Files
@@ -21,45 +20,38 @@ Not so sure about the utility of this. I don't think players should need more th
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
 ##		C	Interaction
-###			C	Shelf?
-This is going to be pretty elaborate, unfortunately. Might want to shelf anything that's really complex. 
-Plus, it sounds like Agent Intearctions might be next in line for RogueLibs.
-SORRY, category!
-###			C	00 Cost Display
-Bananas & alcohol are hardcoded
-To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
-You might be able to simply remove 
-###			C	Blood Bag - Administer
-Might need extratext to work
-Setting to Hospital chunk didn't work
-###			C	Blood Bag - Donate
-Might need extratext to work
-###			C	Blood Bag - Use
-New
-###			C	Borrow Money
-Moocher one worked, but not this one
-Setting to Bank chunk didn't work
+###			C	00 Button Persistence
+A few of them still appear after one-use options. See that they disappear when they would in vanilla
+###			C	Administer Blood Bag
+Vanilla persists, this is mostly complete
+####		C	Missing Extra Text on button
+(- 20 HP)
+###			C	Give Blood
+####		C	Missing Extra Text on button
+(- 20 HP/$20)d
 ###			C	Bribe Cops
-Check gates
+Button doesn't appear, even if they have The Law
 ###			C	Bribe For Entry
-Check gates
+Seems to work, but still appears after paid
+I need more info on how these chunks work. I'm definitely missing something.
 ###			C	Bribe For Entry (Alcohol)
-Check gates
-###			C	Buy Round
-####			C	Add Cost
-Didn't show up with vanilla text
+Still appears after paying cash
+Disappeared after talking to vanilla bouncer
+Should only appear if object in inventory
 ###			H	Buy Slave
 Pending actual assignment of owned slaves 
-###			C	Heal (Player)
-Not showing up after cost text added
+###			√	Heal (Player)
+Complete
 ###			C	Identify
 Interface works, but unidentified items are not enabled to click
 ###			C	Manage Chunk
-New
-###			C	Pay Debt
-Technically works but didn't show/charge a cost
-###			C	Play Bad Music
-New
+####			√	Arena
+Complete
+####			C	Deportation Center
+#####				C	Buttons Persist
+####			C	Hotel
+No button appeared
+Switched to Clerk (only change) worked
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Heal All
@@ -81,11 +73,13 @@ New
 New
 ###			H	Repair Weapons
 New
-###			H	Sell Faction Intel 1-4
+###			H	Pay respects to Faction
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
+###			H	Sell Intel to Faction 
+Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
 ###			H	Start Election
 New
 ###			H	Summon Professional
@@ -108,17 +102,35 @@ New
 New
 ###			H	Train Traits - Trade
 New
-###			H	Untrusting
-This character must be Friendly or better to unlock Interaction options
 ###			H	Visitor's Badge
 Set Bribe options on separate traits
+###			√	Borrow Money
+Complete
 ###			√	Borrow Money (Moocher)
+Complete
+###			√	Buy Round
 Complete
 ###			√	Influence Election
 Complete
 ###			√	Leave Weapons Behind
 Complete
 ###			√	Offer Motivation
+Complete
+###			√	Pay Debt
+Complete
+###			√	Play Bad Music
+Complete
+###			√	Use Blood Bag
+Complete
+##		√H	Interaction Gate
+###			C	Insular
+###			C	Insularer
+###			C	Insularest
+###			√	Untrusting
+Complete
+###			√	Untrustinger
+Complete
+###			√	Untrustingest
 Complete
 ##		H	Hack
 ###			C	00 Interrupts
@@ -365,16 +377,25 @@ Apparently Lockdown walls are broken in custom levels.
 Complete
 ###			√	Fearless
 Complete
-##		√H	Cost
-###			H	Cost - Alcohol
+##		√H	Cost Currency
+###			C	00 Button ExtraCost Display
+Bananas & alcohol are hardcoded
+To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
+###			H	Alcohol
 A la Bouncer
-###			H	Cost - Banana
+###			H	Banana
 Test
-###			√	Cost - Less
+###			C	Blood
+Blood Bags always an option
+If Vampirism, allow drink
+###			C	Flesh
+Require Cannibalism? Maybe not
+##		√	Cost Scale
+###			√	Less
 Complete
-###			√	Cost - More
+###			√	More
 Complete
-###			√	Cost - Zero
+###			√	Zero
 Complete
 ##		√H	Drug Warrior
 I think I'm gonna crowdsource the QA on this to release sooner.
@@ -503,6 +524,8 @@ Complete
 DW
 ###			H	Invincible
 New
+###			H	Mute Dialogue
+Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
 ###			H	Reviveable (Infinite)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
 ###			H	Reviveable (One)
@@ -531,6 +554,13 @@ Complete
 ###			√	Z-Infected
 Complete
 ##		√H	Relationships - Faction
+###			C	General concept
+Friendly to faction doesn't align you. You do not inherit the faction's relationships.
+Loyal causes you to inherit its relationships, but negative ones are moderated:
+	Hostile → Annoyed
+	Annoyed → Neutral
+		The net effect of this one is that Loyalists are less likely to initate conflict on behalf of their faction.
+Aligned means you fully inherit any faction-mandated relationships.
 ###			H	Config Files for unique player-defined factions
 Generate traits based on these names
 Allow multiple faction list files in a folder, to increase ease of compatibility.
@@ -709,6 +739,9 @@ Ability to be already shooting water according to direction
 - Oil (Dark Green)
 - Ooze (Yellow)
 - Water (Blue)
+##			C	Laser Emitter
+###				C	Mode: Metal Detector
+This would really only make sense with a Stop & Frisk mod.
 ##			C	Movie Screen
 Allow Text like Sign
 #		H	Player Utilities

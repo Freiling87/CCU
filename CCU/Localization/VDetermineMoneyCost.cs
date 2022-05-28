@@ -3,6 +3,7 @@
 	public static class VDetermineMoneyCost
 	{
 		public const string
+			HP_20 = " - 20HP",
 			AgentItemSale = "AgentItemSale",
 			AmmoDispenser = "AmmoDispenser",
 			ArtOfTheDealSale = "ArtOfTheDealSale",
@@ -21,8 +22,9 @@
 			BuyRound = "BuyRound",
 			CapsuleMachine = "CapsuleMachine",
 			CloneMachineItem = "CloneMachineItem",
-			ElectionBribe = "ElectionBribe",
 			FundResarch = "FundResearch",
+			GiveBlood = " - 20HP/$20",
+			GiveBloodLowHealth = " - 10HP/$20",
 			Hire_Gangbanger = "GangbangerHire",		// (float)(30 + (num3 - 1) * 2);
 			Hire_Hacker = "HackerAssist",           // (float)(20 + (num3 - 1) * 2);
 			Hire_Soldier = "SoldierHire",           // (float)(30 + (num3 - 1) * 2);

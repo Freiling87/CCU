@@ -5,5 +5,6 @@
         public T_Interaction() : base() { }
 
         public abstract string ButtonText { get; }
+        public abstract string InteractionCost { get; }
     }
 }

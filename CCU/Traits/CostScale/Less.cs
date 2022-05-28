@@ -1,32 +1,26 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
-using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Cost_Scale
 {
-    public class Pay_Debt : T_Interaction
+    public class Less : T_CostScale
     {
-        public override string ButtonText => VButtonText.PayDebt;
-        public override string InteractionCost => null;
-
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pay_Debt>()
+            RogueLibs.CreateCustomTrait<Less>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
-                    "Note: If you want them to lend money as well, use {0} too.", ShortNameDocumentationOnly(typeof(Borrow_Money))),
+                    [LanguageCode.English] = "This character's costs are decreased by 50%.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pay_Debt)),
+                    [LanguageCode.English] = DisplayName(typeof(Less)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(More)), DisplayName(typeof(Zero)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

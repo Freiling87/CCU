@@ -6,7 +6,7 @@ namespace CCU.Traits.Hire_Type
     public class Intruder : T_HireType
     {
         public override string HiredActionButtonText => VButtonText.Hired_LockpickDoor;
-        public override string HireButtonText => VButtonText.Hire_Expert;
+        public override string ButtonText => VButtonText.Hire_Expert;
         public override object HireCost => VDetermineMoneyCost.Hire_Thief;
 
         [RLSetup]

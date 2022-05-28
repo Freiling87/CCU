@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class UseBloodBag : T_Interaction
     {
         public override string ButtonText => VButtonText.UseBloodBag;
+        public override string InteractionCost => null;
 
         [RLSetup]
         public static void Setup()

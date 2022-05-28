@@ -1,30 +1,26 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
-using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Cost_Scale
 {
-    public class Bribe_for_Entry : T_Interaction
+    public class Zero : T_CostScale
     {
-        public override string ButtonText => VButtonText.BribeForEntry;
-
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bribe_for_Entry>()
+            RogueLibs.CreateCustomTrait<Zero>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),
+                    [LanguageCode.English] = "This character's costs are reduced to zero.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bribe_for_Entry)),
+                    [LanguageCode.English] = DisplayName(typeof(Zero)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Less)), DisplayName(typeof(More)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

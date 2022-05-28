@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Influence_Election : T_Interaction
     {
         public override string ButtonText => VButtonText.InfluenceElection;
+        public override string InteractionCost => VDetermineMoneyCost.BribeElection;
 
         [RLSetup]
         public static void Setup()

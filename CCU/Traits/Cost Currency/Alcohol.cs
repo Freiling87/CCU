@@ -1,26 +1,26 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Cost
+namespace CCU.Traits.Cost_Currency
 {
-    public class Zero : T_Cost
+    public class Alcohol : T_CostCurrency
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Zero>()
+            RogueLibs.CreateCustomTrait<Alcohol>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's costs are reduced to zero.",
+                    [LanguageCode.English] = "This character's costs are converted to Alcohol.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Zero)),
+                    [LanguageCode.English] = DisplayName(typeof(Alcohol)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Less)), DisplayName(typeof(More)) },
+                    Cancellations = { DisplayName(typeof(Banana)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

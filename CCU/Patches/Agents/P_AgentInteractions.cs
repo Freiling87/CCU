@@ -1,9 +1,12 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Traits.Cost;
+using CCU.Localization;
+using CCU.Traits;
+using CCU.Traits.Cost_Scale;
 using CCU.Traits.Hack;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Interaction;
+using CCU.Traits.Interaction_Gate;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Trait_Gate;
@@ -72,16 +75,19 @@ namespace CCU.Patches.Agents
 		}
 
 		public static void AddCustomAgentButtons(Agent agent)
-        {
-			logger.LogDebug("AddCustomAgentInteractionButtons");
-			logger.LogDebug("=" + agent.agentName + "=");
-
-			if (agent.agentName != "Custom")
-				return;
+		{
+			TraitManager.LogTraitList(agent);
 
 			AgentInteractions agentInteractions = agent.agentInteractions;
 			Agent interactingAgent = agent.interactingAgent;
 			string relationship = agent.relationships.GetRel(interactingAgent);
+			int relationshipLevel = VRelationship.OrderedRelationships.IndexOf(relationship);
+
+			if (agent.agentName != "Custom" ||
+				(agent.HasTrait<Untrusting>() && relationshipLevel < 3) ||
+				(agent.HasTrait<Untrustinger>() && relationshipLevel < 4) ||
+				(agent.HasTrait<Untrustingest>() && relationshipLevel < 5))
+				return;
 
 			// Hire 
 			if (agent.GetTraits<T_HireType>().Any())
@@ -94,12 +100,12 @@ namespace CCU.Patches.Agents
                     else
 					{
 						string hireButtonText =
-							agent.GetTraits<T_HireType>().Where(t => t.HireButtonText == VButtonText.Hire_Muscle).Any()
+							agent.GetTraits<T_HireType>().Where(t => t.ButtonText == VButtonText.Hire_Muscle).Any()
 							? VButtonText.Hire_Muscle
 							: VButtonText.Hire_Expert;
 
 						string cost =
-							agent.GetTraits<T_HireType>().Where(t => t.HireButtonText == VButtonText.Hire_Muscle).Any()
+							agent.GetTraits<T_HireType>().Where(t => t.ButtonText == VButtonText.Hire_Muscle).Any()
 							? VDetermineMoneyCost.Hire_Soldier
 							: VDetermineMoneyCost.Hire_Hacker;
 
@@ -127,7 +133,7 @@ namespace CCU.Patches.Agents
 				// Simple Exceptions
 				if ((interaction is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
 					(interaction is Bribe_Cops && (interactingAgent.aboveTheLaw || !interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))) ||
-					((interaction is Bribe_for_Entry || interaction is Bribe_for_Entry_Alcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
+					((interaction is Pay_Entrance_Fee || interaction is Bribe_for_Entry_Alcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
 					(interaction is Influence_Election && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
 					(interaction is Leave_Weapons_Behind && !interactingAgent.inventory.HasWeapons()) ||
 					(interaction is Offer_Motivation && agent.oma.offeredOfficeDrone) ||
@@ -155,39 +161,128 @@ namespace CCU.Patches.Agents
 
 					if (!patrons.Any())
 						continue;
+					else
+						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(patrons.Count, VDetermineMoneyCost.BuyRound));
 				}
+				else if (interaction is Bribe_for_Entry_Alcohol)
+                {
+
+                }
 				else if (interaction is Buy_Slave)
 				{
 					bool hasSlaves = false;
+					bool questSlave = false;
 
 					for (int i = 0; i < agent.gc.agentList.Count; i++)
 					{
 						Agent possibleSlave = agent.gc.agentList[i];
 
-						if (possibleSlave.agentName == "Slave" && possibleSlave.slaveOwners.Contains(agent) && (possibleSlave.rescueForQuest != null || (!possibleSlave.gc.serverPlayer && possibleSlave.oma.rescuingForQuest)))
+						if (possibleSlave.agentName == VanillaAgents.Slave && possibleSlave.slaveOwners.Contains(agent))
 						{
 							hasSlaves = true;
-							break;
+
+							if (possibleSlave.rescueForQuest != null || (!possibleSlave.gc.serverPlayer && possibleSlave.oma.rescuingForQuest))
+								questSlave = true;
 						}
 					}
 
-					if (!hasSlaves)
-						continue;
+					if (questSlave)
+						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(VDetermineMoneyCost.QuestSlavePurchase));
+					else if (hasSlaves)
+						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(VDetermineMoneyCost.SlavePurchase));
 				}
 				else if (interaction is Play_Bad_Music)
 				{
-					bool turntables = false;
-					foreach (ObjectReal objectReal in GC.objectRealList)
+					for (int i = 0; i < agent.gc.objectRealList.Count; i++)
 					{
+						ObjectReal objectReal = agent.gc.objectRealList[i];
+
 						if (objectReal.objectName == vObject.Turntables && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
-							turntables = true;
+						{
+							Turntables turntables = (Turntables)objectReal;
+
+							if (turntables.SpeakersFunctional() && !turntables.badMusicPlaying)
+							{
+								if (interactingAgent.inventory.HasItem(vItem.RecordofEvidence))
+									agentInteractions.AddButton(VButtonText.PlayMayorEvidence, agent.determineMoneyCost(VDetermineMoneyCost.PlayMayorEvidence));
+
+								agentInteractions.AddButton(VButtonText.PlayBadMusic, agent.determineMoneyCost(VDetermineMoneyCost.PlayBadMusic));
+							}
+						}
 					}
-
-					if (!turntables)
-						continue;
 				}
+				else if (interaction is Manage_Chunk)
+				{
+					string chunk = agent.startingChunkRealDescription;
 
-				agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.ButtonText));
+					if (chunk == VChunkType.Arena)
+					{
+						for (int i = 0; i < agent.gc.objectRealList.Count; i++)
+						{
+							ObjectReal objectReal = agent.gc.objectRealList[i];
+
+							if (objectReal.startingChunk == agent.startingChunk && objectReal.objectName == vObject.EventTriggerFloor)
+							{
+								EventTriggerFloor eventTriggerFloor = (EventTriggerFloor)objectReal;
+
+								if (!eventTriggerFloor.functional && eventTriggerFloor.triggerState != "NeedToPayOut" && eventTriggerFloor.triggerState != "NoPayout" && eventTriggerFloor.triggerState != "Cheated")
+									agent.SayDialogue("NoMoreFights");
+								else if (eventTriggerFloor.triggerState == "Initial")
+								{
+									bool groupFight = false;
+
+									for (int m = 0; m < agent.gc.agentList.Count; m++)
+									{
+										Agent agent3 = agent.gc.agentList[m];
+
+										if ((agent3.isPlayer > 0 || agent3.employer != null) && agent3 != interactingAgent)
+											groupFight = true;
+									}
+
+									if (groupFight)
+										agent.SayDialogue("AskToStartFightMultiple");
+									else
+										agent.SayDialogue("AskToStartFight");
+
+									agentInteractions.AddButton(VButtonText.Arena_SignUpToFight);
+								}
+								else if (eventTriggerFloor.triggerState == "FightSignedUp")
+									agent.SayDialogue("SignedUpToFight");
+								else if (eventTriggerFloor.triggerState == "FightStarted")
+									agent.SayDialogue("FightCheer");
+								else if (eventTriggerFloor.triggerState == "NeedToPayOut")
+								{
+									agent.SayDialogue("NoMoreFights");
+									agentInteractions.AddButton("PayOutFight");
+								}
+								else if (eventTriggerFloor.triggerState == "NoPayout")
+									agent.SayDialogue("LostFightNoPayout");
+								else if (eventTriggerFloor.triggerState == "Cheated")
+									agent.SayDialogue("CheatedNoPayout");
+								else if (eventTriggerFloor.triggerState == "FightsOver")
+									agent.SayDialogue("NoMoreFights");
+							}
+						}
+					}
+					else if (chunk == VChunkType.DeportationCenter)
+					{
+						agentInteractions.AddButton(VButtonText.BribeDeportation, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
+						agentInteractions.AddButton(VButtonText.BribeDeportationItem);
+					}
+					else if (chunk == VChunkType.Hotel && agent.inventory.HasItem(vItem.Key))
+						agentInteractions.AddButton(VButtonText.BuyKeyHotel, agent.determineMoneyCost(VDetermineMoneyCost.BuyKey));
+				}
+				else if (interaction is Pay_Debt)
+                {
+					agentInteractions.AddButton(interaction.ButtonText, interactingAgent.CalculateDebt());
+				}
+				else // Non-Exceptions
+				{
+					if (interaction.InteractionCost is null)
+						agentInteractions.AddButton(interaction.ButtonText);
+					else
+						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.InteractionCost));
+				}
 			}
 
 			// Merchant 

@@ -6,7 +6,7 @@ namespace CCU.Traits.Hire_Type
     public class Trapper : T_HireType
     {
         public override string HiredActionButtonText => CJob.DisarmTrap;
-        public override string HireButtonText => VButtonText.Hire_Expert;
+        public override string ButtonText => VButtonText.Hire_Expert;
         public override object HireCost => VDetermineMoneyCost.Hire_Thief;
 
         //[RLSetup]

@@ -6,7 +6,8 @@ namespace CCU.Traits.Interaction
 {
     public class Bribe_for_Entry_Alcohol : T_Interaction
     {
-        public override string ButtonText => VButtonText.BribeForEntryAlcohol_1;
+        public override string ButtonText => null;
+        public override string InteractionCost => null;
 
         [RLSetup]
         public static void Setup()

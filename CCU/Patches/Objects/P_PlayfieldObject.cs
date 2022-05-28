@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits;
-using CCU.Traits.Cost;
+using CCU.Traits.Cost_Scale;
 using CCU.Traits.Map_Marker;
 using HarmonyLib;
 using RogueLibsCore;
