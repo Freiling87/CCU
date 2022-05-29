@@ -73,7 +73,7 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Some Bark											|Loud
 |Stimpacker											|Health regeneration
 |Stimpackerer										|Fast health regeneration
-|Sure I Can											|Killer Thrower
+|Sure I Can!										|Killer Thrower
 |The Impermanent Hunk								|Strength
 |The Last Whiff										|Nicotine
 |Wildcard											|Random (Vanilla Drug Dealer)
@@ -130,14 +130,14 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Armorer											|Armor, Durability Spray
 |Assassin											|Weaponry & Stealth tools
 |Banana Boutique									|Bananas. Also Banana peels for the cost-cutter.
-|Barbarian Merchant									|Ale, Meat & Weaponry. All that is best in life!
+|Barbarian Merchant									|Ale, meat & a sharp blade. All that is best in life!
 |Bartender											|Vanilla Bartender shop inventory
 |Bartender (Dive)									|Inventory for seedy joints.
 |Bartender (Fancy)									|Inventory for upscale establishments.
 |Blacksmith											|Melee Weapons & Durability Spray
 |Consumer Electronics								|Appliances & Electronics for the modern idiot
-|Contraband											|Stuff confiscated from the City's Ne'er-do-wells
 |Convenience Store									|Beer, Smokes, and where your dad said he was going when he left
+|Cop (Contraband)									|Stuff confiscated from the City's Ne'er- and/or Rarely-Do-Wells
 |Cop (Standard)										|Standard Patrolman's gear
 |Cop (SWAT)											|Doorkicker's gear
 |Demolition Depot									|Explosives
@@ -148,7 +148,7 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Hardware Store										|Tools & safety equipment
 |High Tech											|High tech shit
 |Home Fortress Outlet								|Traps
-|Hypnotist											|Make people like you with this shit!
+|Hypnotist											|Finally, people might just like you!
 |Junk Dealer										|Trash, used toilet paper (Resistance Vouchers), and occasionally a gem
 |McFud's											|Home of the Slopper!
 |Medical Supplier									|Medicine, scalpels, syringes
@@ -224,7 +224,7 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Cool Cannibal										|- Neutral to Cool With Cannibals<br>- If Merchant, will only sell to Cool With Cannibals
 |Cop Access											|- If Merchant Type is cop-related, will only sell to The Law
 |Crushable											|- Hostile to Crepe Crusher<br>- XP bonus when neutralized by Crepe Crusher<br>- Aligned to Crepes
-|Family Friend										|- Aligned to Friend of the Family
+|Family Friend										|- Aligned to Friend of the Family & Mobsters
 |Honorable Thief									|- Will not Pickpocket Honor Among Thieves<br>- If Merchant, will only sell to Honor Among Thieves
 |Scumbag											|- Hostile to Scumbag Slaughterer
 |Slayable											|- Hostile to Scientist Slaughterer<br>- XP bonus when neutralized by Scientist Slaughterer

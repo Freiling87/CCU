@@ -11,7 +11,7 @@ namespace CCU.Traits.Trait_Gate
             RogueLibs.CreateCustomTrait<Family_Friend>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This NPC will be Aligned to a player with Friend of the Family."),
+                    [LanguageCode.English] = String.Format("This NPC will be Aligned to all players with Friend of the Family, as well as all Mobsters."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

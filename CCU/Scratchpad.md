@@ -1,4 +1,6 @@
-﻿#		Header Symbol Notes
+﻿#		How to read this
+If you wandered in here out of curiosity, this is my working notes file, and completed/planned feature list. It's a markdown file, but best viewed in raw form since a lot of its organization has to do with text characters' alignment.
+
 Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
@@ -278,6 +280,8 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		H	Loadout
+###			C	CC Items Inclusion
+Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
 

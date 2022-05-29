@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Sure_I_Can)),
+                    [LanguageCode.English] = DisplayName(typeof(Sure_I_Can), "Sure I Can!"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

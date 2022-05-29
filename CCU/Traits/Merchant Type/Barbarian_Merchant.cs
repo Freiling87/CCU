@@ -11,7 +11,7 @@ namespace CCU.Traits.Merchant_Type
             RogueLibs.CreateCustomTrait<Barbarian_Merchant>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells stuff for barbarians."),
+                    [LanguageCode.English] = String.Format("Ale, meat & a sharp blade. All that is best in life!"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

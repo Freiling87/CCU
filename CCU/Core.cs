@@ -18,7 +18,7 @@ namespace CCU
 	public class Core : BaseUnityPlugin
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
-		public const string pluginName = "Custom Content Utilities";
+		public const string pluginName = "Custom Content Utilities"; 
 		public const string pluginVersion = "0.1.0";
 		public const bool designerEdition = true;
 
