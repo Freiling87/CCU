@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using SORCE.Localization;
 using System;
 
@@ -8,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Administer_Blood_Bag : T_Interaction
     {
         public override string ButtonText => VButtonText.AdministerBloodBag;
+        public override bool ExtraTextCostOnly => true;
         public override string InteractionCost => VDetermineMoneyCost.HP_20;
 
         [RLSetup]

@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Bribe_for_Entry_Alcohol : T_Interaction
     {
         public override string ButtonText => null;
+        public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => null;
 
         [RLSetup]

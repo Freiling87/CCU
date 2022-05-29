@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Give_Blood : T_Interaction
     {
         public override string ButtonText => VButtonText.DonateBlood;
+        public override bool ExtraTextCostOnly => true;
         public override string InteractionCost =>
             GameController.gameController.challenges.Contains("LowHealth")
                 ? VDetermineMoneyCost.GiveBloodLowHealth

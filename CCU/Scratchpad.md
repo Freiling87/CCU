@@ -4,6 +4,9 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	C	General
+##		H	Explosion Trait Refactor
+Move Explosion Type to its own trait
+Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
 ##		C!	00 Names
 Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. 
 ##		C	Add Cancellations
@@ -20,13 +23,6 @@ Not so sure about the utility of this. I don't think players should need more th
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	CT	Traits
 ##		C	Interaction
-###			C	Administer Blood Bag
-Vanilla persists, this is mostly complete
-####		C	Missing Extra Text on button
-(- 20 HP)
-###			C	Give Blood
-####		C	Missing Extra Text on button
-(- 20 HP/$20)d
 ###			C	Bribe Cops
 Button doesn't appear, even if they have The Law
 ###			C	Bribe For Entry
@@ -38,18 +34,16 @@ Disappeared after talking to vanilla bouncer
 Should only appear if object in inventory
 ###			H	Buy Slave
 Pending actual assignment of owned slaves 
-###			√	Heal (Player)
-Complete
 ###			C	Identify
 Interface works, but unidentified items are not enabled to click
 ###			C	Manage Chunk
-####			√	Arena
-Complete
 ####			C	Deportation Center
 #####				C	Buttons Persist
 ####			C	Hotel
 No button appeared
 Switched to Clerk (only change) worked
+####			√	Arena
+Complete
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Heal All
@@ -102,11 +96,17 @@ New
 New
 ###			H	Visitor's Badge
 Set Bribe options on separate traits
+###			√	Administer Blood Bag
+Complete
 ###			√	Borrow Money
 Complete
 ###			√	Borrow Money (Moocher)
 Complete
 ###			√	Buy Round
+Complete
+###			√	Give Blood
+Complete
+###			√	Heal (Player)
 Complete
 ###			√	Influence Election
 Complete

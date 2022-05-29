@@ -280,6 +280,8 @@ namespace CCU.Patches.Agents
 				{
 					if (interaction.InteractionCost is null)
 						agentInteractions.AddButton(interaction.ButtonText);
+					else if (interaction.ExtraTextCostOnly)
+						agentInteractions.AddButton(interaction.ButtonText, interaction.InteractionCost);
 					else
 						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.InteractionCost));
 				}

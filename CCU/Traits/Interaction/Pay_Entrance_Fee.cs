@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Pay_Entrance_Fee : T_Interaction
     {
         public override string ButtonText => VButtonText.PayEntranceFee;
+        public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => VDetermineMoneyCost.Bribe;
 
         [RLSetup]

@@ -24,20 +24,21 @@ namespace CCU.Patches
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		/// <summary>
-		/// SuicideBomb
-		/// Currently Shelved
-		/// </summary>
-		/// <param name="statusEffectName"></param>
-		/// <param name="showText"></param>
-		/// <param name="causingAgent"></param>
-		/// <param name="cameFromClient"></param>
-		/// <param name="dontPrevent"></param>
-		/// <param name="specificTime"></param>
-		/// <param name="__instance"></param>
-		/// <returns></returns>
+        /// <summary>
+        /// SuicideBomb
+        /// Currently Shelved
+        /// </summary>
+        /// <param name="statusEffectName"></param>
+        /// <param name="showText"></param>
+        /// <param name="causingAgent"></param>
+        /// <param name="cameFromClient"></param>
+        /// <param name="dontPrevent"></param>
+        /// <param name="specificTime"></param>
+        /// <param name="__instance"></param>
+        /// <returns></returns>
         //[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddStatusEffect), argumentTypes: new[] { typeof(string), typeof(bool), typeof(Agent), typeof(NetworkInstanceId), typeof(bool), typeof(int), typeof(StatusEffects) })]
-		public static bool AddStatusEffect_Prefix(string statusEffectName, bool showText, Agent causingAgent, NetworkInstanceId cameFromClient, bool dontPrevent, int specificTime, StatusEffects __instance)
+        [Obsolete]
+        public static bool AddStatusEffect_Prefix(string statusEffectName, bool showText, Agent causingAgent, NetworkInstanceId cameFromClient, bool dontPrevent, int specificTime, StatusEffects __instance)
         {
 			if (statusEffectName == CStatusEffect.SuicideBomb)
             {

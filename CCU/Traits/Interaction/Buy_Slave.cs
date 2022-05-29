@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Buy_Slave : T_Interaction
     {
         public override string ButtonText => VButtonText.PurchaseSlave;
+        public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => null; // Determined in code
 
         [RLSetup]

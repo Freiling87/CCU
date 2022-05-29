@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Leave_Weapons_Behind : T_Interaction
     {
         public override string ButtonText => VButtonText.LeaveWeaponsBehind;
+        public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => null;
 
         // Should include FollowersLeaveWeaponsBehind

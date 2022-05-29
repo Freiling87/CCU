@@ -7,6 +7,7 @@ namespace CCU.Traits.Interaction
     public class Heal_Player : T_Interaction
     {
         public override string ButtonText => VButtonText.Heal;
+        public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => VDetermineMoneyCost.Heal;
 
         [RLSetup]

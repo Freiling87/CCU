@@ -6,7 +6,7 @@ namespace CCU.Traits.Drug_Warrior
 {
     public class Suicide_Bomber_Normal : T_DrugWarrior
     {
-        public override string DrugEffect => CStatusEffect.SuicideBomb_Normal;
+        public override string DrugEffect => CStatusEffect.SuicideBomb;
 
         [RLSetup]
         public static void Setup()
