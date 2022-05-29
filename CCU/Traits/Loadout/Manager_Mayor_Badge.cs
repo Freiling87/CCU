@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Loadout
 {
-	public class ChunkMayorBadge : CustomTrait
+    public class Manager_Mayor_Badge : T_Loadout
 	{
-		//[RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<ChunkMayorBadge>()
+			RogueLibs.CreateCustomTrait<Manager_Mayor_Badge>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Safe Combo Holder. If multiple characters have this trait, one will be chosen randomly.",
+					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Badge Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
 					[LanguageCode.Russian] = "",
 				})
 				.WithName(new CustomNameInfo

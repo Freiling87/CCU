@@ -98,125 +98,65 @@ namespace CCU.Patches.Inventory
 			 * Loadout_SafeCombo
 			 */
 
-			if (GC.levelType == "HomeBase")
-				return false;
-			
-			Random.InitState(GC.loadLevel.randomSeedNum + GC.sessionDataBig.curLevelEndless + __instance.agent.agentID);
-			int itemsAdded = 0;
+			Agent agent = __instance.agent;
 
-			#region Loadout_Key, Loadout_SafeCombo
-			if (__instance.agent.ownerID > 0 && __instance.agent.prisoner == 0 && (!GC.loadComplete || (GC.streamingWorld && !GC.streamingWorldController.StreamingLoaded(__instance.agent.startingChunk, __instance.agent.startingChunkReal))))
+			if (agent.agentName == VanillaAgents.CustomCharacter)
 			{
-				bool flag = false;
-				bool flag2 = false;
-			
-				for (int i = 0; i < GC.objectRealList.Count; i++)
+				if (agent.HasTrait<Manager_Key>() || agent.HasTrait<Manager_Safe_Combo>())
 				{
-					ObjectReal objectReal = GC.objectRealList[i];
-				
-					if ((GC.levelShape == 0 && (objectReal.owner == __instance.agent.ownerID || __instance.agent.ownerID == 99) && objectReal.startingChunk == __instance.agent.startingChunk) || 
-						(GC.levelShape == 2 && objectReal.startingSector == __instance.agent.startingSector))
+					for (int i = 0; i < GC.objectRealList.Count; i++)
 					{
-						#region Loadout_Key
-						if (__instance.agent.HasTrait<ChunkKey>() && GC.levelShape == 0 && objectReal.objectName == "Door" && objectReal.prisonObject > 0)
+						ObjectReal objectReal = GC.objectRealList[i];
+
+						if ((GC.levelShape == 0 && (objectReal.owner == agent.ownerID || agent.startingChunkRealDescription == VChunkType.Hotel || agent.ownerID == 99) && objectReal.startingChunk == agent.startingChunk) || (GC.levelShape == 2 && objectReal.startingSector == agent.startingSector))
 						{
-							Door door = (Door)objectReal;
-					
-							if (!door.hasDetonator && door.extraVar != 10)
+							if (objectReal.objectName == vObject.Door && objectReal.prisonObject == 0 && agent.HasTrait<Manager_Key>() && !agent.inventory.HasItem(vItem.Key))
 							{
-								if (flag)
-									door.distributedKey = __instance.agent;
-								else if (door.distributedKey == null && door.locked)
+								Door door = (Door)objectReal;
+								
+								if (door.distributedKey == null && door.locked)
 								{
-									InvItem invItem = __instance.AddItem("Key", 1);
+									InvItem invItem = __instance.AddItem(vItem.Key, 1);
 									invItem.specificChunk = door.startingChunk;
 									invItem.specificSector = door.startingSector;
 									invItem.chunks.Add(door.startingChunk);
 									invItem.sectors.Add(door.startingChunk);
-									string text = door.startingChunkRealDescription;
+									string doorDescription = door.startingChunkRealDescription;
 									
-									if (text == "Generic")
-										text = "GuardPost";
-										
-									invItem.contents.Add(text);
-									door.distributedKey = __instance.agent;
-									itemsAdded++;
-									flag = true;
-									__instance.agent.oma.hasKey = true;
+									if (doorDescription == VChunkType.Generic)
+										doorDescription = "GuardPost";
+									
+									invItem.contents.Add(doorDescription);
+									door.distributedKey = agent;
+									agent.oma.hasKey = true;
 								}
 							}
-						}
-						else if (__instance.agent.HasTrait<ChunkKey>() && GC.levelShape == 2 && objectReal.objectName == "Door" && objectReal.prisonObject == 0) // Most likely un-implemented StreamingWorld stuff, but leaving in just in case
-						{
-							Door door2 = (Door)objectReal;
-						
-							if (flag)
-								door2.distributedKey = __instance.agent;
-							else if (door2.distributedKey == null && door2.locked)
+							else if (objectReal.objectName == vObject.Safe && agent.HasTrait<Manager_Safe_Combo>() && !agent.inventory.HasItem(vItem.SafeCombination))
 							{
-								bool flag4 = false;
-							
-								if (__instance.agent.chunkFunctionType == "Key")
-									flag4 = true;
-
-								if (flag4)
-								{
-									InvItem invItem2 = __instance.AddItem("Key", 1);
-									invItem2.specificChunk = door2.startingChunk;
-									invItem2.specificSector = door2.startingSector;
-									invItem2.chunks.Add(door2.startingChunk);
-									invItem2.sectors.Add(door2.startingChunk);
-									string text2 = door2.startingChunkRealDescription;
+								Safe safe = (Safe)objectReal;
 								
-									if (text2 == "Generic")
-										text2 = "GuardPost";
-									
-									invItem2.contents.Add(text2);
-									door2.distributedKey = __instance.agent;
-									itemsAdded++;
-									flag = true;
-									__instance.agent.oma.hasKey = true;
+								if (safe.distributedKey == null)
+								{
+									InvItem invItem3 = __instance.AddItem(vItem.SafeCombination, 1);
+									invItem3.specificChunk = safe.startingChunk;
+									invItem3.specificSector = safe.startingSector;
+									invItem3.chunks.Add(safe.startingChunk);
+									invItem3.sectors.Add(safe.startingChunk);
+									invItem3.contents.Add(safe.startingChunkRealDescription);
+									safe.distributedKey = agent;
+									agent.oma.hasSafeCombination = true;
 								}
 							}
 						}
-						#endregion
-						#region Loadout_SafeCombo
-						else if (__instance.agent.HasTrait<ChunkSafeCombo>() && objectReal.objectName == "Safe")
-						{
-							Safe safe = (Safe)objectReal;
-							
-							if (flag2)
-								safe.distributedKey = __instance.agent;
-							else if (safe.distributedKey == null)
-							{
-								InvItem invItem3 = __instance.AddItem("SafeCombination", 1);
-								invItem3.specificChunk = safe.startingChunk;
-								invItem3.specificSector = safe.startingSector;
-								invItem3.chunks.Add(safe.startingChunk);
-								invItem3.sectors.Add(safe.startingChunk);
-								invItem3.contents.Add(safe.startingChunkRealDescription);
-								safe.distributedKey = __instance.agent;
-								itemsAdded++;
-								flag2 = true;
-								__instance.agent.oma.hasSafeCombination = true;
-							}
-						}
-						#endregion
 					}
 				}
 
-				if (flag2 || flag)
-					__instance.agent.wontFlee = true;
+				if (__instance.agent.HasTrait<Manager_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == "MayorOffice")
+				{
+					__instance.AddItem(vItem.MayorsMansionGuestBadge, 1);
+					__instance.agent.oma.hasMayorBadge = true;
+				}
 			}
-			#endregion
-			#region Loadout_ChunkMayorBadge
-			if (__instance.agent.HasTrait<ChunkMayorBadge>() && __instance.agent.startingChunkRealDescription == "MayorOffice")
-			{
-				__instance.AddItem("MayorBadge", 1);
-				__instance.agent.oma.hasMayorBadge = true;
-				itemsAdded++;
-			}
-			#endregion
 
 			return true;
 		}

@@ -74,6 +74,41 @@ namespace CCU.Patches.Agents
 			return instructions;
 		}
 
+        [HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
+		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, int slotNum, string combineType, string useOnType, AgentInteractions __instance, ref bool __result)
+        {
+			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
+			{
+				if (item.invItemName == vItem.Syringe)
+				{
+					if (combineType == "Combine")
+					{
+						if (!GC.syringesIdentified.Contains(item.contents[0]) && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Drugalug))
+						{
+							if (agent.moneySuccess(agent.determineMoneyCost(VDetermineMoneyCost.IdentifySyringe)))
+							{
+								agent.SayDialogue("Bought2");
+								interactingAgent.statusEffects.IdentifySyringe(item.contents[0]);
+							}
+						}
+						else
+						{
+							interactingAgent.SayDialogue("AlreadyIdentified");
+							GC.audioHandler.Play(interactingAgent, "CantDo");
+						}
+					}
+
+					__result = true;
+					return false;
+				}
+
+				__result = false;
+				return false;
+			}
+
+			return true;
+		}
+
 		public static void AddCustomAgentButtons(Agent agent)
 		{
 			TraitManager.LogTraitList(agent);
@@ -88,6 +123,11 @@ namespace CCU.Patches.Agents
 				(agent.HasTrait<Untrustinger>() && relationshipLevel < 4) ||
 				(agent.HasTrait<Untrustingest>() && relationshipLevel < 5))
 				return;
+
+			//// Hack
+			//if (interactingAgent.interactionHelper.interactingFar)
+			//	foreach (T_Hack hack in agent.GetTraits<T_Hack>())
+			//		agentInteractions.AddButton(hack.ButtonText);
 
 			// Hire 
 			if (agent.GetTraits<T_HireType>().Any())
@@ -122,19 +162,11 @@ namespace CCU.Patches.Agents
 				}
 			}
 
-			//// Hack
-			//if (interactingAgent.interactionHelper.interactingFar)
-			//	foreach (T_Hack hack in agent.GetTraits<T_Hack>())
-			//		agentInteractions.AddButton(hack.ButtonText);
-
 			// Interaction 
 			foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
 			{
 				// Simple Exceptions
 				if ((interaction is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
-					(interaction is Bribe_Cops && (interactingAgent.aboveTheLaw || !interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))) ||
-					((interaction is Pay_Entrance_Fee || interaction is Bribe_for_Entry_Alcohol) && (relationship == "Aligned" || relationship == "Loyal" || relationship == "Submissive" || interactingAgent.agentName == "Cop2")) ||
-					(interaction is Influence_Election && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
 					(interaction is Leave_Weapons_Behind && !interactingAgent.inventory.HasWeapons()) ||
 					(interaction is Offer_Motivation && agent.oma.offeredOfficeDrone) ||
 					(interaction is Pay_Debt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
@@ -153,7 +185,7 @@ namespace CCU.Patches.Agents
 
 						if (possiblePatron.startingChunk == agent.startingChunk && possiblePatron != agent && possiblePatron.prisoner == 0 && !possiblePatron.dead && !possiblePatron.zombified && !possiblePatron.oma.mindControlled && possiblePatron.gc.tileInfo.GetTileData(possiblePatron.tr.position).chunkID == possiblePatron.startingChunk)
 						{
-							if (relationship != "Hateful" && relationship != "Aligned" && relationship != "Loyal" && relationship != "Submissive" &&
+							if (relationship != "Hateful" && relationship != "Aligned" && relationship != VRelationship.Loyal && relationship != "Submissive" &&
 								!possiblePatron.statusEffects.hasTrait("BloodRestoresHealth") && !possiblePatron.statusEffects.hasTrait("OilRestoresHealth"))
 								patrons.Add(possiblePatron);
 						}
@@ -164,10 +196,73 @@ namespace CCU.Patches.Agents
 					else
 						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(patrons.Count, VDetermineMoneyCost.BuyRound));
 				}
-				else if (interaction is Bribe_for_Entry_Alcohol)
-                {
+				else if (interaction is Bribe_Cops)
+				{
+					if (!interactingAgent.aboveTheLaw && !interactingAgent.HasTrait(VanillaTraits.AbovetheLaw) && !agent.statusEffects.hasStatusEffect(VStatusEffect.AbovetheLaw) && !interactingAgent.enforcer && !interactingAgent.upperCrusty)
+					{
+						if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt1) || interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt2))
+						{
+							if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt1))
+								agentInteractions.AddButton(VButtonText.PayCopDebt, agent.determineMoneyCost(VDetermineMoneyCost.PayCops1));
 
-                }
+							if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt2))
+								agentInteractions.AddButton(VButtonText.PayCopDebt, agent.determineMoneyCost(VDetermineMoneyCost.PayCops2));
+						}
+						else if (!interactingAgent.statusEffects.hasTrait("MustPayCops"))
+							agentInteractions.AddButton(VButtonText.BribeCops, agent.determineMoneyCost(VDetermineMoneyCost.BribeCops));
+					}
+				}
+				else if (interaction is Bribe_for_Entry_Alcohol || interaction is Pay_Entrance_Fee) // Bouncer traits
+                {
+					bool hasOtherBouncer = false;
+
+					for (int i = 0; i < agent.gc.agentList.Count; i++)
+					{
+						Agent iAgent = agent.gc.agentList[i];
+
+						if (iAgent.startingChunk == agent.startingChunk && iAgent.ownerID == agent.ownerID && iAgent != agent && (iAgent.oma.modProtectsProperty != 0 || iAgent.agentName == VanillaAgents.Bouncer))
+						{
+							relStatus relCode = iAgent.relationships.GetRelCode(interactingAgent);
+						
+							if (relationshipLevel < 3 && relCode != relStatus.Submissive)
+                            {
+								hasOtherBouncer = true;
+								break;
+							}
+						}
+					}
+
+					if (agentInteractions.HasMetalDetector(agent, interactingAgent) && (relationshipLevel > 2 || relationship == VRelationship.Submissive || interactingAgent.agentName == VanillaAgents.SuperCop))
+					{
+						agent.SayDialogue("DontNeedMoney");
+						agentInteractions.BouncerTurnOffLaserEmitter(agent, interactingAgent, false);
+					}
+					else
+					{
+						if ((relationshipLevel > 2 || relationship == VRelationship.Submissive) && (!hasOtherBouncer || relationship == VRelationship.Submissive))
+							agent.SayDialogue("DontNeedMoney");
+						
+						else if (interactingAgent.statusEffects.hasTrait("Unlikeable") || interactingAgent.statusEffects.hasTrait("Naked") || interactingAgent.statusEffects.hasTrait("Suspicious"))
+							agent.SayDialogue("WontJoinA");
+						else if (interaction is Bribe_for_Entry_Alcohol)
+						{
+							if (interactingAgent.inventory.HasItem(vItem.Beer))
+								agentInteractions.AddButton(VButtonText.BribeForEntryBeer);
+							else if (interactingAgent.inventory.HasItem(vItem.Whiskey))
+								agentInteractions.AddButton(VButtonText.BribeForEntryWhiskey);
+						}
+						else if (interaction is Pay_Entrance_Fee)
+						{
+							if (agent.startingChunkRealDescription == VChunkType.Bar ||
+								agent.startingChunkRealDescription == VChunkType.DanceClub ||
+								agent.startingChunkRealDescription == VChunkType.Arena ||
+								agent.startingChunkRealDescription == VChunkType.MusicHall)
+								agentInteractions.AddButton(VButtonText.PayEntranceFee, agent.determineMoneyCost(VDetermineMoneyCost.Bribe));
+							else
+								agentInteractions.AddButton(VButtonText.Bribe, agent.determineMoneyCost(VDetermineMoneyCost.Bribe));
+						}
+					}
+				}
 				else if (interaction is Buy_Slave)
 				{
 					bool hasSlaves = false;
@@ -191,23 +286,18 @@ namespace CCU.Patches.Agents
 					else if (hasSlaves)
 						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(VDetermineMoneyCost.SlavePurchase));
 				}
-				else if (interaction is Play_Bad_Music)
-				{
-					for (int i = 0; i < agent.gc.objectRealList.Count; i++)
+				else if (interaction is Leave_Weapons_Behind)
+                {
+					agentInteractions.AddButton(interaction.ButtonText);
+
+					for (int i = 0; i < agent.gc.agentList.Count; i++)
 					{
-						ObjectReal objectReal = agent.gc.objectRealList[i];
+						Agent followerCandidate = agent.gc.agentList[i];
 
-						if (objectReal.objectName == vObject.Turntables && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
+						if (followerCandidate.employer == interactingAgent && followerCandidate.inventory.HasWeapons() && !followerCandidate.inCombat && followerCandidate.jobCode != jobType.GoHere && Vector2.Distance(agent.tr.position, followerCandidate.tr.position) < 13.44f)
 						{
-							Turntables turntables = (Turntables)objectReal;
-
-							if (turntables.SpeakersFunctional() && !turntables.badMusicPlaying)
-							{
-								if (interactingAgent.inventory.HasItem(vItem.RecordofEvidence))
-									agentInteractions.AddButton(VButtonText.PlayMayorEvidence, agent.determineMoneyCost(VDetermineMoneyCost.PlayMayorEvidence));
-
-								agentInteractions.AddButton(VButtonText.PlayBadMusic, agent.determineMoneyCost(VDetermineMoneyCost.PlayBadMusic));
-							}
+							agentInteractions.AddButton(VButtonText.FollowersLeaveWeaponsBehind);
+							break;
 						}
 					}
 				}
@@ -266,8 +356,15 @@ namespace CCU.Patches.Agents
 					}
 					else if (chunk == VChunkType.DeportationCenter)
 					{
-						agentInteractions.AddButton(VButtonText.BribeDeportation, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
-						agentInteractions.AddButton(VButtonText.BribeDeportationItem);
+						if (interactingAgent.upperCrusty)
+							agent.SayDialogue("NoDeportationUpperCrusty");
+						else if (relationshipLevel > 2 || relationship == VRelationship.Submissive)
+							agent.SayDialogue("DontNeedMoney");
+						else
+						{
+							agentInteractions.AddButton(VButtonText.BribeDeportation, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
+							agentInteractions.AddButton(VButtonText.BribeDeportationItem);
+						}
 					}
 					else if (chunk == VChunkType.Hotel && agent.inventory.HasItem(vItem.Key))
 						agentInteractions.AddButton(VButtonText.BuyKeyHotel, agent.determineMoneyCost(VDetermineMoneyCost.BuyKey));
@@ -275,6 +372,26 @@ namespace CCU.Patches.Agents
 				else if (interaction is Pay_Debt)
                 {
 					agentInteractions.AddButton(interaction.ButtonText, interactingAgent.CalculateDebt());
+				}
+				else if (interaction is Play_Bad_Music)
+				{
+					for (int i = 0; i < agent.gc.objectRealList.Count; i++)
+					{
+						ObjectReal objectReal = agent.gc.objectRealList[i];
+
+						if (objectReal.objectName == vObject.Turntables && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
+						{
+							Turntables turntables = (Turntables)objectReal;
+
+							if (turntables.SpeakersFunctional() && !turntables.badMusicPlaying)
+							{
+								if (interactingAgent.inventory.HasItem(vItem.RecordofEvidence))
+									agentInteractions.AddButton(VButtonText.PlayMayorEvidence, agent.determineMoneyCost(VDetermineMoneyCost.PlayMayorEvidence));
+
+								agentInteractions.AddButton(VButtonText.PlayBadMusic, agent.determineMoneyCost(VDetermineMoneyCost.PlayBadMusic));
+							}
+						}
+					}
 				}
 				else // Non-Exceptions
 				{
@@ -290,9 +407,6 @@ namespace CCU.Patches.Agents
 			// Merchant 
 			if (agent.GetTraits<T_MerchantType>().Any() && agent.hasSpecialInvDatabase)
 			{
-				Core.LogCheckpoint("Vendor");
-				logger.LogDebug("\tCount: " + agent.specialInvDatabase.InvItemList.Count);
-
 				bool cantBuy =
 					(agent.HasTrait<Cool_Cannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral") && interactingAgent.agentName != VanillaAgents.Cannibal) ||
 					(agent.HasTrait<Cop_Access>() && !interactingAgent.HasTrait("TheLaw") && interactingAgent.agentName != VanillaAgents.Cop && interactingAgent.agentName != VanillaAgents.CopBot && interactingAgent.agentName != VanillaAgents.SuperCop) ||
@@ -321,7 +435,6 @@ namespace CCU.Patches.Agents
 			}
 		}
 
-		// Non-Patch
 		public static void SafecrackSafe(Agent agent, Agent interactingAgent, PlayfieldObject mySafe)
 		{
 			if (GC.serverPlayer)
@@ -340,7 +453,6 @@ namespace CCU.Patches.Agents
 			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.SafecrackSafe, mySafe.objectNetID);
 		}
 
-		// Non-Patch
 		public static void TamperSomething(Agent agent, Agent interactingAgent, PlayfieldObject target)
 		{
 			if (GC.serverPlayer)

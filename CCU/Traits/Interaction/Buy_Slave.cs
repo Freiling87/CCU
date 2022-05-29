@@ -10,7 +10,7 @@ namespace CCU.Traits.Interaction
         public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => null; // Determined in code
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Buy_Slave>()

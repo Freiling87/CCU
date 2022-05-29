@@ -25,8 +25,8 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 ###				Behavior
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades
-|Eat Corpse											|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
+|Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades<br>- Might extend this to the other traps.
+|Eat Corpses										|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
 |Grab Drugs											|- Grab Drugs, like Me
 |Grab Money											|- Grab Money, like Slum Dweller
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
@@ -95,30 +95,34 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |:--------------------------------------------------|:------------------------------------------------------|
 |Administer Blood Bag								|- Lose 20HP for a Blood Bag
 |Borrow Money										|- Gain debt for $50
-|Bribe Cops											|- Pay to bribe cops
-|Bribe for Entry									|- Pay to make owners Friendly
+|Borrow Money (Moocher)								|- Gain debt for $50 if you have Moocher
+|Bribe Cops											|- Pay to bribe cops<br>- Also works with Cop Debt
 |Bribe for Entry (Alcohol)							|- Give Alchol to make owners Friendly
 |Buy Round											|- Pay to make everyone in chunk Friendly
-|Buy Slave											|- Pay to buy Slave
-|Donate Blood										|- Lose 20HP for $20
+|Give Blood											|- Lose 20HP for $20
 |Heal Player										|- Pay to heal self
 |Identify											|- Pay to identify items
 |Influence Election									|- Pay to influence election
 |Leave Weapons Behind								|- Drop all weapons
-|Manage Chunk										|- Manage Arena, Deportation Center, or Hotel
-|Moochable											|- Valid target for Moocher
+|Manage Chunk										|- Manage Arena, Deportation Center, or Hotel<br>- Hotel management requires Key added with Loadout trait below
 |Offer Motivation									|- Give small item to make Friendly
 |Pay Debt											|- Pay off Debt
-|Play Bad Song										|- Pay to play bad song
+|Pay Entrance Fee									|- Pay to make owners Friendly
+|Play Bad Music										|- Pay to break someone's achy breaky heart, despite their protests<br>- Also works with Mayor Evidence
 |Start Election										|- Interact to start Election
 |Use Blood Bag										|- Give Blood Bag to heal for 20HP
-|Visitor's Badge									|- Carries Mayor's Visitor Badge
 ###				Interaction Gate
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Untrusting											|- Will not interact with Agents Neutral or worse
-|Untrustinger										|- Will not interact with Agents Friendly or worse
-|Untrustingest										|- Will not interact with Agents Loyal or worse
+|Untrusting											|- Will only interact with Agents Friendly or better 
+|Untrustinger										|- Will only interact with Agents Loyal or better 
+|Untrustingest										|- Will only interact with Agents Aligned
+###				Loadout
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Manager Key										|- Starts with the chunk's Key
+|Manager Mayor Badge								|- Starts with the chunk's Mayor Badge
+|Manager Safe Combo									|- Starts with the chunk's Safe Combo
 ###				Merchant Type
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|

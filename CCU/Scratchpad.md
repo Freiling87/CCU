@@ -21,29 +21,10 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#	CT	Traits
-##		C	Interaction
-###			C	Bribe Cops
-Button doesn't appear, even if they have The Law
-###			C	Bribe For Entry
-Seems to work, but still appears after paid
-I need more info on how these chunks work. I'm definitely missing something.
-###			C	Bribe For Entry (Alcohol)
-Still appears after paying cash
-Disappeared after talking to vanilla bouncer
-Should only appear if object in inventory
+#	√H	Traits
+##		√H	Interaction
 ###			H	Buy Slave
 Pending actual assignment of owned slaves 
-###			C	Identify
-Interface works, but unidentified items are not enabled to click
-###			C	Manage Chunk
-####			C	Deportation Center
-#####				C	Buttons Persist
-####			C	Hotel
-No button appeared
-Switched to Clerk (only change) worked
-####			√	Arena
-Complete
 ###			H	Cybernetic Surgery
 Curated Trait-seller
 ###			H	Heal All
@@ -102,19 +83,34 @@ Complete
 Complete
 ###			√	Borrow Money (Moocher)
 Complete
+###			√	Bribe Cops
+Complete
+###			√	Bribe For Entry (Alcohol)
+Complete
 ###			√	Buy Round
 Complete
 ###			√	Give Blood
 Complete
 ###			√	Heal (Player)
 Complete
+###			√	Identify
+Complete
 ###			√	Influence Election
 Complete
 ###			√	Leave Weapons Behind
 Complete
+###			√	Manage Chunk
+####			√	Arena
+Complete
+####			√	Deportation Center
+Complete
+####			√	Hotel
+Complete
 ###			√	Offer Motivation
 Complete
 ###			√	Pay Debt
+Complete
+###			√	Pay Entry Fee
 Complete
 ###			√	Play Bad Music
 Complete
@@ -647,6 +643,10 @@ Complete
 Complete
 #	H	Mutators
 Focus on Traits for this version.
+##		C	Requested features
+- Random Disaster (Disasters Every Level not in editor)
+- No Trait-Up
+  - Allows designer control over character progression
 ##		C	00 Mutator List Population
 ###			C	Level Editor Mutator List
 - I think this has since been addressed in Roguelibs, as of 3.5.0b

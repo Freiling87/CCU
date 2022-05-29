@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Loadout
 {
-	public class Guns_Common : CustomTrait
+    public class Guns_Common : T_Loadout
 	{
 		//[RLSetup]
 		public static void Setup()

@@ -1,4 +1,5 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.Loadout;
+using RogueLibsCore;
 using System;
 
 namespace CCU.Traits.Interaction
@@ -15,10 +16,11 @@ namespace CCU.Traits.Interaction
             RogueLibs.CreateCustomTrait<Manage_Chunk>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will do Clerk behaviors if they're placed in certain chunks:\n" +
+                    [LanguageCode.English] = String.Format("This character will do Clerk/Jock behaviors if they're placed in certain chunks:\n" +
                     "- Arena\n" +
                     "- Deportation Center\n" +
-                    "- Hotel\n"),
+                    "- Hotel *\n\n" +
+                    "*<color=red>Requires</color>: {0}", ShortNameDocumentationOnly(typeof(Manager_Key))),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

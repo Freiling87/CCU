@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Loadout
 {
-	public class ChunkKey : CustomTrait
+    public class Manager_Safe_Combo : T_Loadout
 	{
-		//[RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<ChunkKey>()
+			RogueLibs.CreateCustomTrait<Manager_Safe_Combo>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Key Holder. If multiple characters have this trait, one will be chosen randomly.",
+					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Safe Combo Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
 					[LanguageCode.Russian] = "",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Loadout_ChunkKey,
+					[LanguageCode.English] = CTrait.Loadout_ChunkSafeCombo,
 					[LanguageCode.Russian] = "",
 				})
 				.WithUnlock(new TraitUnlock
