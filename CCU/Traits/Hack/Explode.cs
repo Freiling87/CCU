@@ -1,26 +1,31 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
+using System;
 
-namespace CCU.Traits.Cost_Currency
+namespace CCU.Traits.Hack
 {
-    public class Banana : T_CostCurrency
+    public class Explode : T_Hack
     {
+        public override string ButtonText => VButtonText.Hack_Haywire;
+
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Banana>()
+            RogueLibs.CreateCustomTrait<Explode>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's costs are converted to Bananas.",
+                    [LanguageCode.English] = String.Format("This character can be hacked to Explode.\n\n" + 
+                    "<color=red>Requires:</color> Electronic"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Banana)),
+                    [LanguageCode.English] = DisplayName(typeof(Explode)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Alcohol)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

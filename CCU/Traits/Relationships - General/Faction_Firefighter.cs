@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Rel_General
 {
-	public class Thief : T_MerchantType
+    public class Faction_Firefighter : T_Rel_General
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Thief>()
+            RogueLibs.CreateCustomTrait<Faction_Firefighter>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells intrusion tools."),
+                    [LanguageCode.English] = "This character is Aligned to Firefighters and anyone else with this trait.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Thief)),
+                    [LanguageCode.English] = DisplayName(typeof(Faction_Firefighter), "Firefighter-Aligned"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

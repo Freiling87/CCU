@@ -5,7 +5,34 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#	C	General
+#	C	v.1.0.0 Changelog
+- **Hard Changes:** These will require you to update any affected content accordingly. 
+  - Trait renaming: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
+    - Faction Relationships: Some of these were incomplete and have been renamed to reflect this.
+      - Hostile to Cannibal → Faction Military (Now includes alignment with Soldiers)
+      - Hostile to Soldier → Faction Cannibal (Now includes alignment with Cannibals)
+    - Hire Type
+      - Hacker → Cyber-Intruder
+    - Merchant Type traits renamed
+      - Shopkeeper → General Store
+      - Soldier → Army Quartermaster
+      - Thief → Intruder's Warehouse
+      - Vampire → Sanguisuge Specialties
+- **Soft Changes:** These will not require you to change anything. Any old content will be maintained in legacy code to maximize retro-compatibility.
+  - Bugfixes
+    - Fixed Vending Machine money cost issues
+    - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+- **Feature additions**
+  - Behavior
+    - Added Grab Alcohol & Grab Food
+  - Added exceptions to Untrusting traits (Leave Weapons Behind, Offer Motivation, Pay Debt)
+  - Faction Relationships
+    - Added Firefighter Faction
+#	CT!	General
+##		T!	Automate trait name changes
+This will need to run without a hitch.
+##		T!	Vending machine DetermineMoneyCost
+
 ##		H	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
@@ -118,7 +145,9 @@ Complete
 Complete
 ###			√	Use Blood Bag
 Complete
-##		√H	Interaction Gate
+##		T	Interaction Gate
+###			T	00 Refactor
+Changed how they gate interactions a bit, needs a test.
 ###			C	Insular
 ###			C	Insularer
 ###			C	Insularest
@@ -140,6 +169,9 @@ Attempted
 - Whole appearance is randomized when any appearance trait is added.
   - Should be a simple fix since it's doing less rather than more.
 ###			C	Facial Hair
+####			C	Trait names changed
+Changed trait names to not overlap with vanilla names. 
+This will likely break the BEARD MACHINE, because it was based directly on the class names.
 ####			C	Vanilla facial hair no longer spawns
 New
 ###			C	Hair Type
@@ -447,6 +479,9 @@ New
 New
 ###			H	Drink Blood
 New
+###			C	Hack
+####			C	Cyber Nuke
+Giving character Cyber Nuke allows Blow Up option, but it doesn't work
 ###			H	Handcuff
 New
 ###			H	Mug
@@ -514,11 +549,13 @@ Complete
 Complete
 ###			√	Cause a Ruckus
 Complete
-###			√	Hack
-Complete
 ##		√	Merchant Type
 Complete
 ##		√H	Passive
+###			C	Supernatural
+Ghost-gibber vulnerable
+###			C	Incorporeal
+Ghost form
 ###			H	Vision Beams (Cop Bot)
 DW
 ###			H	Invincible
@@ -542,8 +579,9 @@ Agent.customZombified
 Complete
 ###			√	Extortable
 Complete
-###			√	Guilty
-Complete
+###			C	Guilty
+####			C	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
 ###			√	Innocent
 Complete
 ###			√	Possessed
@@ -553,6 +591,9 @@ Complete
 ###			√	Z-Infected
 Complete
 ##		√H	Relationships - Faction
+###			C	Faction Firefighter
+###			C	Faction Cannibal
+###			C	Faction Military
 ###			C	General concept
 Friendly to faction doesn't align you. You do not inherit the faction's relationships.
 Loyal causes you to inherit its relationships, but negative ones are moderated:

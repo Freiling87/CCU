@@ -1,33 +1,26 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
-using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Cost_Currency
 {
-    public class Buy_Slave : T_Interaction
+    public class Swap_Meet : T_CostCurrency
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.PurchaseSlave;
-        public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => null; // Determined in code
-
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buy_Slave>()
+            RogueLibs.CreateCustomTrait<Swap_Meet>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If this character owns any Slaves, they will sell them."),
+                    [LanguageCode.English] = "This character doesn't accept money. Instead, you have to give them an item of equal or greater value than the cost of the good or service.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Buy_Slave)),
+                    [LanguageCode.English] = DisplayName(typeof(Swap_Meet)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Banana_Barter)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

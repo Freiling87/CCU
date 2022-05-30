@@ -402,7 +402,7 @@ namespace CCU
 				Cigarettes = "Cigarettes",
 				CircuitBoard = "CircuitBoard",
 				Cocktail = "Cocktail",
-				Codpiece = "Codpiece",
+				CodPiece = "CodPiece",
 				Cologne = "Cologne",
 				CourierPackage = "CourierPackage",
 				CritterUpper = "CritterUpper",

@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Borrow_Money_Moocher : T_Interaction
     {
+        public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.BorrowMoney;
         public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => null;

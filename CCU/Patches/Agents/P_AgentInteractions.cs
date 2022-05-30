@@ -75,7 +75,7 @@ namespace CCU.Patches.Agents
 		}
 
         [HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
-		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, int slotNum, string combineType, string useOnType, AgentInteractions __instance, ref bool __result)
+		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, int slotNum, string combineType, string useOnType, ref bool __result)
         {
 			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
 			{
@@ -111,18 +111,22 @@ namespace CCU.Patches.Agents
 
 		public static void AddCustomAgentButtons(Agent agent)
 		{
-			TraitManager.LogTraitList(agent);
-
 			AgentInteractions agentInteractions = agent.agentInteractions;
 			Agent interactingAgent = agent.interactingAgent;
 			string relationship = agent.relationships.GetRel(interactingAgent);
 			int relationshipLevel = VRelationship.OrderedRelationships.IndexOf(relationship);
 
-			if (agent.agentName != "Custom" ||
-				(agent.HasTrait<Untrusting>() && relationshipLevel < 3) ||
-				(agent.HasTrait<Untrustinger>() && relationshipLevel < 4) ||
-				(agent.HasTrait<Untrustingest>() && relationshipLevel < 5))
+			if (agent.agentName != "Custom")
 				return;
+
+			T_InteractionGate trustTrait = agent.GetTraits<T_InteractionGate>().Where(t => t.MinimumRelationship > 0).FirstOrDefault(); // Should only ever be one
+
+			bool untrusted = trustTrait is null
+				? false
+				: relationshipLevel < trustTrait.MinimumRelationship;
+				//(agent.HasTrait<Untrusting>() && relationshipLevel < 3) ||
+				//			(agent.HasTrait<Untrustinger>() && relationshipLevel < 4) ||
+				//			(agent.HasTrait<Untrustingest>() && relationshipLevel < 5);
 
 			//// Hack
 			//if (interactingAgent.interactionHelper.interactingFar)
@@ -130,7 +134,7 @@ namespace CCU.Patches.Agents
 			//		agentInteractions.AddButton(hack.ButtonText);
 
 			// Hire 
-			if (agent.GetTraits<T_HireType>().Any())
+			if (!untrusted && agent.GetTraits<T_HireType>().Any())
 			{
 				if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 				{
@@ -166,7 +170,9 @@ namespace CCU.Patches.Agents
 			foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
 			{
 				// Simple Exceptions
-				if ((interaction is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
+				if ((!(interaction is Offer_Motivation || interaction is Leave_Weapons_Behind) && untrusted) ||
+					(interaction is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
+					(interaction is Influence_Election && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
 					(interaction is Leave_Weapons_Behind && !interactingAgent.inventory.HasWeapons()) ||
 					(interaction is Offer_Motivation && agent.oma.offeredOfficeDrone) ||
 					(interaction is Pay_Debt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
@@ -179,13 +185,14 @@ namespace CCU.Patches.Agents
 				if (interaction is Buy_Round)
 				{
 					List<Agent> patrons = new List<Agent>();
+
 					for (int i = 0; i < agent.gc.agentList.Count; i++)
 					{
 						Agent possiblePatron = agent.gc.agentList[i];
 
 						if (possiblePatron.startingChunk == agent.startingChunk && possiblePatron != agent && possiblePatron.prisoner == 0 && !possiblePatron.dead && !possiblePatron.zombified && !possiblePatron.oma.mindControlled && possiblePatron.gc.tileInfo.GetTileData(possiblePatron.tr.position).chunkID == possiblePatron.startingChunk)
 						{
-							if (relationship != "Hateful" && relationship != "Aligned" && relationship != VRelationship.Loyal && relationship != "Submissive" &&
+							if (relationship != VRelationship.Hostile && relationship != VRelationship.Aligned && relationship != VRelationship.Loyal && relationship != VRelationship.Submissive &&
 								!possiblePatron.statusEffects.hasTrait("BloodRestoresHealth") && !possiblePatron.statusEffects.hasTrait("OilRestoresHealth"))
 								patrons.Add(possiblePatron);
 						}
@@ -405,7 +412,7 @@ namespace CCU.Patches.Agents
 			}
 
 			// Merchant 
-			if (agent.GetTraits<T_MerchantType>().Any() && agent.hasSpecialInvDatabase)
+			if (!untrusted && agent.GetTraits<T_MerchantType>().Any() && agent.hasSpecialInvDatabase)
 			{
 				bool cantBuy =
 					(agent.HasTrait<Cool_Cannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral") && interactingAgent.agentName != VanillaAgents.Cannibal) ||

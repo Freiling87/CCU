@@ -1,26 +1,32 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CCU.Traits.Cost_Currency
+namespace CCU.Traits.Hire_Duration
 {
-    public class Blood : T_CostCurrency
+    public class Permanent_Hire : CustomTrait
     {
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Blood>()
+            RogueLibs.CreateCustomTrait<Permanent_Hire>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's costs are converted to blood, which can be paid with blood bags. If the agent has Vampirism, the player has an alternative choice.",
+                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Blood)),
+                    [LanguageCode.English] = CTrait.Permanent,
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Alcohol)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

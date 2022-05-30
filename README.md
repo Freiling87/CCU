@@ -27,7 +27,9 @@ CCU traits do not count toward the 8-Trait Limit, since they have no effect on p
 |:--------------------------------------------------|:------------------------------------------------------|
 |Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades<br>- Might extend this to the other traps.
 |Eat Corpses										|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
-|Grab Drugs											|- Grab Drugs, like Me
+|Grab Alcohol										|- Grab Alcohol, like me<br>- Don't do drinks, kids
+|Grab Drugs											|- Grab Drugs, like me also<br>- Don't do drugs, kids
+|Grab Food											|- Grab Food, like your mom
 |Grab Money											|- Grab Money, like Slum Dweller
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
 |Seek & Destroy										|- Stalk & attack players, like Killer Robot
@@ -114,9 +116,11 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 ###				Interaction Gate
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Untrusting											|- Will only interact with Agents Friendly or better 
-|Untrustinger										|- Will only interact with Agents Loyal or better 
-|Untrustingest										|- Will only interact with Agents Aligned
+|Untrusting											|- Will only interact with Agents Friendly or better *
+|Untrustinger										|- Will only interact with Agents Loyal or better *
+|Untrustingest										|- Will only interact with Agents Aligned *
+
+****Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt*
 ###				Loadout
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|

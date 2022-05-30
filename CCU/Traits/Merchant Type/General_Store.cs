@@ -1,21 +1,22 @@
 ﻿using RogueLibsCore;
+using System;
 
-namespace CCU.Traits.Rel_General
+namespace CCU.Traits.Merchant_Type
 {
-    public class Hostile_To_Cannibal : T_Rel_General
+    public class General_Store : T_MerchantType
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hostile_To_Cannibal>()
+            RogueLibs.CreateCustomTrait<General_Store>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to Cannibals.",
+                    [LanguageCode.English] = String.Format("This character sells miscellaneous stuff. A real retail slut."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Hostile_To_Cannibal)),
+                    [LanguageCode.English] = DisplayName(typeof(General_Store)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

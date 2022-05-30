@@ -3,7 +3,7 @@ using SORCE.Localization;
 
 namespace CCU.Traits.Hire_Type
 {
-    public class Hacker : T_HireType
+    public class Cyber_Intruder : T_HireType
     {
         public override string HiredActionButtonText => VButtonText.Hired_HackSomething;
         public override string ButtonText => VButtonText.Hire_Expert;
@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hacker>()
+            RogueLibs.CreateCustomTrait<Cyber_Intruder>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to hack something remotely.",
@@ -20,7 +20,7 @@ namespace CCU.Traits.Hire_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Hacker)),
+                    [LanguageCode.English] = DisplayName(typeof(Cyber_Intruder), "Cyber-Intruder"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
