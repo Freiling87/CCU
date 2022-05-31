@@ -1,27 +1,23 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hire_Duration
+namespace CCU.Traits.Behavior
 {
-    public class HirePermanentOnly : CustomTrait
+    public class Grab_Alcohol : T_Behavior
     {
-        //[RLSetup]
+        public override bool LosCheck => true;
+
+        [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<HirePermanentOnly>()
+            RogueLibs.CreateCustomTrait<Grab_Alcohol>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate. This trait replaces the vanilla hire option.",
+                    [LanguageCode.English] = string.Format("This character will grab alcohol if they see it."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PermanentOnly,
+                    [LanguageCode.English] = DisplayName(typeof(Grab_Alcohol)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

@@ -3,12 +3,12 @@ using System;
 
 namespace CCU.Traits.Merchant_Type
 {
-    public class Soldier : T_MerchantType
+    public class Army_Quartermaster : T_MerchantType
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Soldier>()
+            RogueLibs.CreateCustomTrait<Army_Quartermaster>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells military hardware."),
@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Soldier)),
+                    [LanguageCode.English] = DisplayName(typeof(Army_Quartermaster)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

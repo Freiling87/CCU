@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCU</RootNamespace>
     <AssemblyName>CCU</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -123,6 +123,7 @@
     <Compile Include="Localization\LocalizationTools.cs" />
     <Compile Include="Localization\VButtonText.cs" />
     <Compile Include="Localization\VExplosionType.cs" />
+    <Compile Include="Localization\VItemCategory.cs" />
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Localization\CStatusEffect.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
@@ -154,14 +155,17 @@
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
     <Compile Include="Traits\Behavior\Grab_Drugs.cs" />
+    <Compile Include="Traits\Behavior\Grab_Alcohol.cs" />
+    <Compile Include="Traits\Behavior\Grab_Food.cs" />
     <Compile Include="Traits\Behavior\Grab_Money.cs" />
     <Compile Include="Traits\Behavior\Pick_Pockets.cs" />
     <Compile Include="Traits\Behavior\Seek_and_Destroy.cs" />
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
-    <Compile Include="Traits\Cost Currency\Flesh.cs" />
-    <Compile Include="Traits\Cost Currency\Blood.cs" />
+    <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />
+    <Compile Include="Traits\Cost Currency\Shylock.cs" />
+    <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
     <Compile Include="Traits\Cost Currency\T_CostCurrency.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Big.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Huge.cs" />
@@ -195,7 +199,7 @@
     <Compile Include="Traits\Drug Warrior\T_DrugWarrior.cs" />
     <Compile Include="Traits\Combat\Lockdowner.cs" />
     <Compile Include="Traits\Combat\T_Combat.cs" />
-    <Compile Include="Traits\Cost Currency\Alcohol.cs" />
+    <Compile Include="Traits\Cost Currency\Booze_Bargain.cs" />
     <Compile Include="Traits\CostScale\Zero.cs" />
     <Compile Include="Traits\CostScale\T_CostScale.cs" />
     <Compile Include="Traits\Explode On Death\Big.cs" />
@@ -210,13 +214,14 @@
     <Compile Include="Traits\Explode On Death\Slime.cs" />
     <Compile Include="Traits\Explode On Death\Stomp.cs" />
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
-    <Compile Include="Traits\Hire Duration\HirePermanentOnly.cs" />
-    <Compile Include="Traits\Hire Duration\HirePermanent.cs" />
+    <Compile Include="Traits\Hack\Explode.cs" />
+    <Compile Include="Traits\Hire Duration\Permanent_Hire_Only.cs" />
+    <Compile Include="Traits\Hire Duration\Permanent_Hire.cs" />
     <Compile Include="Traits\Hire Type\Muscle.cs" />
     <Compile Include="Traits\Hire Type\Intruder.cs" />
     <Compile Include="Traits\Hire Type\Decoy.cs" />
     <Compile Include="Traits\Hire Type\Trapper.cs" />
-    <Compile Include="Traits\Hire Type\Hacker.cs" />
+    <Compile Include="Traits\Hire Type\Cyber_Intruder.cs" />
     <Compile Include="Traits\Hire Type\Pickpocket.cs" />
     <Compile Include="Traits\Hire Type\Poisoner.cs" />
     <Compile Include="Traits\Hire Type\Safecracker.cs" />
@@ -270,7 +275,7 @@
     <Compile Include="Traits\Combat\Fearless.cs" />
     <Compile Include="Traits\Combat\Coward.cs" />
     <Compile Include="Traits\Drug Warrior\Wildcard.cs" />
-    <Compile Include="Traits\Cost Currency\Banana.cs" />
+    <Compile Include="Traits\Cost Currency\Banana_Barter.cs" />
     <Compile Include="Traits\CostScale\Less.cs" />
     <Compile Include="Traits\CostScale\More.cs" />
     <Compile Include="Traits\Passive\Extortable.cs" />
@@ -278,6 +283,7 @@
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
     <Compile Include="Traits\Relationships - Faction\T_Rel_Faction.cs" />
+    <Compile Include="Traits\Relationships - General\Faction_Firefighter.cs" />
     <Compile Include="Traits\Relationships - General\Spineful.cs" />
     <Compile Include="Traits\Relationships - General\T_Rel_General.cs" />
     <Compile Include="Traits\Relationships - Player\Player_Secret_Hate.cs" />
@@ -295,8 +301,8 @@
     <Compile Include="Traits\TraitGate\Crushable.cs" />
     <Compile Include="Traits\TraitGate\Bashable.cs" />
     <Compile Include="Traits\TraitGate\Suspecter.cs" />
-    <Compile Include="Traits\Relationships - General\Hostile_To_Cannibal.cs" />
-    <Compile Include="Traits\Relationships - General\Hostile_To_Soldier.cs" />
+    <Compile Include="Traits\Relationships - General\Faction_Military.cs" />
+    <Compile Include="Traits\Relationships - General\Faction_Cannibal.cs" />
     <Compile Include="Traits\Relationships - General\Hostile_To_Vampire.cs" />
     <Compile Include="Traits\Relationships - General\Hostile_To_Werewolf.cs" />
     <Compile Include="Traits\TraitGate\Common_Folk.cs" />
@@ -340,9 +346,9 @@
     <Compile Include="Traits\Merchant Type\Riot_Inc.cs" />
     <Compile Include="Traits\Merchant Type\Pest_Control.cs" />
     <Compile Include="Traits\Merchant Type\Research_Materials.cs" />
-    <Compile Include="Traits\Merchant Type\Shopkeeper.cs" />
+    <Compile Include="Traits\Merchant Type\General_Store.cs" />
     <Compile Include="Traits\Merchant Type\Slave_Shop.cs" />
-    <Compile Include="Traits\Merchant Type\Soldier.cs" />
+    <Compile Include="Traits\Merchant Type\Army_Quartermaster.cs" />
     <Compile Include="Traits\Merchant Type\Sporting_Goods.cs" />
     <Compile Include="Traits\Merchant Type\Teleportationist.cs" />
     <Compile Include="Traits\Merchant Type\Hardware_Store.cs" />
@@ -351,7 +357,7 @@
     <Compile Include="Traits\Merchant Type\Throwcery_Store.cs" />
     <Compile Include="Traits\Merchant Type\Toy_Store.cs" />
     <Compile Include="Traits\Merchant Type\Upper_Cruster.cs" />
-    <Compile Include="Traits\Merchant Type\Vampire.cs" />
+    <Compile Include="Traits\Merchant Type\Sanguisuge_Specialties.cs" />
     <Compile Include="Traits\Merchant Type\Villains_Vault.cs" />
     <Compile Include="Traits\Appearance\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="Core.cs" />
@@ -368,12 +374,12 @@
     <Compile Include="Traits\TraitGate\T_TraitGate.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\TraitGate\Honorable_Thief.cs" />
-    <Compile Include="Traits\Merchant Type\Thief.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Beard.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Mustache.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\MustacheCircus.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\MustacheRedneck.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\NoFacialHair.cs" />
+    <Compile Include="Traits\Merchant Type\Intruders_Warehouse.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Add_Beard.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Add_Mustache.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Add_Mustache_Circus.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Add_Mustache_Redneck.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Add_No_Facial_Hair.cs" />
     <Compile Include="Traits\Relationships - Faction\Faction_1_Aligned.cs" />
     <Compile Include="Traits\Relationships - Faction\Faction_1_Hostile.cs" />
     <Compile Include="Traits\Relationships - Faction\Faction_2_Aligned.cs" />
@@ -383,6 +389,7 @@
     <Compile Include="Traits\Relationships - Faction\Faction_4_Aligned.cs" />
     <Compile Include="Traits\Relationships - Faction\Faction_4_Hostile.cs" />
     <Compile Include="Traits\T_CCU.cs" />
+    <Compile Include="Utilities\Legacy\NameUpdates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scratchpad.md" />
@@ -398,9 +405,11 @@
     <Folder Include="Traits\Appearance\SkinColor\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\CCScreenshotExample.jpg" />
     <Content Include="Images\CCU_16x16.png" />
     <Content Include="Images\CCU_64x64.png" />
-    <Content Include="Images\ChunkEditor.png" />
+    <Content Include="Images\CCU_Large.png" />
+    <Content Include="Localization\CDialogueConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

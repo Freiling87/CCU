@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Pay_Debt : T_Interaction
     {
+        public override bool AllowUntrusted => true;
         public override string ButtonText => VButtonText.PayDebt;
         public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => null;

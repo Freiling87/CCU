@@ -1,33 +1,26 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
-using System;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Cost_Currency
 {
-    public class Buy_Slave : T_Interaction
+    public class Blood_Covenant : T_CostCurrency
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.PurchaseSlave;
-        public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => null; // Determined in code
-
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buy_Slave>()
+            RogueLibs.CreateCustomTrait<Blood_Covenant>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If this character owns any Slaves, they will sell them."),
+                    [LanguageCode.English] = "This character's costs are converted to blood, which can be paid with blood bags. If the agent has Vampirism, the player has an alternative choice... but they're being a little dodgy about specifics.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Buy_Slave)),
+                    [LanguageCode.English] = DisplayName(typeof(Blood_Covenant)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = { DisplayName(typeof(Booze_Bargain)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

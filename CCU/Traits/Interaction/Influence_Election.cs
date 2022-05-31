@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Influence_Election : T_Interaction
     {
+        public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.InfluenceElection;
         public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => VDetermineMoneyCost.BribeElection;

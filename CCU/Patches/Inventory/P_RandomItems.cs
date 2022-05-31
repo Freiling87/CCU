@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx.Logging;
+﻿using BepInEx.Logging;
 using CCU.Traits.Merchant_Type;
 using HarmonyLib;
 using UnityEngine;
 
 namespace CCU.Patches.Inventory
 {
-	[HarmonyPatch(declaringType: typeof(RandomItems))]
+    [HarmonyPatch(declaringType: typeof(RandomItems))]
 	class P_RandomItems
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -33,7 +28,7 @@ namespace CCU.Patches.Inventory
 			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Armorer)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.ArmorDurabilitySpray, 2);
 			sel.CreateRandomElement(rList, vItem.BulletproofVest, 3);
-			sel.CreateRandomElement(rList, vItem.Codpiece, 2);
+			sel.CreateRandomElement(rList, vItem.CodPiece, 2);
 			sel.CreateRandomElement(rList, vItem.FireproofSuit, 1);
 			sel.CreateRandomElement(rList, vItem.GasMask, 1);
 			sel.CreateRandomElement(rList, vItem.HardHat, 1);
@@ -57,7 +52,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.BaconCheeseburger, 3);
 			sel.CreateRandomElement(rList, vItem.Beer, 6);
 			sel.CreateRandomElement(rList, vItem.BraceletofStrength, 2);
-			sel.CreateRandomElement(rList, vItem.Codpiece, 3);
+			sel.CreateRandomElement(rList, vItem.CodPiece, 3);
 			sel.CreateRandomElement(rList, vItem.HamSandwich, 3);
 			sel.CreateRandomElement(rList, vItem.RagePoison, 1);
 			sel.CreateRandomElement(rList, vItem.Sword, 3);
@@ -212,7 +207,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.BananaPeel, 8);
 			sel.CreateRandomElement(rList, vItem.BaseballBat, 2);
 			sel.CreateRandomElement(rList, vItem.CardboardBox, 2);
-			sel.CreateRandomElement(rList, vItem.Codpiece, 2);
+			sel.CreateRandomElement(rList, vItem.CodPiece, 2);
 			sel.CreateRandomElement(rList, vItem.FourLeafClover, 1);
 			sel.CreateRandomElement(rList, vItem.FreeItemVoucher, 1);
 			sel.CreateRandomElement(rList, vItem.HiringVoucher, 1);
@@ -344,7 +339,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.RagePoison, 1);
 			sel.CreateRandomElement(rList, vItem.Rock, 4);
 
-			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Shopkeeper)), "Items", "Item"); // Vanilla
+			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(General_Store)), "Items", "Item"); // Vanilla
 			sel.CreateRandomElement(rList, "Food", 10);
 			sel.CreateRandomElement(rList, "Medical2", 5);
 			sel.CreateRandomElement(rList, "Gun1", 3);
@@ -362,7 +357,7 @@ namespace CCU.Patches.Inventory
 
 			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Slave_Shop)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.Axe, 2);
-			sel.CreateRandomElement(rList, vItem.Codpiece, 2);
+			sel.CreateRandomElement(rList, vItem.CodPiece, 2);
 			sel.CreateRandomElement(rList, vItem.DizzyGrenade, 2);
 			sel.CreateRandomElement(rList, vItem.FreezeRay, 1);
 			sel.CreateRandomElement(rList, vItem.Sword, 2);
@@ -376,14 +371,14 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.SlaveHelmetRemover, 1);
 			sel.CreateRandomElement(rList, vItem.Wrench, 2);
 
-			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Soldier)), "Items", "Item"); // Vanilla
+			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Army_Quartermaster)), "Items", "Item"); // Vanilla
 			sel.CreateRandomElement(rList, "Gun2", 3);
 			sel.CreateRandomElement(rList, "Gun3", 3);
 			sel.CreateRandomElement(rList, "WeaponMod", 1);
 
 			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Sporting_Goods)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BaseballBat, 3);
-			sel.CreateRandomElement(rList, vItem.Codpiece, 2);
+			sel.CreateRandomElement(rList, vItem.CodPiece, 2);
 			sel.CreateRandomElement(rList, vItem.FirstAidKit, 2);
 			sel.CreateRandomElement(rList, vItem.KillerThrower, 2);
 			sel.CreateRandomElement(rList, vItem.MusclyPill, 2);
@@ -408,7 +403,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.WallBypasser, 2);
 			sel.CreateRandomElement(rList, vItem.WarpGrenade, 2);
 
-			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Thief)), "Items", "Item"); // Vanilla
+			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Intruders_Warehouse)), "Items", "Item"); // Vanilla
 			sel.CreateRandomElement(rList, "Crowbar", 3);
 			sel.CreateRandomElement(rList, "Lockpick", 3);
 			sel.CreateRandomElement(rList, "SafeBuster", 3);
@@ -447,7 +442,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, "BraceletStrength", 1);
 			sel.CreateRandomElement(rList, "FriendPhone", 1);
 
-			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Vampire)), "Items", "Item");
+			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Sanguisuge_Specialties)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BloodBag, 6);
 			sel.CreateRandomElement(rList, vItem.Cologne, 1);
 			sel.CreateRandomElement(rList, vItem.Hypnotizer, 2);

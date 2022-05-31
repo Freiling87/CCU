@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Administer_Blood_Bag : T_Interaction
     {
+        public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.AdministerBloodBag;
         public override bool ExtraTextCostOnly => true;
         public override string InteractionCost => VDetermineMoneyCost.HP_20;

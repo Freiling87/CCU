@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Identify : T_Interaction
     {
+        public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.Identify;
         public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => VDetermineMoneyCost.IdentifySyringe;

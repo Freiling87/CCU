@@ -1,26 +1,28 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Cost_Currency
+namespace CCU.Traits.Behavior
 {
-    public class Alcohol : T_CostCurrency
+    public class Grab_Food : T_Behavior
     {
-        //[RLSetup]
+        public override bool LosCheck => true;
+
+        [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Alcohol>()
+            RogueLibs.CreateCustomTrait<Grab_Food>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's costs are converted to Alcohol.",
+                    [LanguageCode.English] = string.Format("This character will grab food if they see it."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Alcohol)),
+                    [LanguageCode.English] = DisplayName(typeof(Grab_Food)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Banana)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

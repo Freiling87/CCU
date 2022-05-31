@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Give_Blood : T_Interaction
     {
+        public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.DonateBlood;
         public override bool ExtraTextCostOnly => true;
         public override string InteractionCost =>

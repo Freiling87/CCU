@@ -18,7 +18,7 @@ namespace CCU.Extensions
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalDetails.LockpickDoorReal))]
 		public static void LockpickDoorReal_Postfix(GoalDetails __instance, ref Agent ___agent)
 		{
-			if (___agent.HasTrait<HirePermanent>() || ___agent.HasTrait<HirePermanentOnly>())
+			if (___agent.HasTrait<Permanent_Hire>() || ___agent.HasTrait<Permanent_Hire_Only>())
 			{
 				// TODO: Figure out how to track a bool here
 				// Or, make a PermHired status effect?

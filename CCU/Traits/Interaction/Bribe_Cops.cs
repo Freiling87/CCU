@@ -6,6 +6,7 @@ namespace CCU.Traits.Interaction
 {
     public class Bribe_Cops : T_Interaction
     {
+        public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.BribeCops;
         public override bool ExtraTextCostOnly => false;
         public override string InteractionCost => VDetermineMoneyCost.BribeCops;

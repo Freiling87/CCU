@@ -6,6 +6,7 @@ using UnityEngine;
 using RogueLibsCore;
 using CCU.Traits.Trait_Gate;
 using CCU.Traits.Behavior;
+using SORCE.Localization;
 
 namespace CCU.Patches.Agents
 {
@@ -373,7 +374,33 @@ namespace CCU.Patches.Agents
 											}
 										}
 									}
-									
+
+									if (___agent.HasTrait<Grab_Alcohol>())
+									{
+										___agent.losCheckAtIntervalsTime = 0;
+
+										if (!___agent.hasEmployer)
+										{
+											List<Item> itemList = __instance.gc.itemList;
+
+											for (int n = 0; n < itemList.Count; n++)
+											{
+												Item item2 = itemList[n];
+
+												if (item2.invItem.Categories.Contains(VItemCategory.Alcohol) &&
+													!item2.fellInHole && item2.curTileData.prison == ___agent.curTileData.prison && !item2.dontStealFromGround &&
+													(___agent.curTileData.prison <= 0 || ___agent.curTileData.chunkID == item2.curTileData.chunkID) &&
+													!__instance.gc.tileInfo.DifferentLockdownZones(___agent.curTileData, item2.curTileData) && ___agent.curPosX - 5f < item2.curPosition.x && ___agent.curPosX + 5f > item2.curPosition.x && ___agent.curPosY - 5f < item2.curPosition.y && ___agent.curPosY + 5f > item2.curPosition.y && ___agent.movement.HasLOSObjectNormal(item2))
+												{
+													___agent.SetPreviousDefaultGoal(___agent.defaultGoal);
+													___agent.SetDefaultGoal("GoGet");
+													___agent.SetGoGettingTarget(item2);
+													___agent.stoleStuff = true;
+													goto SkipAbilities;
+												}
+											}
+										}
+									}
 									if (___agent.HasTrait<Grab_Drugs>())
 									{
 										___agent.losCheckAtIntervalsTime = 0;
@@ -400,7 +427,33 @@ namespace CCU.Patches.Agents
 											}
 										}
 									}
-									
+									if (___agent.HasTrait<Grab_Food>())
+									{
+										___agent.losCheckAtIntervalsTime = 0;
+
+										if (!___agent.hasEmployer)
+										{
+											List<Item> itemList = __instance.gc.itemList;
+
+											for (int n = 0; n < itemList.Count; n++)
+											{
+												Item item2 = itemList[n];
+
+												if (item2.invItem.Categories.Contains(VItemCategory.Food) &&
+													!item2.fellInHole && item2.curTileData.prison == ___agent.curTileData.prison && !item2.dontStealFromGround &&
+													(___agent.curTileData.prison <= 0 || ___agent.curTileData.chunkID == item2.curTileData.chunkID) &&
+													!__instance.gc.tileInfo.DifferentLockdownZones(___agent.curTileData, item2.curTileData) && ___agent.curPosX - 5f < item2.curPosition.x && ___agent.curPosX + 5f > item2.curPosition.x && ___agent.curPosY - 5f < item2.curPosition.y && ___agent.curPosY + 5f > item2.curPosition.y && ___agent.movement.HasLOSObjectNormal(item2))
+												{
+													___agent.SetPreviousDefaultGoal(___agent.defaultGoal);
+													___agent.SetDefaultGoal("GoGet");
+													___agent.SetGoGettingTarget(item2);
+													___agent.stoleStuff = true;
+													goto SkipAbilities;
+												}
+											}
+										}
+									}
+
 									if (___agent.agentName == "Cannibal" || (___agent.specialAbility == vSpecialAbility.Cannibalize && ___agent.HasTrait<Eat_Corpses>()))
 									{
 										___agent.losCheckAtIntervalsTime = 0;

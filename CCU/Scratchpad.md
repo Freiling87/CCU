@@ -38,11 +38,108 @@ Pending pilot
 Pending pilot
 ###			C	Roamer Level Feature
 New
+###			H	Repair Armor
+New
+###			H	Repair Weapons
+New
+###			H	Pay respects to Faction
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
+###			H	Sell Intel to Faction 
+Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
+###			H	Start Election
+New
+###			H	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			H	This One's On Me
+Buy a round for a patron and anyone with the same owner ID in the chunk.
+No drink for that guy in the corner. Fuck that guy.
+###			H	Train Attributes (Split to each)
+New
+###			H	Train Traits - Defense
+New
+Sell traits for double their Upgrade Machine cost
+###			H	Train Traits - Guns
+New
+###			H	Train Traits - Melee
+New
+###			H	Train Traits - Movement
+New
+###			H	Train Traits - Social
+New
+###			H	Train Traits - Stealth
+New
+###			H	Train Traits - Trade
+New
+###			H	Visitor's Badge
+Set Bribe options on separate traits
+###			√	Administer Blood Bag
+Complete
+###			√	Borrow Money
+Complete
+###			√	Borrow Money (Moocher)
+Complete
+###			√	Bribe Cops
+Complete
+###			√	Bribe For Entry (Alcohol)
+Complete
+###			√	Buy Round
+Complete
+###			√	Give Blood
+Complete
+###			√	Heal (Player)
+Complete
+###			√	Identify
+Complete
+###			√	Influence Election
+Complete
+###			√	Leave Weapons Behind
+Complete
+###			√	Manage Chunk
+####			√	Arena
+Complete
+####			√	Deportation Center
+Complete
+####			√	Hotel
+Complete
+###			√	Offer Motivation
+Complete
+###			√	Pay Debt
+Complete
+###			√	Pay Entry Fee
+Complete
+###			√	Play Bad Music
+Complete
+###			√	Use Blood Bag
+Complete
+##		√H	Interaction Gate
+###			C	Insular
+###			C	Insularer
+###			C	Insularest
+###			√	Untrusting
+Complete
+###			√	Untrustinger
+Complete
+###			√	Untrustingest
+Complete
+##		H	Hack
+###			C	00 Interrupts
+Works with Electronic, but hacking bar is interrupted
+###			T	Go Haywire
+Attempted
+###			T	Tamper With Aim
+Attempted
 ##		H	Appearance
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
   - Should be a simple fix since it's doing less rather than more.
 ###			C	Facial Hair
+####			C	Trait names changed
+Changed trait names to not overlap with vanilla names. 
+This will likely break the BEARD MACHINE, because it was based directly on the class names.
 ####			C	Vanilla facial hair no longer spawns
 New
 ###			C	Hair Type
@@ -237,6 +334,9 @@ New
 New
 ###			H	Drink Blood
 New
+###			C	Hack
+####			C	Cyber Nuke
+Giving character Cyber Nuke allows Blow Up option, but it doesn't work
 ###			H	Handcuff
 New
 ###			H	Mug
@@ -306,204 +406,6 @@ Complete
 Complete
 ###			√	Hack
 Complete
-##		√H	Interaction
-###			H	Buy Slave
-Pending actual assignment of owned slaves 
-###			H	Cybernetic Surgery
-Curated Trait-seller
-###			H	Heal All
-Like Doctor heal, but all in party with calculated price
-###			H	Heal Other
-Like Doctor heal, but activates reticle so you can select a party member or other.
-###			H	Heal Partial
-Like Doctor heal, but at a Blood Bag level.
-####			C	Mouseover Price
-Show price to heal targeted agent before selection
-###			H	Quest Giver
-New
-###			H	Refill Guns
-New
-###			H	Repair Armor
-New
-###			H	Repair Weapons
-New
-###			H	Pay respects to Faction
-Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
-"Improve Faction Relations"
-Should only allow for 1 of these to simplify algorithm
-But this means you'll need further faction traits
-###			H	Sell Intel to Faction 
-Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
-###			H	Start Election
-New
-###			H	Summon Professional
-New
-Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			H	This One's On Me
-Buy a round for a patron and anyone with the same owner ID in the chunk.
-No drink for that guy in the corner. Fuck that guy.
-###			H	Train Attributes (Split to each)
-New
-###			H	Train Traits - Defense
-New
-Sell traits for double their Upgrade Machine cost
-###			H	Train Traits - Guns
-New
-###			H	Train Traits - Melee
-New
-###			H	Train Traits - Movement
-New
-###			H	Train Traits - Social
-New
-###			H	Train Traits - Stealth
-New
-###			H	Train Traits - Trade
-New
-###			H	Visitor's Badge
-Set Bribe options on separate traits
-###			√	Administer Blood Bag
-Complete
-###			√	Borrow Money
-Complete
-###			√	Borrow Money (Moocher)
-Complete
-###			√	Bribe Cops
-Complete
-###			√	Bribe For Entry (Alcohol)
-Complete
-###			√	Buy Round
-Complete
-###			√	Give Blood
-Complete
-###			√	Heal (Player)
-Complete
-###			√	Identify
-Complete
-###			√	Influence Election
-Complete
-###			√	Leave Weapons Behind
-Complete
-###			√	Manage Chunk
-####			√	Arena
-Complete
-####			√	Deportation Center
-Complete
-####			√	Hotel
-Complete
-###			√	Offer Motivation
-Complete
-###			√	Pay Debt
-Complete
-###			√	Pay Entry Fee
-Complete
-###			√	Play Bad Music
-Complete
-###			√	Use Blood Bag
-Complete
-##		√H	Interaction Gate
-###			C	Insular
-###			C	Insularer
-###			C	Insularest
-###			√	Untrusting
-Complete
-###			√	Untrustinger
-Complete
-###			√	Untrustingest
-Complete
-##		H	Loadout
-###			C	CC Items Inclusion
-Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
-###			C	Guns_Common
-New
-###			C	Discreet
-Automatically applies Silencer to all held weapons on load
-###			C	Infinite Ammo
-New
-###			C	Infinite Consumables
-New
-###			C	Infinite Durability
-New
-###			C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
-###			√	Manager Key
-Complete
-###			√	Manager Mayor Badge
-Complete
-###			√	Manager Safe Combo
-Complete
-##		H	Map Marker
-Statuseffects.agent.SpawnNewMapMarker()
-###			P	General Notes
-- Check out:
-GC
-	.questMarkerList
-PlayfieldObject
-	.MinimapDisplay
-x	.SpawnBigQuestMapMarker			Just goes into MinimapDisplay
-x	.SpawnedBigQuetsMarkerRecently	Not relevant
-	.SpawnNewMapMarker				This is where DrugDealer/Shopkeeper/etc. are detected
-Quest
-	.questMarkerPrefab
-QuestMarker
-	Entire class!
-	.NetworkmarkerName = agentRealName		This looks like where marker type is determined
-
-- Also, check out the GPYess trait and see where that comes up.
-###			C	Pilot
-No more errors, but no map marker. 
-###			H	Bartender
-Pending pilot
-###			H	Drug Dealer
-Pending pilot
-###			H	Killer Robot
-Pending pilot
-###			H	Question Mark
-Pending pilot
-###			H	Shopkeeper
-Pending pilot
-###			H	Portrait
-Pending customs
-##		H	Merchant
-###			H	Buyer
-New
-###			H	Buyer Only
-New
-###			H	Inventory Size Large
-Ten items
-###			H	Inventory Refresh
-Refresh on purchase
-###			H	Inventory Size Small
-One item
-####			C	Get full list of Vendor traits to test and complete category
 ##		√	Merchant Type
 Complete
 ##		√H	Passive
@@ -544,8 +446,9 @@ Agent.customZombified
 Complete
 ###			√	Extortable
 Complete
-###			√	Guilty
-Complete
+###			C	Guilty
+####			C	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
 ###			√	Innocent
 Complete
 ###			√	Possessed
@@ -555,6 +458,9 @@ Complete
 ###			√	Z-Infected
 Complete
 ##		√H	Relationships - Faction
+###			C	Faction Firefighter
+###			C	Faction Cannibal
+###			C	Faction Military
 ###			C	General concept
 Friendly to faction doesn't align you. You do not inherit the faction's relationships.
 Loyal causes you to inherit its relationships, but negative ones are moderated:

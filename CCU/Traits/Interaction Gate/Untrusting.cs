@@ -13,7 +13,11 @@ namespace CCU.Traits.Interaction_Gate
             RogueLibs.CreateCustomTrait<Untrusting>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will not interact with anyone Neutral or worse."),
+                    [LanguageCode.English] = String.Format("This character will only interact with Friendly or better.\n\n" +
+                    "Exceptions: \n" +
+                    "- Leave Weapons Behind\n" +
+                    "- Offer Motivation\n" +
+                    "- Pay Debt"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
