@@ -1,25 +1,22 @@
-﻿using CCU.Localization;
-using RogueLibsCore;
-using System;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Drug_Warrior
+namespace CCU.Traits.Rel_General
 {
-    public class Suicide_Bomber_Normal : T_DrugWarrior
+    public class Spineful : T_Rel_General
     {
-        public override string DrugEffect => CStatusEffect.SuicideBomb;
-
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Suicide_Bomber_Normal>()
+            RogueLibs.CreateCustomTrait<Spineful>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will die in a Normal explosion 15 seconds after starting combat."),
+                    [LanguageCode.English] = "This character will never go Submissive.\n\n" + 
+                    "Use case: Gang members running a protection racket and serving as guards for a business owner, instead of hired goons who just want to go home at the end of the day.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Suicide_Bomber_Normal), "Suicide Bomber (Normal)"),
+                    [LanguageCode.English] = DisplayName(typeof(Spineful)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

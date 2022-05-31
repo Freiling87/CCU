@@ -17,5 +17,7 @@ namespace CCU.Traits
             (type.Name).Replace('_', ' ');
 
         public string TextName => DisplayName(GetType());
+
+        
     }
 }

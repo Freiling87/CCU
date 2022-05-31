@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
             RogueLibs.CreateCustomTrait<Player_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned to players.",
+                    [LanguageCode.English] = "This character is Hostile to players.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

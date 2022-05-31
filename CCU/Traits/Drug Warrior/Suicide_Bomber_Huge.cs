@@ -8,7 +8,7 @@ namespace CCU.Traits.Drug_Warrior
     {
         public override string DrugEffect => CStatusEffect.SuicideBomb;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Suicide_Bomber_Huge>()

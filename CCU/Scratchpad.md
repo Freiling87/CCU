@@ -6,6 +6,11 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	C	General
+##		C	Hide CCU Traits
+###			C	When Possessing, show up on left
+###			C	Upgrade Machine
+##		C	Crepe Lookout pickpocketed Crepe Enforcer
+Need a relationship check
 ##		H	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
@@ -24,6 +29,283 @@ The config file should match the name of the campaign, if they allow the same ch
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	√H	Traits
+##		H	Agent Group
+###			C	Slum NPCs (Pilot)
+New
+###			H	Affect Campaign
+Pending pilot
+###			H	Affect Vanilla 
+Pending pilot
+###			C	Roamer Level Feature
+New
+##		H	Appearance
+###			C	Full-randomization bug
+- Whole appearance is randomized when any appearance trait is added.
+  - Should be a simple fix since it's doing less rather than more.
+###			C	Facial Hair
+####			C	Vanilla facial hair no longer spawns
+New
+###			C	Hair Type
+New
+###			C	Skin Color
+New
+##		√H	Behavior
+###			C	Absconder
+Once hostile to a player, flees to exit elevator
+###			H	Clean Trash
+New
+###			H	Confiscate Contraband
+Should also spawn Confiscation Center (See SORCE)
+###			C	Curious
+Investigate noises like cop & shopkeeper
+###			H	Deport Non-Citizens
+Should also spawn Deportation Center (See SORCE)
+###			C	Fucking Salesman
+Knocks on non-restricted locked doors, moves on after a pause
+###			H	Fight Fires
+Agent.firefighter
+Agent.fightsFires
+###			H	Grab Everything
+New
+###			H	Grab Food
+New
+###			H	Guard Door
+New
+###			C	Heister
+Picks a chest on the level, and tries to fight their way to loot it. 
+If successful, deactivates behavior.
+###			H	Hobo Beg (Custom)
+Maybe just implement the whole Hey, You! overhaul here
+###			H	Hog Turntables
+New
+Allow paid Musician behavior
+###			H	Mutinous
+Agent.mutinous
+###			C	Needful
+Will seek out Musician need objects and operate them
+###			C	Paranoid
+Constant search state
+###			H	SecretHate
+Agent.secretHate
+Agent.choseSecretHate
+I think this is Bounty behavior
+###			H	Shakedown Player (Mobster)
+New
+Use this on leader w/ Wander Level
+Use "Follow" behavior on agents placed behind them
+No need for "Roaming Gang" Trait itself
+###			C	Sleepyhead
+Will default to finding a bed to sleep in, returning even after combat.
+###			C	Slowpoke
+Takes a longer time to react to everything
+###			C	Suicdal
+Walks into hazards, only those they can see
+###			H	Tattle (Upper Cruster)
+New
+###			C	Wage-Exempt
+Will "mug" you for a tip after any transaction
+###			√H	Accident-Prone
+Works for: Crusher, Fire Spewer, Saw Blade
+####			C	Slime, Floor Trigger, ??
+New
+###			C	Vandal
+Destroys public objects or Windows on a whim
+###			√	Eat Corpse
+Complete
+###			√	Grab Drugs
+Complete
+###			√	Grab Money
+Complete
+###			√	Pickpocket
+Complete
+###			√	Seek & Destroy (Killer Robot)
+Complete
+##		H	Campaign Flags
+Might need to limit this to a single flag, since having multiple true at the same time would complicate things
+###			C	If Paid then Flag A/B/C/D True
+New
+###			C	If Killed then Flag A/B/C/D True
+Etc.
+##		√H	Combat
+###			H	Lockdowner (R.I.P.)
+Apparently Lockdown walls are broken in custom levels.
+###			C	Call for Backup
+Calls cops on you when going hostile
+Ensure this applies to all enforcers, not just cops
+###			C	Gloater
+Will dance on corpses and make loud noise if they win a combat
+###			√	Coward
+Complete
+###			√	Fearless
+Complete
+##		√H	Cost Currency
+###			C	00 Button ExtraCost Display
+Bananas & alcohol are hardcoded
+To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
+###			H	Alcohol
+A la Bouncer
+###			H	Banana
+Test
+###			C	Blood
+Blood Bags always an option
+If Vampirism, allow drink
+###			C	Flesh
+Require Cannibalism? Maybe not
+##		√	Cost Scale
+###			√	Less
+Complete
+###			√	More
+Complete
+###			√	Zero
+Complete
+##		√H	Drug Warrior
+###			C	Suicide Bomber
+Initiate a 15s timer, then detonate a Huge explosion
+##		√H	Explode On Death
+###			C	00 Destroy body
+For all non-normal explosion types
+This will complete about half the holds in here.
+###			H	00 Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			H	Dizzy
+Body remained
+###			H	EMP
+Works, but body remained
+###			H	Firebomb
+Didn't do anything
+###			H	Noise Only
+Doesn't work
+Also not interesting
+###			H	Oil
+This doesn't exist but should follow water logic. Plus there are many other uses.
+###			H	Ooze
+Only did particle effect
+###			H	Ridiculous
+Only did particle effect, didn't end slow-mo, no kills.
+This is the Bomb disaster one, so it will need special attention.
+###			H	Slime
+Only did particle effect
+###			H	Stomp
+Did particle effect
+Pushed body away
+Didn't stun anyone
+###			H	Warp
+Complete
+###			H	Water
+Body remained
+###			√	Big
+Complete
+###			√	Normal
+Complete
+###			√	Huge
+Complete
+##		H	Hack
+###			C	00 Interrupts
+Works with Electronic, but hacking bar is interrupted
+###			T	Go Haywire
+Attempted
+###			T	Tamper With Aim
+Attempted
+##		H	Hire Duration
+###			C	Fairweather Flunkie
+Hiree will leave if they're damaged in combat
+"I didn't sign up for this! You're nuts!"
+###			C	Faithful Flunkie
+Hiree will never "Not feel too good" and quit.
+###			C	Homesickness Disabled
+Automatic Homesickness Killer
+###			C	Homesickness Mandatory
+Overrides Homesickness Killer
+###			C	Permanent Hire
+New
+~8x normal hire price
+Does not affect damage threshold
+###			C	Permanent Hire Only
+As above, but removes the single-use hire option.
+###			C	Start as Hired
+On level entry
+###			C	Timed Hire: 30s
+Is this one even interesting?
+##		√H	Hire Type
+###			C	00 Split off Hire Base Cost
+Not referring to final cost, but the Hacker/Soldier cost tiers
+###			H	Chloroform
+New
+###			H	Devour Corpse
+New
+###			H	Disarm Trap
+New
+###			H	Drink Blood
+New
+###			H	Handcuff
+New
+###			H	Mug
+One-time use, mug target NPC
+###			H	Pickpocket
+New
+###			H	Poison
+New 
+###			H	Safecrack
+- Reticle does not activate 
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
+	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
+	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
+	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
+
+Here's what comes up for Lockpick job:
+	Agent
+√		.GetCodeFromJob
+√		.GetJobCode					Need to extend jobType enum
+√		.ObjectAction
+	AgentInteractions
+√		.DetermineButtons
+√		.LockpickDoor				
+√		.PressedButton	
+	GoalDoJob
+√		.Activate					Check out 
+√		.Terminate
+	GoalDetails						E_GoalDetails
+√		.LockpickDoorReal
+	GoalLockpickDoor				GoalSafecrackSafe
+√		.Activate
+√		.Process
+√		.Terminate
+	GoalLockpickDoorReal			GoalSafecrackSafeReal
+√		.Activate
+√		.Process
+√		.Terminate
+	InvInterface
+√		.ShowTarget					
+√		.ShowTarget2
+	ObjectMult
+		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
+	PlayfieldObjectInteractions
+√		.TargetObject
+
+Objects to Analyze/track:
+	Agent
+		job
+		jobCode
+		target.targetType
+
+In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
+###			H	Set Explosive
+On door or Safe: Plants door detonator
+Elsewhere: Remote bomb
+Gives you detonator when planted
+###			H	Set Time Bomb
+Based on and consumes Time Bombs in inventory. NPC starts with one.
+###			H	Tamper
+- Interface works but reticle is green for non-tamperable items.
+  - Log message "Not implemented yet", fair enough
+###			√	Bodyguard
+Complete
+###			√	Break In
+Complete
+###			√	Cause a Ruckus
+Complete
+###			√	Hack
+Complete
 ##		√H	Interaction
 ###			H	Buy Slave
 Pending actual assignment of owned slaves 
@@ -128,77 +410,56 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
-##		H	Hack
-###			C	00 Interrupts
-Works with Electronic, but hacking bar is interrupted
-###			T	Go Haywire
-Attempted
-###			T	Tamper With Aim
-Attempted
-##		H	Appearance
-###			C	Full-randomization bug
-- Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more.
-###			C	Facial Hair
-####			C	Vanilla facial hair no longer spawns
+##		H	Loadout
+###			C	CC Items Inclusion
+Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
+###			C	Guns_Common
 New
-###			C	Hair Type
+###			C	Discreet
+Automatically applies Silencer to all held weapons on load
+###			C	Infinite Ammo
 New
-###			C	Skin Color
+###			C	Infinite Consumables
 New
-##		H	Bodyguarded
+###			C	Infinite Durability
 New
-- There are a few other hits that came up in a string search (possibly "Musician"):
-  - LoadLevel.SpawnStartingFollowers
-  - ObjectMult.StartWithFollowersBodyguardA
-    - Ignore this one, it's for the Player Bodyguard trait
-- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
-###			C	Pilot Trait
-No errors, but no effect.
-###			C	Bodyguard Quantity Traits?
-One / few / many, that's it
-###			C	Bodyguarded - Cop
-New
-###			C	Bodyguarded - Blahd
-New
-###			C	Bodyguarded - Crepe
-New
-###			C	Bodyguarded - Goon
-New
-###			C	Bodyguarded - Gorilla
-New
-###			C	Bodyguarded - Mafia
-New
-###			C	Bodyguarded - Soldier
-New
-###			C	Bodyguarded - Supercop
-New
-###			C	Bodyguarded - Supergoon
-New
-##		H	Campaign Flags
-Might need to limit this to a single flag, since having multiple true at the same time would complicate things
-###			C	If Paid then Flag A/B/C/D True
-New
-###			C	If Killed then Flag A/B/C/D True
-Etc.
-##		H	Hire Duration
-###			C	Fairweather Flunkie
-Hiree will leave if they're damaged in combat
-"I didn't sign up for this! You're nuts!"
-###			C	Faithful Flunkie
-Hiree will never "Not feel too good" and quit.
-###			C	Homesickness Disabled
-Automatic Homesickness Killer
-###			C	Homesickness Mandatory
-Overrides Homesickness Killer
-###			C	Permanent Hire
-New
-~8x normal hire price
-Does not affect damage threshold
-###			C	Permanent Hire Only
-As above, but removes the single-use hire option.
-###			C	Timed Hire: 30s
-Is this one even interesting?
+###			C	Item Groups
+uwumacaronitime's idea: Item groups similar to NPC groups
+
+I can see this going two ways: 
+- As a trait for NPCs to generate with
+- As a designated item in the chunk creator for use in NPC & Object inventories. 
+
+I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
+
+Vanilla list:
+- Defense
+- Drugs
+- Food
+- Guns
+- GunAccessory
+- Melee
+- Movement
+- NonViolent
+- NonUsableTool
+- NonStandardWeapons
+- NonStandardWeapons2
+- NotRealWeapons
+- Passive
+- Social
+- Stealth
+- Supplies
+- Technology
+- Trade
+- Usable
+- Weapons
+- Weird
+###			√	Manager Key
+Complete
+###			√	Manager Mayor Badge
+Complete
+###			√	Manager Safe Combo
+Complete
 ##		H	Map Marker
 Statuseffects.agent.SpawnNewMapMarker()
 ###			P	General Notes
@@ -236,305 +497,46 @@ Pending customs
 New
 ###			H	Buyer Only
 New
-###			H	Large Inventory
-New
-###			H	Refresh Inventory
-New
-###			H	Small Inventory
-New
-###			C	Vendor
+###			H	Inventory Size Large
+Ten items
+###			H	Inventory Refresh
+Refresh on purchase
+###			H	Inventory Size Small
+One item
 ####			C	Get full list of Vendor traits to test and complete category
-##		H	Spawn
-###			C	Enslaved
-New
-###			C	Hide In Object
-Detect Bush/Manhole on same tile
-###			C	Respawn
-Never-ending waves of enemies
-####			C	Respawn Delay
-0, 3, 15, 30, 60, 120, 180 seconds
-####			C	Respawn Quantity
-1, 3, 10, Infinite
-###			C	Roaming Gang
-New
-###			C	Slave Owner
-NEw			
-##		H	Utility
-###			C	Hide Traits in Collapsed Groups
-- While in Character Creator, hide traits in Collapsed Groups
-  - Once all traits are in they're going to get hard to manage. 
-###			C	Sort active Traits by Name
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-- DW
-###			C	Sort active Traits by Value
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-##		H	Agent Group
-###			C	Slum NPCs (Pilot)
-New
-###			H	Affect Campaign
-Pending pilot
-###			H	Affect Vanilla 
-Pending pilot
-###			C	Roamer Level Feature
-New
-##		H	Loadout
-###			C	CC Items Inclusion
-Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
-###			C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
-###			T	ChunkKey
-- Attempted - InvDatabase.FillAgent()
-###			T	ChunkMayorBadge
-- Attempted - InvDatabase.FillAgent()
-###			T	ChunkSafeCombo
-- Attempted - InvDatabase.FillAgent()
-###			C	Guns_Common
-New
-##		√H	Behavior
-###			H	Clean Trash
-New
-###			H	Confiscate Contraband
-Should also spawn Confiscation Center (See SORCE)
-###			H	Deport Non-Citizens
-Should also spawn Deportation Center (See SORCE)
-###			H	Fight Fires
-Agent.firefighter
-Agent.fightsFires
-###			H	Grab Everything
-New
-###			H	Grab Food
-New
-###			H	Guard Door
-New
-###			H	Hobo Beg (Custom)
-Maybe just implement the whole Hey, You! overhaul here
-###			H	Hog Turntables
-New
-Allow paid Musician behavior
-###			H	Mutinous
-Agent.mutinous
-###			H	SecretHate
-Agent.secretHate
-Agent.choseSecretHate
-I think this is Bounty behavior
-###			H	Shakedown Player (Mobster)
-New
-Use this on leader w/ Wander Level
-Use "Follow" behavior on agents placed behind them
-No need for "Roaming Gang" Trait itself
-###			H	Tattle (Upper Cruster)
-New
-###			√H	Accident-Prone
-Works for: Crusher, Fire Spewer, Saw Blade
-Doesn't work for: Slime, Floor Trigger, ??
-###			√	Eat Corpse
-Complete
-###			√	Grab Drugs
-Complete
-###			√	Grab Money
-Complete
-###			√	Pickpocket
-Complete
-###			√	Seek & Destroy (Killer Robot)
-Complete
-##		√H	Combat
-###			H	Lockdowner (R.I.P.)
-Apparently Lockdown walls are broken in custom levels.
-###			√	Coward
-Complete
-###			√	Fearless
-Complete
-##		√H	Cost Currency
-###			C	00 Button ExtraCost Display
-Bananas & alcohol are hardcoded
-To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
-###			H	Alcohol
-A la Bouncer
-###			H	Banana
-Test
-###			C	Blood
-Blood Bags always an option
-If Vampirism, allow drink
-###			C	Flesh
-Require Cannibalism? Maybe not
-##		√	Cost Scale
-###			√	Less
-Complete
-###			√	More
-Complete
-###			√	Zero
-Complete
-##		√H	Drug Warrior
-###			C	Suicide Bomber
-Initiate a 15s timer, then detonate a Huge explosion
-##		√H	Explode On Death
-###			C	00 Destroy body
-For all non-normal explosion types
-This will complete about half the holds in here.
-###			H	00 Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
-###			H	Dizzy
-Body remained
-###			H	EMP
-Works, but body remained
-###			H	Firebomb
-Didn't do anything
-###			H	Noise Only
-Doesn't work
-Also not interesting
-###			H	Oil
-This doesn't exist but should follow water logic. Plus there are many other uses.
-###			H	Ooze
-Only did particle effect
-###			H	Ridiculous
-Only did particle effect, didn't end slow-mo, no kills.
-This is the Bomb disaster one, so it will need special attention.
-###			H	Slime
-Only did particle effect
-###			H	Stomp
-Did particle effect
-Pushed body away
-Didn't stun anyone
-###			H	Warp
-Complete
-###			H	Water
-Body remained
-###			√	Big
-Complete
-###			√	Normal
-Complete
-###			√	Huge
-Complete
-##		√H	Hire Type
-###			C	00 Split off Hire Base Cost
-Not referring to final cost, but the Hacker/Soldier cost tiers
-###			H	Chloroform
-New
-###			H	Devour Corpse
-New
-###			H	Disarm Trap
-New
-###			H	Drink Blood
-New
-###			H	Handcuff
-New
-###			H	Mug
-One-time use, mug target NPC
-###			H	Pickpocket
-New
-###			H	Poison
-New 
-###			H	Safecrack
-- Reticle does not activate 
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
-	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
-	[Info   :  CCU_Core] PressedButton_Prefix: Method Call
-	[Debug  :CCU_P_AgentInteractions]       buttonText: [CCU] Job - SafecrackSafe
-
-Here's what comes up for Lockpick job:
-	Agent
-√		.GetCodeFromJob
-√		.GetJobCode					Need to extend jobType enum
-√		.ObjectAction
-	AgentInteractions
-√		.DetermineButtons
-√		.LockpickDoor				
-√		.PressedButton	
-	GoalDoJob
-√		.Activate					Check out 
-√		.Terminate
-	GoalDetails						E_GoalDetails
-√		.LockpickDoorReal
-	GoalLockpickDoor				GoalSafecrackSafe
-√		.Activate
-√		.Process
-√		.Terminate
-	GoalLockpickDoorReal			GoalSafecrackSafeReal
-√		.Activate
-√		.Process
-√		.Terminate
-	InvInterface
-√		.ShowTarget					
-√		.ShowTarget2
-	ObjectMult
-		.ObjectAction				Not sure yet - are these just logging messages, or are they important?
-	PlayfieldObjectInteractions
-√		.TargetObject
-
-Objects to Analyze/track:
-	Agent
-		job
-		jobCode
-		target.targetType
-
-In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-###			H	Set Explosive
-On door or Safe: Plants door detonator
-Elsewhere: Remote bomb
-Gives you detonator when planted
-###			H	Set Time Bomb
-Based on and consumes Time Bombs in inventory. NPC starts with one.
-###			H	Tamper
-- Interface works but reticle is green for non-tamperable items.
-  - Log message "Not implemented yet", fair enough
-###			√	Bodyguard
-Complete
-###			√	Break In
-Complete
-###			√	Cause a Ruckus
-Complete
-###			√	Hack
-Complete
 ##		√	Merchant Type
 Complete
 ##		√H	Passive
-###			H	Vision Beams (Cop Bot)
-DW
+###			C	Blinker
+Blink to a random nearby spot when hit
+This is valid for player characters, so might need to be another mod
 ###			H	Invincible
 New
 ###			H	Mute Dialogue
 Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
+###			C	Oblivious
+Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
+But will enter combat if their teammates do.
 ###			H	Reviveable (Infinite)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
 ###			H	Reviveable (One)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
 ###			H	Reviver
 If hired and surviving, will revive the player once
+###			C	Spidey-Sensitive
+When alerted, immediately enters combat with perp (no search necessary)
 ###			H	Statue
 Remove colors
 Tint white
 Make stationary, Invincible, non-reactive
+###			C	Stinky Aura
+Werewolf A-were-ness works on this character
+###			C	Supernatural
+Ghost Gibber works
+###			C	Unchallenging
+No XP for neutralization
+###			H	Vision Beams (Cop Bot)
+DW
 ###			H	Zombified
 Agent.zombified
 Agent.customZombified
@@ -588,6 +590,22 @@ public override string Relationship => VRelationship.Aligned, etc.
 ###			√	Faction 4 Aligned
 ###			√	Faction 4 Hostile
 ##		√H	Relationships - General
+###			C	All-Annoyed
+New
+###			C	All-Friendly
+New
+###			C	All-Hostile
+New
+###			C	Forgetful
+Returns to neutral after a timer
+###			C	Imposterous
+After a long delay, goes hostile to Aligned
+###			C	Samaritanous
+Protects at Neutral instead of Loyal
+###			C	Spineful
+Will never go submissive
+###			C	Thankful
+Joins combat at Friendly instead of Loyal
 ###			H	Class Unity
 Like Class Solidarity, except Aligned
 Note that Solidarity includes a No Infighting effect.
@@ -615,6 +633,50 @@ Complete
 Complete
 ###			√	Player Submissive 
 Complete
+##		H	Spawn
+###			C	Enslaved
+New
+###			C	Hide In Object
+Detect Bush/Manhole on same tile
+###			C	Respawn
+Never-ending waves of enemies
+####			C	Respawn Delay
+0, 3, 15, 30, 60, 120, 180 seconds
+####			C	Respawn Quantity
+1, 3, 10, Infinite
+###			C	Roaming Gang
+New
+###			C	Slave Owner
+NEw			
+##		H	Spawn - Bodyguarded
+New
+- There are a few other hits that came up in a string search (possibly "Musician"):
+  - LoadLevel.SpawnStartingFollowers
+  - ObjectMult.StartWithFollowersBodyguardA
+    - Ignore this one, it's for the Player Bodyguard trait
+- Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
+###			C	Pilot Trait
+No errors, but no effect.
+###			C	Bodyguard Quantity Traits?
+One / few / many, that's it
+###			C	Bodyguarded - Cop
+New
+###			C	Bodyguarded - Blahd
+New
+###			C	Bodyguarded - Crepe
+New
+###			C	Bodyguarded - Goon
+New
+###			C	Bodyguarded - Gorilla
+New
+###			C	Bodyguarded - Mafia
+New
+###			C	Bodyguarded - Soldier
+New
+###			C	Bodyguarded - Supercop
+New
+###			C	Bodyguarded - Supergoon
+New
 ##		√H	Trait Gates
 ###			H	Crust Enjoyer
 If you have Upper Crusty, this character is Loyal
@@ -645,6 +707,17 @@ Complete
 Complete
 ###			√	Suspicious Suspecter
 Complete
+##		H	Utility
+###			C	Hide Traits in Collapsed Groups
+- While in Character Creator, hide traits in Collapsed Groups
+  - Once all traits are in they're going to get hard to manage. 
+###			C	Sort active Traits by Name
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
+- DW
+###			C	Sort active Traits by Value
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
 #	H	Mutators
 Focus on Traits for this version.
 ##		C	Requested features
@@ -701,6 +774,9 @@ Gate level access
 ###			C	Level Entry Requires A/B/C/D true
 Gate level access
 ###			C	Traits for Level Branching
+##		C	Disasters
+###			C	Random Disaster
+Disasters Every Level doesn't work?
 ##		T	Followers
 ###				00	Add conflicts
 ###			C	Homesickness Disabled
@@ -714,6 +790,8 @@ You will need to eliminate spontaneous hostiles for this to work, though.
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
+##		C	Progression
+###			C	Delay Level-Up
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts

@@ -278,6 +278,7 @@
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
     <Compile Include="Traits\Relationships - Faction\T_Rel_Faction.cs" />
+    <Compile Include="Traits\Relationships - General\Spineful.cs" />
     <Compile Include="Traits\Relationships - General\T_Rel_General.cs" />
     <Compile Include="Traits\Relationships - Player\Player_Secret_Hate.cs" />
     <Compile Include="Traits\Relationships - General\Relationless.cs" />
