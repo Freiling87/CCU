@@ -20,7 +20,7 @@ namespace CCU.Traits.Interaction
             RogueLibs.CreateCustomTrait<Give_Blood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can administer blood bags for cash."),
+                    [LanguageCode.English] = String.Format("This character can help donate blood for cash."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo

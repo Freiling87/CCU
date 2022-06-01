@@ -57,8 +57,8 @@ namespace CCU.Patches.AgentRelationships
                     relationship = "Submissive";
             }
 
-            if ((___agent.HasTrait<Hostile_To_Cannibal>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<Cool_Cannibal>())) ||
-                (___agent.HasTrait<Hostile_To_Soldier>() && otherAgent.agentName == VanillaAgents.Soldier) ||
+            if ((___agent.HasTrait<Faction_Military>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<Cool_Cannibal>())) ||
+                (___agent.HasTrait<Faction_Cannibal>() && otherAgent.agentName == VanillaAgents.Soldier) ||
                 (___agent.HasTrait<Hostile_To_Vampire>() && otherAgent.agentName == VanillaAgents.Vampire) ||
                 (___agent.HasTrait<Hostile_To_Werewolf>() && otherAgent.agentName == VanillaAgents.WerewolfTransformed) ||
                 (___agent.HasTrait<Bashable>() && (otherAgent.agentName == VanillaAgents.GangsterCrepe || otherAgent.HasTrait(VanillaTraits.BlahdBasher))) ||

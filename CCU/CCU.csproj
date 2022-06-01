@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CCU</RootNamespace>
     <AssemblyName>CCU</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -200,8 +200,8 @@
     <Compile Include="Traits\Combat\Lockdowner.cs" />
     <Compile Include="Traits\Combat\T_Combat.cs" />
     <Compile Include="Traits\Cost Currency\Booze_Bargain.cs" />
-    <Compile Include="Traits\CostScale\Zero.cs" />
-    <Compile Include="Traits\CostScale\T_CostScale.cs" />
+    <Compile Include="Traits\Cost Scale\Zero.cs" />
+    <Compile Include="Traits\Cost Scale\T_CostScale.cs" />
     <Compile Include="Traits\Explode On Death\Big.cs" />
     <Compile Include="Traits\Explode On Death\Water.cs" />
     <Compile Include="Traits\Explode On Death\Warp.cs" />
@@ -276,8 +276,8 @@
     <Compile Include="Traits\Combat\Coward.cs" />
     <Compile Include="Traits\Drug Warrior\Wildcard.cs" />
     <Compile Include="Traits\Cost Currency\Banana_Barter.cs" />
-    <Compile Include="Traits\CostScale\Less.cs" />
-    <Compile Include="Traits\CostScale\More.cs" />
+    <Compile Include="Traits\Cost Scale\Less.cs" />
+    <Compile Include="Traits\Cost Scale\More.cs" />
     <Compile Include="Traits\Passive\Extortable.cs" />
     <Compile Include="Traits\Interaction\Borrow_Money_Moocher.cs" />
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
