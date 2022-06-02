@@ -208,6 +208,12 @@ Takes a longer time to react to everything
 Walks into hazards, only those they can see
 ###			H	Tattle (Upper Cruster)
 New
+###			H	Arsonist
+Arsonist behavior
+###			H	Mad Bomber
+Place a Time Bomb in a public toilet
+###			H	Bio-Terrorist
+Poison a random vent or pump
 ###			C	Wage-Exempt
 Will "mug" you for a tip after any transaction
 ###			√H	Accident-Prone
@@ -410,6 +416,8 @@ Complete
 ###			C	Insular
 ###			C	Insularer 
 ###			C	Insularest
+###			C	Professional
+Allow interact with Annoyed
 ###			√	Untrusting
 Complete
 ###			√	Untrustinger
