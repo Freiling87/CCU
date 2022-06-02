@@ -29,6 +29,8 @@ Listed in order of Parent tier summary symbol priority:
   - Faction Relationships
     - Added Firefighter Faction
 #	C	General
+##		T!	Revert RogueLibs to Stable
+New
 ##		T!	Automate trait name changes
 This will need to run without a hitch.
 ##		T!	Vending machine DetermineMoneyCost
