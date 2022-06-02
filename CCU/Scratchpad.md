@@ -29,6 +29,25 @@ Listed in order of Parent tier summary symbol priority:
   - Faction Relationships
     - Added Firefighter Faction
 #	C	General
+##		C	Custom Object variables
+###			C	Readables
+Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
+	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
+
+The text string, in its path from user input to the object itself
+	LevelEditor.extraVarStringObject.text
+	LevelEditorTile.extraVarString
+	SpawnerBasic.extraVarString
+	PlayfieldObject.extraVarString
+	Sign.signTextOnline
+
+Opening the field to edit it: 
+	LevelEditor.OpenLongDescription
+####			C	Enabling input field
+LevelEditor.UpdateInterface		- Search for "Sign"
+###			C	Containables
+Allow object to store items:
+	Shelf, Toilet
 ##		T!	Revert RogueLibs to Stable
 New
 ##		T!	Automate trait name changes
