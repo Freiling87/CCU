@@ -5,7 +5,7 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#	C	v.0.2.0 Bugfixes
+#	C	v.1.0.0 Changelog
 - **Hard Changes:** These will require you to update any affected content accordingly. 
   - Trait renaming: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
     - Faction Relationships: Some of these were incomplete and have been renamed to reflect this.
@@ -29,6 +29,31 @@ Listed in order of Parent tier summary symbol priority:
   - Faction Relationships
     - Added Firefighter Faction
 #	C	General
+##		C	Custom Object variables
+###			C	Readables
+Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
+	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
+
+The text string, in its path from user input to the object itself
+	LevelEditor.extraVarStringObject.text
+	LevelEditorTile.extraVarString
+	SpawnerBasic.extraVarString
+	PlayfieldObject.extraVarString
+	Sign.signTextOnline
+
+Opening the field to edit it: 
+	LevelEditor.OpenLongDescription
+####			C	Enabling input field
+LevelEditor.UpdateInterface		- Search for "Sign"
+###			C	Containables
+Allow object to store items:
+	Shelf, Toilet
+##		T!	Revert RogueLibs to Stable
+New
+##		T!	Automate trait name changes
+This will need to run without a hitch.
+##		T!	Vending machine DetermineMoneyCost
+##		C!	Seek & Destroy blinks on death
 ##		C	Hide CCU Traits
 ###			C	When Possessing, show up on left
 ###			C	Upgrade Machine
@@ -574,6 +599,110 @@ Complete
 ###			√	Manager Mayor Badge
 Complete
 ###			√	Manager Safe Combo
+Complete
+##		√H	Interaction
+###			H	Buy Slave
+Pending actual assignment of owned slaves 
+###			H	Cybernetic Surgery
+Curated Trait-seller
+###			H	Heal All
+Like Doctor heal, but all in party with calculated price
+###			H	Heal Other
+Like Doctor heal, but activates reticle so you can select a party member or other.
+###			H	Heal Partial
+Like Doctor heal, but at a Blood Bag level.
+####			C	Mouseover Price
+Show price to heal targeted agent before selection
+###			H	Quest Giver
+New
+###			H	Refill Guns
+New
+###			H	Repair Armor
+New
+###			H	Repair Weapons
+New
+###			H	Pay respects to Faction
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
+###			H	Sell Intel to Faction 
+Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
+###			H	Start Election
+New
+###			H	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			H	This One's On Me
+Buy a round for a patron and anyone with the same owner ID in the chunk.
+No drink for that guy in the corner. Fuck that guy.
+###			H	Train Attributes (Split to each)
+New
+###			H	Train Traits - Defense
+New
+Sell traits for double their Upgrade Machine cost
+###			H	Train Traits - Guns
+New
+###			H	Train Traits - Melee
+New
+###			H	Train Traits - Movement
+New
+###			H	Train Traits - Social
+New
+###			H	Train Traits - Stealth
+New
+###			H	Train Traits - Trade
+New
+###			H	Visitor's Badge
+Set Bribe options on separate traits
+###			√	Administer Blood Bag
+Complete
+###			√	Borrow Money
+Complete
+###			√	Borrow Money (Moocher)
+Complete
+###			√	Bribe Cops
+Complete
+###			√	Bribe For Entry (Alcohol)
+Complete
+###			√	Buy Round
+Complete
+###			√	Give Blood
+Complete
+###			√	Heal (Player)
+Complete
+###			√	Identify
+Complete
+###			√	Influence Election
+Complete
+###			√	Leave Weapons Behind
+Complete
+###			√	Manage Chunk
+####			√	Arena
+Complete
+####			√	Deportation Center
+Complete
+####			√	Hotel
+Complete
+###			√	Offer Motivation
+Complete
+###			√	Pay Debt
+Complete
+###			√	Pay Entry Fee
+Complete
+###			√	Play Bad Music
+Complete
+###			√	Use Blood Bag
+Complete
+##		√H	Interaction Gate
+###			C	Insular
+###			C	Insularer
+###			C	Insularest
+###			√	Untrusting
+Complete
+###			√	Untrustinger
+Complete
+###			√	Untrustingest
 Complete
 ##		√	Merchant Type
 Complete
