@@ -75,7 +75,7 @@ namespace CCU.Patches.Agents
 		}
 
         [HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
-		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, int slotNum, string combineType, string useOnType, ref bool __result)
+		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, int slotNum, string combineType, string useOnType, AgentInteractions __instance, ref bool __result)
         {
 			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
 			{
@@ -109,6 +109,10 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="agent"></param>
 		public static void AddCustomAgentButtons(Agent agent)
 		{
 			AgentInteractions agentInteractions = agent.agentInteractions;
@@ -124,9 +128,6 @@ namespace CCU.Patches.Agents
 			bool untrusted = trustTrait is null
 				? false
 				: relationshipLevel < trustTrait.MinimumRelationship;
-				//(agent.HasTrait<Untrusting>() && relationshipLevel < 3) ||
-				//			(agent.HasTrait<Untrustinger>() && relationshipLevel < 4) ||
-				//			(agent.HasTrait<Untrustingest>() && relationshipLevel < 5);
 
 			//// Hack
 			//if (interactingAgent.interactionHelper.interactingFar)
@@ -310,71 +311,72 @@ namespace CCU.Patches.Agents
 				}
 				else if (interaction is Manage_Chunk)
 				{
-					string chunk = agent.startingChunkRealDescription;
-
-					if (chunk == VChunkType.Arena)
-					{
-						for (int i = 0; i < agent.gc.objectRealList.Count; i++)
-						{
-							ObjectReal objectReal = agent.gc.objectRealList[i];
-
-							if (objectReal.startingChunk == agent.startingChunk && objectReal.objectName == vObject.EventTriggerFloor)
+					switch (agent.startingChunkRealDescription)
+                    {
+						case VChunkType.Arena:
+							for (int i = 0; i < agent.gc.objectRealList.Count; i++)
 							{
-								EventTriggerFloor eventTriggerFloor = (EventTriggerFloor)objectReal;
+								ObjectReal objectReal = agent.gc.objectRealList[i];
 
-								if (!eventTriggerFloor.functional && eventTriggerFloor.triggerState != "NeedToPayOut" && eventTriggerFloor.triggerState != "NoPayout" && eventTriggerFloor.triggerState != "Cheated")
-									agent.SayDialogue("NoMoreFights");
-								else if (eventTriggerFloor.triggerState == "Initial")
+								if (objectReal.startingChunk == agent.startingChunk && objectReal.objectName == vObject.EventTriggerFloor)
 								{
-									bool groupFight = false;
+									EventTriggerFloor eventTriggerFloor = (EventTriggerFloor)objectReal;
 
-									for (int m = 0; m < agent.gc.agentList.Count; m++)
+									if (!eventTriggerFloor.functional && eventTriggerFloor.triggerState != "NeedToPayOut" && eventTriggerFloor.triggerState != "NoPayout" && eventTriggerFloor.triggerState != "Cheated")
+										agent.SayDialogue("NoMoreFights");
+									else if (eventTriggerFloor.triggerState == "Initial")
 									{
-										Agent agent3 = agent.gc.agentList[m];
+										bool groupFight = false;
 
-										if ((agent3.isPlayer > 0 || agent3.employer != null) && agent3 != interactingAgent)
-											groupFight = true;
+										for (int m = 0; m < agent.gc.agentList.Count; m++)
+										{
+											Agent agent3 = agent.gc.agentList[m];
+
+											if ((agent3.isPlayer > 0 || agent3.employer != null) && agent3 != interactingAgent)
+												groupFight = true;
+										}
+
+										if (groupFight)
+											agent.SayDialogue("AskToStartFightMultiple");
+										else
+											agent.SayDialogue("AskToStartFight");
+
+										agentInteractions.AddButton(VButtonText.Arena_SignUpToFight);
 									}
-
-									if (groupFight)
-										agent.SayDialogue("AskToStartFightMultiple");
-									else
-										agent.SayDialogue("AskToStartFight");
-
-									agentInteractions.AddButton(VButtonText.Arena_SignUpToFight);
+									else if (eventTriggerFloor.triggerState == "FightSignedUp")
+										agent.SayDialogue("SignedUpToFight");
+									else if (eventTriggerFloor.triggerState == "FightStarted")
+										agent.SayDialogue("FightCheer");
+									else if (eventTriggerFloor.triggerState == "NeedToPayOut")
+									{
+										agent.SayDialogue("NoMoreFights");
+										agentInteractions.AddButton("PayOutFight");
+									}
+									else if (eventTriggerFloor.triggerState == "NoPayout")
+										agent.SayDialogue("LostFightNoPayout");
+									else if (eventTriggerFloor.triggerState == "Cheated")
+										agent.SayDialogue("CheatedNoPayout");
+									else if (eventTriggerFloor.triggerState == "FightsOver")
+										agent.SayDialogue("NoMoreFights");
 								}
-								else if (eventTriggerFloor.triggerState == "FightSignedUp")
-									agent.SayDialogue("SignedUpToFight");
-								else if (eventTriggerFloor.triggerState == "FightStarted")
-									agent.SayDialogue("FightCheer");
-								else if (eventTriggerFloor.triggerState == "NeedToPayOut")
-								{
-									agent.SayDialogue("NoMoreFights");
-									agentInteractions.AddButton("PayOutFight");
-								}
-								else if (eventTriggerFloor.triggerState == "NoPayout")
-									agent.SayDialogue("LostFightNoPayout");
-								else if (eventTriggerFloor.triggerState == "Cheated")
-									agent.SayDialogue("CheatedNoPayout");
-								else if (eventTriggerFloor.triggerState == "FightsOver")
-									agent.SayDialogue("NoMoreFights");
 							}
-						}
-					}
-					else if (chunk == VChunkType.DeportationCenter)
-					{
-						if (interactingAgent.upperCrusty)
-							agent.SayDialogue("NoDeportationUpperCrusty");
-						else if (relationshipLevel > 2 || relationship == VRelationship.Submissive)
-							agent.SayDialogue("DontNeedMoney");
-						else
-						{
-							agentInteractions.AddButton(VButtonText.BribeDeportation, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
-							agentInteractions.AddButton(VButtonText.BribeDeportationItem);
-						}
-					}
-					else if (chunk == VChunkType.Hotel && agent.inventory.HasItem(vItem.Key))
-						agentInteractions.AddButton(VButtonText.BuyKeyHotel, agent.determineMoneyCost(VDetermineMoneyCost.BuyKey));
+							break;
+						case VChunkType.DeportationCenter:
+							if (interactingAgent.upperCrusty)
+								agent.SayDialogue("NoDeportationUpperCrusty");
+							else if (relationshipLevel > 2 || relationship == VRelationship.Submissive)
+								agent.SayDialogue("DontNeedMoney");
+							else
+							{
+								agentInteractions.AddButton(VButtonText.BribeDeportation, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
+								agentInteractions.AddButton(VButtonText.BribeDeportationItem);
+							}
+							break;
+						case VChunkType.Hotel:
+							if (agent.inventory.HasItem(vItem.Key))
+								agentInteractions.AddButton(VButtonText.BuyKeyHotel, agent.determineMoneyCost(VDetermineMoneyCost.BuyKey));
+							break;
+                    }
 				}
 				else if (interaction is Pay_Debt)
                 {
