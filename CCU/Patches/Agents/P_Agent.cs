@@ -27,100 +27,58 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
-			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() &&  __instance.HasTrait<Extortable>())
+			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() && __instance.HasTrait<Extortable>())
 				__result = true;
 		}
 
+		/// <summary>
+		/// Extend Job Type Pseudo-enum 
+		/// Code contributions from uwumacaronitime
+		/// </summary>
+		/// <param name="jobInt"></param>
+		/// <param name="__result"></param>
+		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetCodeFromJob), argumentTypes: new[] { typeof(int) })]
 		public static bool GetCodeFromJob_Prefix(int jobInt, ref string __result)
 		{
-			string result = "";
-
 			switch (jobInt)
 			{
-				case 0:
-					result = "None";
-					break;
-				case 1:
-					result = "Follow";
-					break;
-				case 2:
-					result = "GoHere";
-					break;
-				case 3:
-					result = "Ruckus";
-					break;
-				case 4:
-					result = "Attack";
-					break;
-				case 5:
-					result = "LockpickDoor";
-					break;
-				case 6:
-					result = "HackSomething";
-					break;
-				case 7:
-					result = "UseToilet";
-					break;
-				case 8:
-					result = "GetSupplies";
-					break;
-				case 9:
-					result = "GetDrugs";
-					break;
-				case 10:
-					result = "GetDrink";
-					break;
-				case 11:
-					result = "UseATM";
-					break;
 				case 12:
-					result = CJob.SafecrackSafe;
+					__result = CJob.SafecrackSafe;
 					break;
 				case 13:
-					result = CJob.TamperSomething;
+					__result = CJob.TamperSomething;
 					break;
+				default:
+					return true;
 			}
 
-			__result = result;
 			return false;
 		}
 
+		/// <summary>
+		/// Code contributions from uwumacaronitime
+		/// </summary>
+		/// <param name="jobString"></param>
+		/// <param name="__result"></param>
+		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetJobCode), argumentTypes: new[] { typeof(string) })]
 		public static bool GetJobCode_Prefix(string jobString, ref jobType __result)
 		{
-			jobType result = jobType.None;
+			// No idea how to extend an actual enum, and the advice I've gotten has been worrying.
 
-			if (jobString == "Attack")
-				result = jobType.Attack;
-			else if (jobString == "Follow")
-				result = jobType.Follow;
-			else if (jobString == "GetDrink")
-				result = jobType.GetDrink;
-			else if (jobString == "GetDrugs")
-				result = jobType.GetDrugs;
-			else if (jobString == "GetSupplies")
-				result = jobType.GetSupplies;
-			else if (jobString == "GoHere")
-				result = jobType.GoHere;
-			else if (jobString == "HackSomething")
-				result = jobType.HackSomething;
-			else if (jobString == "LockpickDoor")
-				result = jobType.LockpickDoor;
-			else if (jobString == "Ruckus")
-				result = jobType.Ruckus;
-			else if (jobString == "UseATM")
-				result = jobType.UseATM;
-			else if (jobString == "UseToilet")
-				result = jobType.UseToilet;
-			else if (jobString == CJob.SafecrackSafe)
-				result = jobType.GetSupplies; // TODO
-			else if (jobString == CJob.TamperSomething)
-				result = jobType.GetSupplies; // TODO
-			else if (jobString != null && jobString.Length == 0)
-				result = jobType.None;
+			switch (jobString)
+			{
+				case CJob.SafecrackSafe:
+					__result = jobType.GetSupplies; // TODO
+					break;
+				case CJob.TamperSomething:
+					__result = jobType.GetSupplies; // TODO
+					break;
+				default:
+					return true;
+			}
 
-			__result = result;
 			return false;
 		}
 
@@ -145,7 +103,7 @@ namespace CCU.Patches.Agents
 					___noMoreObjectActions = false;
 				}
 
-					return false;
+				return false;
 			}
 
 			return true;
@@ -154,8 +112,8 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			# region Active
-            if (__instance.GetTraits<T_Behavior>().Where(c => c.LosCheck).Any())
+			#region Active
+			if (__instance.GetTraits<T_Behavior>().Where(c => c.LosCheck).Any())
 			{
 				// Thieves have their LOScheck set to 50% in vanilla
 				if (__instance.HasTrait<Pick_Pockets>() && GC.percentChance(50))
@@ -172,9 +130,9 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<Go_Haywire>() ||
 				__instance.HasTrait<Tamper_with_Aim>())
 				__instance.hackable = true;
-            #endregion
-            #region Combat
-            if (__instance.HasTrait<T_DrugWarrior>())
+			#endregion
+			#region Combat
+			if (__instance.HasTrait<T_DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant
@@ -192,7 +150,7 @@ namespace CCU.Patches.Agents
 				__instance.oma.mustBeGuilty = true;
 
 			if (__instance.HasTrait<Possessed>())
-            {
+			{
 				__instance.secretShapeShifter = true;
 				__instance.oma.secretShapeShifter = true;
 				__instance.oma.mustBeGuilty = true;
@@ -223,15 +181,15 @@ namespace CCU.Patches.Agents
 				__instance.canGoBetweenLevels = false;
 		}
 
-        [HarmonyPostfix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0])]
+		[HarmonyPostfix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0])]
 		public static void Start_Postfix(Agent __instance)
-        {
+		{
 			__instance.AddHook<P_Agent_Hook>();
-        }
+		}
 	}
 
-    public class P_Agent_Hook : HookBase<PlayfieldObject>
-    {
+	public class P_Agent_Hook : HookBase<PlayfieldObject>
+	{
 		public int SuicideVestTimer;
 
 		protected override void Initialize() { }

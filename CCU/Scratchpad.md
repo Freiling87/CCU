@@ -29,6 +29,7 @@ Listed in order of Parent tier summary symbol priority:
   - Faction Relationships
     - Added Firefighter Faction
 #	C	General
+##		C!	00 Chunk Key Holder might not work correctly
 ##		C	Custom Object variables
 ###			C	Readables
 Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
