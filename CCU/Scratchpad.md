@@ -78,92 +78,13 @@ The config file should match the name of the campaign, if they allow the same ch
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #	√H	Traits
-##		H	Agent Group
-###			C	Slum NPCs (Pilot)
-New
-###			H	Affect Campaign
-Pending pilot
-###			H	Affect Vanilla 
-Pending pilot
-###			C	Roamer Level Feature
-New
-###			H	Repair Armor
-New
-###			H	Repair Weapons
-New
-###			H	Pay respects to Faction
-Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
-"Improve Faction Relations"
-Should only allow for 1 of these to simplify algorithm
-But this means you'll need further faction traits
-###			H	Sell Intel to Faction 
-Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
-###			H	Start Election
-New
-###			H	Summon Professional
-New
-Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			H	This One's On Me
-Buy a round for a patron and anyone with the same owner ID in the chunk.
-No drink for that guy in the corner. Fuck that guy.
-###			H	Train Attributes (Split to each)
-New
-###			H	Train Traits - Defense
-New
-Sell traits for double their Upgrade Machine cost
-###			H	Train Traits - Guns
-New
-###			H	Train Traits - Melee
-New
-###			H	Train Traits - Movement
-New
-###			H	Train Traits - Social
-New
-###			H	Train Traits - Stealth
-New
-###			H	Train Traits - Trade
-New
-###			H	Visitor's Badge
-Set Bribe options on separate traits
-###			√	Administer Blood Bag
-Complete
-###			√	Borrow Money
-Complete
-###			√	Borrow Money (Moocher)
-Complete
-###			√	Bribe Cops
-Complete
-###			√	Bribe For Entry (Alcohol)
-Complete
-###			√	Buy Round
-Complete
-###			√	Give Blood
-Complete
-###			√	Heal (Player)
-Complete
-###			√	Identify
-Complete
-###			√	Influence Election
-Complete
-###			√	Leave Weapons Behind
-Complete
-###			√	Manage Chunk
-####			√	Arena
-Complete
-####			√	Deportation Center
-Complete
-####			√	Hotel
-Complete
-###			√	Offer Motivation
-Complete
-###			√	Pay Debt
-Complete
-###			√	Pay Entry Fee
-Complete
-###			√	Play Bad Music
-Complete
-###			√	Use Blood Bag
-Complete
+##		C	Accent Color
+Combine w/ Accent Effect traits
+##		C	Accent Effect
+Apply Accent Color trait to target effect
+###			C	Agent Glow
+###			C	Nametag (Space/hover)
+###			C	Vision Beam
 ##		H	Appearance
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
@@ -450,6 +371,10 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
+##		C	Gibs
+###			C	All wall-type gibs
+Include sound effect where applicable, like with glass
+###			C	Ungibbable
 ##		H	Hire Duration
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
@@ -734,6 +659,8 @@ Make stationary, Invincible, non-reactive
 Werewolf A-were-ness works on this character
 ###			C	Supernatural
 Ghost Gibber works
+###			C	Translucent
+Ghost visual effect
 ###			C	Unchallenging
 No XP for neutralization
 ###			H	Vision Beams (Cop Bot)
@@ -853,6 +780,92 @@ Never-ending waves of enemies
 New
 ###			C	Slave Owner
 NEw			
+##		H	Spawn Group
+###			C	Slum NPCs (Pilot)
+New
+###			H	Affect Campaign
+Pending pilot
+###			H	Affect Vanilla 
+Pending pilot
+###			C	Roamer Level Feature
+New
+###			H	Repair Armor
+New
+###			H	Repair Weapons
+New
+###			H	Pay respects to Faction
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
+###			H	Sell Intel to Faction 
+Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
+###			H	Start Election
+New
+###			H	Summon Professional
+New
+Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
+###			H	This One's On Me
+Buy a round for a patron and anyone with the same owner ID in the chunk.
+No drink for that guy in the corner. Fuck that guy.
+###			H	Train Attributes (Split to each)
+New
+###			H	Train Traits - Defense
+New
+Sell traits for double their Upgrade Machine cost
+###			H	Train Traits - Guns
+New
+###			H	Train Traits - Melee
+New
+###			H	Train Traits - Movement
+New
+###			H	Train Traits - Social
+New
+###			H	Train Traits - Stealth
+New
+###			H	Train Traits - Trade
+New
+###			H	Visitor's Badge
+Set Bribe options on separate traits
+###			√	Administer Blood Bag
+Complete
+###			√	Borrow Money
+Complete
+###			√	Borrow Money (Moocher)
+Complete
+###			√	Bribe Cops
+Complete
+###			√	Bribe For Entry (Alcohol)
+Complete
+###			√	Buy Round
+Complete
+###			√	Give Blood
+Complete
+###			√	Heal (Player)
+Complete
+###			√	Identify
+Complete
+###			√	Influence Election
+Complete
+###			√	Leave Weapons Behind
+Complete
+###			√	Manage Chunk
+####			√	Arena
+Complete
+####			√	Deportation Center
+Complete
+####			√	Hotel
+Complete
+###			√	Offer Motivation
+Complete
+###			√	Pay Debt
+Complete
+###			√	Pay Entry Fee
+Complete
+###			√	Play Bad Music
+Complete
+###			√	Use Blood Bag
+Complete
 ##		H	Spawn - Bodyguarded
 New
 - There are a few other hits that came up in a string search (possibly "Musician"):
