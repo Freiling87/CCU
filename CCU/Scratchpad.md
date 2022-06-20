@@ -30,8 +30,9 @@ Listed in order of Parent tier summary symbol priority:
   - Faction Relationships
     - Added Firefighter Faction
 #	C	General
-##		C!	00 Chunk Key Holder might not work correctly
-##		C	Custom Object variables
+##		T!	00 Chunk Key Holder might not work correctly
+Attempted: P_InvDatabase.FillAgent
+##		H	Custom Object variables
 ###			C	Readables
 Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
 	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
@@ -57,7 +58,17 @@ With Hacker/Cyber-Intruder
 Attempted
 ##		T!	Seek & Destroy blinks on death
 Attempted: P_StatusEffects.ExplodeAfterDeathChecks_Prefix
+##		C	Thief Shop sometimes doesn't generate
+Probably gates with Honor Among Thieves
+##		C	Pay Debt + Cost Scale
+New
 ##		C	Vanilla Cop Bot not exploding
+New
+##		C	Pickpocket Aligned
+Can lead to crash according to CL
+From CL's bug report:
+	they did steal several times in a row without crashing 
+	the one time the crash finally occurred it was right after they actually started fighting each other (every other time the thief just wandered off). So it's maybe not so much the pickpocketing itself as bashable NPCs becoming hostile to one another.
 ##		C	Hide CCU Traits
 ###			C	When Possessing, show up on left
 ###			C	Upgrade Machine
@@ -66,12 +77,9 @@ Need a relationship check
 ##		H	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
-##		C!	00 Names
-Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. 
-##		C	Add Cancellations
-###			C	Verify DisplayName isn't breaking them
 ##		C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
+Just add a --- CCU TRAITS --- Divider or something
 ##		H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.

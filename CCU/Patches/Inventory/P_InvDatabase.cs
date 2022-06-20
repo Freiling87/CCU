@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx.Logging;
-using HarmonyLib;
-using CCU.Traits;
-using System.Reflection;
-using Random = UnityEngine.Random;
-using RogueLibsCore;
+﻿using BepInEx.Logging;
 using CCU.Traits.Loadout;
 using CCU.Traits.Merchant_Type;
+using HarmonyLib;
+using RogueLibsCore;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace CCU.Patches.Inventory
 {
-	[HarmonyPatch(declaringType:typeof(InvDatabase))]
+    [HarmonyPatch(declaringType:typeof(InvDatabase))]
 	public static class P_InvDatabase
 	{
 		// TODO: AddItemReal is private and used in AddRandItem as well as fillAgent
@@ -85,17 +80,16 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
+		/// <summary>
+		/// Loadouts
+		/// </summary>
+		/// <param name="__instance"></param>
+		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
 		public static bool FillAgent_Prefix(InvDatabase __instance)
 		{
 			/* This is based on the vanilla, meant as a "first pass" to allocate important objects before other Agents get a chance.
-			 * Omits everything past line 168 - that portion will take place during the normal method run after this patch, and the methods it calls will be patched rather than this one 
-			 * TODO: AddRandWeapon, AddRandItem, AddStartingHeadpiece
-			 * 
-			 * Contains:
-			 * Loadout_ChunkMayorBadge
-			 * Loadout_Key
-			 * Loadout_SafeCombo
+			 * Omits everything past line 168 - that portion will take place during the normal method run after this patch, and the methods it calls will be patched rather than this one.
 			 */
 
 			Agent agent = __instance.agent;
@@ -114,6 +108,19 @@ namespace CCU.Patches.Inventory
 							{
 								Door door = (Door)objectReal;
 								
+								if (door.distributedKey != null)
+                                {
+									Agent prevKeyHolder = door.distributedKey;
+
+									if (!prevKeyHolder.HasTrait<Manager_Key>())
+                                    {
+										InvItem key = prevKeyHolder.inventory.FindItem(vItem.Key);
+										prevKeyHolder.inventory.SubtractFromItemCount(key, 1);
+										prevKeyHolder.oma.hasKey = false;
+										door.distributedKey = null;
+                                    }
+                                }
+
 								if (door.distributedKey == null && door.locked)
 								{
 									InvItem invItem = __instance.AddItem(vItem.Key, 1);
@@ -134,7 +141,20 @@ namespace CCU.Patches.Inventory
 							else if (objectReal.objectName == vObject.Safe && agent.HasTrait<Manager_Safe_Combo>() && !agent.inventory.HasItem(vItem.SafeCombination))
 							{
 								Safe safe = (Safe)objectReal;
-								
+
+								if (safe.distributedKey != null)
+								{
+									Agent prevKeyHolder = safe.distributedKey;
+
+									if (!prevKeyHolder.HasTrait<Manager_Safe_Combo>())
+									{
+										InvItem safeCombo = prevKeyHolder.inventory.FindItem(vItem.SafeCombination);
+										prevKeyHolder.inventory.SubtractFromItemCount(safeCombo, 1);
+										prevKeyHolder.oma.hasSafeCombination = false;
+										safe.distributedKey = null;
+									}
+								}
+
 								if (safe.distributedKey == null)
 								{
 									InvItem invItem3 = __instance.AddItem(vItem.SafeCombination, 1);
@@ -151,7 +171,7 @@ namespace CCU.Patches.Inventory
 					}
 				}
 
-				if (__instance.agent.HasTrait<Manager_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == "MayorOffice")
+				if (__instance.agent.HasTrait<Manager_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == VChunkType.MayorOffice)
 				{
 					__instance.AddItem(vItem.MayorsMansionGuestBadge, 1);
 					__instance.agent.oma.hasMayorBadge = true;
@@ -161,29 +181,5 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-		// TODO: Replace this with AccessTools reference to private method if no modifications are needed.
-		internal static InvItem AddItemReal_Custom(InvDatabase __instance, string randItem)
-		{
-			InvItem invItem = __instance.AddItem(randItem, 1);
-			int invItemCount;
-
-			if (invItem.invItemName == "Money")
-				invItemCount = __instance.FindMoneyAmt(false);
-			else if (invItem.itemType == "WeaponMelee" && __instance.CompareTag("Agent"))
-			{
-				if (GC.challenges.Contains("InfiniteMeleeDurability"))
-					invItemCount = 100;
-				else
-					invItemCount = int.Parse(__instance.rnd.RandomSelect("AgentMeleeDurability", "Others"));
-			}
-			else if (invItem.itemType == "WeaponMelee" && __instance.CompareTag("SpecialInvDatabase") && __instance.agent != null)
-				invItemCount = 200;
-			else
-				invItemCount = invItem.initCount;
-			
-			invItem.invItemCount = invItemCount;
-			
-			return invItem;
-		}
 	}
 }

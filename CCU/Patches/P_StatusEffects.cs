@@ -53,7 +53,7 @@ namespace CCU.Patches
         }
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddTrait), new[] { typeof(string), typeof(bool), typeof(bool) })]
-		public static bool AddTrait_Prefix(string traitName)
+		public static bool AddTrait_Prefix(ref string traitName)
         {
 			if (TraitConversions.ContainsKey(traitName))
 				traitName = TraitConversions[traitName];
