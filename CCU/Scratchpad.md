@@ -220,10 +220,10 @@ Complete
 ##		√H	Drug Warrior
 ###			C	Suicide Bomber
 Initiate a 15s timer, then detonate a Huge explosion
-##		√H	Explode On Death
-###			C	00 Destroy body
-For all non-normal explosion types
-This will complete about half the holds in here.
+##		T	Explode On Death
+###			T	Certain explosion types don't delete body
+Attempted: P_StatusEffects_ExplodeBody.DisappearBody
+You obviously will need to test this with EMP or something
 ###			H	00 Explodes when Arrested
 Not too concerned, considering this is vanilla for Slaves.
 ###			H	Dizzy
