@@ -2,6 +2,7 @@
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Localization;
+using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Passive;
@@ -84,6 +85,21 @@ namespace CCU.Patches
 			return true;
         }
 
+		/// <summary>
+		/// Circumvent hardcoded explode on death behavior for agent.killerRobot
+		/// </summary>
+		/// <param name="__instance"></param>
+		/// <returns></returns>
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), new Type[0] { })]
+		public static bool ExplodeAfterDeathChecks_Prefix(StatusEffects __instance)
+        {
+			if (__instance.agent.HasTrait<Seek_and_Destroy>() &&
+				!__instance.agent.HasTrait<T_ExplodeOnDeath>())
+				return false;
+
+			return true;
+        }
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks))]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
@@ -92,7 +108,6 @@ namespace CCU.Patches
 				if (!__instance.agent.disappeared)
 					__instance.agent.objectSprite.flashingRepeatedly = true;
 
-				// TODO: See note 2205240553
 				if (GC.serverPlayer)
 					__instance.StartCoroutine("ExplodeBody");
 			}
