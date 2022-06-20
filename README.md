@@ -16,6 +16,11 @@ Players need at least one version of CCU installed for your content to work corr
 If you make content with CCU, you are *strongly advised* to put [Mod], [CCU] or something similar in your steam upload title to catch their attention. You could also put a warning in the upload's image. If they don't have CCU and try to play your content, it will play as a (really confusing) vanilla campaign.
 
 In the upload's description, provide a link to the Player Edition and advise them to install it for the full experience.
+#		Development Priorities
+In light of certain questions I've received, I think it is important to be clear about my priorities for this project:
+- All content will be retro-compatible. The newest release of CCU will always maintain or improve the functioning of content made with older versions.
+- In terms of content, my main goal is to modularize vanilla features to allow designers full control over the basics. Adding new custom content comes later.
+- Custom content is curated to allow maximum flexibility and reusability. If a single CCU feature is cool *on its own*, then it probably needs to be broken down into modularized parts. If it can't be broken down and only has one application, it's either crucial or completely unnecessary.
 #		Campaign Utilities
 ##			Mutators
 These are on hold for version 2. They include Level Branching, Big Quest controls, 

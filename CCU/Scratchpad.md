@@ -57,6 +57,7 @@ With Hacker/Cyber-Intruder
 Attempted
 ##		T!	Seek & Destroy blinks on death
 Attempted: P_StatusEffects.ExplodeAfterDeathChecks_Prefix
+##		C	Vanilla Cop Bot not exploding
 ##		C	Hide CCU Traits
 ###			C	When Possessing, show up on left
 ###			C	Upgrade Machine
