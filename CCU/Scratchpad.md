@@ -22,6 +22,7 @@ Listed in order of Parent tier summary symbol priority:
   - Bugfixes
     - Fixed Vending Machine money cost issues
     - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+    - Influence Election no longer persists after use
 - **Feature additions**
   - Behavior
     - Added Grab Alcohol & Grab Food
@@ -49,8 +50,9 @@ LevelEditor.UpdateInterface		- Search for "Sign"
 ###			C	Containables
 Allow object to store items:
 	Shelf, Toilet
-##		C!	Automate trait name changes
-This will need to run without a hitch.
+##		T	Automate trait name changes
+Pilot attempt: P_StatusEffects.AddTrait
+With Hacker/Cyber-Intruder
 ##		T!	Vending machine DetermineMoneyCost
 Attempted
 ##		T!	Seek & Destroy blinks on death
