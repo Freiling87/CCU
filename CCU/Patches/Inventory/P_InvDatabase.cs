@@ -85,7 +85,7 @@ namespace CCU.Patches.Inventory
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))] 
 		public static bool FillAgent_Prefix(InvDatabase __instance)
 		{
 			/* This is based on the vanilla, meant as a "first pass" to allocate important objects before other Agents get a chance.
@@ -180,6 +180,5 @@ namespace CCU.Patches.Inventory
 
 			return true;
 		}
-
 	}
 }

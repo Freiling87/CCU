@@ -118,6 +118,7 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Localization\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
     <Compile Include="Localization\VDetermineMoneyCost.cs" />
     <Compile Include="Localization\LocalizationTools.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Patches\P_GameController.cs" />
     <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
+    <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Spawn\P_LoadLevel.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />

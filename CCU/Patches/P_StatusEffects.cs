@@ -6,6 +6,7 @@ using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Hire_Type;
+using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -52,20 +53,20 @@ namespace CCU.Patches
 			return true;
         }
 
+		/// <summary>
+		/// Legacy Trait Updater
+		/// </summary>
+		/// <param name="traitName"></param>
+		/// <param name="__instance"></param>
+		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddTrait), new[] { typeof(string), typeof(bool), typeof(bool) })]
-		public static bool AddTrait_Prefix(ref string traitName)
+		public static bool AddTrait_Prefix(ref string traitName, StatusEffects __instance)
         {
-			if (TraitConversions.ContainsKey(traitName))
-				traitName = TraitConversions[traitName];
+			if (Legacy.TraitConversions.ContainsKey(traitName))
+				traitName = Legacy.TraitConversions[traitName];
 
 			return true;
         }
-
-		public static Dictionary<string, string> TraitConversions = new Dictionary<string, string>()
-		{
-			{ "Hacker", nameof(Cyber_Intruder) },
-
-		};
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)

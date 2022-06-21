@@ -4,14 +4,12 @@ using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine.UI;
 
 namespace CCU.Patches.Interface
 {
-	[HarmonyPatch(declaringType: typeof(CharacterSheet))]
+	// TODO: Transpilerize
+    [HarmonyPatch(declaringType: typeof(CharacterSheet))]
 	public static class P_CharacterSheet
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -272,7 +270,7 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait2.traitName))
 							hidden = true;
 
-						if (trait2.GetHook<T_CCU>() != null) // Remove Hidden Traits
+						if (trait2.GetHook<T_CCU>() != null) // Hide CCU traits
 							hidden = true;
 
 						if (!hidden)
@@ -322,7 +320,7 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait3.traitName))
 							traitHidden = true;
 
-						if (trait3.GetHook<T_CCU>() != null) // Remove CCU traits
+						if (trait3.GetHook<T_CCU>() != null) // Hide CCU traits
 							traitHidden = true;
 
 						if (!traitHidden)

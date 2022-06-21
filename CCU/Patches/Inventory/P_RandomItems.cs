@@ -442,7 +442,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, "BraceletStrength", 1);
 			sel.CreateRandomElement(rList, "FriendPhone", 1);
 
-			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Sanguisuge_Specialties)), "Items", "Item");
+			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Bloodsucker_Bazaar)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BloodBag, 6);
 			sel.CreateRandomElement(rList, vItem.Cologne, 1);
 			sel.CreateRandomElement(rList, vItem.Hypnotizer, 2);

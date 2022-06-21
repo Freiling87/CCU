@@ -17,7 +17,7 @@ Listed in order of Parent tier summary symbol priority:
       - Shopkeeper → General Store
       - Soldier → Army Quartermaster
       - Thief → Intruder's Warehouse
-      - Vampire → Sanguisuge Specialties
+      - Vampire → Bloodsucker Bazaar
 - **Soft Changes:** These will not require you to change anything. Any old content will be maintained in legacy code to maximize retro-compatibility.
   - Bugfixes
     - Fixed Vending Machine money cost issues
@@ -32,7 +32,7 @@ Listed in order of Parent tier summary symbol priority:
     - Added Firefighter Faction
 #	C	General
 ##		T!	00 Chunk Key Holder might not work correctly
-Attempted: P_InvDatabase.FillAgent
+Attempted: P_InvDatabase.FillAgent 
 ##		H	Custom Object variables
 ###			C	Readables
 Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
@@ -52,9 +52,6 @@ LevelEditor.UpdateInterface		- Search for "Sign"
 ###			C	Containables
 Allow object to store items:
 	Shelf, Toilet
-##		T	Automate trait name changes
-Pilot attempt: P_StatusEffects.AddTrait
-With Hacker/Cyber-Intruder
 ##		T!	Vending machine DetermineMoneyCost
 Attempted
 ##		T!	Seek & Destroy blinks on death
@@ -89,16 +86,21 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#	C	Traits
-##		C	Accent Color
+#		√	Systems
+##			√	Legacy Updater
+###				√	Trait Updater
+####				√	Designer Side
+P_Unlocks.GetUnlock_Prefix
+####				√	Player Side 
+P_StatusEffects.AddTrait_Prefix
+#		C	Traits
+##			C	Accent Color
 Combine w/ Accent Effect traits
-##		C	Accent Effect
+##			C	Accent Effect
 Apply Accent Color trait to target effect
-###			C	Agent Glow
-###			C	Nametag (Space/hover)
-###			C	Vision Beam
-##		H	Appearance
-#	√C	Traits
+###				C	Agent Glow
+###				C	Nametag (Space/hover)
+###				C	Vision Beam
 ##		C	Agent Group
 ###			C	Slum NPCs (Pilot)
 New
@@ -483,7 +485,7 @@ Complete
 ###			√	Give Blood
 Complete
 ###			√	Heal (Player)
-Complete
+Complete 
 ###			√	Identify
 Complete
 ###			√	Influence Election
@@ -1039,7 +1041,7 @@ Complete
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-#	C	Mutators
+#		C	Mutators
 Focus on Traits for this version.
 ##		C	Requested features
 - Random Disaster (Disasters Every Level not in editor)

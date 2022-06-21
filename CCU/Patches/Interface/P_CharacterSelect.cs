@@ -19,6 +19,7 @@ namespace CCU.Patches.Interface
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// TODO: Transpilerize
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent), argumentTypes: new Type[3] { typeof(int), typeof(string), typeof(Agent) })]
 		public static bool SetupSlotAgent_Prefix(int n, string mySlotAgentType, Agent curPlayer, CharacterSelect __instance, bool ___removingCustomCharacter)
 		{
