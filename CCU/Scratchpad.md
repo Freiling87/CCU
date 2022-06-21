@@ -19,9 +19,11 @@ Listed in order of Parent tier summary symbol priority:
       - Thief → Intruder's Warehouse
       - Vampire → Sanguisuge Specialties
 - **Soft Changes:** These will not require you to change anything. Any old content will be maintained in legacy code to maximize retro-compatibility.
-  - Fixed Vending Machine money cost issues
-  - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
-  - Removed Research Gun from Tech Mart & Research inventories
+  - Bugfixes
+    - Fixed Vending Machine money cost issues
+    - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+    - Influence Election no longer persists after use
+    - Removed Research Gun from Tech Mart & Research inventories
 - **Feature additions**
   - Behavior
     - Added Grab Alcohol & Grab Food
@@ -29,7 +31,9 @@ Listed in order of Parent tier summary symbol priority:
   - Faction Relationships
     - Added Firefighter Faction
 #	C	General
-##		C	Custom Object variables
+##		T!	00 Chunk Key Holder might not work correctly
+Attempted: P_InvDatabase.FillAgent
+##		H	Custom Object variables
 ###			C	Readables
 Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
 	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
@@ -48,13 +52,24 @@ LevelEditor.UpdateInterface		- Search for "Sign"
 ###			C	Containables
 Allow object to store items:
 	Shelf, Toilet
-##		T!	Revert RogueLibs to Stable
-New
-##		T!	Automate trait name changes
-This will need to run without a hitch.
+##		T	Automate trait name changes
+Pilot attempt: P_StatusEffects.AddTrait
+With Hacker/Cyber-Intruder
 ##		T!	Vending machine DetermineMoneyCost
-##		C!	Seek & Destroy blinks on death
-##		C!	Cop Bots don't explode
+Attempted
+##		T!	Seek & Destroy blinks on death
+Attempted: P_StatusEffects.ExplodeAfterDeathChecks_Prefix
+##		C	Thief Shop sometimes doesn't generate
+Probably gates with Honor Among Thieves
+##		C	Pay Debt + Cost Scale
+New
+##		C	Vanilla Cop Bot not exploding
+New
+##		C	Pickpocket Aligned
+Can lead to crash according to CL
+From CL's bug report:
+	they did steal several times in a row without crashing 
+	the one time the crash finally occurred it was right after they actually started fighting each other (every other time the thief just wandered off). So it's maybe not so much the pickpocketing itself as bashable NPCs becoming hostile to one another.
 ##		C	Hide CCU Traits
 ###			C	When Possessing, show up on left
 ###			C	Upgrade Machine
@@ -63,13 +78,10 @@ Need a relationship check
 ##		C	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
-##		C!	00 Names
-Be absolutely sure where .WithName is assigning: any with a second argument for DisplayName(Type, string) might be disconnected if you use the wrong one. 
-##		C	Add Cancellations
-###			C	Verify DisplayName isn't breaking them
 ##		C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
-##		C	Config Files
+Just add a --- CCU TRAITS --- Divider or something
+##		H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
 These should be grouped by Campaign, since that's the only place they're valid.
@@ -77,6 +89,15 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
+#	C	Traits
+##		C	Accent Color
+Combine w/ Accent Effect traits
+##		C	Accent Effect
+Apply Accent Color trait to target effect
+###			C	Agent Glow
+###			C	Nametag (Space/hover)
+###			C	Vision Beam
+##		H	Appearance
 #	√C	Traits
 ##		C	Agent Group
 ###			C	Slum NPCs (Pilot)
@@ -299,6 +320,11 @@ Complete
 ##		√C	Drug Warrior
 ###			C	Suicide Bomber
 Initiate a 15s timer, then detonate a Huge explosion
+##		T	Explode On Death
+###			T	Certain explosion types don't delete body
+Attempted: P_StatusEffects_ExplodeBody.DisappearBody
+You obviously will need to test this with EMP or something
+###			H	00 Explodes when Arrested
 ###			C	Extendo-Wheels
 Gain Roller Skates
 ###			C	Sweaty
@@ -493,7 +519,11 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
-##		C	Hire Duration
+##		C	Gibs
+###			C	All wall-type gibs
+Include sound effect where applicable, like with glass
+###			C	Ungibbable
+##		H	Hire Duration
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
 "I didn't sign up for this! You're nuts!"
@@ -792,6 +822,8 @@ Ghost Gibber works
 Reports ALL crimes to alarm button
 ###			C	Unappetizing
 Can't be bitten/cannibalized
+###			C	Translucent
+Ghost visual effect
 ###			C	Unchallenging
 No XP for neutralization
 ###			C	Vision Beams (Cop Bot)

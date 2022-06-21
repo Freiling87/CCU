@@ -2,8 +2,10 @@
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Localization;
+using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
+using CCU.Traits.Hire_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -50,6 +52,21 @@ namespace CCU.Patches
 			return true;
         }
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddTrait), new[] { typeof(string), typeof(bool), typeof(bool) })]
+		public static bool AddTrait_Prefix(ref string traitName)
+        {
+			if (TraitConversions.ContainsKey(traitName))
+				traitName = TraitConversions[traitName];
+
+			return true;
+        }
+
+		public static Dictionary<string, string> TraitConversions = new Dictionary<string, string>()
+		{
+			{ "Hacker", nameof(Cyber_Intruder) },
+
+		};
+
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
 		{
@@ -84,6 +101,21 @@ namespace CCU.Patches
 			return true;
         }
 
+		/// <summary>
+		/// Circumvent hardcoded explode on death behavior for agent.killerRobot
+		/// </summary>
+		/// <param name="__instance"></param>
+		/// <returns></returns>
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), new Type[0] { })]
+		public static bool ExplodeAfterDeathChecks_Prefix(StatusEffects __instance)
+        {
+			if (__instance.agent.HasTrait<Seek_and_Destroy>() &&
+				!__instance.agent.HasTrait<T_ExplodeOnDeath>())
+				return false;
+
+			return true;
+        }
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks))]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
@@ -92,7 +124,6 @@ namespace CCU.Patches
 				if (!__instance.agent.disappeared)
 					__instance.agent.objectSprite.flashingRepeatedly = true;
 
-				// TODO: See note 2205240553
 				if (GC.serverPlayer)
 					__instance.StartCoroutine("ExplodeBody");
 			}
@@ -158,5 +189,31 @@ namespace CCU.Patches
 
 			return result;
         }
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> DisappearBody(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo copBot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.copBot));
+			MethodInfo magicBool = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(MagicBool));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, copBot)
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, magicBool),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static bool MagicBool(Agent agent) =>
+			agent.copBot ||
+			agent.GetTraits<T_ExplodeOnDeath>().Any();
 	}
 }
