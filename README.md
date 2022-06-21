@@ -11,16 +11,13 @@ There are two versions of CCU:
 - The Player edition is for those who only want to play it.
 #		Best practices for use
 ##			Steam Upload
-Players need at least one version of CCU installed for your content to work correctly. 
+You can upload Custom Characters, Chunk Packs, and Campaigns with CCU content. Players need at least one version of CCU installed for your content to work correctly. 
 
-If you make content with CCU, you are *strongly advised* to put [Mod], [CCU] or something similar in your steam upload title to catch their attention. You could also put a warning in the upload's image. If they don't have CCU and try to play your content, it will play as a (really confusing) vanilla campaign.
+If you make content with CCU, you are <u>strongly advised</u> to put [Mod], [CCU] or something similar in your steam upload title to catch their attention. You could also put a warning in the upload's image. If they don't have CCU and try to play your content, it will play as a (really confusing) vanilla campaign.
 
 In the upload's description, provide a link to the Player Edition and advise them to install it for the full experience.
 #		Campaign Utilities
-##			Mutators
-These are on hold for version 2. They include Level Branching, Big Quest controls, 
 #		NPC Utilities
-CCU traits do not count toward the 8-Trait Limit, since they have no effect on player characters. *
 ##			Traits
 ###				Behavior
 |Trait												|Effect													|

@@ -3,7 +3,7 @@ If you wandered in here out of curiosity, this is my working notes file, and com
 
 Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
-	H = Hold, usually pending resolution of a separate or grouped issue
+	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	C	v.1.0.0 Changelog
 - **Hard Changes:** These will require you to update any affected content accordingly. 
@@ -19,9 +19,9 @@ Listed in order of Parent tier summary symbol priority:
       - Thief → Intruder's Warehouse
       - Vampire → Sanguisuge Specialties
 - **Soft Changes:** These will not require you to change anything. Any old content will be maintained in legacy code to maximize retro-compatibility.
-  - Bugfixes
-    - Fixed Vending Machine money cost issues
-    - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+  - Fixed Vending Machine money cost issues
+  - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+  - Removed Research Gun from Tech Mart & Research inventories
 - **Feature additions**
   - Behavior
     - Added Grab Alcohol & Grab Food
@@ -54,12 +54,13 @@ New
 This will need to run without a hitch.
 ##		T!	Vending machine DetermineMoneyCost
 ##		C!	Seek & Destroy blinks on death
+##		C!	Cop Bots don't explode
 ##		C	Hide CCU Traits
 ###			C	When Possessing, show up on left
 ###			C	Upgrade Machine
 ##		C	Crepe Lookout pickpocketed Crepe Enforcer
 Need a relationship check
-##		H	Explosion Trait Refactor
+##		C	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
 ##		C!	00 Names
@@ -68,7 +69,7 @@ Be absolutely sure where .WithName is assigning: any with a second argument for 
 ###			C	Verify DisplayName isn't breaking them
 ##		C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
-##		H	Config Files
+##		C	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
 These should be grouped by Campaign, since that's the only place they're valid.
@@ -76,53 +77,53 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#	√H	Traits
-##		H	Agent Group
+#	√C	Traits
+##		C	Agent Group
 ###			C	Slum NPCs (Pilot)
 New
-###			H	Affect Campaign
+###			C	Affect Campaign
 Pending pilot
-###			H	Affect Vanilla 
+###			C	Affect Vanilla 
 Pending pilot
 ###			C	Roamer Level Feature
 New
-###			H	Repair Armor
+###			C	Repair Armor
 New
-###			H	Repair Weapons
+###			C	Repair Weapons
 New
-###			H	Pay respects to Faction
+###			C	Pay respects to Faction
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
-###			H	Sell Intel to Faction 
+###			C	Sell Intel to Faction 
 Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
-###			H	Start Election
+###			C	Start Election
 New
-###			H	Summon Professional
+###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			H	This One's On Me
+###			C	This One's On Me
 Buy a round for a patron and anyone with the same owner ID in the chunk.
 No drink for that guy in the corner. Fuck that guy.
-###			H	Train Attributes (Split to each)
+###			C	Train Attributes (Split to each)
 New
-###			H	Train Traits - Defense
+###			C	Train Traits - Defense
 New
 Sell traits for double their Upgrade Machine cost
-###			H	Train Traits - Guns
+###			C	Train Traits - Guns
 New
-###			H	Train Traits - Melee
+###			C	Train Traits - Melee
 New
-###			H	Train Traits - Movement
+###			C	Train Traits - Movement
 New
-###			H	Train Traits - Social
+###			C	Train Traits - Social
 New
-###			H	Train Traits - Stealth
+###			C	Train Traits - Stealth
 New
-###			H	Train Traits - Trade
+###			C	Train Traits - Trade
 New
-###			H	Visitor's Badge
+###			C	Visitor's Badge
 Set Bribe options on separate traits
 ###			√	Administer Blood Bag
 Complete
@@ -163,7 +164,7 @@ Complete
 Complete
 ###			√	Use Blood Bag
 Complete
-##		H	Appearance
+##		C	Appearance
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
   - Should be a simple fix since it's doing less rather than more.
@@ -177,50 +178,50 @@ New
 New
 ###			C	Skin Color
 New
-##		√H	Behavior
+##		√C	Behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
-###			H	Clean Trash
+###			C	Clean Trash
 New
-###			H	Confiscate Contraband
+###			C	Confiscate Contraband
 Should also spawn Confiscation Center (See SORCE)
 ###			C	Curious
 Investigate noises like cop & shopkeeper
-###			H	Deport Non-Citizens
+###			C	Deport Non-Citizens
 Should also spawn Deportation Center (See SORCE)
 ###			C	Fucking Salesman
 Knocks on non-restricted locked doors, moves on after a pause
-###			H	Fight Fires
+###			C	Fight Fires
 Agent.firefighter
 Agent.fightsFires
 ###			C	First Aider
 Revives Aligned if they can within a certain timer
 
-###			H	Grab Everything
+###			C	Grab Everything
 New
-###			H	Grab Food
+###			C	Grab Food
 New
-###			H	Guard Door
+###			C	Guard Door
 New
 ###			C	Heister
 Picks a chest on the level, and tries to fight their way to loot it. 
 If successful, deactivates behavior.
-###			H	Hobo Beg (Custom)
+###			C	Hobo Beg (Custom)
 Maybe just implement the whole Hey, You! overhaul here
-###			H	Hog Turntables
+###			C	Hog Turntables
 New
 Allow paid Musician behavior
-###			H	Mutinous
+###			C	Mutinous
 Agent.mutinous
 ###			C	Needful
 Will seek out Musician need objects and operate them
 ###			C	Paranoid
 Constant search state
-###			H	SecretHate
+###			C	SecretHate
 Agent.secretHate
 Agent.choseSecretHate
 I think this is Bounty behavior
-###			H	Shakedown Player (Mobster)
+###			C	Shakedown Player (Mobster)
 New
 Use this on leader w/ Wander Level
 Use "Follow" behavior on agents placed behind them
@@ -231,17 +232,17 @@ Will default to finding a bed to sleep in, returning even after combat.
 Takes a longer time to react to everything
 ###			C	Suicdal
 Walks into hazards, only those they can see
-###			H	Tattle (Upper Cruster)
+###			C	Tattle (Upper Cruster)
 New
-###			H	Arsonist
+###			C	Arsonist
 Arsonist behavior
-###			H	Mad Bomber
+###			C	Mad Bomber
 Place a Time Bomb in a public toilet
-###			H	Bio-Terrorist
+###			C	Bio-Terrorist
 Poison a random vent or pump
 ###			C	Wage-Exempt
 Will "mug" you for a tip after any transaction
-###			√H	Accident-Prone
+###			√C	Accident-Prone
 Works for: Crusher, Fire Spewer, Saw Blade
 ####			C	Slime, Floor Trigger, ??
 New
@@ -257,14 +258,14 @@ Complete
 Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
-##		H	Campaign Flags
+##		C	Campaign Flags
 Might need to limit this to a single flag, since having multiple true at the same time would complicate things
 ###			C	If Paid then Flag A/B/C/D True
 New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
-##		√H	Combat
-###			H	Lockdowner (R.I.P.)
+##		√C	Combat
+###			C	Lockdowner (R.I.P.)
 Apparently Lockdown walls are broken in custom levels.
 ###			C	Call for Backup
 Calls cops on you when going hostile
@@ -275,13 +276,13 @@ Will dance on corpses and make loud noise if they win a combat
 Complete
 ###			√	Fearless
 Complete
-##		√H	Cost Currency
+##		√C	Cost Currency
 ###			C	00 Button ExtraCost Display
 Bananas & alcohol are hardcoded
 To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
-###			H	Alcohol
+###			C	Alcohol
 A la Bouncer
-###			H	Banana
+###			C	Banana
 Test
 ###			C	Blood
 Blood Bags always an option
@@ -295,40 +296,65 @@ Complete
 Complete
 ###			√	Zero
 Complete
-##		√H	Drug Warrior
+##		√C	Drug Warrior
 ###			C	Suicide Bomber
 Initiate a 15s timer, then detonate a Huge explosion
-##		√H	Explode On Death
+###			C	Extendo-Wheels
+Gain Roller Skates
+###			C	Sweaty
+Gain Wet, lmao
+##		C	Drug Warrior Modifiers
+###			C	Extended Release
+Effect lasts until end of combat
+###			C	Heelie 
+###			C	Last Stander
+Effect triggers when they would flee instead of at beginning of combat
+####			C	Extended Release interaction
+When paired with ER, the effect lasts until they would no longer be intimidated. 
+###			C	Post Warrior
+Effect triggers on end of threat (Regenerate, smoke, invisible)
+###			C	Whatta Rush
+Effect gains 2s of duration on damage
+##		√C	Explode On Death
 ###			C	00 Destroy body
 For all non-normal explosion types
 This will complete about half the holds in here.
-###			H	00 Explodes when Arrested
+###			C	00 Explodes when Arrested
 Not too concerned, considering this is vanilla for Slaves.
-###			H	Dizzy
+###			C	00 Refactor
+See other Explosion trait groups
+This category will become Explosion Type
+###			C	Death Rattle
+Noise
+###			C	Monke Parasites
+Explodes into Monke (barrel style)
+###			C	Thoughts & Prayers
+Rocket explosion?
+###			C	Dizzy
 Body remained
-###			H	EMP
+###			C	EMP
 Works, but body remained
-###			H	Firebomb
+###			C	Firebomb
 Didn't do anything
-###			H	Noise Only
+###			C	Noise Only
 Doesn't work
 Also not interesting
-###			H	Oil
+###			C	Oil
 This doesn't exist but should follow water logic. Plus there are many other uses.
-###			H	Ooze
+###			C	Ooze
 Only did particle effect
-###			H	Ridiculous
+###			C	Ridiculous
 Only did particle effect, didn't end slow-mo, no kills.
 This is the Bomb disaster one, so it will need special attention.
-###			H	Slime
+###			C	Slime
 Only did particle effect
-###			H	Stomp
+###			C	Stomp
 Did particle effect
 Pushed body away
 Didn't stun anyone
-###			H	Warp
+###			C	Warp
 Complete
-###			H	Water
+###			C	Water
 Body remained
 ###			√	Big
 Complete
@@ -336,67 +362,85 @@ Complete
 Complete
 ###			√	Huge
 Complete
-##		H	Hack
+##		C	Explosion Timer
+###			C	Hidden Fuse
+No red blink before explosion
+###			C	Long Fuse
+###			C	Short Fuse
+###			C	Zero Fuse
+##		C	Explosion Trigger
+###			C	On Damage
+###			C	On Death
+###			C	On Hostile
+###			C	On Health Low
+##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted
 ###			T	Go Haywire
 Attempted
 ###			T	Tamper With Aim
 Attempted
-##		√H	Interaction
-###			H	Buy Slave
+##		√C	Interaction
+###			C	Buy Slave
 Pending actual assignment of owned slaves 
-###			H	Cybernetic Surgery
+###			C	Cybernetic Surgery
 Curated Trait-seller
-###			H	Heal All
+###			C	Heal All
 Like Doctor heal, but all in party with calculated price
-###			H	Heal Other
+###			C	Heal Other
 Like Doctor heal, but activates reticle so you can select a party member or other.
-###			H	Heal Partial
+###			C	Heal Partial
 Like Doctor heal, but at a Blood Bag level.
 ####			C	Mouseover Price
 Show price to heal targeted agent before selection
-###			H	Quest Giver
+###			C	Quest Giver
 New
-###			H	Refill Guns
+###			C	Real Estate Agent
+####			C	Buy Property
+($500): Next level, one chunk (Bar, nightclub, Shop, etc.) will have its owners Submissive to you. You gain a $100 passive income that may be reduced if the chunk is damaged.
+####			C	Pump & Dump
+($250): Boost up a local business, only to pull the rug out from under the suckers! Next level, one chunk (above types) will be Hostile to you. You get a single payment of up to $375, depending on how much the chunk is damaged. Doing this three times will give you Ideological Clash.
+####			C	Sell Property
+Lose your smallest owned property income. Immediately gain twice its return amount. Rant about taxes.
+###			C	Refill Guns
 New
-###			H	Repair Armor
+###			C	Repair Armor
 New
-###			H	Repair Weapons
+###			C	Repair Weapons
 New
-###			H	Pay respects to Faction
+###			C	Pay respects to Faction
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
-###			H	Sell Intel to Faction 
+###			C	Sell Intel to Faction 
 Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
-###			H	Start Election
+###			C	Start Election
 New
-###			H	Summon Professional
+###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			H	This One's On Me
+###			C	This One's On Me
 Buy a round for a patron and anyone with the same owner ID in the chunk.
 No drink for that guy in the corner. Fuck that guy.
-###			H	Train Attributes (Split to each)
+###			C	Train Attributes (Split to each)
 New
-###			H	Train Traits - Defense
+###			C	Train Traits - Defense
 New
 Sell traits for double their Upgrade Machine cost
-###			H	Train Traits - Guns
+###			C	Train Traits - Guns
 New
-###			H	Train Traits - Melee
+###			C	Train Traits - Melee
 New
-###			H	Train Traits - Movement
+###			C	Train Traits - Movement
 New
-###			H	Train Traits - Social
+###			C	Train Traits - Social
 New
-###			H	Train Traits - Stealth
+###			C	Train Traits - Stealth
 New
-###			H	Train Traits - Trade
+###			C	Train Traits - Trade
 New
-###			H	Visitor's Badge
+###			C	Visitor's Badge
 Set Bribe options on separate traits
 ###			√	Administer Blood Bag
 Complete
@@ -437,7 +481,7 @@ Complete
 Complete
 ###			√	Use Blood Bag
 Complete
-##		√H	Interaction Gate
+##		√C	Interaction Gate
 ###			C	Insular
 ###			C	Insularer 
 ###			C	Insularest
@@ -449,7 +493,7 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
-##		H	Hire Duration
+##		C	Hire Duration
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
 "I didn't sign up for this! You're nuts!"
@@ -467,29 +511,29 @@ Removes homesickness killer, and allows infinite uses of skills.
 As above, but removes the single-use hire option.
 ###			C	Start as Hired
 On level entry
-##		√H	Hire Type
+##		√C	Hire Type
 ###			C	00 Split off Hire Base Cost
 Not referring to final cost, but the Hacker/Soldier cost tiers
-###			H	Chloroform
+###			C	Chloroform
 New
-###			H	Devour Corpse
+###			C	Devour Corpse
 New
-###			H	Disarm Trap
+###			C	Disarm Trap
 New
-###			H	Drink Blood
+###			C	Drink Blood
 New
 ###			C	Hack
 ####			C	Cyber Nuke
 Giving character Cyber Nuke allows Blow Up option, but it doesn't work
-###			H	Handcuff
+###			C	Handcuff
 New
-###			H	Mug
+###			C	Mug
 One-time use, mug target NPC
-###			H	Pickpocket
+###			C	Pickpocket
 New
-###			H	Poison
+###			C	Poison
 New 
-###			H	Safecrack
+###			C	Safecrack
 - Reticle does not activate 
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire
 	[Info   :  CCU_Core] DetermineButtons_Prefix: Hire Order
@@ -533,13 +577,13 @@ Objects to Analyze/track:
 		target.targetType
 
 In P_AgentInteractions.SafecrackSafe, I used JobType.GetSupplies as a placeholder until I figure out how to add to enums.
-###			H	Set Explosive
+###			C	Set Explosive
 On door or Safe: Plants door detonator
 Elsewhere: Remote bomb
 Gives you detonator when planted
-###			H	Set Time Bomb
+###			C	Set Time Bomb
 Based on and consumes Time Bombs in inventory. NPC starts with one.
-###			H	Tamper
+###			C	Tamper
 - Interface works but reticle is green for non-tamperable items.
   - Log message "Not implemented yet", fair enough
 ###			√	Muscle
@@ -550,11 +594,13 @@ Complete
 Complete
 ###			√	Cyber-Intruder
 Complete
-##		H	Loadout
+##		C	Loadout
 ###			C	CC Items Inclusion
 Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
 ###			C	Guns_Common
 New
+###			C	Deep Storage
+Doesn't drop items on death (They're in their butt)
 ###			C	Discreet
 Automatically applies Silencer to all held weapons on load
 ###			C	Infinite Ammo
@@ -600,60 +646,60 @@ Complete
 Complete
 ###			√	Manager Safe Combo
 Complete
-##		√H	Interaction
-###			H	Buy Slave
+##		√C	Interaction
+###			C	Buy Slave
 Pending actual assignment of owned slaves 
-###			H	Cybernetic Surgery
+###			C	Cybernetic Surgery
 Curated Trait-seller
-###			H	Heal All
+###			C	Heal All
 Like Doctor heal, but all in party with calculated price
-###			H	Heal Other
+###			C	Heal Other
 Like Doctor heal, but activates reticle so you can select a party member or other.
-###			H	Heal Partial
+###			C	Heal Partial
 Like Doctor heal, but at a Blood Bag level.
 ####			C	Mouseover Price
 Show price to heal targeted agent before selection
-###			H	Quest Giver
+###			C	Quest Giver
 New
-###			H	Refill Guns
+###			C	Refill Guns
 New
-###			H	Repair Armor
+###			C	Repair Armor
 New
-###			H	Repair Weapons
+###			C	Repair Weapons
 New
-###			H	Pay respects to Faction
+###			C	Pay respects to Faction
 Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
 "Improve Faction Relations"
 Should only allow for 1 of these to simplify algorithm
 But this means you'll need further faction traits
-###			H	Sell Intel to Faction 
+###			C	Sell Intel to Faction 
 Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
-###			H	Start Election
+###			C	Start Election
 New
-###			H	Summon Professional
+###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			H	This One's On Me
+###			C	This One's On Me
 Buy a round for a patron and anyone with the same owner ID in the chunk.
 No drink for that guy in the corner. Fuck that guy.
-###			H	Train Attributes (Split to each)
+###			C	Train Attributes (Split to each)
 New
-###			H	Train Traits - Defense
+###			C	Train Traits - Defense
 New
 Sell traits for double their Upgrade Machine cost
-###			H	Train Traits - Guns
+###			C	Train Traits - Guns
 New
-###			H	Train Traits - Melee
+###			C	Train Traits - Melee
 New
-###			H	Train Traits - Movement
+###			C	Train Traits - Movement
 New
-###			H	Train Traits - Social
+###			C	Train Traits - Social
 New
-###			H	Train Traits - Stealth
+###			C	Train Traits - Stealth
 New
-###			H	Train Traits - Trade
+###			C	Train Traits - Trade
 New
-###			H	Visitor's Badge
+###			C	Visitor's Badge
 Set Bribe options on separate traits
 ###			√	Administer Blood Bag
 Complete
@@ -694,38 +740,47 @@ Complete
 Complete
 ###			√	Use Blood Bag
 Complete
-##		√H	Interaction Gate
+##		√C	Interaction Gate
 ###			C	Insular
+Requires Faction Friendly
 ###			C	Insularer
+Requires Faction Loyal
 ###			C	Insularest
+Requires Faction Aligned
 ###			√	Untrusting
 Complete
 ###			√	Untrustinger
 Complete
 ###			√	Untrustingest
 Complete
-##		√	Merchant Type
-Complete
-##		√H	Passive
+##		C	Merchant Type
+###			C	Refactor
+###			C	Custom quantity in refactor
+Allows to sell shitty items in junk dealer, for instance
+##		√C	Passive
 ###			C	Blinker
 Blink to a random nearby spot when hit
 This is valid for player characters, so might need to be another mod
-###			H	Invincible
+###			C	Concealed Carrier
+Hides weapon until drawn
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
+###			C	Invincible
 New
-###			H	Mute Dialogue
+###			C	Mute Dialogue
 Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
 ###			C	Oblivious
 Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
 But will enter combat if their teammates do.
-###			H	Reviveable (Infinite)
+###			C	Reviveable (Infinite)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			H	Reviveable (One)
+###			C	Reviveable (One)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			H	Reviver
+###			C	Reviver
 If hired and surviving, will revive the player once
 ###			C	Spidey-Sensitive
 When alerted, immediately enters combat with perp (no search necessary)
-###			H	Statue
+###			C	Statue
 Remove colors
 Tint white
 Make stationary, Invincible, non-reactive
@@ -733,19 +788,23 @@ Make stationary, Invincible, non-reactive
 Werewolf A-were-ness works on this character
 ###			C	Supernatural
 Ghost Gibber works
+###			C	Tattletale
+Reports ALL crimes to alarm button
+###			C	Unappetizing
+Can't be bitten/cannibalized
 ###			C	Unchallenging
 No XP for neutralization
-###			H	Vision Beams (Cop Bot)
+###			C	Vision Beams (Cop Bot)
 DW
-###			H	Zombified
+###			C	Zombified
 Agent.zombified
 Agent.customZombified
 ###			√	Crusty
 Complete
 ###			√	Extortable
 Complete
-###			C	Guilty
-####			C	Cascade to Employees
+###			C!	Guilty
+####			C!	Cascade to Employees
 SetRelationshipOriginal, under Drug Dealer
 ###			√	Innocent
 Complete
@@ -755,7 +814,7 @@ Complete
 Complete
 ###			√	Z-Infected
 Complete
-##		√H	Relationships - Faction
+##		√C	Relationships - Faction
 ###			C	Faction Firefighter
 ###			C	Faction Cannibal
 ###			C	Faction Military
@@ -766,25 +825,25 @@ Loyal causes you to inherit its relationships, but negative ones are moderated:
 	Annoyed → Neutral
 		The net effect of this one is that Loyalists are less likely to initate conflict on behalf of their faction.
 Aligned means you fully inherit any faction-mandated relationships.
-###			H	Config Files for unique player-defined factions
+###			C	Config Files for unique player-defined factions
 Generate traits based on these names
 Allow multiple faction list files in a folder, to increase ease of compatibility.
-###			H	00 Refactor
+###			C	00 Refactor
 These should inherit from a shared class
 public override char Faction => '1', etc.
 public override string Relationship => VRelationship.Aligned, etc.
-###			H	Faction 1 Annoyed
-###			H	Faction 1 Friendly
-###			H	Faction 1 Loyal
-###			H	Faction 2 Annoyed
-###			H	Faction 2 Friendly
-###			H	Faction 2 Loyal
-###			H	Faction 3 Annoyed
-###			H	Faction 3 Friendly
-###			H	Faction 3 Loyal
-###			H	Faction 4 Annoyed
-###			H	Faction 4 Friendly
-###			H	Faction 4 Loyal
+###			C	Faction 1 Annoyed
+###			C	Faction 1 Friendly
+###			C	Faction 1 Loyal
+###			C	Faction 2 Annoyed
+###			C	Faction 2 Friendly
+###			C	Faction 2 Loyal
+###			C	Faction 3 Annoyed
+###			C	Faction 3 Friendly
+###			C	Faction 3 Loyal
+###			C	Faction 4 Annoyed
+###			C	Faction 4 Friendly
+###			C	Faction 4 Loyal
 ###			√	Faction 1 Aligned
 ###			√	Faction 1 Hostile
 ###			√	Faction 2 Aligned
@@ -793,7 +852,7 @@ public override string Relationship => VRelationship.Aligned, etc.
 ###			√	Faction 3 Hostile
 ###			√	Faction 4 Aligned
 ###			√	Faction 4 Hostile
-##		√H	Relationships - General
+##		√C	Relationships - General
 ###			C	All-Annoyed
 New
 ###			C	All-Friendly
@@ -810,9 +869,15 @@ Protects at Neutral instead of Loyal
 Will never go submissive
 ###			C	Thankful
 Joins combat at Friendly instead of Loyal
-###			H	Class Unity
+###			C	Class Unity
 Like Class Solidarity, except Aligned
 Note that Solidarity includes a No Infighting effect.
+###			C	Quick Temper
+Hostile at 4 strikes, Annoyed at 1
+###			C	Quicker Temper
+Hostile at 2 strikes, Annoyed at 1
+###			C	Quickest Temper
+Hostile at 1 strike
 ###			√	Hostile to Cannibal
 Complete
 ###			√	Hostile to Soldier
@@ -823,8 +888,8 @@ Complete
 Complete
 ###			√	Relationless
 Complete
-##		√H	Relationships - Player
-###			H	Player Secret Hate
+##		√C	Relationships - Player
+###			C	Player Secret Hate
 ###			√	Player Aligned
 Complete
 ###			√	Player Annoyed
@@ -837,7 +902,23 @@ Complete
 Complete
 ###			√	Player Submissive 
 Complete
-##		H	Spawn
+##		C	Senses - Hearing
+###			C	Deaf
+Already a status effect, you might even overlap the trait name as a cool trick
+##		C	Senses - Vision
+###			C	Scanline
+Show NPC vision cone like Cop bot, minus the audio (that can be modularized elsewhere)
+###			C	Short-sighted
+Short vision
+###			C	Far-sighted
+Camera-style blindspot
+###			C	Eye of the Hawk
+Long vision
+###			C	Eye of the Duck
+Wide peripheral vision
+###			C	Eye of the Worm
+Narrow peripheral vision
+##		C	Spawn
 ###			C	Enslaved
 New
 ###			C	Hide In Object
@@ -852,7 +933,9 @@ Never-ending waves of enemies
 New
 ###			C	Slave Owner
 NEw			
-##		H	Spawn - Bodyguarded
+###			C	Spawn on Object Destruction
+Set matching Owner ID to spawn like Ghost from Gravestone
+##		C	Spawn - Bodyguarded
 New
 - There are a few other hits that came up in a string search (possibly "Musician"):
   - LoadLevel.SpawnStartingFollowers
@@ -881,13 +964,15 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
-##		√H	Trait Gates
-###			H	Crust Enjoyer
+##		C	Tethers
+###			C	Types depend on vanilla variable
+##		√C	Trait Gates
+###			C	Crust Enjoyer
 If you have Upper Crusty, this character is Loyal
 I think this is actually automatic with Enforcer
-###			H	Gate Vendor
+###			C	Gate Vendor
 Won't sell unless you have appropriate trait
-###			H	Gate Hire
+###			C	Gate Hire
 Won't hire unless you have appropriate trait
 ###			√	Cool Cannibal
 Complete
@@ -911,7 +996,7 @@ Complete
 Complete
 ###			√	Suspicious Suspecter
 Complete
-##		H	Utility
+##		C	Utility
 ###			C	Hide Traits in Collapsed Groups
 - While in Character Creator, hide traits in Collapsed Groups
   - Once all traits are in they're going to get hard to manage. 
@@ -922,7 +1007,7 @@ Complete
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-#	H	Mutators
+#	C	Mutators
 Focus on Traits for this version.
 ##		C	Requested features
 - Random Disaster (Disasters Every Level not in editor)
@@ -1011,9 +1096,9 @@ Main quest rewards are multiplied by 10
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-#		H	Item Groups
+#		C	Item Groups
 Next release
-#		H	Object Additions
+#		C	Object Additions
 ##			C	Air Conditioner
 Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected
@@ -1029,25 +1114,25 @@ Ability to be already shooting water according to direction
 This would really only make sense with a Stop & Frisk mod.
 ##			C	Movie Screen
 Allow Text like Sign
-#		H	Player Utilities
+#		C	Player Utilities
 This might need to be its own mod
-##		H	Mouse3 Bind to command followers
+##		C	Mouse3 Bind to command followers
 - Target
   - Ground - All Stand Guard
   - Agent - All Attack
   - Self - All Follow
 - Could also be an item or SA
-##		H	Mutators to omit Vanilla content when custom is available
+##		C	Mutators to omit Vanilla content when custom is available
 - If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
-##		H	Save Chunk Pack configuration between loads
+##		C	Save Chunk Pack configuration between loads
 - I.e., only deactivate chunk packs when the player says so!
   - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-##		H	Show Chunk info on Mouseover in Map mode
+##		C	Show Chunk info on Mouseover in Map mode
 - When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
     - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-#		H	Demo Campaign - Shadowrun-but-not-really
+#		C	Demo Campaign - Shadowrun-but-not-really
 Remember, simultaneous release would be a bad thing. Get it to a playable state so you can consistently test features with it, but don't need it finished yet.
 ##		C	Music Pack
 ###			C	Actually Making a Music Pack
@@ -1197,7 +1282,7 @@ Offices
 ###			T	Rooftop Escape
 - Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
 - Disable Swat team ship control override (Destroy Computer)
-#		H	Demo Campaign - Wetwork
+#		C	Demo Campaign - Wetwork
 Progression & Patterns
   - Removal of base negative traits will affect certain early paths. 
     - Three as an example: Loud, Antisocial, Tech Illiterate

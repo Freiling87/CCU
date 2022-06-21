@@ -320,9 +320,10 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.FreezeRay, 1);
 			sel.CreateRandomElement(rList, vItem.GhostGibber, 1);
 			sel.CreateRandomElement(rList, vItem.IdentifyWand, 1);
-			sel.CreateRandomElement(rList, vItem.ResearchGun, 1);
 			sel.CreateRandomElement(rList, vItem.ShrinkRay, 1);
 			sel.CreateRandomElement(rList, vItem.Syringe, 3);
+			sel.CreateRandomElement(rList, vItem.TranquilizerGun, 1);
+			sel.CreateRandomElement(rList, vItem.WaterPistol, 1);
 
 			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Resistance_Commissary)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.FreeItemVoucher, 3);
@@ -392,7 +393,6 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.IdentifyWand, 2);
 			sel.CreateRandomElement(rList, vItem.PortableSellOMatic, 1);
 			sel.CreateRandomElement(rList, vItem.MemoryMutilator, 2);
-			sel.CreateRandomElement(rList, vItem.ResearchGun, 2);
 			sel.CreateRandomElement(rList, vItem.SafeBuster, 2);
 			sel.CreateRandomElement(rList, vItem.Translator, 3);
 
