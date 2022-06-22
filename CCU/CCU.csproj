@@ -216,6 +216,10 @@
     <Compile Include="Traits\Explode On Death\Slime.cs" />
     <Compile Include="Traits\Explode On Death\Stomp.cs" />
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
+    <Compile Include="Traits\Gib Type\Ice_Gibs.cs" />
+    <Compile Include="Traits\Gib Type\Ghost_Gibs.cs" />
+    <Compile Include="Traits\Gib Type\Normal_Gibs.cs" />
+    <Compile Include="Traits\Gib Type\T_GibType.cs" />
     <Compile Include="Traits\Hack\Explode.cs" />
     <Compile Include="Traits\Hire Duration\Permanent_Hire_Only.cs" />
     <Compile Include="Traits\Hire Duration\Permanent_Hire.cs" />
@@ -285,7 +289,7 @@
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
     <Compile Include="Traits\Relationships - Faction\T_Rel_Faction.cs" />
-    <Compile Include="Traits\Relationships - General\Faction_Firefighter.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_Firefighter_Aligned.cs" />
     <Compile Include="Traits\Relationships - General\Spineful.cs" />
     <Compile Include="Traits\Relationships - General\T_Rel_General.cs" />
     <Compile Include="Traits\Relationships - Player\Player_Secret_Hate.cs" />
@@ -303,10 +307,10 @@
     <Compile Include="Traits\TraitGate\Crushable.cs" />
     <Compile Include="Traits\TraitGate\Bashable.cs" />
     <Compile Include="Traits\TraitGate\Suspecter.cs" />
-    <Compile Include="Traits\Relationships - General\Faction_Military.cs" />
-    <Compile Include="Traits\Relationships - General\Faction_Cannibal.cs" />
-    <Compile Include="Traits\Relationships - General\Hostile_To_Vampire.cs" />
-    <Compile Include="Traits\Relationships - General\Hostile_To_Werewolf.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_Soldier_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_Cannibal_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_Vampire_Aligned.cs" />
+    <Compile Include="Traits\Relationships - Faction\Faction_Werewolf_Aligned.cs" />
     <Compile Include="Traits\TraitGate\Common_Folk.cs" />
     <Compile Include="Traits\TraitGate\Cool_Cannibal.cs" />
     <Compile Include="Traits\TraitGate\Cop_Access.cs" />
