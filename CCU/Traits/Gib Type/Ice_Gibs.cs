@@ -1,31 +1,28 @@
-﻿using CCU.Localization;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Linq;
 
-namespace CCU.Traits.Explode_On_Death
+namespace CCU.Traits.Gib_Type
 {
-    public class Slime : T_ExplodeOnDeath
+    public class Ice_Gibs : T_GibType
     {
-        public override string ExplosionType => VExplosionType.Slime;
+        public override int GibType => 1;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Slime>()
+            RogueLibs.CreateCustomTrait<Ice_Gibs>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character dies doing what they loved: Secreting toxic slime.\n\nR.I.P."),
+                    [LanguageCode.English] = String.Format("This character's body explodes into shards of ice."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Slime)),
+                    [LanguageCode.English] = DisplayName(typeof(Ice_Gibs)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Slime)).Select(c => c.TextName).ToList(),
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

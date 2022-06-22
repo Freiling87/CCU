@@ -9,7 +9,7 @@ namespace CCU.Traits.Explode_On_Death
     {
         public override string ExplosionType => VExplosionType.Stomp;
 
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Stomp>()

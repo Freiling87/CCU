@@ -3,32 +3,28 @@ using RogueLibsCore;
 using System;
 using System.Linq;
 
-namespace CCU.Traits.Explode_On_Death
+namespace CCU.Traits.Gib_Type
 {
-    /// <summary>
-    /// Named distinct from the Status effect
-    /// </summary>
-    public class Dizzy_EOD : T_ExplodeOnDeath
+    public class Ghost_Gibs : T_GibType
     {
-        public override string ExplosionType => VExplosionType.Dizzy;
+        public override int GibType => 2;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Dizzy_EOD>()
+            RogueLibs.CreateCustomTrait<Ghost_Gibs>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("On death, this character makes anyone nearby dizzy. I can't think of any possible reason for this."),
+                    [LanguageCode.English] = String.Format("This character's body explodes into chunks of... ectoplasm? Probably not vegan, if you were wondering."),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Dizzy_EOD), "Dizzy"),
+                    [LanguageCode.English] = DisplayName(typeof(Ghost_Gibs)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Dizzy_EOD)).Select(c => c.TextName).ToList(),
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

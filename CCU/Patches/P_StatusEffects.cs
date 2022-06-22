@@ -5,6 +5,7 @@ using CCU.Localization;
 using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
+using CCU.Traits.Gib_Type;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
@@ -157,7 +158,7 @@ namespace CCU.Patches
 		private static IEnumerable<CodeInstruction> CustomizeExplosion(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo ExplosionType = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(ExplosionType));
+			MethodInfo ExplosionType = AccessTools.DeclaredMethod(typeof(T_ExplodeOnDeath), nameof(T_ExplodeOnDeath.GetExplosionType));
 			FieldInfo agent = AccessTools.Field(typeof(StatusEffects), nameof(StatusEffects.agent));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -182,39 +183,86 @@ namespace CCU.Patches
 			return instructions;
 		}
 
-		public static string ExplosionType(Agent agent)
+        // This section slated for elimination once GibItAShot is working correctly.
+
+        //      [HarmonyTranspiler, UsedImplicitly]
+        //      private static IEnumerable<CodeInstruction> DisappearBody(IEnumerable<CodeInstruction> codeInstructions)
+        //      {
+        //          List<CodeInstruction> instructions = codeInstructions.ToList();
+        //          FieldInfo copBot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.copBot));
+        //          MethodInfo magicBool = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(MagicBool));
+
+        //          CodeReplacementPatch patch = new CodeReplacementPatch(
+        //              expectedMatches: 1,
+        //              targetInstructionSequence: new List<CodeInstruction>
+        //              {
+        //                  new CodeInstruction(OpCodes.Ldfld, copBot)
+        //              },
+        //              insertInstructionSequence: new List<CodeInstruction>
+        //              {
+        //                  new CodeInstruction(OpCodes.Call, magicBool),
+        //              });
+
+        //          patch.ApplySafe(instructions, logger);
+        //          return instructions;
+        //      }
+
+        //// Matt made me do it
+        //      private static bool MagicBool(Agent agent) =>
+        //          agent.copBot ||
+        //          agent.GetTraits<T_ExplodeOnDeath>().Any();
+
+
+        [HarmonyTranspiler, UsedImplicitly]
+        private static IEnumerable<CodeInstruction> GibBody(IEnumerable<CodeInstruction> codeInstructions)
         {
-			string result = agent.GetTraits<T_ExplodeOnDeath>().Where(c => c.ExplosionType != null).FirstOrDefault().ExplosionType;
-
-			logger.LogDebug("result: " + result);
-
-			return result;
-        }
-
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> DisappearBody(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
+            List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo agent = AccessTools.Field(typeof(StatusEffects), nameof(StatusEffects.agent));
 			FieldInfo copBot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.copBot));
-			MethodInfo magicBool = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(MagicBool));
+			MethodInfo gibItAShot = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(GibItAShot));
 
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldfld, copBot)
-				},
+            CodeReplacementPatch patch = new CodeReplacementPatch(
+                expectedMatches: 1,
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Call, magicBool),
-				});
+					new CodeInstruction(OpCodes.Ldloc_1),								
+					new CodeInstruction(OpCodes.Call, gibItAShot),						
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld, copBot),
+                });
 
-			patch.ApplySafe(instructions, logger);
-			return instructions;
+            patch.ApplySafe(instructions, logger);
+            return instructions;
+        }
+
+		private static void GibItAShot(StatusEffects __instance)
+		{
+			logger.LogDebug("GibItAShot");
+			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().FirstOrDefault() is null)
+				return;
+
+			int gibType = T_GibType.GetGibType(__instance.agent);
+
+			logger.LogDebug("gibType:\t" + gibType);
+
+			//	Networking version
+			if (GC.multiplayerMode && !__instance.dontDoBloodExplosion)
+				__instance.agent.objectMult.Gib(gibType); 
+
+			//	Base version
+			//	Why Matt, why
+			if (gibType == 0)
+				__instance.NormalGib();
+			else if (gibType == 1)
+				__instance.IceGib();
+			else if (gibType == 2)
+				__instance.GhostGib();
+
+			__instance.agent.objectMult.Gib(gibType);
 		}
-
-		private static bool MagicBool(Agent agent) =>
-			agent.copBot ||
-			agent.GetTraits<T_ExplodeOnDeath>().Any();
 	}
 }

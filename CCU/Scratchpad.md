@@ -6,61 +6,37 @@ Listed in order of Parent tier summary symbol priority:
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	C	v.1.0.0 Changelog
-- **Hard Changes:** These will require you to update any affected content accordingly. 
-  - Trait renaming: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
-    - Faction Relationships: Some of these were incomplete and have been renamed to reflect this.
-      - Hostile to Cannibal → Faction Military (Now includes alignment with Soldiers)
-      - Hostile to Soldier → Faction Cannibal (Now includes alignment with Cannibals)
-    - Hire Type
-      - Hacker → Cyber-Intruder
-    - Merchant Type traits renamed
-      - Shopkeeper → General Store
-      - Soldier → Army Quartermaster
-      - Thief → Intruder's Warehouse
-      - Vampire → Bloodsucker Bazaar
-- **Soft Changes:** These will not require you to change anything. Any old content will be maintained in legacy code to maximize retro-compatibility.
-  - Bugfixes
-    - Fixed Vending Machine money cost issues
-    - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
-    - Influence Election no longer persists after use
-    - Removed Research Gun from Tech Mart & Research inventories
+- Bugfixes
+  - Fixed Vending Machine interaction issues
+  - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+  - Influence Election no longer persists after use
+  - Removed Research Gun from Tech Mart & Research inventories
+  - **Trait renaming:** 
+    - **Class Name Overlaps**: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
+      - **Hire Type**
+        - Hacker → Cyber-Intruder
+      - **Merchant Type**
+        - Shopkeeper → General Store
+        - Soldier → Army Quartermaster
+        - Thief → Intruder's Warehouse
+        - Vampire → Bloodsucker Bazaar
+    - **Class-based Faction Relationship Traits:** Most of the agent-based relationship traits only included hostility to a class' enemies. This doesn't fully cover the scope of the vanilla feature, so these have been expanded to treat certain agent types as factions. The traits now include mutual alignment with vanilla agents of that class, plus mutual hostility with that class' enemies.
+      - Hostile to Cannibal → Faction Soldier Aligned
+      - Hostile to Soldier → Faction Cannibal Aligned
+      - Hostile to Vampire → Faction Werewolf Aligned
+      - Hostile to Werewolf → Faction Vampire Aligned
 - **Feature additions**
   - Behavior
     - Added Grab Alcohol & Grab Food
-  - Added exceptions to Untrusting traits (Leave Weapons Behind, Offer Motivation, Pay Debt)
+  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt.
   - Faction Relationships
-    - Added Firefighter Faction
-#	C	General
+      - Added Faction Firefighter Aligned
+      - Added Faction Gorilla Aligned #	C	General
 ##		T!	00 Chunk Key Holder might not work correctly
 Attempted: P_InvDatabase.FillAgent 
-##		H	Custom Object variables
-###			C	Readables
-Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
-	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
-
-The text string, in its path from user input to the object itself
-	LevelEditor.extraVarStringObject.text
-	LevelEditorTile.extraVarString
-	SpawnerBasic.extraVarString
-	PlayfieldObject.extraVarString
-	Sign.signTextOnline
-
-Opening the field to edit it: 
-	LevelEditor.OpenLongDescription
-####			C	Enabling input field
-LevelEditor.UpdateInterface		- Search for "Sign"
-###			C	Containables
-Allow object to store items:
-	Shelf, Toilet
-##		T!	Vending machine DetermineMoneyCost
-Attempted
-##		T!	Seek & Destroy blinks on death
-Attempted: P_StatusEffects.ExplodeAfterDeathChecks_Prefix
 ##		C	Thief Shop sometimes doesn't generate
 Probably gates with Honor Among Thieves
 ##		C	Pay Debt + Cost Scale
-New
-##		C	Vanilla Cop Bot not exploding
 New
 ##		C	Pickpocket Aligned
 Can lead to crash according to CL
@@ -86,9 +62,10 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#		√	Systems
-##			√	Legacy Updater
-###				√	Trait Updater
+#		C	Systems
+##			C	Legacy Updater
+###				C	Trait Updater
+####				C	Relationship Factions
 ####				√	Designer Side
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
@@ -281,6 +258,8 @@ Complete
 Complete
 ###			√	Seek & Destroy (Killer Robot)
 Complete
+####			√	Blinks on Death
+Complete
 ##		C	Campaign Flags
 Might need to limit this to a single flag, since having multiple true at the same time would complicate things
 ###			C	If Paid then Flag A/B/C/D True
@@ -320,17 +299,22 @@ Complete
 ###			√	Zero
 Complete
 ##		√C	Drug Warrior
-###			C	Suicide Bomber
-Initiate a 15s timer, then detonate a Huge explosion
-##		T	Explode On Death
-###			T	Certain explosion types don't delete body
-Attempted: P_StatusEffects_ExplodeBody.DisappearBody
-You obviously will need to test this with EMP or something
-###			H	00 Explodes when Arrested
 ###			C	Extendo-Wheels
 Gain Roller Skates
+###			C	Suicide Bomber
+Initiate a 15s timer, then detonate a Huge explosion
+Interface with Timer traits and Explosion traits to allow player to customize
 ###			C	Sweaty
 Gain Wet, lmao
+##		C	Explode On Death
+###			C	00 Explodes when Arrested
+
+###			√	00 Cop Bot not Exploding
+Resolved
+###			√	00 Certain explosion types don't delete body
+P_StatusEffects_ExplodeBody.DisappearBody
+####			√	GIB ME GIBS
+P_StatusEffects_ExplodeBody.GibItAShot
 ##		C	Drug Warrior Modifiers
 ###			C	Extended Release
 Effect lasts until end of combat
@@ -343,30 +327,21 @@ When paired with ER, the effect lasts until they would no longer be intimidated.
 Effect triggers on end of threat (Regenerate, smoke, invisible)
 ###			C	Whatta Rush
 Effect gains 2s of duration on damage
-##		√C	Explode On Death
-###			C	00 Destroy body
-For all non-normal explosion types
-This will complete about half the holds in here.
+##		CT	Explode On Death
 ###			C	00 Explodes when Arrested
 Not too concerned, considering this is vanilla for Slaves.
 ###			C	00 Refactor
 See other Explosion trait groups
 This category will become Explosion Type
-###			C	Death Rattle
+###			T	Death Rattle
 Noise
 ###			C	Monke Parasites
 Explodes into Monke (barrel style)
 ###			C	Thoughts & Prayers
 Rocket explosion?
-###			C	Dizzy
-Body remained
-###			C	EMP
-Works, but body remained
+###			T	Dizzy
 ###			C	Firebomb
 Didn't do anything
-###			C	Noise Only
-Doesn't work
-Also not interesting
 ###			C	Oil
 This doesn't exist but should follow water logic. Plus there are many other uses.
 ###			C	Ooze
@@ -380,11 +355,12 @@ Only did particle effect
 Did particle effect
 Pushed body away
 Didn't stun anyone
-###			C	Warp
-Complete
-###			C	Water
-Body remained
+###			T	Warp
+Was marked as complete but idk
+###			T	Water
 ###			√	Big
+Complete
+###			√	EMP
 Complete
 ###			√	Normal
 Complete
@@ -396,11 +372,6 @@ No red blink before explosion
 ###			C	Long Fuse
 ###			C	Short Fuse
 ###			C	Zero Fuse
-##		C	Explosion Trigger
-###			C	On Damage
-###			C	On Death
-###			C	On Hostile
-###			C	On Health Low
 ##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted
@@ -1133,6 +1104,25 @@ Main quest rewards are multiplied by 10
 #		C	Item Groups
 Next release
 #		C	Object Additions
+##		H	Custom Object variables
+###			C	Readables
+Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
+	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
+
+The text string, in its path from user input to the object itself
+	LevelEditor.extraVarStringObject.text
+	LevelEditorTile.extraVarString
+	SpawnerBasic.extraVarString
+	PlayfieldObject.extraVarString
+	Sign.signTextOnline
+
+Opening the field to edit it: 
+	LevelEditor.OpenLongDescription
+####			C	Enabling input field
+LevelEditor.UpdateInterface		- Search for "Sign"
+###			C	Containables
+Allow object to store items:
+	Shelf, Toilet
 ##			C	Air Conditioner
 Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected

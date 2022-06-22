@@ -171,7 +171,7 @@ namespace CCU.Patches.Agents
 			foreach (T_Interaction interaction in agent.GetTraits<T_Interaction>())
 			{
 				// Simple Exceptions
-				if ((!(interaction is Offer_Motivation || interaction is Leave_Weapons_Behind) && untrusted) ||
+				if ((!(interaction is Offer_Motivation || interaction is Leave_Weapons_Behind || interaction is Pay_Debt || interaction is Pay_Entrance_Fee) && untrusted) ||
 					(interaction is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
 					(interaction is Influence_Election && agent.gc.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
 					(interaction is Leave_Weapons_Behind && !interactingAgent.inventory.HasWeapons()) ||

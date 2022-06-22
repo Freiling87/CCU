@@ -8,7 +8,7 @@ namespace CCU.Traits.Explode_On_Death
     {
         public override string ExplosionType => VExplosionType.Ridiculous;
 
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomTrait<Ridiculous>()
