@@ -4,6 +4,8 @@ namespace CCU.Traits.Cost_Scale
 {
     public class More : T_CostScale
     {
+        public override float CostScale => 1.50f;
+
         [RLSetup]
         public static void Setup()
         {
@@ -20,7 +22,6 @@ namespace CCU.Traits.Cost_Scale
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Less)), DisplayName(typeof(Zero)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

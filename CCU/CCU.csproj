@@ -169,6 +169,7 @@
     <Compile Include="Traits\Cost Currency\Shylock.cs" />
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
     <Compile Include="Traits\Cost Currency\T_CostCurrency.cs" />
+    <Compile Include="Traits\Cost Scale\Much_More.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Big.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Huge.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Normal.cs" />

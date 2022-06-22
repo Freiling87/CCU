@@ -2,22 +2,22 @@
 
 namespace CCU.Traits.Cost_Scale
 {
-    public class Less : T_CostScale
+    public class Much_More : T_CostScale
     {
-        public override float CostScale => 0.50f;
+        public override float CostScale => 2.00f;
 
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Less>()
+            RogueLibs.CreateCustomTrait<Much_More>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character's costs are decreased by 50%.",
+                    [LanguageCode.English] = "This character's costs are increased by 100%.",
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Less)),
+                    [LanguageCode.English] = DisplayName(typeof(Much_More)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

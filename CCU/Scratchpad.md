@@ -28,16 +28,20 @@ Listed in order of Parent tier summary symbol priority:
 - **Feature additions**
   - Behavior
     - Added Grab Alcohol & Grab Food
-  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt.
+  - Cost Scale
+    - Added Much More (200% cost)
+  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
   - Faction Relationships
       - Added Faction Firefighter Aligned
-      - Added Faction Gorilla Aligned #	C	General
+      - Added Faction Gorilla Aligned 
+#	CT	General
 ##		T!	00 Chunk Key Holder might not work correctly
 Attempted: P_InvDatabase.FillAgent 
-##		C	Thief Shop sometimes doesn't generate
+##		T	Thief Shop sometimes doesn't generate
 Probably gates with Honor Among Thieves
-##		C	Pay Debt + Cost Scale
-New
+First, recreate this to identify the issue.
+##		T	Pay Debt + Cost Scale
+P_AgentInteractions.AddInteractionButtons
 ##		C	Pickpocket Aligned
 Can lead to crash according to CL
 From CL's bug report:

@@ -109,10 +109,6 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="agent"></param>
 		public static void AddCustomAgentButtons(Agent agent)
 		{
 			AgentInteractions agentInteractions = agent.agentInteractions;
@@ -120,7 +116,7 @@ namespace CCU.Patches.Agents
 			string relationship = agent.relationships.GetRel(interactingAgent);
 			int relationshipLevel = VRelationship.OrderedRelationships.IndexOf(relationship);
 
-			if (agent.agentName != "Custom")
+			if (agent.agentName != VanillaAgents.CustomCharacter)
 				return;
 
 			T_InteractionGate trustTrait = agent.GetTraits<T_InteractionGate>().Where(t => t.MinimumRelationship > 0).FirstOrDefault(); // Should only ever be one
@@ -380,7 +376,10 @@ namespace CCU.Patches.Agents
 				}
 				else if (interaction is Pay_Debt)
                 {
-					agentInteractions.AddButton(interaction.ButtonText, interactingAgent.CalculateDebt());
+					// Cost scaling is done slightly different for this interaction, since it's not subject to level scaling.
+					float costScale = agent.GetTrait<T_CostScale>().CostScale;
+
+					agentInteractions.AddButton(interaction.ButtonText, (int)(interactingAgent.CalculateDebt() * costScale));
 				}
 				else if (interaction is Play_Bad_Music)
 				{

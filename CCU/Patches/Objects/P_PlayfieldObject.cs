@@ -16,37 +16,20 @@ namespace CCU.Patches.Objects
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new[] { typeof(int), typeof(string) })]
         public static void DetermineMoneyCost_Postfix(int moneyAmt, string transactionType, PlayfieldObject __instance, ref int __result)
         {
-			// Need initial Cost → Item conversion
-			// NOTE: Ensure moneyAmt isn't used inappropriately in here, since I'm not sure you can modify its value
-
 			Agent agent = __instance.GetComponent<Agent>();
 
 			if (agent is null)
 				return;
 
-			//bool alcohol = moneyAmt >= 8008135 && moneyAmt < 8008171;
-			//bool bananas = moneyAmt >= 6789 && moneyAmt < 6825;
-			//bool blood = moneyAmt >= 87444 && moneyAmt < 87480;
-			//bool flesh = moneyAmt >= 5497064 && moneyAmt < 5497100;
+			T_CostScale trait = agent.GetTrait<T_CostScale>();
 
-			//if (alcohol)
-			//	moneyAmt = MoneyToAlcohol(moneyAmt);
-			//else if (bananas)
-			//	moneyAmt = MoneyToBananas(moneyAmt);
-
-			if (agent.HasTrait<Less>())
-				__result = (int)((float)__result * 0.5f);
-			else if (agent.HasTrait<More>())
-				__result = (int)((float)__result * 1.5f);
-			else if (agent.HasTrait<Zero>())
-				__result = 0;
-
-			//if (alcohol)
-			//	moneyAmt = AlcoholToMoney(moneyAmt);
-			//else if (bananas)
-			//	moneyAmt = BananasToMoney(moneyAmt);
+			if (trait is null)
+				return;
+			
+			__result = (int)(__result * trait.CostScale);
 		}
 
+		// Shouldn't these include the item value based exchange rate?
 		public static int AlcoholToMoney(int moneyAmt) =>
 			moneyAmt + 8008134;
 		public static int BananasToMoney(int moneyAmt) =>
