@@ -1,10 +1,12 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 
 namespace CCU.Traits.Behavior
 {
     public class Grab_Drugs : T_Behavior
     {
         public override bool LosCheck => true;
+        public override string[] GrabItemCategories => new string[] { VItemCategory.Drugs };
 
         [RLSetup]
         public static void Setup()

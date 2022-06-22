@@ -8,6 +8,7 @@ namespace CCU.Traits.Behavior
     public class Pick_Pockets : T_Behavior
     {
         public override bool LosCheck => true;
+        public override string[] GrabItemCategories => null;
 
         [RLSetup]
         public static void Setup()

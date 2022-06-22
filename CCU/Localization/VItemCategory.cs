@@ -13,6 +13,7 @@
 			Health = "Health",
 			Melee = "Melee",
 			MeleeAccessory = "MeleeAccessory",
+			Money = "Money",
 			Movement = "Movement",
 			NonStandardWeapons = "NonStandardWeapons",
 			NonStandardWeapons2 = "NonStandardWeapons2",

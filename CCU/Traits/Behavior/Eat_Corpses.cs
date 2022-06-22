@@ -1,10 +1,12 @@
 ﻿using RogueLibsCore;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Behavior
 {
     public class Eat_Corpses : T_Behavior
     {
         public override bool LosCheck => true;
+        public override string[] GrabItemCategories => null;
 
         [RLSetup]
         public static void Setup()

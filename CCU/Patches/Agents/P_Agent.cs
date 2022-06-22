@@ -127,8 +127,7 @@ namespace CCU.Patches.Agents
 				__instance.killerRobot = true;
 			#endregion
 			#region Interaction
-			if (__instance.HasTrait<Go_Haywire>() ||
-				__instance.HasTrait<Tamper_with_Aim>())
+			if (__instance.HasTrait<T_Hack>())
 				__instance.hackable = true;
 			#endregion
 			#region Combat

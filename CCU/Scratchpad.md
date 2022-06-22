@@ -42,11 +42,14 @@ Probably gates with Honor Among Thieves
 First, recreate this to identify the issue.
 ##		T	Pay Debt + Cost Scale
 P_AgentInteractions.AddInteractionButtons
-##		C	Pickpocket Aligned
-Can lead to crash according to CL
+##		T	Pickpocket Aligned
 From CL's bug report:
 	they did steal several times in a row without crashing 
 	the one time the crash finally occurred it was right after they actually started fighting each other (every other time the thief just wandered off). So it's maybe not so much the pickpocketing itself as bashable NPCs becoming hostile to one another.
+Test this to identify issues before attempting.
+The pickpocket code needs to be transpilerized anyway.
+###			T	LOS Behavior refactor
+Transpilerizing and refactoring these traits.
 ##		C	Hide CCU Traits
 ###			C	When Possessing, show up on left
 ###			C	Upgrade Machine

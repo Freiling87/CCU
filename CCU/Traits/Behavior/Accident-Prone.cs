@@ -1,11 +1,13 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Behavior
 {
     public class AccidentProne : T_Behavior
     {
         public override bool LosCheck => false;
+        public override string[] GrabItemCategories => null;
 
         [RLSetup]
         public static void Setup()

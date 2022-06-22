@@ -5,6 +5,7 @@ namespace CCU.Traits.Behavior
     public class Seek_and_Destroy : T_Behavior
     {
         public override bool LosCheck => false;
+        public override string[] GrabItemCategories => null;
 
         [RLSetup]
         public static void Setup()
