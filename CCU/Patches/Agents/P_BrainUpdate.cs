@@ -96,50 +96,53 @@ namespace CCU.Patches.Agents
 
 					for (int i = 0; i < deadAgentList.Count; i++)
 					{
-						Agent target = deadAgentList[i];
+						Agent targetAgent = deadAgentList[i];
 
 						try
 						{
-							if (target.dead && !target.resurrect && !target.ghost && !target.disappeared && !target.inhuman && !target.cantCannibalize && !target.hasGettingBitByAgent && agent.prisoner == target.prisoner && agent.slaveOwners.Count == 0 &&
-								(agent.prisoner <= 0 || agent.curTileData.chunkID == target.curTileData.chunkID) &&
-								(!(target.agentName == VanillaAgents.Cannibal) || !target.KnockedOut()) &&
-								!target.arrested && !target.invisible && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, target.curTileData) && agent.curPosX - 5f < target.curPosX && agent.curPosX + 5f > target.curPosX && agent.curPosY - 5f < target.curPosY && agent.curPosY + 5f > target.curPosY && agent.movement.HasLOSAgent(target) && target.fire == null)
+							if (targetAgent.dead && !targetAgent.resurrect && !targetAgent.ghost && !targetAgent.disappeared && !targetAgent.inhuman && !targetAgent.cantCannibalize && !targetAgent.hasGettingBitByAgent && agent.prisoner == targetAgent.prisoner && agent.slaveOwners.Count == 0 &&
+								(agent.prisoner <= 0 || agent.curTileData.chunkID == targetAgent.curTileData.chunkID) &&
+								(!(targetAgent.agentName == VanillaAgents.Cannibal) || !targetAgent.KnockedOut()) &&
+								!targetAgent.arrested && !targetAgent.invisible && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, targetAgent.curTileData) && agent.curPosX - 5f < targetAgent.curPosX && agent.curPosX + 5f > targetAgent.curPosX && agent.curPosY - 5f < targetAgent.curPosY && agent.curPosY + 5f > targetAgent.curPosY && agent.movement.HasLOSAgent(targetAgent) && targetAgent.fire == null)
 							{
 								agent.SetPreviousDefaultGoal(agent.defaultGoal);
 								agent.SetDefaultGoal("Cannibalize");
-								agent.SetCannibalizingTarget(target);
+								agent.SetCannibalizingTarget(targetAgent);
 								agent.losCheckAtIntervals = false;
 								break;
 							}
 						}
 						catch
 						{
-							Debug.LogError(string.Concat(new object[] { "Cannibalize Error: ", agent, " - ", target }));
+							Debug.LogError(string.Concat(new object[] { "Cannibalize Error: ", agent, " - ", targetAgent }));
 						}
 					}
 				}
 			}
-			if (agent.specialAbility == vSpecialAbility.StickyGlove && agent.HasTrait<Pick_Pockets>() &&
-				!agent.brainUpdate.thiefNoSteal)
+			if (agent.specialAbility == vSpecialAbility.StickyGlove && agent.HasTrait<Pick_Pockets>() && !agent.brainUpdate.thiefNoSteal)
 			{
 				agent.losCheckAtIntervalsTime = 0;
 				if (!agent.hasEmployer)
 				{
 					List<Agent> lastSawAgentList2 = GC.lastSawAgentList;
-					for (int num5 = 0; num5 < agent.losCheckAtIntervalsList.Count; num5++)
+					for (int i = 0; i < agent.losCheckAtIntervalsList.Count; i++)
 					{
-						Agent agent6 = agent.losCheckAtIntervalsList[num5];
-						Relationship relationship = agent.relationships.GetRelationship(agent6);
-						bool honorFlag =
-							(agent6.statusEffects.hasTrait("HonorAmongThieves") || agent6.statusEffects.hasTrait("HonorAmongThieves2")) &&
-							(agent.agentName == "Thief" ||
-								(agent.specialAbility == vSpecialAbility.StickyGlove && agent.HasTrait<Pick_Pockets>() && agent.HasTrait<Honorable_Thief>()));
+						Agent targetAgent = agent.losCheckAtIntervalsList[i];
+						Relationship relationship = agent.relationships.GetRelationship(targetAgent);
 
-						if (relationship.distance < 4f && !honorFlag && !agent6.mechEmpty && !agent6.objectAgent && relationship.relTypeCode != relStatus.Aligned && relationship.relTypeCode != relStatus.Loyal && relationship.relTypeCode != relStatus.Friendly && relationship.relTypeCode != relStatus.Hostile && agent.slaveOwners.Count == 0 && agent.prisoner == agent6.prisoner && !agent6.invisible && !agent6.disappeared && (agent.prisoner <= 0 || agent.curTileData.chunkID == agent6.curTileData.chunkID) && !agent6.hasGettingArrestedByAgent && !agent.hectoredAgents.Contains(agent6.agentID) && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, agent6.curTileData))
+						bool honorFlag = agent.HasTrait<Honorable_Thief>() &&
+							(targetAgent.statusEffects.hasTrait(VanillaTraits.HonorAmongThieves) || 
+							targetAgent.statusEffects.hasTrait("HonorAmongThieves2"));
+
+						if (relationship.distance < 4f && !honorFlag && !targetAgent.mechEmpty && !targetAgent.objectAgent && 
+							(relationship.relTypeCode == relStatus.Neutral || relationship.relTypeCode == relStatus.Annoyed) &&
+							agent.slaveOwners.Count == 0 && agent.prisoner == targetAgent.prisoner && !targetAgent.invisible && !targetAgent.disappeared && 
+							(agent.prisoner <= 0 || agent.curTileData.chunkID == targetAgent.curTileData.chunkID) && 
+							!targetAgent.hasGettingArrestedByAgent && !agent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, targetAgent.curTileData))
 						{
 							agent.SetDefaultGoal("Steal");
-							agent.SetStealingFromAgent(agent6);
-							agent.hectoredAgents.Add(agent6.agentID);
+							agent.SetStealingFromAgent(targetAgent);
+							agent.hectoredAgents.Add(targetAgent.agentID);
 							agent.losCheckAtIntervals = false;
 							agent.noEnforcerAlert = true;
 							agent.oma.mustBeGuilty = true;
@@ -158,15 +161,15 @@ namespace CCU.Patches.Agents
 
 					for (int i = 0; i < agent.losCheckAtIntervalsList.Count; i++)
 					{
-						Agent agent7 = agent.losCheckAtIntervalsList[i];
-						Relationship relationship2 = agent.relationships.GetRelationship(agent7);
+						Agent targetAgent = agent.losCheckAtIntervalsList[i];
+						Relationship relationship2 = agent.relationships.GetRelationship(targetAgent);
 
-						if (relationship2.distance < 5f && relationship2.relTypeCode != relStatus.Aligned && relationship2.relTypeCode != relStatus.Loyal && relationship2.relTypeCode != relStatus.Friendly && relationship2.relTypeCode != relStatus.Hostile && agent7.agentName != "Vampire" && !agent7.hasGettingBitByAgent && !agent7.mechEmpty && !agent7.mechFilled && !agent7.objectAgent && !agent7.dizzy && (agent7.localPlayer || agent7.isPlayer == 0) && agent.prisoner == agent7.prisoner && !agent7.invisible && agent.slaveOwners.Count == 0 && (agent.prisoner <= 0 || agent.curTileData.chunkID == agent7.curTileData.chunkID) && !agent7.hasGettingArrestedByAgent && !agent.hectoredAgents.Contains(agent7.agentID) && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, agent7.curTileData) && !agent7.dead && !agent7.ghost && !agent7.hologram && !agent7.disappeared && !agent7.inhuman && !agent7.beast && !agent7.zombified)
+						if (relationship2.distance < 5f && relationship2.relTypeCode != relStatus.Aligned && relationship2.relTypeCode != relStatus.Loyal && relationship2.relTypeCode != relStatus.Friendly && relationship2.relTypeCode != relStatus.Hostile && targetAgent.agentName != "Vampire" && !targetAgent.hasGettingBitByAgent && !targetAgent.mechEmpty && !targetAgent.mechFilled && !targetAgent.objectAgent && !targetAgent.dizzy && (targetAgent.localPlayer || targetAgent.isPlayer == 0) && agent.prisoner == targetAgent.prisoner && !targetAgent.invisible && agent.slaveOwners.Count == 0 && (agent.prisoner <= 0 || agent.curTileData.chunkID == targetAgent.curTileData.chunkID) && !targetAgent.hasGettingArrestedByAgent && !agent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, targetAgent.curTileData) && !targetAgent.dead && !targetAgent.ghost && !targetAgent.hologram && !targetAgent.disappeared && !targetAgent.inhuman && !targetAgent.beast && !targetAgent.zombified)
 						{
 							agent.SetPreviousDefaultGoal(agent.defaultGoal);
 							agent.SetDefaultGoal("Bite");
-							agent.hectoredAgents.Add(agent7.agentID);
-							agent.SetBitingTarget(agent7);
+							agent.hectoredAgents.Add(targetAgent.agentID);
+							agent.SetBitingTarget(targetAgent);
 							agent.losCheckAtIntervals = false;
 							agent.noEnforcerAlert = true;
 							agent.oma.mustBeGuilty = true;

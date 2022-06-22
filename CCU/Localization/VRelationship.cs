@@ -27,6 +27,8 @@ namespace CCU.Localization
             Loyal,      //  4
             Aligned     //  5
         };
-    }
 
+        public static int GetRelationshipLevel(string relationship) =>
+            OrderedRelationships.IndexOf(relationship);
+    }
 }

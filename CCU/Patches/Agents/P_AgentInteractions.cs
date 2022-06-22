@@ -114,7 +114,7 @@ namespace CCU.Patches.Agents
 			AgentInteractions agentInteractions = agent.agentInteractions;
 			Agent interactingAgent = agent.interactingAgent;
 			string relationship = agent.relationships.GetRel(interactingAgent);
-			int relationshipLevel = VRelationship.OrderedRelationships.IndexOf(relationship);
+			int relationshipLevel = VRelationship.GetRelationshipLevel(relationship);
 
 			if (agent.agentName != VanillaAgents.CustomCharacter)
 				return;
