@@ -47,12 +47,18 @@ From CL's bug report:
 	they did steal several times in a row without crashing 
 	the one time the crash finally occurred it was right after they actually started fighting each other (every other time the thief just wandered off). So it's maybe not so much the pickpocketing itself as bashable NPCs becoming hostile to one another.
 Test this to identify issues before attempting.
-The pickpocket code needs to be transpilerized anyway.
 ###			T	LOS Behavior refactor
 Transpilerizing and refactoring these traits.
-##		C	Hide CCU Traits
-###			C	When Possessing, show up on left
+##		CT	Hide CCU Traits
+###			T	When Possessing, show up on left
+Logging trait names as an exploratory measure.
 ###			C	Upgrade Machine
+ScrollingMenu.
+	GetTraitsChangeTraitRandom
+	GetTraitsRemoveTrait
+	GetTraitsUpgradeTrait
+
+This might be fine, but it will be more maintainable to use RegEx and fill these fields in declaration.
 ##		C	Crepe Lookout pickpocketed Crepe Enforcer
 Need a relationship check
 ##		C	Explosion Trait Refactor
