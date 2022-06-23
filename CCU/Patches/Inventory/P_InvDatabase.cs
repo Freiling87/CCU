@@ -4,6 +4,7 @@ using CCU.Traits.Merchant_Type;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -88,94 +89,90 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))] 
 		public static bool FillAgent_Prefix(InvDatabase __instance)
 		{
-			/* This is based on the vanilla, meant as a "first pass" to allocate important objects before other Agents get a chance.
-			 * Omits everything past line 168 - that portion will take place during the normal method run after this patch, and the methods it calls will be patched rather than this one.
-			 */
-
 			Agent agent = __instance.agent;
 
-			if (agent.agentName == VanillaAgents.CustomCharacter)
+			if (agent.agentName != VanillaAgents.CustomCharacter)
+				return true;
+
+			if (agent.HasTrait<Manager_Key>() || agent.HasTrait<Manager_Safe_Combo>())
 			{
-				if (agent.HasTrait<Manager_Key>() || agent.HasTrait<Manager_Safe_Combo>())
+				for (int i = 0; i < GC.objectRealList.Count; i++)
 				{
-					for (int i = 0; i < GC.objectRealList.Count; i++)
+					ObjectReal objectReal = GC.objectRealList[i];
+
+					if ((GC.levelShape == 0 && (objectReal.owner == agent.ownerID || agent.startingChunkRealDescription == VChunkType.Hotel || agent.ownerID == 99) && objectReal.startingChunk == agent.startingChunk) || (GC.levelShape == 2 && objectReal.startingSector == agent.startingSector))
 					{
-						ObjectReal objectReal = GC.objectRealList[i];
-
-						if ((GC.levelShape == 0 && (objectReal.owner == agent.ownerID || agent.startingChunkRealDescription == VChunkType.Hotel || agent.ownerID == 99) && objectReal.startingChunk == agent.startingChunk) || (GC.levelShape == 2 && objectReal.startingSector == agent.startingSector))
+						if (objectReal.objectName == vObject.Door && objectReal.prisonObject == 0 && agent.HasTrait<Manager_Key>() && !agent.inventory.HasItem(vItem.Key))
 						{
-							if (objectReal.objectName == vObject.Door && objectReal.prisonObject == 0 && agent.HasTrait<Manager_Key>() && !agent.inventory.HasItem(vItem.Key))
+							Door door = (Door)objectReal;
+
+							if (!(door.distributedKey is null) && door.locked)
 							{
-								Door door = (Door)objectReal;
-								
-								if (door.distributedKey != null)
-                                {
-									Agent prevKeyHolder = door.distributedKey;
+								Agent prevKeyHolder = door.distributedKey;
 
-									if (!prevKeyHolder.HasTrait<Manager_Key>())
-                                    {
-										InvItem key = prevKeyHolder.inventory.FindItem(vItem.Key);
-										prevKeyHolder.inventory.SubtractFromItemCount(key, 1);
-										prevKeyHolder.oma.hasKey = false;
-										door.distributedKey = null;
-                                    }
-                                }
-
-								if (door.distributedKey == null && door.locked)
+								if (!prevKeyHolder.HasTrait<Manager_Key>())
 								{
-									InvItem invItem = __instance.AddItem(vItem.Key, 1);
-									invItem.specificChunk = door.startingChunk;
-									invItem.specificSector = door.startingSector;
-									invItem.chunks.Add(door.startingChunk);
-									invItem.sectors.Add(door.startingChunk);
-									string doorDescription = door.startingChunkRealDescription;
-									
-									if (doorDescription == VChunkType.Generic)
-										doorDescription = "GuardPost";
-									
-									invItem.contents.Add(doorDescription);
-									door.distributedKey = agent;
-									agent.oma.hasKey = true;
+									InvItem key = prevKeyHolder.inventory.FindItem(vItem.Key);
+									prevKeyHolder.inventory.SubtractFromItemCount(key, 1);
+									prevKeyHolder.oma.hasKey = false;
+									door.distributedKey = null;
 								}
 							}
-							else if (objectReal.objectName == vObject.Safe && agent.HasTrait<Manager_Safe_Combo>() && !agent.inventory.HasItem(vItem.SafeCombination))
+
+							if (door.distributedKey is null && door.locked)
 							{
-								Safe safe = (Safe)objectReal;
+								InvItem invItem = __instance.AddItem(vItem.Key, 1);
+								invItem.specificChunk = door.startingChunk;
+								invItem.specificSector = door.startingSector;
+								invItem.chunks.Add(door.startingChunk);
+								invItem.sectors.Add(door.startingChunk);
+								string doorDescription = door.startingChunkRealDescription;
 
-								if (safe.distributedKey != null)
+								if (doorDescription == VChunkType.Generic)
+									doorDescription = "GuardPost";
+
+								invItem.contents.Add(doorDescription);
+								door.distributedKey = agent;
+								agent.oma.hasKey = true;
+							}
+						}
+						else if (objectReal.objectName == vObject.Safe && agent.HasTrait<Manager_Safe_Combo>() && !agent.inventory.HasItem(vItem.SafeCombination))
+						{
+							Safe safe = (Safe)objectReal;
+
+							if (!(safe.distributedKey is null))
+							{
+								Agent prevKeyHolder = safe.distributedKey;
+
+								if (!prevKeyHolder.HasTrait<Manager_Safe_Combo>())
 								{
-									Agent prevKeyHolder = safe.distributedKey;
-
-									if (!prevKeyHolder.HasTrait<Manager_Safe_Combo>())
-									{
-										InvItem safeCombo = prevKeyHolder.inventory.FindItem(vItem.SafeCombination);
-										prevKeyHolder.inventory.SubtractFromItemCount(safeCombo, 1);
-										prevKeyHolder.oma.hasSafeCombination = false;
-										safe.distributedKey = null;
-									}
+									InvItem safeCombo = prevKeyHolder.inventory.FindItem(vItem.SafeCombination);
+									prevKeyHolder.inventory.SubtractFromItemCount(safeCombo, 1);
+									prevKeyHolder.oma.hasSafeCombination = false;
+									safe.distributedKey = null;
 								}
+							}
 
-								if (safe.distributedKey == null)
-								{
-									InvItem invItem3 = __instance.AddItem(vItem.SafeCombination, 1);
-									invItem3.specificChunk = safe.startingChunk;
-									invItem3.specificSector = safe.startingSector;
-									invItem3.chunks.Add(safe.startingChunk);
-									invItem3.sectors.Add(safe.startingChunk);
-									invItem3.contents.Add(safe.startingChunkRealDescription);
-									safe.distributedKey = agent;
-									agent.oma.hasSafeCombination = true;
-								}
+							if (safe.distributedKey is null)
+							{
+								InvItem safeCombo = __instance.AddItem(vItem.SafeCombination, 1);
+								safeCombo.specificChunk = safe.startingChunk;
+								safeCombo.specificSector = safe.startingSector;
+								safeCombo.chunks.Add(safe.startingChunk);
+								safeCombo.sectors.Add(safe.startingChunk);
+								safeCombo.contents.Add(safe.startingChunkRealDescription);
+								safe.distributedKey = agent;
+								agent.oma.hasSafeCombination = true;
 							}
 						}
 					}
 				}
+			}
 
-				if (__instance.agent.HasTrait<Manager_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == VChunkType.MayorOffice)
-				{
-					__instance.AddItem(vItem.MayorsMansionGuestBadge, 1);
-					__instance.agent.oma.hasMayorBadge = true;
-				}
+			if (__instance.agent.HasTrait<Manager_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == VChunkType.MayorOffice)
+			{
+				__instance.AddItem(vItem.MayorsMansionGuestBadge, 1);
+				__instance.agent.oma.hasMayorBadge = true;
 			}
 
 			return true;

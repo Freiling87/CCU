@@ -11,32 +11,31 @@ Listed in order of Parent tier summary symbol priority:
   - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
   - Influence Election no longer persists after use
   - Removed Research Gun from Tech Mart & Research inventories
-  - **Trait renaming:** 
-    - **Class Name Overlaps**: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
-      - **Hire Type**
-        - Hacker → Cyber-Intruder
-      - **Merchant Type**
-        - Shopkeeper → General Store
-        - Soldier → Army Quartermaster
-        - Thief → Intruder's Warehouse
-        - Vampire → Bloodsucker Bazaar
-    - **Class-based Faction Relationship Traits:** Most of the agent-based relationship traits only included hostility to a class' enemies. This doesn't fully cover the scope of the vanilla feature, so these have been expanded to treat certain agent types as factions. The traits now include mutual alignment with vanilla agents of that class, plus mutual hostility with that class' enemies.
-      - Hostile to Cannibal → Faction Soldier Aligned
-      - Hostile to Soldier → Faction Cannibal Aligned
-      - Hostile to Vampire → Faction Werewolf Aligned
-      - Hostile to Werewolf → Faction Vampire Aligned
+  - Fixed Chunk Key Holder & Chunk Safe Combo Holder *being totally fucking broken*. Is this even a bugfix if they just didn't work? 
+- **Trait renaming:** 
+  - **Class Name Overlaps**: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
+    - **Hire Type**
+      - Hacker → Cyber-Intruder
+    - **Merchant Type**
+      - Shopkeeper → General Store
+      - Soldier → Army Quartermaster
+      - Thief → Intruder's Warehouse
+      - Vampire → Bloodsucker Bazaar
+  - **Class-based Faction Relationship Traits:** Most of the agent-based relationship traits only included hostility to a class' enemies. This doesn't fully cover the scope of the vanilla feature, so these have been expanded to treat certain agent types as factions. The traits now include mutual alignment with vanilla agents of that class, plus mutual hostility with that class' enemies.
+    - Hostile to Cannibal → Faction Soldier Aligned
+    - Hostile to Soldier → Faction Cannibal Aligned
+    - Hostile to Vampire → Faction Werewolf Aligned
+    - Hostile to Werewolf → Faction Vampire Aligned
 - **Feature additions**
-  - Behavior
+  - **Behavior**
     - Added Grab Alcohol & Grab Food
-  - Cost Scale
+  - **Cost Scale**
     - Added Much More (200% cost)
-  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
-  - Faction Relationships
+  - **Untrusting/er/est:** Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
+  - **Faction Relationships**
       - Added Faction Firefighter Aligned
       - Added Faction Gorilla Aligned 
 #	CT	General
-##		T!	00 Chunk Key Holder might not work correctly
-Attempted: P_InvDatabase.FillAgent 
 ##		T	Thief Shop sometimes doesn't generate
 Probably gates with Honor Among Thieves
 First, recreate this to identify the issue.
