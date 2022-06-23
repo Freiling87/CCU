@@ -57,10 +57,10 @@ namespace CCU.Patches.AgentRelationships
                     relationship = "Submissive";
             }
 
-            if ((___agent.HasTrait<Faction_Military>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<Cool_Cannibal>())) ||
-                (___agent.HasTrait<Faction_Cannibal>() && otherAgent.agentName == VanillaAgents.Soldier) ||
-                (___agent.HasTrait<Hostile_To_Vampire>() && otherAgent.agentName == VanillaAgents.Vampire) ||
-                (___agent.HasTrait<Hostile_To_Werewolf>() && otherAgent.agentName == VanillaAgents.WerewolfTransformed) ||
+            if ((___agent.HasTrait<Faction_Cannibal_Aligned>() && otherAgent.agentName == VanillaAgents.Soldier) ||
+                (___agent.HasTrait<Faction_Soldier_Aligned>() && (otherAgent.agentName == VanillaAgents.Cannibal || otherAgent.HasTrait<Cool_Cannibal>())) ||
+                (___agent.HasTrait<Faction_Vampire_Aligned>() && otherAgent.agentName == VanillaAgents.WerewolfTransformed) ||
+                (___agent.HasTrait<Faction_Werewolf_Aligned>() && otherAgent.agentName == VanillaAgents.Vampire) ||
                 (___agent.HasTrait<Bashable>() && (otherAgent.agentName == VanillaAgents.GangsterCrepe || otherAgent.HasTrait(VanillaTraits.BlahdBasher))) ||
                 (___agent.HasTrait<Crushable>() && (otherAgent.agentName == VanillaAgents.GangsterBlahd || otherAgent.HasTrait(VanillaTraits.CrepeCrusher))) ||
                 (___agent.HasTrait<Slayable>() && (otherAgent.agentName == VanillaAgents.Gorilla || otherAgent.HasTrait("HatesScientist"))) ||
@@ -78,8 +78,10 @@ namespace CCU.Patches.AgentRelationships
             if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<Common_Folk>() && !otherAgent.guardSequence)
                 relationship = "Loyal";
 
-            if ((___agent.HasTrait<Bashable>() && otherAgent.agentName == VanillaAgents.GangsterBlahd) ||
-                (___agent.HasTrait<Crushable>() && otherAgent.agentName == VanillaAgents.GangsterCrepe) ||
+            if (((___agent.agentName == VanillaAgents.GangsterBlahd || ___agent.HasTrait<Bashable>()) && 
+                (otherAgent.agentName == VanillaAgents.GangsterBlahd || otherAgent.HasTrait<Bashable>())) ||
+                ((___agent.agentName == VanillaAgents.GangsterCrepe || ___agent.HasTrait<Crushable>()) && 
+                (otherAgent.agentName == VanillaAgents.GangsterCrepe || otherAgent.HasTrait<Crushable>())) ||
                 (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily))) ||
                 AgentsFactionAligned(___agent, otherAgent))
                 relationship = "Aligned";

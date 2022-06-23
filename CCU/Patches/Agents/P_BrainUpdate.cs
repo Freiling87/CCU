@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Behavior;
 using CCU.Traits.Trait_Gate;
@@ -15,33 +16,34 @@ using UnityEngine;
 namespace CCU.Patches.Agents
 {
     [HarmonyPatch(declaringType: typeof(BrainUpdate))]
-    public static class P_BrainUpdate
+    public static class P_BrainUpdate_MyUpdate
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, UsedImplicitly, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate), argumentTypes: new Type[0] { })]
+		[HarmonyTranspiler, HarmonyPatch(typeof(BrainUpdate), nameof(BrainUpdate.MyUpdate), new Type[0] { })]
 		private static IEnumerable<CodeInstruction> CallCustomLOSChecks(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo agent = AccessTools.DeclaredField(typeof(BrainUpdate), "agent");
-			MethodInfo customLOSChecks = AccessTools.DeclaredMethod(typeof(P_BrainUpdate), nameof(P_BrainUpdate.CallCustomLOSChecks));
+			MethodInfo customLOSChecks = AccessTools.DeclaredMethod(typeof(P_BrainUpdate_MyUpdate), nameof(P_BrainUpdate_MyUpdate.CustomLOSChecks), new[] { typeof(Agent) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
+					new CodeInstruction(OpCodes.Ble),
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldfld, agent),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Call, customLOSChecks)
+					new CodeInstruction(OpCodes.Call, customLOSChecks),
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld, agent),
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld, agent),
 					new CodeInstruction(OpCodes.Callvirt),
 					new CodeInstruction(OpCodes.Ldstr, "Thief"),
 				});
@@ -50,20 +52,29 @@ namespace CCU.Patches.Agents
 			return instructions;
 		}
 
-		private static void CustomLOSChecks(Agent agent)
+		private static void CustomLOSChecks(Agent LOSagent)
         {
-			if (agent.agentName != VanillaAgents.CustomCharacter)
+			if (LOSagent.agentName != VanillaAgents.CustomCharacter || 
+				LOSagent.losCheckAtIntervalsTime < 7)
 				return;
 
-			List<string> pickupCategories = agent.GetTraits<T_Behavior>().Where(t => t.LosCheck).SelectMany(t => t.GrabItemCategories).ToList();
+			logger.LogDebug("CustomLOSChecks:\t" + LOSagent.agentName);
+			
+			List<string> pickupCategories = null;
 
-			if (!pickupCategories.Any())
-				return;
+			try
+            {
+				 pickupCategories = LOSagent.GetTraits<T_Behavior>().Where(t => !(t.GrabItemCategories is null)).SelectMany(t => t.GrabItemCategories).ToList();
+			}
+            catch (Exception message)
+            {
+				logger.LogDebug("Error: " + message);
+            }
 
-			agent.losCheckAtIntervalsTime = 0;
+			LOSagent.losCheckAtIntervalsTime = 0;
 
 			//	Item Grabbing
-			if (!agent.hasEmployer)
+			if (!LOSagent.hasEmployer && pickupCategories.Any())
 			{
 				List<Item> itemList = GC.itemList;
 
@@ -72,25 +83,25 @@ namespace CCU.Patches.Agents
 					Item item = itemList[n];
 
 					if (item.invItem.Categories.Intersect(pickupCategories).Any() &&
-						!item.fellInHole && item.curTileData.prison == agent.curTileData.prison && !item.dontStealFromGround &&
-						(agent.curTileData.prison <= 0 || agent.curTileData.chunkID == item.curTileData.chunkID) &&
-						!GC.tileInfo.DifferentLockdownZones(agent.curTileData, item.curTileData) && agent.curPosX - 5f < item.curPosition.x && agent.curPosX + 5f > item.curPosition.x && agent.curPosY - 5f < item.curPosition.y && agent.curPosY + 5f > item.curPosition.y && agent.movement.HasLOSObjectNormal(item))
+						!item.fellInHole && item.curTileData.prison == LOSagent.curTileData.prison && !item.dontStealFromGround &&
+						(LOSagent.curTileData.prison <= 0 || LOSagent.curTileData.chunkID == item.curTileData.chunkID) &&
+						!GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, item.curTileData) && LOSagent.curPosX - 5f < item.curPosition.x && LOSagent.curPosX + 5f > item.curPosition.x && LOSagent.curPosY - 5f < item.curPosition.y && LOSagent.curPosY + 5f > item.curPosition.y && LOSagent.movement.HasLOSObjectNormal(item))
 					{
-						agent.SetPreviousDefaultGoal(agent.defaultGoal);
-						agent.SetDefaultGoal("GoGet");
-						agent.SetGoGettingTarget(item);
-						agent.stoleStuff = true;
+						LOSagent.SetPreviousDefaultGoal(LOSagent.defaultGoal);
+						LOSagent.SetDefaultGoal("GoGet");
+						LOSagent.SetGoGettingTarget(item);
+						LOSagent.stoleStuff = true;
 						return;
 					}
 				}
 			}
 
 			//	LOS Actions
-			if (agent.specialAbility == vSpecialAbility.Cannibalize && agent.HasTrait<Eat_Corpses>())
+			if (LOSagent.specialAbility == vSpecialAbility.Cannibalize && LOSagent.HasTrait<Eat_Corpses>())
 			{
-				agent.losCheckAtIntervalsTime = 0;
+				logger.LogDebug("Cannibalize");
 
-				if (!agent.hasEmployer || agent.health <= 15f)
+				if (!LOSagent.hasEmployer || LOSagent.health <= 15f)
 				{
 					List<Agent> deadAgentList = GC.deadAgentList;
 
@@ -100,80 +111,82 @@ namespace CCU.Patches.Agents
 
 						try
 						{
-							if (targetAgent.dead && !targetAgent.resurrect && !targetAgent.ghost && !targetAgent.disappeared && !targetAgent.inhuman && !targetAgent.cantCannibalize && !targetAgent.hasGettingBitByAgent && agent.prisoner == targetAgent.prisoner && agent.slaveOwners.Count == 0 &&
-								(agent.prisoner <= 0 || agent.curTileData.chunkID == targetAgent.curTileData.chunkID) &&
+							if (targetAgent.dead && !targetAgent.resurrect && !targetAgent.ghost && !targetAgent.disappeared && !targetAgent.inhuman && !targetAgent.cantCannibalize && !targetAgent.hasGettingBitByAgent && LOSagent.prisoner == targetAgent.prisoner && LOSagent.slaveOwners.Count == 0 &&
+								(LOSagent.prisoner <= 0 || LOSagent.curTileData.chunkID == targetAgent.curTileData.chunkID) &&
 								(!(targetAgent.agentName == VanillaAgents.Cannibal) || !targetAgent.KnockedOut()) &&
-								!targetAgent.arrested && !targetAgent.invisible && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, targetAgent.curTileData) && agent.curPosX - 5f < targetAgent.curPosX && agent.curPosX + 5f > targetAgent.curPosX && agent.curPosY - 5f < targetAgent.curPosY && agent.curPosY + 5f > targetAgent.curPosY && agent.movement.HasLOSAgent(targetAgent) && targetAgent.fire == null)
+								!targetAgent.arrested && !targetAgent.invisible && !GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, targetAgent.curTileData) && LOSagent.curPosX - 5f < targetAgent.curPosX && LOSagent.curPosX + 5f > targetAgent.curPosX && LOSagent.curPosY - 5f < targetAgent.curPosY && LOSagent.curPosY + 5f > targetAgent.curPosY && LOSagent.movement.HasLOSAgent(targetAgent) && targetAgent.fire == null)
 							{
-								agent.SetPreviousDefaultGoal(agent.defaultGoal);
-								agent.SetDefaultGoal("Cannibalize");
-								agent.SetCannibalizingTarget(targetAgent);
-								agent.losCheckAtIntervals = false;
+								LOSagent.SetPreviousDefaultGoal(LOSagent.defaultGoal);
+								LOSagent.SetDefaultGoal("Cannibalize");
+								LOSagent.SetCannibalizingTarget(targetAgent);
+								LOSagent.losCheckAtIntervals = false;
 								break;
 							}
 						}
 						catch
 						{
-							Debug.LogError(string.Concat(new object[] { "Cannibalize Error: ", agent, " - ", targetAgent }));
+							Debug.LogError(string.Concat(new object[] { "Cannibalize Error: ", LOSagent, " - ", targetAgent }));
 						}
 					}
 				}
 			}
-			if (agent.specialAbility == vSpecialAbility.StickyGlove && agent.HasTrait<Pick_Pockets>() && !agent.brainUpdate.thiefNoSteal)
+			if (LOSagent.specialAbility == vSpecialAbility.StickyGlove && LOSagent.HasTrait<Pick_Pockets>() && !LOSagent.brainUpdate.thiefNoSteal)
 			{
-				agent.losCheckAtIntervalsTime = 0;
-				if (!agent.hasEmployer)
+				logger.LogDebug("Pickpocket LOS");
+				
+				if (!LOSagent.hasEmployer)
 				{
 					List<Agent> lastSawAgentList2 = GC.lastSawAgentList;
-					for (int i = 0; i < agent.losCheckAtIntervalsList.Count; i++)
-					{
-						Agent targetAgent = agent.losCheckAtIntervalsList[i];
-						Relationship relationship = agent.relationships.GetRelationship(targetAgent);
 
-						bool honorFlag = agent.HasTrait<Honorable_Thief>() &&
+					for (int i = 0; i < LOSagent.losCheckAtIntervalsList.Count; i++)
+					{
+						Agent targetAgent = LOSagent.losCheckAtIntervalsList[i];
+						Relationship relationship = LOSagent.relationships.GetRelationship(targetAgent);
+
+						bool honorFlag = LOSagent.HasTrait<Honorable_Thief>() &&
 							(targetAgent.statusEffects.hasTrait(VanillaTraits.HonorAmongThieves) || 
 							targetAgent.statusEffects.hasTrait("HonorAmongThieves2"));
 
 						if (relationship.distance < 4f && !honorFlag && !targetAgent.mechEmpty && !targetAgent.objectAgent && 
 							(relationship.relTypeCode == relStatus.Neutral || relationship.relTypeCode == relStatus.Annoyed) &&
-							agent.slaveOwners.Count == 0 && agent.prisoner == targetAgent.prisoner && !targetAgent.invisible && !targetAgent.disappeared && 
-							(agent.prisoner <= 0 || agent.curTileData.chunkID == targetAgent.curTileData.chunkID) && 
-							!targetAgent.hasGettingArrestedByAgent && !agent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, targetAgent.curTileData))
+							LOSagent.slaveOwners.Count == 0 && LOSagent.prisoner == targetAgent.prisoner && !targetAgent.invisible && !targetAgent.disappeared && 
+							(LOSagent.prisoner <= 0 || LOSagent.curTileData.chunkID == targetAgent.curTileData.chunkID) && 
+							!targetAgent.hasGettingArrestedByAgent && !LOSagent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, targetAgent.curTileData))
 						{
-							agent.SetDefaultGoal("Steal");
-							agent.SetStealingFromAgent(targetAgent);
-							agent.hectoredAgents.Add(targetAgent.agentID);
-							agent.losCheckAtIntervals = false;
-							agent.noEnforcerAlert = true;
-							agent.oma.mustBeGuilty = true;
+							LOSagent.SetDefaultGoal("Steal");
+							LOSagent.SetStealingFromAgent(targetAgent);
+							LOSagent.hectoredAgents.Add(targetAgent.agentID);
+							LOSagent.losCheckAtIntervals = false;
+							LOSagent.noEnforcerAlert = true;
+							LOSagent.oma.mustBeGuilty = true;
 							break;
 						}
 					}
 				}
 			}
-			if (agent.specialAbility == vSpecialAbility.Bite && agent.HasTrait<Suck_Blood>())
+			if (LOSagent.specialAbility == vSpecialAbility.Bite && LOSagent.HasTrait<Suck_Blood>())
 			{
-				agent.losCheckAtIntervalsTime = 0;
+				logger.LogDebug("Suck Blood LOS");
 
-				if (!agent.hasEmployer || agent.health <= 15f)
+				if (!LOSagent.hasEmployer || LOSagent.health <= 15f)
 				{
 					List<Agent> lastSawAgentList3 = GC.lastSawAgentList;
 
-					for (int i = 0; i < agent.losCheckAtIntervalsList.Count; i++)
+					for (int i = 0; i < LOSagent.losCheckAtIntervalsList.Count; i++)
 					{
-						Agent targetAgent = agent.losCheckAtIntervalsList[i];
-						Relationship relationship2 = agent.relationships.GetRelationship(targetAgent);
+						Agent targetAgent = LOSagent.losCheckAtIntervalsList[i];
+						Relationship relationship2 = LOSagent.relationships.GetRelationship(targetAgent);
 
-						if (relationship2.distance < 5f && relationship2.relTypeCode != relStatus.Aligned && relationship2.relTypeCode != relStatus.Loyal && relationship2.relTypeCode != relStatus.Friendly && relationship2.relTypeCode != relStatus.Hostile && targetAgent.agentName != "Vampire" && !targetAgent.hasGettingBitByAgent && !targetAgent.mechEmpty && !targetAgent.mechFilled && !targetAgent.objectAgent && !targetAgent.dizzy && (targetAgent.localPlayer || targetAgent.isPlayer == 0) && agent.prisoner == targetAgent.prisoner && !targetAgent.invisible && agent.slaveOwners.Count == 0 && (agent.prisoner <= 0 || agent.curTileData.chunkID == targetAgent.curTileData.chunkID) && !targetAgent.hasGettingArrestedByAgent && !agent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(agent.curTileData, targetAgent.curTileData) && !targetAgent.dead && !targetAgent.ghost && !targetAgent.hologram && !targetAgent.disappeared && !targetAgent.inhuman && !targetAgent.beast && !targetAgent.zombified)
+						if (relationship2.distance < 5f && relationship2.relTypeCode != relStatus.Aligned && relationship2.relTypeCode != relStatus.Loyal && relationship2.relTypeCode != relStatus.Friendly && relationship2.relTypeCode != relStatus.Hostile && targetAgent.agentName != "Vampire" && !targetAgent.hasGettingBitByAgent && !targetAgent.mechEmpty && !targetAgent.mechFilled && !targetAgent.objectAgent && !targetAgent.dizzy && (targetAgent.localPlayer || targetAgent.isPlayer == 0) && LOSagent.prisoner == targetAgent.prisoner && !targetAgent.invisible && LOSagent.slaveOwners.Count == 0 && (LOSagent.prisoner <= 0 || LOSagent.curTileData.chunkID == targetAgent.curTileData.chunkID) && !targetAgent.hasGettingArrestedByAgent && !LOSagent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, targetAgent.curTileData) && !targetAgent.dead && !targetAgent.ghost && !targetAgent.hologram && !targetAgent.disappeared && !targetAgent.inhuman && !targetAgent.beast && !targetAgent.zombified)
 						{
-							agent.SetPreviousDefaultGoal(agent.defaultGoal);
-							agent.SetDefaultGoal("Bite");
-							agent.hectoredAgents.Add(targetAgent.agentID);
-							agent.SetBitingTarget(targetAgent);
-							agent.losCheckAtIntervals = false;
-							agent.noEnforcerAlert = true;
-							agent.oma.mustBeGuilty = true;
-							agent.oma.hasAttacked = true;
+							LOSagent.SetPreviousDefaultGoal(LOSagent.defaultGoal);
+							LOSagent.SetDefaultGoal("Bite");
+							LOSagent.hectoredAgents.Add(targetAgent.agentID);
+							LOSagent.SetBitingTarget(targetAgent);
+							LOSagent.losCheckAtIntervals = false;
+							LOSagent.noEnforcerAlert = true;
+							LOSagent.oma.mustBeGuilty = true;
+							LOSagent.oma.hasAttacked = true;
 							break;
 						}
 					}
