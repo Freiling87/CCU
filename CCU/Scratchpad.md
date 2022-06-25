@@ -7,11 +7,13 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 #	C	v.1.0.0 Changelog
 - Bugfixes
-  - Fixed Vending Machine interaction issues
-  - Fixed string mismatch causing CodPiece [sic] to spawn an error in shop inventories
+  - Vending Machines work correctly again
+  - CodPiece [sic] now spawns correctly in shops
   - Influence Election no longer persists after use
   - Removed Research Gun from Tech Mart & Research inventories
-  - Fixed Chunk Key Holder & Chunk Safe Combo Holder *being totally fucking broken*. Is this even a bugfix if they just didn't work? 
+  - Chunk Key Holder & Chunk Safe Combo Holder now *actually work*
+  - Crushable & Bashable now mutually align eligible agents (was erroneously one-way)
+  - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
 - **Trait renaming:** 
   - **Class Name Overlaps**: A few traits shared names with some vanilla content, and apparently the game doesn't differentiate. This was causing some vanilla characters' descriptions to be changed to the traits' descriptions.
     - **Hire Type**
@@ -36,11 +38,34 @@ Listed in order of Parent tier summary symbol priority:
       - Added Faction Firefighter Aligned
       - Added Faction Gorilla Aligned 
 #	CT	General
-##		T	Thief Shop sometimes doesn't generate
-Probably gates with Honor Among Thieves
-First, recreate this to identify the issue.
+##		C	Relationship Refactor
+###			C	Create SetRelationship(agent, otherAgent, VRelationship)
+Current state is embarrassing
+Custom Factions		√
+Vanilla Factions	√
+Player Rels			√
+
 ##		T	Pay Debt + Cost Scale
 P_AgentInteractions.AddInteractionButtons
+##		C	Agent.killerRobot
+###			T	Water Damage
+CL reported that they take damage in water.
+P_Agent.KillerRobotWaterDamage
+###			C	Water Bullet Damage
+BulletHitbox.HitAftermath
+	In 2 places in there
+###			C	Fearless
+Combat.CombatCheck
+Since there's a trait for this, it needs to be modular
+###			C	Explosive Stimulator targets KR
+Whatever the item's called
+AgentInteractions.UseExplosiveStimulator
+###			C	EMP Vulnerability
+Explosion.ExplosionHit
+###			C	Knockback Bonus
+Melee.Attack
+###			C	Not sure
+ObjectMult.UpdateObjectMult
 ##		T	Pickpocket Aligned
 From CL's bug report:
 	they did steal several times in a row without crashing 
@@ -58,8 +83,8 @@ ScrollingMenu.
 	GetTraitsUpgradeTrait
 
 This might be fine, but it will be more maintainable to use RegEx and fill these fields in declaration.
-##		C	Crepe Lookout pickpocketed Crepe Enforcer
-Need a relationship check
+##		T	Crepe Lookout pickpocketed Crepe Enforcer
+This might be resolved
 ##		C	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
@@ -831,7 +856,12 @@ Complete
 Complete
 ###			√	Z-Infected
 Complete
-##		√C	Relationships - Faction
+##		C	Relationships - Faction
+###			C	00 Refactor
+Put custom methods in faction traits.
+E.g. Crushable.IsAlignedTo(Agent agent)
+agent == vagent.crepe || agent.hastrait<crushable>
+This logic can get very ugly so it'd be nice to pack it away elsewhere and just iterate through all applicable traits.
 ###			C	Faction Firefighter
 ###			C	Faction Cannibal
 ###			C	Faction Military
@@ -876,25 +906,38 @@ New
 New
 ###			C	All-Hostile
 New
+###			C	Never Aligned
+###			C	Never Annoyed
+###			C	Never Friendly
+###			C	Never Loyal
+###			C	Never Aligned
+###			C	Never Submissive
 ###			C	Forgetful
 Returns to neutral after a timer
 ###			C	Imposterous
-After a long delay, goes hostile to Aligned
-###			C	Samaritanous
-Protects at Neutral instead of Loyal
-###			C	Spineful
-Will never go submissive
-###			C	Thankful
-Joins combat at Friendly instead of Loyal
-###			C	Class Unity
-Like Class Solidarity, except Aligned
-Note that Solidarity includes a No Infighting effect.
-###			C	Quick Temper
+After a long delay, goes hostile to any they're aligned to
+###			C	Long Fuse
+Hostile at 12 strikes, Annoyed at 6
+###			C	Longer Fuse
+Hostile at 8 strikes, Annoyed at 4
+###			C	Longest Fuse
+Goes annoyed only when damaged. Goes hostile only when annoyed and damaged.
+###			C	Protect at Aligned
+Inner circle only
+###			C	Protect at Friendly
+Indeed
+###			C	Protect at Neutral
+Cosmopolitan
+###			C	Protect at Annoyed
+What a good guy
+###			C	Protect never
+Well okay damn dude
+###			C	Short Fuse
 Hostile at 4 strikes, Annoyed at 1
-###			C	Quicker Temper
+###			C	Shorter Fuse
 Hostile at 2 strikes, Annoyed at 1
-###			C	Quickest Temper
-Hostile at 1 strike
+###			C	Shortest Fuse
+So annoyed they go straight to hostile at 1 strike
 ###			√	Hostile to Cannibal
 Complete
 ###			√	Hostile to Soldier

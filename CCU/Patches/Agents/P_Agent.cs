@@ -15,6 +15,9 @@ using CCU.Traits.Trait_Gate;
 using System.Linq;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Drug_Warrior;
+using System.Collections.Generic;
+using BTHarmonyUtils.TranspilerUtils;
+using System.Reflection.Emit;
 
 namespace CCU.Patches.Agents
 {
@@ -23,6 +26,34 @@ namespace CCU.Patches.Agents
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+
+        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.AgentLateUpdate), argumentTypes: new Type[0] { })]
+		private static IEnumerable<CodeInstruction> KillerRobotWaterDamage(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo killerRobot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.killerRobot));
+			MethodInfo isKRorSNS = AccessTools.DeclaredMethod(typeof(P_Agent), nameof(IsKillerRobotOrSNS));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, killerRobot),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, isKRorSNS)
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static bool IsKillerRobotOrSNS(Agent agent) =>
+			agent.killerRobot &&
+			//	Agent.KillerRobot has water damage hardcoded. Exclude it if they don't add electronic.
+			!(agent.HasTrait<Seek_and_Destroy>() && !agent.HasTrait(VanillaTraits.Electronic));
+
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)

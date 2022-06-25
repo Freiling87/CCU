@@ -11,9 +11,7 @@ namespace CCU.Localization
             Hostile = "Hateful",
             Loyal = "Loyal",
             Neutral = "Neutral",
-            Submissive = "Submissive",
-
-            NoMoreSemiColons = "";
+            Submissive = "Submissive";
 
         /// <summary>
         /// Excludes Submissive (Unlikely to use ordinal logic)

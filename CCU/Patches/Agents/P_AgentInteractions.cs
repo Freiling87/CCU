@@ -9,6 +9,7 @@ using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
+using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -135,8 +136,12 @@ namespace CCU.Patches.Agents
 			{
 				if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 				{
-					if ((agent.HasTrait<Bashable>() && (interactingAgent.agentName == VanillaAgents.GangsterBlahd || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))) ||
-						(agent.HasTrait<Crushable>() && (interactingAgent.agentName == VanillaAgents.GangsterCrepe || (interactingAgent.agentName == "Gangbanger" && interactingAgent.oma.superSpecialAbility))))
+					if ((agent.HasTrait<Faction_Blahd_Aligned>() && 
+						(interactingAgent.agentName == VanillaAgents.GangsterBlahd || 
+							(interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility))) ||
+						(agent.HasTrait<Faction_Crepe_Aligned>() && 
+						(interactingAgent.agentName == VanillaAgents.GangsterCrepe || 
+							(interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))))
 						agentInteractions.AddButton(VButtonText.JoinMe);
                     else
 					{
@@ -418,7 +423,7 @@ namespace CCU.Patches.Agents
 				bool cantBuy =
 					(agent.HasTrait<Cool_Cannibal>() && !interactingAgent.statusEffects.hasTrait("CannibalsNeutral") && interactingAgent.agentName != VanillaAgents.Cannibal) ||
 					(agent.HasTrait<Cop_Access>() && !interactingAgent.HasTrait("TheLaw") && interactingAgent.agentName != VanillaAgents.Cop && interactingAgent.agentName != VanillaAgents.CopBot && interactingAgent.agentName != VanillaAgents.SuperCop) ||
-					(agent.HasTrait<Honorable_Thief>() && !interactingAgent.statusEffects.hasTrait("HonorAmongThieves") && interactingAgent.statusEffects.hasTrait("HonorAmongThieves2"));
+					(agent.HasTrait<Honorable_Thief>() && !interactingAgent.statusEffects.hasTrait("HonorAmongThieves") && !interactingAgent.statusEffects.hasTrait("HonorAmongThieves2"));
 
 				if (!cantBuy)
 				{

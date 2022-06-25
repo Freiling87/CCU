@@ -9,6 +9,7 @@ using CCU.Traits.Gib_Type;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
+using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -72,11 +73,13 @@ namespace CCU.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
 		{
-			if ((__instance.agent.HasTrait<Bashable>() && (myAgent.HasTrait(VanillaTraits.BlahdBasher) || myAgent.agentName == VanillaAgents.GangsterCrepe)) ||
-				(__instance.agent.HasTrait<Cool_Cannibal>() && (myAgent.agentName == VanillaAgents.Soldier)) ||
-				(__instance.agent.HasTrait<Crushable>() && (myAgent.HasTrait(VanillaTraits.CrepeCrusher) || myAgent.agentName == VanillaAgents.GangsterBlahd)) ||
+			if (((__instance.agent.HasTrait<Faction_Blahd_Aligned>() || __instance.agent.HasTrait(VanillaTraits.CrepeCrusher)) && 
+					(myAgent.HasTrait(VanillaTraits.BlahdBasher) || myAgent.agentName == VanillaAgents.GangsterCrepe || myAgent.HasTrait<Faction_Crepe_Aligned>())) ||
+				((__instance.agent.HasTrait<Faction_Crepe_Aligned>() || __instance.agent.HasTrait(VanillaTraits.BlahdBasher)) && 
+					(myAgent.HasTrait(VanillaTraits.CrepeCrusher) || myAgent.agentName == VanillaAgents.GangsterBlahd || myAgent.HasTrait<Faction_Blahd_Aligned>())) ||
+				(__instance.agent.HasTrait<Cool_Cannibal>() && myAgent.agentName == VanillaAgents.Soldier) ||
 				(__instance.agent.HasTrait<Slayable>() && myAgent.HasTrait("HatesScientist")) ||
-				(__instance.agent.HasTrait<Specistist>() && myAgent.HasTrait(VanillaTraits.Specist)))
+				(__instance.agent.HasTrait<Faction_Gorilla_Aligned>() && myAgent.HasTrait(VanillaTraits.Specist)))
 			{
 				__result = true;
 				return false;
