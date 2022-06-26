@@ -1,5 +1,7 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits;
 using HarmonyLib;
+using RogueLibsCore;
 
 namespace CCU.Patches.Interface
 {
@@ -18,10 +20,10 @@ namespace CCU.Patches.Interface
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffectDisplay.AddDisplayPiece), argumentTypes: new[] { typeof(StatusEffect), typeof(Trait) })]
         public static bool AddDisplayPiece_Prefix(StatusEffect myStatusEffect, Trait myTrait)
         {
-            // First, let's identify the format of trait names so we're using the right versions.
-            logger.LogDebug(myTrait.traitName);
-            
-            return true;
+            if (myTrait?.GetHook<T_CCU>() is null)
+                return true;
+
+            return false;
         }
     }
 }
