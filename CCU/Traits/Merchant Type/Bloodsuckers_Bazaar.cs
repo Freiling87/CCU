@@ -3,12 +3,12 @@ using System;
 
 namespace CCU.Traits.Merchant_Type
 {
-    public class Bloodsucker_Bazaar : T_MerchantType
+    public class Bloodsuckers_Bazaar : T_MerchantType
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bloodsucker_Bazaar>()
+            RogueLibs.CreateCustomTrait<Bloodsuckers_Bazaar>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells anything a Vampire could need."),
@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bloodsucker_Bazaar)),
+                    [LanguageCode.English] = DisplayName(typeof(Bloodsuckers_Bazaar), "Bloodsuckers' Bazaar"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock

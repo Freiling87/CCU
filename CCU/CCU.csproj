@@ -365,7 +365,7 @@
     <Compile Include="Traits\Merchant Type\Throwcery_Store.cs" />
     <Compile Include="Traits\Merchant Type\Toy_Store.cs" />
     <Compile Include="Traits\Merchant Type\Upper_Cruster.cs" />
-    <Compile Include="Traits\Merchant Type\Sanguisuge_Specialties.cs" />
+    <Compile Include="Traits\Merchant Type\Bloodsuckers_Bazaar.cs" />
     <Compile Include="Traits\Merchant Type\Villains_Vault.cs" />
     <Compile Include="Traits\Appearance\Appearance.cs" Condition=" '$(Configuration)' != 'Designer Edition - Hotkeys Only' " />
     <Compile Include="Core.cs" />
