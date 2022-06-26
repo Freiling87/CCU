@@ -19,7 +19,7 @@ namespace CCU.Patches
 		public static bool GetUnlock_Prefix(ref string unlockName)
         {
 			if (Legacy.TraitConversions.ContainsKey(unlockName))
-				unlockName = Legacy.TraitConversions[unlockName];
+				unlockName = Legacy.TraitConversions[unlockName].Name;
 
 			return true;
         }

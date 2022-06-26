@@ -13,6 +13,7 @@ Listed in order of Parent tier summary symbol priority:
   - Removed Research Gun from Tech Mart & Research inventories
   - Chunk Key Holder & Chunk Safe Combo Holder now *actually work*
   - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
+  - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
 - **Trait renaming:** I've renamed and slightly reorganized some of the traits. This update should automatically update outdated trait lists both on spawn and on loading in the character editor. Ideally, you won't even notice the change being made.
   - **Class Name Overlaps**: A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
     - **Hire Type**
@@ -43,6 +44,8 @@ Listed in order of Parent tier summary symbol priority:
     - Faction Firefighter Aligned
     - Faction Gorilla Aligned 
 #	CT	General
+##		C	Character Repository Trait Display
+This might require a refactor of the Legacy Dictionary. Switch it to Types instead of strings, and pull the names when calling it. 
 ##		C	Legacy Updater
 Loading from Character Repository: Before loaded into a slot, traits are not yet updated. 
 The easiest way to do this is probably to continue the hacky smoke & mirrors. Just display the translated trait rather than loading/saving character data.

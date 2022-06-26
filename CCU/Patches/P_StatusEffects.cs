@@ -65,7 +65,7 @@ namespace CCU.Patches
 		public static bool AddTrait_Prefix(ref string traitName, StatusEffects __instance)
         {
 			if (Legacy.TraitConversions.ContainsKey(traitName))
-				traitName = Legacy.TraitConversions[traitName];
+				traitName = Legacy.TraitConversions[traitName].Name;
 
 			return true;
         }

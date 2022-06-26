@@ -32,8 +32,6 @@ namespace CCU
 			new Harmony(pluginGUID).PatchAll();
 			RogueLibs.LoadFromAssembly();
 		}
-		public static void LogCheckpoint(string note, [CallerMemberName] string callerName = "") =>
-			logger.LogInfo(callerName + ": " + note);
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");
 	}
