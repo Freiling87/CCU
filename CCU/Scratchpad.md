@@ -49,25 +49,6 @@ Listed in order of Parent tier summary symbol priority:
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing
-##		T	Pickpocket Aligned
-From CL's bug report:
-	they did steal several times in a row without crashing 
-	the one time the crash finally occurred it was right after they actually started fighting each other (every other time the thief just wandered off). So it's maybe not so much the pickpocketing itself as bashable NPCs becoming hostile to one another.
-Test this to identify issues before attempting.
-###			T	LOS Behavior refactor
-Transpilerizing and refactoring these traits.
-##		CT	Hide CCU Traits
-###			T	When Possessing, show up on left
-Logging trait names as an exploratory measure.
-###			C	Upgrade Machine
-ScrollingMenu.
-	GetTraitsChangeTraitRandom
-	GetTraitsRemoveTrait
-	GetTraitsUpgradeTrait
-
-This might be fine, but it will be more maintainable to use RegEx and fill these fields in declaration.
-##		T	Crepe Lookout pickpocketed Crepe Enforcer
-This might be resolved
 ##		C	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
