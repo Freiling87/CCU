@@ -5,27 +5,27 @@ using System.Linq;
 
 namespace CCU.Traits.Explode_On_Death
 {
-    public class Ooze : T_ExplodeOnDeath
+    public class Firebomb : T_ExplodeOnDeath
     {
-        public override string ExplosionType => VExplosionType.Ooze;
+        public override string ExplosionType => VExplosionType.FireBomb;
 
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Ooze>()
+            PostProcess = RogueLibs.CreateCustomTrait<Firebomb>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("On death, this character releases The Ooze. They say that's the first thing that happens."),
+                    [LanguageCode.English] = String.Format("On death, this character splashes burning oil everywhere. What did they eat?!"),
                     [LanguageCode.Russian] = "",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Ooze)),
+                    [LanguageCode.English] = DisplayName(typeof(Firebomb)),
                     [LanguageCode.Russian] = "",
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Ooze)).Select(c => c.TextName).ToList(),
+                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Firebomb)).Select(c => c.TextName).ToList(),
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

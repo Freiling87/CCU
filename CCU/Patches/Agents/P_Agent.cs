@@ -103,6 +103,22 @@ namespace CCU.Patches.Agents
 			return false;
 		}
 
+		/// <summary>
+		/// Lists the agent's trait list on interaction.
+		/// </summary>
+		/// <param name="otherAgent"></param>
+		/// <param name="__instance"></param>
+		/// <returns></returns>
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
+		public static bool Interact_Prefix(Agent otherAgent, Agent __instance)
+        {
+			logger.LogDebug("Agent Trait List: " + __instance.agentRealName);
+			foreach (Trait trait in __instance.statusEffects.TraitList)
+				logger.LogDebug("\t" + trait.traitName);
+
+			return true;
+        }
+
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
 		public static bool ObjectAction_Prefix(string myAction, string extraString, float extraFloat, Agent causerAgent, PlayfieldObject extraObject, Agent __instance, ref bool ___noMoreObjectActions)
 		{

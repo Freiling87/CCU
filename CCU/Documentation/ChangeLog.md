@@ -1,0 +1,54 @@
+﻿#   Change Log
+
+##      0.1.1
+- Bugfixes
+  - Vending Machines' cost interactions now load correctly
+  - Codpiece now spawns correctly in shops
+  - Influence Election no longer persists after use
+  - Removed Research Gun from Tech Mart & Research inventories
+  - Chunk Key Holder & Chunk Safe Combo Holder nowactually work
+  - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
+  - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
+  - Decoupled various Killer Robot behaviors that were hardcode-attached to Seek & Destroy (Water damage, EMP vulnerability, Knockback Bonus, walking through Doors). 
+    - Trivia: I think the level of hardcoded-ness of Killer Robot implies that the class pre-dates SOR's trait system, or at least a big part of it.
+- Trait Update System:I've renamed and slightly reorganized some of the traits. This system should automatically update outdated traits both on spawn and on loading in the character editor. You will not have to update character files, and all versions of CCU will be backwards-compatible with un-updated content.
+  - Class Name Overlaps:A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
+    - Hire Type
+      - Hacker → Cyber-Intruder
+    - Merchant Type
+      - Shopkeeper → General Store
+      - Soldier → Army Quartermaster
+      - Thief → Intruder's Warehouse
+      - Vampire → Bloodsucker Bazaar
+  - Class-based Faction Relationship Traits: Most of the agent-based relationship traits only included hostility to a class' enemies. This doesn't fully cover the scope of the vanilla feature, so these have been expanded to treat certain agent types as factions. The traits now include mutual alignment with vanilla agents of that class, plus mutual hostility with that class' enemies.
+    - Bashable → Faction Blahd Aligned
+    - Crushable → Faction Crepe Aligned
+    - Hostile to Cannibal → Faction Soldier Aligned
+    - Hostile to Soldier → Faction Cannibal Aligned
+    - Hostile to Vampire → Faction Werewolf Aligned
+    - Hostile to Werewolf → Faction Vampire Aligned
+    - Specistist → Faction Gorilla Aligned
+- Tweaks
+  - Pay Debt is now scaled to Cost Scale traits
+  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
+- Feature additions
+  - Behavior
+    - Grab Alcohol
+    - Grab Food
+  - Cost Scale
+    - Much More (200% cost)
+  - Explode On Death
+    - Dizzy
+    - EMP
+    - Firebomb
+    - Noise Only
+    - Slime
+    - Stomp
+    - Water
+  - Relationships - Faction
+    - Faction Firefighter Aligned
+    - Faction Gorilla Aligned 
+- Gib Type
+- Ghost Gibs
+- Ice Gibs
+- Normal Gibs

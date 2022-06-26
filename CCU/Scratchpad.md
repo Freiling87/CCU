@@ -5,46 +5,7 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#	C	v.1.0.0 Changelog
-- **Bugfixes**
-  - Vending Machines' cost interactions now load correctly
-  - Codpiece now spawns correctly in shops
-  - Influence Election no longer persists after use
-  - Removed Research Gun from Tech Mart & Research inventories
-  - Chunk Key Holder & Chunk Safe Combo Holder now *actually work*
-  - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
-  - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
-  - Decoupled various Killer Robot behaviors that were hardcode-attached to Seek & Destroy (Water damage, EMP vulnerability, Knockback Bonus, walking through Doors). 
-    - Trivia: I think the level of hardcoded-ness of Killer Robot implies that the class pre-dates SOR's trait system, or at least a big part of it.
-- **Trait Update System:** I've renamed and slightly reorganized some of the traits. This system should automatically update outdated traits both on spawn and on loading in the character editor. You will not have to update character files, and all versions of CCU will be backwards-compatible with un-updated content.
-  - **Class Name Overlaps**: A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
-    - **Hire Type**
-      - Hacker → Cyber-Intruder
-    - **Merchant Type**
-      - Shopkeeper → General Store
-      - Soldier → Army Quartermaster
-      - Thief → Intruder's Warehouse
-      - Vampire → Bloodsucker Bazaar
-  - **Class-based Faction Relationship Traits:** Most of the agent-based relationship traits only included hostility to a class' enemies. This doesn't fully cover the scope of the vanilla feature, so these have been expanded to treat certain agent types as factions. The traits now include mutual alignment with vanilla agents of that class, plus mutual hostility with that class' enemies.
-	- Bashable → Faction Blahd Aligned
-    - Crushable → Faction Crepe Aligned
-    - Hostile to Cannibal → Faction Soldier Aligned
-    - Hostile to Soldier → Faction Cannibal Aligned
-    - Hostile to Vampire → Faction Werewolf Aligned
-    - Hostile to Werewolf → Faction Vampire Aligned
-    - Specistist → Faction Gorilla Aligned
-- **Tweaks**
-  - Pay Debt is now scaled to Cost Scale traits
-  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
-- **Feature additions**
-  - **Behavior**
-    - Grab Alcohol
-    - Grab Food
-  - **Cost Scale**
-    - Much More (200% cost)
-  - **Faction Relationships**
-    - Faction Firefighter Aligned
-    - Faction Gorilla Aligned 
+
 #	CT	General
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
@@ -329,18 +290,20 @@ Effect triggers on end of threat (Regenerate, smoke, invisible)
 ###			C	Whatta Rush
 Effect gains 2s of duration on damage
 ##		CT	Explode On Death
+###			C	00 Does not explode when killed with Cyanide
 ###			C	00 Explodes when Arrested
 Not too concerned, considering this is vanilla for Slaves.
 ###			C	00 Refactor
 See other Explosion trait groups
 This category will become Explosion Type
-###			T	Death Rattle
-Noise
+###			T	Noise Only
+Agents turned, now see if it happens without the trait
 ###			C	Monke Parasites
 Explodes into Monke (barrel style)
 ###			C	Thoughts & Prayers
 Rocket explosion?
-###			T	Dizzy
+###			√	Dizzy
+Complete
 ###			C	Firebomb
 Didn't do anything
 ###			C	Oil
@@ -351,7 +314,8 @@ Only did particle effect
 Only did particle effect, didn't end slow-mo, no kills.
 This is the Bomb disaster one, so it will need special attention.
 ###			C	Slime
-Only did particle effect
+Does particle effect and poisons
+Do the sprite later.
 ###			C	Stomp
 Did particle effect
 Pushed body away

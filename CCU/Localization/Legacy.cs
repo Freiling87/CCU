@@ -20,7 +20,7 @@ namespace CCU.Localization
 			{ VanillaAgents.Hacker,					typeof(Cyber_Intruder) },
 			{ VanillaAgents.Shopkeeper,				typeof(General_Store) },
 			{ VanillaAgents.Soldier,				typeof(Muscle) },
-			{ VanillaAgents.Thief,					typeof(Intruders_Warehouse) },
+			{ VanillaAgents.Thief,					typeof(Intruders_Outlet) },
 			{ VanillaAgents.Vampire,				typeof(Bloodsuckers_Bazaar) },
 			//		Relationship Refactor
 			{ "Bashable",							typeof(Faction_Blahd_Aligned) },

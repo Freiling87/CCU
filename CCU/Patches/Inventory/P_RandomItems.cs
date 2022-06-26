@@ -403,7 +403,7 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.WallBypasser, 2);
 			sel.CreateRandomElement(rList, vItem.WarpGrenade, 2);
 
-			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Intruders_Warehouse)), "Items", "Item"); // Vanilla
+			rList = sel.CreateRandomList(Traits.T_CCU.DisplayName(typeof(Intruders_Outlet)), "Items", "Item"); // Vanilla
 			sel.CreateRandomElement(rList, "Crowbar", 3);
 			sel.CreateRandomElement(rList, "Lockpick", 3);
 			sel.CreateRandomElement(rList, "SafeBuster", 3);

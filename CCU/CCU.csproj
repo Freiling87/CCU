@@ -215,6 +215,7 @@
     <Compile Include="Traits\Cost Scale\Zero.cs" />
     <Compile Include="Traits\Cost Scale\T_CostScale.cs" />
     <Compile Include="Traits\Explode On Death\Big.cs" />
+    <Compile Include="Traits\Explode On Death\Firebomb.cs" />
     <Compile Include="Traits\Explode On Death\Water.cs" />
     <Compile Include="Traits\Explode On Death\Warp.cs" />
     <Compile Include="Traits\Explode On Death\Dizzy_EOD.cs" />
@@ -391,7 +392,7 @@
     <Compile Include="Traits\Trait Gate\T_TraitGate.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\Trait Gate\Honorable_Thief.cs" />
-    <Compile Include="Traits\Merchant Type\Intruders_Warehouse.cs" />
+    <Compile Include="Traits\Merchant Type\Intruders_Outlet.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Add_Beard.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Add_Mustache.cs" />
     <Compile Include="Traits\Appearance\FacialHair\Add_Mustache_Circus.cs" />
@@ -409,13 +410,16 @@
     <Compile Include="Utilities\Legacy\NameUpdates.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Documentation\BestPractices.md" />
+    <None Include="Documentation\ChangeLog.md" />
+    <None Include="Documentation\Installation.md" />
+    <None Include="Documentation\NPCUtilities.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Challenges\Gameplay\" />
     <Folder Include="Challenges\Interface\" />
     <Folder Include="Challenges\Utility\" />
-    <Folder Include="Documentation\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />

@@ -7,7 +7,7 @@
 			Dizzy = "Dizzy",
 			EMP = "EMP",
 			Huge = "Huge",
-			Molotov = "Firebomb",
+			FireBomb = "FireBomb",
 			NoiseOnly = "Knocker",
 			MindControl = "MindControl",
 			Normal = "Normal",
