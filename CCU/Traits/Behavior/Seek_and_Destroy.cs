@@ -32,5 +32,9 @@ namespace CCU.Traits.Behavior
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public static bool IsVanillaKillerRobot(Agent agent) =>
+            agent.killerRobot &&
+            agent.agentName == VanillaAgents.KillerRobot;
     }
 }

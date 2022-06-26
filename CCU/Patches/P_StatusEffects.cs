@@ -6,8 +6,6 @@ using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Gib_Type;
-using CCU.Traits.Hire_Type;
-using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;

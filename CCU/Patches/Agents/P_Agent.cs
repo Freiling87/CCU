@@ -1,38 +1,34 @@
 ﻿using BepInEx.Logging;
-using HarmonyLib;
-using System;
-using RogueLibsCore;
-using System.Reflection;
-using CCU.Traits;
-using CCU.Traits.Combat;
-using CCU.Traits.Passive;
+using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Behavior;
-using CCU.Traits.Interaction;
+using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Hack;
-using CCU.Traits.Rel_Player;
+using CCU.Traits.Merchant_Type;
+using CCU.Traits.Passive;
 using CCU.Traits.Rel_General;
 using CCU.Traits.Trait_Gate;
-using System.Linq;
-using CCU.Traits.Merchant_Type;
-using CCU.Traits.Drug_Warrior;
+using HarmonyLib;
+using RogueLibsCore;
+using System;
 using System.Collections.Generic;
-using BTHarmonyUtils.TranspilerUtils;
+using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace CCU.Patches.Agents
 {
-	[HarmonyPatch(declaringType: typeof(Agent))]
+    [HarmonyPatch(declaringType: typeof(Agent))]
 	public class P_Agent
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
         [HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.AgentLateUpdate), argumentTypes: new Type[0] { })]
-		private static IEnumerable<CodeInstruction> KillerRobotWaterDamage(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> AgentLateUpdate_LimitWaterDamageToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo killerRobot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.killerRobot));
-			MethodInfo isKRorSNS = AccessTools.DeclaredMethod(typeof(P_Agent), nameof(IsKillerRobotOrSNS));
+			MethodInfo isVanillaKillerRobot = AccessTools.DeclaredMethod(typeof(Seek_and_Destroy), nameof(Seek_and_Destroy.IsVanillaKillerRobot));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -42,18 +38,12 @@ namespace CCU.Patches.Agents
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Call, isKRorSNS)
+					new CodeInstruction(OpCodes.Call, isVanillaKillerRobot)
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		private static bool IsKillerRobotOrSNS(Agent agent) =>
-			agent.killerRobot &&
-			//	Agent.KillerRobot has water damage hardcoded. Exclude it if they don't add electronic.
-			!(agent.HasTrait<Seek_and_Destroy>() && !agent.HasTrait(VanillaTraits.Electronic));
-
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
@@ -127,9 +117,9 @@ namespace CCU.Patches.Agents
 				if (!___noMoreObjectActions)
 				{
 					if (myAction == CJob.SafecrackSafe)
-						P_AgentInteractions_DetermineButtons.SafecrackSafe(__instance, causerAgent, extraObject);
+						P_AgentInteractions.SafecrackSafe(__instance, causerAgent, extraObject);
 					else if (myAction == CJob.TamperSomething)
-						P_AgentInteractions_DetermineButtons.TamperSomething(__instance, causerAgent, extraObject);
+						P_AgentInteractions.TamperSomething(__instance, causerAgent, extraObject);
 
 					___noMoreObjectActions = false;
 				}

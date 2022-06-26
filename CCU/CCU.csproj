@@ -136,6 +136,10 @@
     <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
     <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
+    <Compile Include="Patches\Combat\P_BulletHitbox.cs" />
+    <Compile Include="Patches\Combat\P_Combat.cs" />
+    <Compile Include="Patches\Combat\P_Explosion.cs" />
+    <Compile Include="Patches\Combat\P_Melee.cs" />
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
@@ -145,12 +149,15 @@
     <Compile Include="Patches\Interface\P_ScrollingMenu.cs" />
     <Compile Include="Patches\Interface\P_StatusEffectDisplay.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
+    <Compile Include="Patches\Inventory\P_ItemFunctions.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
     <Compile Include="Patches\P_GameController.cs" />
     <Compile Include="Patches\P_NameDB.cs" />
+    <Compile Include="Patches\P_ObjectMult.cs" />
     <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\P_Unlocks.cs" />

@@ -1,9 +1,9 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Localization;
-using CCU.Traits;
+using CCU.Traits.Behavior;
 using CCU.Traits.Cost_Scale;
-using CCU.Traits.Hack;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
@@ -15,6 +15,7 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
 using SORCE.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -23,17 +24,18 @@ using UnityEngine;
 
 namespace CCU.Patches.Agents
 {
-	[HarmonyPatch(declaringType: typeof(AgentInteractions))]
-	static class P_AgentInteractions_DetermineButtons
+    [HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	static class P_AgentInteractions
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, UsedImplicitly, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), 
+			argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
         private static IEnumerable<CodeInstruction> DetermineButtons(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo ACAB = AccessTools.DeclaredMethod(typeof(P_AgentInteractions_DetermineButtons), nameof(AddCustomAgentButtons));
+			MethodInfo ACAB = AccessTools.DeclaredMethod(typeof(P_AgentInteractions), nameof(AddCustomAgentButtons));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -75,41 +77,6 @@ namespace CCU.Patches.Agents
 			return instructions;
 		}
 
-        [HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
-		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, int slotNum, string combineType, string useOnType, AgentInteractions __instance, ref bool __result)
-        {
-			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
-			{
-				if (item.invItemName == vItem.Syringe)
-				{
-					if (combineType == "Combine")
-					{
-						if (!GC.syringesIdentified.Contains(item.contents[0]) && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Drugalug))
-						{
-							if (agent.moneySuccess(agent.determineMoneyCost(VDetermineMoneyCost.IdentifySyringe)))
-							{
-								agent.SayDialogue("Bought2");
-								interactingAgent.statusEffects.IdentifySyringe(item.contents[0]);
-							}
-						}
-						else
-						{
-							interactingAgent.SayDialogue("AlreadyIdentified");
-							GC.audioHandler.Play(interactingAgent, "CantDo");
-						}
-					}
-
-					__result = true;
-					return false;
-				}
-
-				__result = false;
-				return false;
-			}
-
-			return true;
-		}
-
 		public static void AddCustomAgentButtons(Agent agent)
 		{
 			AgentInteractions agentInteractions = agent.agentInteractions;
@@ -136,14 +103,14 @@ namespace CCU.Patches.Agents
 			{
 				if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 				{
-					if ((agent.HasTrait<Faction_Blahd_Aligned>() && 
-						(interactingAgent.agentName == VanillaAgents.GangsterBlahd || 
+					if ((agent.HasTrait<Faction_Blahd_Aligned>() &&
+						(interactingAgent.agentName == VanillaAgents.GangsterBlahd ||
 							(interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility))) ||
-						(agent.HasTrait<Faction_Crepe_Aligned>() && 
-						(interactingAgent.agentName == VanillaAgents.GangsterCrepe || 
+						(agent.HasTrait<Faction_Crepe_Aligned>() &&
+						(interactingAgent.agentName == VanillaAgents.GangsterCrepe ||
 							(interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))))
 						agentInteractions.AddButton(VButtonText.JoinMe);
-                    else
+					else
 					{
 						string hireButtonText =
 							agent.GetTraits<T_HireType>().Where(t => t.ButtonText == VButtonText.Hire_Muscle).Any()
@@ -222,7 +189,7 @@ namespace CCU.Patches.Agents
 					}
 				}
 				else if (interaction is Bribe_for_Entry_Alcohol || interaction is Pay_Entrance_Fee) // Bouncer traits
-                {
+				{
 					bool hasOtherBouncer = false;
 
 					for (int i = 0; i < agent.gc.agentList.Count; i++)
@@ -232,9 +199,9 @@ namespace CCU.Patches.Agents
 						if (iAgent.startingChunk == agent.startingChunk && iAgent.ownerID == agent.ownerID && iAgent != agent && (iAgent.oma.modProtectsProperty != 0 || iAgent.agentName == VanillaAgents.Bouncer))
 						{
 							relStatus relCode = iAgent.relationships.GetRelCode(interactingAgent);
-						
+
 							if (relationshipLevel < 3 && relCode != relStatus.Submissive)
-                            {
+							{
 								hasOtherBouncer = true;
 								break;
 							}
@@ -250,7 +217,7 @@ namespace CCU.Patches.Agents
 					{
 						if ((relationshipLevel > 2 || relationship == VRelationship.Submissive) && (!hasOtherBouncer || relationship == VRelationship.Submissive))
 							agent.SayDialogue("DontNeedMoney");
-						
+
 						else if (interactingAgent.statusEffects.hasTrait("Unlikeable") || interactingAgent.statusEffects.hasTrait("Naked") || interactingAgent.statusEffects.hasTrait("Suspicious"))
 							agent.SayDialogue("WontJoinA");
 						else if (interaction is Bribe_for_Entry_Alcohol)
@@ -296,7 +263,7 @@ namespace CCU.Patches.Agents
 						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(VDetermineMoneyCost.SlavePurchase));
 				}
 				else if (interaction is Leave_Weapons_Behind)
-                {
+				{
 					agentInteractions.AddButton(interaction.ButtonText);
 
 					for (int i = 0; i < agent.gc.agentList.Count; i++)
@@ -313,7 +280,7 @@ namespace CCU.Patches.Agents
 				else if (interaction is Manage_Chunk)
 				{
 					switch (agent.startingChunkRealDescription)
-                    {
+					{
 						case VChunkType.Arena:
 							for (int i = 0; i < agent.gc.objectRealList.Count; i++)
 							{
@@ -377,10 +344,10 @@ namespace CCU.Patches.Agents
 							if (agent.inventory.HasItem(vItem.Key))
 								agentInteractions.AddButton(VButtonText.BuyKeyHotel, agent.determineMoneyCost(VDetermineMoneyCost.BuyKey));
 							break;
-                    }
+					}
 				}
 				else if (interaction is Pay_Debt)
-                {
+				{
 					// Cost scaling is done slightly different for this interaction, since it's not subject to level scaling.
 					float costScale = agent.GetTrait<T_CostScale>().CostScale;
 
@@ -482,6 +449,98 @@ namespace CCU.Patches.Agents
 			}
 
 			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.TamperSomething, target.objectNetID);
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.FinishedOperating), argumentTypes: new[] { typeof(Agent) })]
+		private static IEnumerable<CodeInstruction> FinishedOperating_LimitHackToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo killerRobot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.killerRobot));
+			MethodInfo isVanillaKillerRobot = AccessTools.DeclaredMethod(typeof(Seek_and_Destroy), nameof(Seek_and_Destroy.IsVanillaKillerRobot));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, killerRobot),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, isVanillaKillerRobot)
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), 
+			argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
+		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, string combineType, string useOnType, ref bool __result)
+        {
+			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
+			{
+				if (item.invItemName == vItem.Syringe)
+				{
+					if (combineType == "Combine")
+					{
+						if (!GC.syringesIdentified.Contains(item.contents[0]) && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Drugalug))
+						{
+							if (agent.moneySuccess(agent.determineMoneyCost(VDetermineMoneyCost.IdentifySyringe)))
+							{
+								agent.SayDialogue("Bought2");
+								interactingAgent.statusEffects.IdentifySyringe(item.contents[0]);
+							}
+						}
+						else
+						{
+							interactingAgent.SayDialogue("AlreadyIdentified");
+							GC.audioHandler.Play(interactingAgent, "CantDo");
+						}
+					}
+
+					__result = true;
+					return false;
+				}
+
+				__result = false;
+				return false;
+			}
+
+			return true;
+		}
+	}
+
+    [HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	static class P_AgentInteractions_UseExplosiveStimulator
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTargetMethod, UsedImplicitly]
+		private static MethodInfo Find_MoveNext_MethodInfo() =>
+			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(AgentInteractions), nameof(AgentInteractions.UseExplosiveStimulator), 
+				new[] { typeof(Agent), typeof(List<PlayfieldObject>) }));
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> LimitToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo killerRobot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.killerRobot));
+			MethodInfo isVanillaKillerRobot = AccessTools.DeclaredMethod(typeof(Seek_and_Destroy), nameof(Seek_and_Destroy.IsVanillaKillerRobot));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, killerRobot),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, isVanillaKillerRobot)
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
 		}
 	}
 }

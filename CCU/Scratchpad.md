@@ -6,15 +6,17 @@ Listed in order of Parent tier summary symbol priority:
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #	C	v.1.0.0 Changelog
-- Bugfixes
-  - Vending Machines work correctly again
+- **Bugfixes**
+  - Vending Machines' cost interactions now load correctly
   - Codpiece now spawns correctly in shops
   - Influence Election no longer persists after use
   - Removed Research Gun from Tech Mart & Research inventories
   - Chunk Key Holder & Chunk Safe Combo Holder now *actually work*
   - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
   - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
-- **Trait renaming:** I've renamed and slightly reorganized some of the traits. This update should automatically update outdated trait lists both on spawn and on loading in the character editor. Ideally, you won't even notice the change being made.
+  - Decoupled various Killer Robot behaviors that were hardcode-attached to Seek & Destroy (Water damage, EMP vulnerability, Knockback Bonus, walking through Doors). 
+    - Trivia: I think the level of hardcoded-ness of Killer Robot implies that the class pre-dates SOR's trait system, or at least a big part of it.
+- **Trait Update System:** I've renamed and slightly reorganized some of the traits. This system should automatically update outdated traits both on spawn and on loading in the character editor. You will not have to update character files, and all versions of CCU will be backwards-compatible with un-updated content.
   - **Class Name Overlaps**: A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
     - **Hire Type**
       - Hacker → Cyber-Intruder
@@ -31,7 +33,7 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Vampire → Faction Werewolf Aligned
     - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
-- **Changes**
+- **Tweaks**
   - Pay Debt is now scaled to Cost Scale traits
   - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
 - **Feature additions**
@@ -44,33 +46,9 @@ Listed in order of Parent tier summary symbol priority:
     - Faction Firefighter Aligned
     - Faction Gorilla Aligned 
 #	CT	General
-##		C	Character Repository Trait Display
-This might require a refactor of the Legacy Dictionary. Switch it to Types instead of strings, and pull the names when calling it. 
-##		C	Legacy Updater
-Loading from Character Repository: Before loaded into a slot, traits are not yet updated. 
-The easiest way to do this is probably to continue the hacky smoke & mirrors. Just display the translated trait rather than loading/saving character data.
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing
-##		C	Agent.killerRobot
-###			T	Water Damage
-CL reported that they take damage in water.
-P_Agent.KillerRobotWaterDamage
-###			C	Water Bullet Damage
-BulletHitbox.HitAftermath
-	In 2 places in there
-###			C	Fearless
-Combat.CombatCheck
-Since there's a trait for this, it needs to be modular
-###			C	Explosive Stimulator targets KR
-Whatever the item's called
-AgentInteractions.UseExplosiveStimulator
-###			C	EMP Vulnerability
-Explosion.ExplosionHit
-###			C	Knockback Bonus
-Melee.Attack
-###			C	Not sure
-ObjectMult.UpdateObjectMult
 ##		T	Pickpocket Aligned
 From CL's bug report:
 	they did steal several times in a row without crashing 
@@ -421,6 +399,9 @@ Works with Electronic, but hacking bar is interrupted
 Attempted
 ###			T	Tamper With Aim
 Attempted
+###			C	Triangulate
+Head towards hacker when interactFar starts
+AgentInteractions.HackSomething in CopBot block
 ##		√C	Interaction
 ###			C	Buy Slave
 Pending actual assignment of owned slaves 
@@ -808,6 +789,8 @@ Blink to a random nearby spot when hit
 This is valid for player characters, so might need to be another mod
 ###			C	Concealed Carrier
 Hides weapon until drawn
+###			C	Explodevice Eligible
+agent.canExplosiveStimulate
 ###			C	Holographic
 Ghostlike, not necessarily gibbable (Use Supernatural for that)
 ###			C	Invincible

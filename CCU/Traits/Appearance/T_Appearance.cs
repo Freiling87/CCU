@@ -9,7 +9,7 @@ namespace CCU.Traits.Appearance
     /// <summary>
     /// TODO: This is a parent class to contain all appearance traits.
     /// </summary>
-    internal class T_Appearance
+    public static class T_Appearance
     {
     }
 }
