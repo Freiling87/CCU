@@ -10,7 +10,7 @@ namespace CCU.Traits.Behavior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Seek_and_Destroy>()
+            PostProcess = RogueLibs.CreateCustomTrait<Seek_and_Destroy>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),

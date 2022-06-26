@@ -10,7 +10,7 @@ namespace CCU.Traits.Gib_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Ice_Gibs>()
+            PostProcess = RogueLibs.CreateCustomTrait<Ice_Gibs>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's body explodes into shards of ice."),

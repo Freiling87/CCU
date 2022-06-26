@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Trapper>()
+            PostProcess = RogueLibs.CreateCustomTrait<Trapper>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to disarm a trap.",

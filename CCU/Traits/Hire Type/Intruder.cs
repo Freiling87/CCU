@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Intruder>()
+            PostProcess = RogueLibs.CreateCustomTrait<Intruder>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to break into windows or doors.",

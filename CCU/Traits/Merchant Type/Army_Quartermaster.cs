@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Army_Quartermaster>()
+            PostProcess = RogueLibs.CreateCustomTrait<Army_Quartermaster>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells military hardware."),

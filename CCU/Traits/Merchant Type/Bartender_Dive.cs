@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bartender_Dive>()
+            PostProcess = RogueLibs.CreateCustomTrait<Bartender_Dive>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells alcohol in a cheap, seedy place."),

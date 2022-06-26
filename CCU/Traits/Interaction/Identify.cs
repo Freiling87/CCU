@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Identify>()
+            PostProcess = RogueLibs.CreateCustomTrait<Identify>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can identify objects for money."),

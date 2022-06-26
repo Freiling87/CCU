@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Gunsmith>()
+            PostProcess = RogueLibs.CreateCustomTrait<Gunsmith>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells guns and gun accessories."),

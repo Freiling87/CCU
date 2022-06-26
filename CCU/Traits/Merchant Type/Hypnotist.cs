@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hypnotist>()
+            PostProcess = RogueLibs.CreateCustomTrait<Hypnotist>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells hypnotist's tools."),

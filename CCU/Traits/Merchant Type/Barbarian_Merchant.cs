@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Barbarian_Merchant>()
+            PostProcess = RogueLibs.CreateCustomTrait<Barbarian_Merchant>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Ale, meat & a sharp blade. All that is best in life!"),

@@ -7,7 +7,7 @@ namespace CCU.Traits.Cost_Currency
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Swap_Meet>()
+            PostProcess = RogueLibs.CreateCustomTrait<Swap_Meet>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character doesn't accept money. Instead, you have to give them an item of equal or greater value than the cost of the good or service.",

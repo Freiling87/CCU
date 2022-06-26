@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Secret_Hate>()
+            PostProcess = RogueLibs.CreateCustomTrait<Player_Secret_Hate>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character will ambush Players.",

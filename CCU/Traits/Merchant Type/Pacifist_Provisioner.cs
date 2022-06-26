@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pacifist_Provisioner>()
+            PostProcess = RogueLibs.CreateCustomTrait<Pacifist_Provisioner>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells tools to avoid hurting people."),

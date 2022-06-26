@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Electrocutioner>()
+            PostProcess = RogueLibs.CreateCustomTrait<Electrocutioner>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will gain Electro-Touch upon entering combat, and then say some hokey pun about how they're going to show the hero something shocking. Yawn."),

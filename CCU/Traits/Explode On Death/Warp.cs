@@ -12,7 +12,7 @@ namespace CCU.Traits.Explode_On_Death
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Warp>()
+            PostProcess = RogueLibs.CreateCustomTrait<Warp>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("All the good ancient curses were taken. This one teleports anyone present for its holder's death to a mildly inconvenient location nearby. OoOoOoOh!"),

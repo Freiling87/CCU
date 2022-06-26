@@ -66,8 +66,6 @@ namespace CCU.Patches.AgentRelationships
             if (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily)))
                 relationship = VRelationship.Aligned;
 
-            logger.LogDebug("Final Relationship: " + relationship);
-
             //  TODO: Refactor
             switch (relationship)
             {

@@ -12,7 +12,7 @@ namespace CCU.Traits.Explode_On_Death
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Stomp>()
+            PostProcess = RogueLibs.CreateCustomTrait<Stomp>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character stuns everyone nearby. Bad gas?"),

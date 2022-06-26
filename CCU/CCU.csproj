@@ -225,6 +225,7 @@
     <Compile Include="Traits\Hack\Explode.cs" />
     <Compile Include="Traits\Hire Duration\Permanent_Hire_Only.cs" />
     <Compile Include="Traits\Hire Duration\Permanent_Hire.cs" />
+    <Compile Include="Traits\Hire Duration\T_HireDuration.cs" />
     <Compile Include="Traits\Hire Type\Muscle.cs" />
     <Compile Include="Traits\Hire Type\Intruder.cs" />
     <Compile Include="Traits\Hire Type\Decoy.cs" />

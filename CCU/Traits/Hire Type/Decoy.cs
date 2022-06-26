@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Decoy>()
+            PostProcess = RogueLibs.CreateCustomTrait<Decoy>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to cause a distraction, or a Ruckus, if you will.",

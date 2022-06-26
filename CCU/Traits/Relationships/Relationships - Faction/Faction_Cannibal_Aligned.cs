@@ -12,7 +12,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_Cannibal_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_Cannibal_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned to Cannibals and anyone else with this trait. They're Hostile to Soldiers and anyone with Faction Soldier Aligned.",

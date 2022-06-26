@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Some_Bark>()
+            PostProcess = RogueLibs.CreateCustomTrait<Some_Bark>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Loud on entering combat. They probably still bite, though."),

@@ -9,7 +9,7 @@ namespace CCU.Traits.Cost_Scale
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Zero>()
+            PostProcess = RogueLibs.CreateCustomTrait<Zero>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are reduced to zero.",

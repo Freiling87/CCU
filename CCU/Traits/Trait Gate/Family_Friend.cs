@@ -8,7 +8,7 @@ namespace CCU.Traits.Trait_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Family_Friend>()
+            PostProcess = RogueLibs.CreateCustomTrait<Family_Friend>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC will be Aligned to all players with Friend of the Family, as well as all Mobsters."),

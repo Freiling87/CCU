@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Hostile>()
+            PostProcess = RogueLibs.CreateCustomTrait<Player_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Hostile to players.",

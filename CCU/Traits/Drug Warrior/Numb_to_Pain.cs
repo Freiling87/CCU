@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Numb_to_Pain>()
+            PostProcess = RogueLibs.CreateCustomTrait<Numb_to_Pain>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains a 20% damage resistance upon entering combat."),

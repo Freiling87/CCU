@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Upper_Cruster>()
+            PostProcess = RogueLibs.CreateCustomTrait<Upper_Cruster>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells fancy shit by top brands made by slaves."),

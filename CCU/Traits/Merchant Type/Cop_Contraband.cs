@@ -9,7 +9,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cop_Contraband>()
+            PostProcess = RogueLibs.CreateCustomTrait<Cop_Contraband>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Stuff confiscated from the City's Ne'er- and/or Rarely-Do-Wells.\n\n<color=green>{0}</color> = Player needs The Law to access shop", ShortNameDocumentationOnly(typeof(Cop_Access))),

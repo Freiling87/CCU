@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<General_Store>()
+            PostProcess = RogueLibs.CreateCustomTrait<General_Store>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells miscellaneous stuff. A real retail slut."),

@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Suicide_Bomber_Huge>()
+            PostProcess = RogueLibs.CreateCustomTrait<Suicide_Bomber_Huge>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will die in a Huge explosion 15 seconds after starting combat."),

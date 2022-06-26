@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Use_Blood_Bag>()
+            PostProcess = RogueLibs.CreateCustomTrait<Use_Blood_Bag>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can help the player use a Blood Bag in their inventory."),

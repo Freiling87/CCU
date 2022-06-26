@@ -11,7 +11,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Hostile_to_Werewolf>()
+            PostProcess = RogueLibs.CreateCustomTrait<Hostile_to_Werewolf>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Hostile to Werewolves.",

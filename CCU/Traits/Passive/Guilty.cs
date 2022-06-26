@@ -8,7 +8,7 @@ namespace CCU.Traits.Passive
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Guilty>()
+            PostProcess = RogueLibs.CreateCustomTrait<Guilty>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is designated Guilty for The Law or Scumbag Slaughterer."),

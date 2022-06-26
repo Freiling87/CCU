@@ -11,7 +11,7 @@ namespace CCU.Traits.Explode_On_Death
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Ridiculous>()
+            PostProcess = RogueLibs.CreateCustomTrait<Ridiculous>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character explodes. Over 125 Slaves' worth, a fantastic value!"),

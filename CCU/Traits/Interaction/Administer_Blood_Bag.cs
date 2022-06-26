@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Administer_Blood_Bag>()
+            PostProcess = RogueLibs.CreateCustomTrait<Administer_Blood_Bag>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can give you a blood bag, at the cost of 20 HP."),

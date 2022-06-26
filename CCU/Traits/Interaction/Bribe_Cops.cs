@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bribe_Cops>()
+            PostProcess = RogueLibs.CreateCustomTrait<Bribe_Cops>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will accept cash to bribe law enforcement."),

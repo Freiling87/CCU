@@ -12,7 +12,7 @@ namespace CCU.Traits.Explode_On_Death
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<EMP>()
+            PostProcess = RogueLibs.CreateCustomTrait<EMP>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character releases an EMP."),

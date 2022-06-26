@@ -12,7 +12,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_Gorilla_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_Gorilla_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent is aligned with Gorillas and anyone else with this trait. They are hostile to Scientists and Specists. They provide an XP bonus when neutralized by Specists."),

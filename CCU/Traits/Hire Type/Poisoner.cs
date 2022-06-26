@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Poisoner>()
+            PostProcess = RogueLibs.CreateCustomTrait<Poisoner>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",

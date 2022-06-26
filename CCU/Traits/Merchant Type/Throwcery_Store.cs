@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Throwcery_Store>()
+            PostProcess = RogueLibs.CreateCustomTrait<Throwcery_Store>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells throwing weapons & Killer Thrower."),

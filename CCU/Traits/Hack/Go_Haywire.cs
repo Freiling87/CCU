@@ -11,7 +11,7 @@ namespace CCU.Traits.Hack
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Go_Haywire>()
+            PostProcess = RogueLibs.CreateCustomTrait<Go_Haywire>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to go Haywire.\n\n" + 

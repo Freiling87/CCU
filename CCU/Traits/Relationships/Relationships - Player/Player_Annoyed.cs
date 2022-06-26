@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Annoyed>()
+            PostProcess = RogueLibs.CreateCustomTrait<Player_Annoyed>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Annoyed at players.",

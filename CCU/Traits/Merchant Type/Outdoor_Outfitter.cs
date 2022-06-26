@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Outdoor_Outfitter>()
+            PostProcess = RogueLibs.CreateCustomTrait<Outdoor_Outfitter>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells traps & wilderness gear."),

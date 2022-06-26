@@ -8,7 +8,7 @@ namespace CCU.Traits.Trait_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Slayable>()
+            PostProcess = RogueLibs.CreateCustomTrait<Slayable>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC is hostile and provides an XP bonus to Scientist Slayers."),

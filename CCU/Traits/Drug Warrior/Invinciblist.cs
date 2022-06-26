@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Invincibilist>()
+            PostProcess = RogueLibs.CreateCustomTrait<Invincibilist>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Invincible upon entering combat. And yes, it's spelled right."),

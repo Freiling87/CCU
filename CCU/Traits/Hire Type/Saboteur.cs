@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Saboteur>()
+            PostProcess = RogueLibs.CreateCustomTrait<Saboteur>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to tamper with machinery and electronics.",

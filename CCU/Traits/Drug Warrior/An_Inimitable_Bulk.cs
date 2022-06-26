@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<An_Inimitable_Bulk>()
+            PostProcess = RogueLibs.CreateCustomTrait<An_Inimitable_Bulk>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains Giant when entering combat. They're angry because they can't pronounce the name of this trait out loud. And, I presume, you will not like them when they are angry."),

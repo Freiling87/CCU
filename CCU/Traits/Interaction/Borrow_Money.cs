@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Borrow_Money>()
+            PostProcess = RogueLibs.CreateCustomTrait<Borrow_Money>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can lend money."),

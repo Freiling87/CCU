@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buyer>()
+            PostProcess = RogueLibs.CreateCustomTrait<Buyer>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will buy items from the player.\n\n" +

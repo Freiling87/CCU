@@ -16,7 +16,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Leave_Weapons_Behind>()
+            PostProcess = RogueLibs.CreateCustomTrait<Leave_Weapons_Behind>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can be interacted with to drop all weapons in the Player's inventory."),

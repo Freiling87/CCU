@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CCU.Traits.Hire_Duration
 {
-    public class Permanent_Hire : CustomTrait
+    public class Permanent_Hire : T_HireDuration
     {
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Permanent_Hire>()
+            PostProcess = RogueLibs.CreateCustomTrait<Permanent_Hire>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate.",

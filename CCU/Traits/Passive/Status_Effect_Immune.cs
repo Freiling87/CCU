@@ -8,7 +8,7 @@ namespace CCU.Traits.Passive
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Status_Effect_Immune>()
+            PostProcess = RogueLibs.CreateCustomTrait<Status_Effect_Immune>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is immune to all status effects... but they still have feelings."),

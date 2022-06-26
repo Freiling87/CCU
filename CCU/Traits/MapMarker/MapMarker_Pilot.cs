@@ -7,7 +7,7 @@ namespace CCU.Traits.Map_Marker
 		//[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<MapMarker_Pilot>()
+			PostProcess = RogueLibs.CreateCustomTrait<MapMarker_Pilot>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character should spawn with a Map Marker. Let's see what happens!",

@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Confusionist>()
+            PostProcess = RogueLibs.CreateCustomTrait<Confusionist>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Confused upon entering combat. Maybe it's a trick? A ploy? A ruse...?\n\nNo, there's actually something wrong with them."),

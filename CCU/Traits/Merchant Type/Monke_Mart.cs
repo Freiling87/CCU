@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Monke_Mart>()
+            PostProcess = RogueLibs.CreateCustomTrait<Monke_Mart>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells stuff for monke, gorgia, you name it.\n\nThanks for coming, please return (to monke)!"),

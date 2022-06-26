@@ -10,7 +10,7 @@ namespace CCU.Traits.Interaction_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Untrustinger>()
+            PostProcess = RogueLibs.CreateCustomTrait<Untrustinger>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will only interact with Loyal or better.\n\n" +

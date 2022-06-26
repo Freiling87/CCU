@@ -8,7 +8,7 @@ namespace CCU.Traits.Trait_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cool_Cannibal>()
+            PostProcess = RogueLibs.CreateCustomTrait<Cool_Cannibal>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait."),

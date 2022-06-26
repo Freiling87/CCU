@@ -11,7 +11,7 @@ namespace CCU.Traits.Behavior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Eat_Corpses>()
+            PostProcess = RogueLibs.CreateCustomTrait<Eat_Corpses>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),

@@ -7,7 +7,7 @@ namespace CCU.Traits.Loadout
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Manager_Safe_Combo>()
+			PostProcess = RogueLibs.CreateCustomTrait<Manager_Safe_Combo>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Safe Combo Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",

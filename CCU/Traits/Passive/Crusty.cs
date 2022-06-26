@@ -8,7 +8,7 @@ namespace CCU.Traits.Passive
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Crusty>()
+            PostProcess = RogueLibs.CreateCustomTrait<Crusty>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has the privileges of the upper class."),

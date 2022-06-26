@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Offer_Motivation>()
+            PostProcess = RogueLibs.CreateCustomTrait<Offer_Motivation>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can be given small items, and will become Friendly."),

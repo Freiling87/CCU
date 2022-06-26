@@ -11,7 +11,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_2_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_2_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",

@@ -5,6 +5,16 @@ namespace CCU.Traits
 {
     public abstract class T_CCU : CustomTrait
     {
+        public static TraitBuilder PostProcess
+        {
+            set
+            {
+                value.Unlock.Unlock.cantLose = true;
+                value.Unlock.Unlock.cantSwap = true;
+                value.Unlock.Unlock.upgrade = null;
+            }
+        }
+
         public static string DisplayName(Type type, string custom = null) =>
             "[CCU] " + 
             (type.Namespace).Split('.')[2].Replace('_', ' ') + 

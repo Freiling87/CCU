@@ -9,7 +9,7 @@ namespace CCU.Traits.Cost_Scale
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Much_More>()
+            PostProcess = RogueLibs.CreateCustomTrait<Much_More>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are increased by 100%.",

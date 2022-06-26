@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Armor_Plated>()
+            PostProcess = RogueLibs.CreateCustomTrait<Armor_Plated>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains a layer of bullet resistance when entering combat."),

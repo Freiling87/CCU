@@ -10,7 +10,7 @@ namespace CCU.Traits.Gib_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Normal_Gibs>()
+            PostProcess = RogueLibs.CreateCustomTrait<Normal_Gibs>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is made of meat. Delicious meat."),

@@ -11,7 +11,7 @@ namespace CCU.Traits.Hack
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Explode>()
+            PostProcess = RogueLibs.CreateCustomTrait<Explode>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to Explode.\n\n" + 

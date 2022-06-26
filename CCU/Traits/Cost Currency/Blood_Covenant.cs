@@ -7,7 +7,7 @@ namespace CCU.Traits.Cost_Currency
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Blood_Covenant>()
+            PostProcess = RogueLibs.CreateCustomTrait<Blood_Covenant>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to blood, which can be paid with blood bags. If the agent has Vampirism, the player has an alternative choice... but they're being a little dodgy about specifics.",

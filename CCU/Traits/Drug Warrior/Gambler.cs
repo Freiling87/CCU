@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Gambler>()
+            PostProcess = RogueLibs.CreateCustomTrait<Gambler>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("You feel lucky, punk? I do."),

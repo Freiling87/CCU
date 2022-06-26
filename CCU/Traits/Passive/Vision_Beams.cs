@@ -8,7 +8,7 @@ namespace CCU.Traits.Passive
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Vision_Beams>()
+            PostProcess = RogueLibs.CreateCustomTrait<Vision_Beams>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's vision is visually indicated, as with Cop Bot."),

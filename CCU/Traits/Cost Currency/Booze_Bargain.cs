@@ -7,7 +7,7 @@ namespace CCU.Traits.Cost_Currency
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Booze_Bargain>()
+            PostProcess = RogueLibs.CreateCustomTrait<Booze_Bargain>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to Alcohol.",

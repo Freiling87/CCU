@@ -12,7 +12,7 @@ namespace CCU.Traits.Behavior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<AccidentProne>()
+            PostProcess = RogueLibs.CreateCustomTrait<AccidentProne>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will not path around Crushers, Fire Spewers, and Sawblades.\n\n" +

@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Flasher>()
+            PostProcess = RogueLibs.CreateCustomTrait<Flasher>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Fast upon entering combat... like The Flash. They absolutely do *not* reveal themselves to people, and we are working on getting the name changed."),

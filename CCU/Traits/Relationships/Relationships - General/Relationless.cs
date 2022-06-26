@@ -8,7 +8,7 @@ namespace CCU.Traits.Rel_General
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Relationless>()
+            PostProcess = RogueLibs.CreateCustomTrait<Relationless>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is always Neutral, like Butler Bot. What a lonely life.",

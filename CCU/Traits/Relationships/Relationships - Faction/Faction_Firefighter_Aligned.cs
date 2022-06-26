@@ -12,7 +12,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_Firefighter_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_Firefighter_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned to Firefighters and anyone else with this trait.",

@@ -8,7 +8,7 @@ namespace CCU.Traits.Trait_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Common_Folk>()
+            PostProcess = RogueLibs.CreateCustomTrait<Common_Folk>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC will be Loyal to a player with Friend of the Common Folk."),

@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<BuyerOnly>()
+            PostProcess = RogueLibs.CreateCustomTrait<BuyerOnly>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will buy items from the player. This trait removes the option to buy items from the Agent.\n\n" +

@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Intruders_Warehouse>()
+            PostProcess = RogueLibs.CreateCustomTrait<Intruders_Warehouse>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells intrusion tools.\n\nYou're gonna like the shit you steal - I guarantee it!"),

@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Colognier>()
+            PostProcess = RogueLibs.CreateCustomTrait<Colognier>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Louis XII's Cologniers were a legendary regiment known for smelling very pleasant right before they died quickly in combat. This character carries on that proud tradition."),

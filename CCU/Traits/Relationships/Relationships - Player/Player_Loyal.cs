@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Loyal>()
+            PostProcess = RogueLibs.CreateCustomTrait<Player_Loyal>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Loyal to Players.",

@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bribe_for_Entry_Alcohol>()
+            PostProcess = RogueLibs.CreateCustomTrait<Bribe_for_Entry_Alcohol>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if bribed with alcohol."),

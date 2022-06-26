@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Fireproofer>()
+            PostProcess = RogueLibs.CreateCustomTrait<Fireproofer>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains a layer of fire resistance when entering combat."),

@@ -8,7 +8,7 @@ namespace CCU.Traits.Passive
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Possessed>()
+            PostProcess = RogueLibs.CreateCustomTrait<Possessed>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has a Shapeshifter firmly lodged up their ass.\n\nThat's their excuse, what's yours?!"),

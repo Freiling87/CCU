@@ -8,7 +8,7 @@ namespace CCU.Traits.Combat
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Fearless>()
+            PostProcess = RogueLibs.CreateCustomTrait<Fearless>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will never flee from combat."),

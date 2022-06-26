@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<The_Impermanent_Hunk>()
+            PostProcess = RogueLibs.CreateCustomTrait<The_Impermanent_Hunk>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will gain a *temporary* Strength buff upon entering combat.\n\n<color=red>Remember, kids: Don't maintain? Lose your gains!</color>"),

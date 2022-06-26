@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Cyber_Intruder>()
+            PostProcess = RogueLibs.CreateCustomTrait<Cyber_Intruder>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to hack something remotely.",

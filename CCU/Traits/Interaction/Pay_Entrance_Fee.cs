@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pay_Entrance_Fee>()
+            PostProcess = RogueLibs.CreateCustomTrait<Pay_Entrance_Fee>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),

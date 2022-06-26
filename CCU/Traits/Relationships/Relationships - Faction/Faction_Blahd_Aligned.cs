@@ -12,7 +12,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_Blahd_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_Blahd_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent is aligned with Blahds and hostile to Crepes and Blahd Bashers. They provide an XP bonus when neutralized by Blahd Bashers."),

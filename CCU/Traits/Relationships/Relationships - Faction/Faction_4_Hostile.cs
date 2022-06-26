@@ -11,7 +11,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_4_Hostile>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_4_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 4.",

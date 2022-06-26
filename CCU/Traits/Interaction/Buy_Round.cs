@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buy_Round>()
+            PostProcess = RogueLibs.CreateCustomTrait<Buy_Round>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can be paid to serve a round of drinks to everyone in the chunk."),

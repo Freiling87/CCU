@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Heal_Player>()
+            PostProcess = RogueLibs.CreateCustomTrait<Heal_Player>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can heal, for money.\n\nThey may or may not keep it real."),

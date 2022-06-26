@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Neutral>()
+            PostProcess = RogueLibs.CreateCustomTrait<Player_Neutral>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Neutral to players.",

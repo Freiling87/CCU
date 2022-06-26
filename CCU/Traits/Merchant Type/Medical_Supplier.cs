@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Medical_Supplier>()
+            PostProcess = RogueLibs.CreateCustomTrait<Medical_Supplier>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells medicine and medical supplies."),

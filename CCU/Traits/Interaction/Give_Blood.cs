@@ -17,7 +17,7 @@ namespace CCU.Traits.Interaction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Give_Blood>()
+            PostProcess = RogueLibs.CreateCustomTrait<Give_Blood>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can help donate blood for cash."),

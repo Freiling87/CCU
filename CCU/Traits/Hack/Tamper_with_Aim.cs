@@ -11,7 +11,7 @@ namespace CCU.Traits.Hack
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Tamper_with_Aim>()
+            PostProcess = RogueLibs.CreateCustomTrait<Tamper_with_Aim>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to tamper with their ranged weapon aim.\n\n" +

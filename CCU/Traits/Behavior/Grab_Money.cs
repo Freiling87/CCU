@@ -11,7 +11,7 @@ namespace CCU.Traits.Behavior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Grab_Money>()
+            PostProcess = RogueLibs.CreateCustomTrait<Grab_Money>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will grab money if they see it."),

@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Banana_Boutique>()
+            PostProcess = RogueLibs.CreateCustomTrait<Banana_Boutique>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Yes, that is a banana in their pocket. But yes, they're still happy to see you."),

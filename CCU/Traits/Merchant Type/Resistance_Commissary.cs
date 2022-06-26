@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Resistance_Commissary>()
+            PostProcess = RogueLibs.CreateCustomTrait<Resistance_Commissary>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character distributes resources for the Resistance."),

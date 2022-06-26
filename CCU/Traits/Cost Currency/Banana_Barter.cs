@@ -7,7 +7,7 @@ namespace CCU.Traits.Cost_Currency
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Banana_Barter>()
+            PostProcess = RogueLibs.CreateCustomTrait<Banana_Barter>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to Bananas.",

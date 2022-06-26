@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Stimpacker>()
+            PostProcess = RogueLibs.CreateCustomTrait<Stimpacker>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will start regenerating health upon entering combat."),

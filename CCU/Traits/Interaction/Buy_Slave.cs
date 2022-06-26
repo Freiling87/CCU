@@ -14,7 +14,7 @@ namespace CCU.Traits.Interaction
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Buy_Slave>()
+            PostProcess = RogueLibs.CreateCustomTrait<Buy_Slave>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("If this character owns any Slaves, they will sell them."),

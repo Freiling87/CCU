@@ -7,7 +7,7 @@ namespace CCU.Traits.Loadout
 		//[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Guns_Common>()
+			PostProcess = RogueLibs.CreateCustomTrait<Guns_Common>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character will generate with a pistol, shotgun, machine gun or revolver.",

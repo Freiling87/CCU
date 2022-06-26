@@ -11,7 +11,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Invisibilist>()
+            PostProcess = RogueLibs.CreateCustomTrait<Invisibilist>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Invisible upon entering combat. And yes, it's spelled right."),

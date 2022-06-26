@@ -9,7 +9,7 @@ namespace CCU.Traits.Bodyguarded
         //[RLSetup]
         public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Bodyguarded_Pilot>()
+			PostProcess = RogueLibs.CreateCustomTrait<Bodyguarded_Pilot>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character should spawn with bodyguards. Let's see what happens!",

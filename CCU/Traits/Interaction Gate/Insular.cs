@@ -10,7 +10,7 @@ namespace CCU.Traits.Interaction_Gate
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Insular>()
+            PostProcess = RogueLibs.CreateCustomTrait<Insular>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will not interact with anyone who has a relationship with their faction at Neutral or worse."),

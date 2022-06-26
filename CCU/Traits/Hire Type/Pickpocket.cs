@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pickpocket>()
+            PostProcess = RogueLibs.CreateCustomTrait<Pickpocket>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to pick someone's pockets.",

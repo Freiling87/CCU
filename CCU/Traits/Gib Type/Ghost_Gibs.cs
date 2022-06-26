@@ -12,7 +12,7 @@ namespace CCU.Traits.Gib_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Ghost_Gibs>()
+            PostProcess = RogueLibs.CreateCustomTrait<Ghost_Gibs>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's body explodes into chunks of... ectoplasm? Probably not vegan, if you were wondering."),

@@ -7,7 +7,7 @@ namespace CCU.Traits.Cost_Currency
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Shylock>()
+            PostProcess = RogueLibs.CreateCustomTrait<Shylock>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to uh... bites of flesh.",

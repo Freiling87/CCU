@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Teleportationist>()
+            PostProcess = RogueLibs.CreateCustomTrait<Teleportationist>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells teleportation tools. Get them before they're gone!"),

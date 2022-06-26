@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Firefighter_Five_and_Dime>()
+            PostProcess = RogueLibs.CreateCustomTrait<Firefighter_Five_and_Dime>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells whatever a Firefighter could need... legally."),

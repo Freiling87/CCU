@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Anthropophagie>()
+            PostProcess = RogueLibs.CreateCustomTrait<Anthropophagie>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("A boutique for fine young cannibals."),

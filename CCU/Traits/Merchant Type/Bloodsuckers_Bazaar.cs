@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Bloodsuckers_Bazaar>()
+            PostProcess = RogueLibs.CreateCustomTrait<Bloodsuckers_Bazaar>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells anything a Vampire could need."),

@@ -10,7 +10,7 @@ namespace CCU.Traits.Drug_Warrior
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Wildcard>()
+            PostProcess = RogueLibs.CreateCustomTrait<Wildcard>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will use a random syringe upon entering combat."),

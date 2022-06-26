@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Fire_Sale>()
+            PostProcess = RogueLibs.CreateCustomTrait<Fire_Sale>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Sale! Big sale! Everything must go (up in flames)!"),

@@ -12,7 +12,7 @@ namespace CCU.Traits.Explode_On_Death
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Noise_Only>()
+            PostProcess = RogueLibs.CreateCustomTrait<Noise_Only>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character makes a REALLY loud death rattle."),

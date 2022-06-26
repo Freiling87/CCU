@@ -8,7 +8,7 @@ namespace CCU.Traits.Combat
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Coward>()
+            PostProcess = RogueLibs.CreateCustomTrait<Coward>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will always flee from combat."),

@@ -8,7 +8,7 @@ namespace CCU.Traits.Merchant_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Pest_Control>()
+            PostProcess = RogueLibs.CreateCustomTrait<Pest_Control>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells chemicals and tools for exterminating or subduing pests."),

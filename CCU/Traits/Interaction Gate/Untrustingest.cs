@@ -10,7 +10,7 @@ namespace CCU.Traits.Interaction_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Untrustingest>()
+            PostProcess = RogueLibs.CreateCustomTrait<Untrustingest>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will only interact with Aligned.\n\n" +

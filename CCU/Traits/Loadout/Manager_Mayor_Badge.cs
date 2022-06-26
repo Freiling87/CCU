@@ -7,7 +7,7 @@ namespace CCU.Traits.Loadout
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<Manager_Mayor_Badge>()
+			PostProcess = RogueLibs.CreateCustomTrait<Manager_Mayor_Badge>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Badge Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",

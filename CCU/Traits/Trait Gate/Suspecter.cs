@@ -7,7 +7,7 @@ namespace CCU.Traits.Trait_Gate
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Suspecter>()
+            PostProcess = RogueLibs.CreateCustomTrait<Suspecter>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Annoyed at characters with the Suspicious trait.",

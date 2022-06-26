@@ -10,7 +10,7 @@ namespace CCU.Traits.Rel_Player
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Player_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Player_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned to players.",

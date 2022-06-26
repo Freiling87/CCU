@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Muscle>()
+            PostProcess = RogueLibs.CreateCustomTrait<Muscle>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired as a bodyguard.",

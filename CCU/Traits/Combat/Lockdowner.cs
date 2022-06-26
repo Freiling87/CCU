@@ -8,7 +8,7 @@ namespace CCU.Traits.Combat
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Lockdowner>()
+            PostProcess = RogueLibs.CreateCustomTrait<Lockdowner>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will activate a Lockdown when they enter combat. \n\n<color=red>Requires:</color> Lockdown Walls on level"),

@@ -12,7 +12,7 @@ namespace CCU.Traits.Explode_On_Death
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Water>()
+            PostProcess = RogueLibs.CreateCustomTrait<Water>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character splashes water everywhere. I've heard it's bad to hold it in too long."),

@@ -7,7 +7,7 @@ namespace CCU.Traits.Facial_Hair
 		//[RLSetup]
 		public static void Setup()
 		{
-			RogueLibs.CreateCustomTrait<MustacheCircus>()
+			PostProcess = RogueLibs.CreateCustomTrait<MustacheCircus>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this trait to the appearance pool. If this character is generated as an NPC, their appearance will be randomized between all appearance traits in the pool.",

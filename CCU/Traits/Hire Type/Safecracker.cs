@@ -12,7 +12,7 @@ namespace CCU.Traits.Hire_Type
         //[RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Safecracker>()
+            PostProcess = RogueLibs.CreateCustomTrait<Safecracker>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to break into safes up-close and silently.",

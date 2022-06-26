@@ -46,39 +46,9 @@ Listed in order of Parent tier summary symbol priority:
 ##		C	Legacy Updater
 Loading from Character Repository: Before loaded into a slot, traits are not yet updated. 
 The easiest way to do this is probably to continue the hacky smoke & mirrors. Just display the translated trait rather than loading/saving character data.
-##		C	Trait Removable/Swappable/Upgradeable
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing
-###			T	Trait Names in Legacy Updater
-Data is entered, just need to test.
-##		T	Pay Debt + Cost Scale
-P_AgentInteractions.AddInteractionButtons
-###			C	Broken interaction
-Button shows up, but when pressed it gives this error. However, the debt is applied but the status text doesn't appear. This is an untested feature anyway.
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	CCU.Patches.Interface.P_StatusEffectDisplay.AddDisplayPiece_Prefix (StatusEffect myStatusEffect, Trait myTrait) (at <52e5f9639dbf48b99c6272b47886af5b>:0)
-	StatusEffectDisplay.AddDisplayPiece (StatusEffect myStatusEffect, Trait myTrait) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	StatusEffects.AddStatusEffect (System.String statusEffectName, System.Boolean showText, Agent causingAgent, UnityEngine.Networking.NetworkInstanceId cameFromClient, System.Boolean dontPrevent, System.Int32 specificTime) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	StatusEffects.AddStatusEffect (System.String statusEffectName, System.Boolean showText, System.Boolean dontPrevent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	AgentInteractions.PressedButton (Agent agent, Agent interactingAgent, System.String buttonText, System.Int32 buttonPrice) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	RogueLibsCore.VanillaInteractions+<>c__DisplayClass11_2.<Patch_Agent>b__3 (RogueLibsCore.InteractionModel`1[T] m) (at <86bb72f00f4f468d9c5d2e9685a23cc2>:0)
-	RogueLibsCore.SimpleInteraction`1[T].OnPressed () (at <86bb72f00f4f468d9c5d2e9685a23cc2>:0)
-	RogueLibsCore.InteractionModel.OnPressedButton2 (System.String buttonName) (at <86bb72f00f4f468d9c5d2e9685a23cc2>:0)
-	RogueLibsCore.InteractionModel.OnPressedButton (System.String buttonName) (at <86bb72f00f4f468d9c5d2e9685a23cc2>:0)
-	RogueLibsCore.RogueLibsPlugin.PressedButtonHook (PlayfieldObject __instance, System.String buttonText) (at <86bb72f00f4f468d9c5d2e9685a23cc2>:0)
-	Agent.PressedButton (System.String buttonText, System.Int32 buttonPrice) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Agent.PressedButton (System.String buttonText) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	WorldSpaceGUI.PressedButton (System.Int32 buttonNum) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	ButtonHelper.PushButton () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	ButtonHelper.DoUpdate (System.Boolean onlySetImages) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	ButtonHelper.Update () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-
-	[Error  :RogueLibsCore] SimpleInteractionProvider's handler on Custom (1128) (Agent) threw an exception.
-	[Error  :RogueLibsCore] System.NullReferenceException: Object reference not set to an instance of an object
-	  at CCU.Patches.Agents.P_AgentInteractions_DetermineButtons.AddCustomAgentButtons (Agent agent) [0x00e75] in <52e5f9639dbf48b99c6272b47886af5b>:0
-	  at AgentInteractions.DetermineButtons (Agent agent, Agent interactingAgent, System.Collections.Generic.List`1[T] buttons1, System.Collections.Generic.List`1[T] buttonsExtra1, System.Collections.Generic.List`1[T] buttonPrices1) [0x01a75] in <9086a7372c854d5a8678e46a74a50fc1>:0
 ##		C	Agent.killerRobot
 ###			T	Water Damage
 CL reported that they take damage in water.

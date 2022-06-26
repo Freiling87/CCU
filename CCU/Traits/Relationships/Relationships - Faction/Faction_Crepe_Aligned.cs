@@ -12,7 +12,7 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<Faction_Crepe_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Faction_Crepe_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent is aligned with Crepes and hostile to Blahds and Crepe Crushers. They provide an XP bonus when neutralized by Crepe Crushers."),
