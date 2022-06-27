@@ -22,12 +22,12 @@ namespace CCU.Traits.Interaction
                     "- Deportation Center\n" +
                     "- Hotel *\n\n" +
                     "*<color=red>Requires</color>: {0}", ShortNameDocumentationOnly(typeof(Manager_Key))),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Manage_Chunk)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

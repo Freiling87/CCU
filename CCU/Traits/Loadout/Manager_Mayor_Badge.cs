@@ -11,12 +11,12 @@ namespace CCU.Traits.Loadout
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Badge Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = CTrait.Loadout_ChunkMayorBadge,
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithUnlock(new TraitUnlock
 				{

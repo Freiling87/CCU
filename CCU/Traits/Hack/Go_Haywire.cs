@@ -16,12 +16,12 @@ namespace CCU.Traits.Hack
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to go Haywire.\n\n" + 
                     "<color=red>Requires:</color> Electronic"),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Go_Haywire)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

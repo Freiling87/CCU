@@ -15,12 +15,12 @@ namespace CCU.Traits.Trait_Gate
                     "<color=green>Interactions</color>\n" +
                     "- Will not target the player with Pickpocketing if they have Honor Among Thieves.\n" +
                     "- Will not sell items unless player has Honor Among Thieves."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Honorable_Thief)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

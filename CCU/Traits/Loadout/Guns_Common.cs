@@ -11,12 +11,12 @@ namespace CCU.Traits.Loadout
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character will generate with a pistol, shotgun, machine gun or revolver.",
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = CTrait.Loadout_Guns_Common,
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithUnlock(new TraitUnlock
 				{

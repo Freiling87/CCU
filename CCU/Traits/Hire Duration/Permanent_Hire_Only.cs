@@ -10,19 +10,19 @@ namespace CCU.Traits.Hire_Duration
 {
     public class Permanent_Hire_Only : T_HireDuration
     {
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Permanent_Hire_Only>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate. This trait replaces the vanilla hire option.",
-                    [LanguageCode.Russian] = "",
+                    [LanguageCode.English] = "Offers the Permanent Hire button, and removes the vanilla option.",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.PermanentOnly,
-                    [LanguageCode.Russian] = "",
+                    [LanguageCode.English] = DisplayName(typeof(Permanent_Hire_Only)),
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

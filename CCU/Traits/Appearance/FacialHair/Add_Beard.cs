@@ -11,12 +11,12 @@ namespace CCU.Traits.Facial_Hair
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this trait to the appearance pool. If this character is generated as an NPC, their appearance will be randomized between all appearance traits in the pool.",
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DisplayName(typeof(Beard)),
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithUnlock(new TraitUnlock
 				{

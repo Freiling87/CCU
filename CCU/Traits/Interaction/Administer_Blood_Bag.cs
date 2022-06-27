@@ -18,12 +18,12 @@ namespace CCU.Traits.Interaction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character can give you a blood bag, at the cost of 20 HP."),
-                    [LanguageCode.Russian] = "", 
+                     
                 })
                 .WithName(new CustomNameInfo 
                 {
                     [LanguageCode.English] = DisplayName(typeof(Administer_Blood_Bag)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

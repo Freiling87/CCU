@@ -1,22 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Hire_Duration
 {
-    public class Bartender_Vanilla : T_MerchantType
+    public class Join_on_Sight : T_HireDuration
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Bartender_Vanilla>()
+            PostProcess = RogueLibs.CreateCustomTrait<Join_on_Sight>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells alcohol."),
+                    [LanguageCode.English] = "Agent will join any player who comes within sight.",
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bartender_Vanilla), "Bartender (Vanilla)"),
+                    [LanguageCode.English] = DisplayName(typeof(Join_on_Sight)),
                     
                 })
                 .WithUnlock(new TraitUnlock
