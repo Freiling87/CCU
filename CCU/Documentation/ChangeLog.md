@@ -32,23 +32,28 @@
   - Pay Debt is now scaled to Cost Scale traits
   - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
 - **Feature additions**
-  - Behavior
-    - Grab Alcohol
-    - Grab Food
-  - Cost Scale
-    - Much More (200% cost)
-  - Explode On Death
-    - Dizzy
-    - EMP
-    - Firebomb
-    - Noise Only
-    - Slime
-    - Stomp
-    - Water
-  - Relationships - Faction
-    - Faction Firefighter Aligned
-    - Faction Gorilla Aligned 
-  - Gib Type
-    - Ghost Gibs
-    - Ice Gibs
-    - Normal Gibs
+  - Mutators
+    - Followers
+      - Homesickness Disabled
+      - Homesickness Mandatory
+  - Traits
+    - Behavior
+      - Grab Alcohol
+      - Grab Food
+    - Cost Scale
+      - Much More (200% cost)
+    - Explode On Death
+      - Dizzy
+      - EMP
+      - Firebomb
+      - Noise Only
+      - Slime
+      - Stomp
+      - Water
+    - Relationships - Faction
+      - Faction Firefighter Aligned
+      - Faction Gorilla Aligned 
+    - Gib Type
+      - Ghost Gibs
+      - Ice Gibs
+      - Normal Gibs

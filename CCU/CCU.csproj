@@ -175,6 +175,7 @@
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
+    <Compile Include="Traits\Combat\Nth_Wind.cs" />
     <Compile Include="Traits\Combat\Backed_Up.cs" />
     <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />
     <Compile Include="Traits\Cost Currency\Shylock.cs" />
@@ -415,6 +416,7 @@
     <None Include="Documentation\BestPractices.md" />
     <None Include="Documentation\ChangeLog.md" />
     <None Include="Documentation\Installation.md" />
+    <None Include="Documentation\Challenges.md" />
     <None Include="Documentation\NPCUtilities.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>

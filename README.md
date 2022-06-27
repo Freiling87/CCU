@@ -19,4 +19,5 @@ In light of certain questions I've received, I think it is important to be clear
 - [Change Log](/CCU/Documentation/ChangeLog.md)
 - [Best Practices for Designers](/CCU/Documentation/BestPractices.md)
 #		Content
-- [NPC Utilities](/CCU/Documentation/NPCUtilities.md)
+- [Mutators](/CCU/Documentation/Challenges.md)
+- [Traits](/CCU/Documentation/NPCUtilities.md)

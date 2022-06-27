@@ -5,7 +5,25 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
+#		Changelog
+- **Bugfixes**
+  - Fixed Pick Pockets occasionally cancelling the setup of various interaction and merchant traits
 #	CT	General
+##		T	Pick Pockets prevents shop generation
+Attempt: Removed erroneous early return in P_Agent.SetupAgentStats_Postfix
+##		C	Explosion Refactor
+Current Setup:
+	Explode on Death
+Proposal:
+	Explosion Fuse
+		Short
+		Long
+		None
+	Explosion Type
+	Explosion Trigger
+		Damage
+		Death
+		Combat
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing
@@ -230,6 +248,12 @@ Etc.
 P_GoalBattle.
 	Process_StartCombatActions
 	DoCombatActions
+###			T	Nth Wind
+Refreshes Drug Warrior & Backed Up bools after combat ends.
+P_GoalCombatEngage.
+	Terminate_Postfix
+P_StatusEffects.
+	Resurrect
 ###			H	Gloater
 Will dance on corpses and make loud noise if they win a combat
 This one's kinda hard... Probably on hold for now.
@@ -260,6 +284,9 @@ Complete
 ###			√	Zero
 Complete
 ##		√C	Drug Warrior
+###			C	Suppress Syringe Text/Audio
+The `-Syringe` text is just clutter
+The sound is sometimes not applicable lorewise
 ###			C	Extendo-Wheels
 Gain Roller Skates
 ###			C	Suicide Bomber
