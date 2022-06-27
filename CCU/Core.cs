@@ -102,16 +102,6 @@ namespace CCU
 	public static class CMutators
 	{
 		public const string
-		#region Followers
-			HomesicknessDisabled = "[CCU] Homesickness Disabled",
-			HomesicknessMandatory = "[CCU] Homesickness Mandatory",
-		#endregion
-		#region Interface
-			ScrollingButtonHeight50 = "[CCU] Interface - Scrolling Button Height 50%",
-			ScrollingButtonHeight75 = "[CCU] Interface - Scrolling Button Height 75%",
-			ScrollingButtonTextAlignLeft = "[CCU] Interface - Scrolling Button Text Align Left",
-			ScrollingButtonTextSizeStatic = "[CCU] Interface - Scrolling Button Text Size Static",
-		#endregion
 		#region Interface Themes
 			//		BACKGROUND			TEXT COLOR			FONT
 			InterfaceTheme_BloodMoon = "[CCU] Interface Theme - Blood Moon",                    //	Burgundy			Moon White			Gothic
@@ -156,29 +146,6 @@ namespace CCU
 		#region Utility
 			SortMutatorsByName = "! Sort Mutators by Name";
 		#endregion
-
-		public static List<string> LevelOnlyMutators = new List<string>()
-		{
-
-		};
-
-		//private static List<string> AllCustomMutators() =>
-		//	typeof(CMutators).GetFields().Cast<string>().ToList().Where(s => s.GetType() is string);
-
-		//foreach (var constant in typeof(TestClass).GetFields())
-		//{
-		//	if (constant.IsLiteral && !constant.IsInitOnly)
-		//	{
-		//		lstOfConstants.Add((string)constant.GetValue(null));
-		//	}
-
-		//}
-
-		public static List<string> AllCustomMutators() =>
-			typeof(CMutators).GetFields()
-				.Where(field => field.IsLiteral && !field.IsInitOnly)
-				.Select(field => (string)field.GetValue(null))
-				.ToList();
 	}
 	public static class CTrait
 	{
@@ -310,32 +277,7 @@ namespace CCU
 			SkinColor_Zombie2 = "[CCU] Skin Color - ZombieSkin2",
 		#endregion
 		#endregion
-		#region Active
-			CleanTrash = "[CCU] Behavior - Clean Trash",
-			EnforceLaws = "[CCU] Behavior - Enforce Laws (Cop)",
-			EnforceLawsCopBot = "[CCU] Behavior - Enforce Laws (Cop Bot)",
-			FightFires = "[CCU] Behavior - Fight Fires",
-			GuardDoor = "[CCU] Behavior - Guard Door",
-			HogTurntables = "[CCU] Behavior - Turntables Guard",
-			Shakedown = "[CCU] Behavior - Shakedown",
-			Tattletale = "[CCU] Behavior - Tattletale",
-		#endregion
-		#region Bodyguarded
-			Bodyguarded_Pilot = "[CCU] Bodyguarded - Pilot",
-			Bodyguarded_Cops = "[CCU] Bodyguarded - Cops",
-			Bodyguarded_Goons = "[CCU] Bodyguarded - Goons",
-			Bodyguarded_Supercops = "[CCU] Bodyguarded - Supercops",
-			Bodyguarded_Supergoons = "[CCU] Bodyguarded - Supergoons",
-		#endregion
-		#region Hire
-			JoinIfFreed = "[CCU] Hire - Join if Freed (Prisoner)",
-			Permanent = "[CCU] Hire Duration - Permanent",
-			PermanentOnly = "[CCU] Hire Duration - Permanent Only",
-		#endregion
 		#region Loadout
-			Loadout_ChunkKey = "[CCU] Loadout: Chunk Key Holder",
-			Loadout_ChunkMayorBadge = "[CCU] Loadout: Chunk Mayor Badge",
-			Loadout_ChunkSafeCombo = "[CCU] Loadout: Chunk Safe Combo Holder",
 			Loadout_Guns_Common = "[CCU] Loadout: Guns (Common)",
 			Loadout_Guns_Heavy = "[CCU] Loadout: Guns (Heavy)",
 			Loadout_Guns_Rare = "[CCU] Loadout: Guns (Rare)",
@@ -350,11 +292,6 @@ namespace CCU
 			MapMarker_QuestionMark = "[CCU] Map Marker: QuestionMark",
 			MapMarker_Shopkeeper = "[CCU] Map Marker: Shopkeeper",
         #endregion
-		#region Passive
-			Passive_ExplodeOnDeathMolotov = "[CCU] Passive - Explode On Death (Molotov)",
-			Passive_ExplodeOnDeathSlime = "[CCU] Passive - Explode On Death (Slime)",
-			Passive_ExplodeOnDeathWater = "[CCU] Passive - Explode On Death (Water)",
-		#endregion
 		#region Spawn
 			HideInObject = "[CCU] Spawn: Hide In Bush",
 			Spawn_RoamingGang = "[CCU] Spawn: Roaming Gangs",

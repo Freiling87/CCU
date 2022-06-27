@@ -1,5 +1,13 @@
 ﻿namespace SORCE.Localization
 {
+	public static class CDetermineMoneyCost
+    {
+		public const string
+			HirePermanentExpert = "HackerAssist_Permanent",
+			HirePermanentMuscle = "SoldierHire_Permanent",
+
+			z = "";
+    }
 	public static class VDetermineMoneyCost
 	{
 		public const string

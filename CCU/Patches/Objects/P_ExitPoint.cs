@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using CCU.Challenges.Followers;
 using HarmonyLib;
 
 namespace CCU.Patches.Objects
@@ -20,12 +21,12 @@ namespace CCU.Patches.Objects
 				{
 					if (myAgent.isPlayer == 0)
 						employee.agentInteractions.LetGo(employee, employee.employer);
-					else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
+					else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)))
 					{
 						employee.SayDialogue("CantCome");
 						employee.agentInteractions.LetGo(employee, employee.employer);
 					}
-					else if (GC.challenges.Contains(CMutators.HomesicknessDisabled) || employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait("AgentsFollowToNextLevel"))
+					else if (GC.challenges.Contains(nameof(Homesickness_Disabled)) || employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait("AgentsFollowToNextLevel"))
 						employee.wantsToExit = true;
 					else
 					{

@@ -41,9 +41,13 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#		C	Systems
-##			C	Legacy Updater
-###				C	Trait Updater
+#		T	Systems
+##			T	Legacy Updater
+###				T!	Challenge
+Homesickness Mandatory & Disabled
+####				T	Test Mutator List in editor
+Had to tweak it
+###				√	Trait
 ####				√	Designer Side
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
@@ -161,12 +165,8 @@ New
 Once hostile to a player, flees to exit elevator
 ###			C	Clean Trash
 New
-###			C	Confiscate Contraband
-Should also spawn Confiscation Center (See SORCE)
 ###			C	Curious
 Investigate noises like cop & shopkeeper
-###			C	Deport Non-Citizens
-Should also spawn Deportation Center (See SORCE)
 ###			C	Fucking Salesman
 Knocks on non-restricted locked doors, moves on after a pause
 ###			C	Fight Fires
@@ -184,10 +184,14 @@ Maybe just implement the whole Hey, You! overhaul here
 ###			C	Hog Turntables
 New
 Allow paid Musician behavior
+###			C	La Migra
+Should also spawn Deportation Center (See SORCE)
 ###			C	Mutinous
 Agent.mutinous
 ###			C	Needful
 Will seek out Musician need objects and operate them
+###			C	Non-Enforcer Enforcer
+See if there's any use for Agents who enforce laws but aren't agent.enforcer
 ###			C	Paranoid
 Constant search state
 ###			C	SecretHate
@@ -203,6 +207,8 @@ No need for "Roaming Gang" Trait itself
 Will default to finding a bed to sleep in, returning even after combat.
 ###			C	Slowpoke
 Takes a longer time to react to everything
+###			C	Stop & Frisk
+Should also spawn Confiscation Center (See SORCE)
 ###			C	Suicdal
 Walks into hazards, only those they can see
 ###			C	Tattle (Upper Cruster)
@@ -490,20 +496,24 @@ Complete
 ###			C	All wall-type gibs
 Include sound effect where applicable, like with glass
 ###			C	Ungibbable
-##		H	Hire Duration
+##		C	Hire Damage Tolerance
+###			C	Anyweather
+Hiree will leave if a Hostile sees them
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
 "I didn't sign up for this! You're nuts!"
-###			C	Faithful
-Hiree will never "Not feel too good" and quit.
-###			C	Homesickness Always
+###			C	Foulweather
+Hiree will never leave due to damage
+##		H	Hire Duration
+###			C	Homesick 
 Automatic Homesickness Killer
-###			C	Homesickness Never
+###			C	Homesuck
 Overrides Homesickness Killer
 ###			C	Permanent Hire
 ~8x normal hire price
-Does not affect damage threshold
-Removes homesickness killer, and allows infinite uses of skills.
+Allows infinite uses of skills.
+When "Not feeling too hot," they'll flee combat but not leave the party, if that's possible.
+P_AgentInteractions.
 ###			C	Permanent Hire Only
 As above, but removes the single-use hire option.
 ###			C	Start as Hired

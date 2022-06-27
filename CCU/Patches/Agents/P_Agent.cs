@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Challenges.Followers;
 using CCU.Traits.Behavior;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
@@ -218,9 +219,9 @@ namespace CCU.Patches.Agents
 				__instance.oma.mustBeGuilty = true;
 			#endregion
 
-			if (GC.challenges.Contains(CMutators.HomesicknessDisabled))
+			if (GC.challenges.Contains(nameof(Homesickness_Disabled)))
 				__instance.canGoBetweenLevels = true;
-			else if (GC.challenges.Contains(CMutators.HomesicknessMandatory))
+			else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)))
 				__instance.canGoBetweenLevels = false;
 		}
 
@@ -234,6 +235,7 @@ namespace CCU.Patches.Agents
 	public class P_Agent_Hook : HookBase<PlayfieldObject>
 	{
 		public bool HasUsedWalkieTalkie;
+		public bool PermanentHire;
 		public int SuicideVestTimer;
 
 		protected override void Initialize() { }

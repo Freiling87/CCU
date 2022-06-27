@@ -1,9 +1,16 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
+using CCU.Traits.Behavior;
 using CCU.Traits.Cost_Scale;
 using CCU.Traits.Map_Marker;
 using HarmonyLib;
 using RogueLibsCore;
+using SORCE.Localization;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
+using UnityEngine;
 
 namespace CCU.Patches.Objects
 {
@@ -28,6 +35,49 @@ namespace CCU.Patches.Objects
 			
 			__result = (int)(__result * trait.CostScale);
 		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new [] { typeof(int), typeof(string) })]
+		private static IEnumerable<CodeInstruction> DetermineMoneyCost_DetectCustomValues(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo customPriceByName = AccessTools.DeclaredMethod(typeof(P_PlayfieldObject), nameof(CustomPriceByName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldc_R4, 300),
+					new CodeInstruction(OpCodes.Stloc_0),
+					new CodeInstruction(OpCodes.Ldc_I4_0),
+					new CodeInstruction(OpCodes.Stloc_S, 4),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_0),					//	int num (original transaction price)
+					new CodeInstruction(OpCodes.Ldarg_2),					//	string transactionType
+					new CodeInstruction(OpCodes.Call, customPriceByName),	//	float
+					new CodeInstruction(OpCodes.Stloc_0),					//	num
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static float CustomPriceByName(int originalNum, string transactionType)
+        {
+			int levelModifier = Mathf.Clamp(GC.sessionDataBig.curLevelEndless, 1, 15);
+
+			switch (transactionType)
+            {
+				case CDetermineMoneyCost.HirePermanentExpert:
+					return (240 + (levelModifier - 1) * 16);
+				case CDetermineMoneyCost.HirePermanentMuscle:
+					return (160 + (levelModifier - 1) * 16);
+				default:
+					return originalNum;
+			}
+        }
+
 
 		// Shouldn't these include the item value based exchange rate?
 		public static int AlcoholToMoney(int moneyAmt) =>

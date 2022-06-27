@@ -14,13 +14,13 @@ namespace CCU.Patches.Interface
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(ButtonHelper.RefreshContent), argumentTypes: new[] { typeof(ButtonData) })]
-		public static bool RefreshContent_Prefix(ButtonData myData, ButtonHelper __instance)
-		{
-			if (GC.challenges.Contains(CMutators.ScrollingButtonTextSizeStatic))
-				myData.resizeTextForBestFit = false;
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(ButtonHelper.RefreshContent), argumentTypes: new[] { typeof(ButtonData) })]
+		//public static bool RefreshContent_Prefix(ButtonData myData, ButtonHelper __instance)
+		//{
+		//	if (GC.challenges.Contains(CMutators.ScrollingButtonTextSizeStatic))
+		//		myData.resizeTextForBestFit = false;
 
-			return true;
-		}
+		//	return true;
+		//}
 	}
 }

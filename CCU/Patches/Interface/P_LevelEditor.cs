@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using BepInEx.Logging;
 using System.Reflection;
 using CCU.Content;
+using CCU.Challenges;
 
 namespace CCU.Patches.Interface
 {
@@ -65,7 +66,10 @@ namespace CCU.Patches.Interface
 			List<string> list = new List<string>();
 
 			list.AddRange(vMutator.VanillaMutators); // This list is copied from this method so it shouldn't break anything
-			list.AddRange(CMutators.LevelOnlyMutators);
+
+			// TODO: RETEST
+			foreach (C_CCU challenge in RogueFramework.Unlocks.OfType<C_CCU>())
+				list.Add(nameof(challenge));
 
 			__instance.ActivateLoadMenu(); 
 			___numButtonsLoad = (float)list.Count;
