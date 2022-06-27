@@ -1037,17 +1037,7 @@ Complete
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		C	Mutators
-Focus on Traits for this version.
-##		C	Requested features
-- Random Disaster (Disasters Every Level not in editor)
-- No Trait-Up
-  - Allows designer control over character progression
 ##		C	00 Mutator List Population
-###			C	Level Editor Mutator List
-- I think this has since been addressed in Roguelibs, as of 3.5.0b
-- Vanilla replacement worked, pending custom content
-- [Error  : Unity Log] Coroutine 'SetScrollbarPlacement' couldn't be started!
-  - This didn't affect anything but I'd like it resolved
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
 ###			√	General Mutator List
@@ -1094,9 +1084,8 @@ Gate level access
 ###			C	Traits for Level Branching
 ##		C	Disasters
 ###			C	Random Disaster
-Disasters Every Level doesn't work?
+Random Disasters and/or Disasters Every Level aren't offered in the editor
 ##		T	Followers
-###				00	Add conflicts
 ###			C	Homesickness Disabled
 ####			C	Set to Aligned
 ###			T	Homesickness Mandatory
@@ -1108,8 +1097,12 @@ You will need to eliminate spontaneous hostiles for this to work, though.
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
+##		C	Presets
+Curated configurations of challenges that can serve as a shortcut.
+E.g., "Interlude:" No funny business, pause big quests, etc.
 ##		C	Progression
-###			C	Delay Level-Up
+###			C	Delay Trait Gain
+Count and put off trait choices until this challenge isn't present
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
@@ -1126,7 +1119,7 @@ Main quest rewards are multiplied by 10
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		C	Item Groups
-Next release
+wut
 #		C	Object Additions
 ##		H	Custom Object variables
 ###			C	Readables

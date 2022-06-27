@@ -424,9 +424,6 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Challenges\Gameplay\" />
-    <Folder Include="Challenges\Interface\" />
-    <Folder Include="Challenges\Utility\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
