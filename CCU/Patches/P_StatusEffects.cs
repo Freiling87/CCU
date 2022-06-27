@@ -94,7 +94,7 @@ namespace CCU.Patches
 			if (trait != null)
             {
 				__result =
-                    trait is Traits.Drug_Warrior.Wildcard
+                    trait is Wildcard
                     ? __instance.ChooseRandomDrugDealerStatusEffect()
 					: trait.DrugEffect;
 				

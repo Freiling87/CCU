@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Behavior;
+using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Hack;
 using CCU.Traits.Merchant_Type;
@@ -149,7 +150,7 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			#region Active
+			#region Behavior
 			if (__instance.GetTraits<T_Behavior>().Where(c => c.LosCheck).Any())
 			{
 				// Thieves have their LOScheck set to 50% in vanilla
@@ -163,13 +164,17 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<Seek_and_Destroy>())
 				__instance.killerRobot = true;
 			#endregion
+			#region Combat
+			if (__instance.HasTrait<Backed_Up>())
+				__instance.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie = false;
+			#endregion
+			#region Drug Warrior
+			if (__instance.HasTrait<T_DrugWarrior>())
+				__instance.combat.canTakeDrugs = true;
+			#endregion
 			#region Interaction
 			if (__instance.HasTrait<T_Hack>())
 				__instance.hackable = true;
-			#endregion
-			#region Combat
-			if (__instance.HasTrait<T_DrugWarrior>())
-				__instance.combat.canTakeDrugs = true;
 			#endregion
 			#region Merchant
 			if (__instance.GetTraits<T_MerchantType>().Any())
@@ -226,6 +231,7 @@ namespace CCU.Patches.Agents
 
 	public class P_Agent_Hook : HookBase<PlayfieldObject>
 	{
+		public bool HasUsedWalkieTalkie;
 		public int SuicideVestTimer;
 
 		protected override void Initialize() { }

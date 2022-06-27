@@ -140,6 +140,7 @@
     <Compile Include="Patches\Combat\P_Combat.cs" />
     <Compile Include="Patches\Combat\P_Explosion.cs" />
     <Compile Include="Patches\Combat\P_Melee.cs" />
+    <Compile Include="Patches\Goals\P_GoalBattle.cs" />
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
+    <Compile Include="Traits\Combat\Backed_Up.cs" />
     <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />
     <Compile Include="Traits\Cost Currency\Shylock.cs" />
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />

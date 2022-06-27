@@ -5,7 +5,6 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-
 #	CT	General
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
@@ -27,7 +26,6 @@ Not so sure about the utility of this. I don't think players should need more th
 #		C	Systems
 ##			C	Legacy Updater
 ###				C	Trait Updater
-####				C	Relationship Factions
 ####				√	Designer Side
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
@@ -140,7 +138,7 @@ New
 New
 ###			C	Skin Color
 New
-##		√C	Behavior
+##		C	Behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
 ###			C	Clean Trash
@@ -158,12 +156,7 @@ Agent.firefighter
 Agent.fightsFires
 ###			C	First Aider
 Revives Aligned if they can within a certain timer
-
 ###			C	Grab Everything
-New
-###			C	Grab Food
-New
-###			C	Guard Door
 New
 ###			C	Heister
 Picks a chest on the level, and tries to fight their way to loot it. 
@@ -212,7 +205,11 @@ New
 Destroys public objects or Windows on a whim
 ###			√	Eat Corpse
 Complete
+###			√	Grab Alcohol
+Complete
 ###			√	Grab Drugs
+Complete
+###			√	Grab Food
 Complete
 ###			√	Grab Money
 Complete
@@ -228,14 +225,16 @@ Might need to limit this to a single flag, since having multiple true at the sam
 New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
-##		√C	Combat
-###			C	Lockdowner (R.I.P.)
-Apparently Lockdown walls are broken in custom levels.
-###			C	Call for Backup
-Calls cops on you when going hostile
-Ensure this applies to all enforcers, not just cops
-###			C	Gloater
+##		T	Combat
+###			T	Backed Up
+P_GoalBattle.
+	Process_StartCombatActions
+	DoCombatActions
+###			H	Gloater
 Will dance on corpses and make loud noise if they win a combat
+This one's kinda hard... Probably on hold for now.
+###			H	Lockdowner
+Apparently Lockdown walls are broken in custom levels.
 ###			√	Coward
 Complete
 ###			√	Fearless
