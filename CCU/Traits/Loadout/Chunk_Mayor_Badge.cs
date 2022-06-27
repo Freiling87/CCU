@@ -2,20 +2,20 @@
 
 namespace CCU.Traits.Loadout
 {
-    public class Manager_Key : T_Loadout
+    public class Chunk_Mayor_Badge : T_Loadout
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Manager_Key>()
+			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Mayor_Badge>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Key Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
+					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Badge Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
 					
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Loadout_ChunkKey,
+					[LanguageCode.English] = DisplayName(typeof(Chunk_Mayor_Badge)),
 					
 				})
 				.WithUnlock(new TraitUnlock

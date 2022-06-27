@@ -21,7 +21,7 @@ namespace CCU.Traits.Interaction
                     "- Arena\n" +
                     "- Deportation Center\n" +
                     "- Hotel *\n\n" +
-                    "*<color=red>Requires</color>: {0}", ShortNameDocumentationOnly(typeof(Manager_Key))),
+                    "*<color=red>Requires</color>: {0}", ShortNameDocumentationOnly(typeof(Chunk_Key))),
                     
                 })
                 .WithName(new CustomNameInfo

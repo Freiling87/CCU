@@ -1,41 +1,46 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SORCE.Localization;
 
 namespace CCU
 {
-	public static class CCUNames
+    public static class CCUNames
 	{
 		[RLSetup]
 		public static void InitializeNames()
 		{
-			CustomName jobDisarmTrap = RogueLibs.CreateCustomName(CJob.DisarmTrap, NameTypes.Interface, new CustomNameInfo
+			string t;
+			//	Button Text
+			t = NameTypes.Interface;
+			RogueLibs.CreateCustomName(CButtonText.HirePermanentExpert, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Hire Permanently",
+			});
+			RogueLibs.CreateCustomName(CButtonText.HirePermanentMuscle, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Hire Permanently",
+			});
+
+			//	Jobs
+			t = NameTypes.Interface;
+			RogueLibs.CreateCustomName(CJob.DisarmTrap, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Disarm Trap",
-				[LanguageCode.Russian] = "",
 			});
-			CustomName jobPickpocket = RogueLibs.CreateCustomName(CJob.Pickpocket, NameTypes.Interface, new CustomNameInfo
+			RogueLibs.CreateCustomName(CJob.Pickpocket, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Pickpocket",
-				[LanguageCode.Russian] = "",
 			});
-			CustomName jobPoison = RogueLibs.CreateCustomName(CJob.Poison, NameTypes.Interface, new CustomNameInfo
+			RogueLibs.CreateCustomName(CJob.Poison, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Poison",
-				[LanguageCode.Russian] = "",
 			});
-			CustomName jobSafecrack = RogueLibs.CreateCustomName(CJob.SafecrackSafe, NameTypes.Interface, new CustomNameInfo
+			RogueLibs.CreateCustomName(CJob.SafecrackSafe, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Safecrack",
-				[LanguageCode.Russian] = "",
 			});
-			CustomName jobTamper = RogueLibs.CreateCustomName(CJob.TamperSomething, NameTypes.Interface, new CustomNameInfo
+			RogueLibs.CreateCustomName(CJob.TamperSomething, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Tamper",
-				[LanguageCode.Russian] = "",
 			});
 		}
 	}

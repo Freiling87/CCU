@@ -1,12 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
+using System;
 
 namespace CCU.Challenges
 {
-    class C_CCU
+    public abstract class C_CCU : MutatorUnlock
     {
+        public C_CCU() : base() { }
+
+        public static UnlockBuilder PostProcess
+        {
+            // Copied from Trait hierarchy.
+
+            set
+            {
+                //value.Unlock.Unlock.cantLose = true;
+                //value.Unlock.Unlock.cantSwap = true;
+                //value.Unlock.Unlock.upgrade = null;
+            }
+        }
+
+        public static string DisplayName(Type type, string custom = null) =>
+            "[CCU] " +
+            (type.Namespace).Split('.')[2].Replace('_', ' ') +
+            " - " +
+            (custom ?? (type.Name).Replace('_', ' '));
+
+        public static string ShortNameDocumentationOnly(Type type) =>
+            (type.Namespace).Split('.')[2].Replace('_', ' ') +
+            " - " +
+            (type.Name).Replace('_', ' ');
+
+        public string TextName => DisplayName(GetType());
     }
 }
