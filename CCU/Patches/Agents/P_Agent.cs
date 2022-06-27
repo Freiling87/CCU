@@ -153,12 +153,14 @@ namespace CCU.Patches.Agents
 			#region Behavior
 			if (__instance.GetTraits<T_Behavior>().Where(c => c.LosCheck).Any())
 			{
-				// Thieves have their LOScheck set to 50% in vanilla
-				if (__instance.HasTrait<Pick_Pockets>() && GC.percentChance(50))
-					return;
-
-				// All others excluded
-				__instance.losCheckAtIntervals = true;
+				if (__instance.HasTrait<Pick_Pockets>())
+                {
+					// Thieves have their LOScheck set to 50% in vanilla
+					if (GC.percentChance(50))
+						__instance.losCheckAtIntervals = true;
+				}
+				else 
+					__instance.losCheckAtIntervals = true;
 			}
 
 			if (__instance.HasTrait<Seek_and_Destroy>())
