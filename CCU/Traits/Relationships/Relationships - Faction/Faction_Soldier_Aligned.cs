@@ -15,12 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned to Soldiers and anyone else with this trait. They are hostile to Cannibals and anyone with Faction Cannibal Aligned.",
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Faction_Soldier_Aligned)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

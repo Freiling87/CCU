@@ -16,12 +16,12 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character dies doing what they loved: Secreting toxic slime.\n\nR.I.P."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Slime)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

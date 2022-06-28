@@ -12,12 +12,12 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells traps."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Home_Fortress_Outlet)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

@@ -18,12 +18,12 @@ namespace CCU.Traits.Interaction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if bribed with alcohol."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Bribe_for_Entry_Alcohol),("Bribe for Entry (Alcohol)")),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

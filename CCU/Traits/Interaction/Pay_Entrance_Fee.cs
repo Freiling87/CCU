@@ -18,12 +18,12 @@ namespace CCU.Traits.Interaction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if paid with cash."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Pay_Entrance_Fee)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

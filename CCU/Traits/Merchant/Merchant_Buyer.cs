@@ -13,12 +13,12 @@ namespace CCU.Traits.Merchant
                 {
                     [LanguageCode.English] = String.Format("This character will buy items from the player.\n\n" +
                     "<color=red>Requires:</color> Any Merchant Type trait."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Buyer)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

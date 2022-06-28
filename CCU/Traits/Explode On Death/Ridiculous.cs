@@ -16,12 +16,12 @@ namespace CCU.Traits.Explode_On_Death
                 {
                     [LanguageCode.English] = String.Format("On death, this character explodes. Over 125 Slaves' worth, a fantastic value!\n\n" + 
                     "This is the explosion from the Hidden Bombs disaster. It means instant death for the player."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Ridiculous)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

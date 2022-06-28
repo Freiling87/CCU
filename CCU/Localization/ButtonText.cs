@@ -1,5 +1,14 @@
 ﻿namespace SORCE.Localization
 {
+	public static class CButtonText
+    {
+		public const string
+			HirePermanentExpert = "AssistMe_Permanent",
+			HirePermanentMuscle = "HireAsProtection_Permanent",
+
+			z = "";
+    }
+
 	public static class VButtonText
 	{
 		public const string

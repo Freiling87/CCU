@@ -19,12 +19,12 @@ namespace CCU.Traits.Interaction
                 {
                     [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" + 
                     "Note: If you want them to lend money as well, use {0} too.", ShortNameDocumentationOnly(typeof(Borrow_Money))),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Pay_Debt)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

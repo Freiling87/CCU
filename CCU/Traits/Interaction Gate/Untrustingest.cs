@@ -18,12 +18,12 @@ namespace CCU.Traits.Interaction_Gate
                     "- Leave Weapons Behind\n" +
                     "- Offer Motivation\n" +
                     "- Pay Debt"),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Untrustingest)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

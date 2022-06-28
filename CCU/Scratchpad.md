@@ -5,6 +5,9 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
+#		Changelog
+- **Bugfixes**
+  - Fixed Pick Pockets occasionally cancelling the setup of various interaction and merchant traits
 #	C	0.1.1 Bug Reports
 CL - Haven't had time to test everything yet but it looks like most of the issues I've previously seen with CCU (and roguelibs, bonus yay!) have been fixed, so I'll definitely try to wrap up some of my half-finished stuff this week now that it's easier to playtest. Two fairly big bugs still seem to exist though, first is that shopkeepers with honor among thieves still seem to have a random chance of not actually having their shop (although at least it seems like they no longer offer their shop to non-thieves, based on limited tested though so it might just have been bad luck).
 CL - The other is that the aligned in-fighting crash still exists, managed to reproduce it immediately and caught this shot about a frame before the crash so you know exactly what the situation looked like. In this case I'm pretty sure the thieves were all trying to rob me which is at least a huge improvement over last time if they no longer can choose to pickpocket a friend, that will make it very unlikely for people to randomly get this bug (since you'd have to steer them into a friend like I did, pretty hard to do on accident) but it's still worth eventually fixing since a crash is a crash.
@@ -14,6 +17,21 @@ CL - Also not a bug but a weird immersion break working as intended, custom gori
 ###			C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
 #	CT	General
+##		T	Pick Pockets prevents shop generation
+Attempt: Removed erroneous early return in P_Agent.SetupAgentStats_Postfix
+##		C	Explosion Refactor
+Current Setup:
+	Explode on Death
+Proposal:
+	Explosion Fuse
+		Short
+		Long
+		None
+	Explosion Type
+	Explosion Trigger
+		Damage
+		Death
+		Combat
 ##		C	Relationship Refactor
 ###			C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing
@@ -31,10 +49,13 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#		C	Systems
-##			C	Legacy Updater
-###				C	Trait Updater
-####				C	Relationship Factions
+#		T	Systems
+##			T	Legacy Updater
+###				T!	Challenge
+Homesickness Mandatory & Disabled
+####				T	Test Mutator List in editor
+Had to tweak it
+###				√	Trait
 ####				√	Designer Side
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
@@ -147,17 +168,13 @@ New
 New
 ###			C	Skin Color
 New
-##		√C	Behavior
+##		C	Behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
 ###			C	Clean Trash
 New
-###			C	Confiscate Contraband
-Should also spawn Confiscation Center (See SORCE)
 ###			C	Curious
 Investigate noises like cop & shopkeeper
-###			C	Deport Non-Citizens
-Should also spawn Deportation Center (See SORCE)
 ###			C	Fucking Salesman
 Knocks on non-restricted locked doors, moves on after a pause
 ###			C	Fight Fires
@@ -165,12 +182,7 @@ Agent.firefighter
 Agent.fightsFires
 ###			C	First Aider
 Revives Aligned if they can within a certain timer
-
 ###			C	Grab Everything
-New
-###			C	Grab Food
-New
-###			C	Guard Door
 New
 ###			C	Heister
 Picks a chest on the level, and tries to fight their way to loot it. 
@@ -180,10 +192,14 @@ Maybe just implement the whole Hey, You! overhaul here
 ###			C	Hog Turntables
 New
 Allow paid Musician behavior
+###			C	La Migra
+Should also spawn Deportation Center (See SORCE)
 ###			C	Mutinous
 Agent.mutinous
 ###			C	Needful
 Will seek out Musician need objects and operate them
+###			C	Non-Enforcer Enforcer
+See if there's any use for Agents who enforce laws but aren't agent.enforcer
 ###			C	Paranoid
 Constant search state
 ###			C	SecretHate
@@ -199,6 +215,8 @@ No need for "Roaming Gang" Trait itself
 Will default to finding a bed to sleep in, returning even after combat.
 ###			C	Slowpoke
 Takes a longer time to react to everything
+###			C	Stop & Frisk
+Should also spawn Confiscation Center (See SORCE)
 ###			C	Suicdal
 Walks into hazards, only those they can see
 ###			C	Tattle (Upper Cruster)
@@ -219,7 +237,11 @@ New
 Destroys public objects or Windows on a whim
 ###			√	Eat Corpse
 Complete
+###			√	Grab Alcohol
+Complete
 ###			√	Grab Drugs
+Complete
+###			√	Grab Food
 Complete
 ###			√	Grab Money
 Complete
@@ -235,14 +257,22 @@ Might need to limit this to a single flag, since having multiple true at the sam
 New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
-##		√C	Combat
-###			C	Lockdowner (R.I.P.)
-Apparently Lockdown walls are broken in custom levels.
-###			C	Call for Backup
-Calls cops on you when going hostile
-Ensure this applies to all enforcers, not just cops
-###			C	Gloater
+##		T	Combat
+###			T	Backed Up
+P_GoalBattle.
+	Process_StartCombatActions
+	DoCombatActions
+###			T	Nth Wind
+Refreshes Drug Warrior & Backed Up bools after combat ends.
+P_GoalCombatEngage.
+	Terminate_Postfix
+P_StatusEffects.
+	Resurrect
+###			H	Gloater
 Will dance on corpses and make loud noise if they win a combat
+This one's kinda hard... Probably on hold for now.
+###			H	Lockdowner
+Apparently Lockdown walls are broken in custom levels.
 ###			√	Coward
 Complete
 ###			√	Fearless
@@ -268,6 +298,9 @@ Complete
 ###			√	Zero
 Complete
 ##		√C	Drug Warrior
+###			C	Suppress Syringe Text/Audio
+The `-Syringe` text is just clutter
+The sound is sometimes not applicable lorewise
 ###			C	Extendo-Wheels
 Gain Roller Skates
 ###			C	Suicide Bomber
@@ -471,20 +504,24 @@ Complete
 ###			C	All wall-type gibs
 Include sound effect where applicable, like with glass
 ###			C	Ungibbable
-##		H	Hire Duration
+##		C	Hire Damage Tolerance
+###			C	Anyweather
+Hiree will leave if a Hostile sees them
 ###			C	Fairweather
 Hiree will leave if they're damaged in combat
 "I didn't sign up for this! You're nuts!"
-###			C	Faithful
-Hiree will never "Not feel too good" and quit.
-###			C	Homesickness Always
+###			C	Foulweather
+Hiree will never leave due to damage
+##		H	Hire Duration
+###			C	Homesick 
 Automatic Homesickness Killer
-###			C	Homesickness Never
+###			C	Homesuck
 Overrides Homesickness Killer
 ###			C	Permanent Hire
 ~8x normal hire price
-Does not affect damage threshold
-Removes homesickness killer, and allows infinite uses of skills.
+Allows infinite uses of skills.
+When "Not feeling too hot," they'll flee combat but not leave the party, if that's possible.
+P_AgentInteractions.
 ###			C	Permanent Hire Only
 As above, but removes the single-use hire option.
 ###			C	Start as Hired
@@ -1008,17 +1045,7 @@ Complete
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		C	Mutators
-Focus on Traits for this version.
-##		C	Requested features
-- Random Disaster (Disasters Every Level not in editor)
-- No Trait-Up
-  - Allows designer control over character progression
 ##		C	00 Mutator List Population
-###			C	Level Editor Mutator List
-- I think this has since been addressed in Roguelibs, as of 3.5.0b
-- Vanilla replacement worked, pending custom content
-- [Error  : Unity Log] Coroutine 'SetScrollbarPlacement' couldn't be started!
-  - This didn't affect anything but I'd like it resolved
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
 ###			√	General Mutator List
@@ -1065,9 +1092,8 @@ Gate level access
 ###			C	Traits for Level Branching
 ##		C	Disasters
 ###			C	Random Disaster
-Disasters Every Level doesn't work?
+Random Disasters and/or Disasters Every Level aren't offered in the editor
 ##		T	Followers
-###				00	Add conflicts
 ###			C	Homesickness Disabled
 ####			C	Set to Aligned
 ###			T	Homesickness Mandatory
@@ -1079,8 +1105,12 @@ You will need to eliminate spontaneous hostiles for this to work, though.
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 ###			C	No Minimap
+##		C	Presets
+Curated configurations of challenges that can serve as a shortcut.
+E.g., "Interlude:" No funny business, pause big quests, etc.
 ##		C	Progression
-###			C	Delay Level-Up
+###			C	Delay Trait Gain
+Count and put off trait choices until this challenge isn't present
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
@@ -1097,7 +1127,7 @@ Main quest rewards are multiplied by 10
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		C	Item Groups
-Next release
+wut
 #		C	Object Additions
 ##		H	Custom Object variables
 ###			C	Readables

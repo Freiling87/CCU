@@ -115,23 +115,23 @@
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
     <Compile Include="Challenges\C_CCU.cs" />
+    <Compile Include="Challenges\Followers\C_Followers.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
-    <Compile Include="Localization\Legacy.cs" />
+    <Compile Include="Localization\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
-    <Compile Include="Localization\VDetermineMoneyCost.cs" />
-    <Compile Include="Localization\LocalizationTools.cs" />
-    <Compile Include="Localization\VButtonText.cs" />
+    <Compile Include="Localization\DetermineMoneyCostText.cs" />
+    <Compile Include="Localization\ButtonText.cs" />
     <Compile Include="Localization\VExplosionType.cs" />
     <Compile Include="Localization\VItemCategory.cs" />
     <Compile Include="Localization\VRelationship.cs" />
-    <Compile Include="Localization\CStatusEffect.cs" />
+    <Compile Include="Localization\StatusEffectText.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
     <Compile Include="Challenges\Branching\C_Branching.cs" />
     <Compile Include="Challenges\MutatorManager.cs" />
-    <Compile Include="Challenges\Followers\HomesicknessDisabled.cs" />
-    <Compile Include="Challenges\Followers\HomesicknessMandatory.cs" />
+    <Compile Include="Challenges\Followers\Homesickness_Disabled.cs" />
+    <Compile Include="Challenges\Followers\Homesickness_Mandatory.cs" />
     <Compile Include="Patches\Agents\P_Agent.cs" />
     <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
@@ -140,7 +140,9 @@
     <Compile Include="Patches\Combat\P_Combat.cs" />
     <Compile Include="Patches\Combat\P_Explosion.cs" />
     <Compile Include="Patches\Combat\P_Melee.cs" />
+    <Compile Include="Patches\Goals\P_GoalBattle.cs" />
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
+    <Compile Include="Patches\Goals\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
@@ -174,6 +176,8 @@
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
+    <Compile Include="Traits\Combat\Nth_Wind.cs" />
+    <Compile Include="Traits\Combat\Backed_Up.cs" />
     <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />
     <Compile Include="Traits\Cost Currency\Shylock.cs" />
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
@@ -232,8 +236,10 @@
     <Compile Include="Traits\Gib Type\Normal_Gibs.cs" />
     <Compile Include="Traits\Gib Type\T_GibType.cs" />
     <Compile Include="Traits\Hack\Explode.cs" />
+    <Compile Include="Traits\Hire Duration\Join_on_Sight.cs" />
     <Compile Include="Traits\Hire Duration\Permanent_Hire_Only.cs" />
     <Compile Include="Traits\Hire Duration\Permanent_Hire.cs" />
+    <Compile Include="Traits\Hire Duration\Join_on_Release.cs" />
     <Compile Include="Traits\Hire Duration\T_HireDuration.cs" />
     <Compile Include="Traits\Hire Type\Muscle.cs" />
     <Compile Include="Traits\Hire Type\Intruder.cs" />
@@ -271,7 +277,7 @@
     <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
-    <Compile Include="Traits\Loadout\Manager_Mayor_Badge.cs" />
+    <Compile Include="Traits\Loadout\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />
     <Compile Include="Traits\MapMarker\T_MapMarker.cs" />
     <Compile Include="Traits\Merchant Type\Gun_Dealer_Heavy.cs" />
@@ -384,8 +390,8 @@
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Traits\Loadout\Manager_Key.cs" />
-    <Compile Include="Traits\Loadout\Manager_Safe_Combo.cs" />
+    <Compile Include="Traits\Loadout\Chunk_Key.cs" />
+    <Compile Include="Traits\Loadout\Chunk_Safe_Combo.cs" />
     <Compile Include="Traits\Loadout\Guns_Common.cs" />
     <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
     <Compile Include="Traits\Bodyguarded\Bodyguarded_Pilot.cs" />
@@ -413,13 +419,11 @@
     <None Include="Documentation\BestPractices.md" />
     <None Include="Documentation\ChangeLog.md" />
     <None Include="Documentation\Installation.md" />
+    <None Include="Documentation\Challenges.md" />
     <None Include="Documentation\NPCUtilities.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Challenges\Gameplay\" />
-    <Folder Include="Challenges\Interface\" />
-    <Folder Include="Challenges\Utility\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
@@ -430,7 +434,7 @@
     <Content Include="Images\CCU_16x16.png" />
     <Content Include="Images\CCU_64x64.png" />
     <Content Include="Images\CCU_Large.png" />
-    <Content Include="Localization\CDialogueConfig.xml" />
+    <Content Include="Localization\Config System\CDialogueConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

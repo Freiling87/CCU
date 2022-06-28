@@ -11,12 +11,12 @@ namespace CCU.Traits.Cost_Currency
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to Alcohol.",
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Booze_Bargain)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

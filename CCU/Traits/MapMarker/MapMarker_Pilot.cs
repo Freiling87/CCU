@@ -11,12 +11,12 @@ namespace CCU.Traits.Map_Marker
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character should spawn with a Map Marker. Let's see what happens!",
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DisplayName(typeof(MapMarker_Pilot)),
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithUnlock(new TraitUnlock
 				{

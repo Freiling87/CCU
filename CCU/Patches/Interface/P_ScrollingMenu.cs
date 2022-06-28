@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Challenges.Followers;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
@@ -20,7 +21,8 @@ namespace CCU.Patches.Interface
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(ScrollingMenu.CanHaveTrait), argumentTypes: new[] { typeof(Unlock) })]
 		public static bool canHaveTrait_Prefix(Unlock myUnlock, ref bool __result)
 		{
-			if ((GC.challenges.Contains(CMutators.HomesicknessDisabled) || GC.challenges.Contains(CMutators.HomesicknessMandatory)) && myUnlock.unlockName == VanillaTraits.HomesicknessKiller)
+			if ((GC.challenges.Contains(nameof(Homesickness_Disabled)) || GC.challenges.Contains(nameof(Homesickness_Mandatory))) && 
+				myUnlock.unlockName == VanillaTraits.HomesicknessKiller)
 			{
 				__result = false;
 				return false;

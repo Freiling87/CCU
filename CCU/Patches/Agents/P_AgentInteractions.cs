@@ -4,6 +4,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Localization;
 using CCU.Traits.Behavior;
 using CCU.Traits.Cost_Scale;
+using CCU.Traits.Hire_Duration;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
@@ -15,7 +16,6 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
 using SORCE.Localization;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -76,7 +76,6 @@ namespace CCU.Patches.Agents
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
 		public static void AddCustomAgentButtons(Agent agent)
 		{
 			AgentInteractions agentInteractions = agent.agentInteractions;
@@ -122,10 +121,23 @@ namespace CCU.Patches.Agents
 							? VDetermineMoneyCost.Hire_Soldier
 							: VDetermineMoneyCost.Hire_Hacker;
 
-						agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost((string)cost));
+						if (agent.HasTrait<Permanent_Hire_Only>())
+							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(cost + "_Permanent"));
+						else if (agent.HasTrait<Permanent_Hire>())
+                        {
+							agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost(cost));
+							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(cost + "_Permanent"));
 
-						if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
-							agentInteractions.AddButton(hireButtonText, 6666);
+							if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
+								agentInteractions.AddButton(hireButtonText, 6666);
+						}
+						else // Vanilla Hire
+                        {
+							agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost(cost));
+							
+							if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
+								agentInteractions.AddButton(hireButtonText, 6666);
+						}
 					}
 				}
 				else if (!agent.oma.cantDoMoreTasks) // Ordering already-hired Agent
@@ -415,43 +427,8 @@ namespace CCU.Patches.Agents
 			}
 		}
 
-		public static void SafecrackSafe(Agent agent, Agent interactingAgent, PlayfieldObject mySafe)
-		{
-			if (GC.serverPlayer)
-			{
-				agent.job = CJob.SafecrackSafe;
-				agent.jobCode = jobType.GetSupplies; // TODO
-				agent.StartCoroutine(agent.ChangeJobBig(""));
-				agent.assignedPos = mySafe.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
-				agent.assignedObject = mySafe.playfieldObjectReal;
-				agent.assignedAgent = null;
-				GC.audioHandler.Play(agent, "AgentOK");
-
-				return;
-			}
-
-			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.SafecrackSafe, mySafe.objectNetID);
-		}
-
-		public static void TamperSomething(Agent agent, Agent interactingAgent, PlayfieldObject target)
-		{
-			if (GC.serverPlayer)
-			{
-				agent.job = CJob.SafecrackSafe;
-				agent.jobCode = jobType.GetSupplies; // TODO
-				agent.StartCoroutine(agent.ChangeJobBig(""));
-				agent.assignedPos = target.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
-				agent.assignedObject = target.playfieldObjectReal;
-				agent.assignedAgent = null;
-				GC.audioHandler.Play(agent, "AgentOK");
-
-				return;
-			}
-
-			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.TamperSomething, target.objectNetID);
-		}
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.FinishedOperating), argumentTypes: new[] { typeof(Agent) })]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.FinishedOperating), 
+			argumentTypes: new[] { typeof(Agent) })]
 		private static IEnumerable<CodeInstruction> FinishedOperating_LimitHackToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -473,9 +450,36 @@ namespace CCU.Patches.Agents
 			return instructions;
 		}
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.LetGo), 
+			argumentTypes: new[] { typeof(Agent), typeof(Agent) })]
+		public static bool LetGo_Prefix(Agent agent, Agent interactingAgent)
+        {
+			if (agent.GetHook<P_Agent_Hook>().PermanentHire)
+				return false;
+
+			return true;
+        }
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.PressedButton), 
+			argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(string), typeof(int) })]
+		public static bool PressedButton_Prefix(Agent agent, Agent interactingAgent, string buttonText, int buttonPrice)
+        {
+			switch (buttonText)
+            {
+				case CButtonText.HirePermanentExpert:
+					HirePermanently(agent, interactingAgent, buttonPrice);
+					return false;
+				case CButtonText.HirePermanentMuscle:
+					HirePermanently(agent, interactingAgent, buttonPrice);
+					return false;
+				default:
+					return true;
+            }
+        }
+
 		[HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), 
 			argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
-		private static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, string combineType, string useOnType, ref bool __result)
+		public static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, string combineType, string useOnType, ref bool __result)
         {
 			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
 			{
@@ -507,6 +511,86 @@ namespace CCU.Patches.Agents
 			}
 
 			return true;
+		}
+
+		public static void SafecrackSafe(Agent agent, Agent interactingAgent, PlayfieldObject mySafe)
+		{
+			if (GC.serverPlayer)
+			{
+				agent.job = CJob.SafecrackSafe;
+				agent.jobCode = jobType.GetSupplies; // TODO
+				agent.StartCoroutine(agent.ChangeJobBig(""));
+				agent.assignedPos = mySafe.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
+				agent.assignedObject = mySafe.playfieldObjectReal;
+				agent.assignedAgent = null;
+				GC.audioHandler.Play(agent, "AgentOK");
+
+				return;
+			}
+
+			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.SafecrackSafe, mySafe.objectNetID);
+		}
+		public static void TamperSomething(Agent agent, Agent interactingAgent, PlayfieldObject target)
+		{
+			if (GC.serverPlayer)
+			{
+				agent.job = CJob.SafecrackSafe;
+				agent.jobCode = jobType.GetSupplies; // TODO
+				agent.StartCoroutine(agent.ChangeJobBig(""));
+				agent.assignedPos = target.GetComponent<ObjectReal>().FindDoorObjectAgentPos();
+				agent.assignedObject = target.playfieldObjectReal;
+				agent.assignedAgent = null;
+				GC.audioHandler.Play(agent, "AgentOK");
+
+				return;
+			}
+
+			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.TamperSomething, target.objectNetID);
+		}
+		public static void HirePermanently(Agent agent, Agent interactingAgent, int buttonPrice)
+		{
+			int num = agent.FindNumFollowing(interactingAgent);
+			bool canHire = false;
+
+			if ((interactingAgent.statusEffects.hasTrait(VanillaTraits.TeamBuildingExpert) && num < 3) ||
+				(interactingAgent.statusEffects.hasTrait(VanillaTraits.ArmyofFive) && num < 5))
+				canHire = true;
+			else if (interactingAgent.statusEffects.hasTrait(VanillaTraits.Malodorous) &&
+				!interactingAgent.statusEffects.hasTrait(VanillaTraits.Charismatic) &&
+				!interactingAgent.statusEffects.hasTrait("Likeable2") &&
+				!interactingAgent.statusEffects.hasTrait("NiceSmelling"))
+			{
+				agent.SayDialogue("WontJoinA");
+				agent.StopInteraction();
+			}
+			else if (interactingAgent.statusEffects.hasTrait(VanillaTraits.Antisocial))
+			{
+				agent.SayDialogue("WontJoinA");
+				agent.StopInteraction();
+			}
+			else if (num < 1)
+				canHire = true;
+			else
+			{
+				agent.SayDialogue("WontJoinB");
+				agent.StopInteraction();
+			}
+
+			if (!canHire)
+				return;
+
+			if (!agent.moneySuccess(buttonPrice))
+			{
+				agent.StopInteraction();
+				return;
+			}
+
+			agent.agentInteractions.AssistMe(agent, interactingAgent);
+			agent.SetChangeElectionPoints(interactingAgent);
+			agent.StopInteraction();
+			agent.GetHook<P_Agent_Hook>().PermanentHire = true;
+
+			return;
 		}
 	}
 

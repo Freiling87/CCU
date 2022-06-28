@@ -28,5 +28,11 @@ namespace CCU.Patches.Goals
                 __instance.agent.CauseLockdown();
             }
         }
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalCombatEngage.Terminate), argumentTypes: new Type[0] { })]
+        public static void Terminate_Postfix(GoalCombatEngage __instance)
+        {
+            Nth_Wind.ResetFlags(__instance.agent);
+        }
     }
 }

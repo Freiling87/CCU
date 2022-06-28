@@ -17,12 +17,12 @@ namespace CCU.Traits.Behavior
                 {
                     [LanguageCode.English] = String.Format("This character will not path around Crushers, Fire Spewers, and Sawblades.\n\n" +
                         "Working on the other traps. Maybe."),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(AccidentProne), "Accident-Prone"),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

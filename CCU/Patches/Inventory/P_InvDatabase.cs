@@ -94,7 +94,7 @@ namespace CCU.Patches.Inventory
 			if (agent.agentName != VanillaAgents.CustomCharacter)
 				return true;
 
-			if (agent.HasTrait<Manager_Key>() || agent.HasTrait<Manager_Safe_Combo>())
+			if (agent.HasTrait<Chunk_Key>() || agent.HasTrait<Chunk_Safe_Combo>())
 			{
 				for (int i = 0; i < GC.objectRealList.Count; i++)
 				{
@@ -102,7 +102,7 @@ namespace CCU.Patches.Inventory
 
 					if ((GC.levelShape == 0 && (objectReal.owner == agent.ownerID || agent.startingChunkRealDescription == VChunkType.Hotel || agent.ownerID == 99) && objectReal.startingChunk == agent.startingChunk) || (GC.levelShape == 2 && objectReal.startingSector == agent.startingSector))
 					{
-						if (objectReal.objectName == vObject.Door && objectReal.prisonObject == 0 && agent.HasTrait<Manager_Key>() && !agent.inventory.HasItem(vItem.Key))
+						if (objectReal.objectName == vObject.Door && objectReal.prisonObject == 0 && agent.HasTrait<Chunk_Key>() && !agent.inventory.HasItem(vItem.Key))
 						{
 							Door door = (Door)objectReal;
 
@@ -110,7 +110,7 @@ namespace CCU.Patches.Inventory
 							{
 								Agent prevKeyHolder = door.distributedKey;
 
-								if (!prevKeyHolder.HasTrait<Manager_Key>())
+								if (!prevKeyHolder.HasTrait<Chunk_Key>())
 								{
 									InvItem key = prevKeyHolder.inventory.FindItem(vItem.Key);
 									prevKeyHolder.inventory.SubtractFromItemCount(key, 1);
@@ -136,7 +136,7 @@ namespace CCU.Patches.Inventory
 								agent.oma.hasKey = true;
 							}
 						}
-						else if (objectReal.objectName == vObject.Safe && agent.HasTrait<Manager_Safe_Combo>() && !agent.inventory.HasItem(vItem.SafeCombination))
+						else if (objectReal.objectName == vObject.Safe && agent.HasTrait<Chunk_Safe_Combo>() && !agent.inventory.HasItem(vItem.SafeCombination))
 						{
 							Safe safe = (Safe)objectReal;
 
@@ -144,7 +144,7 @@ namespace CCU.Patches.Inventory
 							{
 								Agent prevKeyHolder = safe.distributedKey;
 
-								if (!prevKeyHolder.HasTrait<Manager_Safe_Combo>())
+								if (!prevKeyHolder.HasTrait<Chunk_Safe_Combo>())
 								{
 									InvItem safeCombo = prevKeyHolder.inventory.FindItem(vItem.SafeCombination);
 									prevKeyHolder.inventory.SubtractFromItemCount(safeCombo, 1);
@@ -169,7 +169,7 @@ namespace CCU.Patches.Inventory
 				}
 			}
 
-			if (__instance.agent.HasTrait<Manager_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == VChunkType.MayorOffice)
+			if (__instance.agent.HasTrait<Chunk_Mayor_Badge>() && __instance.agent.startingChunkRealDescription == VChunkType.MayorOffice)
 			{
 				__instance.AddItem(vItem.MayorsMansionGuestBadge, 1);
 				__instance.agent.oma.hasMayorBadge = true;

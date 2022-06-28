@@ -12,12 +12,12 @@ namespace CCU.Traits.Rel_General
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is always Neutral, like Butler Bot. What a lonely life.",
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DisplayName(typeof(Relationless)),
-                    [LanguageCode.Russian] = "",
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

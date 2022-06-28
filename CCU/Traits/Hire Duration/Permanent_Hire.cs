@@ -1,28 +1,26 @@
-﻿using BepInEx.Logging;
-using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Hire_Duration
 {
     public class Permanent_Hire : T_HireDuration
     {
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Permanent_Hire>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character can be hired permanently at 8x the normal rate.",
-                    [LanguageCode.Russian] = "",
+                    [LanguageCode.English] = 
+                        "Adds a 'Hire Permanently' interaction option at 8x the normal rate.\n" + 
+                            "- Permanent Hires can use their Expert ability unlimited times.\n" + 
+                            "- At low health they will flee but not leave your party.\n\n" + 
+                        "<color=red>Requires:</color> Any Hire Type trait",
+                    
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = CTrait.Permanent,
-                    [LanguageCode.Russian] = "",
+                    [LanguageCode.English] = DisplayName(typeof(Permanent_Hire)),
+                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

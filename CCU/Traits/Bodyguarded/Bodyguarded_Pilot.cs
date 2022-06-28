@@ -13,12 +13,12 @@ namespace CCU.Traits.Bodyguarded
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character should spawn with bodyguards. Let's see what happens!",
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DisplayName(typeof(Bodyguarded_Pilot)),
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithUnlock(new TraitUnlock
 				{

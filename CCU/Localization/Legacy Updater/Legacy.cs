@@ -1,18 +1,26 @@
-﻿using CCU.Traits;
+﻿using CCU.Challenges.Followers;
 using CCU.Traits.Hire_Type;
+using CCU.Traits.Loadout;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Rel_Faction;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Localization
 {
     public static class Legacy
 	{
+		//	Use CLASS name, not display name!
+
+		public static Dictionary<string, Type> ChallengeConversions = new Dictionary<string, Type>()
+		{
+			//	0.1.2
+			//		Update to standard format, elimination of CMutator lists
+			{ "[CCU] Homesickness Disabled",        typeof(Homesickness_Disabled) },
+			{ "[CCU] Homesickness Mandatory",		typeof(Homesickness_Mandatory) },
+		};
+
 		public static Dictionary<string, Type> TraitConversions = new Dictionary<string, Type>()
 		{
 			//	0.1.1
@@ -31,6 +39,11 @@ namespace CCU.Localization
 			//		Capitalization OCD
 			{ "Hostile_To_Vampire",					typeof(Hostile_to_Vampire) },
 			{ "Hostile_To_Werewolf",				typeof(Hostile_to_Werewolf) },
+
+			//	0.1.2
+			{ "Manager_Safe_Combo",					typeof(Chunk_Safe_Combo) },
+			{ "Manager_Key",                        typeof(Chunk_Key) },
+			{ "Manager_Mayor_Badge",                typeof(Chunk_Mayor_Badge) },
 		};
 	}
 }

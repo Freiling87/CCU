@@ -2,21 +2,21 @@
 
 namespace CCU.Traits.Loadout
 {
-    public class Manager_Key : T_Loadout
+    public class Chunk_Key : T_Loadout
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Manager_Key>()
+			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Key>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Key Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
-					[LanguageCode.Russian] = "",
+					
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = CTrait.Loadout_ChunkKey,
-					[LanguageCode.Russian] = "",
+					[LanguageCode.English] = DisplayName(typeof(Chunk_Key)),
+					
 				})
 				.WithUnlock(new TraitUnlock
 				{

@@ -3,6 +3,7 @@ using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Localization;
 using CCU.Traits.Behavior;
+using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Gib_Type;
@@ -59,7 +60,8 @@ namespace CCU.Patches
 		/// <param name="traitName"></param>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddTrait), new[] { typeof(string), typeof(bool), typeof(bool) })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddTrait), 
+			argumentTypes: new[] { typeof(string), typeof(bool), typeof(bool) })]
 		public static bool AddTrait_Prefix(ref string traitName, StatusEffects __instance)
         {
 			if (Legacy.TraitConversions.ContainsKey(traitName))
@@ -68,7 +70,8 @@ namespace CCU.Patches
 			return true;
         }
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), argumentTypes: new[] { typeof(Agent) })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), 
+			argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
 		{
 			if (((__instance.agent.HasTrait<Faction_Blahd_Aligned>() || __instance.agent.HasTrait(VanillaTraits.CrepeCrusher)) && 
@@ -86,7 +89,8 @@ namespace CCU.Patches
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect), argumentTypes: new Type[0] { })]
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect), 
+			argumentTypes: new Type[0] { })]
 		public static bool ChooseRandomDrugDealerStatusEffect_Prefix(StatusEffects __instance, ref string __result)
         {
 			T_DrugWarrior trait = __instance.agent.GetTrait<T_DrugWarrior>();
@@ -94,7 +98,7 @@ namespace CCU.Patches
 			if (trait != null)
             {
 				__result =
-                    trait is Traits.Drug_Warrior.Wildcard
+                    trait is Wildcard
                     ? __instance.ChooseRandomDrugDealerStatusEffect()
 					: trait.DrugEffect;
 				
@@ -109,7 +113,8 @@ namespace CCU.Patches
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), new Type[0] { })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), 
+			argumentTypes: new Type[0] { })]
 		public static bool ExplodeAfterDeathChecks_Prefix(StatusEffects __instance)
         {
 			if (__instance.agent.HasTrait<Seek_and_Destroy>() &&
@@ -119,7 +124,8 @@ namespace CCU.Patches
 			return true;
         }
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks))]
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), 
+			argumentTypes: new Type[0] { })]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
 			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().Any())
@@ -132,7 +138,8 @@ namespace CCU.Patches
 			}
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.IsInnocent), argumentTypes: new[] { typeof(Agent) })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.IsInnocent), 
+			argumentTypes: new[] { typeof(Agent) })]
 		public static bool IsInnocent_Prefix(Agent playerGettingPoints, StatusEffects __instance, ref bool __result)
 		{
 			if (__instance.agent.HasTrait<Innocent>())
@@ -142,6 +149,13 @@ namespace CCU.Patches
 			}
 
 			return true;
+        }
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.Resurrect), 
+			argumentTypes: new[] { typeof(bool) })]
+		public static void Resurrect_Postfix(StatusEffects __instance)
+        {
+			Nth_Wind.ResetFlags(__instance.agent);
         }
 	}
 
