@@ -77,83 +77,6 @@ Pending pilot
 Pending pilot
 ###			C	Roamer Level Feature
 New
-###			C	Repair Armor
-New
-###			C	Repair Weapons
-New
-###			C	Pay respects to Faction
-Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
-"Improve Faction Relations"
-Should only allow for 1 of these to simplify algorithm
-But this means you'll need further faction traits
-###			C	Sell Intel to Faction 
-Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
-###			C	Start Election
-New
-###			C	Summon Professional
-New
-Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			C	This One's On Me
-Buy a round for a patron and anyone with the same owner ID in the chunk.
-No drink for that guy in the corner. Fuck that guy.
-###			C	Train Attributes (Split to each)
-New
-###			C	Train Traits - Defense
-New
-Sell traits for double their Upgrade Machine cost
-###			C	Train Traits - Guns
-New
-###			C	Train Traits - Melee
-New
-###			C	Train Traits - Movement
-New
-###			C	Train Traits - Social
-New
-###			C	Train Traits - Stealth
-New
-###			C	Train Traits - Trade
-New
-###			C	Visitor's Badge
-Set Bribe options on separate traits
-###			√	Administer Blood Bag
-Complete
-###			√	Borrow Money
-Complete
-###			√	Borrow Money (Moocher)
-Complete
-###			√	Bribe Cops
-Complete
-###			√	Bribe For Entry (Alcohol)
-Complete
-###			√	Buy Round
-Complete
-###			√	Give Blood
-Complete
-###			√	Heal (Player)
-Complete
-###			√	Identify
-Complete
-###			√	Influence Election
-Complete
-###			√	Leave Weapons Behind
-Complete
-###			√	Manage Chunk
-####			√	Arena
-Complete
-####			√	Deportation Center
-Complete
-####			√	Hotel
-Complete
-###			√	Offer Motivation
-Complete
-###			√	Pay Debt
-Complete
-###			√	Pay Entry Fee
-Complete
-###			√	Play Bad Music
-Complete
-###			√	Use Blood Bag
-Complete
 ##		C	Appearance
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
@@ -251,6 +174,10 @@ Complete
 Complete
 ####			√	Blinks on Death
 Complete
+##		C	Buyer Cap
+Total amount of money the trader will dispense when buying player goods
+##		C	Buyer Type
+A shorter list of broader categories than Merchant Type. Depends on how it feels while you write it.
 ##		C	Campaign Flags
 Might need to limit this to a single flag, since having multiple true at the same time would complicate things
 ###			C	If Paid then Flag A/B/C/D True
@@ -380,26 +307,99 @@ No red blink before explosion
 ##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted
+###			C	Align
+New
+###			C	Explode
+New
+###			C	Free Transactions
+New
+###			C	Give Inventory To Player
+New
+###			C	Give Single Order
+As if they were follower
+This includes Expert actions, like Lockpick, etc... but maybe not Hack, since chaining hacks might be a can of worms
 ###			T	Go Haywire
 Attempted
+###			C	Increase Odds of Winning
+For gambling bots
+###			C	Increase Buyer Prices
+For Buyer traits
+###			C	Join Party
+New
+###			C	Make Noise
+A la arcade machine
+###			C	Play Bad Music
+Busker?
+###			C	Reduce Prices
+New
+###			C	Security Cam/Turret Options
+New
+###			C	Security Core
+All Security Hack options
+###			C	Spit Out Money
+A la ATM
 ###			T	Tamper With Aim
 Attempted
 ###			C	Triangulate
 Head towards hacker when interactFar starts
 AgentInteractions.HackSomething in CopBot block
-##		√C	Interaction
+###			C	Triangulate for Network
+
+###			C	Unlock Safes & Doors
+Maybe set it so they all unlock on death too, or make a separate Unlock All On Death trait.
+###			C	Buy Round for Allied
+Buy a round for a patron and anyone with the same owner ID in the chunk.
+No drink for that guy in the corner. Fuck that guy.
 ###			C	Buy Slave
 Pending actual assignment of owned slaves 
-###			C	Cybernetic Surgery
-Curated Trait-seller
-###			C	Heal All
+###			C	Clone (Group)
+####			C	Clone Player
+####			C	Clone Random Character (Separate from Hack function)
+####			C	Clone Item
+####			C	Clone Target Character
+###			H	Cybernetics (Group)
+This would be an overhaul
+Get Eric's cybernetic traits as a start
+####			H	Implant
+New
+####			H	Remove
+Some are simply negatives, acquired or from spawn
+####			H	Repair
+New
+###			C	Deactivation Protocol
+Try to hack an Electronic agent in-person via vocal injection attack
+###			C	Faction (Group)
+####			C	Pay respects to Faction
+Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
+"Improve Faction Relations"
+Should only allow for 1 of these to simplify algorithm
+But this means you'll need further faction traits
+####			C	Sell Intel to Faction 
+The idea is, if you were really on their side you wouldn't charge for information. 
+Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
+###			C	Gamble
+####			C	All-In
+High risk, high reward
+####			C	Bluff
+Uses your social skill isntead of luck?
+####			C	Cheat
+Uses your stealth skill instead of luck
+####			C	Play it Close
+####			C	Risky Bet
+####			C	Safe Bet
+####			C	Sore Loser
+###			C	Heal (Group)
+####			C	All
 Like Doctor heal, but all in party with calculated price
-###			C	Heal Other
+####			C	Other
 Like Doctor heal, but activates reticle so you can select a party member or other.
-###			C	Heal Partial
+####			C	Partial
 Like Doctor heal, but at a Blood Bag level.
 ####			C	Mouseover Price
 Show price to heal targeted agent before selection
+###			C	Item Storage
+A la ATM
+"Smuggler?"
 ###			C	Quest Giver
 New
 ###			C	Real Estate Agent
@@ -409,46 +409,50 @@ New
 ($250): Boost up a local business, only to pull the rug out from under the suckers! Next level, one chunk (above types) will be Hostile to you. You get a single payment of up to $375, depending on how much the chunk is damaged. Doing this three times will give you Ideological Clash.
 ####			C	Sell Property
 Lose your smallest owned property income. Immediately gain twice its return amount. Rant about taxes.
-###			C	Refill Guns
+###			C	Refill/Repair (Group)
+####			C	Refill Guns
 New
-###			C	Repair Armor
+####			C	Repair Armor
 New
-###			C	Repair Weapons
+####			C	Repair Weapons
 New
-###			C	Pay respects to Faction
-Costs $1,000 to bump reputation up one level (Hostile → Annoyed etc)
-"Improve Faction Relations"
-Should only allow for 1 of these to simplify algorithm
-But this means you'll need further faction traits
-###			C	Sell Intel to Faction 
-Reverse of buying into faction. Just a way to get cash in exchange for slightly reducing your relation. Friendly or better.
+###			C	Sell Mystery Item
+A la Goodie Dispenser
 ###			C	Start Election
 New
 ###			C	Summon Professional
 New
 Pay a fee for him to teleport a Hacker, Thief, Doctor or Soldier to you. You still have to pay them to hire them.
-###			C	This One's On Me
-Buy a round for a patron and anyone with the same owner ID in the chunk.
-No drink for that guy in the corner. Fuck that guy.
-###			C	Train Attributes (Split to each)
+###			C	Train (Group)
 New
-###			C	Train Traits - Defense
+####			C	HP Gain
+####			C	Stat Gain
 New
+####			C	Trait Gain
 Sell traits for double their Upgrade Machine cost
-###			C	Train Traits - Guns
+#####				C	Defense
 New
-###			C	Train Traits - Melee
+#####				C	Guns
 New
-###			C	Train Traits - Movement
+#####				C	Melee
 New
-###			C	Train Traits - Social
+#####				C	Movement
 New
-###			C	Train Traits - Stealth
+#####				C	Social
 New
-###			C	Train Traits - Trade
+#####				C	Stealth
 New
-###			C	Visitor's Badge
+#####				C	Trade
+New
+####			C	Trait Removal
+New
+####			C	Trait Swap
+New
+####			C	Trait Upgrade
+New
+###			M	Chunk Visitor's Badge
 Set Bribe options on separate traits
+Move to Loadout
 ###			√	Administer Blood Bag
 Complete
 ###			√	Borrow Money
@@ -609,58 +613,6 @@ Complete
 Complete
 ###			√	Cyber-Intruder
 Complete
-##		C	Loadout
-###			C	CC Items Inclusion
-Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
-###			C	Guns_Common
-New
-###			C	Deep Storage
-Doesn't drop items on death (They're in their butt)
-###			C	Discreet
-Automatically applies Silencer to all held weapons on load
-###			C	Infinite Ammo
-New
-###			C	Infinite Consumables
-New
-###			C	Infinite Durability
-New
-###			C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
-###			√	Manager Key
-Complete
-###			√	Manager Mayor Badge
-Complete
-###			√	Manager Safe Combo
-Complete
 ##		√C	Interaction
 ###			C	Buy Slave
 Pending actual assignment of owned slaves 
@@ -699,20 +651,20 @@ Buy a round for a patron and anyone with the same owner ID in the chunk.
 No drink for that guy in the corner. Fuck that guy.
 ###			C	Train Attributes (Split to each)
 New
-###			C	Train Traits - Defense
+###			C	Defense
 New
 Sell traits for double their Upgrade Machine cost
-###			C	Train Traits - Guns
+###			C	Guns
 New
-###			C	Train Traits - Melee
+###			C	Melee
 New
-###			C	Train Traits - Movement
+###			C	Movement
 New
-###			C	Train Traits - Social
+###			C	Social
 New
-###			C	Train Traits - Stealth
+###			C	Stealth
 New
-###			C	Train Traits - Trade
+###			C	Trade
 New
 ###			C	Visitor's Badge
 Set Bribe options on separate traits
@@ -768,10 +720,67 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
+##		C	Loadout
+###			C	CC Items Inclusion
+Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
+###			C	Guns_Common
+New
+###			C	Deep Storage
+Doesn't drop items on death (They're in their butt)
+###			C	Discreet
+Automatically applies Silencer to all held weapons on load
+###			C	Infinite Ammo
+New
+###			C	Infinite Consumables
+New
+###			C	Infinite Durability
+New
+###			C	Item Groups
+uwumacaronitime's idea: Item groups similar to NPC groups
+
+I can see this going two ways: 
+- As a trait for NPCs to generate with
+- As a designated item in the chunk creator for use in NPC & Object inventories. 
+
+I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
+
+Vanilla list:
+- Defense
+- Drugs
+- Food
+- Guns
+- GunAccessory
+- Melee
+- Movement
+- NonViolent
+- NonUsableTool
+- NonStandardWeapons
+- NonStandardWeapons2
+- NotRealWeapons
+- Passive
+- Social
+- Stealth
+- Supplies
+- Technology
+- Trade
+- Usable
+- Weapons
+- Weird
+###			√	Manager Key
+Complete
+###			√	Manager Mayor Badge
+Complete
+###			√	Manager Safe Combo
+Complete
 ##		C	Merchant Type
-###			C	Refactor
-###			C	Custom quantity in refactor
+###			C	00 Refactor
+New
+###			C	00 Custom quantity in refactor
 Allows to sell shitty items in junk dealer, for instance
+###			C	NPC Loadout
+Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
+###			C	Player Loadout 
+As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		√C	Passive
 ###			C	Blinker
 Blink to a random nearby spot when hit
@@ -1181,206 +1190,6 @@ This might need to be its own mod
   - Gives credit to author
   - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
     - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-#		C	Demo Campaign - Shadowrun-but-not-really
-Remember, simultaneous release would be a bad thing. Get it to a playable state so you can consistently test features with it, but don't need it finished yet.
-##		C	Music Pack
-###			C	Actually Making a Music Pack
-How
-###			C	Tracks
-Cyberpunk / Darkwave?
-
-		Track					Artist							Note
-	Neo Tokyo				Perturbator					Super Tense
-	Onna Musha				Vector Seven					Peaceful
-	Black Bauhinia		Vector Seven					Dark
-	Breach					Vector Seven					Not quite sure
-	Arasaka Headquarters	Vector Seven					Sounds Stealthy
-	Carnage				Vector Seven					Name fits but maybe not intense enough
-	Acid Spit				Mega Drive						Fast
-	Crimewave				Mega Drive						Dark, Urban
-	Orbital Strike		Mega Drive						Robotty
-	Drums A-Go-Go			Hollywood Persuaders			1960s campy heist, blues-box, but still a good energy
-##		T	Player Character
-"The Fixer," an old man who's not quite as tough as he used to be. But he has a lot of connections in the criminal world and knows how to put together a team. So this will direct the player to use a hiring-based playstyle.
-Remove Low-Cost Jobs and add No In-Fighting
-##		T	Home base (Perennial)
-In between each mission, a slummy neighborhood that changes every time you see it
-###			T	The Bar
-Where the mercenaries hang out. All Talk interactions should tell you a bit about them.
-Ensure that Buying a Round will affect all hires.
-Feel free to use multiple copies of the same merc, since their appearances will vary! B)
-Give them a "Permanent hire" trait
-####			T	The Fence
-He'll buy your shit from you. This should be a *rare* opportunity to sell stuff.
-####			T	The Bartender
-Maybe something clever to say. Maybe not.
-####			T	The Mercs
-- AHS Corp. Medbot
-  - Pacifist, can be hired and sell healing
-###			T	Hospital
-- MedBots slowly replace the doctors
-- Mission: Rescue the spare MedBot - adds them to your Vehicle
-###			T	Fire Station
-Privatized, and no one can afford them here
-###			T	Hazardous Waste Handler's Union Local No. 606
-One mutated guy who brags about his dad being a lifelong member
-Rumors that they run a cannibal ring
-###			T	Doc's
-Skeezy place out back
-###			T	Another Doc
-Has to charge more because he doesn't work for criminals, and doesn't use robots
-Sells his clinic to a medical corp, soon is replaced by MedBots
-###			T	Coffin Hotel
-Micro-apartments with an evil landlord
-###			T	The "Vehicle"
-Will start small, later evolve to carry an "away squad" that can serve as a mobile home base for healing, etc.
-1 - Just a Van thing for a robbery
-2 - Now has a Driver and 
-##		T	The Projects
-Reuse some Building Blocks chunks if you need
-###			T	Exterior (possibly skip)
-Slums city area
-Try to do something cool that encourages player to use Factions to solve a problem
-###			T	Ground Level
-Gang has taken over the building and now runs a secure perimiter around the building
-###			T	Basement
-Destroy Squank production facilities and steal caches of it
-##		T	Fud Factory
-Semi-rural area, backwoods depressed town environs
-
-###			T	Ground Floor
-- Some redneck cabins out in the woods
-  - Ensure there are a couple Barbecues here
-  - They gripe about the factory poisoning the water and laying everyone off to employ robots
-  - Sell Bombs & traps
-  - Hire for cheap, all heavily armed
-  - Red Hats & Camo 
-- Disable Security Control Unit 
-  - Destroy Alarm Buttons
-    - If this actually works, that's an interesting strategy tension
-- Shipping Dept.
-  - Not a mission, but there's a lot of Fud in here if you can find a way to steal it. Heavily Secure.
-- Overclocked Generators
-  - There are four in a cross pattern, right at the edge of where a time bomb should be placed in the middle to hit all four. This isn't used yet, but later will be.
-- Two routes to get into facility
-  - Creek, there's a gap in the fence where it gets heavily wooded that opens on a less-secure area
-  - Front entry, more security
-- Goal: Freight Elevator
-###			T	Production Basement level
-- Agents:
-  - Robot Workers
-  - Humanish Technicians
-  - Robot Managers
-- Destroy 3 Power Boxes
-- Cave tunnel to some weird kooky cave shit, entrance hidden by a shelf
-###			T	Secret Sub-Basement Slave Quarters
-- Facility breeds humans for slaughter because demand for Fud is so high
-- Hellish Aesthetic
-- Agents:
-  - Fud Cattle Human
-  - Fud Veal Flavor Baby Meat Baby
-- Mission: Free Low-Fat Fud captives
-  - Prison is a circular hallway with a conveyor belt pushing them in circles for exercise
-- Mission: Kill Slavemasters & Rudy McFudy
-  - Surrounded by Work Pits
-###			T	Canning Plant
-- Emerge on Freight Elevator with a bunch of freed slaves who now roam the level, getting picked off by the security team that arrives
-  - Security team set to "Killer Robot" behavior? pwz
-  - If they are some real killers, the challenge could be to just make it to the van with no hope of fighting them off
-- Cramped Hive quarters for employees, virtually a prison
-##		T	Underground
-###			T	Subway to Cave Tunnel
-###			T	Sewer City
-Make sure some Ghostblasters are sold here
-###			T	Catacombs
-Necromancer Lair
-##		T	Apollo Corp. Tower
-###			T	Brief
-Describe what quests represent beforehand in terms of plan
-###			T	Ground Floor
-- Initiate Facility Silent Lockdown (Press Button task)
-- Destroy Offsite Security Team silent alarm conduit (Destroy Generator in base of a separate Radio Tower that you can see as you ascend or descend)
-- Eliminate Onsite Security Team (Neutralize)
-- Get to Employee Only Elevator
-  - Interior route, through Atrium, security checkpoints etc. Brute force
-  - Exterior route, stealth & distraction option
-###			T	Dormitories
-- Time to just fucking rob people 
-- But you also need an Access code from the Chief Engineer, who you have to neutralize one way or another
-- Show off affluent but empty lifestyle
-- Get to Freight Elevator in Kitchen area to reach Infrastructure level
-###			T	Infrastructure Sub-Basement
-- Some underclass residential areas
-  - The only place in Apollo where you see green skin
-Mess with power to disable security safeguards of IT department
-###			T	IT Department
-- Living Quarters are utilitarian and futuristic, but coffin-like
-- Lots of Gnomes & Dwarves
-- Enable elevator access to Executive Suites
-- Robots & Turrets & Shit
-- This might be a good Killer Robot level, make it sort of mazelike
-###			T	Executive Suites
-- Almost all Human & Elf, zero Green up here
-- It's a fuckin' PARTY up here. Execs and the hoi-polloi are living it up. There's still a lot of security but you should be able to play this as a social level.
-- Wood floors w/ rugs, fireplaces, etc. whatever looks as fancy as possible
-- Get Airship Key Fob for escape from the VP of Sales (Retrieve)
-- Kill someone to settle a personal grudge? Maybe tie it into an earlier part of the plot (Eliminate)
-Pool/Jacuzzi
-Bar
-Offices
-###			T	Rooftop Escape
-- Swat team is here. And they're blocking the escape, an airship you planned to hijack to get out of here. (Eliminate)
-- Disable Swat team ship control override (Destroy Computer)
-#		C	Demo Campaign - Wetwork
-Progression & Patterns
-  - Removal of base negative traits will affect certain early paths. 
-    - Three as an example: Loud, Antisocial, Tech Illiterate
-    - There should always be alternatives to killing non-targets, even if they're goons
-    - Have up to 4 paths depending on which negatives the player has removed.
-  - It should be clear to the player which enemies will go Annoyed versus Hostile.
-  - Weapon gating
-    - Very limited/controlled access to weapons
-      - Mechanism: Heavily guarded weapon detector on subway platform entrances
-    - Silenced pistol
-    - Silenced revolver is a one-hit kill with Wetworker, eliminating guesswork
-    - Sniping is only possible in the later levels, but it's fun as shit so it's worth the wait. 
-      - Start it out loud, and give a silencer later.
-
-Player Character
-		Endurance	3
-		Speed		3
-		Ranged		3
-		Melee		3
-	Traits
-		Tech Illiterate
-		Loud
-		Antisocial
-		Pacifist
-		Sniper - Limited to Pistol, call it a Rifle ban
-		Wetworker (Doubletapper)
-		Backstabber
-		Sneaky Fingers - Tamper Kills!
-	Special Ability
-		Sticky Glove - You can control the circumstances where it's useful, at least
-Items
-	Generally Disposable - There should be a gate or two where the only way through is to ditch your weapons.
-	Silenced Pistol - "Remember, always Double-Tap! A downed target is still a deadly one."
-	Silenced Revolver - Allows Sniping, so it only comes into play halfway through the campaign.
-
-Levels
-First, get costs of Negative Trait removals to determine what will be doable at what point
-1 - Ghetto
-Do a string of burglaries while LOUD
-Teach the player about the security camera sound trick
-	Riskier with windows, since they're most likely to point AT a door and be next to a window
-Rogue vision, night time. You don't know where chests will spawn.
-
-"My contact called me and said his courier would be in a subway station bathroom."
-Just a quick level with dialogue to 
-
-|Level	|Area					|Notes	|
-|:-----:|:----------------------|:------|
-|	1	|Subway					|- Meet a contact, maybe see cool shit on the way. Free him from a "prison" like a subway bathroom.
 #		Notes dump - Anything below here
 Removed from Readme
 
