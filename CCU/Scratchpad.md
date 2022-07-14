@@ -9,6 +9,8 @@ Listed in order of Parent tier summary symbol priority:
 - **Bugfixes**
   - Fixed Pick Pockets occasionally cancelling the setup of various interaction and merchant traits
 #	C	0.1.1 Bug Reports
+OhShaw - Chinese text turns red
+	I think this is the pilot test for text modding, left in
 CL - Possibly Drug Warrior Wildcard causing a crash
 CL - Also there is some weirdness with custom gangsters both having conflicts with regards to ownership situations (like if you set one to be annoyed and the other as a non-owner, the latter will get chased out) but still being aligned for everything else. This leads to things blahd doctors chasing their blahd thief patients out of the hospital hideout, but then becoming hostile to you if you punched the thief they just yelled at. It doesn't seem to apply to vanilla gangster owners, like a "real" blahd won't chase out a non-owner blahd thief.
 CL - Haven't had time to test everything yet but it looks like most of the issues I've previously seen with CCU (and roguelibs, bonus yay!) have been fixed, so I'll definitely try to wrap up some of my half-finished stuff this week now that it's easier to playtest. Two fairly big bugs still seem to exist though, first is that shopkeepers with honor among thieves still seem to have a random chance of not actually having their shop (although at least it seems like they no longer offer their shop to non-thieves, based on limited tested though so it might just have been bad luck).
