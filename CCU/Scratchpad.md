@@ -178,10 +178,6 @@ Complete
 Complete
 ####			√	Blinks on Death
 Complete
-##		C	Buyer Cap
-Total amount of money the trader will dispense when buying player goods
-##		C	Buyer Type
-A shorter list of broader categories than Merchant Type. Depends on how it feels while you write it.
 ##		C	Campaign Flags
 Might need to limit this to a single flag, since having multiple true at the same time would complicate things
 ###			C	If Paid then Flag A/B/C/D True
@@ -776,6 +772,19 @@ Complete
 Complete
 ###			√	Manager Safe Combo
 Complete
+##			C	Merchant Buyer Modifiers
+###				C	Buyer Cap
+Total amount of money the trader will dispense when buying player goods
+Vanilla For Sellomatic: 250-300 per level
+####				C	$50
+####				C	$150
+####				C	$500
+####				C	$1000
+####				C	Unlimited
+###				C	Buyer Type
+A shorter list of broader categories than Merchant Type. Depends on how it feels while you write it.
+###				C	Buyer Type - Match Merchant Types
+Mirror shop inventory
 ##		C	Merchant Type
 ###			C	00 Refactor
 New

@@ -53,11 +53,16 @@ namespace CCU.Patches.Objects
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_0),					//	int num (original transaction price)
+					new CodeInstruction(OpCodes.Ldarg_1),					//	int moneyAmt
 					new CodeInstruction(OpCodes.Ldarg_2),					//	string transactionType
 					new CodeInstruction(OpCodes.Call, customPriceByName),	//	float
 					new CodeInstruction(OpCodes.Stloc_0),					//	num
-				});
+				}, 
+				postfixInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldloc_S),
+					new CodeInstruction(OpCodes.Brfalse_S),
+                });
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;

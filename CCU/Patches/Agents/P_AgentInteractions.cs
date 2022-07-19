@@ -452,7 +452,7 @@ namespace CCU.Patches.Agents
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.LetGo), 
 			argumentTypes: new[] { typeof(Agent), typeof(Agent) })]
-		public static bool LetGo_Prefix(Agent agent, Agent interactingAgent)
+		public static bool LetGo_Prefix(Agent agent, Agent otherAgent)
         {
 			if (agent.GetHook<P_Agent_Hook>().PermanentHire)
 				return false;

@@ -24,12 +24,17 @@ namespace CCU.Patches.Goals
 		private static IEnumerable<CodeInstruction> Process_StartCombatActions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo agent = AccessTools.DeclaredField(typeof(GoalBattle), nameof(GoalBattle.agent));
-			FieldInfo canTakeDrugs = AccessTools.DeclaredField(typeof(Agent), "canTakeDrugs");
+			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(GoalBattle.agent));
+			FieldInfo canTakeDrugs = AccessTools.DeclaredField(typeof(Combat), nameof(Combat.canTakeDrugs));
 			MethodInfo doCombatActions = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(DoCombatActions));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldc_I4_1),
+					new CodeInstruction(OpCodes.Stloc_0),
+                },
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_0),
