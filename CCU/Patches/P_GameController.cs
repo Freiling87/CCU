@@ -42,11 +42,11 @@ namespace CCU.Patches
             }
         }
 
-        // [HarmonyPostfix, HarmonyPatch(methodName: nameof(GameController.SetFont), argumentTypes: new[] { typeof(Text) })]
+        //[HarmonyPostfix, HarmonyPatch(methodName: nameof(GameController.SetFont), argumentTypes: new[] { typeof(Text) })]
         //public static void SetFont_Postfix(Text myText)
         //{
-        //	// This works.
-        //	// myText.color = new UnityEngine.Color(255f, 0f, 0f);
+        //    // This works, but only for non-english languages
+        //    myText.color = new UnityEngine.Color(255f, 0f, 0f);
         //}
     }
 }
