@@ -1,7 +1,10 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Behavior;
+using CCU.Traits.Combat;
+using CCU.Traits.Drug_Warrior;
 using HarmonyLib;
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

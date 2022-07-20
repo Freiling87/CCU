@@ -153,6 +153,7 @@
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_ItemFunctions.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Patches\Level\P_LevelTransition.cs" />
     <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
@@ -163,7 +164,7 @@
     <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\P_Unlocks.cs" />
-    <Compile Include="Patches\Spawn\P_LoadLevel.cs" />
+    <Compile Include="Patches\Level\P_LoadLevel.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
@@ -424,6 +425,7 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Patches\Spawn\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />

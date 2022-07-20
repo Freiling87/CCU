@@ -5,7 +5,7 @@ namespace CCU.Traits.Combat
 {
     public class Backed_Up : T_Combat
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Backed_Up>()

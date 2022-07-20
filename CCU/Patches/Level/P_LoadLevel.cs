@@ -9,8 +9,16 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace CCU.Patches.RenameMe
+namespace CCU.Patches.Level
 {
+    [HarmonyPatch(declaringType: typeof(LoadLevel))]
+	public static class P_LoadLevel
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+	}
+
     [HarmonyPatch(declaringType: typeof(LoadLevel))]
 	static class P_LoadLevel_loadStuff2
 	{

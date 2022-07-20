@@ -7,6 +7,7 @@ namespace CCU.Traits
     {
         public static TraitBuilder PostProcess
         {
+            // This is applied after each trait is created. I don't fully get how it works, but see where PP's value is assigned.
             set
             {
                 value.Unlock.Unlock.cantLose = true;

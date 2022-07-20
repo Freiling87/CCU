@@ -95,17 +95,11 @@ namespace CCU.Patches
         {
 			T_DrugWarrior trait = __instance.agent.GetTrait<T_DrugWarrior>();
 			
-			if (trait != null)
-            {
-				__result =
-                    trait is Wildcard
-                    ? __instance.ChooseRandomDrugDealerStatusEffect()
-					: trait.DrugEffect;
-				
-				return false;
-            }
+			if (trait is null || trait is Wildcard)
+				return true;
 
-			return true;
+			__result = trait.DrugEffect;
+			return false;
         }
 
 		/// <summary>
@@ -149,13 +143,6 @@ namespace CCU.Patches
 			}
 
 			return true;
-        }
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.Resurrect), 
-			argumentTypes: new[] { typeof(bool) })]
-		public static void Resurrect_Postfix(StatusEffects __instance)
-        {
-			Nth_Wind.ResetFlags(__instance.agent);
         }
 	}
 

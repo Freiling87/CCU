@@ -1,19 +1,18 @@
-﻿using System;
-using System.Reflection;
-using BepInEx;
-using RogueLibsCore;
+﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using System.Runtime.CompilerServices;
-using System.Diagnostics;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+using RogueLibsCore;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace CCU
 {
-	[BepInPlugin(pluginGUID, pluginName, pluginVersion)]
+    [BepInPlugin(pluginGUID, pluginName, pluginVersion)]
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
 	public class Core : BaseUnityPlugin
 	{

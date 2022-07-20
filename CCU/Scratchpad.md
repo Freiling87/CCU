@@ -5,9 +5,10 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#		0.1.1 Changelog
+#			0.1.1 Changelog
 - **Bugfixes**
   - Pick Pockets no longer cancels the setup of various interaction and merchant traits
+  - Drug Warrior - Wildcard now runs without crashing the game
   - Text color restored to yellow for non-English versions (this was a feature test accidentally left in)
   - Vending Machines' cost interactions now load correctly
   - Codpiece now spawns correctly in shops
@@ -16,8 +17,7 @@ Listed in order of Parent tier summary symbol priority:
   - Chunk Key Holder & Chunk Safe Combo Holder now actually work
   - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
   - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
-  - Decoupled various Killer Robot behaviors that were hardcode-attached to Seek & Destroy (Water damage, EMP vulnerability, Knockback Bonus, walking through Doors). 
-    - Trivia: I think the level of hardcoded-ness of Killer Robot implies that the class pre-dates SOR's trait system, or at least a big part of it.
+  - Decoupled various Killer Robot behaviors that were hardcoded to Seek & Destroy (Water damage, EMP vulnerability, Knockback bonus, walking through Doors). 
 - **Trait Update System:** I've renamed and slightly reorganized some of the traits. This system should automatically update outdated traits both on spawn and on loading in the character editor. You will not have to update character files, and all versions of CCU will be backwards-compatible with un-updated content.
   - **Class Name Overlaps:** A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
     - Hire Type
@@ -64,20 +64,27 @@ Listed in order of Parent tier summary symbol priority:
       - Ghost Gibs
       - Ice Gibs
       - Normal Gibs
-#	C	0.1.1 Bug Reports
-CL - Possibly Drug Warrior Wildcard causing a crash
+#		C	Bug Reports
+##			C	Relationships not saved with game
+CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
+	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
+  		- Specifically for Aligned, it might be best to copy the Hypnotizer mk2's effects, since 
+##			C	Faction ownership (Blahd Thief / Doctor)
 CL - Also there is some weirdness with custom gangsters both having conflicts with regards to ownership situations (like if you set one to be annoyed and the other as a non-owner, the latter will get chased out) but still being aligned for everything else. This leads to things blahd doctors chasing their blahd thief patients out of the hospital hideout, but then becoming hostile to you if you punched the thief they just yelled at. It doesn't seem to apply to vanilla gangster owners, like a "real" blahd won't chase out a non-owner blahd thief.
-CL - Haven't had time to test everything yet but it looks like most of the issues I've previously seen with CCU (and roguelibs, bonus yay!) have been fixed, so I'll definitely try to wrap up some of my half-finished stuff this week now that it's easier to playtest. Two fairly big bugs still seem to exist though, first is that shopkeepers with honor among thieves still seem to have a random chance of not actually having their shop (although at least it seems like they no longer offer their shop to non-thieves, based on limited tested though so it might just have been bad luck).
-CL - The other is that the aligned in-fighting crash still exists, managed to reproduce it immediately and caught this shot about a frame before the crash so you know exactly what the situation looked like. In this case I'm pretty sure the thieves were all trying to rob me which is at least a huge improvement over last time if they no longer can choose to pickpocket a friend, that will make it very unlikely for people to randomly get this bug (since you'd have to steer them into a friend like I did, pretty hard to do on accident) but it's still worth eventually fixing since a crash is a crash.
+	- On searching for this, I can't find anything specific to gangbanger. So I have a guess as to what it will look like:
+  		- Algo checks for OwnerID inequality and agentName equality to determine ownership tolerance
+##			C	Vocally Challenged language-matching
 CL - Also not a bug but a weird immersion break working as intended, custom gorillas are aligned now but oddly enough don't speak the same language since vocally challenged seems to be class specific. There might be value in having non-gorillas aligned with gorillas so I don't know if you should edit the trait itself but maybe the addition of a "speaks gorilla" language trait would be a good solution. Or you could just leave it as is, since it is the game working as intended.
-#	C	Systems
-##		C	Legacy Name Updater
-###			C	Iterate until failure
+Add a set of traits: Vocally Challenged - Alien, Gorilla, etc.
+OR, exempt people for being aligned? idk
+#		C	Systems
+##			C	Legacy Name Updater
+###				C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
-#	CT	General
-##		T	Pick Pockets prevents shop generation
+#		CT	General
+##			T	Pick Pockets prevents shop generation
 Attempt: Removed erroneous early return in P_Agent.SetupAgentStats_Postfix
-##		C	Explosion Refactor
+##			C	Explosion Refactor
 Current Setup:
 	Explode on Death
 Proposal:
@@ -90,16 +97,16 @@ Proposal:
 		Damage
 		Death
 		Combat
-##		C	Relationship Refactor
-###			C	Create SetRelationship(agent, otherAgent, VRelationship)
+##			C	Relationship Refactor
+###				C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing
-##		C	Explosion Trait Refactor
+##			C	Explosion Trait Refactor
 Move Explosion Type to its own trait
 Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
-##		C	Dedicated section on Character Sheet
+##			C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
 Just add a --- CCU TRAITS --- Divider or something
-##		H	Config Files
+##			H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
 These should be grouped by Campaign, since that's the only place they're valid.
@@ -109,7 +116,7 @@ Not so sure about the utility of this. I don't think players should need more th
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #		T	Systems
 ##			T	Legacy Updater
-###				T!	Challenge
+###				T!	Challenges
 Homesickness Mandatory & Disabled
 ####				T	Test Mutator List in editor
 Had to tweak it
@@ -119,14 +126,15 @@ P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
 P_StatusEffects.AddTrait_Prefix
 #		C	Traits
-##			C	Accent Color
+##		C	Accent Color
 Combine w/ Accent Effect traits
-##			C	Accent Effect
+##		C	Accent Effect
 Apply Accent Color trait to target effect
-###				C	Agent Glow
-###				C	Nametag (Space/hover)
-###				C	Vision Beam
+###			C	Agent Glow
+###			C	Nametag (Space/hover)
+###			C	Vision Beam
 ##		C	Agent Group
+However this is implemented, there's a danger of subscribed content doing this in an unwanted way. How to control it?
 ###			C	Slum NPCs (Pilot)
 New
 ###			C	Affect Campaign
@@ -152,6 +160,15 @@ New
 ##		C	Behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
+###			C	Ambush
+Clearer way to present "Secretly Hostile" relationship, especially since it's not even a relationship
+How a Bounty Ambusher is set up:
+	agent.bountyHunter
+	agent.bountyHunterProjectileWeapon
+	Relationships.SetSecretHate
+		You should remove this from the Player Relationship algo, since it would interfere with this behavior opaquely
+	Relationship.SecretHate
+		Note that it's on Relationship (singular), meaning you'll have to find the particular rel
 ###			C	Clean Trash
 New
 ###			C	Curious
@@ -187,6 +204,7 @@ Constant search state
 Agent.secretHate
 Agent.choseSecretHate
 I think this is Bounty behavior
+Didn't work but if you get it working it should be under Behavior - Ambush, since that will make more sense to users.
 ###			C	Shakedown Player (Mobster)
 New
 Use this on leader w/ Wander Level
@@ -238,17 +256,21 @@ Might need to limit this to a single flag, since having multiple true at the sam
 New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
-##		T	Combat
-###			T	Backed Up
-P_GoalBattle.
-	Process_StartCombatActions
-	DoCombatActions
-###			T	Nth Wind
+##		C	Combat
+###			C	Nth Wind
 Refreshes Drug Warrior & Backed Up bools after combat ends.
 P_GoalCombatEngage.
 	Terminate_Postfix
 P_StatusEffects.
-	Resurrect
+	Resurrect	
+###			H	Backed Up
+P_GoalBattle.
+	Process_StartCombatActions
+	DoCombatActions
+Test: 
+	[Error  : Unity Log] AI Update Error: Custom (1124) (Agent)
+	Repeated on loop.
+IIRC this error comes from a try-catch chain that can be sort of a pain to break open. For that reason I'm shelving this.
 ###			H	Gloater
 Will dance on corpses and make loud noise if they win a combat
 This one's kinda hard... Probably on hold for now.
@@ -826,7 +848,7 @@ Complete
 Complete
 ###			√	Manager Safe Combo
 Complete
-##			C	Merchant Buyer Modifiers
+##		C	Merchant Buyer Modifiers
 ###				C	Buyer Cap
 Total amount of money the trader will dispense when buying player goods
 Vanilla For Sellomatic: 250-300 per level
@@ -1265,19 +1287,3 @@ Removed from Readme
   - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
   - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
   - LevelEditor.customCharacterList has all customs saved. Iterate through this and find appropriate traits, then add through RandomAgents.fillAgents
-## CC Steam Workshop Upload
-
-- Pop up Yes/No dialogue asking if user wants to do the following:
-  - Automate screenshot of character portrait for thumbnail
-  - Automate screenshot of character stat screen
-  - Upload both screenshots into Character folder and name appropriately before upload
-  - Output a Text file with all character content for upload as a description 
-# Chunk Editor Utilities
-To Sorquol
-## Fields 
-- Multiple In Chunk field for SpawnerAgent
-## Item Groups *
-- Know how you can select "Slum NPCs" as a type? Why can't we do that with items? 
-## General *
-- Spawn objects placed regardless of district (vanilla limits to district-appropriate objects)
-- Red-tint any objects that might spawn inconsistently due to placement rules (e.g., Security Cams over gaps)
