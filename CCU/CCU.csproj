@@ -278,7 +278,9 @@
     <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
-    <Compile Include="Traits\Language\Aelian_Speaker.cs" />
+    <Compile Include="Traits\Language\ErSdtAdt_Speaker.cs" />
+    <Compile Include="Traits\Language\Foreign_Speaker.cs" />
+    <Compile Include="Traits\Language\Werewelsh_Speaker.cs" />
     <Compile Include="Traits\Language\Zombese_Speaker.cs" />
     <Compile Include="Traits\Language\Monkese_Speaker.cs" />
     <Compile Include="Traits\Language\T_Language.cs" />

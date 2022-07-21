@@ -3,22 +3,22 @@ using System;
 
 namespace CCU.Traits.Language
 {
-    public class Aelian_Speaker : T_Language
+    public class Foreign_Speaker : T_Language
     {
-        public override string[] VanillaSpeakers => new string[] { VanillaAgents.Alien };
+        public override string[] VanillaSpeakers => new string[] { VanillaAgents.Zombie };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Aelian_Speaker>()
+            PostProcess = RogueLibs.CreateCustomTrait<Foreign_Speaker>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character speaks Aelian, the lingua franca of... aliens (No etymological relation). A bizarre language that sounds like a keyboard being mashed. Very concise.\n\n" + 
-                    "Agent can bypass Vocally Challenged when speaking to vanilla Aliens, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("Americans used to think that all foreigners spoke the same language, Foreign. In a sick twist of fate, that's now the truth. That's just how linguistics works, man.\n\n" +
+                    "Agent can bypass Vocally Challenged when speaking to anyone else with this trait. This doesn't apply to any vanilla NPCs."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Aelian_Speaker)),
+                    [LanguageCode.English] = DisplayName(typeof(Foreign_Speaker)),
                 })
                 .WithUnlock(new TraitUnlock
                 {
