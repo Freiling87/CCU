@@ -1,26 +1,30 @@
 ﻿using RogueLibsCore;
+using SORCE.Localization;
 
-namespace CCU.Traits.Cost_Currency
+namespace CCU.Traits.Behavior
 {
-    public class Swap_Meet : T_CostCurrency
+    public class Grab_Everything : T_Behavior
     {
-        //[RLSetup]
+        public override bool LosCheck => true;
+        public override string[] GrabItemCategories => null;
+
+        [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Swap_Meet>()
+            PostProcess = RogueLibs.CreateCustomTrait<Grab_Everything>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character doesn't accept money. Instead, you have to give them an item of equal or greater value than the cost of the good or service. The ratio of acceptable items improves with vanilla bargaining traits.",
+                    [LanguageCode.English] = string.Format("This character will grab any item they see."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Swap_Meet)),
+                    [LanguageCode.English] = DisplayName(typeof(Grab_Everything)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Banana_Barter)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

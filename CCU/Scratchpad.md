@@ -65,14 +65,16 @@ Listed in order of Parent tier summary symbol priority:
       - Ice Gibs
       - Normal Gibs
 #		C	Bug Reports
+##			C	Seek & Destroy x Player Loyal
+Freeze on load, need error message
+This worked in previous version, so it should be pretty findable
+##			C	Non-Shop Payment Interactions Free
+Every single non-shop payment interaction appears to be free now, even extending to vanilla NPCs. You can just walk up and hire any thief, bribe the cops, clear your debt, whatever.
+This worked previously, so possibly review recent commits now that they're a little more organized
 ##			C	Relationships not saved with game
 CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
 	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
   		- Specifically for Aligned, it might be best to copy the Hypnotizer mk2's effects, since 
-##			C	Faction ownership (Blahd Thief / Doctor)
-CL - Also there is some weirdness with custom gangsters both having conflicts with regards to ownership situations (like if you set one to be annoyed and the other as a non-owner, the latter will get chased out) but still being aligned for everything else. This leads to things blahd doctors chasing their blahd thief patients out of the hospital hideout, but then becoming hostile to you if you punched the thief they just yelled at. It doesn't seem to apply to vanilla gangster owners, like a "real" blahd won't chase out a non-owner blahd thief.
-	- On searching for this, I can't find anything specific to gangbanger. So I have a guess as to what it will look like:
-  		- Algo checks for OwnerID inequality and agentName equality to determine ownership tolerance
 ##			C	Vocally Challenged language-matching
 CL - Also not a bug but a weird immersion break working as intended, custom gorillas are aligned now but oddly enough don't speak the same language since vocally challenged seems to be class specific. There might be value in having non-gorillas aligned with gorillas so I don't know if you should edit the trait itself but maybe the addition of a "speaks gorilla" language trait would be a good solution. Or you could just leave it as is, since it is the game working as intended.
 Add a set of traits: Vocally Challenged - Alien, Gorilla, etc.
@@ -158,6 +160,12 @@ New
 ###			C	Skin Color
 New
 ##		C	Behavior
+###			T	Grab Alcohol
+
+###			T	Grab Drugs
+
+###			C	Grab Everything
+New
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
 ###			C	Ambush
@@ -180,8 +188,6 @@ Agent.firefighter
 Agent.fightsFires
 ###			C	First Aider
 Revives Aligned if they can within a certain timer
-###			C	Grab Everything
-New
 ###			C	Heister
 Picks a chest on the level, and tries to fight their way to loot it. 
 If successful, deactivates behavior.
@@ -298,9 +304,11 @@ Require Cannibalism? Maybe not
 Complete
 ###			√	More
 Complete
+###			√	Much More
+Complete
 ###			√	Zero
 Complete
-##		√C	Drug Warrior
+##		C	Drug Warrior
 ###			C	Suppress Syringe Text/Audio
 The `-Syringe` text is just clutter
 The sound is sometimes not applicable lorewise
@@ -311,7 +319,9 @@ Initiate a 15s timer, then detonate a Huge explosion
 Interface with Timer traits and Explosion traits to allow player to customize
 ###			C	Sweaty
 Gain Wet, lmao
-##		C	Explode On Death
+##		CT	Explode On Death
+###			T	00 Do they explode when... exploded?
+Verify by kill w rocket
 ###			C	00 Explodes when Arrested
 
 ###			√	00 Cop Bot not Exploding
@@ -323,7 +333,6 @@ P_StatusEffects_ExplodeBody.GibItAShot
 ##		C	Drug Warrior Modifiers
 ###			C	Extended Release
 Effect lasts until end of combat
-###			C	Heelie 
 ###			C	Last Stander
 Effect triggers when they would flee instead of at beginning of combat
 ####			C	Extended Release interaction
@@ -333,8 +342,9 @@ Effect triggers on end of threat (Regenerate, smoke, invisible)
 ###			C	Whatta Rush
 Effect gains 2s of duration on damage
 ##		CT	Explode On Death
-###			C	00 Does not explode when killed with Cyanide
-###			C	00 Explodes when Arrested
+###			H	00 Does not explode when killed with Cyanide
+There's no vanilla precedent for this particular situation, so let's see what users prefer.
+###			H	00 Explodes when Arrested
 Not too concerned, considering this is vanilla for Slaves.
 ###			C	00 Refactor
 See other Explosion trait groups
@@ -375,11 +385,42 @@ Complete
 ###			√	Huge
 Complete
 ##		C	Explosion Timer
-###			C	Hidden Fuse
+Vanilla for EOD is 1.5 seconds
+###			C	Cinematic Fuse
+Base value 3m, meant to be used with Ridiculous Explosion
+Displays as with Disaster
+###			C	Suppress Countoff
+No countoff numbers
+Works with Cinematic Disaster countoff too
+###			C	Suppress Red Blink
 No red blink before explosion
 ###			C	Long Fuse
+3.00s
+5m with Cinematic
+###			C	Longer Fuse
+5.00s
+10m with Cinematic
+###			C	Longest Fuse
+10.00s
+15m with Cinematic
 ###			C	Short Fuse
+0.75s
+1m with Cinematic
 ###			C	Zero Fuse
+0.0
+##		C	Explosion Timer Trigger
+###			C	Combat Start
+###			C	Death
+###			C	Low Health
+###			C	Spawn
+This is more of a utility, to allow designers to explode or burn things at level start.
+##		C	Gib Type
+###			√	Ghost Gibs
+Complete
+###			√	Ice Gibs
+Complete
+###			√	Normal Gibs
+Complete
 ##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted

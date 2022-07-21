@@ -153,7 +153,6 @@
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_ItemFunctions.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
-    <Compile Include="Patches\Level\P_LevelTransition.cs" />
     <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
@@ -168,6 +167,7 @@
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
+    <Compile Include="Traits\Behavior\Grab_Everything.cs" />
     <Compile Include="Traits\Behavior\Grab_Drugs.cs" />
     <Compile Include="Traits\Behavior\Grab_Alcohol.cs" />
     <Compile Include="Traits\Behavior\Grab_Food.cs" />
