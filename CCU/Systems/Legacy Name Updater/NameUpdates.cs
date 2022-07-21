@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CCU.Utilities.Legacy
+namespace CCU.Utilities.LNU
 {
     class NameUpdates
     {

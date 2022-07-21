@@ -15,7 +15,7 @@ using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
-using SORCE.Localization;
+using CCU.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;

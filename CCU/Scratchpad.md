@@ -1062,8 +1062,7 @@ Complete
 Complete
 ###			√	Relationless
 Complete
-##		√C	Relationships - Player
-###			C	Player Secret Hate
+##		√	Relationships - Player
 ###			√	Player Aligned
 Complete
 ###			√	Player Annoyed
@@ -1074,6 +1073,8 @@ Complete
 Complete
 ###			√	Player Loyal
 Complete
+###			√	Player Secret Hate
+Moved to Behavior - Ambush (more transparent to user)
 ###			√	Player Submissive 
 Complete
 ##		C	Senses - Hearing
@@ -1265,9 +1266,9 @@ Main quest rewards are multiplied by 10
   - Pretty much has exactly what you need.
 #		C	Item Groups
 wut
-#		C	Object Additions
-##		H	Custom Object variables
-###			C	Readables
+#		CT	Object Additions
+##		CT	Custom Object variables
+###			CT	Readables
 Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
 	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
 
@@ -1280,8 +1281,16 @@ The text string, in its path from user input to the object itself
 
 Opening the field to edit it: 
 	LevelEditor.OpenLongDescription
-####			C	Enabling input field
-LevelEditor.UpdateInterface		- Search for "Sign"
+####			T	Setup object
+P_BasicObject.Spawn
+####			T	Display input field
+P_LevelEditor.UpdateInterface
+####			T	Edit input field
+P_LevelEditor.PressedLoadExtraVarStringList
+####			C	Custom Sprites when readable text present
+Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
+#####				C	Computer
+"Unread Mail" icon on screen
 ###			C	Containables
 Allow object to store items:
 	Shelf, Toilet
@@ -1300,29 +1309,3 @@ Ability to be already shooting water according to direction
 This would really only make sense with a Stop & Frisk mod.
 ##			C	Movie Screen
 Allow Text like Sign
-#		C	Player Utilities
-This might need to be its own mod
-##		C	Mouse3 Bind to command followers
-- Target
-  - Ground - All Stand Guard
-  - Agent - All Attack
-  - Self - All Follow
-- Could also be an item or SA
-##		C	Mutators to omit Vanilla content when custom is available
-- If designer has added customs to be Roamers, or Hide in Bushes, etc., have some mutators to exclude Vanilla types from those spawning behaviors
-##		C	Save Chunk Pack configuration between loads
-- I.e., only deactivate chunk packs when the player says so!
-  - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-##		C	Show Chunk info on Mouseover in Map mode
-- When in gameplay map view, mouseover a chunk to see its name and author in the unused space in the margins.
-  - Gives credit to author
-  - Helps identify gamebreaking chunks, allowing you to not use the chunk pack or notify their author.
-    - This is useful but doesn't belong in CCU, it belongs in a QOL mod
-#		Notes dump - Anything below here
-Removed from Readme
-
-##			Roamer Traits
-- Add a trait to have that NPC show up in the list of available roaming NPCs in various districts.
-  - E.g., make Junkie, add Roamer_Slums. Then make a level and in Features, his name will pop up. [Maybe possible through Trait OnAdded/OnRemoved behaviors]
-  - Could also have this create a mutator with Custom Roamers, allowing designers to affect vanilla gameplay with new NPCs
-  - LevelEditor.customCharacterList has all customs saved. Iterate through this and find appropriate traits, then add through RandomAgents.fillAgents

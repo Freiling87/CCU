@@ -153,6 +153,7 @@
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_ItemFunctions.cs" />
     <Compile Include="Patches\Inventory\P_RandomItems.cs" />
+    <Compile Include="Patches\Objects\P_BasicObject.cs" />
     <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
+    <Compile Include="Systems\Readable Objects\Readables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
@@ -420,7 +422,7 @@
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Hostile.cs" />
     <Compile Include="Traits\T_CCU.cs" />
-    <Compile Include="Utilities\Legacy\NameUpdates.cs" />
+    <Compile Include="Systems\Legacy Name Updater\NameUpdates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Documentation\BestPractices.md" />

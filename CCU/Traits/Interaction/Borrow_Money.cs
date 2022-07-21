@@ -1,6 +1,6 @@
 ﻿using RogueLibsCore;
 using System;
-using SORCE.Localization;
+using CCU.Localization;
 
 namespace CCU.Traits.Interaction
 {

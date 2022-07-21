@@ -1,10 +1,11 @@
-﻿namespace SORCE.Localization
+﻿namespace CCU.Localization
 {
 	public static class CButtonText
     {
 		public const string
 			HirePermanentExpert = "AssistMe_Permanent",
 			HirePermanentMuscle = "HireAsProtection_Permanent",
+			Investigate = "Investigate", // For readable objects
 
 			z = "";
     }

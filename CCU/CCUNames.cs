@@ -1,5 +1,5 @@
 ﻿using RogueLibsCore;
-using SORCE.Localization;
+using CCU.Localization;
 
 namespace CCU
 {

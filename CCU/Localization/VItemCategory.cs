@@ -1,4 +1,4 @@
-﻿namespace SORCE.Localization
+﻿namespace CCU.Localization
 {
 	public static class VItemCategory
 	{

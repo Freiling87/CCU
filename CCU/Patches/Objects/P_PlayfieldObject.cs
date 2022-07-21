@@ -5,7 +5,7 @@ using CCU.Traits.Cost_Scale;
 using CCU.Traits.Map_Marker;
 using HarmonyLib;
 using RogueLibsCore;
-using SORCE.Localization;
+using CCU.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
