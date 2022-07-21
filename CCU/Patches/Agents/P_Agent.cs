@@ -1,10 +1,12 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Challenges.Followers;
+using CCU.Localization;
 using CCU.Traits.Behavior;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Hack;
+using CCU.Traits.Language;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Rel_General;
@@ -53,6 +55,33 @@ namespace CCU.Patches.Agents
 			if (!__instance.oma.shookDown && !GC.loadLevel.LevelContainsMayor() && __instance.HasTrait<Extortable>())
 				__result = true;
 		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
+		public static void CanUnderstandEachOther_Postfix(Agent otherAgent, Agent __instance, ref bool __result)
+        {
+			if (__result is false && !__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked))
+            {
+				foreach (T_Language trait in __instance.GetTraits<T_Language>())
+                {
+					if (trait.VanillaSpeakers.Contains(otherAgent.agentName)
+						|| otherAgent.GetTraits<T_Language>().Contains(trait))
+                    {
+						__result = true;
+						return;
+					}
+				}
+
+				foreach (T_Language trait in otherAgent.GetTraits<T_Language>())
+				{
+					if (trait.VanillaSpeakers.Contains(__instance.agentName)
+						|| __instance.GetTraits<T_Language>().Contains(trait))
+					{
+						__result = true;
+						return;
+					}
+				}
+			}
+        }
 
 		/// <summary>
 		/// Extend Job Type Pseudo-enum 

@@ -25,15 +25,13 @@ namespace CCU.Patches.Objects
         {
 			Agent agent = __instance.GetComponent<Agent>();
 
-			if (agent is null)
-				return;
+			if (!(agent is null))
+			{
+				T_CostScale trait = agent.GetTrait<T_CostScale>();
 
-			T_CostScale trait = agent.GetTrait<T_CostScale>();
-
-			if (trait is null)
-				return;
-			
-			__result = (int)(__result * trait.CostScale);
+				if (!(trait is null))
+					__result = (int)(__result * trait.CostScale);
+			}
 		}
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new [] { typeof(int), typeof(string) })]

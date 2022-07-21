@@ -113,13 +113,13 @@ namespace CCU.Patches.Agents
 					{
 						string hireButtonText =
 							agent.GetTraits<T_HireType>().Where(t => t.ButtonText == VButtonText.Hire_Muscle).Any()
-							? VButtonText.Hire_Muscle
-							: VButtonText.Hire_Expert;
+								? VButtonText.Hire_Muscle
+								: VButtonText.Hire_Expert;
 
 						string cost =
 							agent.GetTraits<T_HireType>().Where(t => t.ButtonText == VButtonText.Hire_Muscle).Any()
-							? VDetermineMoneyCost.Hire_Soldier
-							: VDetermineMoneyCost.Hire_Hacker;
+								? VDetermineMoneyCost.Hire_Soldier
+								: VDetermineMoneyCost.Hire_Hacker;
 
 						if (agent.HasTrait<Permanent_Hire_Only>())
 							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(cost + "_Permanent"));

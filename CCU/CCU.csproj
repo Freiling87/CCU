@@ -278,6 +278,10 @@
     <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
+    <Compile Include="Traits\Language\Aelian_Speaker.cs" />
+    <Compile Include="Traits\Language\Zombese_Speaker.cs" />
+    <Compile Include="Traits\Language\Monkese_Speaker.cs" />
+    <Compile Include="Traits\Language\T_Language.cs" />
     <Compile Include="Traits\Loadout\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />
     <Compile Include="Traits\MapMarker\T_MapMarker.cs" />

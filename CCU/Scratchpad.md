@@ -64,8 +64,8 @@ Listed in order of Parent tier summary symbol priority:
       - Ghost Gibs
       - Ice Gibs
       - Normal Gibs
-#		C	Bug Reports
-##			C	Seek & Destroy x Player Loyal
+#		CT	Bug Reports
+##			T	Seek & Destroy x Player Loyal
 Freeze on load, need error message
 This worked in previous version, so it should be pretty findable
 ##			C	Non-Shop Payment Interactions Free
@@ -75,10 +75,11 @@ This worked previously, so possibly review recent commits now that they're a lit
 CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
 	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
   		- Specifically for Aligned, it might be best to copy the Hypnotizer mk2's effects, since 
-##			C	Vocally Challenged language-matching
+##			T	Vocally Challenged language-matching
 CL - Also not a bug but a weird immersion break working as intended, custom gorillas are aligned now but oddly enough don't speak the same language since vocally challenged seems to be class specific. There might be value in having non-gorillas aligned with gorillas so I don't know if you should edit the trait itself but maybe the addition of a "speaks gorilla" language trait would be a good solution. Or you could just leave it as is, since it is the game working as intended.
 Add a set of traits: Vocally Challenged - Alien, Gorilla, etc.
 OR, exempt people for being aligned? idk
+Attempt: See Traits/Language
 #		C	Systems
 ##			C	Legacy Name Updater
 ###				C	Iterate until failure
@@ -415,6 +416,10 @@ No red blink before explosion
 ###			C	Spawn
 This is more of a utility, to allow designers to explode or burn things at level start.
 ##		C	Gib Type
+###			C	Wall types
+Include sound effect where applicable, like with glass
+###			C	Ungibbable
+
 ###			√	Ghost Gibs
 Complete
 ###			√	Ice Gibs
@@ -609,22 +614,6 @@ Complete
 Complete
 ###			√	Use Blood Bag
 Complete
-##		√C	Interaction Gate
-###			C	Insular
-###			C	Insularer 
-###			C	Insularest
-###			C	Professional
-Allow interact with Annoyed
-###			√	Untrusting
-Complete
-###			√	Untrustinger
-Complete
-###			√	Untrustingest
-Complete
-##		C	Gibs
-###			C	All wall-type gibs
-Include sound effect where applicable, like with glass
-###			C	Ungibbable
 ##		C	Hire Damage Tolerance
 ###			C	Anyweather
 Hiree will leave if a Hostile sees them
@@ -837,6 +826,13 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
+##		T	Language
+###			T	00 Base Feature
+P_Agent.
+	CanUnderstandEachOther_Postfix
+###			√	Alienian
+###			√	Monkese
+###			√	Zombese
 ##		C	Loadout
 ###			C	CC Items Inclusion
 Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
@@ -928,6 +924,8 @@ Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
 ###			C	Oblivious
 Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
 But will enter combat if their teammates do.
+###			C	Psychic Shield
+Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
 ###			C	Reviveable (Infinite)
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
 ###			C	Reviveable (One)
