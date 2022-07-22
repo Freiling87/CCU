@@ -19,7 +19,7 @@ namespace CCU.Patches.Objects
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(BasicObject.Spawn), new[] {typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk))]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(BasicObject.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static IEnumerable<CodeInstruction> Spawn_SetupReadables(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

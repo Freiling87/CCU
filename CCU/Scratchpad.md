@@ -6,6 +6,38 @@ Listed in order of Parent tier summary symbol priority:
 	C = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #			0.1.1 Changelog
+- **Feature additions**
+  - Mutators
+    - Followers
+      - Homesickness Disabled
+      - Homesickness Mandatory
+  - Traits
+    - Behavior
+      - Grab Alcohol
+      - Grab Food
+    - Cost Scale
+      - Much More (200% cost)
+    - Explode On Death
+      - Dizzy
+      - EMP
+      - Firebomb
+      - Noise Only
+      - Slime
+      - Stomp
+      - Water
+    - Relationships - Faction
+      - Faction Firefighter Aligned
+      - Faction Gorilla Aligned 
+    - Gib Type (Make sure to use one with Explode on Death)
+      - Ghost Gibs
+      - Ice Gibs
+      - Normal Gibs
+  - Objects
+    - Readables are now supported! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
+      - Readable objects: Computer, Gravestone, Shelf, Sign, Podium
+- **Tweaks**
+  - Pay Debt is now scaled to Cost Scale traits
+  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
 - **Bugfixes**
   - Pick Pockets no longer cancels the setup of various interaction and merchant traits
   - Drug Warrior - Wildcard now runs without crashing the game
@@ -35,35 +67,6 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Vampire → Faction Werewolf Aligned
     - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
-- **Tweaks**
-  - Pay Debt is now scaled to Cost Scale traits
-  - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
-- **Feature additions**
-  - Mutators
-    - Followers
-      - Homesickness Disabled
-      - Homesickness Mandatory
-  - Traits
-    - Behavior
-      - Grab Alcohol
-      - Grab Food
-    - Cost Scale
-      - Much More (200% cost)
-    - Explode On Death
-      - Dizzy
-      - EMP
-      - Firebomb
-      - Noise Only
-      - Slime
-      - Stomp
-      - Water
-    - Relationships - Faction
-      - Faction Firefighter Aligned
-      - Faction Gorilla Aligned 
-    - Gib Type
-      - Ghost Gibs
-      - Ice Gibs
-      - Normal Gibs
 #		CT	Bug Reports
 ##			T	Seek & Destroy x Player Loyal
 Freeze on load, need error message
@@ -1268,29 +1271,22 @@ Main quest rewards are multiplied by 10
 wut
 #		CT	Object Additions
 ##		CT	Custom Object variables
-###			CT	Readables
-Allow player to define text, call button "Investigate" or "Look" to be as broad as possible
-	Altar, Computer, Door, Gravestone, Movie Screen, Shelf, Podium
-
-The text string, in its path from user input to the object itself
-	LevelEditor.extraVarStringObject.text
-	LevelEditorTile.extraVarString
-	SpawnerBasic.extraVarString
-	PlayfieldObject.extraVarString
-	Sign.signTextOnline
-
-Opening the field to edit it: 
-	LevelEditor.OpenLongDescription
-####			T	Setup object
-P_BasicObject.Spawn
-####			T	Display input field
-P_LevelEditor.UpdateInterface
-####			T	Edit input field
-P_LevelEditor.PressedLoadExtraVarStringList
+###			C	Readables
+####			C	Movie Screen
+Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
+Should be ready with next RL release
 ####			C	Custom Sprites when readable text present
 Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
 #####				C	Computer
 "Unread Mail" icon on screen
+####			√	Input field Display
+P_LevelEditor.UpdateInterface
+####			√	Input field Edit
+P_LevelEditor.PressedLoadExtraVarStringList
+####			√	Setup object
+P_BasicObject.Spawn
+####			√	Interaction
+Readables.Setup
 ###			C	Containables
 Allow object to store items:
 	Shelf, Toilet

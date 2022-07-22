@@ -429,6 +429,7 @@
     <None Include="Documentation\ChangeLog.md" />
     <None Include="Documentation\Installation.md" />
     <None Include="Documentation\Challenges.md" />
+    <None Include="Documentation\Objects.md" />
     <None Include="Documentation\NPCUtilities.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>

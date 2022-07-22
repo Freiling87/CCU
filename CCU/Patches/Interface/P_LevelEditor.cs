@@ -116,7 +116,7 @@ namespace CCU.Patches.Interface
 			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
+				expectedMatches: 2,
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),

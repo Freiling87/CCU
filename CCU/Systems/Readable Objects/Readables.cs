@@ -1,7 +1,9 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
+using HarmonyLib;
 using RogueLibsCore;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace CCU.Systems.Readables
 {
@@ -16,11 +18,11 @@ namespace CCU.Systems.Readables
 			// vObject.Altar,
 			vObject.Computer,
 			// vObject.Counter,
-			// vObject.Door,
+			// vObject.Door,		// Has Extravar field already
 			vObject.Gravestone,
-			vObject.MovieScreen,
+			// vObject.MovieScreen, // Didn't work yet, see notes
 			vObject.Shelf,
-			vObject.Sign,
+			// vObject.Sign,		// No need, and interacts poorly
 			// vObject.Table,
 			// vObject.TableBig,
 			vObject.Podium
@@ -49,14 +51,16 @@ namespace CCU.Systems.Readables
 			{
 				if (ReadableObjects.Contains(h.Object.objectName) && h.Object.extraVarString != "")
 				{
-					if (h.Object is Computer computer)
+                    if (h.Object is Computer computer)
                     {
-						// Remove vanilla "Read Email" button
+						FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
+						List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
+						interactions.RemoveAll(i => i.ButtonName is VButtonText.ReadEmail);
 					}
 
 					h.AddImplicitButton(CButtonText.Investigate, m =>
 					{
-						h.Object.ShowBigImage(h.Object.extraVarString, "", null);
+						m.Object.ShowBigImage(m.Object.extraVarString, "", null);
 					});
 				}
 			});

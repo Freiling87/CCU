@@ -13,7 +13,7 @@
 	public static class VButtonText
 	{
 		public const string
-        #region Agent Interaction
+        #region Agents
             AdministerBloodBag = "AdministerBloodBag",
 			AlignWithMe = "AlignWithMe",
 			Arena_SignUpToFight = "SignUpToFight",
@@ -50,8 +50,10 @@
 			PurchaseSlave = "PurchaseSlave",
 			PutMoneyTowardHome = "PutMoneyTowardHome",
 			UseBloodBag = "UseBloodBag",
-
+        #endregion
+		#region Objects
+			ReadEmail = "ReadEmail",
 		#endregion
-			NoMoreSemiColon = "lol";
+            NoMoreSemiColon = "lol";
 	}
 }
