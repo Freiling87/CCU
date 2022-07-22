@@ -15,7 +15,6 @@ using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
-using CCU.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -116,24 +115,24 @@ namespace CCU.Patches.Agents
 								? VButtonText.Hire_Muscle
 								: VButtonText.Hire_Expert;
 
-						string cost =
+						string costString =
 							agent.GetTraits<T_HireType>().Where(t => t.ButtonText == VButtonText.Hire_Muscle).Any()
-								? VDetermineMoneyCost.Hire_Soldier
+								? VDetermineMoneyCost.Hire_Soldier 
 								: VDetermineMoneyCost.Hire_Hacker;
 
 						if (agent.HasTrait<Permanent_Hire_Only>())
-							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(cost + "_Permanent"));
+							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(costString + "_Permanent"));
 						else if (agent.HasTrait<Permanent_Hire>())
                         {
-							agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost(cost));
-							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(cost + "_Permanent"));
+							agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost(costString));
+							agentInteractions.AddButton(hireButtonText + "_Permanent", agent.determineMoneyCost(costString + "_Permanent"));
 
 							if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
 								agentInteractions.AddButton(hireButtonText, 6666);
 						}
 						else // Vanilla Hire
                         {
-							agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost(cost));
+							agentInteractions.AddButton(hireButtonText, agent.determineMoneyCost(costString));
 							
 							if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
 								agentInteractions.AddButton(hireButtonText, 6666);
@@ -161,7 +160,7 @@ namespace CCU.Patches.Agents
 											&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
 					(interaction is Use_Blood_Bag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
 					continue;
-
+				
 				// Complex Exceptions
 				if (interaction is Buy_Round)
 				{
@@ -361,7 +360,7 @@ namespace CCU.Patches.Agents
 				else if (interaction is Pay_Debt)
 				{
 					// Cost scaling is done slightly different for this interaction, since it's not subject to level scaling.
-					float costScale = agent.GetTrait<T_CostScale>().CostScale;
+					float costScale = agent.GetTrait<T_CostScale>()?.CostScale ?? 1f;
 
 					agentInteractions.AddButton(interaction.ButtonText, (int)(interactingAgent.CalculateDebt() * costScale));
 				}
@@ -387,12 +386,12 @@ namespace CCU.Patches.Agents
 				}
 				else // Non-Exceptions
 				{
-					if (interaction.InteractionCost is null)
+					if (interaction.DetermineMoneyCost is null)
 						agentInteractions.AddButton(interaction.ButtonText);
 					else if (interaction.ExtraTextCostOnly)
-						agentInteractions.AddButton(interaction.ButtonText, interaction.InteractionCost);
+						agentInteractions.AddButton(interaction.ButtonText, interaction.DetermineMoneyCost);
 					else
-						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.InteractionCost));
+						agentInteractions.AddButton(interaction.ButtonText, agent.determineMoneyCost(interaction.DetermineMoneyCost));
 				}
 			}
 

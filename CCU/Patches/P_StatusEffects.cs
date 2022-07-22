@@ -243,20 +243,16 @@ namespace CCU.Patches
 
 		private static void GibItAShot(StatusEffects __instance)
 		{
-			logger.LogDebug("GibItAShot");
 			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().FirstOrDefault() is null)
 				return;
 
 			int gibType = T_GibType.GetGibType(__instance.agent);
-
-			logger.LogDebug("gibType:\t" + gibType);
 
 			//	Networking version
 			if (GC.multiplayerMode && !__instance.dontDoBloodExplosion)
 				__instance.agent.objectMult.Gib(gibType); 
 
 			//	Base version
-			//	Why Matt, why
 			if (gibType == 0)
 				__instance.NormalGib();
 			else if (gibType == 1)

@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => false;
         public override string ButtonText => null;
         public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => null; // Determined in code
+        public override string DetermineMoneyCost => null; // Determined in code
 
         [RLSetup]
         public static void Setup()

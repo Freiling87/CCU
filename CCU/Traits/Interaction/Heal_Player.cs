@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.Heal;
         public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => VDetermineMoneyCost.Heal;
+        public override string DetermineMoneyCost => VDetermineMoneyCost.Heal;
 
         [RLSetup]
         public static void Setup()

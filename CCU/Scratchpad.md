@@ -68,9 +68,13 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
 #		CT	Bug Reports
-##			T	Seek & Destroy x Player Loyal
-Freeze on load, need error message
-This worked in previous version, so it should be pretty findable
+##			C	Hole Bug
+Papparazzo wouldn't fall
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
+	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Hole.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 ##			C	Non-Shop Payment Interactions Free
 Every single non-shop payment interaction appears to be free now, even extending to vanilla NPCs. You can just walk up and hire any thief, bribe the cops, clear your debt, whatever.
 This worked previously, so possibly review recent commits now that they're a little more organized

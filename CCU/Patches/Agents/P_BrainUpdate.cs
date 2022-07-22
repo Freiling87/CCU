@@ -58,8 +58,6 @@ namespace CCU.Patches.Agents
 				LOSagent.losCheckAtIntervalsTime < 7)
 				return;
 
-			logger.LogDebug("CustomLOSChecks:\t" + LOSagent.agentName);
-			
 			List<string> pickupCategories = null;
 
 			try
@@ -99,8 +97,6 @@ namespace CCU.Patches.Agents
 			//	LOS Actions
 			if (LOSagent.specialAbility == vSpecialAbility.Cannibalize && LOSagent.HasTrait<Eat_Corpses>())
 			{
-				logger.LogDebug("Cannibalize");
-
 				if (!LOSagent.hasEmployer || LOSagent.health <= 15f)
 				{
 					List<Agent> deadAgentList = GC.deadAgentList;
@@ -132,8 +128,6 @@ namespace CCU.Patches.Agents
 			}
 			if (LOSagent.specialAbility == vSpecialAbility.StickyGlove && LOSagent.HasTrait<Pick_Pockets>() && !LOSagent.brainUpdate.thiefNoSteal)
 			{
-				logger.LogDebug("Pickpocket LOS");
-				
 				if (!LOSagent.hasEmployer)
 				{
 					List<Agent> lastSawAgentList2 = GC.lastSawAgentList;
@@ -166,8 +160,6 @@ namespace CCU.Patches.Agents
 			}
 			if (LOSagent.specialAbility == vSpecialAbility.Bite && LOSagent.HasTrait<Suck_Blood>())
 			{
-				logger.LogDebug("Suck Blood LOS");
-
 				if (!LOSagent.hasEmployer || LOSagent.health <= 15f)
 				{
 					List<Agent> lastSawAgentList3 = GC.lastSawAgentList;

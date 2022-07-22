@@ -13,7 +13,7 @@ namespace CCU.Traits.Language
             PostProcess = RogueLibs.CreateCustomTrait<Zombese_Speaker>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character speaks Zombese, the lingua franca of persons of additional lifespan. Speech requires no articulation of the mouth or tongue. Just a stream of raw brain-data oozing out from Broca's Area. Not as relaxing as whalesong.\n\n" +
+                    [LanguageCode.English] = String.Format("This character speaks Zombese, the lingua franca of persons of additional lifespan. Speech requires no articulation of the mouth or tongue - just a stream of raw brain-data oozing out from Broca's Area. Much in common with Whalesong, but nowhere near as relaxing.\n\n" +
                     "Agent can bypass Vocally Challenged when speaking to vanilla Zombies, and anyone else with this trait."),
                 })
                 .WithName(new CustomNameInfo

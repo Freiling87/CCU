@@ -42,8 +42,6 @@ namespace CCU.Traits.Combat
         {
             if (agent.HasTrait<Nth_Wind>())
             {
-                logger.LogDebug("Nth_Wind ResetFlags: " + agent.agentRealName);
-
                 if (agent.GetTraits<T_DrugWarrior>().Any())
                 {
                     agent.combat.canTakeDrugs = true;

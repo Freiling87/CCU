@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.DonateBlood;
         public override bool ExtraTextCostOnly => true;
-        public override string InteractionCost =>
+        public override string DetermineMoneyCost =>
             GameController.gameController.challenges.Contains("LowHealth")
                 ? VDetermineMoneyCost.GiveBloodLowHealth
                 : VDetermineMoneyCost.GiveBlood;

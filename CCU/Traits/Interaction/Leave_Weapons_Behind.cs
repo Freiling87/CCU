@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => true;
         public override string ButtonText => VButtonText.LeaveWeaponsBehind;
         public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => null;
+        public override string DetermineMoneyCost => null;
 
         // Should include FollowersLeaveWeaponsBehind
 

@@ -12,7 +12,7 @@ namespace CCU.Traits
 
 		public static void LogTraitList(Agent agent)
 		{
-			logger.LogDebug("TRAIT LIST: " + agent.agentName);
+			logger.LogDebug("TRAIT LIST: " + agent.agentRealName);
 
 			foreach (Trait trait in agent.statusEffects.TraitList)
 				logger.LogDebug("\t" + trait.traitName);

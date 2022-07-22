@@ -2,6 +2,7 @@
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Challenges.Followers;
 using CCU.Localization;
+using CCU.Traits;
 using CCU.Traits.Behavior;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
@@ -134,19 +135,10 @@ namespace CCU.Patches.Agents
 			return false;
 		}
 
-		/// <summary>
-		/// Lists the agent's trait list on interaction.
-		/// </summary>
-		/// <param name="otherAgent"></param>
-		/// <param name="__instance"></param>
-		/// <returns></returns>
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
 		public static bool Interact_Prefix(Agent otherAgent, Agent __instance)
         {
-			logger.LogDebug("Agent Trait List: " + __instance.agentRealName);
-			foreach (Trait trait in __instance.statusEffects.TraitList)
-				logger.LogDebug("\t" + trait.traitName);
-
+			TraitManager.LogTraitList(__instance); // Leave it, you'll need it
 			return true;
         }
 

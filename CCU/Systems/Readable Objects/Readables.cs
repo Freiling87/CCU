@@ -30,10 +30,6 @@ namespace CCU.Systems.Readables
 
 		public static string MagicObjectName(string originalName)
 		{
-			Core.LogMethodCall();
-			// Need this to test inputs for LevelEditor.PressedScrollingMenuButton
-			logger.LogDebug("\tInput: " + originalName);
-
 			if (Readables.ReadableObjects.Contains(originalName))
 				return "Sign";
 

@@ -7,6 +7,6 @@
         public abstract bool AllowUntrusted { get; }
         public abstract string ButtonText { get; }
         public abstract bool ExtraTextCostOnly { get; }
-        public abstract string InteractionCost { get; }
+        public abstract string DetermineMoneyCost { get; }
     }
 }

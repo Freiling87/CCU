@@ -20,21 +20,7 @@ namespace CCU.Patches.Objects
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new[] { typeof(int), typeof(string) })]
-        public static void DetermineMoneyCost_Postfix(int moneyAmt, string transactionType, PlayfieldObject __instance, ref int __result)
-        {
-			Agent agent = __instance.GetComponent<Agent>();
-
-			if (!(agent is null))
-			{
-				T_CostScale trait = agent.GetTrait<T_CostScale>();
-
-				if (!(trait is null))
-					__result = (int)(__result * trait.CostScale);
-			}
-		}
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new [] { typeof(int), typeof(string) })]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new[] { typeof(int), typeof(string) })]
 		private static IEnumerable<CodeInstruction> DetermineMoneyCost_DetectCustomValues(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -42,48 +28,52 @@ namespace CCU.Patches.Objects
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
+				targetInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldc_R4, 300),
-					new CodeInstruction(OpCodes.Stloc_0),
-					new CodeInstruction(OpCodes.Ldc_I4_0),
-					new CodeInstruction(OpCodes.Stloc_S, 4),
+					new CodeInstruction(OpCodes.Ldloc_S, 4),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldarg_1),					//	int moneyAmt
+					new CodeInstruction(OpCodes.Ldloc_0),					//	float num
 					new CodeInstruction(OpCodes.Ldarg_2),					//	string transactionType
 					new CodeInstruction(OpCodes.Call, customPriceByName),	//	float
 					new CodeInstruction(OpCodes.Stloc_0),					//	num
-				}, 
-				postfixInstructionSequence: new List<CodeInstruction>
-                {
-					new CodeInstruction(OpCodes.Ldloc_S),
-					new CodeInstruction(OpCodes.Brfalse_S),
-                });
+					new CodeInstruction(OpCodes.Ldloc_S, 4),				//	
+				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		private static float CustomPriceByName(int originalNum, string transactionType)
-        {
+		private static float CustomPriceByName(float originalPrice, string transactionType)
+		{
 			int levelModifier = Mathf.Clamp(GC.sessionDataBig.curLevelEndless, 1, 15);
 
 			switch (transactionType)
-            {
+			{
 				case CDetermineMoneyCost.HirePermanentExpert:
-					return (240 + (levelModifier - 1) * 16);
+					return 240f + 16 * (levelModifier - 1);
 				case CDetermineMoneyCost.HirePermanentMuscle:
-					return (160 + (levelModifier - 1) * 16);
+					return 160f + 16 * (levelModifier - 1);
 				default:
-					return originalNum;
+					return originalPrice;
 			}
-        }
+		}
 
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new[] { typeof(int), typeof(string) })]
+        public static void DetermineMoneyCost_Postfix(PlayfieldObject __instance, ref int __result)
+        {
+			Agent agent = __instance.GetComponent<Agent>();
 
-		// Shouldn't these include the item value based exchange rate?
-		public static int AlcoholToMoney(int moneyAmt) =>
+			if (!(agent is null))
+			{
+				float scale = agent.GetTrait<T_CostScale>()?.CostScale ?? 1f;
+				__result = (int)(__result * scale);
+			}
+		}
+
+        #region Cost Currency
+        // Shouldn't these include the item value based exchange rate?
+        public static int AlcoholToMoney(int moneyAmt) =>
 			moneyAmt + 8008134;
 		public static int BananasToMoney(int moneyAmt) =>
 			moneyAmt + 6788;
@@ -164,9 +154,10 @@ namespace CCU.Patches.Objects
 
 			return true;
         }
+        #endregion
 
-		// [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
-		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
+        // [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
+        public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
 		{
 			if (__instance.CompareTag("Agent"))
 			{

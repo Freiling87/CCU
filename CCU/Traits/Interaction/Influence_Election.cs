@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.InfluenceElection;
         public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => VDetermineMoneyCost.BribeElection;
+        public override string DetermineMoneyCost => VDetermineMoneyCost.BribeElection;
 
         [RLSetup]
         public static void Setup()

@@ -30,12 +30,36 @@ namespace CCU
 		public void Awake()
 		{
 			LogMethodCall();
-
+			 
 			new Harmony(pluginGUID).PatchAll();
 			RogueLibs.LoadFromAssembly();
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");
+		public static void LogVariables(params object[] variables)
+        {
+			// TODO
+
+			foreach (object variable in variables)
+            {
+				string text = nameof(variable); // Can't access these this way.
+				int tabs = (40 - text.Length) / 4; // Might need to round up.
+
+				for (int i = 0; i < tabs; i++)
+					text += "\t";
+
+				if (variable is string)
+                {
+					text += (string)variable;
+                }
+				else if (variable is int)
+                {
+					text += (int)variable;
+                }
+
+				logger.LogDebug(text);
+            }
+        }
 	}
 
 	public static class CoreTools

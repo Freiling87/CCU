@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.Identify;
         public override bool ExtraTextCostOnly => false;
-        public override string InteractionCost => VDetermineMoneyCost.IdentifySyringe;
+        public override string DetermineMoneyCost => VDetermineMoneyCost.IdentifySyringe;
 
         [RLSetup]
         public static void Setup()

@@ -9,7 +9,7 @@ namespace CCU.Traits.Interaction
         public override bool AllowUntrusted => false;
         public override string ButtonText => VButtonText.AdministerBloodBag;
         public override bool ExtraTextCostOnly => true;
-        public override string InteractionCost => VDetermineMoneyCost.HP_20;
+        public override string DetermineMoneyCost => VDetermineMoneyCost.HP_20;
 
         [RLSetup]
         public static void Setup()
