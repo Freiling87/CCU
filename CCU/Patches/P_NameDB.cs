@@ -19,8 +19,7 @@ namespace CCU.Patches
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(NameDB.GetName), argumentTypes: new[] { typeof(string), typeof(string) })]
 		public static bool GetName_Prefix(ref string myName, string type)
 		{
-			if (type == "StatusEffect" &&
-					Legacy.TraitConversions.ContainsKey(myName))
+			if (type == "StatusEffect" && Legacy.TraitConversions.ContainsKey(myName))
 				myName = T_CCU.DisplayName(Legacy.TraitConversions[myName]);
 
 			return true;
@@ -29,9 +28,11 @@ namespace CCU.Patches
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(NameDB.GetName), argumentTypes: new[] { typeof(string), typeof(string) })]
 		public static void GetName_Postfix(string myName, string type, ref string __result)
         {
-			if (type != "StatusEffect" || !__result.Contains("E_"))
+			if (Core.debugMode ||
+				type != "StatusEffect" || !__result.Contains("E_"))
 				return;
 
+		repeat:
 			foreach (Type trait in Legacy.TraitConversions.Values)
             {
 				string traitName = T_CCU.DisplayName(trait);
@@ -39,7 +40,7 @@ namespace CCU.Patches
 				if (__result == "E_" + traitName)
                 {
 					__result = __result.Remove(0, 2);
-					return;
+					goto repeat;
 				}	
 			}
 		}

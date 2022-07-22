@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,7 @@ namespace CCU.Traits
 			foreach (Trait trait in agent.statusEffects.TraitList)
 				logger.LogDebug("\t" + trait.traitName);
 		}
+
 		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList) =>
 			traitList.Where(trait => trait.GetHook<T_CCU>() is null).ToList();
 	}

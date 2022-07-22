@@ -283,8 +283,8 @@
     <Compile Include="Traits\Language\ErSdtAdt_Speaker.cs" />
     <Compile Include="Traits\Language\Foreign_Speaker.cs" />
     <Compile Include="Traits\Language\Werewelsh_Speaker.cs" />
-    <Compile Include="Traits\Language\Zombese_Speaker.cs" />
-    <Compile Include="Traits\Language\Monkese_Speaker.cs" />
+    <Compile Include="Traits\Language\Lang_Zonbi_Speaker.cs" />
+    <Compile Include="Traits\Language\High_Goryllian_Speaker.cs" />
     <Compile Include="Traits\Language\T_Language.cs" />
     <Compile Include="Traits\Loadout\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />

@@ -25,6 +25,12 @@ Listed in order of Parent tier summary symbol priority:
       - Slime
       - Stomp
       - Water
+    - Language (For use with or without Vocally Challenged)
+      - ErSdtAdt Speaker
+      - Foreign Speaker
+      - Lang Zonbi Speaker
+      - High Goryllian Speaker
+      - Werewelsh Speaker
     - Relationships - Faction
       - Faction Firefighter Aligned
       - Faction Gorilla Aligned 
@@ -68,25 +74,21 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
 #		CT	Bug Reports
-##			C	Hole Bug
+##			C	Relationships not saved with game
+CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
+	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
+  		- Specifically for Aligned, it might be best to copy the Hypnotizer mk2's effects, since 
+#		√	Bug Archive
+##			√	Fast or Rollerskates won't fall in Hole
+###					Issue
 Papparazzo wouldn't fall
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
 	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 	Hole.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-##			C	Non-Shop Payment Interactions Free
-Every single non-shop payment interaction appears to be free now, even extending to vanilla NPCs. You can just walk up and hire any thief, bribe the cops, clear your debt, whatever.
-This worked previously, so possibly review recent commits now that they're a little more organized
-##			C	Relationships not saved with game
-CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
-	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
-  		- Specifically for Aligned, it might be best to copy the Hypnotizer mk2's effects, since 
-##			T	Vocally Challenged language-matching
-CL - Also not a bug but a weird immersion break working as intended, custom gorillas are aligned now but oddly enough don't speak the same language since vocally challenged seems to be class specific. There might be value in having non-gorillas aligned with gorillas so I don't know if you should edit the trait itself but maybe the addition of a "speaks gorilla" language trait would be a good solution. Or you could just leave it as is, since it is the game working as intended.
-Add a set of traits: Vocally Challenged - Alien, Gorilla, etc.
-OR, exempt people for being aligned? idk
-Attempt: See Traits/Language
+###				√	Fix
+Vanilla bug
 #		C	Systems
 ##			C	Legacy Name Updater
 ###				C	Iterate until failure
@@ -833,8 +835,31 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
-##		T	Language
-###			T	00 Base Feature
+##		C	Language (Overhaul)
+###			C	00 Mutator: Language System
+- NPCs have a chance to speak a foreign language
+  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
+- NPCs have a chance to have Vocally Challenged
+  - If they do, they always have at least one foreign language
+- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
+- Enables Polyglot trait choice
+- Gives the Translator an actual reason to exist
+- All hired agents can act as translators
+- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
+###			C	00 Mutator Group: Our Town
+Shifts the population so that about 66% are speakers, and one third of those don't speak English.
+- Chinatown
+- Brighton Beach
+- Etc. with all config languages
+- Gorillian Gables Luxury Living Community (Monkese)
+- District 9 (ErSdtAdt)
+- Werewales (Werewelsh)
+- 28th St. (Lang Zonbi)
+###			C	00 Trait: Polyglot
+Trait choice locked behind Language System Mutator
+- Gain 2 languages on taking the trait
+- Gain 1 langauge every 3 levels
+###			√	00 Base Feature
 P_Agent.
 	CanUnderstandEachOther_Postfix
 ###			√	Alienian

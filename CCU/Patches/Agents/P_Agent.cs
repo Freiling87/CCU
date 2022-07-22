@@ -61,26 +61,17 @@ namespace CCU.Patches.Agents
 		public static void CanUnderstandEachOther_Postfix(Agent otherAgent, Agent __instance, ref bool __result)
         {
 			if (__result is false && !__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked))
-            {
-				foreach (T_Language trait in __instance.GetTraits<T_Language>())
-                {
-					if (trait.VanillaSpeakers.Contains(otherAgent.agentName)
-						|| otherAgent.GetTraits<T_Language>().Contains(trait))
-                    {
-						__result = true;
-						return;
-					}
-				}
+			{
+				List<T_Language> myLanguages = __instance.GetTraits<T_Language>().ToList();
+				List<T_Language> yourLanguages = otherAgent.GetTraits<T_Language>().ToList();
 
-				foreach (T_Language trait in otherAgent.GetTraits<T_Language>())
-				{
-					if (trait.VanillaSpeakers.Contains(__instance.agentName)
-						|| __instance.GetTraits<T_Language>().Contains(trait))
-					{
-						__result = true;
-						return;
-					}
-				}
+				if (myLanguages.Any(lang => yourLanguages.Exists(otherLang => lang.Trait.traitName == otherLang.Trait.traitName)) ||
+					myLanguages.Any(t => t.VanillaSpeakers.Contains(otherAgent.agentName)) ||
+					yourLanguages.Any(t => t.VanillaSpeakers.Contains(__instance.agentName)))
+                {
+					__result = true;
+					return;
+				} 
 			}
         }
 
@@ -135,11 +126,11 @@ namespace CCU.Patches.Agents
 			return false;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
-		public static bool Interact_Prefix(Agent otherAgent, Agent __instance)
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
+		public static void Interact_Prefix(Agent otherAgent, Agent __instance)
         {
 			TraitManager.LogTraitList(__instance); // Leave it, you'll need it
-			return true;
+			// InteractingAgent is not set yet, so you'll have to do that ad hoc here if you want IA's trait list
         }
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
