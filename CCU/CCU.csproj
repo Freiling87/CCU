@@ -119,6 +119,7 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
     <Compile Include="Localization\DetermineMoneyCostText.cs" />
@@ -187,6 +188,10 @@
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
     <Compile Include="Traits\Cost Currency\T_CostCurrency.cs" />
     <Compile Include="Traits\Cost Scale\Much_More.cs" />
+    <Compile Include="Traits\Drug Warrior Modifier\Extended_Release.cs" />
+    <Compile Include="Traits\Drug Warrior Modifier\Eternal_Release.cs" />
+    <Compile Include="Traits\Drug Warrior Modifier\Suppress_Syringe_AV.cs" />
+    <Compile Include="Traits\Drug Warrior Modifier\T_DrugWarriorModifier.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Big.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Huge.cs" />
     <Compile Include="Traits\Drug Warrior\Suicide_Bomber_Normal.cs" />
@@ -427,6 +432,9 @@
     <Compile Include="Systems\Legacy Name Updater\NameUpdates.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Documentation\BestPractices.md" />
     <None Include="Documentation\ChangeLog.md" />
     <None Include="Documentation\Installation.md" />

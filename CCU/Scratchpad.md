@@ -1,11 +1,20 @@
-﻿#		How to read this
+﻿#			How to read this
 If you wandered in here out of curiosity, this is my working notes file, and completed/planned feature list. It's a markdown file, but best viewed in raw form since a lot of its organization has to do with text characters' alignment.
 
 Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#			0.1.1 Changelog
+#			Scope
+##			P	Bug Fixing
+###				T	Custom Gib test
+Verify that all methods of gibbing work, not just EOD
+###				C	Relationships not saved with game
+CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
+	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
+	- Verify that the traits still exist on the characters after load.
+	- Agent.LoadWorldData - calls agent.relationships.LoadWorldDataRels
+##			P	0.1.1 Changelog
 - **Feature additions**
   - Mutators
     - Followers
@@ -72,54 +81,57 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Vampire → Faction Werewolf Aligned
     - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
-#		CT	Bug Reports
-##			T	Custom Gib test
-Verify that all methods of gibbing work, not just EOD
-##			C	Relationships not saved with game
-CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
-	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
-	- Verify that the traits still exist on the characters after load.
-	- Agent.LoadWorldData - calls agent.relationships.LoadWorldDataRels
-#		√	Bug Archive
-##			√	Fast or Rollerskates won't fall in Hole
-###					Issue
-Papparazzo wouldn't fall
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
-	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Hole.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-###				√	Fix
-Vanilla bug
-#		C	Systems
-##			C	Legacy Name Updater
+##			T	Behavior Traits
+###			T	Grab Alcohol
+###			T	Grab Drugs
+##			T	Test note
+20220725
+##		CT	Drug Warrior Modifiers
+GoalBattle.Process is where the effect is applied.
+###			T	Suppress Syringe AV
+The `-Syringe` text is just clutter
+The sound is sometimes not applicable lorewise
+###			C	Extended Release
+Used 69420 as duration
+Might need a hook for this.
+###			T	Eternal Release
+Test
+###			C	Last Stander
+Effect triggers when they would flee instead of at beginning of combat
+####			C	Extended Release interaction
+When paired with ER, the effect lasts until they would no longer be intimidated. 
+###			C	Post Warrior
+Effect triggers on end of threat (Regenerate, smoke, invisible)
+###			C	Whatta Rush
+Effect gains 1s of duration on take/receive damage
+##		CT	Explode On Death
+###			T	Custom Explosion System
+New
+###			T	Oil Spill
+Explosion.SetupExplosion ~373
+###			T	00 Do they explode when... exploded?
+Verify by kill w rocket
+###			C	00 Explodes when Arrested
+New
+###			√	00 Cop Bot not Exploding
+Resolved
+###			√	00 Certain explosion types don't delete body
+P_StatusEffects_ExplodeBody.DisappearBody
+####			√	GIB ME GIBS
+P_StatusEffects_ExplodeBody.GibItAShot
+#		CT	Projects
+##			CT	Legacy Name Updater
 ###				C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
-#		C	General
-##			T	Test this
-20220725
-##			C	Explosion Refactor
-Current Setup:
-	Explode on Death
-Proposal:
-	Explosion Fuse
-		Short
-		Long
-		None
-	Explosion Type
-	Explosion Trigger
-		Damage
-		Death
-		Combat
-##			C	Relationship Refactor
-###				C	Create SetRelationship(agent, otherAgent, VRelationship)
-Current state is embarrassing
-##			C	Explosion Trait Refactor
-Move Explosion Type to its own trait
-Explode on Death & Suicide bomber would then only need one trait each, or could be variegated in some other dimension (e.g., bomb timers)
-##			C	Dedicated section on Character Sheet
-Should not be too hard, as the one method where it's filled out is pretty transparent
-Just add a --- CCU TRAITS --- Divider or something
+###				T!	Challenges
+Homesickness Mandatory & Disabled
+####				T	Test Mutator List in editor
+Had to tweak it
+###				√	Traits
+####				√	Designer Side
+P_Unlocks.GetUnlock_Prefix
+####				√	Player Side 
+P_StatusEffects.AddTrait_Prefix
 ##			H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
@@ -128,17 +140,62 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#		T	Systems
-##			T	Legacy Updater
-###				T!	Challenges
-Homesickness Mandatory & Disabled
-####				T	Test Mutator List in editor
-Had to tweak it
-###				√	Trait
-####				√	Designer Side
-P_Unlocks.GetUnlock_Prefix
-####				√	Player Side 
-P_StatusEffects.AddTrait_Prefix
+##			C	Relationship Refactor
+###				C	Create SetRelationship(agent, otherAgent, VRelationship)
+Current state is embarrassing
+##			C	Explosion Trait Refactor
+Current Setup:
+	Explode on Death
+Proposal:
+	Event Fuse
+		Short
+		Long
+		None
+	Event Type
+		Explosion
+	Event Trigger
+		Align
+		Combat
+		Damage Dealt
+		Damage Taken
+		Death
+		Exit Level
+		Join Party
+		Search
+		Spawn
+##			C	Dedicated section on Character Sheet
+Should not be too hard, as the one method where it's filled out is pretty transparent
+Just add a --- CCU TRAITS --- Divider or something
+##			C	Language (Overhaul)
+###			C	00 Mutator: Language System
+- NPCs have a chance to speak a foreign language
+  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
+- NPCs have a chance to have Vocally Challenged
+  - If they do, they always have at least one foreign language
+- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
+- Enables Polyglot trait choice
+- Gives the Translator an actual reason to exist
+- All hired agents can act as translators
+- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
+###			C	00 Mutator Group: Our Town
+Shifts the population so that about 66% are speakers, and one third of those don't speak English.
+- Chinatown
+- Brighton Beach
+- Etc. with all config languages
+- Gorillian Gables Luxury Living Community (Monkese)
+- District 9 (ErSdtAdt)
+- Werewales (Werewelsh)
+- 28th St. (Lang Zonbi)
+###			C	00 Trait: Polyglot
+Trait choice locked behind Language System Mutator
+- Gain 2 languages on taking the trait
+- Gain 1 langauge every 3 levels
+###			√	00 Base Feature
+P_Agent.
+	CanUnderstandEachOther_Postfix
+###			√	Alienian
+###			√	Monkese
+###			√	Zombese
 #		T	Goals
 ##			T	Level Editor List
 ##			T	Scene Setters
@@ -283,8 +340,8 @@ Might need to limit this to a single flag, since having multiple true at the sam
 New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
-##		C	Combat
-###			C	Nth Wind
+##		H	Combat
+###			H	Nth Wind
 Refreshes Drug Warrior & Backed Up bools after combat ends.
 P_GoalCombatEngage.
 	Terminate_Postfix
@@ -307,7 +364,7 @@ Apparently Lockdown walls are broken in custom levels.
 Complete
 ###			√	Fearless
 Complete
-##		√C	Cost Currency
+##		C	Cost Currency
 ###			C	00 Button ExtraCost Display
 Bananas & alcohol are hardcoded
 To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
@@ -320,19 +377,7 @@ Blood Bags always an option
 If Vampirism, allow drink
 ###			C	Flesh
 Require Cannibalism? Maybe not
-##		√	Cost Scale
-###			√	Less
-Complete
-###			√	More
-Complete
-###			√	Much More
-Complete
-###			√	Zero
-Complete
 ##		C	Drug Warrior
-###			C	Suppress Syringe Text/Audio
-The `-Syringe` text is just clutter
-The sound is sometimes not applicable lorewise
 ###			C	Extendo-Wheels
 Gain Roller Skates
 ###			C	Suicide Bomber
@@ -340,51 +385,15 @@ Initiate a 15s timer, then detonate a Huge explosion
 Interface with Timer traits and Explosion traits to allow player to customize
 ###			C	Sweaty
 Gain Wet, lmao
-##		CT	Explode On Death
-###			T	Custom Explosion System
-New
-###			T	Oil Spill
-Explosion.SetupExplosion ~373
-###			T	00 Do they explode when... exploded?
-Verify by kill w rocket
-###			C	00 Explodes when Arrested
-New
-###			√	00 Cop Bot not Exploding
-Resolved
-###			√	00 Certain explosion types don't delete body
-P_StatusEffects_ExplodeBody.DisappearBody
-####			√	GIB ME GIBS
-P_StatusEffects_ExplodeBody.GibItAShot
-##		C	Drug Warrior Modifiers
-###			C	Extended Release
-Effect lasts until end of combat
-###			C	Last Stander
-Effect triggers when they would flee instead of at beginning of combat
-####			C	Extended Release interaction
-When paired with ER, the effect lasts until they would no longer be intimidated. 
-###			C	Post Warrior
-Effect triggers on end of threat (Regenerate, smoke, invisible)
-###			C	Whatta Rush
-Effect gains 2s of duration on damage
-##		CT	Explode On Death
-###			H	00 Does not explode when killed with Cyanide
-There's no vanilla precedent for this particular situation, so let's see what users prefer.
-###			H	00 Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
+##		C	Explode On Death
 ###			C	00 Refactor
 See other Explosion trait groups
 This category will become Explosion Type
-###			T	Noise Only
-Agents turned, now see if it happens without the trait
 ###			C	Monke Parasites
 Explodes into Monke (barrel style)
 ###			C	Thoughts & Prayers
-Rocket explosion?
-###			√	Dizzy
-Complete
-###			C	Firebomb
-Didn't do anything
-###			C	Oil
+Fireworks
+###			C	Oil Spill
 This doesn't exist but should follow water logic. Plus there are many other uses.
 ###			C	Ooze
 Only did particle effect
@@ -398,16 +407,27 @@ Do the sprite later.
 Did particle effect
 Pushed body away
 Didn't stun anyone
-###			T	Warp
-Was marked as complete but idk
-###			T	Water
+###			H	00 Does not explode when killed with Cyanide
+There's no vanilla precedent for this particular situation, so let's see what users prefer.
+###			H	00 Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
 ###			√	Big
+Complete
+###			√	Dizzy
 Complete
 ###			√	EMP
 Complete
-###			√	Normal
+###			√	Firebomb
 Complete
 ###			√	Huge
+Complete
+###			√	Noise Only
+Complete
+###			√	Normal
+Complete
+###			√	Warp
+Complete
+###			√	Water
 Complete
 ##		C	Explosion Timer
 Vanilla for EOD is 1.5 seconds
@@ -443,7 +463,7 @@ This is more of a utility, to allow designers to explode or burn things at level
 ###			C	Wall types
 Include sound effect where applicable, like with glass
 ###			C	Ungibbable
-
+New
 ###			√	Ghost Gibs
 Complete
 ###			√	Ice Gibs
@@ -646,7 +666,8 @@ Hiree will leave if they're damaged in combat
 "I didn't sign up for this! You're nuts!"
 ###			C	Foulweather
 Hiree will never leave due to damage
-##		H	Hire Duration
+##		H	Hire Modifiers
+A couple are technically Hire Triggers, so I broadened this cat name
 ###			C	Homesick 
 Automatic Homesickness Killer
 ###			C	Homesuck
@@ -661,8 +682,6 @@ As above, but removes the single-use hire option.
 ###			C	Start as Hired
 On level entry
 ##		√C	Hire Type
-###			C	00 Split off Hire Base Cost
-Not referring to final cost, but the Hacker/Soldier cost tiers
 ###			C	Chloroform
 New
 ###			C	Devour Corpse
@@ -850,36 +869,6 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
-##		C	Language (Overhaul)
-###			C	00 Mutator: Language System
-- NPCs have a chance to speak a foreign language
-  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
-- NPCs have a chance to have Vocally Challenged
-  - If they do, they always have at least one foreign language
-- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
-- Enables Polyglot trait choice
-- Gives the Translator an actual reason to exist
-- All hired agents can act as translators
-- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
-###			C	00 Mutator Group: Our Town
-Shifts the population so that about 66% are speakers, and one third of those don't speak English.
-- Chinatown
-- Brighton Beach
-- Etc. with all config languages
-- Gorillian Gables Luxury Living Community (Monkese)
-- District 9 (ErSdtAdt)
-- Werewales (Werewelsh)
-- 28th St. (Lang Zonbi)
-###			C	00 Trait: Polyglot
-Trait choice locked behind Language System Mutator
-- Gain 2 languages on taking the trait
-- Gain 1 langauge every 3 levels
-###			√	00 Base Feature
-P_Agent.
-	CanUnderstandEachOther_Postfix
-###			√	Alienian
-###			√	Monkese
-###			√	Zombese
 ##		C	Loadout
 ###			C	CC Items Inclusion
 Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
@@ -1109,21 +1098,6 @@ Complete
 Complete
 ###			√	Relationless
 Complete
-##		√	Relationships - Player
-###			√	Player Aligned
-Complete
-###			√	Player Annoyed
-Complete
-###			√	Player Friendly
-Complete
-###			√	Player Hostile
-Complete
-###			√	Player Loyal
-Complete
-###			√	Player Secret Hate
-Moved to Behavior - Ambush (more transparent to user)
-###			√	Player Submissive 
-Complete
 ##		C	Senses - Hearing
 ###			C	Deaf
 Already a status effect, you might even overlap the trait name as a cool trick
@@ -1229,6 +1203,31 @@ Complete
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
+#		√	Trait Archive
+##			√	Cost Scale
+###				√	Less
+Complete
+###				√	More
+Complete
+###				√	Much More
+Complete
+###				√	Zero
+Complete
+##			√	Relationships - Player
+###				√	Player Aligned
+Complete
+###				√	Player Annoyed
+Complete
+###				√	Player Friendly
+Complete
+###				√	Player Hostile
+Complete
+###				√	Player Loyal
+Complete
+###				√	Player Secret Hate
+Moved to Behavior - Ambush (more transparent to user)
+###				√	Player Submissive 
+Complete
 #		C	Mutators
 ##		C	00 Mutator List Population
 ###			C	00 Hide from Non-Editor access
@@ -1349,3 +1348,14 @@ Ability to be already shooting water according to direction
 This would really only make sense with a Stop & Frisk mod.
 ##			C	Movie Screen
 Allow Text like Sign
+#		√	Bug Archive
+##			√	Fast or Rollerskates won't fall in Hole
+###					Issue
+Papparazzo wouldn't fall
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
+	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Hole.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+###				√	Fix
+Vanilla bug
