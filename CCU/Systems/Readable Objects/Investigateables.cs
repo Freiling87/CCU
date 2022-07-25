@@ -25,15 +25,13 @@ namespace CCU.Systems.Investigateables
 			// vObject.MovieScreen, // Didn't work yet, see notes
 			vObject.Podium,
 			vObject.Shelf,
-			//vObject.Table,			// Really needs a sprite change
-			//vObject.TableBig,		// Really needs a sprite change
 			vObject.Window,
 		};
 
 		public static string MagicObjectName(string originalName)
 		{
-			if (Investigateables.InvestigateableObjects.Contains(originalName))
-				return "Sign";
+			if (InvestigateableObjects.Contains(originalName))
+				return vObject.Sign;
 
 			return originalName;
 		}
@@ -43,23 +41,19 @@ namespace CCU.Systems.Investigateables
 		{
 			string t = NameTypes.Interface;
 
-			RogueLibs.CreateCustomName(CButtonText.Investigate, t, new CustomNameInfo("Investigate"));
+			RogueLibs.CreateCustomName(CButtonText.Investigate, t, new CustomNameInfo(CButtonText.Investigate));
 
 			RogueInteractions.CreateProvider(h =>
 			{
 				if (InvestigateableObjects.Contains(h.Object.objectName) && h.Object.extraVarString != "")
 				{
                     if (h.Object is Computer computer)
-                    {
-						FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
-						List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-						interactions.RemoveAll(i => i.ButtonName is VButtonText.ReadEmail);
-					}
+						h.RemoveButton(VButtonText.ReadEmail);
 
 					h.AddImplicitButton(CButtonText.Investigate, m =>
-					{
-						m.Object.ShowBigImage(m.Object.extraVarString, "", null);
-					});
+						{
+							m.Object.ShowBigImage(m.Object.extraVarString, "", null);
+						});
 				}
 			});
 		}
