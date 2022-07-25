@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Systems.Readables;
+using CCU.Systems.Investigateables;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace CCU.Patches.Objects
 		public static IEnumerable<CodeInstruction> Spawn_SetupReadables(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.MagicObjectName));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,

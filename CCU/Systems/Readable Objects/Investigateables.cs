@@ -5,32 +5,34 @@ using RogueLibsCore;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace CCU.Systems.Readables
+namespace CCU.Systems.Investigateables
 {
-    class Readables
+    class Investigateables
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static List<string> ReadableObjects = new List<string>()
+		public static List<string> InvestigateableObjects = new List<string>()
 		{
-			// Commented-out entries are those that would require a sprite change
-			// vObject.Altar,
+			vObject.Altar,
+			vObject.ArcadeGame,
+			vObject.Boulder,
 			vObject.Computer,
-			// vObject.Counter,
-			// vObject.Door,		// Has Extravar field already
+			// vObject.Counter,		// Really needs a sprite change
+			vObject.Door,
 			vObject.Gravestone,
+			vObject.Jukebox,
 			// vObject.MovieScreen, // Didn't work yet, see notes
+			vObject.Podium,
 			vObject.Shelf,
-			// vObject.Sign,		// No need, and interacts poorly
-			// vObject.Table,
-			// vObject.TableBig,
-			vObject.Podium
+			//vObject.Table,			// Really needs a sprite change
+			//vObject.TableBig,		// Really needs a sprite change
+			vObject.Window,
 		};
 
 		public static string MagicObjectName(string originalName)
 		{
-			if (Readables.ReadableObjects.Contains(originalName))
+			if (Investigateables.InvestigateableObjects.Contains(originalName))
 				return "Sign";
 
 			return originalName;
@@ -45,7 +47,7 @@ namespace CCU.Systems.Readables
 
 			RogueInteractions.CreateProvider(h =>
 			{
-				if (ReadableObjects.Contains(h.Object.objectName) && h.Object.extraVarString != "")
+				if (InvestigateableObjects.Contains(h.Object.objectName) && h.Object.extraVarString != "")
 				{
                     if (h.Object is Computer computer)
                     {

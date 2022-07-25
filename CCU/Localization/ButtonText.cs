@@ -5,7 +5,7 @@
 		public const string
 			HirePermanentExpert = "AssistMe_Permanent",
 			HirePermanentMuscle = "HireAsProtection_Permanent",
-			Investigate = "Investigate", // For readable objects
+			Investigate = "Investigate",
 
 			z = "";
     }

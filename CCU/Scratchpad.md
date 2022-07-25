@@ -3,7 +3,7 @@ If you wandered in here out of curiosity, this is my working notes file, and com
 
 Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
-	C = Hold, usually pending resolution of a separate or grouped issue
+	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #			0.1.1 Changelog
 - **Feature additions**
@@ -39,8 +39,7 @@ Listed in order of Parent tier summary symbol priority:
       - Ice Gibs
       - Normal Gibs
   - Objects
-    - Readables are now supported! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
-      - Readable objects: Computer, Gravestone, Shelf, Sign, Podium
+    - It's a banner day for the rude... you can now read emails! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
 - **Tweaks**
   - Pay Debt is now scaled to Cost Scale traits
   - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
@@ -77,7 +76,8 @@ Listed in order of Parent tier summary symbol priority:
 ##			C	Relationships not saved with game
 CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
 	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
-  		- Specifically for Aligned, it might be best to copy the Hypnotizer mk2's effects, since 
+	- Verify that the traits still exist on the characters after load.
+	- Agent.LoadWorldData - calls agent.relationships.LoadWorldDataRels
 #		√	Bug Archive
 ##			√	Fast or Rollerskates won't fall in Hole
 ###					Issue
@@ -93,9 +93,7 @@ Vanilla bug
 ##			C	Legacy Name Updater
 ###				C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
-#		CT	General
-##			T	Pick Pockets prevents shop generation
-Attempt: Removed erroneous early return in P_Agent.SetupAgentStats_Postfix
+#		C	General
 ##			C	Explosion Refactor
 Current Setup:
 	Explode on Death

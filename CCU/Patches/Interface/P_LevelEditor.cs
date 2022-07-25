@@ -13,7 +13,8 @@ using CCU.Content;
 using CCU.Challenges;
 using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
-using CCU.Systems.Readables;
+using CCU.Systems.Investigateables;
+using CCU.Patches.Objects;
 
 namespace CCU.Patches.Interface
 {
@@ -82,12 +83,27 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
-        #region Readables
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList))]
+		public static bool PressedLoadExtraVarStringList_Prefix(LevelEditor __instance, InputField ___tileNameObject, ref float ___numButtonsLoad)
+        {
+			string text = ___tileNameObject.text;
+
+			if (text == vObject.Window)
+			{
+				__instance.scrollingMenuType = "LoadExtraVarsWindow";
+				P_Window.CreateExtraVarsWindowList_1(__instance, ref ___numButtonsLoad);
+				return false;
+			}
+
+			return true;
+		}
+
+        #region Investigateables
         [HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
 		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EditTextBox(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.MagicObjectName));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -99,7 +115,7 @@ namespace CCU.Patches.Interface
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
-					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if readable, or real name if not
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if investigateable, or real name if not
 					new CodeInstruction(OpCodes.Ldstr, "Sign"),
 				});
 
@@ -107,13 +123,12 @@ namespace CCU.Patches.Interface
 			return instructions;
 		}
 
-		// Not sure of a good name for this one
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedScrollingMenuButton), new [] { typeof(ButtonHelper) } )]
 		public static IEnumerable<CodeInstruction> PressedScrollingMenuButton_TextBoxValid(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo scrollingButtonType = AccessTools.DeclaredField(typeof(ButtonHelper), nameof(ButtonHelper.scrollingButtonType));
-			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.MagicObjectName));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 2,
@@ -135,16 +150,11 @@ namespace CCU.Patches.Interface
 			return instructions;
 		}
 
-		/// <summary>
-		/// Display Text Box for Readable Objects
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
-		private static IEnumerable<CodeInstruction> UpdateInterface_ShowTextBoxForReadables(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> UpdateInterface_ShowTextBoxForInvestigateables(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.MagicObjectName));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -156,7 +166,7 @@ namespace CCU.Patches.Interface
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_S, 34),				//	Object real name
-					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if readable, or real name if not
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if investigateable, or real name if not
 					new CodeInstruction(OpCodes.Ldstr, "Sign"),				
 				});
 

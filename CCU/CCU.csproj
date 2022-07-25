@@ -165,7 +165,7 @@
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
-    <Compile Include="Systems\Readable Objects\Readables.cs" />
+    <Compile Include="Systems\Readable Objects\Investigateables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
