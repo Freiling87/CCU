@@ -73,6 +73,8 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
 #		CT	Bug Reports
+##			T	Custom Gib test
+Verify that all methods of gibbing work, not just EOD
 ##			C	Relationships not saved with game
 CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
 	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
@@ -94,6 +96,8 @@ Vanilla bug
 ###				C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
 #		C	General
+##			T	Test this
+20220725
 ##			C	Explosion Refactor
 Current Setup:
 	Explode on Death
@@ -135,6 +139,15 @@ Had to tweak it
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
 P_StatusEffects.AddTrait_Prefix
+#		T	Goals
+##			T	Level Editor List
+##			T	Scene Setters
+These are goals that will trigger one action at level load.
+###				T	Arrested
+###				T	Burned
+###				T	Dead
+###				T	Gibbed
+###				T	Knocked Out
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
@@ -328,10 +341,14 @@ Interface with Timer traits and Explosion traits to allow player to customize
 ###			C	Sweaty
 Gain Wet, lmao
 ##		CT	Explode On Death
+###			T	Custom Explosion System
+New
+###			T	Oil Spill
+Explosion.SetupExplosion ~373
 ###			T	00 Do they explode when... exploded?
 Verify by kill w rocket
 ###			C	00 Explodes when Arrested
-
+New
 ###			√	00 Cop Bot not Exploding
 Resolved
 ###			√	00 Certain explosion types don't delete body

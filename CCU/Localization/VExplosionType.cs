@@ -1,5 +1,18 @@
-﻿namespace CCU.Localization
+﻿using System.Collections.Generic;
+
+namespace CCU.Localization
 {
+	public static class CExplosionType
+    {
+		public const string
+			OilSpill = "OilSpill";
+
+		public static List<string> Types = new List<string>
+		{
+			OilSpill,
+		};
+    }
+
     public static class VExplosionType
     {
 		public const string
