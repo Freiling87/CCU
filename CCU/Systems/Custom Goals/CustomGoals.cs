@@ -11,11 +11,25 @@ namespace CCU.Systems.CustomGoals
         public static GameController GC => GameController.gameController;
 
         public const string
+            //  Scene Setters
             Arrested = "Arrested",
             Burned = "Burned",
             Dead = "Dead",
             Gibbed = "Gibbed",
             KnockedOut = "KnockedOut",
+
+            //  Other Customs
+            Panic = "Panic",
+            WanderAgents = "WanderAgents",
+            WanderAgentsNonOwners = "WanderAgentsNonOwners",
+            WanderAgentsOwners = "WanderAgentsOwners",
+            WanderObjects = "WanderObjects",
+            WanderObjectsOwned = "WanderObjectsOwned",
+
+            //  Vanilla Behaviors not normally available in editor
+            CommitArson = "CommitArson",
+            FleeDanger = "FleeDanger",
+            RobotClean = "RobotClean",
 
             NoMoreSemicolon = "";
 
@@ -28,15 +42,21 @@ namespace CCU.Systems.CustomGoals
             Gibbed,
             KnockedOut,
         };
+        public static List<string> ActualGoals = new List<string>()
+        {
+            //      Custom
+            //  Investigate             //  Wander Agents + Wander Objects
+            //  WanderAgents,           
+            //  WanderAgentsNonOwners,  
+            //  WanderAgentsOwners,
+            //  WanderObjects,
+            //  WanderObjectsOwned,
 
-        // Dump from old method:
-            //list2.Add("CommitArson");
-            //list2.Add("Explode");
-            //list2.Add("Panic"); 
-            //list2.Add("RobotClean"); // In Vanilla
-            //list2.Add("WanderAgents");
-            //list2.Add("WanderAgentsAligned");
-            //list2.Add("WanderAgentsUnaligned");
+            //      Vanilla
+            CommitArson,
+            FleeDanger, // Probably not gonna work, and not really worth trying too hard on since it's unspecific.
+            RobotClean,
+        };
 
         public static void RunSceneSetters(Agent agent)
         {
@@ -69,6 +89,9 @@ namespace CCU.Systems.CustomGoals
         }
 
         public static List<string> CustomGoalList(List<string> vanillaList) =>
-            vanillaList.Concat(SceneSetters).ToList();
+            vanillaList
+                .Concat(SceneSetters)
+                .Concat(ActualGoals)
+                .ToList();
     }
 }
