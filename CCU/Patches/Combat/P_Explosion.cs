@@ -20,6 +20,47 @@ namespace CCU.Patches.P_Combat
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Explosion.SetupExplosion))]
+		private static IEnumerable<CodeInstruction> SetupExplosion_CustomExplosions(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo immediateHit = AccessTools.DeclaredField(typeof(Explosion), nameof(Explosion.immediateHit));
+			MethodInfo RunCustomExplosion = AccessTools.DeclaredMethod(typeof(P_Explosion), nameof(P_Explosion.RunCustomExplosion));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld, immediateHit),
+					new CodeInstruction(OpCodes.Brtrue_S),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),								//	this
+					new CodeInstruction(OpCodes.Call, RunCustomExplosion),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		public static void RunCustomExplosion(Explosion explosion)
+		{
+			switch (explosion.explosionType)
+			{
+				case CExplosionType.OilSpill:
+					explosion.StartCoroutine(explosion.SpawnNoiseLate());
+					explosion.StartCoroutine(explosion.PlaySoundAfterTick());
+					explosion.circleCollider2D.enabled = true;
+					explosion.circleCollider2D.radius = 1.28f;
+					explosion.gc.spawnerMain.SpawnParticleEffect("WaterExplosion", explosion.tr.position, 0f);
+					explosion.StartCoroutine("SpillLiquidLate");
+
+					break;
+			}
+		}
+
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Explosion.ExplosionHit), argumentTypes: new[] { typeof(GameObject), typeof(bool) })]
 		private static IEnumerable<CodeInstruction> ExplosionHit_LimitEMPtoVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -41,47 +82,6 @@ namespace CCU.Patches.P_Combat
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Explosion.SetupExplosion))]
-		private static IEnumerable<CodeInstruction> SetupExplosion_CustomExplosions(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo immediateHit = AccessTools.DeclaredField(typeof(Explosion), nameof(Explosion.immediateHit));
-			MethodInfo RunCustomExplosion = AccessTools.DeclaredMethod(typeof(P_Explosion), nameof(P_Explosion.RunCustomExplosion));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),								//	this
-					new CodeInstruction(OpCodes.Call, RunCustomExplosion),
-				},
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld, immediateHit),
-					new CodeInstruction(OpCodes.Brtrue_S),
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		public static void RunCustomExplosion(Explosion explosion)
-        {
-            switch (explosion.explosionType)
-            {
-				case CExplosionType.OilSpill:
-					explosion.StartCoroutine(explosion.SpawnNoiseLate());
-					explosion.StartCoroutine(explosion.PlaySoundAfterTick());
-					explosion.circleCollider2D.enabled = true;
-					explosion.circleCollider2D.radius = 1.28f;
-					explosion.gc.spawnerMain.SpawnParticleEffect("WaterExplosion", explosion.tr.position, 0f);
-					explosion.StartCoroutine("SpillLiquidLate");
-
-					break;
-            }
-        }
 	}
 
 	[HarmonyPatch(declaringType: typeof(Explosion))]
@@ -98,16 +98,20 @@ namespace CCU.Patches.P_Combat
 		private static IEnumerable<CodeInstruction> SpillLiquidLate_HookSpecialExplosionTypes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo explosionType = AccessTools.DeclaredField(typeof(Explosion), nameof(Explosion.explosionType));
 			MethodInfo ExplosionTypeMagicStringMatcher = AccessTools.DeclaredMethod(typeof(P_Explosion_SpillLiquidLate), nameof(P_Explosion_SpillLiquidLate.ExplosionTypeMagicStringMatcher));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				targetInstructionSequence: new List<CodeInstruction>
 				{
+					new CodeInstruction(OpCodes.Ldfld, explosionType),
 					new CodeInstruction(OpCodes.Ldstr, "Water"),
 				},
-				postfixInstructionSequence: new List<CodeInstruction>
+				insertInstructionSequence: new List<CodeInstruction>
 				{
+					new CodeInstruction(OpCodes.Ldfld, explosionType),
+					new CodeInstruction(OpCodes.Ldstr, "Water"),
 					new CodeInstruction(OpCodes.Call, ExplosionTypeMagicStringMatcher),
 				});
 

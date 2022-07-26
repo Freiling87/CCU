@@ -1,27 +1,19 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
+using CCU.Challenges;
+using CCU.Systems.CustomGoals;
+using CCU.Systems.Investigateables;
+using HarmonyLib;
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HarmonyLib;
-using UnityEngine;
-using UnityEngine.UI;
-using BepInEx.Logging;
 using System.Reflection;
-using CCU.Content;
-using CCU.Challenges;
-using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
-using CCU.Systems.Readables;
-using CCU.Systems.Containers;
-using CCU.Systems.Investigateables;
-using CCU.Patches.Objects;
-using CCU.Systems.CustomGoals;
 
 namespace CCU.Patches.Interface
 {
-	[HarmonyPatch(declaringType: typeof(LevelEditor))]
+    [HarmonyPatch(declaringType: typeof(LevelEditor))]
 	public static class P_LevelEditor
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -32,25 +24,32 @@ namespace CCU.Patches.Interface
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo updateList = AccessTools.DeclaredMethod(typeof(CustomGoals), nameof(CustomGoals.CustomGoalList));
+			MethodInfo activateLoadMenu = AccessTools.DeclaredMethod(typeof(LevelEditor), nameof(LevelEditor.ActivateLoadMenu));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
-				targetInstructionSequence: new List<CodeInstruction>
+				prefixInstructionSequence: new List<CodeInstruction>
 				{
+					new CodeInstruction(OpCodes.Ldloc_1),
 					new CodeInstruction(OpCodes.Ldstr, "WanderFar"),
 					new CodeInstruction(OpCodes.Callvirt),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_1),	//	list2
+					new CodeInstruction(OpCodes.Ldloc_1),
 					new CodeInstruction(OpCodes.Call, updateList),
 					new CodeInstruction(OpCodes.Stloc_1),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{ 
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Call, activateLoadMenu),
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
+		 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.CreateMutatorListLevel))]
 		public static bool CreateMutatorList_Level(LevelEditor __instance, ref float ___numButtonsLoad)
 		{

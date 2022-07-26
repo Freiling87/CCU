@@ -2,6 +2,7 @@
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Patches.Agents;
 using CCU.Traits.Combat;
+using CCU.Traits.Drug_Warrior_Modifier;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -21,10 +22,11 @@ namespace CCU.Patches.Goals
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
-		private static IEnumerable<CodeInstruction> Process_StartCombatActions(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> Process_ModifyStatusDuration(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(GoalBattle.agent));
+			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(Goal.agent));
+			FieldInfo statusEffects = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.statusEffects));
 			MethodInfo customStatusDuration = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(P_GoalBattle.CustomStatusDuration));
 			MethodInfo addStatusEffect_1 = AccessTools.DeclaredMethod(typeof(StatusEffects), nameof(StatusEffects.AddStatusEffect), new[] { typeof(string) });
 			MethodInfo addStatusEffect_2 = AccessTools.DeclaredMethod(typeof(StatusEffects), nameof(StatusEffects.AddStatusEffect), new[] { typeof(string), typeof(int) });
@@ -32,16 +34,19 @@ namespace CCU.Patches.Goals
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				targetInstructionSequence: new List<CodeInstruction>
-                {
-					new CodeInstruction(OpCodes.Ldloc_2),
-					new CodeInstruction(OpCodes.Call, addStatusEffect_1),
+                {	
+					new CodeInstruction(OpCodes.Ldloc_2),						//	statusEffectName
+					new CodeInstruction(OpCodes.Call, addStatusEffect_1),		//	clear
                 },
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_2),
-					new CodeInstruction(OpCodes.Ldfld, agent),
-					new CodeInstruction(OpCodes.Call, customStatusDuration),
-					new CodeInstruction(OpCodes.Call, addStatusEffect_2),
+					new CodeInstruction(OpCodes.Ldarg_0),						//	this
+					new CodeInstruction(OpCodes.Ldfld, agent),					//	this.agent
+					new CodeInstruction(OpCodes.Ldfld, statusEffects),			//	this.agent.statusEffects
+					new CodeInstruction(OpCodes.Ldloc_2),						//	this.agent.statusEffects, statusEffectName
+					new CodeInstruction(OpCodes.Ldfld, agent),					//	this.agent.statusEffects, statusEffectName, Agent
+					new CodeInstruction(OpCodes.Call, customStatusDuration),	//	this.agent.statusEffects, statusEffectName, statusDuration
+					new CodeInstruction(OpCodes.Callvirt, addStatusEffect_2),	//	clear
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -51,11 +56,11 @@ namespace CCU.Patches.Goals
 		public static int CustomStatusDuration(Agent agent)
         {
 			if (agent.HasTrait<Eternal_Release>())
-				return 9999;
+				return 9999;	//	First Matt, and so I
 			else if (agent.HasTrait<Extended_Release>())
-				return 69420;
+				return 69420;	//	Magic Number abusers
 			else
-				return -1;
+				return -1;		//	2 versus 1 though
         }
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
