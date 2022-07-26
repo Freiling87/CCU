@@ -14,6 +14,7 @@ Listed in order of Parent tier summary symbol priority:
   - Traits
     - Behavior
       - Grab Alcohol
+      - Grab Everything
       - Grab Food
     - Cost Scale
       - Much More (200% cost)
@@ -39,7 +40,7 @@ Listed in order of Parent tier summary symbol priority:
       - Ice Gibs
       - Normal Gibs
   - Objects
-    - Readables are now supported! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
+    - This is an historic moment for the rude, as you can now read emails! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
       - Readable objects: Computer, Gravestone, Shelf, Sign, Podium
 - **Tweaks**
   - Pay Debt is now scaled to Cost Scale traits
@@ -70,8 +71,6 @@ Listed in order of Parent tier summary symbol priority:
     - Crushable → Faction Crepe Aligned
     - Hostile to Cannibal → Faction Soldier Aligned
     - Hostile to Soldier → Faction Cannibal Aligned
-    - Hostile to Vampire → Faction Werewolf Aligned
-    - Hostile to Werewolf → Faction Vampire Aligned
     - Specistist → Faction Gorilla Aligned
 #		CT	Bug Reports
 ##			C	Relationships not saved with game
@@ -127,6 +126,46 @@ The config file should match the name of the campaign, if they allow the same ch
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 #		T	Systems
+##			C	Door System
+###				C	Keycard System
+Red, Blue, Green, Yellow
+Work only on Keycard Doors and Keycard Safes
+####				C	Access Scope
+Determines how far the keycard will work. Doesn't have to use every tier of this, just being expansive.
+	Chunk
+	Chunk Type
+	Level
+	District
+	City
+	Mayor Village
+	All
+####				C	Access Level
+Configurable in Keycard and Keycard Door
+####				C	RFID Flipping
+If someone is holding a Keycard, you can grab their card's RFID signal to add it to your keyring. 
+This can be done in the manner of a normal hack, or with a Signal Grabber passive inventory item - no interaction required, but shorter range. Good tool for the undercover.
+####				C	Keycard Doors
+#####					C	Hack
+- Admit Owners*
+- Admit Non-Owners
+- Admit No One
+- Admit All
+- Something Mischievous
+- Trigger Alarm
+- Turn Off/On
+#####					C	Tamper
+- Disconnect (a la Security Camera)
+#####					C	Automatic Door option
+This would be neato
+###				C	Key Ring System
+Keys are specific to an object. One door, one chest, etc. so chunks may generate with multiple. 
+Desk is a lockable container.
+####				C	Keyring
+Keyring stores all keys in one slot
+##			C	Stash System
+Variable field in editor, maybe with some basic setting variations (destructible, Investigateable, etc.)
+Locks access to the object as a Chest unless the player holds the matching Stash Hint.
+You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
 ##			T	Legacy Updater
 ###				T!	Challenges
 Homesickness Mandatory & Disabled
@@ -1281,6 +1320,9 @@ E.g., "Interlude:" No funny business, pause big quests, etc.
 ##		C	Progression
 ###			C	Delay Trait Gain
 Count and put off trait choices until this challenge isn't present
+###			C	Reset Player Character
+###			C	Empty Inventory on Exit
+###			C	Wipe Statistics on Exit
 ##		C	Quests
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
@@ -1300,6 +1342,30 @@ Main quest rewards are multiplied by 10
 wut
 #		CT	Object Additions
 ##		CT	Custom Object variables
+###			C	Containers
+####			C	Lockable
+Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
+Maybe generate a Desk Key item, specific to the Desk
+####			C	Note loads in ShowChest interface
+WorldSpaceGIU.ShowChest
+		interactingAgent.mainGUI.invInterface.chestDatabase = invDatabase;
+We should be able to filter that somehow
+
+Get some info on that watergun item, make it into a custom Clue item, see how we can identify it to filter it out.
+#####				C	InvDatabase.IsEmpty
+202207241004 - Filter IsEmpty to return true when the only item is a Clue
+#####				C	InvDatabase.TakeAll 
+Exclude Clue or whatever
+#####				C	InvInterface.UpdateInvInterface
+			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
+Filter InvItemList here. Inject a call to a custom method.
+#####				C	InvInterface.Slots
+This is a List<InvItem> and I think what we need to filter
+####			C	Note drops as Water Gun when object destroyed
+####			√	Open Container
+####			√	Drop Contents when destroyed
+####			√	Show Editor Controls
+####			√	Load/Save Editor Input
 ###			C	Readables
 ####			C	Movie Screen
 Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
@@ -1316,9 +1382,6 @@ P_LevelEditor.PressedLoadExtraVarStringList
 P_BasicObject.Spawn
 ####			√	Interaction
 Readables.Setup
-###			C	Containables
-Allow object to store items:
-	Shelf, Toilet
 ##			C	Air Conditioner
 Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected

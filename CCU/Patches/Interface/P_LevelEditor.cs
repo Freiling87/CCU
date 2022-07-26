@@ -14,6 +14,7 @@ using CCU.Challenges;
 using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
 using CCU.Systems.Readables;
+using CCU.Systems.Containers;
 
 namespace CCU.Patches.Interface
 {
@@ -82,9 +83,135 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
-        #region Readables
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
-		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EditTextBox(IEnumerable<CodeInstruction> codeInstructions)
+		#region Containers
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo magicReadableName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
+					new CodeInstruction(OpCodes.Call, magicReadableName),	//	Readables take precedence for ExtraVarString slot 1, e.g. Shelf
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"ChestBasic" if readable, or real name if not
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarString2List), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarString2List_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"ChestBasic" if readable, or real name if not
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarString3List), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarString3List_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"ChestBasic" if readable, or real name if not
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedScrollingMenuButton), new[] { typeof(ButtonHelper) })]
+		public static IEnumerable<CodeInstruction> PressedScrollingMenuButton_ValidateContainerEntries(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo scrollingButtonType = AccessTools.DeclaredField(typeof(ButtonHelper), nameof(ButtonHelper.scrollingButtonType));
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_1),
+					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_1),
+					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
+					new CodeInstruction(OpCodes.Call, magicObjectName),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic")
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
+		private static IEnumerable<CodeInstruction> UpdateInterface_ShowContainerSelectors(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S, 34),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S, 34),				//	Object real name
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if readable, or real name if not
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		#endregion
+		#region Readables
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EnableReadableTextBox(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Readables), nameof(Readables.MagicObjectName));
@@ -107,7 +234,6 @@ namespace CCU.Patches.Interface
 			return instructions;
 		}
 
-		// Not sure of a good name for this one
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedScrollingMenuButton), new [] { typeof(ButtonHelper) } )]
 		public static IEnumerable<CodeInstruction> PressedScrollingMenuButton_TextBoxValid(IEnumerable<CodeInstruction> codeInstructions)
 		{

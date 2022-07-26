@@ -156,6 +156,7 @@
     <Compile Include="Patches\Objects\P_BasicObject.cs" />
     <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
+    <Compile Include="Patches\Objects\P_ObjectReal.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
     <Compile Include="Patches\P_GameController.cs" />
@@ -165,7 +166,8 @@
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
-    <Compile Include="Systems\Readable Objects\Readables.cs" />
+    <Compile Include="Systems\Object Containers\Containers.cs" />
+    <Compile Include="Systems\Object Readables\Readables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />

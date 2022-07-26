@@ -11,6 +11,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
+using System;
+using CCU.Systems.Containers;
 
 namespace CCU.Patches.Objects
 {

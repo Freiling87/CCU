@@ -32,6 +32,7 @@ namespace CCU.Patches.AgentRelationships
             }
 		}
 
+        //  TODO: Refactor
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
@@ -66,7 +67,14 @@ namespace CCU.Patches.AgentRelationships
             if (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily)))
                 relationship = VRelationship.Aligned;
 
-            //  TODO: Refactor
+            SetRelationshipTo(___agent, otherAgent, relationship);
+        }
+
+        //  TODO: Refactor
+        public static void SetRelationshipTo(Agent agent, Agent otherAgent, string relationship)
+        {
+            Relationships __instance = agent.relationships;
+
             switch (relationship)
             {
                 case "":
@@ -74,7 +82,8 @@ namespace CCU.Patches.AgentRelationships
                 case VRelationship.Aligned:
                     __instance.SetRelInitial(otherAgent, VRelationship.Aligned);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRelInitial(___agent, VRelationship.Aligned);
+                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Aligned);
+                    otherAgent.relationships.SetRelHate(agent, 0);
                     break;
                 case VRelationship.Annoyed:
                     __instance.SetStrikes(otherAgent, 2);
@@ -86,26 +95,26 @@ namespace CCU.Patches.AgentRelationships
                 case VRelationship.Hostile:
                     __instance.SetRel(otherAgent, VRelationship.Hostile);
                     __instance.SetRelHate(otherAgent, 5);
-                    otherAgent.relationships.GetRelationship(___agent).mechHate = true;
-                    otherAgent.relationships.SetRelInitial(___agent, VRelationship.Hostile);
+                    otherAgent.relationships.GetRelationship(agent).mechHate = true;
+                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Hostile);
                     break;
                 case VRelationship.Loyal:
                     __instance.SetRelInitial(otherAgent, VRelationship.Loyal);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRelInitial(___agent, VRelationship.Loyal);
-                    otherAgent.relationships.SetRelHate(___agent, 0);
+                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Loyal);
+                    otherAgent.relationships.SetRelHate(agent, 0);
                     break;
                 case VRelationship.Neutral:
                     __instance.SetRelHate(otherAgent, 0);
                     __instance.SetRelInitial(otherAgent, VRelationship.Neutral);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRelInitial(___agent, VRelationship.Neutral);
-                    otherAgent.relationships.SetRelHate(___agent, 0);
+                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Neutral);
+                    otherAgent.relationships.SetRelHate(agent, 0);
                     break;
                 case VRelationship.Submissive:
                     __instance.SetRel(otherAgent, VRelationship.Submissive);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRel(___agent, VRelationship.Neutral);
+                    otherAgent.relationships.SetRel(agent, VRelationship.Neutral);
                     break;
             }
         }

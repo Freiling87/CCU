@@ -30,8 +30,8 @@ namespace CCU.Systems.Readables
 
 		public static string MagicObjectName(string originalName)
 		{
-			if (Readables.ReadableObjects.Contains(originalName))
-				return "Sign";
+			if (ReadableObjects.Contains(originalName))
+				return vObject.Sign;
 
 			return originalName;
 		}
