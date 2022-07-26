@@ -15,7 +15,7 @@ namespace CCU.Localization
 
 		public static Dictionary<string, Type> ChallengeConversions = new Dictionary<string, Type>()
 		{
-			//	0.1.2
+			//	0.1.1
 			//		Update to standard format, elimination of CMutator lists
 			{ "[CCU] Homesickness Disabled",        typeof(Homesickness_Disabled) },
 			{ "[CCU] Homesickness Mandatory",		typeof(Homesickness_Mandatory) },
@@ -39,8 +39,7 @@ namespace CCU.Localization
 			//		Capitalization OCD
 			{ "Hostile_To_Vampire",					typeof(Hostile_to_Vampire) },
 			{ "Hostile_To_Werewolf",				typeof(Hostile_to_Werewolf) },
-
-			//	0.1.2
+			//		More OCD
 			{ "Manager_Safe_Combo",					typeof(Chunk_Safe_Combo) },
 			{ "Manager_Key",                        typeof(Chunk_Key) },
 			{ "Manager_Mayor_Badge",                typeof(Chunk_Mayor_Badge) },

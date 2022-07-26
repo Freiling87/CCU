@@ -59,6 +59,16 @@
               <para>Specifies that interactions stuff should be logged.</para>
             </summary>
         </member>
+        <member name="F:RogueLibsCore.DebugFlags.Disasters">
+            <summary>
+              <para>Specifies that disasters stuff should be logged.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.DebugFlags.EnableHints">
+            <summary>
+              <para>Specifies that various potentially annoying debug hints should be enabled, such as "I am patched!" buttons in the interactions.</para>
+            </summary>
+        </member>
         <member name="F:RogueLibsCore.DebugFlags.EnableTools">
             <summary>
               <para>Specifies that various debug tools should be enabled.</para>
@@ -305,6 +315,24 @@
               <para>Determines whether the status effect is removed between levels.</para>
             </summary>
         </member>
+        <member name="M:RogueLibsCore.EffectInfo.GetName">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this effect's name.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this effect's name, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.EffectInfo.GetDescription">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this effect's description.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this effect's description, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.EffectInfo.GetSprite">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.RogueSprite"/> that represents this effect. Note that it works only on sprites initialized with <see cref="M:RogueLibsCore.EffectBuilder.WithSprite(System.Byte[],UnityEngine.Rect,System.Single)"/> or one of its overloads.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.RogueSprite"/> that represents this effect, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
         <member name="M:RogueLibsCore.EffectInfo.Get(System.Type)">
             <summary>
               <para>Gets the specified <see cref="T:RogueLibsCore.CustomEffect"/> <paramref name="type"/>'s metadata.</para>
@@ -347,7 +375,7 @@
         </member>
         <member name="T:RogueLibsCore.EffectNameAttribute">
             <summary>
-              <para>Specifies a different name for the custom item to use.</para>
+              <para>Specifies a different name for the custom effect to use.</para>
             </summary>
         </member>
         <member name="P:RogueLibsCore.EffectNameAttribute.Name">
@@ -460,6 +488,14 @@
               <para>Gets all hooks attached to the current instance.</para>
             </summary>
             <returns>A collection of hooks attached to the current instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.HookController`1.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.HookController`1.Finalize">
+            <summary>
+              <para>Finalizes the <see cref="T:RogueLibsCore.HookController`1"/> and disposes of all its hooks.</para>
+            </summary>
         </member>
         <member name="T:RogueLibsCore.HookFactoryBase`1">
             <summary>
@@ -955,7 +991,7 @@
         </member>
         <member name="T:RogueLibsCore.OnItemsCombiningArgs">
             <summary>
-              <para>Represents the item combining inventory check args.</para>
+              <para>Provides data for the <see cref="M:RogueLibsCore.InventoryChecks.AddItemsCombiningCheck(System.String,RogueLibsCore.RogueEventHandler{RogueLibsCore.OnItemsCombiningArgs})"/> event.</para>
             </summary>
         </member>
         <member name="M:RogueLibsCore.OnItemsCombiningArgs.#ctor(InvItem,InvItem,Agent)">
@@ -989,7 +1025,7 @@
         </member>
         <member name="T:RogueLibsCore.OnItemTargetingAnywhereArgs">
             <summary>
-              <para>Represents the item targeting anywhere inventory check args.</para>
+              <para>Provides data for the <see cref="M:RogueLibsCore.InventoryChecks.AddItemTargetingAnywhereCheck(System.String,RogueLibsCore.RogueEventHandler{RogueLibsCore.OnItemTargetingAnywhereArgs})"/> event.</para>
             </summary>
         </member>
         <member name="M:RogueLibsCore.OnItemTargetingAnywhereArgs.#ctor(InvItem,UnityEngine.Vector2,Agent)">
@@ -1023,7 +1059,7 @@
         </member>
         <member name="T:RogueLibsCore.OnItemTargetingArgs">
             <summary>
-              <para>Represents the item targeting inventory check args.</para>
+              <para>Provides data for the <see cref="M:RogueLibsCore.InventoryChecks.AddItemTargetingCheck(System.String,RogueLibsCore.RogueEventHandler{RogueLibsCore.OnItemTargetingArgs})"/> event.</para>
             </summary>
         </member>
         <member name="M:RogueLibsCore.OnItemTargetingArgs.#ctor(InvItem,PlayfieldObject,Agent)">
@@ -1057,7 +1093,7 @@
         </member>
         <member name="T:RogueLibsCore.OnItemUsingArgs">
             <summary>
-              <para>Represents the item usage inventory check args.</para>
+              <para>Provides data for the <see cref="M:RogueLibsCore.InventoryChecks.AddItemUsingCheck(System.String,RogueLibsCore.RogueEventHandler{RogueLibsCore.OnItemUsingArgs})"/> event.</para>
             </summary>
         </member>
         <member name="M:RogueLibsCore.OnItemUsingArgs.#ctor(InvItem,Agent)">
@@ -1191,6 +1227,30 @@
             <summary>
               <para>Gets the collection of inventory checks, ignored by the custom item.</para>
             </summary>
+        </member>
+        <member name="M:RogueLibsCore.ItemInfo.GetName">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this item's name.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this item's name, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.ItemInfo.GetDescription">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this item's description.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this item's description, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.ItemInfo.GetUnlock">
+            <summary>
+              <para>Returns an <see cref="T:RogueLibsCore.ItemUnlock"/> associated with this item.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.ItemUnlock"/> associated with this item, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.ItemInfo.GetSprite">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.RogueSprite"/> that represents this item. Note that it works only on sprites initialized with <see cref="M:RogueLibsCore.ItemBuilder.WithSprite(System.Byte[],UnityEngine.Rect,System.Single)"/> or one of its overloads.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.RogueSprite"/> that represents this item, if found; otherwise, <see langword="null"/>.</returns>
         </member>
         <member name="M:RogueLibsCore.ItemInfo.Get(System.Type)">
             <summary>
@@ -1387,6 +1447,30 @@
             <summary>
               <para>Gets the custom trait's name.</para>
             </summary>
+        </member>
+        <member name="M:RogueLibsCore.TraitInfo.GetName">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this trait's name.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this trait's name, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.TraitInfo.GetDescription">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this trait's description.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this trait's description, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.TraitInfo.GetUnlock">
+            <summary>
+              <para>Returns an <see cref="T:RogueLibsCore.TraitUnlock"/> associated with this trait.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.TraitUnlock"/> associated with this trait, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.TraitInfo.GetSprite">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.RogueSprite"/> that represents this trait. Note that it works only on sprites initialized with <see cref="M:RogueLibsCore.TraitBuilder.WithSprite(System.Byte[],UnityEngine.Rect,System.Single)"/> or one of its overloads.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.RogueSprite"/> that represents this trait, if found; otherwise, <see langword="null"/>.</returns>
         </member>
         <member name="M:RogueLibsCore.TraitInfo.Get(System.Type)">
             <summary>
@@ -1681,7 +1765,7 @@
         </member>
         <member name="P:RogueLibsCore.IUnlockInCC.IsAvailableInCC">
             <summary>
-              <para>Gets or sets whether the unlock is available in the Character Creation menu.</para>
+              <para>Gets or sets whether the unlock is available in the Character Creation menu. Default value: <see langword="true"/>.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.CustomCharacterCreation">
@@ -1771,6 +1855,11 @@
         <member name="M:RogueLibsCore.UnlocksMenu.UpdateMenu">
             <summary>
               <para>When overriden in a derived class, updates the contents of the menu.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.UnlocksMenu.ShowLockedUnlocks">
+            <summary>
+              <para>Determines whether the unlocks should be displayed in the menu even if they're locked.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.UnlocksMenuType">
@@ -2010,6 +2099,51 @@
               <para>The disabled state. Gray button.</para>
             </summary>
         </member>
+        <member name="T:RogueLibsCore.UnlockTypes">
+            <summary>
+              <para>The collection of unlock types used in the game. Use it to avoid typos.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Item">
+            <summary>
+              <para>The unlock type for items.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Ability">
+            <summary>
+              <para>The unlock type for abilities.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Trait">
+            <summary>
+              <para>The unlock type for traits.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Mutator">
+            <summary>
+              <para>The unlock type for mutators.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Agent">
+            <summary>
+              <para>The unlock type for agents.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.BigQuest">
+            <summary>
+              <para>The unlock type for big quests.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Extra">
+            <summary>
+              <para>The unlock type for achievements.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.UnlockTypes.Floor">
+            <summary>
+              <para>The unlock type for floors.</para>
+            </summary>
+        </member>
         <member name="T:RogueLibsCore.UnlockWrapper">
             <summary>
               <para>Represents a generic unlock in the game.</para>
@@ -2065,7 +2199,7 @@
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.IsAvailable">
             <summary>
-              <para>Gets or sets whether the unlock is available in the primary menus.</para>
+              <para>Gets or sets whether the unlock is available in the primary menus. Default value: <see langword="true"/>.</para>
             </summary>
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.Cancellations">
@@ -2123,6 +2257,26 @@
         <member name="P:RogueLibsCore.UnlockWrapper.gc">
             <summary>
               <para>Gets the currently used instance of <see cref="T:GameController"/>.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.UnlockWrapper.DisplayNameInPrerequisites">
+            <summary>
+              <para>Gets or sets whether the name of the unlock should not be hidden in other unlocks' prerequisites.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.UnlockWrapper.DisplayNameInCancellations">
+            <summary>
+              <para>Gets or sets whether the name of the unlock should not be hidden in other unlocks' cancellations.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.UnlockWrapper.ShowInPrerequisites">
+            <summary>
+              <para>Gets or sets whether the name of the unlock should be displayed in other unlocks' prerequisites.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.UnlockWrapper.ShowInCancellations">
+            <summary>
+              <para>Gets or sets whether the name of the unlock should be displayed in other unlocks' cancellations.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.AbilityUnlock">
@@ -2281,6 +2435,11 @@
               <para>Gets the <see cref="T:RogueLibsCore.AgentUnlock"/> associated with this Big Quest.</para>
             </summary>
         </member>
+        <member name="P:RogueLibsCore.BigQuestUnlock.AgentName">
+            <summary>
+              <para>Gets the name of the agent associated with this Big Quest.</para>
+            </summary>
+        </member>
         <member name="M:RogueLibsCore.BigQuestUnlock.SetupUnlock">
             <summary>
               <para>Sets up the Big Quest's associated <see cref="T:RogueLibsCore.AgentUnlock"/>.</para>
@@ -2296,6 +2455,9 @@
             <inheritdoc/>
         </member>
         <member name="M:RogueLibsCore.BigQuestUnlock.GetDescription">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.BigQuestUnlock.GetFancyDescription">
             <inheritdoc/>
         </member>
         <member name="T:RogueLibsCore.ExtraUnlock">
@@ -2427,7 +2589,7 @@
         </member>
         <member name="P:RogueLibsCore.ItemUnlock.IsAvailableInItemTeleporter">
             <summary>
-              <para>Gets or sets whether the item is available in the Item Teleporter menu.</para>
+              <para>Gets or sets whether the item is available in the Item Teleporter menu. Default value: <see langword="true"/>.</para>
             </summary>
         </member>
         <member name="M:RogueLibsCore.ItemUnlock.UpdateButton">
@@ -2568,6 +2730,647 @@
         <member name="M:RogueLibsCore.TraitUnlock.OnPushedButton">
             <inheritdoc/>
         </member>
+        <member name="T:RogueLibsCore.CustomInteraction">
+            <summary>
+              <para>Represents an interaction. An unnecessary layer of abstraction, but it's kind of late to fix that now.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.CustomInteraction.MatchObject(RogueLibsCore.InteractionModel)">
+            <summary>
+              <para>Matches the interaction models that the interaction is valid for.</para>
+            </summary>
+            <param name="model">The <see cref="T:RogueLibsCore.InteractionModel"/> to match.</param>
+            <returns><see langword="true"/>, if the interaction is valid for the specified <paramref name="model"/>; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.CustomInteraction`1">
+            <summary>
+              <para>Represents an interaction. An unnecessary layer of abstraction, but it's kind of late to fix that now.</para>
+            </summary>
+            <typeparam name="T">The type of the object that the interaction is for.</typeparam>
+        </member>
+        <member name="P:RogueLibsCore.CustomInteraction`1.Model">
+            <summary>
+              <para>Gets the <see cref="T:RogueLibsCore.InteractionModel`1"/> that the interaction was created for.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomInteraction`1.Object">
+            <summary>
+              <para>Gets the object that the interaction was created for.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.CustomInteraction`1.MatchObject(RogueLibsCore.InteractionModel)">
+            <summary>
+              <para>Matches the interaction models that are instances of the <see cref="T:RogueLibsCore.InteractionModel`1"/> type.</para>
+            </summary>
+            <param name="model">The <see cref="T:RogueLibsCore.InteractionModel"/> to match.</param>
+            <returns><see langword="true"/>, if the <paramref name="model"/> is an instance of the <see cref="T:RogueLibsCore.InteractionModel`1"/> type; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.CustomInteraction`1.MatchObject(RogueLibsCore.InteractionModel{`0})">
+            <summary>
+              <para>Matches the interaction models that the interaction is valid for.</para>
+            </summary>
+            <param name="model">The <see cref="T:RogueLibsCore.InteractionModel`1"/> to match.</param>
+            <returns><see langword="true"/>, if the interaction is valid for the specified <paramref name="model"/>; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.Interaction">
+            <summary>
+              <para>Represents an interaction.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.Model">
+            <summary>
+              <para>Gets the <see cref="T:RogueLibsCore.InteractionModel"/> that the interaction was created for.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.Object">
+            <summary>
+              <para>Gets the object that the interaction is for.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.Agent">
+            <summary>
+              <para>Gets the agent that started the interaction.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.Helper">
+            <summary>
+              <para>Gets the <see cref="T:InteractionHelper"/> of the interaction.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.ImplicitAction">
+            <summary>
+              <para>Determines whether the interaction is implicit and should be automatically triggered if it's the only button in the menu.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.SortingOrder">
+            <summary>
+              <para>Gets or sets the sorting order of the interaction.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.SortingIndex">
+            <summary>
+              <para>Gets or sets the sorting index of the interaction.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.CompareTo(RogueLibsCore.Interaction)">
+            <inheritdoc/>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.ButtonName">
+            <summary>
+              <para>Gets the interaction's button name.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.ButtonPrice">
+            <summary>
+              <para>Gets the interaction's button price, or <see langword="null"/> if it's not defined.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Interaction.ButtonExtra">
+            <summary>
+              <para>Gets the interaction's button extra information string that is appended to the button's text.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.SetButton(System.String)">
+            <summary>
+              <para>Initializes the interaction's button with the specified <paramref name="buttonName"/>.</para>
+            </summary>
+            <param name="buttonName">The button's name.</param>
+            <returns><see langword="true"/>, to be used as a return value of <see cref="M:RogueLibsCore.Interaction.SetupButton"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.SetButton(System.String,System.String)">
+            <summary>
+              <para>Initializes the interaction's button with the specified <paramref name="buttonName"/> and <paramref name="buttonExtra"/>.</para>
+            </summary>
+            <param name="buttonName">The button's name.</param>
+            <param name="buttonExtra">The button's extra information, or <see langword="null"/>.</param>
+            <returns><see langword="true"/>, to be used as a return value of <see cref="M:RogueLibsCore.Interaction.SetupButton"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.SetButton(System.String,System.Nullable{System.Int32})">
+            <summary>
+              <para>Initializes the interaction's button with the specified <paramref name="buttonName"/> and <paramref name="buttonPrice"/>.</para>
+            </summary>
+            <param name="buttonName">The button's name.</param>
+            <param name="buttonPrice">The button's price, or <see langword="null"/>.</param>
+            <returns><see langword="true"/>, to be used as a return value of <see cref="M:RogueLibsCore.Interaction.SetupButton"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.SetButton(System.String,System.Nullable{System.Int32},System.String)">
+            <summary>
+              <para>Initializes the interaction's button with the specified <paramref name="buttonName"/>, <paramref name="buttonPrice"/> and <paramref name="buttonExtra"/>.</para>
+            </summary>
+            <param name="buttonName">The button's name.</param>
+            <param name="buttonPrice">The button's price, or <see langword="null"/>.</param>
+            <param name="buttonExtra">The button's extra information, or <see langword="null"/>.</param>
+            <returns><see langword="true"/>, to be used as a return value of <see cref="M:RogueLibsCore.Interaction.SetupButton"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.StopInteraction">
+            <summary>
+              <para>Stops the current interaction completely.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.SetupButton">
+            <summary>
+              <para>Sets up the interaction's button.</para>
+            </summary>
+            <returns><see langword="true"/>, if the interaction's button was set up successfully; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.OnPressed">
+            <summary>
+              <para>Gets called when the interaction's button is pressed.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.Interaction.OnPressedImplicitly">
+            <summary>
+              <para>Gets called when the interaction's button is the only one in the menu and is pressed implicitly.</para>
+            </summary>
+        </member>
+        <member name="T:RogueLibsCore.IInteractionProvider">
+            <summary>
+              <para>Represents an interaction provider.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.IInteractionProvider.GetInteractions(RogueLibsCore.InteractionModel)">
+            <summary>
+              <para>Returns interactions provided by this instance for the specified interaction <paramref name="model"/>.</para>
+            </summary>
+            <param name="model">The <see cref="T:RogueLibsCore.InteractionModel"/> to get the interactions for.</param>
+            <returns>An array of interactions provided for the specified interaction <paramref name="model"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.InteractionModel">
+            <summary>
+              <para>Represents an object in terms of interactivity and handles its interactions.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.#ctor">
+            <summary>
+              <para>Initializes a new instance of the <see cref="T:RogueLibsCore.InteractionModel"/> class.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.Instance">
+            <summary>
+              <para>Gets the object that the interaction model is attached to.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.Object">
+            <summary>
+              <para>Gets the object that the interaction model is attached to.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.Agent">
+            <summary>
+              <para>Gets the agent that is currently interacting with the object.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.Helper">
+            <summary>
+              <para>Gets the <see cref="T:InteractionHelper"/> of the current interaction.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.gc">
+            <summary>
+              <para>Gets the currently used instance of <see cref="T:GameController"/>.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.StopInteraction">
+            <summary>
+              <para>Stops the current interaction completely.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.StopInteraction(System.Boolean)">
+            <summary>
+              <para>Stops the current interaction completely. If <paramref name="forced"/> is <see langword="true"/>, forces the model to end the interaction right now, instead of postponing it to after the interaction handlers are processed.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.Initialize">
+            <inheritdoc/>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.Interactions">
+            <summary>
+              <para>Gets the read-only collection of interactions currently initialized.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.StopCallback">
+            <summary>
+              <para>Gets or sets the stop callback, that gets called if the interaction fails, is stopped or is interrupted.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel.SideEffect">
+            <summary>
+              <para>Gets or sets the side effect, that gets called after the interactions are set up, regardless of whether it was successful.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.RemoveInteraction(RogueLibsCore.Interaction)">
+            <summary>
+              <para>Removes the specified <paramref name="interaction"/> from the model.</para>
+            </summary>
+            <param name="interaction">The interaction to remove.</param>
+            <returns><see langword="true"/>, if the interaction was removed successfully; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.RemoveInteraction(System.Predicate{RogueLibsCore.Interaction})">
+            <summary>
+              <para>Removes an interaction that satisfies the specified <paramref name="predicate"/> from the model.</para>
+            </summary>
+            <param name="predicate">The predicate that matches the interaction to remove.</param>
+            <returns><see langword="true"/>, if the interaction was removed successfully; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.RemoveInteraction(System.String)">
+            <summary>
+              <para>Removes an interaction with the specified <paramref name="buttonName"/> from the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction to remove.</param>
+            <returns><see langword="true"/>, if the interaction was removed successfully; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.HasInteraction(RogueLibsCore.Interaction)">
+            <summary>
+              <para>Determines whether there's a specified <paramref name="interaction"/> in the model.</para>
+            </summary>
+            <param name="interaction">The interaction to look for in the model.</param>
+            <returns><see langword="true"/>, if the specified <paramref name="interaction"/> exists in the model; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.HasInteraction(System.Predicate{RogueLibsCore.Interaction})">
+            <summary>
+              <para>Determines whether there is an interaction that satisfies the specified <paramref name="predicate"/> in the model.</para>
+            </summary>
+            <param name="predicate">The predicate that matches the interaction to look for.</param>
+            <returns><see langword="true"/>, if an interaction that satisfies the specified <paramref name="predicate"/> exists in the model; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.HasInteraction(System.String)">
+            <summary>
+              <para>Determines whether there is an interaction with the specified <paramref name="buttonName"/> in the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction to look for.</param>
+            <returns><see langword="true"/>, if an interaction with the specified <paramref name="buttonName"/> exists in the model; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.StartOperating(System.Single,System.Boolean,System.String)">
+            <summary>
+              <para>Makes the current interacting agent to start operating on the object with the specified parameters.</para>
+            </summary>
+            <param name="timeToOperate">The amount of time it takes to finish the operation.</param>
+            <param name="makeNoise">Determines whether the operation makes noise.</param>
+            <param name="barType">The type of the operating bar.</param>
+            <returns>The <see cref="T:UnityEngine.Coroutine"/> representing the operation.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.StartOperating(System.String,System.Single,System.Boolean,System.String)">
+            <summary>
+              <para>Makes the current interacting agent to start operating on the object using an item with the specified <paramref name="itemName"/> with the specified parameters.</para>
+            </summary>
+            <param name="itemName">The name of the item to operate with.</param>
+            <param name="timeToOperate">The amount of time it takes to finish the operation.</param>
+            <param name="makeNoise">Determines whether the operation makes noise.</param>
+            <param name="barType">The type of the operating bar.</param>
+            <returns>The <see cref="T:UnityEngine.Coroutine"/> representing the operation.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.StartOperating(InvItem,System.Single,System.Boolean,System.String)">
+            <summary>
+              <para>Makes the current interacting agent to start operating on the object using the specified <paramref name="item"/> with the specified parameters.</para>
+            </summary>
+            <param name="item">The item to operate with.</param>
+            <param name="timeToOperate">The amount of time it takes to finish the operation.</param>
+            <param name="makeNoise">Determines whether the operation makes noise.</param>
+            <param name="barType">The type of the operating bar.</param>
+            <returns>The <see cref="T:UnityEngine.Coroutine"/> representing the operation.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.IsInteractable(Agent)">
+            <summary>
+              <para>Determines whether the current object can be interacted by the specified <paramref name="agent"/>.</para>
+            </summary>
+            <param name="agent">The agent to determine whether the object is interactable to.</param>
+            <returns><see langword="true"/>, if the current object is interactable; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.InteractionModel`1">
+            <typeparam name="T">The type of the object that the model represents.</typeparam>
+            <inheritdoc/>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel`1.Instance">
+            <summary>
+              <para>Gets the object that the interaction model is attached to.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.InteractionModel`1.Object">
+            <summary>
+              <para>Gets the object that the interaction model is attached to.</para>
+            </summary>
+        </member>
+        <member name="T:RogueLibsCore.RogueInteractions">
+            <summary>
+              <para>Provides a set of static methods for creating and manipulating interaction providers.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.RogueInteractions.Providers">
+            <summary>
+              <para>The list of interaction providers, used by RogueLibs.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.RogueInteractions.CreateProvider``1(System.Action{RogueLibsCore.SimpleInteractionProvider{``0}})">
+            <summary>
+              <para>Creates a <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/> with the specified <paramref name="handler"/>.</para>
+            </summary>
+            <typeparam name="T">The type of the object the interactions are for.</typeparam>
+            <param name="handler">A delegate that handles interactions using a <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/>.</param>
+            <returns>The created instance of the <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/> class.</returns>
+        </member>
+        <member name="M:RogueLibsCore.RogueInteractions.CreateProvider``1(System.Func{RogueLibsCore.SimpleInteractionProvider{``0},System.Object})">
+            <summary>
+              <para>Creates a <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/> with the specified <paramref name="handler"/>. The delegate's return value is ignored.</para>
+            </summary>
+            <typeparam name="T">The type of the object the interactions are for.</typeparam>
+            <param name="handler">A delegate that handles interactions using a <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/>. The return value is ignored.</param>
+            <returns>The created instance of the <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/> class.</returns>
+        </member>
+        <member name="M:RogueLibsCore.RogueInteractions.CreateProvider(System.Action{RogueLibsCore.SimpleInteractionProvider})">
+            <summary>
+              <para>Creates a <see cref="T:RogueLibsCore.SimpleInteractionProvider"/> with the specified <paramref name="handler"/>.</para>
+            </summary>
+            <param name="handler">A delegate that handles interactions using a <see cref="T:RogueLibsCore.SimpleInteractionProvider"/>.</param>
+            <returns>The created instance of the <see cref="T:RogueLibsCore.SimpleInteractionProvider"/> class.</returns>
+        </member>
+        <member name="M:RogueLibsCore.RogueInteractions.CreateProvider(System.Func{RogueLibsCore.SimpleInteractionProvider,System.Object})">
+            <summary>
+              <para>Creates a <see cref="T:RogueLibsCore.SimpleInteractionProvider"/> with the specified <paramref name="handler"/>. The delegate's return value is ignored.</para>
+            </summary>
+            <param name="handler">A delegate that handles interactions using a <see cref="T:RogueLibsCore.SimpleInteractionProvider"/>. The return value is ignored.</param>
+            <returns>The created instance of the <see cref="T:RogueLibsCore.SimpleInteractionProvider"/> class.</returns>
+        </member>
+        <member name="T:RogueLibsCore.SimpleInteraction">
+            <summary>
+              <para>Represents an interaction created using a <see cref="T:RogueLibsCore.SimpleInteractionProvider"/>.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction.#ctor(System.String,System.Nullable{System.Int32},System.String,System.Boolean,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Initializes an instance of the <see cref="T:RogueLibsCore.SimpleInteraction"/> with the specified parameters.</para>
+            </summary>
+            <param name="name">The name of the interaction's button.</param>
+            <param name="price">The price of the interaction's button.</param>
+            <param name="extra">The extra information on the interaction's button.</param>
+            <param name="implicitAction">Determines whether the interaction's button's action is implicit.</param>
+            <param name="action">The action that gets called when the interaction's button is pressed.</param>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteraction.ImplicitAction">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction.MatchObject(RogueLibsCore.InteractionModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction.SetupButton">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction.OnPressed">
+            <inheritdoc/>
+        </member>
+        <member name="T:RogueLibsCore.SimpleInteraction`1">
+            <summary>
+              <para>Represents an interaction created using a <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/>.</para>
+            </summary>
+            <typeparam name="T">The type of the object that the interaction is for.</typeparam>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction`1.#ctor(System.String,System.Nullable{System.Int32},System.String,System.Boolean,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <summary>
+              <para>Initializes an instance of the <see cref="T:RogueLibsCore.SimpleInteraction"/> with the specified parameters.</para>
+            </summary>
+            <param name="name">The name of the interaction's button.</param>
+            <param name="price">The price of the interaction's button.</param>
+            <param name="extra">The extra information on the interaction's button.</param>
+            <param name="implicitAction">Determines whether the interaction's button's action is implicit.</param>
+            <param name="action">The action that gets called when the interaction's button is pressed.</param>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteraction`1.ImplicitAction">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction`1.SetupButton">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteraction`1.OnPressed">
+            <inheritdoc/>
+        </member>
+        <member name="T:RogueLibsCore.SimpleInteractionProvider">
+            <summary>
+              <para>Represents a simple interaction provider that uses a delegate to handle interactions.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.#ctor(System.Action{RogueLibsCore.SimpleInteractionProvider})">
+            <summary>
+              <para>Initializes a new instance of the <see cref="T:RogueLibsCore.SimpleInteractionProvider"/> class with the specified <paramref name="handler"/>.</para>
+            </summary>
+            <param name="handler">A delegate that handles interactions using this interaction provider.</param>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.RemoveButton(System.String)">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.RemoveInteraction(System.String)"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.RemoveButton(System.Predicate{RogueLibsCore.Interaction})">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.RemoveInteraction(System.Predicate{RogueLibsCore.Interaction})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.HasButton(System.String)">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.HasInteraction(System.String)"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.HasButton(System.Predicate{RogueLibsCore.Interaction})">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.HasInteraction(System.Predicate{RogueLibsCore.Interaction})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an interaction with the specified <paramref name="buttonName"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.String,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an interaction with the specified <paramref name="buttonName"/>, <paramref name="buttonExtra"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="buttonExtra">The extra information on the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.Nullable{System.Int32},System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an interaction with the specified <paramref name="buttonName"/>, <paramref name="buttonPrice"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="buttonPrice">The price of the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.Nullable{System.Int32},System.String,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an interaction with the specified <paramref name="buttonName"/>, <paramref name="buttonPrice"/>, <paramref name="buttonExtra"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="buttonPrice">The price of the interaction's button.</param>
+            <param name="buttonExtra">The extra information on the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an implicit interaction with the specified <paramref name="buttonName"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.String,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an implicit interaction with the specified <paramref name="buttonName"/>, <paramref name="buttonExtra"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="buttonExtra">The extra information on the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.Nullable{System.Int32},System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an implicit interaction with the specified <paramref name="buttonName"/>, <paramref name="buttonPrice"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="buttonPrice">The price of the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.Nullable{System.Int32},System.String,System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Adds an implicit interaction with the specified <paramref name="buttonName"/>, <paramref name="buttonPrice"/>, <paramref name="buttonExtra"/> and <paramref name="action"/> to the model.</para>
+            </summary>
+            <param name="buttonName">The name of the interaction's button.</param>
+            <param name="buttonPrice">The price of the interaction's button.</param>
+            <param name="buttonExtra">The extra information on the interaction's button.</param>
+            <param name="action">The interaction's action.</param>
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction"/> instance.</returns>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.SetStopCallback(System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Sets the specified stop <paramref name="callback"/> that gets called if the interaction fails, is stopped or is interrupted.</para>
+            </summary>
+            <param name="callback">The stop callback to set.</param>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.CombineStopCallback(System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Combines the specified stop <paramref name="callback"/> with any previously defined ones.</para>
+            </summary>
+            <param name="callback">The stop callback to combine with any previously defined ones.</param>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.SetSideEffect(System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Sets the specified <paramref name="sideEffect"/> that gets called after the interactions are set up, regardless of whether it was successful.</para>
+            </summary>
+            <param name="sideEffect">The side effect to set.</param>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider.CombineSideEffect(System.Action{RogueLibsCore.InteractionModel})">
+            <summary>
+              <para>Combines the specified <paramref name="sideEffect"/> with any previously defined ones.</para>
+            </summary>
+            <param name="sideEffect">The side effect to combine with any previously defined ones.</param>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider.Model">
+            <summary>
+              <para>Gets the interaction model that the provider provides interactions for.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider.Object">
+            <summary>
+              <para>Gets the object that is being interacted with.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider.Agent">
+            <summary>
+              <para>Gets the agent that is interacting with an object.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider.Helper">
+            <summary>
+              <para>Gets the <see cref="T:InteractionHelper"/> of the current interaction.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider.gc">
+            <summary>
+              <para>Gets the currently used instance of <see cref="T:GameController"/>.</para>
+            </summary>
+        </member>
+        <member name="T:RogueLibsCore.SimpleInteractionProvider`1">
+            <summary>
+              <para>Represents a simple interaction provider that uses a delegate to handle interactions.</para>
+            </summary>
+            <typeparam name="T">The type of the object that the interactions are for.</typeparam>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.#ctor(System.Action{RogueLibsCore.SimpleInteractionProvider{`0}})">
+            <summary>
+              <para>Initializes a new instance of the <see cref="T:RogueLibsCore.SimpleInteractionProvider`1"/> class with the specified <paramref name="handler"/>.</para>
+            </summary>
+            <param name="handler">A delegate that handles interactions using this interaction provider.</param>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.RemoveButton(System.String)">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.RemoveInteraction(System.String)"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.RemoveButton(System.Predicate{RogueLibsCore.Interaction})">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.RemoveInteraction(System.Predicate{RogueLibsCore.Interaction})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.HasButton(System.String)">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.HasInteraction(System.String)"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.HasButton(System.Predicate{RogueLibsCore.Interaction})">
+            <inheritdoc cref="M:RogueLibsCore.InteractionModel.HasInteraction(System.Predicate{RogueLibsCore.Interaction})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddButton(System.String,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddButton(System.String,System.String,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.String,System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddButton(System.String,System.Nullable{System.Int32},System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.Nullable{System.Int32},System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddButton(System.String,System.Nullable{System.Int32},System.String,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddButton(System.String,System.Nullable{System.Int32},System.String,System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddImplicitButton(System.String,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddImplicitButton(System.String,System.String,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.String,System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddImplicitButton(System.String,System.Nullable{System.Int32},System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.Nullable{System.Int32},System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.AddImplicitButton(System.String,System.Nullable{System.Int32},System.String,System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <returns>The created <see cref="T:RogueLibsCore.SimpleInteraction`1"/> instance.</returns>
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.AddImplicitButton(System.String,System.Nullable{System.Int32},System.String,System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.SetStopCallback(System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.SetStopCallback(System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.CombineStopCallback(System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.CombineStopCallback(System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.SetSideEffect(System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.SetSideEffect(System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="M:RogueLibsCore.SimpleInteractionProvider`1.CombineSideEffect(System.Action{RogueLibsCore.InteractionModel{`0}})">
+            <inheritdoc cref="M:RogueLibsCore.SimpleInteractionProvider.CombineSideEffect(System.Action{RogueLibsCore.InteractionModel})"/>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider`1.Model">
+            <inheritdoc cref="P:RogueLibsCore.SimpleInteractionProvider.Model"/>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider`1.Object">
+            <inheritdoc cref="P:RogueLibsCore.SimpleInteractionProvider.Object"/>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider`1.Agent">
+            <inheritdoc cref="P:RogueLibsCore.SimpleInteractionProvider.Agent"/>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider`1.Helper">
+            <inheritdoc cref="P:RogueLibsCore.SimpleInteractionProvider.Helper"/>
+        </member>
+        <member name="P:RogueLibsCore.SimpleInteractionProvider`1.gc">
+            <summary>
+              <para>Gets the currently used instance of <see cref="T:GameController"/>.</para>
+            </summary>
+        </member>
         <member name="T:RogueLibsCore.AbilityBuilder">
             <summary>
               <para>Represents a <see cref="T:RogueLibsCore.CustomAbility"/> builder, that attaches additional information to the ability.</para>
@@ -2654,6 +3457,67 @@
             <param name="unlock">The unlock information to initialize.</param>
             <returns>The current instance of <see cref="T:RogueLibsCore.AbilityBuilder"/>, for chaining purposes.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="unlock"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="T:RogueLibsCore.DisasterBuilder">
+            <summary>
+              <para>Represents a <see cref="T:RogueLibsCore.CustomDisaster"/> builder, that attaches additional information to the disaster.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.DisasterBuilder.#ctor(RogueLibsCore.DisasterInfo)">
+            <summary>
+              <para>Initializes a new instance of the <see cref="T:RogueLibsCore.DisasterBuilder"/> class with the specified <paramref name="info"/>.</para>
+            </summary>
+            <param name="info">The disaster metadata to use.</param>
+        </member>
+        <member name="P:RogueLibsCore.DisasterBuilder.Info">
+            <summary>
+              <para>The used disaster metadata.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.DisasterBuilder.Name">
+            <summary>
+              <para>Gets the disaster's localizable name.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.DisasterBuilder.Description">
+            <summary>
+              <para>Gets the disaster's localizable description.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.DisasterBuilder.Message1">
+            <summary>
+              <para>Gets the disaster's localizable first message.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.DisasterBuilder.Message2">
+            <summary>
+              <para>Gets the disaster's localizable second message.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.DisasterBuilder.WithName(RogueLibsCore.CustomNameInfo)">
+            <summary>
+              <para>Creates a localizable string with the specified localization <paramref name="info"/> to act as the disaster's name.</para>
+            </summary>
+            <param name="info">The localization data to initialize the localizable string with.</param>
+            <returns>The current instance of <see cref="T:RogueLibsCore.DisasterBuilder"/>, for chaining purposes.</returns>
+            <exception cref="T:System.ArgumentException">A localizable string that acts as the disaster's name already exists.</exception>
+        </member>
+        <member name="M:RogueLibsCore.DisasterBuilder.WithDescription(RogueLibsCore.CustomNameInfo)">
+            <summary>
+              <para>Creates a localizable string with the specified localization <paramref name="info"/> to act as the disaster's description.</para>
+            </summary>
+            <param name="info">The localization data to initialize the localizable string with.</param>
+            <returns>The current instance of <see cref="T:RogueLibsCore.DisasterBuilder"/>, for chaining purposes.</returns>
+            <exception cref="T:System.ArgumentException">A localizable string that acts as the disaster's description already exists.</exception>
+        </member>
+        <member name="M:RogueLibsCore.DisasterBuilder.WithMessage(RogueLibsCore.CustomNameInfo)">
+            <summary>
+              <para>Creates a localizable string with the specified localization <paramref name="info"/> to act as the disaster's message. Can be repeated to create up to two messages.</para>
+            </summary>
+            <param name="info">The localization data to initialize the localizable string with.</param>
+            <returns>The current instance of <see cref="T:RogueLibsCore.DisasterBuilder"/>, for chaining purposes.</returns>
+            <exception cref="T:System.ArgumentException">A localizable string that acts as the disaster's message already exists.</exception>
+            <exception cref="T:System.InvalidOperationException">The maximum of two localizable messages have already been created.</exception>
         </member>
         <member name="T:RogueLibsCore.EffectBuilder">
             <summary>
@@ -2944,6 +3808,140 @@
             <returns>The current instance of <see cref="T:RogueLibsCore.UnlockBuilder"/>, for chaining purposes.</returns>
             <exception cref="T:System.ArgumentException">A localizable string that acts as the description of the unlock already exists.</exception>
         </member>
+        <member name="T:RogueLibsCore.CustomDisaster">
+            <summary>
+              <para>Represents a custom disaster.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.IsActive">
+            <summary>
+              <para>Determines whether this disaster is currently active.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.CurrentDistrict">
+            <summary>
+              <para>Gets the index of the current district (0 - Slums, 1 - Industrial, 2 - Park, 3 - Downtown, 4 - Uptown, 5 - Mayor Village).</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.CurrentFloor">
+            <summary>
+              <para>Gets the index of the floor of the current district (from 0 to 2, or from 0 to 1 if Quick Game is on).</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.CurrentLevel">
+            <summary>
+              <para>Gets the index of the current level (0-2 - Slums, 3-5 - Industrial, 6-8 - Park, 9-11 - Downtown, 12-14 - Uptown, 15 - Mayor Village (or 0-1, 2-3, 4-5, 6-7, 8-9 if Quick Game is on), and more in Endless mode).</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.DisasterInfo">
+            <summary>
+              <para>Gets the custom disaster's metadata.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.gc">
+            <summary>
+              <para>Gets the currently used instance of <see cref="T:GameController"/>.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.CustomDisaster.AllowTeleport">
+            <summary>
+              <para>Determines whether the teleportation is allowed during this disaster. Default value: <see langword="false"/>.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.CustomDisaster.TestForced">
+            <summary>
+              <para>Determines if the disaster <b>must</b> be applied to the current level. Default return value: <see langword="false"/>.</para>
+            </summary>
+            <returns><see langword="true"/>, if the disaster <b>must</b> be applied to the current level; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.CustomDisaster.Test">
+            <summary>
+              <para>Determines if the disaster can be applied to the current level.</para>
+            </summary>
+            <returns><see langword="true"/>, if the disaster can be applied to the current level; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.CustomDisaster.Start">
+            <summary>
+              <para>Initializes the custom disaster.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.CustomDisaster.Finish">
+            <summary>
+              <para>Finishes and cleans up after the custom disaster.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.CustomDisaster.Updating">
+            <summary>
+              <para>Updates the custom disaster using a <see cref="T:UnityEngine.Coroutine"/>.</para>
+            </summary>
+            <returns>The enumerator representing the custom disaster's updating coroutine.</returns>
+        </member>
+        <member name="T:RogueLibsCore.DisasterInfo">
+            <summary>
+              <para>Represents the <see cref="T:RogueLibsCore.CustomDisaster"/> type metadata.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.DisasterInfo.Name">
+            <summary>
+              <para>Gets the custom disaster's name.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.DisasterInfo.GetName">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's name.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's name, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.DisasterInfo.GetDescription">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's description.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's description, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.DisasterInfo.GetMessage1">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's first message.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's first message, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.DisasterInfo.GetMessage2">
+            <summary>
+              <para>Returns a <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's second message.</para>
+            </summary>
+            <returns>The <see cref="T:RogueLibsCore.CustomName"/> associated with this disaster's second message, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.DisasterInfo.Get(System.Type)">
+            <summary>
+              <para>Gets the specified <see cref="T:RogueLibsCore.CustomDisaster"/> <paramref name="type"/>'s metadata.</para>
+            </summary>
+            <param name="type">The <see cref="T:RogueLibsCore.CustomDisaster"/> type to get the metadata for.</param>
+            <returns>The specified <paramref name="type"/>'s metadata.</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="type"/> is not a <see cref="T:RogueLibsCore.CustomDisaster"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.DisasterInfo.Get``1">
+            <summary>
+              <para>Gets the specified <typeparamref name="TDisaster"/>'s metadata.</para>
+            </summary>
+            <typeparam name="TDisaster">The <see cref="T:RogueLibsCore.CustomDisaster"/> type get the metadata for.</typeparam>
+            <returns>The specified <typeparamref name="TDisaster"/>'s metadata.</returns>
+        </member>
+        <member name="T:RogueLibsCore.DisasterNameAttribute">
+            <summary>
+              <para>Specifies a different name for the custom disaster to use.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.DisasterNameAttribute.Name">
+            <summary>
+              <para>Gets the custom disaster's name.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.DisasterNameAttribute.#ctor(System.String)">
+            <summary>
+              <para>Initializes a new instance of the <see cref="T:RogueLibsCore.DisasterNameAttribute"/> class with the specified <paramref name="name"/>.</para>
+            </summary>
+            <param name="name">The custom disaster's name.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+        </member>
         <member name="T:RogueLibsCore.CustomName">
             <summary>
               <para>The implementation of the <see cref="T:RogueLibsCore.IName"/> interface, used by the <see cref="T:RogueLibsCore.CustomNameProvider"/>. Provides properties for getting and setting the 8 default languages' localization texts.</para>
@@ -3158,6 +4156,16 @@
               <para>Gets or sets the fall-back language that will be used, when the current language's localization string is not found. Default: <see cref="F:RogueLibsCore.LanguageCode.English"/>.</para>
             </summary>
         </member>
+        <member name="E:RogueLibsCore.LanguageService.OnCurrentChanged">
+            <summary>
+              <para>Occurs when the current language is changed.</para>
+            </summary>
+        </member>
+        <member name="E:RogueLibsCore.LanguageService.OnFallBackChanged">
+            <summary>
+              <para>Occurs when the fall back language is changed.</para>
+            </summary>
+        </member>
         <member name="P:RogueLibsCore.LanguageService.Languages">
             <summary>
               <para>Returns a read-only dictionary of languages currently existing in the game.</para>
@@ -3191,6 +4199,174 @@
             <param name="name">The current localizable string instance.</param>
             <returns>The current language's localization string, if found; otherwise, the fall-back language's localization string, if found; otherwise, <see langword="null"/>.</returns>
         </member>
+        <member name="T:RogueLibsCore.LanguageVersions">
+            <summary>
+              <para>Represents an index of languages' numeric versions.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.LanguageVersions.Entries">
+            <summary>
+              <para>Gets a read-only dictionary of language ids to their versions.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.LanguageVersions.WriteXml(System.Xml.XmlWriter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.LanguageVersions.ReadXml(System.Xml.XmlReader)">
+            <inheritdoc/>
+        </member>
+        <member name="T:RogueLibsCore.LocaleCategory">
+            <summary>
+              <para>Represents a localization category, containing localization entries.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.LocaleCategory.Id">
+            <summary>
+              <para>Gets the category's identifier.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.LocaleCategory.Entries">
+            <summary>
+              <para>Gets the category's underlying dictionary of entry ids to their values.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.LocaleCategory.WriteXml(System.Xml.XmlWriter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.LocaleCategory.ReadXml(System.Xml.XmlReader)">
+            <inheritdoc/>
+        </member>
+        <member name="P:RogueLibsCore.LocaleCategory.Item(System.String)">
+            <summary>
+              <para>Returns the value of an entry with the specified <paramref name="name"/>, if found; otherwise, <see langword="null"/>.</para>
+            </summary>
+            <param name="name">The name of the entry to look for.</param>
+            <returns>The value of an entry with the specified <paramref name="name"/>, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.LocaleLanguage">
+            <summary>
+              <para>Represents a localization language, containing localization categories.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.LocaleLanguage.Id">
+            <summary>
+              <para>Gets the language's identifier.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.LocaleLanguage.Version">
+            <summary>
+              <para>Gets the language's numeric version.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.LocaleLanguage.Categories">
+            <summary>
+              <para>Gets the language's underlying dictionary of categories.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.LocaleLanguage.WriteXml(System.Xml.XmlWriter)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RogueLibsCore.LocaleLanguage.ReadXml(System.Xml.XmlReader)">
+            <inheritdoc/>
+        </member>
+        <member name="P:RogueLibsCore.LocaleLanguage.Item(System.String,System.String)">
+            <summary>
+              <para>Returns the value of an entry with the specified <paramref name="name"/> in the specified <paramref name="category"/>, if found; otherwise, <see langword="null"/>.</para>
+            </summary>
+            <param name="category">The category to look for the entry in.</param>
+            <param name="name">The name of the entry to look for.</param>
+            <returns>The value of an entry with the specified <paramref name="name"/> in the specified <paramref name="category"/>, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.Localization">
+            <summary>
+              <para>Provides information about, and means to manipulate in-game localization.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Localization.Current">
+            <summary>
+              <para>Gets the current language's information.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.Localization.FallBack">
+            <summary>
+              <para>Gets the fall-back language's information.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.Localization.GetName(System.String,System.String)">
+            <summary>
+              <para>Returns the value of an entry with the specified <paramref name="name"/> and <paramref name="type"/> in the current or fall-back language.</para>
+            </summary>
+            <param name="name">The name of the entry to look for.</param>
+            <param name="type">The type of the entry to look for.</param>
+            <returns>The value of an entry with the specified <paramref name="name"/> and <paramref name="type"/> in the current or fall-back language, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.OnLanguageChangedArgs">
+            <summary>
+              <para>Provides data for the <see cref="E:RogueLibsCore.LanguageService.OnCurrentChanged"/> and <see cref="E:RogueLibsCore.LanguageService.OnFallBackChanged"/> events.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.OnLanguageChangedArgs.#ctor(RogueLibsCore.LanguageCode,RogueLibsCore.LanguageCode)">
+            <summary>
+              <para>Initializes a new instance of the <see cref="T:RogueLibsCore.OnLanguageChangedArgs"/> class with the specified <paramref name="previous"/> value and current <paramref name="value"/>.</para>
+            </summary>
+            <param name="previous">The previous language.</param>
+            <param name="value">The current language.</param>
+        </member>
+        <member name="P:RogueLibsCore.OnLanguageChangedArgs.PreviousValue">
+            <summary>
+              <para>Gets the previously set language.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.OnLanguageChangedArgs.Value">
+            <summary>
+              <para>Gets the currently set language.</para>
+            </summary>
+        </member>
+        <member name="T:RogueLibsCore.NameTypes">
+            <summary>
+              <para>The collection of name types used in the game. Use it to avoid typos.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Item">
+            <summary>
+              <para>The name type for the names of items and abilities.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Description">
+            <summary>
+              <para>The name type for the descriptions of items, abilities, traits status effects, and agents.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.StatusEffect">
+            <summary>
+              <para>The name type for the names of traits and status effects.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Interface">
+            <summary>
+              <para>The name type for the interface buttons, labels and other text.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Unlock">
+            <summary>
+              <para>The name type for the names and descriptions of mutators and big quests.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Object">
+            <summary>
+              <para>The name type for the names of objects and chunk types.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Agent">
+            <summary>
+              <para>The name type for the names of agents.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.NameTypes.Dialogue">
+            <summary>
+              <para>The name type for the agent dialogues.</para>
+            </summary>
+        </member>
         <member name="T:RogueLibsCore.CustomNameProvider">
             <summary>
               <para>The default implementation of the <see cref="T:RogueLibsCore.INameProvider"/> interface that uses instances of the <see cref="T:RogueLibsCore.CustomName"/> class.</para>
@@ -3200,6 +4376,14 @@
             <summary>
               <para>The <see cref="T:RogueLibsCore.CustomName"/> dictionary used by the provider, organized by type and name.</para>
             </summary>
+        </member>
+        <member name="M:RogueLibsCore.CustomNameProvider.FindEntry(System.String,System.String)">
+            <summary>
+              <para>Returns an entry with the specified <paramref name="name"/> and <paramref name="type"/>.</para>
+            </summary>
+            <param name="name">The name of the entry to look for.</param>
+            <param name="type">The type of the entry to look for.</param>
+            <returns>An entry with the specified <paramref name="name"/> and <paramref name="type"/>, if found; otherwise, <see langword="null"/>.</returns>
         </member>
         <member name="M:RogueLibsCore.CustomNameProvider.GetName(System.String,System.String,System.String@)">
             <inheritdoc/>
@@ -3291,12 +4475,98 @@
         </member>
         <member name="F:RogueLibsCore.RogueFramework.Unlocks">
             <summary>
-              <para>The list of all unlocks in the game, including original ones too.</para>
+              <para>The list of all unlocks in the game, including the vanilla ones too.</para>
             </summary>
+        </member>
+        <member name="F:RogueLibsCore.RogueFramework.CustomDisasters">
+            <summary>
+              <para>The list of all custom disasters, that will be used in the game.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.RogueFramework.GetActiveDisaster">
+            <summary>
+              <para>Returns the currently active custom disaster.</para>
+            </summary>
+            <returns>The currently active instance of <see cref="T:RogueLibsCore.CustomDisaster"/>, if there is one; otherwise, <see langword="null"/>.</returns>
         </member>
         <member name="F:RogueLibsCore.RogueFramework.ExtraSprites">
             <summary>
               <para>The list of extra sprites, that will be used if a sprite is not found in the appropriate collection.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.ItemSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the item sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.ObjectSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the object sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.FloorSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the floor sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.BulletSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the projectile sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.HairSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the hair sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.FacialHairSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the facial hair sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.HeadPieceSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the head piece sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.AgentSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the agent sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.BodySprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the agent body sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.WreckageSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the wreckage sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.InterfaceSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the interface sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.DecalSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the decal sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.WallTopSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the wall top sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.WallSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the wall sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.SpawnerSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the spawner sprites, used in the Level Editor, or <see langword="null"/>, if it's not initialized yet.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.RogueLibs">
@@ -3361,6 +4631,13 @@
             </summary>
             <typeparam name="TEffect">The <see cref="T:RogueLibsCore.CustomEffect"/> type. Must have a parameterless constructor.</typeparam>
             <returns>An <see cref="T:RogueLibsCore.EffectBuilder"/> with the specified effect's metadata.</returns>
+        </member>
+        <member name="M:RogueLibsCore.RogueLibs.CreateCustomDisaster``1">
+            <summary>
+              <para>Creates a <typeparamref name="TDisaster"/> custom disaster. Chain "With" methods to attach extra information.</para>
+            </summary>
+            <typeparam name="TDisaster">The <see cref="T:RogueLibsCore.CustomDisaster"/> type. Must have a parameterless constructor.</typeparam>
+            <returns>An <see cref="T:RogueLibsCore.DisasterBuilder"/> with the specified disaster's metadata.</returns>
         </member>
         <member name="M:RogueLibsCore.RogueLibs.CreateCustomSprite(System.String,RogueLibsCore.SpriteScope,System.Byte[],System.Single)">
             <summary>
@@ -3438,6 +4715,14 @@
             <summary>
               <para>Invokes all static methods marked with a <see cref="T:RogueLibsCore.RLSetupAttribute"/> in the current assembly.</para>
             </summary>
+        </member>
+        <member name="M:RogueLibsCore.RogueLibs.CreateVersionText(System.String,System.String)">
+            <summary>
+              <para>Creates a <see cref="T:RogueLibsCore.VersionText"/>, that is displayed in the bottom-left corner, with the specified unique <paramref name="id"/> and initializes it with the specified <paramref name="text"/> value.</para>
+            </summary>
+            <param name="id">The unique identifier representing the <see cref="T:RogueLibsCore.VersionText"/>.</param>
+            <param name="text">The value to initialize the <see cref="T:RogueLibsCore.VersionText"/> with.</param>
+            <returns>The created <see cref="T:RogueLibsCore.VersionText"/>.</returns>
         </member>
         <member name="T:RogueLibsCore.RogueSprite">
             <summary>
@@ -3547,6 +4832,12 @@
               <para>Gets the scope of the sprite's definition.</para>
             </summary>
         </member>
+        <member name="M:RogueLibsCore.RogueSprite.Dump(tk2dSpriteCollectionData)">
+            <summary>
+              <para>Dumps all tk2d sprites from the specified <paramref name="collection"/> into a "tk2d_{CollectionName}" folder in the game's root directory.</para>
+            </summary>
+            <param name="collection">The collection whose sprites to dump.</param>
+        </member>
         <member name="T:RogueLibsCore.SpriteScope">
             <summary>
               <para>Represents a type of game resources that a <see cref="T:RogueLibsCore.RogueSprite"/> will be integrated into.</para>
@@ -3575,6 +4866,66 @@
         <member name="F:RogueLibsCore.SpriteScope.Floors">
             <summary>
               <para>The floor sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Bullets">
+            <summary>
+              <para>The projectile sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Hair">
+            <summary>
+              <para>The hair sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.FacialHair">
+            <summary>
+              <para>The facial hair sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.HeadPieces">
+            <summary>
+              <para>The head piece sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Agents">
+            <summary>
+              <para>The agent sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Bodies">
+            <summary>
+              <para>The agent body sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Wreckage">
+            <summary>
+              <para>The wreckage sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Interface">
+            <summary>
+              <para>The interface sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Decals">
+            <summary>
+              <para>The decal sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.WallTops">
+            <summary>
+              <para>The wall top sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Walls">
+            <summary>
+              <para>The wall sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Spawners">
+            <summary>
+              <para>The spawner sprites, used in the Level Editor.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.CreateEffectInfo">
@@ -3818,6 +5169,74 @@
             <param name="instance">The instance of a hookable type.</param>
             <returns>The hook that is assignable to a variable of <typeparamref name="THook"/> type, if found; otherwise, <see langword="default"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="instance"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.GetOrAddHook``1(InvItem)">
+            <summary>
+              <para>Returns a hook attached to the current instance, that is assignable to a variable of the <typeparamref name="THook"/> type, or creates one if it doesn't exist.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns>The hook that is assignable to a variable of <typeparamref name="THook"/> type, if found; otherwise, <see langword="default"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="instance"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.GetOrAddHook``1(PlayfieldObject)">
+            <summary>
+              <para>Returns a hook attached to the current instance, that is assignable to a variable of the <typeparamref name="THook"/> type, or creates one if it doesn't exist.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns>The hook that is assignable to a variable of <typeparamref name="THook"/> type, if found; otherwise, <see langword="default"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="instance"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.GetOrAddHook``1(StatusEffect)">
+            <summary>
+              <para>Returns a hook attached to the current instance, that is assignable to a variable of the <typeparamref name="THook"/> type, or creates one if it doesn't exist.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns>The hook that is assignable to a variable of <typeparamref name="THook"/> type, if found; otherwise, <see langword="default"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="instance"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.GetOrAddHook``1(Trait)">
+            <summary>
+              <para>Returns a hook attached to the current instance, that is assignable to a variable of the <typeparamref name="THook"/> type, or creates one if it doesn't exist.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns>The hook that is assignable to a variable of <typeparamref name="THook"/> type, if found; otherwise, <see langword="default"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="instance"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.HasHook``1(InvItem)">
+            <summary>
+              <para>Determines whether the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns><see langword="true"/>, if the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.HasHook``1(PlayfieldObject)">
+            <summary>
+              <para>Determines whether the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns><see langword="true"/>, if the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.HasHook``1(StatusEffect)">
+            <summary>
+              <para>Determines whether the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns><see langword="true"/>, if the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.HookExtensions.HasHook``1(Trait)">
+            <summary>
+              <para>Determines whether the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type.</para>
+            </summary>
+            <typeparam name="THook">The type of a hook to search for.</typeparam>
+            <param name="instance">The instance of a hookable type.</param>
+            <returns><see langword="true"/>, if the current instance contains a hook, that is assignable to a variable of the <typeparamref name="THook"/> type; otherwise, <see langword="false"/>.</returns>
         </member>
         <member name="M:RogueLibsCore.HookExtensions.GetHooks``1(InvItem)">
             <summary>
@@ -4227,6 +5646,15 @@
             <returns>The item hook assignable to a variable of the specified <typeparamref name="TAbility"/> type associated with the <paramref name="agent"/>'s special ability, if found; otherwise, <see langword="default"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="agent"/> is <see langword="null"/>.</exception>
         </member>
+        <member name="M:RogueLibsCore.RogueExtensions.HasAbility``1(Agent)">
+            <summary>
+              <para>Determines whether the current agent has an item hook assignable to a variable of the specified <typeparamref name="TAbility"/> type associated with the current <paramref name="agent"/>'s special ability.</para>
+            </summary>
+            <typeparam name="TAbility">The type of the item hook to search for.</typeparam>
+            <param name="agent">The current agent.</param>
+            <returns><see langword="true"/>, if the current agent's special ability contains an item hook that is assignable to a variable of the <typeparamref name="TAbility"/> type.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="agent"/> is <see langword="null"/>.</exception>
+        </member>
         <member name="M:RogueLibsCore.RogueExtensions.GiveAbility(Agent,System.Type)">
             <summary>
               <para>Gives an ability of the specified <paramref name="abilityType"/> to the current <paramref name="agent"/>.</para>
@@ -4241,8 +5669,17 @@
               <para>Finds an item hook assignable to a variable of the specified <paramref name="abilityType"/> associated with the current <paramref name="agent"/>'s special ability.</para>
             </summary>
             <param name="agent">The current agent.</param>
-            <param name="abilityType">Type of the ability to give to the <paramref name="agent"/>.</param>
+            <param name="abilityType">Type of the ability to search for.</param>
             <returns>The item hook assignable to a variable of the specified <paramref name="abilityType"/> associated with the <paramref name="agent"/>'s special ability, if found; otherwise, <see langword="default"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="agent"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:RogueLibsCore.RogueExtensions.HasAbility(Agent,System.Type)">
+            <summary>
+              <para>Determines whether the current agent has an item hook assignable to a variable of the specified <paramref name="abilityType"/> associated with the current <paramref name="agent"/>'s special ability.</para>
+            </summary>
+            <param name="abilityType">Type of the ability to search for.</param>
+            <param name="agent">The current agent.</param>
+            <returns><see langword="true"/>, if the current agent's special ability contains an item hook that is assignable to a variable of the <paramref name="abilityType"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="agent"/> is <see langword="null"/>.</exception>
         </member>
         <member name="M:RogueLibsCore.RogueExtensions.AddTrait``1(Agent)">
@@ -4567,6 +6004,12 @@
             <param name="callerPlugin">The instance of <see cref="T:BepInEx.BaseUnityPlugin"/> responsible for the patches.</param>
             <param name="typeWithPatches">The type containing patch methods.</param>
         </member>
+        <member name="M:RogueLibsCore.RoguePatcher.GetHarmony">
+            <summary>
+              <para>Returns the underling <see cref="T:HarmonyLib.Harmony"/> instance, used by the patcher.</para>
+            </summary>
+            <returns>The underlying <see cref="T:HarmonyLib.Harmony"/> instance, used by the patcher.</returns>
+        </member>
         <member name="P:RogueLibsCore.RoguePatcher.TypeWithPatches">
             <summary>
               <para>Gets or sets the type containing the patch methods.</para>
@@ -4810,6 +6253,21 @@
             <param name="interfaceType">The type of the interface with the methods.</param>
             <param name="methodNames">The names of the interface's method.</param>
             <returns>An array of <see cref="T:System.Reflection.MethodInfo"/>s of the implemented methods, if found; otherwise, <see langword="null"/>.</returns>
+        </member>
+        <member name="T:RogueLibsCore.VersionText">
+            <summary>
+              <para>Represents a version text displayed in the bottom-left corner of the screen. Does not necessarily display a version.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.VersionText.Id">
+            <summary>
+              <para>Gets the version text's unique identifier.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.VersionText.Text">
+            <summary>
+              <para>Gets or sets the text displayed by the version text.</para>
+            </summary>
         </member>
     </members>
 </doc>

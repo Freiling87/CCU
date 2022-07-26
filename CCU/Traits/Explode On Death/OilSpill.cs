@@ -1,30 +1,31 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
+using System.Linq;
 
-namespace CCU.Traits.Drug_Warrior
+namespace CCU.Traits.Explode_On_Death
 {
-    public class Numbestest_to_Pain : T_DrugWarrior
+    public class OilSpill : T_ExplodeOnDeath
     {
-        public override string DrugEffect => VStatusEffect.NumbToPain;
+        public override string ExplosionType => CExplosionType.OilSpill;
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Numbestest_to_Pain>()
+            PostProcess = RogueLibs.CreateCustomTrait<Ooze>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character gains a 66% damage resistance upon entering combat."),
+                    [LanguageCode.English] = String.Format("On death, this character splashes flammable oil everywhere. "),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Numbestest_to_Pain)),
+                    [LanguageCode.English] = DisplayName(typeof(Ooze)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
+                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Ooze)).Select(c => c.TextName).ToList(),
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

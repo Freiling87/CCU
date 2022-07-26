@@ -20,7 +20,45 @@ namespace CCU.Patches.Goals
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process), argumentTypes: new Type[0] { })]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
+		private static IEnumerable<CodeInstruction> Process_StartCombatActions(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(GoalBattle.agent));
+			MethodInfo customStatusDuration = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(P_GoalBattle.CustomStatusDuration));
+			MethodInfo addStatusEffect_1 = AccessTools.DeclaredMethod(typeof(StatusEffects), nameof(StatusEffects.AddStatusEffect), new[] { typeof(string) });
+			MethodInfo addStatusEffect_2 = AccessTools.DeclaredMethod(typeof(StatusEffects), nameof(StatusEffects.AddStatusEffect), new[] { typeof(string), typeof(int) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldloc_2),
+					new CodeInstruction(OpCodes.Call, addStatusEffect_1),
+                },
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_2),
+					new CodeInstruction(OpCodes.Ldfld, agent),
+					new CodeInstruction(OpCodes.Call, customStatusDuration),
+					new CodeInstruction(OpCodes.Call, addStatusEffect_2),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		public static int CustomStatusDuration(Agent agent)
+        {
+			if (agent.HasTrait<Eternal_Release>())
+				return 9999;
+			else if (agent.HasTrait<Extended_Release>())
+				return 69420;
+			else
+				return -1;
+        }
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
 		private static IEnumerable<CodeInstruction> Process_StartCombatActions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

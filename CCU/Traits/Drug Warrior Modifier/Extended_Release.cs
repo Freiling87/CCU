@@ -1,26 +1,21 @@
-﻿using CCU.Localization;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Drug_Warrior
+namespace CCU.Traits.Drug_Warrior_Modifier
 {
-    public class Numbestest_to_Pain : T_DrugWarrior
+    public class Extended_Release : T_DrugWarriorModifier
     {
-        public override string DrugEffect => VStatusEffect.NumbToPain;
-
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Numbestest_to_Pain>()
+            PostProcess = RogueLibs.CreateCustomTrait<Extended_Release>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character gains a 66% damage resistance upon entering combat."),
-                    
+                    [LanguageCode.English] = String.Format("Drug warrior status effect lasts until end of combat."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Numbestest_to_Pain)),
-                    
+                    [LanguageCode.English] = DisplayName(typeof(Extended_Release)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

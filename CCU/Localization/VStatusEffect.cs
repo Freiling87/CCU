@@ -47,7 +47,7 @@
 			MindControlling = "MindControlling",
 			NiceSmelling = "NiceSmelling",
 			Nicotine = "Nicotine",
-			NumbtoPain = "NumbToPain",
+			NumbToPain = "NumbToPain",
 			OnFire = "OnFire",
 			Paralyzed = "Paralyzed",
 			Poisoned = "Poisoned",
