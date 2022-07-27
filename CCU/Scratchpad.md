@@ -6,14 +6,12 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #			Scope
+##			C	Container/Ivestigateable interaction
+InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
 ##			P	Bug Fixing
 ###				T	Custom Gib test
 Verify that all methods of gibbing work, not just EOD
-###				C	Relationships not saved with game
-CL - Another weird thing I need to double check related to the gang traits is that if you stop a run as a custom gangster and then revisit it later you lose the alignment half of the trait but keep the hostility, haven't tried reproducing it yet to see if it's that straightforward but I did a two part playtesting run with one of my new crepe classes that worked perfectly in the first half and then was no longer aligned with the other crepes after launching the game again.
-	- The relationship method needs a refactor anyway. Verify that it's actually doing each of those relationships correctly.
-	- Verify that the traits still exist on the characters after load.
-	- Agent.LoadWorldData - calls agent.relationships.LoadWorldDataRels
+###				T	Electronic NPCs with EOD have Normal Gibs
 ##			P	0.1.1 Changelog
 - **Feature additions**
   - Mutators
@@ -65,6 +63,8 @@ CL - Another weird thing I need to double check related to the gang traits is th
   - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
   - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
   - Decoupled various Killer Robot behaviors that were hardcoded to Seek & Destroy (Water damage, EMP vulnerability, Knockback bonus, walking through Doors). 
+- **Bug Acknowledgement**
+  - Saved runs may not load mod content correctly. This is a limitation of RogueLibs and beyond my technical ability to implement (or even understand, to be honest). So for the time being, there's no roadmap to resolve this.
 - **Trait Update System:** I've renamed and slightly reorganized some of the traits. This system should automatically update outdated traits both on spawn and on loading in the character editor. You will not have to update character files, and all versions of CCU will be backwards-compatible with un-updated content.
   - **Class Name Overlaps:** A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
     - Hire Type
@@ -118,6 +118,56 @@ Resolved
 P_StatusEffects_ExplodeBody.DisappearBody
 ####			√	GIB ME GIBS
 P_StatusEffects_ExplodeBody.GibItAShot
+##			C	Language (Overhaul)
+###			C	00 Mutator: Language System
+- NPCs have a chance to speak a foreign language
+  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
+- NPCs have a chance to have Vocally Challenged
+  - If they do, they always have at least one foreign language
+- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
+- Enables Polyglot trait choice
+- Gives the Translator an actual reason to exist
+- All hired agents can act as translators
+- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
+###			C	00 Mutator Group: Our Town
+Shifts the population so that about 66% are speakers, and one third of those don't speak English.
+- Chinatown
+- Brighton Beach
+- Etc. with all config languages
+- Gorillian Gables Luxury Living Community (Monkese)
+- District 9 (ErSdtAdt)
+- Werewales (Werewelsh)
+- 28th St. (Lang Zonbi)
+###			C	00 Trait: Polyglot
+Trait choice locked behind Language System Mutator
+- Gain 2 languages on taking the trait
+- Gain 1 langauge every 3 levels
+###			√	00 Base Feature
+P_Agent.
+	CanUnderstandEachOther_Postfix
+###			√	Alienian
+###			√	Monkese
+###			√	Zombese
+##		C	Gib Type
+###			C	Wall types
+Include sound effect where applicable, like with glass
+###			C	Ungibbable
+New
+###			√	Ghost Gibs
+Complete
+###			√	Ice Gibs
+Complete
+###			√	Normal Gibs
+Complete
+##			T	Goals
+###				T	Level Editor List
+###				T	Scene Setters
+These are goals that will trigger one action at level load.
+####				T	Arrested
+####				T	Burned
+####				T	Dead
+####				T	Gibbed
+####				T	Knocked Out
 #		CT	Projects
 ##			CT	Legacy Name Updater
 ###				C	Iterate until failure
@@ -165,45 +215,6 @@ Proposal:
 ##			C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
 Just add a --- CCU TRAITS --- Divider or something
-##			C	Language (Overhaul)
-###			C	00 Mutator: Language System
-- NPCs have a chance to speak a foreign language
-  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
-- NPCs have a chance to have Vocally Challenged
-  - If they do, they always have at least one foreign language
-- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
-- Enables Polyglot trait choice
-- Gives the Translator an actual reason to exist
-- All hired agents can act as translators
-- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
-###			C	00 Mutator Group: Our Town
-Shifts the population so that about 66% are speakers, and one third of those don't speak English.
-- Chinatown
-- Brighton Beach
-- Etc. with all config languages
-- Gorillian Gables Luxury Living Community (Monkese)
-- District 9 (ErSdtAdt)
-- Werewales (Werewelsh)
-- 28th St. (Lang Zonbi)
-###			C	00 Trait: Polyglot
-Trait choice locked behind Language System Mutator
-- Gain 2 languages on taking the trait
-- Gain 1 langauge every 3 levels
-###			√	00 Base Feature
-P_Agent.
-	CanUnderstandEachOther_Postfix
-###			√	Alienian
-###			√	Monkese
-###			√	Zombese
-#		T	Goals
-##			T	Level Editor List
-##			T	Scene Setters
-These are goals that will trigger one action at level load.
-###				T	Arrested
-###				T	Burned
-###				T	Dead
-###				T	Gibbed
-###				T	Knocked Out
 ##			H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
@@ -212,7 +223,6 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-#		T	Systems
 ##			C	Door System
 ###				C	Keycard System
 Red, Blue, Green, Yellow
@@ -263,6 +273,17 @@ Had to tweak it
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
 P_StatusEffects.AddTrait_Prefix
+##		C	Trait Utilities
+###			C	Hide Traits in Collapsed Groups
+- While in Character Creator, hide traits in Collapsed Groups
+  - Once all traits are in they're going to get hard to manage. 
+###			C	Sort active Traits by Name
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
+- DW
+###			C	Sort active Traits by Value
+- ScrollingMenu.PushedButton @ 0006
+  - Pretty much has exactly what you need.
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
@@ -295,7 +316,7 @@ New
 New
 ###			C	Skin Color
 New
-##		C	Behavior
+##		CT	Behavior
 ###			T	Grab Alcohol
 
 ###			T	Grab Drugs
@@ -517,17 +538,6 @@ No red blink before explosion
 ###			C	Low Health
 ###			C	Spawn
 This is more of a utility, to allow designers to explode or burn things at level start.
-##		C	Gib Type
-###			C	Wall types
-Include sound effect where applicable, like with glass
-###			C	Ungibbable
-New
-###			√	Ghost Gibs
-Complete
-###			√	Ice Gibs
-Complete
-###			√	Normal Gibs
-Complete
 ##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted
@@ -739,7 +749,7 @@ P_AgentInteractions.
 As above, but removes the single-use hire option.
 ###			C	Start as Hired
 On level entry
-##		√C	Hire Type
+##		C	Hire Type
 ###			C	Chloroform
 New
 ###			C	Devour Corpse
@@ -820,7 +830,7 @@ Complete
 Complete
 ###			√	Cyber-Intruder
 Complete
-##		√C	Interaction
+##		C	Interaction
 ###			C	Buy Slave
 Pending actual assignment of owned slaves 
 ###			C	Cybernetic Surgery
@@ -914,7 +924,7 @@ Complete
 Complete
 ###			√	Use Blood Bag
 Complete
-##		√C	Interaction Gate
+##		C	Interaction Gate
 ###			C	Insular
 Requires Faction Friendly
 ###			C	Insularer
@@ -1001,7 +1011,7 @@ Allows to sell shitty items in junk dealer, for instance
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
-##		√C	Passive
+##		C	Passive
 ###			C	Blinker
 Blink to a random nearby spot when hit
 This is valid for player characters, so might need to be another mod
@@ -1107,7 +1117,7 @@ public override string Relationship => VRelationship.Aligned, etc.
 ###			√	Faction 3 Hostile
 ###			√	Faction 4 Aligned
 ###			√	Faction 4 Hostile
-##		√C	Relationships - General
+##		C	Relationships - General
 ###			C	All-Annoyed
 New
 ###			C	All-Friendly
@@ -1220,7 +1230,7 @@ New
 New
 ##		C	Tethers
 ###			C	Types depend on vanilla variable
-##		√C	Trait Gates
+##		C	Trait Gates
 ###			C	Crust Enjoyer
 If you have Upper Crusty, this character is Loyal
 I think this is actually automatic with Enforcer
@@ -1249,42 +1259,6 @@ Complete
 ###			√	Specific Species
 Complete
 ###			√	Suspicious Suspecter
-Complete
-##		C	Utility
-###			C	Hide Traits in Collapsed Groups
-- While in Character Creator, hide traits in Collapsed Groups
-  - Once all traits are in they're going to get hard to manage. 
-###			C	Sort active Traits by Name
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-- DW
-###			C	Sort active Traits by Value
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-#		√	Trait Archive
-##			√	Cost Scale
-###				√	Less
-Complete
-###				√	More
-Complete
-###				√	Much More
-Complete
-###				√	Zero
-Complete
-##			√	Relationships - Player
-###				√	Player Aligned
-Complete
-###				√	Player Annoyed
-Complete
-###				√	Player Friendly
-Complete
-###				√	Player Hostile
-Complete
-###				√	Player Loyal
-Complete
-###				√	Player Secret Hate
-Moved to Behavior - Ambush (more transparent to user)
-###				√	Player Submissive 
 Complete
 #		C	Mutators
 ##		C	00 Mutator List Population
@@ -1432,12 +1406,33 @@ This would really only make sense with a Stop & Frisk mod.
 Allow Text like Sign
 #		√	Bug Archive
 ##			√	Fast or Rollerskates won't fall in Hole
-###					Issue
-Papparazzo wouldn't fall
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
-	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Hole.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 ###				√	Fix
 Vanilla bug
+##			H	Relationships not Loaded
+###				H	Fix
+Everything is running, but the Agent Hooks don't exist when running from a Save. Abbysssal said this is out of scope, so this bug is probably here to stay for the time being.
+#		√	Trait Archive
+##			√	Cost Scale
+###				√	Less
+Complete
+###				√	More
+Complete
+###				√	Much More
+Complete
+###				√	Zero
+Complete
+##			√	Relationships - Player
+###				√	Player Aligned
+Complete
+###				√	Player Annoyed
+Complete
+###				√	Player Friendly
+Complete
+###				√	Player Hostile
+Complete
+###				√	Player Loyal
+Complete
+###				√	Player Secret Hate
+Moved to Behavior - Ambush (more transparent to user)
+###				√	Player Submissive 
+Complete

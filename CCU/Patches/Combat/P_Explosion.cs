@@ -112,7 +112,7 @@ namespace CCU.Patches.P_Combat
 				{
 					new CodeInstruction(OpCodes.Ldfld, explosionType),
 					new CodeInstruction(OpCodes.Ldstr, "Water"),
-					new CodeInstruction(OpCodes.Call, ExplosionTypeMagicStringMatcher),
+					new CodeInstruction(OpCodes.Call, ExplosionTypeMagicStringMatcher), 
 				});
 
 			patch.ApplySafe(instructions, logger);

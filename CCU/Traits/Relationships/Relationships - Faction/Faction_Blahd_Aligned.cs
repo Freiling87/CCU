@@ -38,7 +38,7 @@ namespace CCU.Traits.Rel_Faction
                 ? VRelationship.Aligned
             : agent.HasTrait<Faction_Crepe_Aligned>() || agent.agentName == VanillaAgents.GangsterCrepe || agent.HasTrait(VanillaTraits.BlahdBasher)
                 ? VRelationship.Hostile
-                : null;
+            : null;
         public override void OnAdded() { }
         public override void OnRemoved() { }
     }
