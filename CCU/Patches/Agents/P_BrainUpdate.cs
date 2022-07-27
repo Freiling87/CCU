@@ -72,7 +72,8 @@ namespace CCU.Patches.Agents
 			LOSagent.losCheckAtIntervalsTime = 0;
 
 			//	Item Grabbing
-			if (!LOSagent.hasEmployer && pickupCategories.Any())
+			if (LOSagent.agentInvDatabase.hasEmptySlot() &&
+				!LOSagent.hasEmployer && (pickupCategories.Any() || LOSagent.HasTrait<Grab_Everything>()))
 			{
 				List<Item> itemList = GC.itemList;
 
@@ -80,7 +81,7 @@ namespace CCU.Patches.Agents
 				{
 					Item item = itemList[n];
 
-					if (item.invItem.Categories.Intersect(pickupCategories).Any() &&
+					if ((item.invItem.Categories.Intersect(pickupCategories).Any() || LOSagent.HasTrait<Grab_Everything>()) &&
 						!item.fellInHole && item.curTileData.prison == LOSagent.curTileData.prison && !item.dontStealFromGround &&
 						(LOSagent.curTileData.prison <= 0 || LOSagent.curTileData.chunkID == item.curTileData.chunkID) &&
 						!GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, item.curTileData) && LOSagent.curPosX - 5f < item.curPosition.x && LOSagent.curPosX + 5f > item.curPosition.x && LOSagent.curPosY - 5f < item.curPosition.y && LOSagent.curPosY + 5f > item.curPosition.y && LOSagent.movement.HasLOSObjectNormal(item))

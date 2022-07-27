@@ -5,10 +5,9 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-#			Scope
-##			C	Container/Ivestigateable interaction
-InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
+#		Scope
 ##			P	Bug Fixing
+###				C	Grab Traits should not trigger if inventory full
 ###				T	Custom Gib test
 Verify that all methods of gibbing work, not just EOD
 ###				T	Electronic NPCs with EOD have Normal Gibs
@@ -80,11 +79,12 @@ Verify that all methods of gibbing work, not just EOD
     - Hostile to Cannibal → Faction Soldier Aligned
     - Hostile to Soldier → Faction Cannibal Aligned
     - Specistist → Faction Gorilla Aligned
-##			T	Behavior Traits
-###			T	Grab Alcohol
-###			T	Grab Drugs
+###			C	Flex Traits
+Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
 ##			T	Test note
 20220725
+##			C	Container/Ivestigateable interaction
+InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
 ##		CT	Drug Warrior Modifiers
 GoalBattle.Process is where the effect is applied.
 ###			T	Suppress Syringe AV
@@ -118,36 +118,6 @@ Resolved
 P_StatusEffects_ExplodeBody.DisappearBody
 ####			√	GIB ME GIBS
 P_StatusEffects_ExplodeBody.GibItAShot
-##			C	Language (Overhaul)
-###			C	00 Mutator: Language System
-- NPCs have a chance to speak a foreign language
-  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
-- NPCs have a chance to have Vocally Challenged
-  - If they do, they always have at least one foreign language
-- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
-- Enables Polyglot trait choice
-- Gives the Translator an actual reason to exist
-- All hired agents can act as translators
-- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
-###			C	00 Mutator Group: Our Town
-Shifts the population so that about 66% are speakers, and one third of those don't speak English.
-- Chinatown
-- Brighton Beach
-- Etc. with all config languages
-- Gorillian Gables Luxury Living Community (Monkese)
-- District 9 (ErSdtAdt)
-- Werewales (Werewelsh)
-- 28th St. (Lang Zonbi)
-###			C	00 Trait: Polyglot
-Trait choice locked behind Language System Mutator
-- Gain 2 languages on taking the trait
-- Gain 1 langauge every 3 levels
-###			√	00 Base Feature
-P_Agent.
-	CanUnderstandEachOther_Postfix
-###			√	Alienian
-###			√	Monkese
-###			√	Zombese
 ##		C	Gib Type
 ###			C	Wall types
 Include sound effect where applicable, like with glass
@@ -159,16 +129,76 @@ Complete
 Complete
 ###			√	Normal Gibs
 Complete
-##			T	Goals
-###				T	Level Editor List
-###				T	Scene Setters
-These are goals that will trigger one action at level load.
-####				T	Arrested
-####				T	Burned
-####				T	Dead
-####				T	Gibbed
-####				T	Knocked Out
-#		CT	Projects
+##		CT	Goals
+###			CT	Actual Goals
+####			T	Commit Arson
+####			C	Flee Danger
+DW (What's the point anyway)
+####			C	Robot Clean
+DW
+###			C	Scene Setters
+####			C	Arrested
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	AgentInteractions.ArrestAgent (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	CCU.Systems.CustomGoals.CustomGoals.RunSceneSetters (Agent agent) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
+	CCU.Patches.Level.P_LoadLevel.SetupMore5_Postfix (LoadLevel __instance) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
+	LoadLevel.SetupMore5 () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+####			C	Burned
+DW
+####			C	Dead
+Works but gibs. No gib.
+####			√	Gibbed
+Complete
+####			√	Knocked Out
+Complete
+##		T	Language - Designer
+###			T	ErSdtAdt Speaker
+###			T	Foreign Speaker
+###			T	High Goryllian Speaker
+###			T	Lang Zombi Speaker
+###			T	Werewelsh Speaker
+##		C	Language - Player
+###			C	Mute
+No interactions under any circumstances, even with Translator
+###			C	Polyglot
+Gain 2 languages on trait gain, and an additional one every two levels.
+#	CT	Projects
+##			C	Language (Overhaul)
+###			C	00 Mutator: Language System
+- NPCs have a chance to speak a foreign language
+  - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
+- NPCs have a chance to have Vocally Challenged
+  - If they do, they always have at least one foreign language
+- Some people become Friendly if you interact in a non-English language. Chance is higher if they don't speak English.
+- Enables Polyglot trait choice
+- Gives the Translator an actual reason to exist
+- All hired agents can act as translators
+- Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
+###			C	00 Non-Disaster Group: Our Town
+Gated behind Language System Mutator
+Shifts the population so that about 66% are speakers, and one third - 1 half of those don't speak English.
+Or you know what, make an overhaul mutator mapped to each class. That's what this is turning into.
+- Concrete Jungle (Monkese)
+- District 69 (ErSdtAdt)
+- Little Faraway (Foreign)
+- Meltingpot District (Even distribution of all language groups)
+- Werewales (Werewelsh)
+- Brainard (Lang Zonbi)
+###			C	00 Trait: Polyglot
+Trait choice locked behind Language System Mutator
+- Gain 2 languages on taking the trait
+- Gain 1 langauge every 3 levels
+###			C	Trait: ____ Speaker
+These will be the first Flex Traits (see other section) for CCU.
+###			√	00 Base Feature
+P_Agent.
+	CanUnderstandEachOther_Postfix
+###			√	Alienian
+###			√	Monkese
+###			√	Zombese
 ##			CT	Legacy Name Updater
 ###				C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
@@ -191,7 +221,7 @@ Not so sure about the utility of this. I don't think players should need more th
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 ##			C	Relationship Refactor
 ###				C	Create SetRelationship(agent, otherAgent, VRelationship)
-Current state is embarrassing
+Current state is embarrassing 
 ##			C	Explosion Trait Refactor
 Current Setup:
 	Explode on Death
@@ -316,13 +346,7 @@ New
 New
 ###			C	Skin Color
 New
-##		CT	Behavior
-###			T	Grab Alcohol
-
-###			T	Grab Drugs
-
-###			C	Grab Everything
-New
+##		C	Behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
 ###			C	Ambush
@@ -402,6 +426,8 @@ Complete
 ###			√	Grab Alcohol
 Complete
 ###			√	Grab Drugs
+Complete
+###			√	Grab Everything
 Complete
 ###			√	Grab Food
 Complete
