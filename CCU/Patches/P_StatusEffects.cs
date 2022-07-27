@@ -19,6 +19,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine.Networking;
+using static CCU.Traits.Gib_Type.T_GibType;
 
 namespace CCU.Patches
 {
@@ -89,7 +90,16 @@ namespace CCU.Patches
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect), 
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
+		public static bool ChangeHealth_Prefix(StatusEffects __instance, ref float healthNum)
+        {
+			if (__instance.agent.HasTrait<Not_Vincible>() && healthNum < 0f)
+				healthNum = 0f;
+
+			return true;
+        }
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect), 
 			argumentTypes: new Type[0] { })]
 		public static bool ChooseRandomDrugDealerStatusEffect_Prefix(StatusEffects __instance, ref string __result)
         {
@@ -144,6 +154,19 @@ namespace CCU.Patches
 
 			return true;
         }
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.NormalGib))]
+		public static bool NormalGib_Redirect(StatusEffects __instance)
+		{
+			if (__instance.agent.HasTrait<Indestructible>())
+				return false;
+
+			if (__instance.agent.GetTraits<T_GibType>().First() is Meat_Chunks)
+				return true;
+
+			P_StatusEffects_ExplodeBody.CustomGib(__instance);
+			return false;
+		}
 	}
 
     [HarmonyPatch(declaringType: typeof(StatusEffects))]
@@ -214,21 +237,20 @@ namespace CCU.Patches
         //          agent.copBot ||
         //          agent.GetTraits<T_ExplodeOnDeath>().Any();
 
-
         [HarmonyTranspiler, UsedImplicitly]
         private static IEnumerable<CodeInstruction> GibBody(IEnumerable<CodeInstruction> codeInstructions)
         {
             List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo agent = AccessTools.Field(typeof(StatusEffects), nameof(StatusEffects.agent));
 			FieldInfo copBot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.copBot));
-			MethodInfo gibItAShot = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(GibItAShot));
+			MethodInfo explodeOnDeathCustomGibs = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(EOD_CustomGibs));
 
             CodeReplacementPatch patch = new CodeReplacementPatch(
                 expectedMatches: 1,
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_1),								
-					new CodeInstruction(OpCodes.Call, gibItAShot),						
+					new CodeInstruction(OpCodes.Call, explodeOnDeathCustomGibs),						
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
                 {
@@ -241,26 +263,76 @@ namespace CCU.Patches
             return instructions;
         }
 
-		private static void GibItAShot(StatusEffects __instance)
+		private static void EOD_CustomGibs(StatusEffects __instance)
 		{
-			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().FirstOrDefault() is null)
+			// Checks for EOD to detect custom characters.
+			// Cannot check for GibType here since vanilla means normal Gibs.
+			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().Any() &&
+				!__instance.agent.HasTrait<Indestructible>())
+				CustomGib(__instance); 
+		}
+
+		// Largely a modified copy of vanilla
+		public static void CustomGib(StatusEffects statusEffects)
+		{
+			Agent agent = statusEffects.agent;
+			T_GibType gibTrait = agent.GetTraits<T_GibType>().FirstOrDefault();
+
+			if (statusEffects.slaveHelmetGonnaBlow)
+			{
+				MethodInfo slaveHelmetBlow = AccessTools.DeclaredMethod(typeof(StatusEffects), "SlaveHelmetBlow");
+				slaveHelmetBlow.GetMethodWithoutOverrides<Action>(statusEffects).Invoke();
 				return;
+			}
 
-			int gibType = T_GibType.GetGibType(__instance.agent);
+			if ((GC.serverPlayer && !statusEffects.agent.disappeared) || (!GC.serverPlayer && !statusEffects.agent.gibbed && !statusEffects.agent.fellInHole))
+			{
+				statusEffects.agent.gibbed = true;
+				statusEffects.Disappear();
 
-			//	Networking version
-			if (GC.multiplayerMode && !__instance.dontDoBloodExplosion)
-				__instance.agent.objectMult.Gib(gibType); 
+				if (agent.HasTrait<Gibless>())
+					return;
 
-			//	Base version
-			if (gibType == 0)
-				__instance.NormalGib();
-			else if (gibType == 1)
-				__instance.IceGib();
-			else if (gibType == 2)
-				__instance.GhostGib();
+				if (GC.bloodEnabled)
+				{
+					if ((!statusEffects.agent.overHole || statusEffects.agent.underWater) && (!statusEffects.agent.warZoneAgent || !statusEffects.agent.underWater))
+					{ 
+						InvItem invItem = new InvItem();
+						invItem.invItemName = "Giblet";
+						invItem.SetupDetails(false);
+						string gibSpriteName = GetGibType(statusEffects.agent).ToString();
 
-			__instance.agent.objectMult.Gib(gibType);
+						for (int i = 1; i <= gibTrait.gibQuantity; i++)
+						{
+							int gibSpriteIterator = Math.Max(1, i % (gibTrait.gibSpriteIteratorLimit + 1));
+							invItem.LoadItemSprite(gibSpriteName + gibSpriteIterator);
+							GC.spawnerMain.SpawnWreckage(statusEffects.agent.tr.position, invItem, statusEffects.agent, null, false);
+						}
+
+						if (!statusEffects.agent.underWater && gibTrait.gibDecal != DecalSpriteName.None)
+							GC.spawnerMain.SpawnFloorDecal(statusEffects.agent.tr.position, gibTrait.gibDecal.ToString());
+					}
+					if (!statusEffects.dontDoBloodExplosion && !(gibTrait.particleEffect is null)) // dontdobloodexplosion is strictly tied to cannibalism
+					{
+						GC.spawnerMain.SpawnParticleEffect(gibTrait.particleEffect, statusEffects.agent.tr.position, 0f);
+						GC.audioHandler.Play(statusEffects.agent, gibTrait.audioClipName);
+					}
+					else
+						GC.audioHandler.Play(statusEffects.agent, VanillaAudio.CannibalFinish);// This is specific to cannibalize; not sure if that will ever lead here but just in case.
+				}
+				else // I doubt many players play with gore disabled, but who knows
+				{
+					GC.spawnerMain.SpawnParticleEffect("WallDestroyed", statusEffects.agent.tr.position, 0f);
+
+					if (statusEffects.agent.agentName == VanillaAgents.Robot)
+						GC.audioHandler.Play(statusEffects.agent, VanillaAudio.RobotDeath);
+					else
+						GC.audioHandler.Play(statusEffects.agent, VanillaAudio.AgentDie);
+				}
+
+				if (statusEffects.agent.isPlayer != 0 && !statusEffects.playedPlayerDeath)
+					GC.audioHandler.Play(statusEffects.agent, VanillaAudio.PlayerDeath);
+			}
 		}
 	}
 }

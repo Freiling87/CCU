@@ -1,27 +1,21 @@
-﻿using CCU.Localization;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
-using System.Linq;
 
-namespace CCU.Traits.Gib_Type
+namespace CCU.Traits.Passive
 {
-    public class Ghost_Gibs : T_GibType
+    public class Indestructible : T_CCU
     {
-        public override int GibType => 2;
-
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Ghost_Gibs>()
+            PostProcess = RogueLibs.CreateCustomTrait<Indestructible>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character's body explodes into chunks of... ectoplasm? Probably not vegan, if you were wondering."),
-                    
+                    [LanguageCode.English] = String.Format("I meant what I said! Can't be gibbed or cannibalized."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Ghost_Gibs)),
-                    
+                    [LanguageCode.English] = DisplayName(typeof(Indestructible)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

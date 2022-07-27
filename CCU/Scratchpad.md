@@ -7,10 +7,12 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 #		Scope
 ##			P	Bug Fixing
-###				C	Grab Traits should not trigger if inventory full
-###				T	Custom Gib test
-Verify that all methods of gibbing work, not just EOD
-###				T	Electronic NPCs with EOD have Normal Gibs
+###				C	Hole bug
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
+	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 ##			P	0.1.1 Changelog
 - **Feature additions**
   - Mutators
@@ -32,19 +34,26 @@ Verify that all methods of gibbing work, not just EOD
       - Slime
       - Stomp
       - Water
+    - Gib Type
+      - Ectoplasm
+      - Gibless
+      - Glass Shards
+      - Golemite
+      - Ice Shards
+      - Leaves
+      - Meat Chunks
     - Language (For use with or without Vocally Challenged)
       - ErSdtAdt Speaker
       - Foreign Speaker
       - Lang Zonbi Speaker
       - High Goryllian Speaker
       - Werewelsh Speaker
+    - Passive
+      - Indestructible
+      - Not Vincible
     - Relationships - Faction
       - Faction Firefighter Aligned
       - Faction Gorilla Aligned 
-    - Gib Type (Make sure to use one with Explode on Death)
-      - Ghost Gibs
-      - Ice Gibs
-      - Normal Gibs
   - Objects
     - It's a banner day for the rude... you can now read emails! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
 - **Tweaks**
@@ -108,26 +117,103 @@ Effect gains 1s of duration on take/receive damage
 New
 ###			T	Oil Spill
 Explosion.SetupExplosion ~373
-###			T	00 Do they explode when... exploded?
+###			T	Do they explode when... exploded?
 Verify by kill w rocket
-###			C	00 Explodes when Arrested
+###			C	Explodes when Arrested
 New
-###			√	00 Cop Bot not Exploding
-Resolved
-###			√	00 Certain explosion types don't delete body
+###			√	Cop Bot not Exploding
+Complete
+###			√	Certain explosion types don't delete body
 P_StatusEffects_ExplodeBody.DisappearBody
-####			√	GIB ME GIBS
+###			√	Gib body
 P_StatusEffects_ExplodeBody.GibItAShot
 ##		C	Gib Type
-###			C	Wall types
-Include sound effect where applicable, like with glass
-###			C	Ungibbable
+###			C	Robot Gibs
 New
-###			√	Ghost Gibs
+###			C	Wood
+For use with Leaves, once they can combine into one
+###			√	Ectoplasm
 Complete
-###			√	Ice Gibs
+###			√	Gibless (No gibs)
 Complete
-###			√	Normal Gibs
+###			√	Glass Shards
+Complete
+###			√	Ice Shards
+Complete
+###			√	Leaves
+Complete
+###			√	Meat Chunks
+Complete
+##		CT	Passive
+###			C	Blinker
+Blink to a random nearby spot when hit
+This is valid for player characters, so might need to be another mod
+###			C	Concealed Carrier
+Hides weapon until drawn
+###			C	Explodevice Eligible
+agent.canExplosiveStimulate
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
+###			C	Immobile
+Can't move (for turret types)
+###			C	Invincible
+New
+###			C	Mute Dialogue
+Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
+###			C	Oblivious
+Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
+But will enter combat if their teammates do.
+###			C	Psychic Shield
+Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			C	Reviver
+If hired and surviving, will revive the player once
+###			C	Spidey-Sensitive
+When alerted, immediately enters combat with perp (no search necessary)
+###			C	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
+###			C	Stinky Aura
+Werewolf A-were-ness works on this character
+###			C	Supernatural
+Ghost Gibber works
+###			C	Tattletale
+Reports ALL crimes to alarm button
+###			C	Unappetizing
+Can't be bitten/cannibalized
+###			C	Translucent
+Ghost visual effect
+###			C	Unchallenging
+No XP for neutralization
+###			C	Vision Beams (Cop Bot)
+DW
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			√	Berserk (Declined)
+Rel General - Hostile to All
+###			√	Crusty
+Complete
+###			√	Extortable
+Complete
+###			C!	Guilty
+####			C!	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+###			√	Indestructible
+Complete
+###			√	Innocent
+Complete
+###			√	Possessed
+Complete
+###			√	Status Effect Immune
+Complete
+###			√	Un-Vincible
+Complete
+###			√	Z-Infected
 Complete
 ##		CT	Goals
 ###			CT	Actual Goals
@@ -165,6 +251,8 @@ Complete
 No interactions under any circumstances, even with Translator
 ###			C	Polyglot
 Gain 2 languages on trait gain, and an additional one every two levels.
+###			C	Telepathic (rename)
+Can talk to all languages, even Mutes
 #	CT	Projects
 ##			C	Language (Overhaul)
 ###			C	00 Mutator: Language System
@@ -775,6 +863,12 @@ P_AgentInteractions.
 As above, but removes the single-use hire option.
 ###			C	Start as Hired
 On level entry
+##		C	Hire Trigger
+Obv default to On Hire, maybe use a secret default trait to keep the code clean
+###			C	On Use Altar
+"Activate Servants"
+###			C	On Use Podium
+"Who's With Me?!"
 ##		C	Hire Type
 ###			C	Chloroform
 New
@@ -1037,69 +1131,6 @@ Allows to sell shitty items in junk dealer, for instance
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
-##		C	Passive
-###			C	Blinker
-Blink to a random nearby spot when hit
-This is valid for player characters, so might need to be another mod
-###			C	Concealed Carrier
-Hides weapon until drawn
-###			C	Explodevice Eligible
-agent.canExplosiveStimulate
-###			C	Holographic
-Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Invincible
-New
-###			C	Mute Dialogue
-Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
-###			C	Oblivious
-Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
-But will enter combat if their teammates do.
-###			C	Psychic Shield
-Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
-###			C	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			C	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			C	Reviver
-If hired and surviving, will revive the player once
-###			C	Spidey-Sensitive
-When alerted, immediately enters combat with perp (no search necessary)
-###			C	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-###			C	Stinky Aura
-Werewolf A-were-ness works on this character
-###			C	Supernatural
-Ghost Gibber works
-###			C	Tattletale
-Reports ALL crimes to alarm button
-###			C	Unappetizing
-Can't be bitten/cannibalized
-###			C	Translucent
-Ghost visual effect
-###			C	Unchallenging
-No XP for neutralization
-###			C	Vision Beams (Cop Bot)
-DW
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			√	Crusty
-Complete
-###			√	Extortable
-Complete
-###			C!	Guilty
-####			C!	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
-###			√	Innocent
-Complete
-###			√	Possessed
-Complete
-###			√	Status Effect Immune
-Complete
-###			√	Z-Infected
-Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
 Put custom methods in faction traits.
@@ -1151,8 +1182,10 @@ New
 ###			C	All-Hostile
 New
 ###			C	Never Aligned
+For all Never traits, 
 ###			C	Never Annoyed
 ###			C	Never Friendly
+###			C	Never Hostile
 ###			C	Never Loyal
 ###			C	Never Aligned
 ###			C	Never Submissive
@@ -1420,16 +1453,69 @@ Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected
 ##			C	Fire Hydrant
 Ability to be already shooting water according to direction
-##			C	Flaming Barrel
-- Gibs (Black)
-- Oil (Dark Green)
-- Ooze (Yellow)
-- Water (Blue)
+##			C	Explosive Barrel
+###				C	Sprite Warning Label
+Specific to Status Effect
+If label too small, use barrel color and pattern
+###				C	Explosion Type (ExtraVarString)
+This will be important since this list will be used for several objects.
+###				C	Durability (ExtraVarString2)
+This can also be reused, e.g. for security cam
+####				C	Bombproof
+Not useful for barrels, but since this list will be reused
+####				C	Reinforced
+Requires 2-3 hits to explode rather than 1
+(Normal for most objects, generally only useful for barrels)
+####				C	Steel-Cased
+Requires an explosion to destroy
+####				C	Volatile
+Destroyed if you bump into it
 ##			C	Laser Emitter
 ###				C	Mode: Metal Detector
 This would really only make sense with a Stop & Frisk mod.
-##			C	Movie Screen
-Allow Text like Sign
+##			C	Slime Barrel
+###				C	Sprite Warning Label
+Specific to Status Effect
+If label too small, use barrel color and pattern
+###				C	Status Effect (ExtraVarString)
+This will be important since this list will be used for several objects.
+###				C	Durability (ExtraVarString2)
+This can also be reused, e.g. for security cam
+####				C	Bombproof
+Not useful for barrels, but since this list will be reused
+####				C	Reinforced
+Requires 2-3 hits to explode rather than 1
+(Normal for most objects, generally only useful for barrels)
+####				C	Steel-Cased
+Requires an explosion to destroy
+####				C	Volatile
+Destroyed if you bump into it
+##			C	Turret
+###				C	Gun Type (ExtraVarString)
+####				C	Flamethrower
+####				C	Freeze Ray
+####				C	Ghost Gibber
+####				C	Grenade Launcher
+####				C	Machine Gun
+####				C	Minigun
+####				C	Rail Gun
+####				C	Rocket
+####				C	Shrink Ray
+####				C	Sniper
+Extends vision range
+####				C	Tranquilizer
+####				H	Request - Custom Dart
+Streets of Cheese suggested darts with choosable status effect
+Doing entries for each type would be prohibitive, but if one ExtraVarString looks sparse you could use that for the status effect. And that'd likely be reusable code since other objects might use statuses.
+###				C	Sensors (ExtraVarString2)
+####				C	Built-In Camera (Rotating)
+####				C	Built-In Camera (Stationary)
+###				C	Durability (ExtraVarString3)
+####				C	Armored
+####				C	Fragile
+####				C	Indestructible
+###				C	Other (ExtraVarString4)
+####				C	Explode on Death
 #		√	Bug Archive
 ##			√	Fast or Rollerskates won't fall in Hole
 ###				√	Fix

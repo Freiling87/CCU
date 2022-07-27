@@ -6,6 +6,7 @@ using CCU.Traits;
 using CCU.Traits.Behavior;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
+using CCU.Traits.Gib_Type;
 using CCU.Traits.Hack;
 using CCU.Traits.Language;
 using CCU.Traits.Merchant_Type;
@@ -187,8 +188,12 @@ namespace CCU.Patches.Agents
 			if (__instance.HasTrait<T_DrugWarrior>())
 				__instance.combat.canTakeDrugs = true;
 			#endregion
-			#region Interaction
-			if (__instance.HasTrait<T_Hack>())
+			#region Gib Type
+			if (!__instance.GetTraits<T_GibType>().Any())
+				__instance.AddTrait<Meat_Chunks>();
+            #endregion
+            #region Interaction
+            if (__instance.HasTrait<T_Hack>())
 				__instance.hackable = true;
 			#endregion
 			#region Merchant

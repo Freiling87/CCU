@@ -243,9 +243,15 @@
     <Compile Include="Traits\Explode On Death\Slime.cs" />
     <Compile Include="Traits\Explode On Death\Stomp.cs" />
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
-    <Compile Include="Traits\Gib Type\Ice_Gibs.cs" />
-    <Compile Include="Traits\Gib Type\Ghost_Gibs.cs" />
-    <Compile Include="Traits\Gib Type\Normal_Gibs.cs" />
+    <Compile Include="Traits\Passive\Not_Vincible.cs" />
+    <Compile Include="Traits\Passive\Indestructible.cs" />
+    <Compile Include="Traits\Gib Type\Glass_Shards.cs" />
+    <Compile Include="Traits\Gib Type\Ice_Shards.cs" />
+    <Compile Include="Traits\Gib Type\Ectoplasm.cs" />
+    <Compile Include="Traits\Gib Type\Gibless.cs" />
+    <Compile Include="Traits\Gib Type\Golemite.cs" />
+    <Compile Include="Traits\Gib Type\Leaves.cs" />
+    <Compile Include="Traits\Gib Type\Meat_Chunks.cs" />
     <Compile Include="Traits\Gib Type\T_GibType.cs" />
     <Compile Include="Traits\Hack\Explode.cs" />
     <Compile Include="Traits\Hire Duration\Join_on_Sight.cs" />
@@ -448,7 +454,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Patches\Spawn\" />
-    <Folder Include="Systems\Readable Objects\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />

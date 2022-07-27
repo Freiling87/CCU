@@ -3,22 +3,27 @@ using System;
 
 namespace CCU.Traits.Gib_Type
 {
-    public class Ice_Gibs : T_GibType
+    public class Meat_Chunks : T_GibType
     {
-        public override int GibType => 1;
+        public override string audioClipName => VanillaAudio.AgentGib;
+        public override DecalSpriteName gibDecal => DecalSpriteName.BloodExplosion;
+        public override int gibQuantity => 5;
+        public override int gibSpriteIteratorLimit => 5;
+        public override GibSpriteNameStem gibType => GibSpriteNameStem.GibletNormal;
+        public override string particleEffect => "BloodExplosion";
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Ice_Gibs>()
+            PostProcess = RogueLibs.CreateCustomTrait<Meat_Chunks>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character's body explodes into shards of ice."),
+                    [LanguageCode.English] = String.Format("This character is made of meat. Delicious meat."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Ice_Gibs)),
+                    [LanguageCode.English] = DisplayName(typeof(Meat_Chunks)),
                     
                 })
                 .WithUnlock(new TraitUnlock
