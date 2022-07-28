@@ -90,7 +90,8 @@ namespace CCU.Patches
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), 
+			argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
 		public static bool ChangeHealth_Prefix(StatusEffects __instance, ref float healthNum)
         {
 			if (__instance.agent.HasTrait<Not_Vincible>() && healthNum < 0f)
@@ -167,9 +168,39 @@ namespace CCU.Patches
 			P_StatusEffects_ExplodeBody.CustomGib(__instance);
 			return false;
 		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(StatusEffects.UpdateStatusEffect))]
+		private static IEnumerable<CodeInstruction> UpdateStatusEffect_ExtendedRelease(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo extendedReleaseCheck = AccessTools.DeclaredMethod(typeof(P_StatusEffects), nameof(P_StatusEffects.ExtendedReleaseCheck));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_0),
+					new CodeInstruction(OpCodes.Ldc_I4, 9999)// Try with float if doesn't work, it's worked before
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_0),
+					new CodeInstruction(OpCodes.Call, extendedReleaseCheck),
+					new CodeInstruction(OpCodes.Ldc_I4, 9999)// Try with float if doesn't work, it's worked before
+
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static int ExtendedReleaseCheck(int vanilla) =>
+			vanilla == 69420
+				? 9999
+				: vanilla;
 	}
 
-    [HarmonyPatch(declaringType: typeof(StatusEffects))]
+	[HarmonyPatch(declaringType: typeof(StatusEffects))]
 	static class P_StatusEffects_ExplodeBody
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();

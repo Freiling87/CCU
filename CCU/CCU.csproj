@@ -450,6 +450,7 @@
     <None Include="Documentation\Challenges.md" />
     <None Include="Documentation\Objects.md" />
     <None Include="Documentation\NPCUtilities.md" />
+    <None Include="Documentation\Acknowledgments.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>

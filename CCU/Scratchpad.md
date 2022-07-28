@@ -6,6 +6,8 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Scope
+##			C	Thanks
+Forgot to add thanks notes to documentation, don't forget it again.
 ##			P	Bug Fixing
 ###				C	Hole bug
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
@@ -101,12 +103,15 @@ GoalBattle.Process is where the effect is applied.
 ###			T	Suppress Syringe AV
 The `-Syringe` text is just clutter
 The sound is sometimes not applicable lorewise
-P_GoalBattle.Process_GateSyringeAV
-###			C	Extended Release
-Used 69420 as duration
-Might need a hook for this.
+	P_GoalBattle.Process_GateSyringeAV
+###			T	Extended Release
+Duration:
+	P_GoalBattle.CustomStatusDuration(Agent agent)
+Deactivation:
+	P_GoalBattle.Terminate_Postfix
 ###			T	Eternal Release
 Test
+P_GoalBattle.CustomStatusDuration(Agent agent)
 ###			C	Last Stander
 Effect triggers when they would flee instead of at beginning of combat
 ####			C	Extended Release interaction
@@ -1323,6 +1328,17 @@ Complete
 ###			√	Suspicious Suspecter
 Complete
 #		C	Mutators
+
+Setting: Force Big Quest completion - If set to yes, you will need to complete your big quest before leaving the floor, if there is one. You will not be able to exit the floor until the BQ is done, even after completing all the missions on the floor. If the quest is failed (floor only fails dont count) you will spontaneously combust and die.
+
+Setting: Exit on Death - If set to yes, you will be forced to exit the floor when you die. On the next floor, you will be revived and you will be healed to maximum HP.
+
+Mutator: Exit Timer - Similar to Time Limit, except that the elevator is locked until the timer reaches zero. Missions will not open the elevator.
+
+Mutator: Exit Timer EXTREME - Similar to Time Limit EXTREME, except that the timer is LONGER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator.
+
+Mutator: Exit Timer LITE - Similar to Time Limit, except that the timer is SHORTER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator. 
+
 ##		C	00 Mutator List Population
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
@@ -1387,6 +1403,8 @@ In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 Curated configurations of challenges that can serve as a shortcut.
 E.g., "Interlude:" No funny business, pause big quests, etc.
 ##		C	Progression
+###			C	Exit Timer
+For Survival Levels, elevator is locked until timer elapses.
 ###			C	Delay Trait Gain
 Count and put off trait choices until this challenge isn't present
 ###			C	Reset Player Character
@@ -1396,9 +1414,9 @@ Count and put off trait choices until this challenge isn't present
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
 ###			C	Big Quest Mandatory
-Lose the game if you don't complete your Big Quest for this floor
-Allows the creator to have greater control over the flow of the campaign
-E.g., custom character with Doctor's big quest
+Complete quest to exit level
+Die if you fail quest
+Possibly modified by Mark-based
 ###			C	Big Quest Stopping Point
 Equivalent to Mayor's Village, where super special abilities activate if you completed the Big Quest
 ###			C	Major Contract

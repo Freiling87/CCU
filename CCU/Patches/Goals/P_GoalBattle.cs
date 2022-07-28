@@ -56,11 +56,11 @@ namespace CCU.Patches.Goals
 		public static int CustomStatusDuration(Agent agent)
         {
 			if (agent.HasTrait<Eternal_Release>())
-				return 9999;	//	First Matt, and so I
+				return 9999;
 			else if (agent.HasTrait<Extended_Release>())
-				return 69420;	//	Magic Number abusers
+				return 69420;
 			else
-				return -1;		//	2 versus 1 though
+				return -1; // Triggers GetStatusEffectTime, vanilla
         }
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
@@ -104,7 +104,6 @@ namespace CCU.Patches.Goals
 				agent.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie = true;
             }
         }
-
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
 		private static IEnumerable<CodeInstruction> Process_GateDrugWarriorAV(IEnumerable<CodeInstruction> codeInstructions)
@@ -156,6 +155,13 @@ namespace CCU.Patches.Goals
 		
 			GC.spawnerMain.SpawnStatusText(agent, "UseItem", vItem.Syringe, "Item");
 			GC.audioHandler.Play(agent, VanillaAudio.UseSyringe);
+        }
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalBattle.Terminate))]
+		private static void Terminate_Postfix(GoalBattle __instance)
+        {
+			if (__instance.agent.HasTrait<Extended_Release>())
+				__instance.agent.statusEffects.StatusEffectList.RemoveAll(se => se.curTime == 69420);
         }
 	}
 }
