@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
 using CCU.Systems.Containers;
 using CCU.Traits.Loadout;
 using CCU.Traits.Merchant_Type;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace CCU.Patches.Inventory
 {
@@ -222,5 +224,36 @@ namespace CCU.Patches.Inventory
 			__result = true;
 			return false;
 		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.TakeAll))]
+		private static IEnumerable<CodeInstruction> TakeAll_ExcludeNotes(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo slots = AccessTools.DeclaredField(typeof(InvInterface), nameof(InvInterface.Slots));
+			MethodInfo slotsFiltered = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.FilteredSlots));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld), 
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld, slots),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Call, slotsFiltered),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
+			invDatabase.agent.mainGUI.invInterface.Slots.Where(islot => !GC.nameDB.GetName(islot.item.invItemName, "Item").Contains("E_")).ToList();
+
 	}
 }

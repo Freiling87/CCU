@@ -101,8 +101,8 @@ Also try:
 			We should be able to filter that somehow
 #####				T	InvDatabase.IsEmpty
 P_InvDatabase.IsEmtpy_Replacement
-#####				C	InvDatabase.TakeAll 
-Exclude Clue or whatever
+#####				T	InvDatabase.TakeAll 
+P_InvDatabase.TakeAll_ExcludeNotes
 #####				C	InvInterface.UpdateInvInterface
 			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
 Filter InvItemList here. Inject a call to a custom method.

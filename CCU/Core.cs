@@ -21,9 +21,9 @@ namespace CCU
 			(designerEdition
 				? "Designer Edition" 
 				: "Player Edition"); 
-		public const string pluginVersion = "0.1.1";
+		public const string pluginVersion = "1.0.0";
 		public const bool designerEdition = true;
-		public const bool debugMode = true;
+		public const bool debugMode = false;
 
 		public static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
