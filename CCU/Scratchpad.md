@@ -95,11 +95,13 @@ Enable existing traits to player side and make their display name conditional on
 ##			T	Container/Ivestigateable interaction
 InvDatabase.FillChest ~923 uses component.extraVarString, check if NameDB found rather than just null
 Attempt: P_ObjectMultObject.OnDeserialize_Postfix
+If that doesn't work, Use Magic Strings for ExtraVarStrings lower down in the same method.
 ##		CT	Drug Warrior Modifiers
 GoalBattle.Process is where the effect is applied.
 ###			T	Suppress Syringe AV
 The `-Syringe` text is just clutter
 The sound is sometimes not applicable lorewise
+P_GoalBattle.Process_GateSyringeAV
 ###			C	Extended Release
 Used 69420 as duration
 Might need a hook for this.

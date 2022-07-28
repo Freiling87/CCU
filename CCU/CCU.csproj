@@ -120,7 +120,6 @@
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
-    <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
     <Compile Include="Localization\DetermineMoneyCostText.cs" />

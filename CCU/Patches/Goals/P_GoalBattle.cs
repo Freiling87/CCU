@@ -104,5 +104,58 @@ namespace CCU.Patches.Goals
 				agent.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie = true;
             }
         }
+
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
+		private static IEnumerable<CodeInstruction> Process_GateDrugWarriorAV(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo agent = AccessTools.DeclaredField(typeof(GoalBattle), nameof(GoalBattle.agent));
+			MethodInfo gateDrugWarriorAV = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(P_GoalBattle.GateDrugWarriorAV));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					//	this.gc.spawnerMain.SpawnStatusText(this.agent, "UseItem", "Syringe", "Item");
+					//	this.gc.audioHandler.Play(this.agent, "UseSyringe");
+
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldstr, "UseItem"),
+					new CodeInstruction(OpCodes.Ldstr, "Syringe"),
+					new CodeInstruction(OpCodes.Ldstr, "Item"),
+					new CodeInstruction(OpCodes.Callvirt),
+					new CodeInstruction(OpCodes.Pop),
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldstr, "UseSyringe"),
+					new CodeInstruction(OpCodes.Callvirt),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld, agent),
+					new CodeInstruction(OpCodes.Call, gateDrugWarriorAV),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static void GateDrugWarriorAV(Agent agent)
+        {
+			if (agent.HasTrait<Suppress_Syringe_AV>())
+				return;
+		
+			GC.spawnerMain.SpawnStatusText(agent, "UseItem", vItem.Syringe, "Item");
+			GC.audioHandler.Play(agent, VanillaAudio.UseSyringe);
+        }
 	}
 }
