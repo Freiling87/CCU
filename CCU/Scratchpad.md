@@ -92,8 +92,9 @@ Listed in order of Parent tier summary symbol priority:
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
 ##			T	Test note
 20220725
-##			C	Container/Ivestigateable interaction
-InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
+##			T	Container/Ivestigateable interaction
+InvDatabase.FillChest ~923 uses component.extraVarString, check if NameDB found rather than just null
+Attempt: P_ObjectMultObject.OnDeserialize_Postfix
 ##		CT	Drug Warrior Modifiers
 GoalBattle.Process is where the effect is applied.
 ###			T	Suppress Syringe AV
