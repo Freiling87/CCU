@@ -1,5 +1,16 @@
-#		Streets of Rogue Custom Content Utilities
-SOR gives you a LOT of tools for creating custom content, but it does have some limitations. Here are a few things that are currently impossible with the Vanilla version:
+<p align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU" align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU" align="right">
+</p>
+
+<h1 align="center">
+Streets of Rogue
+<br>
+Custom Content Utilities
+</h1>
+<br>
+
+SOR gives you a LOT of options for creating custom content, but with some limitations. Here are a few things that are currently impossible with the Vanilla version:
 - Aligning Custom NPCs in different chunks
 - Variable Custom NPC appearances
 - Giving Custom NPCs behaviors like pickpocketing, hiring, selling items, etc.
