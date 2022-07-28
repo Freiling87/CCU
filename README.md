@@ -1,6 +1,6 @@
 <p align="left">
-<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU" align="left">
-<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU" align="right">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU Logo" align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
@@ -33,9 +33,8 @@ There are two versions of CCU:
 - [Traits](/CCU/Documentation/C03_Traits.md)
 
 #		Special Thanks
+**Abbysssal#2020** & **BlazingTwist#4559** - Tons of code help
 
-Abbysssal#2020 & BlazingTwist#4559 - Tons of code help
+**Cyan_Light#1438** - Endless SOR mechanic knowledge, bugtesting
 
-Cyan_Light#1438 - Endless SOR mechanic knowledge, bugtesting
-
-Maxior06#0804 & Cheese Wizard#6914 - Lots of feedback and feature ideas
+**Cheese Wizard#6914** & **Maxior06#0804**- Lots of feedback and feature ideas
