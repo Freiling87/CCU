@@ -133,6 +133,7 @@ P_BasicObject.Spawn
 Readables.Setup
 ##			C	Documentation Update
 - Add Objects Link to main readme
+- Add Player Traits link to main readme
 - Manually verify full lists of features until scoping is more coherent.
 ##			T	Test note
 20220725

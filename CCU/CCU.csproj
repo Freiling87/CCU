@@ -444,12 +444,13 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="Documentation\C04_Traits_Player.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
     <None Include="Documentation\M01_Installation.md" />
     <None Include="Documentation\C01_Mutators.md" />
     <None Include="Documentation\C02_Objects.md" />
-    <None Include="Documentation\C03_Traits.md" />
+    <None Include="Documentation\C03_Traits_Designer.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
