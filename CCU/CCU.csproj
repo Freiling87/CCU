@@ -444,13 +444,12 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="Documentation\BestPractices.md" />
-    <None Include="Documentation\ChangeLog.md" />
-    <None Include="Documentation\Installation.md" />
-    <None Include="Documentation\Challenges.md" />
-    <None Include="Documentation\Objects.md" />
-    <None Include="Documentation\NPCUtilities.md" />
-    <None Include="Documentation\Acknowledgments.md" />
+    <None Include="Documentation\M02_BestPractices.md" />
+    <None Include="Documentation\M03_ChangeLog.md" />
+    <None Include="Documentation\M01_Installation.md" />
+    <None Include="Documentation\C01_Mutators.md" />
+    <None Include="Documentation\C02_Objects.md" />
+    <None Include="Documentation\C03_Traits.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>

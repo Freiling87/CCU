@@ -201,11 +201,26 @@ namespace CCU.Patches.Inventory
 		}
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
-		public static bool IsEmpty_Prefix(InvDatabase __instance)
+		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
         {
-			// TODO (See note 202207241004)
+			for (int i = 0; i < __instance.InvItemList.Count; i++)
+            {
+				string name = __instance.InvItemList[i].invItemName;
 
-			return true;
-        }
+				if (name != null && name != "")
+				{
+					try
+					{
+						GC.nameDB.GetName(name, "Item");
+						__result = false;
+						return false;
+					}
+					catch { }
+				}
+			}
+
+			__result = true;
+			return false;
+		}
 	}
 }

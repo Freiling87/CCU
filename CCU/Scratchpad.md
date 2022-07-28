@@ -6,15 +6,8 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Scope
-##			C	Thanks
-Forgot to add thanks notes to documentation, don't forget it again.
 ##			P	Bug Fixing
-###				C	Hole bug
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
-	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+Crickets are okay though
 ##			P	0.1.1 Changelog
 - **Feature additions**
   - Mutators
@@ -92,14 +85,62 @@ Forgot to add thanks notes to documentation, don't forget it again.
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
+##		CT	Custom Object variables
+###			C	Containers
+####			T	Use Agent item slots to keep stringvars available
+But get more familiar with how the interface actually presents before making a choice here
+####			H	Lockable
+Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
+Maybe generate a Desk Key item, specific to the Desk
+####			T	Note Item
+P_ObjectMultObject.OnDeserialize
+
+Also try:
+	WorldSpaceGIU.ShowChest
+		interactingAgent.mainGUI.invInterface.chestDatabase = invDatabase;
+			We should be able to filter that somehow
+#####				T	InvDatabase.IsEmpty
+P_InvDatabase.IsEmtpy_Replacement
+#####				C	InvDatabase.TakeAll 
+Exclude Clue or whatever
+#####				C	InvInterface.UpdateInvInterface
+			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
+Filter InvItemList here. Inject a call to a custom method.
+#####				C	InvInterface.Slots
+This is a List<InvItem> and I think what we need to filter
+####			C	Note drops as Water Gun when object destroyed
+####			√	Open Container
+####			√	Drop Contents when destroyed
+####			√	Show Editor Controls
+####			√	Load/Save Editor Input
+###			C	Readables
+####			C	One-Time Read
+For stuff that might not apply later, like peeking into windows
+####			C	Movie Screen
+Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
+Should be ready with next RL release
+####			C	Custom Sprites when readable text present
+Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
+#####				C	Computer
+"Unread Mail" icon on screen
+####			√	Input field Display
+P_LevelEditor.UpdateInterface
+####			√	Input field Edit
+P_LevelEditor.PressedLoadExtraVarStringList
+####			√	Setup object
+P_BasicObject.Spawn
+####			√	Interaction
+Readables.Setup
+##			C	Documentation Update
+- Add Objects Link to main readme
+- Manually verify full lists of features until scoping is more coherent.
 ##			T	Test note
 20220725
 ##			T	Container/Ivestigateable interaction
 InvDatabase.FillChest ~923 uses component.extraVarString, check if NameDB found rather than just null
 Attempt: P_ObjectMultObject.OnDeserialize_Postfix
 If that doesn't work, Use Magic Strings for ExtraVarStrings lower down in the same method.
-##		CT	Drug Warrior Modifiers
-GoalBattle.Process is where the effect is applied.
+##		T	Drug Warrior Modifiers
 ###			T	Suppress Syringe AV
 The `-Syringe` text is just clutter
 The sound is sometimes not applicable lorewise
@@ -112,23 +153,25 @@ Deactivation:
 ###			T	Eternal Release
 Test
 P_GoalBattle.CustomStatusDuration(Agent agent)
-###			C	Last Stander
+###			H	One for the Road
 Effect triggers when they would flee instead of at beginning of combat
 ####			C	Extended Release interaction
 When paired with ER, the effect lasts until they would no longer be intimidated. 
-###			C	Post Warrior
+###			H	Post Warrior
 Effect triggers on end of threat (Regenerate, smoke, invisible)
-###			C	Whatta Rush
-Effect gains 1s of duration on take/receive damage
-##		CT	Explode On Death
+###			H	High on Pain
+Effect gains 1s of duration on taking damage
+###			H	Take the Thrill Kill Pill
+Effect gains 1s of duration on dealing damage, extra on kill
+##		T	Explode On Death
 ###			T	Custom Explosion System
 New
 ###			T	Oil Spill
 Explosion.SetupExplosion ~373
 ###			T	Do they explode when... exploded?
 Verify by kill w rocket
-###			C	Explodes when Arrested
-New
+###			H	Explodes when Arrested
+See if anyone cares. This is vanilla behavior.
 ###			√	Cop Bot not Exploding
 Complete
 ###			√	Certain explosion types don't delete body
@@ -151,77 +194,6 @@ Complete
 ###			√	Leaves
 Complete
 ###			√	Meat Chunks
-Complete
-##		CT	Passive
-###			C	Blinker
-Blink to a random nearby spot when hit
-This is valid for player characters, so might need to be another mod
-###			C	Concealed Carrier
-Hides weapon until drawn
-###			C	Explodevice Eligible
-agent.canExplosiveStimulate
-###			C	Holographic
-Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Immobile
-Can't move (for turret types)
-###			C	Invincible
-New
-###			C	Mute Dialogue
-Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
-###			C	Oblivious
-Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
-But will enter combat if their teammates do.
-###			C	Psychic Shield
-Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
-###			C	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			C	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			C	Reviver
-If hired and surviving, will revive the player once
-###			C	Spidey-Sensitive
-When alerted, immediately enters combat with perp (no search necessary)
-###			C	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-###			C	Stinky Aura
-Werewolf A-were-ness works on this character
-###			C	Supernatural
-Ghost Gibber works
-###			C	Tattletale
-Reports ALL crimes to alarm button
-###			C	Unappetizing
-Can't be bitten/cannibalized
-###			C	Translucent
-Ghost visual effect
-###			C	Unchallenging
-No XP for neutralization
-###			C	Vision Beams (Cop Bot)
-DW
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			√	Berserk (Declined)
-Rel General - Hostile to All
-###			√	Crusty
-Complete
-###			√	Extortable
-Complete
-###			C!	Guilty
-####			C!	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
-###			√	Indestructible
-Complete
-###			√	Innocent
-Complete
-###			√	Possessed
-Complete
-###			√	Status Effect Immune
-Complete
-###			√	Un-Vincible
-Complete
-###			√	Z-Infected
 Complete
 ##		CT	Goals
 ###			CT	Actual Goals
@@ -261,7 +233,7 @@ No interactions under any circumstances, even with Translator
 Gain 2 languages on trait gain, and an additional one every two levels.
 ###			C	Telepathic (rename)
 Can talk to all languages, even Mutes
-#	CT	Projects
+#		CT	Projects
 ##			C	Language (Overhaul)
 ###			C	00 Mutator: Language System
 - NPCs have a chance to speak a foreign language
@@ -389,6 +361,11 @@ Keyring stores all keys in one slot
 Variable field in editor, maybe with some basic setting variations (destructible, Investigateable, etc.)
 Locks access to the object as a Chest unless the player holds the matching Stash Hint.
 You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
+##			C	Sugar System
+Merchant Type: Sugar Only
+Buyer Type: Sugar Only
+Passive: Stinger (Calls cops if you sell or buy contraband)
+And also the entire Drug Dealer mod series. 
 ##			T	Legacy Updater
 ###				T!	Challenges
 Homesickness Mandatory & Disabled
@@ -1139,6 +1116,78 @@ Allows to sell shitty items in junk dealer, for instance
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
+##		CT	Passive
+###			C	Blinker
+Blink to a random nearby spot when hit
+This is valid for player characters, so might need to be another mod
+###			C	Concealed Carrier
+Hides weapon until drawn
+###			C	Explodevice Eligible
+agent.canExplosiveStimulate
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
+###			C	Immobile
+Can't move (for turret types)
+###			C	Mute Dialogue
+Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
+###			C	Oblivious
+Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
+But will enter combat if their teammates do.
+###			C	Psychic Shield
+Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			C	Reviver
+If hired and surviving, will revive the player once
+###			C	Spidey-Sensitive
+When alerted, immediately enters combat with perp (no search necessary)
+###			C	Statue
+This should be more of an amalgam of traits, not its own package. Players can make a statue if they want.
+	Remove colors (Accent Color + Accent effect)
+	Tint white 
+	Immobile
+	Invincible
+Non-Reactive ?
+###			C	Stinky Aura
+Werewolf A-were-ness works on this character
+###			C	Supernatural
+Ghost Gibber works
+###			C	Tattletale
+Reports ALL crimes to alarm button
+###			C	Unappetizing
+Can't be bitten/cannibalized
+###			C	Translucent
+Ghost visual effect
+###			C	Unchallenging
+No XP for neutralization
+###			C	Vision Beams (Cop Bot)
+DW
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			√	Berserk (Declined)
+Rel General - Hostile to All
+###			√	Crusty
+Complete
+###			√	Extortable
+Complete
+###			C!	Guilty
+####			C!	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+###			√	Indestructible
+Complete
+###			√	Innocent
+Complete
+###			√	Not Vincible
+Complete
+###			√	Possessed
+Complete
+###			√	Status Effect Immune
+Complete
+###			√	Z-Infected
+Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
 Put custom methods in faction traits.
@@ -1427,48 +1476,20 @@ Main quest rewards are multiplied by 10
   - Pretty much has exactly what you need.
 #		C	Item Groups
 wut
-#		CT	Object Additions
-##		CT	Custom Object variables
-###			C	Containers
-####			C	Lockable
-Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
-Maybe generate a Desk Key item, specific to the Desk
-####			C	Note loads in ShowChest interface
-WorldSpaceGIU.ShowChest
-		interactingAgent.mainGUI.invInterface.chestDatabase = invDatabase;
-We should be able to filter that somehow
-
-Get some info on that watergun item, make it into a custom Clue item, see how we can identify it to filter it out.
-#####				C	InvDatabase.IsEmpty
-202207241004 - Filter IsEmpty to return true when the only item is a Clue
-#####				C	InvDatabase.TakeAll 
-Exclude Clue or whatever
-#####				C	InvInterface.UpdateInvInterface
-			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
-Filter InvItemList here. Inject a call to a custom method.
-#####				C	InvInterface.Slots
-This is a List<InvItem> and I think what we need to filter
-####			C	Note drops as Water Gun when object destroyed
-####			√	Open Container
-####			√	Drop Contents when destroyed
-####			√	Show Editor Controls
-####			√	Load/Save Editor Input
-###			C	Readables
-####			C	Movie Screen
-Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
-Should be ready with next RL release
-####			C	Custom Sprites when readable text present
-Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
-#####				C	Computer
-"Unread Mail" icon on screen
-####			√	Input field Display
-P_LevelEditor.UpdateInterface
-####			√	Input field Edit
-P_LevelEditor.PressedLoadExtraVarStringList
-####			√	Setup object
-P_BasicObject.Spawn
-####			√	Interaction
-Readables.Setup
+#		CT	Objects
+##			C	Object Special Actions
+###				C	Alarm
+###				C	Explode
+###				C	Raise Dead (Chunk)
+###				C	Raise Dead (Level)
+###				C	Set Level Flag ABCD
+This one would likely need to coexist with another OSA so...
+##			C	Object Special Action Triggers
+For use with Variables
+###				C	On Destroy
+###				C	On Investigate
+When text is *closed*
+###				C	On Loot
 ##			C	Air Conditioner
 Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected
