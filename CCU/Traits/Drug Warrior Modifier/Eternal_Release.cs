@@ -5,7 +5,7 @@ namespace CCU.Traits.Drug_Warrior_Modifier
 {
     public class Eternal_Release : T_DrugWarriorModifier
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Eternal_Release>()

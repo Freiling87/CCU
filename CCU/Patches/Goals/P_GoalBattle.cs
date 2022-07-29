@@ -22,54 +22,12 @@ namespace CCU.Patches.Goals
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
-		private static IEnumerable<CodeInstruction> Process_ModifyStatusDuration(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(Goal.agent));
-			FieldInfo statusEffects = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.statusEffects));
-			MethodInfo customStatusDuration = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(P_GoalBattle.CustomStatusDuration));
-			MethodInfo addStatusEffect_1 = AccessTools.DeclaredMethod(typeof(StatusEffects), nameof(StatusEffects.AddStatusEffect), new[] { typeof(string) });
-			MethodInfo addStatusEffect_2 = AccessTools.DeclaredMethod(typeof(StatusEffects), nameof(StatusEffects.AddStatusEffect), new[] { typeof(string), typeof(int) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				targetInstructionSequence: new List<CodeInstruction>
-                {	
-					new CodeInstruction(OpCodes.Ldloc_2),						//	statusEffectName
-					new CodeInstruction(OpCodes.Call, addStatusEffect_1),		//	clear
-                },
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),						//	this
-					new CodeInstruction(OpCodes.Ldfld, agent),					//	this.agent
-					new CodeInstruction(OpCodes.Ldfld, statusEffects),			//	this.agent.statusEffects
-					new CodeInstruction(OpCodes.Ldloc_2),						//	this.agent.statusEffects, statusEffectName
-					new CodeInstruction(OpCodes.Ldfld, agent),					//	this.agent.statusEffects, statusEffectName, Agent
-					new CodeInstruction(OpCodes.Call, customStatusDuration),	//	this.agent.statusEffects, statusEffectName, statusDuration
-					new CodeInstruction(OpCodes.Callvirt, addStatusEffect_2),	//	clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		public static int CustomStatusDuration(Agent agent)
-        {
-			if (agent.HasTrait<Eternal_Release>())
-				return 9999;
-			else if (agent.HasTrait<Extended_Release>())
-				return 69420;
-			else
-				return -1; // Triggers GetStatusEffectTime, vanilla
-        }
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
 		private static IEnumerable<CodeInstruction> Process_StartCombatActions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(GoalBattle.agent));
 			FieldInfo canTakeDrugs = AccessTools.DeclaredField(typeof(Combat), nameof(Combat.canTakeDrugs));
-			MethodInfo doCombatActions = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(DoCombatActions));
+			MethodInfo doCombatActions = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(StartCombatActions));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -95,8 +53,7 @@ namespace CCU.Patches.Goals
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		private static void DoCombatActions(Agent agent)
+		private static void StartCombatActions(Agent agent)
         {
 			if (agent.HasTrait<Backed_Up>() && !agent.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie)
             {
@@ -109,7 +66,7 @@ namespace CCU.Patches.Goals
 		private static IEnumerable<CodeInstruction> Process_GateDrugWarriorAV(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo agent = AccessTools.DeclaredField(typeof(GoalBattle), nameof(GoalBattle.agent));
+			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(GoalBattle.agent));
 			MethodInfo gateDrugWarriorAV = AccessTools.DeclaredMethod(typeof(P_GoalBattle), nameof(P_GoalBattle.GateDrugWarriorAV));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -155,13 +112,6 @@ namespace CCU.Patches.Goals
 		
 			GC.spawnerMain.SpawnStatusText(agent, "UseItem", vItem.Syringe, "Item");
 			GC.audioHandler.Play(agent, VanillaAudio.UseSyringe);
-        }
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalBattle.Terminate))]
-		private static void Terminate_Postfix(GoalBattle __instance)
-        {
-			if (__instance.agent.HasTrait<Extended_Release>())
-				__instance.agent.statusEffects.StatusEffectList.RemoveAll(se => se.curTime == 69420);
         }
 	}
 }

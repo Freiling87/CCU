@@ -29,31 +29,36 @@ namespace CCU.Patches
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        /// <summary>
-        /// SuicideBomb
-        /// Currently Shelved
-        /// </summary>
-        /// <param name="statusEffectName"></param>
-        /// <param name="showText"></param>
-        /// <param name="causingAgent"></param>
-        /// <param name="cameFromClient"></param>
-        /// <param name="dontPrevent"></param>
-        /// <param name="specificTime"></param>
-        /// <param name="__instance"></param>
-        /// <returns></returns>
-        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddStatusEffect), argumentTypes: new[] { typeof(string), typeof(bool), typeof(Agent), typeof(NetworkInstanceId), typeof(bool), typeof(int), typeof(StatusEffects) })]
-        [Obsolete]
-        public static bool AddStatusEffect_Prefix(string statusEffectName, bool showText, Agent causingAgent, NetworkInstanceId cameFromClient, bool dontPrevent, int specificTime, StatusEffects __instance)
-        {
-			if (statusEffectName == CStatusEffect.SuicideBomb)
-            {
+        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(StatusEffects.AddStatusEffect), 
+			argumentTypes: new[] { typeof(string), typeof(bool), typeof(Agent), typeof(NetworkInstanceId), typeof(bool), typeof(int) })]
+		private static IEnumerable<CodeInstruction> AddStatusEffect_ExtendedRelease(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo extendedReleaseCheck = AccessTools.DeclaredMethod(typeof(P_StatusEffects), nameof(P_StatusEffects.ExtendedReleaseCheck));
 
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldloc_0)
+                },
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, extendedReleaseCheck),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldc_I4, 9999)
+				});
 
-				return false;
-            }
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
 
-			return true;
-        }
+		private static int ExtendedReleaseCheck(int vanilla) =>
+			vanilla == 69420
+				? 9999
+				: vanilla;
 
 		/// <summary>
 		/// Legacy Trait Updater
@@ -168,36 +173,6 @@ namespace CCU.Patches
 			P_StatusEffects_ExplodeBody.CustomGib(__instance);
 			return false;
 		}
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(StatusEffects.UpdateStatusEffect))]
-		private static IEnumerable<CodeInstruction> UpdateStatusEffect_ExtendedRelease(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo extendedReleaseCheck = AccessTools.DeclaredMethod(typeof(P_StatusEffects), nameof(P_StatusEffects.ExtendedReleaseCheck));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_0),
-					new CodeInstruction(OpCodes.Ldc_I4, 9999)// Try with float if doesn't work, it's worked before
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_0),
-					new CodeInstruction(OpCodes.Call, extendedReleaseCheck),
-					new CodeInstruction(OpCodes.Ldc_I4, 9999)// Try with float if doesn't work, it's worked before
-
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		private static int ExtendedReleaseCheck(int vanilla) =>
-			vanilla == 69420
-				? 9999
-				: vanilla;
 	}
 
 	[HarmonyPatch(declaringType: typeof(StatusEffects))]
@@ -365,5 +340,16 @@ namespace CCU.Patches
 					GC.audioHandler.Play(statusEffects.agent, VanillaAudio.PlayerDeath);
 			}
 		}
+	}
+
+    [HarmonyPatch(declaringType: typeof(StatusEffects))]
+	static class P_StatusEffects_UpdateStatusEffect
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTargetMethod, UsedImplicitly]
+		private static MethodInfo Find_MoveNext_MethodInfo() =>
+			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(StatusEffects), "UpdateStatusEffect"));
 	}
 }

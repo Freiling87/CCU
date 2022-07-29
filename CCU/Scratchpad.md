@@ -5,6 +5,8 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
+
+HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	Bugs
 Except crickets, crickets are fine.
@@ -21,6 +23,8 @@ Except crickets, crickets are fine.
       - Grab Food
     - Cost Scale
       - Much More (200% cost)
+    - Drug Warrior Modifier
+      - Suppress Syringe A/V
     - Explode On Death
       - Dizzy
       - EMP
@@ -136,7 +140,6 @@ Readables.Setup
 - Add Objects Link to main readme
 - Add Player Traits link to main readme
 - Manually verify full lists of features until scoping is more coherent.
-##			T	Test note
 ##		T	Followers
 ###			C	Homesickness Disabled
 ####			C	Set to Aligned
@@ -148,30 +151,6 @@ Test
 InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
 Attempt: P_ObjectMultObject.OnDeserialize_Postfix
 If DW, use magic str for ExtraVarStrings lower down in same method
-##		CT	Drug Warrior Modifiers
-GoalBattle.Process is where the effect is applied.
-###			T	Suppress Syringe AV
-The `-Syringe` text is just clutter
-The sound is sometimes not applicable lorewise
-	P_GoalBattle.Process_GateSyringeAV
-###			T	Extended Release
-Duration:
-	P_GoalBattle.CustomStatusDuration(Agent agent)
-Deactivation:
-	P_GoalBattle.Terminate_Postfix
-###			T	Eternal Release
-Test
-P_GoalBattle.CustomStatusDuration(Agent agent)
-###			H	One for the Road
-Effect triggers when they would flee instead of at beginning of combat
-####			C	Extended Release interaction
-When paired with ER, the effect lasts until they would no longer be intimidated. 
-###			H	Post Warrior
-Effect triggers on end of threat (Regenerate, smoke, invisible)
-###			H	High on Pain
-Effect gains 1s of duration on taking damage
-###			H	Take the Thrill Kill Pill
-Effect gains 1s of duration on dealing damage, extra on kill
 ##		T	Explode On Death
 ###			T	Custom Explosion System
 New
@@ -673,6 +652,24 @@ Initiate a 15s timer, then detonate a Huge explosion
 Interface with Timer traits and Explosion traits to allow player to customize
 ###			C	Sweaty
 Gain Wet, lmao
+##		CT	Drug Warrior Modifiers
+GoalBattle.Process is where the effect is applied.
+###			√	Suppress Syringe AV
+Complete
+###			C	Extended Release
+This might have differing effects on status effects. E.g., Fainting Goat Warrior might never trigger.
+###			C	Eternal Release
+New
+###			C	One for the Road
+Effect triggers when they would flee instead of at beginning of combat
+####			C	Extended Release interaction
+When paired with ER, the effect lasts until they would no longer be intimidated. 
+###			C	Post Warrior
+Effect triggers on end of threat (Regenerate, smoke, invisible)
+###			C	High on Pain
+Effect gains 1s of duration on taking damage
+###			C	Take the Thrill Kill Pill
+Effect gains 1s of duration on dealing damage, extra on kill
 ##		C	Explosion Timer
 Vanilla for EOD is 1.5 seconds
 ###			C	Cinematic Fuse
