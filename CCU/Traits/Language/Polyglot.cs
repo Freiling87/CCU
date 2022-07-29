@@ -1,32 +1,35 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Language
 {
     public class Polyglot : T_Language
     {
-        public override string[] VanillaSpeakers => new string[] { VanillaAgents.Zombie };
+        public override string[] VanillaSpeakers => new string[] { };
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Polyglot>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("When the moon is full, something awakens in this character. Something that knows no human scruple, nor vowel. An ancient curse that howls for blood and just so happens to speak Welsh. Weirder things have happened.\n\n" +
-                    "Agent can bypass Vocally Challenged when speaking to (transformed) vanilla Werewolves, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("Choose 2 languages to learn at start, and gain another language every 2 levels.\n\n" +
+                    "Sharing a language with an NPC allows you to bypass Vocally Challenged."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Polyglot)),
+                    [LanguageCode.English] = PlayerName(typeof(Polyglot)),
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { },
-                    CharacterCreationCost = 0,
+                    Cancellations = { VanillaTraits.VocallyChallenged },
+                    CharacterCreationCost = 2,
                     IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
+                    IsAvailableInCC = true,
+                    Recommendations = new List<string>() { "Speaks High Goryllian or a Translator instead. This trait will not be worth taking until the Language system is expanded." },
+                    UnlockCost = 5,
+                    Unlock = { isUpgrade = true }
                 });
         }
         public override void OnAdded() { }

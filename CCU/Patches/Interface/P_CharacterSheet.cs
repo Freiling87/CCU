@@ -270,7 +270,8 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait2.traitName))
 							hidden = true;
 
-						if (trait2.GetHook<T_CCU>() != null) // Hide CCU traits
+						if (trait2.GetHook<T_CCU>() != null &&
+							trait2.GetHook<T_PlayerTrait>() is null) // Hide CCU traits
 							hidden = true;
 
 						if (!hidden)
@@ -320,7 +321,8 @@ namespace CCU.Patches.Interface
 						if (___statusEffects.hasStatusEffect(trait3.traitName))
 							traitHidden = true;
 
-						if (trait3.GetHook<T_CCU>() != null) // Hide CCU traits
+						if (trait3.GetHook<T_CCU>() != null &&
+							trait3.GetHook<T_PlayerTrait>() is null) // Hide CCU traits
 							traitHidden = true;
 
 						if (!traitHidden)

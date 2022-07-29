@@ -20,7 +20,8 @@ namespace CCU.Patches.Interface
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffectDisplay.AddDisplayPiece), argumentTypes: new[] { typeof(StatusEffect), typeof(Trait) })]
         public static bool AddDisplayPiece_Prefix(StatusEffect myStatusEffect, Trait myTrait)
         {
-            if (myTrait?.GetHook<T_CCU>() is null)
+            if (myTrait?.GetHook<T_CCU>() is null ||
+                myTrait?.GetHook<T_PlayerTrait>() != null)
                 return true;
 
             return false;

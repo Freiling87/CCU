@@ -15,7 +15,7 @@ namespace CCU.Traits.Explode_On_Death
             PostProcess = RogueLibs.CreateCustomTrait<Water>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("On death, this character splashes water everywhere. I've heard it's bad to hold it in too long."),
+                    [LanguageCode.English] = String.Format("On death, this character splashes water everywhere. Contributing factor to death: Uromisotisis poisoning. Don't hold it in, folks."),
                     
                 })
                 .WithName(new CustomNameInfo
@@ -25,7 +25,7 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = RogueFramework.Unlocks.OfType<T_ExplodeOnDeath>().Where(c => !(c is Water)).Select(c => c.TextName).ToList(),
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

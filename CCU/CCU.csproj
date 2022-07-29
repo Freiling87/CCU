@@ -295,12 +295,12 @@
     <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
-    <Compile Include="Traits\Language\ErSdtAdt_Speaker.cs" />
-    <Compile Include="Traits\Language\Foreign_Speaker.cs" />
+    <Compile Include="Traits\Language\Speaks_ErSdtAdt.cs" />
+    <Compile Include="Traits\Language\Speaks_Foreign.cs" />
     <Compile Include="Traits\Language\Polyglot.cs" />
-    <Compile Include="Traits\Language\Werewelsh_Speaker.cs" />
-    <Compile Include="Traits\Language\Lang_Zonbi_Speaker.cs" />
-    <Compile Include="Traits\Language\High_Goryllian_Speaker.cs" />
+    <Compile Include="Traits\Language\Speaks_Werewelsh.cs" />
+    <Compile Include="Traits\Language\Speaks_Chthonic.cs" />
+    <Compile Include="Traits\Language\Speaks_High_Goryllian.cs" />
     <Compile Include="Traits\Language\T_Language.cs" />
     <Compile Include="Traits\Loadout\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />
@@ -439,6 +439,7 @@
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Hostile.cs" />
     <Compile Include="Traits\T_CCU.cs" />
     <Compile Include="Systems\Legacy Name Updater\NameUpdates.cs" />
+    <Compile Include="Traits\T_PlayerTrait.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">

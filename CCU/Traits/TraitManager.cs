@@ -20,6 +20,6 @@ namespace CCU.Traits
 		}
 
 		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList) =>
-			traitList.Where(trait => trait.GetHook<T_CCU>() is null).ToList();
+			traitList.Where(trait => trait.GetHook<T_CCU>() is null || trait.GetHook<T_PlayerTrait>() != null).ToList();
 	}
 }

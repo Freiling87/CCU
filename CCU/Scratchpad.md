@@ -6,14 +6,9 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #		Scope
-##			P	Bug Fixing
-###				C	Hole bug
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
-	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-##			P	0.1.1 Changelog
+##			P	Bugs
+Except crickets, crickets are fine.
+##			P	1.0.0 Changelog
 - **Feature additions**
   - Mutators
     - Followers
@@ -42,12 +37,13 @@ Listed in order of Parent tier summary symbol priority:
       - Ice Shards
       - Leaves
       - Meat Chunks
-    - Language (For use with or without Vocally Challenged)
+    - Language: For use with or without Vocally Challenged. Characters are assumed to speak English (Sorry, it's canon) if they don't have Vocally challenged. Part of a language system that may be extended in the future.
       - ErSdtAdt Speaker
       - Foreign Speaker
       - Lang Zonbi Speaker
       - High Goryllian Speaker
       - Werewelsh Speaker
+      - Polyglot: A player-side trait that gives 2 languages on trait gain, and an additional language every 2 levels afterward. Vocally Challenged now grants 1 free non-English language
     - Passive
       - Indestructible
       - Not Vincible
@@ -71,8 +67,8 @@ Listed in order of Parent tier summary symbol priority:
   - Honorable Thief now correctly gates Shop Access vis-a-vis Honor Among Thieves
   - CCU traits now correctly hidden from Augmentation Booth, Possession Trait List
   - Decoupled various Killer Robot behaviors that were hardcoded to Seek & Destroy (Water damage, EMP vulnerability, Knockback bonus, walking through Doors). 
-- **Bug Acknowledgement**
-  - Saved runs may not load mod content correctly. This is a limitation of RogueLibs and beyond my technical ability to implement (or even understand, to be honest). So for the time being, there's no roadmap to resolve this.
+- **Feature Limitation**
+  - Bad news: Continuing a saved run will not load all mod content. This is way beyond my technical ability to fix, and not scoped in Roguelibs at this point. So unfortunately, this is not likely to be fixed in the near future. Mod content should be played in a single session for best results.
 - **Trait Update System:** I've renamed and slightly reorganized some of the traits. This system should automatically update outdated traits both on spawn and on loading in the character editor. You will not have to update character files, and all versions of CCU will be backwards-compatible with un-updated content.
   - **Class Name Overlaps:** A few traits shared names with certain vanilla classes, causing their description in the character select page to be overwritten.
     - Hire Type
@@ -88,11 +84,14 @@ Listed in order of Parent tier summary symbol priority:
     - Hostile to Cannibal → Faction Soldier Aligned
     - Hostile to Soldier → Faction Cannibal Aligned
     - Specistist → Faction Gorilla Aligned
-###			C	Flex Traits
-Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
-##			T	Test note
+##		T	Followers
+###			C	Homesickness Disabled
+####			C	Set to Aligned
+###			T	Homesickness Mandatory
+Test
+##		T	Test note
 20220725
-##			C	Container/Ivestigateable interaction
+##		C	Container/Ivestigateable interaction
 InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
 ##		CT	Drug Warrior Modifiers
 GoalBattle.Process is where the effect is applied.
@@ -113,37 +112,61 @@ Effect triggers on end of threat (Regenerate, smoke, invisible)
 ###			C	Whatta Rush
 Effect gains 1s of duration on take/receive damage
 ##		CT	Explode On Death
-###			T	Custom Explosion System
-New
 ###			T	Oil Spill
 Explosion.SetupExplosion ~373
 ###			T	Do they explode when... exploded?
 Verify by kill w rocket
-###			C	Explodes when Arrested
+###			T	Custom Explosion System
 New
+###			C	00 Refactor
+See other Explosion trait groups
+This category will become Explosion Type
+###			C	Monke Parasites
+Explodes into Monke (barrel style)
+###			C	Thoughts & Prayers
+Fireworks
+###			C	Oil Spill
+This doesn't exist but should follow water logic. Plus there are many other uses.
+###			C	Ooze
+Only did particle effect
+###			C	Ridiculous
+Only did particle effect, didn't end slow-mo, no kills.
+This is the Bomb disaster one, so it will need special attention.
+###			C	Slime
+Does particle effect and poisons
+Do the sprite later.
+###			C	Stomp
+Did particle effect
+Pushed body away
+Didn't stun anyone
+###			H	00 Does not explode when killed with Cyanide
+There's no vanilla precedent for this particular situation, so let's see what users prefer.
+###			H	00 Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			√	Big
+Complete
+###			√	Dizzy
+Complete
+###			√	EMP
+Complete
+###			√	Firebomb
+Complete
+###			√	Huge
+Complete
+###			√	Noise Only
+Complete
+###			√	Normal
+Complete
+###			√	Warp
+Complete
+###			√	Water
+Complete
 ###			√	Cop Bot not Exploding
 Complete
 ###			√	Certain explosion types don't delete body
 P_StatusEffects_ExplodeBody.DisappearBody
 ###			√	Gib body
 P_StatusEffects_ExplodeBody.GibItAShot
-##		C	Gib Type
-###			C	Robot Gibs
-New
-###			C	Wood
-For use with Leaves, once they can combine into one
-###			√	Ectoplasm
-Complete
-###			√	Gibless (No gibs)
-Complete
-###			√	Glass Shards
-Complete
-###			√	Ice Shards
-Complete
-###			√	Leaves
-Complete
-###			√	Meat Chunks
-Complete
 ##		CT	Passive
 ###			C	Blinker
 Blink to a random nearby spot when hit
@@ -240,22 +263,32 @@ Works but gibs. No gib.
 Complete
 ####			√	Knocked Out
 Complete
-##		T	Language - Designer
-###			T	ErSdtAdt Speaker
-###			T	Foreign Speaker
-###			T	High Goryllian Speaker
-###			T	Lang Zombi Speaker
-###			T	Werewelsh Speaker
-##		C	Language - Player
-###			C	Mute
-No interactions under any circumstances, even with Translator
-###			C	Polyglot
-Gain 2 languages on trait gain, and an additional one every two levels.
-###			C	Telepathic (rename)
-Can talk to all languages, even Mutes
 #	CT	Projects
+##			C	Enclave System
+###				C	Currency Changing
+If you want different currencies, you'll need new ways for players to change it.
+####				C	Trait: Behavior - Moneychanger
+Cost Scaled
+###				C	Enclave: Concrete Jungle
+####				C	Agent: Bananamonger
+Human vendor, speaks English and Goryllian, spawns with a Vendor cart. Sells bananas at a good price. Great place to change your currency.
+####				C	Agent: Cheeky Monkey
+Hides in the bushes, pickpockets. Like thieves but even more fucking annoying.
+####				C	Currency: Banana
+Yeah
+####				C	Feature: Banana Vendor
+One of the only vendors who takes cash. Sells at a good price. Great place to change money.
+####				C	Floor Type: Grass
+Yeah
+####				C	Laws: Only Bitch Crimes are Illegal
+Theft
+Vandalism
+etc.
+Ritual Combat is respected as your right.
+####				C	Wall Type: Concrete
+Yeah
 ##			C	Language (Overhaul)
-###			C	00 Mutator: Language System
+###			C	00 Mutator: Our Town
 - NPCs have a chance to speak a foreign language
   - If a shopkeeper or bartender speaks a second language, generate a Neon Sign in front of their business in that language (we can dream, right?)
 - NPCs have a chance to have Vocally Challenged
@@ -265,7 +298,7 @@ Can talk to all languages, even Mutes
 - Gives the Translator an actual reason to exist
 - All hired agents can act as translators
 - Every District has a set of Our Town mutators (below) that may trigger on level 2 of the district.
-###			C	00 Non-Disaster Group: Our Town
+###			C	00 Our Town Non-Disasters
 Gated behind Language System Mutator
 Shifts the population so that about 66% are speakers, and one third - 1 half of those don't speak English.
 Or you know what, make an overhaul mutator mapped to each class. That's what this is turning into.
@@ -275,12 +308,6 @@ Or you know what, make an overhaul mutator mapped to each class. That's what thi
 - Meltingpot District (Even distribution of all language groups)
 - Werewales (Werewelsh)
 - Brainard (Lang Zonbi)
-###			C	00 Trait: Polyglot
-Trait choice locked behind Language System Mutator
-- Gain 2 languages on taking the trait
-- Gain 1 langauge every 3 levels
-###			C	Trait: ____ Speaker
-These will be the first Flex Traits (see other section) for CCU.
 ###			√	00 Base Feature
 P_Agent.
 	CanUnderstandEachOther_Postfix
@@ -578,50 +605,6 @@ Initiate a 15s timer, then detonate a Huge explosion
 Interface with Timer traits and Explosion traits to allow player to customize
 ###			C	Sweaty
 Gain Wet, lmao
-##		C	Explode On Death
-###			C	00 Refactor
-See other Explosion trait groups
-This category will become Explosion Type
-###			C	Monke Parasites
-Explodes into Monke (barrel style)
-###			C	Thoughts & Prayers
-Fireworks
-###			C	Oil Spill
-This doesn't exist but should follow water logic. Plus there are many other uses.
-###			C	Ooze
-Only did particle effect
-###			C	Ridiculous
-Only did particle effect, didn't end slow-mo, no kills.
-This is the Bomb disaster one, so it will need special attention.
-###			C	Slime
-Does particle effect and poisons
-Do the sprite later.
-###			C	Stomp
-Did particle effect
-Pushed body away
-Didn't stun anyone
-###			H	00 Does not explode when killed with Cyanide
-There's no vanilla precedent for this particular situation, so let's see what users prefer.
-###			H	00 Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
-###			√	Big
-Complete
-###			√	Dizzy
-Complete
-###			√	EMP
-Complete
-###			√	Firebomb
-Complete
-###			√	Huge
-Complete
-###			√	Noise Only
-Complete
-###			√	Normal
-Complete
-###			√	Warp
-Complete
-###			√	Water
-Complete
 ##		C	Explosion Timer
 Vanilla for EOD is 1.5 seconds
 ###			C	Cinematic Fuse
@@ -652,6 +635,25 @@ No red blink before explosion
 ###			C	Low Health
 ###			C	Spawn
 This is more of a utility, to allow designers to explode or burn things at level start.
+##		C	Gib Type
+###			C	Robot Gibs
+Need sprites :(
+###			C	Wood
+For use with Leaves, once they can combine into one
+###			√	Ectoplasm
+Complete
+###			√	Gibless
+Complete
+###			√	Glass Shards
+Complete
+###			√	Golemite
+Complete
+###			√	Ice Shards
+Complete
+###			√	Leaves
+Complete
+###			√	Meat Chunks
+Complete
 ##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted
@@ -1057,6 +1059,34 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
+##			C	Language
+###			H	Mute
+No interactions under any circumstances, even with Translator
+###			C	Polyglot
+Gain 2 languages on trait gain, and an additional one every two levels.
+If put on an NPC, those are randomly chosen.
+####			C	Polyglot as Speaker +
+Set as Upgrade for all Speaker traits
+Also gives 2 languages on upgrade, not just 1. This is for consistency and so that it's actually worth upgrading.
+####			C	Polyglot as Polyglot +
+This is an interesting pattern that might be mirrored in other meta-traits. 
+If they generally represent knowledge, then turn all knowledge skills into meta-traits. 
+E.g. Medical Professional is split up into competencies with various healing items that have unique bonuses rather than just a flat HP gain.
+####			C	Chance for Relationship Gain
+Chance to make someone Friendly if they speak that language and not English
+###			C	Telepathic (rename)
+Can talk to all languages, even Mutes, unless they have some anti-telepathy trait or something
+This could belong in a different category, since it has broad applications.
+###			√	Speaks Chthonic
+Complete
+###			√	Speaks ErSdtAdt
+Complete
+###			√	Speaks Foreign
+Complete
+###			√	Speaks High Goryllian
+Complete
+###			√	Speaks Werewelsh
+Complete
 ##		C	Loadout
 ###			C	CC Items Inclusion
 Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
@@ -1368,11 +1398,6 @@ Gate level access
 ##		C	Disasters
 ###			C	Random Disaster
 Random Disasters and/or Disasters Every Level aren't offered in the editor
-##		T	Followers
-###			C	Homesickness Disabled
-####			C	Set to Aligned
-###			T	Homesickness Mandatory
-Test
 ##		C	Gameplay
 ###			C	No Funny Business
 For town levels. Ensures no one will be killed.

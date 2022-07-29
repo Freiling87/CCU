@@ -1334,7 +1334,8 @@ namespace CCU.Patches.Interface
 
 						foreach (Trait trait in __instance.dummyAgent.statusEffects.TraitList)
 						{
-							if (trait.GetHook<T_CCU>() != null) // Hide CCU traits
+							if (trait.GetHook<T_CCU>() != null &&
+								trait.GetHook<T_PlayerTrait>() is null) // Hide CCU traits
 								continue;
 
 							text12 = __instance.characterSelectStatsText[curPlayer.isPlayer - 1];

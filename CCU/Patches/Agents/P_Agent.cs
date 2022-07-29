@@ -195,6 +195,16 @@ namespace CCU.Patches.Agents
             #region Interaction
             if (__instance.HasTrait<T_Hack>())
 				__instance.hackable = true;
+            #endregion
+            #region Language
+			foreach (T_Language_Unlock unlock in RogueFramework.Unlocks.OfType<T_Language_Unlock>())
+            {
+				// Hacky, but possibly the only way to do this.
+				T_Language trait = __instance.AddTrait(unlock.Name).GetHook<T_Language>();
+
+				if (!trait.VanillaSpeakers.Contains(__instance.agentName))
+					__instance.statusEffects.RemoveTrait(unlock.Name);
+			}
 			#endregion
 			#region Merchant
 			if (__instance.GetTraits<T_MerchantType>().Any())

@@ -12,4 +12,7 @@ namespace CCU.Traits.Appearance
     public static class T_Appearance
     {
     }
+
+    // Trait Factory:
+    // https://discord.com/channels/187414758536773632/433748059172896769/906571723204358175
 }

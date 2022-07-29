@@ -1,14 +1,8 @@
 ﻿using BepInEx.Logging;
-using BTHarmonyUtils.TranspilerUtils;
 using CCU.Challenges.Followers;
+using CCU.Traits.Language;
 using HarmonyLib;
-using JetBrains.Annotations;
 using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace CCU.Patches.Interface
 {
@@ -31,7 +25,7 @@ namespace CCU.Patches.Interface
 			return true;
 		}
 
-		// You COULD do it this way, or just learn RegEx...
+		// Trait Hiding. Test before deleting.
 
 		//[HarmonyTranspiler, UsedImplicitly, HarmonyPatch(methodName: nameof(ScrollingMenu.GetTraitsChangeTraitRandom), argumentTypes: new Type[0] { })]
 		//private static IEnumerable<CodeInstruction> FilterTraitsForChange(IEnumerable<CodeInstruction> codeInstructions)
@@ -109,6 +103,5 @@ namespace CCU.Patches.Interface
 		//public static bool CantUpgradeOrCCU(Unlock unlock) =>
 		//	unlock. ||
 		//	unlock.unlockName.Contains("[CCU]");
-
 	}
 }

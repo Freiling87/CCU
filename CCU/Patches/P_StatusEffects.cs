@@ -161,7 +161,7 @@ namespace CCU.Patches
 			if (__instance.agent.HasTrait<Indestructible>())
 				return false;
 
-			if (__instance.agent.GetTraits<T_GibType>().First() is Meat_Chunks)
+			if (__instance.agent.GetTraits<T_GibType>().FirstOrDefault() is Meat_Chunks)
 				return true;
 
 			P_StatusEffects_ExplodeBody.CustomGib(__instance);
