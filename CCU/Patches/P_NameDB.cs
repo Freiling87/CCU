@@ -16,7 +16,7 @@ namespace CCU.Patches
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(NameDB.GetName), argumentTypes: new[] { typeof(string), typeof(string) })]
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(NameDB.GetName))]
 		public static bool GetName_Prefix(ref string myName, string type)
 		{
 			if (type == "StatusEffect" && Legacy.TraitConversions.ContainsKey(myName))
@@ -25,23 +25,21 @@ namespace CCU.Patches
 			return true;
         }
 
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(NameDB.GetName), argumentTypes: new[] { typeof(string), typeof(string) })]
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(NameDB.GetName))]
 		public static void GetName_Postfix(string myName, string type, ref string __result)
         {
+			// TODO: Make this iterate with a while loop to be able to rename multiple generations of releases.
+			// Might also need to be extended past traits, but you have more time for that.
 			if (Core.debugMode ||
 				type != "StatusEffect" || !__result.Contains("E_"))
 				return;
 
-		repeat:
 			foreach (Type trait in Legacy.TraitConversions.Values)
             {
 				string traitName = T_CCU.DisplayName(trait);
 
 				if (__result == "E_" + traitName)
-                {
 					__result = __result.Remove(0, 2);
-					goto repeat;
-				}	
 			}
 		}
 	}

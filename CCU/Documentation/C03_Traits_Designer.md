@@ -1,6 +1,5 @@
-﻿#		NPC Utilities
-##			Traits
-###				Behavior
+﻿#		Traits
+##			Behavior
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades<br>- Might extend this to the other traps.
@@ -12,12 +11,14 @@
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
 |Seek & Destroy										|- Stalk & attack players, like Killer Robot
 |Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite
-###				Combat
+
+##			Combat
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Coward												|- Always flees from combat
 |Fearless											|- Never flees from combat
-###				Cost Scale
+
+##			Cost Scale
 This affects all costs from the agent: Hire, Interaction, Merchant
 
 |Trait												|Effect													|
@@ -26,7 +27,8 @@ This affects all costs from the agent: Hire, Interaction, Merchant
 |More												|- Costs increased by 50%
 |Much More											|- Costs increased by 100%
 |Zero												|- Costs reduced by 100%
-###				Drug Warrior
+
+##			Drug Warrior
 Upon entering combat, the agent will apply a status effect to themselves, similarly to how the Drug Dealer acts in vanilla.
 
 |Trait												|Effect													|
@@ -58,7 +60,8 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |The Impermanent Hunk								|Strength
 |The Last Whiff										|Nicotine
 |Wildcard											|Random (Vanilla Drug Dealer)
-###				Explode on Death
+
+##			Explode on Death
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Big												|Big explosion
@@ -72,14 +75,16 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Stomp												|Dizzy & Knockback to anyone nearby
 |Warp												|Teleports anyone nearby to a random place in the level
 |Water												|Splashes water on death
-###				Hire
+
+##			Hire
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Cyber-Intruder										|- Hack target Object or hackable Agent
 |Decoy												|- Cause a Ruckus
 |Intruder											|- Break into target Door or Window
 |Muscle												|- Hire as protection
-###				Interaction
+
+##			Interaction
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Administer Blood Bag								|- Lose 20HP for a Blood Bag
@@ -100,7 +105,8 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Play Bad Music										|- Pay to break someone's achy breaky heart, despite their protests<br>- Also works with Mayor Evidence
 |Start Election										|- Interact to start Election
 |Use Blood Bag										|- Give Blood Bag to heal for 20HP
-###				Interaction Gate
+
+##			Interaction Gate
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Untrusting											|- Will only interact with Agents Friendly or better *
@@ -108,13 +114,15 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Untrustingest										|- Will only interact with Agents Aligned *
 
 ****Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
-###				Loadout
+
+##			Loadout
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Manager Key										|- Starts with the chunk's Key
 |Manager Mayor Badge								|- Starts with the chunk's Mayor Badge
 |Manager Safe Combo									|- Starts with the chunk's Safe Combo
-###				Merchant Type
+
+##			Merchant Type
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Anthropophagie										|Alcohol, Axes & Bear Traps
@@ -167,7 +175,8 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Toy Store											|Harmless stuff that you probably wouldn't have any use for
 |Upper Cruster										|Vanilla Upper Cruster store inventory
 |Villain											|For when you're not concerned about collateral damage
-###				Passive
+
+##			Passive
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Crusty												|- Same as Upper-Crusty
@@ -177,7 +186,8 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Possessed											|- Has Shapeshifter
 |Status Effect-Immune								|- Guess, genius
 |Z-Infected											|- Zombifies on death
-###				Relationships - Faction
+
+##			Relationships - Faction
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Faction 1 Aligned									|- Aligned with same trait
@@ -196,11 +206,13 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Faction Soldier Aligned							|- Aligned to Soldiers<br>- Hostile to Cannibals<br>- Formerly "Hostile to Cannibal"
 |Hostile to Vampire									|- Hostile to Vampire
 |Hostile to Werewolf								|- Hostile to Werewolf
-###				Relationships - General
+
+##			Relationships - General
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Relationless										|- Permanently Neutral to all other Agents
-###				Relationships - Player
+
+##			Relationships - Player
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Player-Aligned										|- Aligned to Players
@@ -210,7 +222,8 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Player-Loyal										|- Loyal to Players
 |Player-Neutral										|- Neutral to Players (For overriding other relationship traits)
 |Player-Submissive									|- Submissive to Players
-###				Trait Gate
+
+##			Trait Gate
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Common Folk										|- Loyal to Friend of the Common Folk

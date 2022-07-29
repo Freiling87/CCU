@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
 using CCU.Systems.Containers;
 using CCU.Traits.Loadout;
 using CCU.Traits.Merchant_Type;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace CCU.Patches.Inventory
 {
@@ -201,11 +203,57 @@ namespace CCU.Patches.Inventory
 		}
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
-		public static bool IsEmpty_Prefix(InvDatabase __instance)
+		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
         {
-			// TODO (See note 202207241004)
+			for (int i = 0; i < __instance.InvItemList.Count; i++)
+            {
+				string name = __instance.InvItemList[i].invItemName;
 
-			return true;
-        }
+				if (name != null && name != "")
+				{
+					try
+					{
+						GC.nameDB.GetName(name, "Item");
+						__result = false;
+						return false;
+					}
+					catch { }
+				}
+			}
+
+			__result = true;
+			return false;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.TakeAll))]
+		private static IEnumerable<CodeInstruction> TakeAll_ExcludeNotes(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo slots = AccessTools.DeclaredField(typeof(InvInterface), nameof(InvInterface.Slots));
+			MethodInfo slotsFiltered = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.FilteredSlots));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld), 
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld, slots),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Call, slotsFiltered),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
+			invDatabase.agent.mainGUI.invInterface.Slots.Where(islot => !GC.nameDB.GetName(islot.item.invItemName, "Item").Contains("E_")).ToList();
+
 	}
 }

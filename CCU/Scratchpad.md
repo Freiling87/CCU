@@ -84,6 +84,59 @@ Except crickets, crickets are fine.
     - Hostile to Cannibal → Faction Soldier Aligned
     - Hostile to Soldier → Faction Cannibal Aligned
     - Specistist → Faction Gorilla Aligned
+###			C	Flex Traits
+Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
+##		CT	Custom Object variables
+###			C	Containers
+####			T	Use Agent item slots to keep stringvars available
+But get more familiar with how the interface actually presents before making a choice here
+####			H	Lockable
+Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
+Maybe generate a Desk Key item, specific to the Desk
+####			T	Note Item
+P_ObjectMultObject.OnDeserialize
+
+Also try:
+	WorldSpaceGIU.ShowChest
+		interactingAgent.mainGUI.invInterface.chestDatabase = invDatabase;
+			We should be able to filter that somehow
+#####				T	InvDatabase.IsEmpty
+P_InvDatabase.IsEmtpy_Replacement
+#####				T	InvDatabase.TakeAll 
+P_InvDatabase.TakeAll_ExcludeNotes
+#####				C	InvInterface.UpdateInvInterface
+			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
+Filter InvItemList here. Inject a call to a custom method.
+#####				C	InvInterface.Slots
+This is a List<InvItem> and I think what we need to filter
+####			C	Note drops as Water Gun when object destroyed
+####			√	Open Container
+####			√	Drop Contents when destroyed
+####			√	Show Editor Controls
+####			√	Load/Save Editor Input
+###			C	Readables
+####			C	One-Time Read
+For stuff that might not apply later, like peeking into windows
+####			C	Movie Screen
+Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
+Should be ready with next RL release
+####			C	Custom Sprites when readable text present
+Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
+#####				C	Computer
+"Unread Mail" icon on screen
+####			√	Input field Display
+P_LevelEditor.UpdateInterface
+####			√	Input field Edit
+P_LevelEditor.PressedLoadExtraVarStringList
+####			√	Setup object
+P_BasicObject.Spawn
+####			√	Interaction
+Readables.Setup
+##			C	Documentation Update
+- Add Objects Link to main readme
+- Add Player Traits link to main readme
+- Manually verify full lists of features until scoping is more coherent.
+##			T	Test note
 ##		T	Followers
 ###			C	Homesickness Disabled
 ####			C	Set to Aligned
@@ -93,25 +146,35 @@ Test
 20220725
 ##		C	Container/Ivestigateable interaction
 InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
+Attempt: P_ObjectMultObject.OnDeserialize_Postfix
+If DW, use magic str for ExtraVarStrings lower down in same method
 ##		CT	Drug Warrior Modifiers
 GoalBattle.Process is where the effect is applied.
 ###			T	Suppress Syringe AV
 The `-Syringe` text is just clutter
 The sound is sometimes not applicable lorewise
-###			C	Extended Release
-Used 69420 as duration
-Might need a hook for this.
+	P_GoalBattle.Process_GateSyringeAV
+###			T	Extended Release
+Duration:
+	P_GoalBattle.CustomStatusDuration(Agent agent)
+Deactivation:
+	P_GoalBattle.Terminate_Postfix
 ###			T	Eternal Release
 Test
-###			C	Last Stander
+P_GoalBattle.CustomStatusDuration(Agent agent)
+###			H	One for the Road
 Effect triggers when they would flee instead of at beginning of combat
 ####			C	Extended Release interaction
 When paired with ER, the effect lasts until they would no longer be intimidated. 
-###			C	Post Warrior
+###			H	Post Warrior
 Effect triggers on end of threat (Regenerate, smoke, invisible)
-###			C	Whatta Rush
-Effect gains 1s of duration on take/receive damage
-##		CT	Explode On Death
+###			H	High on Pain
+Effect gains 1s of duration on taking damage
+###			H	Take the Thrill Kill Pill
+Effect gains 1s of duration on dealing damage, extra on kill
+##		T	Explode On Death
+###			T	Custom Explosion System
+New
 ###			T	Oil Spill
 Explosion.SetupExplosion ~373
 ###			T	Do they explode when... exploded?
@@ -408,6 +471,11 @@ Keyring stores all keys in one slot
 Variable field in editor, maybe with some basic setting variations (destructible, Investigateable, etc.)
 Locks access to the object as a Chest unless the player holds the matching Stash Hint.
 You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
+##			C	Sugar System
+Merchant Type: Sugar Only
+Buyer Type: Sugar Only
+Passive: Stinger (Calls cops if you sell or buy contraband)
+And also the entire Drug Dealer mod series. 
 ##			T	Legacy Updater
 ###				T!	Challenges
 Homesickness Mandatory & Disabled
@@ -1350,6 +1418,17 @@ Complete
 ###			√	Suspicious Suspecter
 Complete
 #		C	Mutators
+
+Setting: Force Big Quest completion - If set to yes, you will need to complete your big quest before leaving the floor, if there is one. You will not be able to exit the floor until the BQ is done, even after completing all the missions on the floor. If the quest is failed (floor only fails dont count) you will spontaneously combust and die.
+
+Setting: Exit on Death - If set to yes, you will be forced to exit the floor when you die. On the next floor, you will be revived and you will be healed to maximum HP.
+
+Mutator: Exit Timer - Similar to Time Limit, except that the elevator is locked until the timer reaches zero. Missions will not open the elevator.
+
+Mutator: Exit Timer EXTREME - Similar to Time Limit EXTREME, except that the timer is LONGER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator.
+
+Mutator: Exit Timer LITE - Similar to Time Limit, except that the timer is SHORTER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator. 
+
 ##		C	00 Mutator List Population
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
@@ -1409,6 +1488,8 @@ In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 Curated configurations of challenges that can serve as a shortcut.
 E.g., "Interlude:" No funny business, pause big quests, etc.
 ##		C	Progression
+###			C	Exit Timer
+For Survival Levels, elevator is locked until timer elapses.
 ###			C	Delay Trait Gain
 Count and put off trait choices until this challenge isn't present
 ###			C	Reset Player Character
@@ -1418,9 +1499,9 @@ Count and put off trait choices until this challenge isn't present
 ###			C	Big Quest Exempt
 Deactivate Big Quest for level, freeze mark counts
 ###			C	Big Quest Mandatory
-Lose the game if you don't complete your Big Quest for this floor
-Allows the creator to have greater control over the flow of the campaign
-E.g., custom character with Doctor's big quest
+Complete quest to exit level
+Die if you fail quest
+Possibly modified by Mark-based
 ###			C	Big Quest Stopping Point
 Equivalent to Mayor's Village, where super special abilities activate if you completed the Big Quest
 ###			C	Major Contract
@@ -1431,48 +1512,20 @@ Main quest rewards are multiplied by 10
   - Pretty much has exactly what you need.
 #		C	Item Groups
 wut
-#		CT	Object Additions
-##		CT	Custom Object variables
-###			C	Containers
-####			C	Lockable
-Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
-Maybe generate a Desk Key item, specific to the Desk
-####			C	Note loads in ShowChest interface
-WorldSpaceGIU.ShowChest
-		interactingAgent.mainGUI.invInterface.chestDatabase = invDatabase;
-We should be able to filter that somehow
-
-Get some info on that watergun item, make it into a custom Clue item, see how we can identify it to filter it out.
-#####				C	InvDatabase.IsEmpty
-202207241004 - Filter IsEmpty to return true when the only item is a Clue
-#####				C	InvDatabase.TakeAll 
-Exclude Clue or whatever
-#####				C	InvInterface.UpdateInvInterface
-			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
-Filter InvItemList here. Inject a call to a custom method.
-#####				C	InvInterface.Slots
-This is a List<InvItem> and I think what we need to filter
-####			C	Note drops as Water Gun when object destroyed
-####			√	Open Container
-####			√	Drop Contents when destroyed
-####			√	Show Editor Controls
-####			√	Load/Save Editor Input
-###			C	Readables
-####			C	Movie Screen
-Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
-Should be ready with next RL release
-####			C	Custom Sprites when readable text present
-Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
-#####				C	Computer
-"Unread Mail" icon on screen
-####			√	Input field Display
-P_LevelEditor.UpdateInterface
-####			√	Input field Edit
-P_LevelEditor.PressedLoadExtraVarStringList
-####			√	Setup object
-P_BasicObject.Spawn
-####			√	Interaction
-Readables.Setup
+#		CT	Objects
+##			C	Object Special Actions
+###				C	Alarm
+###				C	Explode
+###				C	Raise Dead (Chunk)
+###				C	Raise Dead (Level)
+###				C	Set Level Flag ABCD
+This one would likely need to coexist with another OSA so...
+##			C	Object Special Action Triggers
+For use with Variables
+###				C	On Destroy
+###				C	On Investigate
+When text is *closed*
+###				C	On Loot
 ##			C	Air Conditioner
 Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected
