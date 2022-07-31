@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Junk_Dealer)),
+                    [LanguageCode.English] = DesignerName(typeof(Junk_Dealer)),
                     
                 })
                 .WithUnlock(new TraitUnlock

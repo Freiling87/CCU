@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pay_Entrance_Fee)),
+                    [LanguageCode.English] = DesignerName(typeof(Pay_Entrance_Fee)),
                     
                 })
                 .WithUnlock(new TraitUnlock

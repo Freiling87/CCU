@@ -25,7 +25,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Give_Blood)),
+                    [LanguageCode.English] = DesignerName(typeof(Give_Blood)),
                     
                 })
                 .WithUnlock(new TraitUnlock

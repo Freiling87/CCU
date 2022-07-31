@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Mining_Gear)),
+                    [LanguageCode.English] = DesignerName(typeof(Mining_Gear)),
                     
                 })
                 .WithUnlock(new TraitUnlock

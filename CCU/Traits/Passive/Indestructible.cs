@@ -15,7 +15,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Indestructible)),
+                    [LanguageCode.English] = DesignerName(typeof(Indestructible)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

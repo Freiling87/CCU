@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bribe_for_Entry_Alcohol),("Bribe for Entry (Alcohol)")),
+                    [LanguageCode.English] = DesignerName(typeof(Bribe_for_Entry_Alcohol),("Bribe for Entry (Alcohol)")),
                     
                 })
                 .WithUnlock(new TraitUnlock

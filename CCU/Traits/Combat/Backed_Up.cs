@@ -16,7 +16,7 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Backed_Up)),
+                    [LanguageCode.English] = DesignerName(typeof(Backed_Up)),
                     
                 })
                 .WithUnlock(new TraitUnlock

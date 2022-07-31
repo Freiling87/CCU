@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Stimpackerer)),
+                    [LanguageCode.English] = DesignerName(typeof(Stimpackerer)),
                     
                 })
                 .WithUnlock(new TraitUnlock

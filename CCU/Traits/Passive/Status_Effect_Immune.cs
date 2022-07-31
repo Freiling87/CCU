@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Status_Effect_Immune)),
+                    [LanguageCode.English] = DesignerName(typeof(Status_Effect_Immune)),
                     
                 })
                 .WithUnlock(new TraitUnlock

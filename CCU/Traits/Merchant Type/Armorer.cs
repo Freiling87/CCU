@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Armorer)),
+                    [LanguageCode.English] = DesignerName(typeof(Armorer)),
                     
                 })
                 .WithUnlock(new TraitUnlock

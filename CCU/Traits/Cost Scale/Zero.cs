@@ -17,7 +17,7 @@ namespace CCU.Traits.Cost_Scale
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Zero)),
+                    [LanguageCode.English] = DesignerName(typeof(Zero)),
                     
                 })
                 .WithUnlock(new TraitUnlock

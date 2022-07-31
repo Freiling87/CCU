@@ -19,7 +19,7 @@ namespace CCU.Traits.Rel_Faction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Hostile_to_Werewolf)),
+                    [LanguageCode.English] = DesignerName(typeof(Hostile_to_Werewolf)),
                     
                 })
                 .WithUnlock(new TraitUnlock

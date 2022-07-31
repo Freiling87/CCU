@@ -19,12 +19,12 @@ namespace CCU.Traits.Rel_Faction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Faction_2_Aligned)),
+                    [LanguageCode.English] = DesignerName(typeof(Faction_2_Aligned)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Faction_2_Hostile)) },
+                    Cancellations = { DesignerName(typeof(Faction_2_Hostile)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

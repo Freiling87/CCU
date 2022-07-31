@@ -15,7 +15,7 @@ namespace CCU.Traits.Facial_Hair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(NoFacialHair)),
+					[LanguageCode.English] = DesignerName(typeof(NoFacialHair)),
 					
 				})
 				.WithUnlock(new TraitUnlock

@@ -23,7 +23,7 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Nth_Wind)),
+                    [LanguageCode.English] = DesignerName(typeof(Nth_Wind)),
                     
                 })
                 .WithUnlock(new TraitUnlock

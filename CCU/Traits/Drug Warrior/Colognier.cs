@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Colognier)),
+                    [LanguageCode.English] = DesignerName(typeof(Colognier)),
                     
                 })
                 .WithUnlock(new TraitUnlock

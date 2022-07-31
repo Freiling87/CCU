@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Resistance_Commissary)),
+                    [LanguageCode.English] = DesignerName(typeof(Resistance_Commissary)),
                     
                 })
                 .WithUnlock(new TraitUnlock

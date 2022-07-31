@@ -24,7 +24,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Leave_Weapons_Behind)),
+                    [LanguageCode.English] = DesignerName(typeof(Leave_Weapons_Behind)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -15,7 +15,7 @@ namespace CCU.Traits.Facial_Hair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(MustacheCircus)),
+					[LanguageCode.English] = DesignerName(typeof(MustacheCircus)),
 					
 				})
 				.WithUnlock(new TraitUnlock

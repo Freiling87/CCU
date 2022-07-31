@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Intruders_Outlet), "Intruder's Outlet"),
+                    [LanguageCode.English] = DesignerName(typeof(Intruders_Outlet), "Intruder's Outlet"),
                     
                 })
                 .WithUnlock(new TraitUnlock

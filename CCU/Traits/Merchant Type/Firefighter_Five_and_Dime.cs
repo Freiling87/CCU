@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Firefighter_Five_and_Dime), "Firefighter Five & Dime"),
+                    [LanguageCode.English] = DesignerName(typeof(Firefighter_Five_and_Dime), "Firefighter Five & Dime"),
                     
                 })
                 .WithUnlock(new TraitUnlock

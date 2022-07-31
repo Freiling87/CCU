@@ -19,7 +19,7 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Grab_Drugs)),
+                    [LanguageCode.English] = DesignerName(typeof(Grab_Drugs)),
                     
                 })
                 .WithUnlock(new TraitUnlock

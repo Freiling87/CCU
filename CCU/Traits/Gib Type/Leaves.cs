@@ -23,7 +23,7 @@ namespace CCU.Traits.Gib_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Leaves)),
+                    [LanguageCode.English] = DesignerName(typeof(Leaves)),
                     
                 })
                 .WithUnlock(new TraitUnlock

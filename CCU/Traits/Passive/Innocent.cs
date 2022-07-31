@@ -16,12 +16,12 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Innocent)),
+                    [LanguageCode.English] = DesignerName(typeof(Innocent)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Guilty)) },
+                    Cancellations = { DesignerName(typeof(Guilty)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

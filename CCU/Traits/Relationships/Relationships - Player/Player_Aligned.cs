@@ -18,7 +18,7 @@ namespace CCU.Traits.Rel_Player
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Player_Aligned)),
+                    [LanguageCode.English] = DesignerName(typeof(Player_Aligned)),
                     
                 })
                 .WithUnlock(new TraitUnlock

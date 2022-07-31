@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Vision_Beams)),
+                    [LanguageCode.English] = DesignerName(typeof(Vision_Beams)),
                     
                 })
                 .WithUnlock(new TraitUnlock

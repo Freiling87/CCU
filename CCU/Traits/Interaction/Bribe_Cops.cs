@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bribe_Cops)),
+                    [LanguageCode.English] = DesignerName(typeof(Bribe_Cops)),
                     
                 })
                 .WithUnlock(new TraitUnlock

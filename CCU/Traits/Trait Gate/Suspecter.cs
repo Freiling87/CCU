@@ -15,7 +15,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Suspecter)),
+                    [LanguageCode.English] = DesignerName(typeof(Suspecter)),
                     
                 })
                 .WithUnlock(new TraitUnlock

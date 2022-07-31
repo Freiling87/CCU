@@ -15,7 +15,7 @@ namespace CCU.Traits.Facial_Hair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(Beard)),
+					[LanguageCode.English] = DesignerName(typeof(Beard)),
 					
 				})
 				.WithUnlock(new TraitUnlock

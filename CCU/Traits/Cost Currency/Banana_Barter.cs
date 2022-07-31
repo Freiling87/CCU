@@ -15,12 +15,12 @@ namespace CCU.Traits.Cost_Currency
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Banana_Barter)),
+                    [LanguageCode.English] = DesignerName(typeof(Banana_Barter)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Booze_Bargain)) },
+                    Cancellations = { DesignerName(typeof(Booze_Bargain)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

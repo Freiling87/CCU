@@ -18,12 +18,12 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Suck_Blood)),
+                    [LanguageCode.English] = DesignerName(typeof(Suck_Blood)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Eat_Corpses)), DisplayName(typeof(Pick_Pockets)) },
+                    Cancellations = { DesignerName(typeof(Eat_Corpses)), DesignerName(typeof(Pick_Pockets)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

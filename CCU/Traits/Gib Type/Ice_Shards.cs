@@ -23,7 +23,7 @@ namespace CCU.Traits.Gib_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Ice_Shards)),
+                    [LanguageCode.English] = DesignerName(typeof(Ice_Shards)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,7 +16,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_Access)),
+                    [LanguageCode.English] = DesignerName(typeof(Cop_Access)),
                     
                 })
                 .WithUnlock(new TraitUnlock

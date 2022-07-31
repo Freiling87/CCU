@@ -16,7 +16,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cool_Cannibal)),
+                    [LanguageCode.English] = DesignerName(typeof(Cool_Cannibal)),
                     
                 })
                 .WithUnlock(new TraitUnlock

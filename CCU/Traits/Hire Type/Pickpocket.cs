@@ -20,7 +20,7 @@ namespace CCU.Traits.Hire_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pickpocket)),
+                    [LanguageCode.English] = DesignerName(typeof(Pickpocket)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Anthropophagie)),
+                    [LanguageCode.English] = DesignerName(typeof(Anthropophagie)),
                     
                 })
                 .WithUnlock(new TraitUnlock

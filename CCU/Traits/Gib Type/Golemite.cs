@@ -22,7 +22,7 @@ namespace CCU.Traits.Gib_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Golemite)),
+                    [LanguageCode.English] = DesignerName(typeof(Golemite)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

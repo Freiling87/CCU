@@ -15,7 +15,7 @@ namespace CCU.Traits.Loadout
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(Chunk_Safe_Combo)),
+					[LanguageCode.English] = DesignerName(typeof(Chunk_Safe_Combo)),
 					
 				})
 				.WithUnlock(new TraitUnlock

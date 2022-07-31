@@ -16,7 +16,7 @@ namespace CCU.Traits.Drug_Warrior_Modifier
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Suppress_Syringe_AV)),
+                    [LanguageCode.English] = DesignerName(typeof(Suppress_Syringe_AV)),
                     
                 })
                 .WithUnlock(new TraitUnlock

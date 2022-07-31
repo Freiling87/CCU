@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(An_Inimitable_Bulk)),
+                    [LanguageCode.English] = DesignerName(typeof(An_Inimitable_Bulk)),
                     
                 })
                 .WithUnlock(new TraitUnlock

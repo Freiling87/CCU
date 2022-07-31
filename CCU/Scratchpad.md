@@ -21,11 +21,16 @@ Vanilla:
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
 ##			P	1.0.0 Changelog
+* Next to a name indicates a Player-accessible feature. This means the Mutator, Trait, whatever will be named normally (won't have all the [CCU] name prefixes).
+
 - **Feature additions**
   - Mutators
     - Followers
-      - Homesickness Disabled
-      - Homesickness Mandatory
+      - Homesickness Disabled*
+      - Homesickness Mandatory*
+  - Objects: New extra variables have been added. Check the [Objects](/CCU/Documentation/C02_Objects.md) page for specifics on the categories below.
+    - Containers: Various objects can now store ONE item as a container.
+    - Investigateables: It's a banner day for the rude... no emails are safe! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
   - Traits
     - Asterisk indicates Player Traits. These will be accessible to players in trait menus, and will be named like normal (non-CCU) traits. 
     - Behavior
@@ -52,21 +57,18 @@ Will make easier to track bug reports
       - Ice Shards
       - Leaves
       - Meat Chunks
-    - Language*: For use with or without Vocally Challenged. Characters are assumed to speak English (Sorry, it's canon) if they don't have Vocally challenged. Part of a language system that may be extended in the future.
-      - ErSdtAdt Speaker
-      - Foreign Speaker
-      - Lang Zonbi Speaker
-      - High Goryllian Speaker
-      - Werewelsh Speaker
-      - Polyglot: A player-side trait that gives 2 languages on trait gain, and an additional language every 2 levels afterward. Vocally Challenged now grants 1 free non-English language
+    - Language: For use with or without Vocally Challenged. Characters are assumed to speak English (Sorry, it's canon) unless they have Vocally challenged. Part of a language system that may be extended in the future.
+      - Chthonic Speaker*
+      - ErSdtAdt Speaker*
+      - Foreign Speaker*
+      - High Goryllian Speaker*
+      - Werewelsh Speaker*
     - Passive
       - Indestructible
       - Not Vincible
     - Relationships - Faction
       - Faction Firefighter Aligned
       - Faction Gorilla Aligned 
-  - Objects
-    - It's a banner day for the rude... you can now read emails! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
 - **Tweaks**
   - Pay Debt is now scaled to Cost Scale traits
   - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
@@ -105,59 +107,6 @@ Enable existing traits to player side and make their display name conditional on
 ###			C	Level Editor Field Allocation
 Make a spreadsheet. Cross-check which items will use which features to avoid overlap
 Field by Feature  x  Feature by Object Type  =  Object by Field, detecting conflicts
-##		C	Containers
-###			H	Containervestigateables 
-Disabling the overlap resolved all the rest of the bugs here. 
-####			C	Can't remove items
-Containervestigateables, once given an item, can't have it removed
-####			C	Cross-Contamination
-Investigateable text is displayed erroneously when selecting a containervestigateable after any investigateable. It either copies the text over or displays the old stuff.
-Next attempt:
-	LevelEditor.
-		CloseLongDescription
-		OpenLongDescription
-###			C	EVS1
-####			C	Keycoded
-This will be my term for the Safe's lock, since it's hackable and uses a combo.
-####			H	Locked
-Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
-Maybe generate a Desk Key item, specific to the Desk
-####			C	Stashed
-Stash is inaccessible (except with Object destruction) until Stash Hint is found. 
-It will have almost everything in common with Key, so it should be easy research.
-####			C	Stashed + Keycoded
-If you keep it modular, this should be easy
-####			C	Stashed + Keycoded + Locked
-Why the fuck not, let's go nuts
-####			C	Stashed + Locked
-If you keep it modular, this should be easy
-###			C	EVS2
-Durability?
-###			C	EVS3
-Use this slot for item storage.
-1 Slot is limiting, but if you can't tell a story with 1 item then you need an editor.
-###			C	Investigateables
-####			C	French Vanilla Strings
-Default strings per object type
-#####				C	Gravestone
-Yeah Gravestone jokes are soooo funny and fresh
-####			C	One-Time Read
-For stuff that might not apply later, like peeking into windows
-####			C	Movie Screen
-Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
-Should be ready with next RL release
-####			C	Custom Sprites when readable text present
-Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
-#####				C	Computer
-"Unread Mail" icon on screen
-####			√	Input field Display
-P_LevelEditor.UpdateInterface
-####			√	Input field Edit
-P_LevelEditor.PressedLoadExtraVarStringList
-####			√	Setup object
-P_BasicObject.Spawn
-####			√	Interaction
-Readables.Setup
 ##			C	Documentation Update
 - Add Objects Link to main readme
   - Full list of objects, with Vars1-4 as columns indicating what's added
@@ -258,8 +207,6 @@ agent.canExplosiveStimulate
 Ghostlike, not necessarily gibbable (Use Supernatural for that)
 ###			C	Immobile
 Can't move (for turret types)
-###			C	Invincible
-New
 ###			C	Mute Dialogue
 Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
 ###			C	Oblivious
@@ -309,11 +256,11 @@ SetRelationshipOriginal, under Drug Dealer
 Complete
 ###			√	Innocent
 Complete
+###			√	Not Vincible
+Complete
 ###			√	Possessed
 Complete
 ###			√	Status Effect Immune
-Complete
-###			√	Un-Vincible
 Complete
 ###			√	Z-Infected
 Complete
@@ -1553,6 +1500,36 @@ Main quest rewards are multiplied by 10
 #		C	Item Groups
 wut
 #		CT	Objects
+##		C	Containers
+###			H	Containervestigateables 
+Disabling the overlap resolved all the rest of the bugs here. 
+####			C	Can't remove items
+Containervestigateables, once given an item, can't have it removed
+####			C	Cross-Contamination
+Investigateable text is displayed erroneously when selecting a containervestigateable after any investigateable. It either copies the text over or displays the old stuff.
+Next attempt:
+	LevelEditor.
+		CloseLongDescription
+		OpenLongDescription
+###			C	EVS1
+####			C	Keycoded
+This will be my term for the Safe's lock, since it's hackable and uses a combo.
+####			H	Locked
+Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
+Maybe generate a Desk Key item, specific to the Desk
+####			C	Stashed
+Stash is inaccessible (except with Object destruction) until Stash Hint is found. 
+It will have almost everything in common with Key, so it should be easy research.
+####			C	Stashed + Keycoded
+If you keep it modular, this should be easy
+####			C	Stashed + Keycoded + Locked
+Why the fuck not, let's go nuts
+####			C	Stashed + Locked
+If you keep it modular, this should be easy
+###			C	EVS2
+Durability?
+###			√	EVS3
+Item
 ##			C	Object Special Actions
 ###				C	Alarm
 ###				C	Explode
@@ -1571,6 +1548,28 @@ Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected
 ##			C	Fire Hydrant
 Ability to be already shooting water according to direction
+##			C	Investigateables
+###			C	French Vanilla Strings
+Default strings per object type
+####				C	Gravestone
+Yeah Gravestone jokes are soooo funny and fresh
+###			C	One-Time Read
+For stuff that might not apply later, like peeking into windows
+###			C	Movie Screen
+Didn't work yet: https://discord.com/channels/187414758536773632/433748059172896769/1000014921305706567
+Should be ready with next RL release
+###			C	Custom Sprites when readable text present
+Will need a visual indicator to the player. This is an extra, if RL correctly toggles interactability conditional on valid interactions.
+####				C	Computer
+"Unread Mail" icon on screen
+###			√	Input field Display
+P_LevelEditor.UpdateInterface
+###			√	Input field Edit
+P_LevelEditor.PressedLoadExtraVarStringList
+###			√	Setup object
+P_BasicObject.Spawn
+###			√	Interaction
+Readables.Setup
 ##			C	Explosive Barrel
 ###				C	Sprite Warning Label
 Specific to Status Effect

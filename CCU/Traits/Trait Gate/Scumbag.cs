@@ -16,7 +16,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Scumbag)),
+                    [LanguageCode.English] = DesignerName(typeof(Scumbag)),
                     
                 })
                 .WithUnlock(new TraitUnlock

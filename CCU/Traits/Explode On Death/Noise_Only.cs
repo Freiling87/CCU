@@ -20,7 +20,7 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Noise_Only)),
+                    [LanguageCode.English] = DesignerName(typeof(Noise_Only)),
                     
                 })
                 .WithUnlock(new TraitUnlock

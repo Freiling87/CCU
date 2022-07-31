@@ -20,7 +20,7 @@ namespace CCU.Traits.Hire_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Decoy)),
+                    [LanguageCode.English] = DesignerName(typeof(Decoy)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Electrocutioner)),
+                    [LanguageCode.English] = DesignerName(typeof(Electrocutioner)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Gun_Dealer_Heavy), "Gun Dealer (Heavy)"),
+                    [LanguageCode.English] = DesignerName(typeof(Gun_Dealer_Heavy), "Gun Dealer (Heavy)"),
                     
                 })
                 .WithUnlock(new TraitUnlock

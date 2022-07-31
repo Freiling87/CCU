@@ -20,7 +20,7 @@ namespace CCU.Traits.Hack
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Explode)),
+                    [LanguageCode.English] = DesignerName(typeof(Explode)),
                     
                 })
                 .WithUnlock(new TraitUnlock

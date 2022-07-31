@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Army_Quartermaster)),
+                    [LanguageCode.English] = DesignerName(typeof(Army_Quartermaster)),
                     
                 })
                 .WithUnlock(new TraitUnlock

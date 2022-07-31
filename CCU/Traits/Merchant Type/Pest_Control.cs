@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pest_Control)),
+                    [LanguageCode.English] = DesignerName(typeof(Pest_Control)),
                     
                 })
                 .WithUnlock(new TraitUnlock

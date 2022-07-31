@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Numbestest_to_Pain)),
+                    [LanguageCode.English] = DesignerName(typeof(Numbestest_to_Pain)),
                     
                 })
                 .WithUnlock(new TraitUnlock

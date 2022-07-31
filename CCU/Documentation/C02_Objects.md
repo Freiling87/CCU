@@ -4,10 +4,10 @@ Some objects can now contain Items.
 ##			Investigation
 You can now write and read text with several objects as if they were Signs. The player views this text with the "Investigate" interaction (wording intended to be as broad as possible).
 ##			Object Variables
-The full list of modifiable variables added to all Objects.
+The full list of modifiable variables added to all Objects. **(V)** indicates the variable slot is already occupied by Vanilla content.
 
-|Object								|1						|2						|3						|
-|:----------------------------------|:---------------------:|:---------------------:|:---------------------:|
+|Object								|1						|2						|3						|Notes	|
+|:----------------------------------|:---------------------:|:---------------------:|:---------------------:|:------|
 |Air Conditioner
 |Alarm Button
 |Altar								|Investigation Text		|
@@ -16,7 +16,7 @@ The full list of modifiable variables added to all Objects.
 |Armchair
 |ATM Machine
 |Augmentation Booth
-|Barbecue							|						|						|Container Item
+|Barbecue							|						|						|Container Item			|- Fire prevents container access, unless Agent has fire resistance.
 |Bar Stool
 |Bathtub							|						|						|Container Item
 |Bed								|						|						|Container Item
@@ -35,10 +35,10 @@ The full list of modifiable variables added to all Objects.
 |Event Trigger Floor
 |Exploding Barrel
 |Fire Hydrant
-|Fireplace							|						|						|Container Item
+|Fireplace							|						|						|Container Item			|- Fire prevents container access, unless Agent has fire resistance.
 |Fire Spewer
 |Flame Grate
-|Flaming Barrel						|						|						|Container Item
+|Flaming Barrel						|						|						|Container Item			|- Fire prevents container access, unless Agent has fire resistance.
 |Gas Vent							|						|						|Container Item
 |Generator
 |Generator (Overclocked)

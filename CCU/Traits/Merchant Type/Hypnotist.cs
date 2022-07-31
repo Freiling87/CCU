@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Hypnotist)),
+                    [LanguageCode.English] = DesignerName(typeof(Hypnotist)),
                     
                 })
                 .WithUnlock(new TraitUnlock

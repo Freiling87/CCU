@@ -20,7 +20,7 @@ namespace CCU.Systems.Containers
 			vObject.Fireplace,
 			vObject.FlamingBarrel,
 			vObject.GasVent,	// Require screwdriver
-			vObject.Manhole,
+			//vObject.Manhole,	// Need SORCE's code here
 			vObject.Plant,
 			// vObject.Podium,	Investigateable
 			vObject.PoolTable,

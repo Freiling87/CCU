@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Play_Bad_Music)),
+                    [LanguageCode.English] = DesignerName(typeof(Play_Bad_Music)),
                     
                 })
                 .WithUnlock(new TraitUnlock

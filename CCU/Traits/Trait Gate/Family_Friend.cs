@@ -16,7 +16,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Family_Friend)),
+                    [LanguageCode.English] = DesignerName(typeof(Family_Friend)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Recoverist)),
+                    [LanguageCode.English] = DesignerName(typeof(Recoverist)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -20,7 +20,7 @@ namespace CCU.Traits.Rel_Faction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Faction_Blahd_Aligned)),
+                    [LanguageCode.English] = DesignerName(typeof(Faction_Blahd_Aligned)),
                     
                 })
                 .WithUnlock(new TraitUnlock

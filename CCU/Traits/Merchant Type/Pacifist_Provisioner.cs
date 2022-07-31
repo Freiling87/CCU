@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pacifist_Provisioner)),
+                    [LanguageCode.English] = DesignerName(typeof(Pacifist_Provisioner)),
                     
                 })
                 .WithUnlock(new TraitUnlock

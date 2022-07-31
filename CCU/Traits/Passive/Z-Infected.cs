@@ -16,12 +16,12 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Z_Infected),("Z-Infected")),
+                    [LanguageCode.English] = DesignerName(typeof(Z_Infected),("Z-Infected")),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Possessed)) },
+                    Cancellations = { DesignerName(typeof(Possessed)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

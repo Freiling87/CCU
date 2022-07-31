@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Armor_Plated), "Armor-Plated"),
+                    [LanguageCode.English] = DesignerName(typeof(Armor_Plated), "Armor-Plated"),
                     
                 })
                 .WithUnlock(new TraitUnlock

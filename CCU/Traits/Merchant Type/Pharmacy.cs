@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Pharmacy)),
+                    [LanguageCode.English] = DesignerName(typeof(Pharmacy)),
                     
                 })
                 .WithUnlock(new TraitUnlock

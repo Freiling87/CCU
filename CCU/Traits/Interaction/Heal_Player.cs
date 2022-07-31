@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Heal_Player)),
+                    [LanguageCode.English] = DesignerName(typeof(Heal_Player)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bartender_Fancy), "Bartender (Fancy)"),
+                    [LanguageCode.English] = DesignerName(typeof(Bartender_Fancy), "Bartender (Fancy)"),
                     
                 })
                 .WithUnlock(new TraitUnlock

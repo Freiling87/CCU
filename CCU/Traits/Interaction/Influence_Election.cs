@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Influence_Election)),
+                    [LanguageCode.English] = DesignerName(typeof(Influence_Election)),
                     
                 })
                 .WithUnlock(new TraitUnlock

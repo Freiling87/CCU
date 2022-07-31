@@ -18,7 +18,7 @@ namespace CCU.Traits.Interaction_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Insular)),
+                    [LanguageCode.English] = DesignerName(typeof(Insular)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -15,7 +15,7 @@ namespace CCU.Traits.Drug_Warrior_Modifier
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Eternal_Release)),
+                    [LanguageCode.English] = DesignerName(typeof(Eternal_Release)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

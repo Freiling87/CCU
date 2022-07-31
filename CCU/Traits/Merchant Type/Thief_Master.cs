@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Thief_Master)),
+                    [LanguageCode.English] = DesignerName(typeof(Thief_Master)),
                     
                 })
                 .WithUnlock(new TraitUnlock

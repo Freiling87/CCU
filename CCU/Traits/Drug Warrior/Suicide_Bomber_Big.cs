@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Suicide_Bomber_Big), "Suicide Bomber (Big)"),
+                    [LanguageCode.English] = DesignerName(typeof(Suicide_Bomber_Big), "Suicide Bomber (Big)"),
                     
                 })
                 .WithUnlock(new TraitUnlock

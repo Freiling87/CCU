@@ -22,12 +22,12 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Borrow_Money_Moocher), ("Borrow Money (Moocher)")),
+                    [LanguageCode.English] = DesignerName(typeof(Borrow_Money_Moocher), ("Borrow Money (Moocher)")),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Borrow_Money)) },
+                    Cancellations = { DesignerName(typeof(Borrow_Money)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

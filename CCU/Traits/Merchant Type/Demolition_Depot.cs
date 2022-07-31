@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Demolition_Depot)),
+                    [LanguageCode.English] = DesignerName(typeof(Demolition_Depot)),
                     
                 })
                 .WithUnlock(new TraitUnlock

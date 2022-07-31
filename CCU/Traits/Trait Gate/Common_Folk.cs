@@ -16,7 +16,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Common_Folk)),
+                    [LanguageCode.English] = DesignerName(typeof(Common_Folk)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Upper_Cruster)),
+                    [LanguageCode.English] = DesignerName(typeof(Upper_Cruster)),
                     
                 })
                 .WithUnlock(new TraitUnlock

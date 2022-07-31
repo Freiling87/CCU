@@ -16,7 +16,7 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Lockdowner)),
+                    [LanguageCode.English] = DesignerName(typeof(Lockdowner)),
                     
                 })
                 .WithUnlock(new TraitUnlock

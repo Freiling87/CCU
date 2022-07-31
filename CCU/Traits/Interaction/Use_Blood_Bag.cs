@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Use_Blood_Bag)),
+                    [LanguageCode.English] = DesignerName(typeof(Use_Blood_Bag)),
                     
                 })
                 .WithUnlock(new TraitUnlock

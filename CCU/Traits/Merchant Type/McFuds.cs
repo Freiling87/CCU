@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(McFuds), "McFud's"),
+                    [LanguageCode.English] = DesignerName(typeof(McFuds), "McFud's"),
                     
                 })
                 .WithUnlock(new TraitUnlock

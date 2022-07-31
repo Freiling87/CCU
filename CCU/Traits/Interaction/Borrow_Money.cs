@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Borrow_Money)),
+                    [LanguageCode.English] = DesignerName(typeof(Borrow_Money)),
                     
                 })
                 .WithUnlock(new TraitUnlock

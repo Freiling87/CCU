@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Bloodsuckers_Bazaar), "Bloodsuckers' Bazaar"),
+                    [LanguageCode.English] = DesignerName(typeof(Bloodsuckers_Bazaar), "Bloodsuckers' Bazaar"),
                     
                 })
                 .WithUnlock(new TraitUnlock

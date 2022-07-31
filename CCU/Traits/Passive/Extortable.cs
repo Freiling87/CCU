@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Extortable)),
+                    [LanguageCode.English] = DesignerName(typeof(Extortable)),
                     
                 })
                 .WithUnlock(new TraitUnlock

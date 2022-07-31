@@ -15,7 +15,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Not_Vincible)),
+                    [LanguageCode.English] = DesignerName(typeof(Not_Vincible)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

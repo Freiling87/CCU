@@ -17,7 +17,7 @@ namespace CCU.Traits.Bodyguarded
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(Bodyguarded_Pilot)),
+					[LanguageCode.English] = DesignerName(typeof(Bodyguarded_Pilot)),
 					
 				})
 				.WithUnlock(new TraitUnlock

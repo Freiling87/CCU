@@ -22,7 +22,7 @@ namespace CCU.Patches
 		public static bool GetName_Prefix(ref string myName, string type, ref string __result)
 		{
 			if (type == "StatusEffect" && Legacy.TraitConversions.ContainsKey(myName))
-				myName = T_CCU.DisplayName(Legacy.TraitConversions[myName]);
+				myName = T_CCU.DesignerName(Legacy.TraitConversions[myName]);
 
 			if (type == "Item")
 				if (Investigateables.IsInvestigationString(myName))
@@ -45,7 +45,7 @@ namespace CCU.Patches
 
 			foreach (Type trait in Legacy.TraitConversions.Values)
             {
-				string traitName = T_CCU.DisplayName(trait);
+				string traitName = T_CCU.DesignerName(trait);
 
 				if (__result == "E_" + traitName)
 					__result = __result.Remove(0, 2);

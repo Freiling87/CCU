@@ -18,7 +18,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Wildcard)),
+                    [LanguageCode.English] = DesignerName(typeof(Wildcard)),
                     
                 })
                 .WithUnlock(new TraitUnlock

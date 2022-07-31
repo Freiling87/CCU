@@ -19,7 +19,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Honorable_Thief)),
+                    [LanguageCode.English] = DesignerName(typeof(Honorable_Thief)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_SWAT), "Cop (SWAT)"),
+                    [LanguageCode.English] = DesignerName(typeof(Cop_SWAT), "Cop (SWAT)"),
                     
                 })
                 .WithUnlock(new TraitUnlock

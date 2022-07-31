@@ -20,7 +20,7 @@ namespace CCU.Traits.Hire_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Poisoner)),
+                    [LanguageCode.English] = DesignerName(typeof(Poisoner)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -18,7 +18,7 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Seek_and_Destroy), "Seek & Destroy"),
+                    [LanguageCode.English] = DesignerName(typeof(Seek_and_Destroy), "Seek & Destroy"),
                     
                 })
                 .WithUnlock(new TraitUnlock

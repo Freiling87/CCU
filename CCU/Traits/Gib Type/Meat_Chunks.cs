@@ -23,7 +23,7 @@ namespace CCU.Traits.Gib_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Meat_Chunks)),
+                    [LanguageCode.English] = DesignerName(typeof(Meat_Chunks)),
                     
                 })
                 .WithUnlock(new TraitUnlock

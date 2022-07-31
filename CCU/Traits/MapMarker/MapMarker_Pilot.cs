@@ -15,7 +15,7 @@ namespace CCU.Traits.Map_Marker
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(MapMarker_Pilot)),
+					[LanguageCode.English] = DesignerName(typeof(MapMarker_Pilot)),
 					
 				})
 				.WithUnlock(new TraitUnlock

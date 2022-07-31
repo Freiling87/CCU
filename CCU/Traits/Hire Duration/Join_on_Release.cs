@@ -15,7 +15,7 @@ namespace CCU.Traits.Hire_Duration
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Join_on_Release)),
+                    [LanguageCode.English] = DesignerName(typeof(Join_on_Release)),
                     
                 })
                 .WithUnlock(new TraitUnlock

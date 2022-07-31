@@ -4,6 +4,6 @@
     {
         public T_MerchantType() : base() { }
 
-        new public string DisplayName => DisplayName(GetType());
+        new public string DisplayName => DesignerName(GetType());
     }
 }

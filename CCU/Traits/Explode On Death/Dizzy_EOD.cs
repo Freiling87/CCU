@@ -23,7 +23,7 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Dizzy_EOD), "Dizzy"),
+                    [LanguageCode.English] = DesignerName(typeof(Dizzy_EOD), "Dizzy"),
                     
                 })
                 .WithUnlock(new TraitUnlock

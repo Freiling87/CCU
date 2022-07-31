@@ -16,7 +16,7 @@ namespace CCU.Traits.Trait_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Slayable)),
+                    [LanguageCode.English] = DesignerName(typeof(Slayable)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -16,12 +16,12 @@ namespace CCU.Traits.Combat
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Fearless)),
+                    [LanguageCode.English] = DesignerName(typeof(Fearless)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Fearless)) },
+                    Cancellations = { DesignerName(typeof(Fearless)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -18,7 +18,7 @@ namespace CCU.Traits.Rel_Player
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Player_Secret_Hate)),
+                    [LanguageCode.English] = DesignerName(typeof(Player_Secret_Hate)),
                     
                 })
                 .WithUnlock(new TraitUnlock

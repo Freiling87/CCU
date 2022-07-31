@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Occultist)),
+                    [LanguageCode.English] = DesignerName(typeof(Occultist)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Fainting_Goat_Warrior)),
+                    [LanguageCode.English] = DesignerName(typeof(Fainting_Goat_Warrior)),
                     
                 })
                 .WithUnlock(new TraitUnlock

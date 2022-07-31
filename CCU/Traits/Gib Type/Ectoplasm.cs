@@ -24,7 +24,7 @@ namespace CCU.Traits.Gib_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Ectoplasm)),
+                    [LanguageCode.English] = DesignerName(typeof(Ectoplasm)),
                     
                 })
                 .WithUnlock(new TraitUnlock

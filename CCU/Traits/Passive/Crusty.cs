@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Crusty)),
+                    [LanguageCode.English] = DesignerName(typeof(Crusty)),
                     
                 })
                 .WithUnlock(new TraitUnlock

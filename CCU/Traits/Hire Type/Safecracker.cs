@@ -20,7 +20,7 @@ namespace CCU.Traits.Hire_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Safecracker)),
+                    [LanguageCode.English] = DesignerName(typeof(Safecracker)),
                     
                 })
                 .WithUnlock(new TraitUnlock

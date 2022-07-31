@@ -20,7 +20,7 @@ namespace CCU.Traits.Hire_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Intruder)),
+                    [LanguageCode.English] = DesignerName(typeof(Intruder)),
                     
                 })
                 .WithUnlock(new TraitUnlock

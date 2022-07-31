@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Assassineer)),
+                    [LanguageCode.English] = DesignerName(typeof(Assassineer)),
                     
                 })
                 .WithUnlock(new TraitUnlock

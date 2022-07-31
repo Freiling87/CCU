@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Buy_Round)),
+                    [LanguageCode.English] = DesignerName(typeof(Buy_Round)),
                     
                 })
                 .WithUnlock(new TraitUnlock

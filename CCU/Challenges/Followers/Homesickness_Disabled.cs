@@ -10,11 +10,11 @@ namespace CCU.Challenges.Followers
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(Homesickness_Disabled), true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Followers act as if their employer had Homesickness Killer.",
+					[LanguageCode.English] = "Followers act as if their employer had Homesickness Killer. Homesickness Killer is removed from the trait choice pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(Homesickness_Disabled)),
+					[LanguageCode.English] = PlayerName(typeof(Homesickness_Disabled)),
 				});
 		}
 	}

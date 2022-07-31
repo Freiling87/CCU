@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Fire_Sale)),
+                    [LanguageCode.English] = DesignerName(typeof(Fire_Sale)),
                     
                 })
                 .WithUnlock(new TraitUnlock

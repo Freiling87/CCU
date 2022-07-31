@@ -15,7 +15,7 @@ namespace CCU.Traits.Loadout
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(Chunk_Mayor_Badge)),
+					[LanguageCode.English] = DesignerName(typeof(Chunk_Mayor_Badge)),
 					
 				})
 				.WithUnlock(new TraitUnlock

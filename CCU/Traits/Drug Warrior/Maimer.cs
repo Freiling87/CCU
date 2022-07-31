@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Maimer)),
+                    [LanguageCode.English] = DesignerName(typeof(Maimer)),
                     
                 })
                 .WithUnlock(new TraitUnlock

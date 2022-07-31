@@ -22,7 +22,7 @@ namespace CCU.Traits.Gib_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Gibless)),
+                    [LanguageCode.English] = DesignerName(typeof(Gibless)),
                 })
                 .WithUnlock(new TraitUnlock
                 {

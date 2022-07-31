@@ -16,9 +16,7 @@ namespace CCU.Traits
             }
         }
 
-        // On its OWN commit, 
-        //  Rename to Designer Name
-        public static string DisplayName(Type type, string custom = null) =>
+        public static string DesignerName(Type type, string custom = null) =>
             "[CCU] " + 
             (type.Namespace).Split('.')[2].Replace('_', ' ') + 
             " - " +
@@ -27,13 +25,12 @@ namespace CCU.Traits
         public static string PlayerName(Type type) =>
             (type.Name).Replace('_', ' ');
 
-        //  ...and Rename to Documentation Name
-        public static string ShortNameDocumentationOnly(Type type) =>
+        public static string LongishDocumentationName(Type type) =>
             (type.Namespace).Split('.')[2].Replace('_', ' ') + 
             " - " +
             (type.Name).Replace('_', ' ');
 
 
-        public string TextName => DisplayName(GetType());
+        public string TextName => DesignerName(GetType());
     }
 }

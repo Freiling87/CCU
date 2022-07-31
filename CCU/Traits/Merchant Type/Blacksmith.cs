@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Blacksmith), "Blacksmith, Ye Olde"),
+                    [LanguageCode.English] = DesignerName(typeof(Blacksmith), "Blacksmith, Ye Olde"),
                     
                 })
                 .WithUnlock(new TraitUnlock

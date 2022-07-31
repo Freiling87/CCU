@@ -16,7 +16,7 @@ namespace CCU.Traits.Rel_General
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Relationless)),
+                    [LanguageCode.English] = DesignerName(typeof(Relationless)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(The_Impermanent_Hunk)),
+                    [LanguageCode.English] = DesignerName(typeof(The_Impermanent_Hunk)),
                     
                 })
                 .WithUnlock(new TraitUnlock

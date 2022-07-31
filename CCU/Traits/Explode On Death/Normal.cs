@@ -19,12 +19,12 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Normal)),
+                    [LanguageCode.English] = DesignerName(typeof(Normal)),
                     
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DisplayName(typeof(Big)), DisplayName(typeof(Huge)) },
+                    Cancellations = { DesignerName(typeof(Big)), DesignerName(typeof(Huge)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

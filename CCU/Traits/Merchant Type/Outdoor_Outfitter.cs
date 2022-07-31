@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Outdoor_Outfitter)),
+                    [LanguageCode.English] = DesignerName(typeof(Outdoor_Outfitter)),
                     
                 })
                 .WithUnlock(new TraitUnlock

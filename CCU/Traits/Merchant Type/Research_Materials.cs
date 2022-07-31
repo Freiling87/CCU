@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Research_Materials)),
+                    [LanguageCode.English] = DesignerName(typeof(Research_Materials)),
                     
                 })
                 .WithUnlock(new TraitUnlock

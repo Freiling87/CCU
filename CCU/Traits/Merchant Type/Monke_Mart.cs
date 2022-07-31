@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Monke_Mart)),
+                    [LanguageCode.English] = DesignerName(typeof(Monke_Mart)),
                     
                 })
                 .WithUnlock(new TraitUnlock

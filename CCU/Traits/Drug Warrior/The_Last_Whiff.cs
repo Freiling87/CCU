@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(The_Last_Whiff)),
+                    [LanguageCode.English] = DesignerName(typeof(The_Last_Whiff)),
                     
                 })
                 .WithUnlock(new TraitUnlock

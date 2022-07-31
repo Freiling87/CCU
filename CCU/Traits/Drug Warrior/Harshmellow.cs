@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Harshmellow)),
+                    [LanguageCode.English] = DesignerName(typeof(Harshmellow)),
                     
                 })
                 .WithUnlock(new TraitUnlock

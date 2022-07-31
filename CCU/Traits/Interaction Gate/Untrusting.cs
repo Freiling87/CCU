@@ -22,7 +22,7 @@ namespace CCU.Traits.Interaction_Gate
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Untrusting)),
+                    [LanguageCode.English] = DesignerName(typeof(Untrusting)),
                     
                 })
                 .WithUnlock(new TraitUnlock

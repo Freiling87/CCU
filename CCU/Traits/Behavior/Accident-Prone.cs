@@ -21,7 +21,7 @@ namespace CCU.Traits.Behavior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(AccidentProne), "Accident-Prone"),
+                    [LanguageCode.English] = DesignerName(typeof(AccidentProne), "Accident-Prone"),
                     
                 })
                 .WithUnlock(new TraitUnlock

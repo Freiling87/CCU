@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Cop_Patrol), "Cop (Patrol)"),
+                    [LanguageCode.English] = DesignerName(typeof(Cop_Patrol), "Cop (Patrol)"),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Immortalish)),
+                    [LanguageCode.English] = DesignerName(typeof(Immortalish)),
                     
                 })
                 .WithUnlock(new TraitUnlock

@@ -15,7 +15,7 @@ namespace CCU.Traits.Facial_Hair
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DisplayName(typeof(Mustache)),
+					[LanguageCode.English] = DesignerName(typeof(Mustache)),
 					
 				})
 				.WithUnlock(new TraitUnlock

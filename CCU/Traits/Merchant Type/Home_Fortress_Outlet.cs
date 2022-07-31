@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Home_Fortress_Outlet)),
+                    [LanguageCode.English] = DesignerName(typeof(Home_Fortress_Outlet)),
                     
                 })
                 .WithUnlock(new TraitUnlock

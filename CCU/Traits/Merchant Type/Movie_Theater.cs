@@ -16,7 +16,7 @@ namespace CCU.Traits.Merchant_Type
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DisplayName(typeof(Movie_Theater)),
+                    [LanguageCode.English] = DesignerName(typeof(Movie_Theater)),
                     
                 })
                 .WithUnlock(new TraitUnlock
