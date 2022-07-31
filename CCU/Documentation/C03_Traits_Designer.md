@@ -1,4 +1,5 @@
 ﻿#		Traits
+An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has.
 ##			Behavior
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|

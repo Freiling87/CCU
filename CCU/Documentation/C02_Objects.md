@@ -6,7 +6,7 @@ You can now write and read text with several objects as if they were Signs. The 
 ##			Object Variables
 The full list of modifiable variables added to all Objects. **(V)** indicates the variable slot is already occupied by Vanilla content.
 
-|Object								|1						|2						|3						|Notes	|
+|Object								|Variable 1				|Variable 2				|Variable 3				|Notes	|
 |:----------------------------------|:---------------------:|:---------------------:|:---------------------:|:------|
 |Air Conditioner
 |Alarm Button
@@ -24,7 +24,7 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Boulder (Small)
 |Bush
 |Chair
-|Chest
+|Chest								|**(V)**				|**(V)**				|**(V)**				|
 |Clone Machine
 |Computer							|Investigation Text		|
 |Counter
@@ -46,7 +46,7 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Jukebox							|Investigation Text		|
 |Killer Plant
 |Lamp
-|Laser Emitter
+|Laser Emitter						|**(V)**				|
 |Loadout Machine
 |Manhole							|						|						|Container Item
 |Mine
@@ -57,7 +57,7 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Pool Table							|						|						|Container Item
 |Power Box
 |Refrigerator
-|Safe
+|Safe								|**(V)**				|**(V)**				|**(V)**				|
 |Satellite Dish
 |Security Camera
 |Sell-O-Matic

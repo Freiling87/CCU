@@ -447,7 +447,6 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="Documentation\C04_Traits_Player.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
     <None Include="Documentation\M01_Installation.md" />

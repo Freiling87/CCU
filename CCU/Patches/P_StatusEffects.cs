@@ -127,6 +127,7 @@ namespace CCU.Patches
 			argumentTypes: new Type[0] { })]
 		public static bool ExplodeAfterDeathChecks_Prefix(StatusEffects __instance)
         {
+			// Explode on Death is hardcoded into the agent.killerRobot variable. This is to filter that for custom agents.
 			if (__instance.agent.HasTrait<Seek_and_Destroy>() &&
 				!__instance.agent.HasTrait<T_ExplodeOnDeath>())
 				return false;

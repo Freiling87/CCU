@@ -10,6 +10,8 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	Bugs
 Except crickets, crickets are fine.
+###			C	Consider moving Container item to var 1
+Are Containervestigateables really worth all the trouble? If you can eliminate the overlap you don't need to deal with their many bugs.
 ###				C	Multiple Keys Allocated
 CL's conditions:
 	Custom Clerk w KeyHaver
@@ -21,7 +23,7 @@ Vanilla:
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
 ##			P	1.0.0 Changelog
-* Next to a name indicates a Player-accessible feature. This means the Mutator, Trait, whatever will be named normally (won't have all the [CCU] name prefixes).
+An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has.
 
 - **Feature additions**
   - Mutators
@@ -103,98 +105,12 @@ Will make easier to track bug reports
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
-##		CT	Custom Object variables
-###			C	Level Editor Field Allocation
-Make a spreadsheet. Cross-check which items will use which features to avoid overlap
-Field by Feature  x  Feature by Object Type  =  Object by Field, detecting conflicts
 ##			C	Documentation Update
 - Add Objects Link to main readme
-  - Full list of objects, with Vars1-4 as columns indicating what's added
-- Add Player Traits link to main readme
 - Manually verify full lists of features until scoping is more coherent.
 - Indicate Player Traits and the deal with those
-###			H	Ambusher
-Bathtub (Need sprite)
-Bush
-Elevator
-Gravestone
-Manhole
-Toilet
-Tube
-Well
-####			C	Cannibal
-####			C	Thief
-###			H	Fire Status
-Barbecue
-Flaming Barrel
-Fireplace
-####			C	Lit
-####			C	Unlit
-##		T	Followers
-###			C	Homesickness Disabled
-####			C	Set to Aligned
-###			T	Homesickness Mandatory
-Test
 ##		T	Test note
 20220725
-##		T	Explode On Death
-###			T	Custom Explosion System
-New
-###			T	Oil Spill
-Explosion.SetupExplosion ~373
-###			T	Do they explode when... exploded?
-Verify by kill w rocket
-###			T	Custom Explosion System
-New
-###			C	00 Refactor
-See other Explosion trait groups
-This category will become Explosion Type
-###			C	Monke Parasites
-Explodes into Monke (barrel style)
-###			C	Thoughts & Prayers
-Fireworks
-###			C	Oil Spill
-This doesn't exist but should follow water logic. Plus there are many other uses.
-###			C	Ooze
-Only did particle effect
-###			C	Ridiculous
-Only did particle effect, didn't end slow-mo, no kills.
-This is the Bomb disaster one, so it will need special attention.
-###			C	Slime
-Does particle effect and poisons
-Do the sprite later.
-###			C	Stomp
-Did particle effect
-Pushed body away
-Didn't stun anyone
-###			H	00 Does not explode when killed with Cyanide
-There's no vanilla precedent for this particular situation, so let's see what users prefer.
-###			H	00 Explodes when Arrested
-Not too concerned, considering this is vanilla for Slaves.
-###			√	Big
-Complete
-###			√	Dizzy
-Complete
-###			√	EMP
-Complete
-###			√	Firebomb
-Complete
-###			√	Huge
-Complete
-###			√	Noise Only
-Complete
-###			√	Normal
-Complete
-###			√	Warp
-Complete
-###			√	Water
-Complete
-###			√	Cop Bot not Exploding
-Complete
-###			√	Certain explosion types don't delete body
-P_StatusEffects_ExplodeBody.DisappearBody
-###			√	Gib body
-P_StatusEffects_ExplodeBody.GibItAShot
 ##		CT	Passive
 ###			C	Blinker
 Blink to a random nearby spot when hit
@@ -660,6 +576,64 @@ Effect triggers on end of threat (Regenerate, smoke, invisible)
 Effect gains 1s of duration on taking damage
 ###			C	Take the Thrill Kill Pill
 Effect gains 1s of duration on dealing damage, extra on kill
+##		C	Explode On Death
+System still works after minor refactor.
+###			H	00 Doesn't trigger when exploded
+Rocket launcher kill just gibbed them
+This is vanilla behavior (See StatusEffects.ExplodeAfterDeathChecks). Only fix if there's an uproar.
+###			H	Oil Spill
+Shelved
+Explosion.SetupExplosion ~373
+DW:
+	[Info   : Unity Log] ADDRELHATE: Custom (1134) (Agent) - Playerr (Agent)
+	[Info   : Unity Log] SpawnExplosion -1
+		No error message, but that's not a good thing
+###			C	Monke Parasites
+Explodes into Monke (barrel style)
+###			C	Thoughts & Prayers
+Fireworks
+###			C	Oil Spill
+This doesn't exist but should follow water logic. Plus there are many other uses.
+###			C	Ooze
+Only did particle effect
+###			C	Ridiculous
+Only did particle effect, didn't end slow-mo, no kills.
+This is the Bomb disaster one, so it will need special attention.
+###			C	Slime
+Does particle effect and poisons
+Do the sprite later.
+###			C	Stomp
+Did particle effect
+Pushed body away
+Didn't stun anyone
+###			H	00 Does not explode when killed with Cyanide
+There's no vanilla precedent for this particular situation, so let's see what users prefer.
+###			H	00 Explodes when Arrested
+Not too concerned, considering this is vanilla for Slaves.
+###			√	Big
+Complete
+###			√	Dizzy
+Complete
+###			√	EMP
+Complete
+###			√	Firebomb
+Complete
+###			√	Huge
+Complete
+###			√	Noise Only
+Complete
+###			√	Normal
+Complete
+###			√	Warp
+Complete
+###			√	Water
+Complete
+###			√	Cop Bot not Exploding
+Complete
+###			√	Certain explosion types don't delete body
+P_StatusEffects_ExplodeBody.DisappearBody
+###			√	Gib body
+P_StatusEffects_ExplodeBody.GibItAShot
 ##		C	Explosion Timer
 Vanilla for EOD is 1.5 seconds
 ###			C	Cinematic Fuse
@@ -1400,9 +1374,7 @@ Complete
 Complete
 ###			√	Slayable
 Complete
-###			√	Specific Species
-Complete
-###			√	Suspicious Suspecter
+###			√	Suspecter
 Complete
 #		C	Mutators
 
@@ -1464,6 +1436,11 @@ Gate level access
 ##		C	Disasters
 ###			C	Random Disaster
 Random Disasters and/or Disasters Every Level aren't offered in the editor
+##		√	Followers
+###			√	Homesickness Disabled
+Complete
+###			√	Homesickness Mandatory
+Complete
 ##		C	Gameplay
 ###			C	No Funny Business
 For town levels. Ensures no one will be killed.
@@ -1500,6 +1477,23 @@ Main quest rewards are multiplied by 10
 #		C	Item Groups
 wut
 #		CT	Objects
+##			H	Ambusher
+Bathtub (Need sprite)
+Bush
+Elevator
+Gravestone
+Manhole
+Toilet
+Tube
+Well
+###			C	Cannibal
+###			C	Thief
+##			H	Fire Status
+Barbecue
+Flaming Barrel
+Fireplace
+###			C	Lit
+###			C	Unlit
 ##		C	Containers
 ###			H	Containervestigateables 
 Disabling the overlap resolved all the rest of the bugs here. 
@@ -1637,9 +1631,12 @@ Doing entries for each type would be prohibitive, but if one ExtraVarString look
 ##			√	Fast or Rollerskates won't fall in Hole
 ###				√	Fix
 Vanilla bug
+##				H	Suicide doesn't gib
+###				H	Fix
+Hook Regeneration
 ##			H	Relationships not Loaded
 ###				H	Fix
-Everything is running, but the Agent Hooks don't exist when running from a Save. Abbysssal said this is out of scope, so this bug is probably here to stay for the time being.
+Hook Regeneration
 #		√	Trait Archive
 ##			√	Cost Scale
 ###				√	Less

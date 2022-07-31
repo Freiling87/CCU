@@ -5,22 +5,22 @@ using System.Linq;
 
 namespace CCU.Traits.Explode_On_Death
 {
-    public class OilSpill : T_ExplodeOnDeath
+    public class Oil_Spill : T_ExplodeOnDeath
     {
         public override string ExplosionType => CExplosionType.OilSpill;
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Ooze>()
+            PostProcess = RogueLibs.CreateCustomTrait<Oil_Spill>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("On death, this character splashes flammable oil everywhere. "),
+                    [LanguageCode.English] = String.Format("On death, this character splashes oil everywhere. Don't worry, it's inflammable."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Ooze)),
+                    [LanguageCode.English] = DesignerName(typeof(Oil_Spill)),
                     
                 })
                 .WithUnlock(new TraitUnlock
