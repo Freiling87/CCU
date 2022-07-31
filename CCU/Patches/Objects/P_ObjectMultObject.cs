@@ -18,22 +18,20 @@ namespace CCU.Patches.Objects
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(ObjectMultObject.OnDeserialize))]
         public static void OnDeserialize_Postfix(ObjectMultObject __instance)
         {
-            logger.LogDebug("OnDeserialize_Postfix: " + __instance.objectName);
-
+            logger.LogDebug("OnDeserialize_Postfix");
             MethodInfo getName = AccessTools.DeclaredMethod(typeof(ObjectMultObject), "GetName");
 
-            logger.LogDebug("Chest1: " + __instance.chestItem1);
+            logger.LogDebug("C1");
             try { getName.GetMethodWithoutOverrides<Action<string, string>>(__instance).Invoke(__instance.chestItem1, "Item"); }
             catch { __instance.chestItem1 = ""; }
 
-            logger.LogDebug("Chest2: " + __instance.chestItem2);
+            logger.LogDebug("C2");
             try { getName.GetMethodWithoutOverrides<Action<string, string>>(__instance).Invoke(__instance.chestItem2, "Item"); }
             catch { __instance.chestItem2 = ""; }
 
-            logger.LogDebug("Chest3: " + __instance.chestItem3);
+            logger.LogDebug("C3");
             try { getName.GetMethodWithoutOverrides<Action<string, string>>(__instance).Invoke(__instance.chestItem3, "Item"); }
             catch { __instance.chestItem3 = ""; }
-
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Reflection.Emit;
 using UnityEngine;
 using System;
 using CCU.Systems.Containers;
+using CCU.Patches.Inventory;
 
 namespace CCU.Patches.Objects
 {
@@ -156,10 +157,10 @@ namespace CCU.Patches.Objects
 
 			return true;
         }
-        #endregion
-
-        // [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
-        public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
+		#endregion
+		
+		// [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
+		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
 		{
 			if (__instance.CompareTag("Agent"))
 			{

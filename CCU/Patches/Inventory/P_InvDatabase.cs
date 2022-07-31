@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Systems.Containers;
+using CCU.Systems.Investigateables;
 using CCU.Traits.Loadout;
 using CCU.Traits.Merchant_Type;
 using HarmonyLib;
@@ -202,26 +203,47 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
+		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS3(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo extraVarString3 = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.extraVarString3));
+			MethodInfo magicVarString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.magicVarString));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 5,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, extraVarString3),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, magicVarString),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		// Returns a false negative if Note detected
+		public static string magicVarString(string vanilla) =>
+			Investigateables.IsInvestigationString(vanilla)
+				? ""
+				: vanilla;
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
 		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
         {
+			__result = true;
+
 			for (int i = 0; i < __instance.InvItemList.Count; i++)
             {
 				string name = __instance.InvItemList[i].invItemName;
 
-				if (name != null && name != "")
-				{
-					try
-					{
-						GC.nameDB.GetName(name, "Item");
-						__result = false;
-						return false;
-					}
-					catch { }
-				}
+				if (name != null && name != "" && !Investigateables.IsInvestigationString(name))
+					__result = false;
 			}
 
-			__result = true;
 			return false;
 		}
 
@@ -230,7 +252,7 @@ namespace CCU.Patches.Inventory
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo slots = AccessTools.DeclaredField(typeof(InvInterface), nameof(InvInterface.Slots));
-			MethodInfo slotsFiltered = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.FilteredSlots));
+			MethodInfo slotsFiltered = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.FilteredSlots));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -251,9 +273,5 @@ namespace CCU.Patches.Inventory
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		private static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
-			invDatabase.agent.mainGUI.invInterface.Slots.Where(islot => !GC.nameDB.GetName(islot.item.invItemName, "Item").Contains("E_")).ToList();
-
 	}
 }

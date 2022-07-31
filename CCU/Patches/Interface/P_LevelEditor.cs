@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Challenges;
+using CCU.Systems.Containers;
 using CCU.Systems.CustomGoals;
 using CCU.Systems.Investigateables;
 using HarmonyLib;
@@ -10,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace CCU.Patches.Interface
 {
@@ -69,8 +72,156 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
-        #region Readables
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
+		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
+        {
+			if (__instance.currentInterface == "Objects" &&
+					Investigateables.InvestigateableObjects.Contains(___tileNameObject.text) &&
+					!Investigateables.IsInvestigationString(___extraVarStringObject.text))
+				___extraVarStringObject.text = Investigateables.ExtraVarStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
+        }
+
+		#region Containers
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarString3List), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarString3List_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"ChestBasic" if readable, or real name if not
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedScrollingMenuButton), new[] { typeof(ButtonHelper) })]
+		public static IEnumerable<CodeInstruction> PressedScrollingMenuButton_OnChoice_ShowCustomInterface(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo deactivateLoadMenu = AccessTools.DeclaredMethod(typeof(LevelEditor), nameof(LevelEditor.DeactivateLoadMenu));
+			FieldInfo extraVarString3Object = AccessTools.DeclaredField(typeof(LevelEditor), "extraVarString3Object");
+			MethodInfo loadSpecialInterfaces = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
+			FieldInfo scrollingButtonType = AccessTools.DeclaredField(typeof(ButtonHelper), nameof(ButtonHelper.scrollingButtonType));
+			MethodInfo setActive = AccessTools.DeclaredMethod(typeof(GameObject), nameof(GameObject.SetActive));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldc_I4_0),
+					new CodeInstruction(OpCodes.Callvirt, setActive),
+                },
+                postfixInstructionSequence: new List<CodeInstruction>
+                {
+                    new CodeInstruction(OpCodes.Ldarg_0),
+                    new CodeInstruction(OpCodes.Call, deactivateLoadMenu),
+                },
+                insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldarg_1),
+					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
+					new CodeInstruction(OpCodes.Ldstr, ""),
+					new CodeInstruction(OpCodes.Call, loadSpecialInterfaces),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
+		private static IEnumerable<CodeInstruction> UpdateInterface_OnSelect_ShowCustomInterface(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo oneOfEachSceneObject = AccessTools.DeclaredField(typeof(LevelEditor), "oneOfEachSceneObject");
+			MethodInfo loadSpecialInterface = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld, oneOfEachSceneObject),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldloc_S, 34),					//	text10 (item name)
+					new CodeInstruction(OpCodes.Ldloc_S, 43),					//	tileNameText2
+					new CodeInstruction(OpCodes.Call, loadSpecialInterface),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName = "")
+        {
+			Core.LogMethodCall();
+			logger.LogDebug("ObjectName: " + objectName);
+			logger.LogDebug("itemName: " + itemName ?? "");
+
+			if (Containers.ContainerObjects.Contains(objectName))
+            {
+				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
+				InputField extraVarString3Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString3Object").GetValue(levelEditor);
+
+				extraVarObject.gameObject.SetActive(false);
+				extraVarString3Object.gameObject.SetActive(true);
+				levelEditor.SetNameText(extraVarString3Object, itemName, "Item");
+			}
+		}
+        #endregion
+        #region Investigateables
+        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.OpenLongDescription))]
+		public static IEnumerable<CodeInstruction> OpenLongDescription_RemoveSpecialStrings(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo extraVarStringObject = AccessTools.DeclaredField(typeof(LevelEditor), "extraVarStringObject");
+			MethodInfo getText = AccessTools.DeclaredMethod(typeof(InputField), "get_text");
+			MethodInfo LongDescriptionWithoutSpecialStrings = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.LongDescriptionWithoutSpecialStrings));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, extraVarStringObject),
+					new CodeInstruction(OpCodes.Callvirt, getText),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, LongDescriptionWithoutSpecialStrings),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		//TODO: Move this to a general PlayfieldObject Extension System class
+		public static string LongDescriptionWithoutSpecialStrings(string vanilla)
+        {
+			Core.LogMethodCall();
+			logger.LogDebug("vanilla: " + vanilla);
+
+			if (vanilla is null || vanilla == "")
+				return vanilla;
+
+			if (vanilla.Contains(Investigateables.ExtraVarStringPrefix))
+				vanilla = vanilla.Replace(Investigateables.ExtraVarStringPrefix + Environment.NewLine, "");
+
+			return vanilla;
+        }
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
 		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EditTextBox(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -144,7 +295,6 @@ namespace CCU.Patches.Interface
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
 		#endregion
 	}
 }

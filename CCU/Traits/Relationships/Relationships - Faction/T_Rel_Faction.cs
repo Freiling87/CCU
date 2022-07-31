@@ -67,10 +67,6 @@ namespace CCU.Traits.Rel_Faction
                 //  TryGet returns only a bool. The out is assigning the actual dict value to self/otherWeight.
                 float selfWeight = alignmentWeights.TryGetValue(self, out selfWeight) ? selfWeight : 0;
                 float otherWeight = alignmentWeights.TryGetValue(other, out otherWeight) ? otherWeight : 0;
-
-                logger.LogDebug("selfWeight: " + selfWeight);
-                logger.LogDebug("otherWeight: " + otherWeight);
-
                 return selfWeight * otherWeight;
             }
 
@@ -78,8 +74,6 @@ namespace CCU.Traits.Rel_Faction
             {
                 float alignmentStrength = Mathf.Clamp01(Mathf.Abs(agreement));
                 Alignment[] alignmentsOrderedAscending;
-
-                logger.LogDebug("agreement: " + agreement);
 
                 if (agreement > 0)
                     alignmentsOrderedAscending = new[] 
@@ -99,28 +93,30 @@ namespace CCU.Traits.Rel_Faction
 
                 int alignmentIndex = Mathf.RoundToInt((alignmentsOrderedAscending.Length - 1) * alignmentStrength);
 
-                logger.LogDebug("result: " + alignmentsOrderedAscending[alignmentIndex]);
-
                 return alignmentsOrderedAscending[alignmentIndex];
             }
 
             public static Alignment GetAverageAlignment(Agent thisAgent, Agent otherAgent)
             {
-                logger.LogDebug("thisAgent: " + thisAgent.agentRealName);
-                logger.LogDebug("otherAgent: " + otherAgent.agentRealName);
+                try
+                {
+                    float averageAgreementStrength =
+                        Enumerable.Range(1, 4)
+                        .Select(faction => new
+                        {
+                            thisAlignment = GetFactionAlignment(thisAgent, faction),
+                            otherAlignment = GetFactionAlignment(otherAgent, faction)
+                        })
+                        .Where(alignments => alignments.thisAlignment != Alignment.Neutral && alignments.otherAlignment != Alignment.Neutral) // May be 0
+                        .Select(alignments => GetAgreementStrength(alignments.thisAlignment.Value, alignments.otherAlignment.Value))
+                        .Average();
 
-                float averageAgreementStrength = Enumerable.Range(1, 4)
-                    .Select(faction => new {
-                        thisAlignment = GetFactionAlignment(thisAgent, faction),
-                        otherAlignment = GetFactionAlignment(otherAgent, faction)
-                    })
-                    .Where(alignments => alignments.thisAlignment != Alignment.Neutral && alignments.otherAlignment != Alignment.Neutral)
-                    .Select(alignments => GetAgreementStrength(alignments.thisAlignment.Value, alignments.otherAlignment.Value))
-                    .Average();
-
-                logger.LogDebug("result: " + GetAlignmentFromAgreement(averageAgreementStrength));
-
-                return GetAlignmentFromAgreement(averageAgreementStrength);
+                    return GetAlignmentFromAgreement(averageAgreementStrength);
+                }
+                catch
+                {
+                    return Alignment.Neutral;
+                }
             }
         }
     }

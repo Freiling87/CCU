@@ -15,19 +15,17 @@ namespace CCU.Systems.Containers
 			vObject.Barbecue,
 			vObject.Bathtub,
 			vObject.Bed,
-			vObject.Crate,
+			// vObject.Crate,	Likely has special rules that will need attention
 			vObject.Desk,
 			vObject.Fireplace,
-			vObject.FlameGrate,
 			vObject.FlamingBarrel,
-			vObject.GasVent,
+			vObject.GasVent,	// Require screwdriver
 			vObject.Manhole,
 			vObject.Plant,
-			vObject.Podium,
+			// vObject.Podium,	Investigateable
 			vObject.PoolTable,
 			vObject.Shelf,
-			vObject.SlimeBarrel,
-			vObject.Speaker,
+			//vObject.SlimeBarrel,	Poison looter
 			vObject.Stove,
 			vObject.Toilet,
 			vObject.Tube,
@@ -76,10 +74,11 @@ namespace CCU.Systems.Containers
 						(h.Object is Tube tube && tube.functional))
 						return;
 
-					h.AddImplicitButton(CButtonText.OpenContainer, m =>
-					{
-						m.Object.ShowChest();
-					});
+					if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
+						h.AddImplicitButton(CButtonText.OpenContainer, m =>
+						{
+							m.Object.ShowChest();
+						});
 				}
 			});
 		}

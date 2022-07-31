@@ -10,6 +10,16 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Multiple Keys Allocated
+CL's conditions:
+	Custom Clerk w KeyHaver
+	Custom Mannequin
+	Goon
+Vanilla:
+	Allocate to a non-goon preferred
+	Ignores Important
+###				C	Add latest commit ID to dll filename
+Will make easier to track bug reports
 ##			P	1.0.0 Changelog
 - **Feature additions**
   - Mutators
@@ -17,6 +27,7 @@ Except crickets, crickets are fine.
       - Homesickness Disabled
       - Homesickness Mandatory
   - Traits
+    - Asterisk indicates Player Traits. These will be accessible to players in trait menus, and will be named like normal (non-CCU) traits. 
     - Behavior
       - Grab Alcohol
       - Grab Everything
@@ -41,7 +52,7 @@ Except crickets, crickets are fine.
       - Ice Shards
       - Leaves
       - Meat Chunks
-    - Language: For use with or without Vocally Challenged. Characters are assumed to speak English (Sorry, it's canon) if they don't have Vocally challenged. Part of a language system that may be extended in the future.
+    - Language*: For use with or without Vocally Challenged. Characters are assumed to speak English (Sorry, it's canon) if they don't have Vocally challenged. Part of a language system that may be extended in the future.
       - ErSdtAdt Speaker
       - Foreign Speaker
       - Lang Zonbi Speaker
@@ -91,34 +102,45 @@ Except crickets, crickets are fine.
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
 ##		CT	Custom Object variables
-###			C	Containers
-####			T	Use Agent item slots to keep stringvars available
-But get more familiar with how the interface actually presents before making a choice here
-####			H	Lockable
+###			C	Level Editor Field Allocation
+Make a spreadsheet. Cross-check which items will use which features to avoid overlap
+Field by Feature  x  Feature by Object Type  =  Object by Field, detecting conflicts
+##		C	Containers
+###			H	Containervestigateables 
+Disabling the overlap resolved all the rest of the bugs here. 
+####			C	Can't remove items
+Containervestigateables, once given an item, can't have it removed
+####			C	Cross-Contamination
+Investigateable text is displayed erroneously when selecting a containervestigateable after any investigateable. It either copies the text over or displays the old stuff.
+Next attempt:
+	LevelEditor.
+		CloseLongDescription
+		OpenLongDescription
+###			C	EVS1
+####			C	Keycoded
+This will be my term for the Safe's lock, since it's hackable and uses a combo.
+####			H	Locked
 Only Desk seems eligible, but that's enough to go for it. Use stringvar1 or something as a Locked variable
 Maybe generate a Desk Key item, specific to the Desk
-####			T	Note Item
-P_ObjectMultObject.OnDeserialize
-
-Also try:
-	WorldSpaceGIU.ShowChest
-		interactingAgent.mainGUI.invInterface.chestDatabase = invDatabase;
-			We should be able to filter that somehow
-#####				T	InvDatabase.IsEmpty
-P_InvDatabase.IsEmtpy_Replacement
-#####				T	InvDatabase.TakeAll 
-P_InvDatabase.TakeAll_ExcludeNotes
-#####				C	InvInterface.UpdateInvInterface
-			using (List<InvItem>.Enumerator enumerator = this.chestDatabase.InvItemList.GetEnumerator())
-Filter InvItemList here. Inject a call to a custom method.
-#####				C	InvInterface.Slots
-This is a List<InvItem> and I think what we need to filter
-####			C	Note drops as Water Gun when object destroyed
-####			√	Open Container
-####			√	Drop Contents when destroyed
-####			√	Show Editor Controls
-####			√	Load/Save Editor Input
-###			C	Readables
+####			C	Stashed
+Stash is inaccessible (except with Object destruction) until Stash Hint is found. 
+It will have almost everything in common with Key, so it should be easy research.
+####			C	Stashed + Keycoded
+If you keep it modular, this should be easy
+####			C	Stashed + Keycoded + Locked
+Why the fuck not, let's go nuts
+####			C	Stashed + Locked
+If you keep it modular, this should be easy
+###			C	EVS2
+Durability?
+###			C	EVS3
+Use this slot for item storage.
+1 Slot is limiting, but if you can't tell a story with 1 item then you need an editor.
+###			C	Investigateables
+####			C	French Vanilla Strings
+Default strings per object type
+#####				C	Gravestone
+Yeah Gravestone jokes are soooo funny and fresh
 ####			C	One-Time Read
 For stuff that might not apply later, like peeking into windows
 ####			C	Movie Screen
@@ -138,8 +160,27 @@ P_BasicObject.Spawn
 Readables.Setup
 ##			C	Documentation Update
 - Add Objects Link to main readme
+  - Full list of objects, with Vars1-4 as columns indicating what's added
 - Add Player Traits link to main readme
 - Manually verify full lists of features until scoping is more coherent.
+- Indicate Player Traits and the deal with those
+###			H	Ambusher
+Bathtub (Need sprite)
+Bush
+Elevator
+Gravestone
+Manhole
+Toilet
+Tube
+Well
+####			C	Cannibal
+####			C	Thief
+###			H	Fire Status
+Barbecue
+Flaming Barrel
+Fireplace
+####			C	Lit
+####			C	Unlit
 ##		T	Followers
 ###			C	Homesickness Disabled
 ####			C	Set to Aligned
@@ -147,10 +188,6 @@ Readables.Setup
 Test
 ##		T	Test note
 20220725
-##		C	Container/Ivestigateable interaction
-InvDatabase.FillChest ~923 uses component.extraVarString, check if Name found rather than just null
-Attempt: P_ObjectMultObject.OnDeserialize_Postfix
-If DW, use magic str for ExtraVarStrings lower down in same method
 ##		T	Explode On Death
 ###			T	Custom Explosion System
 New
@@ -450,6 +487,11 @@ Keyring stores all keys in one slot
 Variable field in editor, maybe with some basic setting variations (destructible, Investigateable, etc.)
 Locks access to the object as a Chest unless the player holds the matching Stash Hint.
 You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
+###				C	Item: Stash Hint
+Generates on NPC inventory or in a container in their chunk
+Acts like a key, but when activated the agent will read text out loud that's specific to a Container type
+This will be EXTREMELY annoying with Gravestones, which is kinda funny
+
 ##			C	Sugar System
 Merchant Type: Sugar Only
 Buyer Type: Sugar Only
@@ -482,6 +524,7 @@ Combine w/ Accent Effect traits
 ##		C	Accent Effect
 Apply Accent Color trait to target effect
 ###			C	Agent Glow
+Killer Robot has this
 ###			C	Nametag (Space/hover)
 ###			C	Vision Beam
 ##		C	Agent Group
@@ -497,7 +540,7 @@ New
 ##		C	Appearance
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more.
+  - Should be a simple fix since it's doing less rather than more. 
 ###			C	Facial Hair
 ####			C	Trait names changed
 Changed trait names to not overlap with vanilla names. 

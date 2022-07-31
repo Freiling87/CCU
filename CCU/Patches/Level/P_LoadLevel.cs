@@ -36,7 +36,8 @@ namespace CCU.Patches.Level
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
 			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "loadStuff2", new Type[] { }));
 
-		[HarmonyTranspiler, UsedImplicitly]
+		// This is what causes the Papparazzo bug. Feature is out of scope for now anyway.
+		//[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetNextLevel(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

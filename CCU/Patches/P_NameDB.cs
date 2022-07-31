@@ -1,5 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
+using CCU.Systems.Containers;
+using CCU.Systems.Investigateables;
 using CCU.Traits;
 using HarmonyLib;
 using System;
@@ -11,16 +13,23 @@ using System.Threading.Tasks;
 namespace CCU.Patches
 {
 	[HarmonyPatch(declaringType: typeof(NameDB))]
-	public static class P_CharacterCreation
+	public static class P_NameDB
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(NameDB.GetName))]
-		public static bool GetName_Prefix(ref string myName, string type)
+		public static bool GetName_Prefix(ref string myName, string type, ref string __result)
 		{
 			if (type == "StatusEffect" && Legacy.TraitConversions.ContainsKey(myName))
 				myName = T_CCU.DisplayName(Legacy.TraitConversions[myName]);
+
+			if (type == "Item")
+				if (Investigateables.IsInvestigationString(myName))
+				{
+					__result = myName;
+					return false;
+				}
 
 			return true;
         }

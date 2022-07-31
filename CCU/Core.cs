@@ -742,7 +742,7 @@ namespace CCU
 				Manhole = "Manhole",
 				Mine = "Mine",
 				MovieScreen = "MovieScreen",
-				PawnShopMachine = "PawnShopMachine",
+				SellOMatic = "PawnShopMachine",
 				Plant = "Plant",
 				Podium = "Podium",
 				PoliceBox = "PoliceBox",
