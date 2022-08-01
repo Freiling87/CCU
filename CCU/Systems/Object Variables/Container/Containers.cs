@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
 using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 
 namespace CCU.Systems.Containers
@@ -34,6 +35,24 @@ namespace CCU.Systems.Containers
 			vObject.Well,
 		};
 
+		public enum ContainerValues
+        {
+			Hidden,
+			// Desk is only lockable of the above. These are mostly pointless.
+			//Hidden_Locked,
+			//Hidden_Locked_Keycoded,
+			//Hidden_Keycoded,
+			//Locked,
+			//Locked_Keycoded,
+			//Keycoded,
+			None
+        }
+
+		// TODO: verify which data field you're using for this
+		public static bool IsStash(ObjectReal objectReal) =>
+			throw new NotImplementedException();
+			//objectReal.extraVarString.Contains("Hidden");
+
 		public static string MagicObjectName(string originalName)
 		{
 			if (ContainerObjects.Contains(originalName))
@@ -48,6 +67,13 @@ namespace CCU.Systems.Containers
 			string t = NameTypes.Interface;
 
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo("Search"));
+
+			t = NameTypes.Dialogue;
+			RogueLibs.CreateCustomName("StashHint_Barbecue_01", t, new CustomNameInfo("If I don't get back into town for Christmas, don't worry. You won't end up with a lump of coal, but you'll probably have to dig through some to find it. Hope you were good this year!"));
+			RogueLibs.CreateCustomName("StashHint_Barbecue_02", t, new CustomNameInfo("The cops ransacked the place again this week, and they looked hungry for evidence. Well, unless they're hungry for some pork ribs they're not gonna find what they're looking for."));
+			RogueLibs.CreateCustomName("StashHint_Bathtub_01", t, new CustomNameInfo("That thing we stole... it's too hot to sell yet, even to a fence. Let's stay out of prison for now. I hid it somewhere where it's safe to drop the soap."));
+			//etc., aim for 3 each.
+			// Dialogue is spoken on item pickup, shown in an Investigation window if item activated
 
 			RogueInteractions.CreateProvider(h => 
 			{

@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Systems.Containers;
 using CCU.Systems.CustomGoals;
 using CCU.Traits.Loadout;
 using HarmonyLib;
@@ -182,6 +183,28 @@ namespace CCU.Patches.Level
 						safeCombo.chunks.Add(agent.startingChunk);
 						safeCombo.sectors.Add(agent.startingChunk);
 						safeCombo.contents.Add(agent.startingChunkRealDescription);
+						agent.oma.hasKey = true;
+					}
+				}
+
+				if (agent.HasTrait<Chunk_Stash_Hint>())
+                {
+					List<ObjectReal> validStashes = GC.objectRealList.Where(or => Containers.IsStash(or)).ToList();
+
+					if (validStashes.Count > 0)
+					{
+						foreach (Door door in validStashes)
+							door.distributedKey = agent;
+
+						InvItem key = agent.agentInvDatabase.AddItem(vItem.Key, 1);
+						key.specificChunk = agent.startingChunk;
+						key.specificSector = agent.startingSector;
+						key.chunks.Add(agent.startingChunk);
+						key.sectors.Add(agent.startingChunk);
+						key.contents.Add(
+							agent.startingChunkRealDescription == VChunkType.Generic
+								? VChunkType.GuardPostSeeWarning
+								: agent.startingChunkRealDescription);
 						agent.oma.hasKey = true;
 					}
 				}

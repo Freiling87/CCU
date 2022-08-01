@@ -8,6 +8,8 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
+##			C	Move Container var to Var1
+I don't think we'll need to re-open Containervestigateables.
 ##			P	Bugs
 Except crickets, crickets are fine.
 ###			C	Consider moving Container item to var 1
@@ -275,6 +277,7 @@ Desk is a lockable container.
 Keyring stores all keys in one slot
 ##			H	Stash System
 On hold: Complete the Key/SafeCombo aspect of Containers first.
+Locked + Keycoded really only apply to Desk. They might easily be left out of this system.
 Variable field in editor, maybe with some basic setting variations (destructible, Investigateable, etc.)
 Locks access to the object as a Chest unless the player holds the matching Stash Hint.
 You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
