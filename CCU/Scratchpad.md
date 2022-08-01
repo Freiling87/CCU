@@ -19,6 +19,77 @@ P_LoadLevel_SetupMore4_2.SetupMore4_2_GeneralLoadouts
 P_InvDatabase.FillAgent_LoadoutBadge
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
+##		CT	Passive
+###			T	Immovable
+Test
+###			T	Blinker*
+Blink to a random nearby spot when hit
+This is valid for player characters, so might need to be another mod
+###			T	Concealed Carrier
+Hides weapon when out of combat.
+###			C	Explodevice Eligible
+agent.canExplosiveStimulate
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
+###			C	Immobile
+Can't move (for turret types)
+###			C	Mute Dialogue
+Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
+###			C	Oblivious
+Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
+But will enter combat if their teammates do.
+###			C	Psychic Shield
+Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			C	Reviver
+If hired and surviving, will revive the player once
+###			C	Spidey-Sensitive
+When alerted, immediately enters combat with perp (no search necessary)
+###			C	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
+###			C	Stinky Aura
+Werewolf A-were-ness works on this character
+###			C	Supernatural
+Ghost Gibber works
+###			C	Tattletale
+Reports ALL crimes to alarm button
+###			C	Unappetizing
+Can't be bitten/cannibalized
+###			C	Translucent
+Ghost visual effect
+###			C	Unchallenging
+No XP for neutralization
+###			C	Vision Beams (Cop Bot)
+DW
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			√	Berserk (Declined)
+Rel General - Hostile to All
+###			√	Crusty
+Complete
+###			√	Extortable
+Complete
+###			C!	Guilty
+####			C!	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+###			√	Indestructible
+Complete
+###			√	Innocent
+Complete
+###			√	Not Vincible
+Complete
+###			√	Possessed
+Complete
+###			√	Status Effect Immune
+Complete
+###			√	Z-Infected
+Complete
 ##			P	1.0.0 Changelog
 An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has.
 
@@ -105,8 +176,6 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
-##			T	Immovable (Passive)
-Test
 ##			T	Scene Setters
 ###				T	Arrested
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
@@ -1157,75 +1226,6 @@ Allows to sell shitty items in junk dealer, for instance
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
-##		CT	Passive
-###			C	Blinker
-Blink to a random nearby spot when hit
-This is valid for player characters, so might need to be another mod
-###			C	Concealed Carrier
-Hides weapon until drawn
-###			C	Explodevice Eligible
-agent.canExplosiveStimulate
-###			C	Holographic
-Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Immobile
-Can't move (for turret types)
-###			C	Mute Dialogue
-Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
-###			C	Oblivious
-Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
-But will enter combat if their teammates do.
-###			C	Psychic Shield
-Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
-###			C	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			C	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			C	Reviver
-If hired and surviving, will revive the player once
-###			C	Spidey-Sensitive
-When alerted, immediately enters combat with perp (no search necessary)
-###			C	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-###			C	Stinky Aura
-Werewolf A-were-ness works on this character
-###			C	Supernatural
-Ghost Gibber works
-###			C	Tattletale
-Reports ALL crimes to alarm button
-###			C	Unappetizing
-Can't be bitten/cannibalized
-###			C	Translucent
-Ghost visual effect
-###			C	Unchallenging
-No XP for neutralization
-###			C	Vision Beams (Cop Bot)
-DW
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			√	Berserk (Declined)
-Rel General - Hostile to All
-###			√	Crusty
-Complete
-###			√	Extortable
-Complete
-###			C!	Guilty
-####			C!	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
-###			√	Indestructible
-Complete
-###			√	Innocent
-Complete
-###			√	Not Vincible
-Complete
-###			√	Possessed
-Complete
-###			√	Status Effect Immune
-Complete
-###			√	Z-Infected
-Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
 Put custom methods in faction traits.

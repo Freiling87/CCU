@@ -3,7 +3,6 @@ using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Localization;
 using CCU.Traits.Behavior;
-using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Gib_Type;
@@ -18,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using UnityEngine;
 using UnityEngine.Networking;
 using static CCU.Traits.Gib_Type.T_GibType;
 
@@ -174,6 +174,35 @@ namespace CCU.Patches
 			P_StatusEffects_ExplodeBody.CustomGib(__instance);
 			return false;
 		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.UseQuickEscapeTeleporter))]
+		public static bool UseQuickEscapeTeleporter_Blinker(bool isEndOfFrame, StatusEffects __instance)
+        {
+			if (__instance.agent.HasTrait<Blinker>())
+            {
+				Agent agent = __instance.agent;
+				Vector3 targetLoc = Vector3.zero;
+				int attempts = 0;
+
+				do
+				{
+					targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
+					attempts++;
+				} 
+				while (Vector2.Distance(targetLoc, agent.tr.position) > 5f);
+
+				if (targetLoc == Vector3.zero)
+					targetLoc = agent.tr.position;
+
+				agent.Teleport(targetLoc, false, true);
+				agent.agentCamera.fastLerpTime = 1f;
+				GC.audioHandler.Play(agent, VanillaAudio.Spawn);
+
+				return false;
+			}
+
+			return true;
+        }
 	}
 
 	[HarmonyPatch(declaringType: typeof(StatusEffects))]

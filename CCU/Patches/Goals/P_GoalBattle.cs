@@ -3,6 +3,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Patches.Agents;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior_Modifier;
+using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -112,6 +113,13 @@ namespace CCU.Patches.Goals
 		
 			GC.spawnerMain.SpawnStatusText(agent, "UseItem", vItem.Syringe, "Item");
 			GC.audioHandler.Play(agent, VanillaAudio.UseSyringe);
+        }
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalBattle.Terminate))]
+		private static void Terminate_Postfix(Agent ___agent)
+        {
+			if (___agent.HasTrait<Concealed_Carrier>() && ___agent.gun.visibleGun != null)
+				___agent.gun.HideGun();
         }
 	}
 }

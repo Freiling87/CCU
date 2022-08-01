@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.Combat;
+using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -11,6 +12,18 @@ namespace CCU.Patches.Goals
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalCombatEngage.Activate))]
+        private static void Activate_Postfix(Agent ___agent)
+        {
+            if (___agent.HasTrait<Concealed_Carrier>())
+            {
+                InvItem equippedWeapon = ___agent.inventory.equippedWeapon;
+
+                if (!(equippedWeapon is null))
+                    ___agent.gun.ShowGun(equippedWeapon);
+            }
+        }
 
         /// <summary>
         /// Lockdowner (Shelved, possibly a vanilla bug with lockdown walls on custom levels)

@@ -1,11 +1,7 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Patches
 {
