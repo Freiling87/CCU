@@ -20,6 +20,11 @@ P_InvDatabase.FillAgent_LoadoutBadge
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
 ##		CT	Passive
+agent.KillForQuest
+###			C!	Guilty
+####			C!	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+Extended this to agent.employee but I doubt that's ever actually assigned anyway.
 ###			T	Immovable
 Test
 ###			T	Blinker*
@@ -48,25 +53,27 @@ Instead of dying, agent will be Injured instead. Player can revive them or hire 
 If hired and surviving, will revive the player once
 ###			C	Spidey-Sensitive
 When alerted, immediately enters combat with perp (no search necessary)
-###			C	Statue
+###			H	Statue
 Remove colors
 Tint white
 Make stationary, Invincible, non-reactive
+This should probably not be one trait, but many combined
 ###			C	Stinky Aura
 Werewolf A-were-ness works on this character
 ###			C	Supernatural
 Ghost Gibber works
 ###			C	Tattletale
 Reports ALL crimes to alarm button
-###			C	Unappetizing
-Can't be bitten/cannibalized
 ###			C	Translucent
 Ghost visual effect
+###			C	Unappetizing
+Can't be bitten/cannibalized
 ###			C	Unchallenging
 No XP for neutralization
 ###			C	Vision Beams (Cop Bot)
 DW
 ###			C	Zombified
+NOT Z-infected. But you might want to just Z-infect and kill, since it might be simplest.
 Agent.zombified
 Agent.customZombified
 ###			√	Berserk (Declined)
@@ -75,9 +82,6 @@ Rel General - Hostile to All
 Complete
 ###			√	Extortable
 Complete
-###			C!	Guilty
-####			C!	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
 ###			√	Indestructible
 Complete
 ###			√	Innocent
