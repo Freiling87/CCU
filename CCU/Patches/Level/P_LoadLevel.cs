@@ -2,8 +2,10 @@
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Systems.CustomGoals;
+using CCU.Traits.Loadout;
 using HarmonyLib;
 using JetBrains.Annotations;
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,5 +103,92 @@ namespace CCU.Patches.Level
 
 			return n;
 		}
+	}
+
+	[HarmonyPatch(declaringType: typeof(LoadLevel))]
+	static class P_LoadLevel_SetupMore4_2
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTargetMethod, UsedImplicitly]
+		private static MethodInfo Find_MoveNext_MethodInfo() =>
+			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore4_2"));
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: "SetupMore4_2")]
+		private static IEnumerable<CodeInstruction> SetupMore4_2_GeneralLoadouts(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo loadoutChunkAccessItems = AccessTools.DeclaredMethod(typeof(P_LoadLevel_SetupMore4_2), nameof(P_LoadLevel_SetupMore4_2.LoadoutChunkAccessItems));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldstr, "SETUPMORE4_7"),
+					new CodeInstruction(OpCodes.Call),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, loadoutChunkAccessItems),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		/// <summary>
+		/// Distributed loadout items that are affected by other agents.
+		/// Any non-interacting loadouts should probably be done in a FillAgent prefix.
+		/// </summary>
+		public static void LoadoutChunkAccessItems()
+        {
+			foreach (Agent agent in GC.agentList)
+            {
+				if (agent.HasTrait<Chunk_Key>())
+                {
+					List<Door> validDoors = GC.objectRealList.Where(or => or is Door door && door.startingChunk == agent.startingChunk && door.locked && door.distributedKey is null && !door.hasDetonator && door.extraVar != 10).Cast<Door>().ToList();
+
+					if (validDoors.Count > 0)
+					{
+						foreach (Door door in validDoors)
+							door.distributedKey = agent;
+
+						InvItem key = agent.agentInvDatabase.AddItem(vItem.Key, 1);
+						key.specificChunk = agent.startingChunk;
+						key.specificSector = agent.startingSector;
+						key.chunks.Add(agent.startingChunk);
+						key.sectors.Add(agent.startingChunk);
+						key.contents.Add(
+							agent.startingChunkRealDescription == VChunkType.Generic
+								? VChunkType.GuardPostSeeWarning
+								: agent.startingChunkRealDescription);
+						agent.oma.hasKey = true;
+					}
+                }
+				
+				if (agent.HasTrait<Chunk_Safe_Combo>())
+                {
+					List<Safe> validSafes = GC.objectRealList.Where(or => or is Safe safe && safe.startingChunk == agent.startingChunk && safe.locked && safe.distributedKey is null).Cast<Safe>().ToList();
+
+					if (validSafes.Count > 0)
+					{
+						foreach (Safe safe in validSafes)
+							safe.distributedKey = agent;
+
+						InvItem safeCombo = agent.agentInvDatabase.AddItem(vItem.SafeCombination, 1);
+						safeCombo.specificChunk = agent.startingChunk;
+						safeCombo.specificSector = agent.startingSector;
+						safeCombo.chunks.Add(agent.startingChunk);
+						safeCombo.sectors.Add(agent.startingChunk);
+						safeCombo.contents.Add(agent.startingChunkRealDescription);
+						agent.oma.hasKey = true;
+					}
+				}
+
+				// Mayor Badge via transpiler
+            }
+		}
+
 	}
 }

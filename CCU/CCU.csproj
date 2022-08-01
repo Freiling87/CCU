@@ -245,6 +245,7 @@
     <Compile Include="Traits\Explode On Death\Slime.cs" />
     <Compile Include="Traits\Explode On Death\Stomp.cs" />
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
+    <Compile Include="Traits\Loadout\Chunk_Stash_Hint.cs" />
     <Compile Include="Traits\Passive\Not_Vincible.cs" />
     <Compile Include="Traits\Passive\Indestructible.cs" />
     <Compile Include="Traits\Gib Type\Glass_Shards.cs" />

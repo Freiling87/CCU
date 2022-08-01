@@ -22,7 +22,6 @@ namespace CCU.Traits.Interaction
                     "- Deportation Center\n" +
                     "- Hotel *\n\n" +
                     "*<color=red>Requires</color>: {0}", LongishDocumentationName(typeof(Chunk_Key))),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {

@@ -12,20 +12,8 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 Except crickets, crickets are fine.
 ###			C	Consider moving Container item to var 1
 Are Containervestigateables really worth all the trouble? If you can eliminate the overlap you don't need to deal with their many bugs.
-###				C	Multiple Keys Allocated
-CL's conditions:
-	Custom Clerk w KeyHaver
-	Custom Mannequin
-	Goon
-Vanilla:
-	Allocate to a non-goon preferred
-	Ignores Important
-####				C	Verify Safe Combo
-####				C	Verify Mayor Badge
-####				C	The Fix
-Currently, this is done in a prefix to FillAgent. 
-I think this should be moved to a prefix to the method that calls FillAgent, so that it can do all its work regardless of which random agent the normal algo picks. And flipping the right bool will preempt the original from firing anyway.
-This will be needed for Loadout traits in general anyway, so it'll be an important fix.
+###				T	Multiple Keys Allocated
+Rewrote entirely. LoadLevel_SetupMore4_2.SetupMore4_2_GeneralLoadouts
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
 ##			P	1.0.0 Changelog
@@ -359,7 +347,6 @@ You don't know the object holds an item until you find the Stash Hint item somew
 Generates on NPC inventory or in a container in their chunk
 Acts like a key, but when activated the agent will read text out loud that's specific to a Container type
 This will be EXTREMELY annoying with Gravestones, which is kinda funny
-
 ##			C	Sugar System
 Merchant Type: Sugar Only
 Buyer Type: Sugar Only

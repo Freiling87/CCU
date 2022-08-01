@@ -24,6 +24,7 @@
 			Generic = "Generic",
 			Graveyard = "Graveyard",
 			Greenhouse = "Greenhouse",
+			GuardPostSeeWarning = "GuardPost",	// Only found this in Key Allocation, not sure if it's a real type
 			HedgeMaze = "HedgeMaze",
 			Hideout = "Hideout",
 			Hospital = "Hospital",
