@@ -122,6 +122,7 @@
     <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
+    <Compile Include="Patches\P_Movement.cs" />
     <Compile Include="PropertyLogger.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Traits\Explode On Death\Stomp.cs" />
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
     <Compile Include="Traits\Loadout\Chunk_Stash_Hint.cs" />
+    <Compile Include="Traits\Passive\Immovable.cs" />
     <Compile Include="Traits\Passive\Not_Vincible.cs" />
     <Compile Include="Traits\Passive\Indestructible.cs" />
     <Compile Include="Traits\Gib Type\Glass_Shards.cs" />

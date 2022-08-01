@@ -105,6 +105,8 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
+##			T	Immovable (Passive)
+Test
 ##			T	Scene Setters
 ###				T	Arrested
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
