@@ -12,8 +12,6 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 I don't think we'll need to re-open Containervestigateables.
 ##			P	Bugs
 Except crickets, crickets are fine.
-###			C	Consider moving Container item to var 1
-Are Containervestigateables really worth all the trouble? If you can eliminate the overlap you don't need to deal with their many bugs.
 ###				T	Loadout Rewrite
 ####				T	Key & Safe Combo
 P_LoadLevel_SetupMore4_2.SetupMore4_2_GeneralLoadouts

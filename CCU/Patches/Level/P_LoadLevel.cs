@@ -187,21 +187,22 @@ namespace CCU.Patches.Level
 					}
 				}
 
+				// Also add a chance for Stash Hint to allocate to a random non-stash container in the chunk.
 				if (agent.HasTrait<Chunk_Stash_Hint>())
                 {
-					List<ObjectReal> validStashes = GC.objectRealList.Where(or => Containers.IsStash(or)).ToList();
-
+					List<ObjectReal> validStashes = GC.objectRealList.Where(or => Containers.IsStash(or) && or.startingChunk == agent.startingChunk).ToList();
+					
 					if (validStashes.Count > 0)
 					{
-						foreach (Door door in validStashes)
-							door.distributedKey = agent;
+						//foreach (ObjectReal stash in validStashes)
+						//	stash.distributedKey = agent;
 
-						InvItem key = agent.agentInvDatabase.AddItem(vItem.Key, 1);
-						key.specificChunk = agent.startingChunk;
-						key.specificSector = agent.startingSector;
-						key.chunks.Add(agent.startingChunk);
-						key.sectors.Add(agent.startingChunk);
-						key.contents.Add(
+						InvItem stashHint = agent.agentInvDatabase.AddItem("StashHint", 1);
+						stashHint.specificChunk = agent.startingChunk;
+						stashHint.specificSector = agent.startingSector;
+						stashHint.chunks.Add(agent.startingChunk);
+						stashHint.sectors.Add(agent.startingChunk);
+						stashHint.contents.Add(
 							agent.startingChunkRealDescription == VChunkType.Generic
 								? VChunkType.GuardPostSeeWarning
 								: agent.startingChunkRealDescription);

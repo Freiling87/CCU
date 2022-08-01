@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
+using CCU.Systems.Object_Variables;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,12 @@ namespace CCU.Systems.Containers
 			vObject.VendorCart,
 			vObject.WaterPump,
 			vObject.Well,
+		};
+		public static List<string> FireParticleEffectObjects = new List<string>()
+		{
+			vObject.Barbecue,
+			vObject.Fireplace,
+			vObject.FlamingBarrel,
 		};
 
 		public enum ContainerValues
@@ -75,36 +82,53 @@ namespace CCU.Systems.Containers
 			//etc., aim for 3 each.
 			// Dialogue is spoken on item pickup, shown in an Investigation window if item activated
 
+			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TooHot, t, new CustomNameInfo("It's too hot to touch!"));
+			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_ManholeClosed, t, new CustomNameInfo("I need a crowbar."));
+			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TubeFunctional, t, new CustomNameInfo("It's still running, and I want to keep all my limbs."));
+
 			RogueInteractions.CreateProvider(h => 
 			{
 				if (ContainerObjects.Contains(h.Object.objectName))
 				{
-						Agent agent = h.Object.interactingAgent;
-						bool grabHotStuff =
-							agent.HasTrait(VanillaTraits.FireproofSkin) ||
-							agent.HasTrait(VanillaTraits.FireproofSkin2) ||
-							agent.statusEffects.hasStatusEffect(VStatusEffect.ResistFire);
+					Agent agent = h.Object.interactingAgent;
 
-						// Curse of Legibility
-						if ((!grabHotStuff && 
-							(
-								(h.Object.ora.hasParticleEffect &&
-								(
-									h.Object is Barbecue ||
-									h.Object is Fireplace ||
-									h.Object is FlamingBarrel)
-								) ||
-								(h.Object is FlameGrate flameGrate && !(flameGrate.myFire is null))
-							)) ||
-							(h.Object is Manhole manhole && !manhole.opened) ||
-							(h.Object is Tube tube && tube.functional))
+					// Stash Hiding
+					if (IsStash(h.Object.playfieldObjectReal))
+                    {
+						if (!h.Object.GetHook<P_ObjectReal_Hook>().stashDiscovered)
 							return;
 
-						if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
-							h.AddImplicitButton(CButtonText.OpenContainer, m =>
-							{
-								m.Object.ShowChest();
-							});
+                    }
+
+					bool isHot =
+						(FireParticleEffectObjects.Contains(h.Object.objectName) && h.Object.ora.hasParticleEffect) ||
+						(h.Object is FlameGrate flameGrate && !(flameGrate.myFire is null));
+					bool grabHotStuff =
+						agent.HasTrait(VanillaTraits.FireproofSkin) ||
+						agent.HasTrait(VanillaTraits.FireproofSkin2) ||
+						agent.statusEffects.hasStatusEffect(VStatusEffect.ResistFire);
+
+					if (isHot && !grabHotStuff)
+                    {
+						agent.SayDialogue(CDialogue.CantAccessContainer_TooHot);
+						return;
+                    }
+					else if (h.Object is Manhole manhole && !manhole.opened)
+					{
+						agent.SayDialogue(CDialogue.CantAccessContainer_ManholeClosed);
+						return;
+					}
+					else if(h.Object is Tube tube && tube.functional)
+					{
+						agent.SayDialogue(CDialogue.CantAccessContainer_TubeFunctional);
+						return;
+					}
+
+					if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
+						h.AddImplicitButton(CButtonText.OpenContainer, m =>
+						{
+							m.Object.ShowChest();
+						});
 				}
 			});
 		}

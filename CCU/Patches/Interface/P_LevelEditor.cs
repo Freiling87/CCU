@@ -82,8 +82,8 @@ namespace CCU.Patches.Interface
         }
 
 		#region Containers
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarString3List), new Type[0] { })]
-		public static IEnumerable<CodeInstruction> PressedLoadExtraVarString3List_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
@@ -111,7 +111,6 @@ namespace CCU.Patches.Interface
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo deactivateLoadMenu = AccessTools.DeclaredMethod(typeof(LevelEditor), nameof(LevelEditor.DeactivateLoadMenu));
-			FieldInfo extraVarString3Object = AccessTools.DeclaredField(typeof(LevelEditor), "extraVarString3Object");
 			MethodInfo loadSpecialInterfaces = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
 			FieldInfo scrollingButtonType = AccessTools.DeclaredField(typeof(ButtonHelper), nameof(ButtonHelper.scrollingButtonType));
 			MethodInfo setActive = AccessTools.DeclaredMethod(typeof(GameObject), nameof(GameObject.SetActive));
@@ -140,6 +139,7 @@ namespace CCU.Patches.Interface
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
+
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> UpdateInterface_OnSelect_ShowCustomInterface(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -165,6 +165,7 @@ namespace CCU.Patches.Interface
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
+
 		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName = "")
         {
 			Core.LogMethodCall();
@@ -174,11 +175,11 @@ namespace CCU.Patches.Interface
 			if (Containers.ContainerObjects.Contains(objectName))
             {
 				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
-				InputField extraVarString3Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString3Object").GetValue(levelEditor);
+				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor);
 
 				extraVarObject.gameObject.SetActive(false);
-				extraVarString3Object.gameObject.SetActive(true);
-				levelEditor.SetNameText(extraVarString3Object, itemName, "Item");
+				extraVarStringObject.gameObject.SetActive(true);
+				levelEditor.SetNameText(extraVarStringObject, itemName, "Item");
 			}
 		}
         #endregion
