@@ -76,6 +76,18 @@ namespace CCU.Patches.Agents
 			}
         }
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.FindSpeed))]
+		public static bool FindSpeed_Prefix(Agent __instance, ref int __result)
+        {
+			if (__instance.HasTrait<Immobile>())
+            {
+				__result = 0;
+				return false;
+            }
+
+			return true;
+        }
+
 		/// <summary>
 		/// Extend Job Type Pseudo-enum 
 		/// Code contributions from uwumacaronitime

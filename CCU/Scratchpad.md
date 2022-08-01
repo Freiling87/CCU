@@ -27,12 +27,12 @@ Blink to a random nearby spot when hit
 This is valid for player characters, so might need to be another mod
 ###			T	Concealed Carrier
 Hides weapon when out of combat.
+###			T	Immobile
+Can't move (for turret types)
 ###			C	Explodevice Eligible
 agent.canExplosiveStimulate
 ###			C	Holographic
 Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Immobile
-Can't move (for turret types)
 ###			C	Mute Dialogue
 Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
 ###			C	Oblivious
