@@ -49,36 +49,36 @@ namespace CCU.Systems.Containers
 
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo("Search"));
 
-			RogueInteractions.CreateProvider(h =>
+			RogueInteractions.CreateProvider(h => 
 			{
-			if (ContainerObjects.Contains(h.Object.objectName))
-			{
-					Agent agent = h.Object.interactingAgent;
-					bool grabHotStuff =
-						agent.HasTrait(VanillaTraits.FireproofSkin) ||
-						agent.HasTrait(VanillaTraits.FireproofSkin2) ||
-						agent.statusEffects.hasStatusEffect(VStatusEffect.ResistFire);
+				if (ContainerObjects.Contains(h.Object.objectName))
+				{
+						Agent agent = h.Object.interactingAgent;
+						bool grabHotStuff =
+							agent.HasTrait(VanillaTraits.FireproofSkin) ||
+							agent.HasTrait(VanillaTraits.FireproofSkin2) ||
+							agent.statusEffects.hasStatusEffect(VStatusEffect.ResistFire);
 
-					// Apologies if this is cursed, but it helps legibility for me
-					if ((!grabHotStuff && 
-						(
-							(h.Object.ora.hasParticleEffect &&
+						// Curse of Legibility
+						if ((!grabHotStuff && 
 							(
-								h.Object is Barbecue ||
-								h.Object is Fireplace ||
-								h.Object is FlamingBarrel)
-							) ||
-							(h.Object is FlameGrate flameGrate && !(flameGrate.myFire is null))
-						)) ||
-						(h.Object is Manhole manhole && !manhole.opened) ||
-						(h.Object is Tube tube && tube.functional))
-						return;
+								(h.Object.ora.hasParticleEffect &&
+								(
+									h.Object is Barbecue ||
+									h.Object is Fireplace ||
+									h.Object is FlamingBarrel)
+								) ||
+								(h.Object is FlameGrate flameGrate && !(flameGrate.myFire is null))
+							)) ||
+							(h.Object is Manhole manhole && !manhole.opened) ||
+							(h.Object is Tube tube && tube.functional))
+							return;
 
-					if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
-						h.AddImplicitButton(CButtonText.OpenContainer, m =>
-						{
-							m.Object.ShowChest();
-						});
+						if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
+							h.AddImplicitButton(CButtonText.OpenContainer, m =>
+							{
+								m.Object.ShowChest();
+							});
 				}
 			});
 		}

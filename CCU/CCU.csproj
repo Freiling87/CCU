@@ -170,8 +170,8 @@
     <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
     <Compile Include="Systems\Custom Goals\CustomGoals.cs" />
-    <Compile Include="Systems\Object Containers\Containers.cs" />
-    <Compile Include="Systems\Object Readables\Investigateables.cs" />
+    <Compile Include="Systems\Object Variables\Container\Containers.cs" />
+    <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />

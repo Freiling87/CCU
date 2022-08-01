@@ -12,8 +12,11 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 Except crickets, crickets are fine.
 ###			C	Consider moving Container item to var 1
 Are Containervestigateables really worth all the trouble? If you can eliminate the overlap you don't need to deal with their many bugs.
-###				T	Multiple Keys Allocated
-Rewrote entirely. LoadLevel_SetupMore4_2.SetupMore4_2_GeneralLoadouts
+###				T	Loadout Rewrite
+####				T	Key & Safe Combo
+P_LoadLevel_SetupMore4_2.SetupMore4_2_GeneralLoadouts
+####				T	Mayor Badge
+P_InvDatabase.FillAgent_LoadoutBadge
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
 ##			P	1.0.0 Changelog
@@ -104,75 +107,6 @@ Enable existing traits to player side and make their display name conditional on
 - Manually verify full lists of features until scoping is more coherent.
 ##		T	Test note
 20220725
-##		CT	Passive
-###			C	Blinker
-Blink to a random nearby spot when hit
-This is valid for player characters, so might need to be another mod
-###			C	Concealed Carrier
-Hides weapon until drawn
-###			C	Explodevice Eligible
-agent.canExplosiveStimulate
-###			C	Holographic
-Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Immobile
-Can't move (for turret types)
-###			C	Mute Dialogue
-Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
-###			C	Oblivious
-Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
-But will enter combat if their teammates do.
-###			C	Psychic Shield
-Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
-###			C	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			C	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			C	Reviver
-If hired and surviving, will revive the player once
-###			C	Spidey-Sensitive
-When alerted, immediately enters combat with perp (no search necessary)
-###			C	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-###			C	Stinky Aura
-Werewolf A-were-ness works on this character
-###			C	Supernatural
-Ghost Gibber works
-###			C	Tattletale
-Reports ALL crimes to alarm button
-###			C	Unappetizing
-Can't be bitten/cannibalized
-###			C	Translucent
-Ghost visual effect
-###			C	Unchallenging
-No XP for neutralization
-###			C	Vision Beams (Cop Bot)
-DW
-###			C	Zombified
-Agent.zombified
-Agent.customZombified
-###			√	Berserk (Declined)
-Rel General - Hostile to All
-###			√	Crusty
-Complete
-###			√	Extortable
-Complete
-###			C!	Guilty
-####			C!	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
-###			√	Indestructible
-Complete
-###			√	Innocent
-Complete
-###			√	Not Vincible
-Complete
-###			√	Possessed
-Complete
-###			√	Status Effect Immune
-Complete
-###			√	Z-Infected
-Complete
 ##		CT	Goals
 ###			CT	Actual Goals
 ####			T	Commit Arson
@@ -339,7 +273,8 @@ Keys are specific to an object. One door, one chest, etc. so chunks may generate
 Desk is a lockable container.
 ####				C	Keyring
 Keyring stores all keys in one slot
-##			C	Stash System
+##			H	Stash System
+On hold: Complete the Key/SafeCombo aspect of Containers first.
 Variable field in editor, maybe with some basic setting variations (destructible, Investigateable, etc.)
 Locks access to the object as a Chest unless the player holds the matching Stash Hint.
 You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
@@ -380,8 +315,11 @@ Combine w/ Accent Effect traits
 Apply Accent Color trait to target effect
 ###			C	Agent Glow
 Killer Robot has this
+###			C	Monocolor Agent
+E.g., if White is selected, they should look like a Greek Statue or whatever.
 ###			C	Nametag (Space/hover)
 ###			C	Vision Beam
+New
 ##		C	Agent Group
 However this is implemented, there's a danger of subscribed content doing this in an unwanted way. How to control it?
 ###			C	Slum NPCs (Pilot)
@@ -407,6 +345,7 @@ New
 ###			C	Skin Color
 New
 ##		C	Behavior
+###			C	Vanilla Panic Room behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
 ###			C	Ambush
@@ -1080,7 +1019,7 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
-##			C	Language
+##		C	Language
 ###			H	Mute
 No interactions under any circumstances, even with Translator
 ###			C	Polyglot
@@ -1182,6 +1121,75 @@ Allows to sell shitty items in junk dealer, for instance
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
+##		CT	Passive
+###			C	Blinker
+Blink to a random nearby spot when hit
+This is valid for player characters, so might need to be another mod
+###			C	Concealed Carrier
+Hides weapon until drawn
+###			C	Explodevice Eligible
+agent.canExplosiveStimulate
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
+###			C	Immobile
+Can't move (for turret types)
+###			C	Mute Dialogue
+Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
+###			C	Oblivious
+Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
+But will enter combat if their teammates do.
+###			C	Psychic Shield
+Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			C	Reviver
+If hired and surviving, will revive the player once
+###			C	Spidey-Sensitive
+When alerted, immediately enters combat with perp (no search necessary)
+###			C	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
+###			C	Stinky Aura
+Werewolf A-were-ness works on this character
+###			C	Supernatural
+Ghost Gibber works
+###			C	Tattletale
+Reports ALL crimes to alarm button
+###			C	Unappetizing
+Can't be bitten/cannibalized
+###			C	Translucent
+Ghost visual effect
+###			C	Unchallenging
+No XP for neutralization
+###			C	Vision Beams (Cop Bot)
+DW
+###			C	Zombified
+Agent.zombified
+Agent.customZombified
+###			√	Berserk (Declined)
+Rel General - Hostile to All
+###			√	Crusty
+Complete
+###			√	Extortable
+Complete
+###			C!	Guilty
+####			C!	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+###			√	Indestructible
+Complete
+###			√	Innocent
+Complete
+###			√	Not Vincible
+Complete
+###			√	Possessed
+Complete
+###			√	Status Effect Immune
+Complete
+###			√	Z-Infected
+Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
 Put custom methods in faction traits.

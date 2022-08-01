@@ -8,7 +8,6 @@ using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -105,6 +104,40 @@ namespace CCU.Patches.Inventory
 
 			return true;
 		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
+		private static IEnumerable<CodeInstruction> FillAgent_LoadoutBadge(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo mayorBadgeMagicString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.MayorBadgeMagicString));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld),
+				},
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Callvirt),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+                {
+					new CodeInstruction(OpCodes.Ldstr, "Clerk"),
+                },
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, mayorBadgeMagicString)
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		private static string MayorBadgeMagicString(Agent agent) =>
+			agent.HasTrait<Chunk_Mayor_Badge>()
+				? "Clerk"
+				: agent.name;
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS3(IEnumerable<CodeInstruction> codeInstructions)

@@ -148,7 +148,7 @@ namespace CCU.Patches.Level
 				if (agent.HasTrait<Chunk_Key>())
                 {
 					List<Door> validDoors = GC.objectRealList.Where(or => or is Door door && door.startingChunk == agent.startingChunk && door.locked && door.distributedKey is null && !door.hasDetonator && door.extraVar != 10).Cast<Door>().ToList();
-
+					// extraVar = 10 = "PanicRoom" or something
 					if (validDoors.Count > 0)
 					{
 						foreach (Door door in validDoors)
@@ -186,7 +186,7 @@ namespace CCU.Patches.Level
 					}
 				}
 
-				// Mayor Badge via transpiler
+				// Mayor Badge: InvDatabase.FillAgent transpiler
             }
 		}
 
