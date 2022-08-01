@@ -29,8 +29,8 @@ There are two versions of CCU:
 - [Change Log](/CCU/Documentation/M03_ChangeLog.md)
 
 #		Content Guides
-- [Mutators](/CCU/Documentation/C01_Mutators.md)
-- [Traits](/CCU/Documentation/C03_Traits.md)
+- [Mutators](/CCU/Documentation/C02_Mutators.md)
+- [Traits](/CCU/Documentation/C04_Traits.md)
 
 #		Special Thanks
 **Abbysssal#2020** & **BlazingTwist#4559** - Tons of code help

@@ -23,6 +23,9 @@ Will make easier to track bug reports
 An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has.
 
 - **Feature additions**
+  - Agent Goals
+    - Gibbed
+    - Knocked Out
   - Mutators
     - Followers
       - Homesickness Disabled*
@@ -102,20 +105,8 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
-##			C	Documentation Update
-- Add Objects Link to main readme
-- Manually verify full lists of features until scoping is more coherent.
-##		T	Test note
-20220725
-##		CT	Goals
-###			CT	Actual Goals
-####			T	Commit Arson
-####			C	Flee Danger
-DW (What's the point anyway)
-####			C	Robot Clean
-DW
-###			C	Scene Setters
-####			C	Arrested
+##			T	Scene Setters
+###				T	Arrested
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	AgentInteractions.ArrestAgent (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
@@ -124,15 +115,22 @@ DW
 	LoadLevel.SetupMore5 () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-####			C	Burned
+###				T	Burned
 DW
-####			C	Dead
+But what did it do homie
+###				T	Dead
 Works but gibs. No gib.
-####			√	Gibbed
+###				√	Gibbed
 Complete
-####			√	Knocked Out
+###				√	Knocked Out
 Complete
-#	CT	Projects
+##			C	Documentation Update
+- Add Objects Link to main readme
+- Add Default Goals too
+- Manually verify full lists of features until scoping is more coherent.
+##		T	Test note
+20220725
+#		CT	Projects
 ##			C	Enclave System
 ###				C	Currency Changing
 If you want different currencies, you'll need new ways for players to change it.
@@ -309,6 +307,41 @@ P_StatusEffects.AddTrait_Prefix
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
+
+##		CT	Agent Goals
+###			CT	Actual Goals
+####			T	Commit Arson
+New
+####			C	Flee Danger
+DW (What's the point anyway)
+####			C	Robot Clean
+DW
+###			C	Scene Setters
+####			C	Arrested
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	AgentInteractions.ArrestAgent (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	CCU.Systems.CustomGoals.CustomGoals.RunSceneSetters (Agent agent) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
+	CCU.Patches.Level.P_LoadLevel.SetupMore5_Postfix (LoadLevel __instance) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
+	LoadLevel.SetupMore5 () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+####			C	Burned
+DW
+####			C	Dead
+Works but gibs. No gib.
+####			√	Gibbed
+Complete
+####			√	Knocked Out
+Complete
+#		C	Default Goals
+##			CT	Actual Goals
+###				T	Commit Arson
+New
+###				C	Flee Danger
+DW (What's the point anyway)
+###				C	Robot Clean
+DW
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
@@ -1378,7 +1411,6 @@ Complete
 ###			√	Suspecter
 Complete
 #		C	Mutators
-
 Setting: Force Big Quest completion - If set to yes, you will need to complete your big quest before leaving the floor, if there is one. You will not be able to exit the floor until the BQ is done, even after completing all the missions on the floor. If the quest is failed (floor only fails dont count) you will spontaneously combust and die.
 
 Setting: Exit on Death - If set to yes, you will be forced to exit the floor when you die. On the next floor, you will be revived and you will be healed to maximum HP.

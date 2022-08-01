@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
+using RogueLibsCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +27,7 @@ namespace CCU.Systems.CustomGoals
             WanderObjects = "WanderObjects",
             WanderObjectsOwned = "WanderObjectsOwned",
 
-            //  Vanilla Behaviors not normally available in editor
+            //  Vanilla Unlocked
             CommitArson = "CommitArson",
             FleeDanger = "FleeDanger",
             RobotClean = "RobotClean",
@@ -53,9 +54,9 @@ namespace CCU.Systems.CustomGoals
             //  WanderObjectsOwned,
 
             //      Vanilla
-            CommitArson,
-            FleeDanger, // Probably not gonna work, and not really worth trying too hard on since it's unspecific.
-            RobotClean,
+            //CommitArson,
+            //FleeDanger, // Probably not gonna work, and not really worth trying too hard on since it's unspecific.
+            //RobotClean,
         };
 
         public static void RunSceneSetters(Agent agent)
@@ -68,22 +69,38 @@ namespace CCU.Systems.CustomGoals
             switch (agent.defaultGoal)
             {
                 case Arrested:
-                    agent.agentInteractions.ArrestAgent(agent);
+                    // Copied from AgentInteractions.ArrestAgent
+                    agent.knockedOut = true;
+                    agent.knockedOutLocal = true;
+                    agent.arrested = true;
+                    agent.gc.tileInfo.DirtyWalls();
+                    agent.lastHitByAgent = agent.gettingArrestedByAgent;
+                    agent.justHitByAgent2 = agent.gettingArrestedByAgent;
+                    agent.healthBeforeKnockout = agent.health;
+                    agent.deathMethod = "Arrested";
+                    agent.deathKiller = agent.gettingArrestedByAgent.agentName;
+                    agent.statusEffects.ChangeHealth(-200f);
+                    agent.gettingArrestedByAgent.SetArrestingAgent(null);
+                    agent.SetGettingArrestedByAgent(null);
+                    agent.agentHitboxScript.SetWBSprites();
+                    agent.StopInteraction();
                     break;
                 case Dead:
-                    agent.statusEffects.ChangeHealth((agent.currentHealth + 1) * -1);
+                    // This avoids a magic number that would gib the agent.
+                    agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
+                    agent.statusEffects.ChangeHealth(-1);
                     break;
                 case Burned:
                     agent.deathMethod = "Fire"; // I think StatusEffects.SetupDeath will catch this and spawn the fire.
-                    agent.statusEffects.ChangeHealth((agent.currentHealth + 1) * -1);
-                    break;
+                    // This avoids a magic number that would gib the agent.
+                    agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
+                    agent.statusEffects.ChangeHealth(-1); break;
                 case Gibbed:
                     agent.statusEffects.ChangeHealth(-200f);
                     break;
                 case KnockedOut:
                     agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                     agent.tranqTime = 1000;
-                    // Hopefully SE.Update will pick this up.
                     break;
             }
         }
