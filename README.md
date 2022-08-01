@@ -30,7 +30,7 @@ There are two versions of CCU:
 
 #		Content Guides
 - [Mutators](/CCU/Documentation/C01_Mutators.md)
-- [Traits](/CCU/Documentation/C03_Traits_Designer.md)
+- [Traits](/CCU/Documentation/C03_Traits.md)
 
 #		Special Thanks
 **Abbysssal#2020** & **BlazingTwist#4559** - Tons of code help

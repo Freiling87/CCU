@@ -199,12 +199,12 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Faction 3 Hostile									|- Hostile to Faction 3 Aligned
 |Faction 4 Aligned									|- Aligned with same trait
 |Faction 4 Hostile									|- Hostile to Faction 4 Aligned
-|Faction Blahd Aligned								|- Aligned to Blahds<br>- Hostile to Crepes & Blahd Bashers<br>- XP bonus when neutralized by Blahd Bashers<br>- Formerly "Bashable"
-|Faction Cannibal Aligned							|- Aligned to Cannibals<br>- Hostile to Soldiers<br>- Formerly "Hostile to Soldier"
-|Faction Crepe Aligned								|- Aligned to Crepes<br>- Hostile to Blahds & Crepe Crushers<br>- XP bonus when neutralized by Crepe Crushers<br>- Formerly "Crushable"
+|Faction Blahd Aligned								|- Aligned to Blahds<br>- Hostile to Crepes & Blahd Bashers<br>- XP bonus when neutralized by Blahd Bashers
+|Faction Cannibal Aligned							|- Aligned to Cannibals<br>- Hostile to Soldiers
+|Faction Crepe Aligned								|- Aligned to Crepes<br>- Hostile to Blahds & Crepe Crushers<br>- XP bonus when neutralized by Crepe Crushers
 |Faction Firefighter Aligned						|- Aligned to Firefighters<br>- Hostile to Arsonists
-|Faction Gorilla Aligned							|- Aligned to Gorillas<br>- Hostile to Scientists & Specists<br>- XP bonus when neutralized by Specists<br>- Formerly "Specistist"
-|Faction Soldier Aligned							|- Aligned to Soldiers<br>- Hostile to Cannibals<br>- Formerly "Hostile to Cannibal"
+|Faction Gorilla Aligned							|- Aligned to Gorillas<br>- Hostile to Scientists & Specists<br>- XP bonus when neutralized by Specists
+|Faction Soldier Aligned							|- Aligned to Soldiers<br>- Hostile to Cannibals
 |Hostile to Vampire									|- Hostile to Vampire
 |Hostile to Werewolf								|- Hostile to Werewolf
 

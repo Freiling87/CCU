@@ -20,6 +20,12 @@ CL's conditions:
 Vanilla:
 	Allocate to a non-goon preferred
 	Ignores Important
+####				C	Verify Safe Combo
+####				C	Verify Mayor Badge
+####				C	The Fix
+Currently, this is done in a prefix to FillAgent. 
+I think this should be moved to a prefix to the method that calls FillAgent, so that it can do all its work regardless of which random agent the normal algo picks. And flipping the right bool will preempt the original from firing anyway.
+This will be needed for Loadout traits in general anyway, so it'll be an important fix.
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
 ##			P	1.0.0 Changelog
@@ -108,7 +114,6 @@ Enable existing traits to player side and make their display name conditional on
 ##			C	Documentation Update
 - Add Objects Link to main readme
 - Manually verify full lists of features until scoping is more coherent.
-- Indicate Player Traits and the deal with those
 ##		T	Test note
 20220725
 ##		CT	Passive

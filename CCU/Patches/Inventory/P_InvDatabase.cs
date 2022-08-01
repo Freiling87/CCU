@@ -131,9 +131,12 @@ namespace CCU.Patches.Inventory
 						{
 							Door door = (Door)objectReal;
 
+							logger.LogDebug("Key allocation");
+
 							if (!(door.distributedKey is null) && door.locked)
 							{
 								Agent prevKeyHolder = door.distributedKey;
+								logger.LogDebug("Removing key from: " + prevKeyHolder);
 
 								if (!prevKeyHolder.HasTrait<Chunk_Key>())
 								{

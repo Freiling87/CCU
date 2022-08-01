@@ -131,6 +131,11 @@ namespace CCU.Patches.Agents
 		public static void Interact_Prefix(Agent otherAgent, Agent __instance)
         {
 			TraitManager.LogTraitList(__instance); // Leave it, you'll need it
+
+			logger.LogDebug("Inventory: ");
+			foreach (InvItem ii in __instance.inventory.InvItemList)
+				logger.LogDebug(ii.invItemName);
+
 			// InteractingAgent is not set yet, so you'll have to do that ad hoc here if you want IA's trait list
         }
 
