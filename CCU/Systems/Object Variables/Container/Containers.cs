@@ -55,11 +55,6 @@ namespace CCU.Systems.Containers
 			None
         }
 
-		// TODO: verify which data field you're using for this
-		public static bool IsStash(ObjectReal objectReal) =>
-			throw new NotImplementedException();
-			//objectReal.extraVarString.Contains("Hidden");
-
 		public static string MagicObjectName(string originalName)
 		{
 			if (ContainerObjects.Contains(originalName))
@@ -71,6 +66,7 @@ namespace CCU.Systems.Containers
 		[RLSetup]
 		public static void Setup()
 		{
+			Core.LogMethodCall();
 			string t = NameTypes.Interface;
 
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo("Search"));
@@ -86,19 +82,14 @@ namespace CCU.Systems.Containers
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_ManholeClosed, t, new CustomNameInfo("I need a crowbar."));
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TubeFunctional, t, new CustomNameInfo("It's still running, and I want to keep all my limbs."));
 
+			logger.LogDebug("Branch");
 			RogueInteractions.CreateProvider(h => 
 			{
 				if (ContainerObjects.Contains(h.Object.objectName))
 				{
 					Agent agent = h.Object.interactingAgent;
 
-					// Stash Hiding
-					if (IsStash(h.Object.playfieldObjectReal))
-                    {
-						if (!h.Object.GetHook<P_ObjectReal_Hook>().stashDiscovered)
-							return;
-
-                    }
+					logger.LogDebug("objectname: " + h.Object.objectName);
 
 					bool isHot =
 						(FireParticleEffectObjects.Contains(h.Object.objectName) && h.Object.ora.hasParticleEffect) ||

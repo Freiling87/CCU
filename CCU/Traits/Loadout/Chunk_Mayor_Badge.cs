@@ -4,7 +4,7 @@ namespace CCU.Traits.Loadout
 {
     public class Chunk_Mayor_Badge : T_Loadout
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Mayor_Badge>()

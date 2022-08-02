@@ -5,7 +5,7 @@ namespace CCU.Traits.Passive
 {
     public class Immobile : T_CCU
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Immobile>()

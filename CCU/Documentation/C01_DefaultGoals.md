@@ -5,5 +5,8 @@ Scene Setters do something to the agent that's just designed to set the stage fo
 
 |Name								|Notes	|
 |:----------------------------------|:------|
+|Arrested							|- Agent starts out arrested
+|Burned								|- Agent starts out dead & burning
+|Dead								|- Agent starts out dead
 |Gibbed								|- Agent starts out gibbed
 |Knocked Out						|- Agent starts out unconscious

@@ -110,11 +110,13 @@ namespace CCU.Patches.Inventory
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo mayorBadgeMagicString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.MayorBadgeMagicString));
+			FieldInfo wontFlee = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.wontFlee));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
+					new CodeInstruction(OpCodes.Stfld, wontFlee),
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldfld),
 				},

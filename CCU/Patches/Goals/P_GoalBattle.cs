@@ -56,10 +56,10 @@ namespace CCU.Patches.Goals
 		}
 		private static void StartCombatActions(Agent agent)
         {
-			if (agent.HasTrait<Backed_Up>() && !agent.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie)
+			if (agent.HasTrait<Backed_Up>() && !agent.GetHook<P_Agent_Hook>().WalkieTalkieUsed)
             {
 				agent.agentInteractions.UseWalkieTalkie(agent, agent.opponent); // Might be reversed, hard to tell
-				agent.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie = true;
+				agent.GetHook<P_Agent_Hook>().WalkieTalkieUsed = true;
             }
         }
 

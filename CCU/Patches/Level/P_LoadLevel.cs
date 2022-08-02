@@ -24,8 +24,7 @@ namespace CCU.Patches.Level
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetupMore5))]
 		public static void SetupMore5_Postfix(LoadLevel __instance)
         {
-			foreach (Agent agent in GC.agentList)
-				CustomGoals.RunSceneSetters(agent);
+			CustomGoals.RunSceneSetters();
         }
 	}
 
@@ -116,7 +115,7 @@ namespace CCU.Patches.Level
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
 			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore4_2"));
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: "SetupMore4_2")]
+		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore4_2_GeneralLoadouts(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -183,29 +182,6 @@ namespace CCU.Patches.Level
 						safeCombo.chunks.Add(agent.startingChunk);
 						safeCombo.sectors.Add(agent.startingChunk);
 						safeCombo.contents.Add(agent.startingChunkRealDescription);
-						agent.oma.hasKey = true;
-					}
-				}
-
-				// Also add a chance for Stash Hint to allocate to a random non-stash container in the chunk.
-				if (agent.HasTrait<Chunk_Stash_Hint>())
-                {
-					List<ObjectReal> validStashes = GC.objectRealList.Where(or => Containers.IsStash(or) && or.startingChunk == agent.startingChunk).ToList();
-					
-					if (validStashes.Count > 0)
-					{
-						//foreach (ObjectReal stash in validStashes)
-						//	stash.distributedKey = agent;
-
-						InvItem stashHint = agent.agentInvDatabase.AddItem("StashHint", 1);
-						stashHint.specificChunk = agent.startingChunk;
-						stashHint.specificSector = agent.startingSector;
-						stashHint.chunks.Add(agent.startingChunk);
-						stashHint.sectors.Add(agent.startingChunk);
-						stashHint.contents.Add(
-							agent.startingChunkRealDescription == VChunkType.Generic
-								? VChunkType.GuardPostSeeWarning
-								: agent.startingChunkRealDescription);
 						agent.oma.hasKey = true;
 					}
 				}

@@ -57,10 +57,9 @@ namespace CCU.Patches.Interface
 		public static bool CreateMutatorList_Level(LevelEditor __instance, ref float ___numButtonsLoad)
 		{
 			List<string> list = new List<string>();
+			list.AddRange(vMutator.VanillaMutators);
 
-			list.AddRange(vMutator.VanillaMutators); // This list is copied from this method so it shouldn't break anything
-
-			// TODO: RETEST 20220725
+			// Likely to be added to RogueLibs as a feature, so this might be redundant at some point.
 			foreach (C_CCU challenge in RogueFramework.Unlocks.OfType<C_CCU>())
 				list.Add(nameof(challenge));
 

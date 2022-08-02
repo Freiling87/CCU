@@ -178,7 +178,9 @@ namespace CCU.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.UseQuickEscapeTeleporter))]
 		public static bool UseQuickEscapeTeleporter_Blinker(bool isEndOfFrame, StatusEffects __instance)
         {
-			if (__instance.agent.HasTrait<Blinker>())
+            logger.LogDebug("Blinker health: " + __instance.agent.currentHealth);
+
+            if (__instance.agent.HasTrait<Blinker>())
             {
 				Agent agent = __instance.agent;
 				Vector3 targetLoc = Vector3.zero;

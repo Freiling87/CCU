@@ -49,7 +49,7 @@ namespace CCU.Traits.Combat
                 }
 
                 if (agent.HasTrait<Backed_Up>())
-                    agent.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie = false;
+                    agent.GetHook<P_Agent_Hook>().WalkieTalkieUsed = false;
             }
         }
     }

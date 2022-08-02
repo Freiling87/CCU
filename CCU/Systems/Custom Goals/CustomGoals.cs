@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
+using CCU.Patches.Agents;
 using RogueLibsCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,19 +18,19 @@ namespace CCU.Systems.CustomGoals
             Burned = "Burned",
             Dead = "Dead",
             Gibbed = "Gibbed",
-            KnockedOut = "KnockedOut",
+            KnockedOut = "Knocked Out",
 
             //  Other Customs
             Panic = "Panic",
-            WanderAgents = "WanderAgents",
-            WanderAgentsNonOwners = "WanderAgentsNonOwners",
-            WanderAgentsOwners = "WanderAgentsOwners",
-            WanderObjects = "WanderObjects",
-            WanderObjectsOwned = "WanderObjectsOwned",
+            WanderAgents = "Wander Between Agents",
+            WanderAgentsNonOwners = "Wander Between Agents (Non-Owner)",
+            WanderAgentsOwners = "Wander Between Agents (Owner)",
+            WanderObjects = "Wander Between Objects (Non-Owner)",
+            WanderObjectsOwned = "Wander Between Objects (Owner)",
 
             //  Vanilla Unlocked
-            CommitArson = "CommitArson",
-            FleeDanger = "FleeDanger",
+            CommitArson = "Commit Arson",
+            FleeDanger = "Flee Danger",
             RobotClean = "RobotClean",
 
             NoMoreSemicolon = "";
@@ -59,49 +60,57 @@ namespace CCU.Systems.CustomGoals
             //RobotClean,
         };
 
-        public static void RunSceneSetters(Agent agent)
+        public static void RunSceneSetters()
         {
-            if (!SceneSetters.Contains(agent.defaultGoal))
-                return;
-
-            // StatusEffects.ChangeHealth uses magic number -200f to auto-gib.
-            // Some of the stuff below is to exploit or avoid that.
-            switch (agent.defaultGoal)
+        start:
+            foreach (Agent agent in GC.agentList)
             {
-                case Arrested:
-                    // Copied from AgentInteractions.ArrestAgent
-                    agent.knockedOut = true;
-                    agent.knockedOutLocal = true;
-                    agent.arrested = true;
-                    agent.gc.tileInfo.DirtyWalls();
-                    agent.lastHitByAgent = agent.gettingArrestedByAgent;
-                    agent.justHitByAgent2 = agent.gettingArrestedByAgent;
-                    agent.healthBeforeKnockout = agent.health;
-                    agent.deathMethod = "Arrested";
-                    agent.deathKiller = agent.gettingArrestedByAgent.agentName;
-                    agent.statusEffects.ChangeHealth(-200f);
-                    agent.gettingArrestedByAgent.SetArrestingAgent(null);
-                    agent.SetGettingArrestedByAgent(null);
-                    agent.agentHitboxScript.SetWBSprites();
-                    agent.StopInteraction();
-                    break;
-                case Dead:
-                    // This avoids a magic number that would gib the agent.
-                    agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
-                    agent.statusEffects.ChangeHealth(-1);
-                    break;
-                case Burned:
-                    agent.deathMethod = "Fire"; // I think StatusEffects.SetupDeath will catch this and spawn the fire.
-                    // This avoids a magic number that would gib the agent.
-                    agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
-                    agent.statusEffects.ChangeHealth(-1); break;
-                case Gibbed:
-                    agent.statusEffects.ChangeHealth(-200f);
-                    break;
-                case KnockedOut:
-                    agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
-                    agent.tranqTime = 1000;
-                    break;
+                if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetHook<P_Agent_Hook>().SceneSetterFinished)
+                    continue;
+
+                switch (agent.defaultGoal)
+                {
+                    case Arrested:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        // Copied from AgentInteractions.ArrestAgent
+                        agent.knockedOut = true;
+                        agent.knockedOutLocal = true;
+                        agent.arrested = true;
+                        agent.gc.tileInfo.DirtyWalls();
+                        agent.gettingArrestedByAgent = agent;
+                        agent.lastHitByAgent = agent.gettingArrestedByAgent;
+                        agent.justHitByAgent2 = agent.gettingArrestedByAgent;
+                        agent.healthBeforeKnockout = agent.health;
+                        agent.deathMethod = "Arrested";
+                        agent.deathKiller = agent.gettingArrestedByAgent.agentName;
+                        agent.statusEffects.ChangeHealth(-200f);
+                        agent.gettingArrestedByAgent.SetArrestingAgent(null);
+                        agent.SetGettingArrestedByAgent(null);
+                        agent.agentHitboxScript.SetWBSprites();
+                        agent.StopInteraction();
+                        goto start;
+                    case Dead:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
+                        agent.statusEffects.ChangeHealth(-1);
+                        goto start;
+                    case Burned:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.deathMethod = "Fire";
+                        // This avoids a magic number that would gib the agent.
+                        agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
+                        agent.statusEffects.ChangeHealth(-1);
+                        goto start;
+                    case Gibbed:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.statusEffects.ChangeHealth(-200f);
+                        goto start;
+                    case KnockedOut:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
+                        agent.tranqTime = 1000;
+                        goto start;
+                }
             }
         }
 

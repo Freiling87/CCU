@@ -14,7 +14,7 @@ namespace CCU.Patches
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Movement.FindKnockBackStrength))]
         public static bool FindKnockBackStrength(Agent ___agent, ref float __result)
         {
-            if (___agent.HasTrait<Immovable>())
+            if (___agent?.HasTrait<Immovable>() ?? false)
             {
                 __result = 0;
                 return false;

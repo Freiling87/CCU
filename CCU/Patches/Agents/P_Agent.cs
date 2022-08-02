@@ -199,7 +199,7 @@ namespace CCU.Patches.Agents
 			#endregion
 			#region Combat
 			if (__instance.HasTrait<Backed_Up>())
-				__instance.GetHook<P_Agent_Hook>().HasUsedWalkieTalkie = false;
+				__instance.GetHook<P_Agent_Hook>().WalkieTalkieUsed = false;
 			#endregion
 			#region Drug Warrior
 			if (__instance.HasTrait<T_DrugWarrior>())
@@ -278,7 +278,9 @@ namespace CCU.Patches.Agents
 
 	public class P_Agent_Hook : HookBase<PlayfieldObject>
 	{
-		public bool HasUsedWalkieTalkie;
+		public bool SceneSetterFinished = false; // Avoids removal from series mid-traversal
+
+		public bool WalkieTalkieUsed;
 		public bool PermanentHire;
 		public int SuicideVestTimer;
 

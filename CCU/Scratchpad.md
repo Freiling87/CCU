@@ -8,97 +8,20 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
-##			C	Move Container var to Var1
-I don't think we'll need to re-open Containervestigateables.
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				T	Loadout Rewrite
-####				T	Key & Safe Combo
-P_LoadLevel_SetupMore4_2.SetupMore4_2_GeneralLoadouts
-####				T	Mayor Badge
-P_InvDatabase.FillAgent_LoadoutBadge
+###				T	Key Duplication Bug
+This worked for me, pending CL's confirmation
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
-##		CT	Passive
-agent.KillForQuest
-###			C!	Guilty
-####			C!	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
-Extended this to agent.employee but I doubt that's ever actually assigned anyway.
-###			T	Immovable
-Test
-###			T	Blinker*
-Blink to a random nearby spot when hit
-This is valid for player characters, so might need to be another mod
-###			T	Concealed Carrier
-Hides weapon when out of combat.
-###			T	Immobile
-Can't move (for turret types)
-###			C	Explodevice Eligible
-agent.canExplosiveStimulate
-###			C	Holographic
-Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Mute Dialogue
-Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
-###			C	Oblivious
-Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
-But will enter combat if their teammates do.
-###			C	Psychic Shield
-Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
-###			C	Reviveable (Infinite)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
-###			C	Reviveable (One)
-Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
-###			C	Reviver
-If hired and surviving, will revive the player once
-###			C	Spidey-Sensitive
-When alerted, immediately enters combat with perp (no search necessary)
-###			H	Statue
-Remove colors
-Tint white
-Make stationary, Invincible, non-reactive
-This should probably not be one trait, but many combined
-###			C	Stinky Aura
-Werewolf A-were-ness works on this character
-###			C	Supernatural
-Ghost Gibber works
-###			C	Tattletale
-Reports ALL crimes to alarm button
-###			C	Translucent
-Ghost visual effect
-###			C	Unappetizing
-Can't be bitten/cannibalized
-###			C	Unchallenging
-No XP for neutralization
-###			C	Vision Beams (Cop Bot)
-DW
-###			C	Zombified
-NOT Z-infected. But you might want to just Z-infect and kill, since it might be simplest.
-Agent.zombified
-Agent.customZombified
-###			√	Berserk (Declined)
-Rel General - Hostile to All
-###			√	Crusty
-Complete
-###			√	Extortable
-Complete
-###			√	Indestructible
-Complete
-###			√	Innocent
-Complete
-###			√	Not Vincible
-Complete
-###			√	Possessed
-Complete
-###			√	Status Effect Immune
-Complete
-###			√	Z-Infected
-Complete
 ##			P	1.0.0 Changelog
-An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has.
+An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
 
 - **Feature additions**
-  - Agent Goals
+  - Agent Default Goals
+    - Arrested
+    - Burned
+    - Dead
     - Gibbed
     - Knocked Out
   - Mutators
@@ -141,6 +64,7 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
       - High Goryllian Speaker*
       - Werewelsh Speaker*
     - Passive
+      - Immovable
       - Indestructible
       - Not Vincible
     - Relationships - Faction
@@ -180,31 +104,10 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
-##			T	Scene Setters
-###				T	Arrested
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	AgentInteractions.ArrestAgent (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	CCU.Systems.CustomGoals.CustomGoals.RunSceneSetters (Agent agent) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
-	CCU.Patches.Level.P_LoadLevel.SetupMore5_Postfix (LoadLevel __instance) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
-	LoadLevel.SetupMore5 () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-###				T	Burned
-DW
-But what did it do homie
-###				T	Dead
-Works but gibs. No gib.
-###				√	Gibbed
-Complete
-###				√	Knocked Out
-Complete
 ##			C	Documentation Update
 - Add Objects Link to main readme
 - Add Default Goals too
 - Manually verify full lists of features until scoping is more coherent.
-##		T	Test note
-20220725
 #		CT	Projects
 ##			C	Enclave System
 ###				C	Currency Changing
@@ -391,32 +294,17 @@ New
 DW (What's the point anyway)
 ####			C	Robot Clean
 DW
-###			C	Scene Setters
-####			C	Arrested
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	AgentInteractions.ArrestAgent (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	CCU.Systems.CustomGoals.CustomGoals.RunSceneSetters (Agent agent) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
-	CCU.Patches.Level.P_LoadLevel.SetupMore5_Postfix (LoadLevel __instance) (at <8ec24f2cb37249d98375c99ba6268ebe>:0)
-	LoadLevel.SetupMore5 () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-####			C	Burned
-DW
-####			C	Dead
-Works but gibs. No gib.
-####			√	Gibbed
+##			√	Scene Setters
+###				√	Arrested
 Complete
-####			√	Knocked Out
+###				√	Burned
 Complete
-#		C	Default Goals
-##			CT	Actual Goals
-###				T	Commit Arson
-New
-###				C	Flee Danger
-DW (What's the point anyway)
-###				C	Robot Clean
-DW
+###				√	Dead
+Complete
+###				√	Gibbed
+Complete
+###				√	Knocked Out
+Complete
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
@@ -1230,6 +1118,92 @@ Allows to sell shitty items in junk dealer, for instance
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
+##		CT	Passive
+###			C	Blinker*
+On hit: 
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	CCU.Patches.P_StatusEffects.UseQuickEscapeTeleporter_Blinker (System.Boolean isEndOfFrame, StatusEffects __instance) (at <c787a15bc1a54e8c86354dd6e6781bad>:0)
+	StatusEffects.UseQuickEscapeTeleporter (System.Boolean isEndOfFrame) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	StatusEffects.ChangeHealth (System.Single healthNum, PlayfieldObject damagerObject, UnityEngine.Networking.NetworkInstanceId cameFromClient, System.Single clientFinalHealthNum, System.String damagerObjectName, System.Byte extraVar) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	StatusEffects.ChangeHealth (System.Single healthNum, PlayfieldObject damagerObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Agent.Damage (PlayfieldObject damagerObject, System.Boolean fromClient) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	BulletHitbox.HitAftermath (Agent agent, System.Int32 bulletPlayerNum, System.Boolean bulletLocalPlayer, System.Boolean fromClient) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	BulletHitbox.HitObject (UnityEngine.GameObject hitObject, System.Boolean fromClient) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	BulletHitbox.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+###			C	Concealed Carrier
+Hides weapon when out of combat.
+First attempt DW
+###			C	Explodevice Eligible
+agent.canExplosiveStimulate
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
+###			C	Immobile
+Can't move (for turret types)
+DW
+###			C	Mute Dialogue
+Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
+###			C	Oblivious
+Doesn't care about destroyed property, dead teammates, or noises in restricted areas. 
+But will enter combat if their teammates do.
+###			C	Psychic Shield
+Wiki: "The Alien is unaffected by mind altering items such as a Hypnotizer or Haterator, but can be affected by items like Rage Poison or the Satellite's Happy Waves."
+###			C	Reviveable (Infinite)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it unlimited times.
+###			C	Reviveable (One)
+Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
+###			C	Reviver
+If hired and surviving, will revive the player once
+###			C	Spidey-Sensitive
+When alerted, immediately enters combat with perp (no search necessary)
+###			H	Statue
+Remove colors
+Tint white
+Make stationary, Invincible, non-reactive
+This should probably not be one trait, but many combined
+###			C	Stinky Aura
+Werewolf A-were-ness works on this character
+###			C	Supernatural
+Ghost Gibber works
+###			C	Tattletale
+Reports ALL crimes to alarm button
+###			C	Translucent
+Ghost visual effect
+###			C	Unappetizing
+Can't be bitten/cannibalized
+###			C	Unchallenging
+No XP for neutralization
+###			C	Vision Beams (Cop Bot)
+DW
+###			C	Zombified
+NOT Z-infected. But you might want to just Z-infect and kill, since it might be simplest.
+Agent.zombified
+Agent.customZombified
+###			√	Berserk (Declined)
+Rel General - Hostile to All
+###			√	Crusty
+Complete
+###			√	Extortable
+Complete
+###			√	Immovable
+Complete
+###			√	Indestructible
+Complete
+###			√	Innocent
+Complete
+###			√H	Guilty
+agent.KillForQuest to see where those poor apartment dwellers are declared collateral damage
+####			H	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+Extended this to agent.employee but I doubt that's ever actually assigned anyway.
+###			√	Not Vincible
+Complete
+###			√	Possessed
+Complete
+###			√	Status Effect Immune
+Complete
+###			√	Z-Infected
+Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
 Put custom methods in faction traits.
