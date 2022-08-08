@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
 using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,14 +14,14 @@ namespace CCU.Systems.Investigateables
 
 		public static string ExtraVarStringPrefix = "investigateable-message:::";
 
-		public static List<string> InvestigateableObjects = new List<string>()
+		public static List<string> InvestigateableObjects_Slot1 = new List<string>()
 		{
 			vObject.Altar,
 			vObject.ArcadeGame,
 			vObject.Boulder,
 			vObject.Computer,
 			// vObject.Counter,		// Really needs a sprite change
-			vObject.Door,
+			// vObject.Door,
 			vObject.Gravestone,
 			vObject.Jukebox,
 			// vObject.MovieScreen, // Didn't work yet, see notes
@@ -30,17 +31,23 @@ namespace CCU.Systems.Investigateables
 			vObject.Television,
 			vObject.Window,
 		};
+		public static List<string> InvestigateableObjects_Slot2 = new List<string>()
+		{
+			vObject.Door,
+		};
 
 		public static string MagicObjectName(string originalName)
 		{
-			if (InvestigateableObjects.Contains(originalName))
+			if (InvestigateableObjects_Slot1.Contains(originalName))
 				return vObject.Sign;
 
 			return originalName;
 		}
 
 		public static bool IsInvestigationString(string name) =>
-			name?.Contains(ExtraVarStringPrefix) ?? false;
+			(name?.Contains(ExtraVarStringPrefix) ?? false) &&
+			name != ExtraVarStringPrefix &&
+			name != ExtraVarStringPrefix + Environment.NewLine;
 
 		public static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
 			invDatabase.agent.mainGUI.invInterface.Slots.Where(islot => !IsInvestigationString(islot.itemNameText.text)).ToList();
@@ -63,9 +70,10 @@ namespace CCU.Systems.Investigateables
 
 			RogueInteractions.CreateProvider(h =>
 			{
-				if (InvestigateableObjects.Contains(h.Object.objectName) && h.Object.extraVarString != "")
+				if (InvestigateableObjects_Slot1.Contains(h.Object.objectName) && 
+					IsInvestigationString(h.Object.extraVarString))
 				{
-                    if (h.Object is Computer computer && !(h.Object.extraVarString is null) && IsInvestigationString(h.Object.extraVarString))
+                    if (h.Object is Computer computer)
 						h.RemoveButton(VButtonText.ReadEmail);
 
 					h.AddImplicitButton(CButtonText.Investigate, m =>

@@ -26,10 +26,12 @@ namespace CCU.Systems.Containers
 			vObject.Plant,
 			// vObject.Podium,	Investigateable
 			vObject.PoolTable,
+			vObject.Refrigerator,
 			vObject.Shelf,
 			//vObject.SlimeBarrel,	Poison looter
 			vObject.Stove,
 			vObject.Toilet,
+			vObject.TrashCan, 
 			vObject.Tube,
 			vObject.VendorCart,
 			vObject.WaterPump,
@@ -82,46 +84,51 @@ namespace CCU.Systems.Containers
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_ManholeClosed, t, new CustomNameInfo("I need a crowbar."));
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TubeFunctional, t, new CustomNameInfo("It's still running, and I want to keep all my limbs."));
 
-			logger.LogDebug("Branch");
 			RogueInteractions.CreateProvider(h => 
 			{
 				if (ContainerObjects.Contains(h.Object.objectName))
 				{
 					Agent agent = h.Object.interactingAgent;
-
-					logger.LogDebug("objectname: " + h.Object.objectName);
-
-					bool isHot =
-						(FireParticleEffectObjects.Contains(h.Object.objectName) && h.Object.ora.hasParticleEffect) ||
-						(h.Object is FlameGrate flameGrate && !(flameGrate.myFire is null));
-					bool grabHotStuff =
-						agent.HasTrait(VanillaTraits.FireproofSkin) ||
-						agent.HasTrait(VanillaTraits.FireproofSkin2) ||
-						agent.statusEffects.hasStatusEffect(VStatusEffect.ResistFire);
-
-					if (isHot && !grabHotStuff)
-                    {
-						agent.SayDialogue(CDialogue.CantAccessContainer_TooHot);
-						return;
-                    }
-					else if (h.Object is Manhole manhole && !manhole.opened)
-					{
-						agent.SayDialogue(CDialogue.CantAccessContainer_ManholeClosed);
-						return;
-					}
-					else if(h.Object is Tube tube && tube.functional)
-					{
-						agent.SayDialogue(CDialogue.CantAccessContainer_TubeFunctional);
-						return;
-					}
+					
+					if (h.Object is TrashCan)
+						h.RemoveButton(VButtonText.Open);
 
 					if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
 						h.AddImplicitButton(CButtonText.OpenContainer, m =>
 						{
-							m.Object.ShowChest();
+							TryOpenChest(m.Object, agent);
 						});
 				}
 			});
+		}
+
+		private static void TryOpenChest(PlayfieldObject playfieldObject, Agent agent)
+		{
+			bool isHot =
+				(FireParticleEffectObjects.Contains(playfieldObject.objectName) && playfieldObject.ora.hasParticleEffect) ||
+				(playfieldObject is FlameGrate flameGrate && !(flameGrate.myFire is null));
+			bool grabHotStuff =
+				agent.HasTrait(VanillaTraits.FireproofSkin) ||
+				agent.HasTrait(VanillaTraits.FireproofSkin2) ||
+				agent.statusEffects.hasStatusEffect(VStatusEffect.ResistFire);
+
+			if (isHot && !grabHotStuff)
+			{
+				agent.SayDialogue(CDialogue.CantAccessContainer_TooHot);
+				return;
+			}
+			else if (playfieldObject is Manhole manhole && !manhole.opened)
+			{
+				agent.SayDialogue(CDialogue.CantAccessContainer_ManholeClosed);
+				return;
+			}
+			else if (playfieldObject is Tube tube && tube.functional)
+			{
+				agent.SayDialogue(CDialogue.CantAccessContainer_TubeFunctional);
+				return;
+			}
+
+			playfieldObject.ShowChest();
 		}
 	}
 }

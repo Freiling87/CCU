@@ -23,7 +23,7 @@ namespace CCU.Patches.Interface
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.CreateGoalList))]
-		private static IEnumerable<CodeInstruction> CreateGoalList_Extend(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> CreateGoalList_ShowExtendedOptions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo updateList = AccessTools.DeclaredMethod(typeof(CustomGoals), nameof(CustomGoals.CustomGoalList));
@@ -75,7 +75,7 @@ namespace CCU.Patches.Interface
 		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
         {
 			if (__instance.currentInterface == "Objects" &&
-					Investigateables.InvestigateableObjects.Contains(___tileNameObject.text) &&
+					Investigateables.InvestigateableObjects_Slot1.Contains(___tileNameObject.text) &&
 					!Investigateables.IsInvestigationString(___extraVarStringObject.text))
 				___extraVarStringObject.text = Investigateables.ExtraVarStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
         }
@@ -167,10 +167,6 @@ namespace CCU.Patches.Interface
 
 		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName = "")
         {
-			Core.LogMethodCall();
-			logger.LogDebug("ObjectName: " + objectName);
-			logger.LogDebug("itemName: " + itemName ?? "");
-
 			if (Containers.ContainerObjects.Contains(objectName))
             {
 				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
