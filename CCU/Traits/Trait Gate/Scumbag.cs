@@ -33,9 +33,12 @@ namespace CCU.Traits.Trait_Gate
         {
             agent.oma.mustBeGuilty = true;
             agent.oma._mustBeGuilty = true;
-            //agent.bigQuestType = VanillaAgents.MechPilot;
-            //agent.mechPilotTarget = true;
-            //agent.GetComponent<PlayfieldObject>().isBigQuestObject = true;
+            //agent.isBigQuestObject = true;
+            //agent.bigQuestType = "MechPilot";
+            //agent.showBigQuestMarker = true;
+            //agent.bigQuestMarkerAlwaysSeen = true;
+            //agent.bigQuestMarkerMustBeDiscovered = true;
+            //agent.SpawnNewMapMarker();
         }
     }
 }

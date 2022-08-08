@@ -53,10 +53,7 @@ namespace CCU.Patches.AgentRelationships
 
             //  Trait Gates
             if (___agent.HasTrait<Scumbag>() && otherAgent.HasTrait(VanillaTraits.ScumbagSlaughterer))
-            {
                 ___agent.relationships.GetRelationship(otherAgent).mechHate = true;
-                ___agent.oma.mustBeGuilty = true;
-            }
 
             if (___agent.HasTrait<Suspecter>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == VRelationship.Neutral && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 relationship = VRelationship.Annoyed;

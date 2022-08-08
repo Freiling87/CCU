@@ -10,13 +10,6 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Scumbag
-CL: Scumbags appear to be bugged, they 
-	aren't counted for the mech big quest 
-		PlayfieldObject.BigQuestType
-			I believe this contains a string match 
-	spawn hostile and remain that way even if you're outside the mech.
-		Fixed - test
 ###				C	Limit Window Investigation to one side
 Shouldn't be accessible from both sides
 That code is more likely in Door than Window
