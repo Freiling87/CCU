@@ -5,6 +5,7 @@ using CCU.Localization;
 using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
+using CCU.Traits.Explosion_Modifier;
 using CCU.Traits.Gib_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Rel_Faction;
@@ -178,30 +179,32 @@ namespace CCU.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.UseQuickEscapeTeleporter))]
 		public static bool UseQuickEscapeTeleporter_Blinker(bool isEndOfFrame, StatusEffects __instance)
         {
-            logger.LogDebug("Blinker health: " + __instance.agent.currentHealth);
-
-            if (__instance.agent.HasTrait<Blinker>())
-            {
-				Agent agent = __instance.agent;
-				Vector3 targetLoc = Vector3.zero;
-				int attempts = 0;
-
-				do
+			try
+			{
+				if (__instance.agent.HasTrait<Blinker>())
 				{
-					targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
-					attempts++;
-				} 
-				while (Vector2.Distance(targetLoc, agent.tr.position) > 5f);
+					Agent agent = __instance.agent;
+					Vector3 targetLoc = Vector3.zero;
+					int attempts = 0;
 
-				if (targetLoc == Vector3.zero)
-					targetLoc = agent.tr.position;
+					do
+					{
+						targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
+						attempts++;
+					}
+					while (Vector2.Distance(targetLoc, agent.tr.position) > 5f);
 
-				agent.Teleport(targetLoc, false, true);
-				agent.agentCamera.fastLerpTime = 1f;
-				GC.audioHandler.Play(agent, VanillaAudio.Spawn);
+					if (targetLoc == Vector3.zero)
+						targetLoc = agent.tr.position;
 
-				return false;
+					agent.Teleport(targetLoc, false, true);
+					agent.agentCamera.fastLerpTime = 1f;
+					GC.audioHandler.Play(agent, VanillaAudio.Spawn);
+
+					return false;
+				}
 			}
+			catch { }
 
 			return true;
         }
@@ -371,6 +374,30 @@ namespace CCU.Patches
 				if (statusEffects.agent.isPlayer != 0 && !statusEffects.playedPlayerDeath)
 					GC.audioHandler.Play(statusEffects.agent, VanillaAudio.PlayerDeath);
 			}
+		}
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> SetExplosionTimer(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo agent = AccessTools.DeclaredField(typeof(StatusEffects), nameof(StatusEffects.agent));
+			MethodInfo explosionTimerDuration = AccessTools.DeclaredMethod(typeof(T_ExplosionTimer), nameof(T_ExplosionTimer.ExplosionTimerDuration));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldc_R4, 1.5f)
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld, agent),
+					new CodeInstruction(OpCodes.Call, explosionTimerDuration),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
 		}
 	}
 
