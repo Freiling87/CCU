@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Trait_Gate
 {
-    public class Scumbag : T_TraitGate
+    public class Scumbag : T_TraitGate, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -12,12 +12,10 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer, and will be hostile to them."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Scumbag)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,5 +28,14 @@ namespace CCU.Traits.Trait_Gate
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.oma.mustBeGuilty = true;
+            agent.oma._mustBeGuilty = true;
+            //agent.bigQuestType = VanillaAgents.MechPilot;
+            //agent.mechPilotTarget = true;
+            //agent.GetComponent<PlayfieldObject>().isBigQuestObject = true;
+        }
     }
 }

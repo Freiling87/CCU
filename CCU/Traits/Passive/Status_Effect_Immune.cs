@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Status_Effect_Immune : T_CCU
+    public class Status_Effect_Immune : T_CCU, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -12,12 +12,10 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is immune to all status effects... but they still have feelings."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Status_Effect_Immune)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,5 +28,10 @@ namespace CCU.Traits.Passive
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.preventStatusEffects = true;
+        }
     }
 }

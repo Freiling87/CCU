@@ -11,19 +11,18 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 ##			P	Bugs
 Except crickets, crickets are fine.
 ###				C	Scumbag
-CL: Scumbags appear to be bugged, they aren't counted for the mech big quest but more importantly they spawn hostile and remain that way even if you're outside the mech.
+CL: Scumbags appear to be bugged, they 
+	aren't counted for the mech big quest 
+		PlayfieldObject.BigQuestType
+			I believe this contains a string match 
+	spawn hostile and remain that way even if you're outside the mech.
+		Fixed - test
 ###				C	Limit Window Investigation to one side
 Shouldn't be accessible from both sides
 That code is more likely in Door than Window
 ###				C	Player Traits
 ####				C	Variable name based on Designer Mode
 ####				C	Verify what it looks like (Bummer)
-###				C	Too Hot! Dialogue
-https://discord.com/channels/187414758536773632/433748059172896769/1003835141426266113
-###				C	Add latest commit ID to dll filename
-Will make easier to track bug reports
-###				C	Door Var1 conflict
-Move to Var2?
 ##			P	1.0.0 Changelog
 An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
 

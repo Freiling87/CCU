@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class Seek_and_Destroy : T_Behavior
+    public class Seek_and_Destroy : T_Behavior, ISetupAgentStats
     {
         public override bool LosCheck => false;
         public override string[] GrabItemCategories => null;
@@ -14,12 +14,10 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Seek_and_Destroy), "Seek & Destroy"),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -36,5 +34,10 @@ namespace CCU.Traits.Behavior
         public static bool IsVanillaKillerRobot(Agent agent) =>
             agent.killerRobot &&
             agent.agentName == VanillaAgents.KillerRobot;
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.killerRobot = true;
+        }
     }
 }

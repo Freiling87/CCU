@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Behavior
 {
-    public class Suck_Blood : T_Behavior
+    public class Suck_Blood : T_Behavior, ISetupAgentStats
     {
         public override bool LosCheck => true;
         public override string[] GrabItemCategories => null;
@@ -14,12 +14,10 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Suck_Blood)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -32,5 +30,10 @@ namespace CCU.Traits.Behavior
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.losCheckAtIntervals = true;
+        }
     }
 }

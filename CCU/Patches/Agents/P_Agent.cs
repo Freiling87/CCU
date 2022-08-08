@@ -194,121 +194,13 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
-			#region Behavior
-			if (__instance.GetTraits<T_Behavior>().Where(c => c.LosCheck).Any())
-			{
-				if (__instance.HasTrait<Pick_Pockets>())
-                {
-					// Thieves have their LOScheck set to 50% in vanilla
-					if (GC.percentChance(50))
-						__instance.losCheckAtIntervals = true;
-				}
-				else 
-					__instance.losCheckAtIntervals = true;
-			}
+			foreach (ISetupAgentStats trait in __instance.GetTraits<ISetupAgentStats>())
+				trait.SetupAgentStats(__instance);
 
-			if (__instance.HasTrait<Seek_and_Destroy>())
-				__instance.killerRobot = true;
-			#endregion
-			#region Combat
-			if (__instance.HasTrait<Backed_Up>())
-				__instance.GetHook<P_Agent_Hook>().WalkieTalkieUsed = false;
-			#endregion
-			#region Drug Warrior
-			if (__instance.HasTrait<T_DrugWarrior>())
-				__instance.combat.canTakeDrugs = true;
-			#endregion
-			#region Gib Type
 			if (!__instance.GetTraits<T_GibType>().Any())
 				__instance.AddTrait<Meat_Chunks>();
-            #endregion
-            #region Interaction
-            if (__instance.HasTrait<T_Hack>())
-				__instance.hackable = true;
-			#endregion
-			#region Language
-			switch (__instance.agentName)
-            {
-				case VanillaAgents.Alien:
-					__instance.AddTrait<Speaks_ErSdtAdt>();
-					break;
-				case VanillaAgents.Assassin:
-					__instance.AddTrait<Speaks_Foreign>();
-					break;
-				case VanillaAgents.CopBot:
-					__instance.AddTrait<Speaks_Binary>();
-					break;
-				case VanillaAgents.Ghost:
-					__instance.AddTrait<Speaks_Chthonic>();
-					break;
-				case VanillaAgents.Gorilla:
-					__instance.AddTrait<Speaks_High_Goryllian>();
-					break;
-				case VanillaAgents.Hacker:
-					__instance.AddTrait<Speaks_Binary>();
-					break;
-				case VanillaAgents.KillerRobot:
-					__instance.AddTrait<Speaks_Binary>();
-					break;
-				case VanillaAgents.Robot:
-					__instance.AddTrait<Speaks_Binary>();
-					break;
-				case VanillaAgents.ShapeShifter:
-					__instance.AddTrait<Speaks_Chthonic>();
-					break;
-				case VanillaAgents.Vampire:
-					__instance.AddTrait<Speaks_Chthonic>();
-					break;
-				case VanillaAgents.Werewolf:
-					__instance.AddTrait<Speaks_Werewelsh>();
-					break;
-				case VanillaAgents.WerewolfTransformed:
-					__instance.AddTrait<Speaks_Werewelsh>();
-					break;
-				case VanillaAgents.Zombie:
-					__instance.AddTrait<Speaks_Chthonic>();
-					break;
-            }
-			#endregion
-			#region Merchant
-			if (__instance.GetTraits<T_MerchantType>().Any())
-				__instance.SetupSpecialInvDatabase();
-			#endregion
-			#region Passive
-			if (__instance.HasTrait<AccidentProne>())
-				__instance.dontStopForDanger = true;
 
-			if (__instance.HasTrait<Crusty>())
-				__instance.upperCrusty = true;
-
-			if (__instance.HasTrait<Guilty>())
-				__instance.oma.mustBeGuilty = true;
-
-			if (__instance.HasTrait<Possessed>())
-			{
-				__instance.secretShapeShifter = true;
-				__instance.oma.secretShapeShifter = true;
-				__instance.oma.mustBeGuilty = true;
-				__instance.agentHitboxScript.GetColorFromString("Red", "Eyes");
-			}
-
-			if (__instance.HasTrait<Status_Effect_Immune>())
-				__instance.preventStatusEffects = true;
-
-			if (__instance.HasTrait<Vision_Beams>())
-				__instance.agentSecurityBeams.enabled = true;
-
-			if (__instance.HasTrait<Z_Infected>())
-				__instance.zombieWhenDead = true;
-			#endregion
-			#region Relationships
-			if (__instance.HasTrait<Relationless>())
-				__instance.dontChangeRelationships = true;
-			#endregion
-			#region Trait Gates
-			if (__instance.HasTrait<Scumbag>())
-				__instance.oma.mustBeGuilty = true;
-			#endregion
+			Language.AddLangsToVanillaAgents(__instance);
 
 			if (GC.challenges.Contains(nameof(Homesickness_Disabled)))
 				__instance.canGoBetweenLevels = true;

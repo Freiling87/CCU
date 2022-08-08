@@ -5,7 +5,7 @@ namespace CCU.Traits.Behavior
     /// <summary>
     /// Don't rename this: needs to be distinct from Hire trait name
     /// </summary>
-    public class Pick_Pockets : T_Behavior
+    public class Pick_Pockets : T_Behavior, ISetupAgentStats
     {
         public override bool LosCheck => true;
         public override string[] GrabItemCategories => null;
@@ -17,12 +17,10 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Pick_Pockets)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -35,5 +33,11 @@ namespace CCU.Traits.Behavior
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            if (gc.percentChance(50))
+                agent.losCheckAtIntervals = true;
+        }
     }
 }

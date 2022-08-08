@@ -1,9 +1,9 @@
-﻿using RogueLibsCore;
-using CCU.Localization;
+﻿using CCU.Localization;
+using RogueLibsCore;
 
 namespace CCU.Traits.Behavior
 {
-    public class Grab_Money : T_Behavior
+    public class Grab_Money : T_Behavior, ISetupAgentStats
     {
         public override bool LosCheck => true;
         public override string[] GrabItemCategories => new string[] { VItemCategory.Money };
@@ -15,12 +15,10 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will grab money if they see it."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Grab_Money)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -33,5 +31,10 @@ namespace CCU.Traits.Behavior
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.losCheckAtIntervals = true;
+        }
     }
 }

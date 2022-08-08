@@ -32,7 +32,7 @@ namespace CCU.Patches.AgentRelationships
             }
 		}
 
-        //  TODO: Refactor
+        //  TODO: Refactor. Consider an Interface along the lines of ISetupAgentStats
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
@@ -53,7 +53,10 @@ namespace CCU.Patches.AgentRelationships
 
             //  Trait Gates
             if (___agent.HasTrait<Scumbag>() && otherAgent.HasTrait(VanillaTraits.ScumbagSlaughterer))
-                relationship = VRelationship.Hostile;
+            {
+                ___agent.relationships.GetRelationship(otherAgent).mechHate = true;
+                ___agent.oma.mustBeGuilty = true;
+            }
 
             if (___agent.HasTrait<Suspecter>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == VRelationship.Neutral && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 relationship = VRelationship.Annoyed;
@@ -67,7 +70,8 @@ namespace CCU.Patches.AgentRelationships
             if (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily)))
                 relationship = VRelationship.Aligned;
 
-            SetRelationshipTo(___agent, otherAgent, relationship);
+            if (!(relationship is null))
+                SetRelationshipTo(___agent, otherAgent, relationship);
         }
 
         //  TODO: Refactor

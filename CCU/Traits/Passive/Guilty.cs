@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Guilty : T_CCU
+    public class Guilty : T_CCU, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -11,13 +11,11 @@ namespace CCU.Traits.Passive
             PostProcess = RogueLibs.CreateCustomTrait<Guilty>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character is designated Guilty for The Law or Scumbag Slaughterer."),
-                    
+                    [LanguageCode.English] = String.Format("This character is designated Guilty for The Law."),
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Guilty)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,5 +28,10 @@ namespace CCU.Traits.Passive
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.oma.mustBeGuilty = true;
+        }
     }
 }

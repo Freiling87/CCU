@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Vision_Beams : T_CCU
+    public class Vision_Beams : T_CCU, ISetupAgentStats
     {
         //[RLSetup]
         public static void Setup()
@@ -12,12 +12,10 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's vision is visually indicated, as with Cop Bot."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Vision_Beams)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,5 +28,10 @@ namespace CCU.Traits.Passive
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.agentSecurityBeams.enabled = true;
+        }
     }
 }

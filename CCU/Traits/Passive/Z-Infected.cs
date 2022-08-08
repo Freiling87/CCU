@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Z_Infected : T_CCU
+    public class Z_Infected : T_CCU, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -12,12 +12,10 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is infected with the Z-Virus. They are not a zombie yet, but will become one when killed."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Z_Infected),("Z-Infected")),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,5 +28,10 @@ namespace CCU.Traits.Passive
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.zombieWhenDead = true;
+        }
     }
 }

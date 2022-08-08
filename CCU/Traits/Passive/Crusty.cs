@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Crusty : T_CCU
+    public class Crusty : T_CCU, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -12,12 +12,10 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has the privileges of the upper class."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Crusty)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,5 +28,10 @@ namespace CCU.Traits.Passive
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.upperCrusty = true;
+        }
     }
 }

@@ -3,7 +3,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Rel_General
 {
-    public class Relationless : T_Rel_General
+    public class Relationless : T_Rel_General, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -12,12 +12,10 @@ namespace CCU.Traits.Rel_General
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is always Neutral, like Butler Bot. What a lonely life.",
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Relationless)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -29,9 +27,13 @@ namespace CCU.Traits.Rel_General
                 });
         }
 
-        public override string GetRelationshipTo(Agent agent) =>
-            VRelationship.Neutral;
+        public override string GetRelationshipTo(Agent agent) => VRelationship.Neutral;
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.dontChangeRelationships = true;
+        }
     }
 }

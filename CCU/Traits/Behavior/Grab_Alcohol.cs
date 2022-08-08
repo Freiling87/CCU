@@ -1,10 +1,9 @@
-﻿using RogueLibsCore;
-using CCU.Localization;
-using System.Collections.Generic;
+﻿using CCU.Localization;
+using RogueLibsCore;
 
 namespace CCU.Traits.Behavior
 {
-    public class Grab_Alcohol : T_Behavior
+    public class Grab_Alcohol : T_Behavior, ISetupAgentStats
     {
         public override bool LosCheck => true;
         public override string[] GrabItemCategories => new string[] { VItemCategory.Alcohol };
@@ -16,12 +15,10 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will grab alcohol if they see it."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Grab_Alcohol)),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -34,5 +31,10 @@ namespace CCU.Traits.Behavior
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
+
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.losCheckAtIntervals = true;
+        }
     }
 }
