@@ -114,16 +114,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
-    <Compile Include="Challenges\C_CCU.cs" />
-    <Compile Include="Challenges\Followers\C_Followers.cs" />
+    <Compile Include="Mutators\C_CCU.cs" />
+    <Compile Include="Mutators\Followers\C_Followers.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Localization\CDialogue.cs" />
+    <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
     <Compile Include="Patches\P_Movement.cs" />
     <Compile Include="PropertyLogger.cs" />
+    <Compile Include="Systems\Language\Language.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
     <Compile Include="Localization\DetermineMoneyCostText.cs" />
@@ -133,10 +135,10 @@
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Localization\StatusEffectText.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
-    <Compile Include="Challenges\Branching\C_Branching.cs" />
-    <Compile Include="Challenges\MutatorManager.cs" />
-    <Compile Include="Challenges\Followers\Homesickness_Disabled.cs" />
-    <Compile Include="Challenges\Followers\Homesickness_Mandatory.cs" />
+    <Compile Include="Mutators\Branching\C_Branching.cs" />
+    <Compile Include="Mutators\MutatorManager.cs" />
+    <Compile Include="Mutators\Followers\Homesickness_Disabled.cs" />
+    <Compile Include="Mutators\Followers\Homesickness_Mandatory.cs" />
     <Compile Include="Patches\Agents\P_Agent.cs" />
     <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
@@ -248,7 +250,17 @@
     <Compile Include="Traits\Explode On Death\Slime.cs" />
     <Compile Include="Traits\Explode On Death\Stomp.cs" />
     <Compile Include="Traits\Explode On Death\T_ExplodeOnDeath.cs" />
+    <Compile Include="Traits\Explosion Timer\Cinematic_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\Longest_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\Longer_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\Long_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\Shorter_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\Shortest_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\Short_Fuse.cs" />
+    <Compile Include="Traits\Explosion Timer\T_ExplosionTimer.cs" />
+    <Compile Include="Traits\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\Loadout\Chunk_Stash_Hint.cs" />
+    <Compile Include="Traits\Passive\Brainless.cs" />
     <Compile Include="Traits\Passive\Concealed_Carrier.cs" />
     <Compile Include="Traits\Passive\Blinker.cs" />
     <Compile Include="Traits\Passive\Immobile.cs" />
@@ -455,7 +467,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="Documentation\C01_DefaultGoals.md" />
+    <None Include="Documentation\C01_AgentDefaultGoals.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
     <None Include="Documentation\M01_Installation.md" />
@@ -475,6 +487,7 @@
     <Content Include="Images\CCScreenshotExample.jpg" />
     <Content Include="Images\CCU_16x16.png" />
     <Content Include="Images\CCU_64x64.png" />
+    <Content Include="Images\CCU_Blue.png" />
     <Content Include="Images\CCU_Large.png" />
     <Content Include="Systems\Custom Dialogue\CDialogueConfig.xml" />
   </ItemGroup>

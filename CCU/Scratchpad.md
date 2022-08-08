@@ -10,10 +10,20 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				T	Key Duplication Bug
-This worked for me, pending CL's confirmation
+###				C	Scumbag
+CL: Scumbags appear to be bugged, they aren't counted for the mech big quest but more importantly they spawn hostile and remain that way even if you're outside the mech.
+###				C	Limit Window Investigation to one side
+Shouldn't be accessible from both sides
+That code is more likely in Door than Window
+###				C	Player Traits
+####				C	Variable name based on Designer Mode
+####				C	Verify what it looks like (Bummer)
+###				C	Too Hot! Dialogue
+https://discord.com/channels/187414758536773632/433748059172896769/1003835141426266113
 ###				C	Add latest commit ID to dll filename
 Will make easier to track bug reports
+###				C	Door Var1 conflict
+Move to Var2?
 ##			P	1.0.0 Changelog
 An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
 
@@ -28,11 +38,10 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Followers
       - Homesickness Disabled*
       - Homesickness Mandatory*
-  - Objects: New extra variables have been added. Check the [Objects](/CCU/Documentation/C02_Objects.md) page for specifics on the categories below.
+  - Objects: New extra variables have been added. Check the Objects feature page linked from the main page of the readme for specifics on the categories below.
     - Containers: Various objects can now store ONE item as a container.
     - Investigateables: It's a banner day for the rude... no emails are safe! In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
   - Traits
-    - Asterisk indicates Player Traits. These will be accessible to players in trait menus, and will be named like normal (non-CCU) traits. 
     - Behavior
       - Grab Alcohol
       - Grab Everything
@@ -57,12 +66,13 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
       - Ice Shards
       - Leaves
       - Meat Chunks
-    - Language: For use with or without Vocally Challenged. Characters are assumed to speak English (Sorry, it's canon) unless they have Vocally challenged. Part of a language system that may be extended in the future.
-      - Chthonic Speaker*
-      - ErSdtAdt Speaker*
-      - Foreign Speaker*
-      - High Goryllian Speaker*
-      - Werewelsh Speaker*
+    - Language: For use with or without Vocally Challenged. Characters without Vocally Challenged are assumed to speak English (sorry, it's canon).
+      - Speaks Binary*
+      - Speaks Chthonic*
+      - Speaks ErSdtAdt*
+      - Speaks Foreign*
+      - Speaks High Goryllian*
+      - Speaks Werewelsh*
     - Passive
       - Immovable
       - Indestructible
@@ -104,10 +114,6 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Specistist → Faction Gorilla Aligned
 ###			C	Flex Traits
 Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
-##			C	Documentation Update
-- Add Objects Link to main readme
-- Add Default Goals too
-- Manually verify full lists of features until scoping is more coherent.
 #		CT	Projects
 ##			C	Enclave System
 ###				C	Currency Changing
@@ -132,6 +138,40 @@ etc.
 Ritual Combat is respected as your right.
 ####				C	Wall Type: Concrete
 Yeah
+###				C	Enclave: District 69
+####				C	Agent: Nordic
+####				C	Agent: Reptilian
+####				C	Agent: Small Grey
+####				C	Agent: Glorbrax
+Secretes alcohol in exchange for raw Moneys
+####				C	Currency: Booze
+####				C	Floor Type: Steel
+####				C	Laws: 
+Highly cosmopolitan, no tolerance of slavery...? 
+Or maybe factionalized, with highly varying rules according to the chunk
+Or maybe their laws are configured to treat you like a test subject.
+####				C	Law Enforcers
+Apprehension Ray is hard to hit, but teleports you immediately to jail
+###				C	Enclave: Necropolis
+####			C	Agent: Bloodslave
+They don't even complain anymore
+####			C	Agent: Necromancer
+Expert hire, Can revive any dead agent for hire
+####			C	Agent: Ghoul
+Feral, eat corpses, hostile but cowardly
+####			C	Agent: Sangrist
+Currency Changer
+####			C	Agent: Z-Rancher
+Sells trained zombies, but that's way too OP
+####			C	Currency: Blood
+####			C	Feature: Canals
+Catacomb vibe?
+####			C	Floor Type: Dungeony stone
+####			C	Wall Type: Brick
+###				C	Enclave: Little Foreignia
+The most normal of the Enclaves. Nearly identical to vanilla, but people speak Foreign.
+###				C	Enclave: Werewales
+Um
 ##			C	Language (Overhaul)
 ###			C	00 Mutator: Our Town
 - NPCs have a chance to speak a foreign language
@@ -285,16 +325,17 @@ P_StatusEffects.AddTrait_Prefix
 ###			C	Sort active Traits by Value
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-
-##		CT	Agent Goals
-###			CT	Actual Goals
-####			T	Commit Arson
+#		C	Agent Goals
+##			CT	Default Goals
+###				T	Commit Arson
 New
-####			C	Flee Danger
+###				C	Flee Danger
 DW (What's the point anyway)
-####			C	Robot Clean
+###				C	Robot Clean
 DW
-##			√	Scene Setters
+###				C	Random Teleport
+CL: It would also be good for scattering key holders, like I've got an unfinished campaign where hunting down minibosses to get the keys to the elevator is meant to be one of the objectives but due to the way SoR loads chunks their almost always still standing nearing the elevator when you walk up, so being able to warp them away would be a nice workaround there.
+Also, a way to randomly place the Player would be useful too.
 ###				√	Arrested
 Complete
 ###				√	Burned
@@ -562,31 +603,29 @@ Complete
 P_StatusEffects_ExplodeBody.DisappearBody
 ###			√	Gib body
 P_StatusEffects_ExplodeBody.GibItAShot
-##		C	Explosion Timer
-Vanilla for EOD is 1.5 seconds
-###			C	Cinematic Fuse
-Base value 3m, meant to be used with Ridiculous Explosion
-Displays as with Disaster
-###			C	Suppress Countoff
-No countoff numbers
-Works with Cinematic Disaster countoff too
+##		C	Explosion AV
 ###			C	Suppress Red Blink
 No red blink before explosion
-###			C	Long Fuse
-3.00s
-5m with Cinematic
-###			C	Longer Fuse
-5.00s
-10m with Cinematic
-###			C	Longest Fuse
-10.00s
-15m with Cinematic
-###			C	Short Fuse
-0.75s
-1m with Cinematic
-###			C	Zero Fuse
-0.0
-##		C	Explosion Timer Trigger
+P_StatusEffects.ExplodeAfterDeathChecks transpiler for this.agent.objectSprite.FlashingRepeatedly
+###			H	Cinematic Timer
+Pending Ridiculous Explosion
+##		C	Explosion Timer
+Vanilla for EOD is 1.5 seconds
+###			H	Cinematic Fuse
+Pending creation of Ridiculous explosion.
+###			√	Long Fuse
+2x
+###			√	Longer Fuse
+3x
+###			√	Longest Fuse
+4x
+###			√	Short Fuse
+0.66x
+###			√	Shorter Fuse
+0.33x
+###			√	Shortest Fuse
+0.00x
+##		C	Explosion Trigger
 ###			C	Combat Start
 ###			C	Death
 ###			C	Low Health
@@ -831,6 +870,8 @@ Obv default to On Hire, maybe use a secret default trait to keep the code clean
 ##		C	Hire Type
 ###			C	Chloroform
 New
+###			C	Cyber-Intruder (Up-Close)
+No remote hack
 ###			C	Devour Corpse
 New
 ###			C	Disarm Trap
@@ -1017,6 +1058,13 @@ Complete
 ###			√	Untrustingest
 Complete
 ##		C	Language
+###				C	French Vanilla Gibberish
+Make Goryllian say Ook Ook if you don't understand it 
+Agent.SayDialogue:
+	string text = this.gc.nameDB.GetName(this.agentName + "_NonEnglish", "Dialogue");
+
+transpile agentName value to custom agentName method that returns appropriate gibberish.
+	If agent has multiple, have them pick a random one to speak gibberish from.
 ###			H	Mute
 No interactions under any circumstances, even with Translator
 ###			C	Polyglot
@@ -1119,6 +1167,8 @@ Since Character Creator inventory isn't by default carried to spawn, use it as a
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		CT	Passive
+###			C	Brainless
+Need a fully brain-broken agent for target dummies, statues, etc.
 ###			C	Blinker*
 On hit: 
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object

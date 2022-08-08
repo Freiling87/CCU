@@ -19,7 +19,7 @@ namespace CCU
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
 		public const string pluginName = "Custom Content Utilities - " + 
 			(designerEdition
-				? "Designer Edition" 
+				? "Designer Edition"
 				: "Player Edition"); 
 		public const string pluginVersion = "1.0.0";
 		public const bool designerEdition = true;

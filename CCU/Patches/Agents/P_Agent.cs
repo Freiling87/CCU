@@ -59,21 +59,21 @@ namespace CCU.Patches.Agents
 		}
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
-		public static void CanUnderstandEachOther_Postfix(Agent otherAgent, Agent __instance, ref bool __result)
+		public static void CanUnderstandEachOther_Postfix(Agent __instance, Agent otherAgent, ref bool __result)
 		{
-			if (__result is false && !__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked))
-			{
-				List<T_Language> myLanguages = __instance.GetTraits<T_Language>().ToList();
-				List<T_Language> yourLanguages = otherAgent.GetTraits<T_Language>().ToList();
+			if (__result is true || 
+				__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) ||
+				otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked))
+				return;
 
-				if (myLanguages.Any(lang => yourLanguages.Exists(otherLang => lang.Trait.traitName == otherLang.Trait.traitName)) ||
-					myLanguages.Any(t => t.VanillaSpeakers.Contains(otherAgent.agentName)) ||
-					yourLanguages.Any(t => t.VanillaSpeakers.Contains(__instance.agentName)))
-				{
-					__result = true;
-					return;
-				}
-			}
+			List<T_Language> myLanguages = __instance.GetTraits<T_Language>().ToList();
+			List<T_Language> yourLanguages = otherAgent.GetTraits<T_Language>().ToList();
+
+			if (myLanguages.Select(myLang => myLang.TextName).Intersect(
+					yourLanguages.Select(yourLang => yourLang.TextName)).Any())
+				__result = true;
+
+			return;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.FindSpeed))]
@@ -178,7 +178,7 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetBrainActive))]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetBrainActive))]
 		public static bool SetBrainActive_Prefix(Agent __instance, ref bool isActive)
         {
 			if (__instance.HasTrait<Brainless>())
@@ -225,16 +225,50 @@ namespace CCU.Patches.Agents
             #region Interaction
             if (__instance.HasTrait<T_Hack>())
 				__instance.hackable = true;
-            #endregion
-            #region Language
-			foreach (T_Language_Unlock unlock in RogueFramework.Unlocks.OfType<T_Language_Unlock>())
+			#endregion
+			#region Language
+			switch (__instance.agentName)
             {
-				// Hacky, but possibly the only way to do this.
-				T_Language trait = __instance.AddTrait(unlock.Name).GetHook<T_Language>();
-
-				if (!trait.VanillaSpeakers.Contains(__instance.agentName))
-					__instance.statusEffects.RemoveTrait(unlock.Name);
-			}
+				case VanillaAgents.Alien:
+					__instance.AddTrait<Speaks_ErSdtAdt>();
+					break;
+				case VanillaAgents.Assassin:
+					__instance.AddTrait<Speaks_Foreign>();
+					break;
+				case VanillaAgents.CopBot:
+					__instance.AddTrait<Speaks_Binary>();
+					break;
+				case VanillaAgents.Ghost:
+					__instance.AddTrait<Speaks_Chthonic>();
+					break;
+				case VanillaAgents.Gorilla:
+					__instance.AddTrait<Speaks_High_Goryllian>();
+					break;
+				case VanillaAgents.Hacker:
+					__instance.AddTrait<Speaks_Binary>();
+					break;
+				case VanillaAgents.KillerRobot:
+					__instance.AddTrait<Speaks_Binary>();
+					break;
+				case VanillaAgents.Robot:
+					__instance.AddTrait<Speaks_Binary>();
+					break;
+				case VanillaAgents.ShapeShifter:
+					__instance.AddTrait<Speaks_Chthonic>();
+					break;
+				case VanillaAgents.Vampire:
+					__instance.AddTrait<Speaks_Chthonic>();
+					break;
+				case VanillaAgents.Werewolf:
+					__instance.AddTrait<Speaks_Werewelsh>();
+					break;
+				case VanillaAgents.WerewolfTransformed:
+					__instance.AddTrait<Speaks_Werewelsh>();
+					break;
+				case VanillaAgents.Zombie:
+					__instance.AddTrait<Speaks_Chthonic>();
+					break;
+            }
 			#endregion
 			#region Merchant
 			if (__instance.GetTraits<T_MerchantType>().Any())

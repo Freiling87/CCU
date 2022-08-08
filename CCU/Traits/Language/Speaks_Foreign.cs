@@ -5,7 +5,10 @@ namespace CCU.Traits.Language
 {
     public class Speaks_Foreign : T_Language
     {
-        public override string[] VanillaSpeakers => new string[] { };
+        public override string[] VanillaSpeakers => new string[] 
+        { 
+            VanillaAgents.Assassin 
+        };
 
         [RLSetup]
         public static void Setup()
@@ -13,13 +16,13 @@ namespace CCU.Traits.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Foreign>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to anyone else with this trait. Not assigned to any vanilla NPCs."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_Foreign)),
                 })
-                .WithUnlock(new T_Language_Unlock
+                .WithUnlock(new TraitUnlock
                 {
                     Cancellations = { },
                     CharacterCreationCost = 1,

@@ -64,13 +64,9 @@ namespace CCU.Systems.CustomGoals
 
         public static void RunSceneSetters()
         {
-            logger.LogDebug("RunSceneSetters");
         start:
             foreach (Agent agent in GC.agentList)
             {
-                logger.LogDebug("Name: " + agent.agentRealName);
-                logger.LogDebug("Goal: " + agent.defaultGoal);
-
                 if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetHook<P_Agent_Hook>().SceneSetterFinished)
                     continue;
 

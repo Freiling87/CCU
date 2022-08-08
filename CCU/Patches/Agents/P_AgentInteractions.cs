@@ -8,6 +8,7 @@ using CCU.Traits.Hire_Duration;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
+using CCU.Traits.Language;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Rel_Faction;
@@ -29,12 +30,13 @@ namespace CCU.Patches.Agents
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// TODO: Replace with Roguelibs' Custom Interactions system
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), 
 			argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
-        private static IEnumerable<CodeInstruction> DetermineButtons(IEnumerable<CodeInstruction> codeInstructions)
+        private static IEnumerable<CodeInstruction> DetermineButtons_AddCustomAgentButtons(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo ACAB = AccessTools.DeclaredMethod(typeof(P_AgentInteractions), nameof(AddCustomAgentButtons));
+			MethodInfo addCustomAgentButtons = AccessTools.DeclaredMethod(typeof(P_AgentInteractions), nameof(AddCustomAgentButtons));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -52,7 +54,7 @@ namespace CCU.Patches.Agents
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),				// agent
-					new CodeInstruction(OpCodes.Call, ACAB)				// void
+					new CodeInstruction(OpCodes.Call, addCustomAgentButtons)				// void
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
 				{
@@ -425,6 +427,35 @@ namespace CCU.Patches.Agents
 				agentInteractions.AddButton("Shakedown", " (" + threat + "%)");
 			}
 		}
+
+        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons), argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(List<string>), typeof(List<string>), typeof(List<int>) })]
+		private static IEnumerable<CodeInstruction> DetermineButtons_BypassLanguageHardcode(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo cantUnderstandEachOther = AccessTools.DeclaredMethod(typeof(P_AgentInteractions), nameof(P_AgentInteractions.CanUnderstandEachOther));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 2,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_2),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldstr, "Translator"),
+					new CodeInstruction(OpCodes.Callvirt),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_1),
+					new CodeInstruction(OpCodes.Ldarg_2),
+					new CodeInstruction(OpCodes.Call, cantUnderstandEachOther),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		private static bool CanUnderstandEachOther(Agent agent, Agent otherAgent) =>
+			otherAgent.inventory.HasItem(vItem.Translator) ||
+			agent.CanUnderstandEachOther(otherAgent, true, true);
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.FinishedOperating), 
 			argumentTypes: new[] { typeof(Agent) })]
