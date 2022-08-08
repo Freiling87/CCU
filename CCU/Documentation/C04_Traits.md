@@ -1,12 +1,26 @@
-﻿#		Traits
-An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has.
+﻿<p align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU Logo" align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
+</p>
+
+<h1 align="center">
+CCU
+<br>
+Traits
+</h1>
+<br>
+
+An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have the [CCU] name prefix that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
+
 ##			Behavior
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades<br>- Might extend this to the other traps.
 |Eat Corpses										|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
 |Grab Alcohol										|- Grab Alcohol, like me<br>- Don't do drinks, kids
 |Grab Drugs											|- Grab Drugs, like me also<br>- Don't do drugs, kids
+|Grab Everything									|- Grab Everything, like a toddler<br>- Don't have kids, kids
 |Grab Food											|- Grab Food, like your mom
 |Grab Money											|- Grab Money, like Slum Dweller
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
@@ -14,13 +28,14 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
 |Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite
 
 ##			Combat
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Coward												|- Always flees from combat
 |Fearless											|- Never flees from combat
 
 ##			Cost Scale
-This affects all costs from the agent: Hire, Interaction, Merchant
+This affects ALL costs from the agent's interactions: Hire, Interaction, Merchant
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -62,7 +77,14 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |The Last Whiff										|Nicotine
 |Wildcard											|Random (Vanilla Drug Dealer)
 
+##			Drug Warrior Modifier
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Suppress Syringe AV								|- No longer does Syringe sound & text when activating Drug Warrior
+
 ##			Explode on Death
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Big												|Big explosion
@@ -77,7 +99,21 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Warp												|Teleports anyone nearby to a random place in the level
 |Water												|Splashes water on death
 
+##			Gib Type
+Agents default to Meat Chunks if they have no Gib trait.
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Ectoplasm											|- Alien gibs
+|Gibless											|- No gibs
+|Glass Shards										|- Guess
+|Golemite											|- Rock chunks
+|Ice Shards											|- Guess
+|Leaves												|- Yes, leaves
+|Meat Chunks										|- Just like mama used to explode into
+
 ##			Hire
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Cyber-Intruder										|- Hack target Object or hackable Agent
@@ -86,6 +122,7 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Muscle												|- Hire as protection
 
 ##			Interaction
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Administer Blood Bag								|- Lose 20HP for a Blood Bag
@@ -108,6 +145,7 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Use Blood Bag										|- Give Blood Bag to heal for 20HP
 
 ##			Interaction Gate
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Untrusting											|- Will only interact with Agents Friendly or better *
@@ -116,7 +154,20 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 
 ****Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
 
+##			Language
+Language traits are part of a larger planned system. For now, they have limited utility unless you make extensive use of them with Vocally Challenged.
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Speaks Chthonic									|- Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies and anyone else with this trait
+|Speaks ErSdtAdt									|- Agent can bypass Vocally Challenged when speaking to Aliens and anyone else with this trait
+|Speaks Foreign										|- Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait
+|Speaks High Goryllian								|- Agent can bypass Vocally Challenged when speaking to Gorillas and anyone else with this trait
+|Speaks ErSdtAdt									|- Agent can bypass Vocally Challenged when speaking to Aliens and anyone else with this trait
+|Speaks Werewelsh									|- Agent can bypass Vocally Challenged when speaking to Werewolves (both forms) and anyone else with this trait
+
 ##			Loadout
+
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Manager Key										|- Starts with the chunk's Key
@@ -124,6 +175,7 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Manager Safe Combo									|- Starts with the chunk's Safe Combo
 
 ##			Merchant Type
+
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Anthropophagie										|Alcohol, Axes & Bear Traps
@@ -183,7 +235,10 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Crusty												|- Same as Upper-Crusty
 |Extortable											|- Valid target for Extortionist
 |Guilty												|- Valid target for Cop Big Quest
+|Indestructible										|- Can't be gibbed (can still be killed)
+|Immovable											|- Receives zero knockback
 |Innocent											|- Gets away with murder
+|Not Vincible										|- Invincible (had to change name for reasons)
 |Possessed											|- Has Shapeshifter
 |Status Effect-Immune								|- Guess, genius
 |Z-Infected											|- Zombifies on death

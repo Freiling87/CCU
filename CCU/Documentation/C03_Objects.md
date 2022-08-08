@@ -1,8 +1,21 @@
-﻿#		Objects
+﻿<p align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU Logo" align="left">
+<img width = "140" src="CCU/Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
+</p>
+
+<h1 align="center">
+CCU
+<br>
+Mutators
+</h1>
+<br>
+
 ##			Containers
-Some objects can now contain Items.
+Some objects can now contain Items. See the Object Variables list for specifics.
+
 ##			Investigation
-You can now write and read text with several objects as if they were Signs. The player views this text with the "Investigate" interaction (wording intended to be as broad as possible).
+You can now write and read text with several objects as if they were Signs. The player views this text with the "Investigate" interaction (wording intended to be as broad as possible). See the Object Variables list for specifics.
+
 ##			Object Variables
 The full list of modifiable variables added to all Objects. **(V)** indicates the variable slot is already occupied by Vanilla content.
 
@@ -16,10 +29,10 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Armchair
 |ATM Machine
 |Augmentation Booth
-|Barbecue							|						|						|Container Item			|- Fire prevents container access, unless Agent has fire resistance.
+|Barbecue							|Container Item			|						|						|- Fire prevents container access, unless Agent has fire resistance.
 |Bar Stool
-|Bathtub							|						|						|Container Item
-|Bed								|						|						|Container Item
+|Bathtub							|Container Item			|						|
+|Bed								|Container Item			|						|
 |Boulder							|Investigation Text		|
 |Boulder (Small)
 |Bush
@@ -29,58 +42,59 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Computer							|Investigation Text		|
 |Counter
 |Crate
-|Desk								|						|						|Container Item
-|Door								|Investigation Text		|
-|Elevator
-|Event Trigger Floor
+|Desk								|Container Item			|						|
+|Door								|**(V)**				|						|
+|Elevator							|**(V)**
 |Exploding Barrel
 |Fire Hydrant
-|Fireplace							|						|						|Container Item			|- Fire prevents container access, unless Agent has fire resistance.
+|Fireplace							|Container Item			|						|						|- Fire prevents container access, unless Agent has fire resistance.
 |Fire Spewer
-|Flame Grate
-|Flaming Barrel						|						|						|Container Item			|- Fire prevents container access, unless Agent has fire resistance.
-|Gas Vent							|						|						|Container Item
+|Flaming Barrel						|Container Item			|						|						|- Fire prevents container access, unless Agent has fire resistance.
+|Floor Event Trigger				|
+|Floor Switch						|
+|Gas Vent							|Container Item			|						|						|
 |Generator
 |Generator (Overclocked)
+|Grate								|**(V)**
 |Gravestone							|Investigation Text		|
 |Jukebox							|Investigation Text		|
 |Killer Plant
 |Lamp
 |Laser Emitter						|**(V)**				|
 |Loadout Machine
-|Manhole							|						|						|Container Item
+|Manhole							|Container Item			|						|						|
 |Mine
 |Movie Screen
-|Plant								|						|						|Container Item
+|Plant								|Container Item			|						|						|
 |Podium								|Investigation Text		|
 |Police Box
-|Pool Table							|						|						|Container Item
+|Pool Table							|Container Item			|						|						|
 |Power Box
-|Refrigerator
+|Refrigerator						|Container Item			|						|						|
 |Safe								|**(V)**				|**(V)**				|**(V)**				|
 |Satellite Dish
 |Security Camera
 |Sell-O-Matic
-|Shelf								|						|						|Container Item
+|Shelf								|Container Item			|						|						|
 |Sign								|**(V)**				|
 |Slime Barrel
 |Slot Machine
 |Speaker							|Investigation Text		|
-|Stove								|						|						|Container Item
+|Stove								|Container Item			|						|						|
 |Switch Basic
 |Switch Floor
 |Table
 |Table (Big)
 |Television							|Investigation Text		|
-|Toilet								|						|						|Container Item
-|Trash Can
+|Toilet								|Container Item			|						|						|
+|Trash Can							|Container Item			|						|						|
 |Tree
-|Tube								|						|						|Container Item
+|Tube								|Container Item			|						|						|- Factory operation prevents container access.
 |Turntables
 |Turret
-|Vendor Stand						|						|						|Container Item
-|Water Pump							|						|						|Container Item
-|Well								|						|						|Container Item
+|Vendor Stand						|Container Item			|						|						|
+|Water Pump							|Container Item			|						|						|
+|Well								|Container Item			|						|						|
 |Window								|Investigation Text		|
 
 
