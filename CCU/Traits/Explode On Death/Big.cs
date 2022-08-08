@@ -1,7 +1,6 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
 using System;
-using System.Linq;
 
 namespace CCU.Traits.Explode_On_Death
 {
@@ -25,7 +24,7 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DesignerName(typeof(Huge)), DesignerName(typeof(Normal)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

@@ -4,6 +4,7 @@
     {
         public T_Bodyguarded() : base() { }
 
+        public abstract int BodyguardCountBase { get; }
         public abstract string BodyguardType { get; }
     }
 }

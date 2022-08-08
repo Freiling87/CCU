@@ -51,8 +51,7 @@
 			PurchaseSlave = "PurchaseSlave",
 			PutMoneyTowardHome = "PutMoneyTowardHome",
 			UseBloodBag = "UseBloodBag",
-        #endregion
-		#region Objects
+			Open = "Open",
 			ReadEmail = "ReadEmail",
 		#endregion
             NoMoreSemiColon = "lol";

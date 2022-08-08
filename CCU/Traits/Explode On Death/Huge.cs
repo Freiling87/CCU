@@ -24,7 +24,7 @@ namespace CCU.Traits.Explode_On_Death
                 })
                 .WithUnlock(new TraitUnlock
                 {
-                    Cancellations = { DesignerName(typeof(Big)), DesignerName(typeof(Normal)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
