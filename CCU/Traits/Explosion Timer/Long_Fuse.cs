@@ -1,7 +1,7 @@
 ﻿using CCU.Traits.Explosion_Modifier;
 using RogueLibsCore;
 
-namespace CCU.Traits.Explostion_Modifier
+namespace CCU.Traits.Explosion_Timer
 {
     public class Long_Fuse : T_ExplosionTimer
     {
