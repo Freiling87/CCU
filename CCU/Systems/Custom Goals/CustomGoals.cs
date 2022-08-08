@@ -19,6 +19,7 @@ namespace CCU.Systems.CustomGoals
             Dead = "Dead",
             Gibbed = "Gibbed",
             KnockedOut = "Knocked Out",
+            Zombified = "Zombified",
 
             //  Other Customs
             Panic = "Panic",
@@ -36,13 +37,14 @@ namespace CCU.Systems.CustomGoals
             NoMoreSemicolon = "";
 
         // Pseudo-Goals that trigger once on level load
-        public static List<string> SceneSetters = new List<string>()
+        public static List<string> SceneSetters = new List<string>() 
         {
             Arrested,
             Burned,
             Dead,
             Gibbed,
             KnockedOut,
+            Zombified,
         };
         public static List<string> ActualGoals = new List<string>()
         {
@@ -62,9 +64,13 @@ namespace CCU.Systems.CustomGoals
 
         public static void RunSceneSetters()
         {
+            logger.LogDebug("RunSceneSetters");
         start:
             foreach (Agent agent in GC.agentList)
             {
+                logger.LogDebug("Name: " + agent.agentRealName);
+                logger.LogDebug("Goal: " + agent.defaultGoal);
+
                 if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetHook<P_Agent_Hook>().SceneSetterFinished)
                     continue;
 
@@ -109,6 +115,12 @@ namespace CCU.Systems.CustomGoals
                         agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                         agent.tranqTime = 1000;
+                        goto start;
+                    case Zombified:
+                        agent.zombieWhenDead = true;
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
+                        agent.statusEffects.ChangeHealth(-1);
                         goto start;
                 }
             }
