@@ -60,7 +60,7 @@ namespace CCU.Patches.Agents
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
 		public static void CanUnderstandEachOther_Postfix(Agent otherAgent, Agent __instance, ref bool __result)
-        {
+		{
 			if (__result is false && !__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked))
 			{
 				List<T_Language> myLanguages = __instance.GetTraits<T_Language>().ToList();
@@ -69,12 +69,12 @@ namespace CCU.Patches.Agents
 				if (myLanguages.Any(lang => yourLanguages.Exists(otherLang => lang.Trait.traitName == otherLang.Trait.traitName)) ||
 					myLanguages.Any(t => t.VanillaSpeakers.Contains(otherAgent.agentName)) ||
 					yourLanguages.Any(t => t.VanillaSpeakers.Contains(__instance.agentName)))
-                {
+				{
 					__result = true;
 					return;
-				} 
+				}
 			}
-        }
+		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.FindSpeed))]
 		public static bool FindSpeed_Prefix(Agent __instance, ref int __result)
@@ -177,6 +177,19 @@ namespace CCU.Patches.Agents
 
 			return true;
 		}
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetBrainActive))]
+		public static bool SetBrainActive_Prefix(Agent __instance, ref bool isActive)
+        {
+			if (__instance.HasTrait<Brainless>())
+            {
+				isActive = false;
+				__instance.brain.active = false;
+				__instance.interactable = false;
+			}
+
+			return true;
+        }
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)

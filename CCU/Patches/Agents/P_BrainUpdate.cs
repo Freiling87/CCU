@@ -2,6 +2,7 @@
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Behavior;
+using CCU.Traits.Passive;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -186,5 +187,14 @@ namespace CCU.Patches.Agents
 				}
 			}
 		}
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate))]
+		public static bool MyUpdate_Prefix(Agent ___agent)
+        {
+			if (___agent.HasTrait<Brainless>())
+				return false;
+
+			return true;
+        }
 	}
 }
