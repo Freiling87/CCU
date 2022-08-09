@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Content>
+	<Agents>
+		<Agent Name="SlumDweller">
+			<Situation Type="Arrested">
+				<Line>Three hots and a cot? Oh, woe is me!</Line>
+				<Line>You can't arrest me, I'm the King of Cleveland!</Line>
+			</Situation>
+			<Situation Type="GrabMoney">
+				<Line>Ooh, a piece o' currency!</Line>
+				<Line>Another smard investmunt paysh off. *Burp*</Line>
+			</Situation>
+		</Agent>
+	</Agents>
+	<Traits>
+		<Trait Name="Addict">
+			<Situation Type="StartCombat">
+				<Line>Aww, man. Bummer.</Line>
+				<Line>Who DARES harsh my mellow?!</Line>
+			</Situation>
+			<Situation Type="Withdrawal">
+				<Line>Is it just me, or is it cold and hot and my bones hurt in here?</Line>
+				<Line>You know, drug withdrawals are actually not that much fun.</Line>
+			</Situation>
+		</Trait>
+	</Traits>
+	<Objects>
+		<Object Name="Gravestone">
+			<Situation Type="Investigate">
+				<Line>
+					Figure out how to make multi-line entries work, e.g.:
+					
+					Here lies
+				Jahnothun Frumpus
+				~~~~~~~~~~~~~~~~~
+					69 - 420
+					  RIB</Line>
+			</Situation>
+		</Object>
+		<Object Name="Computer">
+			<Situation Type="Investigate">
+				<Line>
+					
+				</Line>
+			</Situation>
+		</Object>
+		<Object Name="Television">
+			<Situation Type="PopupRotation">
+				<Line>
+					One situation adds a line to the pool of randoms the TV can pull from.
+					Another situation sets a script of several lines to rotate through. These read off a bit more quickly.
+				</Line>
+			</Situation>
+		</Object>
+	</Objects>
+		
+</Content>

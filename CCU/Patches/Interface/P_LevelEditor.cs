@@ -167,7 +167,7 @@ namespace CCU.Patches.Interface
 
 		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName = "")
         {
-			if (Containers.ContainerObjects.Contains(objectName))
+			if (Containers.ContainerObjects_Slot1.Contains(objectName))
             {
 				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
 				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor);

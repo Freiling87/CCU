@@ -10,9 +10,7 @@ Traits
 </h1>
 <br>
 
-WARNING: This was published prematurely. It includes some v1.0.0 content.
-
-An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have the [CCU] name prefix that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
+An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have the [CCU] name prefix that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets.
 
 ##			Behavior
 
@@ -101,6 +99,18 @@ Upon entering combat, the agent will apply a status effect to themselves, simila
 |Warp												|Teleports anyone nearby to a random place in the level
 |Water												|Splashes water on death
 
+##			Explosion Timer
+For use with Explode on Death traits. Vanilla timer duration is 1.5 seconds. You can use multiple of these traits to fine-tune the timer, but the math is up to you.
+
+|Trait												|Fuse duration multiplier								|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Long Fuse											|2.00
+|Longer Fuse										|3.00
+|Longest Fuse										|4.00
+|Short Fuse											|0.66
+|Shorter Fuse										|0.33
+|Shortest Fuse										|0.00
+
 ##			Gib Type
 Agents default to Meat Chunks if they have no Gib trait.
 
@@ -173,7 +183,6 @@ Language traits are part of a larger planned system. For now, they have limited 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Manager Key										|- Starts with the chunk's Key
-|Manager Mayor Badge								|- Starts with the chunk's Mayor Badge
 |Manager Safe Combo									|- Starts with the chunk's Safe Combo
 
 ##			Merchant Type
@@ -234,13 +243,15 @@ Language traits are part of a larger planned system. For now, they have limited 
 ##			Passive
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Blinker											|- Teleports randomly when damaged
+|Brainless											|- Heavy Reddit user
 |Crusty												|- Same as Upper-Crusty
 |Extortable											|- Valid target for Extortionist
 |Guilty												|- Valid target for Cop Big Quest
-|Indestructible										|- Can't be gibbed (can still be killed)
+|Indestructible										|- Can be killed, but body can't be destroyed
 |Immovable											|- Receives zero knockback
 |Innocent											|- Gets away with murder
-|Not Vincible										|- Invincible (had to change name for reasons)
+|Not Vincible										|- Had to change name for reasons
 |Possessed											|- Has Shapeshifter
 |Status Effect-Immune								|- Guess, genius
 |Z-Infected											|- Zombifies on death

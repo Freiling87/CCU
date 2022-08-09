@@ -36,7 +36,6 @@ namespace CCU.Systems.CustomGoals
 
             NoMoreSemicolon = "";
 
-        // Pseudo-Goals that trigger once on level load
         public static List<string> SceneSetters = new List<string>() 
         {
             Arrested,

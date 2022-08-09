@@ -174,7 +174,7 @@
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
-    <Compile Include="Systems\Custom Goals\CustomGoals.cs" />
+    <Compile Include="Systems\Agent Goals\CustomGoals.cs" />
     <Compile Include="Systems\Object Variables\Container\Containers.cs" />
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
@@ -491,7 +491,7 @@
     <Content Include="Images\CCU_64x64.png" />
     <Content Include="Images\CCU_Blue.png" />
     <Content Include="Images\CCU_Large.png" />
-    <Content Include="Systems\Custom Dialogue\CDialogueConfig.xml" />
+    <Content Include="Systems\Custom Localization\LocalizationConfigMockup.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -99,7 +99,7 @@ namespace CCU.Patches.Inventory
         {
 			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
 
-			if (objectRealName != null && Containers.ContainerObjects.Contains(objectRealName))
+			if (objectRealName != null && Containers.ContainerObjects_Slot1.Contains(objectRealName))
 				__instance.money = new InvItem();
 
 			return true;

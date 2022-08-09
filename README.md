@@ -26,14 +26,16 @@ There are two versions of CCU:
 #		Mod Info
 - [Installation](/CCU/Documentation/M01_Installation.md)
 - [Best Practices for Designers](/CCU/Documentation/M02_BestPractices.md)
-- [Change Log](/CCU/Documentation/M03_ChangeLog.md)
+- [Changelog](/CCU/Documentation/M03_ChangeLog.md)
 
 #		Content Guides
+- [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md)
 - [Mutators](/CCU/Documentation/C02_Mutators.md)
+- [Objects](/CCU/Documentation/C03_Objects.md)
 - [Traits](/CCU/Documentation/C04_Traits.md)
 
 #		Special Thanks
-**Abbysssal#2020** & **BlazingTwist#4559** - Tons of code help
+**Abbysssal#2020** & **BlazingTwist#4559** - Saintlike patience in teaching an absolute dumb-dumb how to code
 
 **Cyan_Light#1438** - Endless SOR mechanic knowledge, bugtesting
 

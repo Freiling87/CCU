@@ -10,9 +10,6 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Limit Window Investigation to one side
-Shouldn't be accessible from both sides
-That code is more likely in Door than Window
 ###				C	Player Traits
 ####				C	Variable name based on Designer Mode
 ####				C	Verify what it looks like (Bummer)
@@ -66,6 +63,8 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
       - Speaks High Goryllian*
       - Speaks Werewelsh*
     - Passive
+      - Blinker
+      - Brainless
       - Immovable
       - Indestructible
       - Not Vincible
@@ -73,6 +72,7 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
       - Faction Firefighter Aligned
       - Faction Gorilla Aligned 
 - **Tweaks**
+  - Loadout - Mayor Badge is deactivated for the time being. There's a lot of hardcoded logic for the Mayor Village and I need to be more thorough before I can release related features.
   - Pay Debt is now scaled to Cost Scale traits
   - Untrusting/er/est: Added exceptions for Leave Weapons Behind, Offer Motivation, Pay Debt & Pay Entrance Fee.
 - **Bugfixes**
@@ -1598,8 +1598,12 @@ GasVent.fumigationSelected
 ##			C	Fire Hydrant
 Ability to be already shooting water according to direction
 ##			C	Investigateables
+###				C	Limit Window Investigation to one side
+Shouldn't be accessible from both sides
+That code is more likely in Door than Window
 ###			C	French Vanilla Strings
 Default strings per object type
+####				C	Computer
 ####				C	Gravestone
 Yeah Gravestone jokes are soooo funny and fresh
 ###			C	One-Time Read

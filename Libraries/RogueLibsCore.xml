@@ -64,6 +64,11 @@
               <para>Specifies that disasters stuff should be logged.</para>
             </summary>
         </member>
+        <member name="F:RogueLibsCore.DebugFlags.Objects">
+            <summary>
+              <para>Specifies that objects stuff should be logged.</para>
+            </summary>
+        </member>
         <member name="F:RogueLibsCore.DebugFlags.EnableHints">
             <summary>
               <para>Specifies that various potentially annoying debug hints should be enabled, such as "I am patched!" buttons in the interactions.</para>
@@ -514,6 +519,16 @@
         <member name="M:RogueLibsCore.IDoFixedUpdate.FixedUpdate">
             <summary>
               <para>The Unity's FixedUpdate method, that is called approximately 60 times per second, or 100 times per second when everything's slowed down.</para>
+            </summary>
+        </member>
+        <member name="T:RogueLibsCore.IDoLateUpdate">
+            <summary>
+              <para>Indicates that this hook class should be updated with Unity's LateUpdate method.</para>
+            </summary>
+        </member>
+        <member name="M:RogueLibsCore.IDoLateUpdate.LateUpdate">
+            <summary>
+              <para>The Unity's LateUpdate method, that is called once per frame after everything else, but before the render.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.IDoUpdate">
@@ -2174,22 +2189,22 @@
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.IsUnlocked">
             <summary>
-              <para>Gets or sets whether the unlock is unlocked.</para>
+              <para>Gets or sets whether the unlock is unlocked. Default value: <see langword="false"/>.</para>
             </summary>
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.UnlockCost">
             <summary>
-              <para>Gets or sets the unlock cost of the unlock, in nuggets.</para>
+              <para>Gets or sets the unlock cost of the unlock, in nuggets. Default value: 0 (automatically unlocks once all prerequisites are obtained).</para>
             </summary>
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.LoadoutCost">
             <summary>
-              <para>Gets or sets the loadout cost of the unlock, in nuggets.</para>
+              <para>Gets or sets the loadout cost of the unlock, in nuggets. Default value: 1.</para>
             </summary>
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.CharacterCreationCost">
             <summary>
-              <para>Gets or sets the character creation cost of the unlock, in points.</para>
+              <para>Gets or sets the character creation cost of the unlock, in points. Default value: 1.</para>
             </summary>
         </member>
         <member name="P:RogueLibsCore.UnlockWrapper.IsEnabled">
@@ -2706,6 +2721,11 @@
         <member name="P:RogueLibsCore.TraitUnlock.IsAvailableInCC">
             <inheritdoc/>
         </member>
+        <member name="P:RogueLibsCore.TraitUnlock.Upgrade">
+            <summary>
+              <para>Gets or sets the trait's upgrade.</para>
+            </summary>
+        </member>
         <member name="M:RogueLibsCore.TraitUnlock.GetUpgradeCost">
             <summary>
               <para>Gets the trait's upgrade cost, in money.</para>
@@ -3034,6 +3054,14 @@
               <para>Determines whether the current object can be interacted by the specified <paramref name="agent"/>.</para>
             </summary>
             <param name="agent">The agent to determine whether the object is interactable to.</param>
+            <returns><see langword="true"/>, if the current object is interactable; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:RogueLibsCore.InteractionModel.IsInteractable(Agent,System.Boolean)">
+            <summary>
+              <para>Determines whether the current object can be interacted by the specified <paramref name="agent"/>.</para>
+            </summary>
+            <param name="agent">The agent to determine whether the object is interactable to.</param>
+            <param name="canUseCachedResult">Determines whether a cached result from less than 0.1s before can be used.</param>
             <returns><see langword="true"/>, if the current object is interactable; otherwise, <see langword="false"/>.</returns>
         </member>
         <member name="T:RogueLibsCore.InteractionModel`1">
@@ -3519,6 +3547,12 @@
             <exception cref="T:System.ArgumentException">A localizable string that acts as the disaster's message already exists.</exception>
             <exception cref="T:System.InvalidOperationException">The maximum of two localizable messages have already been created.</exception>
         </member>
+        <member name="M:RogueLibsCore.DisasterBuilder.WithRemovalMutator">
+            <summary>
+              <para>Creates a removal mutator for this disaster.</para>
+            </summary>
+            <returns>The current instance of <see cref="T:RogueLibsCore.DisasterBuilder"/>, for chaining purposes.</returns>
+        </member>
         <member name="T:RogueLibsCore.EffectBuilder">
             <summary>
               <para>Represents a <see cref="T:RogueLibsCore.CustomEffect"/> builder, that attaches additional information to the effect.</para>
@@ -3850,13 +3884,13 @@
         </member>
         <member name="M:RogueLibsCore.CustomDisaster.TestForced">
             <summary>
-              <para>Determines if the disaster <b>must</b> be applied to the current level. Default return value: <see langword="false"/>.</para>
+              <para>Determines if the disaster <u>must</u> be applied to the current level. Default return value: <see langword="false"/>.</para>
             </summary>
-            <returns><see langword="true"/>, if the disaster <b>must</b> be applied to the current level; otherwise, <see langword="false"/>.</returns>
+            <returns><see langword="true"/>, if the disaster must be applied to the current level; otherwise, <see langword="false"/>.</returns>
         </member>
         <member name="M:RogueLibsCore.CustomDisaster.Test">
             <summary>
-              <para>Determines if the disaster can be applied to the current level.</para>
+              <para>Determines if the disaster <u>can</u> be applied to the current level. Default return value: <see langword="true"/>.</para>
             </summary>
             <returns><see langword="true"/>, if the disaster can be applied to the current level; otherwise, <see langword="false"/>.</returns>
         </member>
@@ -3872,7 +3906,7 @@
         </member>
         <member name="M:RogueLibsCore.CustomDisaster.Updating">
             <summary>
-              <para>Updates the custom disaster using a <see cref="T:UnityEngine.Coroutine"/>.</para>
+              <para>Updates the custom disaster using a <see cref="T:UnityEngine.Coroutine"/>; starts after the notification is displayed. Return <see langword="null"/>, if no updating is needed.</para>
             </summary>
             <returns>The enumerator representing the custom disaster's updating coroutine.</returns>
         </member>
@@ -4468,6 +4502,11 @@
               <para>The list of effect hook factories, used by RogueLibs.</para>
             </summary>
         </member>
+        <member name="F:RogueLibsCore.RogueFramework.ObjectFactories">
+            <summary>
+              <para>The list of object hook factories, used by RogueLibs.</para>
+            </summary>
+        </member>
         <member name="F:RogueLibsCore.RogueFramework.NameProviders">
             <summary>
               <para>The list of name providers, used by RogueLibs.</para>
@@ -4567,6 +4606,16 @@
         <member name="P:RogueLibsCore.RogueFramework.SpawnerSprites">
             <summary>
               <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the spawner sprites, used in the Level Editor, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.ShadowSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the shadow sprites, or <see langword="null"/>, if it's not initialized yet.</para>
+            </summary>
+        </member>
+        <member name="P:RogueLibsCore.RogueFramework.TileShadowSprites">
+            <summary>
+              <para>The <see cref="T:tk2dSpriteCollectionData"/> that contains the tile shadow sprites, or <see langword="null"/>, if it's not initialized yet.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.RogueLibs">
@@ -4773,6 +4822,11 @@
               <para>Gets the created sprite, or <see langword="null"/> if invalid data was provided.</para>
             </summary>
         </member>
+        <member name="F:RogueLibsCore.RogueSprite.AllScopes">
+            <summary>
+              <para>A read-only collection of all values in the <see cref="T:RogueLibsCore.SpriteScope"/> enumeration, including <see cref="F:RogueLibsCore.SpriteScope.None"/>.</para>
+            </summary>
+        </member>
         <member name="M:RogueLibsCore.RogueSprite.Define">
             <summary>
               <para>Defines the current sprite and integrates it into the game.</para>
@@ -4786,10 +4840,10 @@
         </member>
         <member name="M:RogueLibsCore.RogueSprite.CreateDefinition(UnityEngine.Texture2D,System.Nullable{UnityEngine.Rect},System.Single)">
             <summary>
-              <para>Creates a <see cref="T:tk2dSpriteDefinition"/> from the specified <paramref name="texture"/> using the specified <paramref name="region"/> and <paramref name="scale"/>.</para>
+              <para>Creates a <see cref="T:tk2dSpriteDefinition"/> from the specified <paramref name="texture"/> using the specified <paramref name="uvRegion"/> and <paramref name="scale"/>.</para>
             </summary>
             <param name="texture">The texture to create a <see cref="T:tk2dSpriteDefinition"/> with.</param>
-            <param name="region">The region of the texture to use. Use <see langword="null"/> to use the entire texture.</param>
+            <param name="uvRegion">The region of the texture to use. Use <see langword="null"/> to use the entire texture.</param>
             <param name="scale">The scale to create a <see cref="T:tk2dSpriteDefinition"/> with.</param>
             <returns>The created <see cref="T:tk2dSpriteDefinition"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="texture"/> is <see langword="null"/>.</exception>
@@ -4926,6 +4980,16 @@
         <member name="F:RogueLibsCore.SpriteScope.Spawners">
             <summary>
               <para>The spawner sprites, used in the Level Editor.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.Shadows">
+            <summary>
+              <para>The shadow sprites.</para>
+            </summary>
+        </member>
+        <member name="F:RogueLibsCore.SpriteScope.TileShadows">
+            <summary>
+              <para>The tile shadow sprites.</para>
             </summary>
         </member>
         <member name="T:RogueLibsCore.CreateEffectInfo">

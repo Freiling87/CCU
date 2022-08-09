@@ -12,7 +12,7 @@ namespace CCU.Systems.Containers
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static List<string> ContainerObjects = new List<string>()
+		public static List<string> ContainerObjects_Slot1 = new List<string>()
 		{
 			vObject.Barbecue,
 			vObject.Bathtub,
@@ -59,7 +59,7 @@ namespace CCU.Systems.Containers
 
 		public static string MagicObjectName(string originalName)
 		{
-			if (ContainerObjects.Contains(originalName))
+			if (ContainerObjects_Slot1.Contains(originalName))
 				return vObject.ChestBasic;
 
 			return originalName;
@@ -86,7 +86,7 @@ namespace CCU.Systems.Containers
 
 			RogueInteractions.CreateProvider(h => 
 			{
-				if (ContainerObjects.Contains(h.Object.objectName))
+				if (ContainerObjects_Slot1.Contains(h.Object.objectName))
 				{
 					Agent agent = h.Object.interactingAgent;
 					

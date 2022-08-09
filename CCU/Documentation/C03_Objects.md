@@ -62,7 +62,7 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Lamp
 |Laser Emitter						|**(V)**				|
 |Loadout Machine
-|Manhole							|Container Item			|						|						|
+|Manhole							|						|						|						|
 |Mine
 |Movie Screen
 |Plant								|Container Item			|						|						|

@@ -21,12 +21,10 @@ namespace CCU.Systems.Investigateables
 			vObject.Boulder,
 			vObject.Computer,
 			// vObject.Counter,		// Really needs a sprite change
-			// vObject.Door,
 			vObject.Gravestone,
 			vObject.Jukebox,
 			// vObject.MovieScreen, // Didn't work yet, see notes
 			vObject.Podium,
-			// vObject.Shelf,		// These don't play well with Containers yet.
 			vObject.Speaker,
 			vObject.Television,
 			vObject.Window,
@@ -34,6 +32,7 @@ namespace CCU.Systems.Investigateables
 		public static List<string> InvestigateableObjects_Slot2 = new List<string>()
 		{
 			vObject.Door,
+			vObject.Shelf,
 		};
 
 		public static string MagicObjectName(string originalName)
