@@ -8,11 +8,21 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
-##			P	Bugs
-Except crickets, crickets are fine.
-###				C	Player Traits
+##			C	Cost Scale - Exclude Bribe for item
+CL: A cost reduction of zero applies even to bribes for quest items. If people want a campaign NPC to hand over a quest item for free they could just use the player alignment trait for that, so while this might not technically be a bug I think there's a strong argument for making an exception here so we can have people that provide free services but are still non-trivial quest targets.
+##				C	Player Traits
 ####				C	Variable name based on Designer Mode
 ####				C	Verify what it looks like (Bummer)
+##			P	Bugs
+Except crickets, crickets are fine.
+###				C	Speakers are upgradeable
+Upgrading a language at an augmentation booth gets you E_polyglot. This is a non-issue but if it's meant to be permanently dummied out (instead of just coming in a later update) then someone will eventually get unreasonably upset over spending $75 fake dollars on nothing.
+###				C	$0 in container
+Maxior - Shelf w/ $0 as container, but not Trash Can
+###				C	Investigate text box
+Maxior - Window w/ empty text box had "investigateable-message:::"
+###				C	Faction Rel Traits work in Homebase
+Can make Hostile
 #		CT	Projects
 ##			C	Enclave System
 ###				C	Currency Changing
@@ -409,13 +419,15 @@ Complete
 ###			C	00 Button ExtraCost Display
 Bananas & alcohol are hardcoded
 To display them correctly, prefix WorldSpaceGUI.ShowObjectButtons (interprets magic numbers)
-###			C	Alcohol
-A la Bouncer
 ###			C	Banana
 Test
+###			C	Barter
+Stretch goal, obv complicated
 ###			C	Blood
 Blood Bags always an option
 If Vampirism, allow drink
+###			C	Booze
+A la Bouncer
 ###			C	Flesh
 Require Cannibalism? Maybe not
 ##		C	Drug Warrior
@@ -1309,6 +1321,9 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
+##		C	Subclass
+One trait for each vanilla agent (32 is a lot)
+Designed to make Class Solidarity worth taking for custom characters
 ##		C	Tethers
 ###			C	Types depend on vanilla variable
 ##		C	Trait Gates
@@ -1331,8 +1346,22 @@ Complete
 Complete
 ###			√	Family Friend
 Complete
-###			√	Honorable Thief
-Complete
+###			C	Thief Network Traits (Trait Gate / Faction)
+####			C	Honorable Thief
+This now just means membership in the network, not necessarily Friendliness. Add it to vanilla thieves.
+####			C	Tweaks to vanilla Honor Among Thieves
+The relationship improvement is now scaled to the particular NPC. 
+####			C	Honored Among Thieves + (Player Trait)
+Those in the Network are Loyal.
+####			C	Honored Among Thieves ++ (Player Trait)
+Those in the Network are Aligned.
+####			C	Dishonorable Thief (Player Trait)
+Still pickpockets other thieves in the network
+Gets access to shops in the network
+CCU idea: The Secret Thief Faction
+Ok not a faction, but linking Honor Among Thieves 
+####			C	Ali Baba (Player Trait)
+Those in the Network are mutually Annoyed
 ###			√	Scumbag
 Complete
 ###			√	Slayable

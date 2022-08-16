@@ -26,7 +26,7 @@ There are two versions of CCU:
 #		Mod Info
 - [Installation](/CCU/Documentation/M01_Installation.md)
 - [Best Practices for Designers](/CCU/Documentation/M02_BestPractices.md)
-- [Changelog](/CCU/Documentation/M03_ChangeLog.md)
+- [Change Log](/CCU/Documentation/M03_ChangeLog.md)
 
 #		Content Guides
 - [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md)
