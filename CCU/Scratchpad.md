@@ -15,8 +15,9 @@ CL: A cost reduction of zero applies even to bribes for quest items. If people w
 ####				C	Verify what it looks like (Bummer)
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Speakers are upgradeable
+###				T	Speakers are upgradeable
 Upgrading a language at an augmentation booth gets you E_polyglot. This is a non-issue but if it's meant to be permanently dummied out (instead of just coming in a later update) then someone will eventually get unreasonably upset over spending $75 fake dollars on nothing.
+	Removed Upgrade assignments, test
 ###				C	$0 in container
 Maxior - Shelf w/ $0 as container, but not Trash Can
 ###				C	Investigate text box
@@ -236,6 +237,9 @@ P_StatusEffects.AddTrait_Prefix
   - Pretty much has exactly what you need.
 #		C	Agent Goals
 ##			CT	Default Goals
+###				C	00 Scene Setter Owner ID
+Consider automatically setting the Owner ID to 99 if a Scene Setter is applied. 
+Maybe this could be done on loading the chunk, not during editing. If it's done during editing it may be unacceptably subtle and throw some users off.
 ###				T	Commit Arson
 New
 ###				C	Flee Danger
@@ -1321,7 +1325,7 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
-##		C	Subclass
+##		C	Subclass / Superclass / Parent Class (Not sure which is clearest)
 One trait for each vanilla agent (32 is a lot)
 Designed to make Class Solidarity worth taking for custom characters
 ##		C	Tethers
