@@ -15,7 +15,15 @@ CL: A cost reduction of zero applies even to bribes for quest items. If people w
 ####				C	Verify what it looks like (Bummer)
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				T	Speakers are upgradeable
+###				C	Allow duplicates in shop inventories
+Currently limited to one slot per item type
+###				C	Grab Everything
+Grabs traps 😂
+###				C	Button Duplication - Objects
+Open/Search seems to be the only one
+###				C	Button Duplication - Agents
+Not sure of a pattern here... I think it only occurred with certain player agents.
+###				T	Speaker Traits are upgradeable
 Upgrading a language at an augmentation booth gets you E_polyglot. This is a non-issue but if it's meant to be permanently dummied out (instead of just coming in a later update) then someone will eventually get unreasonably upset over spending $75 fake dollars on nothing.
 	Removed Upgrade assignments, test
 ###				C	$0 in container
@@ -960,6 +968,9 @@ Complete
 ###			√	Use Blood Bag
 Complete
 ##		C	Interaction Gate
+###			C	Expansion request
+Map Untrustings across Hire/Merchant/Service
+There would only be nine, so this isn't TOO bad
 ###			C	Insular
 Requires Faction Friendly
 ###			C	Insularer
