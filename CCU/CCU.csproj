@@ -261,6 +261,7 @@
     <Compile Include="Traits\Explosion Timer\T_ExplosionTimer.cs" />
     <Compile Include="Traits\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\Loadout\Chunk_Stash_Hint.cs" />
+    <Compile Include="Traits\Merchant Type\Burger_Joint.cs" />
     <Compile Include="Traits\Passive\Brainless.cs" />
     <Compile Include="Traits\Passive\Concealed_Carrier.cs" />
     <Compile Include="Traits\Passive\Blinker.cs" />

@@ -8,6 +8,14 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
+##			P	v. 1.0.1 Patch Notes
+- Bugfixes
+- Feature Additions
+  - Traits
+    - Merchant Type
+      - Burger Joint
+##			C	Merge Multiple Shop Inventories
+Currently selects only first
 ##			C	Cost Scale - Exclude Bribe for item
 CL: A cost reduction of zero applies even to bribes for quest items. If people want a campaign NPC to hand over a quest item for free they could just use the player alignment trait for that, so while this might not technically be a bug I think there's a strong argument for making an exception here so we can have people that provide free services but are still non-trivial quest targets.
 ##				C	Player Traits
@@ -15,6 +23,17 @@ CL: A cost reduction of zero applies even to bribes for quest items. If people w
 ####				C	Verify what it looks like (Bummer)
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	E_PayCopDebt
+On Fence character
+###				C	Duplicated interactions
+Particularly vendors
+###			C	Multiple Aligned Extortable in Chunk
+Had to shake down separately
+###				C	Homebase Hostility
+Verify that this is fixed
+###				C	Factions broken?
+AnAverageFallout#8828 - is it just the quirks of only testing in level editor because im using the faction 1 alligned yet when I spawn a group of them they don't attack after I hit their fellow people 
+Jack of Extra Trades, Friend of the Common Folk, Sucker, Specist, Skinny Nerdlinger, Crepe Crusher, Blahd Basher, Army of Five, Grab Money, Hire Muscle, Common Folk, Faction 1 Aligned
 ###				C	Speakers are upgradeable
 Upgrading a language at an augmentation booth gets you E_polyglot. This is a non-issue but if it's meant to be permanently dummied out (instead of just coming in a later update) then someone will eventually get unreasonably upset over spending $75 fake dollars on nothing.
 ###				C	$0 in container
@@ -392,6 +411,8 @@ New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
 ##		H	Combat
+###			C	Airstriker
+Airstrike on enemy during combat
 ###			H	Nth Wind
 Refreshes Drug Warrior & Backed Up bools after combat ends.
 P_GoalCombatEngage.
@@ -431,6 +452,9 @@ A la Bouncer
 ###			C	Flesh
 Require Cannibalism? Maybe not
 ##		C	Drug Warrior
+###			C	Feature: Apply multiple effects at once
+This will be a little harder than expected. 
+Try a prefix to GoalBattle.Process, but still use the vanilla flags to prevent redundancy.
 ###			C	Extendo-Wheels
 Gain Roller Skates
 ###			C	Suicide Bomber
@@ -779,6 +803,9 @@ Obv default to On Hire, maybe use a secret default trait to keep the code clean
 ###			C	On Use Podium
 "Who's With Me?!"
 ##		C	Hire Type
+###			C	Interact
+Any interaction option, target object.
+Interaction choices are limited to theirs, not yours. This makes hired skills more useful (tech expert tampering, e.g.)
 ###			C	Chloroform
 New
 ###			C	Cyber-Intruder (Up-Close)
@@ -1078,6 +1105,10 @@ Since Character Creator inventory isn't by default carried to spawn, use it as a
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		CT	Passive
+###			C	Fearsome
+Everyone terrified, Killer Robot
+###			C	Trigger Happy
+Like Killer Robot
 ###			C	Brainless
 Need a fully brain-broken agent for target dummies, statues, etc.
 ###			C	Blinker*
@@ -1243,6 +1274,10 @@ Cosmopolitan
 What a good guy
 ###			C	Protect never
 Well okay damn dude
+###			C	Remorseful
+Will do something shitty, but then regret it and go Annoyed at employer.
+###			C	Remorsefuler 
+As above but hostile
 ###			C	Short Fuse
 Hostile at 4 strikes, Annoyed at 1
 ###			C	Shorter Fuse

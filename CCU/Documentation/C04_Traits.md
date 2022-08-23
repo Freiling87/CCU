@@ -186,6 +186,7 @@ Language traits are part of a larger planned system. For now, they have limited 
 |Manager Safe Combo									|- Starts with the chunk's Safe Combo
 
 ##			Merchant Type
+For a detailed list of merchant inventories and item frequency weights, go [here](https://github.com/Freiling87/CCU/blob/master/CCU/Patches/Inventory/P_RandomItems.cs#L21).
 
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|

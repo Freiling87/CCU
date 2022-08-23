@@ -80,6 +80,10 @@ namespace CCU.Patches.Inventory
 			sel.CreateRandomElement(rList, vItem.Sledgehammer, 1);
 			sel.CreateRandomElement(rList, vItem.Sword, 3);
 
+			rList = sel.CreateRandomList(Traits.T_CCU.DesignerName(typeof(Burger_Joint)), "Items", "Item");
+			sel.CreateRandomElement(rList, vItem.BaconCheeseburger, 6);
+			sel.CreateRandomElement(rList, vItem.Beer, 4);
+
 			rList = sel.CreateRandomList(Traits.T_CCU.DesignerName(typeof(Consumer_Electronics)), "Items", "Item");
 			sel.CreateRandomElement(rList, vItem.BoomBox, 2);
 			sel.CreateRandomElement(rList, vItem.FoodProcessor, 1);
