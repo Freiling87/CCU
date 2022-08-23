@@ -29,7 +29,7 @@ namespace CCU.Traits.Language
                     IsAvailable = false,
                     IsAvailableInCC = true,
                     UnlockCost = 5,
-                    Unlock = { upgrade = nameof(Polyglot) }
+                    //Unlock = { upgrade = nameof(Polyglot) }
                 });
         }
         public override void OnAdded() { }

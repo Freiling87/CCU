@@ -35,7 +35,17 @@ Verify that this is fixed
 AnAverageFallout#8828 - is it just the quirks of only testing in level editor because im using the faction 1 alligned yet when I spawn a group of them they don't attack after I hit their fellow people 
 Jack of Extra Trades, Friend of the Common Folk, Sucker, Specist, Skinny Nerdlinger, Crepe Crusher, Blahd Basher, Army of Five, Grab Money, Hire Muscle, Common Folk, Faction 1 Aligned
 ###				C	Speakers are upgradeable
+###				C	Allow duplicates in shop inventories
+Currently limited to one slot per item type
+###				C	Grab Everything
+Grabs traps 😂
+###				C	Button Duplication - Objects
+Open/Search seems to be the only one
+###				C	Button Duplication - Agents
+Not sure of a pattern here... I think it only occurred with certain player agents.
+###				T	Speaker Traits are upgradeable
 Upgrading a language at an augmentation booth gets you E_polyglot. This is a non-issue but if it's meant to be permanently dummied out (instead of just coming in a later update) then someone will eventually get unreasonably upset over spending $75 fake dollars on nothing.
+	Removed Upgrade assignments, test
 ###				C	$0 in container
 Maxior - Shelf w/ $0 as container, but not Trash Can
 ###				C	Investigate text box
@@ -255,6 +265,9 @@ P_StatusEffects.AddTrait_Prefix
   - Pretty much has exactly what you need.
 #		C	Agent Goals
 ##			CT	Default Goals
+###				C	00 Scene Setter Owner ID
+Consider automatically setting the Owner ID to 99 if a Scene Setter is applied. 
+Maybe this could be done on loading the chunk, not during editing. If it's done during editing it may be unacceptably subtle and throw some users off.
 ###				T	Commit Arson
 New
 ###				C	Flee Danger
@@ -983,6 +996,9 @@ Complete
 ###			√	Use Blood Bag
 Complete
 ##		C	Interaction Gate
+###			C	Expansion request
+Map Untrustings across Hire/Merchant/Service
+There would only be nine, so this isn't TOO bad
 ###			C	Insular
 Requires Faction Friendly
 ###			C	Insularer
@@ -1356,7 +1372,7 @@ New
 New
 ###			C	Bodyguarded - Supergoon
 New
-##		C	Subclass
+##		C	Subclass / Superclass / Parent Class (Not sure which is clearest)
 One trait for each vanilla agent (32 is a lot)
 Designed to make Class Solidarity worth taking for custom characters
 ##		C	Tethers
