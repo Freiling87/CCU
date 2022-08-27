@@ -1,6 +1,6 @@
 ﻿<p align="left">
-<img src="../Images/CCU_Large.png" alt="CCU Logo" align="left">
-<img src="../Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
+<img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
@@ -24,7 +24,7 @@ If you want, you can add a layer to your image thumbnail. This will increase att
 <img src="../CCU/Images/CCU_16x16.png">
 <img src="../CCU/Images/CCU_64x64.png">
 <img src="../CCU/Images/CCU_Blue.png">
-<img src="../CCU/Images/CCU_Large.png">
+<img src="../CCU/Images/CCU_160x160.png">
 <img src="../CCU/Images/CharacterFrame.png">
 
 ##			Suggestions?

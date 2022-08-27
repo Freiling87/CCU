@@ -1,6 +1,6 @@
 <p align="left">
-<img src="CCU/Images/CCU_Large.png" alt="CCU Logo" align="left">
-<img src="CCU/Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
+<img src="CCU/Images/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="CCU/Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
