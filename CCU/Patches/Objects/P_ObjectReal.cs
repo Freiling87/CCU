@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Localization;
 using CCU.Patches.Inventory;
 using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
@@ -19,6 +20,16 @@ namespace CCU.Patches.Objects
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(ObjectReal.FinishedOperating))]
+        public static void FinishedOperating_Postfix(ObjectReal __instance)
+        {
+            if (!__instance.interactingAgent.interactionHelper.interactingFar)
+            {
+                if (__instance is VendorCart && __instance.operatingBarType == COperatingBarText.Ransacking)
+                    Containers.TryOpenChest(__instance, __instance.interactingAgent);
+            }
+        }
 
         [HarmonyPrefix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0] { })]
         public static bool Start_SetupInvDatabasesForContainers(ObjectReal __instance)

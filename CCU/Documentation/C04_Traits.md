@@ -32,7 +32,7 @@ Traits
 |Fearless											|- Never flees from combat
 
 ##			Cost Scale
-This affects ALL costs from the agent's interactions: Hire, Interaction, Merchant
+This affects all costs from the agent's interactions, except bribery for Quest Items.
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|

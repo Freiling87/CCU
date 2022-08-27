@@ -1,19 +1,15 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Traits.Behavior;
+using CCU.Localization;
 using CCU.Traits.Cost_Scale;
 using CCU.Traits.Map_Marker;
 using HarmonyLib;
 using RogueLibsCore;
-using CCU.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
-using System;
-using CCU.Systems.Containers;
-using CCU.Patches.Inventory;
 
 namespace CCU.Patches.Objects
 {
@@ -63,15 +59,15 @@ namespace CCU.Patches.Objects
 		}
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new[] { typeof(int), typeof(string) })]
-        public static void DetermineMoneyCost_Postfix(PlayfieldObject __instance, ref int __result)
+        public static void DetermineMoneyCost_Postfix(PlayfieldObject __instance, ref int __result, string transactionType)
         {
 			Agent agent = __instance.GetComponent<Agent>();
 
-			if (!(agent is null))
-			{
-				float scale = agent.GetTrait<T_CostScale>()?.CostScale ?? 1f;
-				__result = (int)(__result * scale);
-			}
+			if (agent is null || transactionType == "BribeQuest")
+				return;
+
+			float scale = agent.GetTrait<T_CostScale>()?.CostScale ?? 1f;
+			__result = (int)(__result * scale);
 		}
 
         #region Cost Currency

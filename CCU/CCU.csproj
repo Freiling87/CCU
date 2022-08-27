@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
+    <Compile Include="Localization\OperatingBarText.cs" />
     <Compile Include="Mutators\C_CCU.cs" />
     <Compile Include="Mutators\Followers\C_Followers.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />

@@ -63,11 +63,13 @@ namespace CCU.Systems.CustomGoals
 
         public static void RunSceneSetters()
         {
-        start:
+        start: // TODO: Goto is a nono, mofo
             foreach (Agent agent in GC.agentList)
             {
                 if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetHook<P_Agent_Hook>().SceneSetterFinished)
                     continue;
+
+                agent.ownerID = 99;
 
                 switch (agent.defaultGoal)
                 {

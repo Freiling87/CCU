@@ -10,16 +10,27 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
-  - Speaker Traits no longer show up in the trait Augmentation Booth for upgrade. This was accidentally left in the 1.0.0 release, since it's part of a larger planned language system.
-  - Pay Cop Debt button fixed
+  - Default Goals
+    - Scene Setters are no longer interrupted by "Flee" behaviors.
+  - Objects
+    - Computer no longer interrupts hacking interaction when Investigation text is set.
+    - Containers are no longer lootable via hacking. 
+  - Traits
+    - Language Speaker group: no longer show up in the trait Augmentation Booth for upgrade. This is a planned feature that was meant to be postponed.
+    - Pay Cop Debt button fixed.
+    - Bribe for Quest Item is now exempt from Cost Scale traits.
 - Feature Additions
+  - Objects
+    - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make noise that may alert the owner unless the stealing agent has Sneaky Fingers.
   - Traits
     - Merchant Stock: Various modifiers for the quantity/durability of sold items. See the Traits page.
     - Merchant Type: Selecting multiple types will now combine inventory random-choice pools.
       - Burger Joint
       - Sugar Shack
-##			P	v. 1.0.1 Feature Notes
+##			P	v. 1.0.1 Documentation Additions
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
+###				Object Variable List
+Vendor Cart mechanics note
 ###				Merchant Stock
 Traits in this category are multiplicative.
 
@@ -37,23 +48,8 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesaler											|- Stackable wares have 2x Quantity
 |Wholesalerer										|- Stackable wares have 3x Quantity
 |Wholesalerest										|- Stackable wares have 4x Quantity
-
-##			C	Cost Scale - Exclude Bribe for item
-CL: A cost reduction of zero applies even to bribes for quest items. If people want a campaign NPC to hand over a quest item for free they could just use the player alignment trait for that, so while this might not technically be a bug I think there's a strong argument for making an exception here so we can have people that provide free services but are still non-trivial quest targets.
-##				C	Player Traits
-####				C	Variable name based on Designer Mode
-####				C	Verify what it looks like (Bummer)
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	00 Scene Setter Owner ID
-Set the Owner ID to 99 if a Scene Setter is applied. 
-Maybe this could be done on loading the chunk, not during editing. If it's done during editing it may be unacceptably subtle and throw some users off.
-###				C	Vendor Cart Balance
-Disable container opening
-###				C	Can't hack Computer
-Investigateable message interrupts
-###				C	"Search" available from hack
-Remote grabbies
 ###				C	The Conundrum of Enduring Ruckus
 Was able to have Hooker cause multiple Ruckuses. Rucki?
 ###				C	Hiring Voucher not consumed

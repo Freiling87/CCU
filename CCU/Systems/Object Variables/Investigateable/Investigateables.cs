@@ -75,7 +75,7 @@ namespace CCU.Systems.Investigateables
                     if (h.Object is Computer computer)
 						h.RemoveButton(VButtonText.ReadEmail);
 
-					h.AddImplicitButton(CButtonText.Investigate, m =>
+					h.AddButton(CButtonText.Investigate, m =>
 					{
 						m.Object.ShowBigImage(m.Object.extraVarString.Remove(0, ExtraVarStringPrefix.Length + 2), "", null);
 					});

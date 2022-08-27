@@ -72,9 +72,11 @@ namespace CCU.Systems.Containers
 			string t = NameTypes.Interface;
 
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo("Search"));
+			RogueLibs.CreateCustomName(CButtonText.Ransack, t, new CustomNameInfo("Ransack"));
+			RogueLibs.CreateCustomName(COperatingBarText.Ransacking, t, new CustomNameInfo("Ransacking"));
 
 			t = NameTypes.Dialogue;
-			RogueLibs.CreateCustomName("StashHint_Barbecue_01", t, new CustomNameInfo("If I don't get back into town for Christmas, don't worry. You won't end up with a lump of coal, but you'll probably have to dig through some to find it. Hope you were good this year!"));
+			RogueLibs.CreateCustomName("StashHint_Barbecue_01", t, new CustomNameInfo("I won't make it for Christmas this year, sorry. You won't end up with a lump of coal, at least. But you'll probably have to dig through some to find it. Hope you were good this year!"));
 			RogueLibs.CreateCustomName("StashHint_Barbecue_02", t, new CustomNameInfo("The cops ransacked the place again this week, and they looked hungry for evidence. Well, unless they're hungry for some pork ribs they're not gonna find what they're looking for."));
 			RogueLibs.CreateCustomName("StashHint_Bathtub_01", t, new CustomNameInfo("That thing we stole... it's too hot to sell yet, even to a fence. Let's stay out of prison for now. I hid it somewhere where it's safe to drop the soap."));
 			//etc., aim for 3 each.
@@ -84,25 +86,41 @@ namespace CCU.Systems.Containers
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_ManholeClosed, t, new CustomNameInfo("I need a crowbar."));
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TubeFunctional, t, new CustomNameInfo("It's still running, and I want to keep all my limbs."));
 
+
 			RogueInteractions.CreateProvider(h => 
 			{
-				if (ContainerObjects_Slot1.Contains(h.Object.objectName))
+				if (ContainerObjects_Slot1.Contains(h.Object.objectName) && !h.Helper.interactingFar)
 				{
 					Agent agent = h.Object.interactingAgent;
-					
-					if (h.Object is TrashCan)
+
+					if (h.HasButton(VButtonText.Open))
 						h.RemoveButton(VButtonText.Open);
 
 					if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
-						h.AddImplicitButton(CButtonText.OpenContainer, m =>
-						{
-							TryOpenChest(m.Object, agent);
-						});
+                    {
+						if (h.Object is VendorCart)
+							h.AddButton(CButtonText.Ransack, m =>
+							{
+								if (!m.Agent.statusEffects.hasTrait(VanillaTraits.SneakyFingers))
+								{
+									GC.audioHandler.Play(m.Object, VanillaAudio.Operating);
+									GC.spawnerMain.SpawnNoise(m.Object.tr.position, 0.4f, m.Agent, "Normal", m.Agent);
+									GC.OwnCheck(m.Agent, m.Object.go, "Normal", 2);
+								}
+
+								m.StartOperating(2f, true, COperatingBarText.Ransacking);
+							});
+						else
+							h.AddImplicitButton(CButtonText.OpenContainer, m =>
+							{
+								TryOpenChest(m.Object, agent);
+							});
+					}
 				}
 			});
 		}
 
-		private static void TryOpenChest(PlayfieldObject playfieldObject, Agent agent)
+		public static void TryOpenChest(PlayfieldObject playfieldObject, Agent agent)
 		{
 			bool isHot =
 				(FireParticleEffectObjects.Contains(playfieldObject.objectName) && playfieldObject.ora.hasParticleEffect) ||
