@@ -1,6 +1,6 @@
 ﻿<p align="left">
-<img width = "160" src="../Images/CCU_Large.png" alt="CCU Logo" align="left" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
-<img width = "160" src="../Images/CCU_Large.png" alt="Yeah there are two, so what" align="right" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
+<img src="../Images/CCU_Large.png" alt="CCU Logo" align="left">
+<img src="../Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
