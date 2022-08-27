@@ -1,4 +1,4 @@
-﻿<p align="left">
+<p align="left">
 <img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
 <img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
@@ -11,13 +11,15 @@ Installation
 
 These installation instructions are written for the .zip releases hosted at [this page](https://gamebanana.com/mods/380574).
 
-1. Choose an edition
-  - Designer Edition: This edition shows all CCU content on Trait & Mutator lists.
-  - Player Edition: This edition hides CCU content so that you can just play it without seeing cluttered trait/mutator menus.
+1. **Choose an edition**
+  - **Designer Edition:** This edition shows all CCU content on Trait & Mutator lists.
+  - **Player Edition:** This edition hides CCU content so that you can just play it without seeing cluttered trait/mutator menus.
 
-2. Copy the Streets of Rogue folder inside the Edition folder into Steam/Steamapps/Common. The folder structure is prebuilt to place the DLL and Core module into the correct BepInEx folders.
+2. **Copy files over**
 
-Included Libraries/Plugins:
-	RogueLibs
-	RogueLibsPatcher
-	BTHarmonyUtils
+Copy the Streets of Rogue folder inside your chosen Edition folder into `Steam/Steamapps/Common`. The folder structure is prebuilt to place the DLL and Core module into the correct BepInEx folders.
+
+- Included Libraries/Plugins:
+  - RogueLibs
+  - RogueLibsPatcher
+  - BTHarmonyUtils
