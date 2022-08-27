@@ -1,4 +1,4 @@
-﻿<p align="left">
+<p align="left">
 <img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
 <img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
@@ -11,13 +11,13 @@ Objects
 <br>
 
 ##			Containers
-Some objects can now contain Items. See the Object Variables list for specifics.
+Some objects can now contain Items. See the [Object Variables list](https://github.com/Freiling87/CCU/edit/master/CCU/Documentation/C03_Objects.md#object-variables) for specifics.
 
 ##			Investigation
 You can now write and read text with several objects as if they were Signs. The player views this text with the "Investigate" interaction (wording intended to be as broad as possible). See the Object Variables list for specifics.
 
 ##			Object Variables
-The full list of modifiable variables added to all Objects. **(V)** indicates the variable slot is already occupied by Vanilla content.
+The full list of modifiable variables added to all Objects. **(V)** indicates the variable slot is already occupied by Vanilla content. Or... are those the Vegan options? I forget.
 
 |Object								|Variable 1				|Variable 2				|Variable 3				|Notes	|
 |:----------------------------------|:---------------------:|:---------------------:|:---------------------:|:------|
