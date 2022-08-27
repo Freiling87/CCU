@@ -500,6 +500,7 @@
     <Content Include="Images\CCU_64x64.png" />
     <Content Include="Images\CCU_Blue.png" />
     <Content Include="Images\CCU_Large.png" />
+    <Content Include="Images\CharacterFrame.png" />
     <Content Include="Systems\Custom Localization\LocalizationConfigMockup.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

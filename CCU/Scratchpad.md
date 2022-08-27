@@ -19,7 +19,8 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
       - Burger Joint
       - Sugar Shack
 ##			P	v. 1.0.1 Feature Notes
-
+Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
+###				Merchant Stock
 Traits in this category are multiplicative.
 
 Durable Wares: Melee & Ranged weapons, Wearables
