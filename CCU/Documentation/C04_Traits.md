@@ -1,16 +1,13 @@
 ﻿<p align="left">
-<img width = "140" src="../Images/CCU_Large.png" alt="CCU Logo" align="left">
-<img width = "140" src="../Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
+<img width = "160" src="../Images/CCU_Large.png" alt="CCU Logo" align="left" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
+<img width = "160" src="../Images/CCU_Large.png" alt="Yeah there are two, so what" align="right" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
 </p>
 
 <h1 align="center">
-CCU
 <br>
 Traits
 </h1>
-<br>
-
-An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have the [CCU] name prefix that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets.
+<br><br>
 
 ##			Behavior
 
@@ -160,23 +157,23 @@ Agents default to Meat Chunks if they have no Gib trait.
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Untrusting											|- Will only interact with Agents Friendly or better *
-|Untrustinger										|- Will only interact with Agents Loyal or better *
-|Untrustingest										|- Will only interact with Agents Aligned *
+|Untrusting											|- Will only interact with Agents Friendly or better
+|Untrustinger										|- Will only interact with Agents Loyal or better
+|Untrustingest										|- Will only interact with Agents Aligned
 
-****Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
+***Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
 
 ##			Language
 Language traits are part of a larger planned system. For now, they have limited utility unless you make extensive use of them with Vocally Challenged.
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Speaks Chthonic									|- Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies and anyone else with this trait
-|Speaks ErSdtAdt									|- Agent can bypass Vocally Challenged when speaking to Aliens and anyone else with this trait
-|Speaks Foreign										|- Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait
-|Speaks High Goryllian								|- Agent can bypass Vocally Challenged when speaking to Gorillas and anyone else with this trait
-|Speaks ErSdtAdt									|- Agent can bypass Vocally Challenged when speaking to Aliens and anyone else with this trait
-|Speaks Werewelsh									|- Agent can bypass Vocally Challenged when speaking to Werewolves (both forms) and anyone else with this trait
+|Speaks Binary[^1]									|- Agent can bypass Vocally Challenged when speaking to Robots, Hackers and anyone else with this trait
+|Speaks Chthonic[^1]								|- Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies and anyone else with this trait
+|Speaks ErSdtAdt[^1]								|- Agent can bypass Vocally Challenged when speaking to Aliens and anyone else with this trait
+|Speaks Foreign[^1]									|- Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait
+|Speaks High Goryllian[^1]							|- Agent can bypass Vocally Challenged when speaking to Gorillas and anyone else with this trait
+|Speaks Werewelsh[^1]								|- Agent can bypass Vocally Challenged when speaking to Werewolves (both forms) and anyone else with this trait
 
 ##			Loadout
 
@@ -186,7 +183,7 @@ Language traits are part of a larger planned system. For now, they have limited 
 |Manager Safe Combo									|- Starts with the chunk's Safe Combo
 
 ##			Merchant Type
-For a detailed list of merchant inventories and item frequency weights, go [here](https://github.com/Freiling87/CCU/blob/master/CCU/Patches/Inventory/P_RandomItems.cs#L21).
+For a detailed list of merchant inventories and item frequency weights, go [here](https://github.com/Freiling87/CCU/tree/master/CCU/Traits/Merchant%20Type).
 
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -244,7 +241,7 @@ For a detailed list of merchant inventories and item frequency weights, go [here
 ##			Passive
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Blinker											|- Teleports randomly when damaged
+|Blinker[^1]										|- Teleports randomly when damaged
 |Brainless											|- Heavy Reddit user
 |Crusty												|- Same as Upper-Crusty
 |Extortable											|- Valid target for Extortionist
@@ -304,3 +301,5 @@ For a detailed list of merchant inventories and item frequency weights, go [here
 |Scumbag											|- Hostile to Scumbag Slaughterer
 |Slayable											|- Hostile to Scientist Slaughterer<br>- XP bonus when neutralized by Scientist Slaughterer
 |Suspecter											|- Annoyed at Suspicious
+
+[^1]: This is a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. Sucker!

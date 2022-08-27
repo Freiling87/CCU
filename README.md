@@ -1,6 +1,6 @@
 <p align="left">
-<img width = "140" src="CCU/Images/CCU_Large.png" alt="CCU Logo" align="left">
-<img width = "140" src="CCU/Images/CCU_Large.png" alt="Yeah there are two, so what" align="right">
+<img width = "160" src="CCU/Images/CCU_Large.png" alt="CCU Logo" align="left" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
+<img width = "160" src="CCU/Images/CCU_Large.png" alt="Yeah there are two, so what" align="right" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
 </p>
 
 <h1 align="center">
@@ -8,7 +8,7 @@ Streets of Rogue
 <br>
 Custom Content Utilities
 </h1>
-<br>
+<br><br>
 
 SOR gives you a LOT of options for creating custom content, but with some limitations. Here are a few things that are currently impossible with the Vanilla version:
 - Aligning Custom NPCs in different chunks
@@ -29,10 +29,10 @@ There are two versions of CCU:
 - [Change Log](/CCU/Documentation/M03_ChangeLog.md)
 
 #		Content Guides
-- [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md)
-- [Mutators](/CCU/Documentation/C02_Mutators.md)
+- [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md) (6)
+- [Mutators](/CCU/Documentation/C02_Mutators.md) (2)
 - [Objects](/CCU/Documentation/C03_Objects.md)
-- [Traits](/CCU/Documentation/C04_Traits.md)
+- [Traits](/CCU/Documentation/C04_Traits.md) (200+)
 
 #		Special Thanks
 **Abbysssal#2020** & **BlazingTwist#4559** - Saintlike patience in teaching an absolute dumb-dumb how to code

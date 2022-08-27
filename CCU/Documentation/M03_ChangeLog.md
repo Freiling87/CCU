@@ -1,5 +1,13 @@
-﻿#   Change Log
-An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
+﻿<p align="left">
+<img width = "160" src="../Images/CCU_Large.png" alt="CCU Logo" align="left" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
+<img width = "160" src="../Images/CCU_Large.png" alt="Yeah there are two, so what" align="right" style="image-rendering: -moz-crisp-edges; image-rendering: -o-crisp-edges; image-rendering: -webkit-optimize-contrast; image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor;">
+</p>
+
+<h1 align="center">
+<br>
+Change Log
+</h1>
+<br><br>
 
 ##		v 1.0.0
  
@@ -12,8 +20,8 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Knocked Out
   - Mutators
     - Followers
-      - Homesickness Disabled*
-      - Homesickness Mandatory*
+      - Homesickness Disabled[^1]
+      - Homesickness Mandatory[^1]
   - Objects: New extra variables have been added. Check the Objects feature page linked from the main page of the readme for specifics on the categories below.
     - Containers: Various objects can now store ONE item as a container.
     - Investigateables: In the editor, you can now add text to certain objects and it will be readable as if it were a Sign. 
@@ -44,14 +52,14 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
       - Leaves
       - Meat Chunks
     - Language: For use with or without Vocally Challenged. Characters without Vocally Challenged are assumed to speak English (sorry, it's canon).
-      - Speaks Binary*
-      - Speaks Chthonic*
-      - Speaks ErSdtAdt*
-      - Speaks Foreign*
-      - Speaks High Goryllian*
-      - Speaks Werewelsh*
+      - Speaks Binary[^1]
+      - Speaks Chthonic[^1]
+      - Speaks ErSdtAdt[^1]
+      - Speaks Foreign[^1]
+      - Speaks High Goryllian[^1]
+      - Speaks Werewelsh[^1]
     - Passive
-      - Blinker
+      - Blinker[^1]
       - Brainless
       - Immovable
       - Indestructible
@@ -92,5 +100,5 @@ An Asterisk (*) Next to a name indicates a Player feature. This means it will be
     - Hostile to Cannibal → Faction Soldier Aligned
     - Hostile to Soldier → Faction Cannibal Aligned
     - Specistist → Faction Gorilla Aligned
-###			C	Flex Traits
-Enable existing traits to player side and make their display name conditional on whether the mod is in Player or Designer mode. However, it doesn't fit neatly into a dichotomy - designers might still want to play, and they should have the same experience as player edition users. There needs to be a list of "Flex Traits" or some better name for this special category, since it will have unique rules for when to display the names in certain formats.
+
+[^1]: This is a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. Sucker!
