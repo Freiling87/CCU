@@ -21,11 +21,9 @@ In the upload's description, provide a link to the Player Edition and advise the
 ###				Thumbnail
 If you want, you can add a layer to your image thumbnail. This will increase attention to your content and reduce the likelihood of players playing it incorrectly. Below are some images I've made, and you're free to use/edit them as you see fit.
 
-<img src="../CCU/Images/CCU_16x16.png">
-<img src="../CCU/Images/CCU_64x64.png">
-<img src="../CCU/Images/CCU_Blue.png">
-<img src="../CCU/Images/CCU_160x160.png">
-<img src="../CCU/Images/CharacterFrame.png">
+|16x16  |64x64  |160x160  |400x400  |Character Frame  |
+|:-----:|:-----:|:-------:|:-------:|:---------------:|
+|<img src="../Images/CCU_16x16.png">|<img src="../Images/CCU_64x64.png">|<img src="../Images/CCU_160x160.png">|<img src="../Images/CCU_Blue.png">|<img src="../Images/CharacterFrame.png">
 
 ##			Suggestions?
 Best Practices are generally discovered by the people using a mod, not the one writing it. If you have any ideas for advice or warnings for this page, please get in touch.
