@@ -9,8 +9,6 @@ Mutators
 </h1>
 <br><br>
 
-An Asterisk (*) Next to a name indicates a Player feature. This means it will be accessible by players, and won't have the [CCU] name prefix that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. 
-
 ##			Followers
 |Mutator											|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
