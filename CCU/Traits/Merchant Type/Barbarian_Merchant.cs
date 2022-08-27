@@ -1,10 +1,23 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Barbarian_Merchant : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.Axe, 3),
+            new KeyValuePair<string, int>( vItem.BaconCheeseburger, 3),
+            new KeyValuePair<string, int>( vItem.Beer, 6),
+            new KeyValuePair<string, int>( vItem.BraceletofStrength, 2),
+            new KeyValuePair<string, int>( vItem.CodPiece, 3),
+            new KeyValuePair<string, int>( vItem.HamSandwich, 3),
+            new KeyValuePair<string, int>( vItem.RagePoison, 1),
+            new KeyValuePair<string, int>( vItem.Sword, 3),
+        };
+
         [RLSetup]
         public static void Setup()
         {

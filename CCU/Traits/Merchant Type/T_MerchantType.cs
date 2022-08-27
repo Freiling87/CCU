@@ -1,4 +1,6 @@
-﻿namespace CCU.Traits.Merchant_Type
+﻿using System.Collections.Generic;
+
+namespace CCU.Traits.Merchant_Type
 {
     public abstract class T_MerchantType : T_CCU, ISetupAgentStats
     {
@@ -10,5 +12,7 @@
         {
             agent.SetupSpecialInvDatabase();
         }
+
+        public abstract List<KeyValuePair<string, int>> MerchantInventory { get; }
     }
 }

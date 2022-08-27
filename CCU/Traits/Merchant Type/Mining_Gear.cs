@@ -1,10 +1,23 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Mining_Gear : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.BombProcessor, 1),
+            new KeyValuePair<string, int>( vItem.Fud, 3),
+            new KeyValuePair<string, int>( vItem.GasMask, 1),
+            new KeyValuePair<string, int>( vItem.HardHat, 4),
+            new KeyValuePair<string, int>( vItem.RemoteBombTrigger, 1),
+            new KeyValuePair<string, int>( vItem.Sledgehammer, 4),
+            new KeyValuePair<string, int>( vItem.TimeBomb, 1),
+            new KeyValuePair<string, int>( vItem.WallBypasser, 2),
+        };
+
         [RLSetup]
         public static void Setup()
         {

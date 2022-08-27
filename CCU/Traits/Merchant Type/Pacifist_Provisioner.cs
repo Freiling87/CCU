@@ -1,10 +1,23 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Pacifist_Provisioner : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.BananaPeel, 2),
+            new KeyValuePair<string, int>( vItem.HologramBigfoot, 1),
+            new KeyValuePair<string, int>( vItem.Hypnotizer, 2),
+            new KeyValuePair<string, int>( vItem.HypnotizerII, 1),
+            new KeyValuePair<string, int>( vItem.FirstAidKit, 2),
+            new KeyValuePair<string, int>( vItem.ParalyzerTrap, 2),
+            new KeyValuePair<string, int>( vItem.QuickEscapeTeleporter, 2),
+            new KeyValuePair<string, int>( vItem.TranquilizerGun, 1),
+        };
+
         [RLSetup]
         public static void Setup()
         {

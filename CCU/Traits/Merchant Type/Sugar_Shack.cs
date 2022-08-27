@@ -4,29 +4,25 @@ using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
-    public class Sporting_Goods : T_MerchantType
+    public class Sugar_Shack : T_MerchantType
     {
         public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
-            new KeyValuePair<string, int>( vItem.BaseballBat, 3),
-            new KeyValuePair<string, int>( vItem.CodPiece, 2),
-            new KeyValuePair<string, int>( vItem.FirstAidKit, 2),
-            new KeyValuePair<string, int>( vItem.KillerThrower, 2),
-            new KeyValuePair<string, int>( vItem.MusclyPill, 2),
+            new KeyValuePair<string, int>( vItem.Sugar, 12),
         };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Sporting_Goods>()
+            PostProcess = RogueLibs.CreateCustomTrait<Sugar_Shack>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells sporting goods."),
+                    [LanguageCode.English] = String.Format("This character sells Sugar, and only Sugar."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Sporting_Goods)),
+                    [LanguageCode.English] = DesignerName(typeof(Sugar_Shack)),
                     
                 })
                 .WithUnlock(new TraitUnlock

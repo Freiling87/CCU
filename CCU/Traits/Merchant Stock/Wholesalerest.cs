@@ -1,24 +1,21 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Merchant
+namespace CCU.Traits.Merchant_Stock
 {
-    public class Buyer : T_Merchant
+    public class Wholesalerest : T_MerchantStock
     {
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Buyer>()
+            PostProcess = RogueLibs.CreateCustomTrait<Wholesalerest>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will buy items from the player.\n\n" +
-                    "<color=red>Requires:</color> Any Merchant Type trait."),
-                    
+                    [LanguageCode.English] = String.Format("This agent sells items at 4x the normal quantity."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Buyer)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Wholesalerest)),
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,6 +27,11 @@ namespace CCU.Traits.Merchant
                 });
         }
         public override void OnAdded() { }
+        public override void OnAddItem(ref InvItem invItem)
+        {
+            if (QuantityTypes.Contains(invItem.itemType))
+                invItem.invItemCount *= 4;
+        }
         public override void OnRemoved() { }
     }
 }

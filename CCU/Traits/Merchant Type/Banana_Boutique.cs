@@ -1,10 +1,17 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Banana_Boutique : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.Banana, 9),
+            new KeyValuePair<string, int>( vItem.BananaPeel, 1),
+        };
+
         [RLSetup]
         public static void Setup()
         {

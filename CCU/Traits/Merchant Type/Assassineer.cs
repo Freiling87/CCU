@@ -1,10 +1,22 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Assassineer : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.Blindenizer, 1),
+            new KeyValuePair<string, int>( vItem.CardboardBox, 1),
+            new KeyValuePair<string, int>( vItem.EarWarpWhistle, 1),
+            new KeyValuePair<string, int>( vItem.KillProfiter, 1),
+            new KeyValuePair<string, int>( vItem.Shuriken, 4),
+            new KeyValuePair<string, int>( vItem.Silencer, 1),
+            new KeyValuePair<string, int>( vItem.Sword, 3),
+        };
+
         [RLSetup]
         public static void Setup()
         {

@@ -10,12 +10,33 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
+  - Speaker Traits no longer show up in the trait Augmentation Booth for upgrade. This was accidentally left in the 1.0.0 release, since it's part of a larger planned language system.
+  - Pay Cop Debt button fixed
 - Feature Additions
   - Traits
-    - Merchant Type
+    - Merchant Stock: Various modifiers for the quantity/durability of sold items. See the Traits page.
+    - Merchant Type: Selecting multiple types will now combine inventory random-choice pools.
       - Burger Joint
-##			C	Merge Multiple Shop Inventories
-Currently selects only first
+      - Sugar Shack
+##			P	v. 1.0.1 Feature Notes
+
+Traits in this category are multiplicative.
+
+Durable Wares: Melee & Ranged weapons, Wearables
+
+Stackable Wares: Consumables, Food, Tools, Throwing Weapons
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Masterworker										|- Durable wares have 2x Durability
+|Masterworkerer										|- Durable wares have 3x Durability
+|Masterworkerest									|- Durable wares have 4x Durability
+|Shiddy Goods										|- Durable wares have 1/3x Durability
+|Shoddy Goods										|- Durable wares have 2/3x Durability
+|Wholesaler											|- Stackable wares have 2x Quantity
+|Wholesalerer										|- Stackable wares have 3x Quantity
+|Wholesalerest										|- Stackable wares have 4x Quantity
+
 ##			C	Cost Scale - Exclude Bribe for item
 CL: A cost reduction of zero applies even to bribes for quest items. If people want a campaign NPC to hand over a quest item for free they could just use the player alignment trait for that, so while this might not technically be a bug I think there's a strong argument for making an exception here so we can have people that provide free services but are still non-trivial quest targets.
 ##				C	Player Traits
@@ -23,35 +44,36 @@ CL: A cost reduction of zero applies even to bribes for quest items. If people w
 ####				C	Verify what it looks like (Bummer)
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	E_PayCopDebt
-On Fence character
-###				C	Duplicated interactions
-Particularly vendors
-###			C	Multiple Aligned Extortable in Chunk
+###				C	00 Scene Setter Owner ID
+Set the Owner ID to 99 if a Scene Setter is applied. 
+Maybe this could be done on loading the chunk, not during editing. If it's done during editing it may be unacceptably subtle and throw some users off.
+###				C	Vendor Cart Balance
+Disable container opening
+###				C	Can't hack Computer
+Investigateable message interrupts
+###				C	"Search" available from hack
+Remote grabbies
+###				C	The Conundrum of Enduring Ruckus
+Was able to have Hooker cause multiple Ruckuses. Rucki?
+###				C	Hiring Voucher not consumed
+Hiring vouchers don't appear to be consumed when hiring custom NPCs, not sure if it's a universal issue but I confirmed it with several classes and confirmed that vanilla hires still consume them so probably a bugged CCU thing.
+###				C	Multiple Aligned Extortable in Chunk
 Had to shake down separately
 ###				C	Homebase Hostility
 Verify that this is fixed
-###				C	Factions broken?
-AnAverageFallout#8828 - is it just the quirks of only testing in level editor because im using the faction 1 alligned yet when I spawn a group of them they don't attack after I hit their fellow people 
-Jack of Extra Trades, Friend of the Common Folk, Sucker, Specist, Skinny Nerdlinger, Crepe Crusher, Blahd Basher, Army of Five, Grab Money, Hire Muscle, Common Folk, Faction 1 Aligned
-###				C	Speakers are upgradeable
-###				C	Allow duplicates in shop inventories
+###				C	Shops don't allow duplicates with limited stock
 Currently limited to one slot per item type
-###				C	Grab Everything
+###				C	Grab Everything grabs Traps
 Grabs traps 😂
 ###				C	Button Duplication - Objects
 Open/Search seems to be the only one
 ###				C	Button Duplication - Agents
 Not sure of a pattern here... I think it only occurred with certain player agents.
-###				T	Speaker Traits are upgradeable
-Upgrading a language at an augmentation booth gets you E_polyglot. This is a non-issue but if it's meant to be permanently dummied out (instead of just coming in a later update) then someone will eventually get unreasonably upset over spending $75 fake dollars on nothing.
-	Removed Upgrade assignments, test
 ###				C	$0 in container
 Maxior - Shelf w/ $0 as container, but not Trash Can
 ###				C	Investigate text box
 Maxior - Window w/ empty text box had "investigateable-message:::"
-###				C	Faction Rel Traits work in Homebase
-Can make Hostile
+I thought I fixed this waaaaah
 #		CT	Projects
 ##			C	Enclave System
 ###				C	Currency Changing
@@ -265,9 +287,6 @@ P_StatusEffects.AddTrait_Prefix
   - Pretty much has exactly what you need.
 #		C	Agent Goals
 ##			CT	Default Goals
-###				C	00 Scene Setter Owner ID
-Consider automatically setting the Owner ID to 99 if a Scene Setter is applied. 
-Maybe this could be done on loading the chunk, not during editing. If it's done during editing it may be unacceptably subtle and throw some users off.
 ###				T	Commit Arson
 New
 ###				C	Flee Danger
@@ -1055,12 +1074,6 @@ New
 Doesn't drop items on death (They're in their butt)
 ###			C	Discreet
 Automatically applies Silencer to all held weapons on load
-###			C	Infinite Ammo
-New
-###			C	Infinite Consumables
-New
-###			C	Infinite Durability
-New
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
 
@@ -1111,6 +1124,27 @@ Vanilla For Sellomatic: 250-300 per level
 A shorter list of broader categories than Merchant Type. Depends on how it feels while you write it.
 ###				C	Buyer Type - Match Merchant Types
 Mirror shop inventory
+##		C	Merchant Stock
+###			C	Replenisher
+Replace stock with same item
+###			C	Restocker
+Replace stock with random
+###			√	Masterworker
+2x Durability
+###			√	Masterworkerer
+3x Durability
+###			√	Masterworkerest
+4x Durability
+###			√	Shiddy Goods
+1/3 Durability
+###			√	Shoddy Goods
+2/3 Durability
+###			√	Stocker
+2x Qty
+###			√	Stockerer
+3x Qty
+###			√	Stockerest
+4x Qty
 ##		C	Merchant Type
 ###			C	00 Refactor
 New
@@ -1121,8 +1155,19 @@ Since Character Creator inventory isn't by default carried to spawn, use it as a
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		CT	Passive
+###			C	Always Gib / Gibbous
+
 ###			C	Fearsome
 Everyone terrified, Killer Robot
+###			C	Infinite Ammo
+New
+###			C	Infinite Consumables
+New
+###			C	Infinite Durability
+New
+###			C	No Drops
+Won't drop equipment, a la Warzone
+Immune to Butterfingerer
 ###			C	Trigger Happy
 Like Killer Robot
 ###			C	Brainless

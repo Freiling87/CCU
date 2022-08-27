@@ -1,11 +1,20 @@
 ﻿using CCU.Traits.Trait_Gate;
 using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Cop_Contraband : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( "Drugs2", 9),
+            new KeyValuePair<string, int>( "Gun1", 3),
+            new KeyValuePair<string, int>( "Gun2", 3),
+            new KeyValuePair<string, int>( "Melee1", 3),
+        };
+
         [RLSetup]
         public static void Setup()
         {

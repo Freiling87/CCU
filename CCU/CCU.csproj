@@ -122,6 +122,8 @@
     <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
+    <Compile Include="Patches\Inventory\P_InvItem.cs" />
+    <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
     <Compile Include="Patches\P_Movement.cs" />
     <Compile Include="Patches\Quests\P_Quests.cs" />
@@ -160,7 +162,6 @@
     <Compile Include="Patches\Interface\P_StatusEffectDisplay.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_ItemFunctions.cs" />
-    <Compile Include="Patches\Inventory\P_RandomItems.cs" />
     <Compile Include="Patches\Objects\P_BasicObject.cs" />
     <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
@@ -262,6 +263,15 @@
     <Compile Include="Traits\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\Loadout\Chunk_Stash_Hint.cs" />
     <Compile Include="Traits\Merchant Type\Burger_Joint.cs" />
+    <Compile Include="Traits\Merchant Type\Sugar_Shack.cs" />
+    <Compile Include="Traits\Merchant Stock\Shiddy_Goods.cs" />
+    <Compile Include="Traits\Merchant Stock\Shoddy_Goods.cs" />
+    <Compile Include="Traits\Merchant Stock\Masterworkerest.cs" />
+    <Compile Include="Traits\Merchant Stock\Masterworkerer.cs" />
+    <Compile Include="Traits\Merchant Stock\Masterworker.cs" />
+    <Compile Include="Traits\Merchant Stock\Wholesalerest.cs" />
+    <Compile Include="Traits\Merchant Stock\Wholesalerer.cs" />
+    <Compile Include="Traits\Merchant Stock\Wholesaler.cs" />
     <Compile Include="Traits\Passive\Brainless.cs" />
     <Compile Include="Traits\Passive\Concealed_Carrier.cs" />
     <Compile Include="Traits\Passive\Blinker.cs" />
@@ -333,10 +343,8 @@
     <Compile Include="Traits\Merchant Type\Gun_Dealer.cs" />
     <Compile Include="Traits\Merchant Type\Slaves_Shop.cs" />
     <Compile Include="Traits\Merchant Type\T_MerchantType.cs" />
-    <Compile Include="Traits\Merchant\Merchant_Buyer.cs" />
-    <Compile Include="Traits\Merchant\Merchant_BuyerOnly.cs" />
     <Compile Include="Traits\Behavior\Accident-Prone.cs" />
-    <Compile Include="Traits\Merchant\T_Merchant.cs" />
+    <Compile Include="Traits\Merchant Stock\T_MerchantStock.cs" />
     <Compile Include="Traits\Passive\Innocent.cs" />
     <Compile Include="Traits\Passive\Possessed.cs" />
     <Compile Include="Traits\Passive\Crusty.cs" />

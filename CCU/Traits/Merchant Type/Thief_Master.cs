@@ -1,10 +1,21 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Thief_Master : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.QuickEscapeTeleporter, 3),
+            new KeyValuePair<string, int>( vItem.SkeletonKey, 2),
+            new KeyValuePair<string, int>( vItem.SafeCrackingTool, 2),
+            new KeyValuePair<string, int>( vItem.TranquilizerGun, 2),
+            new KeyValuePair<string, int>( vItem.WallBypasser, 3),
+            new KeyValuePair<string, int>( vItem.WindowCutter, 3),
+        };
+
         [RLSetup]
         public static void Setup()
         {

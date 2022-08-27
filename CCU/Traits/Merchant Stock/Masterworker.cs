@@ -1,24 +1,21 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Merchant
+namespace CCU.Traits.Merchant_Stock
 {
-    public class BuyerOnly : T_Merchant
+    public class Masterworker : T_MerchantStock
     {
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<BuyerOnly>()
+            PostProcess = RogueLibs.CreateCustomTrait<Masterworker>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will buy items from the player. This trait removes the option to buy items from the Agent.\n\n" +
-                    "<color=red>Requires:</color> Any Merchant Type trait."),
-                    
+                    [LanguageCode.English] = String.Format("This agent sells items at 2x durability."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(BuyerOnly)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Masterworker)),
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -30,6 +27,11 @@ namespace CCU.Traits.Merchant
                 });
         }
         public override void OnAdded() { }
+        public override void OnAddItem(ref InvItem invItem)
+        {
+            if (DurabilityTypes.Contains(invItem.itemType))
+                invItem.invItemCount *= 2;
+        }
         public override void OnRemoved() { }
     }
 }

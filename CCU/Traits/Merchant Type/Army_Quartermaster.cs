@@ -1,17 +1,25 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Army_Quartermaster : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( "Gun2", 3),
+            new KeyValuePair<string, int>( "Gun3", 3),
+            new KeyValuePair<string, int>( "WeaponMod", 1),
+        };
+
         [RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Army_Quartermaster>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells military hardware."),
+                    [LanguageCode.English] = String.Format("This character sells military hardware. This is the vanilla Soldier's mall inventory."),
                     
                 })
                 .WithName(new CustomNameInfo

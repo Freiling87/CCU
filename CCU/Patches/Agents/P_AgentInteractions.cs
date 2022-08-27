@@ -189,15 +189,11 @@ namespace CCU.Patches.Agents
 				{
 					if (!interactingAgent.aboveTheLaw && !interactingAgent.HasTrait(VanillaTraits.AbovetheLaw) && !agent.statusEffects.hasStatusEffect(VStatusEffect.AbovetheLaw) && !interactingAgent.enforcer && !interactingAgent.upperCrusty)
 					{
-						if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt1) || interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt2))
-						{
-							if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt1))
-								agentInteractions.AddButton(VButtonText.PayCopDebt, agent.determineMoneyCost(VDetermineMoneyCost.PayCops1));
-
-							if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt2))
-								agentInteractions.AddButton(VButtonText.PayCopDebt, agent.determineMoneyCost(VDetermineMoneyCost.PayCops2));
-						}
-						else if (!interactingAgent.statusEffects.hasTrait("MustPayCops"))
+						if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt1))
+							agentInteractions.AddButton(VButtonText.PayCops, agent.determineMoneyCost(VDetermineMoneyCost.PayCops1));
+						else if (interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.CopDebt2))
+							agentInteractions.AddButton(VButtonText.PayCops, agent.determineMoneyCost(VDetermineMoneyCost.PayCops2));
+						else if (!interactingAgent.statusEffects.hasTrait(VanillaTraits.CorruptionCosts))
 							agentInteractions.AddButton(VButtonText.BribeCops, agent.determineMoneyCost(VDetermineMoneyCost.BribeCops));
 					}
 				}

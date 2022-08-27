@@ -4,6 +4,7 @@ using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
 using CCU.Traits.Loadout;
 using CCU.Traits.Merchant_Type;
+using CCU.Traits.Merchant_Stock;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -21,6 +22,7 @@ namespace CCU.Patches.Inventory
 
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+
 		public static FieldInfo nameProviderField = AccessTools.Field(typeof(RogueLibs), "NameProvider");
 		public static CustomNameProvider nameProvider = (CustomNameProvider)nameProviderField.GetValue(null);
 
@@ -46,7 +48,7 @@ namespace CCU.Patches.Inventory
 
 				if (__instance.CompareTag("SpecialInvDatabase") && !(rName is null))
 				{
-					string text;
+					string itemName;
 					int num = 0;
 					bool foundItem = false;
 
@@ -54,22 +56,22 @@ namespace CCU.Patches.Inventory
 					{
 						try
 						{
-							text = __instance.rnd.RandomSelect(rName, "Items");
-							text = __instance.SwapWeaponTypes(text);
+							itemName = __instance.rnd.RandomSelect(rName, "Items");
+							itemName = __instance.SwapWeaponTypes(itemName);
 
-							if (text != "")
+							if (itemName != "")
 								foundItem = true;
 						}
 						catch
 						{
-							text = "Empty";
+							itemName = "Empty";
 						}
 
 						foreach (InvItem invItem in __instance.InvItemList)
-							if (invItem.invItemName == text && !invItem.canRepeatInShop)
+							if (invItem.invItemName == itemName && !invItem.canRepeatInShop)
 								foundItem = false;
 
-						if (text == "FreeItemVoucher")
+						if (itemName == "FreeItemVoucher")
 							foundItem = false;
 
 						num++;
@@ -77,12 +79,12 @@ namespace CCU.Patches.Inventory
 					while (!foundItem && num < 100);
 
 					if (num == 100)
-						text = "Empty";
+						itemName = "Empty";
 
-					if (text != "Empty" && text != "")
+					if (itemName != "Empty" && itemName != "")
 					{
 						MethodInfo addItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal", new Type[1] { typeof(string) });
-						__result = addItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(text);
+						__result = addItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(itemName);
 
 						return false;
 					}
@@ -104,6 +106,57 @@ namespace CCU.Patches.Inventory
 
 			return true;
 		}
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
+		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
+        {
+			Agent agent = __instance.agent;
+			
+			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)
+				return true;
+
+			List<string> inventory = new List<string>();
+
+			foreach (T_MerchantType trait in agent.GetTraits<T_MerchantType>())
+				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
+					for (int i = 0; i < item.Value; i++) // Qty
+						inventory.Add(__instance.SwapWeaponTypes(item.Key)); // Name
+			// SwapWeaponTypes is for item-affecting mutators (No Guns, etc.)
+
+			inventory = inventory.OrderBy(item => Guid.NewGuid()).Take(5).ToList();
+
+			//while (inventory.Count < 5)
+   //         {
+			//	// This part should exclude duplicates of items unless a specific trait is taken to allow it.
+			//	// The default might exclude duplicates for durability items only?
+   //         }
+
+			foreach (string item in inventory) 
+			{
+				MethodInfo AddItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal");
+				InvItem invItem = null;
+
+				try
+				{
+					string rListItem = __instance.rnd.RandomSelect(item, "Items");
+					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(rListItem);
+				}
+                catch
+                {
+					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(item);
+				}
+
+				foreach (T_MerchantStock trait in agent.GetTraits<T_MerchantStock>())
+					trait.OnAddItem(ref invItem);
+
+				// This is apparently done automatically for Durability items
+				if (T_MerchantStock.QuantityTypes.Contains(invItem.itemType))
+					T_MerchantStock.ShopPrice(ref invItem);
+			}
+
+			__instance.filledSpecialInv = true;
+			return false;
+        }
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
 		private static IEnumerable<CodeInstruction> FillAgent_LoadoutBadge(IEnumerable<CodeInstruction> codeInstructions)
@@ -146,7 +199,7 @@ namespace CCU.Patches.Inventory
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo extraVarString3 = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.extraVarString3));
-			MethodInfo magicVarString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.magicVarString));
+			MethodInfo magicVarString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.MagicVarString));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 5,
@@ -164,7 +217,7 @@ namespace CCU.Patches.Inventory
 		}
 
 		// Returns a false negative if Note detected
-		public static string magicVarString(string vanilla) =>
+		public static string MagicVarString(string vanilla) =>
 			Investigateables.IsInvestigationString(vanilla)
 				? ""
 				: vanilla;

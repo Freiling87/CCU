@@ -1,29 +1,21 @@
 ﻿using RogueLibsCore;
 using System;
-using System.Collections.Generic;
 
-namespace CCU.Traits.Merchant_Type
+namespace CCU.Traits.Merchant_Stock
 {
-    public class Drug_Dealer : T_MerchantType
+    public class Wholesaler : T_MerchantStock
     {
-        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
-        {
-            new KeyValuePair<string, int>( "Drugs", 3),
-        };
-
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Drug_Dealer>()
+            PostProcess = RogueLibs.CreateCustomTrait<Wholesaler>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character sells drugs."),
-                    
+                    [LanguageCode.English] = String.Format("This agent sells items at 2x the normal quantity."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Drug_Dealer)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Wholesaler)),
                 })
                 .WithUnlock(new TraitUnlock
                 {
@@ -35,6 +27,11 @@ namespace CCU.Traits.Merchant_Type
                 });
         }
         public override void OnAdded() { }
+        public override void OnAddItem(ref InvItem invItem)
+        {
+            if (QuantityTypes.Contains(invItem.itemType))
+                invItem.invItemCount *= 2;
+        }
         public override void OnRemoved() { }
     }
 }

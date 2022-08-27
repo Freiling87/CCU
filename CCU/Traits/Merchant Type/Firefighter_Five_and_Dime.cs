@@ -1,10 +1,21 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Firefighter_Five_and_Dime : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.Axe, 3),
+            new KeyValuePair<string, int>( vItem.Crowbar, 2),
+            new KeyValuePair<string, int>( vItem.FireExtinguisher, 3),
+            new KeyValuePair<string, int>( vItem.FireproofSuit, 3),
+            new KeyValuePair<string, int>( vItem.FirstAidKit, 3),
+            new KeyValuePair<string, int>( vItem.GasMask, 3),
+        };
+
         [RLSetup]
         public static void Setup()
         {

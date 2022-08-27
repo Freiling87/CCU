@@ -43,7 +43,7 @@
 			JoinMe = "JoinMe",
 			LeaveWeaponsBehind = "LeaveWeaponsBehind",
 			OfferMotivation = "OfferOfficeDrone",
-			PayCopDebt = "PayCopDebt",
+			PayCops = "PayCops",
 			PayDebt = "PayBackDebt",
 			PayEntranceFee = "PayEntranceFee",				
 			PlayBadMusic = "PlayBadMusic",

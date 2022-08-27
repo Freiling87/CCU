@@ -1,10 +1,18 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
     public class Resistance_Commissary : T_MerchantType
     {
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.FreeItemVoucher, 3),
+            new KeyValuePair<string, int>( vItem.HiringVoucher, 3),
+            new KeyValuePair<string, int>( vItem.QuickEscapeTeleporter, 2),
+        };
+
         [RLSetup]
         public static void Setup()
         {
