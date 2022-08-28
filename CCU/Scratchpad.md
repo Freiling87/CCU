@@ -27,6 +27,7 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
       - Permanent Hire
       - Permanent Hire Only
     - Merchant Stock: Various modifiers for the quantity/durability of sold items.
+      - Clearancer
       - Masterworker
       - Masterworkerer
       - Masterworkerest
@@ -57,6 +58,7 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Clearancer											|- Allows the same item to be sold multiple times, like Bartender
 |Masterworker										|- Durable wares have 2x Durability
 |Masterworkerer										|- Durable wares have 3x Durability
 |Masterworkerest									|- Durable wares have 4x Durability
@@ -1168,6 +1170,8 @@ Mirror shop inventory
 Replace stock with same item
 ###			C	Restocker
 Replace stock with random
+###			√	Clearancer
+Allows repeats of items
 ###			√	Masterworker
 2x Durability
 ###			√	Masterworkerer

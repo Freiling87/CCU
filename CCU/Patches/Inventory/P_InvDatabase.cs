@@ -121,17 +121,28 @@ namespace CCU.Patches.Inventory
 				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
 					for (int i = 0; i < item.Value; i++) // Qty
 						inventory.Add(__instance.SwapWeaponTypes(item.Key)); // Name
-			// SwapWeaponTypes is for item-affecting mutators (No Guns, etc.)
+																			 // SwapWeaponTypes is for item-affecting mutators (No Guns, etc.)
 
-			inventory = inventory.OrderBy(item => Guid.NewGuid()).Take(5).ToList();
+			List<string> finalInventory = new List<string>();
+			Random rnd = new Random();
+			int attempts = 0;
 
-			//while (inventory.Count < 5)
-   //         {
-			//	// This part should exclude duplicates of items unless a specific trait is taken to allow it.
-			//	// The default might exclude duplicates for durability items only?
-   //         }
+			while (finalInventory.Count < 5 && attempts < 100)
+			{
+				attempts++;
 
-			foreach (string item in inventory) 
+				int bagPickedIndex = rnd.Next(0, inventory.Count);
+				string bagPickedItem = inventory[bagPickedIndex];
+
+				if (!finalInventory.Contains(bagPickedItem) || agent.HasTrait<Clearancer>())
+                {
+					finalInventory.Add(bagPickedItem);
+					inventory.RemoveAt(bagPickedIndex);
+					attempts = 0;
+				}
+            }
+
+			foreach (string item in finalInventory) 
 			{
 				MethodInfo AddItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal");
 				InvItem invItem = null;
