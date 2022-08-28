@@ -122,6 +122,7 @@
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
+    <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />

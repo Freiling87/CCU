@@ -23,7 +23,18 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
   - Objects
     - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make noise that may alert the owner unless the stealing agent has Sneaky Fingers.
   - Traits
-    - Merchant Stock: Various modifiers for the quantity/durability of sold items. See the Traits page.
+    - Hire Duration
+      - Permanent Hire
+      - Permanent Hire Only
+    - Merchant Stock: Various modifiers for the quantity/durability of sold items.
+      - Masterworker
+      - Masterworkerer
+      - Masterworkerest
+      - Shiddy Goods
+      - Shoddy Goods
+      - Wholesaler
+      - Wholesalerer
+      - Wholesalerest
     - Merchant Type: Selecting multiple types will now combine inventory random-choice pools.
       - Burger Joint
       - Sugar Shack
@@ -31,6 +42,12 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
 ###				Object Variable List
 Vendor Cart mechanics note
+###				Hire Duration
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Permanent Hire										|- Offers to hire at 8x the normal cost, with infinite uses of Expert ability.
+|Permanent Hire Only								|- As Permanent Hire, but removes original one-time hire option.
 ###				Merchant Stock
 Traits in this category are multiplicative.
 
@@ -50,8 +67,10 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	The Conundrum of Enduring Ruckus
-Was able to have Hooker cause multiple Ruckuses. Rucki?
+###				C	Too many duplicates in shop inventory
+Exclude same item, need trait for that
+###				C	E_CantHeal
+Should be Doctor_CantHeal
 ###				C	Hiring Voucher not consumed
 Hiring vouchers don't appear to be consumed when hiring custom NPCs, not sure if it's a universal issue but I confirmed it with several classes and confirmed that vanilla hires still consume them so probably a bugged CCU thing.
 ###				C	Multiple Aligned Extortable in Chunk
@@ -440,8 +459,6 @@ New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
 ##		H	Combat
-###			C	Airstriker
-Airstrike on enemy during combat
 ###			H	Nth Wind
 Refreshes Drug Warrior & Backed Up bools after combat ends.
 P_GoalCombatEngage.
@@ -465,6 +482,27 @@ Apparently Lockdown walls are broken in custom levels.
 Complete
 ###			√	Fearless
 Complete
+##		C	Combat Patterns
+###			C	Airstriker
+Constant airstrike on enemy during combat
+###			C	Chaaaaarge! 
+Doable without special?
+###			C	Fireworks Show
+Random rockets, maybe sped up
+###			C	Rocket Barrage
+##		C	Combat Pattern Modifiers
+For Boss-style multi-attacking NPCs
+###			C	Choose Cycled Pattern
+Repeats selected pattersn in a cirlce
+###			C	Choose Random Pattern
+Selects a random different pattern from all added
+###			C	Pattern Interval 1
+###			C	Pattern Interval 2
+###			C	Pattern Interval 3
+###			C	Pattern Interval 4
+###			C	Pattern Trigger Allies Killed
+###			C	Pattern Trigger Damage Taken
+###			C	Pattern Trigger Health Threshold
 ##		C	Cost Currency
 ###			C	00 Button ExtraCost Display
 Bananas & alcohol are hardcoded
@@ -810,27 +848,31 @@ Hiree will leave if they're damaged in combat
 "I didn't sign up for this! You're nuts!"
 ###			C	Foulweather
 Hiree will never leave due to damage
-##		H	Hire Modifiers
+###			C	Weather or Not
+Use Mutiny timer for abandonment
+###			C	Too Cool To Die
+Agent can only be Knocked out, and can be revived
+##		H	Hire Duration
 A couple are technically Hire Triggers, so I broadened this cat name
-###			C	Homesick 
+###			C	Homesickness Immune
 Automatic Homesickness Killer
-###			C	Homesuck
+###			C	Homesickness Enjoyer
 Overrides Homesickness Killer
-###			C	Permanent Hire
-~8x normal hire price
-Allows infinite uses of skills.
-When "Not feeling too hot," they'll flee combat but not leave the party, if that's possible.
-P_AgentInteractions.
-###			C	Permanent Hire Only
-As above, but removes the single-use hire option.
-###			C	Start as Hired
-On level entry
+###			√	Permanent Hire
+Complete
+###			√	Permanent Hire Only
+Complete
 ##		C	Hire Trigger
-Obv default to On Hire, maybe use a secret default trait to keep the code clean
 ###			C	On Use Altar
 "Activate Servants"
 ###			C	On Use Podium
 "Who's With Me?!"
+###			C	On Release
+"Damn, I loved prison"
+###			C	On Sight
+"Another Survivor!"
+###			C	On Start
+"They told me to meet you at the station."
 ##		C	Hire Type
 ###			C	Interact
 Any interaction option, target object.
@@ -1156,6 +1198,8 @@ As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 
 ###			C	Fearsome
 Everyone terrified, Killer Robot
+###			C	Focus Stealer
+Camera focuses on them when in range. For bosses
 ###			C	Infinite Ammo
 New
 ###			C	Infinite Consumables

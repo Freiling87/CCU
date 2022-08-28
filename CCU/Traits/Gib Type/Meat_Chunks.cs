@@ -3,6 +3,10 @@ using System;
 
 namespace CCU.Traits.Gib_Type
 {
+    /// <summary>
+    /// WARNING: You're going to want to delete this. Just know that when you do, you're going to be stuck having to remove the vestigial trait string. Consider the ease of the override format and ask whether it's worth the trouble.
+    /// </summary>
+
     public class Meat_Chunks : T_GibType
     {
         public override string audioClipName => VanillaAudio.AgentGib;

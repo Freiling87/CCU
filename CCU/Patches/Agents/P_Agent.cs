@@ -4,15 +4,10 @@ using CCU.Challenges.Followers;
 using CCU.Localization;
 using CCU.Traits;
 using CCU.Traits.Behavior;
-using CCU.Traits.Combat;
-using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Gib_Type;
-using CCU.Traits.Hack;
+using CCU.Traits.Hire_Duration;
 using CCU.Traits.Language;
-using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
-using CCU.Traits.Rel_General;
-using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -191,6 +186,38 @@ namespace CCU.Patches.Agents
 			return true;
         }
 
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetEmployer))]
+		public static bool SetEmployer_Prefix(Agent __instance, ref Agent myEmployer)
+		{
+			if (__instance.GetOrAddHook<P_Agent_Hook>().PermanentHire &&
+				!(__instance.employer is null) && myEmployer is null)
+            {
+				myEmployer = __instance.employer;
+				__instance.job = "Follow";
+				__instance.jobCode = jobType.Follow;
+				__instance.StartCoroutine(__instance.ChangeJobBig(""));
+				__instance.oma.cantDoMoreTasks = false;
+			}
+
+			return true;
+        }
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetFollowing))]
+		public static bool SetFollowing_Prefix(Agent __instance, ref Agent myFollowing)
+		{
+			if (__instance.GetOrAddHook<P_Agent_Hook>().PermanentHire &&
+				!(__instance.following is null) && myFollowing is null)
+            {
+				myFollowing = __instance.employer;
+				__instance.job = "Follow";
+				__instance.jobCode = jobType.Follow;
+				__instance.StartCoroutine(__instance.ChangeJobBig(""));
+				__instance.oma.cantDoMoreTasks = false;
+			}
+
+			return true;
+		}
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
@@ -206,23 +233,28 @@ namespace CCU.Patches.Agents
 				__instance.canGoBetweenLevels = true;
 			else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)))
 				__instance.canGoBetweenLevels = false;
+
+			if (__instance.HasTrait<Permanent_Hire>() || __instance.HasTrait<Permanent_Hire_Only>())
+				__instance.GetOrAddHook<P_Agent_Hook>().PermanentHire = true;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0])]
-		public static void Start_Postfix(Agent __instance)
+		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
+		public static bool Start_Prefix(Agent __instance)
 		{
 			__instance.AddHook<P_Agent_Hook>();
+
+			return true;
 		}
 	}
 
 	public class P_Agent_Hook : HookBase<PlayfieldObject>
 	{
+		protected override void Initialize() { }
+
 		public bool SceneSetterFinished = false; // Avoids removal from series mid-traversal
 
 		public bool WalkieTalkieUsed;
 		public bool PermanentHire;
 		public int SuicideVestTimer;
-
-		protected override void Initialize() { }
 	}
 }

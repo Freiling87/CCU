@@ -68,7 +68,6 @@ namespace CCU.Systems.Containers
 		[RLSetup]
 		public static void Setup()
 		{
-			Core.LogMethodCall();
 			string t = NameTypes.Interface;
 
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo("Search"));
