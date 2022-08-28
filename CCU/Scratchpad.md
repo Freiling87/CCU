@@ -69,26 +69,47 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Too many duplicates in shop inventory
-Exclude same item, need trait for that
-###				C	E_CantHeal
-Should be Doctor_CantHeal
-###				C	Hiring Voucher not consumed
-Hiring vouchers don't appear to be consumed when hiring custom NPCs, not sure if it's a universal issue but I confirmed it with several classes and confirmed that vanilla hires still consume them so probably a bugged CCU thing.
+###				H	Jukebox Hacks
+Possibly RogueLibs, wait for confirmation.
+
+Mambo:
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	Turntables.PlayBadMusic () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	RogueLibsCore.VanillaInteractions+<>c.<Patch_Turntables>b__68_2 (RogueLibsCore.InteractionModel`1[T] m) (at <ac95cf0d3a8543748b4a19536e8724e6>:0)
+	RogueLibsCore.SimpleInteraction`1[T].OnPressed () (at <ac95cf0d3a8543748b4a19536e8724e6>:0)
+	RogueLibsCore.InteractionModel.OnPressedButton2 (System.String buttonName) (at <ac95cf0d3a8543748b4a19536e8724e6>:0)
+	RogueLibsCore.InteractionModel.OnPressedButton (System.String buttonName) (at <ac95cf0d3a8543748b4a19536e8724e6>:0)
+	RogueLibsCore.RogueLibsPlugin.PressedButtonHook (PlayfieldObject __instance, System.String buttonText) (at <ac95cf0d3a8543748b4a19536e8724e6>:0)
+	Turntables.PressedButton (System.String buttonText, System.Int32 buttonPrice) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	ObjectReal.PressedButton (System.String buttonText) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	WorldSpaceGUI.PressedButton (System.Int32 buttonNum) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	ButtonHelper.PushButton () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	ButtonHelper.DoUpdate (System.Boolean onlySetImages) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	ButtonHelper.Update () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+Bladder: 
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	Turntables+<BadMusicPlayTime>d__31.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+###				T	E_CantHeal
+Agent.Say_Prefix
+###				H	Hiring Voucher not consumed
+This is an RL bug, should be fixed ~08/29/2022.
 ###				C	Multiple Aligned Extortable in Chunk
 Had to shake down separately
-###				C	Homebase Hostility
-Verify that this is fixed
-###				C	Shops don't allow duplicates with limited stock
-Currently limited to one slot per item type
+###				T	Homebase Hostility
+Added Gate to Relationships.SetRelInitial
 ###				C	Grab Everything grabs Traps
 Grabs traps 😂
-###				C	Button Duplication - Objects
+###				T	Button Duplication - Objects
 Open/Search seems to be the only one
-###				C	Button Duplication - Agents
+###				T	Button Duplication - Agents
 Not sure of a pattern here... I think it only occurred with certain player agents.
-###				C	$0 in container
+###				H	$0 in container
+https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
+So far, unable to replicate
 ###				C	Investigate text box
 Maxior - Window w/ empty text box had "investigateable-message:::"
 I thought I fixed this waaaaah

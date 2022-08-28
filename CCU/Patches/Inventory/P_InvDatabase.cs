@@ -131,7 +131,7 @@ namespace CCU.Patches.Inventory
 			{
 				attempts++;
 
-				int bagPickedIndex = rnd.Next(0, inventory.Count);
+				int bagPickedIndex = rnd.Next(0, inventory.Count - 1);
 				string bagPickedItem = inventory[bagPickedIndex];
 
 				if (!finalInventory.Contains(bagPickedItem) || agent.HasTrait<Clearancer>())

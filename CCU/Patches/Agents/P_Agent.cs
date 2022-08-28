@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using UnityEngine.Networking;
 
 namespace CCU.Patches.Agents
 {
@@ -172,6 +173,25 @@ namespace CCU.Patches.Agents
 
 			return true;
 		}
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.Say), argumentTypes: new Type[] { typeof(string), typeof(bool) })]
+		public static bool Say_Prefix(ref string myMessage)
+        {
+			if (myMessage == "E_CantHeal")
+				myMessage = "Doctor_CantHeal";
+
+			return true;
+        }
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SayDialogue), argumentTypes: new Type[] { typeof(bool), typeof(string), typeof(bool), typeof(NetworkInstanceId) })]
+		public static bool SayDialogue_Prefix(Agent __instance, string type)
+        {
+			logger.LogDebug("SayDialogue_Prefix");
+			logger.LogDebug("AgentName: " + __instance.agentName);
+			logger.LogDebug("Type: " + type);
+
+			return true;	
+        }		
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetBrainActive))]
 		public static bool SetBrainActive_Prefix(Agent __instance, ref bool isActive)

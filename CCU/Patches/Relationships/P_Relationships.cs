@@ -36,6 +36,9 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
+            if (GC.levelType == "HomeBase")
+                return;
+
             string relationship = null;
 
             //  Factions, Custom

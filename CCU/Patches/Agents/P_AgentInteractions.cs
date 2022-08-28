@@ -93,7 +93,8 @@ namespace CCU.Patches.Agents
 								if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
 									h.AddButton(hireButtonText, 6666, m =>
 									{
-										m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, hireButtonText, permanentHireCost);
+										//m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, hireButtonText, 6666);
+										m.Agent.agentInteractions.QualifyHireAsProtection(agent, interactingAgent, 6666);
 									});
 							}
 
