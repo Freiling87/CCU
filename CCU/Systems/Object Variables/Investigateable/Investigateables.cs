@@ -44,7 +44,8 @@ namespace CCU.Systems.Investigateables
 		}
 
 		public static bool IsInvestigationString(string name) =>
-			(name?.Contains(ExtraVarStringPrefix) ?? false) &&
+			!(name is null) &&
+			name.StartsWith(ExtraVarStringPrefix) && !name.EndsWith(ExtraVarStringPrefix) &&
 			name != ExtraVarStringPrefix &&
 			name != ExtraVarStringPrefix + Environment.NewLine;
 
@@ -69,7 +70,8 @@ namespace CCU.Systems.Investigateables
 
 			RogueInteractions.CreateProvider(h =>
 			{
-				if (InvestigateableObjects_Slot1.Contains(h.Object.objectName) && 
+				if (!h.Agent.interactionHelper.interactingFar && 
+					InvestigateableObjects_Slot1.Contains(h.Object.objectName) && 
 					IsInvestigationString(h.Object.extraVarString))
 				{
                     if (h.Object is Computer computer)

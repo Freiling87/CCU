@@ -112,11 +112,12 @@ Not sure of a pattern here... I think it only occurred with certain player agent
 https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
-###				C	Investigate text box
+###				T	Investigate text box
 Maxior - Window w/ empty text box had "investigateable-message:::"
-I thought I fixed this waaaaah
+Tried something
 #		CT	Projects
 ##			C	Enclave System
+It's best to work on these piecemeal: mutators, traits, agents. Then combine them when the parts are complete.
 ###				C	Currency Changing
 If you want different currencies, you'll need new ways for players to change it.
 ####				C	Trait: Behavior - Moneychanger
