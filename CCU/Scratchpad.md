@@ -98,8 +98,8 @@ Bladder:
 Agent.Say_Prefix
 ###				H	Hiring Voucher not consumed
 This is an RL bug, should be fixed ~08/29/2022.
-###				C	Multiple Aligned Extortable in Chunk
-Had to shake down separately
+###				T	Multiple Aligned Extortable in Chunk
+Rewrote CanShakeDown_Postfix
 ###				T	Homebase Hostility
 Added Gate to Relationships.SetRelInitial
 ###				C	Grab Everything grabs Traps
