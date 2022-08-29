@@ -31,7 +31,7 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public static string GetFactionRelationship(Agent agent, int faction) =>
-            agent.GetTraits<T_Rel_Faction>().Where(t => t.Faction == faction).FirstOrDefault()?.FactionAlignment.ToString() ?? VRelationship.Neutral;
+            agent.GetTraits<T_Rel_Faction>().FirstOrDefault(t => t.Faction == faction)?.FactionAlignment.ToString() ?? VRelationship.Neutral;
 
         public static Alignment? GetFactionAlignment(Agent agent, int faction) =>
             agent.GetTraits<T_Rel_Faction>().FirstOrDefault(t => t.Faction == faction)?.FactionAlignment ?? Alignment.Neutral;
@@ -67,6 +67,10 @@ namespace CCU.Traits.Rel_Faction
                 //  TryGet returns only a bool. The out is assigning the actual dict value to self/otherWeight.
                 float selfWeight = alignmentWeights.TryGetValue(self, out selfWeight) ? selfWeight : 0;
                 float otherWeight = alignmentWeights.TryGetValue(other, out otherWeight) ? otherWeight : 0;
+
+                if (selfWeight < 0 && otherWeight < 0)
+                    return 0;
+
                 return selfWeight * otherWeight;
             }
 
@@ -107,7 +111,7 @@ namespace CCU.Traits.Rel_Faction
                             thisAlignment = GetFactionAlignment(thisAgent, faction),
                             otherAlignment = GetFactionAlignment(otherAgent, faction)
                         })
-                        .Where(alignments => alignments.thisAlignment != Alignment.Neutral && alignments.otherAlignment != Alignment.Neutral) // May be 0
+                        .Where(alignments => alignments.thisAlignment != Alignment.Neutral || alignments.otherAlignment != Alignment.Neutral) // May be 0
                         .Select(alignments => GetAgreementStrength(alignments.thisAlignment.Value, alignments.otherAlignment.Value))
                         .Average();
 

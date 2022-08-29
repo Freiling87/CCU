@@ -69,6 +69,8 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				T	Enemy of my Enemy Alignment
+Added an early return to T_Rel_Faction.GetAgreementStrength
 ###				H	Jukebox Hacks
 Possibly RogueLibs, wait for confirmation.
 
@@ -542,6 +544,8 @@ A la Bouncer
 ###			C	Flesh
 Require Cannibalism? Maybe not
 ##		C	Drug Warrior
+###			C	Feature: Werewolf Transformation compatibility
+Not a bug, sorry
 ###			C	Feature: Apply multiple effects at once
 This will be a little harder than expected. 
 Try a prefix to GoalBattle.Process, but still use the vanilla flags to prevent redundancy.
