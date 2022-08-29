@@ -8,6 +8,24 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
+##			CT	Default Goals
+###				T	Random Teleport
+CL: It would also be good for scattering key holders, like I've got an unfinished campaign where hunting down minibosses to get the keys to the elevator is meant to be one of the objectives but due to the way SoR loads chunks their almost always still standing nearing the elevator when you walk up, so being able to warp them away would be a nice workaround there.
+Also, a way to randomly place the Player would be useful too.
+###				C	Commit Arson
+New
+###				C	Robot Clean
+DW
+###				√	Arrested
+Complete
+###				√	Burned
+Complete
+###				√	Dead
+Complete
+###				√	Gibbed
+Complete
+###				√	Knocked Out
+Complete
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -195,12 +213,6 @@ Or you know what, make an overhaul mutator mapped to each class. That's what thi
 - Meltingpot District (Even distribution of all language groups)
 - Werewales (Werewelsh)
 - Brainard (Lang Zonbi)
-###			√	00 Base Feature
-P_Agent.
-	CanUnderstandEachOther_Postfix
-###			√	Alienian
-###			√	Monkese
-###			√	Zombese
 ##			CT	Legacy Name Updater
 ###				C	Iterate until failure
 When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
@@ -221,6 +233,14 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
+##			H	Config Files
+###				Custom Flag list
+Allow player to name booleans uniquely.
+These should be grouped by Campaign, since that's the only place they're valid.
+The config file should match the name of the campaign, if they allow the same characters.
+###				Custom Level Tag List?
+Not so sure about the utility of this. I don't think players should need more than 4 level tags.
+- Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 ##			C	Relationship Refactor
 ###				C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing 
@@ -228,10 +248,6 @@ Current state is embarrassing
 Current Setup:
 	Explode on Death
 Proposal:
-	Event Fuse
-		Short
-		Long
-		None
 	Event Type
 		Explosion
 	Event Trigger
@@ -247,14 +263,6 @@ Proposal:
 ##			C	Dedicated section on Character Sheet
 Should not be too hard, as the one method where it's filled out is pretty transparent
 Just add a --- CCU TRAITS --- Divider or something
-##			H	Config Files
-###				Custom Flag list
-Allow player to name booleans uniquely.
-These should be grouped by Campaign, since that's the only place they're valid.
-The config file should match the name of the campaign, if they allow the same characters.
-###				Custom Level Tag List?
-Not so sure about the utility of this. I don't think players should need more than 4 level tags.
-- Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 ##			C	Door System
 ###				C	Keycard System
 Red, Blue, Green, Yellow
@@ -302,9 +310,9 @@ Generates on NPC inventory or in a container in their chunk
 Acts like a key, but when activated the agent will read text out loud that's specific to a Container type
 This will be EXTREMELY annoying with Gravestones, which is kinda funny
 ##			C	Sugar System
-Merchant Type: Sugar Only
-Buyer Type: Sugar Only
-Passive: Stinger (Calls cops if you sell or buy contraband)
+Merchant Type: Sugar Shack √
+Passive: Keep Moving (Acts like Stinger, but doesn't betray you. Red herring)
+Passive: Stinger (Calls cops and flees level if you sell or buy contraband)
 And also the entire Drug Dealer mod series. 
 ##			T	Legacy Updater
 ###				T!	Challenges
@@ -328,26 +336,6 @@ P_StatusEffects.AddTrait_Prefix
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		C	Agent Goals
-##			CT	Default Goals
-###				T	Commit Arson
-New
-###				C	Flee Danger
-DW (What's the point anyway)
-###				C	Robot Clean
-DW
-###				C	Random Teleport
-CL: It would also be good for scattering key holders, like I've got an unfinished campaign where hunting down minibosses to get the keys to the elevator is meant to be one of the objectives but due to the way SoR loads chunks their almost always still standing nearing the elevator when you walk up, so being able to warp them away would be a nice workaround there.
-Also, a way to randomly place the Player would be useful too.
-###				√	Arrested
-Complete
-###				√	Burned
-Complete
-###				√	Dead
-Complete
-###				√	Gibbed
-Complete
-###				√	Knocked Out
-Complete
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
@@ -1592,6 +1580,7 @@ Complete
 ###			√	Homesickness Mandatory
 Complete
 ##		C	Gameplay
+###			C	Random Start Location
 ###			C	No Funny Business
 For town levels. Ensures no one will be killed.
 You will need to eliminate spontaneous hostiles for this to work, though.

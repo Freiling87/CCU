@@ -4,6 +4,7 @@ using CCU.Patches.Agents;
 using RogueLibsCore;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace CCU.Systems.CustomGoals
 {
@@ -19,6 +20,7 @@ namespace CCU.Systems.CustomGoals
             Dead = "Dead",
             Gibbed = "Gibbed",
             KnockedOut = "Knocked Out",
+            RandomTeleport = "Random Teleport",
             Zombified = "Zombified",
 
             //  Other Customs
@@ -43,6 +45,7 @@ namespace CCU.Systems.CustomGoals
             Dead,
             Gibbed,
             KnockedOut,
+            RandomTeleport,
             Zombified,
         };
         public static List<string> ActualGoals = new List<string>()
@@ -112,6 +115,24 @@ namespace CCU.Systems.CustomGoals
                         agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                         agent.tranqTime = 1000;
+                        goto start;
+                    case RandomTeleport:
+                        Vector3 targetLoc = Vector3.zero;
+                        int attempts = 0;
+
+                        do
+                        {
+                            targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
+                            attempts++;
+                        }
+                        while (Vector2.Distance(targetLoc, agent.tr.position) < 20f && attempts < 50);
+
+                        if (targetLoc == Vector3.zero)
+                            targetLoc = agent.tr.position;
+
+                        agent.Teleport(targetLoc, false, true);
+                        agent.agentCamera.fastLerpTime = 1f;
+
                         goto start;
                     case Zombified:
                         agent.zombieWhenDead = true;
