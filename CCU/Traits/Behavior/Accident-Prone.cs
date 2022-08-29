@@ -14,8 +14,8 @@ namespace CCU.Traits.Behavior
             PostProcess = RogueLibs.CreateCustomTrait<AccidentProne>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will not path around Crushers, Fire Spewers, and Sawblades.\n\n" +
-                        "Working on the other traps. Maybe."),
+                    [LanguageCode.English] = String.Format($"This character will not path around Crushers, Fire Spewers, and Sawblades.\n" +
+                        "<color=green>{0}</color> = Will try to pick up armed traps.", LongishDocumentationName(typeof(Grab_Everything))),
                 })
                 .WithName(new CustomNameInfo
                 {

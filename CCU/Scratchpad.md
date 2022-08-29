@@ -102,8 +102,8 @@ This is an RL bug, should be fixed ~08/29/2022.
 Rewrote CanShakeDown_Postfix
 ###				T	Homebase Hostility
 Added Gate to Relationships.SetRelInitial
-###				C	Grab Everything grabs Traps
-Grabs traps 😂
+###				T	Grab Everything grabs Traps
+Adjusted P_BrainUpdate.CustomLOSChecks and normalized Grab_Everything
 ###				T	Button Duplication - Objects
 Open/Search seems to be the only one
 ###				T	Button Duplication - Agents
@@ -1240,20 +1240,8 @@ Won't drop equipment, a la Warzone
 Immune to Butterfingerer
 ###			C	Trigger Happy
 Like Killer Robot
-###			C	Brainless
-Need a fully brain-broken agent for target dummies, statues, etc.
-###			C	Blinker*
-On hit: 
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	CCU.Patches.P_StatusEffects.UseQuickEscapeTeleporter_Blinker (System.Boolean isEndOfFrame, StatusEffects __instance) (at <c787a15bc1a54e8c86354dd6e6781bad>:0)
-	StatusEffects.UseQuickEscapeTeleporter (System.Boolean isEndOfFrame) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	StatusEffects.ChangeHealth (System.Single healthNum, PlayfieldObject damagerObject, UnityEngine.Networking.NetworkInstanceId cameFromClient, System.Single clientFinalHealthNum, System.String damagerObjectName, System.Byte extraVar) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	StatusEffects.ChangeHealth (System.Single healthNum, PlayfieldObject damagerObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Agent.Damage (PlayfieldObject damagerObject, System.Boolean fromClient) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	BulletHitbox.HitAftermath (Agent agent, System.Int32 bulletPlayerNum, System.Boolean bulletLocalPlayer, System.Boolean fromClient) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	BulletHitbox.HitObject (UnityEngine.GameObject hitObject, System.Boolean fromClient) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	BulletHitbox.OnTriggerEnter2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+###			C	Underclass
+Cops won't protect them
 ###			C	Concealed Carrier
 Hides weapon when out of combat.
 First attempt DW
@@ -1304,6 +1292,10 @@ Agent.zombified
 Agent.customZombified
 ###			√	Berserk (Declined)
 Rel General - Hostile to All
+###			√	Blinker*
+Complete
+###			√	Brainless
+Complete
 ###			√	Crusty
 Complete
 ###			√	Extortable
