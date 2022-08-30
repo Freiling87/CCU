@@ -19,12 +19,10 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells Fud & Hot Fud."),
-                    
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(McFuds), "McFud's"),
-                    
                 })
                 .WithUnlock(new TraitUnlock
                 {

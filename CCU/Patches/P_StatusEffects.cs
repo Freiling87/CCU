@@ -166,19 +166,20 @@ namespace CCU.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.NormalGib))]
 		public static bool NormalGib_Redirect(StatusEffects __instance)
 		{
-			if (__instance.agent.HasTrait<Indestructible>())
-				return false;
-
-			if (__instance.agent.GetTraits<T_GibType>().FirstOrDefault() is Meat_Chunks)
+			if (__instance.agent.HasTrait<Meat_Chunks>() || !__instance.agent.GetTraits<T_GibType>().Any())
 				return true;
 
-			P_StatusEffects_ExplodeBody.CustomGib(__instance);
+			if (!__instance.agent.HasTrait<Indestructible>())
+				P_StatusEffects_ExplodeBody.CustomGib(__instance);
+
 			return false;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.UseQuickEscapeTeleporter))]
 		public static bool UseQuickEscapeTeleporter_Blinker(bool isEndOfFrame, StatusEffects __instance)
         {
+			// Thought this was broken, but it was QET + No Teleports
+
 			try
 			{
 				if (__instance.agent.HasTrait<Blinker>())
@@ -316,18 +317,25 @@ namespace CCU.Patches
 		// Largely a modified copy of vanilla
 		public static void CustomGib(StatusEffects statusEffects)
 		{
+			logger.LogDebug("CustomGib");
+			int loggy = 0;
 			Agent agent = statusEffects.agent;
+			logger.LogDebug("Loggy: " + loggy++);
 			T_GibType gibTrait = agent.GetTraits<T_GibType>().FirstOrDefault();
+			logger.LogDebug("Loggy: " + loggy++);
 
-			if (statusEffects.slaveHelmetGonnaBlow)
+            if (statusEffects.slaveHelmetGonnaBlow)
 			{
+				logger.LogDebug("Loggy A: " + loggy++);
 				MethodInfo slaveHelmetBlow = AccessTools.DeclaredMethod(typeof(StatusEffects), "SlaveHelmetBlow");
 				slaveHelmetBlow.GetMethodWithoutOverrides<Action>(statusEffects).Invoke();
 				return;
 			}
 
+			logger.LogDebug("Loggy: " + loggy++);
 			if ((GC.serverPlayer && !statusEffects.agent.disappeared) || (!GC.serverPlayer && !statusEffects.agent.gibbed && !statusEffects.agent.fellInHole))
 			{
+				logger.LogDebug("Loggy B: " + loggy++);
 				statusEffects.agent.gibbed = true;
 				statusEffects.Disappear();
 
@@ -374,6 +382,8 @@ namespace CCU.Patches
 				if (statusEffects.agent.isPlayer != 0 && !statusEffects.playedPlayerDeath)
 					GC.audioHandler.Play(statusEffects.agent, VanillaAudio.PlayerDeath);
 			}
+
+			logger.LogDebug("Loggy: " + loggy++);
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]

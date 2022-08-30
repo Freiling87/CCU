@@ -126,7 +126,9 @@ namespace CCU.Patches.Inventory
 			List<string> finalInventory = new List<string>();
 			Random rnd = new Random();
 			int attempts = 0;
+			bool forceDuplicates = false;
 
+			redo:
 			while (finalInventory.Count < 5 && attempts < 100)
 			{
 				attempts++;
@@ -134,13 +136,20 @@ namespace CCU.Patches.Inventory
 				int bagPickedIndex = rnd.Next(0, inventory.Count - 1);
 				string bagPickedItem = inventory[bagPickedIndex];
 
-				if (!finalInventory.Contains(bagPickedItem) || agent.HasTrait<Clearancer>())
+				if (forceDuplicates || !finalInventory.Contains(bagPickedItem) || agent.HasTrait<Clearancer>() )
                 {
 					finalInventory.Add(bagPickedItem);
 					inventory.RemoveAt(bagPickedIndex);
 					attempts = 0;
 				}
             }
+
+			if (finalInventory.Count < 5)
+			{
+				forceDuplicates = true;
+				attempts = 0;
+				goto redo;
+			}
 
 			foreach (string item in finalInventory) 
 			{
@@ -151,10 +160,16 @@ namespace CCU.Patches.Inventory
 				{
 					string rListItem = __instance.rnd.RandomSelect(item, "Items");
 					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(rListItem);
+
+					if (agent.HasTrait<Clearancer>())
+						invItem.canRepeatInShop = true;
 				}
                 catch
                 {
 					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(item);
+
+					if (agent.HasTrait<Clearancer>())
+						invItem.canRepeatInShop = true;
 				}
 
 				foreach (T_MerchantStock trait in agent.GetTraits<T_MerchantStock>())
