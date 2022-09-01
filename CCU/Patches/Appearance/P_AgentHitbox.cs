@@ -1,36 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RogueLibsCore;
+﻿using BepInEx.Logging;
 using HarmonyLib;
-using System.Reflection;
-using BepInEx.Logging;
-using BTHarmonyUtils.TranspilerUtils;
-using System.Reflection.Emit;
-using CCU.Traits;
-using Random = UnityEngine.Random;
-using CCU.Patches.Appearance;
-using CCU.Traits.Facial_Hair;
 
 namespace CCU.Patches.Appearance
 {
-	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
+    [HarmonyPatch(declaringType: typeof(AgentHitbox))]
 	public static class P_AgentHitbox
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// This can be Transpilerized
 		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.chooseFacialHairType), argumentTypes: new[] { typeof(string) })]
 		public static bool ChooseFacialHairType_Prefix(string agentName, AgentHitbox __instance, ref string __result)
 		{
 			Agent agent = __instance.agent;
 
-			if (agent.GetTraits<T_FacialHair>().Any())
-			{
-				Appearance.RollFacialHair(__instance);
-			}
+			Appearance.RollFacialHair(__instance);
 			
 			if (__instance.canHaveFacialHair)
 			{

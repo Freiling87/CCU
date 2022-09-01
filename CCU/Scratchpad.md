@@ -10,8 +10,6 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			T	Custom Decal Pilot
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
-My GUESS:
-	
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -116,6 +114,20 @@ So far, unable to replicate
 ###				T	Investigate text box
 Maxior - Window w/ empty text box had "investigateable-message:::"
 Tried something
+##		C	Appearance
+###			C	Full-randomization bug
+- Whole appearance is randomized when any appearance trait is added.
+  - Should be a simple fix since it's doing less rather than more. 
+###			C	Facial Hair
+####			C	Trait names changed
+Changed trait names to not overlap with vanilla names. 
+This will likely break the BEARD MACHINE, because it was based directly on the class names.
+####			C	Vanilla facial hair no longer spawns
+New
+###			C	Hair Type
+New
+###			C	Skin Color
+New
 #		CT	Projects
 ##			C	Enclave System
 It's best to work on these piecemeal: mutators, traits, agents. Then combine them when the parts are complete.
@@ -357,20 +369,6 @@ Pending pilot
 ###			C	Affect Vanilla 
 Pending pilot
 ###			C	Roamer Level Feature
-New
-##		C	Appearance
-###			C	Full-randomization bug
-- Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more. 
-###			C	Facial Hair
-####			C	Trait names changed
-Changed trait names to not overlap with vanilla names. 
-This will likely break the BEARD MACHINE, because it was based directly on the class names.
-####			C	Vanilla facial hair no longer spawns
-New
-###			C	Hair Type
-New
-###			C	Skin Color
 New
 ##		C	Behavior
 ###			C	Vanilla Panic Room behavior

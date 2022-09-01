@@ -184,6 +184,7 @@
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
+    <Compile Include="Traits\Appearance\Randomize_Player.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
     <Compile Include="Traits\Behavior\Grab_Everything.cs" />
@@ -461,11 +462,11 @@
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\Trait Gate\Honorable_Thief.cs" />
     <Compile Include="Traits\Merchant Type\Intruders_Outlet.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Add_Beard.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Add_Mustache.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Add_Mustache_Circus.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Add_Mustache_Redneck.cs" />
-    <Compile Include="Traits\Appearance\FacialHair\Add_No_Facial_Hair.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Long_Beard.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Pencil_Mustache.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Curly_Mustache.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\Horseshoe_Mustache.cs" />
+    <Compile Include="Traits\Appearance\FacialHair\No_Facial_Hair.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_1_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_1_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_2_Aligned.cs" />
