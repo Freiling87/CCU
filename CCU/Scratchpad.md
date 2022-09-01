@@ -10,24 +10,6 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			T	Custom Decal Pilot
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
-##			CT	Default Goals
-###				T	Random Teleport
-CL: It would also be good for scattering key holders, like I've got an unfinished campaign where hunting down minibosses to get the keys to the elevator is meant to be one of the objectives but due to the way SoR loads chunks their almost always still standing nearing the elevator when you walk up, so being able to warp them away would be a nice workaround there.
-Also, a way to randomly place the Player would be useful too.
-###				C	Commit Arson
-New
-###				C	Robot Clean
-DW
-###				√	Arrested
-Complete
-###				√	Burned
-Complete
-###				√	Dead
-Complete
-###				√	Gibbed
-Complete
-###				√	Knocked Out
-Complete
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -35,11 +17,20 @@ Complete
   - Objects
     - Computer no longer interrupts hacking interaction when Investigation text is set.
     - Containers are no longer lootable via hacking. 
+    - Containers no longer have redundant Open/Search buttons
   - Traits
+    - Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
+    - Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately.
+    - Extortable: Duplicate buttons eliminated
+    - Interaction - Heal: No longer says broken dialogue when rejecting interaction
     - Language Speaker group: no longer show up in the trait Augmentation Booth for upgrade. This is a planned feature that was meant to be postponed.
-    - Pay Cop Debt button fixed.
-    - Bribe for Quest Item is now exempt from Cost Scale traits.
+    - Rel Faction: Sharing faction animosity can no longer improve your relations with others. 
+    - Pay Cop Debt: button text fixed.
+    - Cost Scale: Now exclude Bribe for Quest Item.
+    - Home Base is no longer affected by Relationship traits
 - Feature Additions
+  - Default Goals
+    - Random Teleport 
   - Objects
     - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make noise that may alert the owner unless the stealing agent has Sneaky Fingers.
   - Traits
@@ -89,8 +80,8 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				T	Enemy of my Enemy Alignment
-Added an early return to T_Rel_Faction.GetAgreementStrength
+###				C	False "Inventory Full" message
+Trying to pick up Whiskey
 ###				H	Jukebox Hacks
 Possibly RogueLibs, wait for confirmation.
 
@@ -114,20 +105,8 @@ Bladder:
 	Stack trace:
 	Turntables+<BadMusicPlayTime>d__31.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-###				T	E_CantHeal
-Agent.Say_Prefix
 ###				H	Hiring Voucher not consumed
 This is an RL bug, should be fixed ~08/29/2022.
-###				T	Multiple Aligned Extortable in Chunk
-Rewrote CanShakeDown_Postfix
-###				T	Homebase Hostility
-Added Gate to Relationships.SetRelInitial
-###				T	Grab Everything grabs Traps
-Adjusted P_BrainUpdate.CustomLOSChecks and normalized Grab_Everything
-###				T	Button Duplication - Objects
-Open/Search seems to be the only one
-###				T	Button Duplication - Agents
-Not sure of a pattern here... I think it only occurred with certain player agents.
 ###				H	$0 in container
 https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
@@ -338,6 +317,23 @@ P_StatusEffects.AddTrait_Prefix
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		C	Agent Goals
+##			CT	Default Goals
+###				C	Commit Arson
+New
+###				C	Robot Clean
+DW
+###				√	Arrested
+Complete
+###				√	Burned
+Complete
+###				√	Dead
+Complete
+###				√	Gibbed
+Complete
+###				√	Knocked Out
+Complete
+###				√	Random Teleport
+Complete
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
