@@ -127,7 +127,9 @@
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
+    <Compile Include="Patches\Objects\P_SpawnerObject.cs" />
     <Compile Include="Patches\P_Movement.cs" />
+    <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\Quests\P_Quests.cs" />
     <Compile Include="PropertyLogger.cs" />
     <Compile Include="Systems\Language\Language.cs" />

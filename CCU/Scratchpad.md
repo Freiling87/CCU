@@ -10,6 +10,8 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
 ##			T	Custom Decal Pilot
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
+My GUESS:
+	
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -32,7 +34,7 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
   - Default Goals
     - Random Teleport 
   - Objects
-    - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make noise that may alert the owner unless the stealing agent has Sneaky Fingers.
+    - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
   - Traits
     - Hire Duration
       - Permanent Hire
