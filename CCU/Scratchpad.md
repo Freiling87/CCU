@@ -8,6 +8,8 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
+##			T	Custom Decal Pilot
+I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			CT	Default Goals
 ###				T	Random Teleport
 CL: It would also be good for scattering key holders, like I've got an unfinished campaign where hunting down minibosses to get the keys to the elevator is meant to be one of the objectives but due to the way SoR loads chunks their almost always still standing nearing the elevator when you walk up, so being able to warp them away would be a nice workaround there.
