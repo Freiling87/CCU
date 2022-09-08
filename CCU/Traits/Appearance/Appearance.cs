@@ -1,26 +1,37 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.Facial_Hair;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace CCU.Patches.Appearance
 {
-	public static class Appearance
+    public static class Appearance
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public static void SetupAppearance(AgentHitbox agentHitbox)
+        {
+			if (agentHitbox.agent.agentName != VanillaAgents.CustomCharacter)
+				return;
+
+			//RollFacialHair(agentHitbox); // Might need special treatment, verify
+			RollHairColor(agentHitbox);
+			RollHairstyle(agentHitbox);
+			RollSkinColor(agentHitbox);
+        }
+
 		// TODO: Untested after refactor
-		public static void RollFacialHair(AgentHitbox agentHitBox)
+		public static string RollFacialHair(AgentHitbox agentHitBox)
 		{
 			List<T_FacialHair> pool = agentHitBox.agent.GetTraits<T_FacialHair>().ToList();
 
 			if (pool.Count == 0 || agentHitBox.agent.agentName != VanillaAgents.CustomCharacter)
-				return;
+				return null; // Change if used as other than void
 
-			var random = new Random();
+			var random = new System.Random();
 			T_FacialHair selection = pool[random.Next(pool.Count)];
 			string selectionName = selection.FacialHairType;
 			agentHitBox.facialHairType = selectionName;
@@ -36,15 +47,20 @@ namespace CCU.Patches.Appearance
 				agentHitBox.facialHair.gameObject.SetActive(true);
 				agentHitBox.facialHairWB.gameObject.SetActive(true);
 			}
+
+			return selectionName;
 		}
-		public static void RollHairColor(AgentHitbox agentHitBox)
+		public static Color32 RollHairColor(AgentHitbox agentHitbox)
 		{
+			return new Color32();
 		}
-		public static void RollHairstyle(AgentHitbox agentHitBox)
+		public static string RollHairstyle(AgentHitbox agentHitBox)
 		{
+			return "";
 		}
-		public static void RollSkinColor(AgentHitbox agentHitBox)
+		public static Color32 RollSkinColor(AgentHitbox agentHitBox)
 		{
+			return new Color32();
 		}
 	}
 }

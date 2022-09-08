@@ -184,7 +184,6 @@
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
-    <Compile Include="Traits\Appearance\Randomize_Player.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
     <Compile Include="Traits\Behavior\Grab_Everything.cs" />
