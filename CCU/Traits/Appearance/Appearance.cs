@@ -12,26 +12,18 @@ namespace CCU.Patches.Appearance
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// TODO: Untested after refactor
 		public static void RollFacialHair(AgentHitbox agentHitBox)
 		{
-			Core.LogMethodCall();
-
-			var random = new Random();
-
-			// TODO: This was changed to account for class refactor, but the code is untested.
-			// The previous setup was to treat the trait names as the strings for facial hair types
-			// Instead, you'll need to get override strings from T_FacialHair children.
-			// Basically, don't expect anything below to work until you redo it.
 			List<T_FacialHair> pool = agentHitBox.agent.GetTraits<T_FacialHair>().ToList();
 
-			logger.LogDebug("\tpool: " + pool.Count);
-
-			if (pool.Count == 0)
+			if (pool.Count == 0 || agentHitBox.agent.agentName != VanillaAgents.CustomCharacter)
 				return;
 
-			CustomTrait selection = pool[random.Next(pool.Count)];
-			string selectionName = selection.Trait.traitName; 
-			agentHitBox.facialHairType = selectionName.Substring(selectionName.IndexOf(" - ") + 1); 
+			var random = new Random();
+			T_FacialHair selection = pool[random.Next(pool.Count)];
+			string selectionName = selection.FacialHairType;
+			agentHitBox.facialHairType = selectionName;
 			agentHitBox.agent.oma.facialHairType = agentHitBox.agent.oma.convertFacialHairTypeToInt(agentHitBox.facialHairType);
 
 			if (agentHitBox.facialHairType == "None" || agentHitBox.facialHairType == "" || agentHitBox.facialHairType == null)

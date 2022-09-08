@@ -18,13 +18,9 @@ namespace CCU.Patches.Interface
         /// <param name="myTrait"></param>
         /// <returns></returns>
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffectDisplay.AddDisplayPiece), argumentTypes: new[] { typeof(StatusEffect), typeof(Trait) })]
-        public static bool AddDisplayPiece_Prefix(StatusEffect myStatusEffect, Trait myTrait)
+        public static bool AddDisplayPiece_Prefix(Trait myTrait)
         {
-            if (myTrait?.GetHook<T_CCU>() is null ||
-                myTrait?.GetHook<T_PlayerTrait>() != null)
-                return true;
-
-            return false;
+            return T_CCU.IsTraitDisplayable(myTrait);
         }
     }
 }
