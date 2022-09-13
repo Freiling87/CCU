@@ -59,7 +59,7 @@ namespace CCU.Systems.Containers
 
 		public static string MagicObjectName(string originalName)
 		{
-			if (ContainerObjects_Slot1.Contains(originalName))
+			if (IsContainer(originalName))
 				return vObject.ChestBasic;
 
 			return originalName;
@@ -88,7 +88,7 @@ namespace CCU.Systems.Containers
 
 			RogueInteractions.CreateProvider(h => 
 			{
-				if (ContainerObjects_Slot1.Contains(h.Object.objectName) && !h.Helper.interactingFar)
+				if (IsContainer(h.Object.objectName) && !h.Helper.interactingFar)
 				{
 					Agent agent = h.Object.interactingAgent;
 
@@ -147,5 +147,10 @@ namespace CCU.Systems.Containers
 
 			playfieldObject.ShowChest();
 		}
+
+		// Expanded later
+		public static bool IsContainer(string objectName) =>
+			!(objectName is null) &&
+			ContainerObjects_Slot1.Contains(objectName);
 	}
 }

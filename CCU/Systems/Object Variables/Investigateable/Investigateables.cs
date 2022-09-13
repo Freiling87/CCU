@@ -35,19 +35,24 @@ namespace CCU.Systems.Investigateables
 			vObject.Shelf,
 		};
 
-		public static string MagicObjectName(string originalName)
-		{
-			if (InvestigateableObjects_Slot1.Contains(originalName))
-				return vObject.Sign;
+		public static string MagicObjectName(string originalName) =>
+			IsInvestigateable(originalName)
+				? vObject.Sign
+				: originalName;
 
-			return originalName;
-		}
+		public static bool IsInvestigateable(string name) =>
+			InvestigateableObjects_Slot1.Contains(name) ||
+			InvestigateableObjects_Slot2.Contains(name);
 
 		public static bool IsInvestigationString(string name) =>
 			!(name is null) &&
-			name.StartsWith(ExtraVarStringPrefix) && !name.EndsWith(ExtraVarStringPrefix) &&
-			name != ExtraVarStringPrefix &&
-			name != ExtraVarStringPrefix + Environment.NewLine;
+			name != "" &&
+			(
+				name.StartsWith(ExtraVarStringPrefix) || 
+				name.EndsWith(ExtraVarStringPrefix) ||
+				name == ExtraVarStringPrefix ||
+				name == ExtraVarStringPrefix + Environment.NewLine
+			);
 
 		public static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
 			invDatabase.agent.mainGUI.invInterface.Slots.Where(islot => !IsInvestigationString(islot.itemNameText.text)).ToList();
@@ -59,7 +64,7 @@ namespace CCU.Systems.Investigateables
 		}
 
 		public static List<InvItem> FilteredInvItemList(List<InvItem> invItemList) =>
-			invItemList.Where(ii => !(ii.invItemName is null) && !IsInvestigationString(ii.invItemName)).ToList();
+			invItemList.Where(ii => !IsInvestigationString(ii.invItemName)).ToList();
 
 		[RLSetup]
 		public static void Setup()
@@ -70,16 +75,22 @@ namespace CCU.Systems.Investigateables
 
 			RogueInteractions.CreateProvider(h =>
 			{
-				if (!h.Agent.interactionHelper.interactingFar && 
-					InvestigateableObjects_Slot1.Contains(h.Object.objectName) && 
+				if (!h.Agent.interactionHelper.interactingFar &&
+					IsInvestigateable(h.Object.objectName) &&
 					IsInvestigationString(h.Object.extraVarString))
 				{
-                    if (h.Object is Computer computer)
+					string text = h.Object.extraVarString.Remove(0, ExtraVarStringPrefix.Length + 2);
+
+					if (text.Length is 0) // idk how do you even detect real content
+						return;
+
+					if (h.Object is Computer computer)
 						h.RemoveButton(VButtonText.ReadEmail);
 
 					h.AddButton(CButtonText.Investigate, m =>
 					{
-						m.Object.ShowBigImage(m.Object.extraVarString.Remove(0, ExtraVarStringPrefix.Length + 2), "", null);
+						logger.LogDebug("Text:\n\t'" + text + "'");
+						m.Object.ShowBigImage(text, "", null);
 					});
 				}
 			});

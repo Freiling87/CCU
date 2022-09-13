@@ -153,8 +153,8 @@ namespace CCU.Patches.Objects
 
 			return true;
         }
-		#endregion
-		
+        #endregion
+				 
 		// [HarmonyPrefix, HarmonyPatch(methodName: nameof(PlayfieldObject.SpawnNewMapMarker))]
 		public static void SpawnNewMapMarker_Prefix(PlayfieldObject __instance)
 		{
@@ -165,6 +165,6 @@ namespace CCU.Patches.Objects
 				if (agent.GetTraits<T_MapMarker>().Any())
 					__instance.MinimapDisplay();
 			}
-		}
+		} 
 	}
 }

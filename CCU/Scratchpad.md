@@ -8,6 +8,12 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
+##		C	Permanent Status Effects
+###			C	Giant
+###			C	Enraged
+
+##		C	Restrict Trait Count 
+to legalize characters
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -15,7 +21,8 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
   - Objects
     - Computer no longer interrupts hacking interaction when Investigation text is set.
     - Containers are no longer lootable via hacking. 
-    - Containers no longer have redundant Open/Search buttons
+    - Containers no longer have redundant Open/Search buttons.
+    - Investigateables no longer show Investigate button with blank text.
   - Traits
     - Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
     - Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately.
@@ -78,8 +85,48 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Fac Rel Refactor
+Agent 1 - Wanted / Hostile Fac1
+Agent 2 - Law / Hostile Fac2 
+
+Should be hostile, but Rel Fac set to neutral.
+###				C	SORCE Mutators not available in Editor levels 
+I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
+###				C	Container button text
+On loading a chunk, they don't pull and display in the button. They are still in the item, and drop correctly.
+P_LevelEditor.SetNameText_Prefix: tileNameText is blank unless defined this session. I.e., item name is not loading here.
+P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means that:
+	UpdateInterface_OnSelect_ShowCustomInterface: Loc_43 is not loading what you think it is. tileNameText2 is apparently always blank, but you might be using the default arg wrong for a harmony patch.
+###				C	Clone Boys Dealer Shop Empty
+I think rLists are being blocked
+
+	[Debug  :CCU_TraitManager] TRAIT LIST: Clone Boys Dealer
+	[Debug  :CCU_TraitManager]      Scumbag
+	[Debug  :CCU_TraitManager]      Borrow_Money_Moocher
+	[Debug  :CCU_TraitManager]      Wildcard
+	[Debug  :CCU_TraitManager]      Drug_Dealer
+	[Debug  :CCU_TraitManager]      Guilty
+	[Debug  :CCU_TraitManager]      IdentifyScience
+	[Debug  :CCU_TraitManager]      HatesBlahds
+	[Debug  :CCU_TraitManager]      HatesCrepes
+	[Debug  :CCU_TraitManager]      Faction_3_Aligned
+	[Debug  :CCU_TraitManager]      Meat_Chunks
+	[Debug  :CCU_P_Agent] Inventory:
+	[Debug  :CCU_P_Agent] Money
+	[Debug  :CCU_P_Agent]
+	[Debug  :CCU_P_Agent]
+	[Debug  :CCU_P_Agent]
+	[Debug  :CCU_P_Agent] 
+###				C	Player Character speaks all
+Tried something
 ###				C	False "Inventory Full" message
-Trying to pick up Whiskey
+Trying to pick up Whiskey, Replicant Rebel character
+Able to replicate?
+###				H	Containers Show "(Empty)"
+Start_SetupInvDatabasesForContainers sets chestReal to true. This makes it so that (Empty) does display the first time the chunk is run, but not on re-runs.
+	This bool is allowing PlayfieldObject.MakeChestNonInteractable to be called, since it's already built to handle any object.
+	Re-setting it to true in a PlayfieldObject.SetVars_Postfix didn't have any effect.
+It might be the 0-Qty Money item throwing off InvDatabase.IsEmpty. That'd be the next thing to try.
 ###				H	Jukebox Hacks
 Possibly RogueLibs, wait for confirmation.
 
@@ -109,9 +156,20 @@ This is an RL bug, should be fixed ~08/29/2022.
 https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
-###				T	Investigate text box
-Maxior - Window w/ empty text box had "investigateable-message:::"
-Tried something
+##		C	Appearance
+###			C	Full-randomization bug
+- Whole appearance is randomized when any appearance trait is added.
+  - Should be a simple fix since it's doing less rather than more. 
+###			C	Facial Hair
+####			C	Trait names changed
+Changed trait names to not overlap with vanilla names. 
+This will likely break the BEARD MACHINE, because it was based directly on the class names.
+####			C	Vanilla facial hair no longer spawns
+New
+###			C	Hair Type
+New
+###			C	Skin Color
+New
 #		CT	Projects
 ##			C	Enclave System
 It's best to work on these piecemeal: mutators, traits, agents. Then combine them when the parts are complete.
@@ -228,15 +286,44 @@ Current Setup:
 	Explode on Death
 Proposal:
 	Event Type
-		Explosion
+		Align
+		Cry
+		Die
+		Drop Items
+		Explosion (All existing types)
+		Flee Level
+		Hostile
+		Path to Panic Room
+		Random Teleport
+		Reset Releationships
+		Ruckus
+	Event Delay
+		Existing Explode on Death "Fuse" traits
+		From Mac:
+			[random] trigger only occurs 25% of the time. multiplicative with other [random]s
+			[random] trigger only occurs 50% of the time. multiplicative with other [random]s
+			[random] trigger only occurs 75% of the time. multiplicative with other [random]s
+			[random] include duds for limits: failed random rolls count towards [limits]
+			[random] only rolled once: the random roll is only cast once, at the start of the level, and the NPC will consistently always fail or succeed depending on that one roll.
+			[limits] Only Once: Can only trigger once.
+			[limits] Only Player: Only triggers if the triggerer was a player
+			[limits] Only NPC: reversed Only Player
+			[Special Interact Button] Only Aligned: Only available to aligned/hire-er agents.
+			[Special Interact Button] Costs Money: The interaction costs money. All money- related traits apply.
+			[Special Interact Button] Goto Agent/Object: Allows you to target an NPC or object. The Agent will then travel to there and trigger the event
+			Apply to triggerer: apply all event effects to the triggerer instead of you
 	Event Trigger
 		Align
 		Combat
+		Committed Crime
 		Damage Dealt
 		Damage Taken
 		Death
 		Exit Level
+		Interact
+		Interact Option (named after Event Type)
 		Join Party
+		Out of Ammo
 		Search
 		Spawn
 ##			C	Dedicated section on Character Sheet
@@ -318,6 +405,8 @@ P_StatusEffects.AddTrait_Prefix
 ##			CT	Default Goals
 ###				C	Commit Arson
 New
+###				C	Frozen
+###				C	Frozen (Permanent)
 ###				C	Robot Clean
 DW
 ###				√	Arrested
@@ -353,20 +442,6 @@ Pending pilot
 ###			C	Affect Vanilla 
 Pending pilot
 ###			C	Roamer Level Feature
-New
-##		C	Appearance
-###			C	Full-randomization bug
-- Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more. 
-###			C	Facial Hair
-####			C	Trait names changed
-Changed trait names to not overlap with vanilla names. 
-This will likely break the BEARD MACHINE, because it was based directly on the class names.
-####			C	Vanilla facial hair no longer spawns
-New
-###			C	Hair Type
-New
-###			C	Skin Color
 New
 ##		C	Behavior
 ###			C	Vanilla Panic Room behavior
@@ -1208,6 +1283,23 @@ Since Character Creator inventory isn't by default carried to spawn, use it as a
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		CT	Passive
+###			C	Elector
+NPC has 2x effect on Electability
+###			C	Unspecial
+Disables:
+	Possession
+	Secret werewolf
+	Arsonist
+###			C	Menace 2 Society
+When neutralized, witnesses Friendly
+###			C	Menace 3 Society
+When neutralized, witnesses Loyal
+###			C	Menace 4 Society
+When neutralized, witnesses Aligned
+###			C	Menace -1 Society
+When neutralized, witnesses Annoyed
+###			C	Menace -2 Society
+When neutralized, witnesses Hostile
 ###			C	Always Gib / Gibbous
 
 ###			C	Fearsome
@@ -1521,7 +1613,12 @@ Mutator: Exit Timer - Similar to Time Limit, except that the elevator is locked 
 Mutator: Exit Timer EXTREME - Similar to Time Limit EXTREME, except that the timer is LONGER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator.
 
 Mutator: Exit Timer LITE - Similar to Time Limit, except that the timer is SHORTER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator. 
-
+##		C	Disaster Mutators
+Simply allows them to be mixed
+##		C	Election Mutators
+###			C	Vary starting election point
+###			C	Vary vote value
+And traits that affect vote power
 ##		C	00 Mutator List Population
 ###			C	00 Hide from Non-Editor access
 - CreateMutatorListCampaign
@@ -1587,6 +1684,14 @@ In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
 Curated configurations of challenges that can serve as a shortcut.
 E.g., "Interlude:" No funny business, pause big quests, etc.
 ##		C	Progression
+###			C	Missions Optional
+Unlock elevator
+###			C	Manual Missions Only
+No randos
+###			C	Force Mission Type
+All Neutralize, Steal, etc., but random
+###			C	Hide Missions
+For diegetic storytelling
 ###			C	Exit Timer
 For Survival Levels, elevator is locked until timer elapses.
 ###			C	Delay Trait Gain
