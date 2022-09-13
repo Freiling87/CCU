@@ -18,8 +18,5 @@ namespace CCU.Traits
 			foreach (Trait trait in agent.statusEffects.TraitList)
 				logger.LogDebug("\t" + trait.traitName);
 		}
-
-		internal static List<Trait> OnlyNonhiddenTraits(List<Trait> traitList) =>
-			traitList.Where(trait => trait.GetHook<T_CCU>() is null || trait.GetHook<T_PlayerTrait>() != null).ToList();
 	}
 }

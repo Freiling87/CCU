@@ -52,7 +52,7 @@ namespace CCU.Patches.Interface
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		 
+		
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.CreateMutatorListLevel))]
 		public static bool CreateMutatorList_Level(LevelEditor __instance, ref float ___numButtonsLoad)
 		{
@@ -71,7 +71,32 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.CreateObjectList))]
+		private static IEnumerable<CodeInstruction> CreateObjectList_Extended(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo add = AccessTools.DeclaredMethod(typeof(List<>), "Add", parameters: new[] { typeof(string) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_0),
+					new CodeInstruction(OpCodes.Ldstr, "ChestGood"),
+					new CodeInstruction(OpCodes.Callvirt, add),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_0),
+					new CodeInstruction(OpCodes.Ldstr, "CustomFloorDecal"),
+					new CodeInstruction(OpCodes.Callvirt),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
 		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
         {
 			if (__instance.currentInterface == "Objects")

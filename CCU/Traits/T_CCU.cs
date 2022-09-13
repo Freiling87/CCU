@@ -1,5 +1,7 @@
 ﻿using RogueLibsCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CCU.Traits
 {
@@ -16,7 +18,17 @@ namespace CCU.Traits
             }
         }
 
-        public string TextName => DesignerName(GetType());
+        // Remove all CCU traits that aren't Player traits
+        public static List<Trait> DisplayableTraits(List<Trait> vanilla) =>
+            vanilla.Where(t => IsTraitDisplayable(t)).ToList();
+
+        public static bool IsTraitDisplayable(Trait trait) =>
+            trait?.GetHook<T_CCU>() is null ||
+            !(trait?.GetHook<T_PlayerTrait>() is null);
+
+        public string TextName => 
+            DesignerName(GetType());
+
         public static string DesignerName(Type type, string custom = null) =>
             "[CCU] " + 
             (type.Namespace).Split('.')[2].Replace('_', ' ') + 

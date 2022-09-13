@@ -4,6 +4,6 @@
     {
         public T_FacialHair() : base() { }
 
-        //public abstract string FacialHairType { get; }
+        public abstract string FacialHairType { get; }
     }
 }

@@ -2,21 +2,21 @@
 
 namespace CCU.Traits.Facial_Hair
 {
-	public class NoFacialHair : T_FacialHair
+    public class Long_Beard : T_FacialHair
 	{
-		//[RLSetup]
+		public override string FacialHairType => "Beard";
+
+        [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<NoFacialHair>()
+			PostProcess = PostProcess = RogueLibs.CreateCustomTrait<Long_Beard>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Adds this trait to the appearance pool. If this character is generated as an NPC, their appearance will be randomized between all appearance traits in the pool.",
-					
+					[LanguageCode.English] = "Adds this item to the appearance pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(NoFacialHair)),
-					
+					[LanguageCode.English] = DesignerName(typeof(Long_Beard)),
 				})
 				.WithUnlock(new TraitUnlock
 				{
