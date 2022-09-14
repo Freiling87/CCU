@@ -128,7 +128,7 @@ namespace CCU.Patches.Inventory
 			int attempts = 0;
 			bool forceDuplicates = false;
 
-			redo:
+			redo: // Yeah redo this whole damn thing
 			while (finalInventory.Count < 5 && attempts < 100)
 			{
 				attempts++;

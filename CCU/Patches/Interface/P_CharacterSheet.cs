@@ -19,7 +19,7 @@ namespace CCU.Patches.Interface
 		private static IEnumerable<CodeInstruction> UpdateStats_HideCCUTraits(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo traitList = AccessTools.DeclaredField(typeof(CharacterSheet), "statusEffects");
+			FieldInfo traitList = AccessTools.DeclaredField(typeof(StatusEffects), nameof(StatusEffects.TraitList));
 			MethodInfo displayableTraits = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.DisplayableTraits));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(

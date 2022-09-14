@@ -15,8 +15,7 @@ namespace CCU.Patches
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), 
-            argumentTypes: new[] { typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
+        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), argumentTypes: new[] { typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
         public static bool Spawn_Prefix(string objectType)
         {
             logger.LogDebug("Spawn_Prefix");

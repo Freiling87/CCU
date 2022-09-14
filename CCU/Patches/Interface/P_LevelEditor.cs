@@ -4,6 +4,7 @@ using CCU.Challenges;
 using CCU.Systems.Containers;
 using CCU.Systems.CustomGoals;
 using CCU.Systems.Investigateables;
+using CCU.Systems.Object_Variables;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -71,25 +72,26 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.CreateObjectList))]
+		// This is out of scope, you silly man!
+		//[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.CreateObjectList))]
 		private static IEnumerable<CodeInstruction> CreateObjectList_Extended(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo add = AccessTools.DeclaredMethod(typeof(List<>), "Add", parameters: new[] { typeof(string) });
+			MethodInfo addCustomListEntries = AccessTools.DeclaredMethod(typeof(ObjectVariables), nameof(ObjectVariables.AddCustomListEntries));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_0),
-					new CodeInstruction(OpCodes.Ldstr, "ChestGood"),
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldstr, "AirConditioner"),
 					new CodeInstruction(OpCodes.Callvirt, add),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_0),
-					new CodeInstruction(OpCodes.Ldstr, "CustomFloorDecal"),
-					new CodeInstruction(OpCodes.Callvirt),
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Call, addCustomListEntries),
 				});
 
 			patch.ApplySafe(instructions, logger);

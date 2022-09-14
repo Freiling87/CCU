@@ -22,7 +22,7 @@ namespace CCU.Patches.Interface
 			FieldInfo dummyAgent = AccessTools.DeclaredField(typeof(CharacterSelect), nameof(CharacterSelect.dummyAgent));
 			FieldInfo statusEffects = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.statusEffects));
 			FieldInfo traitList = AccessTools.DeclaredField(typeof(StatusEffects), nameof(StatusEffects.TraitList));
-			MethodInfo filteredTraitList = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.DisplayableTraits));
+			MethodInfo displayableTraits = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.DisplayableTraits));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -38,10 +38,12 @@ namespace CCU.Patches.Interface
                 },
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Call, filteredTraitList),
+					new CodeInstruction(OpCodes.Call, displayableTraits),
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
 				{
+					new CodeInstruction(OpCodes.Callvirt),
+					new CodeInstruction(OpCodes.Stloc_S, 41),
 				});
 
 			patch.ApplySafe(instructions, logger);
