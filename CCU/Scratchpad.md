@@ -11,7 +11,6 @@ HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 ##		C	Permanent Status Effects
 ###			C	Giant
 ###			C	Enraged
-
 ##		C	Restrict Trait Count 
 to legalize characters
 ##			T	Custom Decal Pilot
@@ -21,20 +20,21 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
   - Default Goals
     - Scene Setters are no longer interrupted by "Flee" behaviors.
   - Objects
-    - Computer no longer interrupts hacking interaction when Investigation text is set.
-    - Containers are no longer lootable via hacking. 
-    - Containers no longer have redundant Open/Search buttons.
-    - Investigateables no longer show Investigate button with blank text.
+    - Containers
+      - Can no longer loot via hack (Lame!)
+      - Disabled redundant Open/Search buttons.
+    - Investigateables
+	  - Computer no longer interrupts hacking interaction when Investigation text is set.
+      - Investigate button no longer appears with blank text.
   - Traits
     - Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
-    - Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately.
-    - Extortable: Duplicate buttons eliminated
+    - Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately. Duplicate Extortion buttons eliminated.
     - Interaction - Heal: No longer says broken dialogue when rejecting interaction
-    - Language Speaker group: no longer show up in the trait Augmentation Booth for upgrade. This is a planned feature that was meant to be postponed.
+    - Language Speaker group: Removed from upgrade menu in Augmentation Booth. This is a planned feature that was meant to be postponed.
     - Rel Faction: Sharing faction animosity can no longer improve your relations with others. 
-    - Pay Cop Debt: button text fixed.
-    - Cost Scale: Now exclude Bribe for Quest Item.
-    - Home Base is no longer affected by Relationship traits
+    - Pay Cop Debt: Button text fixed.
+    - Cost Scale: Now excludes Bribe for Quest Item.
+    - Home Base is no longer affected by Relationship traits. 
 - Feature Additions
   - Default Goals
     - Random Teleport 
@@ -70,9 +70,9 @@ Vendor Cart mechanics note
 ###				Merchant Stock
 Traits in this category are multiplicative.
 
-Durable Wares: Melee & Ranged weapons, Wearables
+***Durable Wares:** Melee & Ranged weapons, Wearables*
 
-Stackable Wares: Consumables, Food, Tools, Throwing Weapons
+***Stackable Wares:** Consumables, Food, Tools, Throwing Weapons*
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -87,10 +87,16 @@ Stackable Wares: Consumables, Food, Tools, Throwing Weapons
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Can open empty containers
+Shows empty list
+###				C	Big Bomb Blacement Bug
+Disaster Big Bomb placed a bomb in Vent
+	Too easily accessible
+	Allowed player to keep it
 ###				C	Fac Rel Refactor
+This might be different from the original enemy of my enemy bug. Test before clearing.
 Agent 1 - Wanted / Hostile Fac1
 Agent 2 - Law / Hostile Fac2 
-
 Should be hostile, but Rel Fac set to neutral.
 ###				C	SORCE Mutators not available in Editor levels 
 I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
@@ -103,7 +109,7 @@ P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means
 I think rLists are being blocked
 
 	[Debug  :CCU_TraitManager] TRAIT LIST: Clone Boys Dealer
-	[Debug  :CCU_TraitManager]      Scumbag
+	[Debug  :CCU_TraitManager]      Scumbag 
 	[Debug  :CCU_TraitManager]      Borrow_Money_Moocher
 	[Debug  :CCU_TraitManager]      Wildcard
 	[Debug  :CCU_TraitManager]      Drug_Dealer

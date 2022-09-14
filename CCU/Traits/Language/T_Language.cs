@@ -66,20 +66,8 @@ namespace CCU.Traits.Language
 			List<T_Language> myLanguages = agent.GetTraits<T_Language>().ToList();
 			List<T_Language> yourLanguages = otherAgent.GetTraits<T_Language>().ToList();
 
-			logger.LogDebug("Mine (" + agent.agentRealName + ")");
-			foreach (T_Language trait in myLanguages)
-				logger.LogDebug(trait.TextName);
-
-			logger.LogDebug("Yours (" + otherAgent.agentRealName + ")");
-			foreach (T_Language trait in yourLanguages)
-				logger.LogDebug(trait.TextName);
-
 			List<string> sharedLangs = myLanguages.Select(myLang => myLang.TextName).Intersect(
 				yourLanguages.Select(yourLang => yourLang.TextName)).ToList();
-
-			logger.LogDebug("Intersect: ");
-			foreach (string str in sharedLangs)
-				logger.LogDebug(str);
 
 			if (myLanguages.Select(myLang => myLang.TextName).Intersect(
 				yourLanguages.Select(yourLang => yourLang.TextName)).Any())

@@ -65,6 +65,8 @@ namespace CCU
 
 	public static class CoreTools
 	{
+		public static readonly System.Random random = new System.Random();
+
 		public static T GetMethodWithoutOverrides<T>(this MethodInfo method, object callFrom)
 				where T : Delegate
 		{

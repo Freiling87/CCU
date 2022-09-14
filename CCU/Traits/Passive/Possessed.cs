@@ -11,7 +11,7 @@ namespace CCU.Traits.Passive
             PostProcess = RogueLibs.CreateCustomTrait<Possessed>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character has a Shapeshifter firmly lodged up their ass.\n\nThat's their excuse, what's yours?!"),
+                    [LanguageCode.English] = String.Format("This character has an inhuman psychopath firmly lodged up their ass, controlling their every action. Except this one doesn't even pay them wages in return."),
                 })
                 .WithName(new CustomNameInfo
                 {
