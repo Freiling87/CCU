@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Facial_Hair
+namespace CCU.Traits.Hairstyle
 {
-	public class No_Facial_Hair : T_FacialHair
+    public class Alien_Head : T_Hairstyle
 	{
-		public override string FacialHairType => "None";
+		public override string[] HairstyleType => new string[] { "AlienHead" };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<No_Facial_Hair>()
+			PostProcess = RogueLibs.CreateCustomTrait<Alien_Head>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(No_Facial_Hair)),
+					[LanguageCode.English] = DesignerName(typeof(Alien_Head)),
 				})
 				.WithUnlock(new TraitUnlock
 				{

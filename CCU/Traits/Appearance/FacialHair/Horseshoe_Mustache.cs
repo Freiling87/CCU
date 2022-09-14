@@ -9,7 +9,7 @@ namespace CCU.Traits.Facial_Hair
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = PostProcess = RogueLibs.CreateCustomTrait<Horseshoe_Mustache>()
+			PostProcess = RogueLibs.CreateCustomTrait<Horseshoe_Mustache>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",

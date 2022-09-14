@@ -41,6 +41,8 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
   - Objects
     - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
   - Traits
+    - Appearance
+      - You can now randomize the appearance of NPCs. Too many traits to list here, see the Traits page for more info.
     - Hire Duration
       - Permanent Hire
       - Permanent Hire Only
@@ -61,12 +63,29 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
 ###				Object Variable List
 Vendor Cart mechanics note
+###				Appearance
+There are a *lot* of traits in this category, grouped into the following:
+
+- Appearance
+- Facial Hair
+- Hair Color
+- Hair Color Group
+- Hairstyle
+- Hairstyle Group
+- Skin Color
+- Skin Color Group
+
+The "Group," uh... groups... have multiple entries. "Long hairstyles," "Punk hairstyles," you get it, you're smart. These are just offered as a quicker way to customize appearance without having to do it granularly.
+
+All selections are thrown into a random pool. When the NPC is generated, it pulls a random selection from this pool for its appearance. They are compatible, so you could add Mohawk as well as Punk Styles if you want to slightly weight the pool, but you won't have a ton of control over that. 
+
 ###				Hire Duration
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Permanent Hire										|- Offers to hire at 8x the normal cost, with infinite uses of Expert ability.
 |Permanent Hire Only								|- As Permanent Hire, but removes original one-time hire option.
+
 ###				Merchant Stock
 Traits in this category are multiplicative.
 
@@ -76,7 +95,7 @@ Traits in this category are multiplicative.
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Clearancer											|- Allows the same item to be sold multiple times, like Bartender
+|Clearancer											|- Allows the same item to be sold multiple times, like Bartender. Better for smaller inventories.
 |Masterworker										|- Durable wares have 2x Durability
 |Masterworkerer										|- Durable wares have 3x Durability
 |Masterworkerest									|- Durable wares have 4x Durability
@@ -165,15 +184,14 @@ https://discord.com/channels/187414758536773632/1003391847902740561/100797553660
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
 ##		C	Appearance
-###			C	Full-randomization bug
-- Whole appearance is randomized when any appearance trait is added.
-  - Should be a simple fix since it's doing less rather than more. 
+###			C	Specials
+Human, Zombie, other skins
+Punk hair colors
+Override racial hair control (Black)
+Normal 50/75 etc, e.g. prefer cleanshaven most of the time to reduce facial hair excess
 ###			C	Facial Hair
-####			C	Trait names changed
-Changed trait names to not overlap with vanilla names. 
-This will likely break the BEARD MACHINE, because it was based directly on the class names.
-####			C	Vanilla facial hair no longer spawns
-New
+####			T	Vanilla facial hair no longer spawns
+Old (no notes, not sure if fixed)
 ###			C	Hair Type
 New
 ###			C	Skin Color
