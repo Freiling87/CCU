@@ -183,6 +183,34 @@
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
     <Compile Include="Traits\Appearance\FacialHair\T_FacialHair.cs" />
+    <Compile Include="Traits\Appearance\Skin Color Grouped\Shapeshifter_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color Grouped\Zombie_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color Grouped\Vampire_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color Grouped\Human_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Zombie_Skin_1.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\White_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Black_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Grey_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Brown_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Yellow_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Orange_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Red_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Green_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Blue_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Purple_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Pink_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Werewolf_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Zombie_Skin_2.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Super_Pale.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Gorilla_Skin.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Light_Black.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Mixed.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Gold.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Pink.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Pale.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_White.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\Human_Black.cs" />
+    <Compile Include="Traits\Appearance\Skin Color\T_SkinColor.cs" />
     <Compile Include="Traits\Appearance\T_Appearance.cs" />
     <Compile Include="Traits\Behavior\Eat_Corpses.cs" />
     <Compile Include="Traits\Behavior\Grab_Everything.cs" />
@@ -497,7 +525,6 @@
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />
-    <Folder Include="Traits\Appearance\SkinColor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\CCScreenshotExample.jpg" />
