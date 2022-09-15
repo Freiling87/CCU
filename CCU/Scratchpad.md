@@ -115,6 +115,8 @@ So far, unable to replicate
 Maxior - Window w/ empty text box had "investigateable-message:::"
 Tried something
 ##		C	Appearance
+    // Trait Factory:
+    // https://discord.com/channels/187414758536773632/433748059172896769/906571723204358175
 ###			C	Full-randomization bug
 - Whole appearance is randomized when any appearance trait is added.
   - Should be a simple fix since it's doing less rather than more. 
@@ -332,6 +334,8 @@ P_StatusEffects.AddTrait_Prefix
   - Pretty much has exactly what you need.
 #		C	Agent Goals
 ##			CT	Default Goals
+###				C	Ambush
+Hide behind object on same tile, if possible
 ###				C	Commit Arson
 New
 ###				C	Robot Clean
@@ -371,6 +375,8 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		C	Behavior
+###			C	Corpse Destroyer
+Gibs enemies' corpses
 ###			C	Vanilla Panic Room behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
@@ -446,6 +452,10 @@ Works for: Crusher, Fire Spewer, Saw Blade
 New
 ###			C	Vandal
 Destroys public objects or Windows on a whim
+###			C	Grab Weapons
+New
+###			C	Grab Contraband
+New
 ###			√	Eat Corpse
 Complete
 ###			√	Grab Alcohol
@@ -471,6 +481,11 @@ New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
 ##		H	Combat
+###			C	Taunt
+Cause all hostiles to target
+###			C	Call
+Crepe/Blahd call all nearby of same class
+Do this, for same class/superclass, and for faction
 ###			H	Nth Wind
 Refreshes Drug Warrior & Backed Up bools after combat ends.
 P_GoalCombatEngage.
