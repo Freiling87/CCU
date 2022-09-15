@@ -10,7 +10,6 @@ using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
 using CCU.Traits.Language;
 using CCU.Traits.Merchant_Type;
-using CCU.Traits.Passive;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -47,11 +46,18 @@ namespace CCU.Patches.Agents
 
 				T_InteractionGate trustTrait = agent.GetTraits<T_InteractionGate>().Where(t => t.MinimumRelationship > 0).FirstOrDefault(); // Should only ever be one
 				bool untrusted = !(trustTrait is null) && relationshipLevel < trustTrait.MinimumRelationship;
-				
+
 				//// Hack
 				//if (interactingAgent.interactionHelper.interactingFar)
 				//	foreach (T_Hack hack in agent.GetTraits<T_Hack>())
 				//		agentInteractions.AddButton(hack.ButtonText);
+
+				// Language
+				if (!Language.HaveSharedLanguage(agent, interactingAgent))
+                {
+					Language.SayGibberish(agent);
+					return;
+				}
 
 				// Hire 
 				if (!untrusted && agent.GetTraits<T_HireType>().Any())
@@ -528,24 +534,6 @@ namespace CCU.Patches.Agents
 							});
 					}
 				}
-
-				// Passive
-				if (agent.HasTrait<Extortable>() && agent.CanShakeDown() && 
-					(interactingAgent.HasTrait(VanillaTraits.Extortionist) || interactingAgent.HasTrait("Shakedowner2")))
-				{
-					int threat = agent.relationships.FindThreat(interactingAgent, false);
-
-					if ((agent.health <= agent.healthMax * 0.4f) ||
-						(agent.relationships.GetRel(interactingAgent) == "Aligned") ||
-						(agent.slaveOwners.Contains(interactingAgent)))
-						threat = 100;
-
-					h.AddButton("Shakedown", " (" + threat + "%)", m =>
-                    {
-						agentInteractions.Shakedown(m.Object, interactingAgent);
-						m.Object.StopInteraction();
-					});
-				}
 			});
         }
 
@@ -553,7 +541,7 @@ namespace CCU.Patches.Agents
 		private static IEnumerable<CodeInstruction> DetermineButtons_BypassLanguageHardcode(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo cantUnderstandEachOther = AccessTools.DeclaredMethod(typeof(P_AgentInteractions), nameof(P_AgentInteractions.CanUnderstandEachOther));
+			MethodInfo canUnderstandEachOther = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.HaveSharedLanguage));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 2,
@@ -568,15 +556,12 @@ namespace CCU.Patches.Agents
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldarg_2),
-					new CodeInstruction(OpCodes.Call, cantUnderstandEachOther),
+					new CodeInstruction(OpCodes.Call, canUnderstandEachOther),
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		private static bool CanUnderstandEachOther(Agent agent, Agent otherAgent) =>
-			otherAgent.inventory.HasItem(vItem.Translator) ||
-			agent.CanUnderstandEachOther(otherAgent, true, true);
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.FinishedOperating), 
 			argumentTypes: new[] { typeof(Agent) })]

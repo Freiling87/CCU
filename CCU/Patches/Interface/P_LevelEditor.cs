@@ -99,10 +99,12 @@ namespace CCU.Patches.Interface
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
 		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
         {
-			if (__instance.currentInterface == "Objects" &&
-					Investigateables.InvestigateableObjects_Slot1.Contains(___tileNameObject.text) &&
+			if (__instance.currentInterface == "Objects")
+            {
+				if (Investigateables.IsInvestigateable(___tileNameObject.text) &&
 					!Investigateables.IsInvestigationString(___extraVarStringObject.text))
 				___extraVarStringObject.text = Investigateables.ExtraVarStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
+			}
         }
 
 		#region Containers
@@ -190,9 +192,9 @@ namespace CCU.Patches.Interface
 			return instructions;
 		}
 
-		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName = "")
+		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName)
         {
-			if (Containers.ContainerObjects_Slot1.Contains(objectName))
+			if (Containers.IsContainer(objectName))
             {
 				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
 				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor);

@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine.Networking;
 
 namespace CCU.Patches.Agents
 {
@@ -52,13 +51,13 @@ namespace CCU.Patches.Agents
 		{
 			if (__instance.HasTrait<Extortable>())
             {
-				__result = true;
-
-				if (__instance.oma.shookDown && GC.loadLevel.LevelContainsMayor())
+				if (__instance.oma.shookDown || GC.loadLevel.LevelContainsMayor())
 				{
 					__result = false;
 					return;
 				}
+				else
+					__result = true;
 
 				foreach (Agent agent in GC.agentList)
 					if (agent.startingChunk == __instance.startingChunk && agent.ownerID == __instance.ownerID && agent.ownerID != 255 && agent.ownerID != 99 && __instance.ownerID != 0 && agent.oma.shookDown)
@@ -69,16 +68,10 @@ namespace CCU.Patches.Agents
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
 		public static void CanUnderstandEachOther_Postfix(Agent __instance, Agent otherAgent, ref bool __result)
 		{
-			if (__result is true || 
-				__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) ||
-				otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked))
-				return;
-
-			List<T_Language> myLanguages = __instance.GetTraits<T_Language>().ToList();
-			List<T_Language> yourLanguages = otherAgent.GetTraits<T_Language>().ToList();
-
-			if (myLanguages.Select(myLang => myLang.TextName).Intersect(
-					yourLanguages.Select(yourLang => yourLang.TextName)).Any())
+			if (__result is false && 
+				!__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
+                !otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
+				Language.HaveSharedLanguage(__instance, otherAgent))
 				__result = true;
 
 			return;
@@ -195,8 +188,8 @@ namespace CCU.Patches.Agents
 			return true;
         }
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SayDialogue), argumentTypes: new Type[] { typeof(bool), typeof(string), typeof(bool), typeof(NetworkInstanceId) })]
-		public static bool SayDialogue_Prefix(Agent __instance, string type)
+        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SayDialogue), argumentTypes: new Type[] { typeof(bool), typeof(string), typeof(bool), typeof(NetworkInstanceId) })]
+		public static bool SayDialogue_PrefixLogging(Agent __instance, string type)
         {
 			logger.LogDebug("SayDialogue_Prefix");
 			logger.LogDebug("AgentName: " + __instance.agentName);

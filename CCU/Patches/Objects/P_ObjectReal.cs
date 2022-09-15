@@ -34,14 +34,17 @@ namespace CCU.Patches.Objects
         [HarmonyPrefix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0] { })]
         public static bool Start_SetupInvDatabasesForContainers(ObjectReal __instance)
         {
-            if (Containers.ContainerObjects_Slot1.Contains(__instance.objectName))
+            if (Containers.IsContainer(__instance.objectName))
             {
                 if (__instance.GetComponent<InvDatabase>() is null)
+                {
                     __instance.objectInvDatabase = __instance.go.AddComponent<InvDatabase>();
+                    __instance.chestReal = true;
+                }
             }
 
             return true;
-        }
+        } 
     }
 
     [HarmonyPatch(declaringType: typeof(ObjectReal))]

@@ -132,7 +132,6 @@
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\Quests\P_Quests.cs" />
     <Compile Include="PropertyLogger.cs" />
-    <Compile Include="Systems\Language\Language.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
     <Compile Include="Localization\DetermineMoneyCostText.cs" />
@@ -494,6 +493,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Patches\Spawn\" />
+    <Folder Include="Systems\Language\" />
     <Folder Include="Traits\Appearance\Accessory\" />
     <Folder Include="Traits\Appearance\HairColor\" />
     <Folder Include="Traits\Appearance\Hairstyle\" />

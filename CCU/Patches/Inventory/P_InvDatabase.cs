@@ -101,7 +101,7 @@ namespace CCU.Patches.Inventory
         {
 			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
 
-			if (objectRealName != null && Containers.ContainerObjects_Slot1.Contains(objectRealName))
+			if (Containers.IsContainer(objectRealName))
 				__instance.money = new InvItem();
 
 			return true;
@@ -133,7 +133,7 @@ namespace CCU.Patches.Inventory
 			{
 				attempts++;
 
-				int bagPickedIndex = rnd.Next(0, inventory.Count - 1);
+				int bagPickedIndex = rnd.Next(0, Math.Max(0, inventory.Count - 1));
 				string bagPickedItem = inventory[bagPickedIndex];
 
 				if (forceDuplicates || !finalInventory.Contains(bagPickedItem) || agent.HasTrait<Clearancer>() )
@@ -221,17 +221,17 @@ namespace CCU.Patches.Inventory
 				: agent.name;
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
-		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS3(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo extraVarString3 = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.extraVarString3));
+			FieldInfo extraVarString = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.extraVarString));
 			MethodInfo magicVarString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.MagicVarString));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 5,
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldfld, extraVarString3),
+					new CodeInstruction(OpCodes.Ldfld, extraVarString),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -251,16 +251,18 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
 		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
         {
-			__result = true;
-
 			for (int i = 0; i < __instance.InvItemList.Count; i++)
             {
 				string name = __instance.InvItemList[i].invItemName;
 
-				if (name != null && name != "" && !Investigateables.IsInvestigationString(name))
+				if (!Investigateables.IsInvestigationString(name))
+                {
 					__result = false;
+					return false;
+				}
 			}
 
+			__result = true;
 			return false;
 		}
 
