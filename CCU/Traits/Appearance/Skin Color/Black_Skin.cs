@@ -9,7 +9,7 @@ namespace CCU.Traits.Skin_Color
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = PostProcess = RogueLibs.CreateCustomTrait<Black_Skin>()
+			PostProcess = RogueLibs.CreateCustomTrait<Black_Skin>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",

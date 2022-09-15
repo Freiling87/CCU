@@ -9,7 +9,7 @@ namespace CCU.Traits.Skin_Color
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = PostProcess = RogueLibs.CreateCustomTrait<Gorilla_Skin>()
+			PostProcess = RogueLibs.CreateCustomTrait<Gorilla_Skin>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",

@@ -11,7 +11,7 @@ namespace CCU.Traits.Skin_Color_Grouped
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = PostProcess = RogueLibs.CreateCustomTrait<Vampire_Skin>()
+			PostProcess = RogueLibs.CreateCustomTrait<Vampire_Skin>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",

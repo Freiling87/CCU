@@ -13,7 +13,7 @@ namespace CCU.Traits.Skin_Color_Grouped
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = PostProcess = RogueLibs.CreateCustomTrait<Shapeshifter_Skin>()
+			PostProcess = RogueLibs.CreateCustomTrait<Shapeshifter_Skin>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
