@@ -5,7 +5,7 @@ namespace CCU.Traits.Hairstyle_Grouped
 {
     public class Short_Female_Styles : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Leia", "Ponytail" };
+		public override string[] HairstyleTypes => new string[] { "Leia", "Ponytail" };
 
         [RLSetup]
 		public static void Setup()

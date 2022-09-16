@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Cutoff : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Cutoff" };
+		public override string[] HairstyleTypes => new string[] { "Cutoff" };
 
         [RLSetup]
 		public static void Setup()

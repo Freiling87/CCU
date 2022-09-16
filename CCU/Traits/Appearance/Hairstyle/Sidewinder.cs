@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Sidewinder : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Sidewinder" };
+		public override string[] HairstyleTypes => new string[] { "Sidewinder" };
 
         [RLSetup]
 		public static void Setup()

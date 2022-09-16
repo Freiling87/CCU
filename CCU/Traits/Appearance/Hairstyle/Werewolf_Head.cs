@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Werewolf_Head : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "WerewolfHead" };
+		public override string[] HairstyleTypes => new string[] { "WerewolfHead" };
 
         [RLSetup]
 		public static void Setup()

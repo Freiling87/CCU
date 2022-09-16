@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Slavemaster_Mask : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "SlavemasterMask" };
+		public override string[] HairstyleTypes => new string[] { "SlavemasterMask" };
 
         [RLSetup]
 		public static void Setup()

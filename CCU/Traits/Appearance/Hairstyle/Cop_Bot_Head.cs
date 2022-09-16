@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Cop_Bot_Head : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "CopBotHead" };
+		public override string[] HairstyleTypes => new string[] { "CopBotHead" };
 
         [RLSetup]
 		public static void Setup()

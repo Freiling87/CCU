@@ -1,23 +1,24 @@
-﻿using CCU.Traits.Hairstyle;
+﻿using CCU.Traits.Hair_Color;
+using CCU.Traits.Hairstyle;
 using RogueLibsCore;
 
-namespace CCU.Traits.Hairstyle_Grouped
+namespace CCU.Traits.Hair_Color_Grouped
 {
-    public class Balding_Styles : T_Hairstyle
+    public class Wild_Colors : T_HairColor
 	{
-		public override string[] HairstyleTypes => new string[] { "Bald", "Balding", "Sidewinder" };
+		public override string[] HairColors => new string[] { "Red", "Green", "Purple", "Pink", "Blue" };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Balding_Styles>()
+			PostProcess = RogueLibs.CreateCustomTrait<Wild_Colors>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple hairstyles to the appearance pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Balding_Styles)),
+					[LanguageCode.English] = DesignerName(typeof(Wild_Colors)),
 				})
 				.WithUnlock(new TraitUnlock
 				{

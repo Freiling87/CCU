@@ -5,7 +5,7 @@ namespace CCU.Traits.Hairstyle_Grouped
 {
     public class Male_Styles : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Military", "Normal", "NormalHigh", "Suave", "Pompadour", "Spiky", "SpikyShort", "Mohawk", "Bald", "Balding", "Sidewinder", "Curtains", "Afro", "PuffyShort" };
+		public override string[] HairstyleTypes => new string[] { "Military", "Normal", "NormalHigh", "Suave", "Pompadour", "Spiky", "SpikyShort", "Mohawk", "Bald", "Balding", "Sidewinder", "Curtains", "Afro", "PuffyShort" };
 
         [RLSetup]
 		public static void Setup()

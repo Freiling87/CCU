@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Flat_Long : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "FlatLong" };
+		public override string[] HairstyleTypes => new string[] { "FlatLong" };
 
         [RLSetup]
 		public static void Setup()

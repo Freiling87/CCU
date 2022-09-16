@@ -5,15 +5,19 @@ namespace CCU.Traits.Hairstyle_Grouped
 {
     public class Not_Hairstyles : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "HologramHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead", };
+        public override string[] HairstyleTypes => 
+			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "HologramHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };
 
-        [RLSetup]
+		public static string[] StaticList => 
+			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "HologramHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };
+
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Not_Hairstyles>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
+					[LanguageCode.English] = "Adds multiple items to the appearance pool. I mean, you can use it but... what the hell are you making?",
 				})
 				.WithName(new CustomNameInfo
 				{

@@ -5,7 +5,7 @@ namespace CCU.Traits.Hairstyle_Grouped
 {
     public class Female_Styles : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "BangsLong", "BangsMedium", "FlatLong", "MessyLong", "Wave", "PuffyLong", "Leia", "Ponytail", "Cutoff" };
+		public override string[] HairstyleTypes => new string[] { "BangsLong", "BangsMedium", "FlatLong", "MessyLong", "Wave", "PuffyLong", "Leia", "Ponytail", "Cutoff" };
 
         [RLSetup]
 		public static void Setup()

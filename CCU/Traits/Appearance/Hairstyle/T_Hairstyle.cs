@@ -6,6 +6,6 @@ namespace CCU.Traits.Hairstyle
     {
         public T_Hairstyle() : base() { }
 
-        public abstract string[] HairstyleType { get; }
+        public abstract string[] HairstyleTypes { get; }
     }
 }

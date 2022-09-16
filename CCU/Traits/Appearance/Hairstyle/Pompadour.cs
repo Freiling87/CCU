@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Pompadour : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Pompadour" };
+		public override string[] HairstyleTypes => new string[] { "Pompadour" };
 
         [RLSetup]
 		public static void Setup()

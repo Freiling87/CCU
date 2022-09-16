@@ -189,11 +189,12 @@ Human, Zombie, other skins
 Punk hair colors
 Override racial hair control (Black)
 Normal 50/75 etc, e.g. prefer cleanshaven most of the time to reduce facial hair excess
-###			C	Facial Hair
-####			T	Vanilla facial hair no longer spawns
-Old (no notes, not sure if fixed)
-###			C	Hair Type
-New
+###			√	Facial Hair
+Complete
+###			√	Hair Color
+Complete
+###			√	Hairstyle
+Complete
 ###			C	Skin Color
 New
 #		CT	Projects

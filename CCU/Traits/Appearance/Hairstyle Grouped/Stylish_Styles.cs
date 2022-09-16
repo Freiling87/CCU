@@ -5,7 +5,7 @@ namespace CCU.Traits.Hairstyle_Grouped
 {
     public class Stylish_Styles : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Suave", "Pompadour", "Spiky", "SpikyShort" };
+		public override string[] HairstyleTypes => new string[] { "Suave", "Pompadour", "Spiky", "SpikyShort" };
 
         [RLSetup]
 		public static void Setup()

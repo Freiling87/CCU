@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Mohawk : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Mohawk" };
+		public override string[] HairstyleTypes => new string[] { "Mohawk" };
 
         [RLSetup]
 		public static void Setup()

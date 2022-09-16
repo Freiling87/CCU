@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Hoodie : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "Hoodie" };
+		public override string[] HairstyleTypes => new string[] { "Hoodie" };
 
         [RLSetup]
 		public static void Setup()

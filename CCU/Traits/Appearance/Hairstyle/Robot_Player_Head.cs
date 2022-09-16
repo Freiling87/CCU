@@ -4,7 +4,7 @@ namespace CCU.Traits.Hairstyle
 {
     public class Robot_Player_Head : T_Hairstyle
 	{
-		public override string[] HairstyleType => new string[] { "RobotPlayerHead" };
+		public override string[] HairstyleTypes => new string[] { "RobotPlayerHead" };
 
         [RLSetup]
 		public static void Setup()

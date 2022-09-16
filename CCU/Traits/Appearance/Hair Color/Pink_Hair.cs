@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hairstyle
+namespace CCU.Traits.Hair_Color
 {
-    public class Normal_High : T_Hairstyle
+	public class Pink_Hair : T_HairColor
 	{
-		public override string[] HairstyleTypes => new string[] { "NormalHigh" };
+		public override string[] HairColors => new string[] { "Pink" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Normal_High>()
+			PostProcess = RogueLibs.CreateCustomTrait<Pink_Hair>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Normal_High)),
+					[LanguageCode.English] = DesignerName(typeof(Pink_Hair)),
 				})
 				.WithUnlock(new TraitUnlock
 				{
