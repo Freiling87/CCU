@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Accessory
+namespace CCU.Traits.App_AC1
 {
 	public class Fire_Helmet : T_Accessory
 	{
-		public override string Accessory => "FireHelmet";
+		public override string[] Rolls => new string[] { "FireHelmet" };
 
         [RLSetup]
 		public static void Setup()

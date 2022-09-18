@@ -1,22 +1,22 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Eye_Color
+namespace CCU.Traits.App_EC1
 {
 	public class Blue_Eyes : T_EyeColor
     {
-		public override string EyeColor => "Blue";
+		public override string[] Rolls => new string[] { "Blue" };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<White_Eyes>()
+			PostProcess = RogueLibs.CreateCustomTrait<Blue_Eyes>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(White_Eyes)),
+					[LanguageCode.English] = DesignerName(typeof(Blue_Eyes)),
 				})
 				.WithUnlock(new TraitUnlock
 				{

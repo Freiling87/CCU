@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Eye_Color
+namespace CCU.Traits.App_EC1
 {
 	public class White_Eyes : T_EyeColor
     {
-		public override string EyeColor => "White";
+		public override string[] Rolls => new string[] { "White" };
 
         [RLSetup]
 		public static void Setup()

@@ -1,11 +1,11 @@
-﻿using CCU.Traits.Hairstyle;
+﻿using CCU.Traits.App_HS1;
 using RogueLibsCore;
 
-namespace CCU.Traits.Hairstyle_Grouped
+namespace CCU.Traits.App_HS2
 {
     public class Bangs_Styles : T_Hairstyle
 	{
-		public override string[] HairstyleTypes => new string[] { "BangsMedium", "BangsLong", "Sidewinder" };
+		public override string[] Rolls => new string[] { "BangsMedium", "BangsLong", "Sidewinder" };
 
         [RLSetup]
 		public static void Setup()

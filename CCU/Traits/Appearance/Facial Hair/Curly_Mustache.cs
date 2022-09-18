@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Facial_Hair
+namespace CCU.Traits.App_FH1
 {
 	public class Curly_Mustache : T_FacialHair
 	{
-        public override string FacialHairType => "MustacheCircus";
+        public override string[] Rolls => new string[] { "MustacheCircus" };
 
         [RLSetup]
 		public static void Setup()

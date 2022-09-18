@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hairstyle
+namespace CCU.Traits.App_HS1
 {
     public class Butler_Bot_Head : T_Hairstyle
 	{
-		public override string[] HairstyleTypes => new string[] { "ButlerBotHead" };
+		public override string[] Rolls => new string[] { "ButlerBotHead" };
 
         [RLSetup]
 		public static void Setup()

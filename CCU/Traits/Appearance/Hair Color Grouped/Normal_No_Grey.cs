@@ -1,12 +1,11 @@
-﻿using CCU.Traits.Hair_Color;
-using CCU.Traits.Hairstyle;
+﻿using CCU.Traits.App_HC1;
 using RogueLibsCore;
 
-namespace CCU.Traits.Hair_Color_Grouped
+namespace CCU.Traits.App_HC2
 {
     public class Normal_No_Grey : T_HairColor
 	{
-		public override string[] HairColors => new string[] { "Brown", "Black", "Blonde", "Orange" };
+		public override string[] Rolls => new string[] { "Brown", "Black", "Blonde", "Orange" };
 
         [RLSetup]
 		public static void Setup()

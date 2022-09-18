@@ -1,12 +1,12 @@
-﻿using CCU.Traits.Hair_Color;
-using CCU.Traits.Hairstyle;
+﻿using CCU.Traits.App_HC1;
 using RogueLibsCore;
 
-namespace CCU.Traits.Hair_Color_Grouped
+namespace CCU.Traits.App_HC2
 {
     public class Wild_Colors : T_HairColor
 	{
-		public override string[] HairColors => new string[] { "Red", "Green", "Purple", "Pink", "Blue" };
+		public override string[] Rolls
+			=> new string[] { "Red", "Green", "Purple", "Pink", "Blue" };
 
         [RLSetup]
 		public static void Setup()

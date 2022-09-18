@@ -145,12 +145,20 @@ namespace CCU.Patches.Agents
         {
 			TraitManager.LogTraitList(__instance); // Leave it, you'll need it
 
-			logger.LogDebug("Inventory: ");
+			logger.LogDebug("------- Inventory");
 			foreach (InvItem ii in __instance.inventory.InvItemList)
 				logger.LogDebug(ii.invItemName);
 
-			// InteractingAgent is not set yet, so you'll have to do that ad hoc here if you want IA's trait list
-        }
+			AgentHitbox agentHitbox = __instance.tr.GetChild(0).transform.GetChild(0).GetComponent<AgentHitbox>();
+			logger.LogDebug("------- Sprites");
+			logger.LogDebug("\tAccessory :\t" + __instance.inventory.startingHeadPiece);
+			logger.LogDebug("\tBody Color:\t" + agentHitbox.bodyColor.ToString());
+			logger.LogDebug("\tBody Type :\t" + __instance.oma.bodyType);
+			logger.LogDebug("\tEye Color :\t" + agentHitbox.eyesColor.ToString());
+			logger.LogDebug("\tHair Color:\t" + agentHitbox.hairColorName);
+			logger.LogDebug("\tLeg Color :\t" + agentHitbox.legsColor.ToString());
+			logger.LogDebug("\tSkinColor :\t" + agentHitbox.skinColorName);
+        } 
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
 		public static bool ObjectAction_Prefix(string myAction, string extraString, float extraFloat, Agent causerAgent, PlayfieldObject extraObject, Agent __instance, ref bool ___noMoreObjectActions)
@@ -281,5 +289,10 @@ namespace CCU.Patches.Agents
 		public bool WalkieTalkieUsed;
 		public bool PermanentHire;
 		public int SuicideVestTimer;
+
+		public string bodyColor;
+		public string bodyType;
+		public string eyesType;
+		public string skinColor;
 	}
 }

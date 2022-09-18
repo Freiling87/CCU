@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Accessory
+namespace CCU.Traits.App_AC1
 {
 	public class Cyber_Specs : T_Accessory
 	{
-		public override string Accessory => "HackerGlasses";
+		public override string[] Rolls => new string[] { "HackerGlasses" };
 
         [RLSetup]
 		public static void Setup()

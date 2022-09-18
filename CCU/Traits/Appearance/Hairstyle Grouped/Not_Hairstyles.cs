@@ -1,12 +1,12 @@
-﻿using CCU.Traits.Hairstyle;
+﻿using CCU.Traits.App_HS1;
 using RogueLibsCore;
 
-namespace CCU.Traits.Hairstyle_Grouped
+namespace CCU.Traits.App_HS2
 {
     public class Not_Hairstyles : T_Hairstyle
 	{
-        public override string[] HairstyleTypes => 
-			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "HologramHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };
+        public override string[] Rolls => 
+			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };
 
 		public static string[] StaticList => 
 			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "HologramHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };

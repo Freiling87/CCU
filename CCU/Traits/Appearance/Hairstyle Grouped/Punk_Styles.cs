@@ -1,11 +1,11 @@
-﻿using CCU.Traits.Hairstyle;
+﻿using CCU.Traits.App_HS1;
 using RogueLibsCore;
 
-namespace CCU.Traits.Hairstyle_Grouped
+namespace CCU.Traits.App_HS2
 {
     public class Punk_Styles : T_Hairstyle
 	{
-		public override string[] HairstyleTypes => new string[] { "Bald", "Mohawk", "Spiky", "SpikyShort", "BangsLong", "BangsMedium", "Leia" };
+		public override string[] Rolls => new string[] { "Bald", "Mohawk", "Spiky", "SpikyShort", "BangsLong", "BangsMedium", "Leia" };
 
         [RLSetup]
 		public static void Setup()

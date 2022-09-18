@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Body_Color
+namespace CCU.Traits.App_BC1
 {
 	public class Red_Body : T_BodyColor
 	{
-        public override string BodyColor => "Red";
+        public override string[] Rolls => new string[] { "Red" };
 
         [RLSetup]
 		public static void Setup()

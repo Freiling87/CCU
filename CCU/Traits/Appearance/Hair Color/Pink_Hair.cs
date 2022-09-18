@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Hair_Color
+namespace CCU.Traits.App_HC1
 {
 	public class Pink_Hair : T_HairColor
 	{
-		public override string[] HairColors => new string[] { "Pink" };
+		public override string[] Rolls => new string[] { "Pink" };
 
 		[RLSetup]
 		public static void Setup()

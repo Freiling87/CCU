@@ -18,66 +18,195 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
-    - Scene Setters are no longer interrupted by "Flee" behaviors.
+	- Scene Setters are no longer interrupted by "Flee" behaviors.
   - Objects
-    - Containers
-      - Can no longer loot via hack (Lame!)
-      - Disabled redundant Open/Search buttons.
-    - Investigateables
+	- Containers
+	  - Can no longer loot via hack (Lame!)
+	  - Disabled redundant Open/Search buttons.
+	- Investigateables
 	  - Computer no longer interrupts hacking interaction when Investigation text is set.
-      - Investigate button no longer appears with blank text.
+	  - Investigate button no longer appears with blank text.
   - Traits
-    - Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
-    - Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately. Duplicate Extortion buttons eliminated.
-    - Interaction - Heal: No longer says broken dialogue when rejecting interaction
-    - Language Speaker group: Removed from upgrade menu in Augmentation Booth. This is a planned feature that was meant to be postponed.
-    - Rel Faction: Sharing faction animosity can no longer improve your relations with others. 
-    - Pay Cop Debt: Button text fixed.
-    - Cost Scale: Now excludes Bribe for Quest Item.
-    - Home Base is no longer affected by Relationship traits. 
+	- Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
+	- Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately. Duplicate Extortion buttons eliminated.
+	- Heal: No longer says broken dialogue when rejecting interaction
+	- Language Speaker group: Removed from upgrade menu in Augmentation Booth. This is a planned feature that was meant to be postponed.
+	- Rel Faction: Sharing faction animosity can no longer improve your relations with others. 
+	- Pay Cop Debt: Button text fixed.
+	- Cost Scale: Now excludes Bribe for Quest Item.
+	- Relationship: No longer affect Home Base
 - Feature Additions
   - Default Goals
-    - Random Teleport 
+	- Random Teleport 
   - Objects
-    - The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
+	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
   - Traits
-    - Appearance
-      - You can now randomize the appearance of NPCs. Too many traits to list here, see the Traits page for more info.
-    - Hire Duration
-      - Permanent Hire
-      - Permanent Hire Only
-    - Merchant Stock: Various modifiers for the quantity/durability of sold items.
-      - Clearancer
-      - Masterworker
-      - Masterworkerer
-      - Masterworkerest
-      - Shiddy Goods
-      - Shoddy Goods
-      - Wholesaler
-      - Wholesalerer
-      - Wholesalerest
-    - Merchant Type: Selecting multiple types will now combine inventory random-choice pools.
-      - Burger Joint
-      - Sugar Shack
+	- Appearance
+	  - You can now randomize the appearance of NPCs. See the Traits page for details, as there are too many traits to list here.
+	  - Feature limitation: Eye type may change for Sitting/Dancing NPCs. This is a bug (IMO) in the original game code. Specifically: Narrow, Wide, Dead eyes are affected; Zombie & Cannibal eyes are not.
+	- Hire Duration
+	  - Permanent Hire
+	  - Permanent Hire Only
+	- Merchant Stock: Various modifiers for the quantity/durability of sold items.
+	  - Clearancer
+	  - Masterworker
+	  - Masterworkerer
+	  - Masterworkerest
+	  - Shiddy Goods
+	  - Shoddy Goods
+	  - Wholesaler
+	  - Wholesalerer
+	  - Wholesalerest
+	- Merchant Type: Selecting multiple types will now combine inventory random-choice pools rather than just selecting one of them.
+	  - Burger Joint
+	  - Sugar Shack
 ##			P	v. 1.0.1 Documentation Additions
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
 ###				Object Variable List
 Vendor Cart mechanics note
 ###				Appearance
-There are a *lot* of traits in this category, grouped into the following:
+There are a *lot* of traits in this category, grouped into the following. They have abbreviated prefixes, in order to keep sorting together but save some space. I'm not going to list every single trait in here, just the unusual ones.
 
-- Appearance
-- Facial Hair
-- Hair Color
-- Hair Color Group
-- Hairstyle
-- Hairstyle Group
-- Skin Color
-- Skin Color Group
+- App AC1: Accessory
+- App BC1: Body Color
+- App BC3: Body Color Special
+- App BT1: Body Type
+- App BT2: Body Type Greyscale
+- App EC1: Eye Color
+- App ET1: Eye Type
+- App FH1: Facial Hair
+- App HC1: Hair Color
+- App HC2: Hair Color Grouped
+- App HS1: Hairstyle
+- App HS2: Hairstyle Grouped
+- App LC1: Legs Color
+- App LC3: Legs Color Special
+- App SC1: Skin Color
+- App SC2: Skin Color Group
 
-The "Group," uh... groups... have multiple entries. "Long hairstyles," "Punk hairstyles," you get it, you're smart. These are just offered as a quicker way to customize appearance without having to do it granularly.
+The "Group," uh... groups... have multiple items. "Long hairstyles," "Punk hairstyles," you get it, you're smart. These are just offered as a quicker way to customize appearance without having to do it granularly. Their contents are listed in sections below.
 
 All selections are thrown into a random pool. When the NPC is generated, it pulls a random selection from this pool for its appearance. They are compatible, so you could add Mohawk as well as Punk Styles if you want to slightly weight the pool, but you won't have a ton of control over that. 
+
+####				How it works
+By adding an appearance trait, you add an item to a random selection pool. When the agent is spawned as an NPC, its appearance is randomly chosen from all pools with items in them. Empty pools are ignored, and appearance copies the visuals in the character editor.
+
+####				Best Practices
+#####					Test Sheet
+With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with a ton of copies of the same NPC to identify weird edge cases and gradually shape a population aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate picture of what the character will look like.
+
+####				BC3: Body Color Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|Shirtless							|Body color matches skin color
+|Shirtsome							|Body color is rerolled if it matches skin color
+
+####				HC2: Hair Color Groups
+
+|Hair Color			|Normal	|Normal (No Grey)	|Wild	|
+|:------------------|:-----:|:-----------------:|:-----:|
+|Black				|✓		|✓					|		|
+|Blonde				|✓		|✓					|		|
+|Blue				|		|					|✓		|
+|Brown				|✓		|✓					|		|
+|Green				|		|					|✓		|
+|Grey				|✓		|					|		|
+|Orange				|✓		|✓					|		|
+|Pink				|		|					|✓		|
+|Purple				|		|					|✓		|
+|Red				|		|					|✓		|
+|White				|		|					|		|
+
+####				HC3: Hair Color Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|Matched Mask						|If a Hoodie is rolled for Hairstyle, matches its color to Body Color
+|Uncolored Mask						|If a non-hairstyle is rolled (Hoodie, Gorilla head, etc.), it won't be colored
+
+####				HS2: Hairstyle Groups
+
+|Hairstyle			|Balding|Bangs	|Female	|Long	|Male	|Not Hairstyles	|Punk	|Short Female	|Short	|Stylish|
+|:------------------|:-----:|:-----:|:-----:|:-----:|:-----:|:-------------:|:-----:|:-------------:|:-----:|:-----:|
+|Afro				|		|		|		|		|✓		|				|		|				|		|		|
+|Alien Head			|		|		|		|		|		|✓				|		|				|		|		|
+|Assassin Mask		|		|		|		|		|		|✓				|		|				|		|		|
+|Bald				|✓		|		|		|		|✓		|				|✓		|				|		|		|
+|Balding			|✓		|		|		|		|✓		|				|		|				|		|		|
+|Bangs Long			|		|✓		|✓		|✓		|		|				|✓		|				|		|		|
+|Bangs Medium		|		|✓		|✓		|✓		|		|				|✓		|				|		|		|
+|Butler Bot Head	|		|		|		|		|		|✓				|		|				|		|		|
+|Cop Bot Head		|		|		|		|		|		|✓				|		|				|		|		|
+|Curtains			|		|		|		|		|✓		|				|		|				|		|		|
+|Cutoff				|		|		|✓		|		|		|				|		|				|		|		|
+|Flat Long			|		|		|✓		|✓		|		|				|		|				|		|		|
+|Gorilla Head		|		|		|		|		|		|✓				|		|				|		|		|
+|Hobo Beard			|		|		|		|		|		|				|		|				|		|		|
+|Hoodie				|		|		|		|		|		|✓				|		|				|		|		|
+|Killer Robot Head	|		|		|		|		|		|✓				|		|				|		|		|
+|Leia				|		|		|✓		|		|		|				|✓		|✓				|		|		|
+|Messy Long			|		|		|✓		|✓		|		|				|		|				|		|		|
+|Military			|		|		|		|		|✓		|				|		|				|✓		|		|
+|Mohawk				|		|		|		|		|✓		|				|✓		|				|		|		|
+|Normal Hair		|		|		|		|		|✓		|				|		|				|✓		|		|
+|Normal High		|		|		|		|		|✓		|				|		|				|✓		|		|
+|Pompadour			|		|		|		|		|✓		|				|		|				|		|✓		|
+|Ponytail			|		|		|✓		|		|		|				|		|✓				|		|		|
+|Puffy Long			|		|		|✓		|✓		|		|				|		|				|		|		|
+|Puffy Short		|		|		|		|		|✓		|				|		|				|		|		|
+|Robot Head			|		|		|		|		|		|✓				|		|				|		|		|
+|Sidewinder			|✓		|✓		|		|		|✓		|				|		|				|		|		|
+|Slavemaster Mask	|		|		|		|		|		|✓				|		|				|		|		|
+|Spiky				|		|		|		|		|✓		|				|✓		|				|✓		|✓		|
+|Spiky Short		|		|		|		|		|✓		|				|✓		|				|✓		|✓		|
+|Suave				|		|		|		|		|✓		|				|		|				|		|✓		|
+|Wave				|		|		|✓		|✓		|		|				|		|				|		|		|
+|Werewolf Head		|		|		|		|		|		|✓				|		|				|		|		|
+
+####				HS3: Hairstyle Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|Masks 50%							|If the hairstyle pool contains any Masks, raises their likelihood of being drawn to 50%.
+
+####				LC3: Legs Color Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|Pantiful							|Legs color is rerolled if it matches skin color
+|Pantsless							|Legs color matches skin color
+
+####				SC2: Skin Color Groups
+
+|Skin Color			|Human	|Shapeshifter	|Vampire|Zombie	|
+|:------------------|:-----:|:-------------:|:-----:|:-----:|
+|Black				|		|				|		|		|
+|Blue				|		|				|		|		|
+|Brown				|		|				|		|		|
+|Gorilla			|		|				|		|		|
+|Green				|		|				|		|		|
+|Grey				|		|				|		|		|
+|Human Black		|✓		|				|✓		|		|
+|Human Gold			|✓		|				|		|		|
+|Human Light Black	|✓		|				|		|		|
+|Human Mixed		|✓		|✓				|		|		|
+|Human Pale			|✓		|✓				|		|		|
+|Human Pink			|✓		|✓				|		|		|
+|Human Super Pale	| 		|				|✓		|		|
+|Human White		|✓[^1]	|✓[^1]			|		|		|
+|Mech				|		|				|		|		|
+|Orange				|		|				|		|		|
+|Pink				|		|				|		|		|
+|Purple				|		|				|		|		|
+|Red				|		|				|		|		|
+|Werewolf			|		|				|		|		|
+|White				|		|				|		|		|
+|Yellow				|		|				|		|		|
+|Zombie 1			|		|				|		|✓		|
+|Zombie 2			|		|				|		|✓		|
+
+[^1]: Doubled in this group. Just copying vanilla.
 
 ###				Hire Duration
 
@@ -106,6 +235,17 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Random Teleport didn't work
+	[Info   : Unity Log] SETUPMORE4_13 False
+	[Info   : Unity Log] SETUPMORE5
+	[Info   : Unity Log] FADE
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	CCU.Systems.CustomGoals.CustomGoals.RunSceneSetters () (at <aae0405f671f4f6bbf10453a674b1f29>:0)
+	CCU.Patches.Level.P_LoadLevel.SetupMore5_Postfix (LoadLevel __instance) (at <aae0405f671f4f6bbf10453a674b1f29>:0)
+	LoadLevel.SetupMore5 () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
 ###				C	Can open empty containers
 Shows empty list
 ###				C	Big Bomb Blacement Bug
@@ -184,19 +324,73 @@ https://discord.com/channels/187414758536773632/1003391847902740561/100797553660
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
 ##		C	Appearance
-###			C	Specials
-Human, Zombie, other skins
-Punk hair colors
-Override racial hair control (Black)
-Normal 50/75 etc, e.g. prefer cleanshaven most of the time to reduce facial hair excess
+###			C	Eye Type
+####			C	Cyclops player
+New
+####			√	Normal Eyes 50%
+Complete
+####			√	Normal Eyes 75%
+Complete
+###			C	Hair Color Special
+####			C	Matched Masks
+Color issue: Related to skin tone on body being copied to hair, which hair can't copy.
+IS there a way to get those colors in there?
+####			√	Uncolored Masks
+Complete
+###			C	Hairstyle Special
+####			C	General Mask/Accessory compatibility
+Might need to make a Dict<string, string[]> of these two sets, since compatibility seems to vary for each.
+####			√	Mask Override (Rename)
+Complete
+####			√	Masks 50%
+Complete
+###			√	General Traits
+####			√	Static Preview
+Seems to work
+###			√	Accessory
+####			√	No Accessory 50%
+Complete
+####			√	No Accessory 75%
+Complete
+###			√	Body Color
+Complete
+###			√	Body Color Special
+####			√	Shirtless
+Complete
+####			√	Shirtsome
+Complete
+###			√	Body Type
+Complete
+###			√	Body Type Greyscale
+Complete
+###			√	Eye Color
+Complete
 ###			√	Facial Hair
+####			√	No Facial Hair 50%
+Complete
+####			√	No Facial Hair 75%
 Complete
 ###			√	Hair Color
 Complete
+###			√	Hair Color Grouped
+Complete
 ###			√	Hairstyle
 Complete
-###			C	Skin Color
-New
+###			√	Hairstyle Grouped
+Complete
+###			√	Legs Color
+Complete
+###			√	Legs Color Special
+####			√	Pantiful
+Complete
+####			√	Pantsless
+Complete
+####			√	Pantsuit
+Complete
+###			√	Skin Color
+Complete
+###			√	Skin Color Grouped
+Complete
 #		CT	Projects
 ##			C	Enclave System
 It's best to work on these piecemeal: mutators, traits, agents. Then combine them when the parts are complete.
@@ -237,25 +431,40 @@ Or maybe their laws are configured to treat you like a test subject.
 ####				C	Law Enforcers
 Apprehension Ray is hard to hit, but teleports you immediately to jail
 ###				C	Enclave: Necropolis
-####			C	Agent: Bloodslave
+####				C	Agent: Bloodslave
 They don't even complain anymore
-####			C	Agent: Necromancer
+####				C	Agent: Necromancer
 Expert hire, Can revive any dead agent for hire
-####			C	Agent: Ghoul
+####				C	Agent: Ghoul
 Feral, eat corpses, hostile but cowardly
-####			C	Agent: Sangrist
+####				C	Agent: Sangrist
 Currency Changer
-####			C	Agent: Z-Rancher
+####				C	Agent: Z-Rancher
 Sells trained zombies, but that's way too OP
-####			C	Currency: Blood
-####			C	Feature: Canals
+####				C	Currency: Blood
+####				C	Feature: Canals
 Catacomb vibe?
-####			C	Floor Type: Dungeony stone
-####			C	Wall Type: Brick
+####				C	Floor Type: Dungeony stone
+####				C	Wall Type: Brick
 ###				C	Enclave: Little Foreignia
 The most normal of the Enclaves. Nearly identical to vanilla, but people speak Foreign.
 ###				C	Enclave: Werewales
 Um
+###				C	Enclave: Haywood & Mt. Blair 
+This enclave's special challenge is that it's almost fully dominated by a single powerful faction, the Union.
+The mob has a presence here, but the Union is generally not dirty. Generally.
+Union refugees were the last group let inside the City before it completely sealed itself off from the outside world. They had missed the deadline, but brought so much important cargo that an exception was made. The shipping containers brought in in that refugee influx are still in use as small buildings. Their trucks ("Rigs") were broken down for parts, but the district retains the name.
+####				C	Law: Seniority
+Agents with the Old trait start out Friendly with the Law. They paid their dues.
+####				C	Faction: Union
+A French Vanilla faction, where members generally have Class Solidarity, No In-Fighting, and Confident in Crowds. 
+They generally carry tools, power tools, and protective equipment. They don't carry the big guns, but make up for it in solidarity.
+Outside Union Town, the Union is still pretty powerful. 
+Cops and Firefighters are Union-Aligned, but not vice-versa.
+####				C	Agent: Scab
+New
+####				C	Agent: Fink
+Pinkertons
 ##			C	Language (Overhaul)
 ###			C	00 Mutator: Our Town
 - NPCs have a chance to speak a foreign language
@@ -473,6 +682,8 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		C	Behavior
+###			C	Consumer
+Visits vending machines and merchants
 ###			C	Corpse Destroyer
 Gibs enemies' corpses
 ###			C	Vanilla Panic Room behavior
@@ -1087,6 +1298,8 @@ Complete
 ###			√	Cyber-Intruder
 Complete
 ##		C	Interaction
+###			C	Shitbird
+Runs off with your money when you try to pay them for something, lol
 ###			C	Buy Slave
 Pending actual assignment of owned slaves 
 ###			C	Cybernetic Surgery
@@ -1572,7 +1785,7 @@ New
 - There are a few other hits that came up in a string search (possibly "Musician"):
   - LoadLevel.SpawnStartingFollowers
   - ObjectMult.StartWithFollowersBodyguardA
-    - Ignore this one, it's for the Player Bodyguard trait
+	- Ignore this one, it's for the Player Bodyguard trait
 - Check out ObjectMult.StartWithFollowers, there are something like 4 similarly named methods in there
 ###			C	Pilot Trait
 No errors, but no effect.
@@ -1677,7 +1890,7 @@ GC.sessionDataBig.curLevelEndless - 1
 
 - LoadLevel
   - loadStuff2 @ 199
-    - this.customLevel = this.customCampaign.levelList[n];
+	- this.customLevel = this.customCampaign.levelList[n];
 
 663:
 	if (this.customCampaign.levelList[n].levelName == this.customCampaign.levelNameList[this.gc.sessionDataBig.curLevelEndless - 1])

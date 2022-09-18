@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Accessory
+namespace CCU.Traits.App_AC1
 {
 	public class Fedora : T_Accessory
 	{
-		public override string Accessory => "Fedora";
+		public override string[] Rolls => new string[] { "Fedora" };
 
         [RLSetup]
 		public static void Setup()

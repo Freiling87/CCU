@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Eye_Type
+namespace CCU.Traits.App_ET1
 {
 	public class Wide_Eyes : T_EyeType
 	{
-		public override string EyeType => "WideEyes";
+		public override string[] Rolls => new string[] { "EyesWide" };
 
         [RLSetup]
 		public static void Setup()

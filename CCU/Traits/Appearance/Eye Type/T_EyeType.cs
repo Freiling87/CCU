@@ -1,9 +1,9 @@
-﻿namespace CCU.Traits.Eye_Type
+﻿using CCU.Traits.App;
+
+namespace CCU.Traits.App_ET1
 {
-    public abstract class T_EyeType : T_CCU
+    public abstract class T_EyeType : T_Appearance
     {
         public T_EyeType() : base() { }
-
-        public abstract string EyeType { get; }
     }
 }

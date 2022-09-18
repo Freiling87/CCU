@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Facial_Hair
+namespace CCU.Traits.App_FH1
 {
 	public class No_Facial_Hair : T_FacialHair
 	{
-		public override string FacialHairType => "None";
+		public override string[] Rolls => new string[] { "None" };
 
         [RLSetup]
 		public static void Setup()

@@ -1,11 +1,11 @@
-﻿using CCU.Traits.Skin_Color;
+﻿using CCU.Traits.App_SC1;
 using RogueLibsCore;
 
-namespace CCU.Traits.Skin_Color_Grouped
+namespace CCU.Traits.App_SC2
 {
 	public class Vampire_Skin : T_SkinColor
 	{
-		public override string[] SkinColors => 
+		public override string[] Rolls => 
 			new string[] { "SuperPaleSkin", "BlackSkin" };
 
 		[RLSetup]

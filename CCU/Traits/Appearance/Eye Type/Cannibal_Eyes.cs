@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Eye_Type
+namespace CCU.Traits.App_ET1
 {
 	public class Cannibal_Eyes : T_EyeType
 	{
-		public override string EyeType => "CannibalEyes";
+		public override string[] Rolls => new string[] { "EyesCannibal" };
 
         [RLSetup]
 		public static void Setup()

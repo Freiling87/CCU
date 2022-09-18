@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Accessory
+namespace CCU.Traits.App_AC1
 {
 	public class Head_Mirror : T_Accessory
 	{
-		public override string Accessory => "DoctorHeadLamp";
+		public override string[] Rolls => new string[] { "DoctorHeadLamp" };
 
         [RLSetup]
 		public static void Setup()

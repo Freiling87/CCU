@@ -1,10 +1,10 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Traits.Skin_Color
+namespace CCU.Traits.App_SC1
 {
 	public class Zombie_Skin_1 : T_SkinColor
 	{
-		public override string[] SkinColors => new string[] { "ZombieSkin1" };
+		public override string[] Rolls => new string[] { "ZombieSkin1" };
 
         [RLSetup]
 		public static void Setup()
