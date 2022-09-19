@@ -66,7 +66,9 @@ namespace CCU.Systems.CustomGoals
 
         public static void RunSceneSetters()
         {
-        start: // TODO: Goto is a nono, mofo
+        // TODO: Goto is a nono, mofo
+        // It's structured like this so I can remove from agentList while traversing it.
+        start: 
             foreach (Agent agent in GC.agentList)
             {
                 if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetHook<P_Agent_Hook>().SceneSetterFinished)
@@ -117,24 +119,34 @@ namespace CCU.Systems.CustomGoals
                         agent.tranqTime = 1000;
                         goto start;
                     case RandomTeleport:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        logger.LogDebug("======= Random Teleport:\t" + agent.agentRealName);
+                        int log = 0;
+                        logger.LogDebug("Log: " + log++);
                         Vector3 targetLoc = Vector3.zero;
                         int attempts = 0;
+                        logger.LogDebug("Log: " + log++);
 
                         do
                         {
                             targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
+                            logger.LogDebug("--- TargetLoc:\t" + targetLoc.ToString());
+                            logger.LogDebug("    Distance :\t" + Vector2.Distance(targetLoc, agent.tr.position));
                             attempts++;
                         }
                         while (Vector2.Distance(targetLoc, agent.tr.position) < 20f && attempts < 50);
 
+                        logger.LogDebug("Log: " + log++);
                         if (targetLoc == Vector3.zero)
                             targetLoc = agent.tr.position;
-
+                        logger.LogDebug("Log: " + log++);
                         agent.Teleport(targetLoc, false, true);
+                        logger.LogDebug("Log: " + log++);
                         agent.agentCamera.fastLerpTime = 1f;
-
+                        logger.LogDebug("Log: " + log++);
                         goto start;
                     case Zombified:
+                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.zombieWhenDead = true;
                         agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));

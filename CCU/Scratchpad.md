@@ -6,15 +6,7 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
-##		C	Permanent Status Effects
-###			C	Giant
-###			C	Enraged
-##		C	Restrict Trait Count 
-to legalize characters
-##			T	Custom Decal Pilot
-I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -36,10 +28,6 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
 	- Cost Scale: Now excludes Bribe for Quest Item.
 	- Relationship: No longer affect Home Base
 - Feature Additions
-  - Default Goals
-	- Random Teleport 
-  - Objects
-	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
   - Traits
 	- Appearance
 	  - You can now randomize the appearance of NPCs. See the Traits page for details, as there are too many traits to list here.
@@ -60,6 +48,10 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
 	- Merchant Type: Selecting multiple types will now combine inventory random-choice pools rather than just selecting one of them.
 	  - Burger Joint
 	  - Sugar Shack
+  - Default Goals
+	- Random Teleport 
+  - Objects
+	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
 ##			P	v. 1.0.1 Documentation Additions
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
 ###				Object Variable List
@@ -235,7 +227,7 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Random Teleport didn't work
+###				T	Random Teleport didn't work
 	[Info   : Unity Log] SETUPMORE4_13 False
 	[Info   : Unity Log] SETUPMORE5
 	[Info   : Unity Log] FADE
@@ -246,6 +238,10 @@ Except crickets, crickets are fine.
 	LoadLevel.SetupMore5 () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+
+POssible issue: Comparing distance from Vec3.Zero?
+
+Added logging to RunSceneSetters.
 ###				C	Can open empty containers
 Shows empty list
 ###				C	Big Bomb Blacement Bug
@@ -1970,6 +1966,8 @@ Main quest rewards are multiplied by 10
 #		C	Item Groups
 wut
 #		CT	Objects
+##			C	Custom Decal
+I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			H	Ambusher
 Bathtub (Need sprite)
 Bush
