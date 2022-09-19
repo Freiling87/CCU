@@ -1,6 +1,7 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.App_BC1;
+using RogueLibsCore;
 
-namespace CCU.Traits.App_BC1
+namespace CCU.Traits.App_BC3
 {
 	public class Neutral_Body_75 : T_BodyColor
 	{

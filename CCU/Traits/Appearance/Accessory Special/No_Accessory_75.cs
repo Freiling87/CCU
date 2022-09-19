@@ -1,22 +1,23 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.App_AC1;
+using RogueLibsCore;
 
-namespace CCU.Traits.App_FH1
+namespace CCU.Traits.App_AC3
 {
-	public class No_Facial_Hair_75 : T_FacialHair
+	public class No_Accessory_75 : T_Accessory
 	{
 		public override string[] Rolls => new string[] { };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<No_Facial_Hair_75>()
+			PostProcess = RogueLibs.CreateCustomTrait<No_Accessory_75>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Rolls \"No Facial Hair\" 75% of the time, regardless of the number of other items in the pool.",
+					[LanguageCode.English] = "Rolls \"No Accessory\" 75% of the time, regardless of the number of other items in the pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(No_Facial_Hair_75), "No Facial Hair 75%"),
+					[LanguageCode.English] = DesignerName(typeof(No_Accessory_75), "No Accessory 75%"),
 				})
 				.WithUnlock(new TraitUnlock
 				{

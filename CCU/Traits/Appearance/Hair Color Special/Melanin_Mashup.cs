@@ -1,22 +1,23 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.App_HC1;
+using RogueLibsCore;
 
-namespace CCU.Traits.App_AC1
+namespace CCU.Traits.App_HC3
 {
-	public class No_Accessory_50 : T_Accessory
+	public class Melanin_Mashup : T_HairColor
 	{
 		public override string[] Rolls => new string[] { };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<No_Accessory_50>()
+			PostProcess = RogueLibs.CreateCustomTrait<Melanin_Mashup>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Rolls \"No Accessory\" 50% of the time, regardless of the number of other items in the pool.",
+					[LanguageCode.English] = "Normally, darker skin colors will turn hair black automatically. This disables that feature.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(No_Accessory_50), "No Accessory 50%"),
+					[LanguageCode.English] = DesignerName(typeof(Melanin_Mashup)),
 				})
 				.WithUnlock(new TraitUnlock
 				{
