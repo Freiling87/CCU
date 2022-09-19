@@ -88,7 +88,7 @@ namespace CCU.Systems.Containers
 
 			RogueInteractions.CreateProvider(h => 
 			{
-				if (IsContainer(h.Object.objectName) && !h.Helper.interactingFar)
+				if (IsContainer(h.Object.objectName) && !h.Helper.interactingFar && !h.Object.objectInvDatabase.isEmpty())
 				{
 					Agent agent = h.Object.interactingAgent;
 
