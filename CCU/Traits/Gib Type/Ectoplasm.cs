@@ -27,7 +27,7 @@ namespace CCU.Traits.Gib_Type
                     [LanguageCode.English] = DesignerName(typeof(Ectoplasm)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,

@@ -14,7 +14,6 @@ namespace CCU.Traits.Language
             VanillaAgents.Robot 
         };
 
-
         [RLSetup]
         public static void Setup()
         {
@@ -27,7 +26,7 @@ namespace CCU.Traits.Language
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_Binary)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 1,

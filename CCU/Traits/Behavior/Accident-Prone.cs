@@ -21,7 +21,7 @@ namespace CCU.Traits.Behavior
                 {
                     [LanguageCode.English] = DesignerName(typeof(AccidentProne), "Accident-Prone"),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

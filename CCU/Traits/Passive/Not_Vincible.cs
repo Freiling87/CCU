@@ -17,7 +17,7 @@ namespace CCU.Traits.Passive
                 {
                     [LanguageCode.English] = DesignerName(typeof(Not_Vincible)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,

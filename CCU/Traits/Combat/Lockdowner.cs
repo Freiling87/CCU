@@ -19,7 +19,7 @@ namespace CCU.Traits.Combat
                     [LanguageCode.English] = DesignerName(typeof(Lockdowner)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

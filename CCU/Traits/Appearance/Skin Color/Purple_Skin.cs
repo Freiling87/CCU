@@ -18,7 +18,7 @@ namespace CCU.Traits.App_SC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Purple_Skin)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

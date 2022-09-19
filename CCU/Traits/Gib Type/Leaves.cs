@@ -26,7 +26,7 @@ namespace CCU.Traits.Gib_Type
                     [LanguageCode.English] = DesignerName(typeof(Leaves)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,

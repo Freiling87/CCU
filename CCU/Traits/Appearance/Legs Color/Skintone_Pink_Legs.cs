@@ -18,7 +18,7 @@ namespace CCU.Traits.App_LC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Skintone_Pink_Legs)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

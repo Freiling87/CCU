@@ -22,7 +22,7 @@ namespace CCU.Traits.App_HS3
 				{
 					[LanguageCode.English] = DesignerName(typeof(Mask_Override)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

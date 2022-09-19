@@ -22,7 +22,7 @@ namespace CCU.Traits.Trait_Gate
                     [LanguageCode.English] = DesignerName(typeof(Honorable_Thief)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

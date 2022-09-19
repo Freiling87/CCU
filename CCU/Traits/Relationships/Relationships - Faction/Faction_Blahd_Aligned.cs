@@ -23,7 +23,7 @@ namespace CCU.Traits.Rel_Faction
                     [LanguageCode.English] = DesignerName(typeof(Faction_Blahd_Aligned)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

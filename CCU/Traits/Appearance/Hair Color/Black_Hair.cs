@@ -18,7 +18,7 @@ namespace CCU.Traits.App_HC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Black_Hair)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

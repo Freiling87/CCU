@@ -25,7 +25,7 @@ namespace CCU.Traits.Interaction_Gate
                     [LanguageCode.English] = DesignerName(typeof(Untrustingest)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

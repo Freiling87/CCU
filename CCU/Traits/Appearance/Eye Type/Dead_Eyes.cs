@@ -18,7 +18,7 @@ namespace CCU.Traits.App_ET1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Dead_Eyes)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

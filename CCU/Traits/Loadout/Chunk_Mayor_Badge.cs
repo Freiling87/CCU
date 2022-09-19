@@ -18,7 +18,7 @@ namespace CCU.Traits.Loadout
 					[LanguageCode.English] = DesignerName(typeof(Chunk_Mayor_Badge)),
 					
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

@@ -18,7 +18,7 @@ namespace CCU.Traits.App_FH1
 				{
 					[LanguageCode.English] = DesignerName(typeof(No_Facial_Hair_75), "No Facial Hair 75%"),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

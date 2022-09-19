@@ -19,7 +19,7 @@ namespace CCU.Traits.App_HC2
 				{
 					[LanguageCode.English] = DesignerName(typeof(Normal_No_Grey), "Normal (No Grey)"),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

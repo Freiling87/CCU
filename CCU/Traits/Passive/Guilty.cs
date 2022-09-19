@@ -17,7 +17,7 @@ namespace CCU.Traits.Passive
                 {
                     [LanguageCode.English] = DesignerName(typeof(Guilty)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { DesignerName(typeof(Innocent)) },
                     CharacterCreationCost = 0,

@@ -21,7 +21,7 @@ namespace CCU.Traits.Rel_Player
                     [LanguageCode.English] = DesignerName(typeof(Player_Loyal)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

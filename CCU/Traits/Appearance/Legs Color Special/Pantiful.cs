@@ -19,7 +19,7 @@ namespace CCU.Traits.App_LC3
 				{
 					[LanguageCode.English] = DesignerName(typeof(Pantiful)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

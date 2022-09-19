@@ -476,6 +476,7 @@
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
+    <Compile Include="Traits\TraitUnlock_CCU.cs" />
     <Compile Include="Traits\Combat\Nth_Wind.cs" />
     <Compile Include="Traits\Combat\Backed_Up.cs" />
     <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />

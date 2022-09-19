@@ -19,7 +19,7 @@ namespace CCU.Traits.App_BC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Gorilla_Colored_Body)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

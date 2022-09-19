@@ -20,7 +20,7 @@ namespace CCU.Traits.App_HC2
 				{
 					[LanguageCode.English] = DesignerName(typeof(Wild_Colors)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

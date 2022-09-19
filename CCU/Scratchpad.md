@@ -8,11 +8,10 @@ Listed in order of Parent tier summary symbol priority:
 
 HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
-##		C	Permanent Status Effects
-###			C	Giant
-###			C	Enraged
-##		C	Restrict Trait Count 
+##		T	Restrict Trait Count 
 to legalize characters
+CharacterCreation.CreateTallyText
+Also includes an attempt at custom CCU trait list separate from the rest.
 ##			T	Custom Decal Pilot
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			P	v. 1.0.1 Patch Notes

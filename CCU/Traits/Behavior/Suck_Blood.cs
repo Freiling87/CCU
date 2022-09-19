@@ -19,7 +19,7 @@ namespace CCU.Traits.Behavior
                 {
                     [LanguageCode.English] = DesignerName(typeof(Suck_Blood)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { DesignerName(typeof(Eat_Corpses)), DesignerName(typeof(Pick_Pockets)) },
                     CharacterCreationCost = 0,

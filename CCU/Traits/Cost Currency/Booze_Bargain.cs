@@ -18,7 +18,7 @@ namespace CCU.Traits.Cost_Currency
                     [LanguageCode.English] = DesignerName(typeof(Booze_Bargain)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { DesignerName(typeof(Banana_Barter)) },
                     CharacterCreationCost = 0,

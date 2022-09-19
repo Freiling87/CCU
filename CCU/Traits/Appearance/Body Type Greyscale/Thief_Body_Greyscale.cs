@@ -19,7 +19,7 @@ namespace CCU.Traits.App_BT2
 				{
 					[LanguageCode.English] = DesignerName(typeof(Thief_Body_Greyscale)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

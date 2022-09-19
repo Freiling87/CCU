@@ -22,7 +22,7 @@ namespace CCU.Traits.Rel_Faction
                     [LanguageCode.English] = DesignerName(typeof(Faction_2_Aligned)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { DesignerName(typeof(Faction_2_Hostile)) },
                     CharacterCreationCost = 0,

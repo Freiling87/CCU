@@ -18,7 +18,7 @@ namespace CCU.Traits.App_BC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Neutral_Body_50), "Neutral Body 50%"),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

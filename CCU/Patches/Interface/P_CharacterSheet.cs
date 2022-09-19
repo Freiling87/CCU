@@ -20,7 +20,7 @@ namespace CCU.Patches.Interface
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo traitList = AccessTools.DeclaredField(typeof(StatusEffects), nameof(StatusEffects.TraitList));
-			MethodInfo displayableTraits = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.DisplayableTraits));
+			MethodInfo displayableTraits = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerTraitList));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 2,

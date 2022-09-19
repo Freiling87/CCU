@@ -18,7 +18,7 @@ namespace CCU.Traits.Map_Marker
 					[LanguageCode.English] = DesignerName(typeof(MapMarker_Pilot)),
 					
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

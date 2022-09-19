@@ -19,7 +19,7 @@ namespace CCU.Traits.App_HS2
 				{
 					[LanguageCode.English] = DesignerName(typeof(Long_Styles)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

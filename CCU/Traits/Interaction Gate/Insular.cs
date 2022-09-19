@@ -21,7 +21,7 @@ namespace CCU.Traits.Interaction_Gate
                     [LanguageCode.English] = DesignerName(typeof(Insular)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

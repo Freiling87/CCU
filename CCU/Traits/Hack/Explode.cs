@@ -23,7 +23,7 @@ namespace CCU.Traits.Hack
                     [LanguageCode.English] = DesignerName(typeof(Explode)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

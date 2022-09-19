@@ -20,7 +20,7 @@ namespace CCU.Traits.Cost_Scale
                     [LanguageCode.English] = DesignerName(typeof(Zero)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,

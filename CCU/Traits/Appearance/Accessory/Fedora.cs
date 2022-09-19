@@ -18,7 +18,7 @@ namespace CCU.Traits.App_AC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Fedora)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

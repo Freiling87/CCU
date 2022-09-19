@@ -19,7 +19,7 @@ namespace CCU.Traits.Explosion_Timer
                 {
                     [LanguageCode.English] = DesignerName(typeof(Shortest_Fuse)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

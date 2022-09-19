@@ -22,7 +22,7 @@ namespace CCU.Traits.App_SC2
 				{
 					[LanguageCode.English] = DesignerName(typeof(Human_Skin)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

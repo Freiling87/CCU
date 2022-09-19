@@ -18,7 +18,7 @@ namespace CCU.Traits.Combat
                 {
                     [LanguageCode.English] = DesignerName(typeof(Backed_Up)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

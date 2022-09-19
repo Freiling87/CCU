@@ -22,7 +22,7 @@ namespace CCU.Traits.Rel_Faction
                     [LanguageCode.English] = DesignerName(typeof(Hostile_to_Vampire)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

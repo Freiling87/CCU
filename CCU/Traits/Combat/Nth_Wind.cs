@@ -26,7 +26,7 @@ namespace CCU.Traits.Combat
                     [LanguageCode.English] = DesignerName(typeof(Nth_Wind)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

@@ -23,7 +23,7 @@ namespace CCU.Traits.App_HS2
 				{
 					[LanguageCode.English] = DesignerName(typeof(Not_Hairstyles)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

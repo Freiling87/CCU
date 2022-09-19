@@ -18,11 +18,23 @@ namespace CCU.Traits
             }
         }
 
-        // Remove all CCU traits that aren't Player traits
-        public static List<Trait> DisplayableTraits(List<Trait> vanilla) =>
-            vanilla.Where(t => IsTraitDisplayable(t)).ToList();
+        public static List<Trait> DesignerTraitList(List<Trait> original) =>
+            original.Where(t => IsDesignerTrait(t)).ToList();
 
-        public static bool IsTraitDisplayable(Trait trait) =>
+        public static List<Unlock> DesignerTraitList(List<Unlock> original) =>
+            original.Where(t => t.GetHook() is TraitUnlock_CCU).ToList();
+
+        public static List<Trait> PlayerTraitList(List<Trait> original) =>
+            original.Where(t => IsPlayerTrait(t)).ToList();
+
+        public static List<Unlock> VanillaTraitList(List<Unlock> original) =>
+            original.Where(t => !(t.GetHook() is TraitUnlock_CCU)).ToList();
+
+        public static bool IsDesignerTrait(Trait trait) =>
+            !(trait?.GetHook<T_CCU>() is null) &&
+            trait?.GetHook<T_PlayerTrait>() is null;
+
+        public static bool IsPlayerTrait(Trait trait) =>
             trait?.GetHook<T_CCU>() is null ||
             !(trait?.GetHook<T_PlayerTrait>() is null);
 

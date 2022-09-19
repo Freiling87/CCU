@@ -18,7 +18,7 @@ namespace CCU.Traits.Loadout
 					[LanguageCode.English] = CTrait.Loadout_Guns_Common,
 					
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,
