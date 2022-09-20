@@ -6,15 +6,7 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-HEY BRO ALT+UP TO JUMP TO METHOD SIGNATURE
 #		Scope
-##		C	Permanent Status Effects
-###			C	Giant
-###			C	Enraged
-##		C	Restrict Trait Count 
-to legalize characters
-##			T	Custom Decal Pilot
-I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -36,10 +28,6 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
 	- Cost Scale: Now excludes Bribe for Quest Item.
 	- Relationship: No longer affect Home Base
 - Feature Additions
-  - Default Goals
-	- Random Teleport 
-  - Objects
-	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
   - Traits
 	- Appearance
 	  - You can now randomize the appearance of NPCs. See the Traits page for details, as there are too many traits to list here.
@@ -60,31 +48,16 @@ I put a Custom Floor Decal item in the Editor Object List. Nothing else. See wha
 	- Merchant Type: Selecting multiple types will now combine inventory random-choice pools rather than just selecting one of them.
 	  - Burger Joint
 	  - Sugar Shack
+  - Default Goals
+	- Random Teleport 
+  - Objects
+	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
 ##			P	v. 1.0.1 Documentation Additions
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
 ###				Object Variable List
 Vendor Cart mechanics note
 ###				Appearance
-There are a *lot* of traits in this category, grouped into the following. They have abbreviated prefixes, in order to keep sorting together but save some space. I'm not going to list every single trait in here, just the unusual ones.
-
-- App AC1: Accessory
-- App BC1: Body Color
-- App BC3: Body Color Special
-- App BT1: Body Type
-- App BT2: Body Type Greyscale
-- App EC1: Eye Color
-- App ET1: Eye Type
-- App FH1: Facial Hair
-- App HC1: Hair Color
-- App HC2: Hair Color Grouped
-- App HS1: Hairstyle
-- App HS2: Hairstyle Grouped
-- App LC1: Legs Color
-- App LC3: Legs Color Special
-- App SC1: Skin Color
-- App SC2: Skin Color Group
-
-The "Group," uh... groups... have multiple items. "Long hairstyles," "Punk hairstyles," you get it, you're smart. These are just offered as a quicker way to customize appearance without having to do it granularly. Their contents are listed in sections below.
+There are a *lot* of traits in this category. Most of them refer to a single value in the character creator, e.g. "Blue Legs," "Mohawk," etc. Some of them refer to multiple values, e.g. "Punk Hairstyles," or "Human Skin Tones." 
 
 All selections are thrown into a random pool. When the NPC is generated, it pulls a random selection from this pool for its appearance. They are compatible, so you could add Mohawk as well as Punk Styles if you want to slightly weight the pool, but you won't have a ton of control over that. 
 
@@ -92,17 +65,44 @@ All selections are thrown into a random pool. When the NPC is generated, it pull
 By adding an appearance trait, you add an item to a random selection pool. When the agent is spawned as an NPC, its appearance is randomly chosen from all pools with items in them. Empty pools are ignored, and appearance copies the visuals in the character editor.
 
 ####				Best Practices
-#####					Test Sheet
-With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with a ton of copies of the same NPC to identify weird edge cases and gradually shape a population aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate picture of what the character will look like.
+#####					Test En Masse
+With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with lots of copies of the same NPC to identify weird edge cases and gradually shape a population aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate idea of what the character will tend to look like.
+#####					Creative Weighting
+Use the grouped traits and redundancy to your advantage. Here's an example:
+> Black Hair, Brown Hair, Blonde Hair, Normal Hair Colors, Normal Hair Colors (No Grey), Wild Hair Colors
+
+This combination has three copies of the most common hair colors. Orange hair is demographically rare so it's not added a third time. Wild Hair Colors are only added once, because you want them to be somewhat rare. 
+
+####				AC3: Accessory Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|No Accessory 50%					|50% chance to spawn with no accessory, regardless of items in the pool
+|No Accessory 75%					|75% chance to spawn with no accessory, regardless of items in the pool
 
 ####				BC3: Body Color Special
 
 |Trait								|Effects								|
 |:----------------------------------|:--------------------------------------|
+|Neutral Body 50%					|50% chance to not apply a body color
+|Neutral Body 75%					|75% chance to not apply a body color
 |Shirtless							|Body color matches skin color
 |Shirtsome							|Body color is rerolled if it matches skin color
 
-####				HC2: Hair Color Groups
+####				EC3: Eye Color Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|Beady-Eyed							|Eye color matches skin color
+
+####				FH3: Facial Hair Special
+
+|Trait								|Effects								|
+|:----------------------------------|:--------------------------------------|
+|No Facial Hair 50%					|50% chance to spawn with no facial hair, regardless of items in the pool
+|No Facial Hair 75%					|75% chance to spawn with no facial hair, regardless of items in the pool
+
+####				HC2: Hair Color Grouped
 
 |Hair Color			|Normal	|Normal (No Grey)	|Wild	|
 |:------------------|:-----:|:-----------------:|:-----:|
@@ -120,12 +120,14 @@ With so many random variables, it's hard to tell whether the look is perfect unl
 
 ####				HC3: Hair Color Special
 
+***Mask:** Any non-hairstyle, like the Hoodie, Gorilla Head, etc.*
+
 |Trait								|Effects								|
 |:----------------------------------|:--------------------------------------|
-|Matched Mask						|If a Hoodie is rolled for Hairstyle, matches its color to Body Color
-|Uncolored Mask						|If a non-hairstyle is rolled (Hoodie, Gorilla head, etc.), it won't be colored
+|Matched Mask						|If a mask is rolled, matches its color to Body Color
+|Uncolored Mask						|If a mask is rolled, it won't be colored
 
-####				HS2: Hairstyle Groups
+####				HS2: Hairstyle Grouped
 
 |Hairstyle			|Balding|Bangs	|Female	|Long	|Male	|Not Hairstyles	|Punk	|Short Female	|Short	|Stylish|
 |:------------------|:-----:|:-----:|:-----:|:-----:|:-----:|:-------------:|:-----:|:-------------:|:-----:|:-----:|
@@ -177,7 +179,7 @@ With so many random variables, it's hard to tell whether the look is perfect unl
 |Pantiful							|Legs color is rerolled if it matches skin color
 |Pantsless							|Legs color matches skin color
 
-####				SC2: Skin Color Groups
+####				SC2: Skin Color Grouped
 
 |Skin Color			|Human	|Shapeshifter	|Vampire|Zombie	|
 |:------------------|:-----:|:-------------:|:-----:|:-----:|
@@ -206,7 +208,7 @@ With so many random variables, it's hard to tell whether the look is perfect unl
 |Zombie 1			|		|				|		|✓		|
 |Zombie 2			|		|				|		|✓		|
 
-[^1]: Doubled in this group. Just copying vanilla.
+[^1]: Doubled in this group in the original game code.
 
 ###				Hire Duration
 
@@ -235,7 +237,7 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Random Teleport didn't work
+###				T	Random Teleport didn't work
 	[Info   : Unity Log] SETUPMORE4_13 False
 	[Info   : Unity Log] SETUPMORE5
 	[Info   : Unity Log] FADE
@@ -246,8 +248,12 @@ Except crickets, crickets are fine.
 	LoadLevel.SetupMore5 () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-###				C	Can open empty containers
-Shows empty list
+
+POssible issue: Comparing distance from Vec3.Zero?
+
+Added logging to RunSceneSetters.
+###				T	Can open empty containers
+Added a check in Containers.
 ###				C	Big Bomb Blacement Bug
 Disaster Big Bomb placed a bomb in Vent
 	Too easily accessible
@@ -264,7 +270,7 @@ On loading a chunk, they don't pull and display in the button. They are still in
 P_LevelEditor.SetNameText_Prefix: tileNameText is blank unless defined this session. I.e., item name is not loading here.
 P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means that:
 	UpdateInterface_OnSelect_ShowCustomInterface: Loc_43 is not loading what you think it is. tileNameText2 is apparently always blank, but you might be using the default arg wrong for a harmony patch.
-###				C	Clone Boys Dealer Shop Empty
+###				C	Empty Merchants
 I think rLists are being blocked
 
 	[Debug  :CCU_TraitManager] TRAIT LIST: Clone Boys Dealer
@@ -284,7 +290,7 @@ I think rLists are being blocked
 	[Debug  :CCU_P_Agent]
 	[Debug  :CCU_P_Agent]
 	[Debug  :CCU_P_Agent] 
-###				C	Player Character speaks all
+###				T	Language system broke?
 Tried something
 ###				C	False "Inventory Full" message
 Trying to pick up Whiskey, Replicant Rebel character
@@ -324,6 +330,16 @@ https://discord.com/channels/187414758536773632/1003391847902740561/100797553660
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
 ##		C	Appearance
+###			C	Eye Type
+####			C	Cyclops player
+New
+####			√	Normal Eyes 50%
+Complete
+####			√	Normal Eyes 75%
+Complete
+###			C	Eye Color Special
+####			C	Beady-Eyed
+This will have the same issue with Matched Masks and Skintone colors.
 ###			C	Hair Color Special
 ####			C	Matched Masks
 Color issue: Related to skin tone on body being copied to hair, which hair can't copy.
@@ -340,6 +356,11 @@ Might need to make a Dict<string, string[]> of these two sets, since compatibili
 Complete
 ####			√	Masks 50%
 Complete
+###			C	Hand Color
+Never know until you try! This might just be as simple as a Glove trait that matches them to body color. This shouldn't be a big elaborate category.
+###			C	Skin Color
+####			C	Melanin Mashup
+New
 ###			H	Randomization
 Not possible yet - Hook regeneration.
 You have access to CharaacterCreation.traitsChosen, but there is no complete character to pull actual traits from in this interface. So you're stuck with string names, and this feature isn't important enough to make a whole module for.
@@ -367,11 +388,6 @@ Complete
 ###			√	Body Type Greyscale
 Complete
 ###			√	Eye Color
-Complete
-###			√	Eye Type
-####			√	Normal Eyes 50%
-Complete
-####			√	Normal Eyes 75%
 Complete
 ###			√	Facial Hair
 ####			√	No Facial Hair 50%
@@ -1978,6 +1994,8 @@ Main quest rewards are multiplied by 10
 #		C	Item Groups
 wut
 #		CT	Objects
+##			C	Custom Decal
+I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			H	Ambusher
 Bathtub (Need sprite)
 Bush

@@ -1,22 +1,23 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.App_EC1;
+using RogueLibsCore;
 
-namespace CCU.Traits.App_FH1
+namespace CCU.Traits.App_EC3
 {
-	public class No_Facial_Hair_50 : T_FacialHair
-	{
+	public class Beady_Eyed : T_EyeColor
+    {
 		public override string[] Rolls => new string[] { };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<No_Facial_Hair_50>()
+			PostProcess = RogueLibs.CreateCustomTrait<Beady_Eyed>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Rolls \"No Facial Hair\" 50% of the time, regardless of the number of other items in the pool.",
+					[LanguageCode.English] = "Matches Eye Color to Body Color.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(No_Facial_Hair_50), "No Facial Hair 50%"),
+					[LanguageCode.English] = DesignerName(typeof(Beady_Eyed), "Beady-Eyed"),
 				})
 				.WithUnlock(new TraitUnlock
 				{

@@ -1,7 +1,7 @@
 ﻿using CCU.Traits.App_HC1;
 using RogueLibsCore;
 
-namespace CCU.Traits.App_HC2
+namespace CCU.Traits.App_HC3
 {
     public class Normal_Colors : T_HairColor
 	{
