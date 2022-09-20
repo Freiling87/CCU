@@ -4,6 +4,7 @@ using CCU.Patches.Agents;
 using CCU.Traits.App;
 using HarmonyLib;
 using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,22 @@ namespace CCU.Patches.Appearance
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+
+        [HarmonyPrefix , HarmonyPatch(methodName: nameof(AgentHitbox.GetColorFromString))]
+		public static bool GetColorFromString_Prefix(string colorChoice)
+        {
+			Core.LogMethodCall();
+			logger.LogDebug("ColorChoice: " + colorChoice);
+			return true;
+        }
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(AgentHitbox.GetColorFromString))]
+		public static void GetColorFromString_Prefix(string bodyPart, AgentHitbox __instance)
+		{
+			Core.LogMethodCall();
+			if (bodyPart == "Eyes")
+				logger.LogDebug("Color: " + __instance.eyesColor);
+		}
 
 		// TODO: Possibly replace most of these by patching the getters for
 		// SaveCharacterData.eyesType and .bodyType
@@ -49,7 +66,7 @@ namespace CCU.Patches.Appearance
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo hasSetup = AccessTools.DeclaredField(typeof(AgentHitbox), nameof(AgentHitbox.hasSetup));
-			MethodInfo setupAppearance = AccessTools.DeclaredMethod(typeof(AppearanceTools), nameof(AppearanceTools.SetupAppearance));
+			MethodInfo setupAppearance = AccessTools.DeclaredMethod(typeof(AppearanceTools), nameof(AppearanceTools.SetupAppearance), parameters: new Type[] { typeof(AgentHitbox) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,

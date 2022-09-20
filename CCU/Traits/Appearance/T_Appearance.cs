@@ -36,11 +36,13 @@ namespace CCU.Traits.App
 
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
+			Agent agent = agentHitbox.agent;
+
 			if (agentHitbox.agent.agentName != VanillaAgents.CustomCharacter ||
-				agentHitbox.agent.isPlayer != 0)
+				(agentHitbox.agent.isPlayer != 0 && agent.HasTrait<Static_Preview>()))
 				return;
 
-			// These methods are ordered according to AgentHitbox.SetupFeatures.
+			// Be very careful with reordering these - some of these are dependent on each other.
 			RollSkinColor(agentHitbox);
 			RollHairstyle(agentHitbox);
 			RollFacialHair(agentHitbox);
@@ -249,7 +251,6 @@ namespace CCU.Traits.App
 
 			string roll = GetRoll<T_EyeType>(agentHitbox);
 			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
-			agent.customCharacterData.eyesType = roll;
 			agent.GetHook<P_Agent_Hook>().eyesType = roll;
 			agentHitbox.SetupBodyStrings();
 			agentHitbox.eyesStrings.Clear();
@@ -325,6 +326,11 @@ namespace CCU.Traits.App
 
 			agentHitbox.hairType = roll;
 			agent.oma.hairType = agent.oma.convertHairTypeToInt(agentHitbox.hairType);
+
+			if (agentHitbox.hairType == "RobotPlayerHead" || agentHitbox.hairType == "CopBotHead" || agentHitbox.hairType == "ButlerBotHead")
+				agentHitbox.headPiecePosY = 0.28f;
+			else
+				agentHitbox.headPiecePosY = 0.16f;
 
 			if (!agent.HasTrait<Static_Preview>())
 				agent.customCharacterData.hairType = roll;

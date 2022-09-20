@@ -324,17 +324,13 @@ https://discord.com/channels/187414758536773632/1003391847902740561/100797553660
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
 ##		C	Appearance
-###			C	Eye Type
-####			C	Cyclops player
-New
-####			√	Normal Eyes 50%
-Complete
-####			√	Normal Eyes 75%
-Complete
 ###			C	Hair Color Special
 ####			C	Matched Masks
 Color issue: Related to skin tone on body being copied to hair, which hair can't copy.
 IS there a way to get those colors in there?
+
+The issue is GetColorFromString. 
+If you have a system that can go from string to color, you might greatly expand color choices here.
 ####			√	Uncolored Masks
 Complete
 ###			C	Hairstyle Special
@@ -344,9 +340,16 @@ Might need to make a Dict<string, string[]> of these two sets, since compatibili
 Complete
 ####			√	Masks 50%
 Complete
+###			H	Randomization
+Not possible yet - Hook regeneration.
+You have access to CharaacterCreation.traitsChosen, but there is no complete character to pull actual traits from in this interface. So you're stuck with string names, and this feature isn't important enough to make a whole module for.
+###			C	Footwear Color
+agenthitbox.footwearcolor
+agenthitbox.footwear1.gameobject.setactive()
 ###			√	General Traits
-####			√	Static Preview
-Seems to work
+####			C	Static Preview
+#####				C	Gym Dweller
+Bpdy type is made static.
 ###			√	Accessory
 ####			√	No Accessory 50%
 Complete
@@ -364,6 +367,11 @@ Complete
 ###			√	Body Type Greyscale
 Complete
 ###			√	Eye Color
+Complete
+###			√	Eye Type
+####			√	Normal Eyes 50%
+Complete
+####			√	Normal Eyes 75%
 Complete
 ###			√	Facial Hair
 ####			√	No Facial Hair 50%

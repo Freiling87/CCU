@@ -153,9 +153,10 @@ namespace CCU.Patches.Agents
 			logger.LogDebug("------- Sprites");
 			logger.LogDebug("\tAccessory :\t" + __instance.inventory.startingHeadPiece);
 			logger.LogDebug("\tBody Color:\t" + agentHitbox.bodyColor.ToString());
-			logger.LogDebug("\tBody Type :\t" + __instance.oma.bodyType);
+			logger.LogDebug("\tBody Type :\t" + __instance.oma.bodyType);  // dw
 			logger.LogDebug("\tEye Color :\t" + agentHitbox.eyesColor.ToString());
 			logger.LogDebug("\tHair Color:\t" + agentHitbox.hairColorName);
+			logger.LogDebug("\tHairstyle :\t" + agentHitbox.hairType);
 			logger.LogDebug("\tLeg Color :\t" + agentHitbox.legsColor.ToString());
 			logger.LogDebug("\tSkinColor :\t" + agentHitbox.skinColorName);
         } 

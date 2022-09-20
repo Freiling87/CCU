@@ -5,11 +5,9 @@ namespace CCU.Traits.App_HS2
 {
     public class Not_Hairstyles : T_Hairstyle
 	{
-        public override string[] Rolls => 
-			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };
+		public override string[] Rolls => new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", };
 
-		public static string[] StaticList => 
-			new string[] { "SlavemasterMask", "AssassinMask", "Hoodie", "GorillaHead", "RobotHead", "HologramHead", "WerewolfHead", "ButlerBotHead", "CopBotHead", "AlienHead", "RobotPlayerHead" };
+		public static string[] StaticList => new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", };
 
 		[RLSetup]
 		public static void Setup()

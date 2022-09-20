@@ -10,6 +10,20 @@ namespace CCU.Traits.App_HS3
 
 		public static List<string> IncompatibleAccessories = new List<string>() { "CopHat", "DoctorHeadLamp", "HatBlue", "HatRed", "ThiefHat", "Fedora", "FireHelmet", "Cop2Hat", "Headphones" };
 
+		// TODO: Consider this system. These entries all have the full list though.
+		public static Dictionary<string, string[]> IncompatiblePairs = new Dictionary<string, string[]>()
+		{
+			{ "CopHat",			new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "Cop2Hat",        new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "DoctorHeadLamp", new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "Fedora",         new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "FireHelmet",     new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "HatBlue",		new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "HatRed",			new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "Headphones",     new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+			{ "ThiefHat",		new string[] { "AlienHead", "AssassinMask", "ButlerBotHead", "CopBotHead", "GorillaHead", "Hoodie", "RobotHead", "RobotPlayerHead", "SlavemasterMask", "WerewolfHead", } },
+		};
+
         [RLSetup]
 		public static void Setup()
 		{
