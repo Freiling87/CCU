@@ -57,13 +57,10 @@ namespace CCU.Systems.Containers
 			None
         }
 
-		public static string MagicObjectName(string originalName)
-		{
-			if (IsContainer(originalName))
-				return vObject.ChestBasic;
-
-			return originalName;
-		}
+		public static string MagicObjectName(string originalName) =>
+			IsContainer(originalName)
+				? vObject.ChestBasic
+				: originalName;
 
 		[RLSetup]
 		public static void Setup()

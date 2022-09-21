@@ -110,6 +110,9 @@ namespace CCU.Patches.Inventory
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
         {
+			Core.LogMethodCall();
+			int log = 0;
+
 			Agent agent = __instance.agent;
 			
 			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)
@@ -121,15 +124,14 @@ namespace CCU.Patches.Inventory
 				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
 					for (int i = 0; i < item.Value; i++) // Qty
 						inventory.Add(__instance.SwapWeaponTypes(item.Key)); // Name
-																			 // SwapWeaponTypes is for item-affecting mutators (No Guns, etc.)
 
 			List<string> finalInventory = new List<string>();
 			Random rnd = new Random();
 			int attempts = 0;
 			bool forceDuplicates = false;
 
-			redo: // Yeah redo this whole damn thing
-			while (finalInventory.Count < 5 && attempts < 100)
+		redo: // Yeah redo this whole damn thing
+			while (inventory.Any() && finalInventory.Count < 5 && attempts < 100)
 			{
 				attempts++;
 
@@ -144,7 +146,7 @@ namespace CCU.Patches.Inventory
 				}
             }
 
-			if (finalInventory.Count < 5)
+			if (inventory.Any() && finalInventory.Count < 5)
 			{
 				forceDuplicates = true;
 				attempts = 0;

@@ -139,7 +139,7 @@ namespace CCU.Patches.Interface
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo deactivateLoadMenu = AccessTools.DeclaredMethod(typeof(LevelEditor), nameof(LevelEditor.DeactivateLoadMenu));
-			MethodInfo loadSpecialInterfaces = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
+			MethodInfo showCustomInterface = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
 			FieldInfo scrollingButtonType = AccessTools.DeclaredField(typeof(ButtonHelper), nameof(ButtonHelper.scrollingButtonType));
 			MethodInfo setActive = AccessTools.DeclaredMethod(typeof(GameObject), nameof(GameObject.SetActive));
 
@@ -161,7 +161,7 @@ namespace CCU.Patches.Interface
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
 					new CodeInstruction(OpCodes.Ldstr, ""),
-					new CodeInstruction(OpCodes.Call, loadSpecialInterfaces),
+					new CodeInstruction(OpCodes.Call, showCustomInterface),
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -173,7 +173,7 @@ namespace CCU.Patches.Interface
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo oneOfEachSceneObject = AccessTools.DeclaredField(typeof(LevelEditor), "oneOfEachSceneObject");
-			MethodInfo loadSpecialInterface = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
+			MethodInfo showCustomInterface = AccessTools.DeclaredMethod(typeof(P_LevelEditor), nameof(P_LevelEditor.ShowCustomInterface));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -185,30 +185,68 @@ namespace CCU.Patches.Interface
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldloc_S, 34),					//	text10 (item name)
+					new CodeInstruction(OpCodes.Ldloc_S, 34),					//	text10 (levelEditorTile.tileName)
 					new CodeInstruction(OpCodes.Ldloc_S, 43),					//	tileNameText2
-					new CodeInstruction(OpCodes.Call, loadSpecialInterface),
+					new CodeInstruction(OpCodes.Call, showCustomInterface),
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
 
-		private static void ShowCustomInterface(LevelEditor levelEditor, string objectName, string itemName)
+		private static void ShowCustomInterface(LevelEditor levelEditor, string objectNameDELETE, string itemNameDELETE)
         {
+			InputField tileNameObject = (InputField)AccessTools.Field(typeof(LevelEditor), "tileNameObject").GetValue(levelEditor);
+			string objectName = tileNameObject.text;
+
 			if (Containers.IsContainer(objectName))
             {
-				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
-				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor);
+				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor); 
+				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor); // Works
 
 				extraVarObject.gameObject.SetActive(false);
 				extraVarStringObject.gameObject.SetActive(true);
-				levelEditor.SetNameText(extraVarStringObject, itemName, "Item");
+				levelEditor.SetNameText(extraVarStringObject, levelEditor.selectedTiles[0].extraVarString, "Item"); // Works
 			}
 		}
-        #endregion
-        #region Investigateables
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.OpenLongDescription))]
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.SetNameText))]
+		public static bool SetNameText_Prefix(string tileNameText, string textType)
+        {
+			Core.LogMethodCall() ;
+			logger.LogDebug("tileNameText: " + tileNameText);
+			logger.LogDebug("textType:     " + textType);
+
+			return true;
+        }
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
+		private static IEnumerable<CodeInstruction> UpdateInterface_ShowTextBoxForContainers(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S, 34), 
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S, 34),				//	Object real name
+					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"ChestBasic" if investigateable, or real name if not
+					new CodeInstruction(OpCodes.Ldstr, "ChestBasic"),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		#endregion
+		#region Investigateables
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.OpenLongDescription))]
 		public static IEnumerable<CodeInstruction> OpenLongDescription_RemoveSpecialStrings(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

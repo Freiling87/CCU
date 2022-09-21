@@ -247,6 +247,16 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Containers
+####				C	Shows all three buttons
+####				C	Contents not updated
+On editor loading a chunk, names don't display in the button. They are still in the item, and drop correctly.
+
+Logging results:
+P_LevelEditor.SetNameText_Prefix: tileNameText is blank unless defined within current selection, which fits our behavior profile.
+P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means that:
+UpdateInterface_OnSelect_ShowCustomInterface: Loc_43 is not loading what you think it is. tileNameText2 is apparently always blank, but you might be using the default arg wrong for a harmony patch.
+
 ###				C	Cyclops Bug
 Still happening with Beach Bum
 ###				C	Fac Rel Refactor
@@ -255,11 +265,6 @@ Agent 2 - Law / Hostile Fac2
 Should be hostile, but Rel Fac set to neutral.
 ###				C	SORCE Mutators not available in Editor levels 
 I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
-###				C	Container button text
-On editor loading a chunk, they don't pull and display in the button. They are still in the item, and drop correctly.
-P_LevelEditor.SetNameText_Prefix: tileNameText is blank unless defined this session. I.e., item name is not loading here.
-P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means that:
-	UpdateInterface_OnSelect_ShowCustomInterface: Loc_43 is not loading what you think it is. tileNameText2 is apparently always blank, but you might be using the default arg wrong for a harmony patch.
 ###				C	Empty Merchants
 I think rLists are being blocked
 
