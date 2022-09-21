@@ -253,10 +253,10 @@ namespace CCU.Patches.Inventory
         {
 			for (int i = 0; i < __instance.InvItemList.Count; i++)
             {
-				string name = __instance.InvItemList[i].invItemName;
+				InvItem invItem = __instance.InvItemList[i];
 
-				if (!Investigateables.IsInvestigationString(name))
-                {
+				if (!GC.nameDB.GetName(invItem.invItemName, "Item").Contains("E_"))
+				{
 					__result = false;
 					return false;
 				}

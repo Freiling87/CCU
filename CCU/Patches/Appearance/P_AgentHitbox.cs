@@ -18,22 +18,6 @@ namespace CCU.Patches.Appearance
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        [HarmonyPrefix , HarmonyPatch(methodName: nameof(AgentHitbox.GetColorFromString))]
-		public static bool GetColorFromString_Prefix(string colorChoice)
-        {
-			Core.LogMethodCall();
-			logger.LogDebug("ColorChoice: " + colorChoice);
-			return true;
-        }
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(AgentHitbox.GetColorFromString))]
-		public static void GetColorFromString_Prefix(string bodyPart, AgentHitbox __instance)
-		{
-			Core.LogMethodCall();
-			if (bodyPart == "Eyes")
-				logger.LogDebug("Color: " + __instance.eyesColor);
-		}
-
 		// TODO: Possibly replace most of these by patching the getters for
 		// SaveCharacterData.eyesType and .bodyType
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupBodyStrings))]

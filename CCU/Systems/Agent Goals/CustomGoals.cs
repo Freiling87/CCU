@@ -120,30 +120,21 @@ namespace CCU.Systems.CustomGoals
                         goto start;
                     case RandomTeleport:
                         agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        logger.LogDebug("======= Random Teleport:\t" + agent.agentRealName);
-                        int log = 0;
-                        logger.LogDebug("Log: " + log++);
                         Vector3 targetLoc = Vector3.zero;
                         int attempts = 0;
-                        logger.LogDebug("Log: " + log++);
 
                         do
                         {
                             targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
-                            logger.LogDebug("--- TargetLoc:\t" + targetLoc.ToString());
-                            logger.LogDebug("    Distance :\t" + Vector2.Distance(targetLoc, agent.tr.position));
                             attempts++;
                         }
                         while (Vector2.Distance(targetLoc, agent.tr.position) < 20f && attempts < 50);
 
-                        logger.LogDebug("Log: " + log++);
                         if (targetLoc == Vector3.zero)
                             targetLoc = agent.tr.position;
-                        logger.LogDebug("Log: " + log++);
                         agent.Teleport(targetLoc, false, true);
-                        logger.LogDebug("Log: " + log++);
-                        agent.agentCamera.fastLerpTime = 1f;
-                        logger.LogDebug("Log: " + log++);
+                        try { agent.agentCamera.fastLerpTime = 1f; }
+                        catch { }
                         goto start;
                     case Zombified:
                         agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;

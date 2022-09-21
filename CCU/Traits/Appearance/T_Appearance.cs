@@ -1,12 +1,15 @@
 ﻿using BepInEx.Logging;
 using CCU.Patches.Agents;
 using CCU.Traits.App_AC1;
+using CCU.Traits.App_AC3;
 using CCU.Traits.App_BC1;
 using CCU.Traits.App_BC3;
 using CCU.Traits.App_BT1;
 using CCU.Traits.App_EC1;
+using CCU.Traits.App_EC3;
 using CCU.Traits.App_ET1;
 using CCU.Traits.App_FH1;
+using CCU.Traits.App_FH3;
 using CCU.Traits.App_HC1;
 using CCU.Traits.App_HC3;
 using CCU.Traits.App_HS1;
@@ -104,6 +107,16 @@ namespace CCU.Traits.App
 
 					break;
 
+				case var _ when type.IsAssignableFrom(typeof(T_EyeColor)):
+
+					if (agent.HasTrait<Beady_Eyed>())
+						return agent.GetHook<P_Agent_Hook>().skinColor;
+
+					if (pool.Count() is 0)
+						return "White";
+
+					break;
+
 				case var _ when type.IsAssignableFrom(typeof(T_EyeType)):
 					if (agent.HasTrait<Normal_Eyes_50>() && GC.percentChance(50) ||
 						(agent.HasTrait<Normal_Eyes_75>() && GC.percentChance(75)))
@@ -135,6 +148,9 @@ namespace CCU.Traits.App
 				case var _ when type.IsAssignableFrom(typeof(T_LegsColor)):
 					if (agent.HasTrait<Pantsless>())
 						return agent.GetOrAddHook<P_Agent_Hook>().skinColor;
+					 
+					if (agent.HasTrait<Pantsuit>())
+						return agent.GetOrAddHook<P_Agent_Hook>().bodyColor;
 
 					if (pool.Count() is 0)
 						return "Black";
@@ -149,8 +165,6 @@ namespace CCU.Traits.App
 						return roll;
 					}
 
-					if (agent.HasTrait<Pantsuit>())
-						return agent.GetOrAddHook<P_Agent_Hook>().bodyColor;
 
 					break;
 
@@ -184,7 +198,7 @@ namespace CCU.Traits.App
 			string roll = GetRoll<T_Accessory>(agentHitbox);
 			agent.inventory.AddStartingHeadPiece(roll, true);
 			agent.inventory.startingHeadPiece = roll;
-			agentHitbox.headPieceType = roll; // Test
+			agentHitbox.headPieceType = roll;
 
 			if (!agent.HasTrait<Static_Preview>())
 				agent.customCharacterData.startingHeadPiece = roll;
@@ -195,12 +209,12 @@ namespace CCU.Traits.App
 			try { agent.GetOrAddHook<P_Agent_Hook>().bodyColor = agent.customCharacterData.bodyColorName; }
 			catch { }
 
-			if (!agent.HasTrait<T_BodyColor>())
+			if (!agent.GetTraits<T_BodyColor>().Any())
 				return;
 
 			string roll = GetRoll<T_BodyColor>(agentHitbox);
-			agentHitbox.GetColorFromString(roll, "Body");
 			agent.GetOrAddHook<P_Agent_Hook>().bodyColor = roll;
+			agentHitbox.GetColorFromString(roll, "Body");
 
 			if (!agent.HasTrait<Static_Preview>())
 				agent.customCharacterData.bodyColorName = roll;
@@ -211,13 +225,13 @@ namespace CCU.Traits.App
 			try { agent.GetOrAddHook<P_Agent_Hook>().bodyType = agent.customCharacterData.bodyType; } 
 			catch { }
 
-			if (!agent.HasTrait<T_BodyType>())
+			if (!agent.GetTraits<T_BodyType>().Any())
 				return;
 
 			string roll = GetRoll<T_BodyType>(agentHitbox);
+			agent.GetOrAddHook<P_Agent_Hook>().bodyType = roll;
 			agent.oma.bodyType = roll;
 			agent.objectMult.bodyType = roll;
-			agent.GetOrAddHook<P_Agent_Hook>().bodyType = roll;
 			agentHitbox.SetupBodyStrings();
 			agentHitbox.agentBodyStrings.Clear();
 
@@ -231,7 +245,7 @@ namespace CCU.Traits.App
 		{
 			Agent agent = agentHitbox.agent;
 
-			if (!agentHitbox.agent.HasTrait<T_EyeColor>())
+			if (!agentHitbox.agent.GetTraits<T_EyeColor>().Any())
 				return;
 
 			string roll = GetRoll<T_EyeColor>(agentHitbox);
@@ -250,8 +264,8 @@ namespace CCU.Traits.App
 				return;
 
 			string roll = GetRoll<T_EyeType>(agentHitbox);
-			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
 			agent.GetHook<P_Agent_Hook>().eyesType = roll;
+			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
 			agentHitbox.SetupBodyStrings();
 			agentHitbox.eyesStrings.Clear();
 
@@ -296,7 +310,8 @@ namespace CCU.Traits.App
 			string roll = GetRoll<T_HairColor>(agentHitbox);
 			string skinColorChoice = (string)AccessTools.DeclaredField(typeof(AgentHitbox), "skinColorChoice").GetValue(agentHitbox);
 
-			if (!Not_Hairstyles.StaticList.Contains(roll) && (skinColorChoice == "BlackSkin" || skinColorChoice == "LightBlackSkin") && roll != "Grey" && roll != "White")
+			if (!Not_Hairstyles.StaticList.Contains(roll) && !agent.HasTrait<Melanin_Mashup>() &&
+				(skinColorChoice == "BlackSkin" || skinColorChoice == "LightBlackSkin") &&  roll != "Grey" && roll != "White")
 				roll = "Black";
 
 			agent.oma.hairColor = agent.oma.convertColorToInt(roll);

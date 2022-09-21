@@ -11,10 +11,12 @@ Listed in order of Parent tier summary symbol priority:
 - Bugfixes
   - Default Goals
 	- Scene Setters are no longer interrupted by "Flee" behaviors.
+    - Random Teleport no longer breaks the Scene Setter system.
   - Objects
 	- Containers
-	  - Can no longer loot via hack (Lame!)
+	  - Can no longer loot via hack - Lame!
 	  - Disabled redundant Open/Search buttons.
+      - "Search" button no longer shows up on empty containers.
 	- Investigateables
 	  - Computer no longer interrupts hacking interaction when Investigation text is set.
 	  - Investigate button no longer appears with blank text.
@@ -67,11 +69,19 @@ By adding an appearance trait, you add an item to a random selection pool. When 
 ####				Best Practices
 #####					Test En Masse
 With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with lots of copies of the same NPC to identify weird edge cases and gradually shape a population aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate idea of what the character will tend to look like.
+
 #####					Creative Weighting
-Use the grouped traits and redundancy to your advantage. Here's an example:
+Use the grouped traits and redundancy to your advantage. Here's an example trait list:
 > Black Hair, Brown Hair, Blonde Hair, Normal Hair Colors, Normal Hair Colors (No Grey), Wild Hair Colors
 
-This combination has three copies of the most common hair colors. Orange hair is demographically rare so it's not added a third time. Wild Hair Colors are only added once, because you want them to be somewhat rare. 
+This combination has three copies of the most common hair colors (two copies each are applied by *Normal Hair Colors* and *Normal Hair Colors (No Grey)*. Orange hair is demographically rare so it's not added a third time. Wild Hair Colors are only added once, because you want them to be somewhat rare. 
+
+#####					Less is More... More or Less
+It's tempting to throw a ton of traits into the list. But keep in mind part of what makes Streets of Rogue brilliant: That appearances *don't* vary that much in vanilla, because making everything immediately visually identifiable was one of the designer's priorities. 
+
+This is not to say that highly variable agents aren't useful. It can be good if you want to surprise the player or a present a lot of visual variety. But every unidentified NPC is another instant where they have to check the agent's class name, which could make gameplay draggy.
+
+As with all things, go crazy in moderation!
 
 ####				AC3: Accessory Special
 
@@ -237,36 +247,16 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				T	Random Teleport didn't work
-	[Info   : Unity Log] SETUPMORE4_13 False
-	[Info   : Unity Log] SETUPMORE5
-	[Info   : Unity Log] FADE
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	CCU.Systems.CustomGoals.CustomGoals.RunSceneSetters () (at <aae0405f671f4f6bbf10453a674b1f29>:0)
-	CCU.Patches.Level.P_LoadLevel.SetupMore5_Postfix (LoadLevel __instance) (at <aae0405f671f4f6bbf10453a674b1f29>:0)
-	LoadLevel.SetupMore5 () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
-	LoadLevel+<SetupMore4_2>d__150.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-
-POssible issue: Comparing distance from Vec3.Zero?
-
-Added logging to RunSceneSetters.
-###				T	Can open empty containers
-Added a check in Containers.
-###				C	Big Bomb Blacement Bug
-Disaster Big Bomb placed a bomb in Vent
-	Too easily accessible
-	Allowed player to keep it
+###				C	Cyclops Bug
+Still happening with Beach Bum
 ###				C	Fac Rel Refactor
-This might be different from the original enemy of my enemy bug. Test before clearing.
 Agent 1 - Wanted / Hostile Fac1
 Agent 2 - Law / Hostile Fac2 
 Should be hostile, but Rel Fac set to neutral.
 ###				C	SORCE Mutators not available in Editor levels 
 I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
 ###				C	Container button text
-On loading a chunk, they don't pull and display in the button. They are still in the item, and drop correctly.
+On editor loading a chunk, they don't pull and display in the button. They are still in the item, and drop correctly.
 P_LevelEditor.SetNameText_Prefix: tileNameText is blank unless defined this session. I.e., item name is not loading here.
 P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means that:
 	UpdateInterface_OnSelect_ShowCustomInterface: Loc_43 is not loading what you think it is. tileNameText2 is apparently always blank, but you might be using the default arg wrong for a harmony patch.
@@ -330,23 +320,17 @@ https://discord.com/channels/187414758536773632/1003391847902740561/100797553660
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
 ##		C	Appearance
-###			C	Eye Type
-####			C	Cyclops player
-New
+###			√	Eye Type
 ####			√	Normal Eyes 50%
 Complete
 ####			√	Normal Eyes 75%
 Complete
-###			C	Eye Color Special
-####			C	Beady-Eyed
-This will have the same issue with Matched Masks and Skintone colors.
+###			√	Eye Color Special
+####			√	Beady-Eyed
 ###			C	Hair Color Special
-####			C	Matched Masks
-Color issue: Related to skin tone on body being copied to hair, which hair can't copy.
-IS there a way to get those colors in there?
-
-The issue is GetColorFromString. 
-If you have a system that can go from string to color, you might greatly expand color choices here.
+####			T	Melanin Mashup
+####			√	Matched Masks
+Complete
 ####			√	Uncolored Masks
 Complete
 ###			C	Hairstyle Special

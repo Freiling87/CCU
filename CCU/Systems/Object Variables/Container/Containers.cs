@@ -85,36 +85,30 @@ namespace CCU.Systems.Containers
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_ManholeClosed, t, new CustomNameInfo("I need a crowbar."));
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TubeFunctional, t, new CustomNameInfo("It's still running, and I want to keep all my limbs."));
 
-
 			RogueInteractions.CreateProvider(h => 
 			{
 				if (IsContainer(h.Object.objectName) && !h.Helper.interactingFar && !h.Object.objectInvDatabase.isEmpty())
 				{
-					Agent agent = h.Object.interactingAgent;
-
 					if (h.HasButton(VButtonText.Open))
 						h.RemoveButton(VButtonText.Open);
 
-					if (!h.Object.objectInvDatabase?.isEmpty() ?? false)
-                    {
-						if (h.Object is VendorCart)
-							h.AddButton(CButtonText.Ransack, m =>
+					if (h.Object is VendorCart)
+						h.AddButton(CButtonText.Ransack, m =>
+						{
+							if (!m.Agent.statusEffects.hasTrait(VanillaTraits.SneakyFingers))
 							{
-								if (!m.Agent.statusEffects.hasTrait(VanillaTraits.SneakyFingers))
-								{
-									GC.audioHandler.Play(m.Object, VanillaAudio.Operating);
-									GC.spawnerMain.SpawnNoise(m.Object.tr.position, 0.4f, m.Agent, "Normal", m.Agent);
-									GC.OwnCheck(m.Agent, m.Object.go, "Normal", 2);
-								}
+								GC.audioHandler.Play(m.Object, VanillaAudio.Operating);
+								GC.spawnerMain.SpawnNoise(m.Object.tr.position, 0.4f, m.Agent, "Normal", m.Agent);
+								GC.OwnCheck(m.Agent, m.Object.go, "Normal", 2);
+							}
 
-								m.StartOperating(2f, true, COperatingBarText.Ransacking);
-							});
-						else
-							h.AddImplicitButton(CButtonText.OpenContainer, m =>
-							{
-								TryOpenChest(m.Object, agent);
-							});
-					}
+							m.StartOperating(2f, true, COperatingBarText.Ransacking);
+						});
+					else
+						h.AddImplicitButton(CButtonText.OpenContainer, m =>
+						{
+							TryOpenChest(m.Object, m.Agent);
+						});
 				}
 			});
 		}
