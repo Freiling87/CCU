@@ -1,10 +1,13 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.Loadout;
+using RogueLibsCore;
 
-namespace CCU.Traits.Loadout
+namespace CCU.Traits.Loadout_Misc
 {
     public class Chunk_Key : T_Loadout
 	{
-		[RLSetup]
+		public override string[] Rolls => new string[] { vItem.Key };
+
+        [RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Key>()

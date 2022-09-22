@@ -219,65 +219,6 @@ namespace CCU
 			AgentGroup_Vampire = "[CCU] Agent Group - Vampire",
 			AgentGroup_WhiteCollars = "[CCU] Agent Group - White-Collars",
 		#endregion
-		#region Appearance				Group
-		#region Accessory
-			Accessory_CopHat = "[CCU] Accessory - Cop Hat",
-			Accessory_DoctorHeadlamp = "[CCU] Accessory - Doctor Headlamp",
-			Accessory_Fedora = "[CCU] Accessory - Fedora",
-			Accessory_FireHelmet = "[CCU] Accessory - Fire Helmet",
-			Accessory_HackerGlasses = "[CCU] Accessory - Hacker Glasses",
-			Accessory_HatBlue = "[CCU] Accessory - Hat (Blue)",
-			Accessory_HatRed = "[CCU] Accessory - Hat (Red)",
-			Accessory_Headphones = "[CCU] Accessory - Headphones",
-			Accessory_None = "[CCU] Accessory - None",
-			Accessory_Sunglasses = "[CCU] Accessory - Sunglasses",
-			Accessory_SupercopHat = "[CCU] Accessory - Supercop Hat",
-			Accessory_ThiefHat = "[CCU] Accessory - Thief Hat",
-		#endregion
-		#region Eyes
-
-		#endregion
-		#region Facial Hair
-			FacialHair_Beard = "[CCU] Facial Hair - Beard",
-			FacialHair_Mustache = "[CCU] Facial Hair - Mustache",
-			FacialHair_MustacheCircus = "[CCU] Facial Hair - MustacheCircus",
-			FacialHair_MustacheRedneck = "[CCU] Facial Hair - MustacheRedneck",
-			FacialHair_None = "[CCU] Facial Hair - None",
-		#endregion
-		#region Hair Color
-			HairColor_Brown = "[CCU] Hair Color - Brown",
-			HairColor_Black = "[CCU] Hair Color - Black",
-			HairColor_Blonde = "[CCU] Hair Color - Blonde",
-			HairColor_Blue = "[CCU] Hair Color - Blue",
-			HairColor_Green = "[CCU] Hair Color - Green",
-			HairColor_Grey = "[CCU] Hair Color - Grey",
-			HairColor_Orange = "[CCU] Hair Color - Orange",
-			HairColor_Pink = "[CCU] Hair Color - Pink",
-			HairColor_Purple = "[CCU] Hair Color - Purple",
-			HairColor_Red = "[CCU] Hair Color - Red",
-		#endregion
-		#region Hairstyle
-
-		#endregion
-		#region Skin Color	
-			SkinColor_SuperPale = "[CCU] Skin Color - SuperPaleSkin",
-			SkinColor_Pale = "[CCU] Skin Color - PaleSkin",
-			SkinColor_White = "[CCU] Skin Color - WhiteSkin",
-			SkinColor_Pink = "[CCU] Skin Color - PinkSkin",
-			SkinColor_Gold = "[CCU] Skin Color - GoldSkin",
-			SkinColor_Mixed = "[CCU] Skin Color - MixedSkin",
-			SkinColor_LightBlack = "[CCU] Skin Color - LightBlackSkin",
-			SkinColor_Black = "[CCU] Skin Color - BlackSkin",
-			SkinColor_Zombie1 = "[CCU] Skin Color - ZombieSkin1",
-			SkinColor_Zombie2 = "[CCU] Skin Color - ZombieSkin2",
-		#endregion
-		#endregion
-		#region Loadout
-			Loadout_Guns_Common = "[CCU] Loadout: Guns (Common)",
-			Loadout_Guns_Heavy = "[CCU] Loadout: Guns (Heavy)",
-			Loadout_Guns_Rare = "[CCU] Loadout: Guns (Rare)",
-			Loadout_Guns_Weird = "[CCU] Loadout: Guns (Weird)",
-		#endregion
 		#region Map Marker
 			MapMarker_Bartender = "[CCU] Map Marker: Bartender",
 			MapMarker_DrugDealer = "[CCU] Map Marker: DrugDealer",
@@ -295,9 +236,17 @@ namespace CCU
 		#endregion
 			NoMoreSemiColons = "lol";
 	}
+	public static class cItem
+    {
+		public const string
+			StashHint = "StashHint",
+
+			z = "z";
+    }
+
 	public static class vItem // Vanilla Items
 	{
-	public const string
+		public const string
 			AccuracyMod = "AccuracyMod",
 			AmmoCapacityMod = "AmmoCapacityMod",
 			AmmoProcessor = "AmmoProcessor",
@@ -407,7 +356,7 @@ namespace CCU
 			MachineGun = "MachineGun",
 			MagicLamp = "MagicLamp",
 			MayorHat = "MayorHat",
-			MayorsMansionGuestBadge = "MayorBadge",
+			MayorBadge = "MayorBadge",
 			MechKey = "MechTransformItem",
 			MeleeDurabilitySpray = "MeleeDurabilityDoubler",
 			MemoryMutilator = "MemoryEraser",

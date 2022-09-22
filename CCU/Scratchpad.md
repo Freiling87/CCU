@@ -7,6 +7,8 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #		Scope
+##			T	Random Weapons
+Pilot attempt
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -56,6 +58,39 @@ Listed in order of Parent tier summary symbol priority:
 	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
 ##			P	v. 1.0.1 Documentation Additions
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
+###				Loadout
+####				Weapons
+
+Melee (Any)
+Melee (Sharp)
+Melee (Blunt)
+Melee (Tools)
+Guns (Any)
+Guns (Common)
+Guns (Heavy)
+Guns (Weird)
+
+|Group				|
+|:------------------|
+|Axe
+|Baseball Bat
+|Crowbar
+|Flamethrower
+|Freeze Ray
+|Knife
+|Leaf Blower
+|Machine Gun
+|Pistol
+|Police Baton
+|Revolver
+|Rocket Launcher
+|Sword
+|Tranquilizer Gun
+|Taser
+|Sledgehammer
+|Shotgun
+|Wrench
+
 ###				Object Variable List
 Vendor Cart mechanics note
 ###				Appearance

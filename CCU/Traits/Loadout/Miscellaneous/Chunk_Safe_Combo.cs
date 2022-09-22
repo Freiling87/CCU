@@ -1,10 +1,13 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.Loadout;
+using RogueLibsCore;
 
-namespace CCU.Traits.Loadout
+namespace CCU.Traits.Loadout_Misc
 {
     public class Chunk_Safe_Combo : T_Loadout
 	{
-		[RLSetup]
+		public override string[] Rolls => new string[] { vItem.SafeCombination };
+
+        [RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Safe_Combo>()
