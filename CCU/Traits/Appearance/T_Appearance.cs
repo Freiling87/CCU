@@ -37,6 +37,38 @@ namespace CCU.Traits.App
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public static void LogAppearance(Agent agent)
+        {
+			AgentHitbox agentHitbox = agent.tr.GetChild(0).transform.GetChild(0).GetComponent<AgentHitbox>();
+			logger.LogDebug("======= APPEARANCE: " + agent.agentRealName);
+			logger.LogDebug("\tAccessory :\t" + agent.inventory.startingHeadPiece);
+			logger.LogDebug("\tBody Color:\t" + agentHitbox.bodyColor.ToString());
+			logger.LogDebug("\tBody Type :\t" + agent.oma.bodyType);  // dw
+			logger.LogDebug("\tEye Color :\t" + agentHitbox.eyesColor.ToString());
+			logger.LogDebug("\tHair Color:\t" + agentHitbox.hairColorName);
+			logger.LogDebug("\tHairstyle :\t" + agentHitbox.hairType);
+			logger.LogDebug("\tLeg Color :\t" + agentHitbox.legsColor.ToString());
+			logger.LogDebug("\tSkinColor :\t" + agentHitbox.skinColorName);
+			
+			logger.LogDebug("\n--- EYE TYPE");
+			logger.LogDebug("Hook        :\t" + agent.GetOrAddHook<P_Agent_Hook>().eyesType); // Blank
+			logger.LogDebug("CustomCharSD:\t" + agent.customCharacterData.eyesType);
+			logger.LogDebug("OMA         :\t" + agent.oma.eyesType); // int
+			logger.LogDebug("EyesStrings :");
+			foreach (string str in agentHitbox.eyesStrings)
+				logger.LogDebug("\t" + str);
+			logger.LogDebug("EyesDeadStr :");
+			foreach (string str in agentHitbox.eyesDeadStrings)
+				logger.LogDebug("\t" + str);
+			logger.LogDebug("EyesNarrowStr :");
+			foreach (string str in agentHitbox.eyesNarrowStrings)
+				logger.LogDebug("\t" + str);
+			logger.LogDebug("EyesWideStrings :");
+			foreach (string str in agentHitbox.eyesWideStrings)
+				logger.LogDebug("\t" + str);
+
+
+		}
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
 			Agent agent = agentHitbox.agent;
@@ -257,23 +289,20 @@ namespace CCU.Traits.App
 		public static void RollEyeType(AgentHitbox agentHitbox)
 		{
 			Agent agent = agentHitbox.agent;
-			try { agent.GetOrAddHook<P_Agent_Hook>().eyesType = agent.customCharacterData.eyesType; }
-			catch { }
+			string stored = agent.customCharacterData.eyesType; 
 
 			if (!agentHitbox.agent.HasTrait<T_EyeType>())
 				return;
 
 			string roll = GetRoll<T_EyeType>(agentHitbox);
-			agent.GetHook<P_Agent_Hook>().eyesType = roll;
+			agent.GetOrAddHook<P_Agent_Hook>().eyesType = roll;
 			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
+			agent.customCharacterData.eyesType = roll; // Needed for SetupBodyStrings
+			LogAppearance(agent);
 			agentHitbox.SetupBodyStrings();
-			agentHitbox.eyesStrings.Clear();
 
-			foreach (string dir in Directions)
-				agentHitbox.eyesStrings.Add(roll + dir);
-
-			if (!agent.HasTrait<Static_Preview>())
-				agent.customCharacterData.eyesType = roll;
+			if (agent.HasTrait<Static_Preview>() && !(stored is null) && stored != "")
+				agent.customCharacterData.eyesType = stored;
 		}
 		public static void RollFacialHair(AgentHitbox agentHitbox)
 		{

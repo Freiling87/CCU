@@ -247,18 +247,8 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Containers
-####				C	Shows all three buttons
-####				C	Contents not updated
-On editor loading a chunk, names don't display in the button. They are still in the item, and drop correctly.
-
-Logging results:
-P_LevelEditor.SetNameText_Prefix: tileNameText is blank unless defined within current selection, which fits our behavior profile.
-P_LevelEditor.ShowCustomInterface: itemName is always blank, which I think means that:
-UpdateInterface_OnSelect_ShowCustomInterface: Loc_43 is not loading what you think it is. tileNameText2 is apparently always blank, but you might be using the default arg wrong for a harmony patch.
-
 ###				C	Cyclops Bug
-Still happening with Beach Bum
+This is confirmed to be a Static Preview bug. 
 ###				C	Fac Rel Refactor
 Agent 1 - Wanted / Hostile Fac1
 Agent 2 - Law / Hostile Fac2 

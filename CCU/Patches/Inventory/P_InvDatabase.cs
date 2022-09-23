@@ -111,7 +111,6 @@ namespace CCU.Patches.Inventory
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
         {
 			Core.LogMethodCall();
-			int log = 0;
 
 			Agent agent = __instance.agent;
 			

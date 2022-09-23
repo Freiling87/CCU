@@ -18,8 +18,6 @@ namespace CCU.Patches.Appearance
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		// TODO: Possibly replace most of these by patching the getters for
-		// SaveCharacterData.eyesType and .bodyType
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupBodyStrings))]
 		private static IEnumerable<CodeInstruction> SetupBodyStrings(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -168,9 +166,10 @@ namespace CCU.Patches.Appearance
 			return instructions;
 		}
 
+		// Used for MethodInfo
 		private static string GetAgentBodyType(Agent agent) =>
-			agent.GetHook<P_Agent_Hook>().bodyType;
+			agent.GetOrAddHook<P_Agent_Hook>().bodyType;
 		private static string GetAgentEyesType(Agent agent) =>
-			agent.GetHook<P_Agent_Hook>().eyesType;
+			agent.GetOrAddHook<P_Agent_Hook>().eyesType;
 	}
 }
