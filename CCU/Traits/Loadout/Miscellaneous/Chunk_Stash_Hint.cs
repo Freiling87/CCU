@@ -1,11 +1,14 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.Loadout;
+using RogueLibsCore;
 
-namespace CCU.Traits.Loadout
+namespace CCU.Traits.Loadout_Misc
 {
     public class Chunk_Stash_Hint : T_Loadout
 	{
-		//[RLSetup]
-		public static void Setup()
+		public override string[] Rolls => new string[] { cItem.StashHint };
+
+        //[RLSetup]
+        public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Stash_Hint>()
 				.WithDescription(new CustomNameInfo

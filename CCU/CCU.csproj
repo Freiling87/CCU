@@ -547,7 +547,8 @@
     <Compile Include="Traits\Explosion Timer\Short_Fuse.cs" />
     <Compile Include="Traits\Explosion Timer\T_ExplosionTimer.cs" />
     <Compile Include="Traits\Language\Speaks_Binary.cs" />
-    <Compile Include="Traits\Loadout\Chunk_Stash_Hint.cs" />
+    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Stash_Hint.cs" />
+    <Compile Include="Traits\Loadout\Weapons Grouped\T_RandomWeapon.cs" />
     <Compile Include="Traits\Merchant Stock\Clearancer.cs" />
     <Compile Include="Traits\Merchant Type\Burger_Joint.cs" />
     <Compile Include="Traits\Merchant Type\Sugar_Shack.cs" />
@@ -623,7 +624,7 @@
     <Compile Include="Traits\Language\Speaks_Chthonic.cs" />
     <Compile Include="Traits\Language\Speaks_High_Goryllian.cs" />
     <Compile Include="Traits\Language\T_Language.cs" />
-    <Compile Include="Traits\Loadout\Chunk_Mayor_Badge.cs" />
+    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />
     <Compile Include="Traits\MapMarker\T_MapMarker.cs" />
     <Compile Include="Traits\Merchant Type\Gun_Dealer_Heavy.cs" />
@@ -733,9 +734,9 @@
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Traits\Loadout\Chunk_Key.cs" />
-    <Compile Include="Traits\Loadout\Chunk_Safe_Combo.cs" />
-    <Compile Include="Traits\Loadout\Guns_Common.cs" />
+    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Key.cs" />
+    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Safe_Combo.cs" />
+    <Compile Include="Traits\Loadout\Weapons Grouped\Guns_Common.cs" />
     <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
     <Compile Include="Traits\Bodyguarded\Bodyguarded_Pilot.cs" />
     <Compile Include="Traits\Trait Gate\T_TraitGate.cs" />
@@ -776,6 +777,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\Language\" />
+    <Folder Include="Traits\Loadout\Weapons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\CCScreenshotExample.jpg" />

@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using CCU.Traits.Loadout_Weapons;
+using CCU.Traits.Loadout_Misc;
 
 namespace CCU.Patches.Inventory
 {
@@ -107,7 +109,49 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.AddRandWeapon))]
+		private static IEnumerable<CodeInstruction> AddRandomWeapon_Custom(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo rollWeaponLoadout = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.RollWeaponLoadout));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 2,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+				},
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldstr, "Empty"),
+					new CodeInstruction(OpCodes.Stloc_S, 4),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_0),
+					new CodeInstruction(OpCodes.Call, rollWeaponLoadout),
+					new CodeInstruction(OpCodes.Stloc_S, 4),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		private static string RollWeaponLoadout(InvDatabase invDatabase)
+        {
+			Agent agent = invDatabase.agent;
+
+			if (agent.agentName != VanillaAgents.CustomCharacter ||
+				!agent.GetTraits<T_Loadout>().Any())
+				return "Empty";
+
+			List<string> pool = agent.GetTraits<T_RandomWeapon>().SelectMany(t => t.Rolls).ToList();
+
+			return pool[CoreTools.random.Next(pool.Count - 1)];
+        }
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
         {
 			Core.LogMethodCall();

@@ -95,7 +95,6 @@ namespace CCU.Traits.App
 			Agent agent = agentHitbox.agent;
 			List<string> pool = agent.GetTraits<T>().SelectMany(t => t.Rolls).ToList();
 
-
 			var type = typeof(T);
             switch (true)
             {
