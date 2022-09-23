@@ -201,11 +201,15 @@ namespace CCU.Patches.Interface
 
 			if (Containers.IsContainer(objectName))
             {
-				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor); 
+				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
 				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor); // Works
+				InputField extraVarString2Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString2Object").GetValue(levelEditor); 
+				InputField extraVarString3Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString3Object").GetValue(levelEditor); 
 
 				extraVarObject.gameObject.SetActive(false);
 				extraVarStringObject.gameObject.SetActive(true);
+				extraVarString2Object.gameObject.SetActive(false);
+				extraVarString3Object.gameObject.SetActive(false);
 				levelEditor.SetNameText(extraVarStringObject, levelEditor.selectedTiles[0].extraVarString, "Item"); // Works
 			}
 		}
