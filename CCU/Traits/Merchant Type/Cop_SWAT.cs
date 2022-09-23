@@ -8,15 +8,15 @@ namespace CCU.Traits.Merchant_Type
     {
         public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
-            new KeyValuePair<string, int>( vItem.BulletproofVest, 4),
-            new KeyValuePair<string, int>( vItem.DizzyGrenade, 4),
-            new KeyValuePair<string, int>( vItem.DoorDetonator, 4),
-            new KeyValuePair<string, int>( vItem.GasMask, 4),
-            new KeyValuePair<string, int>( vItem.WindowCutter, 4),
-            new KeyValuePair<string, int>( vItem.MachineGun, 4),
-            new KeyValuePair<string, int>( vItem.Shotgun, 4),
+            new KeyValuePair<string, int>( vItem.BulletproofVest, 3),
+            new KeyValuePair<string, int>( vItem.DizzyGrenade, 3),
+            new KeyValuePair<string, int>( vItem.DoorDetonator, 3),
+            new KeyValuePair<string, int>( vItem.GasMask, 2),
+            new KeyValuePair<string, int>( vItem.WindowCutter, 2),
+            new KeyValuePair<string, int>( vItem.MachineGun, 3),
+            new KeyValuePair<string, int>( vItem.Shotgun, 3),
             new KeyValuePair<string, int>( vItem.SkeletonKey, 1),
-            new KeyValuePair<string, int>( "WeaponMod", 4),
+            new KeyValuePair<string, int>( "WeaponMod", 2),
         };
 
         [RLSetup]

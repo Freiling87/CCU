@@ -247,6 +247,10 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Shop Inventory is small now
+Drug dealer always has 3 items. Had multiple syringes, so that's not the issue. Often has duplicates, including syringes of same type but none stacked. Quantity is always 1.
+####				C	It's doing Clearancer without it enabled
+So verify the original trait
 ###				C	Computer Investigateable
 Showed Investigation prefix in button text on entering Computer in Draw Mode
 ###				C	SORCE Mutators not available in Editor levels 

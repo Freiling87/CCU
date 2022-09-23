@@ -8,12 +8,12 @@ namespace CCU.Traits.Merchant_Type
     {
         public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
-            new KeyValuePair<string, int>( vItem.BoomBox, 2),
-            new KeyValuePair<string, int>( vItem.FoodProcessor, 1),
-            new KeyValuePair<string, int>( vItem.FriendPhone, 2),
-            new KeyValuePair<string, int>( vItem.MiniFridge, 1),
+            new KeyValuePair<string, int>( vItem.BoomBox, 3),
+            new KeyValuePair<string, int>( vItem.FoodProcessor, 2),
+            new KeyValuePair<string, int>( vItem.FriendPhone, 3),
+            new KeyValuePair<string, int>( vItem.MiniFridge, 3),
             new KeyValuePair<string, int>( vItem.Translator, 2),
-            new KeyValuePair<string, int>( vItem.WalkieTalkie, 1),
+            new KeyValuePair<string, int>( vItem.WalkieTalkie, 2),
         };
 
         [RLSetup]

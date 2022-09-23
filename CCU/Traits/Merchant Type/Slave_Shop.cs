@@ -9,7 +9,7 @@ namespace CCU.Traits.Merchant_Type
         public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Axe, 2),
-            new KeyValuePair<string, int>( vItem.CodPiece, 2),
+            new KeyValuePair<string, int>( vItem.CodPiece, 4),
             new KeyValuePair<string, int>( vItem.DizzyGrenade, 2),
             new KeyValuePair<string, int>( vItem.FreezeRay, 1),
             new KeyValuePair<string, int>( vItem.Sword, 2),

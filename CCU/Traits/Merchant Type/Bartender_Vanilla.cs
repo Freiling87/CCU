@@ -8,8 +8,8 @@ namespace CCU.Traits.Merchant_Type
     {
         public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
-            new KeyValuePair<string, int>( "Alcohol", 3),
-            new KeyValuePair<string, int>( vItem.Cocktail, 3),
+            new KeyValuePair<string, int>( "Alcohol", 6),
+            new KeyValuePair<string, int>( vItem.Cocktail, 6),
         };
 
         [RLSetup]

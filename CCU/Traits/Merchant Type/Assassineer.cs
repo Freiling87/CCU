@@ -13,7 +13,7 @@ namespace CCU.Traits.Merchant_Type
             new KeyValuePair<string, int>( vItem.EarWarpWhistle, 1),
             new KeyValuePair<string, int>( vItem.KillProfiter, 1),
             new KeyValuePair<string, int>( vItem.Shuriken, 4),
-            new KeyValuePair<string, int>( vItem.Silencer, 1),
+            new KeyValuePair<string, int>( vItem.Silencer, 2),
             new KeyValuePair<string, int>( vItem.Sword, 3),
         };
 
