@@ -251,26 +251,6 @@ Except crickets, crickets are fine.
 Showed Investigation prefix in button text on entering Computer in Draw Mode
 ###				C	SORCE Mutators not available in Editor levels 
 I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
-###				C	Empty Merchants
-I think rLists are being blocked
-
-	[Debug  :CCU_TraitManager] TRAIT LIST: Clone Boys Dealer
-	[Debug  :CCU_TraitManager]      Scumbag 
-	[Debug  :CCU_TraitManager]      Borrow_Money_Moocher
-	[Debug  :CCU_TraitManager]      Wildcard
-	[Debug  :CCU_TraitManager]      Drug_Dealer
-	[Debug  :CCU_TraitManager]      Guilty
-	[Debug  :CCU_TraitManager]      IdentifyScience
-	[Debug  :CCU_TraitManager]      HatesBlahds
-	[Debug  :CCU_TraitManager]      HatesCrepes
-	[Debug  :CCU_TraitManager]      Faction_3_Aligned
-	[Debug  :CCU_TraitManager]      Meat_Chunks
-	[Debug  :CCU_P_Agent] Inventory:
-	[Debug  :CCU_P_Agent] Money
-	[Debug  :CCU_P_Agent]
-	[Debug  :CCU_P_Agent]
-	[Debug  :CCU_P_Agent]
-	[Debug  :CCU_P_Agent] 
 ###				T	Language system broke?
 Tried something
 ###				C	False "Inventory Full" message

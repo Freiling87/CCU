@@ -41,14 +41,10 @@ namespace CCU.Patches.AgentRelationships
 
             string relationship = __instance.GetRel(otherAgent);
 
-            Core.LogMethodCall();
-            logger.LogDebug("Relationship : " + relationship);
-
             //  Factions, Custom
             if (___agent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0) && otherAgent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0))
             {
                 Alignment rel = AlignmentUtils.GetAverageAlignment(___agent, otherAgent);
-                logger.Log("rel: " + rel);
 
                 if (rel != Alignment.Neutral)
                     relationship = rel.ToString();

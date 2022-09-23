@@ -214,16 +214,6 @@ namespace CCU.Patches.Interface
 			}
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.SetNameText))]
-		public static bool SetNameText_Prefix(string tileNameText, string textType)
-        {
-			Core.LogMethodCall() ;
-			logger.LogDebug("tileNameText: " + tileNameText);
-			logger.LogDebug("textType:     " + textType);
-
-			return true;
-        }
-
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> UpdateInterface_ShowTextBoxForContainers(IEnumerable<CodeInstruction> codeInstructions)
 		{

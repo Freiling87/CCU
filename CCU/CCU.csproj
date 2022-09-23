@@ -775,7 +775,6 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Patches\Spawn\" />
     <Folder Include="Systems\Language\" />
   </ItemGroup>
   <ItemGroup>

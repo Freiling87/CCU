@@ -305,7 +305,6 @@ namespace CCU.Traits.App
 			agent.GetOrAddHook<P_Agent_Hook>().eyesType = roll;
 			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
 			agent.customCharacterData.eyesType = roll; // Needed for SetupBodyStrings
-			LogAppearance(agent);
 			agentHitbox.SetupBodyStrings();
 
 			if (agent.HasTrait<Static_Preview>() && !(stored is null) && stored != "")

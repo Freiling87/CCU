@@ -63,14 +63,21 @@ namespace CCU.Traits.Language
 
 		public static bool HaveSharedLanguage(Agent agent, Agent otherAgent)
 		{
+			if (agent.HasTrait<Polyglot>() || otherAgent.HasTrait<Polyglot>() ||
+				agent.inventory.HasItem(vItem.Translator) || otherAgent.inventory.HasItem(vItem.Translator) ||
+				(!agent.HasTrait(VanillaTraits.VocallyChallenged) && !otherAgent.HasTrait(VanillaTraits.VocallyChallenged)))
+				return true;
+
 			List<T_Language> myLanguages = agent.GetTraits<T_Language>().ToList();
 			List<T_Language> yourLanguages = otherAgent.GetTraits<T_Language>().ToList();
 
-			List<string> sharedLangs = myLanguages.Select(myLang => myLang.TextName).Intersect(
+			List<string> sharedLangs = myLanguages.Select(myLang => myLang.TextName).Intersect( 
 				yourLanguages.Select(yourLang => yourLang.TextName)).ToList();
 
-			if (myLanguages.Select(myLang => myLang.TextName).Intersect(
-				yourLanguages.Select(yourLang => yourLang.TextName)).Any())
+			foreach (string str in sharedLangs)
+				logger.LogDebug("Shared Language: " + str);
+
+			if (sharedLangs.Any())
 				return true;
 
 			return false;
