@@ -289,7 +289,14 @@ namespace CCU.Traits.App
 		public static void RollEyeType(AgentHitbox agentHitbox)
 		{
 			Agent agent = agentHitbox.agent;
-			string stored = agent.customCharacterData.eyesType; 
+			string stored = "";
+
+			try
+			{
+				agent.GetHook<P_Agent_Hook>().eyesType = agent.customCharacterData.eyesType;
+				stored = agent.customCharacterData.eyesType;
+			}
+			catch { }
 
 			if (!agentHitbox.agent.HasTrait<T_EyeType>())
 				return;

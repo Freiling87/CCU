@@ -68,13 +68,13 @@ By adding an appearance trait, you add an item to a random selection pool. When 
 
 ####				Best Practices
 #####					Test En Masse
-With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with lots of copies of the same NPC to identify weird edge cases and gradually shape a population aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate idea of what the character will tend to look like.
+With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with lots of copies of the same NPC to identify weird edge cases and gradually sculpt an aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate idea of what the character will tend to look like.
 
 #####					Creative Weighting
 Use the grouped traits and redundancy to your advantage. Here's an example trait list:
 > Black Hair, Brown Hair, Blonde Hair, Normal Hair Colors, Normal Hair Colors (No Grey), Wild Hair Colors
 
-This combination has three copies of the most common hair colors (two copies each are applied by *Normal Hair Colors* and *Normal Hair Colors (No Grey)*. Orange hair is demographically rare so it's not added a third time. Wild Hair Colors are only added once, because you want them to be somewhat rare. 
+This combination has three copies of the most common hair colors (two copies each are applied by *Normal Hair Colors* and *Normal Hair Colors (No Grey)*. Orange hair is demographically rare so it's not added a third time. Wild Hair Colors are only added once, to make dyed hair somewhat rare. 
 
 #####					Less is More... More or Less
 It's tempting to throw a ton of traits into the list. But keep in mind part of what makes Streets of Rogue brilliant: That appearances *don't* vary that much in vanilla, because making everything immediately visually identifiable was one of the designer's priorities. 
@@ -247,12 +247,8 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Cyclops Bug
-This is confirmed to be a Static Preview bug. 
-###				C	Fac Rel Refactor
-Agent 1 - Wanted / Hostile Fac1
-Agent 2 - Law / Hostile Fac2 
-Should be hostile, but Rel Fac set to neutral.
+###				C	Computer Investigateable
+Showed Investigation prefix in button text on entering Computer in Draw Mode
 ###				C	SORCE Mutators not available in Editor levels 
 I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
 ###				C	Empty Merchants
@@ -347,9 +343,9 @@ You have access to CharaacterCreation.traitsChosen, but there is no complete cha
 agenthitbox.footwearcolor
 agenthitbox.footwear1.gameobject.setactive()
 ###			√	General Traits
-####			C	Static Preview
-#####				C	Gym Dweller
-Bpdy type is made static.
+####			H	Static Preview
+#####				C	Cyclops Bug
+This is caused by this trait. Since save character data seems to be used inconsistently among body parts, this will tkae a little more work to address.
 ###			√	Accessory
 ####			√	No Accessory 50%
 Complete

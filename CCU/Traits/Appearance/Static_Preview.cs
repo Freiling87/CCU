@@ -4,7 +4,7 @@ namespace CCU.Traits.App
 {
 	public class Static_Preview : T_CCU
 	{
-		[RLSetup]
+		//[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Static_Preview>()
