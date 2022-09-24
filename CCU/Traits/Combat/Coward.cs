@@ -19,7 +19,7 @@ namespace CCU.Traits.Combat
                     [LanguageCode.English] = DesignerName(typeof(Coward)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { DesignerName(typeof(Coward)) },
                     CharacterCreationCost = 0,

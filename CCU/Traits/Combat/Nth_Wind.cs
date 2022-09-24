@@ -10,7 +10,6 @@ namespace CCU.Traits.Combat
     public class Nth_Wind : T_Combat
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
 
         //[RLSetup]
         public static void Setup()
@@ -26,7 +25,7 @@ namespace CCU.Traits.Combat
                     [LanguageCode.English] = DesignerName(typeof(Nth_Wind)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

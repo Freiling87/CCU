@@ -30,7 +30,7 @@ namespace CCU.Traits.Gib_Type
                     [LanguageCode.English] = DesignerName(typeof(Meat_Chunks)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,

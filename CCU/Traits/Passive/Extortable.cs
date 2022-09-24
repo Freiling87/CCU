@@ -19,7 +19,7 @@ namespace CCU.Traits.Passive
                     [LanguageCode.English] = DesignerName(typeof(Extortable)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

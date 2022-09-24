@@ -31,7 +31,7 @@ namespace CCU.Traits.Merchant_Type
                     [LanguageCode.English] = DesignerName(typeof(Villains_Vault), "Villains' Vault"),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

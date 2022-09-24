@@ -29,7 +29,7 @@ namespace CCU.Traits.Merchant_Type
                     [LanguageCode.English] = DesignerName(typeof(Fire_Sale)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

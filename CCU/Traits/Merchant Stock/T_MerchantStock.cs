@@ -6,7 +6,6 @@ namespace CCU.Traits.Merchant_Stock
     public abstract class T_MerchantStock : T_CCU
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
 
         public T_MerchantStock() : base() { }
 

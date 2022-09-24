@@ -19,7 +19,7 @@ namespace CCU.Traits.Behavior
                 {
                     [LanguageCode.English] = DesignerName(typeof(Seek_and_Destroy), "Seek & Destroy"),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

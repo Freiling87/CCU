@@ -34,7 +34,7 @@ namespace CCU.Traits.Merchant_Type
                     [LanguageCode.English] = DesignerName(typeof(Tech_Mart)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

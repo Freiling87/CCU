@@ -23,7 +23,7 @@ namespace CCU.Traits.Explode_On_Death
                     [LanguageCode.English] = DesignerName(typeof(Ridiculous)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

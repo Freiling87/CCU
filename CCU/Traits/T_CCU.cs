@@ -45,14 +45,14 @@ namespace CCU.Traits
             !(trait?.GetHook<T_CCU>() is null) &&
             trait?.GetHook<T_PlayerTrait>() is null;
         public static bool IsDesignerUnlock(Unlock unlock) =>
-            unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && !traitUnlock_CCU.PlayerTrait;
+            unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && !traitUnlock_CCU.playerTrait; // is PlayerTrait ever declared true?
 
         public static bool IsPlayerTrait(Trait trait) =>
             trait?.GetHook<T_CCU>() is null ||
             !(trait?.GetHook<T_PlayerTrait>() is null);
         public static bool IsPlayerUnlock(Unlock unlock) =>
             !(unlock.GetHook() is TraitUnlock_CCU) ||
-            (unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && traitUnlock_CCU.PlayerTrait);
+            (unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && traitUnlock_CCU.playerTrait); // is PlayerTrait ever declared true?
 
         public string TextName => 
             DesignerName(GetType());

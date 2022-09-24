@@ -21,7 +21,7 @@ namespace CCU.Traits.Language
                 {
                     [LanguageCode.English] = PlayerName(typeof(Polyglot)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { VanillaTraits.VocallyChallenged },
                     CharacterCreationCost = 2,

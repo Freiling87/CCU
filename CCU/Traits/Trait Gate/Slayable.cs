@@ -19,7 +19,7 @@ namespace CCU.Traits.Trait_Gate
                     [LanguageCode.English] = DesignerName(typeof(Slayable)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

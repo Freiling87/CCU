@@ -19,7 +19,7 @@ namespace CCU.Traits.Loadout_Weapons
 				{
 					[LanguageCode.English] = DesignerName(typeof(Guns_Common), "Guns (Common)"),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

@@ -19,7 +19,7 @@ namespace CCU.Traits.App_HC3
 				{
 					[LanguageCode.English] = DesignerName(typeof(Melanin_Mashup)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

@@ -18,7 +18,7 @@ namespace CCU.Traits.App_SC1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Zombie_Skin_1)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

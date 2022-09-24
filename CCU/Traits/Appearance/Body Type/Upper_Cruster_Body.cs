@@ -18,7 +18,7 @@ namespace CCU.Traits.App_BT1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Upper_Cruster_Body)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

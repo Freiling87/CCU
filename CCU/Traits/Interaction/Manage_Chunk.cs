@@ -29,7 +29,7 @@ namespace CCU.Traits.Interaction
                     [LanguageCode.English] = DesignerName(typeof(Manage_Chunk)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

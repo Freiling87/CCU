@@ -18,7 +18,7 @@ namespace CCU.Traits.App_HS1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Hobo_Beard)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

@@ -24,7 +24,7 @@ namespace CCU.Traits.Merchant_Type
                 {
                     [LanguageCode.English] = DesignerName(typeof(Burger_Joint)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

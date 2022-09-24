@@ -33,7 +33,7 @@ namespace CCU.Traits.Merchant_Type
                     [LanguageCode.English] = DesignerName(typeof(Demolition_Depot)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

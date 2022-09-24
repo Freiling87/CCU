@@ -18,7 +18,7 @@ namespace CCU.Traits.Hire_Duration
                 {
                     [LanguageCode.English] = DesignerName(typeof(Permanent_Hire)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

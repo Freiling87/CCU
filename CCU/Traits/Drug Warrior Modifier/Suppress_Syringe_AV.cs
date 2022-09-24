@@ -19,7 +19,7 @@ namespace CCU.Traits.Drug_Warrior_Modifier
                     [LanguageCode.English] = DesignerName(typeof(Suppress_Syringe_AV)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

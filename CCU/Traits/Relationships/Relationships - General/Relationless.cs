@@ -17,7 +17,7 @@ namespace CCU.Traits.Rel_General
                 {
                     [LanguageCode.English] = DesignerName(typeof(Relationless)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

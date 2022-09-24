@@ -19,7 +19,7 @@ namespace CCU.Traits.Loadout_Misc
 				{
 					[LanguageCode.English] = DesignerName(typeof(Chunk_Stash_Hint)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

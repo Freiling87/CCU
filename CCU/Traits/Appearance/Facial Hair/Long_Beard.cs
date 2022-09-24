@@ -18,7 +18,7 @@ namespace CCU.Traits.App_FH1
 				{
 					[LanguageCode.English] = DesignerName(typeof(Long_Beard)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

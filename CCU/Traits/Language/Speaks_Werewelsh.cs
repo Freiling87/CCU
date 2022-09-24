@@ -23,7 +23,7 @@ namespace CCU.Traits.Language
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_Werewelsh)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 1,

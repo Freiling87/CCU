@@ -24,7 +24,7 @@ namespace CCU.Traits.Gib_Type
                 {
                     [LanguageCode.English] = DesignerName(typeof(Golemite)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,

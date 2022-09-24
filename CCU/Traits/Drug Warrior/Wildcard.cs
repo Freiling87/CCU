@@ -21,7 +21,7 @@ namespace CCU.Traits.Drug_Warrior
                     [LanguageCode.English] = DesignerName(typeof(Wildcard)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

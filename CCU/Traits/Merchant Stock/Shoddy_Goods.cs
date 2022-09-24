@@ -19,7 +19,7 @@ namespace CCU.Traits.Merchant_Stock
                     [LanguageCode.English] = DesignerName(typeof(Shoddy_Goods)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

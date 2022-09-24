@@ -19,7 +19,7 @@ namespace CCU.Traits.App_EC3
 				{
 					[LanguageCode.English] = DesignerName(typeof(Beady_Eyed), "Beady-Eyed"),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

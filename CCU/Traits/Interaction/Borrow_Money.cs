@@ -25,7 +25,7 @@ namespace CCU.Traits.Interaction
                     [LanguageCode.English] = DesignerName(typeof(Borrow_Money)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { "Borrow Money (Moocher)" },
                     CharacterCreationCost = 0,

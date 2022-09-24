@@ -30,6 +30,9 @@ Listed in order of Parent tier summary symbol priority:
 	- Cost Scale: Now excludes Bribe for Quest Item.
 	- Relationship: No longer affect Home Base
 - Feature Additions
+  - Character Creation Interface
+    - CCU traits are now listed in a separate section, sorted by name.
+    - Vanilla traits are now auto-sorted according to the mode selected on the Traits screen.
   - Traits
 	- Appearance
 	  - You can now randomize the appearance of NPCs. See the Traits page for details, as there are too many traits to list here.
@@ -247,6 +250,11 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Character Creator Trait List 
+####				C	Blinker is in CCU section
+Move to vanilla
+####				C	Blinker not counted for traits or points
+Should be
 ###				C	Shop Inventory is small now
 Drug dealer always has 3 items. Had multiple syringes, so that's not the issue. Often has duplicates, including syringes of same type but none stacked. Quantity is always 1.
 ####				C	It's doing Clearancer without it enabled

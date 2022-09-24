@@ -22,7 +22,7 @@ namespace CCU.Traits.Drug_Warrior
                     [LanguageCode.English] = DesignerName(typeof(Suicide_Bomber_Big), "Suicide Bomber (Big)"),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

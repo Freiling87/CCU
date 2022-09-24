@@ -16,7 +16,7 @@ namespace CCU.Traits.App
 				{
 					[LanguageCode.English] = DesignerName(typeof(Static_Preview)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,

@@ -23,7 +23,7 @@ namespace CCU.Traits.Hire_Type
                     [LanguageCode.English] = DesignerName(typeof(Saboteur)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

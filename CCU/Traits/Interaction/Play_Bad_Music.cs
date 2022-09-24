@@ -25,7 +25,7 @@ namespace CCU.Traits.Interaction
                     [LanguageCode.English] = DesignerName(typeof(Play_Bad_Music)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

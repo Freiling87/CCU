@@ -20,7 +20,7 @@ namespace CCU.Traits.Behavior
                 {
                     [LanguageCode.English] = DesignerName(typeof(Grab_Money)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

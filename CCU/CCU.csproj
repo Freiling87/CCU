@@ -123,6 +123,7 @@
     <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
+    <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
@@ -757,6 +758,7 @@
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Hostile.cs" />
     <Compile Include="Traits\ISetupAgentStats.cs" />
+    <Compile Include="Traits\TraitUnlock_CCU.cs" />
     <Compile Include="Traits\T_CCU.cs" />
     <Compile Include="Systems\Legacy Name Updater\NameUpdates.cs" />
     <Compile Include="Traits\T_PlayerTrait.cs" />

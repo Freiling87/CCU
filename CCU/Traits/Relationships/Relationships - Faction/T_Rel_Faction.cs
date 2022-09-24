@@ -12,7 +12,6 @@ namespace CCU.Traits.Rel_Faction
     public abstract class T_Rel_Faction : T_Relationships
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
 
         public T_Rel_Faction() : base() { }
 

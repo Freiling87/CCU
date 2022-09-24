@@ -25,7 +25,7 @@ namespace CCU.Traits.Interaction
                     [LanguageCode.English] = DesignerName(typeof(Bribe_for_Entry_Alcohol),("Bribe for Entry (Alcohol)")),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

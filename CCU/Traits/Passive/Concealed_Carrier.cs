@@ -17,7 +17,7 @@ namespace CCU.Traits.Passive
                 {
                     [LanguageCode.English] = DesignerName(typeof(Concealed_Carrier)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

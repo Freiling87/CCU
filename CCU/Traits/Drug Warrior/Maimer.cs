@@ -22,7 +22,7 @@ namespace CCU.Traits.Drug_Warrior
                     [LanguageCode.English] = DesignerName(typeof(Maimer)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

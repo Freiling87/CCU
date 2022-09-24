@@ -17,7 +17,7 @@ namespace CCU.Traits.Passive
                 {
                     [LanguageCode.English] = DesignerName(typeof(Status_Effect_Immune)),
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

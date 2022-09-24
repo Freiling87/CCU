@@ -23,7 +23,7 @@ namespace CCU.Traits.Hack
                     [LanguageCode.English] = DesignerName(typeof(Tamper_with_Aim)),
                     
                 })
-                .WithUnlock(new TraitUnlock
+                .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 0,

@@ -19,7 +19,7 @@ namespace CCU.Traits.Bodyguarded
 				{
 					[LanguageCode.English] = DesignerName(typeof(Bodyguarded_Pilot)),
 				})
-				.WithUnlock(new TraitUnlock
+				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
 					IsAvailable = false,
