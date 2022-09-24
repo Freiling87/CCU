@@ -98,17 +98,6 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
-		public static bool Awake_Prefix(InvDatabase __instance)
-        {
-			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
-
-			if (Containers.IsContainer(objectRealName))
-				__instance.money = new InvItem();
-
-			return true;
-		}
-
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.AddRandWeapon))]
 		private static IEnumerable<CodeInstruction> AddRandomWeapon_Custom(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -130,7 +119,7 @@ namespace CCU.Patches.Inventory
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_0),
+					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Call, rollWeaponLoadout),
 					new CodeInstruction(OpCodes.Stloc_S, 4),
 				});
@@ -150,6 +139,17 @@ namespace CCU.Patches.Inventory
 
 			return pool[CoreTools.random.Next(pool.Count - 1)];
         }
+
+		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
+		public static bool Awake_Prefix(InvDatabase __instance)
+		{
+			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
+
+			if (Containers.IsContainer(objectRealName))
+				__instance.money = new InvItem();
+
+			return true;
+		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)

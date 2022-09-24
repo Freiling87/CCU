@@ -1,6 +1,7 @@
 ﻿using CCU.Challenges.Followers;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Loadout;
+using CCU.Traits.Loadout_Misc;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Rel_Faction;
 using RogueLibsCore;

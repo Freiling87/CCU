@@ -35,12 +35,12 @@ namespace CCU.Patches.Agents
 			RogueInteractions.CreateProvider<Agent>(h =>
 			{
 				Agent agent = h.Object;
-				int log = 0;
+				bool log = false;
 
 				if (agent.agentName != VanillaAgents.CustomCharacter)
 					return;
 
-				logger.LogDebug("======== AGENTINTERACTIONS");
+				if (log) logger.LogDebug("======== AGENTINTERACTIONS");
 				AgentInteractions agentInteractions = agent.agentInteractions;
 				Agent interactingAgent = h.Agent;
 				string relationship = agent.relationships.GetRel(interactingAgent);
@@ -54,14 +54,14 @@ namespace CCU.Patches.Agents
 				//	foreach (T_Hack hack in agent.GetTraits<T_Hack>())
 				//		agentInteractions.AddButton(hack.ButtonText);
 
-				logger.LogDebug("=== LANGUAGE");
+				if (log) logger.LogDebug("=== LANGUAGE");
 				if (!Language.HaveSharedLanguage(agent, interactingAgent))
                 {
 					Language.SayGibberish(agent);
 					return;
 				}
 
-				logger.LogDebug("=== HIRE");
+				if (log) logger.LogDebug("=== HIRE");
 				if (!untrusted && agent.GetTraits<T_HireType>().Any())
 				{
 					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
@@ -121,7 +121,7 @@ namespace CCU.Patches.Agents
 							});
 				}
 
-				logger.LogDebug("=== INTERACTION");
+				if (log) logger.LogDebug("=== INTERACTION");
 				foreach (T_Interaction trait in agent.GetTraits<T_Interaction>())
 				{
 					// Simple Exceptions
@@ -510,7 +510,7 @@ namespace CCU.Patches.Agents
 					}
 				}
 
-				logger.LogDebug("=== MERCHANT");
+				if (log) logger.LogDebug("=== MERCHANT");
 				if (!untrusted && agent.GetTraits<T_MerchantType>().Any() && agent.hasSpecialInvDatabase)
 				{
 					bool cantBuy =

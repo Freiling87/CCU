@@ -4,6 +4,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Systems.Containers;
 using CCU.Systems.CustomGoals;
 using CCU.Traits.Loadout;
+using CCU.Traits.Loadout_Misc;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;

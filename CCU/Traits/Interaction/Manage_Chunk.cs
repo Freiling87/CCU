@@ -1,4 +1,5 @@
 ﻿using CCU.Traits.Loadout;
+using CCU.Traits.Loadout_Misc;
 using RogueLibsCore;
 using System;
 

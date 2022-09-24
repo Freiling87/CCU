@@ -7,8 +7,6 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #		Scope
-##			T	Random Weapons
-Pilot attempt
 ##			P	v. 1.0.1 Patch Notes
 - Bugfixes
   - Default Goals
@@ -58,39 +56,6 @@ Pilot attempt
 	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
 ##			P	v. 1.0.1 Documentation Additions
 Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
-###				Loadout
-####				Weapons
-
-Melee (Any)
-Melee (Sharp)
-Melee (Blunt)
-Melee (Tools)
-Guns (Any)
-Guns (Common)
-Guns (Heavy)
-Guns (Weird)
-
-|Group				|
-|:------------------|
-|Axe
-|Baseball Bat
-|Crowbar
-|Flamethrower
-|Freeze Ray
-|Knife
-|Leaf Blower
-|Machine Gun
-|Pistol
-|Police Baton
-|Revolver
-|Rocket Launcher
-|Sword
-|Tranquilizer Gun
-|Taser
-|Sledgehammer
-|Shotgun
-|Wrench
-
 ###				Object Variable List
 Vendor Cart mechanics note
 ###				Appearance
@@ -1154,9 +1119,6 @@ New
 New
 ####			C	Trait Upgrade
 New
-###			M	Chunk Visitor's Badge
-Set Bribe options on separate traits
-Move to Loadout
 ###			√	Administer Blood Bag
 Complete
 ###			√	Borrow Money
@@ -1463,14 +1425,30 @@ Complete
 ###			√	Speaks Werewelsh
 Complete
 ##		C	Loadout
-###			C	CC Items Inclusion
-Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
-###			C	Guns_Common
+###			C	Miscellaneous
+####			C	Chunk Mayor Badge
+Set Bribe options on separate traits
+This might just need to be an item rather than a trait
+####			C	Chunk Stash Hint
 New
-###			C	Deep Storage
-Doesn't drop items on death (They're in their butt)
-###			C	Discreet
+####			√	Chunk Key
+Complete
+####			√	Chunk Safe Combo
+Complete
+###			C	Modifiers
+####			C	Use Starting Inventory
+Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
+####			C	Deep Storage
+Doesn't drop items on death
+Good for modded guns?
+###			C	Weapon
+This worked, but it's out of scope for 0.1.1.
+Change the format into something like Merchant Type, since you want pooled weighted lists
+###			C	Weapon Mods
+####			C	Discreet
 Automatically applies Silencer to all held weapons on load
+###			C	Inventory
+Class-based inventory lists from vanilla
 ###			C	Item Groups
 uwumacaronitime's idea: Item groups similar to NPC groups
 
@@ -1502,12 +1480,6 @@ Vanilla list:
 - Usable
 - Weapons
 - Weird
-###			√	Manager Key
-Complete
-###			√	Manager Mayor Badge
-Complete
-###			√	Manager Safe Combo
-Complete
 ##		C	Merchant Buyer Modifiers
 ###				C	Buyer Cap
 Total amount of money the trader will dispense when buying player goods

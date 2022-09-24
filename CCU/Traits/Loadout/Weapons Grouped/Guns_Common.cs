@@ -7,7 +7,7 @@ namespace CCU.Traits.Loadout_Weapons
 	{
 		public override string[] Rolls => new string[] { vItem.MachineGun, vItem.Pistol, vItem.Shotgun, vItem.Revolver };
 
-        [RLSetup]
+        //[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Guns_Common>()
