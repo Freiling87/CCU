@@ -22,7 +22,7 @@ namespace CCU.Patches.Interface
 			FieldInfo dummyAgent = AccessTools.DeclaredField(typeof(CharacterSelect), nameof(CharacterSelect.dummyAgent));
 			FieldInfo statusEffects = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.statusEffects));
 			FieldInfo traitList = AccessTools.DeclaredField(typeof(StatusEffects), nameof(StatusEffects.TraitList));
-			MethodInfo displayableTraits = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.DisplayableTraits));
+			MethodInfo displayableTraits = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerTraitList));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
