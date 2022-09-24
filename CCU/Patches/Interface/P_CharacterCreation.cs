@@ -104,7 +104,11 @@ namespace CCU.Patches.Inventory
 				return;
 
 			foreach (Unlock unlock in T_CCU.AlphabetizeUnlockList(T_CCU.DesignerUnlockList(characterCreation.traitsChosen)))
-				characterCreation.pointTallyText.text += GC.nameDB.GetName(unlock.unlockName, "StatusEffect") + "\n";
+            {
+				string traitName = GC.nameDB.GetName(unlock.unlockName, "StatusEffect") + "\n";
+				traitName = traitName.Replace("[CCU] ", "");
+				characterCreation.pointTallyText.text += traitName;
+			}
 		}
 
 		// TODO: This was to manage trait maximums. It can be ignored for now.
