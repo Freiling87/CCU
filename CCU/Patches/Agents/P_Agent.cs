@@ -141,18 +141,21 @@ namespace CCU.Patches.Agents
 			return false;
 		}
 
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
 		public static void Interact_Prefix(Agent otherAgent, Agent __instance)
-        {
+		{
 			TraitManager.LogTraitList(__instance);
 
 			logger.LogDebug("------- Inventory");
 			foreach (InvItem ii in __instance.inventory.InvItemList)
 				logger.LogDebug(ii.invItemName);
 
-			logger.LogDebug("------- Special Inventory:");
-			foreach (InvItem ii in __instance.specialInvDatabase.InvItemList)
-				logger.LogDebug(ii.invItemName);
+			if (!(__instance.specialInvDatabase is null))
+            {
+				logger.LogDebug("------- Special Inventory:");
+				foreach (InvItem ii in __instance.specialInvDatabase.InvItemList)
+					logger.LogDebug(ii.invItemName);
+			}
 
 			if (false && 
 				__instance.agentName == VanillaAgents.CustomCharacter)

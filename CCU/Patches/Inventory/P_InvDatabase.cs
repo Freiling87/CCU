@@ -162,16 +162,26 @@ namespace CCU.Patches.Inventory
 				return true;
 
 			List<string> inventory = new List<string>();
-
-			foreach (T_MerchantType trait in agent.GetTraits<T_MerchantType>())
-				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
-					for (int i = 0; i < item.Value; i++) // Qty
-						inventory.Add(__instance.SwapWeaponTypes(item.Key)); // Name
-
+			List<T_MerchantType> traits = agent.GetTraits<T_MerchantType>().ToList();
 			List<string> finalInventory = new List<string>();
 			Random rnd = new Random();
 			int attempts = 0;
 			bool forceDuplicates = false;
+
+			foreach (T_MerchantType trait in traits)
+				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
+                {
+					// Gives priority to Insider traits
+					if (trait.MerchantInventory.Count == 1)
+					{
+						finalInventory.Add(trait.MerchantInventory[0].Key);
+					}
+					else
+					{
+						for (int i = 0; i < item.Value; i++) // Qty
+							inventory.Add(__instance.SwapWeaponTypes(item.Key)); // Name
+					}
+				}
 
 		redo: // Yeah redo this whole damn thing
 			while (inventory.Any() && finalInventory.Count < 5 && attempts < 100)

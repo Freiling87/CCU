@@ -551,6 +551,9 @@
     <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Stash_Hint.cs" />
     <Compile Include="Traits\Loadout\Weapons Grouped\T_RandomWeapon.cs" />
     <Compile Include="Traits\Merchant Stock\Clearancer.cs" />
+    <Compile Include="Traits\Merchant Type\Insider_Safe_Combo.cs" />
+    <Compile Include="Traits\Merchant Type\Insider_Mayors_Badge.cs" />
+    <Compile Include="Traits\Merchant Type\Insider_Key.cs" />
     <Compile Include="Traits\Merchant Type\Burger_Joint.cs" />
     <Compile Include="Traits\Merchant Type\Sugar_Shack.cs" />
     <Compile Include="Traits\Merchant Stock\Shiddy_Goods.cs" />

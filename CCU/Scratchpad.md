@@ -250,6 +250,20 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Check for level on generating appearance
+Player generated new appearance on level 2
+###				C	Agent Name Hover Text blank
+Just a little square
+###				C	Hair over Hat in Character Creation screen
+Probably just need to flip a bool, based on whether hair can show under hat
+###				C	Cyclops Bug
+Back for Replicant Rebel
+Doesn't have Static Preview, only EOD Huge & Speaks Binary
+###				C	Investigateable blanks
+Windows in CL chunks, note the trailing line break and apostrophe:
+	[Debug  :CCU_Investigateables] Text:
+			'investigateable-message:::
+	'
 ###				C	Character Creator Trait List 
 ####				C	Blinker is in CCU section
 Move to vanilla
@@ -1529,6 +1543,29 @@ Allows repeats of items
 New
 ###			C	00 Custom quantity in refactor
 Allows to sell shitty items in junk dealer, for instance
+###			H	Insider
+Test: MT Drug dealer & all 3 insiders
+	1 Sugar, 3 insider items and a blank
+	None of the insider items were purchaseable (greyed out). Alignment didn't affect it
+	Multiples of agent sold multiples of items. 
+####			C	Key
+Sold in shop
+Preferential addition to inventory
+####			C	Mayor Badge
+Sold in shop
+Preferential addition to inventory
+####			C	Safe Combo
+Sold in shop
+Preferential addition to inventory
+####			H	Stash Hint
+Sold in shop
+Preferential addition to inventory
+Stash Hint Notes:
+	Trait: Instinct Searcher - Know where stash is even without hint
+	On gaining Stash Hint, empty stash objects become un-interactable and full one glows for object Type
+	Generally, this should motivate people to either:
+		Track down the stash hint to find it stealthily
+		Smash everything in sight to find it quicker
 ###			C	NPC Loadout
 Since Character Creator inventory isn't by default carried to spawn, use it as a shop inventory.
 ###			C	Player Loadout 

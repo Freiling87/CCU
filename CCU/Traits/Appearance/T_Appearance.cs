@@ -66,8 +66,6 @@ namespace CCU.Traits.App
 			logger.LogDebug("EyesWideStrings :");
 			foreach (string str in agentHitbox.eyesWideStrings)
 				logger.LogDebug("\t" + str);
-
-
 		}
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
