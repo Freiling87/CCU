@@ -71,15 +71,19 @@ namespace CCU.Traits.App
 		{
 			Agent agent = agentHitbox.agent;
 
+			// Exclude players and their employees
 			if (agentHitbox.agent.agentName != VanillaAgents.CustomCharacter ||
-				(agentHitbox.agent.isPlayer != 0 && agent.HasTrait<Static_Preview>()))
+				(agentHitbox.agent.isPlayer != 0 && agent.HasTrait<Static_Preview>()) ||
+				(GC.sessionDataBig.curLevelEndless != 0 && 
+					(agentHitbox.agent.isPlayer != 0 ||
+					agentHitbox.agent.employer.isPlayer != 0 )))
 				return;
 
 			// Be very careful with reordering these - some of these are dependent on each other.
 			RollSkinColor(agentHitbox);
 			RollHairstyle(agentHitbox);
 			RollFacialHair(agentHitbox);
-			agentHitbox.SetCantShowHairUnderHeadPiece();
+			// From here
 			RollBodyColor(agentHitbox);
 			RollHairColor(agentHitbox);
 			RollAccessory(agentHitbox);
@@ -87,6 +91,7 @@ namespace CCU.Traits.App
 			RollEyeColor(agentHitbox);
 			RollEyeType(agentHitbox);
 			RollLegsColor(agentHitbox);
+			agentHitbox.SetCantShowHairUnderHeadPiece(); // To Here
 		}
 		private static string GetRoll<T>(AgentHitbox agentHitbox) where T : T_Appearance
 		{

@@ -124,6 +124,7 @@
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
+    <Compile Include="Patches\Interface\P_ObjectSprite.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
@@ -158,7 +159,6 @@
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
     <Compile Include="Patches\Goals\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
-    <Compile Include="Patches\Interface\P_InvInterface.cs" />
     <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_QuestMarker.cs" />
     <Compile Include="Patches\Interface\P_ScrollingMenu.cs" />

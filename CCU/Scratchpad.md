@@ -250,12 +250,18 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Check for level on generating appearance
+###				T	Check for level on generating appearance
 Player generated new appearance on level 2
-###				C	Agent Name Hover Text blank
+Test with Employees too
+###				T	Agent Name Hover Text blank
+Wrote some logging
 Just a little square
-###				C	Hair over Hat in Character Creation screen
+InvInterface.ShowCursorText
+	InvInterface(This).cursorTextString.text is where agent name goes I believe
+Test w/ guilty and statuses as well
+###				T	Hair over Hat in Character Creation screen
 Probably just need to flip a bool, based on whether hair can show under hat
+Tried moving call to AgentHitBox.SetCantShowHairUnderHeadPiece until after all appearance rolls
 ###				C	Cyclops Bug
 Back for Replicant Rebel
 Doesn't have Static Preview, only EOD Huge & Speaks Binary
