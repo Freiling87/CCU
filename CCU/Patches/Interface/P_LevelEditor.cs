@@ -102,11 +102,10 @@ namespace CCU.Patches.Interface
 		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
         {
 			if (__instance.currentInterface == "Objects")
-            {
-				if (Investigateables.IsInvestigateable(___tileNameObject.text) &&
+				if (Investigateables.IsInvestigateable(___tileNameObject.text) && 
+					___extraVarStringObject.text.Length > 0 &&
 					!Investigateables.IsInvestigationString(___extraVarStringObject.text))
-				___extraVarStringObject.text = Investigateables.ExtraVarStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
-			}
+					___extraVarStringObject.text = Investigateables.InvestigateableStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
         }
 
 		#region Containers
@@ -272,8 +271,8 @@ namespace CCU.Patches.Interface
 			if (vanilla is null || vanilla == "")
 				return vanilla;
 
-			if (vanilla.Contains(Investigateables.ExtraVarStringPrefix))
-				vanilla = vanilla.Replace(Investigateables.ExtraVarStringPrefix + Environment.NewLine, "");
+			if (Investigateables.IsInvestigationString(vanilla))
+				vanilla = Investigateables.PlayerDisplayInvestigationText(vanilla);
 
 			return vanilla;
         }

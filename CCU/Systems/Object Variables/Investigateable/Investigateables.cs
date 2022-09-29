@@ -12,7 +12,7 @@ namespace CCU.Systems.Investigateables
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static string ExtraVarStringPrefix = "investigateable-message:::";
+		public static string InvestigateableStringPrefix = "investigateable-message:::";
 
 		public static List<string> InvestigateableObjects_Slot1 = new List<string>()
 		{
@@ -45,17 +45,14 @@ namespace CCU.Systems.Investigateables
 			InvestigateableObjects_Slot2.Contains(name);
 
 		public static bool IsInvestigationString(string name) =>
-			!(name is null) &&
-			name != "" &&
-			(
-				name.StartsWith(ExtraVarStringPrefix) || 
-				name.EndsWith(ExtraVarStringPrefix) ||
-				name == ExtraVarStringPrefix ||
-				name == ExtraVarStringPrefix + Environment.NewLine
-			);
+			name?.Contains(InvestigateableStringPrefix) ?? false;
+
+		public static string PlayerDisplayInvestigationText(string vanilla) =>
+			vanilla?.Replace(InvestigateableStringPrefix + Environment.NewLine, "") ?? "";
 
 		public static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
-			invDatabase.agent.mainGUI.invInterface.Slots.Where(islot => !IsInvestigationString(islot.itemNameText.text)).ToList();
+			invDatabase.agent.mainGUI.invInterface.Slots
+				.Where(slot => !IsInvestigationString(slot.itemNameText.text)).ToList();
 
 		public static InvDatabase FilteredInvDatabase(InvDatabase invDatabase)
 		{
@@ -64,24 +61,22 @@ namespace CCU.Systems.Investigateables
 		}
 
 		public static List<InvItem> FilteredInvItemList(List<InvItem> invItemList) =>
-			invItemList.Where(ii => !IsInvestigationString(ii.invItemName)).ToList();
+			invItemList.Where(item => !IsInvestigationString(item.invItemName)).ToList();
 
 		[RLSetup]
 		public static void Setup()
 		{
 			string t = NameTypes.Interface;
-
 			RogueLibs.CreateCustomName(CButtonText.Investigate, t, new CustomNameInfo(CButtonText.Investigate));
 
 			RogueInteractions.CreateProvider(h =>
 			{
 				if (!h.Agent.interactionHelper.interactingFar &&
-					IsInvestigateable(h.Object.objectName) &&
 					IsInvestigationString(h.Object.extraVarString))
 				{
-					string text = h.Object.extraVarString.Remove(0, ExtraVarStringPrefix.Length + 2);
+					string text = PlayerDisplayInvestigationText(h.Object.extraVarString);
 
-					if (text.Length is 0) // idk how do you even detect real content
+					if (text.Length is 0)
 						return;
 
 					if (h.Object is Computer computer)
