@@ -20,50 +20,50 @@ namespace CCU.Patches.Inventory
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
-		private static IEnumerable<CodeInstruction> CreatePointTallyText_FilterCCPCount(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo traitsChosen = AccessTools.DeclaredField(typeof(CharacterCreation), nameof(CharacterCreation.traitsChosen));
-			MethodInfo playerUnlockList = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerUnlockList), parameters: new Type[] { typeof(List<Unlock>) });
-			MethodInfo autoSortTraitsChosen = AccessTools.DeclaredMethod(typeof(P_CharacterCreation), nameof(P_CharacterCreation.AutoSortTraitsChosen));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 2,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld, traitsChosen)
-					
-				},
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Call, playerUnlockList),
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Call, autoSortTraitsChosen),
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Callvirt),
-					new CodeInstruction(OpCodes.Stloc_S, 12),
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-		private static void AutoSortTraitsChosen(CharacterCreation characterCreation)
+        // This originally did both auto-sorting of traits as well as exclusion of CCU Traits. Auto-sorting is moved to SORQUOL. CCU filtering should be redone here.
+        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
+        private static IEnumerable<CodeInstruction> CreatePointTallyText_FilterCCPCount(IEnumerable<CodeInstruction> codeInstructions)
         {
-			if (characterCreation.sortByName)
-				characterCreation.traitsChosen = T_CCU.AlphabetizeUnlockList(characterCreation.traitsChosen);
-			else
-				characterCreation.traitsChosen = T_CCU.SortUnlockListByCCP(characterCreation.traitsChosen);
+            List<CodeInstruction> instructions = codeInstructions.ToList();
+            FieldInfo traitsChosen = AccessTools.DeclaredField(typeof(CharacterCreation), nameof(CharacterCreation.traitsChosen));
+            MethodInfo playerUnlockList = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerUnlockList), parameters: new Type[] { typeof(List<Unlock>) });
+            MethodInfo autoSortTraitsChosen = AccessTools.DeclaredMethod(typeof(P_CharacterCreation), nameof(P_CharacterCreation.AutoSortTraitsChosen));
+
+            CodeReplacementPatch patch = new CodeReplacementPatch(
+                expectedMatches: 2,
+                prefixInstructionSequence: new List<CodeInstruction>
+                {
+                    new CodeInstruction(OpCodes.Ldarg_0),
+                    new CodeInstruction(OpCodes.Ldfld, traitsChosen)
+                },
+                targetInstructionSequence: new List<CodeInstruction>
+                {
+
+                },
+                insertInstructionSequence: new List<CodeInstruction>
+                {
+                    new CodeInstruction(OpCodes.Call, playerUnlockList),
+                    new CodeInstruction(OpCodes.Ldarg_0),
+                    new CodeInstruction(OpCodes.Call, autoSortTraitsChosen),
+                },
+                postfixInstructionSequence: new List<CodeInstruction>
+                {
+                    new CodeInstruction(OpCodes.Callvirt),
+                    new CodeInstruction(OpCodes.Stloc_S, 12),
+                });
+
+            patch.ApplySafe(instructions, logger);
+            return instructions;
+        }
+        private static void AutoSortTraitsChosen(CharacterCreation characterCreation)
+        {
+            if (characterCreation.sortByName)
+                characterCreation.traitsChosen = T_CCU.SortUnlocksByName(characterCreation.traitsChosen);
+            else
+                characterCreation.traitsChosen = T_CCU.SortUnlocksByValue(characterCreation.traitsChosen);
         }
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
+        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
 		private static IEnumerable<CodeInstruction> CreatePointTallyText_CustomCCUSection(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -99,38 +99,16 @@ namespace CCU.Patches.Inventory
 		public static void PrintTraitList(CharacterCreation characterCreation)
         {
 			if (T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Any())
-				characterCreation.pointTallyText.text += "\n<color=red>- CCU TRAITS -</color>\n";
+				characterCreation.pointTallyText.text += "\n<color=yellow>- CCU TRAITS -</color>\n";
 			else
 				return;
 
-			foreach (Unlock unlock in T_CCU.AlphabetizeUnlockList(T_CCU.DesignerUnlockList(characterCreation.traitsChosen)))
+			foreach (Unlock unlock in T_CCU.SortUnlocksByName(T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Where(u => !T_CCU.IsPlayerUnlock(u)).ToList()))
             {
 				string traitName = GC.nameDB.GetName(unlock.unlockName, "StatusEffect") + "\n";
 				traitName = traitName.Replace("[CCU] ", "");
 				characterCreation.pointTallyText.text += traitName;
 			}
 		}
-
-		// TODO: This was to manage trait maximums. It can be ignored for now.
-
-		//[HarmonyPostfix, HarmonyPatch(methodName: nameof(CharacterCreation.AddToList), argumentTypes: new[] { typeof(string), typeof(string) })]
-		//public static void AddToList_Postfix(string listType, string unlockName, CharacterCreation __instance)
-		//{
-		//	Core.LogMethodCall();	
-		//	logger.LogDebug("\tlistType: " + listType + "\n\tunlockName: " + unlockName);
-
-		//	if (listType == "Traits" && TraitManager.AllCCUTraitNamesGroup.Contains(unlockName))
-		//		__instance.traitLimit += 1;
-		//}
-
-		//[HarmonyPostfix, HarmonyPatch(methodName: nameof(CharacterCreation.RemoveFromList), argumentTypes: new[] { typeof(string), typeof(string) })]
-		//public static void RemoveFromList_Postfix(string listType, string unlockName, CharacterCreation __instance)
-		//{
-		//	Core.LogMethodCall();
-		//	logger.LogDebug("\tlistType: " + listType + "\n\tunlockName: " + unlockName);
-
-		//	if (listType == "Traits" && TraitManager.AllCCUTraitNamesGroup.Contains(unlockName))
-		//		__instance.traitLimit -= 1;
-		//}
 	}
-}
+} 

@@ -33,6 +33,7 @@ namespace CCU.Traits.Language
                     CharacterCreationCost = 1,
                     IsAvailable = false,
                     IsAvailableInCC = true,
+                    IsPlayerTrait = true,
                     UnlockCost = 5,
                     //Unlock = { upgrade = nameof(Polyglot) }
                 });

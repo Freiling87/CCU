@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Blinker : T_CCU
+    public class Blinker : T_PlayerTrait
     {
         [RLSetup]
         public static void Setup()
@@ -23,6 +23,7 @@ namespace CCU.Traits.Passive
                     CharacterCreationCost = 5,
                     IsAvailable = false,
                     IsAvailableInCC = true,
+                    IsPlayerTrait = true,
                     UnlockCost = 5,
                 });
         }

@@ -27,6 +27,7 @@ namespace CCU.Traits.Language
                     CharacterCreationCost = 2,
                     IsAvailable = false,
                     IsAvailableInCC = true,
+                    IsPlayerTrait = true,
                     Recommendations = new List<string>() { "Speaks High Goryllian or a Translator instead. This trait will not be worth taking until the Language system is expanded, or unless you're playing Chunk Packs/Campaign that make heavy use of it." },
                     UnlockCost = 5,
                     Unlock = { isUpgrade = true }

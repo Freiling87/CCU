@@ -10,6 +10,7 @@ namespace CCU.Traits.Language
         public T_Language() : base() { }
         public abstract string[] VanillaSpeakers { get; }
     }
+
     public static class Language
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -124,7 +125,6 @@ namespace CCU.Traits.Language
 			RogueLibs.CreateCustomName("Werewelsh02", t, new CustomNameInfo("Groof! Groof!"));
 			RogueLibs.CreateCustomName("Werewelsh03", t, new CustomNameInfo("*Excited, confused panting*"));
 			RogueLibs.CreateCustomName("Werewelsh04", t, new CustomNameInfo("OOK! OOK?"));
-			RogueLibs.CreateCustomName("Werewelsh05", t, new CustomNameInfo("Ban. Mah. Ook oook. Ban mah!"));
 		}
 
 		public static void SayGibberish(Agent agent)

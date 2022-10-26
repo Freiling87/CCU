@@ -22,9 +22,6 @@ namespace CCU.Traits
             }
         }
 
-        public static List<Unlock> AlphabetizeUnlockList(List<Unlock> original) =>
-            original.OrderBy(u => GC.nameDB.GetName(u.unlockName, "StatusEffect")).ToList();
-
         public static List<Trait> DesignerTraitList(List<Trait> original) =>
             original.Where(t => IsDesignerTrait(t)).ToList();
         public static List<Unlock> DesignerUnlockList(List<Unlock> original) =>
@@ -35,8 +32,10 @@ namespace CCU.Traits
         public static List<Unlock> PlayerUnlockList(List<Unlock> original) =>
             original.Where(u => IsPlayerUnlock(u)).ToList();
 
-        public static List<Unlock> SortUnlockListByCCP(List<Unlock> original) =>
+        public static List<Unlock> SortUnlocksByValue(List<Unlock> original) =>
             original.OrderBy(u => u.cost3).ToList();
+        public static List<Unlock> SortUnlocksByName(List<Unlock> original) =>
+            original.OrderBy(u => GC.nameDB.GetName(u.unlockName, "StatusEffect")).ToList();
 
         public static List<Unlock> VanillaTraitList(List<Unlock> original) =>
             original.Where(u => !(u.GetHook() is TraitUnlock_CCU)).ToList();
@@ -45,14 +44,15 @@ namespace CCU.Traits
             !(trait?.GetHook<T_CCU>() is null) &&
             trait?.GetHook<T_PlayerTrait>() is null;
         public static bool IsDesignerUnlock(Unlock unlock) =>
-            unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && !traitUnlock_CCU.playerTrait; // is PlayerTrait ever declared true?
+            unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && 
+            !traitUnlock_CCU.IsPlayerTrait;
 
         public static bool IsPlayerTrait(Trait trait) =>
             trait?.GetHook<T_CCU>() is null ||
             !(trait?.GetHook<T_PlayerTrait>() is null);
         public static bool IsPlayerUnlock(Unlock unlock) =>
             !(unlock.GetHook() is TraitUnlock_CCU) ||
-            (unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && traitUnlock_CCU.playerTrait); // is PlayerTrait ever declared true?
+            (unlock.GetHook() is TraitUnlock_CCU traitUnlock_CCU && traitUnlock_CCU.IsPlayerTrait);
 
         public string TextName => 
             DesignerName(GetType());
