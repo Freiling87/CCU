@@ -284,14 +284,36 @@ namespace CCU.Patches.Agents
 
 	public class P_Agent_Hook : HookBase<PlayfieldObject>
 	{
-		protected override void Initialize() { }
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		public bool SceneSetterFinished = false; // Avoids removal from series mid-traversal
+		protected override void Initialize() 
+		{
+			//Core.LogMethodCall();
+			GrabAppearance(); 
+			appearanceRolled = false;
+			SceneSetterFinished = false; // Avoids removal from series mid-traversal
+		}
+
+		public void GrabAppearance()
+		{
+			//Core.LogMethodCall();
+			Agent agent = (Agent)Instance;
+			//logger.LogDebug("Agent: " + agent.agentRealName);
+			SaveCharacterData save = agent.customCharacterData;
+			bodyColor = save.bodyColorName;
+			bodyType = save.bodyType;
+			eyesType = save.eyesType;
+			skinColor = save.skinColorName;
+		}
+
+		public bool SceneSetterFinished;
 
 		public bool WalkieTalkieUsed;
 		public bool PermanentHire;
 		public int SuicideVestTimer;
 
+		public bool appearanceRolled;
 		public string bodyColor;
 		public string bodyType;
 		public string eyesType;

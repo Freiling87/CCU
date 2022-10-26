@@ -250,6 +250,13 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
+###				C	Traits Sorting
+Exclude Player traits from CCU section (Speaker traits EG)
+IsPlayerUnlock needs to detect
+DesignerUnlockList needs to exclude
+###				C	SetRel Error
+Tons of these, only with OfficeDrone
+	[Error  : Unity Log] SetRel Error: OfficeDrone (2007) (Agent) -
 ###				T	Check for level on generating appearance
 Player generated new appearance on level 2
 Test with Employees too
@@ -262,9 +269,6 @@ Test w/ guilty and statuses as well
 ###				T	Hair over Hat in Character Creation screen
 Probably just need to flip a bool, based on whether hair can show under hat
 Tried moving call to AgentHitBox.SetCantShowHairUnderHeadPiece until after all appearance rolls
-###				C	Cyclops Bug
-Back for Replicant Rebel
-Doesn't have Static Preview, only EOD Huge & Speaks Binary
 ###				C	Investigateable blanks
 Windows in CL chunks, note the trailing line break and apostrophe:
 	[Debug  :CCU_Investigateables] Text:
@@ -322,86 +326,6 @@ This is an RL bug, should be fixed ~08/29/2022.
 https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
-##		C	Appearance
-###			√	Eye Type
-####			√	Normal Eyes 50%
-Complete
-####			√	Normal Eyes 75%
-Complete
-###			√	Eye Color Special
-####			√	Beady-Eyed
-###			C	Hair Color Special
-####			T	Melanin Mashup
-####			√	Matched Masks
-Complete
-####			√	Uncolored Masks
-Complete
-###			C	Hairstyle Special
-####			C	General Mask/Accessory compatibility
-Might need to make a Dict<string, string[]> of these two sets, since compatibility seems to vary for each.
-####			√	Mask Override (Rename)
-Complete
-####			√	Masks 50%
-Complete
-###			C	Hand Color
-Never know until you try! This might just be as simple as a Glove trait that matches them to body color. This shouldn't be a big elaborate category.
-###			C	Skin Color
-####			C	Melanin Mashup
-New
-###			H	Randomization
-Not possible yet - Hook regeneration.
-You have access to CharaacterCreation.traitsChosen, but there is no complete character to pull actual traits from in this interface. So you're stuck with string names, and this feature isn't important enough to make a whole module for.
-###			C	Footwear Color
-agenthitbox.footwearcolor
-agenthitbox.footwear1.gameobject.setactive()
-###			√	General Traits
-####			H	Static Preview
-#####				C	Cyclops Bug
-This is caused by this trait. Since save character data seems to be used inconsistently among body parts, this will tkae a little more work to address.
-###			√	Accessory
-####			√	No Accessory 50%
-Complete
-####			√	No Accessory 75%
-Complete
-###			√	Body Color
-Complete
-###			√	Body Color Special
-####			√	Shirtless
-Complete
-####			√	Shirtsome
-Complete
-###			√	Body Type
-Complete
-###			√	Body Type Greyscale
-Complete
-###			√	Eye Color
-Complete
-###			√	Facial Hair
-####			√	No Facial Hair 50%
-Complete
-####			√	No Facial Hair 75%
-Complete
-###			√	Hair Color
-Complete
-###			√	Hair Color Grouped
-Complete
-###			√	Hairstyle
-Complete
-###			√	Hairstyle Grouped
-Complete
-###			√	Legs Color
-Complete
-###			√	Legs Color Special
-####			√	Pantiful
-Complete
-####			√	Pantsless
-Complete
-####			√	Pantsuit
-Complete
-###			√	Skin Color
-Complete
-###			√	Skin Color Grouped
-Complete
 #		CT	Projects
 ##			C	Enclave System
 It's best to work on these piecemeal: mutators, traits, agents. Then combine them when the parts are complete.
@@ -692,6 +616,78 @@ Pending pilot
 Pending pilot
 ###			C	Roamer Level Feature
 New
+##		C	Appearance
+###			C	GC1 - Glove Color
+Never know until you try! This might just be as simple as a Glove trait that matches them to body color. This shouldn't be a big elaborate category.
+###			H	General Traits
+####			H	Static Preview
+#####				C	Cyclops Bug
+On hold for now. For the time being, just excluding PCs from appearance randomization.
+###			√	AC1 - Accessory
+####			√	No Accessory 50%
+Complete
+####			√	No Accessory 75%
+Complete
+###			√	BC1 - Body Color
+Complete
+###			√	BC3 - Body Color Special
+####			√	Shirtless
+Complete
+####			√	Shirtsome
+Complete
+###			√	BT1 - Body Type
+Complete
+###			√	BT2 - Body Type Greyscale
+Complete
+###			√	EC1 - Eye Color
+Complete
+###			√	EC3 - Eye Color Special
+####			√	Beady-Eyed
+###			√	ET1 - Eye Type
+####			√	Normal Eyes 50%
+Complete
+####			√	Normal Eyes 75%
+Complete
+###			√	FH1 - Facial Hair
+####			√	No Facial Hair 50%
+Complete
+####			√	No Facial Hair 75%
+Complete
+###			√	HC1 - Hair Color
+Complete
+###			√	HC2 - Hair Color Grouped
+Complete
+###			√	HC3 - Hair Color Special
+####			√	Melanin Mashup
+Complete
+####			√	Matched Masks
+Complete
+####			√	Uncolored Masks
+Complete
+###			√	HS1 - Hairstyle
+Complete
+###			√	HS2 - Hairstyle Grouped
+Complete
+###			√	HS3 - Hairstyle Special
+####			H	General Mask/Accessory compatibility
+Might need to make a Dict<string, string[]> of these two sets, since compatibility seems to vary for each.
+####			√	Mask Override (Rename)
+Complete
+####			√	Masks 50%
+Complete
+###			√	LC1 - Legs Color
+Complete
+###			√	LC3 - Legs Color Special
+####			√	Pantiful
+Complete
+####			√	Pantsless
+Complete
+####			√	Pantsuit
+Complete
+###			√	SC1 - Skin Color
+Complete
+###			√	SC3 - Skin Color Grouped
+Complete
 ##		C	Behavior
 ###			C	Consumer
 Visits vending machines and merchants
@@ -946,7 +942,7 @@ Complete
 Complete
 ###			√	Warp
 Complete
-###			√	Water
+###			√	Water 
 Complete
 ###			√	Cop Bot not Exploding
 Complete

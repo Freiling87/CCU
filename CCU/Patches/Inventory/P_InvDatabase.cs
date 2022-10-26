@@ -154,8 +154,6 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
         {
-			Core.LogMethodCall();
-
 			Agent agent = __instance.agent;
 			
 			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)

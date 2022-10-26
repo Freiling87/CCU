@@ -69,14 +69,20 @@ namespace CCU.Traits.App
 		}
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
+			Core.LogMethodCall();
+			int log = 0;
 			Agent agent = agentHitbox.agent;
 
-			// Exclude players and their employees
-			if (agentHitbox.agent.agentName != VanillaAgents.CustomCharacter ||
-				(agentHitbox.agent.isPlayer != 0 && agent.HasTrait<Static_Preview>()) ||
-				(GC.sessionDataBig.curLevelEndless != 0 && 
-					(agentHitbox.agent.isPlayer != 0 ||
-					agentHitbox.agent.employer.isPlayer != 0 )))
+			// TODO: Static Preview check
+			if (agent.isPlayer != 0)
+			{
+				agent.GetHook<P_Agent_Hook>().GrabAppearance();
+				RollEyeType(agentHitbox);
+				return;
+			}
+
+			if (agent.agentName != VanillaAgents.CustomCharacter ||
+				agent.GetHook<P_Agent_Hook>().appearanceRolled)
 				return;
 
 			// Be very careful with reordering these - some of these are dependent on each other.
@@ -92,6 +98,7 @@ namespace CCU.Traits.App
 			RollEyeType(agentHitbox);
 			RollLegsColor(agentHitbox);
 			agentHitbox.SetCantShowHairUnderHeadPiece(); // To Here
+			agent.GetHook<P_Agent_Hook>().appearanceRolled = true;
 		}
 		private static string GetRoll<T>(AgentHitbox agentHitbox) where T : T_Appearance
 		{

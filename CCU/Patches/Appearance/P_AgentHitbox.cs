@@ -166,7 +166,6 @@ namespace CCU.Patches.Appearance
 			return instructions;
 		}
 
-		// Used for MethodInfo
 		private static string GetAgentBodyType(Agent agent) =>
 			agent.GetOrAddHook<P_Agent_Hook>().bodyType;
 		private static string GetAgentEyesType(Agent agent) =>
