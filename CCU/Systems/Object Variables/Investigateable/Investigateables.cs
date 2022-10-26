@@ -31,8 +31,8 @@ namespace CCU.Systems.Investigateables
 		};
 		public static List<string> InvestigateableObjects_Slot2 = new List<string>()
 		{
-			vObject.Door,
-			vObject.Shelf,
+			//vObject.Door,
+			//vObject.Shelf,
 		};
 
 		public static string MagicObjectName(string originalName) =>
