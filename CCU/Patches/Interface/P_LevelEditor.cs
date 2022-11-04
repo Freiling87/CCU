@@ -160,6 +160,7 @@ namespace CCU.Patches.Interface
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
+					// This is putting "Shelf" as contents of Shelf
 					new CodeInstruction(OpCodes.Call, showCustomInterface),
 				});
 
@@ -185,8 +186,7 @@ namespace CCU.Patches.Interface
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldarg_1),
-					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
+					new CodeInstruction(OpCodes.Ldloc_S, 9),
 					new CodeInstruction(OpCodes.Call, showCustomInterface),
 				});
 
@@ -201,16 +201,19 @@ namespace CCU.Patches.Interface
 
 			if (Containers.IsContainer(objectName))
             {
-				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
-				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor); // √
-				InputField extraVarString2Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString2Object").GetValue(levelEditor);
-				InputField extraVarString3Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString3Object").GetValue(levelEditor);
 
+				InputField extraVarObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarObject").GetValue(levelEditor);
 				extraVarObject.gameObject.SetActive(false);
+
+				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor); // √
+				levelEditor.SetNameText(extraVarStringObject, extraVarStringObject.text, "Object");
 				extraVarStringObject.gameObject.SetActive(true);
+
+				InputField extraVarString2Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString2Object").GetValue(levelEditor);
 				extraVarString2Object.gameObject.SetActive(false);
+
+				InputField extraVarString3Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString3Object").GetValue(levelEditor);
 				extraVarString3Object.gameObject.SetActive(false);
-				levelEditor.SetNameText(extraVarStringObject, tileNameText, "Object");
 			}
 		}
 
