@@ -70,7 +70,6 @@ namespace CCU.Traits.App
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
 			Core.LogMethodCall();
-			int log = 0;
 			Agent agent = agentHitbox.agent;
 
 			// TODO: Static Preview check
@@ -159,6 +158,9 @@ namespace CCU.Traits.App
 					break;
 
 				case var _ when type.IsAssignableFrom(typeof(T_EyeType)):
+					if (pool.Count() is 0)
+						return agent.customCharacterData.eyesType;
+
 					if (agent.HasTrait<Normal_Eyes_50>() && GC.percentChance(50) ||
 						(agent.HasTrait<Normal_Eyes_75>() && GC.percentChance(75)))
 						return "Eyes";
@@ -302,18 +304,16 @@ namespace CCU.Traits.App
 
 			try
 			{
-				agent.GetHook<P_Agent_Hook>().eyesType = agent.customCharacterData.eyesType;
+				agent.GetOrAddHook<P_Agent_Hook>().eyesType = agent.customCharacterData.eyesType;
 				stored = agent.customCharacterData.eyesType;
 			}
 			catch { }
 
-			if (!agentHitbox.agent.HasTrait<T_EyeType>())
-				return;
-
 			string roll = GetRoll<T_EyeType>(agentHitbox);
+			logger.LogDebug("Roll: " + roll);
 			agent.GetOrAddHook<P_Agent_Hook>().eyesType = roll;
 			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
-			agent.customCharacterData.eyesType = roll; // Needed for SetupBodyStrings
+			agent.customCharacterData.eyesType = roll; // Needed for SetupBodyStrings // Then rewrite it so you don't need to overwrite save for this
 			agentHitbox.SetupBodyStrings();
 
 			if (agent.HasTrait<Static_Preview>() && !(stored is null) && stored != "")
