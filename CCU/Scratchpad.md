@@ -251,8 +251,6 @@ Traits in this category are multiplicative.
 ##			P	Bugs
 Except crickets, crickets are fine.
 ###				C	Appearance
-####				C	Facial Hair
-Beard / Horseshoe, still did no FH 50%
 ####				T	Check for level on generating appearance
 Player generated new appearance on level 2
 ####				T	Hair over Hat in Character Creation screen

@@ -88,6 +88,7 @@ namespace CCU.Traits.App
 			RollSkinColor(agentHitbox);
 			RollHairstyle(agentHitbox);
 			RollFacialHair(agentHitbox);
+			logger.LogDebug("Facial Hair 1: " + agentHitbox.facialHairType);
 			// From here
 			RollBodyColor(agentHitbox);
 			RollHairColor(agentHitbox);
@@ -98,6 +99,7 @@ namespace CCU.Traits.App
 			RollLegsColor(agentHitbox);
 			agentHitbox.SetCantShowHairUnderHeadPiece(); // To Here
 			agent.GetHook<P_Agent_Hook>().appearanceRolled = true;
+			logger.LogDebug("Facial Hair 2: " + agentHitbox.facialHairType);
 		}
 		private static string GetRoll<T>(AgentHitbox agentHitbox) where T : T_Appearance
 		{
@@ -108,7 +110,7 @@ namespace CCU.Traits.App
             switch (true)
             {
 				case var _ when type.IsAssignableFrom(typeof(T_Accessory)):
-					if (agent.HasTrait<No_Accessory_50>() && GC.percentChance(50) ||
+					if ((agent.HasTrait<No_Accessory_50>() && GC.percentChance(50)) ||
 						(agent.HasTrait<No_Accessory_75>() && GC.percentChance(75)))
 						return "";
 
@@ -124,7 +126,7 @@ namespace CCU.Traits.App
 					if (agent.HasTrait<Shirtless>())
 						return agent.GetOrAddHook<P_Agent_Hook>().skinColor;
 
-					if (agent.HasTrait<Neutral_Body_50>() && GC.percentChance(50) ||
+					if ((agent.HasTrait<Neutral_Body_50>() && GC.percentChance(50)) ||
 						(agent.HasTrait<Neutral_Body_75>() && GC.percentChance(75)))
 						return "White";
 
@@ -161,14 +163,14 @@ namespace CCU.Traits.App
 					if (pool.Count() is 0)
 						return agent.customCharacterData.eyesType;
 
-					if (agent.HasTrait<Normal_Eyes_50>() && GC.percentChance(50) ||
+					if ((agent.HasTrait<Normal_Eyes_50>() && GC.percentChance(50)) ||
 						(agent.HasTrait<Normal_Eyes_75>() && GC.percentChance(75)))
 						return "Eyes";
 
 					break;
 
 				case var _ when type.IsAssignableFrom(typeof(T_FacialHair)):
-					if (agent.HasTrait<No_Facial_Hair_50>() && GC.percentChance(50) ||
+					if ((agent.HasTrait<No_Facial_Hair_50>() && GC.percentChance(50)) ||
 						(agent.HasTrait<No_Facial_Hair_75>() && GC.percentChance(75)))
 						return "None";
 
@@ -229,7 +231,14 @@ namespace CCU.Traits.App
 			if (pool.Count() is 0)
 				return null;
 
-			return pool[CoreTools.random.Next(pool.Count())];
+			logger.LogDebug("Pool (" + typeof(T) + ")");
+			foreach (string str in pool)
+				logger.LogDebug(pool.IndexOf(str) + ".\t" + str);
+
+			string result = pool[CoreTools.random.Next(pool.Count())];
+			logger.LogDebug("RESULT: " + result);
+
+			return result;
 		}
 		public static void RollAccessory(AgentHitbox agentHitbox)
 		{
@@ -329,17 +338,6 @@ namespace CCU.Traits.App
 			string roll = GetRoll<T_FacialHair>(agentHitbox);
 			agentHitbox.facialHairType = roll;
 			agent.oma.facialHairType = agentHitbox.agent.oma.convertFacialHairTypeToInt(agentHitbox.facialHairType);
-
-			if (agentHitbox.facialHairType == "None" || agentHitbox.facialHairType == "" || agentHitbox.facialHairType == null)
-			{
-				agentHitbox.facialHair.gameObject.SetActive(false);
-				agentHitbox.facialHairWB.gameObject.SetActive(false);
-			}
-			else
-			{
-				agentHitbox.facialHair.gameObject.SetActive(true);
-				agentHitbox.facialHairWB.gameObject.SetActive(true);
-			}
 
 			if (!agent.HasTrait<Static_Preview>())
 				agent.customCharacterData.facialHair = roll;

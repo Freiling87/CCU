@@ -18,6 +18,16 @@ namespace CCU.Patches.Appearance
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// This prevents custom appearance being wiped out.
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.chooseFacialHairType))]
+		private static bool ChooseFacialHairType_SkipCustoms(string agentName)
+        {
+			if (agentName == VanillaAgents.CustomCharacter)
+				return false;
+
+			return true;
+        }
+
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupBodyStrings))]
 		private static IEnumerable<CodeInstruction> SetupBodyStrings(IEnumerable<CodeInstruction> codeInstructions)
 		{
