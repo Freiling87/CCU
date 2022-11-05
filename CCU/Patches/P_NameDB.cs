@@ -1,18 +1,13 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
-using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
 using CCU.Traits;
 using HarmonyLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Patches
 {
-	[HarmonyPatch(declaringType: typeof(NameDB))]
+    [HarmonyPatch(declaringType: typeof(NameDB))]
 	public static class P_NameDB
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -51,5 +46,10 @@ namespace CCU.Patches
 					__result = __result.Remove(0, 2);
 			}
 		}
+
+		// TODO: Test Note Drop bug and see if the commented part fixes it
+		public static bool IsActualItem(InvItem invItem) =>
+			!invItem.invItemName?.Contains("E_") ?? false;
+			
 	}
 }

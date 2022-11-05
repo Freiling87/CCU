@@ -317,25 +317,18 @@ namespace CCU.Patches
 		// Largely a modified copy of vanilla
 		public static void CustomGib(StatusEffects statusEffects)
 		{
-			logger.LogDebug("CustomGib");
-			int loggy = 0;
 			Agent agent = statusEffects.agent;
-			logger.LogDebug("Loggy: " + loggy++);
 			T_GibType gibTrait = agent.GetTraits<T_GibType>().FirstOrDefault();
-			logger.LogDebug("Loggy: " + loggy++);
 
             if (statusEffects.slaveHelmetGonnaBlow)
 			{
-				logger.LogDebug("Loggy A: " + loggy++);
 				MethodInfo slaveHelmetBlow = AccessTools.DeclaredMethod(typeof(StatusEffects), "SlaveHelmetBlow");
 				slaveHelmetBlow.GetMethodWithoutOverrides<Action>(statusEffects).Invoke();
 				return;
 			}
 
-			logger.LogDebug("Loggy: " + loggy++);
 			if ((GC.serverPlayer && !statusEffects.agent.disappeared) || (!GC.serverPlayer && !statusEffects.agent.gibbed && !statusEffects.agent.fellInHole))
 			{
-				logger.LogDebug("Loggy B: " + loggy++);
 				statusEffects.agent.gibbed = true;
 				statusEffects.Disappear();
 
@@ -382,8 +375,6 @@ namespace CCU.Patches
 				if (statusEffects.agent.isPlayer != 0 && !statusEffects.playedPlayerDeath)
 					GC.audioHandler.Play(statusEffects.agent, VanillaAudio.PlayerDeath);
 			}
-
-			logger.LogDebug("Loggy: " + loggy++);
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]

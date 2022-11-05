@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
+using CCU.Patches;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,10 @@ namespace CCU.Systems.Investigateables
 		}
 
 		public static List<InvItem> FilteredInvItemList(List<InvItem> invItemList) =>
-			invItemList.Where(item => !IsInvestigationString(item.invItemName)).ToList();
+			invItemList.Where(invItem => 
+				!IsInvestigationString(invItem.invItemName) && 
+				P_NameDB.IsActualItem(invItem)
+			).ToList();
 
 		[RLSetup]
 		public static void Setup()

@@ -783,6 +783,7 @@
   <ItemGroup>
     <Folder Include="Systems\Language\" />
     <Folder Include="Traits\Loadout\Weapons\" />
+    <Folder Include="Traits\Signature Weapon\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\CCScreenshotExample.jpg" />
