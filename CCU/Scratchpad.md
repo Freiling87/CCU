@@ -250,16 +250,6 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Investigateables
-####				C	Hide Investigateable String Entirely
-Player should never even see it.
-####				C	Investigateable blanks
-Windows in CL chunks, note the trailing line break and apostrophe:
-	[Debug  :CCU_Investigateables] Text:
-			'investigateable-message:::
-	'
-####				C	Computer Investigateable
-Showed Investigation prefix in button text on entering Computer in Draw Mode
 ###				C	Appearance
 ####				C	Facial Hair
 Beard / Horseshoe, still did no FH 50%
