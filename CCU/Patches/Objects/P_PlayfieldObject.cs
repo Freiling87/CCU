@@ -58,13 +58,18 @@ namespace CCU.Patches.Objects
 			}
 		}
 
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(PlayfieldObject.determineMoneyCost), argumentTypes: new[] { typeof(int), typeof(string) })]
         public static void DetermineMoneyCost_Postfix(PlayfieldObject __instance, ref int __result, string transactionType)
         {
 			Agent agent = __instance.GetComponent<Agent>();
 
-			if (agent is null || transactionType == "BribeQuest")
+			if (agent is null || 
+				transactionType == "BribeQuest" ||
+				__result >= 6666)
 				return;
+
+
 
 			float scale = agent.GetTrait<T_CostScale>()?.CostScale ?? 1f;
 			__result = (int)(__result * scale);

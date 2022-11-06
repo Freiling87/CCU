@@ -91,26 +91,34 @@ namespace CCU.Patches.Agents
 							int normalHireCost = agent.determineMoneyCost(costString);
 							int permanentHireCost = agent.determineMoneyCost(costString + "_Permanent");
 
-							if (!agent.HasTrait<Permanent_Hire_Only>()) // Disables normal hire
+							if (!agent.HasTrait<Permanent_Hire_Only>()) // Normal Hire
 							{
+								if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
+									h.AddButton(hireButtonText + "_Voucher", 6666, m =>
+									{
+										m.Agent.agentInteractions.QualifyHireAsProtection(agent, interactingAgent, 6666);
+									});
+
 								h.AddButton(hireButtonText, normalHireCost, m =>
                                 {
 									m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, hireButtonText, normalHireCost);
                                 });
-
-								if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
-									h.AddButton(hireButtonText, 6666, m =>
-									{
-										//m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, hireButtonText, 6666);
-										m.Agent.agentInteractions.QualifyHireAsProtection(agent, interactingAgent, 6666);
-									});
 							}
 
 							if (agent.HasTrait<Permanent_Hire_Only>() || agent.HasTrait<Permanent_Hire>())
+							{
+								//if (interactingAgent.inventory.HasItem(vItem.HiringVoucher /*Add Gold Version*/))
+								//	h.AddButton(hireButtonText + "_Permanent_Voucher", 6667, m =>
+								//	{
+								//		//m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, hireButtonText, 6667);
+								//		m.Agent.agentInteractions.QualifyHireAsProtection(agent, interactingAgent, 6667);
+								//	});
+
 								h.AddButton(hireButtonText + "_Permanent", permanentHireCost, m =>
-                                {
+								{
 									HirePermanently(m.Object, interactingAgent, permanentHireCost);
 								});
+							}
 						}
 					}
 					else if (!agent.oma.cantDoMoreTasks) // Ordering already-hired Agent

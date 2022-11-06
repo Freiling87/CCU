@@ -3,8 +3,12 @@
 	public static class CButtonText
     {
 		public const string
-			HirePermanentExpert = "AssistMe_Permanent",
-			HirePermanentMuscle = "HireAsProtection_Permanent",
+			Hire_Expert_Permanent = "AssistMe_Permanent",
+			Hire_Expert_Permanent_Voucher = "AssistMe_Permanent_Voucher",
+			Hire_Expert_Voucher = "AssistMe_Voucher", // Name differentiation required to avoid button confusion in RL
+			Hire_Muscle_Permanent = "HireAsProtection_Permanent",
+			Hire_Muscle_Permanent_Voucher = "HireAsProtection_Permanent_Voucher",
+			Hire_Muscle_Voucher = "HireAsProtection_Voucher", // Name differentiation required to avoid button confusion in RL
 			Investigate = "Investigate",
 			OpenContainer = "OpenContainer",
 			Ransack = "Ransack",

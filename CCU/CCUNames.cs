@@ -10,12 +10,27 @@ namespace CCU
 		{
 			string t;
 			//	Button Text
-			t = NameTypes.Interface;
-			RogueLibs.CreateCustomName(CButtonText.HirePermanentExpert, t, new CustomNameInfo
+			t = NameTypes.Interface; 
+			RogueLibs.CreateCustomName(CButtonText.Hire_Expert_Voucher, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Assist Me",
+			}); RogueLibs.CreateCustomName(CButtonText.Hire_Muscle_Voucher, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Assist Me",
+			});
+			RogueLibs.CreateCustomName(CButtonText.Hire_Expert_Permanent, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Hire Permanently",
 			});
-			RogueLibs.CreateCustomName(CButtonText.HirePermanentMuscle, t, new CustomNameInfo
+			RogueLibs.CreateCustomName(CButtonText.Hire_Muscle_Permanent, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Hire Permanently",
+			});
+			RogueLibs.CreateCustomName(CButtonText.Hire_Expert_Permanent_Voucher, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Hire Permanently",
+			});
+			RogueLibs.CreateCustomName(CButtonText.Hire_Muscle_Permanent_Voucher, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Hire Permanently",
 			});

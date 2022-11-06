@@ -58,14 +58,12 @@ namespace CCU.Patches.Interface
 		public static bool CreateMutatorList_Level(LevelEditor __instance, ref float ___numButtonsLoad)
 		{
 			List<string> list = new List<string>();
-			list.AddRange(vMutator.VanillaMutators);
 
-			// Likely to be added to RogueLibs as a feature, so this might be redundant at some point.
-			foreach (C_CCU challenge in RogueFramework.Unlocks.OfType<C_CCU>())
-				list.Add(nameof(challenge));
+			foreach (Unlock unlock in GC.sessionDataBig.challengeUnlocks)
+				list.Add(unlock.unlockName);
 
 			__instance.ActivateLoadMenu(); 
-			___numButtonsLoad = (float)list.Count;
+			___numButtonsLoad = list.Count;
 			__instance.OpenObjectLoad(list);
 			__instance.StartCoroutine("SetScrollbarPlacement");
 

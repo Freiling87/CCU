@@ -250,34 +250,6 @@ Traits in this category are multiplicative.
 |Wholesalerest										|- Stackable wares have 4x Quantity
 ##			P	Bugs
 Except crickets, crickets are fine.
-###				C	Appearance
-####				T	Check for level on generating appearance
-Player generated new appearance on level 2
-####				T	Hair over Hat in Character Creation screen
-Probably just need to flip a bool, based on whether hair can show under hat
-Tried moving call to AgentHitBox.SetCantShowHairUnderHeadPiece until after all appearance rolls
-###				C	SetRel Error
-Tons of these, only with OfficeDrone
-	[Error  : Unity Log] SetRel Error: OfficeDrone (2007) (Agent) -
-###				T	Agent Name Hover Text blank
-Wrote some logging
-Just a little square
-InvInterface.ShowCursorText
-	InvInterface(This).cursorTextString.text is where agent name goes I believe
-Test w/ guilty and statuses as well
-###				C	Shop Inventory is small now
-Drug dealer always has 3 items. Had multiple syringes, so that's not the issue. Often has duplicates, including syringes of same type but none stacked. Quantity is always 1.
-####				C	It's doing Clearancer without it enabled
-So verify the original trait
-###				C	SORCE Mutators not available in Editor levels 
-I remember slating this to be done for CCU but never had to. There might be a shortcut to automate this for SORCE if you copy the formatting from CCU.
-###				T	Language system broke?
-Tried something
-###				C	False "Inventory Full" message
-Trying to pick up Whiskey, Replicant Rebel character
-Able to replicate?
-###				T	Hiring Voucher not consumed
-This is an RL bug, should be fixed ~08/29/2022.
 ###				C	Containers Show "(Empty)"
 Start_SetupInvDatabasesForContainers sets chestReal to true. This makes it so that (Empty) does display the first time the chunk is run, but not on re-runs.
 	This bool is allowing PlayfieldObject.MakeChestNonInteractable to be called, since it's already built to handle any object.
