@@ -4,7 +4,7 @@ namespace CCU.Traits.App_SC1
 {
 	public class Mech_Skin : T_SkinColor
 	{
-		public override string[] Rolls => new string[] { "Black" };
+		public override string[] Rolls => new string[] { "MechSkin" };
 
         [RLSetup]
 		public static void Setup()

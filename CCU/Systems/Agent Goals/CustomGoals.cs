@@ -71,7 +71,7 @@ namespace CCU.Systems.CustomGoals
         start: 
             foreach (Agent agent in GC.agentList)
             {
-                if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetHook<P_Agent_Hook>().SceneSetterFinished)
+                if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished)
                     continue;
 
                 agent.ownerID = 99;
@@ -79,7 +79,7 @@ namespace CCU.Systems.CustomGoals
                 switch (agent.defaultGoal)
                 {
                     case Arrested:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         // Copied from AgentInteractions.ArrestAgent
                         agent.knockedOut = true;
                         agent.knockedOutLocal = true;
@@ -98,28 +98,28 @@ namespace CCU.Systems.CustomGoals
                         agent.StopInteraction();
                         goto start;
                     case Dead:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
                         agent.statusEffects.ChangeHealth(-1);
                         goto start;
                     case Burned:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.deathMethod = "Fire";
                         // This avoids a magic number that would gib the agent.
                         agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
                         agent.statusEffects.ChangeHealth(-1);
                         goto start;
                     case Gibbed:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.ChangeHealth(-200f);
                         goto start;
                     case KnockedOut:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                         agent.tranqTime = 1000;
                         goto start;
                     case RandomTeleport:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         Vector3 targetLoc = Vector3.zero;
                         int attempts = 0;
 
@@ -137,9 +137,9 @@ namespace CCU.Systems.CustomGoals
                         catch { }
                         goto start;
                     case Zombified:
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.zombieWhenDead = true;
-                        agent.GetHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
                         agent.statusEffects.ChangeHealth(-1);
                         goto start;

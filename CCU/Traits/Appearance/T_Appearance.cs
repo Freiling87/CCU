@@ -40,49 +40,59 @@ namespace CCU.Traits.App
 		public static void LogAppearance(Agent agent)
         {
 			AgentHitbox agentHitbox = agent.tr.GetChild(0).transform.GetChild(0).GetComponent<AgentHitbox>();
-			logger.LogDebug("======= APPEARANCE: " + agent.agentRealName);
-			logger.LogDebug("\tAccessory :\t" + agent.inventory.startingHeadPiece);
-			logger.LogDebug("\tBody Color:\t" + agentHitbox.bodyColor.ToString());
-			logger.LogDebug("\tBody Type :\t" + agent.oma.bodyType);  // dw
-			logger.LogDebug("\tEye Color :\t" + agentHitbox.eyesColor.ToString());
-			logger.LogDebug("\tHair Color:\t" + agentHitbox.hairColorName);
-			logger.LogDebug("\tHairstyle :\t" + agentHitbox.hairType);
-			logger.LogDebug("\tLeg Color :\t" + agentHitbox.legsColor.ToString());
-			logger.LogDebug("\tSkinColor :\t" + agentHitbox.skinColorName);
+			logger.LogDebug("======= APPEARANCE (" + agent.agentRealName + ")");
+			logger.LogDebug("\tAccessory  :\t" + agent.inventory.startingHeadPiece);
+			logger.LogDebug("\tBody Color :\t" + agentHitbox.bodyColor.ToString());
+			logger.LogDebug("\tBody Type  :\t" + agent.oma.bodyType);  // dw
+			logger.LogDebug("\tEye Color  :\t" + agentHitbox.eyesColor.ToString());
+			logger.LogDebug("\tEye Type   :\t" + agentHitbox.eyesStrings[1]);
+			logger.LogDebug("\tFacial Hair:\t" + agentHitbox.facialHairType);
+			logger.LogDebug("\tFH Position:\t" + agentHitbox.facialHairPos);
+			logger.LogDebug("\tHair Color :\t" + agentHitbox.hairColorName);
+			logger.LogDebug("\tHair Style :\t" + agentHitbox.hairType);
+			logger.LogDebug("\tLegs Color :\t" + agentHitbox.legsColor.ToString());
+			logger.LogDebug("\tSkin Color :\t" + agentHitbox.skinColorName);
 			
-			logger.LogDebug("\n--- EYE TYPE");
-			logger.LogDebug("Hook        :\t" + agent.GetOrAddHook<P_Agent_Hook>().eyesType); // Blank
-			logger.LogDebug("CustomCharSD:\t" + agent.customCharacterData.eyesType);
-			logger.LogDebug("OMA         :\t" + agent.oma.eyesType); // int
-			logger.LogDebug("EyesStrings :");
-			foreach (string str in agentHitbox.eyesStrings)
-				logger.LogDebug("\t" + str);
-			logger.LogDebug("EyesDeadStr :");
-			foreach (string str in agentHitbox.eyesDeadStrings)
-				logger.LogDebug("\t" + str);
-			logger.LogDebug("EyesNarrowStr :");
-			foreach (string str in agentHitbox.eyesNarrowStrings)
-				logger.LogDebug("\t" + str);
-			logger.LogDebug("EyesWideStrings :");
-			foreach (string str in agentHitbox.eyesWideStrings)
-				logger.LogDebug("\t" + str);
+			//logger.LogDebug("\n--- EYE TYPE");
+			//logger.LogDebug("Hook         :\t" + agent.GetOrAddHook<P_Agent_Hook>().eyesType); // Blank
+			//logger.LogDebug("CustomCharSD :\t" + agent.customCharacterData.eyesType);
+			//logger.LogDebug("OMA          :\t" + agent.oma.eyesType); // int
+			//logger.LogDebug("EyesStrings  :");
+
+			//foreach (string str in agentHitbox.eyesStrings)
+			//	logger.LogDebug("\t" + str);
+			//logger.LogDebug("EyesDeadStr :");
+			//foreach (string str in agentHitbox.eyesDeadStrings)
+			//	logger.LogDebug("\t" + str);
+			//logger.LogDebug("EyesNarrowStr :");
+			//foreach (string str in agentHitbox.eyesNarrowStrings)
+			//	logger.LogDebug("\t" + str);
+			//logger.LogDebug("EyesWideStrings :");
+			//foreach (string str in agentHitbox.eyesWideStrings)
+			//	logger.LogDebug("\t" + str);
 		}
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
-			Core.LogMethodCall();
 			Agent agent = agentHitbox.agent;
+			logger.LogDebug("SetupAppearance " + agent.agentName + " (" + agent.agentRealName + ")");
+			int log = 0;
+			logger.LogDebug(log++);
 
 			// TODO: Static Preview check
 			if (agent.isPlayer != 0)
 			{
-				agent.GetHook<P_Agent_Hook>().GrabAppearance();
+				agent.GetOrAddHook<P_Agent_Hook>().GrabAppearance();
 				RollEyeType(agentHitbox);
 				return;
 			}
 
+			logger.LogDebug(log++);
+
 			if (agent.agentName != VanillaAgents.CustomCharacter ||
-				agent.GetHook<P_Agent_Hook>().appearanceRolled)
+				agent.GetOrAddHook<P_Agent_Hook>().appearanceRolled)
 				return;
+
+			logger.LogDebug(log++);
 
 			// Be very careful with reordering these - some of these are dependent on each other.
 			RollSkinColor(agentHitbox);
@@ -98,7 +108,7 @@ namespace CCU.Traits.App
 			RollEyeType(agentHitbox);
 			RollLegsColor(agentHitbox);
 			agentHitbox.SetCantShowHairUnderHeadPiece(); // To Here
-			agent.GetHook<P_Agent_Hook>().appearanceRolled = true;
+			agent.GetOrAddHook<P_Agent_Hook>().appearanceRolled = true;
 			logger.LogDebug("Facial Hair 2: " + agentHitbox.facialHairType);
 		}
 		private static string GetRoll<T>(AgentHitbox agentHitbox) where T : T_Appearance
@@ -152,7 +162,7 @@ namespace CCU.Traits.App
 				case var _ when type.IsAssignableFrom(typeof(T_EyeColor)):
 
 					if (agent.HasTrait<Beady_Eyed>())
-						return agent.GetHook<P_Agent_Hook>().skinColor;
+						return agent.GetOrAddHook<P_Agent_Hook>().skinColor;
 
 					if (pool.Count() is 0)
 						return "White";
@@ -228,12 +238,12 @@ namespace CCU.Traits.App
 					break;
 			}
 
-			if (pool.Count() is 0)
-				return null;
-
-			logger.LogDebug("Pool (" + typeof(T) + ")");
+			logger.LogDebug("Printing pool for (" + typeof(T) + ")");
 			foreach (string str in pool)
 				logger.LogDebug(pool.IndexOf(str) + ".\t" + str);
+
+			if (pool.Count() is 0)
+				return null;
 
 			string result = pool[CoreTools.random.Next(pool.Count())];
 			logger.LogDebug("RESULT: " + result);
@@ -247,7 +257,7 @@ namespace CCU.Traits.App
 			if (!agent.GetTraits<T_Accessory>().Any())
 				return;
 
-			string roll = GetRoll<T_Accessory>(agentHitbox);
+			string roll = GetRoll<T_Accessory>(agentHitbox); 
 			agent.inventory.AddStartingHeadPiece(roll, true);
 			agent.inventory.startingHeadPiece = roll;
 			agentHitbox.headPieceType = roll;
@@ -332,12 +342,25 @@ namespace CCU.Traits.App
 		{
 			Agent agent = agentHitbox.agent;
 
+			// Default for no facial hair. Must be done for all agents.
+			agentHitbox.facialHair.gameObject.SetActive(false);
+			agentHitbox.facialHairWB.gameObject.SetActive(false);
+
 			if (!agent.GetTraits<T_FacialHair>().Any())
 				return;
 
 			string roll = GetRoll<T_FacialHair>(agentHitbox);
 			agentHitbox.facialHairType = roll;
 			agent.oma.facialHairType = agentHitbox.agent.oma.convertFacialHairTypeToInt(agentHitbox.facialHairType);
+
+			// If removed, causes Hair Cigarette bug
+			if (agentHitbox.facialHairType != "None" && 
+					agentHitbox.facialHairType != "" &&
+					agentHitbox.facialHairType != null)
+			{
+				agentHitbox.facialHair.gameObject.SetActive(true);
+				agentHitbox.facialHairWB.gameObject.SetActive(true);
+			}
 
 			if (!agent.HasTrait<Static_Preview>())
 				agent.customCharacterData.facialHair = roll;

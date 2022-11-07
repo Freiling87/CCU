@@ -34,8 +34,7 @@ namespace CCU.Patches
         {
 			// TODO: Make this iterate with a while loop to be able to rename multiple generations of releases.
 			// Might also need to be extended past traits, but you have more time for that.
-			if (Core.debugMode ||
-				type != "StatusEffect" || !__result.Contains("E_"))
+			if (type != "StatusEffect" || !__result.Contains("E_"))
 				return;
 
 			foreach (Type trait in Legacy.TraitConversions.Values)

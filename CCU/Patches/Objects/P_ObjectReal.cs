@@ -57,7 +57,7 @@ namespace CCU.Patches.Objects
         private static MethodInfo Find_MoveNext_MethodInfo() =>
             PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(ObjectReal), "DestroyMe2"));
 
-        // This also excludes error-items with E_ in the name.
+        // Excludes E_ items and investigateable strings.
         [HarmonyTranspiler, UsedImplicitly]
         private static IEnumerable<CodeInstruction> DestroyMe2_DontSpillNote(IEnumerable<CodeInstruction> codeInstructions)
         {

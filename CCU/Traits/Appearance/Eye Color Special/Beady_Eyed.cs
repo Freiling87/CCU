@@ -13,7 +13,7 @@ namespace CCU.Traits.App_EC3
 			PostProcess = RogueLibs.CreateCustomTrait<Beady_Eyed>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Matches Eye Color to Body Color.",
+					[LanguageCode.English] = "Matches Eye Color to Skin Color.",
 				})
 				.WithName(new CustomNameInfo
 				{

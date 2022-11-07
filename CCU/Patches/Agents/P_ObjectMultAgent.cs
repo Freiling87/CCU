@@ -24,7 +24,7 @@ namespace CCU.Patches.Agents
         private static void EyesType_Getter_Prefix(ObjectMultAgent __instance, ref int __result)
         {
             if (!(__instance.agent.GetOrAddHook<P_Agent_Hook>().eyesType is null))
-                __result = __instance.convertEyesTypeToInt(__instance.agent.GetHook<P_Agent_Hook>().eyesType);
+                __result = __instance.convertEyesTypeToInt(__instance.agent.GetOrAddHook<P_Agent_Hook>().eyesType);
         }
     }
 }

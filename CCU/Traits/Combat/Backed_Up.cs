@@ -32,7 +32,7 @@ namespace CCU.Traits.Combat
 
         public void SetupAgentStats(Agent agent)
         {
-            agent.GetHook<P_Agent_Hook>().WalkieTalkieUsed = false;
+            agent.GetOrAddHook<P_Agent_Hook>().WalkieTalkieUsed = false;
         }
     }
 }

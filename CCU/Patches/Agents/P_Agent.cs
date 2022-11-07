@@ -157,8 +157,7 @@ namespace CCU.Patches.Agents
 					logger.LogDebug(ii.invItemName);
 			}
 
-			if (false && 
-				__instance.agentName == VanillaAgents.CustomCharacter)
+			if (Core.debugMode && __instance.agentName == VanillaAgents.CustomCharacter)
 				AppearanceTools.LogAppearance(__instance);
         } 
 

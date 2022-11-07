@@ -13,7 +13,7 @@ namespace CCU.Traits.App_HC3
 			PostProcess = RogueLibs.CreateCustomTrait<Uncolored_Masks>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "If a Mask is rolled, matches its color to Body Color.",
+					[LanguageCode.English] = "If a Mask is rolled, a color is not applied to it.",
 				})
 				.WithName(new CustomNameInfo
 				{
