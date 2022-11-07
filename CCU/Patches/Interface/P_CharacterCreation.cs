@@ -20,47 +20,37 @@ namespace CCU.Patches.Inventory
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        // This originally did both auto-sorting of traits as well as exclusion of CCU Traits. Auto-sorting is moved to SORQUOL. CCU filtering should be redone here.
+		// Filters trait list on character sheet to Player Traits
+		// This method transpiles before Sorquol.P_CharacterCreation.CreatePointTallyText_AutoSortTraitsChosen. Changes here must be reflected in its criteria.
         [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
         private static IEnumerable<CodeInstruction> CreatePointTallyText_FilterCCPCount(IEnumerable<CodeInstruction> codeInstructions)
         {
             List<CodeInstruction> instructions = codeInstructions.ToList();
             FieldInfo traitsChosen = AccessTools.DeclaredField(typeof(CharacterCreation), nameof(CharacterCreation.traitsChosen));
             MethodInfo playerUnlockList = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerUnlockList), parameters: new Type[] { typeof(List<Unlock>) });
-            MethodInfo autoSortTraitsChosen = AccessTools.DeclaredMethod(typeof(P_CharacterCreation), nameof(P_CharacterCreation.AutoSortTraitsChosen));
 
             CodeReplacementPatch patch = new CodeReplacementPatch(
                 expectedMatches: 2,
                 prefixInstructionSequence: new List<CodeInstruction>
                 {
                     new CodeInstruction(OpCodes.Ldarg_0),
-                    new CodeInstruction(OpCodes.Ldfld, traitsChosen)
-                },
+					new CodeInstruction(OpCodes.Ldfld, traitsChosen)
+				},
                 targetInstructionSequence: new List<CodeInstruction>
                 {
-
-                },
+				},
                 insertInstructionSequence: new List<CodeInstruction>
-                {
-                    new CodeInstruction(OpCodes.Call, playerUnlockList),
-                    new CodeInstruction(OpCodes.Ldarg_0),
-                    new CodeInstruction(OpCodes.Call, autoSortTraitsChosen),
+				{
+					new CodeInstruction(OpCodes.Call, playerUnlockList),
                 },
                 postfixInstructionSequence: new List<CodeInstruction>
                 {
-                    new CodeInstruction(OpCodes.Callvirt),
+                    new CodeInstruction(OpCodes.Call),
                     new CodeInstruction(OpCodes.Stloc_S, 12),
                 });
 
             patch.ApplySafe(instructions, logger);
             return instructions;
-        }
-        private static void AutoSortTraitsChosen(CharacterCreation characterCreation)
-        {
-            if (characterCreation.sortByName)
-                characterCreation.traitsChosen = T_CCU.SortUnlocksByName(characterCreation.traitsChosen);
-            else
-                characterCreation.traitsChosen = T_CCU.SortUnlocksByValue(characterCreation.traitsChosen);
         }
 
         [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
