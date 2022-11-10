@@ -10,9 +10,13 @@ namespace CCU.Patches.Objects
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName:nameof(PlayfieldObjectInteractions.TargetObject), argumentTypes: new[] { typeof(PlayfieldObject), typeof(Agent), typeof(PlayfieldObject), typeof(string) })]
+		[HarmonyPrefix, HarmonyPatch(methodName:nameof(PlayfieldObjectInteractions.TargetObject), argumentTypes: new[] 
+			{ typeof(PlayfieldObject), typeof(Agent), typeof(PlayfieldObject), typeof(string) })]
 		public static bool TargetObject_Prefix(PlayfieldObject playfieldObject, Agent interactingAgent, PlayfieldObject otherObject, string combineType, PlayfieldObjectInteractions __instance, ref bool __result)
 		{
+			if (!playfieldObject.CompareTag("Agent"))
+				return true;
+
 			Agent agent = (Agent)playfieldObject;
 
 			if ((agent.commander.target.targetType == CJob.SafecrackSafe || agent.commander.target.targetType == CJob.TamperSomething) && otherObject != null)
@@ -34,12 +38,12 @@ namespace CCU.Patches.Objects
 
 						if (!isValidTarget)
 						{
-							__result = false; 
+							__result = false;
 							return false;
 						}
 
-						if ((agent.ownerID != objectReal.owner || agent.startingChunk != objectReal.startingChunk || agent.ownerID == 0) && 
-							(objectReal.prisonObject == 0 || objectReal.onPrisonEdge || isWindow) && 
+						if ((agent.ownerID != objectReal.owner || agent.startingChunk != objectReal.startingChunk || agent.ownerID == 0) &&
+							(objectReal.prisonObject == 0 || objectReal.onPrisonEdge || isWindow) &&
 							!objectReal.someoneInteracting)
 						{
 							if (combineType == "Combine")
@@ -57,7 +61,7 @@ namespace CCU.Patches.Objects
 					}
 					else if (agent.commander.target.targetType == CJob.TamperSomething)
 					{
-						if ((agent.ownerID != objectReal.owner || agent.startingChunk != objectReal.startingChunk || agent.ownerID == 0) && 
+						if ((agent.ownerID != objectReal.owner || agent.startingChunk != objectReal.startingChunk || agent.ownerID == 0) &&
 							objectReal.functional && !objectReal.destroyed && !objectReal.destroying && objectReal.fire == null && !objectReal.someoneInteracting && !objectReal.startedFlashing)
 						{
 							if (combineType == "Combine")
