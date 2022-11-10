@@ -11,7 +11,8 @@ namespace CCU.Traits.Hire_Duration
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = 
-                        "Adds a 'Hire Permanently' interaction option at 8x the normal rate. Permanent Hires can use their Expert ability unlimited times.\n\n" + 
+                        "Adds a 'Hire Permanently' interaction option at 8x the normal rate.\n\n" + 
+                        "Permanent Hires can use their Expert ability unlimited times, and will ignore Homesickness.\n\n" + 
                         "<color=red>Requires:</color> Any Hire Type trait",
                 })
                 .WithName(new CustomNameInfo

@@ -2,21 +2,20 @@
 
 namespace CCU.Traits.Hire_Duration
 {
-    public class Permanent_Hire_Only : T_HireDuration
+    public class Homesickly : T_HireDuration
     {
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Permanent_Hire_Only>()
+            PostProcess = RogueLibs.CreateCustomTrait<Homesickly>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Offers Permanent Hire, AND removes the regular hire option.\n\n" +
-                        "Permanent Hires can use their Expert ability unlimited times, and will ignore Homesickness.\n\n" +
-                        "<color=red>Requires:</color> Any Hire Type trait",
+                    [LanguageCode.English] = "Agent will never follow the player between levels.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Permanent_Hire_Only)),
+                    [LanguageCode.English] = DesignerName(typeof(Homesickly)),
+                    
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

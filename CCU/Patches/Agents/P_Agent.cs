@@ -223,7 +223,7 @@ namespace CCU.Patches.Agents
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetEmployer))]
 		public static bool SetEmployer_Prefix(Agent __instance, ref Agent myEmployer)
 		{
-			if (__instance.GetOrAddHook<P_Agent_Hook>().PermanentHire &&
+			if (__instance.GetOrAddHook<P_Agent_Hook>().HiredPermanently &&
 				!(__instance.employer is null) && myEmployer is null)
             {
 				myEmployer = __instance.employer;
@@ -239,7 +239,7 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetFollowing))]
 		public static bool SetFollowing_Prefix(Agent __instance, ref Agent myFollowing)
 		{
-			if (__instance.GetOrAddHook<P_Agent_Hook>().PermanentHire &&
+			if (__instance.GetOrAddHook<P_Agent_Hook>().HiredPermanently &&
 				!(__instance.following is null) && myFollowing is null)
             {
 				myFollowing = __instance.employer;
@@ -263,13 +263,12 @@ namespace CCU.Patches.Agents
 
 			Language.AddLangsToVanillaAgents(__instance);
 
-			if (GC.challenges.Contains(nameof(Homesickness_Disabled)))
+			if (GC.challenges.Contains(nameof(Homesickness_Disabled)) ||
+				__instance.HasTrait<Homesickless>())
 				__instance.canGoBetweenLevels = true;
-			else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)))
+			else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)) ||
+				__instance.HasTrait<Homesickly>())
 				__instance.canGoBetweenLevels = false;
-
-			if (__instance.HasTrait<Permanent_Hire>() || __instance.HasTrait<Permanent_Hire_Only>())
-				__instance.GetOrAddHook<P_Agent_Hook>().PermanentHire = true;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
@@ -309,7 +308,7 @@ namespace CCU.Patches.Agents
 		public bool SceneSetterFinished;
 
 		public bool WalkieTalkieUsed;
-		public bool PermanentHire;
+		public bool HiredPermanently;
 		public int SuicideVestTimer;
 
 		public bool appearanceRolled;

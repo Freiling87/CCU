@@ -600,7 +600,7 @@ namespace CCU.Patches.Agents
 			argumentTypes: new[] { typeof(Agent), typeof(Agent) })]
 		public static bool LetGo_Prefix(Agent agent)
         {
-			agent.GetOrAddHook<P_Agent_Hook>().PermanentHire = false;
+			agent.GetOrAddHook<P_Agent_Hook>().HiredPermanently = false;
 
 			return true;
         }
@@ -728,7 +728,8 @@ namespace CCU.Patches.Agents
 			agent.SetChangeElectionPoints(interactingAgent);
 			agent.StopInteraction();
 			logger.LogDebug("A");
-			agent.GetOrAddHook<P_Agent_Hook>().PermanentHire = true;
+			agent.GetOrAddHook<P_Agent_Hook>().HiredPermanently = true;
+			agent.canGoBetweenLevels = true;
 
 			return;
 		}

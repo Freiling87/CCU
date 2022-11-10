@@ -1,6 +1,9 @@
 ﻿using BepInEx.Logging;
 using CCU.Challenges.Followers;
+using CCU.Patches.Agents;
+using CCU.Traits.Hire_Duration;
 using HarmonyLib;
+using RogueLibsCore;
 
 namespace CCU.Patches.Objects
 {
@@ -21,12 +24,17 @@ namespace CCU.Patches.Objects
 				{
 					if (myAgent.isPlayer == 0)
 						employee.agentInteractions.LetGo(employee, employee.employer);
-					else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)))
+					else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)) ||
+						employee.HasTrait<Homesickly>())
 					{
 						employee.SayDialogue("CantCome");
 						employee.agentInteractions.LetGo(employee, employee.employer);
 					}
-					else if (GC.challenges.Contains(nameof(Homesickness_Disabled)) || employee.canGoBetweenLevels || myAgent.statusEffects.hasTrait("AgentsFollowToNextLevel"))
+					else if (GC.challenges.Contains(nameof(Homesickness_Disabled)) ||
+							employee.HasTrait<Homesickless>() ||
+							employee.GetOrAddHook<P_Agent_Hook>().HiredPermanently ||
+							employee.canGoBetweenLevels || 
+							myAgent.statusEffects.hasTrait("AgentsFollowToNextLevel"))
 						employee.wantsToExit = true;
 					else
 					{
