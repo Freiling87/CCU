@@ -15,7 +15,10 @@ namespace CCU.Traits.Merchant_Type
             new KeyValuePair<string, int>( vItem.Pistol, 3),
             new KeyValuePair<string, int>( vItem.Revolver, 3),
             new KeyValuePair<string, int>( vItem.Shotgun, 3),
-            new KeyValuePair<string, int>( "WeaponMod", 4),
+            new KeyValuePair<string, int>( vItem.AccuracyMod, 1),
+            new KeyValuePair<string, int>( vItem.AmmoCapacityMod, 1),
+            new KeyValuePair<string, int>( vItem.Silencer, 1),
+            new KeyValuePair<string, int>( vItem.RateofFireMod, 1),
         };
 
         [RLSetup]

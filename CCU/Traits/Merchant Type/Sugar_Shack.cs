@@ -31,6 +31,7 @@ namespace CCU.Traits.Merchant_Type
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
+                    Recommendations = new List<string> { "Clearancer" },
                     UnlockCost = 0,
                 });
         }

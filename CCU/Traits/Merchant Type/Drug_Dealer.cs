@@ -8,7 +8,16 @@ namespace CCU.Traits.Merchant_Type
     {
         public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
-            new KeyValuePair<string, int>( "Drugs", 12),
+            new KeyValuePair<string, int>( vItem.Syringe, 6),
+            new KeyValuePair<string, int>( vItem.Cigarettes, 3),
+            new KeyValuePair<string, int>( vItem.MusclyPill, 3),
+            new KeyValuePair<string, int>( vItem.ElectroPill, 3),
+            new KeyValuePair<string, int>( vItem.CyanidePill, 3),
+            new KeyValuePair<string, int>( vItem.CritterUpper, 3),
+            new KeyValuePair<string, int>( vItem.Antidote, 3),
+            new KeyValuePair<string, int>( vItem.Giantizer, 3),
+            new KeyValuePair<string, int>( vItem.Shrinker, 3),
+            new KeyValuePair<string, int>( vItem.RagePoison, 3),
         };
 
         [RLSetup]
