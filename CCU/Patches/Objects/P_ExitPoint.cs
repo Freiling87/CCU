@@ -22,15 +22,16 @@ namespace CCU.Patches.Objects
 
 				if (employee != myAgent && employee.employer == myAgent)
 				{
+					// Negatives allow traits to take precedence over mutators
 					if (myAgent.isPlayer == 0)
 						employee.agentInteractions.LetGo(employee, employee.employer);
-					else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)) ||
+					else if ((GC.challenges.Contains(nameof(Homesickness_Mandatory)) && !employee.HasTrait<Homesickless>()) ||
 						employee.HasTrait<Homesickly>())
 					{
 						employee.SayDialogue("CantCome");
 						employee.agentInteractions.LetGo(employee, employee.employer);
 					}
-					else if (GC.challenges.Contains(nameof(Homesickness_Disabled)) ||
+					else if ((GC.challenges.Contains(nameof(Homesickness_Disabled)) && !employee.HasTrait<Homesickly>()) ||
 							employee.HasTrait<Homesickless>() ||
 							employee.GetOrAddHook<P_Agent_Hook>().HiredPermanently ||
 							employee.canGoBetweenLevels || 

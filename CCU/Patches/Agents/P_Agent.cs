@@ -263,10 +263,11 @@ namespace CCU.Patches.Agents
 
 			Language.AddLangsToVanillaAgents(__instance);
 
-			if (GC.challenges.Contains(nameof(Homesickness_Disabled)) ||
+			// Negatives allow traits to take precedence over mutators.
+			if ((GC.challenges.Contains(nameof(Homesickness_Disabled))  && !__instance.HasTrait<Homesickly>()) ||
 				__instance.HasTrait<Homesickless>())
 				__instance.canGoBetweenLevels = true;
-			else if (GC.challenges.Contains(nameof(Homesickness_Mandatory)) ||
+			else if ((GC.challenges.Contains(nameof(Homesickness_Mandatory)) && !__instance.HasTrait<Homesickless>()) ||
 				__instance.HasTrait<Homesickly>())
 				__instance.canGoBetweenLevels = false;
 		}
