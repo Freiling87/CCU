@@ -4,7 +4,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Systems.Containers;
 using CCU.Systems.CustomGoals;
 using CCU.Traits.Loadout;
-using CCU.Traits.Loadout_Misc;
+using CCU.Traits.Loadout_Chunk_Items;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
@@ -154,7 +154,7 @@ namespace CCU.Patches.Level
 						foreach (Door door in validDoors)
 							door.distributedKey = agent;
 
-						InvItem key = agent.agentInvDatabase.AddItem(vItem.Key, 1);
+						InvItem key = agent.inventory.AddItem(vItem.Key, 1);
 						key.specificChunk = agent.startingChunk;
 						key.specificSector = agent.startingSector;
 						key.chunks.Add(agent.startingChunk);
@@ -176,7 +176,7 @@ namespace CCU.Patches.Level
 						foreach (Safe safe in validSafes)
 							safe.distributedKey = agent;
 
-						InvItem safeCombo = agent.agentInvDatabase.AddItem(vItem.SafeCombination, 1);
+						InvItem safeCombo = agent.inventory.AddItem(vItem.SafeCombination, 1);
 						safeCombo.specificChunk = agent.startingChunk;
 						safeCombo.specificSector = agent.startingSector;
 						safeCombo.chunks.Add(agent.startingChunk);

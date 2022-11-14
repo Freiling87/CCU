@@ -317,5 +317,7 @@ namespace CCU.Patches.Agents
 		public string bodyType;
 		public string eyesType;
 		public string skinColor;
+
+		public bool weaponChosen;
 	}
 }

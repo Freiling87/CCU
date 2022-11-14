@@ -2,7 +2,7 @@
 
 namespace CCU.Challenges.Followers
 {
-    class C_Followers : C_CCU
+    internal abstract class C_Followers : C_CCU
     {
         public C_Followers() : base() { }
     }

@@ -21,7 +21,6 @@ namespace CCU.Traits.Passive
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
-                    Cancellations = { DesignerName(typeof(Guilty)) },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

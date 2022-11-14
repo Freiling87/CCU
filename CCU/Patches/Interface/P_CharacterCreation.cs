@@ -1,20 +1,16 @@
-﻿using System;
+﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
+using CCU.Traits;
+using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using BepInEx.Logging;
-using BTHarmonyUtils.TranspilerUtils;
-using CCU.Traits;
-using HarmonyLib;
-using RogueLibsCore;
-using UnityEngine.UI;
 
 namespace CCU.Patches.Inventory
 {
-	[HarmonyPatch(declaringType: typeof(CharacterCreation))]
+    [HarmonyPatch(declaringType: typeof(CharacterCreation))]
 	public static class P_CharacterCreation
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -53,6 +49,12 @@ namespace CCU.Patches.Inventory
             return instructions;
         }
 
+		/// <summary>
+		/// Custom CCU Trait list section on character sheet
+		/// TODO: Add a "Free Traits" section
+		/// </summary>
+		/// <param name="codeInstructions"></param>
+		/// <returns></returns>
         [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
 		private static IEnumerable<CodeInstruction> CreatePointTallyText_CustomCCUSection(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -88,16 +90,16 @@ namespace CCU.Patches.Inventory
 		}
 		public static void PrintTraitList(CharacterCreation characterCreation)
         {
-			if (T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Any())
-				characterCreation.pointTallyText.text += "\n<color=yellow>- CCU TRAITS -</color>\n";
-			else
-				return;
-
-			foreach (Unlock unlock in T_CCU.SortUnlocksByName(T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Where(u => !T_CCU.IsPlayerUnlock(u)).ToList()))
+			if (Core.designerEdition &&
+				T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Any())
             {
-				string traitName = GC.nameDB.GetName(unlock.unlockName, "StatusEffect") + "\n";
-				traitName = traitName.Replace("[CCU] ", "");
-				characterCreation.pointTallyText.text += traitName;
+				characterCreation.pointTallyText.text += "\n<color=yellow>- CCU TRAITS -</color>\n";
+				foreach (Unlock unlock in T_CCU.SortUnlocksByName(T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Where(u => !T_CCU.IsPlayerUnlock(u)).ToList()))
+				{
+					string traitName = GC.nameDB.GetName(unlock.unlockName, "StatusEffect") + "\n";
+					traitName = traitName.Replace("[CCU] ", "");
+					characterCreation.pointTallyText.text += traitName;
+				}
 			}
 		}
 	}

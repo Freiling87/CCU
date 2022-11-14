@@ -1,7 +1,7 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Player
 {
     public class Blinker : T_PlayerTrait
     {
@@ -11,7 +11,7 @@ namespace CCU.Traits.Passive
             PostProcess = RogueLibs.CreateCustomTrait<Blinker>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("When damaged, teleports to a random nearby spot."),
+                    [LanguageCode.English] = String.Format("When damaged, instantly teleports to a random nearby spot."),
                 })
                 .WithName(new CustomNameInfo
                 {
@@ -21,7 +21,7 @@ namespace CCU.Traits.Passive
                 {
                     Cancellations = { },
                     CharacterCreationCost = 5,
-                    IsAvailable = false,
+                    IsAvailable = true,
                     IsAvailableInCC = true,
                     IsPlayerTrait = true,
                     UnlockCost = 5,

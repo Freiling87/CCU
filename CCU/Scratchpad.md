@@ -7,254 +7,140 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #		Scope
-##			P	v. 1.0.1 Patch Notes
-- Bugfixes
-  - Default Goals
-	- Scene Setters are no longer interrupted by "Flee" behaviors.
-    - Random Teleport no longer breaks the Scene Setter system.
-  - Objects
-	- Containers
-	  - Can no longer loot via hack - Lame!
-	  - Disabled redundant Open/Search buttons.
-      - "Search" button no longer shows up on empty containers.
-	- Investigateables
-	  - Computer no longer interrupts hacking interaction when Investigation text is set.
-	  - Investigate button no longer appears with blank text.
-  - Traits
-	- Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
-	- Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately. Duplicate Extortion buttons eliminated.
-	- Heal: No longer says broken dialogue when rejecting interaction
-	- Language Speaker group: Removed from upgrade menu in Augmentation Booth. This is a planned feature that was meant to be postponed.
-	- Rel Faction: Sharing faction animosity can no longer improve your relations with others. 
-	- Pay Cop Debt: Button text fixed.
-	- Cost Scale: Now excludes Bribe for Quest Item.
-	- Relationship: No longer affect Home Base
-- Feature Additions
-  - Character Creation Interface
-    - CCU traits are now listed in a separate section, sorted by name.
-    - Vanilla traits are now auto-sorted according to the mode selected on the Traits screen.
-  - Traits
-	- Appearance
-	  - You can now randomize the appearance of NPCs. See the Traits page for details, as there are too many traits to list here.
-	  - Feature limitation: Eye type may change for Sitting/Dancing NPCs. This is a bug (IMO) in the original game code. Specifically: Narrow, Wide, Dead eyes are affected; Zombie & Cannibal eyes are not.
-	- Hire Duration
-	  - Permanent Hire
-	  - Permanent Hire Only
-	- Merchant Stock: Various modifiers for the quantity/durability of sold items.
-	  - Clearancer
-	  - Masterworker
-	  - Masterworkerer
-	  - Masterworkerest
-	  - Shiddy Goods
-	  - Shoddy Goods
-	  - Wholesaler
-	  - Wholesalerer
-	  - Wholesalerest
-	- Merchant Type: Selecting multiple types will now combine inventory random-choice pools rather than just selecting one of them.
-	  - Burger Joint
-	  - Sugar Shack
-  - Default Goals
-	- Random Teleport 
-  - Objects
-	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise as you ransack it. Sneaky/Silent Fingers both apply.
-##			P	v. 1.0.1 Documentation Additions
-Note that the Header tiers are extended by one in Scratchpad, so you'll need to adjust those.
-###				Object Variable List
-Vendor Cart mechanics note
-###				Appearance
-There are a *lot* of traits in this category. Most of them refer to a single value in the character creator, e.g. "Blue Legs," "Mohawk," etc. Some of them refer to multiple values, e.g. "Punk Hairstyles," or "Human Skin Tones." 
+No Open Carry
+Add malus to persuasion when breaking various laws, unless talking to scumbags or outlaws
+##		T	Passive
+###			C	Ammo Amateur
+ammo capacity *= 2
+On NPCs, doubles starting capacity
+invItem.maxAmmo
+###			C	Ammo Master
+Ammo cap *= 3
+##		C	Loadout
+###			C	Gun Nut
+####			C	Silencer
+Automatically applies Silencer to all held weapons on load
+####			C	Trigger Mod
+Trigger Mod
+####			C	Accuracy Mod
+Accuracy Mod
+####			C	Ammo Mod
+Ammo mod to all weapons
+###			C	Loader
+Make items somewhat rarer
+####			√	Flat Distribution
+Complete
+####			√	Scaled Distribution
+Complete
+####			√	Upscaled Distribution
+Complete
+###			H	Chunk Items
+####			C	Chunk Mayor Badge
+Set Bribe options on separate traits
+This might just need to be an item rather than a trait
+####			C	Chunk Stash Hint
+New
+####			√	Chunk Key
+Complete
+####			√	Chunk Safe Combo
+Complete
+###			√	Money
+Complete
+###			√	Pockets
+####			√	FunnyPack
+Complete
+####			√	FunnyPack Extreme
+Complete
+####			√	Have
+Complete
+####			√	Have Mostly
+Complete
+####			√	Have Not
+Complete
+###			C	Slots
+####			√	Equipment Chad
+Complete
+####			√	Equipment Enjoyer
+Complete
+####			√	Equipment Virgin
+Complete
+####			√	Sidearmed
+Complete
+####			√	Sidearmed to the Teeth
+Complete
+##		C	Item Groups
+uwumacaronitime's idea: Item groups similar to NPC groups
 
-All selections are thrown into a random pool. When the NPC is generated, it pulls a random selection from this pool for its appearance. They are compatible, so you could add Mohawk as well as Punk Styles if you want to slightly weight the pool, but you won't have a ton of control over that. 
+I can see this going two ways: 
+- As a trait for NPCs to generate with
+- As a designated item in the chunk creator for use in NPC & Object inventories. 
 
-####				How it works
-By adding an appearance trait, you add an item to a random selection pool. When the agent is spawned as an NPC, its appearance is randomly chosen from all pools with items in them. Empty pools are ignored, and appearance copies the visuals in the character editor.
+I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
 
-####				Best Practices
-#####					Test En Masse
-With so many random variables, it's hard to tell whether the look is perfect unless you see a ton of examples. Use a chunk with lots of copies of the same NPC to identify weird edge cases and gradually sculpt an aesthetic. The bonus is that if you decide to share this character on the workshop, you can use that picture to give a more accurate idea of what the character will tend to look like.
-
-#####					Creative Weighting
-Use the grouped traits and redundancy to your advantage. Here's an example trait list:
-> Black Hair, Brown Hair, Blonde Hair, Normal Hair Colors, Normal Hair Colors (No Grey), Wild Hair Colors
-
-This combination has three copies of the most common hair colors (two copies each are applied by *Normal Hair Colors* and *Normal Hair Colors (No Grey)*. Orange hair is demographically rare so it's not added a third time. Wild Hair Colors are only added once, to make dyed hair somewhat rare. 
-
-#####					Less is More... More or Less
-It's tempting to throw a ton of traits into the list. But keep in mind part of what makes Streets of Rogue brilliant: That appearances *don't* vary that much in vanilla, because making everything immediately visually identifiable was one of the designer's priorities. 
-
-This is not to say that highly variable agents aren't useful. It can be good if you want to surprise the player or a present a lot of visual variety. But every unidentified NPC is another instant where they have to check the agent's class name, which could make gameplay draggy.
-
-As with all things, go crazy in moderation!
-
-####				AC3: Accessory Special
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|No Accessory 50%					|50% chance to spawn with no accessory, regardless of items in the pool
-|No Accessory 75%					|75% chance to spawn with no accessory, regardless of items in the pool
-
-####				BC3: Body Color Special
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|Neutral Body 50%					|50% chance to not apply a body color
-|Neutral Body 75%					|75% chance to not apply a body color
-|Shirtless							|Body color matches skin color
-|Shirtsome							|Body color is rerolled if it matches skin color
-
-####				EC3: Eye Color Special
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|Beady-Eyed							|Eye color matches skin color
-
-####				FH3: Facial Hair Special
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|No Facial Hair 50%					|50% chance to spawn with no facial hair, regardless of items in the pool
-|No Facial Hair 75%					|75% chance to spawn with no facial hair, regardless of items in the pool
-
-####				HC2: Hair Color Grouped
-
-|Hair Color			|Normal	|Normal (No Grey)	|Wild	|
-|:------------------|:-----:|:-----------------:|:-----:|
-|Black				|✓		|✓					|		|
-|Blonde				|✓		|✓					|		|
-|Blue				|		|					|✓		|
-|Brown				|✓		|✓					|		|
-|Green				|		|					|✓		|
-|Grey				|✓		|					|		|
-|Orange				|✓		|✓					|		|
-|Pink				|		|					|✓		|
-|Purple				|		|					|✓		|
-|Red				|		|					|✓		|
-|White				|		|					|		|
-
-####				HC3: Hair Color Special
-
-***Mask:** Any non-hairstyle, like the Hoodie, Gorilla Head, etc.*
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|Matched Mask						|If a mask is rolled, matches its color to Body Color
-|Uncolored Mask						|If a mask is rolled, it won't be colored
-
-####				HS2: Hairstyle Grouped
-
-|Hairstyle			|Balding|Bangs	|Female	|Long	|Male	|Not Hairstyles	|Punk	|Short Female	|Short	|Stylish|
-|:------------------|:-----:|:-----:|:-----:|:-----:|:-----:|:-------------:|:-----:|:-------------:|:-----:|:-----:|
-|Afro				|		|		|		|		|✓		|				|		|				|		|		|
-|Alien Head			|		|		|		|		|		|✓				|		|				|		|		|
-|Assassin Mask		|		|		|		|		|		|✓				|		|				|		|		|
-|Bald				|✓		|		|		|		|✓		|				|✓		|				|		|		|
-|Balding			|✓		|		|		|		|✓		|				|		|				|		|		|
-|Bangs Long			|		|✓		|✓		|✓		|		|				|✓		|				|		|		|
-|Bangs Medium		|		|✓		|✓		|✓		|		|				|✓		|				|		|		|
-|Butler Bot Head	|		|		|		|		|		|✓				|		|				|		|		|
-|Cop Bot Head		|		|		|		|		|		|✓				|		|				|		|		|
-|Curtains			|		|		|		|		|✓		|				|		|				|		|		|
-|Cutoff				|		|		|✓		|		|		|				|		|				|		|		|
-|Flat Long			|		|		|✓		|✓		|		|				|		|				|		|		|
-|Gorilla Head		|		|		|		|		|		|✓				|		|				|		|		|
-|Hobo Beard			|		|		|		|		|		|				|		|				|		|		|
-|Hoodie				|		|		|		|		|		|✓				|		|				|		|		|
-|Killer Robot Head	|		|		|		|		|		|✓				|		|				|		|		|
-|Leia				|		|		|✓		|		|		|				|✓		|✓				|		|		|
-|Messy Long			|		|		|✓		|✓		|		|				|		|				|		|		|
-|Military			|		|		|		|		|✓		|				|		|				|✓		|		|
-|Mohawk				|		|		|		|		|✓		|				|✓		|				|		|		|
-|Normal Hair		|		|		|		|		|✓		|				|		|				|✓		|		|
-|Normal High		|		|		|		|		|✓		|				|		|				|✓		|		|
-|Pompadour			|		|		|		|		|✓		|				|		|				|		|✓		|
-|Ponytail			|		|		|✓		|		|		|				|		|✓				|		|		|
-|Puffy Long			|		|		|✓		|✓		|		|				|		|				|		|		|
-|Puffy Short		|		|		|		|		|✓		|				|		|				|		|		|
-|Robot Head			|		|		|		|		|		|✓				|		|				|		|		|
-|Sidewinder			|✓		|✓		|		|		|✓		|				|		|				|		|		|
-|Slavemaster Mask	|		|		|		|		|		|✓				|		|				|		|		|
-|Spiky				|		|		|		|		|✓		|				|✓		|				|✓		|✓		|
-|Spiky Short		|		|		|		|		|✓		|				|✓		|				|✓		|✓		|
-|Suave				|		|		|		|		|✓		|				|		|				|		|✓		|
-|Wave				|		|		|✓		|✓		|		|				|		|				|		|		|
-|Werewolf Head		|		|		|		|		|		|✓				|		|				|		|		|
-
-####				HS3: Hairstyle Special
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|Masks 50%							|If the hairstyle pool contains any Masks, raises their likelihood of being drawn to 50%.
-
-####				LC3: Legs Color Special
-
-|Trait								|Effects								|
-|:----------------------------------|:--------------------------------------|
-|Pantiful							|Legs color is rerolled if it matches skin color
-|Pantsless							|Legs color matches skin color
-
-####				SC2: Skin Color Grouped
-
-|Skin Color			|Human	|Shapeshifter	|Vampire|Zombie	|
-|:------------------|:-----:|:-------------:|:-----:|:-----:|
-|Black				|		|				|		|		|
-|Blue				|		|				|		|		|
-|Brown				|		|				|		|		|
-|Gorilla			|		|				|		|		|
-|Green				|		|				|		|		|
-|Grey				|		|				|		|		|
-|Human Black		|✓		|				|✓		|		|
-|Human Gold			|✓		|				|		|		|
-|Human Light Black	|✓		|				|		|		|
-|Human Mixed		|✓		|✓				|		|		|
-|Human Pale			|✓		|✓				|		|		|
-|Human Pink			|✓		|✓				|		|		|
-|Human Super Pale	| 		|				|✓		|		|
-|Human White		|✓[^1]	|✓[^1]			|		|		|
-|Mech				|		|				|		|		|
-|Orange				|		|				|		|		|
-|Pink				|		|				|		|		|
-|Purple				|		|				|		|		|
-|Red				|		|				|		|		|
-|Werewolf			|		|				|		|		|
-|White				|		|				|		|		|
-|Yellow				|		|				|		|		|
-|Zombie 1			|		|				|		|✓		|
-|Zombie 2			|		|				|		|✓		|
-
-[^1]: Doubled in this group in the original game code.
-
-###				Hire Duration
-
-|Trait												|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
-|Permanent Hire										|- Offers to hire at 8x the normal cost, with infinite uses of Expert ability.
-|Permanent Hire Only								|- As Permanent Hire, but removes original one-time hire option.
-
-###				Merchant Stock
-Traits in this category are multiplicative.
-
-***Durable Wares:** Melee & Ranged weapons, Wearables*
-
-***Stackable Wares:** Consumables, Food, Tools, Throwing Weapons*
-
-|Trait												|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
-|Clearancer											|- Allows the same item to be sold multiple times, like Bartender. Better for smaller inventories.
-|Masterworker										|- Durable wares have 2x Durability
-|Masterworkerer										|- Durable wares have 3x Durability
-|Masterworkerest									|- Durable wares have 4x Durability
-|Shiddy Goods										|- Durable wares have 1/3x Durability
-|Shoddy Goods										|- Durable wares have 2/3x Durability
-|Wholesaler											|- Stackable wares have 2x Quantity
-|Wholesalerer										|- Stackable wares have 3x Quantity
-|Wholesalerest										|- Stackable wares have 4x Quantity
-##			P	Bugs
+Vanilla list:
+- Defense
+- Drugs
+- Food
+- Guns
+- GunAccessory
+- Melee
+- Movement
+- NonViolent
+- NonUsableTool
+- NonStandardWeapons
+- NonStandardWeapons2
+- NotRealWeapons
+- Passive
+- Social
+- Stealth
+- Supplies
+- Technology
+- Trade
+- Usable
+- Weapons
+- Weird
+##		C	Cloneliness Killer
+Loneliness Killer spawns should vary in appearance
+First, need to get this feature working.
+Buddy Cop appearance didn't trigger. Only seems to show Eyes traits, no hair or skin (used single human groups). Are the pools populating?
+This would be a Free Trait, in a category of their own. No limit, 0 points. A subcategory of Player Traits
+##		P	Bugs
 Except crickets, crickets are fine.
-###				C	Containers Show "(Empty)"
-Start_SetupInvDatabasesForContainers sets chestReal to true. This makes it so that (Empty) does display the first time the chunk is run, but not on re-runs.
-	This bool is allowing PlayfieldObject.MakeChestNonInteractable to be called, since it's already built to handle any object.
-	Re-setting it to true in a PlayfieldObject.SetVars_Postfix didn't have any effect.
-It might be the 0-Qty Money item throwing off InvDatabase.IsEmpty. That'd be the next thing to try.
+###				C	Upper Crusty Alignment
+They're following Cops into fights
+###				C	Mustache Disappearances
+After an NPC follows you to the next level... their facial hair disappears
+###				C	Guilty Cops
+Rookie Cop, lv 3 loneliness killer companion turned Guilty when I started arresting someone
+Then, he went guilty when I walked into a hospital. Maybe just any owned tile does it.
+Buddy Cop:
+	On entering level 2, had 2 followers. The first run (continuous, not loaded), all Law went guilty. On the second run (Loaded, continue from front screen), one went hostile too.
+	Third run, I think all Law went guilty when I killed a shapeshifter.
+###				C	ChooseWeapon
+On start level:"
+	[Info   : Unity Log] SETUPMORE4_7
+	[Error  : Unity Log] Couldn't do ChooseWeapon etc. for agent Custom (1216) (Agent)
+
+From LoadLevel.SetupMore4_2:
+	try
+	{
+		Agent agent6 = this.gc.agentList[i];
+		if (agent6.isPlayer == 0)
+		{
+			if (agent6.prisoner == 0)
+				agent6.inventory.FillAgent();
+			
+			if (!agent6.bountyHunter || this.gc.challenges.Contains("RocketLaunchers")) 
+				agent6.inventory.ChooseWeapon();
+			
+			agent6.inventory.ChooseArmor();
+			agent6.inventory.ChooseArmorHead();
+		}
+	}
+	catch
+		"Couldn't do ChooseWeapon etc. for agent ";
+###				C	Eyes Strings error
+Between Accessory & Body Type, current logs are uninterrupted
 ###				H	Jukebox Hacks
 Possibly RogueLibs, wait for confirmation.
 
@@ -453,9 +339,6 @@ Proposal:
 		Out of Ammo
 		Search
 		Spawn
-##			C	Dedicated section on Character Sheet
-Should not be too hard, as the one method where it's filled out is pretty transparent
-Just add a --- CCU TRAITS --- Divider or something
 ##			C	Door System
 ###				C	Keycard System
 Red, Blue, Green, Yellow
@@ -1258,6 +1141,9 @@ Complete
 ###			√	Cyber-Intruder
 Complete
 ##		C	Interaction
+###			C	Insider
+Sell Key/SafeCombo/MayorBadge
+Do as Interaction instead of shop,. 
 ###			C	Shitbird
 Runs off with your money when you try to pay them for something, lol
 ###			C	Buy Slave
@@ -1404,62 +1290,15 @@ Complete
 Complete
 ###			√	Speaks Werewelsh
 Complete
-##		C	Loadout
-###			C	Miscellaneous
-####			C	Chunk Mayor Badge
-Set Bribe options on separate traits
-This might just need to be an item rather than a trait
-####			C	Chunk Stash Hint
-New
-####			√	Chunk Key
+##		√	Loot Drop
+###			√	Blurse of Midas
 Complete
-####			√	Chunk Safe Combo
+###			√	Blurse of Softlock
 Complete
-###			C	Modifiers
-####			C	Use Starting Inventory
-Any items added to the character in the CC will be included when spawned in a chunk. In vanilla, they are overridden by the chunk-defined inventory.
-####			C	Deep Storage
-Doesn't drop items on death
-Good for modded guns?
-###			C	Weapon
-This worked, but it's out of scope for 0.1.1.
-Change the format into something like Merchant Type, since you want pooled weighted lists
-###			C	Weapon Mods
-####			C	Discreet
-Automatically applies Silencer to all held weapons on load
-###			C	Inventory
-Class-based inventory lists from vanilla
-###			C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
+###			√	Blurse of the Pharoah
+Complete
+###			√	Blurse of Valhalla
+Complete
 ##		C	Merchant Buyer Modifiers
 ###				C	Buyer Cap
 Total amount of money the trader will dispense when buying player goods
@@ -1529,6 +1368,9 @@ Since Character Creator inventory isn't by default carried to spawn, use it as a
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		CT	Passive
+###			H	Outlaw
+Out of scope for now
+Ignores mutator-added laws
 ###			C	Elector
 NPC has 2x effect on Electability
 ###			C	Unspecial
@@ -1615,8 +1457,6 @@ Agent.zombified
 Agent.customZombified
 ###			√	Berserk (Declined)
 Rel General - Hostile to All
-###			√	Blinker*
-Complete
 ###			√	Brainless
 Complete
 ###			√	Crusty
@@ -1641,6 +1481,15 @@ Complete
 ###			√	Status Effect Immune
 Complete
 ###			√	Z-Infected
+Complete
+##		C	Player
+###			√	Blinker
+Complete
+###			√	Myrmicapo
+Complete
+###			√	Myrmiconsigliere
+Complete
+###			√	Myrmidon
 Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
@@ -1861,6 +1710,9 @@ Mutator: Exit Timer - Similar to Time Limit, except that the elevator is locked 
 Mutator: Exit Timer EXTREME - Similar to Time Limit EXTREME, except that the timer is LONGER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator.
 
 Mutator: Exit Timer LITE - Similar to Time Limit, except that the timer is SHORTER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator. 
+##		C	Laws
+###			H	No Open Carry
+Out of scope for now
 ##		C	Disaster Mutators
 Simply allows them to be mixed
 ##		C	Election Mutators

@@ -1,10 +1,16 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Mutators.Laws;
+using CCU.Patches.Agents;
 using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
 using CCU.Traits.Loadout;
-using CCU.Traits.Merchant_Type;
+using CCU.Traits.Loadout_Chunk_Items;
+using CCU.Traits.Loadout_Money;
 using CCU.Traits.Merchant_Stock;
+using CCU.Traits.Merchant_Type;
+using CCU.Traits.Passive;
+using CCU.Traits.Player;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -12,8 +18,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using CCU.Traits.Loadout_Weapons;
-using CCU.Traits.Loadout_Misc;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CCU.Patches.Inventory
 {
@@ -98,47 +104,88 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.AddRandWeapon))]
-		private static IEnumerable<CodeInstruction> AddRandomWeapon_Custom(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo rollWeaponLoadout = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.RollWeaponLoadout));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 2,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-				},
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldstr, "Empty"),
-					new CodeInstruction(OpCodes.Stloc_S, 4),
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Call, rollWeaponLoadout),
-					new CodeInstruction(OpCodes.Stloc_S, 4),
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-		private static string RollWeaponLoadout(InvDatabase invDatabase)
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.ChooseWeapon), argumentTypes: new[] { typeof(bool) })]
+		public static bool ChooseWeapon_Prefix(InvDatabase __instance)
         {
-			Agent agent = invDatabase.agent;
+			Agent agent = __instance.agent;
 
-			if (agent.agentName != VanillaAgents.CustomCharacter ||
-				!agent.GetTraits<T_Loadout>().Any())
-				return "Empty";
+			if (!agent.inCombat && !agent.GetOrAddHook<P_Agent_Hook>().weaponChosen &&
+				(agent.HasTrait<Concealed_Carrier>() || 
+				(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
+            {
+				ConcealWeapon(__instance);
+				agent.GetOrAddHook<P_Agent_Hook>().weaponChosen = true;
+				return false;
+            }
 
-			List<string> pool = agent.GetTraits<T_RandomWeapon>().SelectMany(t => t.Rolls).ToList();
-
-			return pool[CoreTools.random.Next(pool.Count - 1)];
+			return true;
         }
+		public static async void ConcealWeapon(InvDatabase invDatabase)
+		{
+			if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
+				await Task.Delay(500);
+			else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
+				await Task.Delay(2000);
+			else
+				await Task.Delay(1000);
+
+			invDatabase.EquipWeapon(invDatabase.fist);
+		}
+
+		[HarmonyPrefix,HarmonyPatch(methodName: nameof(InvDatabase.DepleteArmor))]
+		public static bool DepleteArmor_Modify(InvDatabase __instance, ref int amount)
+        {
+			Agent agent = __instance.agent;
+			float amt = amount;
+
+			if (agent.HasTrait<Myrmicapo>())
+				amt /= 2f;
+
+			if (agent.HasTrait<Myrmiconsigliere>())
+				amt /= 3f;
+
+			if (agent.HasTrait<Myrmidon>())
+				amt /= 4f;
+
+			amount = (int)Mathf.Max(1f, amt);
+
+			return true;
+        }
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
+		private static void FillAgent_Loadout(InvDatabase __instance)
+		{
+			LoadoutTools.SetupLoadout(__instance);
+		}
+
+        [HarmonyPostfix,HarmonyPatch(methodName: nameof(InvDatabase.FindMoneyAmt))]
+		private static void FindMoneyAmount_Postfix(InvDatabase __instance, ref int __result)
+        {
+			if (!__instance.CompareTag("Agent"))
+				return;
+
+			Agent agent = __instance.agent;
+
+			if (agent.HasTrait<Broke>())
+            {
+				__result = 0;
+				return;
+			}
+
+			float amt = agent.HasTrait<Zillionaire>()
+				? 1000f
+				: __result;
+
+			// Kept separate to allow multiplication
+			if (agent.HasTrait<Rich>())
+				amt *= 3f;
+			if (agent.HasTrait<Wealthy>())
+				amt *= 4f;
+			if (agent.HasTrait<Poor>())
+				amt /= 2f;
+
+			__result = (int)amt;
+		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
 		public static bool Awake_Prefix(InvDatabase __instance)
@@ -155,16 +202,16 @@ namespace CCU.Patches.Inventory
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
         {
 			Agent agent = __instance.agent;
-			
+			List<string> inventory = new List<string>();
+			List<string> finalInventory = new List<string>();
+            System.Random rnd = new System.Random();
+			int attempts = 0;
+			bool forceDuplicates = false;
+
 			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)
 				return true;
 
-			List<string> inventory = new List<string>();
 			List<T_MerchantType> traits = agent.GetTraits<T_MerchantType>().ToList();
-			List<string> finalInventory = new List<string>();
-			Random rnd = new Random();
-			int attempts = 0;
-			bool forceDuplicates = false;
 
 			foreach (T_MerchantType trait in traits)
 				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
@@ -294,8 +341,6 @@ namespace CCU.Patches.Inventory
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		// Returns a false negative if Note detected
 		public static string MagicVarString(string vanilla) =>
 			Investigateables.IsInvestigationString(vanilla)
 				? ""

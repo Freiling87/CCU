@@ -7,7 +7,9 @@ using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
 using CCU.Traits.Explosion_Modifier;
 using CCU.Traits.Gib_Type;
+using CCU.Traits.Loot_Drops;
 using CCU.Traits.Passive;
+using CCU.Traits.Player;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -174,6 +176,17 @@ namespace CCU.Patches
 
 			return false;
 		}
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.SetupDeath), argumentTypes: new[] { typeof(PlayfieldObject), typeof(bool), typeof(bool) })]
+		public static bool SetupDeath_FilterSpillables(StatusEffects __instance)
+        {
+			foreach (T_LootDrop trait in __instance.agent.GetTraits<T_LootDrop>())
+				foreach (InvItem invItem in __instance.agent.inventory.InvItemList)
+					if (trait.ProtectedItem(invItem))
+						invItem.doSpill = false;
+
+			return true;
+        }
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.UseQuickEscapeTeleporter))]
 		public static bool UseQuickEscapeTeleporter_Blinker(bool isEndOfFrame, StatusEffects __instance)

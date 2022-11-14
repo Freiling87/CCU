@@ -121,6 +121,8 @@
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
     <Compile Include="Localization\CDialogue.cs" />
+    <Compile Include="Mutators\Laws\C_Law.cs" />
+    <Compile Include="Mutators\Laws\No_Open_Carry.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
@@ -547,13 +549,42 @@
     <Compile Include="Traits\Explosion Timer\Shortest_Fuse.cs" />
     <Compile Include="Traits\Explosion Timer\Short_Fuse.cs" />
     <Compile Include="Traits\Explosion Timer\T_ExplosionTimer.cs" />
+    <Compile Include="Traits\Hire Duration\Homesickly.cs" />
+    <Compile Include="Traits\Hire Duration\Homesickless.cs" />
     <Compile Include="Traits\Language\Speaks_Binary.cs" />
-    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Stash_Hint.cs" />
-    <Compile Include="Traits\Loadout\Weapons Grouped\T_RandomWeapon.cs" />
+    <Compile Include="Traits\Loadout\Money\Poor.cs" />
+    <Compile Include="Traits\Loadout\Money\Desperate.cs" />
+    <Compile Include="Traits\Loadout\Money\Broke.cs" />
+    <Compile Include="Traits\Loadout\Money\Wealthy.cs" />
+    <Compile Include="Traits\Loadout\Money\T_PocketMoney.cs" />
+    <Compile Include="Traits\Loadout\Money\Zillionaire.cs" />
+    <Compile Include="Traits\Loadout\Money\Rich.cs" />
+    <Compile Include="Traits\Loadout\Money\Prosperous.cs" />
+    <Compile Include="Traits\Loadout\Pockets\FunnyPack_Pro.cs" />
+    <Compile Include="Traits\Loadout\Pockets\Have.cs" />
+    <Compile Include="Traits\Loadout\Pockets\Have_Mostly.cs" />
+    <Compile Include="Traits\Loadout\Pockets\Have_Not.cs" />
+    <Compile Include="Traits\Loadout\Slots\Sidearmed_but_on_Both_Sides.cs" />
+    <Compile Include="Traits\Loot\Drops\Blurse_of_Midas.cs" />
+    <Compile Include="Traits\Loot\Drops\Blurse_of_Valhalla.cs" />
+    <Compile Include="Traits\Loot\Drops\Blurse_of_Softlock.cs" />
+    <Compile Include="Traits\Loot\Drops\T_LootDrop.cs" />
+    <Compile Include="Traits\Player\Myrmiconsigliere.cs" />
+    <Compile Include="Traits\Player\Myrmicapo.cs" />
+    <Compile Include="Traits\Player\Myrmidon.cs" />
+    <Compile Include="Traits\Loadout\Slots\Equipment_Enjoyer.cs" />
+    <Compile Include="Traits\Loadout\Slots\Equipment_Virgin.cs" />
+    <Compile Include="Traits\Loadout\Slots\Equipment_Chad.cs" />
+    <Compile Include="Traits\Loadout\Pockets\FunnyPack_Extreme.cs" />
+    <Compile Include="Traits\Loadout\Loader\Upscaled_Distribution.cs" />
+    <Compile Include="Traits\Loadout\Loader\Scaled_Distribution.cs" />
+    <Compile Include="Traits\Loadout\Loader\Flat_Distribution.cs" />
+    <Compile Include="Traits\Loadout\Pockets\FunnyPack.cs" />
+    <Compile Include="Traits\Loadout\Slots\Sidearmed_to_the_Teeth.cs" />
+    <Compile Include="Traits\Loadout\Chunk Items\Chunk_Stash_Hint.cs" />
+    <Compile Include="Traits\Loadout\Slots\Sidearmed.cs" />
+    <Compile Include="Traits\Loot\Drops\Blurse_of_the_Pharoah.cs" />
     <Compile Include="Traits\Merchant Stock\Clearancer.cs" />
-    <Compile Include="Traits\Merchant Type\Insider_Safe_Combo.cs" />
-    <Compile Include="Traits\Merchant Type\Insider_Mayors_Badge.cs" />
-    <Compile Include="Traits\Merchant Type\Insider_Key.cs" />
     <Compile Include="Traits\Merchant Type\Burger_Joint.cs" />
     <Compile Include="Traits\Merchant Type\Sugar_Shack.cs" />
     <Compile Include="Traits\Merchant Stock\Shiddy_Goods.cs" />
@@ -566,9 +597,10 @@
     <Compile Include="Traits\Merchant Stock\Wholesaler.cs" />
     <Compile Include="Traits\Passive\Brainless.cs" />
     <Compile Include="Traits\Passive\Concealed_Carrier.cs" />
-    <Compile Include="Traits\Passive\Blinker.cs" />
+    <Compile Include="Traits\Player\Blinker.cs" />
     <Compile Include="Traits\Passive\Immobile.cs" />
     <Compile Include="Traits\Passive\Immovable.cs" />
+    <Compile Include="Traits\Passive\Outlaw.cs" />
     <Compile Include="Traits\Passive\Not_Vincible.cs" />
     <Compile Include="Traits\Passive\Indestructible.cs" />
     <Compile Include="Traits\Gib Type\Glass_Shards.cs" />
@@ -628,7 +660,7 @@
     <Compile Include="Traits\Language\Speaks_Chthonic.cs" />
     <Compile Include="Traits\Language\Speaks_High_Goryllian.cs" />
     <Compile Include="Traits\Language\T_Language.cs" />
-    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Mayor_Badge.cs" />
+    <Compile Include="Traits\Loadout\Chunk Items\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />
     <Compile Include="Traits\MapMarker\T_MapMarker.cs" />
     <Compile Include="Traits\Merchant Type\Gun_Dealer_Heavy.cs" />
@@ -738,9 +770,8 @@
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Key.cs" />
-    <Compile Include="Traits\Loadout\Miscellaneous\Chunk_Safe_Combo.cs" />
-    <Compile Include="Traits\Loadout\Weapons Grouped\Guns_Common.cs" />
+    <Compile Include="Traits\Loadout\Chunk Items\Chunk_Key.cs" />
+    <Compile Include="Traits\Loadout\Chunk Items\Chunk_Safe_Combo.cs" />
     <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
     <Compile Include="Traits\Bodyguarded\Bodyguarded_Pilot.cs" />
     <Compile Include="Traits\Trait Gate\T_TraitGate.cs" />
@@ -771,6 +802,8 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="Documentation\C01_AgentDefaultGoals.md" />
+    <None Include="Documentation\C0400_PlayerTraits.md" />
+    <None Include="Documentation\C0402_Loadout.md" />
     <None Include="Documentation\C0401_Appearance.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
@@ -782,11 +815,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\Language\" />
-    <Folder Include="Traits\Loadout\Weapons\" />
-    <Folder Include="Traits\Signature Weapon\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Appearance_Examples.png" />
     <Content Include="Images\CCScreenshotExample.jpg" />
+    <Content Include="Images\CCU_160x160.png" />
     <Content Include="Images\CCU_16x16.png" />
     <Content Include="Images\CCU_64x64.png" />
     <Content Include="Images\CCU_Blue.png" />

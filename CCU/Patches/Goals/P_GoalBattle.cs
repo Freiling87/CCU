@@ -105,7 +105,6 @@ namespace CCU.Patches.Goals
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
 		private static void GateDrugWarriorAV(Agent agent)
         {
 			if (agent.HasTrait<Suppress_Syringe_AV>())
@@ -118,8 +117,7 @@ namespace CCU.Patches.Goals
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalBattle.Terminate))]
 		private static void Terminate_Postfix(Agent ___agent)
         {
-			if (___agent.HasTrait<Concealed_Carrier>() && ___agent.gun.visibleGun != null)
-				___agent.gun.HideGun();
+			___agent.inventory.ChooseWeapon();
         }
 	}
 }

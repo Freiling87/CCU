@@ -14,7 +14,8 @@ namespace CCU
 			RogueLibs.CreateCustomName(CButtonText.Hire_Expert_Voucher, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Assist Me",
-			}); RogueLibs.CreateCustomName(CButtonText.Hire_Muscle_Voucher, t, new CustomNameInfo
+			}); 
+			RogueLibs.CreateCustomName(CButtonText.Hire_Muscle_Voucher, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Assist Me",
 			});

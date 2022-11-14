@@ -74,9 +74,6 @@ namespace CCU.Traits.App
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
 			Agent agent = agentHitbox.agent;
-			logger.LogDebug("SetupAppearance " + agent.agentName + " (" + agent.agentRealName + ")");
-			int log = 0;
-			logger.LogDebug(log++);
 
 			// TODO: Static Preview check
 			if (agent.isPlayer != 0)
@@ -86,20 +83,15 @@ namespace CCU.Traits.App
 				return;
 			}
 
-			logger.LogDebug(log++);
-
 			if (agent.agentName != VanillaAgents.CustomCharacter ||
 				agent.GetOrAddHook<P_Agent_Hook>().appearanceRolled)
 				return;
-
-			logger.LogDebug(log++);
 
 			// Be very careful with reordering these - some of these are dependent on each other.
 			RollSkinColor(agentHitbox);
 			RollHairstyle(agentHitbox);
 			RollFacialHair(agentHitbox);
-			logger.LogDebug("Facial Hair 1: " + agentHitbox.facialHairType);
-			// From here
+			// Moved from here...
 			RollBodyColor(agentHitbox);
 			RollHairColor(agentHitbox);
 			RollAccessory(agentHitbox);
@@ -107,9 +99,8 @@ namespace CCU.Traits.App
 			RollEyeColor(agentHitbox);
 			RollEyeType(agentHitbox);
 			RollLegsColor(agentHitbox);
-			agentHitbox.SetCantShowHairUnderHeadPiece(); // To Here
+			agentHitbox.SetCantShowHairUnderHeadPiece(); // to here. To test Hair Over Headpiece bug.
 			agent.GetOrAddHook<P_Agent_Hook>().appearanceRolled = true;
-			logger.LogDebug("Facial Hair 2: " + agentHitbox.facialHairType);
 		}
 		private static string GetRoll<T>(AgentHitbox agentHitbox) where T : T_Appearance
 		{
@@ -238,15 +229,15 @@ namespace CCU.Traits.App
 					break;
 			}
 
-			logger.LogDebug("Printing pool for (" + typeof(T) + ")");
-			foreach (string str in pool)
-				logger.LogDebug(pool.IndexOf(str) + ".\t" + str);
+			//logger.LogDebug("Printing pool for (" + typeof(T) + ")");
+			//foreach (string str in pool)
+				//logger.LogDebug(pool.IndexOf(str) + ".\t" + str);
 
 			if (pool.Count() is 0)
 				return null;
 
-			string result = pool[CoreTools.random.Next(pool.Count())];
-			logger.LogDebug("RESULT: " + result);
+			string result = pool[CoreTools.random.Next(pool.Count())]; // TODO: Shouldn't this throw an off by one error?
+			//logger.LogDebug("RESULT: " + result);
 
 			return result;
 		}
@@ -329,7 +320,6 @@ namespace CCU.Traits.App
 			catch { }
 
 			string roll = GetRoll<T_EyeType>(agentHitbox);
-			logger.LogDebug("Roll: " + roll);
 			agent.GetOrAddHook<P_Agent_Hook>().eyesType = roll;
 			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
 			agent.customCharacterData.eyesType = roll; // Needed for SetupBodyStrings // Then rewrite it so you don't need to overwrite save for this

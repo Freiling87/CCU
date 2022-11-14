@@ -1,12 +1,10 @@
 ﻿using CCU.Traits.Loadout;
 using RogueLibsCore;
 
-namespace CCU.Traits.Loadout_Misc
+namespace CCU.Traits.Loadout_Chunk_Items
 {
     public class Chunk_Stash_Hint : T_Loadout
 	{
-		public override string[] Rolls => new string[] { cItem.StashHint };
-
         //[RLSetup]
         public static void Setup()
 		{
