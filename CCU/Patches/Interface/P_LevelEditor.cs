@@ -96,6 +96,15 @@ namespace CCU.Patches.Interface
 			return instructions;
 		}
 
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.PressedMouseButton))]
+		public static bool PressedMouseButton_Prefix(LevelEditor __instance, ref InputField ___extraVarStringObject )
+        {
+			if (!___extraVarStringObject.IsActive())
+				___extraVarStringObject.text = "";
+
+			return true;
+        }
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
 		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
         {

@@ -41,6 +41,8 @@ namespace CCU.Systems.Investigateables
 				? vObject.Sign
 				: originalName;
 
+		public static bool IsInvestigateable(PlayfieldObject playfieldObject) =>
+			IsInvestigateable(playfieldObject.objectName);
 		public static bool IsInvestigateable(string name) =>
 			InvestigateableObjects_Slot1.Contains(name) ||
 			InvestigateableObjects_Slot2.Contains(name);
@@ -76,6 +78,7 @@ namespace CCU.Systems.Investigateables
 			RogueInteractions.CreateProvider(h =>
 			{
 				if (!h.Agent.interactionHelper.interactingFar &&
+					IsInvestigateable(h.Object) &&
 					IsInvestigationString(h.Object.extraVarString))
 				{
 					string text = PlayerDisplayInvestigationText(h.Object.extraVarString);

@@ -39,7 +39,7 @@ namespace CCU.Patches.AgentRelationships
             if (GC.levelType == "HomeBase")
                 return;
 
-            string relationship = __instance.GetRel(otherAgent);
+            string relationship = null;
 
             //  Factions, Custom
             if (___agent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0) && otherAgent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0))
@@ -76,11 +76,11 @@ namespace CCU.Patches.AgentRelationships
                 relationship = VRelationship.Aligned;
 
             if (!(relationship is null))
-                SetRelationshipTo(___agent, otherAgent, relationship);
+                SetRelationshipTo(___agent, otherAgent, relationship, false);
         }
 
         //  TODO: Refactor
-        public static void SetRelationshipTo(Agent agent, Agent otherAgent, string relationship)
+        public static void SetRelationshipTo(Agent agent, Agent otherAgent, string relationship, bool mutual)
         {
             Relationships __instance = agent.relationships;
 
@@ -91,8 +91,11 @@ namespace CCU.Patches.AgentRelationships
                 case VRelationship.Aligned:
                     __instance.SetRelInitial(otherAgent, VRelationship.Aligned);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Aligned);
-                    otherAgent.relationships.SetRelHate(agent, 0);
+                    if (mutual)
+                    {
+                        otherAgent.relationships.SetRelInitial(agent, VRelationship.Aligned);
+                        otherAgent.relationships.SetRelHate(agent, 0);
+                    }
                     break;
                 case VRelationship.Annoyed:
                     __instance.SetStrikes(otherAgent, 2);
@@ -104,26 +107,38 @@ namespace CCU.Patches.AgentRelationships
                 case VRelationship.Hostile:
                     __instance.SetRel(otherAgent, VRelationship.Hostile);
                     __instance.SetRelHate(otherAgent, 5);
-                    otherAgent.relationships.GetRelationship(agent).mechHate = true;
-                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Hostile);
+                    if (mutual)
+                    {
+                        otherAgent.relationships.GetRelationship(agent).mechHate = true;
+                        otherAgent.relationships.SetRelInitial(agent, VRelationship.Hostile);
+                    }
                     break;
                 case VRelationship.Loyal:
                     __instance.SetRelInitial(otherAgent, VRelationship.Loyal);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Loyal);
-                    otherAgent.relationships.SetRelHate(agent, 0);
+                    if (mutual)
+                    {
+                        otherAgent.relationships.SetRelInitial(agent, VRelationship.Loyal);
+                        otherAgent.relationships.SetRelHate(agent, 0);
+                    }
                     break;
                 case VRelationship.Neutral:
                     __instance.SetRelHate(otherAgent, 0);
                     __instance.SetRelInitial(otherAgent, VRelationship.Neutral);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRelInitial(agent, VRelationship.Neutral);
-                    otherAgent.relationships.SetRelHate(agent, 0);
+                    if (mutual)
+                    {
+                        otherAgent.relationships.SetRelInitial(agent, VRelationship.Neutral);
+                        otherAgent.relationships.SetRelHate(agent, 0);
+                    }
                     break;
                 case VRelationship.Submissive:
                     __instance.SetRel(otherAgent, VRelationship.Submissive);
                     __instance.SetSecretHate(otherAgent, false);
-                    otherAgent.relationships.SetRel(agent, VRelationship.Neutral);
+                    if (mutual)
+                    {
+                        otherAgent.relationships.SetRel(agent, VRelationship.Neutral);
+                    }
                     break;
             }
         }
