@@ -1,21 +1,24 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Passive
+namespace CCU.Traits.Behavior
 {
-    public class Brainless : T_CCU
+    public class Concealed_Carrier : T_Behavior
     {
+        public override bool LosCheck => false;
+        public override string[] GrabItemCategories => null;
+
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Brainless>()
+            PostProcess = RogueLibs.CreateCustomTrait<Concealed_Carrier>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This agent won't react to anything."),
+                    [LanguageCode.English] = String.Format("This agent knows their rights, and declines your request for them to shut up about it. They'll hide their weapon when not in combat."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Brainless)),
+                    [LanguageCode.English] = DesignerName(typeof(Concealed_Carrier)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -5,16 +5,17 @@ using CCU.Patches.Agents;
 using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
 using CCU.Traits.Behavior;
+using CCU.Traits.Inventory;
 using CCU.Traits.Loadout;
 using CCU.Traits.Loadout_Chunk_Items;
 using CCU.Traits.Loadout_Money;
 using CCU.Traits.Merchant_Stock;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
-using CCU.Traits.Player;
-using CCU.Traits.Player.Ammo_Cap;
-using CCU.Traits.Player.Armor_Durability;
-using CCU.Traits.Player.Melee_Attack_Speed;
+using CCU.Traits.Player.Ammo;
+using CCU.Traits.Player.Armor;
+using CCU.Traits.Player.Melee_Combat;
+using CCU.Traits.Player.Ranged_Combat;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -167,9 +168,12 @@ namespace CCU.Patches.Inventory
 			invDatabase.EquipWeapon(invDatabase.fist);
 		}
 
-		[HarmonyPrefix,HarmonyPatch(methodName: nameof(InvDatabase.DepleteArmor))]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.DepleteArmor))]
 		public static bool DepleteArmor_Modify(InvDatabase __instance, ref int amount)
         {
+			if (__instance.agent.HasTrait<Infinite_Armor>())
+				return false;
+
 			float amt = amount;
 
 			foreach (T_Myrmicosanostra trait in __instance.agent.GetTraits<T_Myrmicosanostra>())
@@ -179,6 +183,15 @@ namespace CCU.Patches.Inventory
 			}
 
 			amount = (int)Mathf.Max(1f, amt);
+			return true;
+        }
+
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.DepleteMelee), argumentTypes: new[] { typeof(int), typeof(InvItem) })]
+		public static bool DepleteMelee_Prefix(InvDatabase __instance, int amount)
+        {
+			if (__instance.agent.HasTrait<Infinite_Melee>())
+				return false;
+
 			return true;
         }
 

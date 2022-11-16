@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Traits.Passive;
+using CCU.Traits.Behavior;
 using HarmonyLib;
 using RogueLibsCore;
 
