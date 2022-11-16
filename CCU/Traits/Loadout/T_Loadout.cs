@@ -1,8 +1,11 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits.Loadout_Gun_Nut;
 using CCU.Traits.Loadout_Loader;
 using CCU.Traits.Loadout_Money;
 using CCU.Traits.Loadout_Pockets;
 using CCU.Traits.Loadout_Slots;
+using CCU.Traits.Player.Ammo;
+using CCU.Traits.Player.Armor;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -34,19 +37,27 @@ namespace CCU.Traits.Loadout
 		public static void SetupLoadout(InvDatabase invDatabase)
 		{
 			Agent agent = invDatabase.agent;
-			logger.LogDebug("SetupLoadout: " + agent.agentName + "(" + agent.agentRealName + ")");
 
 			if (agent.agentName != VanillaAgents.CustomCharacter ||
 				!agent.GetTraits<T_Loadout>().Any() ||
 				agent.isPlayer != 0)
 				return;
 
+			logger.LogDebug("Custom Loadout: " + agent.agentName + "(" + agent.agentRealName + ")");
 			invDatabase.DontPlayPickupSounds(true);
 			T_PocketMoney.AddMoney(agent);
 			LoadCustomInventory(invDatabase);
 			invDatabase.ChooseArmor();
 			invDatabase.ChooseArmorHead();
 			invDatabase.ChooseWeapon();
+
+			foreach (InvItem invitem in invDatabase.InvItemList)
+            {
+				logger.LogDebug("Weapon Configuration");
+				T_GunNut.AddModsFromTraits(agent, invitem);
+				T_AmmoCap.RecalculateMaxAmmo(agent, invitem, true);
+			}
+					
 			invDatabase.DontPlayPickupSounds(false);
 		}
 

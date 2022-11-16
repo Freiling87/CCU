@@ -4,6 +4,7 @@ using CCU.Mutators.Laws;
 using CCU.Patches.Agents;
 using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
+using CCU.Traits.Behavior;
 using CCU.Traits.Loadout;
 using CCU.Traits.Loadout_Chunk_Items;
 using CCU.Traits.Loadout_Money;
@@ -11,6 +12,9 @@ using CCU.Traits.Merchant_Stock;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Player;
+using CCU.Traits.Player.Ammo_Cap;
+using CCU.Traits.Player.Armor_Durability;
+using CCU.Traits.Player.Melee_Attack_Speed;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -42,6 +46,37 @@ namespace CCU.Patches.Inventory
 
 			return true;
 		}
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItem), argumentTypes: new[] { typeof(string), typeof(int), typeof(List<string>), typeof(List<int>), typeof(List<int>), typeof(int), typeof(bool), typeof(bool), typeof(int), typeof(int), typeof(bool), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(bool) })]
+		public static void AddItem_Postfix(InvDatabase __instance, ref InvItem __result)
+		{
+			ModItemByTraits(__instance, ref __result);
+		}
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItemAtEmptySlot), argumentTypes: new[] { typeof(InvItem), typeof(bool), typeof(bool), typeof(int), typeof(int) })]		
+		public static void AddItemAtEmptySlot_Postfix(InvDatabase __instance, ref InvItem item)
+		{
+			ModItemByTraits(__instance, ref item);
+		}
+
+		private static void ModItemByTraits(InvDatabase invDatabase, ref InvItem invItem)
+		{
+			if (!(invDatabase.agent is null))
+            {
+                if (invItem.itemType == "WeaponProjectile")
+                {
+                    T_AmmoCap.RecalculateMaxAmmo(invDatabase.agent, invItem, false);
+
+                    if (invDatabase.agent.HasTrait<Pants_on_Autofire>())
+                        invItem.rapidFire = true;
+                }
+				else if (invItem.itemType == "WeaponMelee")
+                {
+					if (invDatabase.agent.HasTrait<Melee_Maniac2>())
+						invItem.rapidFire = true;
+                }
+            }
+        }
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
@@ -135,20 +170,15 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix,HarmonyPatch(methodName: nameof(InvDatabase.DepleteArmor))]
 		public static bool DepleteArmor_Modify(InvDatabase __instance, ref int amount)
         {
-			Agent agent = __instance.agent;
 			float amt = amount;
 
-			if (agent.HasTrait<Myrmicapo>())
-				amt /= 2f;
-
-			if (agent.HasTrait<Myrmiconsigliere>())
-				amt /= 3f;
-
-			if (agent.HasTrait<Myrmidon>())
-				amt /= 4f;
+			foreach (T_Myrmicosanostra trait in __instance.agent.GetTraits<T_Myrmicosanostra>())
+            {
+				logger.LogDebug(trait.TextName);
+				amt *= trait.ArmorDurabilityChangeMultiplier;
+			}
 
 			amount = (int)Mathf.Max(1f, amt);
-
 			return true;
         }
 

@@ -148,13 +148,13 @@ namespace CCU.Patches.Agents
 
 			logger.LogDebug("------- Inventory");
 			foreach (InvItem ii in __instance.inventory.InvItemList)
-				logger.LogDebug(ii.invItemName);
+				logger.LogDebug(ii.invItemName + "(" + ii.invItemCount + ")");
 
 			if (!(__instance.specialInvDatabase is null))
             {
 				logger.LogDebug("------- Special Inventory:");
 				foreach (InvItem ii in __instance.specialInvDatabase.InvItemList)
-					logger.LogDebug(ii.invItemName);
+					logger.LogDebug(ii.invItemName + "(" + ii.invItemCount + ")");
 			}
 
 			if (Core.debugMode && __instance.agentName == VanillaAgents.CustomCharacter)

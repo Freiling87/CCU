@@ -1,17 +1,18 @@
-﻿using CCU.Traits.Loadout;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
-namespace CCU.Traits.Player
+namespace CCU.Traits.Player.Armor
 {
-    internal class Myrmidon : T_PlayerTrait
+    internal class Myrmidon : T_Myrmicosanostra
     {
+        public override float ArmorDurabilityChangeMultiplier => 0.33f;
+
         [RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Myrmidon>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Body armor takes 1/4 damage. Multiplies with other traits in this group.",
+					[LanguageCode.English] = "Armor damage reduced by 2/3.",
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -21,7 +22,7 @@ namespace CCU.Traits.Player
 				{
 					CharacterCreationCost = 6,
 					IsAvailable = true,
-					IsAvailableInCC = true,
+					IsAvailableInCC = false,
 					IsPlayerTrait = true,
 					UnlockCost = 12,
 				});

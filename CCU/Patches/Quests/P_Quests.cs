@@ -25,9 +25,9 @@ namespace CCU.Patches.AgentQuests
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
-                {
+				{
 					new CodeInstruction(OpCodes.Ldarg_1),
-                },
+				},
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Callvirt),
@@ -46,8 +46,9 @@ namespace CCU.Patches.AgentQuests
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		private static bool ScumbagMagicString(PlayfieldObject pfo) =>
-			((Agent)pfo).HasTrait<Scumbag>() ||
-			pfo.objectName == VanillaAgents.GangsterCrepe;
+		private static bool ScumbagMagicString(PlayfieldObject playfieldObject) =>
+			playfieldObject.CompareTag("Agent")
+				? ((Agent)playfieldObject).HasTrait<Scumbag>() || playfieldObject.objectName == VanillaAgents.GangsterCrepe
+				: false;
 	}
 }
