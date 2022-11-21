@@ -17,5 +17,14 @@ namespace CCU.Patches
             foreach (T_MeleeSpeed trait in __instance.agent.GetTraits<T_MeleeSpeed>())
                 __instance.meleeContainerAnim.speed *= trait.SpeedMultiplier;
         }
-	}
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Melee.SetWeaponCooldown))]
+        public static void SetWeaponCooldown_Postfix(Melee __instance)
+        {
+            Agent agent = __instance.agent;
+
+            foreach (T_MeleeSpeed trait in agent.GetTraits<T_MeleeSpeed>())
+                agent.weaponCooldown /= trait.SpeedMultiplier;
+        }
+    }
 }

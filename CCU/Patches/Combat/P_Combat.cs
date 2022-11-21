@@ -3,6 +3,8 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Behavior;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior;
+using CCU.Traits.Player.Melee_Combat;
+using CCU.Traits.Player.Ranged_Combat;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -40,5 +42,31 @@ namespace CCU.Patches.P_Combat
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Combat.DoRapidFire))]
+		private static void DoRapidFire_TriggerHappy(Combat __instance, ref Agent ___agent)
+		{
+			foreach (T_RateOfFire trait in ___agent.GetTraits<T_RateOfFire>())
+				__instance.rapidFireTime /= trait.CooldownMultiplier;
+		}
+
+		// I believe this is only called for Rapid Fire ranged attacks
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Combat.SetPersonalCooldown))]
+		private static void SetPersonalCooldown_TriggerHappy(Combat __instance, ref Agent ___agent)
+        {
+			foreach (T_RateOfFire trait in ___agent.GetTraits<T_RateOfFire>())
+				__instance.personalCooldown *= trait.CooldownMultiplier;
+		}
+
+        [HarmonyPostfix, HarmonyPatch(declaringType: typeof(Combat), methodName: "Start")]
+		private static void Start_Postfix(Combat __instance, ref Agent ___agent)
+        {
+			foreach (T_MeleeSpeed trait in ___agent.GetTraits<T_MeleeSpeed>())
+            {
+				__instance.meleeJustBlockedTimeStart *= trait.SpeedMultiplier;
+				__instance.meleeJustHitCloseTimeStart *= trait.SpeedMultiplier;
+				__instance.meleeJustHitTimeStart *= trait.SpeedMultiplier;
+            }
+        }
 	}
 }

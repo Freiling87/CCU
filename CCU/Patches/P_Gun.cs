@@ -11,8 +11,9 @@ namespace CCU.Patches
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Gun.SetWeaponCooldown))]
         public static void SetWeaponCooldown_Postfix(Gun __instance)
         {
-			__instance.agent.weaponCooldown = T_RateOfFire.WeaponCooldown(__instance.agent, __instance.agent.weaponCooldown);
-		}
+            foreach (T_RateOfFire trait in __instance.agent.GetTraits<T_RateOfFire>())
+                __instance.agent.weaponCooldown *= trait.CooldownMultiplier;
+        }
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Gun.SubtractBullets))]
         public static bool SubtractBullets_Prefix(Gun __instance)

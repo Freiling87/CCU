@@ -51,16 +51,16 @@ namespace CCU.Patches.Inventory
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItem), argumentTypes: new[] { typeof(string), typeof(int), typeof(List<string>), typeof(List<int>), typeof(List<int>), typeof(int), typeof(bool), typeof(bool), typeof(int), typeof(int), typeof(bool), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(bool) })]
 		public static void AddItem_Postfix(InvDatabase __instance, ref InvItem __result)
 		{
-			ModItemByTraits(__instance, ref __result);
+			ModItemByTraits(__instance, __result);
 		}
 
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItemAtEmptySlot), argumentTypes: new[] { typeof(InvItem), typeof(bool), typeof(bool), typeof(int), typeof(int) })]		
 		public static void AddItemAtEmptySlot_Postfix(InvDatabase __instance, ref InvItem item)
 		{
-			ModItemByTraits(__instance, ref item);
+			ModItemByTraits(__instance, item);
 		}
 
-		private static void ModItemByTraits(InvDatabase invDatabase, ref InvItem invItem)
+		public static void ModItemByTraits(InvDatabase invDatabase, InvItem invItem)
 		{
 			if (!(invDatabase.agent is null))
             {
@@ -73,9 +73,9 @@ namespace CCU.Patches.Inventory
                 }
 				else if (invItem.itemType == "WeaponMelee")
                 {
-					if (invDatabase.agent.HasTrait<Melee_Maniac2>())
+					if (invDatabase.agent.HasTrait<Remise_Beast>())
 						invItem.rapidFire = true;
-                }
+                } 
             }
         }
 
