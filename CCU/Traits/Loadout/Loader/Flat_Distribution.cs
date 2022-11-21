@@ -11,7 +11,7 @@ namespace CCU.Traits.Loadout_Loader
 			PostProcess = RogueLibs.CreateCustomTrait<Flat_Distribution>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Agent spawns with the inventory items added in the Character Creator. For equippable items, one item from each category is randomly chosen from items added.",
+					[LanguageCode.English] = "Randomly selects an item for each pool (including pockets), with a (1/N+1)% chance to generate no item, where N is the number of items in the pool.",
 				})
 				.WithName(new CustomNameInfo
 				{

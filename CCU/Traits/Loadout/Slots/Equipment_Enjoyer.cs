@@ -11,8 +11,7 @@ namespace CCU.Traits.Loadout_Slots
 			PostProcess = RogueLibs.CreateCustomTrait<Equipment_Enjoyer>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Flat Distribution Loader: 25% chance to not generate with an item in any given Slot.\n\n" +
-					"Scaled & Upscaled Distribution Loaders: Agent has doubled chances of generating equippable items.",
+					[LanguageCode.English] = "25% chance to not generate with an item in any given Slot. For Scaled/Upscaled loaders, items must still roll their chance successfully to generate.",
 				})
 				.WithName(new CustomNameInfo
 				{

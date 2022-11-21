@@ -11,8 +11,7 @@ namespace CCU.Traits.Loadout_Pockets
 			PostProcess = RogueLibs.CreateCustomTrait<Have_Not>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Flat Distribution Loader: 50% chance to not generate a pocket item.\n\n" +
-					"Scaled & Upscaled Distribution Loaders: Agent has halved chances of generating pocket items.",
+					[LanguageCode.English] = "50% chance to not generate with any Pocket items. For Scaled / Upscaled loaders, items must still roll their chance successfully to generate.\n\n",
 				})
 				.WithName(new CustomNameInfo
 				{

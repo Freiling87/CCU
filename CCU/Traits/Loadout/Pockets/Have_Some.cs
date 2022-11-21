@@ -3,21 +3,20 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Pockets
 {
-	internal class Have_Mostly : T_Loadout
+	internal class Have_Some : T_Loadout
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Have_Mostly>()
+			PostProcess = RogueLibs.CreateCustomTrait<Have_Some>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Flat Distribution Loader: 25% chance to not generate with a pocket item.\n\n" +
-					"Scaled & Upscaled Distribution Loaders: Agent has doubled chances of generating pocket items.\n\n" + 
+					[LanguageCode.English] = "25% chance to not generate with any Pocket items. For Scaled / Upscaled loaders, items must still roll their chance successfully to generate.\n\n" + 
 					"It turns out there are <i>three</i> kinds of people. Who knew?",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Have_Mostly)),
+					[LanguageCode.English] = DesignerName(typeof(Have_Some)),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

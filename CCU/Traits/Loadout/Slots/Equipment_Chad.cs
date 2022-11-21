@@ -11,8 +11,7 @@ namespace CCU.Traits.Loadout_Slots
 			PostProcess = RogueLibs.CreateCustomTrait<Equipment_Chad>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Flat Distribution Loader: No effect.\n\n" +
-					"Scaled & Upscaled Distribution Loaders: Agent will never fail to generate an equippable item in a slot, if there are any added to their item pool. Including the Stacy slot! REEEEEEEEEEEEE",
+					[LanguageCode.English] = "Agent will never fail to generate an equippable item in a slot, if there are any added to their item pool. Including the Stacy slot! REEEEEEEEEEEEE",
 				})
 				.WithName(new CustomNameInfo
 				{

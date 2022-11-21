@@ -1,21 +1,21 @@
 ﻿using CCU.Traits.Loadout;
 using RogueLibsCore;
 
-namespace CCU.Traits.Loadout_Pockets
+namespace CCU.Traits.Loadout_Money
 {
-    internal class Have : T_Loadout
-	{
-		[RLSetup]
+    internal class Bankrupt_75 : T_Loadout
+    {
+        [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Have>()
+			PostProcess = RogueLibs.CreateCustomTrait<Bankrupt_75>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Agent will never fail to generate a pocket item, if there are any added to their item pool.",
+					[LanguageCode.English] = "75% chance to spawn without Money.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Have)),
+					[LanguageCode.English] = DesignerName(typeof(Bankrupt_75), "Bankrupt 75%"),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

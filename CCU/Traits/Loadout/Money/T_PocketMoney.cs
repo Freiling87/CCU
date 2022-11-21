@@ -19,7 +19,10 @@ namespace CCU.Traits.Loadout_Money
 
 		public static void AddMoney(Agent agent)
 		{
-			if (!agent.GetTraits<T_PocketMoney>().Any())
+			if (!agent.GetTraits<T_PocketMoney>().Any() ||
+				(agent.HasTrait<Bankrupt_25>() && GC.percentChance(25)) ||
+				(agent.HasTrait<Bankrupt_50>() && GC.percentChance(50)) ||
+				(agent.HasTrait<Bankrupt_75>() && GC.percentChance(75)))
 				return;
 
 			int moneyAmt = agent.GetTraits<T_PocketMoney>().Sum(t => t.MoneyAmount);

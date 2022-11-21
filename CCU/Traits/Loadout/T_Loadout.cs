@@ -5,7 +5,6 @@ using CCU.Traits.Loadout_Money;
 using CCU.Traits.Loadout_Pockets;
 using CCU.Traits.Loadout_Slots;
 using CCU.Traits.Player.Ammo;
-using CCU.Traits.Player.Armor;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -51,11 +50,13 @@ namespace CCU.Traits.Loadout
 			invDatabase.ChooseArmorHead();
 			invDatabase.ChooseWeapon();
 
-			foreach (InvItem invitem in invDatabase.InvItemList)
-            {
+			foreach (InvItem invItem in invDatabase.InvItemList)
+			{
 				logger.LogDebug("Weapon Configuration");
-				T_GunNut.AddModsFromTraits(agent, invitem);
-				T_AmmoCap.RecalculateMaxAmmo(agent, invitem, true);
+				T_GunNut.AddModsFromTraits(agent, invItem);
+				T_AmmoCap.RecalculateMaxAmmo(agent, invItem, true);
+
+				invDatabase.fist.rapidFire = true;
 			}
 					
 			invDatabase.DontPlayPickupSounds(false);
@@ -64,32 +65,31 @@ namespace CCU.Traits.Loadout
 		// TODO: set invDatabase to a static value, defined on entering this system.
 		//	Then it can be called internally without having to pass it around.
 		private static void LoadCustomInventory(InvDatabase invDatabase)
-        {
+		{
 			Agent agent = invDatabase.agent;
 			List<InvItem> invItemsFromCC = new List<InvItem>();
 
 			foreach (string str in agent.customCharacterData.items)
-            {
+			{
 				InvItem invItem = new InvItem();
 				invItem.invItemName = invDatabase.SwapWeaponTypes(str); // Applies No Guns, Rocket Chaos, etc.
 				invItem.SetupDetails(false); // TODO: Verify that Syringe and cocktail generate correctly
 				invItemsFromCC.Add(invItem);
-            }
+			}
 
 			foreach (Slots currentInvSlot in Enum.GetValues(typeof(Slots)))
 			{
-				if (agent.HasTrait<Flat_Distribution>() &&
-					(currentInvSlot == Slots.Pockets && (
-						(agent.HasTrait<Have_Mostly>() && GC.percentChance(25)) ||
-						(agent.HasTrait<Have_Not>() && GC.percentChance(50)))
-					) ||
-					(currentInvSlot != Slots.Pockets && (
+				int maximum = GetSlotMax(agent, currentInvSlot);
+				bool pockets = currentInvSlot == Slots.Pockets;
+
+				if ((pockets && (
+						(agent.HasTrait<Have_Some>() && GC.percentChance(25)) ||
+						(agent.HasTrait<Have_Not>() && GC.percentChance(50)))) ||
+					(!pockets && (
 						(agent.HasTrait<Equipment_Enjoyer>() && GC.percentChance(25)) ||
-						(agent.HasTrait<Equipment_Virgin>() && GC.percentChance(50))
-					)))
+						(agent.HasTrait<Equipment_Virgin>() && GC.percentChance(50)))))
 					continue;
 				
-				int maximum = GetSlotMax(agent, currentInvSlot);
 				List<InvItem> itemBagForSlot = 
 					invItemsFromCC
 						.Where(ii => GetSlotFromItem(ii) == currentInvSlot)
@@ -102,11 +102,19 @@ namespace CCU.Traits.Loadout
 					InvItem pickedItem = null;
 					bool addItem = false;
 
-                    #region Pick Item, roll Chance
-                    if (agent.HasTrait<Flat_Distribution>())
-                    {
-						addItem = true;
+					#region Pick Item, roll Chance
+					if (agent.HasTrait<Flat_Distribution>())
+					{
 						pickedItem = itemBagForSlot[CoreTools.random.Next(itemBagForSlot.Count())];
+
+						// By default, a 1/(N+1)% chance to generate no item for the slot.
+						logger.LogDebug("Flat Distro no-item chance (" + currentInvSlot + ") : " + (100 / (itemBagForSlot.Count() + 1)));
+						if (GC.percentChance(100 / (itemBagForSlot.Count() + 1)) &&  
+								((pockets && !agent.HasTrait<Have>()) ||
+								(!pockets && !agent.HasTrait<Equipment_Chad>())))
+							break;
+
+						addItem = true;
 					}
 					else if (agent.HasTrait<Scaled_Distribution>() || agent.HasTrait<Upscaled_Distribution>())
 					{
@@ -119,44 +127,23 @@ namespace CCU.Traits.Loadout
 									? Mathf.Clamp((int)(pickedItem.itemValue / 3.4f), 1, 100) 
 									: 0;
 
-						if (currentInvSlot is Slots.Pockets)
-                        {
-							if (agent.HasTrait<Have_Mostly>())
-								chance *= 2;
-
-							if (agent.HasTrait<Have_Not>())
-								chance /= 2;
-
-							if ((agent.HasTrait<Have>() && itemBagForSlot.Count() is 1) ||
-								GC.percentChance(chance))
-								addItem = true;
-						}
-                        else
-						{
-							if (agent.HasTrait<Equipment_Enjoyer>())
-								chance *= 2;
-
-							if (agent.HasTrait<Equipment_Virgin>())
-								chance /= 2;
-
-							if ((agent.HasTrait<Equipment_Chad>() && itemBagForSlot.Count() is 1) ||
-								GC.percentChance(chance))
-								addItem = true;
-						}
+						if (GC.percentChance(chance) ||
+							(pockets && agent.HasTrait<Have>() && itemBagForSlot.Count() is 1) ||
+							(!pockets && agent.HasTrait<Equipment_Chad>() && itemBagForSlot.Count() is 1))
+							addItem = true;
 					}
-                    #endregion
-
-                    if (pickedItem is null)
-						continue;
+					#endregion
 
 					string invItemName = pickedItem.invItemName;
+					itemBagForSlot.Remove(pickedItem);
 
-					if (agent.inventory.InvItemList.Select(ii => ii.invItemName).Contains(invItemName))
+					if (!addItem || 
+						agent.inventory.InvItemList.Select(ii => ii.invItemName).Contains(invItemName))
 						continue;
 
-                    #region Set Count
-                    switch (currentInvSlot)
-                    {
+					#region Set Quantity
+					switch (currentInvSlot)
+					{
 						case Slots.WeaponMelee:
 							if (GC.challenges.Contains("InfiniteMeleeDurability"))
 								pickedItem.invItemCount = 100;
@@ -167,10 +154,10 @@ namespace CCU.Traits.Loadout
 
 						case Slots.WeaponRanged:
 							if (!GC.challenges.Contains("InfiniteAmmo") &&
-							!(GC.challenges.Contains("InfiniteAmmoNormalWeapons") &&
-								!pickedItem.Categories.Contains("NonStandardWeapons") ||
-								!pickedItem.Categories.Contains("NonStandardWeapons2")) &&
-							!invDatabase.agent.warZoneAgent)
+								!(GC.challenges.Contains("InfiniteAmmoNormalWeapons") &&
+									!pickedItem.Categories.Contains("NonStandardWeapons") ||
+									!pickedItem.Categories.Contains("NonStandardWeapons2")) &&
+								!invDatabase.agent.warZoneAgent)
 								pickedItem.invItemCount = pickedItem.initCount;
 							else
 								pickedItem.invItemCount = (int)(pickedItem.initCountAI *
@@ -183,13 +170,15 @@ namespace CCU.Traits.Loadout
 
 							break;
 					}
-                    #endregion
 
-                    pickedItem.dontAutomaticallySelect = false;
-					itemBagForSlot.Remove(pickedItem);
+					if (agent.isPlayer == 0)
+						T_AmmoCap.RecalculateMaxAmmo(agent, pickedItem, true);
 
-					if (addItem)
-						invDatabase.AddItem(pickedItem);
+					#endregion
+
+					//pickedItem.dontAutomaticallySelect = false;
+
+					invDatabase.AddItem(pickedItem);
 				}
 			}
 		}
@@ -201,7 +190,7 @@ namespace CCU.Traits.Loadout
 			return GetSlotFromItem(invItem);
 		}
 		public static Slots GetSlotFromItem(InvItem invItem)
-        {
+		{
 			if (invItem.isArmorHead)
 				return Slots.Headgear;
 			else if (invItem.isArmor)
@@ -226,7 +215,7 @@ namespace CCU.Traits.Loadout
 			int max = 1;
 
 			if (slot is Slots.Pockets)
-            {
+			{
 
 				if (agent.HasTrait<FunnyPack>())
 					max += 1;
@@ -238,7 +227,7 @@ namespace CCU.Traits.Loadout
 					max = 99;
 			}
 			else
-            {
+			{
 				if (agent.HasTrait<Sidearmed>())
 					max += 1;
 
@@ -260,7 +249,7 @@ namespace CCU.Traits.Loadout
 			vItem.StickyGlove,
 			vItem.WaterCannon,
 		};
-        private static int ItemsInSlot(List<InvItem> list, Slots slot) =>
-            list.Where(ii => GetSlotFromItem(ii) == slot && ii.invItemName != "" && !(ii.invItemName is null) && !ExemptSlotItems.Contains(ii.invItemName)).Count();
+		private static int ItemsInSlot(List<InvItem> list, Slots slot) =>
+			list.Where(ii => GetSlotFromItem(ii) == slot && ii.invItemName != "" && !(ii.invItemName is null) && !ExemptSlotItems.Contains(ii.invItemName)).Count();
 	}
 }
