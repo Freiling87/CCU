@@ -5,7 +5,7 @@ namespace CCU.Traits.Player.Ammo
 {
     internal class Ammo_Amateur : T_AmmoCap
     {
-        public override float AmmoCapMultiplier => 0.5f;
+        public override float AmmoCapMultiplier => 1.4f;
 
         [RLSetup]
 		public static void Setup()
@@ -13,7 +13,7 @@ namespace CCU.Traits.Player.Ammo
 			PostProcess = RogueLibs.CreateCustomTrait<Ammo_Amateur>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Ammo capacity multiplied by 0.5.",
+					[LanguageCode.English] = "Ammo capacity increased by 40%.",
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -21,12 +21,13 @@ namespace CCU.Traits.Player.Ammo
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					Cancellations = new List<string> { nameof(Ammo_Artiste), nameof(Ammo_Auteur) },
-					CharacterCreationCost = -1,
+					Cancellations = { nameof(Ammo_Artiste), nameof(Ammo_Auteur) },
+					CharacterCreationCost = 3,
 					IsAvailable = false,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
 					UnlockCost = 5,
+					Upgrade = nameof(Ammo_Artiste),
 				});
 		}
 		public override void OnAdded() { }

@@ -13,7 +13,11 @@ namespace CCU.Traits.Player.Ranged_Combat
 			PostProcess = RogueLibs.CreateCustomTrait<Trigger_Happy>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Fire rate increased by 20%.",
+					[LanguageCode.English] = 
+					Core.designerEdition 
+						? "Fire rate cooldown decreased by 20%."
+						: "Fire rate cooldown decreased by 20 %.\n\n" +
+							"<color=yellow>NPCs:</color> Firing interval decreased by 20%",
 				})
 				.WithName(new CustomNameInfo
 				{

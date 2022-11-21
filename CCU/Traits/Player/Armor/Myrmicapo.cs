@@ -20,6 +20,7 @@ namespace CCU.Traits.Player.Armor
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
+					Cancellations = { nameof(Myrmidon) },
 					CharacterCreationCost = 3,
 					IsAvailable = true,
 					IsAvailableInCC = true,

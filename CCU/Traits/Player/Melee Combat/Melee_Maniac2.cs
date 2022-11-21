@@ -4,7 +4,7 @@ namespace CCU.Traits.Player.Melee_Combat
 {
     internal class Melee_Maniac2 : T_MeleeSpeed
     {
-        public override float SpeedMultiplier => 1.4f;
+        public override float SpeedMultiplier => 1.50f;
 
         [RLSetup]
 		public static void Setup()
@@ -12,7 +12,7 @@ namespace CCU.Traits.Player.Melee_Combat
 			PostProcess = RogueLibs.CreateCustomTrait<Melee_Maniac2>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Melee attack speed increased by 40%. All melee weapons have rapid fire.",
+					[LanguageCode.English] = "Melee attack speed increased by 50%. All melee weapons have rapid fire.",
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -22,8 +22,9 @@ namespace CCU.Traits.Player.Melee_Combat
 				{
 					CharacterCreationCost = 8,
 					IsAvailable = true,
-					IsAvailableInCC = false,
+					IsAvailableInCC = true,
 					IsPlayerTrait = true,
+					UnlockCost = 10,
 				});
 		}
 		public override void OnAdded() { }

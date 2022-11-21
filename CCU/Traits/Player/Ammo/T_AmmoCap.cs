@@ -11,7 +11,7 @@ namespace CCU.Traits.Player.Ammo
 
         public abstract float AmmoCapMultiplier { get; }
 
-		public static void RecalculateMaxAmmo(Agent agent, InvItem invItem, bool preLevelStart)
+		public static void RecalculateMaxAmmo(Agent agent, InvItem invItem, bool setInitCount)
 		{
 			if (invItem.itemType != "WeaponProjectile")
 				return;
@@ -26,7 +26,7 @@ namespace CCU.Traits.Player.Ammo
 
 			invItem.maxAmmo = (int)total;
 
-			if (preLevelStart || invItem.invItemCount > invItem.maxAmmo)
+			if (setInitCount || invItem.invItemCount > invItem.maxAmmo)
 				invItem.invItemCount = invItem.maxAmmo;
 		}
 	}

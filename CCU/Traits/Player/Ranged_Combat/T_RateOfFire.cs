@@ -9,12 +9,5 @@ namespace CCU.Traits.Player.Ranged_Combat
 
         public abstract float CooldownMultiplier { get; }
 
-        public static float WeaponCooldown(Agent agent, float vanilla)
-        {
-            foreach (T_RateOfFire trait in agent.GetTraits<T_RateOfFire>())
-                vanilla *= trait.CooldownMultiplier;
-
-            return vanilla;
-        }
     }
 }

@@ -3,15 +3,18 @@ using System;
 
 namespace CCU.Traits.Player.Ranged_Combat
 {
-    public class Pants_on_Autofire : T_PlayerTrait
+    public class Pants_on_Autofire : T_RateOfFire
     {
+        // This needs to stay a 1
+        public override float CooldownMultiplier => 1f;
+
         [RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Pants_on_Autofire>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("You totally don't have to shit, you *swear*, but you're really in a hurry so you need to shoot all these guys real quick. All your weapons have autofire. Good luck in there."),
+                    [LanguageCode.English] = "You totally don't have to shit, you *swear*, but you're really in a hurry so you need to shoot all these guys real quick. All your weapons have autofire. Good luck in there.",
                 })
                 .WithName(new CustomNameInfo
                 {

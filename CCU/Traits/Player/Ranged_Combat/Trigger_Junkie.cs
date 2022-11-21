@@ -12,7 +12,11 @@ namespace CCU.Traits.Player.Ranged_Combat
 			PostProcess = RogueLibs.CreateCustomTrait<Trigger_Junkie>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Fire rate increased by 40%.",
+					[LanguageCode.English] =
+					Core.designerEdition
+						? "Fire rate cooldown decreased by 40%."
+						: "Fire rate cooldown decreased by 40 %.\n\n" +
+							"<color=yellow>NPCs:</color> Firing interval decreased by 40%",
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -20,11 +24,11 @@ namespace CCU.Traits.Player.Ranged_Combat
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					CharacterCreationCost = 6,
+					CharacterCreationCost = 5,
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
-					UnlockCost = 20,
+					UnlockCost = 10,
 				});
 		}
 		public override void OnAdded() { }
