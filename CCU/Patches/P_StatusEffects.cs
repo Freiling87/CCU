@@ -188,16 +188,12 @@ namespace CCU.Patches
 				foreach (T_LootDrop trait in agent.GetTraits<T_LootDrop>())
 					if (trait.ProtectedItem(invItem))
 					{
-						logger.LogDebug("Blurse Active");
 						invItem.doSpill = false;
 						invItem.cantDropNPC = true;
 					}
 
 				if (agent.GetTraits<T_AmmoCap>().Any())
-                {
-					logger.LogDebug("Ammo Reset on Spill");
 					T_AmmoCap.ResetMaxAmmoOnSpill(agent, invItem);
-                }
 			}
 
 			return true;
