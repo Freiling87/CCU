@@ -52,11 +52,8 @@ namespace CCU.Traits.Loadout
 
 			foreach (InvItem invItem in invDatabase.InvItemList)
 			{
-				logger.LogDebug("Weapon Configuration");
 				T_GunNut.AddModsFromTraits(agent, invItem);
-				T_AmmoCap.RecalculateMaxAmmo(agent, invItem, true);
-
-				invDatabase.fist.rapidFire = true;
+				T_AmmoCap.RecalculateMaxAmmo(agent, invItem, agent.isPlayer == 0);
 			}
 					
 			invDatabase.DontPlayPickupSounds(false);
@@ -171,8 +168,7 @@ namespace CCU.Traits.Loadout
 							break;
 					}
 
-					if (agent.isPlayer == 0)
-						T_AmmoCap.RecalculateMaxAmmo(agent, pickedItem, true);
+					T_AmmoCap.RecalculateMaxAmmo(agent, pickedItem, agent.isPlayer == 0);
 
 					#endregion
 

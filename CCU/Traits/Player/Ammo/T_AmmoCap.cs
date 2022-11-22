@@ -1,10 +1,11 @@
-﻿using RogueLibsCore;
+﻿using BepInEx.Logging;
+using RogueLibsCore;
 
 namespace CCU.Traits.Player.Ammo
 {
     public abstract class T_AmmoCap : T_PlayerTrait
-    {
-        public T_AmmoCap() : base() { }
+	{
+		public T_AmmoCap() : base() { }
 
         public override void OnAdded() { }
         public override void OnRemoved() { }
@@ -29,5 +30,19 @@ namespace CCU.Traits.Player.Ammo
 			if (setInitCount || invItem.invItemCount > invItem.maxAmmo)
 				invItem.invItemCount = invItem.maxAmmo;
 		}
+
+		public static void ResetMaxAmmoOnSpill(Agent agent, InvItem invItem)
+        {
+			float total = invItem.initCount;
+
+			if (invItem.contents.Contains(vItem.AmmoCapacityMod))
+				total *= 1.4f;
+
+			if (invItem.maxAmmo > invItem.initCount)
+				invItem.maxAmmo = (int)total;
+
+			if (invItem.invItemCount > invItem.maxAmmo)
+				invItem.invItemCount = invItem.maxAmmo;
+        }
 	}
 }

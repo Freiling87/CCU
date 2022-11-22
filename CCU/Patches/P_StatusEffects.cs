@@ -10,6 +10,7 @@ using CCU.Traits.Gib_Type;
 using CCU.Traits.Loot_Drops;
 using CCU.Traits.Passive;
 using CCU.Traits.Player;
+using CCU.Traits.Player.Ammo;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -179,11 +180,25 @@ namespace CCU.Patches
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.SetupDeath), argumentTypes: new[] { typeof(PlayfieldObject), typeof(bool), typeof(bool) })]
 		public static bool SetupDeath_FilterSpillables(StatusEffects __instance)
-        {
-			foreach (T_LootDrop trait in __instance.agent.GetTraits<T_LootDrop>())
-				foreach (InvItem invItem in __instance.agent.inventory.InvItemList)
+		{
+			Agent agent = __instance.agent;
+
+			foreach (InvItem invItem in agent.inventory.InvItemList)
+			{
+				foreach (T_LootDrop trait in agent.GetTraits<T_LootDrop>())
 					if (trait.ProtectedItem(invItem))
+					{
+						logger.LogDebug("Blurse Active");
 						invItem.doSpill = false;
+						invItem.cantDropNPC = true;
+					}
+
+				if (agent.GetTraits<T_AmmoCap>().Any())
+                {
+					logger.LogDebug("Ammo Reset on Spill");
+					T_AmmoCap.ResetMaxAmmoOnSpill(agent, invItem);
+                }
+			}
 
 			return true;
         }

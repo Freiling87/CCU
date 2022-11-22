@@ -51,16 +51,16 @@ namespace CCU.Patches.Inventory
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItem), argumentTypes: new[] { typeof(string), typeof(int), typeof(List<string>), typeof(List<int>), typeof(List<int>), typeof(int), typeof(bool), typeof(bool), typeof(int), typeof(int), typeof(bool), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(bool) })]
 		public static void AddItem_Postfix(InvDatabase __instance, ref InvItem __result)
 		{
-			ModItemByTraits(__instance, __result);
+			SetRapidFire(__instance, __result);
 		}
 
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItemAtEmptySlot), argumentTypes: new[] { typeof(InvItem), typeof(bool), typeof(bool), typeof(int), typeof(int) })]		
 		public static void AddItemAtEmptySlot_Postfix(InvDatabase __instance, ref InvItem item)
 		{
-			ModItemByTraits(__instance, item);
+			SetRapidFire(__instance, item);
 		}
 
-		public static void ModItemByTraits(InvDatabase invDatabase, InvItem invItem)
+		public static void SetRapidFire(InvDatabase invDatabase, InvItem invItem)
 		{
 			if (!(invDatabase.agent is null))
             {
@@ -201,33 +201,20 @@ namespace CCU.Patches.Inventory
 			LoadoutTools.SetupLoadout(__instance);
 		}
 
-        [HarmonyPostfix,HarmonyPatch(methodName: nameof(InvDatabase.FindMoneyAmt))]
-		private static void FindMoneyAmount_Postfix(InvDatabase __instance, ref int __result)
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FindMoneyAmt))]
+		private static bool FindMoneyAmount_Prefix(InvDatabase __instance, ref int __result)
         {
-			if (!__instance.CompareTag("Agent"))
-				return;
-
-			Agent agent = __instance.agent;
-
-			if (agent.HasTrait<Broke>())
-            {
+			if (__instance.CompareTag("Agent") && (
+				__instance.agent.GetTraits<T_PocketMoney>().Any() || 
+				(__instance.agent.HasTrait<Bankrupt_25>() && GC.percentChance(25)) ||
+				(__instance.agent.HasTrait<Bankrupt_50>() && GC.percentChance(50)) ||
+				(__instance.agent.HasTrait<Bankrupt_75>() && GC.percentChance(75))))
+			{
 				__result = 0;
-				return;
-			}
+				return false;
+            }
 
-			float amt = agent.HasTrait<Zillionaire>()
-				? 1000f
-				: __result;
-
-			// Kept separate to allow multiplication
-			if (agent.HasTrait<Rich>())
-				amt *= 3f;
-			if (agent.HasTrait<Wealthy>())
-				amt *= 4f;
-			if (agent.HasTrait<Poor>())
-				amt /= 2f;
-
-			__result = (int)amt;
+			return true;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
