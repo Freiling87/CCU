@@ -140,14 +140,6 @@ namespace CCU.Traits.Loadout
 						.OrderBy(c => CoreTools.random.Next(0, 100))
 						.ToList();
 
-				logger.LogDebug("===ITEMBAG: " + itemBagForSlot.Count);
-				foreach (InvItem ii in itemBagForSlot)
-					logger.LogDebug("ii: " + ii.invItemName);
-
-				logger.LogDebug("INVENTORY (" + currentInvSlot.ToString() + "): " + ItemsInSlot(invDatabase.InvItemList, currentInvSlot) + " / " + maximum);
-				foreach (InvItem ii in invDatabase.InvItemList.Where(i => GetSlotFromItem(i) == currentInvSlot))
-					logger.LogDebug("ii: " + ii.invItemName);
-
 				while (ItemsInSlot(invDatabase.InvItemList, currentInvSlot) < maximum && 
 					itemBagForSlot.Count() > 0)
 				{
@@ -160,8 +152,7 @@ namespace CCU.Traits.Loadout
 						pickedItem = itemBagForSlot[CoreTools.random.Next(itemBagForSlot.Count())];
 
 						// By default, a 1/(N+1)% chance to generate no item for the slot.
-						int chance = (100 / (itemBagForSlot.Count() + 1));
-						logger.LogDebug("Flat Distro no-item chance (" + currentInvSlot + ") : " + chance + "%");
+						int chance = (int)(100f / (itemBagForSlot.Count() + 1f));
 						if (GC.percentChance(chance) &&  
 								((pockets && !agent.HasTrait<Have>()) ||
 								(!pockets && !agent.HasTrait<Equipment_Chad>())))
