@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CCU.Traits.Loadout
 {
@@ -33,13 +34,59 @@ namespace CCU.Traits.Loadout
 			WeaponRanged, // This order to ensure precedence of equipping
 		}
 
+		// TODO: You'll just end up rewriting the original trait logic here, unless you refactor the system.
+		// This is an untested WIP, not scoped for 0.1.0
+		public static string LoadoutTable(Agent agent)
+        {
+			string output = "Loadout Roll Chances: ";
+			List<KeyValuePair<string, int>> table = new List<KeyValuePair<string, int>>();
+			List<string> baseItemList = agent.customCharacterData.items;
+			List<InvItem> baseInventory = new List<InvItem>();
+
+			foreach (string item in baseItemList)
+			{
+				InvItem invItem = new InvItem();
+				invItem.invItemName = item;
+				invItem.SetupDetails(false);
+			}
+
+			foreach (Slots currentSlot in Enum.GetValues(typeof(Slots)))
+			{
+				output += (" for Slot: " + currentSlot + Environment.NewLine);
+
+				if (agent.HasTrait<Flat_Distribution>())
+					output += ((int)(100f / (ItemsInSlot(baseInventory, currentSlot) + 1f)) + "% - None" + Environment.NewLine);
+
+				foreach (InvItem invItem in baseInventory)
+				{
+					int chance = 0;
+
+					if (agent.HasTrait<Flat_Distribution>())
+						chance = (int)(100f / (ItemsInSlot(baseInventory, currentSlot) + 1f));
+					else if (agent.HasTrait<Scaled_Distribution>())
+					{
+
+					}
+					else if (agent.HasTrait<Upscaled_Distribution>())
+					{
+
+					}
+
+					output += (chance + "% - " + invItem.invItemName + Environment.NewLine);
+				}
+
+			}
+
+			return output;
+		}
+
 		public static void SetupLoadout(InvDatabase invDatabase)
 		{
 			Agent agent = invDatabase.agent;
 
-			if (agent.agentName != VanillaAgents.CustomCharacter ||
+            if (agent.agentName != VanillaAgents.CustomCharacter ||
 				!agent.GetTraits<T_Loadout>().Any() ||
-				agent.isPlayer != 0)
+				agent.isPlayer != 0) 
 				return;
 
 			logger.LogDebug("Custom Loadout: " + agent.agentName + "(" + agent.agentRealName + ")");
@@ -80,7 +127,7 @@ namespace CCU.Traits.Loadout
 				bool pockets = currentInvSlot == Slots.Pockets;
 
 				if ((pockets && (
-						(agent.HasTrait<Have_Some>() && GC.percentChance(25)) ||
+						(agent.HasTrait<Have_Mostly>() && GC.percentChance(25)) ||
 						(agent.HasTrait<Have_Not>() && GC.percentChance(50)))) ||
 					(!pockets && (
 						(agent.HasTrait<Equipment_Enjoyer>() && GC.percentChance(25)) ||
@@ -90,8 +137,16 @@ namespace CCU.Traits.Loadout
 				List<InvItem> itemBagForSlot = 
 					invItemsFromCC
 						.Where(ii => GetSlotFromItem(ii) == currentInvSlot)
-						.OrderByDescending(ii => ii.itemValue)
+						.OrderBy(c => CoreTools.random.Next(0, 100))
 						.ToList();
+
+				logger.LogDebug("===ITEMBAG: " + itemBagForSlot.Count);
+				foreach (InvItem ii in itemBagForSlot)
+					logger.LogDebug("ii: " + ii.invItemName);
+
+				logger.LogDebug("INVENTORY (" + currentInvSlot.ToString() + "): " + ItemsInSlot(invDatabase.InvItemList, currentInvSlot) + " / " + maximum);
+				foreach (InvItem ii in invDatabase.InvItemList.Where(i => GetSlotFromItem(i) == currentInvSlot))
+					logger.LogDebug("ii: " + ii.invItemName);
 
 				while (ItemsInSlot(invDatabase.InvItemList, currentInvSlot) < maximum && 
 					itemBagForSlot.Count() > 0)
@@ -105,8 +160,9 @@ namespace CCU.Traits.Loadout
 						pickedItem = itemBagForSlot[CoreTools.random.Next(itemBagForSlot.Count())];
 
 						// By default, a 1/(N+1)% chance to generate no item for the slot.
-						logger.LogDebug("Flat Distro no-item chance (" + currentInvSlot + ") : " + (100 / (itemBagForSlot.Count() + 1)));
-						if (GC.percentChance(100 / (itemBagForSlot.Count() + 1)) &&  
+						int chance = (100 / (itemBagForSlot.Count() + 1));
+						logger.LogDebug("Flat Distro no-item chance (" + currentInvSlot + ") : " + chance + "%");
+						if (GC.percentChance(chance) &&  
 								((pockets && !agent.HasTrait<Have>()) ||
 								(!pockets && !agent.HasTrait<Equipment_Chad>())))
 							break;
@@ -241,6 +297,7 @@ namespace CCU.Traits.Loadout
 			vItem.ChloroformHankie,
 			vItem.Fist,
 			vItem.LaserGun,
+			vItem.Money,
 			vItem.ResearchGun,
 			vItem.StickyGlove,
 			vItem.WaterCannon,

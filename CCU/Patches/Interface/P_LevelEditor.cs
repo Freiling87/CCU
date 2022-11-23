@@ -1,12 +1,10 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Challenges;
 using CCU.Systems.Containers;
 using CCU.Systems.CustomGoals;
 using CCU.Systems.Investigateables;
 using CCU.Systems.Object_Variables;
 using HarmonyLib;
-using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +94,7 @@ namespace CCU.Patches.Interface
 			return instructions;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.PressedMouseButton))]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.PressedMouseButton))]
 		public static bool PressedMouseButton_Prefix(LevelEditor __instance, ref InputField ___extraVarStringObject )
         {
 			if (!___extraVarStringObject.IsActive())

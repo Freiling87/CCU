@@ -3,12 +3,12 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Pockets
 {
-	internal class Have_Some : T_Loadout
+	internal class Have_Mostly : T_Loadout
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Have_Some>()
+			PostProcess = RogueLibs.CreateCustomTrait<Have_Mostly>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "25% chance to not generate with any Pocket items. For Scaled / Upscaled loaders, items must still roll their chance successfully to generate.\n\n" + 
@@ -16,7 +16,7 @@ namespace CCU.Traits.Loadout_Pockets
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Have_Some)),
+					[LanguageCode.English] = DesignerName(typeof(Have_Mostly)),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
