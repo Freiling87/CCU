@@ -435,5 +435,44 @@ namespace CCU.Patches
 		[HarmonyTargetMethod, UsedImplicitly]
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
 			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(StatusEffects), "UpdateStatusEffect"));
+
+        [HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> UpdateStatusEffect_WithdrawalForNPC(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo agent = AccessTools.DeclaredField(typeof(StatusEffects), nameof(StatusEffects.agent));
+			MethodInfo withdrawalHealthThreshold = AccessTools.DeclaredMethod(typeof(P_StatusEffects_UpdateStatusEffect), nameof(P_StatusEffects_UpdateStatusEffect.WithdrawalHealthThreshold));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 2,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld, agent),
+					new CodeInstruction(OpCodes.Ldfld),
+				},
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_3)
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld, agent),
+					new CodeInstruction(OpCodes.Ldloc_3),
+					new CodeInstruction(OpCodes.Call, withdrawalHealthThreshold),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		// TODO: Differentiate divisor here according to Agent.SetEndurance
+		private static int WithdrawalHealthThreshold(Agent agent, int vanilla) =>
+			agent.isPlayer == 0
+				? (int)(agent.healthMax / 4f)
+				: vanilla;
 	}
 }
