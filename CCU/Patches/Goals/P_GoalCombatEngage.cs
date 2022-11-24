@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Patches.Agents;
+using CCU.Patches.Inventory;
 using CCU.Traits.Combat;
 using CCU.Traits.Passive;
 using HarmonyLib;
@@ -18,7 +19,7 @@ namespace CCU.Patches.Goals
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalCombatEngage.Activate))]
         public static void Activate_Postfix(GoalCombatEngage __instance)
         {
-            __instance.agent.inventory.ChooseWeapon();
+            __instance.agent.agentInvDatabase.ChooseWeapon();
         }
 
         /// <summary>
@@ -41,8 +42,7 @@ namespace CCU.Patches.Goals
         [HarmonyPostfix, HarmonyPatch(methodName:nameof(GoalCombatEngage.Terminate))]
         public static void Terminate_Postfix(GoalCombatEngage __instance)
         {
-            __instance.agent.inventory.ChooseWeapon();
-            __instance.agent.GetOrAddHook<P_Agent_Hook>().weaponChosen = false;
+            P_InvDatabase.ConcealWeapon(__instance.agent.agentInvDatabase);
         }
     }
 }

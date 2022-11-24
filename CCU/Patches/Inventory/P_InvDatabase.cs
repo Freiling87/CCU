@@ -59,25 +59,35 @@ namespace CCU.Patches.Inventory
 		{
 			SetRapidFire(__instance, item);
 		}
-
 		public static void SetRapidFire(InvDatabase invDatabase, InvItem invItem)
 		{
 			if (!(invDatabase.agent is null))
-            {
-                if (invItem.itemType == "WeaponProjectile")
-                {
-                    T_AmmoCap.RecalculateMaxAmmo(invDatabase.agent, invItem, false);
+			{
+				if (invItem.itemType == "WeaponProjectile")
+				{
+					T_AmmoCap.RecalculateMaxAmmo(invDatabase.agent, invItem, false);
 
-                    if (invDatabase.agent.HasTrait<Pants_on_Autofire>())
-                        invItem.rapidFire = true;
-                }
+					if (invDatabase.agent.HasTrait<Pants_on_Autofire>())
+						invItem.rapidFire = true;
+				}
 				else if (invItem.itemType == "WeaponMelee")
-                {
+				{
 					if (invDatabase.agent.HasTrait<Remise_Beast>())
 						invItem.rapidFire = true;
-                } 
-            }
-        }
+				}
+			}
+		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
+		public static bool Awake_Prefix(InvDatabase __instance)
+		{
+			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
+
+			if (Containers.IsContainer(objectRealName))
+				__instance.money = new InvItem();
+
+			return true;
+		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
@@ -143,29 +153,27 @@ namespace CCU.Patches.Inventory
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.ChooseWeapon), argumentTypes: new[] { typeof(bool) })]
 		public static bool ChooseWeapon_Prefix(InvDatabase __instance)
         {
-			Agent agent = __instance.agent;
-
-			if (!agent.inCombat && !agent.GetOrAddHook<P_Agent_Hook>().weaponChosen &&
-				(agent.HasTrait<Concealed_Carrier>() || 
-				(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
-            {
-				ConcealWeapon(__instance);
-				agent.GetOrAddHook<P_Agent_Hook>().weaponChosen = true;
-				return false;
-            }
-
+			ConcealWeapon(__instance);
 			return true;
         }
 		public static async void ConcealWeapon(InvDatabase invDatabase)
 		{
-			if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
-				await Task.Delay(500);
-			else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
-				await Task.Delay(2000);
-			else
-				await Task.Delay(1000);
+			Agent agent = invDatabase.agent;
 
-			invDatabase.EquipWeapon(invDatabase.fist);
+			if (!agent.inCombat &&
+					(agent.HasTrait<Concealed_Carrier>() ||
+					(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
+			{
+
+				if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
+					await Task.Delay(500);
+				else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
+					await Task.Delay(2000);
+				else
+					await Task.Delay(1000);
+
+				invDatabase.EquipWeapon(invDatabase.fist);
+			}
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.DepleteArmor))]
@@ -213,17 +221,6 @@ namespace CCU.Patches.Inventory
 				__result = 0;
 				return false;
             }
-
-			return true;
-		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
-		public static bool Awake_Prefix(InvDatabase __instance)
-		{
-			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
-
-			if (Containers.IsContainer(objectRealName))
-				__instance.money = new InvItem();
 
 			return true;
 		}

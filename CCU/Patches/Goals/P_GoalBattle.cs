@@ -3,20 +3,16 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Patches.Agents;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior_Modifier;
-using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Patches.Goals
 {
-	[HarmonyPatch(declaringType: typeof(GoalBattle))]
+    [HarmonyPatch(declaringType: typeof(GoalBattle))]
 	public static class P_GoalBattle
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -117,7 +113,7 @@ namespace CCU.Patches.Goals
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalBattle.Terminate))]
 		private static void Terminate_Postfix(Agent ___agent)
         {
-			___agent.inventory.ChooseWeapon();
+			___agent.agentInvDatabase.ChooseWeapon();
         }
 	}
 }
