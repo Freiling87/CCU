@@ -20,7 +20,11 @@ namespace CCU.Systems.CustomGoals
             Dead = "Dead",
             Gibbed = "Gibbed",
             KnockedOut = "Knocked Out",
-            RandomTeleport = "Random Teleport",
+            Random_Patrol_Chunk = "Random Patrol (Chunk)", // New
+            Random_Patrol_Map = "Random Patrol (Map)", // New
+            Teleport_Return_Idle = "Random Teleport + Return (Idle)", // New
+            Teleport_Return_Patrol = "Random Teleport + Return (Patrol)", // New
+            Teleport_Wander = "Random Teleport + Wander",
             Zombified = "Zombified",
 
             //  Other Customs
@@ -36,19 +40,37 @@ namespace CCU.Systems.CustomGoals
             FleeDanger = "Flee Danger",
             RobotClean = "RobotClean",
 
+            //  Legacy
+            RandomTeleport = "Random Teleport", // Redirects to Teleport + Wander
+
             NoMoreSemicolon = "";
 
-        public static List<string> SceneSetters = new List<string>() 
+        public static List<string> SceneSetters_Active = new List<string>()
         {
             Arrested,
             Burned,
             Dead,
             Gibbed,
             KnockedOut,
-            RandomTeleport,
+            Teleport_Wander,
             Zombified,
         };
-        public static List<string> ActualGoals = new List<string>()
+        public static List<string> SceneSetters_All = new List<string>() 
+        {
+            Arrested,
+            Burned,
+            Dead,
+            Gibbed,
+            KnockedOut,
+            Random_Patrol_Chunk,
+            Random_Patrol_Map,
+            RandomTeleport,
+            Teleport_Return_Idle,
+            Teleport_Return_Patrol,
+            Teleport_Wander,
+            Zombified,
+        };
+        public static List<string> ActualGoals_Active = new List<string>()
         {
             //      Custom
             //  Investigate             //  Wander Agents + Wander Objects
@@ -59,9 +81,9 @@ namespace CCU.Systems.CustomGoals
             //  WanderObjectsOwned,
 
             //      Vanilla
-            //CommitArson,
-            //FleeDanger, // Probably not gonna work, and not really worth trying too hard on since it's unspecific.
-            //RobotClean,
+            //  CommitArson,
+            //  FleeDanger, // Probably not gonna work, and not really worth trying too hard on since it's unspecific.
+            //  RobotClean,
         };
 
         public static void RunSceneSetters()
@@ -71,7 +93,7 @@ namespace CCU.Systems.CustomGoals
         start: 
             foreach (Agent agent in GC.agentList)
             {
-                if (!SceneSetters.Contains(agent.defaultGoal) || agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished)
+                if (!SceneSetters_All.Contains(agent.defaultGoal) || agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished)
                     continue;
 
                 agent.ownerID = 99;
@@ -79,7 +101,6 @@ namespace CCU.Systems.CustomGoals
                 switch (agent.defaultGoal)
                 {
                     case Arrested:
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         // Copied from AgentInteractions.ArrestAgent
                         agent.knockedOut = true;
                         agent.knockedOutLocal = true;
@@ -96,61 +117,99 @@ namespace CCU.Systems.CustomGoals
                         agent.SetGettingArrestedByAgent(null);
                         agent.agentHitboxScript.SetWBSprites();
                         agent.StopInteraction();
+
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
+
+
                     case Dead:
+                        KillEmSoftly(agent);
+
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
-                        agent.statusEffects.ChangeHealth(-1);
                         goto start;
+
+
                     case Burned:
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.deathMethod = "Fire";
-                        // This avoids a magic number that would gib the agent.
-                        agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
-                        agent.statusEffects.ChangeHealth(-1);
+                        KillEmSoftly(agent);
+
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
+
+
                     case Gibbed:
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.statusEffects.ChangeHealth(-200f);
-                        goto start;
-                    case KnockedOut:
+
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        goto start;
+
+
+                    case KnockedOut:
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                         agent.tranqTime = 1000;
-                        goto start;
-                    case RandomTeleport:
+
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        Vector3 targetLoc = Vector3.zero;
-                        int attempts = 0;
-
-                        do
-                        {
-                            targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
-                            attempts++;
-                        }
-                        while (Vector2.Distance(targetLoc, agent.tr.position) < 20f && attempts < 50);
-
-                        if (targetLoc == Vector3.zero)
-                            targetLoc = agent.tr.position;
-                        agent.Teleport(targetLoc, false, true);
-                        try { agent.agentCamera.fastLerpTime = 1f; }
-                        catch { }
                         goto start;
+
+
+                    case RandomTeleport: 
+                        goto case Teleport_Wander; // Legacy
+
+
+                    case Teleport_Return_Idle:
+                        DoRandomTeleport(agent);
+
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        break;
+
+
+                    case Teleport_Wander:
+                        DoRandomTeleport(agent);
+                        agent.SetDefaultGoal("WanderFar");
+
+                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
+                        goto start;
+
+
                     case Zombified:
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         agent.zombieWhenDead = true;
+                        KillEmSoftly(agent);
+
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
-                        agent.statusEffects.ChangeHealth(-1);
                         goto start;
                 }
             }
         }
+        private static void DoRandomTeleport(Agent agent)
+        {
+            Vector3 targetLoc = Vector3.zero;
+            int attempts = 0;
+
+            do
+            {
+                targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
+                attempts++;
+            }
+            while (Vector2.Distance(targetLoc, agent.tr.position) < 16f && attempts < 50);
+
+            if (targetLoc == Vector3.zero)
+                targetLoc = agent.tr.position;
+
+            agent.Teleport(targetLoc, false, true);
+            try { agent.agentCamera.fastLerpTime = 1f; }
+            catch { }
+        }
+        private static void KillEmSoftly(Agent agent)
+        {
+            // Kills without gibbing
+            agent.statusEffects.ChangeHealth(-(agent.currentHealth - 1));
+            agent.statusEffects.ChangeHealth(-1);
+        }
 
         public static List<string> CustomGoalList(List<string> vanillaList) =>
             vanillaList
-                .Concat(SceneSetters)
-                .Concat(ActualGoals)
+                .Concat(SceneSetters_Active)
+                .Concat(ActualGoals_Active)
                 .ToList();
     }
-}
+} 
