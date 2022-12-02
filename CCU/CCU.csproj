@@ -78,6 +78,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -117,6 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
+    <Compile Include="Items\ClassAWare.cs" />
+    <Compile Include="Items\I_CCU.cs" />
     <Compile Include="Localization\OperatingBarText.cs" />
     <Compile Include="Mutators\C_CCU.cs" />
     <Compile Include="Mutators\Followers\C_Followers.cs" />
@@ -140,6 +143,11 @@
     <Compile Include="Patches\P_Movement.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\Quests\P_Quests.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="PropertyLogger.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
@@ -566,6 +574,9 @@
     <Compile Include="Traits\Loadout\Gun Nut\Silencer.cs" />
     <Compile Include="Traits\Loadout\Gun Nut\Ammo_Stock.cs" />
     <Compile Include="Traits\Loadout\Gun Nut\T_GunNut.cs" />
+    <Compile Include="Traits\Loadout\Money\Bankrupt_50.cs" />
+    <Compile Include="Traits\Loadout\Money\Bankrupt_75.cs" />
+    <Compile Include="Traits\Loadout\Money\Bankrupt_25.cs" />
     <Compile Include="Traits\Loadout\Money\Poor.cs" />
     <Compile Include="Traits\Loadout\Money\Desperate.cs" />
     <Compile Include="Traits\Loadout\Money\Broke.cs" />
@@ -707,6 +718,7 @@
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
     <Compile Include="Traits\Player\Melee Combat\Melee_Maniac2.cs" />
     <Compile Include="Traits\Player\Melee Combat\Melee_Maniac.cs" />
+    <Compile Include="Traits\Player\Melee Combat\Remise_Beast.cs" />
     <Compile Include="Traits\Player\Melee Combat\T_MeleeSpeed.cs" />
     <Compile Include="Traits\Player\Ranged_Combat\Pants_on_Autofire.cs" />
     <Compile Include="Traits\Player\Ranged_Combat\Trigger_Junkie.cs" />
@@ -836,6 +848,7 @@
     <None Include="Documentation\C02_Mutators.md" />
     <None Include="Documentation\C03_Objects.md" />
     <None Include="Documentation\C04_Traits.md" />
+    <None Include="Resources\Classifier.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
@@ -851,6 +864,12 @@
     <Content Include="Images\CCU_Large.png" />
     <Content Include="Images\CharacterFrame.png" />
     <Content Include="Systems\Custom Localization\LocalizationConfigMockup.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

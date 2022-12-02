@@ -275,7 +275,7 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
 		public static bool Start_Prefix(Agent __instance)
 		{
-			__instance.AddHook<P_Agent_Hook>();
+			__instance.GetOrAddHook<P_Agent_Hook>().Reset();
 
 			return true;
 		}
@@ -306,6 +306,11 @@ namespace CCU.Patches.Agents
 			skinColor = save.skinColorName;
 		}
 
+		public void Reset()
+        {
+			ClassifierScannedAgents.Clear();
+        }
+
 		public bool SceneSetterFinished;
 
 		public bool WalkieTalkieUsed;
@@ -317,5 +322,7 @@ namespace CCU.Patches.Agents
 		public string bodyType;
 		public string eyesType;
 		public string skinColor;
+
+		public List<string> ClassifierScannedAgents = new List<string> { };
 	}
 }

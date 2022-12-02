@@ -7,138 +7,27 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #		Scope
-No Open Carry
-Add malus to persuasion when breaking various laws, unless talking to scumbags or outlaws
-##		T	Passive
-###			C	Ammo Amateur
-ammo capacity *= 2
-On NPCs, doubles starting capacity
-invItem.maxAmmo
-###			C	Ammo Master
-Ammo cap *= 3
-##		C	Loadout
-###			C	Gun Nut
-####			C	Silencer
-Automatically applies Silencer to all held weapons on load
-####			C	Trigger Mod
-Trigger Mod
-####			C	Accuracy Mod
-Accuracy Mod
-####			C	Ammo Mod
-Ammo mod to all weapons
-###			C	Loader
-Make items somewhat rarer
-####			√	Flat Distribution
-Complete
-####			√	Scaled Distribution
-Complete
-####			√	Upscaled Distribution
-Complete
-###			H	Chunk Items
-####			C	Chunk Mayor Badge
-Set Bribe options on separate traits
-This might just need to be an item rather than a trait
-####			C	Chunk Stash Hint
-New
-####			√	Chunk Key
-Complete
-####			√	Chunk Safe Combo
-Complete
-###			√	Money
-Complete
-###			√	Pockets
-####			√	FunnyPack
-Complete
-####			√	FunnyPack Extreme
-Complete
-####			√	Have
-Complete
-####			√	Have Mostly
-Complete
-####			√	Have Not
-Complete
-###			C	Slots
-####			√	Equipment Chad
-Complete
-####			√	Equipment Enjoyer
-Complete
-####			√	Equipment Virgin
-Complete
-####			√	Sidearmed
-Complete
-####			√	Sidearmed to the Teeth
-Complete
-##		C	Item Groups
-uwumacaronitime's idea: Item groups similar to NPC groups
-
-I can see this going two ways: 
-- As a trait for NPCs to generate with
-- As a designated item in the chunk creator for use in NPC & Object inventories. 
-
-I am leaning towards implementing both of these. But whichever is chosen, make it very clear to avoid confusion.
-
-Vanilla list:
-- Defense
-- Drugs
-- Food
-- Guns
-- GunAccessory
-- Melee
-- Movement
-- NonViolent
-- NonUsableTool
-- NonStandardWeapons
-- NonStandardWeapons2
-- NotRealWeapons
-- Passive
-- Social
-- Stealth
-- Supplies
-- Technology
-- Trade
-- Usable
-- Weapons
-- Weird
-##		C	Cloneliness Killer
-Loneliness Killer spawns should vary in appearance
-First, need to get this feature working.
-Buddy Cop appearance didn't trigger. Only seems to show Eyes traits, no hair or skin (used single human groups). Are the pools populating?
-This would be a Free Trait, in a category of their own. No limit, 0 points. A subcategory of Player Traits
 ##		P	Bugs
 Except crickets, crickets are fine.
-###				C	Upper Crusty Alignment
-They're following Cops into fights
-###				C	Mustache Disappearances
-After an NPC follows you to the next level... their facial hair disappears
-###				C	Guilty Cops
-Rookie Cop, lv 3 loneliness killer companion turned Guilty when I started arresting someone
-Then, he went guilty when I walked into a hospital. Maybe just any owned tile does it.
-Buddy Cop:
-	On entering level 2, had 2 followers. The first run (continuous, not loaded), all Law went guilty. On the second run (Loaded, continue from front screen), one went hostile too.
-	Third run, I think all Law went guilty when I killed a shapeshifter.
-###				C	ChooseWeapon
-On start level:"
-	[Info   : Unity Log] SETUPMORE4_7
-	[Error  : Unity Log] Couldn't do ChooseWeapon etc. for agent Custom (1216) (Agent)
+###				C	Loadout error
+Consistently, the Crepe Heavy has this error.
 
-From LoadLevel.SetupMore4_2:
-	try
-	{
-		Agent agent6 = this.gc.agentList[i];
-		if (agent6.isPlayer == 0)
-		{
-			if (agent6.prisoner == 0)
-				agent6.inventory.FillAgent();
-			
-			if (!agent6.bountyHunter || this.gc.challenges.Contains("RocketLaunchers")) 
-				agent6.inventory.ChooseWeapon();
-			
-			agent6.inventory.ChooseArmor();
-			agent6.inventory.ChooseArmorHead();
-		}
-	}
-	catch
-		"Couldn't do ChooseWeapon etc. for agent ";
+	[Info   : Unity Log] SETUPMORE4_7
+	[Debug  :CCU_LoadoutTools] Custom Loadout: Custom(Crepe Heavy)
+	[Error  : Unity Log] Couldn't do ChooseWeapon etc. for agent Custom (1132) (Agent)
+###				C	Mutual Relationship
+No longer works for Firefighter aligned
+I think the Upper Cruster bug was holding some traits together. Review them all.
+###				C	Clone changing appearance
+Buddy Cop Loneliness killer
+The one that showed up on level 2 was identical to me
+The one that came from level 1 rerolled appearance
+###				T	Investigateable string copying
+I think it's only during placement, so find the method of placing an Object and see where it's copying that text from.
+P_levelEditor.PressedMouseButton_Prefix
+###				H	Upper Crusty Busybody 
+Polices pickup and destruction of 0-Owner ID items and objects, and no others.
+After reloading, was unable to replicate this.
 ###				C	Eyes Strings error
 Between Accessory & Body Type, current logs are uninterrupted
 ###				H	Jukebox Hacks
@@ -156,10 +45,10 @@ Mambo:
 	Turntables.PressedButton (System.String buttonText, System.Int32 buttonPrice) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	ObjectReal.PressedButton (System.String buttonText) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	WorldSpaceGUI.PressedButton (System.Int32 buttonNum) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
-	ButtonHelper.PushButton () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
+	ButtonHelper.PushButton () (at <7fd7dd1709b64c98aabccc051a37ae28>:0) 
 	ButtonHelper.DoUpdate (System.Boolean onlySetImages) (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	ButtonHelper.Update () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
-Bladder: 
+Bladder:  
 	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
 	Stack trace:
 	Turntables+<BadMusicPlayTime>d__31.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
@@ -283,14 +172,6 @@ The config file should match the name of the campaign, if they allow the same ch
 ###				Custom Level Tag List?
 Not so sure about the utility of this. I don't think players should need more than 4 level tags.
 - Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
-##			H	Config Files
-###				Custom Flag list
-Allow player to name booleans uniquely.
-These should be grouped by Campaign, since that's the only place they're valid.
-The config file should match the name of the campaign, if they allow the same characters.
-###				Custom Level Tag List?
-Not so sure about the utility of this. I don't think players should need more than 4 level tags.
-- Whenever you have enough in the campaign to make it playable, test it in Player Edition and see if the experience is the same.
 ##			C	Relationship Refactor
 ###				C	Create SetRelationship(agent, otherAgent, VRelationship)
 Current state is embarrassing 
@@ -382,36 +263,30 @@ Variable field in editor, maybe with some basic setting variations (destructible
 Locks access to the object as a Chest unless the player holds the matching Stash Hint.
 You don't know the object holds an item until you find the Stash Hint item somewhere. This could be in an Agent's inventory, or hidden elsewhere in the chunk. 
 ###				C	Item: Stash Hint
-Generates on NPC inventory or in a container in their chunk
+Generates on NPC inventory or in a container in their chunk 
 Acts like a key, but when activated the agent will read text out loud that's specific to a Container type
 This will be EXTREMELY annoying with Gravestones, which is kinda funny
 ##			C	Sugar System
 Merchant Type: Sugar Shack √
 Passive: Keep Moving (Acts like Stinger, but doesn't betray you. Red herring)
 Passive: Stinger (Calls cops and flees level if you sell or buy contraband)
-And also the entire Drug Dealer mod series. 
+And also the entire Drug Dealer mod series.  
 ##			T	Legacy Updater
 ###				T!	Challenges
 Homesickness Mandatory & Disabled
 ####				T	Test Mutator List in editor
 Had to tweak it
-###				√	Trait
+###				√	Trait 
 ####				√	Designer Side
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
 P_StatusEffects.AddTrait_Prefix
-##		C	Trait Utilities
-###			C	Hide Traits in Collapsed Groups
-- While in Character Creator, hide traits in Collapsed Groups
-  - Once all traits are in they're going to get hard to manage. 
-###			C	Sort active Traits by Name
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-- DW
-###			C	Sort active Traits by Value
-- ScrollingMenu.PushedButton @ 0006
-  - Pretty much has exactly what you need.
-#		C	Agent Goals
+##		C	Trait Utilities 
+###			C	Collapsible Groups
+Old attempt: https://github.com/Freiling87/BunnyMod/commit/dd792e8cf82c0faa18c8939048748880d84a9b55
+###			C	Flexible Descriptions
+  - Make a "Flex text" generator that will check mod edition and return description based on that
+#		C	Agent Goals 
 ##			CT	Default Goals
 ###				C	Ambush
 Hide behind object on same tile, if possible
@@ -433,6 +308,18 @@ Complete
 Complete
 ###				√	Random Teleport
 Complete
+#		√H	Items
+##				√H	Class-A-Ware
+It might be cool for these two bars to be *left* of the readout data.
+###				H	Battery Readout
+Power bar with warning "Replace Battery"
+If you do three rows you could make it look like a battery but you don't have that kind of space
+###				H	Memory Readout
+Also a bar 
+#		C	Level Editor Interface
+##		C	Item Groups
+Transpile List creation in LevelEditor.CreateExtraVarsStringChestList
+Get list of groups from FillItems
 #		C	Traits
 ##		C	Accent Color
 Combine w/ Accent Effect traits
@@ -456,12 +343,16 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		C	Appearance
+###			C	Cloneliness Killer
+Loneliness Killer spawns should vary in appearance
+This would be a Free Trait, in a category of their own. No limit, 0 points. A subcategory of Player Traits
 ###			C	GC1 - Glove Color
 Never know until you try! This might just be as simple as a Glove trait that matches them to body color. This shouldn't be a big elaborate category.
 ###			H	General Traits
+####			C	Cloneliness Killer
+Clones roll appearance
 ####			H	Static Preview
-#####				C	Cyclops Bug
-On hold for now. For the time being, just excluding PCs from appearance randomization.
+New
 ###			√	AC1 - Accessory
 ####			√	No Accessory 50%
 Complete
@@ -528,11 +419,6 @@ Complete
 ###			√	SC3 - Skin Color Grouped
 Complete
 ##		C	Behavior
-###			C	Consumer
-Visits vending machines and merchants
-###			C	Corpse Destroyer
-Gibs enemies' corpses
-###			C	Vanilla Panic Room behavior
 ###			C	Absconder
 Once hostile to a player, flees to exit elevator
 ###			C	Ambush
@@ -544,33 +430,48 @@ How a Bounty Ambusher is set up:
 		You should remove this from the Player Relationship algo, since it would interfere with this behavior opaquely
 	Relationship.SecretHate
 		Note that it's on Relationship (singular), meaning you'll have to find the particular rel
+###			C	Arsonist
+Arsonist behavior
+###			C	Bio-Terrorist
+Poison a random vent or pump
 ###			C	Clean Trash
 New
+###			C	Consumer
+Visits vending machines and merchants
+###			C	Corpse Destroyer
+Gibs enemies' corpses
 ###			C	Curious
 Investigate noises like cop & shopkeeper
-###			C	Fucking Salesman
-Knocks on non-restricted locked doors, moves on after a pause
 ###			C	Fight Fires
 Agent.firefighter
 Agent.fightsFires
 ###			C	First Aider
 Revives Aligned if they can within a certain timer
+###			C	Grab Weapons
+New
+###			C	Grab Contraband
+New
 ###			C	Heister
 Picks a chest on the level, and tries to fight their way to loot it. 
 If successful, deactivates behavior.
 ###			C	Hobo Beg (Custom)
 Maybe just implement the whole Hey, You! overhaul here
 ###			C	Hog Turntables
-New
 Allow paid Musician behavior
-###			C	La Migra
+###			C	La Migra / Deportable
 Should also spawn Deportation Center (See SORCE)
+###			C	Mad Bomber
+Place a Time Bomb in a public toilet
 ###			C	Mutinous
 Agent.mutinous
-###			C	Needful
+###			C	Needy
 Will seek out Musician need objects and operate them
-###			C	Non-Enforcer Enforcer
-See if there's any use for Agents who enforce laws but aren't agent.enforcer
+###			C	Neer-do-well
+Intentionally breaks laws (vandalism, etc.)
+###			C	Outlaw
+Ignores Law mutators
+###			C	Panic Room User
+Uppercruster?
 ###			C	Paranoid
 Constant search state
 ###			C	SecretHate
@@ -582,35 +483,33 @@ Didn't work but if you get it working it should be under Behavior - Ambush, sinc
 New
 Use this on leader w/ Wander Level
 Use "Follow" behavior on agents placed behind them
-No need for "Roaming Gang" Trait itself
-###			C	Sleepyhead
+No need for "Roaming Gang" Trait itself###			C	Sleepyhead
 Will default to finding a bed to sleep in, returning even after combat.
 ###			C	Slowpoke
 Takes a longer time to react to everything
+###			C	Solicitor
+Knocks on non-restricted locked doors, tells a joke that automatically annoys whoever answers the door moves on after a pause
 ###			C	Stop & Frisk
 Should also spawn Confiscation Center (See SORCE)
-###			C	Suicdal
+###			C	Suicidal
 Walks into hazards, only those they can see
-###			C	Tattle (Upper Cruster)
+###			C	Tattletale (Upper Cruster)
 New
-###			C	Arsonist
-Arsonist behavior
-###			C	Mad Bomber
-Place a Time Bomb in a public toilet
-###			C	Bio-Terrorist
-Poison a random vent or pump
-###			C	Wage-Exempt
+###			C	Vandal
+Destroys public objects or Windows on a whim
+###			C	Vigilante
+See if there's any use for Agents who enforce laws but aren't agent.enforcer
+###			C	Works for Tips
 Will "mug" you for a tip after any transaction
 ###			√C	Accident-Prone
 Works for: Crusher, Fire Spewer, Saw Blade
 ####			C	Slime, Floor Trigger, ??
 New
-###			C	Vandal
-Destroys public objects or Windows on a whim
-###			C	Grab Weapons
-New
-###			C	Grab Contraband
-New
+###			H	Concealed Carrier
+Main feature complete
+Will be affected by Laws & Outlaw
+###			√	Brainless
+Complete
 ###			√	Eat Corpse
 Complete
 ###			√	Grab Alcohol
@@ -636,11 +535,11 @@ New
 ###			C	If Killed then Flag A/B/C/D True
 Etc.
 ##		H	Combat
-###			C	Taunt
-Cause all hostiles to target
-###			C	Call
+###			C	Ca-Caw!
 Crepe/Blahd call all nearby of same class
 Do this, for same class/superclass, and for faction
+###			C	Taunt
+Exaggerate threat for hostiles
 ###			H	Nth Wind
 Refreshes Drug Warrior & Backed Up bools after combat ends.
 P_GoalCombatEngage.
@@ -813,11 +712,14 @@ Pending creation of Ridiculous explosion.
 0.00x
 ##		C	Explosion Trigger
 ###			C	Combat Start
+New
 ###			C	Death
+New
 ###			C	Low Health
+New
 ###			C	Spawn
 This is more of a utility, to allow designers to explode or burn things at level start.
-##		C	Gib Type
+##		H	Gib Type
 ###			C	Robot Gibs
 Need sprites :(
 ###			C	Wood
@@ -1033,12 +935,11 @@ Hiree will never leave due to damage
 Use Mutiny timer for abandonment
 ###			C	Too Cool To Die
 Agent can only be Knocked out, and can be revived
-##		H	Hire Duration
-A couple are technically Hire Triggers, so I broadened this cat name
-###			C	Homesickness Immune
-Automatic Homesickness Killer
-###			C	Homesickness Enjoyer
-Overrides Homesickness Killer
+##		√	Hire Duration
+###			√	Homesickless
+Complete
+###			√	Homesickness Enjoyer
+Complete
 ###			√	Permanent Hire
 Complete
 ###			√	Permanent Hire Only
@@ -1255,6 +1156,13 @@ Complete
 Complete
 ###			√	Untrustingest
 Complete
+##		√	Inventory
+###			√	Infinite Ammo
+Complete
+###			√	Infinite Armor
+Complete
+###			√	Infinite Melee
+Complete
 ##		C	Language
 ###				C	French Vanilla Gibberish
 Make Goryllian say Ook Ook if you don't understand it 
@@ -1290,6 +1198,62 @@ Complete
 Complete
 ###			√	Speaks Werewelsh
 Complete
+##		√H	Loadout
+###			H	Chunk Items
+####			C	Chunk Mayor Badge
+Set Bribe options on separate traits
+This might just need to be an item rather than a trait
+####			C	Chunk Stash Hint
+New
+####			√	Chunk Key
+Complete
+####			√	Chunk Safe Combo
+Complete
+###			√	Gun Nut 
+####			√	Silencer
+Complete
+####			√	Trigger Mod
+Complete
+####			√	Accuracy Mod
+Complete
+####			√	Ammo Mod
+Complete
+###			√	Loader
+####			√	Flat Distribution
+Complete
+####			√	Scaled Distribution
+Complete
+####			√	Upscaled Distribution
+Complete
+###			√	Money
+####			√	No Money 25%
+New
+####			√	No Money 50%
+New
+####			√	No Money 75%
+New
+###			√	Pockets
+####			√	Have
+Complete
+####			√	Have Mostly
+Complete
+####			√	Have Not
+Complete
+####			√	FunnyPack
+Complete
+####			√	FunnyPack Extreme
+Complete
+###			√	Slots
+####			√	Equipment Chad
+Complete
+####			√	Equipment Enjoyer
+Complete
+####			√	Equipment Virgin
+Complete
+####			√	Sidearmed
+Complete
+####			√	Sidearmed to the Teeth
+Complete
 ##		√	Loot Drop
 ###			√	Blurse of Midas
 Complete
@@ -1304,10 +1268,15 @@ Complete
 Total amount of money the trader will dispense when buying player goods
 Vanilla For Sellomatic: 250-300 per level
 ####				C	$50
+New
 ####				C	$150
+New
 ####				C	$500
+New
 ####				C	$1000
+New
 ####				C	Unlimited
+New
 ###				C	Buyer Type
 A shorter list of broader categories than Merchant Type. Depends on how it feels while you write it.
 ###				C	Buyer Type - Match Merchant Types
@@ -1368,16 +1337,18 @@ Since Character Creator inventory isn't by default carried to spawn, use it as a
 ###			C	Player Loadout 
 As in, the inventory you'd see in a Loadout-o-matic as a shop inventory
 ##		CT	Passive
-###			H	Outlaw
-Out of scope for now
-Ignores mutator-added laws
+###			C	Always Gib / Gibbous
+New
+###			C	Fearsome
+Everyone terrified, Killer Robot
+###			C	Focus Stealer
+Camera focuses on them when in range. For bosses
 ###			C	Elector
 NPC has 2x effect on Electability
-###			C	Unspecial
-Disables:
-	Possession
-	Secret werewolf
-	Arsonist
+###			C	Explodevious
+agent.canExplosiveStimulate
+###			C	Holographic
+Ghostlike, not necessarily gibbable (Use Supernatural for that)
 ###			C	Menace 2 Society
 When neutralized, witnesses Friendly
 ###			C	Menace 3 Society
@@ -1388,35 +1359,6 @@ When neutralized, witnesses Aligned
 When neutralized, witnesses Annoyed
 ###			C	Menace -2 Society
 When neutralized, witnesses Hostile
-###			C	Always Gib / Gibbous
-
-###			C	Fearsome
-Everyone terrified, Killer Robot
-###			C	Focus Stealer
-Camera focuses on them when in range. For bosses
-###			C	Infinite Ammo
-New
-###			C	Infinite Consumables
-New
-###			C	Infinite Durability
-New
-###			C	No Drops
-Won't drop equipment, a la Warzone
-Immune to Butterfingerer
-###			C	Trigger Happy
-Like Killer Robot
-###			C	Underclass
-Cops won't protect them
-###			C	Concealed Carrier
-Hides weapon when out of combat.
-First attempt DW
-###			C	Explodevice Eligible
-agent.canExplosiveStimulate
-###			C	Holographic
-Ghostlike, not necessarily gibbable (Use Supernatural for that)
-###			C	Immobile
-Can't move (for turret types)
-DW
 ###			C	Mute Dialogue
 Cancels possible immersion-breaking dialogue tailored to vanilla NPCs
 ###			C	Oblivious
@@ -1430,6 +1372,10 @@ Instead of dying, agent will be Injured instead. Player can revive them or hire 
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
 ###			C	Reviver
 If hired and surviving, will revive the player once
+###			C	Tight Grip
+Immune to Butterfingerer
+###			C	Trigger Happy
+Like Killer Robot
 ###			C	Spidey-Sensitive
 When alerted, immediately enters combat with perp (no search necessary)
 ###			H	Statue
@@ -1449,14 +1395,24 @@ Ghost visual effect
 Can't be bitten/cannibalized
 ###			C	Unchallenging
 No XP for neutralization
+###			C	Underclass
+Cops won't protect them
+###			C	Unspecial
+Disables:
+	Possession
+	Secret werewolf
+	Arsonist
 ###			C	Vision Beams (Cop Bot)
 DW
 ###			C	Zombified
 NOT Z-infected. But you might want to just Z-infect and kill, since it might be simplest.
 Agent.zombified
 Agent.customZombified
-###			√	Berserk (Declined)
-Rel General - Hostile to All
+###			√H	Guilty
+agent.KillForQuest to see where those poor apartment dwellers are declared collateral damage
+####			H	Cascade to Employees
+SetRelationshipOriginal, under Drug Dealer
+Extended this to agent.employee but I doubt that's ever actually assigned anyway.
 ###			√	Brainless
 Complete
 ###			√	Crusty
@@ -1469,11 +1425,6 @@ Complete
 Complete
 ###			√	Innocent
 Complete
-###			√H	Guilty
-agent.KillForQuest to see where those poor apartment dwellers are declared collateral damage
-####			H	Cascade to Employees
-SetRelationshipOriginal, under Drug Dealer
-Extended this to agent.employee but I doubt that's ever actually assigned anyway.
 ###			√	Not Vincible
 Complete
 ###			√	Possessed
@@ -1482,14 +1433,35 @@ Complete
 Complete
 ###			√	Z-Infected
 Complete
-##		C	Player
-###			√	Blinker
+##		√	Player
+###			√	Ammo
+####			√	Ammo Amateur
 Complete
-###			√	Myrmicapo
+####			√	Ammo Artiste
 Complete
-###			√	Myrmiconsigliere
+####			√	Ammo Auteur
 Complete
-###			√	Myrmidon
+###			√	Armor
+####			√	Blinker
+Complete
+####			√	Myrmicapo
+Complete
+####			√	Myrmidon
+Complete
+###			√	Melee Combat
+####			√	Melee Maniac
+Complete
+####			√	Melee Maniac +
+Complete
+###			√	Ranged Combat
+####			√	Pants on Autofire
+Complete
+####			√	Trigger Happy
+Complete
+####			√	Trigger Junkie
+Complete
+###			√	Miscellaneous
+####			√	Blinker
 Complete
 ##		C	Relationships - Faction
 ###			C	00 Refactor
@@ -1711,6 +1683,7 @@ Mutator: Exit Timer EXTREME - Similar to Time Limit EXTREME, except that the tim
 
 Mutator: Exit Timer LITE - Similar to Time Limit, except that the timer is SHORTER, and the elevator is locked until the timer reaches zero. Missions will not open the elevator. 
 ##		C	Laws
+Add malus to social stuff when breaking various laws, unless talking to scumbags or outlaws
 ###			H	No Open Carry
 Out of scope for now
 ##		C	Disaster Mutators
@@ -1814,8 +1787,6 @@ Main quest rewards are multiplied by 10
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
-#		C	Item Groups
-wut
 #		CT	Objects
 ##			C	Custom Decal
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
@@ -1960,6 +1931,7 @@ Destroyed if you bump into it
 ####				C	Shrink Ray
 ####				C	Sniper
 Extends vision range
+Combat.distOffset is current range from agent to shooting target
 ####				C	Tranquilizer
 ####				H	Request - Custom Dart
 Streets of Cheese suggested darts with choosable status effect
