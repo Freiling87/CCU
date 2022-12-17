@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace CCU.Items
 {
@@ -18,13 +18,15 @@ namespace CCU.Items
             ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<ClassAWare>()
                 .WithName(new CustomNameInfo("Class-A-Ware"))
                 .WithDescription(new CustomNameInfo("Shows info on any Agent. Gives a small XP bonus for discovering new classes. If used on an old class, the use is free but doesn't give XP."))
-                .WithSprite(Properties.Resources.Classifier)
+                .WithSprite(Properties.Resources.ClassAWare)
                 .WithUnlock(new ItemUnlock
                 {
                     UnlockCost = 10,
                     CharacterCreationCost = 1,
                     LoadoutCost = 2,
                 });
+
+            RogueLibs.CreateCustomAudio("ClassAWare_Use", Properties.Resources.ClassAware_Use, UnityEngine.AudioType.WAV);
         }
 
         public override void SetupDetails()
@@ -65,7 +67,7 @@ namespace CCU.Items
             }
 
             Item.invInterface.HideTarget();
-            Owner.gc.audioHandler.Play(Owner, VanillaAudio.CopBotDetect);
+            Owner.gc.audioHandler.Play(Owner, "ClassAWare_Use");
             Owner.gc.spawnerMain.SpawnStateIndicator(agent, "HighVolume");
             CCULogger.GetLogger().LogDebug(MainText(agent, newClass, Owner));
             Owner.mainGUI.ShowBigImage(MainText(agent, newClass, Owner), "", null, target);
@@ -113,7 +115,7 @@ namespace CCU.Items
                 "║└• </color>" + agent.specialAbility + "<color=yellow>\n";
             else output +=
                 "╠═══○ ABILITY\n" +
-                "║\t</color><color=red><< ERROR CODE 8008135 - Target has no talent. SAD! >></color>//<color=yellow>\n";
+                "║\t</color><color=red><< ERROR CODE 8008135 - Target has no talent. SAD! >></color><color=yellow>\n";
 
             output +=
                 "║\n" +
@@ -182,4 +184,4 @@ namespace CCU.Items
             return output;
         }
     }
-}
+} 

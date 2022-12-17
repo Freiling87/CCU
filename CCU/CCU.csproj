@@ -91,6 +91,10 @@
     <Reference Include="UnityEngine.AnimationModule">
       <HintPath>..\Libraries\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
@@ -848,7 +852,10 @@
     <None Include="Documentation\C02_Mutators.md" />
     <None Include="Documentation\C03_Objects.md" />
     <None Include="Documentation\C04_Traits.md" />
-    <None Include="Resources\Classifier.bin" />
+    <None Include="Resources\Audio\ClassAware_Use.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Image\ClassAWare.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
@@ -869,6 +876,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
