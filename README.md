@@ -33,6 +33,7 @@ There are two versions of CCU:
 - [Mutators](/CCU/Documentation/C02_Mutators.md) (2)
 - [Objects](/CCU/Documentation/C03_Objects.md)
 - [Traits](/CCU/Documentation/C04_Traits.md) (200+)
+- [NPC Behaviour](/CCU/Documentation/C05_NPCs.md)
 
 #		Special Thanks
 **Abbysssal#2020** & **BlazingTwist#4559** - Saintlike patience in teaching an absolute dumb-dumb how to code
