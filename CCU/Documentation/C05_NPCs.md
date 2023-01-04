@@ -17,4 +17,4 @@ NPCs have fields named `modGunSkill` and `modMeleeSkill`, NPCs with higher skill
 * Spend less time idling between attacks.
 
 In vanilla SoR you cannot change these fields, but in CCU you can!  
-Custom Characters gain melee- and gunSkill with higher 'Melee' and 'Firearms' attributes, up to a maximum of **2**.
+Custom Characters gain melee- and gunSkill with higher 'Melee' and 'Firearms' attributes, up to an attribute level of **3**.
