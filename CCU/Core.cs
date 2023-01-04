@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using BTHarmonyUtils;
 using UnityEngine;
 
 namespace CCU
@@ -28,8 +29,10 @@ namespace CCU
 		public void Awake()
 		{
 			LogMethodCall();
-			 
-			new Harmony(pluginGUID).PatchAll();
+
+			Harmony harmony = new Harmony(pluginGUID);
+			harmony.PatchAll();
+			PatcherUtils.PatchAll(harmony);
 			RogueLibs.LoadFromAssembly();
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
