@@ -852,6 +852,7 @@
     <None Include="Documentation\C02_Mutators.md" />
     <None Include="Documentation\C03_Objects.md" />
     <None Include="Documentation\C04_Traits.md" />
+    <None Include="Documentation\C05_NPCs.md" />
     <None Include="Resources\Audio\ClassAware_Use.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
