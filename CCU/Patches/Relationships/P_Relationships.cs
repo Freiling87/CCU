@@ -36,11 +36,18 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
+            bool logging = ___agent.agentName == VanillaAgents.CustomCharacter 
+                && false;
+
+            if (logging)
+                logger.LogDebug(string.Format("SetupRelationshipOriginal_Postfix: {0} / {1}", ___agent.agentRealName, otherAgent.agentRealName));
+
             if (GC.levelType == "HomeBase")
                 return;
 
             string relationship = null;
 
+            #region Factions
             //  Factions, Custom
             if (___agent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0) && otherAgent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0))
             {
@@ -53,13 +60,14 @@ namespace CCU.Patches.AgentRelationships
             // Factions, Vanilla
             foreach (T_Rel_Faction trait in ___agent.GetTraits<T_Rel_Faction>().Where(t => t.Faction == 0))
                 relationship = trait.GetRelationshipTo(otherAgent) ?? relationship;
+            #endregion
 
             //  Player
             if (otherAgent.isPlayer > 0)
                 foreach (T_Rel_Player trait in ___agent.GetTraits<T_Rel_Player>())
                     relationship = trait.Relationship ?? relationship;
 
-            //  Trait Gates
+            #region Trait Gates
             if (___agent.HasTrait<Scumbag>() && otherAgent.HasTrait(VanillaTraits.ScumbagSlaughterer))
                 ___agent.relationships.GetRelationship(otherAgent).mechHate = true;
 
@@ -74,9 +82,10 @@ namespace CCU.Patches.AgentRelationships
 
             if (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily)))
                 relationship = VRelationship.Aligned;
+            #endregion
 
             if (!(relationship is null))
-                SetRelationshipTo(___agent, otherAgent, relationship, false);
+                SetRelationshipTo(___agent, otherAgent, relationship, true);
         }
 
         //  TODO: Refactor

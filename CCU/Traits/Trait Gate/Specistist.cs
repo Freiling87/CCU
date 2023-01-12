@@ -11,13 +11,11 @@ namespace CCU.Traits.Trait_Gate
             PostProcess = RogueLibs.CreateCustomTrait<Specistist>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Agent is a valid target for Specist. I think they must be prejudiced against them or something."),
-                    
+                    [LanguageCode.English] = String.Format("Agent is a valid target for Specists. I think they must be prejudiced against them or something."),
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Specistist)),
-                    
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
