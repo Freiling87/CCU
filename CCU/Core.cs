@@ -18,7 +18,7 @@ namespace CCU
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
 		public const string pluginName = "CCU " + (designerEdition ? "Designer Edition" : "Player Edition"); 
-		public const string pluginVersion = "1.1.0a";
+		public const string pluginVersion = "1.1.0";
 		public const bool designerEdition = true;
 		public const bool debugMode = true;
 
@@ -27,7 +27,7 @@ namespace CCU
 
 		public void Awake()
 		{
-			LogMethodCall();
+			LogMethodCall(); 
 			 
 			new Harmony(pluginGUID).PatchAll();
 			RogueLibs.LoadFromAssembly();

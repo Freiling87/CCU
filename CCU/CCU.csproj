@@ -838,7 +838,6 @@
     <Compile Include="Traits\ISetupAgentStats.cs" />
     <Compile Include="Traits\TraitUnlock_CCU.cs" />
     <Compile Include="Traits\T_CCU.cs" />
-    <Compile Include="Systems\Legacy Name Updater\NameUpdates.cs" />
     <Compile Include="Traits\T_PlayerTrait.cs" />
   </ItemGroup>
   <ItemGroup>

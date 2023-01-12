@@ -8,6 +8,56 @@ Listed in order of Parent tier summary symbol priority:
 
 #		Scope
 Reloaded CAW audio, retest
+##		C	Class-A-Ware Error
+Scanned Crepe Lil Bro:
+
+	[Error  : Unity Log] DivideByZeroException: Attempted to divide by zero.
+	Stack trace:
+	CCU.Items.ClassAWare.MainText (Agent agent, System.Boolean newClass, Agent owner) (at <f5107673a59e42ed8e57c0be8372b17b>:0)
+	CCU.Items.ClassAWare.TargetObject (PlayfieldObject target) (at <f5107673a59e42ed8e57c0be8372b17b>:0)
+	RogueLibsCore.RogueLibsPlugin.InvItem_TargetObject (InvItem __instance, PlayfieldObject otherObject, System.String combineType, System.Boolean& __result) (at <d5b03aa633104a1d8e943925b1ea5b1c>:0)
+	InvItem.TargetObject (PlayfieldObject otherObject, System.String combineType) (at <3d326b8e9c744e5faf3a706691682c89>:0)
+	ObjectSprite.OnMouseDown () (at <3d326b8e9c744e5faf3a706691682c89>:0)
+	ObjectSprite.MouseDownAgent () (at <3d326b8e9c744e5faf3a706691682c89>:0)
+	AgentMouseBox.OnMouseDown () (at <3d326b8e9c744e5faf3a706691682c89>:0)
+	UnityEngine.SendMouseEvents:DoSendMouseEvents(Int32)
+
+Interaction data in case it's needed:
+
+	[Debug  :CCU_TraitManager] TRAIT LIST: Crepe Lil Bro
+	[Debug  :CCU_TraitManager]      :       Diminutive
+	[Debug  :CCU_TraitManager]      :       KnockbackMore
+	[Debug  :CCU_TraitManager]      :       HatesBlahds
+	[Debug  :CCU_TraitManager]      :       BadTrader
+	[Debug  :CCU_TraitManager]      :       OperateSlowly
+	[Debug  :CCU_TraitManager]      :       NoTechSkill
+	[Debug  :CCU_TraitManager]      :       ChanceAttacksDoZeroDamage
+	[Debug  :CCU_TraitManager]      :       HardToShoot
+	[Debug  :CCU_TraitManager]      :       Meat_Chunks
+	[Debug  :CCU_P_Agent] ------- Inventory
+	[Debug  :CCU_P_Agent] Money(3)
+	[Debug  :CCU_P_Agent] (0)
+	[Debug  :CCU_P_Agent] (0)
+	[Debug  :CCU_P_Agent] (0)
+	[Debug  :CCU_P_Agent] (0)
+	[Debug  :CCU_AppearanceTools] ======= APPEARANCE (Crepe Lil Bro)
+	[Debug  :CCU_AppearanceTools]   Accessory  :    HatBlue
+	[Debug  :CCU_AppearanceTools]   Body Color :    RGBA(60, 81, 217, 255)
+	[Debug  :CCU_AppearanceTools]   Body Type  :
+	[Debug  :CCU_AppearanceTools]   Eye Color  :    RGBA(255, 255, 255, 255)
+	[Debug  :CCU_AppearanceTools]   Eye Type   :    EyesNE
+	[Debug  :CCU_AppearanceTools]   Facial Hair:    None
+	[Debug  :CCU_AppearanceTools]   FH Position:    (0.0, 0.0, 0.0)
+	[Debug  :CCU_AppearanceTools]   Hair Color :    Black
+	[Debug  :CCU_AppearanceTools]   Hair Style :    Cutoff
+	[Debug  :CCU_AppearanceTools]   Legs Color :    RGBA(255, 255, 255, 255)
+	[Debug  :CCU_AppearanceTools]   Skin Color :    GoldSkin
+##		C	Legacy
+This works on the character editor.
+Also needs to:
+	- Spawn NPCs correctly
+	- Spawn player correctly when they skip editing and select a character from the menu
+
 ##		C	Ice Grip
 Player 0-pt trait
 Agent.AgentLateUpdate():
@@ -59,20 +109,9 @@ Complete
 Complete
 ###			√	Suspecter
 Complete
-##		C	Trait Gate
-###			T	Specistist
-
 ##		C	Relationships - Faction
+Code is done
 ###			C	Documentation Update
-###			C	Layout
-Specistist and Cool Cannibal are trait gates separate from their faction traits. But Crushable and Bashable aren't - because the latter are explicitly for a Faction. 
-###			C	AgentIsRival
-Make sure of how this is used. Avoid giving free XP bonus to those who lack the proper traits.
-###			C	00 Refactor
-Put custom methods in faction traits.
-E.g. Crushable.IsAlignedTo(Agent agent)
-	agent == vagent.crepe || agent.hastrait<crushable>
-This logic can get very ugly so it'd be nice to pack it away elsewhere and just iterate through all applicable traits.
 ###			C	General concept
 Friendly to faction doesn't align you. You do not inherit the faction's relationships.
 Loyal causes you to inherit its relationships, but negative ones are moderated:

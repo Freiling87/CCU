@@ -8,6 +8,7 @@ using CCU.Traits.Trait_Gate;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CCU.Localization
 {
@@ -44,11 +45,7 @@ namespace CCU.Localization
 			//{ "Specistist",                         new Type[] { typeof(Faction_Gorilla_Aligned) } },
 			//{ "Hostile_To_Cannibal",                new Type[] { typeof(Faction_Soldier_Aligned) } },
 
-			//		Capitalization OCD
-			{ "Hostile_To_Vampire",                 new Type[] { typeof(Vampire_Hostile) } },
-			{ "Hostile_To_Werewolf",                new Type[] { typeof(Werewolf_Hostile) } },
-
-			//		More OCD
+			//		Renames
 			{ "Manager_Safe_Combo",                 new Type[] { typeof(Chunk_Safe_Combo) } },
 			{ "Manager_Key",                        new Type[] { typeof(Chunk_Key) } },
 			{ "Manager_Mayor_Badge",                new Type[] { typeof(Chunk_Mayor_Badge) } },
@@ -64,33 +61,36 @@ namespace CCU.Localization
 			{ "Faction_Soldier_Aligned",            new Type[] { typeof(Soldier_Aligned), typeof(Cannibal_Hostile) } },
 
 			//		Amendments to 0.1.1 relationship refactor
-			{ "Bashable",                           new Type[] { typeof(Blahd_Aligned) } },
-			{ "Crushable",                          new Type[] { typeof(Crepe_Aligned) } },
+			{ "Bashable",                           new Type[] { typeof(Blahd_Aligned), typeof(Crepe_Hostile) } },
+			{ "Crushable",                          new Type[] { typeof(Blahd_Hostile), typeof(Crepe_Aligned) } },
 			{ "Hostile_To_Soldier",                 new Type[] { typeof(Soldier_Hostile) } }, // Both capitalizations were used at some point
 			{ "Hostile_to_Soldier",                 new Type[] { typeof(Soldier_Hostile) } },
-			{ "Hostile_To_Cannibal",                new Type[] { typeof(Cannibal_Hostile) } }, // Both capitalizations were used at some point
+			{ "Hostile_To_Cannibal",                new Type[] { typeof(Cannibal_Hostile) } },
 			{ "Hostile_to_Cannibal",                new Type[] { typeof(Cannibal_Hostile) } },
-        };
+			{ "Hostile_To_Vampire",                 new Type[] { typeof(Vampire_Hostile) } },
+			{ "Hostile_to_Vampire",                 new Type[] { typeof(Vampire_Hostile) } },
+			{ "Hostile_To_Werewolf",                new Type[] { typeof(Werewolf_Hostile) } },
+			{ "Hostile_to_Werewolf",                new Type[] { typeof(Werewolf_Hostile) } },
+		};
 
-		public static List<string> UpdateTraitList(List<string> vanilla)
+		// Refactored to recursion by BlazingTwist
+		public static List<string> UpdateTraitList(List<string> traits) =>
+			traits.SelectMany(UpdateTrait).ToList();
+
+		private static List<string> UpdateTrait(string trait)
 		{
-			List<string> final = new List<string>();
+			string ccuTraitName = trait.StartsWith("E_") 
+				? trait.Substring(2) 
+				: trait;
 
-			foreach (string str in vanilla)
-			{
-				if (TraitConversions.ContainsKey(str) ||
-					TraitConversions.ContainsKey("E_" + str))
-				{
-					Type[] results = TraitConversions[str];
+			if (!TraitConversions.ContainsKey(ccuTraitName))
+				return new List<string> { trait };
 
-					foreach (Type result in results)
-						final.Add(result.Name);
-				}
-				else
-					final.Add(str);
-			}
+			logger.LogDebug("Caught Legacy trait: " + ccuTraitName);
 
-			return final;
+			return TraitConversions[ccuTraitName]
+					.SelectMany(type => UpdateTrait(type.Name))
+					.ToList();
 		}
 	}
 }
