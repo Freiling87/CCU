@@ -252,6 +252,28 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats))]
+		private static IEnumerable<CodeInstruction> SetupAgentStats_LegacyUpdater(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo traits = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.traits));
+			MethodInfo updateTraitList = AccessTools.DeclaredMethod(typeof(Legacy), nameof(Legacy.UpdateTraitList));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, traits),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, updateTraitList),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
 		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
 		{
