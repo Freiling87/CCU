@@ -1,26 +1,25 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
-using System;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_Blahd_Aligned : T_Rel_Faction
+    public class Scientist_Hostile : T_Rel_Faction
     {
         public override int Faction => 0;
-        public override Alignment FactionAlignment => throw new NotImplementedException();
+        public override Alignment FactionAlignment => throw new System.NotImplementedException();
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Faction_Blahd_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Scientist_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This agent is aligned with Blahds and hostile to Crepes and Blahd Bashers. They provide an XP bonus when neutralized by Blahd Bashers."),
+                    [LanguageCode.English] = "Agent is Hostile to Scientists.",
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Faction_Blahd_Aligned)),
+                    [LanguageCode.English] = DesignerName(typeof(Scientist_Hostile)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU
@@ -34,11 +33,9 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.HasTrait<Faction_Blahd_Aligned>() || agent.agentName == VanillaAgents.GangsterBlahd
-                ? VRelationship.Aligned
-            : agent.HasTrait<Faction_Crepe_Aligned>() || agent.agentName == VanillaAgents.GangsterCrepe || agent.HasTrait(VanillaTraits.BlahdBasher)
+            agent.agentName == VanillaAgents.Scientist
                 ? VRelationship.Hostile
-            : null;
+                : null;
         public override void OnAdded() { }
         public override void OnRemoved() { }
     }

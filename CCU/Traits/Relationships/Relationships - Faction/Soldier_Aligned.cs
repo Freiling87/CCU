@@ -3,7 +3,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Hostile_to_Werewolf : T_Rel_Faction
+    public class Soldier_Aligned : T_Rel_Faction
     {
         public override int Faction => 0;
         public override Alignment FactionAlignment => throw new System.NotImplementedException();
@@ -11,15 +11,15 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Hostile_to_Werewolf>()
+            PostProcess = RogueLibs.CreateCustomTrait<Soldier_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Hostile to Werewolves.",
+                    [LanguageCode.English] = "Agent is Aligned to Soldiers and anyone else with this trait.",
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Hostile_to_Werewolf)),
+                    [LanguageCode.English] = DesignerName(typeof(Soldier_Aligned)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU
@@ -33,8 +33,9 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.WerewolfTransformed
-                ? VRelationship.Hostile
+            agent.agentName == VanillaAgents.Soldier ||
+            agent.HasTrait<Soldier_Aligned>()
+                ? VRelationship.Aligned
                 : null;
         public override void OnAdded() { }
         public override void OnRemoved() { }

@@ -3,7 +3,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_Soldier_Aligned : T_Rel_Faction
+    public class Soldier_Hostile : T_Rel_Faction
     {
         public override int Faction => 0;
         public override Alignment FactionAlignment => throw new System.NotImplementedException();
@@ -11,16 +11,14 @@ namespace CCU.Traits.Rel_Faction
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Faction_Soldier_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Soldier_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned to Soldiers and anyone else with this trait. They are hostile to Cannibals and anyone with Faction Cannibal Aligned.",
-                    
+                    [LanguageCode.English] = "Agent is Hostile to Soldiers and anyone with the Aligned to Soldier trait.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Faction_Soldier_Aligned)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Soldier_Hostile)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -33,9 +31,8 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.Soldier || agent.HasTrait<Faction_Soldier_Aligned>()
-                ? VRelationship.Aligned
-            : agent.agentName == VanillaAgents.Cannibal || agent.HasTrait<Faction_Cannibal_Aligned>()
+            agent.agentName == VanillaAgents.Soldier ||
+            agent.HasTrait<Soldier_Aligned>()
                 ? VRelationship.Hostile
                 : null;
         public override void OnAdded() { }

@@ -1,27 +1,24 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
-using System;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_Cannibal_Aligned : T_Rel_Faction
+    public class Cannibal_Aligned : T_Rel_Faction
     {
         public override int Faction => 0;
-        public override Alignment FactionAlignment => throw new NotImplementedException();
+        public override Alignment FactionAlignment => throw new System.NotImplementedException();
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Faction_Cannibal_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Cannibal_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned to Cannibals and anyone else with this trait. They're Hostile to Soldiers and anyone with Faction Soldier Aligned.",
-                    
+                    [LanguageCode.English] = "Agent is Aligned to Cannibals and anyone else with this trait.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Faction_Cannibal_Aligned)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Cannibal_Aligned)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -34,10 +31,9 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.HasTrait<Faction_Cannibal_Aligned>() || agent.agentName == VanillaAgents.Cannibal
+            agent.agentName == VanillaAgents.Cannibal ||
+            agent.HasTrait<Cannibal_Aligned>()
                 ? VRelationship.Aligned
-            : agent.HasTrait<Faction_Soldier_Aligned>() || agent.agentName == VanillaAgents.Soldier
-                ? VRelationship.Hostile
                 : null;
         public override void OnAdded() { }
         public override void OnRemoved() { }

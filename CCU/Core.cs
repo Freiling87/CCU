@@ -17,10 +17,10 @@ namespace CCU
 	public class Core : BaseUnityPlugin
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
-		public const string pluginName = "Custom Content Utilities - " + (designerEdition ? "Designer Edition" : "Player Edition"); 
-		public const string pluginVersion = "1.1.0";
+		public const string pluginName = "CCU " + (designerEdition ? "Designer Edition" : "Player Edition"); 
+		public const string pluginVersion = "1.1.0a";
 		public const bool designerEdition = true;
-		public const bool debugMode = false;
+		public const bool debugMode = true;
 
 		public static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -31,6 +31,7 @@ namespace CCU
 			 
 			new Harmony(pluginGUID).PatchAll();
 			RogueLibs.LoadFromAssembly();
+			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion); 
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");

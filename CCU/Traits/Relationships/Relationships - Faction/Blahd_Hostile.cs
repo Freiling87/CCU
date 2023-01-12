@@ -1,27 +1,24 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
-using System;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_Crepe_Aligned : T_Rel_Faction
+    public class Blahd_Hostile : T_Rel_Faction
     {
         public override int Faction => 0;
-        public override Alignment FactionAlignment => throw new NotImplementedException();
+        public override Alignment FactionAlignment => throw new System.NotImplementedException();
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Faction_Crepe_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Blahd_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This agent is aligned with Crepes and hostile to Blahds and Crepe Crushers. They provide an XP bonus when neutralized by Crepe Crushers."),
-                    
+                    [LanguageCode.English] = "Agent is Hostile to Blahds and anyone with the Aligned to Blahd trait.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Faction_Crepe_Aligned)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Blahd_Hostile)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -34,9 +31,8 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.HasTrait<Faction_Crepe_Aligned>() || agent.agentName == VanillaAgents.GangsterCrepe
-                ? VRelationship.Aligned
-            : agent.HasTrait<Faction_Blahd_Aligned>() || agent.agentName == VanillaAgents.GangsterBlahd || agent.HasTrait(VanillaTraits.CrepeCrusher)
+            agent.agentName == VanillaAgents.GangsterBlahd ||
+            agent.HasTrait<Blahd_Aligned>()
                 ? VRelationship.Hostile
                 : null;
         public override void OnAdded() { }

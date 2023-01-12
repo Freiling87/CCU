@@ -1,5 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Localization;
+using CCU.Patches.Agents;
 using CCU.Traits;
 using HarmonyLib;
 using System;
@@ -7,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace CCU.Patches.Inventory
 {
@@ -88,19 +92,41 @@ namespace CCU.Patches.Inventory
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		public static void PrintTraitList(CharacterCreation characterCreation)
+		public static void PrintTraitList(CharacterCreation CC)
         {
 			if (Core.designerEdition &&
-				T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Any())
+				T_CCU.DesignerUnlockList(CC.traitsChosen).Any())
             {
-				characterCreation.pointTallyText.text += "\n<color=yellow>- CCU TRAITS -</color>\n";
-				foreach (Unlock unlock in T_CCU.SortUnlocksByName(T_CCU.DesignerUnlockList(characterCreation.traitsChosen).Where(u => !T_CCU.IsPlayerUnlock(u)).ToList()))
+				CC.pointTallyText.text += "\n<color=yellow>- CCU TRAITS -</color>\n";
+				foreach (Unlock unlock in T_CCU.SortUnlocksByName(T_CCU.DesignerUnlockList(CC.traitsChosen).Where(u => !T_CCU.IsPlayerUnlock(u)).ToList()))
 				{
 					string traitName = GC.nameDB.GetName(unlock.unlockName, "StatusEffect") + "\n";
 					traitName = traitName.Replace("[CCU] ", "");
-					characterCreation.pointTallyText.text += traitName;
+					CC.pointTallyText.text += traitName;
 				}
 			}
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.LoadCharacter2))]
+		private static IEnumerable<CodeInstruction> LoadCharacter2_LegacyTraits(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo traits = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.traits));
+			MethodInfo updateTraitList = AccessTools.DeclaredMethod(typeof(Legacy), nameof(Legacy.UpdateTraitList));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, traits),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, updateTraitList),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
 		}
 	}
 } 

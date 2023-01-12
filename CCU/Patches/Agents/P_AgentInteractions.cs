@@ -66,12 +66,10 @@ namespace CCU.Patches.Agents
 				{
 					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 					{
-						if ((agent.HasTrait<Faction_Blahd_Aligned>() &&
-							(interactingAgent.agentName == VanillaAgents.GangsterBlahd ||
-								(interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility))) ||
-							(agent.HasTrait<Faction_Crepe_Aligned>() &&
-							(interactingAgent.agentName == VanillaAgents.GangsterCrepe ||
-								(interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))))
+						if ((agent.HasTrait<Blahd_Aligned>() &&
+								interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility) ||
+							(agent.HasTrait<Crepe_Aligned>() &&
+								interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))
 							h.AddButton(VButtonText.JoinMe, m =>
 							{
 								m.Object.agentInteractions.QualifyHireAsProtection(m.Object, interactingAgent, 0);

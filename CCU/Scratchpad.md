@@ -7,17 +7,135 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #		Scope
+Reloaded CAW audio, retest
+##		C	Ice Grip
+Player 0-pt trait
+Agent.AgentLateUpdate():
+			if (this.curTileData.ice && !this.onIce && !this.ghost && !this.teleporting)
+##		C	Trait Gates
+See the Gate Vendor/Gate Hire ones too. Those were requested, and they make sense.
+###			C	Specistist
+Ensure this is in right group
+###			C	Crust Enjoyer
+If you have Upper Crusty, this character is Loyal
+I think this is actually automatic with Enforcer
+###			C	Gate Vendor
+Won't sell unless you have appropriate trait
+###			C	Gate Hire
+Won't hire unless you have appropriate trait
+###			C	Thief Network Traits (Trait Gate / Faction)
+####			C	Honorable Thief
+This now just means membership in the network, not necessarily Friendliness. Add it to vanilla thieves.
+####			C	Tweaks to vanilla Honor Among Thieves
+The relationship improvement is now scaled to the particular NPC. 
+####			C	Honored Among Thieves + (Player Trait)
+Those in the Network are Loyal.
+####			C	Honored Among Thieves ++ (Player Trait)
+Those in the Network are Aligned.
+####			C	Dishonorable Thief (Player Trait)
+Still pickpockets other thieves in the network
+Gets access to shops in the network
+CCU idea: The Secret Thief Faction
+Ok not a faction, but linking Honor Among Thieves 
+####			C	Ali Baba (Player Trait)
+Those in the Network are mutually Annoyed
+###			C	Goody Two-Shoes
+Won't interact with Wanted (Shopkeeper vanilla)
+###			√	Cool Cannibal
+Complete
+###			√	Bashable
+Complete
+###			√	Common Folk
+Complete
+###			√	Crushable
+Complete
+###			√	Cop	Access
+Complete
+###			√	Family Friend
+Complete
+###			√	Scumbag
+Complete
+###			√	Slayable
+Complete
+###			√	Suspecter
+Complete
+##		C	Trait Gate
+###			T	Specistist
+
+##		C	Relationships - Faction
+###			C	Documentation Update
+###			C	Layout
+Specistist and Cool Cannibal are trait gates separate from their faction traits. But Crushable and Bashable aren't - because the latter are explicitly for a Faction. 
+###			C	AgentIsRival
+Make sure of how this is used. Avoid giving free XP bonus to those who lack the proper traits.
+###			C	00 Refactor
+Put custom methods in faction traits.
+E.g. Crushable.IsAlignedTo(Agent agent)
+	agent == vagent.crepe || agent.hastrait<crushable>
+This logic can get very ugly so it'd be nice to pack it away elsewhere and just iterate through all applicable traits.
+###			C	General concept
+Friendly to faction doesn't align you. You do not inherit the faction's relationships.
+Loyal causes you to inherit its relationships, but negative ones are moderated:
+	Hostile → Annoyed
+	Annoyed → Neutral
+		The net effect of this one is that Loyalists are less likely to initate conflict on behalf of their faction.
+Aligned means you fully inherit any faction-mandated relationships.
+###			C	Config Files for unique player-defined factions
+Generate traits based on these names
+Allow multiple faction list files in a folder, to increase ease of compatibility.
+###			C	Faction 1 Annoyed
+###			C	Faction 1 Friendly
+###			C	Faction 1 Loyal
+###			C	Faction 2 Annoyed
+###			C	Faction 2 Friendly
+###			C	Faction 2 Loyal
+###			C	Faction 3 Annoyed
+###			C	Faction 3 Friendly
+###			C	Faction 3 Loyal
+###			C	Faction 4 Annoyed
+###			C	Faction 4 Friendly
+###			C	Faction 4 Loyal
+###			√	Faction 1 Aligned
+###			√	Faction 1 Hostile
+###			√	Faction 2 Aligned
+###			√	Faction 2 Hostile
+###			√	Faction 3 Aligned
+###			√	Faction 3 Hostile
+###			√	Faction 4 Aligned
+###			√	Faction 4 Hostile
 ##		P	Bugs
 Except crickets, crickets are fine.
+###				T	Equip Sound Spam
+	CL:	Can confirm that the sound is still present, although it seems like extreme in normal fights against random unarmed people. It's still very noticeable for firefighters though. Speaking of firefighters, alignment with them is still one-sided (as in people with the trait will care if you punch a firefighter, but a firefighter won't care if you punch that person).
+
+I think I've resolved it, prefixing no sfx for EquipWeapon on NPCs. Pending feedback on that change.
+###				C	Alignment Trait Refactors
+check all relationship, trait gate, etc. categories because they might be scattered
+
+	CL - Also I think I found the issue with the firefighter alignment thing because it's also affecting crepes, I think you maybe broke the custom relation traits again. Vanilla gangsters aren't aligned with customs with the trait but the latter will become hostile and defend vanilla NPCs, which is the same problem the firefighter stuff had so while I haven't tested every combination it's probably a safe bet that this is what's happening. Reverted to my previous CCU file and double-checked both the clicking and relationships, same issues.
+	CL - what is the logic behind the cool cannibal gate? It doesn't allow vanilla cannibals to purchase from them and even if it did, thematically it seems like it would be working like the alignment gates instead. If nothing else it would be nice to split this mechanic into two traits since they don't really synergize design wise and can easily get in each other's way, like specifically I'm trying to make a common folk faction that is hostile on sight and want to give them cool cannibal so the player has one extra tool to mitigate the threat with but currently that means they won't sell to other people in their own faction (including copies of the same NPC class).
+####				C	Faction Blahd Aligned
+Aligned to Blahd
+Hostile to Crepe
+Bashable
+####				C	Faction Cannibal Aligned
+Aligned to Cannibal
+Faction Cannibal Aligned
+
+####				C	Mutual Relationship
+No longer works for Firefighter aligned
+I think the Upper Cruster bug was holding some traits together. Review them all.
+####				C	Common Folk
+	CL: If an NPC has friend of the common folk, common folk and is hostile to the player by default then they will be made loyal if the player has the common folk trait too but not if they have friend of the common folk. Seems like both should work there and certainly the latter is more useful since you can actually get it during a run so it's particularly bad that's the one that isn't working.
+###				C	Hiring Voucher
+	CL: Hiring vouchers can be used to hire someone permanently, not a bug but maybe something to put an exception in for (or a trait to prevent it if you want the option to still exist) since it makes them worth several hundred dollars. 
+Speaking of permanent hires, if you buy them with that option they will join your party but won't gain positive alignment until something causes them to remain in the party. For hirables with abilities this is fine since you just tell them to use the ability once and then they'll become aligned instead of leaving, but for muscle this means you can't actually tell them to attack anything until going to the next floor.
 ###				C	Loadout error
 Consistently, the Crepe Heavy has this error.
 
 	[Info   : Unity Log] SETUPMORE4_7
 	[Debug  :CCU_LoadoutTools] Custom Loadout: Custom(Crepe Heavy)
 	[Error  : Unity Log] Couldn't do ChooseWeapon etc. for agent Custom (1132) (Agent)
-###				C	Mutual Relationship
-No longer works for Firefighter aligned
-I think the Upper Cruster bug was holding some traits together. Review them all.
 ###				C	Clone changing appearance
 Buddy Cop Loneliness killer
 The one that showed up on level 2 was identical to me
@@ -152,18 +270,6 @@ Or you know what, make an overhaul mutator mapped to each class. That's what thi
 - Meltingpot District (Even distribution of all language groups)
 - Werewales (Werewelsh)
 - Brainard (Lang Zonbi)
-##			CT	Legacy Name Updater
-###				C	Iterate until failure
-When you have multiple layers of patches, names may undergo more than one permutation. Iterate the name-changing method until failure.
-###				T!	Challenges
-Homesickness Mandatory & Disabled
-####				T	Test Mutator List in editor
-Had to tweak it
-###				√	Traits
-####				√	Designer Side
-P_Unlocks.GetUnlock_Prefix
-####				√	Player Side 
-P_StatusEffects.AddTrait_Prefix
 ##			H	Config Files
 ###				Custom Flag list
 Allow player to name booleans uniquely.
@@ -271,21 +377,35 @@ Merchant Type: Sugar Shack √
 Passive: Keep Moving (Acts like Stinger, but doesn't betray you. Red herring)
 Passive: Stinger (Calls cops and flees level if you sell or buy contraband)
 And also the entire Drug Dealer mod series.  
-##			T	Legacy Updater
-###				T!	Challenges
-Homesickness Mandatory & Disabled
-####				T	Test Mutator List in editor
-Had to tweak it
-###				√	Trait 
+##			√	Legacy Name Updater
+CharacterCreation.LoadCharacter2
+###				H	Challenges
+This needs testing but I don't think anyone really used those mutators yet
+###				√	Traits
 ####				√	Designer Side
 P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
 P_StatusEffects.AddTrait_Prefix
-##		C	Trait Utilities 
-###			C	Collapsible Groups
-Old attempt: https://github.com/Freiling87/BunnyMod/commit/dd792e8cf82c0faa18c8939048748880d84a9b55
+##		H	Trait Utilities 
+###			!	Collapsible Groups
+The BunnyMod content has been found and integrated into the attempts. No need to go back to it.
+After numerous attempts I'm shelving this for 1.1.0, though it remains a top UI priority.
+###			C	Reactive coloration
+Color 1 - Group headers 
+Color 2a,b,c - Group contents, HC1 HC2 HC3 etc. 
+Color 3 - Select All toggle for group
+Ideally, right-clicking a group header would toggle un/select all but that's a stretch
 ###			C	Flexible Descriptions
-  - Make a "Flex text" generator that will check mod edition and return description based on that
+Make a "Flex text" generator that will check DE/PE and return description based on that. Hidden info available to only Designers, where relevant
+###			C	Reactive Descriptions
+Hopefully there's a way to live-update descriptions. It would be cool to see a chart of loadout chances, for example.
+###			H	Free Real Estate
+Freeze text size in TallyText
+Enable Scrollbar
+This got a nullref:
+	Scrollbar scrollbar = CC.pointTally.Find("Scrollbar").GetComponent<Scrollbar>();
+
+So success may depend on our ability to make a new prefab from just code. Probably not possible.
 #		C	Agent Goals 
 ##			CT	Default Goals
 ###				C	Ambush
@@ -311,6 +431,10 @@ Complete
 #		√H	Items
 ##				√H	Class-A-Ware
 It might be cool for these two bars to be *left* of the readout data.
+###				H	ScrollBar
+These didn't work:
+            Owner.mainGUI.scrollingMenuPersonalScript.scrollBarDetails.gameObject.SetActive(true);
+            Owner.mainGUI.scrollingMenuPersonalScript.scrollBarPersonalDetails.gameObject.SetActive(true);
 ###				H	Battery Readout
 Power bar with warning "Replace Battery"
 If you do three rows you could make it look like a battery but you don't have that kind of space
@@ -430,6 +554,10 @@ How a Bounty Ambusher is set up:
 		You should remove this from the Player Relationship algo, since it would interfere with this behavior opaquely
 	Relationship.SecretHate
 		Note that it's on Relationship (singular), meaning you'll have to find the particular rel
+###			C	Hide & Ambush
+Always attacks player when near
+###			C	Hide & Wait
+Hides in bush but does default. Will ambush only if hostile.
 ###			C	Arsonist
 Arsonist behavior
 ###			C	Bio-Terrorist
@@ -1042,6 +1170,9 @@ Complete
 ###			√	Cyber-Intruder
 Complete
 ##		C	Interaction
+###			C	I'm Looking For...
+Spooctus' idea: 
+	Speaking to a front desk person or something, asking for an employee by name. Allows you to point at an NPC and summon them there. Doing this repeatedly will Annoy people.
 ###			C	Insider
 Sell Key/SafeCombo/MayorBadge
 Do as Interaction instead of shop,. 
@@ -1372,6 +1503,10 @@ Instead of dying, agent will be Injured instead. Player can revive them or hire 
 Instead of dying, agent will be Injured instead. Player can revive them or hire someone to do it once.
 ###			C	Reviver
 If hired and surviving, will revive the player once
+###			C	Supernaturally Aware
+- TheShadowHat#1437
+Detect Shapeshifters and Werewolves
+Retains relationship after de-transformation or re-possession
 ###			C	Tight Grip
 Immune to Butterfingerer
 ###			C	Trigger Happy
@@ -1463,49 +1598,6 @@ Complete
 ###			√	Miscellaneous
 ####			√	Blinker
 Complete
-##		C	Relationships - Faction
-###			C	00 Refactor
-Put custom methods in faction traits.
-E.g. Crushable.IsAlignedTo(Agent agent)
-agent == vagent.crepe || agent.hastrait<crushable>
-This logic can get very ugly so it'd be nice to pack it away elsewhere and just iterate through all applicable traits.
-###			C	Faction Firefighter
-###			C	Faction Cannibal
-###			C	Faction Military
-###			C	General concept
-Friendly to faction doesn't align you. You do not inherit the faction's relationships.
-Loyal causes you to inherit its relationships, but negative ones are moderated:
-	Hostile → Annoyed
-	Annoyed → Neutral
-		The net effect of this one is that Loyalists are less likely to initate conflict on behalf of their faction.
-Aligned means you fully inherit any faction-mandated relationships.
-###			C	Config Files for unique player-defined factions
-Generate traits based on these names
-Allow multiple faction list files in a folder, to increase ease of compatibility.
-###			C	00 Refactor
-These should inherit from a shared class
-public override char Faction => '1', etc.
-public override string Relationship => VRelationship.Aligned, etc.
-###			C	Faction 1 Annoyed
-###			C	Faction 1 Friendly
-###			C	Faction 1 Loyal
-###			C	Faction 2 Annoyed
-###			C	Faction 2 Friendly
-###			C	Faction 2 Loyal
-###			C	Faction 3 Annoyed
-###			C	Faction 3 Friendly
-###			C	Faction 3 Loyal
-###			C	Faction 4 Annoyed
-###			C	Faction 4 Friendly
-###			C	Faction 4 Loyal
-###			√	Faction 1 Aligned
-###			√	Faction 1 Hostile
-###			√	Faction 2 Aligned
-###			√	Faction 2 Hostile
-###			√	Faction 3 Aligned
-###			√	Faction 3 Hostile
-###			√	Faction 4 Aligned
-###			√	Faction 4 Hostile
 ##		C	Relationships - General
 ###			C	All-Annoyed
 New
@@ -1628,50 +1720,6 @@ One trait for each vanilla agent (32 is a lot)
 Designed to make Class Solidarity worth taking for custom characters
 ##		C	Tethers
 ###			C	Types depend on vanilla variable
-##		C	Trait Gates
-###			C	Crust Enjoyer
-If you have Upper Crusty, this character is Loyal
-I think this is actually automatic with Enforcer
-###			C	Gate Vendor
-Won't sell unless you have appropriate trait
-###			C	Gate Hire
-Won't hire unless you have appropriate trait
-###			√	Cool Cannibal
-Complete
-###			√	Bashable
-Complete
-###			√	Common Folk
-Complete
-###			√	Crushable
-Complete
-###			√	Cop	Access
-Complete
-###			√	Family Friend
-Complete
-###			C	Thief Network Traits (Trait Gate / Faction)
-####			C	Honorable Thief
-This now just means membership in the network, not necessarily Friendliness. Add it to vanilla thieves.
-####			C	Tweaks to vanilla Honor Among Thieves
-The relationship improvement is now scaled to the particular NPC. 
-####			C	Honored Among Thieves + (Player Trait)
-Those in the Network are Loyal.
-####			C	Honored Among Thieves ++ (Player Trait)
-Those in the Network are Aligned.
-####			C	Dishonorable Thief (Player Trait)
-Still pickpockets other thieves in the network
-Gets access to shops in the network
-CCU idea: The Secret Thief Faction
-Ok not a faction, but linking Honor Among Thieves 
-####			C	Ali Baba (Player Trait)
-Those in the Network are mutually Annoyed
-###			C	Goody Two-Shoes
-Won't interact with Wanted (Shopkeeper vanilla)
-###			√	Scumbag
-Complete
-###			√	Slayable
-Complete
-###			√	Suspecter
-Complete
 #		C	Mutators
 Setting: Force Big Quest completion - If set to yes, you will need to complete your big quest before leaving the floor, if there is one. You will not be able to exit the floor until the BQ is done, even after completing all the missions on the floor. If the quest is failed (floor only fails dont count) you will spontaneously combust and die.
 
@@ -1685,7 +1733,7 @@ Mutator: Exit Timer LITE - Similar to Time Limit, except that the timer is SHORT
 ##		C	Laws
 Add malus to social stuff when breaking various laws, unless talking to scumbags or outlaws
 ###			H	No Open Carry
-Out of scope for now
+Out of scope for now 
 ##		C	Disaster Mutators
 Simply allows them to be mixed
 ##		C	Election Mutators
@@ -1788,6 +1836,61 @@ Main quest rewards are multiplied by 10
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
 #		CT	Objects
+##			C	Traps
+Chest, Door, Window
+Dart, Taser, Flame, Explosion, Slime, etc.
+##			C	Slime Barrel
+###				C	Barrel of Monke
+New
+###				C	Big Explosion
+New
+###				C	Blood and Gore
+Super mutant food stash
+###				C	Cyanide
+Use alien blood sprite?
+###				C	Dizzy
+New
+###				C	EMP
+New
+###				C	Fire Bomb
+Mostly black with bright warning yellow stripes, diagonal on upper and bottom thirds
+Label is a white diamond, red edges with a flame in the middle
+###				C	Huge Explosion
+New
+###				C	Normal
+Even if redundant, gives sprite variety
+###				C	Oil
+Not a vanilla explosion type, so just do the spill
+Black barrel. 
+Label is a white diamond, red edges with a black teardrop shape in it.
+###				C	Ooze
+New
+###				C	Ridiculous Explosion
+New
+###				C	Slime
+Default value, default sprite
+###				C	Stomp
+New
+###				C	Warp
+New
+###				C	Water
+Blue Barrel, middle stripe white. No label.
+###				C	Sprites
+Coloring and distinct warning label specific to Status Effect
+If label too small, use barrel color and pattern
+###				C	Status Effect (ExtraVarString)
+This will be important since this list will be used for several objects.
+###				C	Durability (ExtraVarString2)
+This can also be reused, e.g. for security cam
+####				C	Bombproof
+New
+####				C	Reinforced
+Requires 2-3 hits to explode rather than 1
+(Normal for most objects, generally only useful for barrels)
+####				C	Steel-Cased
+Requires an explosion to destroy
+####				C	Volatile
+Destroyed if you bump into it, maybe could add Overclocked effects to it
 ##			C	Custom Decal
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			H	Ambusher
@@ -1862,6 +1965,10 @@ That code is more likely in Door than Window
 ###			C	French Vanilla Strings
 Default strings per object type
 ####				C	Computer
+#####					C	Zone Security
+Blue, Red, and Green variants
+Use a varstring on security objects to determine their levelwide zone
+#####
 ####				C	Gravestone
 Yeah Gravestone jokes are soooo funny and fresh
 ###			C	One-Time Read
@@ -1901,23 +2008,6 @@ Destroyed if you bump into it
 ##			C	Laser Emitter
 ###				C	Mode: Metal Detector
 This would really only make sense with a Stop & Frisk mod.
-##			C	Slime Barrel
-###				C	Sprite Warning Label
-Specific to Status Effect
-If label too small, use barrel color and pattern
-###				C	Status Effect (ExtraVarString)
-This will be important since this list will be used for several objects.
-###				C	Durability (ExtraVarString2)
-This can also be reused, e.g. for security cam
-####				C	Bombproof
-Not useful for barrels, but since this list will be reused
-####				C	Reinforced
-Requires 2-3 hits to explode rather than 1
-(Normal for most objects, generally only useful for barrels)
-####				C	Steel-Cased
-Requires an explosion to destroy
-####				C	Volatile
-Destroyed if you bump into it
 ##			C	Turret
 ###				C	Gun Type (ExtraVarString)
 ####				C	Flamethrower
