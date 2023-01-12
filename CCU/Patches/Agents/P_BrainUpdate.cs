@@ -22,7 +22,7 @@ namespace CCU.Patches.Agents
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(typeof(BrainUpdate), nameof(BrainUpdate.MyUpdate), new Type[0] { })]
+		[HarmonyTranspiler, HarmonyPatch(typeof(BrainUpdate), nameof(BrainUpdate.MyUpdate))]
 		private static IEnumerable<CodeInstruction> CallCustomLOSChecks(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -198,4 +198,4 @@ namespace CCU.Patches.Agents
 			return true;
         }
 	}
-}
+} 
