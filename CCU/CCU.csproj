@@ -848,13 +848,13 @@
     <None Include="Documentation\C0503_PlayerTraits.md" />
     <None Include="Documentation\C0502_Loadout.md" />
     <None Include="Documentation\C0501_Appearance.md" />
+    <None Include="Documentation\C06_Fixes.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
     <None Include="Documentation\M01_Installation.md" />
     <None Include="Documentation\C03_Mutators.md" />
     <None Include="Documentation\C04_Objects.md" />
     <None Include="Documentation\C05_Traits.md" />
-    <None Include="Documentation\C06_NPCs.md" />
     <None Include="Resources\Audio\ClassAware_Use.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

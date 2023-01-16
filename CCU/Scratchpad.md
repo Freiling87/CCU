@@ -9,16 +9,20 @@ Listed in order of Parent tier summary symbol priority:
 #		Scope
 ##		P	Bugs
 Except crickets. Crickets are fine.
-###				C	ExtraVarString copying
-Still occuring. Try placing multiple custom containers.
-I don't think it happens with vanilla containers, so see what they do in the normal code.
-###				C	Containers (Empty)
+###			H	Editor Object Placement
+Hold - This is BTHarmonyUtils
+Objects, Draw Mode
+Choosing anything but vanilla containers causes an infinite loop with no error message
+Verified this is BTHarmonyUtils
+###			H	CCU Trait section in Load Character screen
+Shows outdated traits when choosing
+###			C	Containers (Empty)
 Text is assigned in PlayfieldObject.MakeChestNonInteractable()
 
 Shelf works
 Stove doesn't
 Vendor stand doesn't
-###				C	Johnny Stabbs
+###			C	Johnny Stabbs
 Has Fac Blahd Aligned (replaced by Legacy)
 
 On attempt Load from stored chars list, get error and no load:
@@ -36,7 +40,6 @@ On attempt Load from stored chars list, get error and no load:
 	...
 ###				C	Equipment noise spam
 Still occuring, even with vanillas
-
 ###				H	Clone changing appearance
 Shelving this because I simply don't care enough to fix it yet. This is super-niche.
 Buddy Cop Loneliness killer

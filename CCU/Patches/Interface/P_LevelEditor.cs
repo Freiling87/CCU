@@ -68,52 +68,8 @@ namespace CCU.Patches.Interface
 			return false;
 		}
 
-		// This is out of scope, you silly man!
-		//[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.CreateObjectList))]
-		private static IEnumerable<CodeInstruction> CreateObjectList_Extended(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo add = AccessTools.DeclaredMethod(typeof(List<>), "Add", parameters: new[] { typeof(string) });
-			MethodInfo addCustomListEntries = AccessTools.DeclaredMethod(typeof(ObjectVariables), nameof(ObjectVariables.AddCustomListEntries));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_1),
-					new CodeInstruction(OpCodes.Ldstr, "AirConditioner"),
-					new CodeInstruction(OpCodes.Callvirt, add),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_1),
-					new CodeInstruction(OpCodes.Call, addCustomListEntries),
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.PressedMouseButton))]
-		public static bool PressedMouseButton_Prefix(LevelEditor __instance, ref InputField ___extraVarStringObject )
-        {
-			if (!___extraVarStringObject.IsActive())
-				___extraVarStringObject.text = "";
-
-			return true;
-        }
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
-		public static void SetExtraVarString_Postfix(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
-        {
-			if (__instance.currentInterface == "Objects")
-				if (Investigateables.IsInvestigateable(___tileNameObject.text) && 
-					___extraVarStringObject.text.Length > 0 &&
-					!Investigateables.IsInvestigationString(___extraVarStringObject.text))
-					___extraVarStringObject.text = Investigateables.InvestigateableStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
-        }
-
 		#region Containers
+		// Pulls up ScrollingList when you click EVS field.
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
 		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -198,7 +154,6 @@ namespace CCU.Patches.Interface
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
 		private static void ShowCustomInterface(LevelEditor levelEditor, string tileNameText)
         {
 			InputField tileNameObject = (InputField)AccessTools.Field(typeof(LevelEditor), "tileNameObject").GetValue(levelEditor);
@@ -210,7 +165,7 @@ namespace CCU.Patches.Interface
 				extraVarObject.gameObject.SetActive(false);
 
 				InputField extraVarStringObject = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarStringObject").GetValue(levelEditor); // √
-				levelEditor.SetNameText(extraVarStringObject, extraVarStringObject.text.Replace(Investigateables.InvestigateableStringPrefix, ""), "Interface");
+				levelEditor.SetNameText(extraVarObject, extraVarObject.text, "Interface");
 				extraVarStringObject.gameObject.SetActive(true);
 
 				InputField extraVarString2Object = (InputField)AccessTools.Field(typeof(LevelEditor), "extraVarString2Object").GetValue(levelEditor);
@@ -334,6 +289,16 @@ namespace CCU.Patches.Interface
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
+		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
+		public static void SetExtraVarString_FormatInvestigateableText(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
+		{
+			if (__instance.currentInterface == "Objects")
+				if (Investigateables.IsInvestigateable(___tileNameObject.text) &&
+					___extraVarStringObject.text.Length > 0 &&
+					!Investigateables.IsInvestigationString(___extraVarStringObject.text))
+					___extraVarStringObject.text = Investigateables.InvestigateableStringPrefix + Environment.NewLine + ___extraVarStringObject.text;
 		}
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
