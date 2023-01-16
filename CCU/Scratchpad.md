@@ -7,186 +7,55 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 
 #		Scope
-Reloaded CAW audio, retest
-##		C	Class-A-Ware Error
-Scanned Crepe Lil Bro:
-
-	[Error  : Unity Log] DivideByZeroException: Attempted to divide by zero.
-	Stack trace:
-	CCU.Items.ClassAWare.MainText (Agent agent, System.Boolean newClass, Agent owner) (at <f5107673a59e42ed8e57c0be8372b17b>:0)
-	CCU.Items.ClassAWare.TargetObject (PlayfieldObject target) (at <f5107673a59e42ed8e57c0be8372b17b>:0)
-	RogueLibsCore.RogueLibsPlugin.InvItem_TargetObject (InvItem __instance, PlayfieldObject otherObject, System.String combineType, System.Boolean& __result) (at <d5b03aa633104a1d8e943925b1ea5b1c>:0)
-	InvItem.TargetObject (PlayfieldObject otherObject, System.String combineType) (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	ObjectSprite.OnMouseDown () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	ObjectSprite.MouseDownAgent () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	AgentMouseBox.OnMouseDown () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	UnityEngine.SendMouseEvents:DoSendMouseEvents(Int32)
-
-Interaction data in case it's needed:
-
-	[Debug  :CCU_TraitManager] TRAIT LIST: Crepe Lil Bro
-	[Debug  :CCU_TraitManager]      :       Diminutive
-	[Debug  :CCU_TraitManager]      :       KnockbackMore
-	[Debug  :CCU_TraitManager]      :       HatesBlahds
-	[Debug  :CCU_TraitManager]      :       BadTrader
-	[Debug  :CCU_TraitManager]      :       OperateSlowly
-	[Debug  :CCU_TraitManager]      :       NoTechSkill
-	[Debug  :CCU_TraitManager]      :       ChanceAttacksDoZeroDamage
-	[Debug  :CCU_TraitManager]      :       HardToShoot
-	[Debug  :CCU_TraitManager]      :       Meat_Chunks
-	[Debug  :CCU_P_Agent] ------- Inventory
-	[Debug  :CCU_P_Agent] Money(3)
-	[Debug  :CCU_P_Agent] (0)
-	[Debug  :CCU_P_Agent] (0)
-	[Debug  :CCU_P_Agent] (0)
-	[Debug  :CCU_P_Agent] (0)
-	[Debug  :CCU_AppearanceTools] ======= APPEARANCE (Crepe Lil Bro)
-	[Debug  :CCU_AppearanceTools]   Accessory  :    HatBlue
-	[Debug  :CCU_AppearanceTools]   Body Color :    RGBA(60, 81, 217, 255)
-	[Debug  :CCU_AppearanceTools]   Body Type  :
-	[Debug  :CCU_AppearanceTools]   Eye Color  :    RGBA(255, 255, 255, 255)
-	[Debug  :CCU_AppearanceTools]   Eye Type   :    EyesNE
-	[Debug  :CCU_AppearanceTools]   Facial Hair:    None
-	[Debug  :CCU_AppearanceTools]   FH Position:    (0.0, 0.0, 0.0)
-	[Debug  :CCU_AppearanceTools]   Hair Color :    Black
-	[Debug  :CCU_AppearanceTools]   Hair Style :    Cutoff
-	[Debug  :CCU_AppearanceTools]   Legs Color :    RGBA(255, 255, 255, 255)
-	[Debug  :CCU_AppearanceTools]   Skin Color :    GoldSkin
-##		C	Legacy
-This works on the character editor.
-Also needs to:
-	- Spawn NPCs correctly
-	- Spawn player correctly when they skip editing and select a character from the menu
-
-##		C	Ice Grip
-Player 0-pt trait
-Agent.AgentLateUpdate():
-			if (this.curTileData.ice && !this.onIce && !this.ghost && !this.teleporting)
-##		C	Trait Gates
-See the Gate Vendor/Gate Hire ones too. Those were requested, and they make sense.
-###			C	Specistist
-Ensure this is in right group
-###			C	Crust Enjoyer
-If you have Upper Crusty, this character is Loyal
-I think this is actually automatic with Enforcer
-###			C	Gate Vendor
-Won't sell unless you have appropriate trait
-###			C	Gate Hire
-Won't hire unless you have appropriate trait
-###			C	Thief Network Traits (Trait Gate / Faction)
-####			C	Honorable Thief
-This now just means membership in the network, not necessarily Friendliness. Add it to vanilla thieves.
-####			C	Tweaks to vanilla Honor Among Thieves
-The relationship improvement is now scaled to the particular NPC. 
-####			C	Honored Among Thieves + (Player Trait)
-Those in the Network are Loyal.
-####			C	Honored Among Thieves ++ (Player Trait)
-Those in the Network are Aligned.
-####			C	Dishonorable Thief (Player Trait)
-Still pickpockets other thieves in the network
-Gets access to shops in the network
-CCU idea: The Secret Thief Faction
-Ok not a faction, but linking Honor Among Thieves 
-####			C	Ali Baba (Player Trait)
-Those in the Network are mutually Annoyed
-###			C	Goody Two-Shoes
-Won't interact with Wanted (Shopkeeper vanilla)
-###			√	Cool Cannibal
-Complete
-###			√	Bashable
-Complete
-###			√	Common Folk
-Complete
-###			√	Crushable
-Complete
-###			√	Cop	Access
-Complete
-###			√	Family Friend
-Complete
-###			√	Scumbag
-Complete
-###			√	Slayable
-Complete
-###			√	Suspecter
-Complete
-##		C	Relationships - Faction
-Code is done
-###			C	Documentation Update
-###			C	General concept
-Friendly to faction doesn't align you. You do not inherit the faction's relationships.
-Loyal causes you to inherit its relationships, but negative ones are moderated:
-	Hostile → Annoyed
-	Annoyed → Neutral
-		The net effect of this one is that Loyalists are less likely to initate conflict on behalf of their faction.
-Aligned means you fully inherit any faction-mandated relationships.
-###			C	Config Files for unique player-defined factions
-Generate traits based on these names
-Allow multiple faction list files in a folder, to increase ease of compatibility.
-###			C	Faction 1 Annoyed
-###			C	Faction 1 Friendly
-###			C	Faction 1 Loyal
-###			C	Faction 2 Annoyed
-###			C	Faction 2 Friendly
-###			C	Faction 2 Loyal
-###			C	Faction 3 Annoyed
-###			C	Faction 3 Friendly
-###			C	Faction 3 Loyal
-###			C	Faction 4 Annoyed
-###			C	Faction 4 Friendly
-###			C	Faction 4 Loyal
-###			√	Faction 1 Aligned
-###			√	Faction 1 Hostile
-###			√	Faction 2 Aligned
-###			√	Faction 2 Hostile
-###			√	Faction 3 Aligned
-###			√	Faction 3 Hostile
-###			√	Faction 4 Aligned
-###			√	Faction 4 Hostile
 ##		P	Bugs
-Except crickets, crickets are fine.
-###				T	Equip Sound Spam
-	CL:	Can confirm that the sound is still present, although it seems like extreme in normal fights against random unarmed people. It's still very noticeable for firefighters though. Speaking of firefighters, alignment with them is still one-sided (as in people with the trait will care if you punch a firefighter, but a firefighter won't care if you punch that person).
+Except crickets. Crickets are fine.
+###				C	ExtraVarString copying
+Still occuring. Try placing multiple custom containers.
+I don't think it happens with vanilla containers, so see what they do in the normal code.
+###				C	Containers (Empty)
+Text is assigned in PlayfieldObject.MakeChestNonInteractable()
 
-I think I've resolved it, prefixing no sfx for EquipWeapon on NPCs. Pending feedback on that change.
-###				C	Alignment Trait Refactors
-check all relationship, trait gate, etc. categories because they might be scattered
+Shelf works
+Stove doesn't
+Vendor stand doesn't
+###				C	Johnny Stabbs
+Has Fac Blahd Aligned (replaced by Legacy)
 
-	CL - Also I think I found the issue with the firefighter alignment thing because it's also affecting crepes, I think you maybe broke the custom relation traits again. Vanilla gangsters aren't aligned with customs with the trait but the latter will become hostile and defend vanilla NPCs, which is the same problem the firefighter stuff had so while I haven't tested every combination it's probably a safe bet that this is what's happening. Reverted to my previous CCU file and double-checked both the clicking and relationships, same issues.
-	CL - what is the logic behind the cool cannibal gate? It doesn't allow vanilla cannibals to purchase from them and even if it did, thematically it seems like it would be working like the alignment gates instead. If nothing else it would be nice to split this mechanic into two traits since they don't really synergize design wise and can easily get in each other's way, like specifically I'm trying to make a common folk faction that is hostile on sight and want to give them cool cannibal so the player has one extra tool to mitigate the threat with but currently that means they won't sell to other people in their own faction (including copies of the same NPC class).
-####				C	Faction Blahd Aligned
-Aligned to Blahd
-Hostile to Crepe
-Bashable
-####				C	Faction Cannibal Aligned
-Aligned to Cannibal
-Faction Cannibal Aligned
+On attempt Load from stored chars list, get error and no load:
 
-####				C	Mutual Relationship
-No longer works for Firefighter aligned
-I think the Upper Cruster bug was holding some traits together. Review them all.
-####				C	Common Folk
-	CL: If an NPC has friend of the common folk, common folk and is hostile to the player by default then they will be made loyal if the player has the common folk trait too but not if they have friend of the common folk. Seems like both should work there and certainly the latter is more useful since you can actually get it during a run so it's particularly bad that's the one that isn't working.
-###				C	Hiring Voucher
-	CL: Hiring vouchers can be used to hire someone permanently, not a bug but maybe something to put an exception in for (or a trait to prevent it if you want the option to still exist) since it makes them worth several hundred dollars. 
-Speaking of permanent hires, if you buy them with that option they will join your party but won't gain positive alignment until something causes them to remain in the party. For hirables with abilities this is fine since you just tell them to use the ability once and then they'll become aligned instead of leaving, but for muscle this means you can't actually tell them to attack anything until going to the next floor.
-###				C	Loadout error
-Consistently, the Crepe Heavy has this error.
+	[Debug  :CCU_Legacy] Caught Legacy trait: Faction_Blahd_Aligned
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	MenuGUI.TextChangedCharacterDescription () (at <3d326b8e9c744e5faf3a706691682c89>:0)
+	UnityEngine.Events.InvokableCall.Invoke () (at <a5d0703505154901897ebf80e8784beb>:0)
+	UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <a5d0703505154901897ebf80e8784beb>:0)
+	UnityEngine.UI.InputField.SendOnValueChanged () (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
+	UnityEngine.UI.InputField.SetText (System.String value, System.Boolean sendCallback) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
+	UnityEngine.UI.InputField.set_text (System.String value) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
+	CharacterCreation.LoadCharacter2 (System.String characterName, System.Boolean secondTry, System.Boolean foundFile, System.Object mySaveObject) (at <3d326b8e9c744e5faf3a706691682c89>:0) 
+	...
+###				C	Equipment noise spam
+Still occuring, even with vanillas
 
-	[Info   : Unity Log] SETUPMORE4_7
-	[Debug  :CCU_LoadoutTools] Custom Loadout: Custom(Crepe Heavy)
-	[Error  : Unity Log] Couldn't do ChooseWeapon etc. for agent Custom (1132) (Agent)
-###				C	Clone changing appearance
+###				H	Clone changing appearance
+Shelving this because I simply don't care enough to fix it yet. This is super-niche.
 Buddy Cop Loneliness killer
 The one that showed up on level 2 was identical to me
 The one that came from level 1 rerolled appearance
-###				T	Investigateable string copying
-I think it's only during placement, so find the method of placing an Object and see where it's copying that text from.
-P_levelEditor.PressedMouseButton_Prefix
+###				H	Eyes Strings error
+Between Accessory & Body Type, current logs are uninterrupted
+Shelved - no apparent effect for this error.
+###				H	Loadout error
+Consistently, the Crepe Heavy has this error.
+	[Info   : Unity Log] SETUPMORE4_7
+	[Debug  :CCU_LoadoutTools] Custom Loadout: Custom(Crepe Heavy)
+	[Error  : Unity Log] Couldn't do ChooseWeapon etc. for agent Custom (1132) (Agent)
+
+This error is from LoadLevel.SetupMore.
+But since there doesn't appear to be any actual repercussion on gameplay, I'm shelving it until it is an issue.
 ###				H	Upper Crusty Busybody 
 Polices pickup and destruction of 0-Owner ID items and objects, and no others.
 After reloading, was unable to replicate this.
-###				C	Eyes Strings error
-Between Accessory & Body Type, current logs are uninterrupted
 ###				H	Jukebox Hacks
 Possibly RogueLibs, wait for confirmation.
 
@@ -506,6 +375,12 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		C	Appearance
+###			C	Sprite sizers
+Wide/narrow, tall/short body
+Long/short legs
+Big/small head
+Big/small eyes
+Big/small hands
 ###			C	Cloneliness Killer
 Loneliness Killer spawns should vary in appearance
 This would be a Free Trait, in a category of their own. No limit, 0 points. A subcategory of Player Traits
@@ -1519,6 +1394,15 @@ NPC has 2x effect on Electability
 agent.canExplosiveStimulate
 ###			C	Holographic
 Ghostlike, not necessarily gibbable (Use Supernatural for that)
+##		C	Ice Grip
+Player 0-pt trait
+Agent.AgentLateUpdate():
+			if (this.curTileData.ice && !this.onIce && !this.ghost && !this.teleporting)
+Could also do an opposite called Cold Feet
+###			C	Last Stander
+Only spawns once all NPCs without Last Stander or better are neutralized
+###			C	Last Standest
+|| But more
 ###			C	Menace 2 Society
 When neutralized, witnesses Friendly
 ###			C	Menace 3 Society
@@ -1637,6 +1521,17 @@ Complete
 ###			√	Miscellaneous
 ####			√	Blinker
 Complete
+##		C	Relationships - Faction
+###			C	General concept
+Friendly to faction doesn't align you. You do not inherit the faction's relationships.
+Loyal causes you to inherit its relationships, but negative ones are moderated:
+	Hostile → Annoyed
+	Annoyed → Neutral
+		The net effect of this one is that Loyalists are less likely to initate conflict on behalf of their faction.
+Aligned means you fully inherit any faction-mandated relationships.
+###			C	Config Files for unique player-defined factions
+Generate traits based on these names
+Allow multiple faction list files in a folder, to increase ease of compatibility.
 ##		C	Relationships - General
 ###			C	All-Annoyed
 New
@@ -1759,6 +1654,51 @@ One trait for each vanilla agent (32 is a lot)
 Designed to make Class Solidarity worth taking for custom characters
 ##		C	Tethers
 ###			C	Types depend on vanilla variable
+##		C	Trait Gates
+See the Gate Vendor/Gate Hire ones too. Those were requested, and they make sense.
+###			C	Crust Enjoyer
+If you have Upper Crusty, this character is Loyal
+I think this is actually automatic with Enforcer
+###			C	Gate Vendor
+Won't sell unless you have appropriate trait
+###			C	Gate Hire
+Won't hire unless you have appropriate trait
+###			C	Thief Network Traits (Trait Gate / Faction)
+####			C	Honorable Thief
+This now just means membership in the network, not necessarily Friendliness. Add it to vanilla thieves.
+####			C	Tweaks to vanilla Honor Among Thieves
+The relationship improvement is now scaled to the particular NPC. 
+####			C	Honored Among Thieves + (Player Trait)
+Those in the Network are Loyal.
+####			C	Honored Among Thieves ++ (Player Trait)
+Those in the Network are Aligned.
+####			C	Dishonorable Thief (Player Trait)
+Still pickpockets other thieves in the network
+Gets access to shops in the network
+CCU idea: The Secret Thief Faction
+Ok not a faction, but linking Honor Among Thieves 
+####			C	Ali Baba (Player Trait)
+Those in the Network are mutually Annoyed
+###			C	Goody Two-Shoes
+Won't interact with Wanted (Shopkeeper vanilla)
+###			√	Cool Cannibal
+Complete
+###			√	Bashable
+Complete
+###			√	Common Folk
+Complete
+###			√	Crushable
+Complete
+###			√	Cop	Access
+Complete
+###			√	Family Friend
+Complete
+###			√	Scumbag
+Complete
+###			√	Slayable
+Complete
+###			√	Suspecter
+Complete
 #		C	Mutators
 Setting: Force Big Quest completion - If set to yes, you will need to complete your big quest before leaving the floor, if there is one. You will not be able to exit the floor until the BQ is done, even after completing all the missions on the floor. If the quest is failed (floor only fails dont count) you will spontaneously combust and die.
 

@@ -77,7 +77,8 @@ namespace CCU.Patches.AgentRelationships
             if (___agent.HasTrait<Cool_Cannibal>() && otherAgent.HasTrait(VanillaTraits.CoolwithCannibals))
                 relationship = VRelationship.Neutral;
 
-            if (___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk) && otherAgent.HasTrait<Common_Folk>() && !otherAgent.guardSequence)
+            if (((___agent.HasTrait<Common_Folk>() || ___agent.agentName == VanillaAgents.SlumDweller) && otherAgent.HasTrait(VanillaTraits.FriendoftheCommonFolk)) ||
+                ((otherAgent.HasTrait<Common_Folk>() || otherAgent.agentName == VanillaAgents.SlumDweller) && ___agent.HasTrait(VanillaTraits.FriendoftheCommonFolk)))
                 relationship = VRelationship.Loyal;
 
             if (___agent.HasTrait<Family_Friend>() && (otherAgent.agentName == VanillaAgents.Mobster || otherAgent.HasTrait(VanillaTraits.FriendoftheFamily)))
