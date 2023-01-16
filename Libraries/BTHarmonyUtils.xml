@@ -63,6 +63,12 @@
             </summary>
             <returns>double from the buffer</returns>
         </member>
+        <member name="M:BTHarmonyUtils.ILUtils.ByteBuffer.ReadNullTerminatedString">
+            <summary>
+            Read a Null-Terminated String from the buffer
+            </summary>
+            <returns>string from the buffer</returns>
+        </member>
         <member name="T:BTHarmonyUtils.ILUtils.InstructionSimplifier">
             <summary>
             A class that houses all the logic for Simplifying Code-Instructions
@@ -73,7 +79,16 @@
             Creates a Tuple&lt;opcode, operand&gt; contains a simplified OpCode/Operand
             e.g. 'Ldarg_0' becomes {Ldarg_S, 0}
             </summary>
-            <param name="instruction">the CodeInstruction to simplify</param>
+            <param name="codeInstruction">codeInstruction to simplify</param>
+            <returns>the Tuple&lt;opcode, operand&gt;</returns>
+        </member>
+        <member name="M:BTHarmonyUtils.ILUtils.InstructionSimplifier.SimplifyForComparison(System.Reflection.Emit.OpCode,System.Object)">
+            <summary>
+            Creates a Tuple&lt;opcode, operand&gt; contains a simplified OpCode/Operand
+            e.g. 'Ldarg_0' becomes {Ldarg_S, 0}
+            </summary>
+            <param name="opcode">the opCode to simplify</param>
+            <param name="operand">the operand to simplify</param>
             <returns>the Tuple&lt;opcode, operand&gt;</returns>
         </member>
         <member name="T:BTHarmonyUtils.ILUtils.InstructionUtils">
@@ -98,6 +113,14 @@
             <param name="sequence">sequence to look for</param>
             <returns>the startIndex for every matching sequence</returns>
         </member>
+        <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.FindInstructionSequence(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Collections.Generic.List{BTHarmonyUtils.InstructionSearch.InstructionMask})">
+            <summary>
+            Checks a list of instructions for occurrences of a sequence
+            </summary>
+            <param name="instructions">instructions to check</param>
+            <param name="sequence">sequence to look for</param>
+            <returns>the startIndex for every matching sequence</returns>
+        </member>
         <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.SequenceMatches(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Int32)">
             <summary>
             Checks if a list of instructions matches with the matcher-sequence
@@ -107,7 +130,24 @@
             <param name="offset">offset the instruction list</param>
             <returns>true if the instructionSequence at the specified offset matches the matcher-sequence</returns>
         </member>
+        <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.SequenceMatches(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Collections.Generic.List{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Int32)">
+            <summary>
+            Checks if a list of instructions matches with the matcher-sequence
+            </summary>
+            <param name="instructions">instructions</param>
+            <param name="sequence">matcher instructions</param>
+            <param name="offset">offset the instruction list</param>
+            <returns>true if the instructionSequence at the specified offset matches the matcher-sequence</returns>
+        </member>
         <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.InstructionMatches(HarmonyLib.CodeInstruction,HarmonyLib.CodeInstruction)">
+            <summary>
+            Helper overload for `InstructionMatches`
+            </summary>
+            <param name="instruction">instruction</param>
+            <param name="matcherInstruction">matcher instruction</param>
+            <returns>true if the instruction roughly equals the matcher-instruction</returns>
+        </member>
+        <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.InstructionMatches(HarmonyLib.CodeInstruction,System.Tuple{System.Nullable{System.Reflection.Emit.OpCode},System.Object})">
              <summary>
              Checks if an instruction matches the matcherInstruction
             
@@ -116,8 +156,24 @@
               e.g. brfalse.s == brfalse
              </summary>
              <param name="instruction">instruction</param>
-             <param name="matcherInstruction">matcher instruction</param>
+             <param name="matcherTuple">matcher instruction</param>
              <returns>true if the instruction roughly equals the matcher-instruction</returns>
+        </member>
+        <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.OpCodeMatches(System.Nullable{System.Reflection.Emit.OpCode},System.Nullable{System.Reflection.Emit.OpCode})">
+            <summary>
+            Checks if an OpCode matcher matches an OpCode
+            </summary>
+            <param name="opCode">the opCode to match</param>
+            <param name="matcherOpCode">the opCode to use as a matcher</param>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.ILUtils.InstructionUtils.OperandMatches(System.Object,System.Object)">
+            <summary>
+            Checks if an Operand matcher matches an Operand
+            </summary>
+            <param name="operand">the operand to match</param>
+            <param name="matcherOperand">the operand to use as a matcher</param>
+            <returns></returns>
         </member>
         <member name="T:BTHarmonyUtils.ILUtils.MethodBodyReader">
             <summary>
@@ -136,9 +192,189 @@
             </summary>
             <returns>List of CodeInstructions</returns>
         </member>
+        <member name="T:BTHarmonyUtils.InstructionSearch.InstructionMask">
+            <summary>
+            Used to match Instructions more dynamically
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchAny">
+            <summary>
+            Provides an InstructionMask that matches any instruction.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchOpCode(System.Nullable{System.Reflection.Emit.OpCode})">
+            <summary>
+            Provides an InstructionMask matching an OpCode.
+            </summary>
+            <param name="opCode">opCode that this Mask should match</param>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchOpCodes(System.Nullable{System.Reflection.Emit.OpCode}[])">
+            <summary>
+            Provides an InstructionMask matching one or more OpCodes.
+            </summary>
+            <param name="allowedOpCodes">a Set of OpCodes that this Mask should match</param>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchOperand(System.Object)">
+            <summary>
+            Provides an InstructionMask matching an operand.
+            </summary>
+            <param name="operand">operand that this Mask should match</param>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchOperands(System.Object[])">
+            <summary>
+            Provides an InstructionMask matching one or more operands.
+            </summary>
+            <param name="operands">a Set of operands that this Mask should match</param>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchCodeInstruction(HarmonyLib.CodeInstruction)">
+            <summary>
+            Provides an InstructionMask matching the opCode and operand of a CodeInstruction
+            </summary>
+            <param name="instruction">CodeInstruction that this Mask should match</param>
+            <returns></returns>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionMask.MatchInstruction(System.Nullable{System.Reflection.Emit.OpCode},System.Object)">
+            <summary>
+            Provides an InstructionMask matching an opCode and operand
+            </summary>
+            <param name="opCode">OpCode this Mask should match</param>
+            <param name="operand">operand this Mask should match</param>
+            <returns></returns>
+        </member>
+        <member name="T:BTHarmonyUtils.InstructionSearch.InstructionSearcher">
+            <summary>
+            InstructionSearcher lets you look for CodeInstructions
+            especially useful to access local variables or compiler generated code in transpilers
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionSearcher.#ctor(System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.SearchMask},System.Int32)">
+            <summary>
+            InstructionSearcher lets you look for CodeInstructions
+            especially useful to access local variables or compiler generated code in transpilers
+            </summary>
+            <param name="searchMasks">Sequence of SearchMasks to search for</param>
+            <param name="expectedMatches">Amount of matches this search should encounter, or less than 0 for any amount</param>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionSearcher.DoSearch(System.Collections.Generic.List{HarmonyLib.CodeInstruction})">
+            <summary>
+            Execute the search on the given instructions
+            </summary>
+            <param name="instructions">instructions to search in</param>
+            <returns>List of all matching sequences, in order</returns>
+            <exception cref="T:System.IO.InvalidDataException">thrown when an unexpected amount of matches is found</exception>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.InstructionSearcher.DoSearchSafe(System.Collections.Generic.List{HarmonyLib.CodeInstruction},BepInEx.Logging.ManualLogSource)">
+            <summary>
+            Execute the search on the given instructions
+            Catches all exceptions and writes them to the logger
+            </summary>
+            <param name="instructions">instructions to search in</param>
+            <param name="logger">logger to write exceptions to</param>
+            <returns>List of all matching sequences, in order</returns>
+        </member>
+        <member name="T:BTHarmonyUtils.InstructionSearch.SearchMask">
+            <summary>
+            Used to match for CodeInstructions
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.InstructionSearch.SearchMask.#ctor(BTHarmonyUtils.InstructionSearch.InstructionMask,System.Boolean)">
+            <summary>
+            Provides a SearchMask that matches an InstructionMask
+            </summary>
+            <param name="mask">the mask to use when matching Instructions</param>
+            <param name="copyToResult">Copy the instruction matching this SearchMask to the output</param>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.InstructionReplacementTranspiler.#ctor(System.Int32,System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},BTHarmonyUtils.internal.LabelPullUp)">
+            <summary>
+            Replace using basic CodeInstructions
+            </summary>
+            <param name="expectedMatches"></param>
+            <param name="insertSequence"></param>
+            <param name="prefixSequence"></param>
+            <param name="targetSequence"></param>
+            <param name="postfixSequence"></param>
+            <param name="pullUp"></param>
+            <exception cref="T:System.IO.InvalidDataException">thrown when no prefix, replace and postfix sequence is specified -> cannot match for anything</exception>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.InstructionReplacementTranspiler.MoveLabels(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Move the labels in the replace-sequence and first label of postfix-sequence to beginning of insert-sequence
+            </summary>
+            <returns>a new insert-sequence with adjusted labels</returns>
+        </member>
+        <member name="T:BTHarmonyUtils.internal.ITranspilerPatch">
+            <summary>
+            Because the CodeReplacementPatch constructor is in use by published mods,
+             this internal interface is used to extend the feature set without affecting the external API.
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.ITranspilerPatch.Apply(System.Collections.Generic.List{HarmonyLib.CodeInstruction})">
+            <summary>
+            Apply this Patch to the given Instructions
+            </summary>
+            <param name="instructions"></param>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.ITranspilerPatch.ApplySafe(System.Collections.Generic.List{HarmonyLib.CodeInstruction},BepInEx.Logging.ManualLogSource)">
+            <summary>
+            Apply this ReplacementPatch to the given instructions
+            Catches all exceptions and writes them to the logger
+            </summary>
+            <param name="instructions">instructions to apply the changes to</param>
+            <param name="logger">logger to write exceptions to</param>
+        </member>
+        <member name="T:BTHarmonyUtils.internal.MidFixCodeGenerator">
+            <summary>
+            Class for generating IL-Code for MidFixes
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.MidFixCodeGenerator.GetCodeInstructions(System.Reflection.MethodInfo,System.Reflection.MethodInfo,System.Reflection.Emit.ILGenerator)">
+            <summary>
+            Returns the codeInstructions for calling a midFix pattern
+            </summary>
+            <param name="midFixPatch">method to call</param>
+            /// <param name="originalMethod">method that is being patched</param>
+            /// <param name="generator">ilGenerator from harmony</param>
+            <returns>codeInstructions</returns>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.MidFixCodeGenerator.GetIndOpcode(System.Type)">
+            <summary>
+            straight copy from Harmony GetIndOpcode
+            </summary>
+        </member>
+        <member name="T:BTHarmonyUtils.internal.MidFixPatcher">
+            <summary>
+            Applies the MidFix patches.
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.internal.MidFixPatcher.DoPatch(HarmonyLib.Harmony,HarmonyLib.HarmonyMethod,System.Reflection.MethodInfo,BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix)">
+            <summary>
+            Applies a MidFix-Patch using the AnnotationInfo
+            This will probably never be used externally, but if you - for some reason - do, here it is.
+            </summary>
+        </member>
         <member name="T:BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix">
             <summary>
             Marks a HarmonyPatch method as a MidFix (called in the middle of a method, rather than the beginning or end)
+            </summary>
+        </member>
+        <member name="P:BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix.instructionMatcherDeclaringType">
+            <summary>
+            type containing the instruction matcher method - only required if in a different class
+            </summary>
+        </member>
+        <member name="P:BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix.instructionMatcherMethodName">
+            <summary>
+            name of the method that provides the instruction matcher for this midFix
+            </summary>
+        </member>
+        <member name="P:BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix.priority">
+            <summary>
+            if you are using multiple midFix patches for the same original method, you can specify their priority, higher priorities execute first
             </summary>
         </member>
         <member name="M:BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix.#ctor(System.String,System.Int32)">
@@ -155,25 +391,6 @@
             Resolves the method that provides the MidFixInstructionMatcher for this patch
             </summary>
         </member>
-        <member name="T:BTHarmonyUtils.MidFixPatch.MidFixCodeGenerator">
-            <summary>
-            Class for generating IL-Code for MidFixes
-            </summary>
-        </member>
-        <member name="M:BTHarmonyUtils.MidFixPatch.MidFixCodeGenerator.GetCodeInstructions(System.Reflection.MethodInfo,System.Reflection.MethodInfo,System.Reflection.Emit.ILGenerator)">
-            <summary>
-            Returns the codeInstructions for calling a midFix pattern
-            </summary>
-            <param name="midFixPatch">method to call</param>
-            /// <param name="originalMethod">method that is being patched</param>
-            /// <param name="generator">ilGenerator from harmony</param>
-            <returns>codeInstructions</returns>
-        </member>
-        <member name="M:BTHarmonyUtils.MidFixPatch.MidFixCodeGenerator.GetIndOpcode(System.Type)">
-            <summary>
-            straight copy from Harmony GetIndOpcode
-            </summary>
-        </member>
         <member name="T:BTHarmonyUtils.MidFixPatch.MidFixInstructionMatcher">
             <summary>
             A class that matches for CodeInstructions in methods
@@ -188,13 +405,14 @@
             <param name="postfixInstructionSequence">Sequence of instructions that should occur after the MidFix</param>
             <exception cref="T:System.IO.InvalidDataException">thrown when no prefix and postfix sequence is specified -> cannot match for anything</exception>
         </member>
-        <member name="M:BTHarmonyUtils.MidFixPatch.MidFixInstructionMatcher.#ctor(System.Int32,System.Linq.Expressions.Expression{System.Action})">
+        <member name="M:BTHarmonyUtils.MidFixPatch.MidFixInstructionMatcher.#ctor(System.Int32,System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask})">
             <summary>
             A construct for matching CodeInstructions in methods
             </summary>
             <param name="expectedMatches">Amount of matches that this Patch should encounter, or less than 0 for any amount</param>
-            <param name="markerMethod">A method that is using TranspilerMarkers to define prefix/postfix -sequences</param>
-            <exception cref="T:System.IO.InvalidDataException">thrown when a sequence isn't closed or there is no prefix and postfix sequence</exception>
+            <param name="prefixInstructionSequence">Sequence of instructions that should occur before the MidFix</param>
+            <param name="postfixInstructionSequence">Sequence of instructions that should occur after the MidFix</param>
+            <exception cref="T:System.IO.InvalidDataException">thrown when no prefix and postfix sequence is specified -> cannot match for anything</exception>
         </member>
         <member name="M:BTHarmonyUtils.MidFixPatch.MidFixInstructionMatcher.MoveLabels(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Int32,System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -222,17 +440,6 @@
             <param name="originalMethod">method that is being patched</param>
             <param name="generator">ilGenerator from harmony</param>
             <param name="logger">logger to write exceptions to</param>
-        </member>
-        <member name="T:BTHarmonyUtils.MidFixPatch.MidFixPatcher">
-            <summary>
-            Applies the MidFix patches.
-            </summary>
-        </member>
-        <member name="M:BTHarmonyUtils.MidFixPatch.MidFixPatcher.DoPatch(HarmonyLib.Harmony,HarmonyLib.HarmonyMethod,System.Reflection.MethodInfo,BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix)">
-            <summary>
-            Applies a MidFix-Patch using the AnnotationInfo
-            This will probably never be used externally, but if you - for some reason - do, here it is.
-            </summary>
         </member>
         <member name="T:BTHarmonyUtils.PatcherUtils">
             <summary>
@@ -283,7 +490,7 @@
         </member>
         <member name="M:BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.#ctor(System.Int32,System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction})">
             <summary>
-            A construct intended to generify Transpilers and make them more accessible.
+            Create a Patch that replaces a set of Instructions
             </summary>
             <param name="expectedMatches">Amount of matches that this Patch should encounter, or less than 0 for any amount</param>
             <param name="insertInstructionSequence">Sequence of instructions to insert at the matching locations</param>
@@ -292,20 +499,29 @@
             <param name="postfixInstructionSequence">Sequence of instructions that should occur after the replace-sequence</param>
             <exception cref="T:System.IO.InvalidDataException">thrown when no prefix, replace and postfix sequence is specified -> cannot match for anything</exception>
         </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.#ctor(System.Int32,System.Linq.Expressions.Expression{System.Action})">
+        <member name="M:BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.#ctor(System.Int32,System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Boolean)">
             <summary>
-            This class is intended to make working with Transpilers more accessible for anybody.
-            The MarkerMethod may contain 0 or 1 insert/prefix/target/postfix -sequences.
+            Create a Patch that replaces a set of Instructions
             </summary>
             <param name="expectedMatches">Amount of matches that this Patch should encounter, or less than 0 for any amount</param>
-            <param name="markerMethod">A method that is using TranspilerMarkers to define insert/prefix/target/postfix -sequences</param>
-            <exception cref="T:System.IO.InvalidDataException">thrown when a sequence isn't closed or there is no prefix, target and postfix sequence</exception>
+            <param name="insertInstructions">Sequence of instructions to insert at the matching locations</param>
+            <param name="prefixInstructions">Sequence of instructions that should occur before the replace-sequence</param>
+            <param name="targetInstructions">Sequence of instructions that should be removed / replaced with the insert-sequence</param>
+            <param name="postfixInstructions">Sequence of instructions that should occur after the replace-sequence</param>
+            <param name="pullNextLabelUp">if enabled, the label immediately after the insertSequence will be moved in front of it, otherwise the label remains at the end of the insertSequence</param>
+            <exception cref="T:System.IO.InvalidDataException">thrown when no prefix, replace and postfix sequence is specified -> cannot match for anything</exception>
         </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.MoveLabels(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.#ctor(System.Int32,System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Collections.Generic.IEnumerable{BTHarmonyUtils.InstructionSearch.InstructionMask},System.Boolean)">
             <summary>
-            Move the labels in the replace-sequence and first label of postfix-sequence to beginning of insert-sequence
+            Create a Patch that replaces a set of Instructions
             </summary>
-            <returns>a new insert-sequence with adjusted labels</returns>
+            <param name="expectedMatches">Amount of matches that this Patch should encounter, or less than 0 for any amount</param>
+            <param name="insertInstructions">Sequence of instructions to insert at the matching locations</param>
+            <param name="prefixInstructions">Sequence of instructions that should occur before the replace-sequence</param>
+            <param name="targetInstructions">Sequence of instructions that should be removed / replaced with the insert-sequence</param>
+            <param name="postfixInstructions">Sequence of instructions that should occur after the replace-sequence</param>
+            <param name="pullNextLabelUp">if enabled, the label immediately after the insertSequence will be moved in front of it, otherwise the label remains at the end of the insertSequence</param>
+            <exception cref="T:System.IO.InvalidDataException">thrown when no prefix, replace and postfix sequence is specified -> cannot match for anything</exception>
         </member>
         <member name="M:BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply(System.Collections.Generic.List{HarmonyLib.CodeInstruction})">
             <summary>
@@ -321,31 +537,6 @@
             </summary>
             <param name="instructions">instructions to apply the changes to</param>
             <param name="logger">logger to write exceptions to</param>
-        </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.TranspilerMarkers.InsertSequenceStart">
-            <summary>
-            Marks the start of the InsertSequence in a Marker-Method
-            </summary>
-        </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.TranspilerMarkers.PrefixSequenceStart">
-            <summary>
-            Marks the start of the PrefixSequence in a Marker-Method
-            </summary>
-        </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.TranspilerMarkers.TargetSequenceStart">
-            <summary>
-            Marks the start of the TargetSequence in a Marker-Method
-            </summary>
-        </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.TranspilerMarkers.PostfixSequenceStart">
-            <summary>
-            Marks the start of the PostfixSequence in a Marker-Method
-            </summary>
-        </member>
-        <member name="M:BTHarmonyUtils.TranspilerUtils.TranspilerMarkers.LastSequenceEnd">
-            <summary>
-            Marks the end of the current Sequence in a Marker-Method
-            </summary>
         </member>
     </members>
 </doc>

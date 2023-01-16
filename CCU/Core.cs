@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using BTHarmonyUtils;
 using UnityEngine;
 
 namespace CCU
@@ -27,9 +28,11 @@ namespace CCU
 
 		public void Awake()
 		{
-			LogMethodCall(); 
-			 
-			new Harmony(pluginGUID).PatchAll();
+			LogMethodCall();
+
+			Harmony harmony = new Harmony(pluginGUID);
+			harmony.PatchAll();
+			PatcherUtils.PatchAll(harmony);
 			RogueLibs.LoadFromAssembly();
 			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion); 
 		}
