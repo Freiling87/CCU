@@ -37,10 +37,9 @@ namespace CCU.Patches.Objects
             if (Containers.IsContainer(__instance.objectName))
             {
                 if (__instance.GetComponent<InvDatabase>() is null)
-                {
                     __instance.objectInvDatabase = __instance.go.AddComponent<InvDatabase>();
-                    __instance.chestReal = true;
-                }
+
+                __instance.chestReal = true;
             }
 
             return true;
