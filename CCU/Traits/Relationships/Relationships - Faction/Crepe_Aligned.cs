@@ -1,27 +1,24 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
-using System;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_Firefighter_Aligned : T_Rel_Faction
+    public class Crepe_Aligned : T_Rel_Faction
     {
         public override int Faction => 0;
-        public override Alignment FactionAlignment => throw new NotImplementedException();
+        public override Alignment FactionAlignment => throw new System.NotImplementedException();
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Faction_Firefighter_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Crepe_Aligned>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "This character is Aligned to Firefighters and anyone else with this trait.",
-                    
+                    [LanguageCode.English] = "Agent is Aligned to Crepes and anyone else with this trait. They are also a valid target for Crepe Crusher and the Crepe Super Special Ability.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Faction_Firefighter_Aligned), "Firefighter-Aligned"),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Crepe_Aligned)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -34,10 +31,9 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.Firefighter || agent.HasTrait<Faction_Firefighter_Aligned>()
+            agent.agentName == VanillaAgents.GangsterCrepe ||
+            agent.HasTrait<Crepe_Aligned>()
                 ? VRelationship.Aligned
-            : agent.arsonist || agent.activeArsonist
-                ? VRelationship.Hostile
                 : null;
         public override void OnAdded() { }
         public override void OnRemoved() { }

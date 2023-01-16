@@ -19,6 +19,7 @@ using CCU.Traits.Player.Ranged_Combat;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -153,10 +154,10 @@ namespace CCU.Patches.Inventory
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.ChooseWeapon), argumentTypes: new[] { typeof(bool) })]
 		public static bool ChooseWeapon_Prefix(InvDatabase __instance)
         {
-			ConcealWeapon(__instance);
+			__instance.StartCoroutine(ConcealWeapon(__instance));
 			return true;
         }
-		public static async void ConcealWeapon(InvDatabase invDatabase)
+		public static IEnumerator ConcealWeapon(InvDatabase invDatabase)
 		{
 			Agent agent = invDatabase.agent;
 
@@ -164,13 +165,12 @@ namespace CCU.Patches.Inventory
 					(agent.HasTrait<Concealed_Carrier>() ||
 					(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
 			{
-
 				if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
-					await Task.Delay(500);
+					yield return new WaitForSeconds(0.75f);
 				else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
-					await Task.Delay(2000);
+					yield return new WaitForSeconds(3.00f);
 				else
-					await Task.Delay(1000);
+					yield return new WaitForSeconds(1.50f);
 
 				invDatabase.EquipWeapon(invDatabase.fist);
 			}
@@ -199,6 +199,15 @@ namespace CCU.Patches.Inventory
         {
 			if (__instance.agent.HasTrait<Infinite_Melee>())
 				return false;
+
+			return true;
+        }
+
+        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.EquipWeapon), argumentTypes: new[] { typeof(InvItem), typeof(bool) })]
+		public static bool EquipWeapon_Prefix(InvDatabase __instance, InvItem item, ref bool sfx)
+        {
+			if (__instance.agent.isPlayer == 0 && item.invItemName == vItem.Fist)
+				sfx = false;
 
 			return true;
         }

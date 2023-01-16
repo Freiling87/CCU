@@ -65,7 +65,8 @@ namespace CCU.Systems.Containers
 		[RLSetup]
 		public static void Setup()
 		{
-			string t = NameTypes.Interface;
+            #region Content
+            string t = NameTypes.Interface;
 
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo("Search"));
 			RogueLibs.CreateCustomName(CButtonText.Ransack, t, new CustomNameInfo("Ransack"));
@@ -81,8 +82,9 @@ namespace CCU.Systems.Containers
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TooHot, t, new CustomNameInfo("It's too hot to touch!"));
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_ManholeClosed, t, new CustomNameInfo("I need a crowbar."));
 			RogueLibs.CreateCustomName(CDialogue.CantAccessContainer_TubeFunctional, t, new CustomNameInfo("It's still running, and I want to keep all my limbs."));
+            #endregion
 
-			RogueInteractions.CreateProvider(h => 
+            RogueInteractions.CreateProvider(h => 
 			{
 				if (IsContainer(h.Object.objectName) && !h.Helper.interactingFar && !h.Object.objectInvDatabase.isEmpty())
 				{

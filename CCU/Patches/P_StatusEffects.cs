@@ -64,33 +64,19 @@ namespace CCU.Patches
 				? 9999
 				: vanilla;
 
-		/// <summary>
-		/// Legacy Trait Updater
-		/// </summary>
-		/// <param name="traitName"></param>
-		/// <param name="__instance"></param>
-		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AddTrait), 
-			argumentTypes: new[] { typeof(string), typeof(bool), typeof(bool) })]
-		public static bool AddTrait_Prefix(ref string traitName, StatusEffects __instance)
-        {
-			if (Legacy.TraitConversions.ContainsKey(traitName))
-				traitName = Legacy.TraitConversions[traitName].Name;
-
-			return true;
-        }
-
+		// Strictly for Rival XP allocation.
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), 
-			argumentTypes: new[] { typeof(Agent) })]
+		argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
 		{
-			if (((__instance.agent.HasTrait<Faction_Blahd_Aligned>() || __instance.agent.HasTrait(VanillaTraits.CrepeCrusher)) && 
-					(myAgent.HasTrait(VanillaTraits.BlahdBasher) || myAgent.agentName == VanillaAgents.GangsterCrepe || myAgent.HasTrait<Faction_Crepe_Aligned>())) ||
-				((__instance.agent.HasTrait<Faction_Crepe_Aligned>() || __instance.agent.HasTrait(VanillaTraits.BlahdBasher)) && 
-					(myAgent.HasTrait(VanillaTraits.CrepeCrusher) || myAgent.agentName == VanillaAgents.GangsterBlahd || myAgent.HasTrait<Faction_Blahd_Aligned>())) ||
-				(__instance.agent.HasTrait<Cool_Cannibal>() && myAgent.agentName == VanillaAgents.Soldier) ||
-				(__instance.agent.HasTrait<Slayable>() && myAgent.HasTrait("HatesScientist")) ||
-				(__instance.agent.HasTrait<Faction_Gorilla_Aligned>() && myAgent.HasTrait(VanillaTraits.Specist)))
+			Agent agent = __instance.agent;
+
+			if
+			(
+				(agent.HasTrait(VanillaTraits.BlahdBasher) && IsBashable(myAgent)) ||
+				(agent.HasTrait(VanillaTraits.CrepeCrusher) && IsCrushable(myAgent)) || 
+				(agent.HasTrait("HatesScientist") && myAgent.HasTrait<Slayable>()) ||
+				(agent.HasTrait(VanillaTraits.Specist) && myAgent.HasTrait<Specistist>()))
 			{
 				__result = true;
 				return false;
@@ -98,8 +84,12 @@ namespace CCU.Patches
 
 			return true;
 		}
+		private static bool IsBashable(Agent agent) =>
+			agent.agentName == VanillaAgents.GangsterBlahd || agent.HasTrait<Blahd_Aligned>() || agent.HasTrait<Crepe_Hostile>();
+		private static bool IsCrushable(Agent agent) =>
+			agent.agentName == VanillaAgents.GangsterCrepe || agent.HasTrait<Crepe_Aligned>() || agent.HasTrait<Blahd_Hostile>();
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), 
 			argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
 		public static bool ChangeHealth_Prefix(StatusEffects __instance, ref float healthNum)
         {

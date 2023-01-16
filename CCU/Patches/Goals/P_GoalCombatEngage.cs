@@ -1,11 +1,9 @@
 ﻿using BepInEx.Logging;
-using CCU.Patches.Agents;
 using CCU.Patches.Inventory;
+using CCU.Traits.Behavior;
 using CCU.Traits.Combat;
-using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
 
 namespace CCU.Patches.Goals
 {
@@ -15,11 +13,11 @@ namespace CCU.Patches.Goals
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalCombatEngage.Activate))]
         public static void Activate_Postfix(GoalCombatEngage __instance)
         {
-            __instance.agent.agentInvDatabase.ChooseWeapon();
+            if (__instance.agent.HasTrait<Concealed_Carrier>())
+                __instance.agent.agentInvDatabase.ChooseWeapon();
         }
 
         /// <summary>
@@ -42,7 +40,7 @@ namespace CCU.Patches.Goals
         [HarmonyPostfix, HarmonyPatch(methodName:nameof(GoalCombatEngage.Terminate))]
         public static void Terminate_Postfix(GoalCombatEngage __instance)
         {
-            P_InvDatabase.ConcealWeapon(__instance.agent.agentInvDatabase);
+            __instance.agent.agentInvDatabase.StartCoroutine(P_InvDatabase.ConcealWeapon(__instance.agent.agentInvDatabase));
         }
     }
 }

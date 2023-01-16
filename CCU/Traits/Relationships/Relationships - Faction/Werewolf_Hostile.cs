@@ -1,27 +1,24 @@
 ﻿using CCU.Localization;
 using RogueLibsCore;
-using System;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public class Faction_Gorilla_Aligned : T_Rel_Faction
+    public class Werewolf_Hostile : T_Rel_Faction
     {
         public override int Faction => 0;
-        public override Alignment FactionAlignment => throw new NotImplementedException();
+        public override Alignment FactionAlignment => throw new System.NotImplementedException();
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Faction_Gorilla_Aligned>()
+            PostProcess = RogueLibs.CreateCustomTrait<Werewolf_Hostile>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This agent is aligned with Gorillas and anyone else with this trait. They are hostile to Scientists and Specists. They provide an XP bonus when neutralized by Specists."),
-                    
+                    [LanguageCode.English] = "This character is Hostile to transformed Werewolves. If they have Werewolf A-Were-Ness, they are hostile to the non-transformed as well.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Faction_Gorilla_Aligned)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Werewolf_Hostile)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -34,10 +31,8 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.Scientist || agent.HasTrait(VanillaTraits.Specist)
+            agent.agentName == VanillaAgents.WerewolfTransformed
                 ? VRelationship.Hostile
-            : agent.agentName == VanillaAgents.Gorilla || agent.HasTrait<Faction_Gorilla_Aligned>()
-                ? VRelationship.Aligned
                 : null;
         public override void OnAdded() { }
         public override void OnRemoved() { }

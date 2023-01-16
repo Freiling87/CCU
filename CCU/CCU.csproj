@@ -140,6 +140,7 @@
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
+    <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
     <Compile Include="Patches\Objects\P_SpawnerObject.cs" />
     <Compile Include="Patches\P_Melee.cs" />
     <Compile Include="Patches\P_Gun.cs" />
@@ -168,7 +169,6 @@
     <Compile Include="Patches\Agents\P_Agent.cs" />
     <Compile Include="Patches\Agents\P_AgentInteractions.cs" />
     <Compile Include="Patches\Agents\P_BrainUpdate.cs" />
-    <Compile Include="Patches\Agents\P_GoalDoJob.cs" />
     <Compile Include="Patches\Combat\P_BulletHitbox.cs" />
     <Compile Include="Patches\Combat\P_Combat.cs" />
     <Compile Include="Patches\Combat\P_Explosion.cs" />
@@ -194,12 +194,12 @@
     <Compile Include="Patches\P_ObjectMult.cs" />
     <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
-    <Compile Include="Patches\P_Unlocks.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
     <Compile Include="Systems\Agent Goals\CustomGoals.cs" />
     <Compile Include="Systems\Object Variables\Container\Containers.cs" />
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
+    <Compile Include="Traits\Appearance\Body Type\Alien_Body.cs" />
     <Compile Include="Traits\Appearance\Eye Color Special\Beady_Eyed.cs" />
     <Compile Include="Traits\Appearance\Hair Color Grouped\Demographic_Colors.cs" />
     <Compile Include="Traits\Appearance\Hair Color Special\Melanin_Mashup.cs" />
@@ -223,7 +223,6 @@
     <Compile Include="Traits\Appearance\Body Color\Mech_Colored_Body.cs" />
     <Compile Include="Traits\Appearance\Body Color Special\Neutral_Body_50.cs" />
     <Compile Include="Traits\Appearance\Body Color Special\Neutral_Body_75.cs" />
-    <Compile Include="Traits\Appearance\Body Type Greyscale\Alien_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Assassin_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Athlete_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Bartender_Body_Greyscale.cs" />
@@ -255,14 +254,12 @@
     <Compile Include="Traits\Appearance\Body Type Greyscale\Resistance_Leader_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Robot_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Scientist_Body_Greyscale.cs" />
-    <Compile Include="Traits\Appearance\Body Type Greyscale\Shapeshifter_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Shopkeeper_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Slavemaster_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Slave_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Slum_Dweller_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Soldier_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Supercop_Body_Greyscale.cs" />
-    <Compile Include="Traits\Appearance\Body Type Greyscale\Supergoon_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Thief_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Upper_Cruster_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Vampire_Body_Greyscale.cs" />
@@ -311,7 +308,6 @@
     <Compile Include="Traits\Appearance\Body Type\Butler_Bot_Body.cs" />
     <Compile Include="Traits\Appearance\Body Type\Firefighter_Body.cs" />
     <Compile Include="Traits\Appearance\Body Type\Robot_Body.cs" />
-    <Compile Include="Traits\Appearance\Body Type\Alien_Body.cs" />
     <Compile Include="Traits\Appearance\Body Type\Cop_Bot_Body.cs" />
     <Compile Include="Traits\Appearance\Body Type\Courier_Body.cs" />
     <Compile Include="Traits\Appearance\Body Type\Mayor_Body.cs" />
@@ -727,8 +723,19 @@
     <Compile Include="Traits\Player\Ranged_Combat\Trigger_Junkie.cs" />
     <Compile Include="Traits\Player\Ranged_Combat\Trigger_Happy.cs" />
     <Compile Include="Traits\Player\Ranged_Combat\T_RateOfFire.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Crepe_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Firefighter_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Gorilla_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Gorilla_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Crepe_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Scientist_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\T_Rel_Faction.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Faction_Firefighter_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - General\T_Rel_General.cs" />
     <Compile Include="Traits\Relationships\Relationships - Player\Player_Secret_Hate.cs" />
     <Compile Include="Traits\Relationships\Relationships - General\Relationless.cs" />
@@ -740,16 +747,12 @@
     <Compile Include="Traits\Relationships\Relationships - Player\Player_Loyal.cs" />
     <Compile Include="Traits\Relationships\Relationships - Player\Player_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Player\T_Rel_Player.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Faction_Gorilla_Aligned.cs" />
     <Compile Include="Traits\Relationships\T_Relationships.cs" />
+    <Compile Include="Traits\Trait Gate\Specistist.cs" />
     <Compile Include="Traits\Trait Gate\Slayable.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Faction_Crepe_Aligned.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Faction_Blahd_Aligned.cs" />
     <Compile Include="Traits\Trait Gate\Suspecter.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Faction_Soldier_Aligned.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Faction_Cannibal_Aligned.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Hostile_to_Werewolf.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Hostile_to_Vampire.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Werewolf_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Vampire_Hostile.cs" />
     <Compile Include="Traits\Trait Gate\Common_Folk.cs" />
     <Compile Include="Traits\Trait Gate\Cool_Cannibal.cs" />
     <Compile Include="Traits\Trait Gate\Cop_Access.cs" />
@@ -834,24 +837,24 @@
     <Compile Include="Traits\ISetupAgentStats.cs" />
     <Compile Include="Traits\TraitUnlock_CCU.cs" />
     <Compile Include="Traits\T_CCU.cs" />
-    <Compile Include="Systems\Legacy Name Updater\NameUpdates.cs" />
     <Compile Include="Traits\T_PlayerTrait.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="Documentation\C02_Items.md" />
     <None Include="Documentation\C01_AgentDefaultGoals.md" />
-    <None Include="Documentation\C0400_PlayerTraits.md" />
-    <None Include="Documentation\C0402_Loadout.md" />
-    <None Include="Documentation\C0401_Appearance.md" />
+    <None Include="Documentation\C0503_PlayerTraits.md" />
+    <None Include="Documentation\C0502_Loadout.md" />
+    <None Include="Documentation\C0501_Appearance.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
     <None Include="Documentation\M01_Installation.md" />
-    <None Include="Documentation\C02_Mutators.md" />
-    <None Include="Documentation\C03_Objects.md" />
-    <None Include="Documentation\C04_Traits.md" />
-    <None Include="Documentation\C05_NPCs.md" />
+    <None Include="Documentation\C03_Mutators.md" />
+    <None Include="Documentation\C04_Objects.md" />
+    <None Include="Documentation\C05_Traits.md" />
+    <None Include="Documentation\C06_NPCs.md" />
     <None Include="Resources\Audio\ClassAware_Use.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

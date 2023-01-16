@@ -66,12 +66,10 @@ namespace CCU.Patches.Agents
 				{
 					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 					{
-						if ((agent.HasTrait<Faction_Blahd_Aligned>() &&
-							(interactingAgent.agentName == VanillaAgents.GangsterBlahd ||
-								(interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility))) ||
-							(agent.HasTrait<Faction_Crepe_Aligned>() &&
-							(interactingAgent.agentName == VanillaAgents.GangsterCrepe ||
-								(interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))))
+						if ((agent.HasTrait<Blahd_Aligned>() &&
+								interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility) ||
+							(agent.HasTrait<Crepe_Aligned>() &&
+								interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))
 							h.AddButton(VButtonText.JoinMe, m =>
 							{
 								m.Object.agentInteractions.QualifyHireAsProtection(m.Object, interactingAgent, 0);
@@ -522,8 +520,6 @@ namespace CCU.Patches.Agents
 				if (!untrusted && agent.GetTraits<T_MerchantType>().Any() && agent.hasSpecialInvDatabase)
 				{
 					bool cantBuy =
-						(agent.HasTrait<Cool_Cannibal>() && 
-							!interactingAgent.statusEffects.hasTrait(VanillaTraits.CoolwithCannibals) && interactingAgent.agentName != VanillaAgents.Cannibal) ||
 						(agent.HasTrait<Cop_Access>() && 
 							!interactingAgent.HasTrait(VanillaTraits.TheLaw) && interactingAgent.agentName != VanillaAgents.Cop && interactingAgent.agentName != VanillaAgents.CopBot && interactingAgent.agentName != VanillaAgents.SuperCop) ||
 						(agent.HasTrait<Honorable_Thief>() && 

@@ -9,6 +9,7 @@ namespace CCU.Traits.Loadout_Money
     public abstract class T_PocketMoney : T_Loadout
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		public T_PocketMoney() : base() { }
 
