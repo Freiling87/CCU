@@ -13,7 +13,7 @@ namespace CCU.Traits.Behavior
             PostProcess = RogueLibs.CreateCustomTrait<Suck_Blood>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
+                    [LanguageCode.English] = string.Format("This character will suck blood like the Vampire. Agents with Hostile to Vampire will be hostile. \n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
                 })
                 .WithName(new CustomNameInfo
                 {

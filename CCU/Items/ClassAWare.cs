@@ -1,4 +1,6 @@
-﻿using CCU.Patches.Agents;
+﻿using BepInEx.Logging;
+using CCU.Localization;
+using CCU.Patches.Agents;
 using CCU.Traits;
 using RogueLibsCore;
 using System;
@@ -12,21 +14,25 @@ namespace CCU.Items
     [ItemCategories(RogueCategories.Usable, RogueCategories.Technology)]
     public class ClassAWare : I_CCU, IItemTargetable
     {
+        private static readonly ManualLogSource logger = CCULogger.GetLogger();
+        public static GameController GC => GameController.gameController;
+
         [RLSetup]
         public static void Setup()
         {
             ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<ClassAWare>()
                 .WithName(new CustomNameInfo("Class-A-Ware"))
-                .WithDescription(new CustomNameInfo("Shows info on any Agent. Gives a small XP bonus for discovering new classes. If used on an old class, the use is free but doesn't give XP."))
+                .WithDescription(new CustomNameInfo("Shows a full stat readout of a target NPC. Gives bonus XP for each new NPC scanned. Free use on previously scanned classes."))
                 .WithSprite(Properties.Resources.ClassAWare)
                 .WithUnlock(new ItemUnlock
                 {
-                    UnlockCost = 10,
                     CharacterCreationCost = 1,
-                    LoadoutCost = 2,
+                    IsAvailable = true,
+                    LoadoutCost = 1,
+                    UnlockCost = 10,
                 });
 
-            RogueLibs.CreateCustomAudio("ClassAWare_Use", Properties.Resources.ClassAware_Use, UnityEngine.AudioType.WAV);
+            RogueLibs.CreateCustomAudio("ClassAWare_Use", Properties.Resources.ClassAware_Use, AudioType.WAV);
         }
 
         public override void SetupDetails()
@@ -38,6 +44,7 @@ namespace CCU.Items
             Item.initCount = 3;
             Item.rewardCount = 3;
             Item.stackable = true;
+            Item.Categories = new List<string> { VItemCategory.Technology, VItemCategory.Usable };
         }
 
         public CustomTooltip TargetCursorText(PlayfieldObject target)
@@ -69,7 +76,7 @@ namespace CCU.Items
             Item.invInterface.HideTarget();
             Owner.gc.audioHandler.Play(Owner, "ClassAWare_Use");
             Owner.gc.spawnerMain.SpawnStateIndicator(agent, "HighVolume");
-            CCULogger.GetLogger().LogDebug(MainText(agent, newClass, Owner));
+            //CCULogger.GetLogger().LogDebug(MainText(agent, newClass, Owner));
             Owner.mainGUI.ShowBigImage(MainText(agent, newClass, Owner), "", null, target);
 
             return true;
@@ -97,11 +104,11 @@ namespace CCU.Items
                 "║</color><color=lime>\tMEM/CAP: " + TotalMemory(owner) + " KB / 16,384 KB</color><color=yellow>\n";
 
             int healthBarMaxBars = 33;
-            int healthBarScale = (int)(agent.healthMax / healthBarMaxBars);
+            int healthBarScale = Math.Max((int)(agent.healthMax / healthBarMaxBars), 1);
 
             output +=
                 "╠╤══○ HEALTH\n" +
-                "║├</color>" + ValueBar((int)agent.health / healthBarScale, healthBarMaxBars, 1) + "<color=yellow>\n" +
+                "║├</color>" + ValueBar((int)(agent.health / healthBarScale), healthBarMaxBars, 1) + "<color=yellow>\n" +
                 "║└────•</color>[\t\t" + Math.Max(agent.health, 0) + "\t\t/\t\t" + agent.healthMax + "\t\t]<color=yellow>\n";
 
             if (agent.dead) output +=
@@ -124,22 +131,33 @@ namespace CCU.Items
                 "║├• </color>Speed\t\t\t\t\t\t" + ValueBar(agent.speedStatMod + 1, 4, 3) + "\t\t[ " + (agent.speedStatMod + 1) + " ]<color=yellow>\n" +
                 "║├• </color>Melee\t\t\t\t\t\t" + ValueBar(agent.strengthStatMod + 1, 4, 3) + "\t\t[ " + (agent.strengthStatMod + 1) + " ]<color=yellow>\n" +
                 "║└• </color>Firearms\t\t\t\t\t" + ValueBar(agent.accuracyStatMod + 1, 4, 3) + "\t\t[ " + (agent.accuracyStatMod + 1) + " ]<color=yellow>\n" +
-                "║\n" +
-                "╠╤══○ TRAITS\n";
+                "║\n";
 
-            List<Trait> textList = T_CCU.PlayerTraitList(agent.statusEffects.TraitList).OrderBy(t => agent.gc.nameDB.GetName(t.traitName, "StatusEffect")).ToList();
+            List<Trait> traitList = T_CCU.PlayerTraitList(agent.statusEffects.TraitList).OrderBy(t => agent.gc.nameDB.GetName(t.traitName, "StatusEffect")).ToList();
 
-            foreach (Trait trait in textList)
+            if (traitList.Count() == 0)
             {
-                if (trait != textList[textList.Count - 1]) output +=
-                    "║├• </color>" + agent.gc.nameDB.GetName(trait.traitName, "StatusEffect") + "<color=yellow>\n";
-                else output +=
-                    "║└• </color>" + agent.gc.nameDB.GetName(trait.traitName, "StatusEffect") + "<color=yellow>\n";
+                output += 
+                    "╠═══○ TRAITS\n" +
+                    "║\t</color><color=red><< ERROR CODE 0000 - No identifiable traits. LOSER ALERT! >></color><color=yellow>\n";
+            }
+            else
+            {
+                output += 
+                    "╠╤══○ TRAITS\n";
+
+                foreach (Trait trait in traitList)
+                {
+                    if (trait != traitList[traitList.Count - 1]) output +=
+                        "║├• </color>" + agent.gc.nameDB.GetName(trait.traitName, "StatusEffect") + "<color=yellow>\n";
+                    else output +=
+                        "║└• </color>" + agent.gc.nameDB.GetName(trait.traitName, "StatusEffect") + "<color=yellow>\n";
+                }
             }
 
-            int breaks = 36 - Regex.Matches(output, "\n").Count;
+            int height = 36 - Regex.Matches(output, "\n").Count;
 
-            for (int i = 0; i < breaks; i++)
+            for (int i = 0; i < height; i++)
                 output += "║\n";
 
             output +=

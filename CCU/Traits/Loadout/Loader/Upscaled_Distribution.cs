@@ -12,8 +12,6 @@ namespace CCU.Traits.Loadout_Loader
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "The items added to this character in the editor have a chance to generate in their inventory on each spawn based on their value. For equippable items, chances are rolled in order from rarest to most common, and by default only one item will be generated.\n\n" +
-					"        Item Value / 350 =\n" +
-					"        %Chance to spawn\n\n" +
 					"The net effect is that cheaper items are rarer, and more expensive items are more common.",
 				})
 				.WithName(new CustomNameInfo

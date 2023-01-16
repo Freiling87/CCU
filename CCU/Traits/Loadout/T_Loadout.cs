@@ -140,7 +140,7 @@ namespace CCU.Traits.Loadout
 						.OrderBy(c => CoreTools.random.Next(0, 100))
 						.ToList();
 
-				while (ItemsInSlot(invDatabase.InvItemList, currentInvSlot) < maximum && 
+				while (ItemsInSlot(agent.agentInvDatabase.InvItemList, currentInvSlot) < maximum && 
 					itemBagForSlot.Count() > 0)
 				{
 					InvItem pickedItem = null;
@@ -166,10 +166,11 @@ namespace CCU.Traits.Loadout
 
 						int chance = 
 							agent.HasTrait<Scaled_Distribution>()
-								? Mathf.Clamp((int)((200f - pickedItem.itemValue) / 3.4f), 1, 100)
-								: agent.HasTrait<Upscaled_Distribution>()
-									? Mathf.Clamp((int)(pickedItem.itemValue / 3.4f), 1, 100) 
+								? Mathf.Clamp((int)((125f - pickedItem.itemValue) / 2.0f), 1, 100)
+							: agent.HasTrait<Upscaled_Distribution>()
+								? Mathf.Clamp((int)(pickedItem.itemValue / 3.0f), 1, 100) 
 									: 0;
+						logger.LogDebug("Chance: " + chance + "%");
 
 						if (GC.percentChance(chance) ||
 							(pockets && agent.HasTrait<Have>() && itemBagForSlot.Count() is 1) ||
@@ -259,7 +260,6 @@ namespace CCU.Traits.Loadout
 
 			if (slot is Slots.Pockets)
 			{
-
 				if (agent.HasTrait<FunnyPack>())
 					max += 1;
 

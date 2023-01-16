@@ -5,7 +5,7 @@ namespace CCU.Traits.App_BT2
 {
 	public class Mech_Body_Greyscale : T_BodyType
     {
-		public override string[] Rolls => new string[] { "Mech" };
+		public override string[] Rolls => new string[] { "G_Mech" };
 
         [RLSetup]
 		public static void Setup()
