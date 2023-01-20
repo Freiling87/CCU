@@ -9,6 +9,105 @@ Change Log
 </h1>
 <br><br>
 
+##		v 1.1.0
+
+- **Feature Additions**
+  - Character Creation Interface
+    - Added CCU traits are now listed in a separate section of the character's trait list, sorted by name.
+    - Traits are now auto-sorted according to the mode selected on the Traits screen (Name / Value).
+  - Systems
+	- Appearance: You can now randomize the appearance of custom NPCs through a trait interface. Details [here](/CCU/Documentation/C0501_Appearance.md).
+    - Loadout: You can now define custom randomized inventories for NPCs through a trait interface. Details [here](/CCU/Documentation/C0502_Loadout.md).
+  - Traits
+    - Behavior
+      - Concealed Carrier
+	- Hire Duration
+      - Homesickless
+      - Homesickly
+	  - Permanent Hire
+	  - Permanent Hire Only
+    - Inventory
+      - Infinite Ammo
+      - Infinite Armor
+      - Infinite Melee
+    - Loot Drop
+      - Blurse of Midas
+      - Blurse of Softlock
+      - Blurse of the Pharoah
+      - Blurse of Valhalla
+	- Merchant Stock: Various modifiers for the quantity/durability of sold items.
+	  - Clearancer
+	  - Masterworker
+	  - Masterworkerer
+	  - Masterworkerest
+	  - Shiddy Goods
+	  - Shoddy Goods
+	  - Wholesaler
+	  - Wholesalerer
+	  - Wholesalerest
+	- Merchant Type: Selecting multiple types will now combine inventory random-choice pools rather than just selecting one of them.
+	  - Burger Joint
+	  - Sugar Shack
+    - Player Traits
+      - Ammo Cap
+        - Ammo Amateur
+        - Ammo Artiste
+        - Ammo Auteur
+      - Armor
+        - Myrmicapo
+        - Myrmidon
+      - Melee Combat
+        - Melee Maniac
+        - Melee Maniac +
+      - Ranged Combat
+        - Pants on Autofire
+        - Trigger Happy
+        - Trigger Junkie
+    - Relationships
+      - Cool Cannibal no longer gates Merchant interactions. I'll be adding some special gates to those later on.
+      - Hostile to Vampire: Now applies hostility against anyone with the Suck Blood behavior trait.
+      - Faction trait breakdown: Combining these in the 0.1.1 update was admittedly a mistake. Due to feedback I've split them back up. As usual, you won't have to update your characters if you're okay with the replacements. 
+        Note that Alignment & Hostility traits will still technically work like factions, treating an Aligned agent in some situations as if they were the class they're aligned with. E.g., Hostile to Blahd will be hostile to Aligned to Blahd.
+        For each entry below, characters with the trait on the left will have it replaced with the trait(s) on the right.
+        - Faction Blahd Aligned → Aligned to Blahd, Hostile to Crepe
+        - Faction Cannibal Aligned → Aligned to Cannibal, Hostile to Soldier
+        - Faction Crepe Aligned → Aligned to Crepe, Hostile to Blahd
+        - Faction Firefighter Aligned → Aligned to Firefighter
+        - Faction Gorilla Aligned → Aligned to Gorilla, Hostile to Scientist, Specistist
+        - Faction Soldier Aligned → Aligned to Soldier, Hostile to Cannibal
+  - Default Goals
+	- Random Teleport 
+  - Objects
+	- The Vendor Cart is no longer accessible as a normal container. It requires an operating bar to access, and will make a small noise that might alert the owner as you ransack it. Sneaky/Silent Fingers both apply. 
+  - Items
+    - Class-A-Ware: Scan NPCs to see their full trait lists, and gain XP in the process. A QOL addition due to the increased diversity of NPC classes you'll see in CCU content.
+- **Bugfixes**
+  - Level Editor
+    - Fixed Vanilla bug that caused Investigateable (Sign) text to be copied between Objects.
+  - Default Goals
+	- Scene Setters are no longer interrupted by "Flee" behaviors.
+    - Random Teleport no longer breaks the Scene Setter system.
+  - Objects
+	- Containers
+	  - Can no longer loot via hack - Lame!
+	  - Disabled redundant Open/Search buttons.
+      - "Search" button no longer shows up on empty containers.
+	- Investigateables
+	  - Computer no longer interrupts hacking interaction when Investigation text is set.
+	  - Investigate button no longer appears with blank text.
+  - Traits
+    - Addict: Increased damage that Withdrawal can do to NPCs. This is a tweak to an oversight in the vanilla code that made it have almost no effect.
+	- Grab Everything: No longer grabs active traps, unless agent has Accident-Prone
+	- Extortable: Multiple Extortables with Matching Owner ID in same chunk are now handled as a group rather than separately. Duplicate Extortion buttons eliminated.
+	- Heal: No longer says broken dialogue when rejecting interaction
+	- Language Speaker group: Removed from upgrade menu in Augmentation Booth. This is a planned feature that was meant to be postponed.
+	- Rel Faction: Sharing faction animosity can no longer improve your relations with others. 
+	- Pay Cop Debt: Button text fixed.
+	- Cost Scale: Now excludes Bribe for Quest Item.
+	- Relationship: No longer affect Home Base
+- **Fixes to Vanilla**
+  - Custom NPCs ranged and melee combat behaviors now scale normally according to their appropriate skill. 
+
 ##		v 1.0.0
  
 - **Feature additions**

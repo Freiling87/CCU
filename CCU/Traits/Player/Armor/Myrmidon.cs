@@ -21,7 +21,7 @@ namespace CCU.Traits.Player.Armor
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					Cancellations = { nameof(Myrmicapo) },
-					CharacterCreationCost = 6,
+					CharacterCreationCost = 7,
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,

@@ -1,23 +1,28 @@
-﻿<p align="left">
-<img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
-<img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
-</p>
+﻿</p>
 
 <h1 align="center">
 <br>
-Traits
+Designer Traits
 </h1>
 <br><br>
+
+Designer Traits are hidden from players entirely. For Player Traits, go [here](/CCU/Documentation/C0503_PlayerTraits.md).
+
+##			Appearance
+
+The Appearance system allows you to give NPCs variable appearances. Its documentation is [here](/CCU/Documentation/C0501_Appearance.md). 
 
 ##			Behavior
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
 |Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades<br>- Might extend this to the other traps.
+|Brainless											|- Heavy Reddit user
+|Concealed Carrier									|- Hides weapon when not in combat
 |Eat Corpses										|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
 |Grab Alcohol										|- Grab Alcohol, like me<br>- Don't do drinks, kids
 |Grab Drugs											|- Grab Drugs, like me also<br>- Don't do drugs, kids
-|Grab Everything									|- Grab Everything, like a toddler<br>- Don't have kids, kids
+|Grab Everything									|- Grab Everything, like a toddler<br>- Don't have kids, kids<br>- Grabs traps with Accident-Prone
 |Grab Food											|- Grab Food, like your mom
 |Grab Money											|- Grab Money, like Slum Dweller
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
@@ -130,6 +135,17 @@ Agents default to Meat Chunks if they have no Gib trait.
 |Intruder											|- Break into target Door or Window
 |Muscle												|- Hire as protection
 
+##			Hire Duration
+
+***Expert Ability:*** Hacking, Lockpicking, Ruckus-Raising. Maybe more in the future.
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Homesickless										|- Agent always follows employer to next level
+|Homesickly											|- Agent never follows employer to next level
+|Permanent Hire										|- Option to hire at 800% cost, with infinite uses of Expert Ability.
+|Permanent Hire Only								|- As Permanent Hire, but removes original one-time hire option.
+
 ##			Interaction
 
 |Trait												|Effect													|
@@ -163,24 +179,27 @@ Agents default to Meat Chunks if they have no Gib trait.
 
 ***Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
 
-##			Language
-Language traits are part of a larger planned system. For now, they have limited utility unless you make extensive use of them with Vocally Challenged.
+##			Inventory
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Speaks Binary[^1]									|- Agent can bypass Vocally Challenged when speaking to Robots, Hackers and anyone else with this trait
-|Speaks Chthonic[^1]								|- Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies and anyone else with this trait
-|Speaks ErSdtAdt[^1]								|- Agent can bypass Vocally Challenged when speaking to Aliens and anyone else with this trait
-|Speaks Foreign[^1]									|- Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait
-|Speaks High Goryllian[^1]							|- Agent can bypass Vocally Challenged when speaking to Gorillas and anyone else with this trait
-|Speaks Werewelsh[^1]								|- Agent can bypass Vocally Challenged when speaking to Werewolves (both forms) and anyone else with this trait
+|Infinite Ammo										|- You know this. You are smart.
+|Infinite Armor										|- Really, really smart.
+|Infinite Melee										|- Who's a big smarty-smart?*
+
+\* *It's you*
 
 ##			Loadout
+The Loadout system allows you to set up an inventory generator for NPCs. Its documentation is [here](/CCU/Documentation/C0502_Loadout.md).
+
+##			Loot Drop
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Manager Key										|- Starts with the chunk's Key
-|Manager Safe Combo									|- Starts with the chunk's Safe Combo
+|Blurse of Midas									|- Agent does not drop Money on being neutralized
+|Blurse of Softlock									|- Agent does not drop important items on being neutralized (Keys, quest items, etc.)
+|Blurse of the Pharoah								|- Agent does not drop non-equippable items on being neutralized
+|Blurse of Valhalla									|- Agent does not drop equippable items on being neutralized
 
 ##			Merchant Type
 For a detailed list of merchant inventories and item frequency weights, go [here](https://github.com/Freiling87/CCU/tree/master/CCU/Traits/Merchant%20Type).
@@ -238,11 +257,27 @@ For a detailed list of merchant inventories and item frequency weights, go [here
 |Upper Cruster										|Vanilla Upper Cruster store inventory
 |Villain											|For when you're not concerned about collateral damage
 
+##			Merchant Stock
+Traits in this category are multiplicative.
+
+***Durable Wares:** Melee & Ranged weapons, Wearables*
+***Stackable Wares:** Consumables, Food, Tools, Throwing Weapons*
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Clearancer											|- Allows the same item to be sold multiple times, like Bartender. Better for smaller inventories.
+|Masterworker										|- Durable wares have 2x Durability
+|Masterworkerer										|- Durable wares have 3x Durability
+|Masterworkerest									|- Durable wares have 4x Durability
+|Shiddy Goods										|- Durable wares have 1/3x Durability
+|Shoddy Goods										|- Durable wares have 2/3x Durability
+|Wholesaler											|- Stackable wares have 2x Quantity
+|Wholesalerer										|- Stackable wares have 3x Quantity
+|Wholesalerest										|- Stackable wares have 4x Quantity
+
 ##			Passive
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Blinker[^1]										|- Teleports randomly when damaged
-|Brainless											|- Heavy Reddit user
 |Crusty												|- Same as Upper-Crusty
 |Extortable											|- Valid target for Extortionist
 |Guilty												|- Valid target for Cop Big Quest
@@ -257,6 +292,12 @@ For a detailed list of merchant inventories and item frequency weights, go [here
 ##			Relationships - Faction
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Blahd Aligned										|- Aligned to Blahd
+|Blahd Hostile										|- Hostile to Blahd
+|Cannibal Aligned									|- Aligned to Cannibal
+|Cannibal Hostile									|- Hostile to Cannibal
+|Crepe Aligned										|- Aligned to Crepe
+|Crepe Hostile										|- Hostile to Crepe
 |Faction 1 Aligned									|- Aligned with same trait
 |Faction 1 Hostile									|- Hostile to Faction 1 Aligned
 |Faction 2 Aligned									|- Aligned with same trait
@@ -265,14 +306,14 @@ For a detailed list of merchant inventories and item frequency weights, go [here
 |Faction 3 Hostile									|- Hostile to Faction 3 Aligned
 |Faction 4 Aligned									|- Aligned with same trait
 |Faction 4 Hostile									|- Hostile to Faction 4 Aligned
-|Faction Blahd Aligned								|- Aligned to Blahds<br>- Hostile to Crepes & Blahd Bashers<br>- XP bonus when neutralized by Blahd Bashers
-|Faction Cannibal Aligned							|- Aligned to Cannibals<br>- Hostile to Soldiers
-|Faction Crepe Aligned								|- Aligned to Crepes<br>- Hostile to Blahds & Crepe Crushers<br>- XP bonus when neutralized by Crepe Crushers
-|Faction Firefighter Aligned						|- Aligned to Firefighters<br>- Hostile to Arsonists
-|Faction Gorilla Aligned							|- Aligned to Gorillas<br>- Hostile to Scientists & Specists<br>- XP bonus when neutralized by Specists
-|Faction Soldier Aligned							|- Aligned to Soldiers<br>- Hostile to Cannibals
-|Hostile to Vampire									|- Hostile to Vampire
-|Hostile to Werewolf								|- Hostile to Werewolf
+|Firefighter Aligned								|- Aligned to Firefighter
+|Gorilla Aligned									|- Aligned to Gorilla
+|Gorilla Hostile									|- Hostile to Gorilla
+|Scientist Hostile									|- Hostile to Scientist
+|Soldier Aligned									|- Aligned to Soldier
+|Soldier Hostile									|- Hostile to Soldier
+|Vampire Hostile									|- Hostile to Vampire
+|Werewolf Hostile									|- Hostile to Werewolf
 
 ##			Relationships - General
 |Trait												|Effect													|
@@ -300,6 +341,5 @@ For a detailed list of merchant inventories and item frequency weights, go [here
 |Honorable Thief									|- Will not Pickpocket Honor Among Thieves<br>- If Merchant, will only sell to Honor Among Thieves
 |Scumbag											|- Hostile to Scumbag Slaughterer
 |Slayable											|- Hostile to Scientist Slaughterer<br>- XP bonus when neutralized by Scientist Slaughterer
+|Specistist											|- Hostile to Specist<br>- XP bonus when neutralized by Scientist Slaughterer
 |Suspecter											|- Annoyed at Suspicious
-
-[^1]: This is a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. Sucker!

@@ -20,7 +20,7 @@ namespace CCU.Traits.Player.Melee_Combat
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					CharacterCreationCost = 8,
+					CharacterCreationCost = 5,
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,

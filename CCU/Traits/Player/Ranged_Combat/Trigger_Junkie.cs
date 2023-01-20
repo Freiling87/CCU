@@ -29,6 +29,10 @@ namespace CCU.Traits.Player.Ranged_Combat
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
 					UnlockCost = 10,
+					Unlock =
+                    {
+						isUpgrade = true,
+                    }
 				});
 		}
 		public override void OnAdded() { }

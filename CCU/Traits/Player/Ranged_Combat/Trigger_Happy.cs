@@ -25,7 +25,6 @@ namespace CCU.Traits.Player.Ranged_Combat
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					Cancellations = new List<string> { nameof(Trigger_Junkie) },
 					CharacterCreationCost = 3,
 					IsAvailable = true,
 					IsAvailableInCC = true,

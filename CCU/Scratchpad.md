@@ -323,8 +323,10 @@ New
 ###				C	Frozen (Permanent)
 ###				C	Robot Clean
 DW
-###				C	Random Teleport Into Owned
-###				C	Random Teleport Into Owned + Prison
+###				C	Teleport (Private)
+New
+###				C	Teleport (Anywhere)
+New
 ###				√	Arrested
 Complete
 ###				√	Burned
@@ -999,6 +1001,8 @@ Complete
 ###			C	On Start
 "They told me to meet you at the station."
 ##		C	Hire Type
+###			C!	Loot
+This should be for all followers period. This would un-softlock Bulky characters.
 ###			C	Interact
 Any interaction option, target object.
 Interaction choices are limited to theirs, not yours. This makes hired skills more useful (tech expert tampering, e.g.)

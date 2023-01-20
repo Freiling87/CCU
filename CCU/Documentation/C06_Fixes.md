@@ -5,9 +5,11 @@
 
 <h1 align="center">
 <br>
-NPCs
+Gameplay Fixes
 </h1>
 <br><br>
+
+Frequently-requested fixes to vanilla bugs, or tweaks that are obviously in favor of the spirit of the original game.
 
 ##		Combat Effectiveness
 
@@ -18,3 +20,5 @@ NPCs have fields named `modGunSkill` and `modMeleeSkill`, NPCs with higher skill
 
 In vanilla SoR you cannot change these fields, but in CCU you can!  
 Custom Characters gain melee- and gunSkill with higher 'Melee' and 'Firearms' attributes, up to an attribute level of **3**.
+
+*Fix submitted by **BlazingTwist**. Thanks!*

@@ -28,10 +28,21 @@ namespace CCU.Traits.Player.Language
                     IsAvailableInCC = true,
                     IsPlayerTrait = true,
                     UnlockCost = 5,
-                    Unlock = { isUpgrade = true }
+                    Unlock = 
+                    { 
+                        // Can't lose or swap until you stash known languages that would be restored on removal
+                        cantLose = true,
+                        cantSwap = true,
+                        isUpgrade = true 
+                    }
                 });
         }
-        public override void OnAdded() { }
+        public override void OnAdded()
+        {
+            foreach (T_Language trait in Owner.GetTraits<T_Language>())
+                if (!(trait is Polyglot))
+                    Owner.statusEffects.RemoveTrait(trait.TextName);
+        }
         public override void OnRemoved() { }
     }
 }

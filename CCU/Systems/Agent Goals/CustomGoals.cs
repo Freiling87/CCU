@@ -41,7 +41,7 @@ namespace CCU.Systems.CustomGoals
             RobotClean = "RobotClean",
 
             //  Legacy
-            RandomTeleport = "Random Teleport", // Redirects to Teleport + Wander
+            RandomTeleport = "Random Teleport", // Redirects to Teleport Public
 
             NoMoreSemicolon = "";
 
@@ -116,32 +116,24 @@ namespace CCU.Systems.CustomGoals
                         agent.SetGettingArrestedByAgent(null);
                         agent.agentHitboxScript.SetWBSprites();
                         agent.StopInteraction();
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
-
 
                     case Dead:
                         KillEmSoftly(agent);
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
-
 
                     case Burned:
                         agent.deathMethod = "Fire";
                         KillEmSoftly(agent);
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
-
 
                     case Gibbed:
                         agent.statusEffects.ChangeHealth(-200f);
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
-
 
                     case KnockedOut:
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
@@ -149,39 +141,35 @@ namespace CCU.Systems.CustomGoals
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
 
-
                     case RandomTeleport: 
                         goto case Teleport_Public; // Legacy
 
-
                     case Teleport_Public:
-                        DoRandomTeleport(agent);
+                        DoRandomTeleport(agent, false, true);
                         agent.SetDefaultGoal("WanderFar");
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
-
 
                     case Zombified:
                         agent.zombieWhenDead = true;
                         KillEmSoftly(agent);
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
                 }
             }
         }
-        private static void DoRandomTeleport(Agent agent)
+
+        private static void DoRandomTeleport(Agent agent, bool allowPrivate, bool allowPublic)
         {
-            Vector3 targetLoc = Vector3.zero;
+            Vector3 targetLoc;
             int attempts = 0;
 
             do
             {
-                targetLoc = GC.tileInfo.FindRandLocation(agent, true, true);
+                targetLoc = GC.tileInfo.FindRandLocation(agent, allowPrivate, true);
                 attempts++;
             }
-            while (Vector2.Distance(targetLoc, agent.tr.position) < 16f && attempts < 50);
+            while (Vector2.Distance(targetLoc, agent.tr.position) < 8f && attempts < 50);
 
             if (targetLoc == Vector3.zero)
                 targetLoc = agent.tr.position;
@@ -190,6 +178,7 @@ namespace CCU.Systems.CustomGoals
             try { agent.agentCamera.fastLerpTime = 1f; }
             catch { }
         }
+
         private static void KillEmSoftly(Agent agent)
         {
             // Kills without gibbing

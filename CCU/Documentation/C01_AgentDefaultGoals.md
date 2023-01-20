@@ -23,4 +23,5 @@ These may not work if the agent starts in a position that will cause them to pan
 |Dead								|- Agent starts out dead
 |Gibbed								|- Agent starts out gibbed
 |Knocked Out						|- Agent starts out unconscious
+|Teleport (Public)					|- Agent starts out in a random public spot in the level
 |Zombified							|- Agent starts out dead...
