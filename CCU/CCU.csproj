@@ -62,7 +62,8 @@
     <Reference Include="BepInEx">
       <HintPath>..\Libraries\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="BTHarmonyUtils">
+    <Reference Include="BTHarmonyUtils, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\BTHarmonyUtils.dll</HintPath>
     </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -121,8 +122,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
+    <None Include="Documentation\C09_CampaignBranching.md" />
+    <Compile Include="Extensions\E_Agent.cs" />
     <Compile Include="Items\ClassAWare.cs" />
     <Compile Include="Items\I_CCU.cs" />
+    <Compile Include="Localization\CAgentGroup.cs" />
     <Compile Include="Localization\OperatingBarText.cs" />
     <Compile Include="Mutators\C_CCU.cs" />
     <Compile Include="Mutators\Followers\C_Followers.cs" />
@@ -566,7 +570,7 @@
     <Compile Include="Traits\Inventory\Infinite_Ammo.cs" />
     <Compile Include="Traits\Inventory\Infinite_Armor.cs" />
     <Compile Include="Traits\Inventory\Infinite_Melee.cs" />
-    <Compile Include="Traits\Language\Speaks_Binary.cs" />
+    <Compile Include="Traits\Player\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\Loadout\Gun Nut\Accuracy_Mod.cs" />
     <Compile Include="Traits\Loadout\Gun Nut\Rate_of_Fire_Mod.cs" />
     <Compile Include="Traits\Loadout\Gun Nut\Rubber_Bullets.cs" />
@@ -681,13 +685,13 @@
     <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
     <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
     <Compile Include="Traits\Interaction\Identify.cs" />
-    <Compile Include="Traits\Language\Speaks_ErSdtAdt.cs" />
-    <Compile Include="Traits\Language\Speaks_Foreign.cs" />
-    <Compile Include="Traits\Language\Polyglot.cs" />
-    <Compile Include="Traits\Language\Speaks_Werewelsh.cs" />
-    <Compile Include="Traits\Language\Speaks_Chthonic.cs" />
-    <Compile Include="Traits\Language\Speaks_High_Goryllian.cs" />
-    <Compile Include="Traits\Language\T_Language.cs" />
+    <Compile Include="Traits\Player\Language\Speaks_ErSdtAdt.cs" />
+    <Compile Include="Traits\Player\Language\Speaks_Foreign.cs" />
+    <Compile Include="Traits\Player\Language\Polyglot.cs" />
+    <Compile Include="Traits\Player\Language\Speaks_Werewelsh.cs" />
+    <Compile Include="Traits\Player\Language\Speaks_Chthonic.cs" />
+    <Compile Include="Traits\Player\Language\Speaks_High_Goryllian.cs" />
+    <Compile Include="Traits\Player\Language\T_Language.cs" />
     <Compile Include="Traits\Loadout\Chunk Items\Chunk_Mayor_Badge.cs" />
     <Compile Include="Traits\Loadout\T_Loadout.cs" />
     <Compile Include="Traits\MapMarker\T_MapMarker.cs" />
@@ -715,7 +719,7 @@
     <Compile Include="Traits\Interaction\Borrow_Money_Moocher.cs" />
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
-    <Compile Include="Traits\Player\Melee Combat\Melee_Maniac2.cs" />
+    <Compile Include="Traits\Player\Melee Combat\Melee_Maniac_2.cs" />
     <Compile Include="Traits\Player\Melee Combat\Melee_Maniac.cs" />
     <Compile Include="Traits\Player\Melee Combat\Remise_Beast.cs" />
     <Compile Include="Traits\Player\Melee Combat\T_MeleeSpeed.cs" />
@@ -724,16 +728,16 @@
     <Compile Include="Traits\Player\Ranged_Combat\Trigger_Happy.cs" />
     <Compile Include="Traits\Player\Ranged_Combat\T_RateOfFire.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Crepe_Aligned.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Crepe_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Firefighter_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Gorilla_Aligned.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Gorilla_Hostile.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Hostile.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Hostile.cs" />
-    <Compile Include="Traits\Relationships\Relationships - Faction\Crepe_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Scientist_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\T_Rel_Faction.cs" />
     <Compile Include="Traits\Relationships\Relationships - General\T_Rel_General.cs" />

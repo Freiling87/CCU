@@ -20,7 +20,10 @@ namespace CCU.Traits.Player.Ammo
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					Cancellations = { nameof(Ammo_Amateur), nameof(Ammo_Artiste) },
+					Cancellations = { 
+						nameof(Ammo_Amateur), 
+						nameof(Ammo_Artiste) 
+					},
 					CharacterCreationCost = 7,
 					IsAvailable = true,
 					IsAvailableInCC = true,
@@ -28,7 +31,5 @@ namespace CCU.Traits.Player.Ammo
 					UnlockCost = 5,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
 	}
 }

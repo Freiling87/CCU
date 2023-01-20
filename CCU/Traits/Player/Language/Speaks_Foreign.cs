@@ -1,27 +1,26 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Language
+namespace CCU.Traits.Player.Language
 {
-    public class Speaks_Werewelsh : T_Language
+    public class Speaks_Foreign : T_Language
     {
         public override string[] VanillaSpeakers => new string[] 
         { 
-            VanillaAgents.Werewolf, 
-            VanillaAgents.WerewolfTransformed 
+            VanillaAgents.Assassin 
         };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Speaks_Werewelsh>()
+            PostProcess = RogueLibs.CreateCustomTrait<Speaks_Foreign>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Werewolves (both forms), and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = PlayerName(typeof(Speaks_Werewelsh)),
+                    [LanguageCode.English] = PlayerName(typeof(Speaks_Foreign)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

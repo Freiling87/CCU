@@ -29,7 +29,5 @@ namespace CCU.Traits.Player.Ammo
 					Upgrade = nameof(Ammo_Auteur),
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
 	}
 }

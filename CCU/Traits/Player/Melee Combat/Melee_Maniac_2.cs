@@ -2,21 +2,21 @@
 
 namespace CCU.Traits.Player.Melee_Combat
 {
-    internal class Melee_Maniac2 : T_MeleeSpeed
+    internal class Melee_Maniac_2 : T_MeleeSpeed
     {
         public override float SpeedMultiplier => 1.50f;
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Melee_Maniac2>()
+			PostProcess = RogueLibs.CreateCustomTrait<Melee_Maniac_2>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Melee attack speed increased by 50%. All melee weapons have rapid fire.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Melee_Maniac2))
+					[LanguageCode.English] = PlayerName(typeof(Melee_Maniac_2))
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

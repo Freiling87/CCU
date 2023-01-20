@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
 using CCU.Challenges.Followers;
-using CCU.Traits.Language;
 using HarmonyLib;
 using RogueLibsCore;
 

@@ -1,4 +1,6 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils.InstructionSearch;
+using BTHarmonyUtils.MidFixPatch;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Challenges.Followers;
 using CCU.Localization;
@@ -7,8 +9,8 @@ using CCU.Traits.App;
 using CCU.Traits.Behavior;
 using CCU.Traits.Gib_Type;
 using CCU.Traits.Hire_Duration;
-using CCU.Traits.Language;
 using CCU.Traits.Passive;
+using CCU.Traits.Player.Language;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -16,8 +18,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using BTHarmonyUtils.InstructionSearch;
-using BTHarmonyUtils.MidFixPatch;
 
 namespace CCU.Patches.Agents
 {
@@ -324,7 +324,7 @@ namespace CCU.Patches.Agents
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
-		public static bool Start_Prefix(Agent __instance)
+		public static bool Start_CreateHook(Agent __instance)
 		{
 			__instance.GetOrAddHook<P_Agent_Hook>().Reset();
 

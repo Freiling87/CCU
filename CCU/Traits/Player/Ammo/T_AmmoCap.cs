@@ -5,10 +5,21 @@ namespace CCU.Traits.Player.Ammo
 {
     public abstract class T_AmmoCap : T_PlayerTrait
 	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
 		public T_AmmoCap() : base() { }
 
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
+        public override void OnAdded() 
+		{
+			foreach (InvItem invItem in Owner.inventory.InvItemList)
+				RecalculateMaxAmmo(Owner, invItem, false);
+		}
+        public override void OnRemoved()
+		{
+			foreach (InvItem invItem in Owner.inventory.InvItemList)
+				RecalculateMaxAmmo(Owner, invItem, false);
+		}
 
         public abstract float AmmoCapMultiplier { get; }
 
@@ -27,7 +38,7 @@ namespace CCU.Traits.Player.Ammo
 
 			invItem.maxAmmo = (int)total;
 
-			if (setInitCount || invItem.invItemCount > invItem.maxAmmo)
+			if (setInitCount)
 				invItem.invItemCount = invItem.maxAmmo;
 		}
 

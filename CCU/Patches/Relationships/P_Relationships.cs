@@ -68,13 +68,16 @@ namespace CCU.Patches.AgentRelationships
                     relationship = trait.Relationship ?? relationship;
 
             #region Trait Gates
+            //  These are dual-direction because this overall method is run from agents in unpredictable order.
+
             if (___agent.HasTrait<Scumbag>() && otherAgent.HasTrait(VanillaTraits.ScumbagSlaughterer))
                 ___agent.relationships.GetRelationship(otherAgent).mechHate = true;
 
             if (___agent.HasTrait<Suspecter>() && ___agent.ownerID != 0 && ___agent.startingChunkRealDescription != "DeportationCenter" && __instance.GetRel(otherAgent) == VRelationship.Neutral && otherAgent.statusEffects.hasTrait(VanillaTraits.Suspicious) && ___agent.ownerID > 0 && (!__instance.QuestInvolvement(___agent) || otherAgent.isPlayer == 0))
                 relationship = VRelationship.Annoyed;
 
-            if (___agent.HasTrait<Cool_Cannibal>() && otherAgent.HasTrait(VanillaTraits.CoolwithCannibals))
+            if ((___agent.HasTrait<Cool_Cannibal>() && otherAgent.HasTrait(VanillaTraits.CoolwithCannibals)) ||
+                (otherAgent.HasTrait<Cool_Cannibal>() && ___agent.HasTrait(VanillaTraits.CoolwithCannibals)))
                 relationship = VRelationship.Neutral;
 
             if (((___agent.HasTrait<Common_Folk>() || ___agent.agentName == VanillaAgents.SlumDweller) && otherAgent.HasTrait(VanillaTraits.FriendoftheCommonFolk)) ||

@@ -1,5 +1,4 @@
 ﻿using RogueLibsCore;
-using System.Collections.Generic;
 
 namespace CCU.Traits.Player.Ammo
 {
@@ -30,7 +29,5 @@ namespace CCU.Traits.Player.Ammo
 					Upgrade = nameof(Ammo_Artiste),
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
 	}
 }

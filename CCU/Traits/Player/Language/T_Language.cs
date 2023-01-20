@@ -3,7 +3,7 @@ using RogueLibsCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CCU.Traits.Language
+namespace CCU.Traits.Player.Language
 {
     public abstract class T_Language : T_PlayerTrait
     {

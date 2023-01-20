@@ -8,8 +8,8 @@ using CCU.Traits.Hire_Duration;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
-using CCU.Traits.Language;
 using CCU.Traits.Merchant_Type;
+using CCU.Traits.Player.Language;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -29,13 +29,14 @@ namespace CCU.Patches.Agents
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		// TODO: Refactor
         [RLSetup]
 		private static void Setup()
         {
 			RogueInteractions.CreateProvider<Agent>(h =>
 			{
 				Agent agent = h.Object;
-				bool log = false;
+				bool log = true;
 
 				if (agent.agentName != VanillaAgents.CustomCharacter)
 					return;
@@ -45,9 +46,11 @@ namespace CCU.Patches.Agents
 				Agent interactingAgent = h.Agent;
 				string relationship = agent.relationships.GetRel(interactingAgent);
 				int relationshipLevel = VRelationship.GetRelationshipLevel(relationship);
+				if (log) logger.LogDebug(string.Format("Relationship: {0} ({1})", agent.relationships.GetRel(interactingAgent), relationshipLevel));
 
 				T_InteractionGate trustTrait = agent.GetTraits<T_InteractionGate>().Where(t => t.MinimumRelationship > 0).FirstOrDefault(); // Should only ever be one
-				bool untrusted = !(trustTrait is null) && relationshipLevel < trustTrait.MinimumRelationship;
+				bool untrusted = relationship == VRelationship.Annoyed ||
+					(!(trustTrait is null) && relationshipLevel < trustTrait.MinimumRelationship);
 
 				//// Hack
 				//if (interactingAgent.interactionHelper.interactingFar)
@@ -131,7 +134,7 @@ namespace CCU.Patches.Agents
 				foreach (T_Interaction trait in agent.GetTraits<T_Interaction>())
 				{
 					// Simple Exceptions
-					if ((!(trait is Offer_Motivation || trait is Leave_Weapons_Behind || trait is Pay_Debt || trait is Pay_Entrance_Fee) && untrusted) ||
+					if ((!(trait is Offer_Motivation || trait is Leave_Weapons_Behind || trait is Pay_Debt || trait is Pay_Entrance_Fee) && untrusted) || // Untrusted Exceptions
 						(trait is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
 						(trait is Influence_Election && GC.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
 						(trait is Leave_Weapons_Behind && !interactingAgent.inventory.HasWeapons()) ||
@@ -684,11 +687,11 @@ namespace CCU.Patches.Agents
 		}
 		public static void HirePermanently(Agent agent, Agent interactingAgent, int buttonPrice)
 		{
-			int num = agent.FindNumFollowing(interactingAgent);
+			int teamSize = agent.FindNumFollowing(interactingAgent);
 			bool canHire = false;
 
-			if ((interactingAgent.statusEffects.hasTrait(VanillaTraits.TeamBuildingExpert) && num < 3) ||
-				(interactingAgent.statusEffects.hasTrait(VanillaTraits.ArmyofFive) && num < 5))
+			if ((interactingAgent.statusEffects.hasTrait(VanillaTraits.TeamBuildingExpert) && teamSize < 3) ||
+				(interactingAgent.statusEffects.hasTrait(VanillaTraits.ArmyofFive) && teamSize < 5))
 				canHire = true;
 			else if (interactingAgent.statusEffects.hasTrait(VanillaTraits.Malodorous) &&
 				!interactingAgent.statusEffects.hasTrait(VanillaTraits.Charismatic) &&
@@ -703,7 +706,7 @@ namespace CCU.Patches.Agents
 				agent.SayDialogue("WontJoinA");
 				agent.StopInteraction();
 			}
-			else if (num < 1)
+			else if (teamSize < 1)
 				canHire = true;
 			else
 			{
@@ -720,10 +723,13 @@ namespace CCU.Patches.Agents
 				return;
 			}
 
-			agent.agentInteractions.AssistMe(agent, interactingAgent);
+			//agent.agentInteractions.AssistMe(agent, interactingAgent); // Replaced:
+			agent.SayDialogue("Joined");
+			agent.gc.audioHandler.Play(agent, "AgentJoin");
+			agent.relationships.StartCoroutine(agent.relationships.joinPartyDelay(interactingAgent, "HireAsProtection"));
+			//
 			agent.SetChangeElectionPoints(interactingAgent);
 			agent.StopInteraction();
-			logger.LogDebug("A");
 			agent.GetOrAddHook<P_Agent_Hook>().HiredPermanently = true;
 			agent.canGoBetweenLevels = true;
 

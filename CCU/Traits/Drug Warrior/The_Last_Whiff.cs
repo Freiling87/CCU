@@ -14,7 +14,7 @@ namespace CCU.Traits.Drug_Warrior
             PostProcess = RogueLibs.CreateCustomTrait<The_Last_Whiff>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character smokes a cigarette right when they get into a fight. How fuckin' cool are they??\n\nWow! Smoking is cool! Smoking is cool! Smoking is cool! Matt Dabrowski wants kids to take up smoking. Spread the word."),
+                    [LanguageCode.English] = String.Format("This character smokes a cigarette right when they get into a fight. How fuckin' cool are they??"),
                     
                 })
                 .WithName(new CustomNameInfo

@@ -1,29 +1,27 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Language
+namespace CCU.Traits.Player.Language
 {
-    public class Speaks_Chthonic : T_Language
+    public class Speaks_Werewelsh : T_Language
     {
         public override string[] VanillaSpeakers => new string[] 
         { 
-            VanillaAgents.Ghost, 
-            VanillaAgents.ShapeShifter, 
-            VanillaAgents.Vampire,
-            VanillaAgents.Zombie 
+            VanillaAgents.Werewolf, 
+            VanillaAgents.WerewolfTransformed 
         };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Speaks_Chthonic>()
+            PostProcess = RogueLibs.CreateCustomTrait<Speaks_Werewelsh>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Werewolves (both forms), and anyone else with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = PlayerName(typeof(Speaks_Chthonic)),
+                    [LanguageCode.English] = PlayerName(typeof(Speaks_Werewelsh)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

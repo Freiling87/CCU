@@ -22,9 +22,9 @@ namespace CCU.Systems.CustomGoals
             KnockedOut = "Knocked Out",
             Random_Patrol_Chunk = "Random Patrol (Chunk)", // New
             Random_Patrol_Map = "Random Patrol (Map)", // New
-            Teleport_Return_Idle = "Random Teleport + Return (Idle)", // New
-            Teleport_Return_Patrol = "Random Teleport + Return (Patrol)", // New
-            Teleport_Wander = "Random Teleport + Wander",
+            Teleport_Public = "Random Teleport (Public)",
+            Teleport_Private = "Random Teleport (Private)",
+            Teleport_Prison = "Random Teleport (Private + Prison)",
             Zombified = "Zombified",
 
             //  Other Customs
@@ -52,7 +52,8 @@ namespace CCU.Systems.CustomGoals
             Dead,
             Gibbed,
             KnockedOut,
-            Teleport_Wander,
+            // RandomTeleport, // Inactive, Legacy
+            Teleport_Public,
             Zombified,
         };
         public static List<string> SceneSetters_All = new List<string>() 
@@ -65,9 +66,7 @@ namespace CCU.Systems.CustomGoals
             Random_Patrol_Chunk,
             Random_Patrol_Map,
             RandomTeleport,
-            Teleport_Return_Idle,
-            Teleport_Return_Patrol,
-            Teleport_Wander,
+            Teleport_Public,
             Zombified,
         };
         public static List<string> ActualGoals_Active = new List<string>()
@@ -147,23 +146,15 @@ namespace CCU.Systems.CustomGoals
                     case KnockedOut:
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                         agent.tranqTime = 1000;
-
                         agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
                         goto start;
 
 
                     case RandomTeleport: 
-                        goto case Teleport_Wander; // Legacy
+                        goto case Teleport_Public; // Legacy
 
 
-                    case Teleport_Return_Idle:
-                        DoRandomTeleport(agent);
-
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        break;
-
-
-                    case Teleport_Wander:
+                    case Teleport_Public:
                         DoRandomTeleport(agent);
                         agent.SetDefaultGoal("WanderFar");
 

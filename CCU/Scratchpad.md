@@ -6,23 +6,21 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 
-#		Scope
+#			Scope
 ##		P	Bugs
 Except crickets. Crickets are fine.
-###			H	Editor Object Placement
-Hold - This is BTHarmonyUtils
-Objects, Draw Mode
-Choosing anything but vanilla containers causes an infinite loop with no error message
-Verified this is BTHarmonyUtils
-###			H	CCU Trait section in Load Character screen
+###				H	Equipment noise spam
+Still occuring, even with vanillas.
+For now, just disabling the noise if they switch to Fist.
+###				H	Dismissed Perm Hire prevents Temp Hire
+Can't temp hire after dismissing perm hire. 
+This is MINOR, I don't care.
+###				H	CCU Trait section in Load Character screen
 Shows outdated traits when choosing
-###			C	Containers (Empty)
-Text is assigned in PlayfieldObject.MakeChestNonInteractable()
+Don't really care yet.
+###				H	Johnny Stabbs
+Hold - Unable to replicate
 
-Shelf works
-Stove doesn't
-Vendor stand doesn't
-###			C	Johnny Stabbs
 Has Fac Blahd Aligned (replaced by Legacy)
 
 On attempt Load from stored chars list, get error and no load:
@@ -38,8 +36,6 @@ On attempt Load from stored chars list, get error and no load:
 	UnityEngine.UI.InputField.set_text (System.String value) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
 	CharacterCreation.LoadCharacter2 (System.String characterName, System.Boolean secondTry, System.Boolean foundFile, System.Object mySaveObject) (at <3d326b8e9c744e5faf3a706691682c89>:0) 
 	...
-###				C	Equipment noise spam
-Still occuring, even with vanillas
 ###				H	Clone changing appearance
 Shelving this because I simply don't care enough to fix it yet. This is super-niche.
 Buddy Cop Loneliness killer
@@ -327,6 +323,8 @@ New
 ###				C	Frozen (Permanent)
 ###				C	Robot Clean
 DW
+###				C	Random Teleport Into Owned
+###				C	Random Teleport Into Owned + Prison
 ###				√	Arrested
 Complete
 ###				√	Burned
@@ -1212,6 +1210,9 @@ Complete
 ###			√	Infinite Melee
 Complete
 ##		C	Language
+###				C	Deaf
+When deafness trait is added, add an ASL language. People with Vocally challenged automatically speak it. 
+This will also slightly diversify Polyglot's progression.
 ###				C	French Vanilla Gibberish
 Make Goryllian say Ook Ook if you don't understand it 
 Agent.SayDialogue:
@@ -1219,7 +1220,7 @@ Agent.SayDialogue:
 
 transpile agentName value to custom agentName method that returns appropriate gibberish.
 	If agent has multiple, have them pick a random one to speak gibberish from.
-###			H	Mute
+###			H	Mute (Rename)
 No interactions under any circumstances, even with Translator
 ###			C	Polyglot
 Gain 2 languages on trait gain, and an additional one every two levels.
@@ -1525,7 +1526,11 @@ Complete
 ####			√	Blinker
 Complete
 ##		C	Relationships - Faction
-###			C	General concept
+###			C	Make Agent relationship traits Player Traits?
+Would also resolve foldering issue
+###			C	Import Relationship traits
+From BunnyMod & RHR (Polarizing et al.)
+###			C	Refactor Concept
 Friendly to faction doesn't align you. You do not inherit the faction's relationships.
 Loyal causes you to inherit its relationships, but negative ones are moderated:
 	Hostile → Annoyed
@@ -1748,25 +1753,27 @@ GC.sessionDataBig.curLevelEndless - 1
 
 ###			C	00 Usage Guide
 This one will be complicated to explain, so it's best to go overboard on documentation and provide examples.
-###			C	Label Alpha/Beta/Gamma/Delta
-Labels a level
+###			C	Level Label
+Labels a level ABCD
 Mutually exclusive
-###			C	Exit Alpha/Beta/Gamma/Delta per Flag A/B/C/D
-If target boolean is true, exit to target level
-###			C	Exit Alpha/Beta/Gamma/Delta
-Destination at Elevator
-###			C	Exit +1/2/3/4
-Can have multiple, to allow Branching
-Adds options at Elevator
-###			C	Flag A/B/C/D false
-For level access
-###			C	Flag A/B/C/D true
-For level access
-###			C	Level Entry Requires A/B/C/D false
-Gate level access
-###			C	Level Entry Requires A/B/C/D true
-Gate level access
-###			C	Traits for Level Branching
+###			C	Elevator Extravars
+####			C	Level +2, 3, 4
+Skip in list
+####			C	Level ABCD
+Target level by tag
+Still subject to Flags
+###			C	Level Entry Gates
+Apply to a destination level to determine how its tags are evaluated.
+####			C	Flags AND
+####			C	Flags NOT
+####			C	Flags OR
+####			C	Flags XOR
+###			C	TRAITS for Level Branching
+####			C	Flag ABCD
+Allow multiple. Nonspecific, to be linked to below.
+####			C	Flag on Evacuated
+####			C	Flag on Neutralized
+####			C	Flag on Paid
 ##		C	Disasters
 ###			C	Random Disaster
 Random Disasters and/or Disasters Every Level aren't offered in the editor
@@ -1821,6 +1828,7 @@ Main quest rewards are multiplied by 10
 ##			C	Traps
 Chest, Door, Window
 Dart, Taser, Flame, Explosion, Slime, etc.
+##
 ##			C	Slime Barrel
 ###				C	Barrel of Monke
 New
@@ -1873,6 +1881,73 @@ Requires 2-3 hits to explode rather than 1
 Requires an explosion to destroy
 ####				C	Volatile
 Destroyed if you bump into it, maybe could add Overclocked effects to it
+##			C	Turret
+Recs by Mac
+###				C	Projectile
+        Banana Peel
+        Beartrap
+        Bullet
+        Ray (payloadable) (slower than bullet, it's basically just freeze ray projectile)
+        Tazer (payloadable)
+        Dart (payloadable)
+        Tazer
+        Ghost Gibber 
+        Grenade (payloadable)
+        Flamethrower
+        Rock
+        Paralizer trap (payloadable)
+        Rocket (payloadable)
+        Landmine (payloadable)
+        Lazer
+        Leafblower
+###				C	Payload
+		Default
+        None
+        Dizzy
+        Freezing
+        E.M.P
+        Warp
+        Poision
+        Confuse
+        Slow
+        Rage Poision
+        Cyanide
+        Sulfuric Acid
+        Tranq
+        Taze
+        Ressurection
+        Fast
+        Regeneration
+        Nicotine
+        Perfume
+        Antidote
+        Invincible
+        Invisible
+        Zombiisim
+###				C	Element
+        Default
+        Normal
+        Harmless (always deals 1 damage)
+        Bullet (for vs. bulletproof)
+        Pyrotechnic (for vs. fireproof skin. Also sets stuff on fire when it hits things, and explodes like molotov)
+        Electric (for vs. wet)
+        Aquatechnic (for vs. Electronic. Does 0 damage to everyone else)
+        Monster Bane (Ghost Gibber)
+        Normie Killer (Reverse Ghost Gibber)
+        Plot Armor Pericing (deals extra damage to players and recruits)
+        Safety Bullet (Bullet, but it deals 0 damage to everyone the turret wasn't targeting)
+        
+        Bananium (Heals anyone with Banana Lover)
+        Distilled (Heals anyone who can drink alcohol)
+        Essential Oils (Heals anyone who has any kind of restriction on meele weapons.)
+        Actual Oil (Heals anyone who can drink(?) oil. So basically mech and robots.)
+###				C	Ammo
+    Unlimited
+    30-second recharge
+    15-second recharge
+    random recharge
+    Limited to 10
+    Limited to 50
 ##			C	Custom Decal
 I put a Custom Floor Decal item in the Editor Object List. Nothing else. See what kind of errors pop up to determine what to patch.
 ##			H	Ambusher

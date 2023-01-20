@@ -166,11 +166,11 @@ namespace CCU.Patches.Inventory
 					(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
 			{
 				if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
-					yield return new WaitForSeconds(0.75f);
+					yield return new WaitForSeconds(1.00f);
 				else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
 					yield return new WaitForSeconds(3.00f);
 				else
-					yield return new WaitForSeconds(1.50f);
+					yield return new WaitForSeconds(2.00f);
 
 				invDatabase.EquipWeapon(invDatabase.fist);
 			}
@@ -203,7 +203,7 @@ namespace CCU.Patches.Inventory
 			return true;
         }
 
-        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.EquipWeapon), argumentTypes: new[] { typeof(InvItem), typeof(bool) })]
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.EquipWeapon), argumentTypes: new[] { typeof(InvItem), typeof(bool) })]
 		public static bool EquipWeapon_Prefix(InvDatabase __instance, InvItem item, ref bool sfx)
         {
 			if (__instance.agent.isPlayer == 0 && item.invItemName == vItem.Fist)

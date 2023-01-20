@@ -71,6 +71,6 @@ namespace CCU.Traits
         public static string PlayerName(Type type) =>
             (type.Name)
                 .Replace('_', ' ')
-                .Replace("2", " +");
+                .Replace("2", "+");
     }
 }

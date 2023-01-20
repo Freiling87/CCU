@@ -25,7 +25,7 @@ namespace CCU.Traits.Player.Melee_Combat
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
 					UnlockCost = 5,
-					Upgrade = nameof(Melee_Maniac2),
+					Upgrade = nameof(Melee_Maniac_2),
 				});
 		}
 		public override void OnAdded() { }
