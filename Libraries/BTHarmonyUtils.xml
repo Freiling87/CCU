@@ -301,12 +301,6 @@
             <param name="pullUp"></param>
             <exception cref="T:System.IO.InvalidDataException">thrown when no prefix, replace and postfix sequence is specified -> cannot match for anything</exception>
         </member>
-        <member name="M:BTHarmonyUtils.internal.InstructionReplacementTranspiler.MoveLabels(System.Collections.Generic.List{HarmonyLib.CodeInstruction},System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Move the labels in the replace-sequence and first label of postfix-sequence to beginning of insert-sequence
-            </summary>
-            <returns>a new insert-sequence with adjusted labels</returns>
-        </member>
         <member name="T:BTHarmonyUtils.internal.ITranspilerPatch">
             <summary>
             Because the CodeReplacementPatch constructor is in use by published mods,
@@ -356,6 +350,51 @@
             Applies a MidFix-Patch using the AnnotationInfo
             This will probably never be used externally, but if you - for some reason - do, here it is.
             </summary>
+        </member>
+        <member name="T:BTHarmonyUtils.LoggingUtils.InstructionTableBuilder">
+            <summary>
+            Useful for logging Instructions in a readable format.
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.LoggingUtils.InstructionTableBuilder.BuildTable(System.Collections.Generic.IEnumerable{HarmonyLib.CodeInstruction})">
+            <summary>
+            Builds a table containing a list of instructions.
+            </summary>
+            <param name="instructions">The instructions for the table</param>
+            <returns>The String representation of the table.</returns>
+        </member>
+        <member name="T:BTHarmonyUtils.LoggingUtils.TextTableBuilder">
+            <summary>
+            Useful for writing Tables to log files.
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.LoggingUtils.TextTableBuilder.Row(System.String[])">
+            <summary>
+            Adds a row to the table.
+            </summary>
+            <param name="columnText">SingleLine-Strings for each column</param>
+        </member>
+        <member name="M:BTHarmonyUtils.LoggingUtils.TextTableBuilder.ThinRowSeparator">
+            <summary>
+            Adds a thin separator-row to the table (e.g.: '|---+---|')
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.LoggingUtils.TextTableBuilder.ThickRowSeparator">
+            <summary>
+            Adds a thick separator-row to the table (e.g.: '|===+===|')
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.LoggingUtils.TextTableBuilder.EndTable">
+            <summary>
+            Adds a table-end separator-row to the table (e.g.: '\=======/')
+            </summary>
+        </member>
+        <member name="M:BTHarmonyUtils.LoggingUtils.TextTableBuilder.BuildTable(System.String)">
+            <summary>
+            Build the table to a String.
+            </summary>
+            <param name="tableIndent">A string to use for indenting the table (e.g.: '  ')</param>
+            <returns>The String representation of the table.</returns>
         </member>
         <member name="T:BTHarmonyUtils.MidFixPatch.BTHarmonyMidFix">
             <summary>
