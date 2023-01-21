@@ -25,7 +25,7 @@ CCU adds the following:
 - 1 [Item](/CCU/Documentation/C02_Items.md)
 - 2 [Mutators](/CCU/Documentation/C03_Mutators.md)
 - 2 (or 28, depending how you count it) [Object Modifications](/CCU/Documentation/C04_Objects.md)
-- 541 [Designer Traits](/CCU/Documentation/C05_Traits.md)
+- 541 [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
 - 11 [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
 - 1 [Gameplay Fix](/CCU/Documentation/C06_Fixes.md)
 

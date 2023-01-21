@@ -59,6 +59,7 @@ Change Log
       - Melee Combat
         - Melee Maniac
         - Melee Maniac +
+        - Remise Beast
       - Ranged Combat
         - Pants on Autofire
         - Trigger Happy
