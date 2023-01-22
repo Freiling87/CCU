@@ -9,6 +9,8 @@ Listed in order of Parent tier summary symbol priority:
 #			Scope
 ##		P	Bugs
 Except crickets. Crickets are fine.
+###				C	Ammo Cap Bug
+Still reducing on pickup
 ###				H	Equipment noise spam
 Still occuring, even with vanillas.
 For now, just disabling the noise if they switch to Fist.
@@ -1760,6 +1762,13 @@ This one will be complicated to explain, so it's best to go overboard on documen
 ###			C	Level Label
 Labels a level ABCD
 Mutually exclusive
+###			C	Those bottom three buttons
+Why do Agents have a different Item interface than Objects? Maybe those buttons could be repurposed.
+###			C	Important Button
+This stores an Int. That might be useful. Maybe this could be toggled between Off, On, and A-B to assign it to a Gate.
+I think it ends up sending to LevelEditor.FillSpawner, which turns it into a bool. So a patch to that method or soon thereafter might find a spot to store the Gate number/letter on the newly spawned object. SpawnerBasic.important is read by all the specialized spawners so you might need to patch all of those.
+
+The box isn't available for Items, maybe it could be.
 ###			C	Elevator Extravars
 ####			C	Level +2, 3, 4
 Skip in list
@@ -1787,13 +1796,16 @@ Complete
 ###			√	Homesickness Mandatory
 Complete
 ##		C	Gameplay
+###			C	Pursuers Follow
+When you use exit elevator, anyone chasing you follows you to the next level.
+###			C	Infinite Continues
 ###			C	Random Start Location
 ###			C	No Funny Business
 For town levels. Ensures no one will be killed.
 You will need to eliminate spontaneous hostiles for this to work, though.
 ##		C	Interface
 In PlayerControl.Update there's a hidden keystroke for pressedInterfaceOff
-###			C	No Minimap
+###			C	No Map/Minimap
 ##		C	Presets
 Curated configurations of challenges that can serve as a shortcut.
 E.g., "Interlude:" No funny business, pause big quests, etc.

@@ -29,8 +29,8 @@ Just normal SOR traits, accessible by players. Cost Nuggets to unlock, because C
 ##			Language
 Note that these have limited utility in vanilla chunks. They are more useful in custom content where the designer has made use of the language system.
 
-|Trait												|CCPV	|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
+|Trait												|CCPV	|Effect											|
+|:--------------------------------------------------|------:|:------------------------------------------------------|
 |Polyglot											|2		|- Speak all languages.
 |Speaks Binary										|1		|- Bypass Vocally Challenged with Robots, Hackers and anyone else with this trait
 |Speaks Chthonic									|1		|- Bypass Vocally Challenged with Ghosts, Shapeshifters, Vampires, Zombies and anyone else with this trait
