@@ -15,6 +15,7 @@ namespace CCU
 {
     [BepInPlugin(pluginGUID, pluginName, pluginVersion)]
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
+    [BepInDependency(BTHarmonyUtilsPlugin.pluginGuid, BTHarmonyUtilsPlugin.minCompatibleVersion)]
 	public class Core : BaseUnityPlugin
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
