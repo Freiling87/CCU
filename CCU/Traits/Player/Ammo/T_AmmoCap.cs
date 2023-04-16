@@ -1,59 +1,56 @@
 ﻿using BepInEx.Logging;
 using RogueLibsCore;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Player.Ammo
 {
-    public abstract class T_AmmoCap : T_PlayerTrait
+    public abstract class T_AmmoCap : T_PlayerTrait, IModifyItems
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		public static GameController GC => GameController.gameController;
 
 		public T_AmmoCap() : base() { }
 
-        public override void OnAdded() 
+		public abstract float AmmoCapMultiplier { get; }
+
+		public override void OnAdded() =>
+			ModifyItemHelper.SetupInventory(Owner);
+		public override void OnRemoved() =>
+			ModifyItemHelper.SetupInventory(Owner);
+
+		// IModifyItems
+		public List<string> EligibleItemTypes => new List<string> { "WeaponProjectile" };
+		public List<string> ExcludedItems => new List<string>() { };
+
+		public bool IsEligible(Agent agent, InvItem invItem) =>
+			EligibleItemTypes.Contains(invItem.itemType) &&
+			!ExcludedItems.Contains(invItem.invItemName);
+
+		public void OnDrop(Agent agent, InvItem invItem)
 		{
-			foreach (InvItem invItem in Owner.inventory.InvItemList)
-				RecalculateMaxAmmo(Owner, invItem, false);
-		}
-        public override void OnRemoved()
-		{
-			foreach (InvItem invItem in Owner.inventory.InvItemList)
-				RecalculateMaxAmmo(Owner, invItem, false);
-		}
-
-        public abstract float AmmoCapMultiplier { get; }
-
-		public static void RecalculateMaxAmmo(Agent agent, InvItem invItem, bool setInitCount)
-		{
-			if (invItem.itemType != "WeaponProjectile")
-				return;
-
-			float total = invItem.initCount;
-
-			foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
-				total *= trait.AmmoCapMultiplier;
+			float ammoCap = invItem.initCount;
 
 			if (invItem.contents.Contains(vItem.AmmoCapacityMod))
-				total *= 1.4f;
+				ammoCap *= 1.4f;
 
-			invItem.maxAmmo = (int)total;
-
-			if (setInitCount)
-				invItem.invItemCount = invItem.maxAmmo;
+			invItem.maxAmmo = (int)ammoCap;
 		}
 
-		public static void ResetMaxAmmoOnSpill(Agent agent, InvItem invItem)
-        {
-			float total = invItem.initCount;
+		public void OnPickup(Agent agent, InvItem invItem)
+		{
+			logger.LogDebug("OnPickup: " + invItem.invItemName);
+			float ammoCap = invItem.initCount;
 
 			if (invItem.contents.Contains(vItem.AmmoCapacityMod))
-				total *= 1.4f;
+				ammoCap *= 1.4f;
 
-			if (invItem.maxAmmo > invItem.initCount)
-				invItem.maxAmmo = (int)total;
+			if (IsEligible(agent, invItem))
+				foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
+				{
+					logger.LogDebug("\ttrait: " + Trait.traitName);
+					ammoCap *= trait.AmmoCapMultiplier;
+				}
 
-			if (invItem.invItemCount > invItem.maxAmmo)
-				invItem.invItemCount = invItem.maxAmmo;
-        }
+			invItem.maxAmmo = (int)ammoCap;
+		}
 	}
 }

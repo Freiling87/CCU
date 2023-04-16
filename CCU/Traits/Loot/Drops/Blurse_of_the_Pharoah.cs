@@ -28,7 +28,7 @@ namespace CCU.Traits.Loot_Drops
 		public override void OnAdded() { }
         public override void OnRemoved() { }
 
-		public override bool ProtectedItem(InvItem invItem) =>
+		public override bool IsUnspillable(InvItem invItem) =>
 			LoadoutTools.GetSlotFromItem(invItem) == LoadoutTools.Slots.Pockets &&
 			!SoftLockItems.Contains(invItem.invItemName);
     }

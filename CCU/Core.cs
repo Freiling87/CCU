@@ -18,8 +18,9 @@ namespace CCU
 	public class Core : BaseUnityPlugin
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
-		public const string pluginName = "CCU " + (designerEdition ? "Designer Edition" : "Player Edition"); 
-		public const string pluginVersion = "1.1.0";
+		public const string pluginName = "CCU " + (designerEdition ? "[D]" : "[P]"); 
+		public const string pluginVersion = "1.1.1";
+		public const string subVersion = "b";
 		public const bool designerEdition = true;
 		public const bool debugMode = true;
 
@@ -34,34 +35,10 @@ namespace CCU
 			harmony.PatchAll();
 			PatcherUtils.PatchAll(harmony);
 			RogueLibs.LoadFromAssembly();
-			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion); 
+			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion + subVersion); 
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");
-		public static void LogVariables(params object[] variables)
-        {
-			// TODO
-
-			foreach (object variable in variables)
-            {
-				string text = nameof(variable); // Can't access these this way.
-				int tabs = (40 - text.Length) / 4; // Might need to round up.
-
-				for (int i = 0; i < tabs; i++)
-					text += "\t";
-
-				if (variable is string)
-                {
-					text += (string)variable;
-                }
-				else if (variable is int)
-                {
-					text += (int)variable;
-                }
-
-				logger.LogDebug(text);
-            }
-        }
 	}
 
 	public static class CoreTools
@@ -168,10 +145,10 @@ namespace CCU
 			Set_True_A = "[CCU] Set True: A",
 			Set_True_B = "[CCU] Set True: B",
 			Set_True_C = "[CCU] Set True: C",
-			Set_True_D = "[CCU] Set True: D",
+			Set_True_D = "[CCU] Set True: D";
 		#endregion
 		#region Utility
-			SortMutatorsByName = "! Sort Mutators by Name";
+		//SortMutatorsByName = "! Sort Mutators by Name";
 		#endregion
 	}
 	public static class CTrait

@@ -28,13 +28,4 @@ namespace CCU.Systems.Object_Variables
 		public static void AddCustomListEntries(List<string> vanilla) =>
 			vanilla.AddRange(CustomObjects);
 	}
-
-	public class P_ObjectReal_Hook : HookBase<ObjectReal>
-	{
-		protected override void Initialize() { }
-
-		public InvItem stashHint = null;
-		public Agent stashHintHolder = null;
-		public bool stashDiscovered = false;
-	}
 }

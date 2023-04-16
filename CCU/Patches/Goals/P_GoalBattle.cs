@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Patches.Agents;
+using CCU.Hooks;
 using CCU.Traits.Combat;
 using CCU.Traits.Drug_Warrior_Modifier;
 using HarmonyLib;
@@ -12,7 +12,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Goals
 {
-    [HarmonyPatch(declaringType: typeof(GoalBattle))]
+	[HarmonyPatch(declaringType: typeof(GoalBattle))]
 	public static class P_GoalBattle
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -52,10 +52,10 @@ namespace CCU.Patches.Goals
 		}
 		private static void StartCombatActions(Agent agent)
         {
-			if (agent.HasTrait<Backed_Up>() && !agent.GetOrAddHook<P_Agent_Hook>().WalkieTalkieUsed)
+			if (agent.HasTrait<Backed_Up>() && !agent.GetOrAddHook<H_Agent>().WalkieTalkieUsed)
             {
 				agent.agentInteractions.UseWalkieTalkie(agent, agent.opponent); // Might be reversed, hard to tell
-				agent.GetOrAddHook<P_Agent_Hook>().WalkieTalkieUsed = true;
+				agent.GetOrAddHook<H_Agent>().WalkieTalkieUsed = true;
             }
         }
 

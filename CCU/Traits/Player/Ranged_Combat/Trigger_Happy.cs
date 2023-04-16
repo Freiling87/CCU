@@ -25,11 +25,11 @@ namespace CCU.Traits.Player.Ranged_Combat
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					CharacterCreationCost = 3,
+					CharacterCreationCost = 5,
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
-					UnlockCost = 10,
+					UnlockCost = 7,
 					Upgrade = nameof(Trigger_Junkie),
 				});;
 		}

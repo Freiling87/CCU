@@ -24,7 +24,7 @@ namespace CCU.Traits.Player
                     IsAvailable = true,
                     IsAvailableInCC = true,
                     IsPlayerTrait = true,
-                    UnlockCost = 5,
+                    UnlockCost = 7,
                 });
         }
         public override void OnAdded() { }

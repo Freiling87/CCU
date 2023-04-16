@@ -28,7 +28,7 @@ namespace CCU.Traits.Player.Ammo
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
-					UnlockCost = 5,
+					UnlockCost = 9,
 				});
 		}
 	}

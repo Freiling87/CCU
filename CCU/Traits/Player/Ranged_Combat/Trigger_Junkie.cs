@@ -24,7 +24,7 @@ namespace CCU.Traits.Player.Ranged_Combat
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					CharacterCreationCost = 5,
+					CharacterCreationCost = 7,
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,

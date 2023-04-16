@@ -1,10 +1,10 @@
-﻿using CCU.Patches.Agents;
+﻿using CCU.Hooks;
 using RogueLibsCore;
 using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Backed_Up : T_Combat, ISetupAgentStats
+	public class Backed_Up : T_Combat, ISetupAgentStats
     {
         //[RLSetup]
         public static void Setup()
@@ -32,7 +32,7 @@ namespace CCU.Traits.Combat
 
         public void SetupAgentStats(Agent agent)
         {
-            agent.GetOrAddHook<P_Agent_Hook>().WalkieTalkieUsed = false;
+            agent.GetOrAddHook<H_Agent>().WalkieTalkieUsed = false;
         }
     }
 }

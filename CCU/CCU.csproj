@@ -124,6 +124,10 @@
     <Compile Include="CCUNames.cs" />
     <None Include="Documentation\C09_CampaignBranching.md" />
     <Compile Include="Extensions\E_Agent.cs" />
+    <Compile Include="Hooks\H_InvItem.cs" />
+    <Compile Include="Hooks\H_Agent.cs" />
+    <Compile Include="Hooks\H_ObjectReal.cs" />
+    <Compile Include="Items\RubberBulletsMod.cs" />
     <Compile Include="Items\ClassAWare.cs" />
     <Compile Include="Items\I_CCU.cs" />
     <Compile Include="Localization\CAgentGroup.cs" />
@@ -136,6 +140,8 @@
     <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Mutators\Laws\C_Law.cs" />
     <Compile Include="Mutators\Laws\No_Open_Carry.cs" />
+    <Compile Include="Mutators\Progression\Big_Quest_Mandatory.cs" />
+    <Compile Include="Mutators\Progression\C_Progression.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
@@ -143,6 +149,7 @@
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
+    <Compile Include="Patches\Objects\P_ComputerShutdown.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
     <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
     <Compile Include="Patches\Objects\P_SpawnerObject.cs" />
@@ -280,7 +287,7 @@
     <Compile Include="Traits\Appearance\Legs Color\Mech_Legs.cs" />
     <Compile Include="Traits\Appearance\Legs Color Special\Pantiful.cs" />
     <Compile Include="Traits\Appearance\Body Color Special\Shirtsome.cs" />
-    <Compile Include="Traits\Appearance\Static_Preview.cs" />
+    <Compile Include="Traits\Appearance\Dynamic_Preview.cs" />
     <Compile Include="Traits\Appearance\Body Color Special\Shirtless.cs" />
     <Compile Include="Traits\Appearance\Legs Color Special\Pantsless.cs" />
     <Compile Include="Traits\Appearance\Body Color\Black_Body.cs" />
@@ -567,16 +574,17 @@
     <Compile Include="Traits\Explosion Timer\T_ExplosionTimer.cs" />
     <Compile Include="Traits\Hire Duration\Homesickly.cs" />
     <Compile Include="Traits\Hire Duration\Homesickless.cs" />
+    <Compile Include="Traits\IModifyItems.cs" />
     <Compile Include="Traits\Inventory\Infinite_Ammo.cs" />
     <Compile Include="Traits\Inventory\Infinite_Armor.cs" />
     <Compile Include="Traits\Inventory\Infinite_Melee.cs" />
     <Compile Include="Traits\Player\Language\Speaks_Binary.cs" />
-    <Compile Include="Traits\Loadout\Gun Nut\Accuracy_Mod.cs" />
-    <Compile Include="Traits\Loadout\Gun Nut\Rate_of_Fire_Mod.cs" />
-    <Compile Include="Traits\Loadout\Gun Nut\Rubber_Bullets.cs" />
-    <Compile Include="Traits\Loadout\Gun Nut\Silencer.cs" />
-    <Compile Include="Traits\Loadout\Gun Nut\Ammo_Stock.cs" />
-    <Compile Include="Traits\Loadout\Gun Nut\T_GunNut.cs" />
+    <Compile Include="Traits\Player\Gun Nut\Accuracy_Modder.cs" />
+    <Compile Include="Traits\Player\Gun Nut\Rate_of_Fire_Modder.cs" />
+    <Compile Include="Traits\Player\Gun Nut\Rubber_Bulleteer.cs" />
+    <Compile Include="Traits\Player\Gun Nut\Silencerist.cs" />
+    <Compile Include="Traits\Player\Gun Nut\Ammo_Stocker.cs" />
+    <Compile Include="Traits\Player\Gun Nut\T_GunNut.cs" />
     <Compile Include="Traits\Loadout\Money\Bankrupt_50.cs" />
     <Compile Include="Traits\Loadout\Money\Bankrupt_75.cs" />
     <Compile Include="Traits\Loadout\Money\Bankrupt_25.cs" />
@@ -863,6 +871,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Image\ClassAWare.bin" />
+    <None Include="Resources\Image\RubberBulletsMod.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
@@ -888,17 +897,28 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set gameDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
-if exist %25gameDirectory%25 (ECHO "Destination directory found") ELSE (ECHO "Destination directory not found")
+    <PostBuildEvent>START /min cmd.exe /c C:\Users\Owner\source\repos\Freiling87\CCU\Postbuild.bat</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>REM    This script copies mod files currently used by the game into your repository's Libraries folder. This means you only need to update dependencies in one place rather than having to do it for each mod you work on.
+ECHO "======= PRE-BUILD"
 
-set dll1="CCU.dll"
-set dll2="BTHarmonyUtils.dll"
-set dll3="RogueLibsCore.dll"
-if exist %25dll%25 (ECHO "Mod DLL found") ELSE (ECHO "Mod DLL not found")
-if exist %25gameDirectory%25 copy /y %25dll1%25 %25gameDirectory%25
-if exist %25gameDirectory%25 copy /y %25dll2%25 %25gameDirectory%25
-if exist %25gameDirectory%25 copy /y %25dll3%25 %25gameDirectory%25
+ECHO "    --- Defining directories"
+SET dirBepinex="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\"
+SET dirCore="%25dirBepinex%25core\"
+SET dirPatchers="%25dirBepinex%25patchers\"
+SET dirPlugins="%25dirBepinex%25plugins\"
+CD /D "..\..\..\Libraries"
+SET dirLibraries=%25cd%25\
 
-if exist %25gameDirectory%25 Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
+ECHO "    --- Defining series"
+SET importsCore=BTHarmonyUtils.dll
+SET importsPatchers=RogueLibsPatcher.dll
+SET importsPlugins=RogueLibsCore.dll
+
+ECHO "    --- Copying files"
+FOR %25%25a IN (%25importsCore%25) DO (XCOPY /s /y "%25dirCore%25%25%25~a" %25dirLibraries%25)
+FOR %25%25a IN (%25importsPatchers%25) DO (XCOPY /s /y "%25dirPatchers%25%25%25~a" %25dirLibraries%25)
+FOR %25%25a IN (%25importsPlugins%25) DO (XCOPY /s /y "%25dirPlugins%25%25%25~a" %25dirLibraries%25)</PreBuildEvent>
   </PropertyGroup>
 </Project>

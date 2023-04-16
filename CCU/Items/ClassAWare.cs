@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
+using CCU.Hooks;
 using CCU.Localization;
-using CCU.Patches.Agents;
 using CCU.Traits;
 using RogueLibsCore;
 using System;
@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace CCU.Items
 {
-    [ItemCategories(RogueCategories.Usable, RogueCategories.Technology)]
+	[ItemCategories(RogueCategories.Usable, RogueCategories.Technology)]
     public class ClassAWare : I_CCU, IItemTargetable
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -64,11 +64,11 @@ namespace CCU.Items
                 return false;
 
             Agent agent = (Agent)target;
-            bool newClass = !Owner.GetOrAddHook<P_Agent_Hook>().ClassifierScannedAgents.Contains(agent.agentRealName);
+            bool newClass = !Owner.GetOrAddHook<H_Agent>().ClassifierScannedAgents.Contains(agent.agentRealName);
 
             if (newClass)
             {
-                Owner.GetOrAddHook<P_Agent_Hook>().ClassifierScannedAgents.Add(agent.agentRealName);
+                Owner.GetOrAddHook<H_Agent>().ClassifierScannedAgents.Add(agent.agentRealName);
                 Owner.skillPoints.AddPoints("HackPoints");
                 Count--;
             }
@@ -180,7 +180,7 @@ namespace CCU.Items
             String.Format("{0:n0}", agent.agentRealName.ToCharArray().Sum(x => x) % 100);
 
         private static string TotalMemory(Agent owner) =>
-            "" + String.Format("{0:n0}", owner.GetOrAddHook<P_Agent_Hook>().ClassifierScannedAgents.Sum(n => n.ToCharArray().Sum(x => x) % 100));
+            "" + String.Format("{0:n0}", owner.GetOrAddHook<H_Agent>().ClassifierScannedAgents.Sum(n => n.ToCharArray().Sum(x => x) % 100));
 
         private static string ValueBar(int value, int max, int scale)
         {

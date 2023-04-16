@@ -25,7 +25,7 @@ namespace CCU.Traits.Player.Armor
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
-					UnlockCost = 6,
+					UnlockCost = 7,
 					Upgrade = nameof(Myrmidon),
 				});
 		}

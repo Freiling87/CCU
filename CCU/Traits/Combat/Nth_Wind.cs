@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Patches.Agents;
+using CCU.Hooks;
 using CCU.Traits.Drug_Warrior;
 using RogueLibsCore;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CCU.Traits.Combat
 {
-    public class Nth_Wind : T_Combat
+	public class Nth_Wind : T_Combat
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
 
@@ -48,7 +48,7 @@ namespace CCU.Traits.Combat
                 }
 
                 if (agent.HasTrait<Backed_Up>())
-                    agent.GetOrAddHook<P_Agent_Hook>().WalkieTalkieUsed = false;
+                    agent.GetOrAddHook<H_Agent>().WalkieTalkieUsed = false;
             }
         }
     }

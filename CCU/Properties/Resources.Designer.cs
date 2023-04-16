@@ -79,5 +79,15 @@ namespace CCU.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] RubberBulletsMod {
+            get {
+                object obj = ResourceManager.GetObject("RubberBulletsMod", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

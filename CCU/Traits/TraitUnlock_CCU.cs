@@ -6,6 +6,7 @@ namespace CCU.Traits
     {
         public TraitUnlock_CCU() { }
 
+        // This is here because of the parallel systems between traits and unlocks.
         public bool IsPlayerTrait = false;
     }
 }

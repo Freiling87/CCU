@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Patches.Agents;
+using CCU.Hooks;
 using CCU.Traits.App;
 using HarmonyLib;
 using RogueLibsCore;
@@ -12,7 +12,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Appearance
 {
-    [HarmonyPatch(declaringType: typeof(AgentHitbox))]
+	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
 	public static class P_AgentHitbox
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -177,8 +177,8 @@ namespace CCU.Patches.Appearance
 		}
 
 		private static string GetAgentBodyType(Agent agent) =>
-			agent.GetOrAddHook<P_Agent_Hook>().bodyType;
+			agent.GetOrAddHook<H_Agent>().bodyType;
 		private static string GetAgentEyesType(Agent agent) =>
-			agent.GetOrAddHook<P_Agent_Hook>().eyesType;
+			agent.GetOrAddHook<H_Agent>().eyesType;
 	}
 }

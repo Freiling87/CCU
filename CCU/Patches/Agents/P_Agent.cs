@@ -3,6 +3,7 @@ using BTHarmonyUtils.InstructionSearch;
 using BTHarmonyUtils.MidFixPatch;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Challenges.Followers;
+using CCU.Hooks;
 using CCU.Localization;
 using CCU.Traits;
 using CCU.Traits.App;
@@ -21,7 +22,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Agents
 {
-    [HarmonyPatch(declaringType: typeof(Agent))]
+	[HarmonyPatch(declaringType: typeof(Agent))]
 	public class P_Agent
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -149,12 +150,16 @@ namespace CCU.Patches.Agents
 			TraitManager.LogTraitList(__instance);
 
 			logger.LogDebug("------- Inventory");
-			foreach (InvItem ii in __instance.inventory.InvItemList)
-				logger.LogDebug(ii.invItemName + "(" + ii.invItemCount + ")");
+			foreach (InvItem ii in __instance.inventory.InvItemList.Where(i => !(i.invItemName is null) && i.invItemName != ""))
+			{
+				logger.LogDebug(ii.invItemName + " * " + ii.invItemCount);
+				foreach (string mod in ii.contents)
+					logger.LogDebug("\t+ " + mod);
+			}
 
 			if (!(__instance.specialInvDatabase is null))
             {
-				logger.LogDebug("------- Special Inventory:");
+				logger.LogDebug("------- Shop Inventory:");
 				foreach (InvItem ii in __instance.specialInvDatabase.InvItemList)
 					logger.LogDebug(ii.invItemName + "(" + ii.invItemCount + ")");
 			}
@@ -225,7 +230,7 @@ namespace CCU.Patches.Agents
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetEmployer))]
 		public static bool SetEmployer_Prefix(Agent __instance, ref Agent myEmployer)
 		{
-			if (__instance.GetOrAddHook<P_Agent_Hook>().HiredPermanently &&
+			if (__instance.GetOrAddHook<H_Agent>().HiredPermanently &&
 				!(__instance.employer is null) && myEmployer is null)
             {
 				myEmployer = __instance.employer;
@@ -241,7 +246,7 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetFollowing))]
 		public static bool SetFollowing_Prefix(Agent __instance, ref Agent myFollowing)
 		{
-			if (__instance.GetOrAddHook<P_Agent_Hook>().HiredPermanently &&
+			if (__instance.GetOrAddHook<H_Agent>().HiredPermanently &&
 				!(__instance.following is null) && myFollowing is null)
             {
 				myFollowing = __instance.employer;
@@ -326,54 +331,9 @@ namespace CCU.Patches.Agents
 		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
 		public static bool Start_CreateHook(Agent __instance)
 		{
-			__instance.GetOrAddHook<P_Agent_Hook>().Reset();
+			__instance.GetOrAddHook<H_Agent>().Reset();
 
 			return true;
 		}
-	}
-
-	public class P_Agent_Hook : HookBase<PlayfieldObject>
-	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		public static GameController GC => GameController.gameController;
-
-		protected override void Initialize() 
-		{
-			//Core.LogMethodCall();
-			GrabAppearance(); 
-			appearanceRolled = false;
-			SceneSetterFinished = false; // Avoids removal from series mid-traversal
-		}
-
-		public void GrabAppearance()
-		{
-			//Core.LogMethodCall();
-			Agent agent = (Agent)Instance;
-			//logger.LogDebug("Agent: " + agent.agentRealName);
-			SaveCharacterData save = agent.customCharacterData;
-			bodyColor = save.bodyColorName;
-			bodyType = save.bodyType;
-			eyesType = save.eyesType;
-			skinColor = save.skinColorName;
-		}
-
-		public void Reset()
-        {
-			ClassifierScannedAgents.Clear();
-        }
-
-		public bool SceneSetterFinished;
-
-		public bool WalkieTalkieUsed;
-		public bool HiredPermanently;
-		public int SuicideVestTimer;
-
-		public bool appearanceRolled;
-		public string bodyColor;
-		public string bodyType;
-		public string eyesType;
-		public string skinColor;
-
-		public List<string> ClassifierScannedAgents = new List<string> { };
 	}
 }

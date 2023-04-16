@@ -6,7 +6,7 @@ namespace CCU.Traits.Loot_Drops
     {
         public T_LootDrop() : base() { }
 
-        public abstract bool ProtectedItem(InvItem invItem);
+        public abstract bool IsUnspillable(InvItem invItem);
 
         public override void OnAdded() { }
         public override void OnRemoved() { }

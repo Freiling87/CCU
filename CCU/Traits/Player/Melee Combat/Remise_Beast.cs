@@ -1,11 +1,11 @@
-﻿using RogueLibsCore;
+﻿using CCU.Hooks;
+using RogueLibsCore;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Player.Melee_Combat
 {
-    internal class Remise_Beast : T_MeleeSpeed
+    public class Remise_Beast : T_PlayerTrait, IModifyItems
 	{
-		public override float SpeedMultiplier => 1f;
-
 		[RLSetup]
 		public static void Setup()
 		{
@@ -27,7 +27,29 @@ namespace CCU.Traits.Player.Melee_Combat
 					UnlockCost = 15,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+
+		public override void OnAdded() =>
+			ModifyItemHelper.SetupInventory(Owner);
+		public override void OnRemoved() =>
+			ModifyItemHelper.SetupInventory(Owner);
+
+		// IModifyItems
+		public List<string> EligibleItemTypes => new List<string> { "WeaponMelee" };
+		public List<string> ExcludedItems => new List<string>() { };
+
+		public bool IsEligible(Agent agent, InvItem invItem) =>
+			EligibleItemTypes.Contains(invItem.itemType) &&
+			!ExcludedItems.Contains(invItem.invItemName);
+
+		public void OnDrop(Agent agent, InvItem invItem)
+		{
+			invItem.rapidFire = invItem.GetOrAddHook<H_InvItem>().vanillaRapidFire;
+		}
+
+		public void OnPickup(Agent agent, InvItem invItem)
+		{
+			if (IsEligible(agent, invItem))
+				invItem.rapidFire = true;
+		}
 	}
 }

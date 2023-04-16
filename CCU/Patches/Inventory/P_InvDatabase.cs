@@ -4,6 +4,7 @@ using CCU.Mutators.Laws;
 using CCU.Patches.Agents;
 using CCU.Systems.Containers;
 using CCU.Systems.Investigateables;
+using CCU.Traits;
 using CCU.Traits.Behavior;
 using CCU.Traits.Inventory;
 using CCU.Traits.Loadout;
@@ -47,36 +48,6 @@ namespace CCU.Patches.Inventory
 			logger.LogDebug("ItemType: " + itemType);
 
 			return true;
-		}
-
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItem), argumentTypes: new[] { typeof(string), typeof(int), typeof(List<string>), typeof(List<int>), typeof(List<int>), typeof(int), typeof(bool), typeof(bool), typeof(int), typeof(int), typeof(bool), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(bool) })]
-		public static void AddItem_Postfix(InvDatabase __instance, ref InvItem __result)
-		{
-			SetRapidFire(__instance, __result);
-		}
-
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItemAtEmptySlot), argumentTypes: new[] { typeof(InvItem), typeof(bool), typeof(bool), typeof(int), typeof(int) })]		
-		public static void AddItemAtEmptySlot_Postfix(InvDatabase __instance, ref InvItem item)
-		{
-			SetRapidFire(__instance, item);
-		}
-		public static void SetRapidFire(InvDatabase invDatabase, InvItem invItem)
-		{
-			if (!(invDatabase.agent is null))
-			{
-				if (invItem.itemType == "WeaponProjectile")
-				{
-					T_AmmoCap.RecalculateMaxAmmo(invDatabase.agent, invItem, false);
-
-					if (invDatabase.agent.HasTrait<Pants_on_Autofire>())
-						invItem.rapidFire = true;
-				}
-				else if (invItem.itemType == "WeaponMelee")
-				{
-					if (invDatabase.agent.HasTrait<Remise_Beast>())
-						invItem.rapidFire = true;
-				}
-			}
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
@@ -212,6 +183,7 @@ namespace CCU.Patches.Inventory
 			return true;
         }
 
+		// TODO: Move to T_Loadout
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
 		private static void FillAgent_Loadout(InvDatabase __instance)
 		{

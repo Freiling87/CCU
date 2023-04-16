@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Hooks;
 using CCU.Localization;
 using CCU.Traits.Behavior;
 using CCU.Traits.Cost_Scale;
@@ -23,7 +24,7 @@ using UnityEngine;
 
 namespace CCU.Patches.Agents
 {
-    [HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	[HarmonyPatch(declaringType: typeof(AgentInteractions))]
 	static class P_AgentInteractions
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -36,7 +37,7 @@ namespace CCU.Patches.Agents
 			RogueInteractions.CreateProvider<Agent>(h =>
 			{
 				Agent agent = h.Object;
-				bool log = true;
+				bool log = false;
 
 				if (agent.agentName != VanillaAgents.CustomCharacter)
 					return;
@@ -599,7 +600,7 @@ namespace CCU.Patches.Agents
 			argumentTypes: new[] { typeof(Agent), typeof(Agent) })]
 		public static bool LetGo_Prefix(Agent agent)
         {
-			agent.GetOrAddHook<P_Agent_Hook>().HiredPermanently = false;
+			agent.GetOrAddHook<H_Agent>().HiredPermanently = false;
 
 			return true;
         }
@@ -730,7 +731,7 @@ namespace CCU.Patches.Agents
 			//
 			agent.SetChangeElectionPoints(interactingAgent);
 			agent.StopInteraction();
-			agent.GetOrAddHook<P_Agent_Hook>().HiredPermanently = true;
+			agent.GetOrAddHook<H_Agent>().HiredPermanently = true;
 			agent.canGoBetweenLevels = true;
 
 			return;

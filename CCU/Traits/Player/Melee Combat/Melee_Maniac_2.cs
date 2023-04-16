@@ -12,7 +12,7 @@ namespace CCU.Traits.Player.Melee_Combat
 			PostProcess = RogueLibs.CreateCustomTrait<Melee_Maniac_2>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Melee attack speed increased by 50%. All melee weapons have rapid fire.",
+					[LanguageCode.English] = "Melee attack speed increased by 50%.",
 				})
 				.WithName(new CustomNameInfo
 				{

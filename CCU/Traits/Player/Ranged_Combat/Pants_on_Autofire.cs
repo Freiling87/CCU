@@ -1,14 +1,12 @@
-﻿using RogueLibsCore;
-using System;
+﻿using CCU.Hooks;
+using RogueLibsCore;
+using System.Collections.Generic;
 
 namespace CCU.Traits.Player.Ranged_Combat
 {
-    public class Pants_on_Autofire : T_RateOfFire
+	public class Pants_on_Autofire : T_PlayerTrait, IModifyItems
     {
-        // This needs to stay a 1
-        public override float CooldownMultiplier => 1f;
-
-        [RLSetup]
+		[RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Pants_on_Autofire>()
@@ -30,7 +28,29 @@ namespace CCU.Traits.Player.Ranged_Combat
                     UnlockCost = 15,
                 });
         }
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
+
+        public override void OnAdded() =>
+            ModifyItemHelper.SetupInventory(Owner);
+        public override void OnRemoved() =>
+            ModifyItemHelper.SetupInventory(Owner);
+
+        // IModifyItems
+        public List<string> EligibleItemTypes => new List<string>() { "WeaponProjectile" };
+        public List<string> ExcludedItems => new List<string>() { };
+
+        public bool IsEligible(Agent agent, InvItem invItem) =>
+            EligibleItemTypes.Contains(invItem.itemType) &&
+            !ExcludedItems.Contains(invItem.invItemName);
+
+        public void OnDrop(Agent agent, InvItem invItem)
+		{
+            invItem.rapidFire = invItem.GetOrAddHook<H_InvItem>().vanillaRapidFire;
+		}
+
+        public void OnPickup(Agent agent, InvItem invItem)
+        {
+			if (IsEligible(agent, invItem))
+			    invItem.rapidFire = true;
+		}
     }
 }

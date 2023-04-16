@@ -43,39 +43,39 @@ namespace CCU.Traits.Loadout
 			List<string> baseItemList = agent.customCharacterData.items;
 			List<InvItem> baseInventory = new List<InvItem>();
 
-			foreach (string item in baseItemList)
-			{
-				InvItem invItem = new InvItem();
-				invItem.invItemName = item;
-				invItem.SetupDetails(false);
-			}
+			// Commented out due to incompleteness
+			//foreach (string item in baseItemList)
+			//{
+			//	InvItem invItem = new InvItem();
+			//	invItem.invItemName = item;
+			//	invItem.SetupDetails(false);
+			//}
 
-			foreach (Slots currentSlot in Enum.GetValues(typeof(Slots)))
-			{
-				output += (" for Slot: " + currentSlot + Environment.NewLine);
+			//foreach (Slots currentSlot in Enum.GetValues(typeof(Slots)))
+			//{
+			//	output += (" for Slot: " + currentSlot + Environment.NewLine);
 
-				if (agent.HasTrait<Flat_Distribution>())
-					output += ((int)(100f / (ItemsInSlot(baseInventory, currentSlot) + 1f)) + "% - None" + Environment.NewLine);
+			//	if (agent.HasTrait<Flat_Distribution>())
+			//		output += ((int)(100f / (ItemsInSlot(baseInventory, currentSlot) + 1f)) + "% - None" + Environment.NewLine);
 
-				foreach (InvItem invItem in baseInventory)
-				{
-					int chance = 0;
+			//	foreach (InvItem invItem in baseInventory)
+			//	{
+			//		int chance = 0;
 
-					if (agent.HasTrait<Flat_Distribution>())
-						chance = (int)(100f / (ItemsInSlot(baseInventory, currentSlot) + 1f));
-					else if (agent.HasTrait<Scaled_Distribution>())
-					{
+			//		if (agent.HasTrait<Flat_Distribution>())
+			//			chance = (int)(100f / (ItemsInSlot(baseInventory, currentSlot) + 1f));
+			//		else if (agent.HasTrait<Scaled_Distribution>())
+			//		{
+			//			a
+			//		}
+			//		else if (agent.HasTrait<Upscaled_Distribution>())
+			//		{
+			//			a
+			//		}
 
-					}
-					else if (agent.HasTrait<Upscaled_Distribution>())
-					{
-
-					}
-
-					output += (chance + "% - " + invItem.invItemName + Environment.NewLine);
-				}
-
-			}
+			//		output += (chance + "% - " + invItem.invItemName + Environment.NewLine);
+			//	}
+			//}
 
 			return output;
 		}
@@ -86,23 +86,16 @@ namespace CCU.Traits.Loadout
 
             if (agent.agentName != VanillaAgents.CustomCharacter ||
 				!agent.GetTraits<T_Loadout>().Any() ||
-				agent.isPlayer != 0) 
+				agent.isPlayer != 0)
 				return;
 
-			logger.LogDebug("Custom Loadout: " + agent.agentName + "(" + agent.agentRealName + ")");
+			logger.LogDebug("SetupLoadout: " + agent.agentName + "(" + agent.agentRealName + ")");
 			invDatabase.DontPlayPickupSounds(true);
 			T_PocketMoney.AddMoney(agent);
 			LoadCustomInventory(invDatabase);
 			invDatabase.ChooseArmor();
 			invDatabase.ChooseArmorHead();
 			invDatabase.ChooseWeapon();
-
-			foreach (InvItem invItem in invDatabase.InvItemList)
-			{
-				T_GunNut.AddModsFromTraits(agent, invItem);
-				T_AmmoCap.RecalculateMaxAmmo(agent, invItem, agent.isPlayer == 0);
-			}
-					
 			invDatabase.DontPlayPickupSounds(false);
 		}
 
@@ -190,6 +183,7 @@ namespace CCU.Traits.Loadout
 					switch (currentInvSlot)
 					{
 						case Slots.WeaponMelee:
+
 							if (GC.challenges.Contains("InfiniteMeleeDurability"))
 								pickedItem.invItemCount = 100;
 							else
@@ -198,34 +192,39 @@ namespace CCU.Traits.Loadout
 							break;
 
 						case Slots.WeaponRanged:
-							if (!GC.challenges.Contains("InfiniteAmmo") &&
-								!(GC.challenges.Contains("InfiniteAmmoNormalWeapons") &&
-									!pickedItem.Categories.Contains("NonStandardWeapons") ||
-									!pickedItem.Categories.Contains("NonStandardWeapons2")) &&
-								!invDatabase.agent.warZoneAgent)
-								pickedItem.invItemCount = pickedItem.initCount;
+
+							if (GC.challenges.Contains("InfiniteAmmo") ||
+								(GC.challenges.Contains("InfiniteAmmoNormalWeapons") && !pickedItem.Categories.Contains("NonStandardWeapons") && !pickedItem.Categories.Contains("NonStandardWeapons2")) ||
+								agent.warZoneAgent)
+								goto default;
 							else
-								pickedItem.invItemCount = (int)(pickedItem.initCountAI *
-									(int.Parse(invDatabase.rnd.RandomSelect("AgentProjectileBullets", "Others")) / 10f));
+							{
+								float roll = int.Parse(GC.rnd.RandomSelect("AgentProjectileBullets", "Others")) / 10f;
+								pickedItem.invItemCount = (int)(pickedItem.initCountAI * roll);
+							}
 
 							break;
 
 						default:
 							pickedItem.invItemCount = pickedItem.initCount;
-
 							break;
 					}
-
-					T_AmmoCap.RecalculateMaxAmmo(agent, pickedItem, agent.isPlayer == 0);
 
 					#endregion
 
 					//pickedItem.dontAutomaticallySelect = false;
+					// These might be an IModifyItems.NPCLoadoutSetup method
+					InvItem final = invDatabase.AddItem(pickedItem);
 
-					invDatabase.AddItem(pickedItem);
+					if (final.agent.HasTrait<Ammo_Stocker>())
+						final.invItemCount = (int)(final.invItemCount * 1.4f);
+
+					foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
+						final.invItemCount = (int)(final.invItemCount * trait.AmmoCapMultiplier);
 				}
 			}
 		}
+		#region Slot Tools
 		public static Slots GetSlotFromItem(string invItemName)
 		{
 			InvItem invItem = new InvItem();
@@ -295,5 +294,6 @@ namespace CCU.Traits.Loadout
 		};
 		private static int ItemsInSlot(List<InvItem> list, Slots slot) =>
 			list.Where(ii => GetSlotFromItem(ii) == slot && ii.invItemName != "" && !(ii.invItemName is null) && !ExemptSlotItems.Contains(ii.invItemName)).Count();
+		#endregion
 	}
 }
