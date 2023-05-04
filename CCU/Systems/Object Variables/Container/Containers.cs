@@ -14,6 +14,7 @@ namespace CCU.Systems.Containers
 
 		public static List<string> ContainerObjects_Slot1 = new List<string>()
 		{
+			// NOTE: Before adding any, ensure that you've accounted for Hidden Bombs, since they'll all become eligible.
 			vObject.Barbecue,
 			vObject.Bathtub,
 			vObject.Bed,
@@ -96,7 +97,7 @@ namespace CCU.Systems.Containers
 						{
 							if (!m.Agent.statusEffects.hasTrait(VanillaTraits.SneakyFingers))
 							{
-								GC.audioHandler.Play(m.Object, VanillaAudio.Operating);
+								GC.audioHandler.Play(m.Agent, VanillaAudio.Operating);
 								GC.spawnerMain.SpawnNoise(m.Object.tr.position, 0.4f, m.Agent, "Normal", m.Agent);
 								GC.OwnCheck(m.Agent, m.Object.go, "Normal", 2);
 							}
