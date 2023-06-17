@@ -103,9 +103,6 @@ namespace CCU.Traits.Loadout_Gun_Nut
 			{
 				logger.LogDebug("Rubber Bullet death threshold passed");
 				damagerObject.playfieldObjectBullet.rubber = false;
-
-
-				damagerObject.agentInvDatabase.agent.SayDialogue()
 			}
 			else if (netHealth <= knockoutThreshold)
 			{

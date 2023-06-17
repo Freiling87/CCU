@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Hooks;
+using CCU.Localization;
 using CCU.Traits.App_AC1;
 using CCU.Traits.App_AC3;
 using CCU.Traits.App_BC1;
@@ -8,6 +9,7 @@ using CCU.Traits.App_BT1;
 using CCU.Traits.App_EC1;
 using CCU.Traits.App_EC3;
 using CCU.Traits.App_ET1;
+using CCU.Traits.App_ET3;
 using CCU.Traits.App_FH1;
 using CCU.Traits.App_FH3;
 using CCU.Traits.App_HC1;
@@ -81,12 +83,11 @@ namespace CCU.Traits.App
 			Agent agent = agentHitbox.agent;
 
 			if (agent.agentName != VanillaAgents.CustomCharacter ||
-				agent.GetOrAddHook<H_Agent>().appearanceRolled || 
+				!agent.GetOrAddHook<H_Agent>().mustRollAppearance || 
 				agent.customCharacterData is null)
 				return;
 
-			// TODO: Static Preview check
-			if (agent.isPlayer != 0)
+			if (agent.isPlayer != 0 && !agent.HasTrait<Dynamic_Player_Appearance>())
 			{
 				agent.GetOrAddHook<H_Agent>().GrabAppearance();
 				RollEyeType(agentHitbox);
@@ -97,7 +98,6 @@ namespace CCU.Traits.App
 			RollSkinColor(agentHitbox);
 			RollHairstyle(agentHitbox);
 			RollFacialHair(agentHitbox);
-			// Moved from here...
 			RollBodyColor(agentHitbox);
 			RollHairColor(agentHitbox);
 			RollAccessory(agentHitbox);
@@ -105,8 +105,8 @@ namespace CCU.Traits.App
 			RollEyeColor(agentHitbox);
 			RollEyeType(agentHitbox);
 			RollLegsColor(agentHitbox);
-			agentHitbox.SetCantShowHairUnderHeadPiece(); // to here. To test Hair Over Headpiece bug.
-			agent.GetOrAddHook<H_Agent>().appearanceRolled = true;
+			agentHitbox.SetCantShowHairUnderHeadPiece();
+			agent.GetOrAddHook<H_Agent>().mustRollAppearance = false;
 		}
 		private static string GetRoll<T>(AgentHitbox agentHitbox) where T : T_Appearance
 		{
@@ -191,7 +191,9 @@ namespace CCU.Traits.App
 						else if (agent.HasTrait<Uncolored_Masks>())
 							return "White";
 					}
-
+					else if (agent.HasTrait<Fleshy_Follicles>())
+						return agent.GetOrAddHook<H_Agent>().skinColor;
+					
 					if (pool.Count() is 0)
 						return agentHitbox.hairColorName;
 
@@ -258,9 +260,7 @@ namespace CCU.Traits.App
 			agent.inventory.AddStartingHeadPiece(roll, true);
 			agent.inventory.startingHeadPiece = roll;
 			agentHitbox.headPieceType = roll;
-
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.startingHeadPiece = roll;
+			agent.customCharacterData.startingHeadPiece = roll;
 		}
 		public static void RollBodyColor(AgentHitbox agentHitbox)
         {
@@ -274,9 +274,7 @@ namespace CCU.Traits.App
 			string roll = GetRoll<T_BodyColor>(agentHitbox);
 			agent.GetOrAddHook<H_Agent>().bodyColor = roll;
 			agentHitbox.GetColorFromString(roll, "Body");
-
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.bodyColorName = roll;
+			agent.customCharacterData.bodyColorName = roll;
 		}
 		public static void RollBodyType(AgentHitbox agentHitbox)
 		{
@@ -293,12 +291,10 @@ namespace CCU.Traits.App
 			agent.objectMult.bodyType = roll;
 			agentHitbox.SetupBodyStrings();
 			agentHitbox.agentBodyStrings.Clear();
+			agentHitbox.agent.customCharacterData.bodyType = roll;
 
-			foreach (string dir in Directions)
+			foreach (string dir in VMapDirection.Directions)
 				agentHitbox.agentBodyStrings.Add(roll + dir);
-
-			if (agent.HasTrait<Dynamic_Preview>())
-				agentHitbox.agent.customCharacterData.bodyType = roll;
 		}
 		public static void RollEyeColor(AgentHitbox agentHitbox)
 		{
@@ -309,9 +305,7 @@ namespace CCU.Traits.App
 
 			string roll = GetRoll<T_EyeColor>(agentHitbox);
 			agentHitbox.GetColorFromString(roll, "Eyes");
-
-			if (agent.HasTrait<Dynamic_Preview>())
-				agentHitbox.agent.customCharacterData.eyesColorName = roll;
+			agentHitbox.agent.customCharacterData.eyesColorName = roll;
 		}
 		public static void RollEyeType(AgentHitbox agentHitbox)
 		{
@@ -327,9 +321,7 @@ namespace CCU.Traits.App
 			agent.GetOrAddHook<H_Agent>().eyesType = roll;
 			agent.oma.eyesType = agentHitbox.agent.oma.convertEyesTypeToInt(roll);
 			agentHitbox.SetupBodyStrings();
-
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.eyesType = roll;
+			agent.customCharacterData.eyesType = roll;
 		}
 		public static void RollFacialHair(AgentHitbox agentHitbox)
 		{
@@ -355,8 +347,7 @@ namespace CCU.Traits.App
 				agentHitbox.facialHairWB.gameObject.SetActive(true);
 			}
 
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.facialHair = roll;
+			agent.customCharacterData.facialHair = roll;
 		}
 		public static void RollHairColor(AgentHitbox agentHitbox)
 		{
@@ -368,7 +359,7 @@ namespace CCU.Traits.App
 			string roll = GetRoll<T_HairColor>(agentHitbox);
 			string skinColorChoice = (string)AccessTools.DeclaredField(typeof(AgentHitbox), "skinColorChoice").GetValue(agentHitbox);
 
-			if (!Not_Hairstyles.StaticList.Contains(roll) && !agent.HasTrait<Melanin_Mashup>() &&
+			if (!Not_Hairstyles.StaticList.Contains(roll) && !agent.HasTrait<Melanin_Mashup>() && !agent.HasTrait<Fleshy_Follicles>() &&
 				(skinColorChoice == "BlackSkin" || skinColorChoice == "LightBlackSkin") &&  roll != "Grey" && roll != "White")
 				roll = "Black";
 
@@ -378,10 +369,7 @@ namespace CCU.Traits.App
 			agentHitbox.facialHairColor = agentHitbox.hairColor;
 			agentHitbox.facialHairColorName = agentHitbox.hairColorName;
 
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.hairColorName = roll;
-
-			return;
+			agent.customCharacterData.hairColorName = roll;
 		}
 		public static void RollHairstyle(AgentHitbox agentHitbox)
 		{
@@ -405,8 +393,7 @@ namespace CCU.Traits.App
 			else
 				agentHitbox.headPiecePosY = 0.16f;
 
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.hairType = roll;
+			agent.customCharacterData.hairType = roll;
 		}
 		public static void RollLegsColor(AgentHitbox agentHitbox)
 		{
@@ -418,8 +405,7 @@ namespace CCU.Traits.App
 			string roll = GetRoll<T_LegsColor>(agentHitbox);
 			agentHitbox.GetColorFromString(roll, "Legs");
 
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.legsColorName = roll;
+			agent.customCharacterData.legsColorName = roll;
 		}
 		public static void RollSkinColor(AgentHitbox agentHitbox)
 		{
@@ -434,20 +420,7 @@ namespace CCU.Traits.App
 			agentHitbox.GetColorFromString(roll, "Skin");
 			agentHitbox.skinColorName = roll;
 
-			if (agent.HasTrait<Dynamic_Preview>())
-				agent.customCharacterData.skinColorName = roll;
+			agent.customCharacterData.skinColorName = roll;
 		}
-
-		public static List<string> Directions = new List<string>()
-		{
-			"N",
-			"NE",
-			"E",
-			"SE",
-			"S",
-			"SW",
-			"W",
-			"NW"
-		};
 	}
 }

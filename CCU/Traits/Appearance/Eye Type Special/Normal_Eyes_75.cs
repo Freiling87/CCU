@@ -1,22 +1,23 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.App_ET1;
+using RogueLibsCore;
 
-namespace CCU.Traits.App_ET1
+namespace CCU.Traits.App_ET3
 {
-	public class Normal_Eyes_50 : T_EyeType
+	public class Normal_Eyes_75 : T_EyeType
 	{
 		public override string[] Rolls => new string[] { };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Normal_Eyes_50>()
+			PostProcess = RogueLibs.CreateCustomTrait<Normal_Eyes_75>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Rolls \"Normal Eyes\" 50% of the time, regardless of the number of other items in the pool.",
+					[LanguageCode.English] = "Rolls \"Normal Eyes\" 75% of the time, regardless of the number of other items in the pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Normal_Eyes_50), "Normal Eyes 50%"),
+					[LanguageCode.English] = DesignerName(typeof(Normal_Eyes_75), "Normal Eyes 75%"),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

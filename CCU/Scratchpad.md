@@ -6,55 +6,74 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
 #			Scope
+##		C	Before release
+Notify Guoxin of finalized version so he can translate
 ##		C	v. 1.1.1 Changelog
+- Compatibility
+  - Verified compatibility with SOR v98 
 - Bugfixes
   - Fixed character select freezing when clicking an empty slot.
-  - 
+  - Fixed Vendor Cart "Operating" sound effect continuing after interaction completed or cancelled.
+  - Fixed Investigateable text showing hidden string ("investigateable-message:::").
+  - Fixed shop with Shoddy/Shiddy Goods selling Taser with -1 quantity.
+  - Ammo-related traits now give free ammo to NPCs with items added in the editor, rather than just items added through the Loadout system.
+  - Fixed Indestructible not working for agents with vanilla (Meat) gibs
 - Feature additions
   - Items
-    - Rubber Bullets Mod
+    - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
+  - Designer Traits
+    - Appearance
+      - Dynamic Player Appearance: Allows appearance variation when using the class as a player. Currently, appearance is only rerolled on starting a new run, but I plan to add a little more control over this in the future.
+      - Fleshy Follicles: Matches hair color to skin color.
+    - Behavior
+      - Accident-Prone: Extended behavior to walk into Killer Plants & Laser Emitters
+    - Combat
+      - Toughness traits: Modify NPC willingness to fight tough odds.
+      - Melee skill traits: Modify frequency of attacks in combat.
+      - Gun skill traits: Modify frequency of attacks in combat.
+    - Passive
+      - Indomitable: Immune to mind control
+    - Senses
+      - Keen Ears traits: Various traits that determine how sensitive the NPC is to sound, and how they react to it.
   - Player Traits
-    - Gun Nut: Agent automatically applies a gun mod to all weapons they pick up. The mod stays on the weapon even if dropped.
-      - Accuracy Modder (5)
-      - Ammo Stocker (5)
-      - Rate of Fire Modder (5)
-      - Rubber Bulleteer (12)
-      - Silencerist (5)
-##		C	v98 Update
-###			√	Verify Wild Hair-Melanation not enforced here
-Fixed in v98. Confirmed not copied.
-##		C	General Notes
-###			C	CharacterSelect.CharacterLoaded
-This is a bool array that might be easier than checking for nulls on charsavedata. 
-Slots 32-48 are custom characters, and it's true
-###			C	Gate RollAppearance
-Behind Dynamic Preview
-So you'll have to detect whether this is a genuine spawn or a CharSelect pseudo-spawn.
+    - Gun Nut : Agent automatically applies a mod to all eligible guns.
+      - Accuracy Modder
+      - Ammo Stocker
+      - Rate of Fire Modder
+      - Rubber Bulleteer
+      - Silencerist
 ##		P	Bugs
 Except crickets. Crickets are fine.
-###				C	Ammo Amateur applying on pistol but not machinegun
-MG was in build, pistol found later. Both had rubber bullets and ammo mod applied, for each weaponmod, one from build and one found later
-###				C	Beards aren't loading
-Check Appearance refactor
-###				C	Gun Nut
-####				C	Rubber Bullets
-Seems feature-complete at 20%.
-#####				C	Ammo with Chunk-Added items?
-Not worth pursuing, as then people will expect chunk-added content to be fully-interactable with Loadout and that's a whole can of worms too large for earlier than v2.
-#####					C	NOT YET
-Expand to an unarmed knockout trait and a melee blunt knockout trait
-#####					C	Rubber Bullets for Pacifists
-Trait is called CantUseWeapons
-Accidental kill threshold is -10f HP, regardless of player/npc, or their max HP. I want to scale this to make weaker characters more delicate.
-Still in StatusEffects.ChangeHealth: Flag9 is the sticking point, tracks if PC/NPC. It's on the same gate as the -10f HP threshold, so it's why accidental kills aren't working yet. 
-The issue is, will bypassing that flag actually run correctly? Or will it call a bunch of things that will break the game if called on an NPC? Might need to just call our own void there instead.
-Flag11 can only be true for player characters, so likely no worry there.
-Flag9 = V_5
-There are some player > 0 checks in there so no worries hopefully
+###				T	Investigateable message
+Test
+###				T	Merchant + Shiddy Goods + Taser = -1 invItemCount
+Seems to work, confirm w Maxior
+###				C	Melee Rapid Fire
+https://discord.com/channels/187414758536773632/1003391847902740561/1112680958672511076
+IIRC Melee Maniac's description is outdated and needs fix
+Thought Remise was working
+###				C	Permanent Hire still counts on death
+Counts toward party max after death
+###				C	Crusty Button
+I don't think I remembered to make them use the button.
+###				C	Concealed Carry
+Gate to NPCs
+###				C	Appearance System
+####				C	Previews no longer match
+Playing character ends up being a hybrid of the two previews. I think this is all those weird saveCharacterData strings. You normalized them but those might not be what's actually used.
+	Slot shows:
+		Edit Character:		Original handmade version, never replaced
+		Modification Slot:	New roll, same body type & color, legs
+		Selection Slot:		New roll, same body type & color, legs
+		Actual Spawn:		
 
-Change XP penalty for knocking out innocents & guilties?
-###				C	Free ammo to NPCs
-Only on initial load
+Only call Reroll when saving custom or pressing Randomize
+####				C	Re-gating
+Base new system around CharacterCreation.RandomizeAppearance
+####				C	Beards aren't loading
+Check Appearance refactor
+			//agent.GetOrAddHook<H_Agent>().appearanceRolled = true;
+This should go into LoadLevel, and set false on death.
 ###				C	Linux compatibility
 Update all mods
 	CCU - never restricted to begin with
@@ -72,10 +91,12 @@ Quests.setupQuests
 What were the test conditions here?
 ####				C	Spawned in Vent off map
 https://discord.com/channels/187414758536773632/187414758536773632/1093294336109727845
-####				C	Spawned in Tube, can't open
-P_ComputerShutdown
-Includes an IEnumerator patch needed
-Ensure that there's an attached Computer or Power Box, else skip Tube as candidate for Bomb
+####				C	Big Bomb inaccessible
+#####					C	Gate bomb placement
+- Must be on map 
+- If Tube, must have computer or power box within range
+#####					√	Computer Shutdown Tube
+Complete
 ###				C	Vanillize Item Qty on load
 Gives full amt, should be scaled to NPC level as vanilla
 ###				C	Infinite Ammo
@@ -119,8 +140,6 @@ Pull RL FROM plugins rather than copying TO it.
 ###				C	Big Quest Mandatory
 	CL - Big Quest Mandatory doesn't work with Werewolf, either form. 
 	NOTE: game did NOT do the red text to warn bq incomplete, which is a clue. He verified that this works on any floor.
-###				C	Long Operating Noise
-Might *only* be Vendor Stand
 ###				C	Language
 Says "I can't speak English" but the other NPC's language is Goryllian (tried interact)
 ###				C	Random Teleport gives Yellow Name
@@ -132,6 +151,14 @@ It's back! Yay. It's back.
 It's just the legacy entry I think. 
 ###				C	Ammo Cap
 	CL - Having a gun already when you pick one of the traits still doesn't update the max ammo
+##		P	Features
+###			C	CharacterSelect.CharacterLoaded
+This is a bool array that might be easier than checking for nulls on charsavedata. 
+Slots 32-48 are custom characters, and it's true
+###			C	Hair match skin
+I guess this is just scope now
+Requested by GenEric
+Fleshy Follicles?
 ##		H√	Bug Archive
 ###				H	Equipment noise spam
 Still occuring, even with vanillas.
@@ -206,6 +233,11 @@ Bladder:
 https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
+###				√	NPC Free Ammo
+Complete. Tested items added via Loadout as well as via editor.
+###				√	Partisan Concealed Carry
+Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117896939837587517
+Issue was Loadout Money without a Loader trait.
 ###				√	Error on select empty slot
 ####				C	Issue
 On selecting empty character slot:
@@ -249,6 +281,12 @@ When you click it, it brings you to the Trait Config menu, where you can write, 
 Now, does this create a new and reusable mutator? e.g. "Force Trait Config: [TraitConfigName]". Or should the user be forced to re-choose the trait config each time, so as not to clutter the trait menu?
 ##		H	CCU v2.0.0 Slate
 Pending release of SOR2
+###			P	Upgrade to highest C# version
+No better time to do this
+###			C	Character Creator UI Improvements
+####			C	Randomize Appearance for Appearance system
+See CharacterCreation.RandomizeAppearance
+Not 100% about when to trigger it generally, on Load/Save/Menu Load?
 ###			C	Loadout System Live Display
 Show tables of item odds, separated by slot
 ###			C	Logging Tools
@@ -382,5 +420,3 @@ Use the Priority Attribute:
 	- As an implicit note to yourself that this method has received at least a baseline of attention to avoid errors.
 ###			C	Full sweep of legacy support
 This depends on how compatible SOR1 data will be for SOR2. I don't think it will be, at all. So this might be a good chance to reform the names and organization of the content in ways that would normally disrupt legacy functions in SOR1.
-###			C	Switch to C# 8.0
-Bout damn time

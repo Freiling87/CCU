@@ -2,19 +2,19 @@
 
 namespace CCU.Traits.App
 {
-	public class Dynamic_Preview : T_CCU
+	public class Dynamic_Player_Appearance : T_CCU
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Dynamic_Preview>()
+			PostProcess = RogueLibs.CreateCustomTrait<Dynamic_Player_Appearance>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Causes the agent's appearance to reroll on the Character Select Menu.",
+					[LanguageCode.English] = "Activates the Appearance System for player versions of this character.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Dynamic_Preview)),
+					[LanguageCode.English] = DesignerName(typeof(Dynamic_Player_Appearance)),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

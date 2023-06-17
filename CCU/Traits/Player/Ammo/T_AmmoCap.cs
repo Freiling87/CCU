@@ -37,18 +37,13 @@ namespace CCU.Traits.Player.Ammo
 
 		public void OnPickup(Agent agent, InvItem invItem)
 		{
-			logger.LogDebug("OnPickup: " + invItem.invItemName);
 			float ammoCap = invItem.initCount;
 
 			if (invItem.contents.Contains(vItem.AmmoCapacityMod))
 				ammoCap *= 1.4f;
 
-			if (IsEligible(agent, invItem))
-				foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
-				{
-					logger.LogDebug("\ttrait: " + Trait.traitName);
-					ammoCap *= trait.AmmoCapMultiplier;
-				}
+			foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
+				ammoCap *= trait.AmmoCapMultiplier;
 
 			invItem.maxAmmo = (int)ammoCap;
 		}

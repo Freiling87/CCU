@@ -15,7 +15,7 @@ namespace CCU.Hooks
 		{
 			//Core.LogMethodCall();
 			GrabAppearance();
-			appearanceRolled = false;
+			mustRollAppearance = true;
 			SceneSetterFinished = false; // Avoids removal from series mid-traversal
 		}
 
@@ -42,7 +42,7 @@ namespace CCU.Hooks
 		public bool HiredPermanently;
 		public int SuicideVestTimer;
 
-		public bool appearanceRolled;
+		public bool mustRollAppearance;
 		public string bodyColor;
 		public string bodyType;
 		public string eyesType;

@@ -3,6 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
+    // N.B.: Named because adding a trait with the same name as a status effect will just give you the status effect. Code you can smell before you even see it!
     public class Not_Vincible : T_CCU
     {
         [RLSetup]

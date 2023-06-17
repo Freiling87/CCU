@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
+using CCU.Hooks;
 using CCU.Localization;
-using CCU.Patches.Agents;
 using RogueLibsCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CCU.Systems.CustomGoals
 {
-    class CustomGoals
+	class CustomGoals
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
@@ -52,7 +52,7 @@ namespace CCU.Systems.CustomGoals
             Dead,
             Gibbed,
             KnockedOut,
-            // RandomTeleport, // Inactive, Legacy
+            // RandomTeleport, // Legacy
             Teleport_Public,
             Zombified,
         };
@@ -65,7 +65,7 @@ namespace CCU.Systems.CustomGoals
             KnockedOut,
             Random_Patrol_Chunk,
             Random_Patrol_Map,
-            RandomTeleport,
+            RandomTeleport, // Legacy
             Teleport_Public,
             Zombified,
         };
@@ -87,12 +87,9 @@ namespace CCU.Systems.CustomGoals
 
         public static void RunSceneSetters()
         {
-        // TODO: Goto is a nono, mofo
-        // It's structured like this so I can remove from agentList while traversing it.
-        start: 
             foreach (Agent agent in GC.agentList)
             {
-                if (!SceneSetters_All.Contains(agent.defaultGoal) || agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished)
+                if (!SceneSetters_All.Contains(agent.defaultGoal) || agent.GetOrAddHook<H_Agent>().SceneSetterFinished)
                     continue;
 
                 agent.ownerID = 99;
@@ -116,45 +113,38 @@ namespace CCU.Systems.CustomGoals
                         agent.SetGettingArrestedByAgent(null);
                         agent.agentHitboxScript.SetWBSprites();
                         agent.StopInteraction();
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
 
                     case Dead:
                         KillEmSoftly(agent);
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
 
                     case Burned:
                         agent.deathMethod = "Fire";
                         KillEmSoftly(agent);
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
 
                     case Gibbed:
                         agent.statusEffects.ChangeHealth(-200f);
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
 
                     case KnockedOut:
                         agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                         agent.tranqTime = 1000;
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
 
-                    case RandomTeleport: 
-                        goto case Teleport_Public; // Legacy
+                    case RandomTeleport: // Legacy, Pre-Release
+                        goto case Teleport_Public;
 
                     case Teleport_Public:
                         DoRandomTeleport(agent, false, true);
                         agent.SetDefaultGoal("WanderFar");
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
 
                     case Zombified:
                         agent.zombieWhenDead = true;
                         KillEmSoftly(agent);
-                        agent.GetOrAddHook<P_Agent_Hook>().SceneSetterFinished = true;
-                        goto start;
+                        break;
                 }
             }
         }

@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Behavior
 {
-    public class AccidentProne : T_Behavior, ISetupAgentStats
+    public class Accident_Prone : T_Behavior, ISetupAgentStats
     {
         public override bool LosCheck => false;
         public override string[] GrabItemCategories => null;
@@ -11,15 +11,15 @@ namespace CCU.Traits.Behavior
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<AccidentProne>()
+            PostProcess = RogueLibs.CreateCustomTrait<Accident_Prone>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format($"This character will not path around Crushers, Fire Spewers, and Sawblades.\n" +
+                    [LanguageCode.English] = String.Format($"This character will not path around Crushers, Fire Spewers, Killer Plants, Laser Emitters & Sawblades.\n" +
                         "<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(Grab_Everything))),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(AccidentProne), "Accident-Prone"),
+                    [LanguageCode.English] = DesignerName(typeof(Accident_Prone), "Accident-Prone"),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

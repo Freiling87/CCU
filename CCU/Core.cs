@@ -51,6 +51,9 @@ namespace CCU
 			IntPtr ptr = method.MethodHandle.GetFunctionPointer();
 			return (T)Activator.CreateInstance(typeof(T), callFrom, ptr);
 		}
+
+		public static string GetRandomMember(List<string> list) =>
+			list[random.Next(0, list.Count)];
 	}
 
 	public static class CCULogger

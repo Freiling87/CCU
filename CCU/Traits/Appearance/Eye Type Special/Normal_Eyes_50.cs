@@ -1,24 +1,23 @@
-﻿using CCU.Traits.App_HC1;
+﻿using CCU.Traits.App_ET1;
 using RogueLibsCore;
 
-namespace CCU.Traits.App_HC2
+namespace CCU.Traits.App_ET3
 {
-    public class Wild_Colors : T_HairColor
+	public class Normal_Eyes_50 : T_EyeType
 	{
-		public override string[] Rolls
-			=> new string[] { "Red", "Green", "Purple", "Pink", "Blue" };
+		public override string[] Rolls => new string[] { };
 
         [RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Wild_Colors>()
+			PostProcess = RogueLibs.CreateCustomTrait<Normal_Eyes_50>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Adds multiple hair colors to the appearance pool.",
+					[LanguageCode.English] = "Rolls \"Normal Eyes\" 50% of the time, regardless of the number of other items in the pool.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Wild_Colors)),
+					[LanguageCode.English] = DesignerName(typeof(Normal_Eyes_50), "Normal Eyes 50%"),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

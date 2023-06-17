@@ -58,7 +58,6 @@ namespace CCU.Patches
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
 		private static int ExtendedReleaseCheck(int vanilla) =>
 			vanilla == 69420
 				? 9999
@@ -159,11 +158,13 @@ namespace CCU.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.NormalGib))]
 		public static bool NormalGib_Redirect(StatusEffects __instance)
 		{
+			if (__instance.agent.HasTrait<Indestructible>())
+				return false;
+
 			if (__instance.agent.HasTrait<Meat_Chunks>() || !__instance.agent.GetTraits<T_GibType>().Any())
 				return true;
 
-			if (!__instance.agent.HasTrait<Indestructible>())
-				P_StatusEffects_ExplodeBody.CustomGib(__instance);
+			P_StatusEffects_ExplodeBody.CustomGib(__instance);
 
 			return false;
 		}
@@ -176,14 +177,11 @@ namespace CCU.Patches
 			foreach (InvItem invItem in agent.inventory.InvItemList)
 			{
 				foreach (T_LootDrop trait in agent.GetTraits<T_LootDrop>())
-					if (trait.ProtectedItem(invItem))
+					if (trait.IsUnspillable(invItem))
 					{
 						invItem.doSpill = false;
 						invItem.cantDropNPC = true;
 					}
-
-				if (agent.GetTraits<T_AmmoCap>().Any())
-					T_AmmoCap.ResetMaxAmmoOnSpill(agent, invItem);
 			}
 
 			return true;

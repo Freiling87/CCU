@@ -28,10 +28,16 @@ namespace CCU.Hooks
 		{
 			Instance.contents.Add(weaponMod);
 
-			if (weaponMod == vItem.RubberBulletsMod)
+			switch (weaponMod)
 			{
-				Instance.Categories.Add("NonViolent");
-				Instance.Categories.Add("NotRealWeapons");
+				case vItem.AmmoCapacityMod:
+					Instance.maxAmmo = (int)(Instance.maxAmmo * 1.4f);
+					break;
+				case vItem.RubberBulletsMod:
+					Instance.Categories.Add("NonViolent");
+					Instance.Categories.Add("NotRealWeapons");
+					break;
+
 			}
 		}
 	}

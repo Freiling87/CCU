@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Hooks;
 using CCU.Mutators.Laws;
 using CCU.Patches.Agents;
 using CCU.Systems.Containers;
@@ -48,6 +49,27 @@ namespace CCU.Patches.Inventory
 			logger.LogDebug("ItemType: " + itemType);
 
 			return true;
+		}
+
+		/// <summary>
+		/// This SHOULD cover all non-Loadout item additions, like the 3 item slots in the editor.
+		/// </summary>
+		/// <param name="__instance"></param>
+		/// <param name="__result"></param>
+		[HarmonyPostfix, HarmonyPatch(methodName: "AddItemReal")]
+		public static void AddItemReal_InitSetup(InvDatabase __instance, ref InvItem __result)
+		{
+			if (__instance.agent is null)
+				return;
+			
+			ModifyItemHelper.SetupItem(__instance.agent, __result);
+
+			// Free NPC ammo
+			if (__instance.agent.isPlayer == 0)
+			{
+				float ratio = (float)__result.maxAmmo / (float)__result.initCount;
+				__result.invItemCount = (int)(__result.invItemCount * ratio);
+			}
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
@@ -280,8 +302,9 @@ namespace CCU.Patches.Inventory
 						invItem.canRepeatInShop = true;
 				}
 
-				foreach (T_MerchantStock trait in agent.GetTraits<T_MerchantStock>())
-					trait.OnAddItem(ref invItem);
+				if (!T_MerchantStock.ExceptionItems.Contains(invItem.invItemName))
+					foreach (T_MerchantStock trait in agent.GetTraits<T_MerchantStock>())
+						trait.OnAddItem(ref invItem);
 
 				// This is apparently done automatically for Durability items
 				if (T_MerchantStock.QuantityTypes.Contains(invItem.itemType))

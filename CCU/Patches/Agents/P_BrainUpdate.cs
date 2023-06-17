@@ -83,7 +83,7 @@ namespace CCU.Patches.Agents
 					Item item = itemList[n];
 
 					if (item.invItem.Categories.Intersect(pickupCategories).Any() &&
-						(!item.objectSprite.dangerous || LOSagent.HasTrait<AccidentProne>()) &&
+						(!item.objectSprite.dangerous || LOSagent.HasTrait<Accident_Prone>()) &&
 						!item.fellInHole && item.curTileData.prison == LOSagent.curTileData.prison && !item.dontStealFromGround &&
 						(LOSagent.curTileData.prison <= 0 || LOSagent.curTileData.chunkID == item.curTileData.chunkID) &&
 						!GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, item.curTileData) && LOSagent.curPosX - 5f < item.curPosition.x && LOSagent.curPosX + 5f > item.curPosition.x && LOSagent.curPosY - 5f < item.curPosition.y && LOSagent.curPosY + 5f > item.curPosition.y && LOSagent.movement.HasLOSObjectNormal(item))
@@ -92,7 +92,7 @@ namespace CCU.Patches.Agents
 						LOSagent.SetDefaultGoal("GoGet");
 						LOSagent.SetGoGettingTarget(item);
 						LOSagent.stoleStuff = true;
-						return;
+						return; // Try a break here
 					}
 				}
 			}

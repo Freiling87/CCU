@@ -37,18 +37,13 @@ namespace CCU.Traits
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItemAtEmptySlot), argumentTypes: new[] { typeof(InvItem), typeof(bool), typeof(bool), typeof(int), typeof(int) })]
 		public static void AddItemAtEmptySlot_Postfix(InvDatabase __instance, ref InvItem item)
 		{
-			//logger.LogDebug("AddItemAtEmptySlot: " + item.invItemName);
 			Agent agent = __instance.agent?? null;
 
 			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter ||
 				item is null || item.invItemName is null || item.invItemName == "")
 				return;
 
-			foreach (IModifyItems trait in agent.GetTraits<IModifyItems>())
-			{
-				//logger.LogDebug("\ttrait:\t" + trait.ToString());
-				trait.OnPickup(agent, item);
-			}
+			ModifyItemHelper.SetupItem(agent, item);
 		}
 	}
 
@@ -59,21 +54,17 @@ namespace CCU.Traits
 
 		public static void SetupInventory(Agent agent)
 		{
-			//logger.LogDebug("SetupInventory");
-
-			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter)
+			if (agent is null)
 				return;
 
+			foreach (InvItem invItem in agent.inventory.InvItemList)
+				SetupItem(agent, invItem);
+		}
+		public static void SetupItem(Agent agent, InvItem invItem)
+		{
 			foreach (IModifyItems trait in agent.GetTraits<IModifyItems>())
-			{
-				//logger.LogDebug("\ttrait:\t" + trait.ToString());
-				foreach (InvItem invItem in agent.inventory.InvItemList)
-				{
-					//logger.LogDebug("\t\titem:\t" + invItem.invItemName);
+				if (trait.IsEligible(agent, invItem))
 					trait.OnPickup(agent, invItem);
-					// if initial setup, Ammo Stock should raise ammo to max for NPCs
-				}
-			}
 		}
 	}
 }

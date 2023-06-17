@@ -132,6 +132,7 @@
     <Compile Include="Items\I_CCU.cs" />
     <Compile Include="Localization\CAgentGroup.cs" />
     <Compile Include="Localization\OperatingBarText.cs" />
+    <Compile Include="Localization\VMapDirection.cs" />
     <Compile Include="Mutators\C_CCU.cs" />
     <Compile Include="Mutators\Followers\C_Followers.cs" />
     <Compile Include="Extensions\E_GoalDetails.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Mutators\Progression\C_Progression.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
+    <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
     <Compile Include="Patches\Interface\P_ObjectSprite.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
@@ -212,7 +214,10 @@
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
     <Compile Include="Traits\Appearance\Body Type\Alien_Body.cs" />
     <Compile Include="Traits\Appearance\Eye Color Special\Beady_Eyed.cs" />
+    <Compile Include="Traits\Appearance\Eye Type Special\Normal_Eyes_50.cs" />
+    <Compile Include="Traits\Appearance\Eye Type Special\Normal_Eyes_75.cs" />
     <Compile Include="Traits\Appearance\Hair Color Grouped\Demographic_Colors.cs" />
+    <Compile Include="Traits\Appearance\Hair Color Special\Fleshy_Follicles.cs" />
     <Compile Include="Traits\Appearance\Hair Color Special\Melanin_Mashup.cs" />
     <Compile Include="Traits\Appearance\Hair Color Special\Uncolored_Masks.cs" />
     <Compile Include="Traits\Appearance\Hair Color Special\Matched_Masks.cs" />
@@ -277,8 +282,6 @@
     <Compile Include="Traits\Appearance\Body Type Greyscale\Werewolf_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Worker_Body_Greyscale.cs" />
     <Compile Include="Traits\Appearance\Body Type Greyscale\Wrestler_Body_Greyscale.cs" />
-    <Compile Include="Traits\Appearance\Eye Type\Normal_Eyes_75.cs" />
-    <Compile Include="Traits\Appearance\Eye Type\Normal_Eyes_50.cs" />
     <Compile Include="Traits\Appearance\Facial Hair Special\No_Facial_Hair_50.cs" />
     <Compile Include="Traits\Appearance\Facial Hair Special\No_Facial_Hair_75.cs" />
     <Compile Include="Traits\Appearance\Hairstyle Special\Mask_Override.cs" />
@@ -287,7 +290,7 @@
     <Compile Include="Traits\Appearance\Legs Color\Mech_Legs.cs" />
     <Compile Include="Traits\Appearance\Legs Color Special\Pantiful.cs" />
     <Compile Include="Traits\Appearance\Body Color Special\Shirtsome.cs" />
-    <Compile Include="Traits\Appearance\Dynamic_Preview.cs" />
+    <Compile Include="Traits\Appearance\Dynamic_Player_Appearance.cs" />
     <Compile Include="Traits\Appearance\Body Color Special\Shirtless.cs" />
     <Compile Include="Traits\Appearance\Legs Color Special\Pantsless.cs" />
     <Compile Include="Traits\Appearance\Body Color\Black_Body.cs" />
@@ -504,8 +507,19 @@
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
+    <Compile Include="Traits\Combat\Gun Skill\Gun_Adept.cs" />
+    <Compile Include="Traits\Combat\Gun Skill\Gun_Competent.cs" />
+    <Compile Include="Traits\Combat\Gun Skill\Gun_Shy.cs" />
+    <Compile Include="Traits\Combat\Melee Skill\Melee_Competent.cs" />
+    <Compile Include="Traits\Combat\Melee Skill\Melee_Shy.cs" />
+    <Compile Include="Traits\Combat\Melee Skill\Melee_Adept.cs" />
+    <Compile Include="Traits\Combat\Toughness\Toughest.cs" />
+    <Compile Include="Traits\Combat\Toughness\Tougher.cs" />
+    <Compile Include="Traits\Combat\Toughness\Tough.cs" />
     <Compile Include="Traits\Combat\Nth_Wind.cs" />
     <Compile Include="Traits\Combat\Backed_Up.cs" />
+    <Compile Include="Traits\Combat\Melee Skill\T_MeleeSkill.cs" />
+    <Compile Include="Traits\Combat\Gun Skill\T_GunSkill.cs" />
     <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />
     <Compile Include="Traits\Cost Currency\Shylock.cs" />
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
@@ -578,6 +592,9 @@
     <Compile Include="Traits\Inventory\Infinite_Ammo.cs" />
     <Compile Include="Traits\Inventory\Infinite_Armor.cs" />
     <Compile Include="Traits\Inventory\Infinite_Melee.cs" />
+    <Compile Include="Traits\Loadout\Loader\T_LoadoutLoader.cs" />
+    <Compile Include="Traits\Combat\Toughness\T_Toughness.cs" />
+    <Compile Include="Traits\Passive\Indomitable.cs" />
     <Compile Include="Traits\Player\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\Player\Gun Nut\Accuracy_Modder.cs" />
     <Compile Include="Traits\Player\Gun Nut\Rate_of_Fire_Modder.cs" />
@@ -760,6 +777,10 @@
     <Compile Include="Traits\Relationships\Relationships - Player\Player_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Player\T_Rel_Player.cs" />
     <Compile Include="Traits\Relationships\T_Relationships.cs" />
+    <Compile Include="Traits\Senses\Hearing\Keener_Ears.cs" />
+    <Compile Include="Traits\Senses\Hearing\Keenest_Ears.cs" />
+    <Compile Include="Traits\Senses\Hearing\Keen_Ears.cs" />
+    <Compile Include="Traits\Senses\T_Senses.cs" />
     <Compile Include="Traits\Trait Gate\Specistist.cs" />
     <Compile Include="Traits\Trait Gate\Slayable.cs" />
     <Compile Include="Traits\Trait Gate\Suspecter.cs" />
@@ -820,7 +841,6 @@
     <Compile Include="Traits\Merchant Type\Bloodsuckers_Bazaar.cs" />
     <Compile Include="Traits\Merchant Type\Villains_Vault.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
     <Compile Include="Patches\Interface\P_CharacterSelect.cs" />
     <Compile Include="Patches\Interface\P_CharacterSheet.cs" />
     <Compile Include="Patches\Relationships\P_Relationships.cs" />

@@ -16,7 +16,7 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format($"This character will grab any item they see.\n\n" +
-                        "<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(AccidentProne))),
+                        "<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(Accident_Prone))),
                 })
                 .WithName(new CustomNameInfo
                 {

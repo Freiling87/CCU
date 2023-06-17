@@ -51,7 +51,7 @@ namespace CCU.Systems.Investigateables
 			name?.Contains(InvestigateableStringPrefix) ?? false;
 
 		public static string PlayerDisplayInvestigationText(string vanilla) =>
-			vanilla?.Replace(InvestigateableStringPrefix + Environment.NewLine, "") ?? "";
+			vanilla?.Replace(InvestigateableStringPrefix, "") ?? "";
 
 		public static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
 			invDatabase.agent.mainGUI.invInterface.Slots

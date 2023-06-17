@@ -153,7 +153,8 @@ namespace CCU.Patches.Agents
 			foreach (InvItem ii in __instance.inventory.InvItemList.Where(i => !(i.invItemName is null) && i.invItemName != ""))
 			{
 				logger.LogDebug(ii.invItemName + " * " + ii.invItemCount);
-				foreach (string mod in ii.contents)
+
+				foreach (string mod in ii.contents) // Includes special abilities like DR I guess
 					logger.LogDebug("\t+ " + mod);
 			}
 
@@ -255,6 +256,15 @@ namespace CCU.Patches.Agents
 				__instance.StartCoroutine(__instance.ChangeJobBig(""));
 				__instance.oma.cantDoMoreTasks = false;
 			}
+
+			return true;
+		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetTraversable))]
+		public static bool SetTraversable_AccidentProne(Agent __instance, ref string type)
+		{
+			if (__instance.HasTrait<Accident_Prone>())
+				type = "TraverseAll";
 
 			return true;
 		}

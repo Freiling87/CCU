@@ -85,11 +85,11 @@ namespace CCU.Traits.Loadout
 			Agent agent = invDatabase.agent;
 
             if (agent.agentName != VanillaAgents.CustomCharacter ||
-				!agent.GetTraits<T_Loadout>().Any() ||
+				!agent.GetTraits<T_LoadoutLoader>().Any() ||
 				agent.isPlayer != 0)
 				return;
 
-			logger.LogDebug("SetupLoadout: " + agent.agentName + "(" + agent.agentRealName + ")");
+			logger.LogDebug("SetupLoadout: " + agent.agentName + " (" + agent.agentRealName + ")");
 			invDatabase.DontPlayPickupSounds(true);
 			T_PocketMoney.AddMoney(agent);
 			LoadCustomInventory(invDatabase);
@@ -216,11 +216,14 @@ namespace CCU.Traits.Loadout
 					// These might be an IModifyItems.NPCLoadoutSetup method
 					InvItem final = invDatabase.AddItem(pickedItem);
 
-					if (final.agent.HasTrait<Ammo_Stocker>())
-						final.invItemCount = (int)(final.invItemCount * 1.4f);
+					if (agent.isPlayer == 0) // Free starting ammo for NPCs
+					{
+						if (final.contents.Contains(vItem.AmmoCapacityMod))
+							final.invItemCount = (int)(final.invItemCount * 1.4f);
 
-					foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
-						final.invItemCount = (int)(final.invItemCount * trait.AmmoCapMultiplier);
+						foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
+							final.invItemCount = (int)(final.invItemCount * trait.AmmoCapMultiplier);
+					}
 				}
 			}
 		}

@@ -1,13 +1,15 @@
 ﻿using CCU.Traits.App_HC1;
 using RogueLibsCore;
+using System.Collections.Generic;
 
 namespace CCU.Traits.App_HC2
 {
     public class Normal_Colors : T_HairColor
 	{
-		public override string[] Rolls => new string[] { "Brown", "Black", "Blonde", "Orange", "Grey" };
+		public override string[] Rolls => StaticList.ToArray();
+		public static List<string> StaticList = new List<string>() { "Brown", "Black", "Blonde", "Orange", "Grey" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Normal_Colors>()

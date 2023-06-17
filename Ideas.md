@@ -318,6 +318,9 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		C	Appearance
+###			C	Custom Randomizer
+Basically, configure Randomize Appearance button to give accurate preview.
+The issue is that the CC doesn't build a character until you save and close. Accessing it from the main menu has GC.PlayerAgent as a Slum Dweller by default. And since you can't be assured that a typed name will match a save file, the only way to do this will be with a bunch of string-matching from List<Unlock> CharacterCreation.TraitsChosen.
 ###			C	Sprite sizers
 Wide/narrow, tall/short body
 Long/short legs
@@ -599,6 +602,16 @@ Interface with Timer traits and Explosion traits to allow player to customize
 Gain Wet, lmao
 ##		CT	Drug Warrior Modifiers
 GoalBattle.Process is where the effect is applied.
+###			P	Refactor
+Aspects:
+	Trigger
+		Combat
+		Hire
+		Flee
+		Revive
+		Spawn
+	Effect
+	Duration
 ###			√	Suppress Syringe AV
 Complete
 ###			C	Extended Release
@@ -723,6 +736,12 @@ Complete
 Complete
 ###			√	Meat Chunks
 Complete
+##		√	Gun Nut
+###			√	Accuracy Modder
+###			√	Ammo Stocker
+###			√	Rate of Fire Modder
+###			√	Rubber Bulleteer
+###			√	Silencerist
 ##		C	Hack
 ###			C	00 Interrupts
 Works with Electronic, but hacking bar is interrupted
@@ -1371,6 +1390,16 @@ Could be cool with natural terrain, e.g.:
 ###			C	Yas Queen
 Can only move in cardinal or diagonal directions. Honestly, work.
 ##		CT	Passive
+###			C	Innocent (Orig)
+Rename to Not-Guilty to allow Innocent to exist
+###			C	Innocent (New)
+XP Penalty for killing them, no matter who you are.
+Onlookers take offenses against them as offenses against themselves - theft, destruction, violence. 
+Non-Ruthless NPCs will never turn against this NPC.
+Trait to block this behavior - could roll into Scumbag or similar, or make its own Ruthless trait.
+Can still be guilty?
+	- Yes: New strategic tension?
+	- No: idk
 ###			C	Always Gib / Gibbous
 New
 ###			C	Fearsome
@@ -1464,8 +1493,6 @@ Complete
 ###			√	Immovable
 Complete
 ###			√	Indestructible
-Complete
-###			√	Innocent
 Complete
 ###			√	Not Vincible
 Complete
@@ -1761,6 +1788,15 @@ Allow multiple. Nonspecific, to be linked to below.
 ####			C	Flag on Evacuated
 ####			C	Flag on Neutralized
 ####			C	Flag on Paid
+###			C	Item triggers
+Requested by CL- https://discord.com/channels/187414758536773632/991046848536006678/1112916448982085632
+###			C	Progression Traits
+####			C	Stat Up (No Cap fr fr fam)
+Free stat on each level, no cap
+####			C	Stat Up (Capped)
+Free stat, 4 cap
+####			C	No Trait Gain
+Etc.
 ##		C	Disasters
 ###			C	Random Disaster
 Random Disasters and/or Disasters Every Level aren't offered in the editor

@@ -1,9 +1,8 @@
-﻿using CCU.Traits.Loadout;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Loader
 {
-	public class Scaled_Distribution : T_Loadout
+	public class Scaled_Distribution : T_LoadoutLoader
 	{
         [RLSetup]
 		public static void Setup()

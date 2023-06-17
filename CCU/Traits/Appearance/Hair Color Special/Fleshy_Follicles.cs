@@ -1,22 +1,23 @@
-﻿using RogueLibsCore;
+﻿using CCU.Traits.App_HC1;
+using RogueLibsCore;
 
-namespace CCU.Traits.App_ET1
+namespace CCU.Traits.App_HC3
 {
-	public class Normal_Eyes_75 : T_EyeType
+	public class Fleshy_Follicles : T_HairColor
 	{
 		public override string[] Rolls => new string[] { };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Normal_Eyes_75>()
+			PostProcess = RogueLibs.CreateCustomTrait<Fleshy_Follicles>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Rolls \"Normal Eyes\" 75% of the time, regardless of the number of other items in the pool.",
+					[LanguageCode.English] = "Matches hair color to skin color.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Normal_Eyes_75), "Normal Eyes 75%"),
+					[LanguageCode.English] = DesignerName(typeof(Fleshy_Follicles)),
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

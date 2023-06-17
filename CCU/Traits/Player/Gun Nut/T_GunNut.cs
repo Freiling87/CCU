@@ -22,7 +22,8 @@ namespace CCU.Traits.Loadout_Gun_Nut
 
 		public bool IsEligible(Agent agent, InvItem invItem) =>
 			EligibleItemTypes.Contains(invItem.itemType) &&
-			!ExcludedItems.Contains(invItem.invItemName);
+			!ExcludedItems.Contains(invItem.invItemName) &&
+			!invItem.contents.Contains(GunMod);
 
 		public void OnDrop(Agent agent, InvItem invItem)
 		{
@@ -35,10 +36,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 
 		public void OnPickup(Agent agent, InvItem invItem)
 		{
-			H_InvItem hook = invItem.GetOrAddHook<H_InvItem>();
-
-			if (IsEligible(agent, invItem) && !invItem.contents.Contains(GunMod))
-				hook.AddWeaponMod(GunMod);
+			invItem.GetOrAddHook<H_InvItem>().AddWeaponMod(GunMod);
 		}
 	}
 }

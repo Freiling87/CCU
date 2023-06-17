@@ -17,7 +17,7 @@ namespace CCU.Traits.App_HC2
 			PostProcess = RogueLibs.CreateCustomTrait<Demographic_Colors>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Adds multiple hairstyles to the appearance pool, curated to more accurately resemble demographic tendencies:\n" +
+					[LanguageCode.English] = "Adds multiple hair colors to the appearance pool, curated to more accurately resemble demographic tendencies:\n" +
 					"- 50% Black\n" +
 					"- 30% Brown\n" +
 					"- 15% Blonde\n" +
