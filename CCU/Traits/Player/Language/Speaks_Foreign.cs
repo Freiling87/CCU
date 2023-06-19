@@ -9,6 +9,7 @@ namespace CCU.Traits.Player.Language
         { 
             VanillaAgents.Assassin 
         };
+        public override string[] LanguageNames => new string[] { "Foreign" };
 
         [RLSetup]
         public static void Setup()

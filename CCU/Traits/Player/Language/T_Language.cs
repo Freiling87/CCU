@@ -1,7 +1,11 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
+using HarmonyLib;
 using RogueLibsCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 
 namespace CCU.Traits.Player.Language
 {
@@ -9,6 +13,7 @@ namespace CCU.Traits.Player.Language
     {
         public T_Language() : base() { }
         public abstract string[] VanillaSpeakers { get; }
+		public abstract string[] LanguageNames { get; }
     }
 
     public static class Language
@@ -89,47 +94,91 @@ namespace CCU.Traits.Player.Language
         {
 			string t = NameTypes.Dialogue;
 
-			RogueLibs.CreateCustomName("GibberishPlaceholder", t, new CustomNameInfo("I DON'T SPEAK YOUR LANGUAGE"));
+			RogueLibs.CreateCustomName("Binary01_NonEnglish", t, new CustomNameInfo("Bleep Bloop?"));
+			RogueLibs.CreateCustomName("Binary02_NonEnglish", t, new CustomNameInfo("ERR: Lang.Intersect(someJerk) == 0\nAborting communication"));
+			RogueLibs.CreateCustomName("Binary03_NonEnglish", t, new CustomNameInfo("01001101 01100101 01100001 01110100 01100010 01100001 01100111!"));
+			RogueLibs.CreateCustomName("Binary04_NonEnglish", t, new CustomNameInfo("Fizz buzz? Buzz? Fizz? Buzz fizz?"));
+			RogueLibs.CreateCustomName("Binary05_NonEnglish", t, new CustomNameInfo("*Frustrated computing noises*"));
 
-			RogueLibs.CreateCustomName("Binary01", t, new CustomNameInfo("Bleep Bloop?"));
-			RogueLibs.CreateCustomName("Binary02", t, new CustomNameInfo("ERR: Language.Intersect.Count == 0"));
-			RogueLibs.CreateCustomName("Binary03", t, new CustomNameInfo("01001101 01100101 01100001 01110100 01100010 01100001 01100111!"));
-			RogueLibs.CreateCustomName("Binary04", t, new CustomNameInfo("Fizz buzz? Buzz? Fizz? Buzz fizz?"));
-			RogueLibs.CreateCustomName("Binary05", t, new CustomNameInfo("*Frustrated computing noises*"));
+			RogueLibs.CreateCustomName("Chthonic01_NonEnglish", t, new CustomNameInfo("*Backwards Rock Lyrics*"));
+			RogueLibs.CreateCustomName("Chthonic02_NonEnglish", t, new CustomNameInfo("Fhthgnan Zbuguluul"));
+			RogueLibs.CreateCustomName("Chthonic03_NonEnglish", t, new CustomNameInfo("..."));
+			RogueLibs.CreateCustomName("Chthonic04_NonEnglish", t, new CustomNameInfo("*Demonic groaning, but slower and louder*"));
+			RogueLibs.CreateCustomName("Chthonic05_NonEnglish", t, new CustomNameInfo("Gnuuuuuuhrg."));
 
-			RogueLibs.CreateCustomName("Chthonic01", t, new CustomNameInfo("*Backwards Rock Lyrics*"));
-			RogueLibs.CreateCustomName("Chthonic02", t, new CustomNameInfo("Fhthgnan Zbuguluul"));
-			RogueLibs.CreateCustomName("Chthonic03", t, new CustomNameInfo("..."));
-			RogueLibs.CreateCustomName("Chthonic04", t, new CustomNameInfo("*Demonic groaning, but slower and louder*"));
-			RogueLibs.CreateCustomName("Chthonic05", t, new CustomNameInfo("Gnuuuuuuhrg."));
+			RogueLibs.CreateCustomName("ErSdtAdt01_NonEnglish", t, new CustomNameInfo("y aIlMsi Smn cyI GAAamkDdl"));
+			RogueLibs.CreateCustomName("ErSdtAdt02_NonEnglish", t, new CustomNameInfo("nihaIeutetTd sMt nsneTko aeiT eR, fe Msa"));
+			RogueLibs.CreateCustomName("ErSdtAdt03_NonEnglish", t, new CustomNameInfo("a ala ls Ftnmuyr ErRgeEA Anegga"));
+			RogueLibs.CreateCustomName("ErSdtAdt04_NonEnglish", t, new CustomNameInfo("ERSDTADT... URUMI! *Gestures frustratedly*"));
+			RogueLibs.CreateCustomName("ErSdtAdt05_NonEnglish", t, new CustomNameInfo("YdPlC ettueuehW ilyaor'kcclsifaInolW Ire Tltlyea"));
 
-			RogueLibs.CreateCustomName("ErSdtAdt01", t, new CustomNameInfo("y aIlMsi Smn cyI GAAamkDdl"));
-			RogueLibs.CreateCustomName("ErSdtAdt02", t, new CustomNameInfo("nihaIeutetTd sMt nsneTko aeiT eR, fe Msa"));
-			RogueLibs.CreateCustomName("ErSdtAdt03", t, new CustomNameInfo("a ala ls Ftnmuyr ErRgeEA Anegga"));
-			RogueLibs.CreateCustomName("ErSdtAdt04", t, new CustomNameInfo("ERSDTADT... URUMI! *Gestures frustratedly*"));
-			RogueLibs.CreateCustomName("ErSdtAdt05", t, new CustomNameInfo("YdPlC ettueuehW ilyaor'kcclsifaInolW Ire Tltlyea"));
+			RogueLibs.CreateCustomName("Foreign01_NonEnglish", t, new CustomNameInfo("Durka durka! Durka durk durka!"));
+			RogueLibs.CreateCustomName("Foreign02_NonEnglish", t, new CustomNameInfo("Blorgle Blargle?"));
+			RogueLibs.CreateCustomName("Foreign03_NonEnglish", t, new CustomNameInfo("BLORGLE BLARGLE."));
+			RogueLibs.CreateCustomName("Foreign04_NonEnglish", t, new CustomNameInfo("No spee. Me no spee."));
+			RogueLibs.CreateCustomName("Foreign05_NonEnglish", t, new CustomNameInfo("I no unerstan. Sorreeee!"));
 
-			RogueLibs.CreateCustomName("Foreign01", t, new CustomNameInfo("Durka durka. Durka durka durk."));
-			RogueLibs.CreateCustomName("Foreign02", t, new CustomNameInfo("Blorgle Blargle?"));
-			RogueLibs.CreateCustomName("Foreign03", t, new CustomNameInfo("BLORGLE BLARGLE."));
-			RogueLibs.CreateCustomName("Foreign04", t, new CustomNameInfo("No spee. Me no spee."));
-			RogueLibs.CreateCustomName("Foreign05", t, new CustomNameInfo("I no unerstan. Sorreeee!"));
+			RogueLibs.CreateCustomName("Goryllian01_NonEnglish", t, new CustomNameInfo("Guh! Muh!"));
+			RogueLibs.CreateCustomName("Goryllian02_NonEnglish", t, new CustomNameInfo("Uh uh, ook ook. Ook."));
+			RogueLibs.CreateCustomName("Goryllian03_NonEnglish", t, new CustomNameInfo("*Haughty look* Ook."));
+			RogueLibs.CreateCustomName("Goryllian04_NonEnglish", t, new CustomNameInfo("Ooook. Me ooook. OOK! OOK?"));
+			RogueLibs.CreateCustomName("Goryllian05_NonEnglish", t, new CustomNameInfo("Ban. Mah. Ook oook. Ban mah!"));
 
-			RogueLibs.CreateCustomName("Goryllian01", t, new CustomNameInfo("Guh! Muh!"));
-			RogueLibs.CreateCustomName("Goryllian02", t, new CustomNameInfo("Uh uh, ook ook. Ook."));
-			RogueLibs.CreateCustomName("Goryllian03", t, new CustomNameInfo("*Haughty look* Ook."));
-			RogueLibs.CreateCustomName("Goryllian04", t, new CustomNameInfo("Ooook. Me ooook. OOK! OOK?"));
-			RogueLibs.CreateCustomName("Goryllian05", t, new CustomNameInfo("Ban. Mah. Ook oook. Ban mah!"));
+			RogueLibs.CreateCustomName("Werewelsh01_NonEnglish", t, new CustomNameInfo("GRRRRRRRR!!!"));
+			RogueLibs.CreateCustomName("Werewelsh02_NonEnglish", t, new CustomNameInfo("Groof! Groof!"));
+			RogueLibs.CreateCustomName("Werewelsh03_NonEnglish", t, new CustomNameInfo("*Excited, confused panting*"));
+			RogueLibs.CreateCustomName("Werewelsh04_NonEnglish", t, new CustomNameInfo("*Idiotic head tilt*"));
+			RogueLibs.CreateCustomName("Werewelsh05_NonEnglish", t, new CustomNameInfo("Woof."));
+		}
 
-			RogueLibs.CreateCustomName("Werewelsh01", t, new CustomNameInfo("GRRRRRRRR!!!"));
-			RogueLibs.CreateCustomName("Werewelsh02", t, new CustomNameInfo("Groof! Groof!"));
-			RogueLibs.CreateCustomName("Werewelsh03", t, new CustomNameInfo("*Excited, confused panting*"));
-			RogueLibs.CreateCustomName("Werewelsh04", t, new CustomNameInfo("OOK! OOK?"));
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.SayDialogue))]
+		private static IEnumerable<CodeInstruction> SetupAgentStats_LegacyUpdater(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo languageDialogueName = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.LanguageDialogueName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+				},
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, languageDialogueName),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{ 
+					new CodeInstruction(OpCodes.Ldstr, "_NonEnglish")
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static string LanguageDialogueName(Agent agent)
+		{
+			if (agent.agentName is VanillaAgents.CustomCharacter)
+			{
+				List<string> spokenLangs = agent.GetTraits<T_Language>().SelectMany(t => t.LanguageNames).ToList();
+
+				string language = CoreTools.GetRandomMember(spokenLangs);
+				string number = UnityEngine.Random.Range(1, 5).ToString("D2");
+
+				logger.LogDebug("Dialogue name: " + language + number);
+				return language + number;
+			}
+
+			return agent.agentName;
 		}
 
 		public static void SayGibberish(Agent agent)
-        {
-			agent.SayDialogue("GibberishPlaceholder");
-        }
+		{
+			agent.Say(GC.nameDB.GetName(LanguageDialogueName(agent) + "_NonEnglish", "Dialogue"));
+		}
 	}
 }

@@ -11,7 +11,9 @@ namespace CCU.Traits.Player.Language
             VanillaAgents.WerewolfTransformed 
         };
 
-        [RLSetup]
+		public override string[] LanguageNames => new string[] { "Werewelsh" };
+
+		[RLSetup]
         public static void Setup()
         {
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Werewelsh>()

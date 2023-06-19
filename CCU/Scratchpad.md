@@ -20,6 +20,7 @@ Notify Guoxin of finalized version so he can translate
   - Permanent Hires no longer occupy a hire slot after death.
   - Tubes are now only valid containers for Hidden Bombs if they are within a Computer or Power Box's shutdown range.
   - Melee Maniac + now improves melee attack speed by 48.5% instead of 50%. This prevents the animation from clipping through targets.
+  - Containers holding Money now generate correct quantities
 - Feature additions
   - Items
     - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
@@ -37,6 +38,7 @@ Notify Guoxin of finalized version so he can translate
     - Passive
       - Crusty: Will now use Alarm Button when fleeing from combat.
       - Indomitable: Immune to mind control
+      - Suppress Status Text: No Status Effect text popups.
     - Senses
       - Keen Ears traits: Various traits that determine how sensitive the NPC is to sound, and how they react to it.
   - Player Traits
@@ -49,16 +51,15 @@ Notify Guoxin of finalized version so he can translate
     - Knockback Peon: Reduces knockback, making followup attacks easier.
 ##			Bugs
 Except crickets. Crickets are fine.
-###				C	Syringe AV
-IIRC someone said this stopped working, double-check it
-###				C	Zero Money
-	Maxior - The 0 money glitch is still here
-	Money put in the custom containers like shelves will still only give 0 money
-	Except garbage cans
-###				C	Redo Pre-Build events 
-Pull RL FROM plugins rather than copying TO it.
-###				C	Language
-Says "I can't speak English" but the other NPC's language is Goryllian (tried interact)
+###				C	Expand _CantSpeakEnglish strings
+Says "I can't speak English" regardless of other NPC's language
+###				H	Expand _NonEnglish strings
+Text-search "NonEnglish" to find a list of Alien, Gorilla, etc. string names.
+Use this system to expand to custom languages. 
+Agent.SayDialogue:
+			string text = this.gc.nameDB.GetName(this.agentName + "_NonEnglish", "Dialogue");
+Change agentName to a custom method
+Ensure you're checking for custom agents
 ###				C	Random Teleport gives Yellow Name
 New
 ###				C	ExtraVarString copying

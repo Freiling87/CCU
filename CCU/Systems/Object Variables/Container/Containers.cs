@@ -142,9 +142,11 @@ namespace CCU.Systems.Containers
 			playfieldObject.ShowChest();
 		}
 
-		// Expanded later
 		public static bool IsContainer(string objectName) =>
 			!(objectName is null) &&
 			ContainerObjects_Slot1.Contains(objectName);
+
+		public static bool IsContainer(ObjectReal objectReal) =>
+			IsContainer(objectReal.objectName);
 	}
 }

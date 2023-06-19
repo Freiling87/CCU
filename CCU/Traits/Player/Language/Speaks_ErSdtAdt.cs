@@ -9,6 +9,7 @@ namespace CCU.Traits.Player.Language
         { 
             VanillaAgents.Alien 
         };
+        public override string[] LanguageNames => new string[] { "ErSdtAdt" };
 
         [RLSetup]
         public static void Setup()

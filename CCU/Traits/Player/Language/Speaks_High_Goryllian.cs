@@ -6,6 +6,7 @@ namespace CCU.Traits.Player.Language
     public class Speaks_High_Goryllian : T_Language
     {
         public override string[] VanillaSpeakers => new string[] { VanillaAgents.Gorilla };
+        public override string[] LanguageNames => new string[] { "Goryllian" };
 
         [RLSetup]
         public static void Setup()

@@ -7,6 +7,7 @@ namespace CCU.Traits.Player.Language
     public class Polyglot : T_Language
     {
         public override string[] VanillaSpeakers => new string[] { };
+        public override string[] LanguageNames => new string[] { "Binary", "Chthonic", "ErSdtAdt", "Foreign", "Goryllian", "Werewelsh" };
 
         [RLSetup]
         public static void Setup()

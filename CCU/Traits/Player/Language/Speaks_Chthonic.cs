@@ -12,6 +12,7 @@ namespace CCU.Traits.Player.Language
             VanillaAgents.Vampire,
             VanillaAgents.Zombie 
         };
+        public override string[] LanguageNames => new string[] { "Chthonic" };
 
         [RLSetup]
         public static void Setup()

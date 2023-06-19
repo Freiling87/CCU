@@ -13,6 +13,7 @@ namespace CCU.Traits.Player.Language
             VanillaAgents.KillerRobot, 
             VanillaAgents.Robot 
         };
+        public override string[] LanguageNames => new string[] { "Binary" };
 
         [RLSetup]
         public static void Setup()

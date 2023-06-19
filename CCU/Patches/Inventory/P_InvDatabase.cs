@@ -75,9 +75,9 @@ namespace CCU.Patches.Inventory
 		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
 		public static bool Awake_Prefix(InvDatabase __instance)
 		{
-			string objectRealName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
+			string objectName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
 
-			if (Containers.IsContainer(objectRealName))
+			if (Containers.IsContainer(objectName))
 				__instance.money = new InvItem();
 
 			return true;
@@ -211,6 +211,22 @@ namespace CCU.Patches.Inventory
 		private static void FillAgent_Loadout(InvDatabase __instance)
 		{
 			LoadoutTools.SetupLoadout(__instance);
+		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new Type[] { typeof(bool) })]
+		private static void FillChest_Money(InvDatabase __instance)
+		{
+			if (!(__instance.objectReal is null)
+				&& Containers.IsContainer(__instance.objectReal))
+			{
+				InvItem money = __instance.FindItem(vItem.Money);
+
+				if (!(money is null) && money.invItemCount == 0)
+				{
+					__instance.objectReal.chestMoneyTier = 2;
+					money.invItemCount = __instance.FindMoneyAmt(true);
+				}
+			}
 		}
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FindMoneyAmt))]
