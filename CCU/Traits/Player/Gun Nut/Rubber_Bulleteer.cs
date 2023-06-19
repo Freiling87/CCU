@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Hooks;
+using CCU.Items;
 using CCU.Localization;
 using HarmonyLib;
 using RogueLibsCore;
@@ -103,6 +104,9 @@ namespace CCU.Traits.Loadout_Gun_Nut
 			{
 				logger.LogDebug("Rubber Bullet death threshold passed");
 				damagerObject.playfieldObjectBullet.rubber = false;
+				
+				if (GC.percentChance(33))
+					RubberBulletsMod.ByTheBook(damagerObject.playfieldObjectBullet.agent);
 			}
 			else if (netHealth <= knockoutThreshold)
 			{

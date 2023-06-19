@@ -61,8 +61,11 @@ namespace CCU.Patches.Agents
 				if (log) logger.LogDebug("=== LANGUAGE");
 				if (!Language.HaveSharedLanguage(agent, interactingAgent))
                 {
-					Language.SayGibberish(agent);
-					return;
+					h.AddImplicitButton("None", m =>
+					{
+						Language.SayGibberish(agent);
+						return;
+					});
 				}
 
 				if (log) logger.LogDebug("=== HIRE");

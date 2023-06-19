@@ -26,6 +26,19 @@ namespace CCU.Items
                     LoadoutCost = 5,
                     UnlockCost = 15,
                 });
+
+            string t = NameTypes.Dialogue;
+
+            RogueLibs.CreateCustomName("LessLethalCollateral_00", t, new CustomNameInfo("When you die, you die poor. It really makes you think."));
+            RogueLibs.CreateCustomName("LessLethalCollateral_01", t, new CustomNameInfo("Should have just complied!"));
+            RogueLibs.CreateCustomName("LessLethalCollateral_02", t, new CustomNameInfo("Oh, *now* you stop resisting."));
+            RogueLibs.CreateCustomName("LessLethalCollateral_03", t, new CustomNameInfo("That's for making me slightly tired!"));
+            RogueLibs.CreateCustomName("LessLethalCollateral_04", t, new CustomNameInfo("Better sprinkle some \"Sugar\" on that one."));
+            RogueLibs.CreateCustomName("LessLethalCollateral_05", t, new CustomNameInfo("Another situation de-escalated!"));
+            RogueLibs.CreateCustomName("LessLethalCollateral_06", t, new CustomNameInfo("Some damages are more collateral than others."));
+            RogueLibs.CreateCustomName("LessLethalCollateral_07", t, new CustomNameInfo("At least they can't sue the department if they're dead."));
+            RogueLibs.CreateCustomName("LessLethalCollateral_08", t, new CustomNameInfo("All Collaterals Are Bad!"));
+            RogueLibs.CreateCustomName("LessLethalCollateral_09", t, new CustomNameInfo("Ugh, now I have to fill out a form."));
         }
 
         public override void SetupDetails()
@@ -60,6 +73,12 @@ namespace CCU.Items
             return false;
         }
         public CustomTooltip CombineTooltip(InvItem other) => default;
+
+        public static void ByTheBook(Agent agent)
+		{
+            string number = UnityEngine.Random.Range(0, 9).ToString("D2");
+            agent.Say(GC.nameDB.GetName("LessLethalCollateral_" + number , "Dialogue"));
+        }
     }
 
 	[HarmonyPatch(declaringType: typeof(InvDatabase))]
