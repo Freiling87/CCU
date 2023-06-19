@@ -1,23 +1,20 @@
 ﻿using RogueLibsCore;
-using System;
 
-namespace CCU.Traits.Combat
+namespace CCU.Traits.Senses
 {
-    public class Fearless : T_Combat, ISetupAgentStats
+	public class Keen_Ears : T_Senses, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Fearless>()
+            PostProcess = RogueLibs.CreateCustomTrait<Keen_Ears>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will never flee from combat."),
-                    
+                    [LanguageCode.English] = "Reacts to sound like Shopkeeper, Slavemaster & Soldier.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Fearless)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Keen_Ears)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -31,10 +28,9 @@ namespace CCU.Traits.Combat
         public override void OnAdded() { }
         public override void OnRemoved() { }
 
-		public void SetupAgentStats(Agent agent)
-		{
-            agent.mustFlee = false;
-            agent.wontFlee = true;
+        public void SetupAgentStats(Agent agent)
+        {
+            agent.modVigilant = 1;
         }
-	}
+    }
 }

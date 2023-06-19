@@ -3,21 +3,23 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Fearless : T_Combat, ISetupAgentStats
+    internal class Tougher : T_Toughness
     {
+        internal override int Toughness => 2;
+
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Fearless>()
+            PostProcess = RogueLibs.CreateCustomTrait<Tougher>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will never flee from combat."),
-                    
+                    [LanguageCode.English] = String.Format("This character is more willing to enter and stay in combat, like Cannibal, Gorilla & Soldier."),
+
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Fearless)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Tougher)),
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -30,11 +32,5 @@ namespace CCU.Traits.Combat
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
-
-		public void SetupAgentStats(Agent agent)
-		{
-            agent.mustFlee = false;
-            agent.wontFlee = true;
-        }
-	}
+    }
 }

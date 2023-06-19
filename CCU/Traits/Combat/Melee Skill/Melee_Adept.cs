@@ -3,21 +3,23 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Fearless : T_Combat, ISetupAgentStats
-    {
-        [RLSetup]
+	internal class Melee_Adept : T_MeleeSkill
+	{
+		internal override int MeleeSkill => 2;
+
+		[RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Fearless>()
+            PostProcess = RogueLibs.CreateCustomTrait<Melee_Adept>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will never flee from combat."),
-                    
+                    [LanguageCode.English] = String.Format("Highest attack frequency, like Gorilla, Supercop & Werewolf."),
+
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Fearless)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Melee_Adept)),
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -30,11 +32,5 @@ namespace CCU.Traits.Combat
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
-
-		public void SetupAgentStats(Agent agent)
-		{
-            agent.mustFlee = false;
-            agent.wontFlee = true;
-        }
-	}
+    }
 }

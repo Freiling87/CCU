@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Combat
 {
-    public class Coward : T_Combat
+    public class Coward : T_Combat, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
@@ -21,7 +21,7 @@ namespace CCU.Traits.Combat
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
-                    Cancellations = { DesignerName(typeof(Coward)) },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
@@ -30,5 +30,11 @@ namespace CCU.Traits.Combat
         }
         public override void OnAdded() { }
         public override void OnRemoved() { }
-    }
+
+		public void SetupAgentStats(Agent agent)
+		{
+            agent.mustFlee = true;
+            agent.wontFlee = false;
+        }
+	}
 }
