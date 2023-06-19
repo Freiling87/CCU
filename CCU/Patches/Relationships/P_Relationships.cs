@@ -17,19 +17,37 @@ namespace CCU.Patches.AgentRelationships
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.AssessFlee), argumentTypes: new[] { typeof(Agent), typeof(int), typeof(int), typeof(float), typeof(float), typeof(Relationship) })]
-        public static void AssessFlee_Postfix(Agent otherAgent, int teamSize, int otherTeamSize, float dist, float relHate, Relationship rel, Agent ___agent, ref float __result)
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Relationships.AssessBattle))]
+        public static bool AssessBattle_CowardFearless(Agent ___agent, ref float __result)
+        {
+            if (___agent.HasTrait<Coward>())
+            {
+                __result = 0f;
+                return false;
+            }
+            else if (___agent.HasTrait<Fearless>())
+            {
+                __result = 9999f;
+                return false;
+            }
+
+            return true;
+        }
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Relationships.AssessFlee))]
+        public static bool AssessFlee_CowardFearless(Agent ___agent, ref float __result)
 		{
             if (___agent.HasTrait<Coward>())
 			{
-                ___agent.mustFlee = true;
-                ___agent.wontFlee = false;
+                __result = 9999f;
+                return false;
             }
             else if (___agent.HasTrait<Fearless>())
 			{
-                ___agent.mustFlee = false;
-                ___agent.wontFlee = true;
-            }
+                __result = 0f;
+                return false;
+			}
+
+            return true;
 		}
 
         //  TODO: Refactor. Consider an Interface along the lines of ISetupAgentStats

@@ -118,7 +118,14 @@ namespace CCU.Patches.Agents
 
 								h.AddButton(hireButtonText + "_Permanent", permanentHireCost, m =>
 								{
-									HirePermanently(m.Object, interactingAgent, permanentHireCost);
+									agent.agentInteractions.QualifyHireAsProtection(agent, interactingAgent, permanentHireCost);
+
+									if (agent.followingNum == interactingAgent.agentID)
+									{
+										logger.LogDebug("Successfully detected permanent hire and notated");
+										agent.GetOrAddHook<H_Agent>().HiredPermanently = true;
+										agent.canGoBetweenLevels = true;
+									}
 								});
 							}
 						}
@@ -686,6 +693,8 @@ namespace CCU.Patches.Agents
 
 			interactingAgent.objectMult.CallCmdObjectActionExtraObjectID(agent.objectNetID, CJob.TamperSomething, target.objectNetID);
 		}
+
+		// Based on AgentInteractions.QualifyHireAsProtection
 		public static void HirePermanently(Agent agent, Agent interactingAgent, int buttonPrice)
 		{
 			int teamSize = agent.FindNumFollowing(interactingAgent);
