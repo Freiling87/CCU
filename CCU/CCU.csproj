@@ -597,6 +597,7 @@
     <Compile Include="Traits\Loadout\Loader\T_LoadoutLoader.cs" />
     <Compile Include="Traits\Combat\Toughness\T_Toughness.cs" />
     <Compile Include="Traits\Passive\Indomitable.cs" />
+    <Compile Include="Traits\Passive\Suppress_Status_Text.cs" />
     <Compile Include="Traits\Player\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\Player\Gun Nut\Accuracy_Modder.cs" />
     <Compile Include="Traits\Player\Gun Nut\Rate_of_Fire_Modder.cs" />

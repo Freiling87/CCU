@@ -1,6 +1,151 @@
 ﻿Recently separated these from the Scratchpad file, since it's gigantomongous. See notes in that file if you're confused.
 
 
+#			v2.0.0 Slate
+Pending release of SOR2
+###			C	Creator tools
+####			C	Live character editor
+Add or remove traits, edit their pockets, etc.
+Could use code from level menus, Sandbox item generator, etc.
+###			P	Upgrade to highest C# version
+No better time to do this
+###			C	Character Creator UI Improvements
+####			C	Randomize Appearance for Appearance system
+See CharacterCreation.RandomizeAppearance
+Not 100% about when to trigger it generally, on Load/Save/Menu Load?
+###			C	Loadout System Live Display
+Show tables of item odds, separated by slot
+###			C	Logging Tools
+####			C	Method Identifier
+Print: Method name, all arg values, name of object calling (exceptions for static, etc.)
+####			C	Line ID Printer
+Automatically increments, decrements, resets a couple of logging variables.
+E.g., where you might use 
+	logger.logDebug("B013");
+Use
+	logger.logCustom(0, 1);
+
+logger.LogCustom(int branchIncrement, int lineIncrement)
+	branch = A-Z
+	line = 0-99
+	for both args:
+		null = reset to 0 or A
+		int = increment by value
+	Track these statically per-method, or in wider scope if needed.
+###			C	Topic-based refactor
+Knew it was unwise to copy the game's class structure. Move all methods into classes that revolve around a particular system, e.g. pull all the AmmoCap stuff into a single AmmoCap class. You are more likely to collide patches, but it will be easier to work on as long as you're diligent about researching those first.
+###			C	Rename most methods
+Generally you don't use descriptive names, and it's time to start. Maybe even split them up with Priority Attributes to control their order. You can use the Harmony Attribute arguments to know which method is targeted.
+###			C	Duplicate Detection Pre-build
+ChatGPT conversation:
+> Can you write a method that will iterate through all my patches and identify if there are multiple that target the same method, who lack the Priority attribute? I'd like this to run as a pre-build event and output to the VS console. Then, I can add Priority to "acknowledge" the overlap and clear out the warning messages.
+####				Response & Code suggestion
+	To achieve this, you can create a custom pre-build event using a C# script that will analyze your code for multiple patches targeting the same method without the HarmonyPriority attribute. The script will use Roslyn, the .NET Compiler Platform, to analyze the C# source code.
+
+	First, install the following NuGet packages in your C# project:
+
+	Microsoft.CodeAnalysis.CSharp
+	Microsoft.CodeAnalysis.CSharp.Scripting
+	Next, create a script, for example, "PreBuildCheck.cs", with the following code:
+
+		csharp
+		Copy code
+		using System;
+		using System.Collections.Generic;
+		using System.IO;
+		using System.Linq;
+		using System.Reflection;
+		using System.Threading.Tasks;
+		using Microsoft.CodeAnalysis;
+		using Microsoft.CodeAnalysis.CSharp;
+		using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+		namespace PreBuild
+		{
+			class Program
+			{
+				static async Task Main(string[] args)
+				{
+					var sourceFiles = Directory.GetFiles("path/to/your/source/folder", "*.cs", SearchOption.AllDirectories);
+
+					var syntaxTrees = new List<SyntaxTree>();
+					foreach (var sourceFile in sourceFiles)
+					{
+						var sourceCode = await File.ReadAllTextAsync(sourceFile);
+						syntaxTrees.Add(CSharpSyntaxTree.ParseText(sourceCode));
+					}
+
+					var references = new List<MetadataReference>
+					{
+						MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+						MetadataReference.CreateFromFile(typeof(HarmonyLib.Harmony).Assembly.Location),
+					};
+
+					var compilation = CSharpCompilation.Create("PreBuildCheck", syntaxTrees, references);
+					var semanticModel = compilation.GetSemanticModel(syntaxTrees.First());
+
+					var methodsWithPatches = new Dictionary<IMethodSymbol, List<IMethodSymbol>>();
+					foreach (var tree in syntaxTrees)
+					{
+						var rootNode = await tree.GetRootAsync();
+						var patchMethods = rootNode.DescendantNodes()
+							.OfType<MethodDeclarationSyntax>()
+							.Where(m => m.AttributeLists.Any(a => a.Attributes.Any(attr => attr.Name.ToString().EndsWith("HarmonyPatch"))))
+							.ToList();
+
+						foreach (var patchMethod in patchMethods)
+						{
+							var methodSymbol = semanticModel.GetDeclaredSymbol(patchMethod);
+							var patchAttribute = methodSymbol.GetAttributes()
+								.FirstOrDefault(a => a.AttributeClass.Name.EndsWith("HarmonyPatch"));
+
+							if (patchAttribute != null)
+							{
+								var targetType = (ITypeSymbol)patchAttribute.ConstructorArguments[0].Value;
+								var targetMethodName = (string)patchAttribute.ConstructorArguments[1].Value;
+								var targetMethod = targetType.GetMembers(targetMethodName)
+									.OfType<IMethodSymbol>().FirstOrDefault();
+
+								if (targetMethod != null)
+								{
+									if (!methodsWithPatches.ContainsKey(targetMethod))
+									{
+										methodsWithPatches[targetMethod] = new List<IMethodSymbol>();
+									}
+									methodsWithPatches[targetMethod].Add(methodSymbol);
+								}
+							}
+						}
+					}
+
+					foreach (var pair in methodsWithPatches)
+					{
+						var targetMethod = pair.Key;
+						var patches = pair.Value;
+
+						if (patches.Count > 1)
+						{
+							var patchesWithoutPriority = patches.Where(p => !p.GetAttributes().Any(a => a.AttributeClass.Name.EndsWith("HarmonyPriority"))).ToList();
+							if (patchesWithoutPriority.Any())
+							{
+								Console.WriteLine($"Multiple patches without priority found for {targetMethod}:");
+								foreach (var patch in patchesWithoutPriority)
+								{
+									Console.WriteLine($"- {patch.ContainingType}.{patch.Name}");
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		Replace "path/to/your/source/folder" with the path to your source code folder.
+####				How to implement it
+Use the Priority Attribute:
+	- To set the order of patches. 
+	- As an implicit note to yourself that this method has received at least a baseline of attention to avoid errors.
+###			C	Full sweep of legacy support
+This depends on how compatible SOR1 data will be for SOR2. I don't think it will be, at all. So this might be a good chance to reform the names and organization of the content in ways that would normally disrupt legacy functions in SOR1.
 #		CT	Projects
 ##			C	Less Lethal Content
 ###				C	Rubber Bullet Tweaks

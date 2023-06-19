@@ -1,24 +1,23 @@
-﻿using CCU.Traits.Passive;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Drug_Warrior_Modifier
+namespace CCU.Traits.Passive
 {
-    public class Suppress_Syringe_AV : T_DrugWarriorModifier
+    public class Suppress_Status_Text : T_PlayerTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Suppress_Syringe_AV>()
+            PostProcess = RogueLibs.CreateCustomTrait<Suppress_Status_Text>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Prevents Syringe text and sound when this agent uses a drug. N.b.: This only addresses the \"-Syringe\" text. To suppress status effect text, use {0}.", DesignerName(typeof(Suppress_Status_Text))),
-                    
+                    [LanguageCode.English] = String.Format("Prevents Status Effect text popup when the agent receives a new status effect."),
+
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Suppress_Syringe_AV)),
-                    
+                    [LanguageCode.English] = DesignerName(typeof(Suppress_Status_Text)),
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
