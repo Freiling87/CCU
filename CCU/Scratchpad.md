@@ -58,9 +58,6 @@ IIRC someone said this stopped working, double-check it
 	Except garbage cans
 ###				C	Redo Pre-Build events 
 Pull RL FROM plugins rather than copying TO it.
-###				C	Big Quest Mandatory
-	CL - Big Quest Mandatory doesn't work with Werewolf, either form. 
-	NOTE: game did NOT do the red text to warn bq incomplete, which is a clue. He verified that this works on any floor.
 ###				C	Language
 Says "I can't speak English" but the other NPC's language is Goryllian (tried interact)
 ###				C	Random Teleport gives Yellow Name
@@ -196,22 +193,6 @@ On selecting empty character slot:
 	UnityEngine.EventSystems.EventSystem:Update()
 ####				C	Fix
 Was rolling appearance without checking for CustomCharacterData. Added early return.
-##		C	Mutators
-###			C	Progression
-####			C	Big Quest Mandatory
-#####				C	Elevator Check
-New
-#####				C	Floor
-New
-#####				C	Game
-New
-#####				H	Chronomantic Dilation
-Speeds up on suicide, but doesn't matter does it?
-#####				√	Level (Instant)
-Doctor, Firefighter
-####		C	Custom Trait List Config
-When you click it, it brings you to the Trait Config menu, where you can write, save or load presets. The chosen Trait Config applies only to that level. 
-Now, does this create a new and reusable mutator? e.g. "Force Trait Config: [TraitConfigName]". Or should the user be forced to re-choose the trait config each time, so as not to clutter the trait menu?
 ##		H	CCU v2.0.0 Slate
 Pending release of SOR2
 ###			C	Creator tools

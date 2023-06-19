@@ -1714,6 +1714,22 @@ Complete
 Complete
 ###			√	Suspecter
 Complete
+##		C	Mutators
+###			C	Progression
+####			C	Big Quest Mandatory
+#####				C	Elevator Check
+New
+#####				C	Floor
+New
+#####				C	Game
+New
+#####				H	Chronomantic Dilation
+Speeds up on suicide, but doesn't matter does it?
+#####				√	Level (Instant)
+Doctor, Firefighter
+####		C	Custom Trait List Config
+When you click it, it brings you to the Trait Config menu, where you can write, save or load presets. The chosen Trait Config applies only to that level. 
+Now, does this create a new and reusable mutator? e.g. "Force Trait Config: [TraitConfigName]". Or should the user be forced to re-choose the trait config each time, so as not to clutter the trait menu?
 #		C	Mutators
 Setting: Force Big Quest completion - If set to yes, you will need to complete your big quest before leaving the floor, if there is one. You will not be able to exit the floor until the BQ is done, even after completing all the missions on the floor. If the quest is failed (floor only fails dont count) you will spontaneously combust and die.
 
@@ -1850,6 +1866,22 @@ Main quest rewards are multiplied by 10
 ###			C	Sort active Mutators by Name
 - ScrollingMenu.PushedButton @ 0006
   - Pretty much has exactly what you need.
+  ##		C	Mutators
+###			C	Progression
+####			C	Big Quest Mandatory
+#####				C	Elevator Check
+New
+#####				C	Floor
+New
+#####				C	Game
+New
+#####				H	Chronomantic Dilation
+Speeds up on suicide, but doesn't matter does it?
+#####				√	Level (Instant)
+Doctor, Firefighter
+####		C	Custom Trait List Config
+When you click it, it brings you to the Trait Config menu, where you can write, save or load presets. The chosen Trait Config applies only to that level. 
+Now, does this create a new and reusable mutator? e.g. "Force Trait Config: [TraitConfigName]". Or should the user be forced to re-choose the trait config each time, so as not to clutter the trait menu?
 #		CT	Objects
 ##			C	Traps
 Chest, Door, Window
