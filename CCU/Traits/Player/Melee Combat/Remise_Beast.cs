@@ -48,8 +48,7 @@ namespace CCU.Traits.Player.Melee_Combat
 
 		public void OnPickup(Agent agent, InvItem invItem)
 		{
-			if (IsEligible(agent, invItem))
-				invItem.rapidFire = true;
+			invItem.rapidFire = true;
 		}
 	}
 }

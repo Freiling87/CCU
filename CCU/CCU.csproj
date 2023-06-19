@@ -146,6 +146,7 @@
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
     <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
+    <Compile Include="Patches\Goals\P_GoalFlee.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
     <Compile Include="Patches\Interface\P_ObjectSprite.cs" />
     <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
@@ -510,6 +511,7 @@
     <Compile Include="Traits\Combat\Gun Skill\Gun_Adept.cs" />
     <Compile Include="Traits\Combat\Gun Skill\Gun_Competent.cs" />
     <Compile Include="Traits\Combat\Gun Skill\Gun_Shy.cs" />
+    <Compile Include="Traits\Combat\Mag_Dumper.cs" />
     <Compile Include="Traits\Combat\Melee Skill\Melee_Competent.cs" />
     <Compile Include="Traits\Combat\Melee Skill\Melee_Shy.cs" />
     <Compile Include="Traits\Combat\Melee Skill\Melee_Adept.cs" />
@@ -744,14 +746,15 @@
     <Compile Include="Traits\Interaction\Borrow_Money_Moocher.cs" />
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
+    <Compile Include="Traits\Player\Melee Combat\Knockback_Peon.cs" />
     <Compile Include="Traits\Player\Melee Combat\Melee_Maniac_2.cs" />
     <Compile Include="Traits\Player\Melee Combat\Melee_Maniac.cs" />
     <Compile Include="Traits\Player\Melee Combat\Remise_Beast.cs" />
     <Compile Include="Traits\Player\Melee Combat\T_MeleeSpeed.cs" />
-    <Compile Include="Traits\Player\Ranged_Combat\Pants_on_Autofire.cs" />
-    <Compile Include="Traits\Player\Ranged_Combat\Trigger_Junkie.cs" />
-    <Compile Include="Traits\Player\Ranged_Combat\Trigger_Happy.cs" />
-    <Compile Include="Traits\Player\Ranged_Combat\T_RateOfFire.cs" />
+    <Compile Include="Traits\Player\Ranged Combat\Pants_on_Autofire.cs" />
+    <Compile Include="Traits\Player\Ranged Combat\Trigger_Junkie.cs" />
+    <Compile Include="Traits\Player\Ranged Combat\Trigger_Happy.cs" />
+    <Compile Include="Traits\Player\Ranged Combat\T_RateOfFire.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Aligned.cs" />

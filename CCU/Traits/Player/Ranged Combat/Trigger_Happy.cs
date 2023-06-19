@@ -1,9 +1,8 @@
 ﻿using RogueLibsCore;
-using System.Collections.Generic;
 
 namespace CCU.Traits.Player.Ranged_Combat
 {
-    internal class Trigger_Happy : T_RateOfFire
+	internal class Trigger_Happy : T_RateOfFire
     {
 		public override float CooldownMultiplier => 0.8f;
 

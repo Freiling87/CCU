@@ -11,13 +11,16 @@ Notify Guoxin of finalized version so he can translate
 ##		C	v. 1.1.1 Changelog
 - Compatibility
   - Verified compatibility with SOR v98 
-- Bugfixes
-  - Fixed character select freezing when clicking an empty slot.
-  - Fixed Vendor Cart "Operating" sound effect continuing after interaction completed or cancelled.
+- Bugfixes & Tweaks
+  - Character Select no longer freezes when clicking an empty slot.
+  - Vendor Cart "Operating" sound effect now plays for the correct duration.
   - Fixed Investigateable text showing hidden string ("investigateable-message:::").
-  - Fixed shop with Shoddy/Shiddy Goods selling Taser with -1 quantity.
+  - Shops with Shoddy/Shiddy Goods no longer set Tasers to -1 quantity.
   - Ammo-related traits now give free ammo to NPCs with items added in the editor, rather than just items added through the Loadout system.
-  - Fixed Indestructible not working for agents with vanilla (Meat) gibs
+  - Indestructible now compatible with vanilla (Meat) Gib Type.
+  - Permanent Hires no longer occupy a hire slot after death.
+  - Tubes are now only valid containers for Hidden Bombs if they are within a Computer or Power Box's shutdown range.
+  - Melee Maniac + now improves melee attack speed by 48.5% instead of 50%. This prevents the animation from clipping through targets.
 - Feature additions
   - Items
     - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
@@ -29,108 +32,26 @@ Notify Guoxin of finalized version so he can translate
       - Accident-Prone: Extended behavior to walk into Killer Plants & Laser Emitters
     - Combat
       - Toughness traits: Modify NPC willingness to fight tough odds.
+      - Mag Dumper: Agent uses rapid fire for longer.
       - Melee skill traits: Modify frequency of attacks in combat.
       - Gun skill traits: Modify frequency of attacks in combat.
     - Passive
+      - Crusty: Will now use Alarm Button when fleeing from combat.
       - Indomitable: Immune to mind control
     - Senses
       - Keen Ears traits: Various traits that determine how sensitive the NPC is to sound, and how they react to it.
   - Player Traits
-    - Gun Nut : Agent automatically applies a mod to all eligible guns.
+    - Gun Nut: Agent automatically applies a mod to all eligible guns.
       - Accuracy Modder
       - Ammo Stocker
       - Rate of Fire Modder
       - Rubber Bulleteer
       - Silencerist
+    - Knockback Peon: Reduces knockback, making followup attacks easier.
 ##		P	Bugs
 Except crickets. Crickets are fine.
-###				T	Investigateable message
-Test
-###				T	Merchant + Shiddy Goods + Taser = -1 invItemCount
-Seems to work, confirm w Maxior
-###				C	Melee Rapid Fire
-https://discord.com/channels/187414758536773632/1003391847902740561/1112680958672511076
-IIRC Melee Maniac's description is outdated and needs fix
-Thought Remise was working
-###				C	Permanent Hire still counts on death
-Counts toward party max after death
-###				C	Crusty Button
-I don't think I remembered to make them use the button.
-###				C	Concealed Carry
-Gate to NPCs
-###				C	Appearance System
-####				C	Previews no longer match
-Playing character ends up being a hybrid of the two previews. I think this is all those weird saveCharacterData strings. You normalized them but those might not be what's actually used.
-	Slot shows:
-		Edit Character:		Original handmade version, never replaced
-		Modification Slot:	New roll, same body type & color, legs
-		Selection Slot:		New roll, same body type & color, legs
-		Actual Spawn:		
-
-Only call Reroll when saving custom or pressing Randomize
-####				C	Re-gating
-Base new system around CharacterCreation.RandomizeAppearance
-####				C	Beards aren't loading
-Check Appearance refactor
-			//agent.GetOrAddHook<H_Agent>().appearanceRolled = true;
-This should go into LoadLevel, and set false on death.
-###				C	Linux compatibility
-Update all mods
-	CCU - never restricted to begin with
-	SORCE - Corrected but not yet committed
-###				C	Bomb disaster issues
-String: "FindBombs"
-Quests.setupQuests
-####				T	QuestUpdate
-	[Error  : Unity Log] Couldn't set up quests
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	Quests.QuestUpdate () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	Quests.Update () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-
-What were the test conditions here?
-####				C	Spawned in Vent off map
-https://discord.com/channels/187414758536773632/187414758536773632/1093294336109727845
-####				C	Big Bomb inaccessible
-#####					C	Gate bomb placement
-- Must be on map 
-- If Tube, must have computer or power box within range
-#####					√	Computer Shutdown Tube
-Complete
-###				C	Vanillize Item Qty on load
-Gives full amt, should be scaled to NPC level as vanilla
-###				C	Infinite Ammo
-https://discord.com/channels/187414758536773632/1003391847902740561/1088592658760466603
-
-- Suspects:
-  - InvItemDatabase.AddItemPlayerStart
-    - Invitemcount is set to initcount near the top.
-###				C	Fearless
-https://discord.com/channels/187414758536773632/1003391847902740561/1087385752754716804
-Has 10/4 Firearms, might be the issue
-###				C	Scene Setters Activate Chunk
-Find a way to selectively activate Agents to preserve actions that players must witness.
-###				C	Unknown
-Maxior - 
-	[Error  :BTHarmonyUtils:MidFixPatcher] InstructionMatcherMethod for patch static void CCU.Patches.Agents.P_Agent::SetupAgentStats_InitCustomCharacter_MidFix(Agent __instance) does not return type MidFixInstructionMatcher
-I got this error while booting up CCU and ECTD
-Does it mean anything?
-Also got this
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	FontCacher+<CacheFont>d3.MoveNext () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	FontCacher:Awake()
-	UnityEngine.GameObject:SetActive(Boolean)
-	MenuGUI:OpenMainMenu()
-	<NewStuff2>d476:MoveNext()
-	UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
-###				C	Melee Clip
-	Streets of Cheese - melee maniac+ is so fast you can't punch objects
-	only when they're near a wall though
-	ok it applies to everything punchable
-	and with weapons too
+###				C	Syringe AV
+IIRC someone said this stopped working, double-check it
 ###				C	Zero Money
 	Maxior - The 0 money glitch is still here
 	Money put in the custom containers like shelves will still only give 0 money
@@ -150,16 +71,28 @@ It's back! Yay. It's back.
 	CL - Spawning idle
 It's just the legacy entry I think. 
 ###				C	Ammo Cap
-	CL - Having a gun already when you pick one of the traits still doesn't update the max ammo
+CL - Having a gun already when you pick one of the traits still doesn't update the max ammo
+###				T	Fearless
+https://discord.com/channels/187414758536773632/1003391847902740561/1087385752754716804
+Added prefixes to AssessBattle & AssessFlee
+Pending confirmation from Maxior
 ##		P	Features
+###			C	Vanillize Item Qty on load
+Editor-added items give full ammo, should be semi-random and scaled to NPC level as Loadout items are
+###			C	Hide Appearance Traits Button
+Hides added ones from char sheet to save space
+Also see about a scrollbar?
 ###			C	CharacterSelect.CharacterLoaded
 This is a bool array that might be easier than checking for nulls on charsavedata. 
 Slots 32-48 are custom characters, and it's true
-###			C	Hair match skin
-I guess this is just scope now
-Requested by GenEric
-Fleshy Follicles?
 ##		H√	Bug Archive
+###				H	Scene Setters Activate Chunk
+Scene setters may cause events that the designer wished the player to witness to play out too early for them to see. Normally the trigger for activating the chunk is by player proximity.
+Unfortunately, I think this fix will be a bit too complex for this project.
+###				H	Hidden Bomb Spawned in Vent off map
+https://discord.com/channels/187414758536773632/187414758536773632/1093294336109727845
+You might be able to replace the != Wastebasket string with a special validity detector.
+So far I've been unable to replicate this bug. Took place on a standard Park map that did not lack other containers for the bomb.
 ###				H	Equipment noise spam
 Still occuring, even with vanillas.
 For now, just disabling the noise if they switch to Fist.
@@ -281,6 +214,10 @@ When you click it, it brings you to the Trait Config menu, where you can write, 
 Now, does this create a new and reusable mutator? e.g. "Force Trait Config: [TraitConfigName]". Or should the user be forced to re-choose the trait config each time, so as not to clutter the trait menu?
 ##		H	CCU v2.0.0 Slate
 Pending release of SOR2
+###			C	Creator tools
+####			C	Live character editor
+Add or remove traits, edit their pockets, etc.
+Could use code from level menus, Sandbox item generator, etc.
 ###			P	Upgrade to highest C# version
 No better time to do this
 ###			C	Character Creator UI Improvements

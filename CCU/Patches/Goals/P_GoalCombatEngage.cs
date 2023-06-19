@@ -16,7 +16,7 @@ namespace CCU.Patches.Goals
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalCombatEngage.Activate))]
         public static void Activate_Postfix(GoalCombatEngage __instance)
         {
-            if (__instance.agent.HasTrait<Concealed_Carrier>())
+            if (__instance.agent.HasTrait<Concealed_Carrier>() && __instance.agent.isPlayer == 0)
                 __instance.agent.agentInvDatabase.ChooseWeapon();
         }
 

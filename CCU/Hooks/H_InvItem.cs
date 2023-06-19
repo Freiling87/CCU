@@ -11,6 +11,7 @@ namespace CCU.Hooks
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public bool vanillaLongerRapidFire;
 		public bool vanillaRapidFire;
 		public bool initialSetup = false;
 
@@ -18,6 +19,7 @@ namespace CCU.Hooks
 		{
 			if (!initialSetup)
 			{
+				vanillaLongerRapidFire = Instance.longerRapidFire;
 				vanillaRapidFire = Instance.rapidFire;
 
 				initialSetup = true;

@@ -124,15 +124,15 @@ public class GoalNoiseReact : Goal
 		if (!this.agent.movement.HasLOSPosition360(this.noisePosition))
 		{
 			TileData noiseSourceTile = this.gc.tileInfo.GetTileData(this.noisePosition);
-			bool notMyJob = false;
+			bool notMyProperty = false;
 
 			if (noiseSourceTile.owner > 0)
 			{
 				if (noiseSourceTile.owner != this.agent.ownerID)
-					notMyJob = true;
+					notMyProperty = true;
 
 				if (noiseSourceTile.owner == this.agent.ownerID && noiseSourceTile.chunkID != this.agent.startingChunk)
-					notMyJob = true;
+					notMyProperty = true;
 			}
 
 			if (noiseSourceTile.prison > 0)
@@ -155,18 +155,18 @@ public class GoalNoiseReact : Goal
 			if (this.gc.levelFeeling == "HarmAtIntervals" && !this.agent.ghost && !this.gc.tileInfo.IsIndoors(this.noise.tr.position))
 				radiationBlasts = true;
 			
-			bool flag10 = false;
+			bool soundHeard = false;
 
 			////////////////////////
 			#region Vigilance Checks
 
-			// Owners & Cops
+			// 1: Soldier, Slavemaster, Shopkeeper; 3: Supercop
 			if (!hearerIsVictim 
-				&& (this.agent.modVigilant == 1 || this.agent.modVigilant == 3)  //
+				&& (this.agent.modVigilant == 1 || this.agent.modVigilant == 3)  
 				&& this.agent.job == "" 
 				&& this.agent.prisoner == 0 
 				&& !this.agent.arenaBattler 
-				&& (!notMyJob || this.agent.modVigilant == 3)  // Supercop laziness override
+				&& (!notMyProperty || this.agent.modVigilant == 3)  // Supercop duty
 				&& !blockedByPrisonOrLockdown 
 				&& !isDoorNoise 
 				&& !isWindowNoise 
@@ -175,7 +175,7 @@ public class GoalNoiseReact : Goal
 				&& !noiseSourceTile.arenaFloor 
 				&& !this.agent.haunted)
 			{
-				flag10 = true;
+				soundHeard = true;
 				GoalCurious goalCurious = new GoalCurious();
 				goalCurious.curiousPosition = this.noisePosition;
 				this.brain.AddSubgoal(this, goalCurious);
@@ -188,13 +188,13 @@ public class GoalNoiseReact : Goal
 					this.gc.spawnerMain.SpawnStateIndicator(this.agent, "Search");
 			}
 
-			// Owned tiles only
+			// 2: Bartender, Bouncer, Cannibal, Goon
 			if (!hearerIsVictim 
-				&& this.agent.modVigilant == 2  // Bartender, Bouncer, Cannibal, Goon
+				&& this.agent.modVigilant == 2  
 				&& noiseSourceTile.owner == this.agent.ownerID
 				&& this.agent.job == "" && this.agent.prisoner == 0 
 				&& !this.agent.arenaBattler 
-				&& !notMyJob 
+				&& !notMyProperty // No supercop save
 				&& !blockedByPrisonOrLockdown 
 				&& !isDoorNoise 
 				&& !isWindowNoise 
@@ -203,7 +203,7 @@ public class GoalNoiseReact : Goal
 				&& !noiseSourceTile.arenaFloor 
 				&& !this.agent.haunted)
 			{
-				flag10 = true;
+				soundHeard = true;
 				GoalCurious goalCurious = new GoalCurious();
 				goalCurious.curiousPosition = this.noisePosition;
 				this.brain.AddSubgoal(this, goalCurious);
@@ -216,20 +216,21 @@ public class GoalNoiseReact : Goal
 					this.gc.spawnerMain.SpawnStateIndicator(this.agent, "Search");
 			}
 
-			// Ignores Haunted
 			if (!hearerIsVictim 
-				&& ((this.noise.volume == 3f && !isDoorNoise && !notMyJob && this.gc.levelFeeling != "Lockdown") || isNoiseJoke) 
-				&& this.agent.modVigilant != 1  // Shopkeeper, Slavemaster & Soldier
+				// 3f noise volume: STRICTLY distraction items and hacks
+				&& ((this.noise.volume == 3f && !isDoorNoise && !notMyProperty && this.gc.levelFeeling != "Lockdown") || isNoiseJoke) 
+				&& this.agent.modVigilant != 1 // 0, 2, 3: Anyone BUT Shopkeeper, Slavemaster & Soldier
 				&& this.agent.job == "" 
 				&& this.agent.prisoner == 0 
 				&& !this.agent.arenaBattler 
-				&& (!this.agent.dontLeavePost || isMyProperty) 
+				&& (!this.agent.dontLeavePost /* Only Bouncer & Res Leader have true*/ || isMyProperty) 
 				&& !blockedByPrisonOrLockdown 
 				&& !isWindowNoise 
 				&& !radiationBlasts 
 				&& !noiseSourceTile.arenaFloor)
+				// Skips check for Haunted
 			{
-				flag10 = true;
+				soundHeard = true;
 				GoalCurious goalCurious = new GoalCurious();
 				goalCurious.curiousPosition = this.noisePosition;
 				this.brain.AddSubgoal(this, goalCurious);
@@ -242,19 +243,21 @@ public class GoalNoiseReact : Goal
 					this.gc.spawnerMain.SpawnStateIndicator(this.agent, "Search");
 			}
 
-			if (!flag10 
+			// All agents
+			if (!soundHeard 
 				&& !hearerIsVictim 
-				&& this.noise.volume == 4f 
+				&& this.noise.volume == 4f // Alarms, explosions, etc. Loudest value.
 				&& this.agent.job == "" 
 				&& this.agent.prisoner == 0 
 				&& !this.agent.arenaBattler 
 				&& (!this.agent.dontLeavePost || isMyProperty) 
 				&& !radiationBlasts 
 				&& !noiseSourceTile.arenaFloor)
+				// Skips check for Haunted
 			{
-				GoalCurious goalCurious4 = new GoalCurious();
-				goalCurious4.curiousPosition = this.noisePosition;
-				this.brain.AddSubgoal(this, goalCurious4);
+				GoalCurious goalCurious = new GoalCurious();
+				goalCurious.curiousPosition = this.noisePosition;
+				this.brain.AddSubgoal(this, goalCurious);
 				this.agent.SetRunBackToPosition(true);
 
 				if (this.agent.isPlayer == 0)
@@ -264,34 +267,36 @@ public class GoalNoiseReact : Goal
 					this.gc.spawnerMain.SpawnStateIndicator(this.agent, "Search");
 			}
 
-			if (!flag10 
+			// Aligned combat-noise search response
+			if (!soundHeard 
 				&& this.noise.searchAgentSource != null 
-				&& this.agent.modToughness > 0 
-				&& this.agent.modVigilant > 0  //
+				&& this.agent.modToughness > 0 //
+				&& this.agent.modVigilant > 0  // 
 				&& this.agent.job == "" 
 				&& this.agent.prisoner == 0 
 				&& !blockedByPrisonOrLockdown 
 				&& !radiationBlasts 
 				&& !noiseSourceTile.arenaFloor)
 			{
-				bool flag11 = false;
+				bool searchForAlignedCombat = false;
 
 				for (int i = 0; i < this.gc.agentList.Count; i++)
 				{
 					Agent agent = this.gc.agentList[i];
 
-					if ((agent.justHitByAgent == this.noise.searchAgentSource || agent.opponent == this.noise.searchAgentSource) && this.agent.relationships.GetRel(agent) == "Aligned")
+					if ((agent.justHitByAgent == this.noise.searchAgentSource || agent.opponent == this.noise.searchAgentSource) 
+						&& this.agent.relationships.GetRel(agent) == "Aligned")
 					{
-						flag11 = true;
+						searchForAlignedCombat = true;
 						break;
 					}
 				}
 
-				if (flag11)
+				if (searchForAlignedCombat)
 				{
-					GoalCurious goalCurious5 = new GoalCurious();
-					goalCurious5.curiousPosition = this.noisePosition;
-					this.brain.AddSubgoal(this, goalCurious5);
+					GoalCurious goalCurious = new GoalCurious();
+					goalCurious.curiousPosition = this.noisePosition;
+					this.brain.AddSubgoal(this, goalCurious);
 					this.agent.SetRunBackToPosition(true);
 
 					if (this.agent.isPlayer == 0)
@@ -438,4 +443,1139 @@ public class GoalNoiseReact : Goal
 
 	// Token: 0x04000FB9 RID: 4025
 	public int waitCyclesThenStop;
+}
+
+
+// Quests
+// Token: 0x0600337A RID: 13178 RVA: 0x002D0378 File Offset: 0x002CE578
+public void setupQuests()
+{
+	this.settingUpQuests = true;
+	this.questItemsGiven.Remove("Money");
+	this.questItemsGiven.Remove("TwitchMystery");
+	this.questItemsGiven.Remove("Nugget");
+
+	if (this.gc.loadLevel.LevelContainsMayor())
+	{
+		this.oneQuest = "MayorQuest";
+	}
+	if (this.oneQuest != "" || this.gc.levelType == "Tutorial" || this.gc.streamingWorld)
+	{
+		this.totalQuests = 1;
+	}
+	this.gc.challenges.Contains("Sandbox");
+
+	while (this.questTriesMain < this.questTriesTotal && this.settingUpQuests)
+	{
+		int num3 = 0;
+		bool flag2 = false;
+
+		while (num3 < 100 && !flag2 && this.settingUpQuests)
+		{
+			Agent agent9 = null;
+			Agent agent2 = null;
+			ObjectReal objectReal = null;
+			ObjectReal objectReal2 = null;
+			ObjectReal objectReal3 = null;
+			string text2 = "";
+			string text3 = "";
+			bool flag3 = false;
+			int num4 = 0;
+			bool flag4 = false;
+
+			if (this.numQuests == this.totalQuests - 1 && this.oneQuest == "" && this.gc.levelType != "Tutorial")
+			{
+				flag4 = true;
+				while (!flag3)
+				{
+					if (num4 >= 100)
+					{
+						break;
+					}
+					agent9 = this.gc.agentList[UnityEngine.Random.Range(0, this.gc.agentList.Count)];
+					try
+					{
+						if (!this.CheckIfQuested(agent9, null, "QuestGiver") && (agent9.agentName == "Shopkeeper" || agent9.agentName == "DrugDealer" || (agent9.agentName == "Clerk" && agent9.startingChunkRealDescription != "DeportationCenter") || agent9.agentName == "Bartender"))
+						{
+							flag3 = true;
+						}
+						if (agent9.startingChunkReal.giveQuest > 0)
+						{
+							flag3 = false;
+						}
+					}
+					catch
+					{
+					}
+					num4++;
+				}
+			}
+			else
+			{
+				flag3 = true;
+			}
+
+			if (flag3)
+			{
+				if (this.gc.streamingWorld)
+				{
+					UnityEngine.Random.InitState(this.gc.loadLevel.randomSeedNum + num3);
+				}
+				bool flag5 = true;
+				this.chosenChunk = null;
+				if (this.gc.levelType == "Tutorial")
+				{
+					text2 = "Destroy";
+					for (int num5 = 0; num5 < this.gc.objectRealList.Count; num5++)
+					{
+						ObjectReal objectReal6 = this.gc.objectRealList[num5];
+						if (objectReal6.objectName == "Generator")
+						{
+							objectReal = objectReal6;
+							break;
+						}
+					}
+				}
+				else if (flag5 && this.oneQuest == "")
+				{
+					if (agent9 != null)
+					{
+						agent9.startingChunkReal.quested = true;
+					}
+					string text4 = "";
+					bool flag6 = true;
+					if (this.gc.customLevel && num3 < 10 && !this.gc.loadLevel.customLevel.randomizeQuests)
+					{
+						foreach (Chunk chunk in this.gc.loadLevel.levelChunks)
+						{
+							if (chunk.specificQuest != "" && chunk.specificQuest != null && chunk.specificQuest != "None" && !chunk.quested && chunk.importantObjects.Count != 0)
+							{
+								this.chosenChunk = chunk;
+								if (chunk.specificQuest != "Random")
+								{
+									text4 = chunk.specificQuest;
+									break;
+								}
+								break;
+							}
+						}
+					}
+					if (this.gc.customLevel && this.chosenChunk == null && !this.gc.loadLevel.customLevel.randomizeQuests)
+					{
+						flag6 = false;
+					}
+					if (this.chosenChunk == null && flag6)
+					{
+						foreach (Chunk chunk2 in this.gc.loadLevel.levelChunks)
+						{
+							if (chunk2.giveQuest > 0 && !chunk2.quested && chunk2.importantObjects.Count != 0 && this.SpecialCasesCheck(chunk2))
+							{
+								this.chosenChunk = chunk2;
+								break;
+							}
+						}
+					}
+					if (this.chosenChunk == null && flag6)
+					{
+						int num6 = 0;
+						foreach (Chunk chunk3 in this.gc.loadLevel.levelChunks)
+						{
+							if (!chunk3.quested && chunk3.importantObjects.Count != 0 && this.SpecialCasesCheck(chunk3) && chunk3.difficultyLevel > num6)
+							{
+								num6 = chunk3.difficultyLevel;
+								this.chosenChunk = chunk3;
+							}
+						}
+					}
+					if (this.numQuests == 0)
+					{
+						bool flag7 = this.gc.percentChance(30);
+						bool flag8 = this.gc.percentChance(10);
+						for (int num7 = 0; num7 < this.gc.agentList.Count; num7++)
+						{
+							Agent agent10 = this.gc.agentList[num7];
+							if (agent10.gang != 0 && !agent10.isBigQuestObject && ((agent10.agentName == "Musician" && flag7) || (agent10.agentName == "Mafia" && flag8) || (agent10.agentName == "Gangbanger" && flag8) || (agent10.agentName == "GangbangerB" && flag8)))
+							{
+								bool flag9 = true;
+								for (int num8 = 0; num8 < this.gc.playerAgentList.Count; num8++)
+								{
+									Agent agent11 = this.gc.playerAgentList[num8];
+									if ((agent10.agentName == "Mafia" || agent10.agentName == "Gangbanger" || agent10.agentName == "GangbangerB") && agent11.agentName == agent10.agentName)
+									{
+										flag9 = false;
+									}
+								}
+								for (int num9 = 0; num9 < this.gc.agentList.Count; num9++)
+								{
+									Agent agent12 = this.gc.agentList[num9];
+									if (agent12.gang == agent10.gang && agent12.isBigQuestObject)
+									{
+										flag9 = false;
+									}
+								}
+								if (flag9)
+								{
+									agent2 = agent10;
+									this.chosenChunk = null;
+									text2 = "Kill";
+									break;
+								}
+							}
+						}
+					}
+					if (this.chosenChunk != null)
+					{
+						this.chosenChunk.quested = true;
+						List<string> list = new List<string>();
+						foreach (PlayfieldObject playfieldObject in this.chosenChunk.importantObjects)
+						{
+							if (playfieldObject.playfieldObjectType == "Agent")
+							{
+								agent2 = (Agent)playfieldObject;
+								if (!this.isAlignedInChunk(agent2))
+								{
+									if (agent2.prisoner > 0 && agent2.ownerID == 0)
+									{
+										bool flag10 = false;
+										for (int num10 = 0; num10 < this.gc.agentList.Count; num10++)
+										{
+											if (this.gc.agentList[num10].startingChunk == agent2.startingChunk && this.gc.agentList[num10].prisoner > 0 && this.gc.agentList[num10].prisoner != agent2.prisoner)
+											{
+												flag10 = true;
+												break;
+											}
+										}
+										if (flag10)
+										{
+											if (this.gc.levelFeeling != "Ooze")
+											{
+												text2 = this.gc.Choose<string>("Rescue", "Rescue", new string[]
+												{
+													"Rescue"
+												});
+											}
+											agent2.potentialQuestTypes.Add("PrisonBreak");
+											if (!list.Contains("PrisonBreak"))
+											{
+												list.Add("PrisonBreak");
+												list.Add("PrisonBreak");
+												list.Add("PrisonBreak");
+											}
+											bool flag11 = true;
+											for (int num11 = 0; num11 < this.gc.playerAgentList.Count; num11++)
+											{
+												if (agent2.relationships.GetRel(this.gc.playerAgentList[num11]) == "Hateful")
+												{
+													flag11 = false;
+												}
+												if (!agent2.relationships.RelForRescueQuestOkay(this.gc.playerAgentList[num11]))
+												{
+													flag11 = false;
+												}
+												if (agent2.agentName == "Gorilla" && this.gc.playerAgentList[num11].bigQuest == "Gorilla" && flag4)
+												{
+													flag11 = false;
+												}
+											}
+											if (this.gc.multiplayerMode && this.gc.serverPlayer)
+											{
+												for (int num12 = 0; num12 < this.gc.networkManagerB.nextCharacter.Count; num12++)
+												{
+													if (!agent2.relationships.RelForRescueQuestOkayMult(this.gc.networkManagerB.nextCharacter[num12]))
+													{
+														flag11 = false;
+													}
+													if (agent2.agentName == "Gorilla" && this.gc.networkManagerB.nextCharacter[num12] == "Gorilla" && flag4)
+													{
+														flag11 = false;
+													}
+												}
+											}
+											if (agent2.zombified)
+											{
+												flag11 = false;
+											}
+											if (agent9 != null)
+											{
+												try
+												{
+													if (agent9.relationships.GetRel(agent2) == "Hateful" || agent9.relationships.GetRel(agent2) == "Annoyed")
+													{
+														flag11 = false;
+													}
+												}
+												catch
+												{
+												}
+												for (int num13 = 0; num13 < this.gc.agentList.Count; num13++)
+												{
+													Agent agent13 = this.gc.agentList[num13];
+													if (agent13.startingChunk == agent9.startingChunk && agent9.startingChunk != 0 && (agent13.relationships.GetRel(agent2) == "Hateful" || agent13.relationships.GetRel(agent2) == "Annoyed"))
+													{
+														flag11 = false;
+													}
+												}
+											}
+											if (flag11 && this.gc.levelFeeling != "Ooze")
+											{
+												agent2.potentialQuestTypes.Add("Rescue");
+												if (!list.Contains("Rescue"))
+												{
+													list.Add("Rescue");
+												}
+											}
+											bool flag12 = true;
+											for (int num14 = 0; num14 < this.gc.playerAgentList.Count; num14++)
+											{
+												if (agent2.relationships.GetRel(this.gc.playerAgentList[num14]) == "Aligned" || ((this.gc.playerAgentList[num14].statusEffects.hasStatusEffect("DontHitOwnKind") || agent2.statusEffects.hasStatusEffect("DontHitOwnKind")) && this.gc.playerAgentList[num14].agentName == agent2.agentName))
+												{
+													flag12 = false;
+												}
+											}
+											if (agent2.zombified)
+											{
+												flag12 = false;
+											}
+											if (flag12)
+											{
+												agent2.potentialQuestTypes.Add("Kill");
+												if (!list.Contains("Kill"))
+												{
+													list.Add("Kill");
+												}
+											}
+										}
+										else
+										{
+											if (this.gc.levelFeeling != "Ooze")
+											{
+												text2 = this.gc.Choose<string>("Rescue", "Rescue", new string[]
+												{
+													"Rescue"
+												});
+											}
+											bool flag13 = true;
+											for (int num15 = 0; num15 < this.gc.playerAgentList.Count; num15++)
+											{
+												if (agent2.relationships.GetRel(this.gc.playerAgentList[num15]) == "Hateful")
+												{
+													flag13 = false;
+												}
+												if (!agent2.relationships.RelForRescueQuestOkay(this.gc.playerAgentList[num15]))
+												{
+													flag13 = false;
+												}
+												if (agent2.agentName == "Gorilla" && this.gc.playerAgentList[num15].bigQuest == "Gorilla" && flag4)
+												{
+													flag13 = false;
+												}
+											}
+											if (this.gc.multiplayerMode && this.gc.serverPlayer)
+											{
+												for (int num16 = 0; num16 < this.gc.networkManagerB.nextCharacter.Count; num16++)
+												{
+													if (!agent2.relationships.RelForRescueQuestOkayMult(this.gc.networkManagerB.nextCharacter[num16]))
+													{
+														flag13 = false;
+													}
+													if (agent2.agentName == "Gorilla" && this.gc.networkManagerB.nextCharacter[num16] == "Gorilla" && flag4)
+													{
+														flag13 = false;
+													}
+												}
+											}
+											if (agent2.zombified)
+											{
+												flag13 = false;
+											}
+											if (agent9 != null)
+											{
+												try
+												{
+													if (agent9.relationships.GetRel(agent2) == "Hateful" || agent9.relationships.GetRel(agent2) == "Annoyed")
+													{
+														flag13 = false;
+													}
+												}
+												catch
+												{
+												}
+											}
+											if (flag13 && this.gc.levelFeeling != "Ooze")
+											{
+												agent2.potentialQuestTypes.Add("Rescue");
+												if (!list.Contains("Rescue"))
+												{
+													list.Add("Rescue");
+													list.Add("Rescue");
+												}
+											}
+											bool flag14 = true;
+											for (int num17 = 0; num17 < this.gc.playerAgentList.Count; num17++)
+											{
+												if (agent2.relationships.GetRel(this.gc.playerAgentList[num17]) == "Aligned" || ((this.gc.playerAgentList[num17].statusEffects.hasStatusEffect("DontHitOwnKind") || agent2.statusEffects.hasStatusEffect("DontHitOwnKind")) && this.gc.playerAgentList[num17].agentName == agent2.agentName))
+												{
+													flag14 = false;
+												}
+											}
+											if (agent2.zombified)
+											{
+												flag14 = false;
+											}
+											if (flag14)
+											{
+												agent2.potentialQuestTypes.Add("Kill");
+												if (!list.Contains("Kill"))
+												{
+													list.Add("Kill");
+												}
+											}
+										}
+									}
+									else if (agent2.agentName == "Slave" && agent2.slaveOwners.Count != 0)
+									{
+										text2 = "FreeSlave";
+										agent2.potentialQuestTypes.Add("FreeSlave");
+										if (!list.Contains("FreeSlave"))
+										{
+											list.Add("FreeSlave");
+											list.Add("FreeSlave");
+										}
+									}
+									else
+									{
+										bool flag15 = false;
+										int num18 = 0;
+										do
+										{
+											text2 = this.gc.Choose<string>("Kill", "KillAll", new string[]
+											{
+												"KillAll",
+												"KillAndRetrieve"
+											});
+											bool flag16 = true;
+											for (int num19 = 0; num19 < this.gc.playerAgentList.Count; num19++)
+											{
+												if (agent2.relationships.GetRel(this.gc.playerAgentList[num19]) == "Aligned" || ((this.gc.playerAgentList[num19].statusEffects.hasStatusEffect("DontHitOwnKind") || agent2.statusEffects.hasStatusEffect("DontHitOwnKind")) && this.gc.playerAgentList[num19].agentName == agent2.agentName))
+												{
+													flag16 = false;
+												}
+											}
+											if (agent2.zombified)
+											{
+												flag16 = false;
+											}
+											if (flag16)
+											{
+												agent2.potentialQuestTypes.Add("Kill");
+												if (!list.Contains("Kill"))
+												{
+													list.Add("Kill");
+												}
+												agent2.potentialQuestTypes.Add("KillAndRetrieve");
+												if (!list.Contains("KillAndRetrieve"))
+												{
+													list.Add("KillAndRetrieve");
+												}
+												agent9 != null;
+												flag15 = true;
+											}
+											if (agent2.ownerID != 0)
+											{
+												for (int num20 = 0; num20 < this.gc.agentList.Count; num20++)
+												{
+													Agent agent14 = this.gc.agentList[num20];
+													if (agent2 != agent14 && agent2.startingChunk == agent14.startingChunk && agent2.ownerID == agent14.ownerID && agent2.agentName != "Bouncer" && agent2.agentName != "Guard" && agent2.agentName != "Guard2" && !agent2.ghost && agent14.agentName != "Bouncer" && agent14.agentName != "Guard" && agent14.agentName != "Guard2" && !agent14.ghost)
+													{
+														bool flag17 = true;
+														for (int num21 = 0; num21 < this.gc.playerAgentList.Count; num21++)
+														{
+															if (agent2.relationships.GetRel(this.gc.playerAgentList[num21]) == "Aligned" || ((this.gc.playerAgentList[num21].statusEffects.hasStatusEffect("DontHitOwnKind") || agent2.statusEffects.hasStatusEffect("DontHitOwnKind")) && this.gc.playerAgentList[num21].agentName == agent2.agentName))
+															{
+																flag17 = false;
+															}
+														}
+														if (agent2.zombified)
+														{
+															flag17 = false;
+														}
+														if (flag17)
+														{
+															agent2.potentialQuestTypes.Add("KillAll");
+															if (!list.Contains("KillAll"))
+															{
+																list.Add("KillAll");
+																if ((!this.gc.challenges.Contains("QuickGame") && this.gc.sessionDataBig.curLevelEndless > 9) || (this.gc.challenges.Contains("QuickGame") && this.gc.sessionDataBig.curLevelEndless > 6))
+																{
+																	list.Add("KillAll");
+																}
+																if ((!this.gc.challenges.Contains("QuickGame") && this.gc.sessionDataBig.curLevelEndless > 12) || (this.gc.challenges.Contains("QuickGame") && this.gc.sessionDataBig.curLevelEndless > 8))
+																{
+																	list.Add("KillAll");
+																}
+															}
+															flag15 = true;
+														}
+													}
+												}
+											}
+											num18++;
+											if (flag15)
+											{
+												break;
+											}
+										}
+										while (num18 < 100);
+									}
+								}
+							}
+							else if (playfieldObject.playfieldObjectType == "ObjectReal")
+							{
+								objectReal = (ObjectReal)playfieldObject;
+								if (!this.isAlignedInChunk(objectReal))
+								{
+									if (objectReal.GetComponent<InvDatabase>() != null)
+									{
+										if (!objectReal.plantable)
+										{
+											if (objectReal.destroyableForQuest)
+											{
+												text2 = "DestroyAndRetrieve";
+												objectReal.potentialQuestTypes.Add("DestroyAndRetrieve");
+												if (!list.Contains("DestroyAndRetrieve"))
+												{
+													list.Add("DestroyAndRetrieve");
+												}
+											}
+											else if (objectReal.chestReal && objectReal.canSpill)
+											{
+												text2 = "Retrieve";
+												objectReal.potentialQuestTypes.Add("Retrieve");
+												if (!list.Contains("Retrieve"))
+												{
+													list.Add("Retrieve");
+												}
+											}
+										}
+									}
+									else if (objectReal.usable)
+									{
+										for (int num22 = 0; num22 < this.gc.objectRealList.Count; num22++)
+										{
+											ObjectReal objectReal7 = this.gc.objectRealList[num22];
+											if (objectReal != objectReal7 && objectReal.startingChunk == objectReal7.startingChunk && objectReal.objectName == objectReal7.objectName)
+											{
+												text2 = "UseAll";
+												objectReal.potentialQuestTypes.Add("UseAll");
+												if (!list.Contains("UseAll"))
+												{
+													list.Add("UseAll");
+													list.Add("UseAll");
+												}
+											}
+										}
+									}
+									else if (!objectReal.OnFloor && (!objectReal.bulletsCanPass || !objectReal.meleeCanPass) && !objectReal.cantBeDestroyed && objectReal.damageAccumulates)
+									{
+										bool flag18 = true;
+										text2 = "Destroy";
+										for (int num23 = 0; num23 < this.gc.playerAgentList.Count; num23++)
+										{
+											if ((objectReal.objectName == "Generator" || objectReal.objectName == "Generator2") && this.gc.playerAgentList[num23].bigQuest == "Soldier" && flag4)
+											{
+												flag18 = false;
+											}
+											if (objectReal.objectName == "PowerBox" && this.gc.playerAgentList[num23].bigQuest == "RobotPlayer" && flag4)
+											{
+												flag18 = false;
+											}
+										}
+										if (this.gc.multiplayerMode && this.gc.serverPlayer)
+										{
+											for (int num24 = 0; num24 < this.gc.networkManagerB.nextCharacter.Count; num24++)
+											{
+												if ((objectReal.objectName == "Generator" || objectReal.objectName == "Generator2") && this.gc.networkManagerB.nextCharacter[num24] == "Soldier" && flag4)
+												{
+													flag18 = false;
+												}
+												if (objectReal.objectName == "PowerBox" && this.gc.networkManagerB.nextCharacter[num24] == "RobotPlayer" && flag4)
+												{
+													flag18 = false;
+												}
+											}
+										}
+										if (flag18)
+										{
+											objectReal.potentialQuestTypes.Add("Destroy");
+											if (!list.Contains("Destroy"))
+											{
+												list.Add("Destroy");
+											}
+											for (int num25 = 0; num25 < this.gc.objectRealList.Count; num25++)
+											{
+												ObjectReal objectReal8 = this.gc.objectRealList[num25];
+												if (objectReal != objectReal8 && objectReal.startingChunk == objectReal8.startingChunk && objectReal.objectName == objectReal8.objectName)
+												{
+													text2 = "DestroyAll";
+													objectReal.potentialQuestTypes.Add("DestroyAll");
+													if (!list.Contains("DestroyAll"))
+													{
+														list.Add("DestroyAll");
+														list.Add("DestroyAll");
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						agent2 = null;
+						objectReal = null;
+						int num26 = 0;
+						if (list.Count > 0)
+						{
+							bool flag19 = true;
+							if (text4 != "" && list.Contains(text4))
+							{
+								flag19 = false;
+								text2 = text4;
+							}
+							if (flag19)
+							{
+								do
+								{
+									text2 = list[UnityEngine.Random.Range(0, list.Count)];
+									num26++;
+								}
+								while (num26 < 30 && this.levelQuestTypes.Contains(text2));
+							}
+							this.levelQuestTypes.Add(text2);
+							using (List<PlayfieldObject>.Enumerator enumerator2 = this.chosenChunk.importantObjects.GetEnumerator())
+							{
+								while (enumerator2.MoveNext())
+								{
+									PlayfieldObject playfieldObject2 = enumerator2.Current;
+									if (playfieldObject2.potentialQuestTypes.Contains(text2))
+									{
+										if (playfieldObject2.playfieldObjectType == "Agent")
+										{
+											agent2 = (Agent)playfieldObject2;
+											break;
+										}
+										if (playfieldObject2.playfieldObjectType == "ObjectReal")
+										{
+											objectReal = (ObjectReal)playfieldObject2;
+											break;
+										}
+									}
+								}
+								goto IL_1E99;
+							}
+						}
+						string str2 = "Couldn't find potential quest within chunk: ";
+						Chunk chunk4 = this.chosenChunk;
+						Debug.Log(str2 + ((chunk4 != null) ? chunk4.ToString() : null));
+					}
+				}
+			IL_1E99:
+				if (this.oneQuest != "")
+				{
+					if (this.oneQuest == "MayorQuest")
+					{
+						text2 = "MayorQuest";
+						for (int num27 = 0; num27 < this.gc.agentList.Count; num27++)
+						{
+							if (this.gc.agentList[num27].agentName == "Mayor")
+							{
+								agent2 = this.gc.agentList[num27];
+								this.chosenChunk = agent2.startingChunkReal;
+								break;
+							}
+						}
+					}
+					else if (this.oneQuest == "FindBombs")
+					{
+						text2 = "FindBombs";
+						int num28 = 0;
+
+						foreach (Chunk chunk5 in this.gc.loadLevel.levelChunks)
+						{
+							if (chunk5.giveQuest > 0 && !chunk5.quested)
+							{
+								foreach (KeyValuePair<int, ObjectReal> keyValuePair in this.gc.chestDic)
+								{
+									ObjectReal value = keyValuePair.Value;
+									if (value.startingChunkReal == chunk5 && value.canSpill && this.gc.tileInfo.IsIndoors(value.tr.position) && value.objectName != "WasteBasket")
+									{
+										if (num28 == 0)
+										{
+											objectReal = value;
+										}
+										else if (num28 == 1)
+										{
+											objectReal2 = value;
+										}
+										else if (num28 == 2)
+										{
+											objectReal3 = value;
+										}
+										num28++;
+										chunk5.quested = true;
+										break;
+									}
+								}
+								if (num28 == 3)
+								{
+									break;
+								}
+							}
+						}
+						int num29 = 0;
+						while (num28 < 3 && num29 < 5)
+						{
+							foreach (Chunk chunk6 in this.gc.loadLevel.levelChunks)
+							{
+								if (!chunk6.quested)
+								{
+									foreach (KeyValuePair<int, ObjectReal> keyValuePair2 in this.gc.chestDic)
+									{
+										ObjectReal value2 = keyValuePair2.Value;
+										if (value2.startingChunkReal == chunk6 && value2.canSpill && this.gc.tileInfo.IsIndoors(value2.tr.position))
+										{
+											if (num28 == 0)
+											{
+												objectReal = value2;
+											}
+											else if (num28 == 1)
+											{
+												objectReal2 = value2;
+											}
+											else if (num28 == 2)
+											{
+												objectReal3 = value2;
+											}
+											num28++;
+											chunk6.quested = true;
+											break;
+										}
+									}
+									if (num28 == 3)
+									{
+										break;
+									}
+								}
+							}
+							num29++;
+						}
+						num29 = 0;
+						while (num28 < 3 && num29 < 5)
+						{
+							foreach (KeyValuePair<int, ObjectReal> keyValuePair3 in this.gc.chestDic)
+							{
+								ObjectReal value3 = keyValuePair3.Value;
+								if (value3.canSpill && value3 != objectReal && value3 != objectReal2 && value3 != objectReal3)
+								{
+									if (num28 == 0)
+									{
+										objectReal = value3;
+									}
+									else if (num28 == 1)
+									{
+										objectReal2 = value3;
+									}
+									else if (num28 == 2)
+									{
+										objectReal3 = value3;
+									}
+									num28++;
+									break;
+								}
+							}
+							if (num28 == 3)
+							{
+								break;
+							}
+							num29++;
+						}
+					}
+				}
+				if (text2 == "")
+				{
+					text2 = "Kill";
+				}
+				if (agent9 != null)
+				{
+					text3 = this.setQuestInfo(agent9.agentName, text2);
+				}
+				if (this.gc.streamingWorld)
+				{
+					text2 = "Kill";
+				}
+				if (text2 != null)
+				{
+					uint num30 = < PrivateImplementationDetails >.ComputeStringHash(text2);
+					if (num30 <= 1230354862U)
+					{
+						if (num30 <= 740927535U)
+						{
+							if (num30 <= 321077238U)
+							{
+								if (num30 != 24605961U)
+								{
+									if (num30 == 321077238U)
+									{
+										if (text2 == "DestroyAndRetrieve")
+										{
+											if (objectReal == null)
+											{
+												objectReal = this.FindObjectType(text3, agent9, "Object");
+											}
+											if (objectReal != null)
+											{
+												this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+												this.numQuests++;
+												flag2 = true;
+											}
+										}
+									}
+								}
+								else if (text2 == "PlantItem")
+								{
+									if (objectReal == null)
+									{
+										objectReal = this.FindObjectType(text3, agent9, "Object");
+									}
+									if (objectReal != null)
+									{
+										this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+										this.numQuests++;
+										flag2 = true;
+									}
+								}
+							}
+							else if (num30 != 637477804U)
+							{
+								if (num30 != 737074361U)
+								{
+									if (num30 == 740927535U)
+									{
+										if (text2 == "UseAll")
+										{
+											if (objectReal == null)
+											{
+												objectReal = this.FindObjectType(text3, agent9, "Object");
+											}
+											if (objectReal != null)
+											{
+												this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+												this.numQuests++;
+												flag2 = true;
+											}
+										}
+									}
+								}
+								else if (text2 == "Kill")
+								{
+									if (agent2 == null)
+									{
+										agent2 = this.FindAgentType(text3, agent9, "Enemy");
+									}
+									if (agent2 != null)
+									{
+										this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+										this.numQuests++;
+										flag2 = true;
+									}
+								}
+							}
+							else if (text2 == "Rescue")
+							{
+								if (agent2 == null)
+								{
+									agent2 = this.FindAgentType(text3, agent9, "Prisoner");
+								}
+								if (agent2 != null)
+								{
+									this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+									this.numQuests++;
+									flag2 = true;
+								}
+							}
+						}
+						else if (num30 <= 778721476U)
+						{
+							if (num30 != 748805737U)
+							{
+								if (num30 == 778721476U)
+								{
+									if (text2 == "DestroyAll")
+									{
+										if (objectReal == null)
+										{
+											objectReal = this.FindObjectType(text3, agent9, "Object");
+										}
+										if (objectReal != null)
+										{
+											this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+											this.numQuests++;
+											flag2 = true;
+										}
+									}
+								}
+							}
+							else if (text2 == "Retrieve")
+							{
+								if (objectReal == null)
+								{
+									objectReal = this.FindRetrieveLocation(null, agent9, "Object");
+								}
+								if (objectReal != null)
+								{
+									this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+									this.numQuests++;
+									flag2 = true;
+								}
+							}
+						}
+						else if (num30 != 915147270U)
+						{
+							if (num30 != 1172247267U)
+							{
+								if (num30 == 1230354862U)
+								{
+									if (text2 == "Deliver")
+									{
+										if (agent2 == null)
+										{
+											agent2 = this.FindAgentType(text3, agent9, "QuestEnder");
+										}
+										if (agent2 != null)
+										{
+											this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+											this.numQuests++;
+											flag2 = true;
+										}
+									}
+								}
+							}
+							else if (text2 == "RoughUp")
+							{
+								if (agent2 == null)
+								{
+									agent2 = this.FindAgentType(text3, agent9, "Enemy");
+								}
+								if (agent2 != null)
+								{
+									this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+									this.numQuests++;
+									flag2 = true;
+								}
+							}
+						}
+						else if (text2 == "RetrieveDontKill")
+						{
+							if (agent2 == null)
+							{
+								agent2 = this.FindAgentType(text3, agent9, "Enemy");
+							}
+							if (agent2 != null)
+							{
+								objectReal = this.FindRetrieveDontKillLocation(null, agent9, "Object", agent2);
+								if (objectReal != null)
+								{
+									this.SetupQuestType(text2, agent9, objectReal, agent2, null, flag4);
+									this.numQuests++;
+									flag2 = true;
+								}
+							}
+						}
+					}
+					else if (num30 <= 2624426747U)
+					{
+						if (num30 <= 1593263083U)
+						{
+							if (num30 != 1299621093U)
+							{
+								if (num30 == 1593263083U)
+								{
+									if (text2 == "MayorQuest")
+									{
+										if (agent2 != null)
+										{
+											this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+											this.numQuests++;
+											flag2 = true;
+										}
+									}
+								}
+							}
+							else if (text2 == "Destroy")
+							{
+								if (objectReal == null)
+								{
+									objectReal = this.FindObjectType(text3, agent9, "Object");
+								}
+								if (objectReal != null)
+								{
+									this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+									this.numQuests++;
+									flag2 = true;
+								}
+							}
+						}
+						else if (num30 != 1758578471U)
+						{
+							if (num30 != 1968442976U)
+							{
+								if (num30 == 2624426747U)
+								{
+									if (text2 == "GiveStatusEffect")
+									{
+										if (agent2 == null)
+										{
+											agent2 = this.FindAgentType(text3, agent9, "Enemy");
+										}
+										if (agent2 != null)
+										{
+											this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+											this.numQuests++;
+											flag2 = true;
+										}
+									}
+								}
+							}
+							else if (text2 == "KillAll")
+							{
+								if (agent2 == null)
+								{
+									agent2 = this.FindAgentType(text3, agent9, "Enemy");
+								}
+								if (agent2 != null)
+								{
+									this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+									this.numQuests++;
+									flag2 = true;
+								}
+							}
+						}
+						else if (text2 == "FindBombs")
+						{
+							if (objectReal == null)
+							{
+								objectReal = this.FindObjectType(text3, agent9, "Object");
+							}
+							if (objectReal != null)
+							{
+								this.SetupQuestType(text2, agent9, objectReal, objectReal2, objectReal3, flag4);
+								this.numQuests++;
+								flag2 = true;
+							}
+						}
+					}
+					else if (num30 <= 3558474965U)
+					{
+						if (num30 != 3145842578U)
+						{
+							if (num30 == 3558474965U)
+							{
+								if (text2 == "Escort")
+								{
+									if (agent2 == null)
+									{
+										agent2 = this.FindAgentType("Shopkeeper", agent9, text3);
+									}
+									if (agent2 != null)
+									{
+										this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+										this.numQuests++;
+										flag2 = true;
+									}
+								}
+							}
+						}
+						else if (text2 == "FreeSlave")
+						{
+							if (agent2 == null)
+							{
+								agent2 = this.FindAgentType(text3, agent9, "Slave");
+							}
+							if (agent2 != null)
+							{
+								this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+								this.numQuests++;
+								flag2 = true;
+							}
+						}
+					}
+					else if (num30 != 3858897898U)
+					{
+						if (num30 != 3859108611U)
+						{
+							if (num30 == 3907636557U)
+							{
+								if (text2 == "PrisonBreak")
+								{
+									if (agent2 == null)
+									{
+										agent2 = this.FindAgentType(text3, agent9, "Prisoner");
+									}
+									if (agent2 != null)
+									{
+										this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+										this.numQuests++;
+										flag2 = true;
+									}
+								}
+							}
+						}
+						else if (text2 == "UseObject")
+						{
+							if (objectReal == null)
+							{
+								objectReal = this.FindObjectType(text3, agent9, "Object");
+							}
+							if (objectReal != null)
+							{
+								this.SetupQuestType(text2, agent9, objectReal, null, null, flag4);
+								this.numQuests++;
+								flag2 = true;
+							}
+						}
+					}
+					else if (text2 == "KillAndRetrieve")
+					{
+						if (agent2 == null)
+						{
+							agent2 = this.FindAgentType(text3, agent9, "Enemy");
+						}
+						if (agent2 != null)
+						{
+							this.SetupQuestType(text2, agent9, agent2, null, null, flag4);
+							this.numQuests++;
+							flag2 = true;
+						}
+					}
+				}
+				num3++;
+			}
+			else
+			{
+				Debug.Log("Couldn't find quest agent");
+				this.settingUpQuests = false;
+			}
+		}
+		this.questTriesMain++;
+		if (this.numQuests >= this.totalQuests)
+		{
+			this.settingUpQuests = false;
+			Debug.Log("Set up all quests");
+		}
+	}
+
+	if (this.questTriesMain == this.questTriesTotal && this.settingUpQuests)
+	{
+		this.settingUpQuests = false;
+		Debug.Log("Couldn't set up all quests");
+	}
 }

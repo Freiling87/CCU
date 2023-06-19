@@ -150,9 +150,6 @@ namespace CCU
 			Set_True_C = "[CCU] Set True: C",
 			Set_True_D = "[CCU] Set True: D";
 		#endregion
-		#region Utility
-		//SortMutatorsByName = "! Sort Mutators by Name";
-		#endregion
 	}
 	public static class CTrait
 	{

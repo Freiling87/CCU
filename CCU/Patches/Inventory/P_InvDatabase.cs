@@ -154,7 +154,8 @@ namespace CCU.Patches.Inventory
 		{
 			Agent agent = invDatabase.agent;
 
-			if (!agent.inCombat &&
+			if (agent.isPlayer == 0 &&
+				!agent.inCombat &&
 					(agent.HasTrait<Concealed_Carrier>() ||
 					(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
 			{
