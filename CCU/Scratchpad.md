@@ -49,17 +49,11 @@ Notify Guoxin of finalized version so he can translate
       - Rubber Bulleteer
       - Silencerist
     - Knockback Peon: Reduces knockback, making followup attacks easier.
+    - Language: Agents now speak gibberish appropriate to their language when you can't communicate with them.
 ##			Bugs
 Except crickets. Crickets are fine.
 ###				C	Expand _CantSpeakEnglish strings
 Says "I can't speak English" regardless of other NPC's language
-###				H	Expand _NonEnglish strings
-Text-search "NonEnglish" to find a list of Alien, Gorilla, etc. string names.
-Use this system to expand to custom languages. 
-Agent.SayDialogue:
-			string text = this.gc.nameDB.GetName(this.agentName + "_NonEnglish", "Dialogue");
-Change agentName to a custom method
-Ensure you're checking for custom agents
 ###				C	Random Teleport gives Yellow Name
 New
 ###				C	ExtraVarString copying
