@@ -2,6 +2,7 @@
 using CCU.Hooks;
 using HarmonyLib;
 using RogueLibsCore;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -57,8 +58,16 @@ namespace CCU.Traits
 			if (agent is null)
 				return;
 
+			agent.StartCoroutine(DelayedRecalc(agent));
+
 			foreach (InvItem invItem in agent.inventory.InvItemList)
 				SetupItem(agent, invItem);
+		}
+		// Waits one frame so that the newly-added trait is actually included in SetupInventory. OnAdded takes place before it is in the trait list.
+		private static IEnumerator DelayedRecalc(Agent agent)
+		{
+			yield return null;
+			ModifyItemHelper.SetupInventory(agent);
 		}
 		public static void SetupItem(Agent agent, InvItem invItem)
 		{

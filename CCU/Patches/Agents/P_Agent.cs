@@ -152,7 +152,7 @@ namespace CCU.Patches.Agents
 			logger.LogDebug("------- Inventory");
 			foreach (InvItem ii in __instance.inventory.InvItemList.Where(i => !(i.invItemName is null) && i.invItemName != ""))
 			{
-				logger.LogDebug(ii.invItemName + " * " + ii.invItemCount);
+				logger.LogDebug(ii.invItemName + " (" + ii.invItemCount + " / " + ii.maxAmmo + ")");
 
 				foreach (string mod in ii.contents) // Includes special abilities like DR I guess
 					logger.LogDebug("\t+ " + mod);

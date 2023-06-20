@@ -20,8 +20,9 @@ Notify Guoxin of finalized version so he can translate
   - Permanent Hires no longer occupy a hire slot after death.
   - Tubes are now only valid containers for Hidden Bombs if they are within a Computer or Power Box's shutdown range.
   - Melee Maniac + now improves melee attack speed by 48.5% instead of 50%. This prevents the animation from clipping through targets.
-  - Containers holding Money now generate correct quantities
+  - Containers holding Money now generate correct quantities.
   - Scene Setters restore correct Owner ID to agents after taking effect. This bug had mainly manifested with Yellow agent names after Random Teleportation.
+  - Item-modfying traits now correctly apply their affect when gained mid-game.
 - Feature additions
   - Items
     - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
@@ -53,14 +54,6 @@ Notify Guoxin of finalized version so he can translate
   - Language System: Added some dialogue regarding various language gaps.
 ##			Bugs
 Except crickets. Crickets are fine.
-###				C	ExtraVarString copying
-It's back! Yay. It's back.
-###				C	Ammo Cap
-CL - Having a gun already when you pick one of the traits still doesn't update the max ammo
-###				T	Fearless
-https://discord.com/channels/187414758536773632/1003391847902740561/1087385752754716804
-Added prefixes to AssessBattle & AssessFlee
-Pending confirmation from Maxior
 ##			Bug Archive
 ###				H	Scene Setters Activate Chunk
 Scene setters may cause events that the designer wished the player to witness to play out too early for them to see. Normally the trigger for activating the chunk is by player proximity.
