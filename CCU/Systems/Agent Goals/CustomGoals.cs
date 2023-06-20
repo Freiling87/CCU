@@ -146,6 +146,8 @@ namespace CCU.Systems.CustomGoals
                         KillEmSoftly(agent);
                         break;
                 }
+
+                agent.ownerID = agent.GetOrAddHook<H_Agent>().originalOwnerID;
             }
         }
 

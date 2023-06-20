@@ -16,6 +16,8 @@ namespace CCU.Hooks
 			//Core.LogMethodCall();
 			GrabAppearance();
 			mustRollAppearance = true;
+
+			originalOwnerID = ((Agent)Instance).ownerID;
 			SceneSetterFinished = false; // Avoids removal from series mid-traversal
 		}
 
@@ -49,5 +51,7 @@ namespace CCU.Hooks
 		public string skinColor;
 
 		public List<string> ClassifierScannedAgents = new List<string> { };
+
+		public int originalOwnerID;
 	}
 }

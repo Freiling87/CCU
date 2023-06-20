@@ -42,6 +42,8 @@ namespace CCU.Patches.Agents
 				if (agent.agentName != VanillaAgents.CustomCharacter)
 					return;
 
+				if (log) logger.LogDebug("         INTERACTION DATA: " + agent.agentRealName);
+				if (log) logger.LogDebug("OwnerID: " + agent.ownerID);
 				if (log) logger.LogDebug("======== AGENTINTERACTIONS");
 				AgentInteractions agentInteractions = agent.agentInteractions;
 				Agent interactingAgent = h.Agent;

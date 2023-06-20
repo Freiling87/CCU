@@ -21,6 +21,7 @@ Notify Guoxin of finalized version so he can translate
   - Tubes are now only valid containers for Hidden Bombs if they are within a Computer or Power Box's shutdown range.
   - Melee Maniac + now improves melee attack speed by 48.5% instead of 50%. This prevents the animation from clipping through targets.
   - Containers holding Money now generate correct quantities
+  - Scene Setters restore correct Owner ID to agents after taking effect. This bug had mainly manifested with Yellow agent names after Random Teleportation.
 - Feature additions
   - Items
     - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
@@ -49,13 +50,9 @@ Notify Guoxin of finalized version so he can translate
       - Rubber Bulleteer
       - Silencerist
     - Knockback Peon: Reduces knockback, making followup attacks easier.
-    - Language: Agents now speak gibberish appropriate to their language when you can't communicate with them.
+  - Language System: Added some dialogue regarding various language gaps.
 ##			Bugs
 Except crickets. Crickets are fine.
-###				C	Expand _CantSpeakEnglish strings
-Says "I can't speak English" regardless of other NPC's language
-###				C	Random Teleport gives Yellow Name
-New
 ###				C	ExtraVarString copying
 It's back! Yay. It's back.
 ###				C	Random Teleport
