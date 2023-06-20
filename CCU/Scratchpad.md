@@ -55,9 +55,6 @@ Notify Guoxin of finalized version so he can translate
 Except crickets. Crickets are fine.
 ###				C	ExtraVarString copying
 It's back! Yay. It's back.
-###				C	Random Teleport
-	CL - Spawning idle
-It's just the legacy entry I think. 
 ###				C	Ammo Cap
 CL - Having a gun already when you pick one of the traits still doesn't update the max ammo
 ###				T	Fearless

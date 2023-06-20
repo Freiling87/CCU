@@ -83,6 +83,16 @@ namespace CCU.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Debugulizer {
+            get {
+                object obj = ResourceManager.GetObject("Debugulizer", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] RubberBulletsMod {
             get {
                 object obj = ResourceManager.GetObject("RubberBulletsMod", resourceCulture);

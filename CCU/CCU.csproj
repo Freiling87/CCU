@@ -127,6 +127,7 @@
     <Compile Include="Hooks\H_InvItem.cs" />
     <Compile Include="Hooks\H_Agent.cs" />
     <Compile Include="Hooks\H_ObjectReal.cs" />
+    <Compile Include="Items\Debugulizer.cs" />
     <Compile Include="Items\RubberBulletsMod.cs" />
     <Compile Include="Items\ClassAWare.cs" />
     <Compile Include="Items\I_CCU.cs" />
@@ -895,6 +896,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Image\ClassAWare.bin" />
+    <None Include="Resources\Image\Debugulizer.bin" />
     <None Include="Resources\Image\RubberBulletsMod.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
