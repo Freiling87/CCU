@@ -5,8 +5,10 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-##			Before release
-Notify Guoxin of finalized version so he can translate
+##			Pre-release checks
+- Notify translators
+  - TBB
+  - Guoxin
 ##			v. 1.1.1 Changelog
 - Compatibility
   - Verified compatibility with SOR v98 
@@ -44,6 +46,7 @@ Notify Guoxin of finalized version so he can translate
     - Senses
       - Keen Ears traits: Various traits that determine how sensitive the NPC is to sound, and how they react to it.
   - Player Traits
+    - Trait Categories: There's a hidden system in the game which chooses your trait options on level up based on your existing character. I've added Trait Categories to all Player Traits to hook into this system. You should get more relevant trait options from now on.
     - Gun Nut: Agent automatically applies a mod to all eligible guns.
       - Accuracy Modder
       - Ammo Stocker
@@ -54,6 +57,13 @@ Notify Guoxin of finalized version so he can translate
   - Language System: Added some dialogue regarding various language gaps.
 ##			Bugs
 Except crickets. Crickets are fine.
+###				Identical Shop Inventories
+Copies of Test Dummy A all have the same shop rolls
+
+###				Water Pistol in Shops
+Doesn't seem to show up in inventories when other items are in the pool.
+Qty is large negative number for some reason, not affected by Shiddy/Shoddy
+Side note, taser spawns in vanilla shopkeeper without even showing a qty, maybe we can bypass by nulling it?
 ##			Bug Archive
 ###				H	Scene Setters Activate Chunk
 Scene setters may cause events that the designer wished the player to witness to play out too early for them to see. Normally the trigger for activating the chunk is by player proximity.
