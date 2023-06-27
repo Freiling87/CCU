@@ -58,9 +58,11 @@ namespace CCU.Traits.Loadout_Gun_Nut
 						categories = { VTraitCategory.Guns }
 					}
 				});
-			RogueLibs.CreateCustomName("CantUseWeapons", NameTypes.Description, new CustomNameInfo
+
+			// Replaces vanilla trait text
+			RogueLibs.CreateCustomName(VanillaTraits.Pacifist, NameTypes.Description, new CustomNameInfo
 			{
-				English = "Can't use weapons, except for some thrown items and Rubber Bullet-modded guns.",
+				[LanguageCode.English] = "Can't use weapons, except for some thrown items and Rubber Bullet-modded guns.",
 			});	
 		}
 	}

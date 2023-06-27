@@ -55,6 +55,10 @@ Listed in order of Parent tier summary symbol priority:
       - Silencerist
     - Knockback Peon: Reduces knockback, making followup attacks easier.
   - Language System: Added some dialogue regarding various language gaps.
+##			Translator Notes Draft
+- The easiest way to do this would be to clone the project from Visual Studio/Github. 
+  - Then search for CustomNameInfo, which is the method that interfaces with the translation system.
+  - Anytime you see a CustomNameInfo that lacks a translation for your
 ##			Bugs
 Except crickets. Crickets are fine.
 ###			H	Big Quest for Faction traits

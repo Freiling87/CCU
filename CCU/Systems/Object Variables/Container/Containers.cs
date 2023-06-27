@@ -114,45 +114,45 @@ namespace CCU.Systems.Containers
 			string t = NameTypes.Interface;
 			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "Search"
+				[LanguageCode.English] = "Search",
 			});
 			RogueLibs.CreateCustomName(CButtonText.Ransack, t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "Ransack"
+				[LanguageCode.English] = "Ransack",
 			});
 			RogueLibs.CreateCustomName(COperatingBarText.Ransacking, t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "Ransacking"
+				[LanguageCode.English] = "Ransacking",
 			});
 
 			t = NameTypes.Dialogue;
-			// Stash hint mockups. These are not implemented yet.
+			// Stash hint mockups. These three are not implemented yet, so no need to translate if you want to skip them.
 			// Dialogue is spoken on item pickup, shown in an Investigation window if item activated.
-			RogueLibs.CreateCustomName("StashHint_Barbecue_01", t, new CustomNameInfo
-			{
-				[LanguageCode.English] = "I won't make it for Christmas this year, sorry. You won't end up with a lump of coal, at least. But you'll probably have to dig through some to find your gift. Hope you were good this year!"
-			});
-			RogueLibs.CreateCustomName("StashHint_Barbecue_02", t, new CustomNameInfo
-			{
-				[LanguageCode.English] = "The cops ransacked the place again this week, and they looked hungry for evidence. Well, unless they're hungry for some pork ribs they're not gonna find what they're looking for. HINT HINT."
-			});
-			RogueLibs.CreateCustomName("StashHint_Bathtub_01", t, new CustomNameInfo
-			{
-				[LanguageCode.English] = "That thing we stole... it's too hot to sell yet, even to a fence. Let's stay out of prison for now. I hid it somewhere where it's safe to drop the soap."
-			});
+			//RogueLibs.CreateCustomName("StashHint_Barbecue_01", t, new CustomNameInfo
+			//{
+			//	[LanguageCode.English] = "I won't make it for Christmas this year, sorry. You won't end up with a lump of coal, at least. But you'll probably have to dig through some to find your gift. Hope you were good this year!",
+			//});
+			//RogueLibs.CreateCustomName("StashHint_Barbecue_02", t, new CustomNameInfo
+			//{
+			//	[LanguageCode.English] = "The cops ransacked the place again this week, and they looked hungry for evidence. Well, unless they're hungry for some pork ribs they're not gonna find what they're looking for. HINT HINT.",
+			//});
+			//RogueLibs.CreateCustomName("StashHint_Bathtub_01", t, new CustomNameInfo
+			//{
+			//	[LanguageCode.English] = "That thing we stole... it's too hot to sell yet, even to a fence. Let's stay out of prison for now. I hid it somewhere where it's safe to drop the soap.",
+			//});
 
 			// Inaccessible Containers
 			RogueLibs.CreateCustomName(CantAccessContainer_ToiletShidded, t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "It's too shiddy!"
+				[LanguageCode.English] = "It's too shiddy!",
 			});
 			RogueLibs.CreateCustomName(CantAccessContainer_TooHot, t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "It's too hot to touch!"
+				[LanguageCode.English] = "It's too hot to touch!",
 			});
 			RogueLibs.CreateCustomName(CantAccessContainer_TubeFunctional, t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "It's still running, and I want to keep all my limbs."
+				[LanguageCode.English] = "It's still running, and I want to keep all my limbs.",
 			});
 		}
 

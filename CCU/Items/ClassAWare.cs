@@ -99,87 +99,88 @@ namespace CCU.Items
         #region Header
         static CustomName headerText1 = RogueLibs.CreateCustomName("headerText1", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Scan complete. File saved:"
+            [LanguageCode.English] = "Scan complete. File saved:",
         });
         static CustomName headerText2 = RogueLibs.CreateCustomName("headerText2", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Loading scan from memory:"
+            [LanguageCode.English] = "Loading scan from memory:",
         });
+        // "Memory / Capacity"
         static CustomName headerText3 = RogueLibs.CreateCustomName("headerText3", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "MEM/CAP"
+            [LanguageCode.English] = "MEM/CAP",
         });
         #endregion
         #region Health
         static CustomName healthText1 = RogueLibs.CreateCustomName("healthText1", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "HEALTH"
+            [LanguageCode.English] = "HEALTH",
         });
         static CustomName healthTextDead = RogueLibs.CreateCustomName("healthTextDead", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "ERROR CODE 69707 - Target may be dead."
+            [LanguageCode.English] = "ERROR CODE 69707 - Target may be dead.",
         });
         #endregion
         #region Special Ability
         static CustomName abilityText1 = RogueLibs.CreateCustomName("abilityText1", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "ABILITY"
+            [LanguageCode.English] = "ABILITY",
         });
         static CustomName abilityNoneFound = RogueLibs.CreateCustomName("abilityNoneFound", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "ERROR CODE 8008135 - Target has no talent. SAD!"
+            [LanguageCode.English] = "ERROR CODE 8008135 - Target has no talent. SAD!",
         });
         #endregion
         #region Attributes
         // Translators: Please adjust number of tabs ("\t") to align attribute bars evenly
         static CustomName attributeHeader = RogueLibs.CreateCustomName("attributeHeader", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "VITALS"
+            [LanguageCode.English] = "VITALS",
         });
         static CustomName attributeName1 = RogueLibs.CreateCustomName("attributeName1", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Endurance\t\t\t\t"
+            [LanguageCode.English] = "Endurance\t\t\t\t",
         });
         static CustomName attributeName2 = RogueLibs.CreateCustomName("attributeName2", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Speed\t\t\t\t\t\t"
+            [LanguageCode.English] = "Speed\t\t\t\t\t\t",
         });
         static CustomName attributeName3 = RogueLibs.CreateCustomName("attributeName3", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Melee\t\t\t\t\t\t"
+            [LanguageCode.English] = "Melee\t\t\t\t\t\t",
         });
         static CustomName attributeName4 = RogueLibs.CreateCustomName("attributeName4", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Firearms\t\t\t\t\t"
+            [LanguageCode.English] = "Firearms\t\t\t\t\t",
         });
         #endregion
         #region Traits
         static CustomName traitsHeader = RogueLibs.CreateCustomName("traitsHeader", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "TRAITS"
+            [LanguageCode.English] = "TRAITS",
         });
         static CustomName noTraitsText = RogueLibs.CreateCustomName("noTraitsText", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "ERROR CODE 0000 - No identifiable traits. LOSER ALERT!"
+            [LanguageCode.English] = "ERROR CODE 0000 - No identifiable traits. LOSER ALERT!",
         });
         #endregion
         #region Footer
         static CustomName footerText1 = RogueLibs.CreateCustomName("footerText1", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "Class-A-Ware MxII, v4.2.0"
+            [LanguageCode.English] = "Class-A-Ware MxII, v4.2.0",
         });
         // The following 3 strings are all part of the same text block.
         static CustomName footerText2 = RogueLibs.CreateCustomName("footerText2", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "By Cachet Biopharm, Copyright 2069. This device is not designed to"
+            [LanguageCode.English] = "By Cachet Biopharm, Copyright 2069. This device is not designed to",
         });
         static CustomName footerText3 = RogueLibs.CreateCustomName("footerText3", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "diagnose or treat medical conditions. Contains materials known in"
+            [LanguageCode.English] = "diagnose or treat medical conditions. Contains materials known in",
         });
         static CustomName footerText4 = RogueLibs.CreateCustomName("footerText4", "Interface", new CustomNameInfo
         {
-            [LanguageCode.English] = "the state of Neo-Cyber-California to cause Space Cancer."
+            [LanguageCode.English] = "the state of Neo-Cyber-California to cause Space Cancer.",
         });
         #endregion
 
