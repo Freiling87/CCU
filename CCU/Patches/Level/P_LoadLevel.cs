@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Systems.CustomGoals;
 using CCU.Traits.Loadout_Chunk_Items;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -14,18 +13,6 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Level
 {
-	[HarmonyPatch(declaringType: typeof(LoadLevel))]
-	public static class P_LoadLevel
-	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		public static GameController GC => GameController.gameController;
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetupMore5))]
-		public static void SetupMore5_Postfix()
-        {
-			CustomGoals.RunSceneSetters();
-        }
-	}
 
     [HarmonyPatch(declaringType: typeof(LoadLevel))]
 	static class P_LoadLevel_loadStuff2

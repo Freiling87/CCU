@@ -60,6 +60,9 @@ namespace CCU.Patches.Agents
 		{
 			List<string> langs = otherAgent.GetTraits<T_Language>().SelectMany(t => t.LanguageNames).ToList();
 
+			if (!otherAgent.HasTrait(VanillaTraits.VocallyChallenged))
+				langs.Add("English");
+
 			if (langs.Count > 1)
 				agent.Say("I can't speak any languages they understand.");
 			else if (langs.Count == 1)

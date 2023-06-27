@@ -140,7 +140,6 @@
     <Compile Include="Extensions\E_GoalDetails.cs" />
     <Compile Include="Content\GoalSafecrackSafe.cs" />
     <Compile Include="Content\GoalSafecrackSafeReal.cs" />
-    <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Mutators\Laws\C_Law.cs" />
     <Compile Include="Mutators\Laws\No_Open_Carry.cs" />
     <Compile Include="Mutators\Progression\Big_Quest_Mandatory.cs" />
@@ -151,7 +150,6 @@
     <Compile Include="Patches\Goals\P_GoalFlee.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
     <Compile Include="Patches\Interface\P_ObjectSprite.cs" />
-    <Compile Include="Patches\Interface\P_WorldSpaceGUI.cs" />
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ComputerShutdown.cs" />
@@ -193,16 +191,13 @@
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
     <Compile Include="Patches\Goals\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
-    <Compile Include="Patches\Interface\P_LevelEditor.cs" />
     <Compile Include="Patches\Interface\P_QuestMarker.cs" />
     <Compile Include="Patches\Interface\P_ScrollingMenu.cs" />
     <Compile Include="Patches\Interface\P_StatusEffectDisplay.cs" />
     <Compile Include="Patches\Inventory\P_InvDatabase.cs" />
     <Compile Include="Patches\Inventory\P_ItemFunctions.cs" />
-    <Compile Include="Patches\Objects\P_BasicObject.cs" />
     <Compile Include="Patches\Objects\P_Door.cs" />
     <Compile Include="Patches\Objects\P_ExitPoint.cs" />
-    <Compile Include="Patches\Objects\P_ObjectReal.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObject.cs" />
     <Compile Include="Patches\Objects\P_PlayfieldObjectInteractions.cs" />
     <Compile Include="Patches\P_GameController.cs" />
@@ -528,6 +523,8 @@
     <Compile Include="Traits\Cost Currency\Shylock.cs" />
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
     <Compile Include="Traits\Cost Currency\T_CostCurrency.cs" />
+    <Compile Include="Traits\Cost Scale\Less_ish.cs" />
+    <Compile Include="Traits\Cost Scale\Little_Steep.cs" />
     <Compile Include="Traits\Cost Scale\Much_More.cs" />
     <Compile Include="Traits\Drug Warrior Modifier\Extended_Release.cs" />
     <Compile Include="Traits\Drug Warrior Modifier\Eternal_Release.cs" />

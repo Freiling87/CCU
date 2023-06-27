@@ -75,7 +75,7 @@ namespace CCU.Patches.Agents
 			if (__result is false && 
 				!__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
                 !otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
-				Language.HaveSharedLanguage(__instance, otherAgent))
+				Language.SharedLanguages(__instance, otherAgent).Any())
 				__result = true;
 
 			return;
@@ -300,7 +300,7 @@ namespace CCU.Patches.Agents
 			if (!__instance.GetTraits<T_GibType>().Any())
 				__instance.AddTrait<Meat_Chunks>();
 
-			Language.AddLangsToVanillaAgents(__instance);
+			T_Language.SetupAgent(__instance);
 
 			// Negatives allow traits to take precedence over mutators.
 			if ((GC.challenges.Contains(nameof(Homesickness_Disabled))  && !__instance.HasTrait<Homesickly>()) ||

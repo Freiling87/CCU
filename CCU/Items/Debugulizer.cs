@@ -1,18 +1,13 @@
 ﻿using BepInEx.Logging;
-using CCU.Hooks;
 using CCU.Localization;
-using CCU.Traits;
 using CCU.Traits.Player.Ammo;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace CCU.Items
 {
-    [ItemCategories(RogueCategories.Usable, RogueCategories.Technology)]
+	[ItemCategories(RogueCategories.Usable, RogueCategories.Technology)]
     public class Debugulizer : I_CCU, IItemTargetable
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -21,9 +16,17 @@ namespace CCU.Items
         [RLSetup]
         public static void Setup()
         {
-            ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<Debugulizer>()
-                .WithName(new CustomNameInfo("Debugulizer"))
-                .WithDescription(new CustomNameInfo("Does what I need it to do!"))
+            if (Core.developerEdition)
+            {
+                ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<Debugulizer>()
+                .WithName(new CustomNameInfo
+                {
+                    [LanguageCode.English] = "Debugulizer",
+                })
+                .WithDescription(new CustomNameInfo
+                {
+                    [LanguageCode.English] = "Developer tool.",
+                })
                 .WithSprite(Properties.Resources.Debugulizer)
                 .WithUnlock(new ItemUnlock
                 {
@@ -33,7 +36,8 @@ namespace CCU.Items
                     UnlockCost = 0,
                 });
 
-            RogueLibs.CreateCustomAudio("Debugulizer_Use", Properties.Resources.ClassAware_Use, AudioType.WAV);
+                RogueLibs.CreateCustomAudio("Debugulizer_Use", Properties.Resources.ClassAware_Use, AudioType.WAV);
+            }
         }
 
         public override void SetupDetails()
@@ -51,9 +55,9 @@ namespace CCU.Items
         public CustomTooltip TargetCursorText(PlayfieldObject target)
         {
             if (target is null || !(target is Agent))
-                return "Choose Target Agent";
+                return ClassAWare.targetingText;
             else
-                return "Valid target:";
+                return ClassAWare.validTargetText;
         }
 
         public bool TargetFilter(PlayfieldObject target) =>
@@ -70,9 +74,14 @@ namespace CCU.Items
             Owner.gc.audioHandler.Play(Owner, "ClassAWare_Use");
             Owner.gc.spawnerMain.SpawnStateIndicator(agent, "HighVolume");
 
-            agent.AddTrait<Ammo_Auteur>();
+            DebugActions(agent);
 
             return true;
+        }
+
+        public static void DebugActions(Agent agent)
+		{
+            agent.AddTrait<Ammo_Auteur>();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Localization;
 using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
@@ -9,8 +8,7 @@ using CCU.Traits.Explosion_Modifier;
 using CCU.Traits.Gib_Type;
 using CCU.Traits.Loot_Drops;
 using CCU.Traits.Passive;
-using CCU.Traits.Player;
-using CCU.Traits.Player.Ammo;
+using CCU.Traits.Player.Movement;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
@@ -24,10 +22,11 @@ using System.Reflection.Emit;
 using UnityEngine;
 using UnityEngine.Networking;
 using static CCU.Traits.Gib_Type.T_GibType;
+using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Patches
 {
-    [HarmonyPatch(declaringType: typeof(StatusEffects))]
+	[HarmonyPatch(declaringType: typeof(StatusEffects))]
 	class P_StatusEffects
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -72,8 +71,8 @@ namespace CCU.Patches
 
 			if
 			(
-				(agent.HasTrait(VanillaTraits.BlahdBasher) && IsBashable(myAgent)) ||
-				(agent.HasTrait(VanillaTraits.CrepeCrusher) && IsCrushable(myAgent)) || 
+				(agent.HasTrait(VanillaTraits.BlahdBasher) && AlignmentUtils.CountsAsBlahd(myAgent)) ||
+				(agent.HasTrait(VanillaTraits.CrepeCrusher) && AlignmentUtils.CountsAsCrepe(myAgent)) || 
 				(agent.HasTrait("HatesScientist") && myAgent.HasTrait<Slayable>()) ||
 				(agent.HasTrait(VanillaTraits.Specist) && myAgent.HasTrait<Specistist>()))
 			{
@@ -83,10 +82,6 @@ namespace CCU.Patches
 
 			return true;
 		}
-		private static bool IsBashable(Agent agent) =>
-			agent.agentName == VanillaAgents.GangsterBlahd || agent.HasTrait<Blahd_Aligned>() || agent.HasTrait<Crepe_Hostile>();
-		private static bool IsCrushable(Agent agent) =>
-			agent.agentName == VanillaAgents.GangsterCrepe || agent.HasTrait<Crepe_Aligned>() || agent.HasTrait<Blahd_Hostile>();
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), 
 			argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]

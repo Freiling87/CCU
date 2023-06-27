@@ -31,8 +31,7 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.GangsterCrepe ||
-            agent.HasTrait<Crepe_Aligned>()
+            AlignmentUtils.CountsAsCrepe(agent)
                 ? VRelationship.Aligned
                 : null;
         public override void OnAdded() { }

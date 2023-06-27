@@ -57,13 +57,17 @@ Listed in order of Parent tier summary symbol priority:
   - Language System: Added some dialogue regarding various language gaps.
 ##			Bugs
 Except crickets. Crickets are fine.
-###				Identical Shop Inventories
+###			H	Big Quest for Faction traits
+Count Blahd-aligned as Blahd, e.g.
+###			T	Scene Setter Breakage
+https://discord.com/channels/187414758536773632/991046848536006678/1122856007706607656
+Spawning with visible hostiles is confirmed to interrupt it inconsistently
+###			H	Normal (EOD) in Shop Inventory
+https://discord.com/channels/187414758536773632/1003391847902740561/1121962031235477524
+No clue how to replicate this.
+###			H	Identical Shop Inventories
 Copies of Test Dummy A all have the same shop rolls
-
-###				Water Pistol in Shops
-Doesn't seem to show up in inventories when other items are in the pool.
-Qty is large negative number for some reason, not affected by Shiddy/Shoddy
-Side note, taser spawns in vanilla shopkeeper without even showing a qty, maybe we can bypass by nulling it?
+Not bothering unless people complain!
 ##			Bug Archive
 ###				H	Scene Setters Activate Chunk
 Scene setters may cause events that the designer wished the player to witness to play out too early for them to see. Normally the trigger for activating the chunk is by player proximity.
@@ -176,6 +180,11 @@ On selecting empty character slot:
 ####				C	Fix
 Was rolling appearance without checking for CustomCharacterData. Added early return.
 ##			Features
+###			C	Interaction - Buy Intel
+Maps unmapped safes and chests, scaled to number or repeatable
+###			C	Add Less-ISh
+75% cost
+
 ###			C	Vanillize Item Qty on load
 Editor-added items give full ammo, should be semi-random and scaled to NPC level as Loadout items are
 ###			C	Hide Appearance Traits Button

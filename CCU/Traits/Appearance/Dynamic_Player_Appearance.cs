@@ -1,8 +1,9 @@
-﻿using RogueLibsCore;
+﻿using CCU.Hooks;
+using RogueLibsCore;
 
 namespace CCU.Traits.App
 {
-	public class Dynamic_Player_Appearance : T_CCU
+	public class Dynamic_Player_Appearance : T_CCU, ISetupAgentStats
 	{
 		[RLSetup]
 		public static void Setup()
@@ -26,5 +27,11 @@ namespace CCU.Traits.App
 		}
 		public override void OnAdded() { }
 		public override void OnRemoved() { }
+
+		public void SetupAgentStats(Agent agent)
+		{
+			if (!agent.clonedAgent)
+				agent.GetOrAddHook<H_Agent>().mustRollAppearance = true;
+		}
 	}
 }

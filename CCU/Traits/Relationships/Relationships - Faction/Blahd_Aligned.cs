@@ -1,4 +1,5 @@
 ﻿using CCU.Localization;
+using CCU.Patches.Agents;
 using RogueLibsCore;
 
 namespace CCU.Traits.Rel_Faction
@@ -31,10 +32,10 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.GangsterBlahd ||
-            agent.HasTrait<Blahd_Aligned>()
+            AlignmentUtils.CountsAsBlahd(agent)
                 ? VRelationship.Aligned
                 : null;
+
         public override void OnAdded() { }
         public override void OnRemoved() { }
     }

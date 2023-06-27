@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
 using CCU.Localization;
-using CCU.Systems.Investigateables;
 using CCU.Traits;
 using HarmonyLib;
 using System;
@@ -12,32 +11,6 @@ namespace CCU.Patches
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
-
-		// Disabling these TEMPORARILY while implementing replacements.
-		// Hopefully we can replace these fixes while we're at it.
-
-		/// <summary>
-		/// I think this was meant to bypass the postfix, showing the new replaced traits in the list instead? Good god
-		/// </summary>
-		/// <param name="myName"></param>
-		/// <param name="type"></param>
-		/// <param name="__result"></param>
-		/// <returns></returns>
-		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(NameDB.GetName))]
-		public static bool GetName_Prefix(ref string myName, string type, ref string __result)
-		{
-			//if (type == "StatusEffect" && Legacy.TraitConversions.ContainsKey(myName))
-			//	myName = T_CCU.DesignerName(Legacy.TraitConversions[myName]);
-
-			if (type == "Item")
-				if (Investigateables.IsInvestigationString(myName))
-				{
-					__result = myName;
-					return false;
-				}
-
-			return true;
-        }
 
 		/// <summary>
 		/// This is a hacky way of displaying outdated traits correctly in character selection. 
@@ -69,9 +42,5 @@ namespace CCU.Patches
 			}
 		}
 
-		// TODO: Test Note Drop bug and see if the commented part fixes it
-		public static bool IsActualItem(InvItem invItem) =>
-			!invItem.invItemName?.Contains("E_") ?? false;
-			
 	}
 }

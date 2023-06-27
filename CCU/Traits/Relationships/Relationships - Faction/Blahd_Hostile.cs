@@ -7,7 +7,7 @@ namespace CCU.Traits.Rel_Faction
     {
         public override int Faction => 0;
         public override Alignment FactionAlignment => throw new System.NotImplementedException();
-
+        
         [RLSetup]
         public static void Setup()
         {
@@ -31,8 +31,8 @@ namespace CCU.Traits.Rel_Faction
         }
 
         public override string GetRelationshipTo(Agent agent) =>
-            agent.agentName == VanillaAgents.GangsterBlahd ||
-            agent.HasTrait<Blahd_Aligned>()
+            AlignmentUtils.CountsAsBlahd(agent)
+            || agent.HasTrait(VanillaTraits.CrepeCrusher)
                 ? VRelationship.Hostile
                 : null;
         public override void OnAdded() { }

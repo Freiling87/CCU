@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,29 @@ namespace CCU.Challenges
 				result.Add(provider.CustomNames[NameTypes.StatusEffect][mutator.Name].GetCurrent());
 
 			return result;
+		}
+	}
+
+	[HarmonyPatch(declaringType: typeof(LevelEditor))]
+	public static class P_LevelEditor
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LevelEditor.CreateMutatorListLevel))]
+		public static bool CreateMutatorList_Level(LevelEditor __instance, ref float ___numButtonsLoad)
+		{
+			List<string> list = new List<string>();
+
+			foreach (Unlock unlock in GC.sessionDataBig.challengeUnlocks)
+				list.Add(unlock.unlockName);
+
+			__instance.ActivateLoadMenu();
+			___numButtonsLoad = list.Count;
+			__instance.OpenObjectLoad(list);
+			__instance.StartCoroutine("SetScrollbarPlacement");
+
+			return false;
 		}
 	}
 }

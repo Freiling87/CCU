@@ -12,7 +12,8 @@ namespace CCU.Traits.Merchant_Stock
         public abstract void OnAddItem(ref InvItem invItem);
         public static List<string> ExceptionItems = new List<string>()
         {
-            vItem.Taser
+            vItem.Taser,
+            vItem.WaterPistol,
         };
         internal List<string> DurabilityTypes = new List<string>()
         {

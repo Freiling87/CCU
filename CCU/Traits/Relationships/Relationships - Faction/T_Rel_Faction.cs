@@ -37,6 +37,14 @@ namespace CCU.Traits.Rel_Faction
         
         public static class AlignmentUtils
         {
+            public static bool CountsAsBlahd(Agent agent) =>
+                agent.agentName == VanillaAgents.GangsterBlahd
+                || agent.HasTrait<Blahd_Aligned>();
+
+            public static bool CountsAsCrepe(Agent agent) =>
+                agent.agentName == VanillaAgents.GangsterCrepe
+                || agent.HasTrait<Crepe_Aligned>();
+
             public static Alignment FromString(string alignmentString) =>
                 Enum.TryParse(alignmentString, true, out Alignment alignment)
                     ? alignment

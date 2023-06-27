@@ -82,17 +82,16 @@ namespace CCU.Traits.App
 		{
 			Agent agent = agentHitbox.agent;
 
-			if (agent.agentName != VanillaAgents.CustomCharacter ||
-				!agent.GetOrAddHook<H_Agent>().mustRollAppearance || 
-				agent.customCharacterData is null)
-				return;
-
-			if (agent.isPlayer != 0 && !agent.HasTrait<Dynamic_Player_Appearance>())
+			if (agent.isPlayer != 0)
 			{
 				agent.GetOrAddHook<H_Agent>().GrabAppearance();
-				RollEyeType(agentHitbox);
+				RollEyeType(agentHitbox); // Does built-in setup that keeps from breaking
 				return;
 			}
+
+			if (!agent.GetOrAddHook<H_Agent>().mustRollAppearance
+				|| agent.customCharacterData is null)
+				return;
 
 			// Be very careful with reordering these - some of these are dependent on each other.
 			RollSkinColor(agentHitbox);

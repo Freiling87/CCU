@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits.App;
 using RogueLibsCore;
 using System.Collections.Generic;
 
@@ -6,19 +7,38 @@ namespace CCU.Hooks
 {
 	public class H_Agent : HookBase<PlayfieldObject>
 	{
-		// Instance = host Agent
+		// NOTE: Instance = host Agent
 
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public bool SceneSetterFinished;
+
+		public bool WalkieTalkieUsed;
+		public bool HiredPermanently;
+		public int SuicideVestTimer;
+
+		public bool mustRollAppearance;
+		public string bodyColor;
+		public string bodyType;
+		public string eyesType;
+		public string skinColor;
+
+		public List<string> classawareStoredAgents = new List<string> { };
+
+		public List<string> languages = new List<string> { };
+
+		public int originalOwnerID;
+
 		protected override void Initialize()
 		{
-			//Core.LogMethodCall();
-			GrabAppearance();
-			mustRollAppearance = true;
+			Agent agent = (Agent)Instance;
 
-			originalOwnerID = ((Agent)Instance).ownerID;
-			SceneSetterFinished = false; // Avoids removal from series mid-traversal
+			mustRollAppearance = 
+				agent.HasTrait<Dynamic_Player_Appearance>()
+				|| agent.isPlayer == 0;
+
+			GrabAppearance();
 		}
 
 		public void GrabAppearance()
@@ -35,23 +55,7 @@ namespace CCU.Hooks
 
 		public void Reset()
 		{
-			ClassifierScannedAgents.Clear();
+			classawareStoredAgents.Clear();
 		}
-
-		public bool SceneSetterFinished;
-
-		public bool WalkieTalkieUsed;
-		public bool HiredPermanently;
-		public int SuicideVestTimer;
-
-		public bool mustRollAppearance;
-		public string bodyColor;
-		public string bodyType;
-		public string eyesType;
-		public string skinColor;
-
-		public List<string> ClassifierScannedAgents = new List<string> { };
-
-		public int originalOwnerID;
 	}
 }

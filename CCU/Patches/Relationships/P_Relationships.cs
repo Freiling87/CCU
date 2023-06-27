@@ -54,8 +54,8 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
-            bool logging = ___agent.agentName == VanillaAgents.CustomCharacter 
-                && false;
+            bool logging = ___agent.HasTrait(VanillaTraits.BlahdBasher) || ___agent.HasTrait(VanillaTraits.CrepeCrusher)
+                || otherAgent.HasTrait(VanillaTraits.BlahdBasher) || otherAgent.HasTrait(VanillaTraits.CrepeCrusher);
 
             if (logging)
                 logger.LogDebug(string.Format("SetupRelationshipOriginal_Postfix: {0} / {1}", ___agent.agentRealName, otherAgent.agentRealName));
@@ -66,7 +66,7 @@ namespace CCU.Patches.AgentRelationships
             string relationship = null;
 
             #region Factions
-            //  Factions, Custom
+            //  Factions 1-4
             if (___agent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0) && otherAgent.GetTraits<T_Rel_Faction>().Any(t => t.Faction != 0))
             {
                 Alignment rel = AlignmentUtils.GetAverageAlignment(___agent, otherAgent);
@@ -75,9 +75,12 @@ namespace CCU.Patches.AgentRelationships
                     relationship = rel.ToString();
             }
 
-            // Factions, Vanilla
+            // Non-numbered factions
+            // For why Basher/Crusher don't make mutually hostile: https://discord.com/channels/187414758536773632/991046848536006678/1063173054257168424
             foreach (T_Rel_Faction trait in ___agent.GetTraits<T_Rel_Faction>().Where(t => t.Faction == 0))
+            {
                 relationship = trait.GetRelationshipTo(otherAgent) ?? relationship;
+            }
             #endregion
 
             //  Player
@@ -121,11 +124,14 @@ namespace CCU.Patches.AgentRelationships
                     break;
                 case VRelationship.Aligned:
                     __instance.SetRelInitial(otherAgent, VRelationship.Aligned);
+                    __instance.SetRelHate(otherAgent, 0);
                     __instance.SetSecretHate(otherAgent, false);
+
                     if (mutual)
                     {
                         otherAgent.relationships.SetRelInitial(agent, VRelationship.Aligned);
                         otherAgent.relationships.SetRelHate(agent, 0);
+                        otherAgent.relationships.SetSecretHate(agent, false);
                     }
                     break;
                 case VRelationship.Annoyed:

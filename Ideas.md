@@ -1,5 +1,4 @@
-﻿Recently separated these from the Scratchpad file, since it's gigantomongous. See notes in that file if you're confused.
-
+﻿
 
 #			v2.0.0 Slate
 Pending release of SOR2
@@ -377,8 +376,7 @@ P_Unlocks.GetUnlock_Prefix
 ####				√	Player Side 
 P_StatusEffects.AddTrait_Prefix
 ##		H	Trait Utilities 
-###			!	Collapsible Groups
-The BunnyMod content has been found and integrated into the attempts. No need to go back to it.
+###			H!	Collapsible Groups
 After numerous attempts I'm shelving this for 1.1.0, though it remains a top UI priority.
 ###			C	Reactive coloration
 Color 1 - Group headers 
@@ -423,8 +421,6 @@ Complete
 ###				√	Random Teleport
 Complete
 #		√H	Items
-##			C	Rubber Bullets Mod
-Unlock
 ##			√H	Class-A-Ware
 It might be cool for these two bars to be *left* of the readout data.
 ###			H	ScrollBar
@@ -434,6 +430,7 @@ These didn't work:
 ###			H	Battery Readout
 Power bar with warning "Replace Battery"
 If you do three rows you could make it look like a battery but you don't have that kind of space
+Base battery on InvItemCount? Baller
 ###			H	Memory Readout
 Also a bar 
 #		C	Level Editor Interface
@@ -2295,38 +2292,3 @@ Doing entries for each type would be prohibitive, but if one ExtraVarString look
 ####				C	Indestructible
 ###				C	Other (ExtraVarString4)
 ####				C	Explode on Death
-#		√	Bug Archive
-##			√	Fast or Rollerskates won't fall in Hole
-###				√	Fix
-Vanilla bug
-##				H	Suicide doesn't gib
-###				H	Fix
-Hook Regeneration
-##			H	Relationships not Loaded
-###				H	Fix
-Hook Regeneration
-#		√	Trait Archive
-##			√	Cost Scale
-###				√	Less
-Complete
-###				√	More
-Complete
-###				√	Much More
-Complete
-###				√	Zero
-Complete
-##			√	Relationships - Player
-###				√	Player Aligned
-Complete
-###				√	Player Annoyed
-Complete
-###				√	Player Friendly
-Complete
-###				√	Player Hostile
-Complete
-###				√	Player Loyal
-Complete
-###				√	Player Secret Hate
-Moved to Behavior - Ambush (more transparent to user)
-###				√	Player Submissive 
-Complete

@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
+using CCU.Localization;
 using RogueLibsCore;
-using System.Collections.Generic;
 
 namespace CCU.Hooks
 {
@@ -36,8 +36,8 @@ namespace CCU.Hooks
 					Instance.maxAmmo = (int)(Instance.maxAmmo * 1.4f);
 					break;
 				case vItem.RubberBulletsMod:
-					Instance.Categories.Add("NonViolent");
-					Instance.Categories.Add("NotRealWeapons");
+					Instance.Categories.Add(VItemCategory.NonViolent);
+					Instance.Categories.Add(VItemCategory.NotRealWeapons);
 					break;
 
 			}

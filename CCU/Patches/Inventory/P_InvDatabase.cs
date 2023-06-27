@@ -1,10 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Hooks;
 using CCU.Mutators.Laws;
-using CCU.Patches.Agents;
-using CCU.Systems.Containers;
-using CCU.Systems.Investigateables;
 using CCU.Traits;
 using CCU.Traits.Behavior;
 using CCU.Traits.Inventory;
@@ -14,10 +10,7 @@ using CCU.Traits.Loadout_Money;
 using CCU.Traits.Merchant_Stock;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
-using CCU.Traits.Player.Ammo;
 using CCU.Traits.Player.Armor;
-using CCU.Traits.Player.Melee_Combat;
-using CCU.Traits.Player.Ranged_Combat;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -26,12 +19,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CCU.Patches.Inventory
 {
-    [HarmonyPatch(declaringType:typeof(InvDatabase))]
+	[HarmonyPatch(declaringType:typeof(InvDatabase))]
 	public static class P_InvDatabase
 	{
 		// TODO: AddItemReal is private and used in AddRandItem as well as fillAgent
@@ -70,17 +62,6 @@ namespace CCU.Patches.Inventory
 				float ratio = (float)__result.maxAmmo / (float)__result.initCount;
 				__result.invItemCount = (int)(__result.invItemCount * ratio);
 			}
-		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
-		public static bool Awake_Prefix(InvDatabase __instance)
-		{
-			string objectName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
-
-			if (Containers.IsContainer(objectName))
-				__instance.money = new InvItem();
-
-			return true;
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
@@ -213,22 +194,6 @@ namespace CCU.Patches.Inventory
 			LoadoutTools.SetupLoadout(__instance);
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new Type[] { typeof(bool) })]
-		private static void FillChest_Money(InvDatabase __instance)
-		{
-			if (!(__instance.objectReal is null)
-				&& Containers.IsContainer(__instance.objectReal))
-			{
-				InvItem money = __instance.FindItem(vItem.Money);
-
-				if (!(money is null) && money.invItemCount == 0)
-				{
-					__instance.objectReal.chestMoneyTier = 2;
-					money.invItemCount = __instance.FindMoneyAmt(true);
-				}
-			}
-		}
-
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FindMoneyAmt))]
 		private static bool FindMoneyAmount_Prefix(InvDatabase __instance, ref int __result)
         {
@@ -249,11 +214,8 @@ namespace CCU.Patches.Inventory
 		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
         {
 			Agent agent = __instance.agent;
-			List<string> inventory = new List<string>();
-			List<string> finalInventory = new List<string>();
-            System.Random rnd = new System.Random();
-			int attempts = 0;
-			bool forceDuplicates = false;
+			List<string> potentialItems = new List<string>();
+			List<string> rolledItems = new List<string>();
 
 			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)
 				return true;
@@ -266,39 +228,42 @@ namespace CCU.Patches.Inventory
 					// Gives priority to Insider traits
 					if (trait.MerchantInventory.Count == 1)
 					{
-						finalInventory.Add(trait.MerchantInventory[0].Key);
+						rolledItems.Add(trait.MerchantInventory[0].Key);
 					}
 					else
 					{
 						for (int i = 0; i < item.Value; i++) // Qty
-							inventory.Add(__instance.SwapWeaponTypes(item.Key)); // Name
+							potentialItems.Add(__instance.SwapWeaponTypes(item.Key)); // Name
 					}
 				}
 
-		redo: // Yeah redo this whole damn thing
-			while (inventory.Any() && finalInventory.Count < 5 && attempts < 100)
+			int attempts = 0;
+			bool forceDuplicates = false;
+
+		redo: // Yeah why don't you "redo" this whole damn thing or more like "undo" or like "redon't" or or or
+			while (potentialItems.Any() && rolledItems.Count < 5 && attempts < 100)
 			{
 				attempts++;
 
-				int bagPickedIndex = rnd.Next(0, Math.Max(0, inventory.Count - 1));
-				string bagPickedItem = inventory[bagPickedIndex];
+				int bagPickedIndex = CoreTools.random.Next(0, Math.Max(0, potentialItems.Count - 1));
+				string bagPickedItem = potentialItems[bagPickedIndex];
 
-				if (forceDuplicates || !finalInventory.Contains(bagPickedItem) || agent.HasTrait<Clearancer>() )
+				if (forceDuplicates || !rolledItems.Contains(bagPickedItem) || agent.HasTrait<Clearancer>() )
                 {
-					finalInventory.Add(bagPickedItem);
-					inventory.RemoveAt(bagPickedIndex);
+					rolledItems.Add(bagPickedItem);
+					potentialItems.RemoveAt(bagPickedIndex);
 					attempts = 0;
 				}
             }
 
-			if (inventory.Any() && finalInventory.Count < 5)
+			if (potentialItems.Any() && rolledItems.Count < 5)
 			{
 				forceDuplicates = true;
 				attempts = 0;
 				goto redo;
 			}
 
-			foreach (string item in finalInventory) 
+			foreach (string item in rolledItems) 
 			{
 				MethodInfo AddItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal");
 				InvItem invItem = null;
@@ -319,9 +284,8 @@ namespace CCU.Patches.Inventory
 						invItem.canRepeatInShop = true;
 				}
 
-				if (!T_MerchantStock.ExceptionItems.Contains(invItem.invItemName))
-					foreach (T_MerchantStock trait in agent.GetTraits<T_MerchantStock>())
-						trait.OnAddItem(ref invItem);
+				if (T_MerchantStock.ExceptionItems.Contains(invItem.invItemName))
+					invItem.invItemCount = 0;
 
 				// This is apparently done automatically for Durability items
 				if (T_MerchantStock.QuantityTypes.Contains(invItem.itemType))
@@ -368,32 +332,6 @@ namespace CCU.Patches.Inventory
 				? "Clerk"
 				: agent.name;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
-		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo extraVarString = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.extraVarString));
-			MethodInfo magicVarString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.MagicVarString));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 5,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldfld, extraVarString),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Call, magicVarString),
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-		public static string MagicVarString(string vanilla) =>
-			Investigateables.IsInvestigationString(vanilla)
-				? ""
-				: vanilla;
-
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
 		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
         {
@@ -410,33 +348,6 @@ namespace CCU.Patches.Inventory
 
 			__result = true;
 			return false;
-		}
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.TakeAll))]
-		private static IEnumerable<CodeInstruction> TakeAll_ExcludeNotes(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo slots = AccessTools.DeclaredField(typeof(InvInterface), nameof(InvInterface.Slots));
-			MethodInfo slotsFiltered = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.FilteredSlots));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld), 
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldfld, slots),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Call, slotsFiltered),
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
 		}
 	}
 }

@@ -21,6 +21,8 @@ namespace CCU
 		public const string pluginName = "CCU " + (designerEdition ? "[D]" : "[P]"); 
 		public const string pluginVersion = "1.1.1";
 		public const string subVersion = "b";
+		
+		public const bool developerEdition = true; // For in-game development tools like Debugulizer
 		public const bool designerEdition = true;
 		public const bool debugMode = true;
 
@@ -52,8 +54,17 @@ namespace CCU
 			return (T)Activator.CreateInstance(typeof(T), callFrom, ptr);
 		}
 
-		public static string GetRandomMember(List<string> list) =>
-			list[random.Next(0, list.Count)];
+		public static string GetRandomMember(List<string> list)
+		{
+			try
+			{
+				return list[random.Next(0, list.Count)];
+			}
+			catch
+			{
+				return null;
+			}
+		}
 	}
 
 	public static class CCULogger

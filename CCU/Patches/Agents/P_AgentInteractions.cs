@@ -11,7 +11,6 @@ using CCU.Traits.Interaction;
 using CCU.Traits.Interaction_Gate;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Player.Language;
-using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -21,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
+using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Patches.Agents
 {
@@ -31,7 +31,7 @@ namespace CCU.Patches.Agents
 		public static GameController GC => GameController.gameController;
 
 		// TODO: Refactor
-        [RLSetup]
+		[RLSetup]
 		private static void Setup()
         {
 			RogueInteractions.CreateProvider<Agent>(h =>
@@ -61,13 +61,14 @@ namespace CCU.Patches.Agents
 				//		agentInteractions.AddButton(hack.ButtonText);
 
 				if (log) logger.LogDebug("=== LANGUAGE");
-				if (!Language.HaveSharedLanguage(agent, interactingAgent))
+				if (!agent.CanUnderstandEachOther(interactingAgent, true, true))
                 {
-					h.AddImplicitButton("None", m =>
+					h.AddImplicitButton("Interact", m =>
 					{
 						Language.SayGibberish(agent);
-						return;
 					});
+
+					return;
 				}
 
 				if (log) logger.LogDebug("=== HIRE");
@@ -75,9 +76,9 @@ namespace CCU.Patches.Agents
 				{
 					if (agent.employer == null && agent.relationships.GetRelCode(interactingAgent) != relStatus.Annoyed)
 					{
-						if ((agent.HasTrait<Blahd_Aligned>() &&
+						if ((AlignmentUtils.CountsAsBlahd(agent) &&
 								interactingAgent.agentName == VanillaAgents.GangsterBlahd && interactingAgent.oma.superSpecialAbility) ||
-							(agent.HasTrait<Crepe_Aligned>() &&
+							(AlignmentUtils.CountsAsCrepe(agent) &&
 								interactingAgent.agentName == VanillaAgents.GangsterCrepe && interactingAgent.oma.superSpecialAbility))
 							h.AddButton(VButtonText.JoinMe, m =>
 							{
