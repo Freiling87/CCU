@@ -5,6 +5,7 @@ using CCU.Traits.Cost_Scale;
 using CCU.Traits.Map_Marker;
 using HarmonyLib;
 using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -53,6 +54,12 @@ namespace CCU.Patches.Objects
 					return 240f + 16 * (levelModifier - 1);
 				case CDetermineMoneyCost.HirePermanentMuscle:
 					return 160f + 16 * (levelModifier - 1);
+				case CDetermineMoneyCost.TeachLanguageEnglish:
+					return 600; // Removal cost for Vocally Challenged
+				case CDetermineMoneyCost.TeachLanguageOther:
+					return 200;
+				
+
 				default:
 					return originalPrice;
 			}
@@ -72,9 +79,9 @@ namespace CCU.Patches.Objects
 			__result = (int)(__result * scale);
 		}
 
-        #region Cost Currency
-        // Shouldn't these include the item value based exchange rate?
-        public static int AlcoholToMoney(int moneyAmt) =>
+		#region Cost Currency
+		// Shouldn't these include the item value based exchange rate?
+		public static int AlcoholToMoney(int moneyAmt) =>
 			moneyAmt + 8008134;
 		public static int BananasToMoney(int moneyAmt) =>
 			moneyAmt + 6788;

@@ -21,7 +21,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Chthonic>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If I even describe this language I could summon something, and I don't have insurance... so figure it out. Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("If I even describe this language I could summon something, and I don't have insurance... so figure it out. Bypass Vocally Challenged with Ghosts, Shapeshifters, Vampires, Zombies, and anyone with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {

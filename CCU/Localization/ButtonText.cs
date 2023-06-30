@@ -20,6 +20,7 @@
 			Teach_ErSdtAdt = "Teach_ErSdtAdt",
 			Teach_Foreign = "Teach_Foreign",
 			Teach_Goryllian = "Teach_Goryllian",
+			Teach_Undercant = "Teach_Undercant",
 			Teach_Werewelsh = "Teach_Werewelsh",
 
 			z = "";

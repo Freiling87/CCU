@@ -18,7 +18,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Foreign>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Pick up some phrases if you ever visit Foreignia, the Otherlands, or Farnce. Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("Pick up some phrases if you ever visit Foreignia, the Otherlands, or Farnce. Bypass Vocally Challenged with Assassins and anyone with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {

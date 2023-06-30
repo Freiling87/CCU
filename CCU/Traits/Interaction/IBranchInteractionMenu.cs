@@ -5,6 +5,7 @@ namespace CCU.Traits.Interaction
 	public interface IBranchInteractionMenu
 	{
 		InteractionState interactionState { get; }
+		bool ButtonCanShow(Agent interactingAgent);
 	}
 
 	public enum InteractionState

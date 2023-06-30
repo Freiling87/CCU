@@ -15,7 +15,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_High_Goryllian>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("A highly complex language with elaborate honorifics. Agent can bypass Vocally Challenged when speaking to Gorillas, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("A highly complex language with elaborate honorifics. Bypass Vocally Challenged with Gorillas, and anyone with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {

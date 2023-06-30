@@ -144,7 +144,7 @@ namespace CCU.Patches.Agents
 
 					foreach (T_Interaction trait in agent.GetTraits<T_Interaction>())
 					{
-						// Simple Exceptions
+						#region Interaction Gates
 						if ((!trait.AllowUntrusted && untrusted) ||
 							(trait is Borrow_Money_Moocher && !interactingAgent.statusEffects.hasTrait(VanillaTraits.Moocher)) ||
 							(trait is Influence_Election && GC.sessionData.electionBribedMob[interactingAgent.isPlayer]) ||
@@ -155,8 +155,8 @@ namespace CCU.Patches.Agents
 													&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
 							(trait is Use_Blood_Bag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
 							continue;
-
-						// Complex Exceptions
+						#endregion
+						#region Vanilla ad hoc exceptions
 						if (trait is Buy_Round)
 						{
 							List<Agent> patrons = new List<Agent>();
@@ -510,9 +510,18 @@ namespace CCU.Patches.Agents
 								}
 							}
 						}
-						else // Non-Exceptions
+						#endregion
+						else 
 						{
-							if (trait.DetermineMoneyCostID is null)
+							if (trait is IBranchInteractionMenu branchTrait) // Assuming no cost to talk
+							{
+								if (branchTrait.ButtonCanShow(agent))
+									h.AddButton(trait.ButtonID, m =>
+									{
+										hook.interactionState = branchTrait.interactionState;
+									});
+							}
+							else if (trait.DetermineMoneyCostID is null)
 								h.AddButton(trait.ButtonID, m =>
 								{
 									m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, trait.ButtonID, 0);
@@ -557,11 +566,37 @@ namespace CCU.Patches.Agents
 				}
 				else if (hook.interactionState is InteractionState.TeachTraits_Language)
 				{
-					foreach (string language in Language.LanguagesKnown(agent))
-					{
-						h.AddButton("Teach_" + language, agent.determineMoneyCost("Teach_" + language), m =>
-						{
+					List<T_Language> traits = new List<T_Language>();
+					List<T_Language> assemblyTraits = CoreTools.AllClassesOfType<T_Language>();
 
+					if (agent.HasTrait<Polyglot>())
+						traits = CoreTools.AllClassesOfType<T_Language>().Where(t => !(t is Polyglot)).OrderBy(t => t.LanguageNames[0]).ToList();
+					else
+						traits = agent.GetTraits<T_Language>().OrderBy(t => t.LanguageNames[0]).ToList();
+
+					foreach (T_Language trait in traits)
+					{
+						string language = trait.LanguageNames[0];
+
+						if (Language.LanguagesKnown(interactingAgent, false).Contains(language))
+							continue;
+
+						string determineMoneyCostText = language is Language.English
+							? CDetermineMoneyCost.TeachLanguageEnglish
+							: CDetermineMoneyCost.TeachLanguageOther;
+						int cost = agent.determineMoneyCost(determineMoneyCostText);
+
+						h.AddButton("Teach_" + language, cost, m =>
+						{
+							if (agent.moneySuccess(cost))
+							{
+								if (language is Language.English)
+									interactingAgent.statusEffects.RemoveTrait(VanillaTraits.VocallyChallenged);
+								else
+									interactingAgent.AddTrait(trait.GetType());
+
+								//Add language-specific callout dialogue here
+							}
 						});
 					}
 				}

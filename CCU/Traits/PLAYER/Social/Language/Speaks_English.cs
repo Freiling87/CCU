@@ -4,38 +4,33 @@ using System;
 
 namespace CCU.Traits.Player.Language
 {
-    public class Speaks_Binary : T_Language
+    public class Speaks_English : T_Language
     {
         public override string[] VanillaSpeakers => new string[] 
         { 
-            "ButlerBot",
-            VanillaAgents.CopBot, 
-            VanillaAgents.Hacker,
-            VanillaAgents.KillerRobot, 
-            VanillaAgents.Robot 
         };
-        public override string[] LanguageNames => new string[] { Language.Binary };
+        public override string[] LanguageNames => new string[] { Language.English };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Speaks_Binary>()
+            PostProcess = RogueLibs.CreateCustomTrait<Speaks_English>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Literal actual beeping and booping, literally actually. Bypass Vocally Challenged with Robots, Hackers, and anyone with this trait."),
+                    [LanguageCode.English] = String.Format("This is a back-end trait. You shouldn't see it."),
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = PlayerName(typeof(Speaks_Binary)),
+                    [LanguageCode.English] = PlayerName(typeof(Speaks_English)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
                     Cancellations = { },
                     CharacterCreationCost = 1,
                     IsAvailable = false,
-                    IsAvailableInCC = true,
-                    IsPlayerTrait = true,
-                    UnlockCost = 3,
+                    IsAvailableInCC = false,
+                    IsPlayerTrait = false,
+                    UnlockCost = 0,
                     //Unlock = { upgrade = nameof(Polyglot) }
                     Unlock =
                     {

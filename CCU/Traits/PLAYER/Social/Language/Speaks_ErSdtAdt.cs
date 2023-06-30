@@ -18,7 +18,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_ErSdtAdt>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("The lingua franca of the galaxy... you illiterate bumpkin. Agent can bypass Vocally Challenged when speaking to Aliens, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("The lingua franca of the galaxy... you illiterate bumpkin. Bypass Vocally Challenged with Aliens, and anyone with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {

@@ -1,11 +1,10 @@
-﻿using CCU.Hooks;
-using CCU.Localization;
-using CCU.Traits.Interaction;
+﻿using CCU.Localization;
+using CCU.Traits.Player.Language;
 using RogueLibsCore;
 
-namespace CCU.Traits.Teacher
+namespace CCU.Traits.Interaction
 {
-	public class Language_Teacher : T_Teacher, IBranchInteractionMenu
+	public class Teach_Languages : T_Teacher, IBranchInteractionMenu
     {
 		public override bool AllowUntrusted => false;
 		public override string ButtonID => CButtonText.Teach_Language;
@@ -14,17 +13,19 @@ namespace CCU.Traits.Teacher
 
         public InteractionState interactionState => InteractionState.TeachTraits_Language;
 
-		//[RLSetup]
+		[RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Language_Teacher>()
+            PostProcess = RogueLibs.CreateCustomTrait<Teach_Languages>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Teaches any language they know.",
+                    [LanguageCode.English] = "Teaches any language they know, for a price." + 
+                    "\n- English (removes Vocally Challenged) - $600" +
+                    "\n- Other languages - $200",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Language_Teacher)),
+                    [LanguageCode.English] = DesignerName(typeof(Teach_Languages)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -35,6 +36,10 @@ namespace CCU.Traits.Teacher
                     UnlockCost = 0,
                 });
         }
+
+		public bool ButtonCanShow(Agent interactingAgent) =>
+            CoreTools.ContainsAll(Language.LanguagesKnown(Owner, false), Language.LanguagesKnown(interactingAgent, false));
+
         public override void OnAdded() { }
         public override void OnRemoved() { }
     }

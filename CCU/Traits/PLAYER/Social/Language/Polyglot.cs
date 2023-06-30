@@ -9,9 +9,9 @@ namespace CCU.Traits.Player.Language
     {
         public override string[] VanillaSpeakers => new string[] { };
         public override string[] LanguageNames => new string[] 
-            { Language.Binary, Language.Chthonic, Language.ErSdtAdt, Language.Foreign, Language.Goryllian, Language.Undercant, Language.Werewelsh };
+            { Language.Binary, Language.Chthonic, Language.English, Language.ErSdtAdt, Language.Foreign, Language.Goryllian, Language.Undercant, Language.Werewelsh };
         public static string[] LanguagesStatic = new string[]
-            { Language.Binary, Language.Chthonic, Language.ErSdtAdt, Language.Foreign, Language.Goryllian, Language.Undercant, Language.Werewelsh };
+            { Language.Binary, Language.Chthonic, Language.English, Language.ErSdtAdt, Language.Foreign, Language.Goryllian, Language.Undercant, Language.Werewelsh };
 
         [RLSetup]
         public static void Setup()
@@ -19,7 +19,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Polyglot>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Speak all languages."),
+                    [LanguageCode.English] = String.Format("Speaks all languages. Not gonna ask you to join some kind of -cule."),
                 })
                 .WithName(new CustomNameInfo
                 {

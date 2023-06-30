@@ -1,6 +1,6 @@
 ﻿using CCU.Traits.Interaction;
 
-namespace CCU.Traits.Teacher
+namespace CCU.Traits.Interaction
 {
 	public abstract class T_Teacher : T_Interaction
 	{

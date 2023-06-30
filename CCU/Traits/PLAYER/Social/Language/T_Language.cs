@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using UnityEngine.Networking;
 
 namespace CCU.Traits.Player.Language
 {
@@ -67,6 +68,8 @@ namespace CCU.Traits.Player.Language
 			Undercant = "Undercant",
 			Werewelsh = "Werewelsh",
 
+			CantTeachLanguage = "CantTeachLanguage",
+
 			z = "";
 
 		private static void SetupNames()
@@ -105,6 +108,12 @@ namespace CCU.Traits.Player.Language
 			RogueLibs.CreateCustomName(Werewelsh, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Werewelsh",
+			});
+
+			// Language teacher
+			RogueLibs.CreateCustomName(CantTeachLanguage, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "You already know all the languages I do!",
 			});
 
 			// Gibberish dialogue, for each language
@@ -266,11 +275,11 @@ namespace CCU.Traits.Player.Language
 			});
 		}
 
-		private static string SelectRandomDialogueName(Agent agent)
+		internal static string SelectRandomDialogueName(Agent agent)
 		{
 			if (agent.agentName is VanillaAgents.CustomCharacter)
 			{
-				List<string> spokenLangs = LanguagesKnown(agent);
+				List<string> spokenLangs = LanguagesKnown(agent, false);
 				string language = CoreTools.GetRandomMember(spokenLangs) ?? "None"; // For nonverbal characters
 				string number = UnityEngine.Random.Range(1, 5).ToString("D2");
 
@@ -285,12 +294,12 @@ namespace CCU.Traits.Player.Language
 			agent.Say(GC.nameDB.GetName(SelectRandomDialogueName(agent) + "_NonEnglish", "Dialogue"));
 		}
 
-		private static bool HaveSharedLanguage(Agent agent, Agent otherAgent) =>
+		internal static bool HaveSharedLanguage(Agent agent, Agent otherAgent) =>
 			LanguagesShared(agent, otherAgent).Any();
 
-		public static List<string> LanguagesKnown(Agent agent)
+		public static List<string> LanguagesKnown(Agent agent, bool countTranslator)
 		{
-			if (agent.inventory.HasItem(vItem.Translator))
+			if (countTranslator && agent.inventory.HasItem(vItem.Translator))
 				return Polyglot.LanguagesStatic.ToList();
 
 			List<string> languages = agent.GetTraits<T_Language>().SelectMany(t => t.LanguageNames).ToList();
@@ -301,49 +310,15 @@ namespace CCU.Traits.Player.Language
 			return languages;
 		}
 
-		private static List<string> LanguagesShared(Agent agent, Agent otherAgent) =>
-			LanguagesKnown(agent).Intersect(LanguagesKnown(otherAgent)).ToList();
+		internal static List<string> LanguagesShared(Agent agent, Agent otherAgent) =>
+			LanguagesKnown(agent, true).Intersect(LanguagesKnown(otherAgent, true)).ToList();
+	}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
-		public static void AllowSharedLanguages(Agent __instance, Agent otherAgent, ref bool __result)
-		{
-			if (__result is false &&
-				!__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
-				!otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
-				Language.LanguagesShared(__instance, otherAgent).Any())
-				__result = true;
-
-			return;
-		}
-
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.SayDialogue))]
-		private static IEnumerable<CodeInstruction> VaryGibberish(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo languageDialogueName = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.SelectRandomDialogueName));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-				},
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Call),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Call, languageDialogueName),
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-				{ 
-					new CodeInstruction(OpCodes.Ldstr, "_NonEnglish")
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
+	[HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	static class P_AgentInteractions
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons))]
 		private static IEnumerable<CodeInstruction> BypassLanguageHardcode(IEnumerable<CodeInstruction> codeInstructions)
@@ -365,6 +340,54 @@ namespace CCU.Traits.Player.Language
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldarg_2),
 					new CodeInstruction(OpCodes.Call, canUnderstandEachOther),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+	}
+
+	[HarmonyPatch(declaringType: typeof(Agent))]
+	static class P_Agent
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
+		public static void AllowSharedLanguages(Agent __instance, Agent otherAgent, ref bool __result)
+		{
+			if (__result is false &&
+				!__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
+				!otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
+				Language.LanguagesShared(__instance, otherAgent).Any())
+				__result = true;
+
+			return;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.SayDialogue), argumentTypes: new Type[] { typeof(bool), typeof(string), typeof(bool), typeof(NetworkInstanceId) })]
+		private static IEnumerable<CodeInstruction> VaryGibberish(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo languageDialogueName = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.SelectRandomDialogueName));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+				},
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, languageDialogueName),
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldstr, "_NonEnglish")
 				});
 
 			patch.ApplySafe(instructions, logger);

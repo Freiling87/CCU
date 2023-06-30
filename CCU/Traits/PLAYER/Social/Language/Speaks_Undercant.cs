@@ -15,7 +15,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Undercant>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("A coded dialect of subterranean outcasts, the Undercant is spoken in the Underdank and many Topside criminal networks. Agent can bypass Vocally Challenged when speaking to Cannibals, Thieves, and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("A coded dialect of subterranean outcasts, the Undercant is spoken in the Underdank and many Topside criminal networks. Bypass Vocally Challenged with Cannibals, Thieves, and anyone with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {
