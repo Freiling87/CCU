@@ -4,25 +4,25 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Offer_Motivation : T_Interaction
+    public class Bribe_for_Entry_Alcohol : T_Interaction
     {
-        public override bool AllowUntrusted => true;
-        public override string ButtonText => VButtonText.OfferMotivation;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => null;
+        public override bool AllowUntrusted => false;
+        public override string ButtonID => null;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null;
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Offer_Motivation>()
+            PostProcess = RogueLibs.CreateCustomTrait<Bribe_for_Entry_Alcohol>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be given small items, and will become Friendly."),
+                    [LanguageCode.English] = String.Format("This character, if serving as Doorman, will allow access if bribed with alcohol."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Offer_Motivation)),
+                    [LanguageCode.English] = DesignerName(typeof(Bribe_for_Entry_Alcohol),("Bribe for Entry (Alcohol)")),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU

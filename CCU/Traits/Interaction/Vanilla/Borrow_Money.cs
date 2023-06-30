@@ -1,33 +1,33 @@
 ﻿using RogueLibsCore;
-using CCU.Localization;
 using System;
+using CCU.Localization;
 
 namespace CCU.Traits.Interaction
 {
-    public class Play_Bad_Music : T_Interaction
+    public class Borrow_Money : T_Interaction
     {
         public override bool AllowUntrusted => false;
-        public override string ButtonText => null;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => null; // Determined in code
+        public override string ButtonID => VButtonText.BorrowMoney;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null;
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Play_Bad_Music>()
+            PostProcess = RogueLibs.CreateCustomTrait<Borrow_Money>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be paid to play a bad song, clearing the chunk out. They can also play Mayor Evidence on Turntables."),
+                    [LanguageCode.English] = String.Format("This character can lend money."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Play_Bad_Music)),
+                    [LanguageCode.English] = DesignerName(typeof(Borrow_Money)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
-                    Cancellations = { },
+                    Cancellations = { "Borrow Money (Moocher)" },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

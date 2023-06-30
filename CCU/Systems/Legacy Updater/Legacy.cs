@@ -86,8 +86,6 @@ namespace CCU.Localization
 			if (!TraitConversions.ContainsKey(ccuTraitName))
 				return new List<string> { trait };
 
-			logger.LogDebug("Caught Legacy trait: " + ccuTraitName);
-
 			return TraitConversions[ccuTraitName]
 					.SelectMany(type => UpdateTrait(type.Name))
 					.ToList();

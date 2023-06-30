@@ -1,33 +1,33 @@
 ﻿using RogueLibsCore;
 using System;
-using CCU.Localization;
+using System.Collections.Generic;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Merchant_Type
 {
-    public class Borrow_Money : T_Interaction
+	public class Insider_Key : T_MerchantType
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.BorrowMoney;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => null;
+        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.Key, 1),
+        };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Borrow_Money>()
+            PostProcess = RogueLibs.CreateCustomTrait<Insider_Key>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can lend money."),
+                    [LanguageCode.English] = String.Format("This fucking rat will sell you a key! THE key!"),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Borrow_Money)),
+                    [LanguageCode.English] = DesignerName(typeof(Insider_Key), "Insider (Key)"),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
-                    Cancellations = { "Borrow Money (Moocher)" },
+                    Cancellations = { },
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,

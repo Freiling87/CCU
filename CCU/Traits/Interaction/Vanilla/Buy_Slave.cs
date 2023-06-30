@@ -4,25 +4,25 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Heal_Player : T_Interaction
+    public class Buy_Slave : T_Interaction
     {
         public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.Heal;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => VDetermineMoneyCost.Heal;
+        public override string ButtonID => VButtonText.PurchaseSlave;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null; // Determined in code
 
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Heal_Player>()
+            PostProcess = RogueLibs.CreateCustomTrait<Buy_Slave>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can heal, for money.\n\nThey may or may not keep it real."),
+                    [LanguageCode.English] = String.Format("If this character owns any Slaves, they will sell them."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Heal_Player)),
+                    [LanguageCode.English] = DesignerName(typeof(Buy_Slave)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU

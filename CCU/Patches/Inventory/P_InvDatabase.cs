@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Localization;
 using CCU.Mutators.Laws;
 using CCU.Traits;
 using CCU.Traits.Behavior;
@@ -33,15 +34,6 @@ namespace CCU.Patches.Inventory
 
 		public static FieldInfo nameProviderField = AccessTools.Field(typeof(RogueLibs), "NameProvider");
 		public static CustomNameProvider nameProvider = (CustomNameProvider)nameProviderField.GetValue(null);
-
-		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddItem), argumentTypes: new[] {typeof(string), typeof(int), typeof(List<string>), typeof(List<int>), typeof(List<int>), typeof(int), typeof(bool), typeof(bool), typeof(int), typeof(int), typeof(bool), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(bool)})]
-		public static bool AddItem_Prefix(string itemName, string itemType, InvDatabase __instance)
-		{
-			logger.LogDebug("ItemName: " + itemName);
-			logger.LogDebug("ItemType: " + itemType);
-
-			return true;
-		}
 
 		/// <summary>
 		/// This SHOULD cover all non-Loadout item additions, like the 3 item slots in the editor.
@@ -160,10 +152,7 @@ namespace CCU.Patches.Inventory
 			float amt = amount;
 
 			foreach (T_Myrmicosanostra trait in __instance.agent.GetTraits<T_Myrmicosanostra>())
-            {
-				logger.LogDebug(trait.TextName);
 				amt *= trait.ArmorDurabilityChangeMultiplier;
-			}
 
 			amount = (int)Mathf.Max(1f, amt);
 			return true;
@@ -209,92 +198,6 @@ namespace CCU.Patches.Inventory
 
 			return true;
 		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FillSpecialInv))]
-		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
-        {
-			Agent agent = __instance.agent;
-			List<string> potentialItems = new List<string>();
-			List<string> rolledItems = new List<string>();
-
-			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)
-				return true;
-
-			List<T_MerchantType> traits = agent.GetTraits<T_MerchantType>().ToList();
-
-			foreach (T_MerchantType trait in traits)
-				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
-                {
-					// Gives priority to Insider traits
-					if (trait.MerchantInventory.Count == 1)
-					{
-						rolledItems.Add(trait.MerchantInventory[0].Key);
-					}
-					else
-					{
-						for (int i = 0; i < item.Value; i++) // Qty
-							potentialItems.Add(__instance.SwapWeaponTypes(item.Key)); // Name
-					}
-				}
-
-			int attempts = 0;
-			bool forceDuplicates = false;
-
-		redo: // Yeah why don't you "redo" this whole damn thing or more like "undo" or like "redon't" or or or
-			while (potentialItems.Any() && rolledItems.Count < 5 && attempts < 100)
-			{
-				attempts++;
-
-				int bagPickedIndex = CoreTools.random.Next(0, Math.Max(0, potentialItems.Count - 1));
-				string bagPickedItem = potentialItems[bagPickedIndex];
-
-				if (forceDuplicates || !rolledItems.Contains(bagPickedItem) || agent.HasTrait<Clearancer>() )
-                {
-					rolledItems.Add(bagPickedItem);
-					potentialItems.RemoveAt(bagPickedIndex);
-					attempts = 0;
-				}
-            }
-
-			if (potentialItems.Any() && rolledItems.Count < 5)
-			{
-				forceDuplicates = true;
-				attempts = 0;
-				goto redo;
-			}
-
-			foreach (string item in rolledItems) 
-			{
-				MethodInfo AddItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal");
-				InvItem invItem = null;
-
-				try
-				{
-					string rListItem = __instance.rnd.RandomSelect(item, "Items");
-					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(rListItem);
-
-					if (agent.HasTrait<Clearancer>())
-						invItem.canRepeatInShop = true;
-				}
-                catch
-                {
-					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(item);
-
-					if (agent.HasTrait<Clearancer>())
-						invItem.canRepeatInShop = true;
-				}
-
-				if (T_MerchantStock.ExceptionItems.Contains(invItem.invItemName))
-					invItem.invItemCount = 0;
-
-				// This is apparently done automatically for Durability items
-				if (T_MerchantStock.QuantityTypes.Contains(invItem.itemType))
-					T_MerchantStock.ShopPrice(ref invItem);
-			}
-
-			__instance.filledSpecialInv = true;
-			return false;
-        }
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
 		private static IEnumerable<CodeInstruction> FillAgent_LoadoutBadge(IEnumerable<CodeInstruction> codeInstructions)

@@ -94,7 +94,7 @@ namespace CCU.Systems.Containers
 							m.StartOperating(2f, true, COperatingBarText.Ransacking);
 						});
 					else
-						h.AddImplicitButton(CButtonText.OpenContainer, m =>
+						h.AddImplicitButton(CButtonText.Container_Open, m =>
 						{
 							TryOpenChest(m.Object, m.Agent);
 						});
@@ -112,7 +112,7 @@ namespace CCU.Systems.Containers
 		internal static void SetupText()
 		{
 			string t = NameTypes.Interface;
-			RogueLibs.CreateCustomName(CButtonText.OpenContainer, t, new CustomNameInfo
+			RogueLibs.CreateCustomName(CButtonText.Container_Open, t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Search",
 			});

@@ -1464,7 +1464,7 @@ New
 ###			C	00 Custom quantity in refactor
 Allows to sell shitty items in junk dealer, for instance
 ###			H	Insider
-Test: MT Drug dealer & all 3 insiders
+Test: MT Drug dealer & all 3 insiders (Insider = Chunk Key, Combo, etc.)
 	1 Sugar, 3 insider items and a blank
 	None of the insider items were purchaseable (greyed out). Alignment didn't affect it
 	Multiples of agent sold multiples of items. 

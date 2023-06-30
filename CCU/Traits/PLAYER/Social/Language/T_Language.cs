@@ -1,8 +1,10 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Hooks;
+using CCU.Localization;
 using HarmonyLib;
 using RogueLibsCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,69 +12,41 @@ using System.Reflection.Emit;
 
 namespace CCU.Traits.Player.Language
 {
-    public abstract class T_Language : T_PlayerTrait
-    {
-        public T_Language() : base() { }
+	public abstract class T_Language : T_PlayerTrait, IMutatorConditionalTrait
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		public T_Language() : base() { }
         public abstract string[] VanillaSpeakers { get; }
 		public abstract string[] LanguageNames { get; }
 
-		public static void SetupAgent(Agent agent)
+		public static void SetupLanguages(Agent agent)
 		{
 			if (agent.agentName != VanillaAgents.CustomCharacter)
 			{
-				switch (agent.agentName)
-				{
-					case VanillaAgents.Alien:
-						agent.AddTrait<Speaks_ErSdtAdt>();
-						break;
-					case VanillaAgents.Assassin:
-						agent.AddTrait<Speaks_Foreign>();
-						break;
-					case VanillaAgents.CopBot:
-						agent.AddTrait<Speaks_Binary>();
-						break;
-					case VanillaAgents.Ghost:
-						agent.AddTrait<Speaks_Chthonic>();
-						break;
-					case VanillaAgents.Gorilla:
-						agent.AddTrait<Speaks_High_Goryllian>();
-						break;
-					case VanillaAgents.Hacker:
-						agent.AddTrait<Speaks_Binary>();
-						break;
-					case VanillaAgents.KillerRobot:
-						agent.AddTrait<Speaks_Binary>();
-						break;
-					case VanillaAgents.Robot:
-						agent.AddTrait<Speaks_Binary>();
-						break;
-					case VanillaAgents.ShapeShifter:
-						agent.AddTrait<Speaks_Chthonic>();
-						break;
-					case VanillaAgents.Vampire:
-						agent.AddTrait<Speaks_Chthonic>();
-						break;
-					case VanillaAgents.Werewolf:
-						agent.AddTrait<Speaks_Werewelsh>();
-						break;
-					case VanillaAgents.WerewolfTransformed:
-						agent.AddTrait<Speaks_Werewelsh>();
-						break;
-					case VanillaAgents.Zombie:
-						agent.AddTrait<Speaks_Chthonic>();
-						break;
-				}
+				List<T_Language> languageTraits = CoreTools.AllClassesOfType<T_Language>();
+
+				foreach(T_Language trait in languageTraits)
+					if (trait.VanillaSpeakers.Contains(agent.agentRealName))
+						agent.AddTrait(trait.GetType());
 			}
 
 			agent.GetOrAddHook<H_Agent>().languages.Clear();
 			agent.GetOrAddHook<H_Agent>().languages = agent.GetTraits<T_Language>().SelectMany(t => t.LanguageNames).ToList();
 
 			if (!agent.HasTrait(VanillaTraits.VocallyChallenged))
-				agent.GetOrAddHook<H_Agent>().languages.Add("English");
+				agent.GetOrAddHook<H_Agent>().languages.Add(gc.nameDB.GetName(Language.English, NameTypes.Dialogue));
+		}
+
+		public bool IsAvailable()
+		{
+			// Make Language module dependent on Language challenge
+			throw new NotImplementedException();
 		}
 	}
 
-    public static class Language
+	public static class Language
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -80,13 +54,61 @@ namespace CCU.Traits.Player.Language
 		[RLSetup]
 		private static void Setup()
 		{
-			SetupText();
+			SetupNames();
 		}
 
-		private static void SetupText()
+		public const string
+			Binary = "Binary",
+			Chthonic = "Chthonic",
+			English = "English",
+			ErSdtAdt = "ErSdtAdt",
+			Foreign = "Foreign",
+			Goryllian = "Goryllian",
+			Undercant = "Undercant",
+			Werewelsh = "Werewelsh",
+
+			z = "";
+
+		private static void SetupNames()
 		{
-			// Translators: These are meant to sound like foreign gibberish to an English speaker, for the various non-english languages in the game.
 			string t = NameTypes.Dialogue;
+
+			// Language Names
+			RogueLibs.CreateCustomName(Binary, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Binary",
+			});
+			RogueLibs.CreateCustomName(Chthonic, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Chthonic",
+			});
+			RogueLibs.CreateCustomName(English, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "ErSdtAdt",
+			});
+			RogueLibs.CreateCustomName(ErSdtAdt, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "ErSdtAdt",
+			});
+			RogueLibs.CreateCustomName(Foreign, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Foreign",
+			});
+			RogueLibs.CreateCustomName(Goryllian, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "High_Goryllian",
+			});
+			RogueLibs.CreateCustomName(Undercant, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Undercant",
+			});
+			RogueLibs.CreateCustomName(Werewelsh, t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Werewelsh",
+			});
+
+			// Gibberish dialogue, for each language
+			// TODO: Split each language into its own class
 			RogueLibs.CreateCustomName("Binary01_NonEnglish", t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "Bleep Bloop?",
@@ -195,7 +217,7 @@ namespace CCU.Traits.Player.Language
 			// For characters without any spoken language
 			RogueLibs.CreateCustomName("None01_NonEnglish", t, new CustomNameInfo
 			{
-				[LanguageCode.Chinese] = "*Frustrated gestures*",
+				[LanguageCode.English] = "*Frustrated gestures*",
 			});
 			RogueLibs.CreateCustomName("None02_NonEnglish", t, new CustomNameInfo
 			{
@@ -244,12 +266,12 @@ namespace CCU.Traits.Player.Language
 			});
 		}
 
-		internal static string LanguageDialogueName(Agent agent)
+		private static string SelectRandomDialogueName(Agent agent)
 		{
 			if (agent.agentName is VanillaAgents.CustomCharacter)
 			{
-				List<string> spokenLangs = GetLanguages(agent);
-				string language = CoreTools.GetRandomMember(spokenLangs) ?? "None";
+				List<string> spokenLangs = LanguagesKnown(agent);
+				string language = CoreTools.GetRandomMember(spokenLangs) ?? "None"; // For nonverbal characters
 				string number = UnityEngine.Random.Range(1, 5).ToString("D2");
 
 				return language + number;
@@ -258,12 +280,15 @@ namespace CCU.Traits.Player.Language
 			return agent.agentName;
 		}
 
-		internal static void SayGibberish(Agent agent)
+		public static void SayGibberish(Agent agent)
 		{
-			agent.Say(GC.nameDB.GetName(LanguageDialogueName(agent) + "_NonEnglish", "Dialogue"));
+			agent.Say(GC.nameDB.GetName(SelectRandomDialogueName(agent) + "_NonEnglish", "Dialogue"));
 		}
 
-		internal static List<string> GetLanguages(Agent agent)
+		private static bool HaveSharedLanguage(Agent agent, Agent otherAgent) =>
+			LanguagesShared(agent, otherAgent).Any();
+
+		public static List<string> LanguagesKnown(Agent agent)
 		{
 			if (agent.inventory.HasItem(vItem.Translator))
 				return Polyglot.LanguagesStatic.ToList();
@@ -276,17 +301,26 @@ namespace CCU.Traits.Player.Language
 			return languages;
 		}
 
-		public static bool HaveSharedLanguage(Agent agent, Agent otherAgent) =>
-			SharedLanguages(agent, otherAgent).Any();
+		private static List<string> LanguagesShared(Agent agent, Agent otherAgent) =>
+			LanguagesKnown(agent).Intersect(LanguagesKnown(otherAgent)).ToList();
 
-		public static List<string> SharedLanguages(Agent agent, Agent otherAgent) =>
-			GetLanguages(agent).Intersect(GetLanguages(otherAgent)).ToList();
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
+		public static void AllowSharedLanguages(Agent __instance, Agent otherAgent, ref bool __result)
+		{
+			if (__result is false &&
+				!__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
+				!otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
+				Language.LanguagesShared(__instance, otherAgent).Any())
+				__result = true;
+
+			return;
+		}
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.SayDialogue))]
-		private static IEnumerable<CodeInstruction> SetupAgentStats_LegacyUpdater(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> VaryGibberish(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo languageDialogueName = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.LanguageDialogueName));
+			MethodInfo languageDialogueName = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.SelectRandomDialogueName));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -305,6 +339,32 @@ namespace CCU.Traits.Player.Language
 				postfixInstructionSequence: new List<CodeInstruction>
 				{ 
 					new CodeInstruction(OpCodes.Ldstr, "_NonEnglish")
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.DetermineButtons))]
+		private static IEnumerable<CodeInstruction> BypassLanguageHardcode(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo canUnderstandEachOther = AccessTools.DeclaredMethod(typeof(Language), nameof(Language.HaveSharedLanguage));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 2,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_2),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldstr, vItem.Translator),
+					new CodeInstruction(OpCodes.Callvirt),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_1),
+					new CodeInstruction(OpCodes.Ldarg_2),
+					new CodeInstruction(OpCodes.Call, canUnderstandEachOther),
 				});
 
 			patch.ApplySafe(instructions, logger);

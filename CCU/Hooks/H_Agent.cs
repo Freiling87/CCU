@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using CCU.Traits.App;
+using CCU.Traits.Interaction;
 using RogueLibsCore;
 using System.Collections.Generic;
 
@@ -12,12 +13,7 @@ namespace CCU.Hooks
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public bool SceneSetterFinished;
-
-		public bool WalkieTalkieUsed;
-		public bool HiredPermanently;
-		public int SuicideVestTimer;
-
+		// Appearance
 		public bool mustRollAppearance;
 		public string bodyColor;
 		public string bodyType;
@@ -25,10 +21,12 @@ namespace CCU.Hooks
 		public string skinColor;
 
 		public List<string> classawareStoredAgents = new List<string> { };
-
+		public bool HiredPermanently;
+		public InteractionState interactionState;
 		public List<string> languages = new List<string> { };
-
-		public int originalOwnerID;
+		public bool SceneSetterFinished;
+		public int SuicideVestTimer;
+		public bool WalkieTalkieUsed;
 
 		protected override void Initialize()
 		{
@@ -39,13 +37,13 @@ namespace CCU.Hooks
 				|| agent.isPlayer == 0;
 
 			GrabAppearance();
+
+			interactionState = InteractionState.Default;
 		}
 
 		public void GrabAppearance()
 		{
-			//Core.LogMethodCall();
 			Agent agent = (Agent)Instance;
-			//logger.LogDebug("Agent: " + agent.agentRealName);
 			SaveCharacterData save = agent.customCharacterData;
 			bodyColor = save.bodyColorName;
 			bodyType = save.bodyType;

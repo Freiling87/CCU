@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Burger_Joint : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BaconCheeseburger, 8),
             new KeyValuePair<string, int>( vItem.Beer, 5),

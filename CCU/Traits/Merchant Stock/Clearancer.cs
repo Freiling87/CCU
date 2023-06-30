@@ -27,7 +27,10 @@ namespace CCU.Traits.Merchant_Stock
                 });
         }
         public override void OnAdded() { }
-        public override void OnAddItem(ref InvItem invItem) { }
+        internal override void OnAddItem(ref InvItem invItem) 
+        {
+            invItem.canRepeatInShop = true;
+        }
         public override void OnRemoved() { }
     }
 }

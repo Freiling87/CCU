@@ -28,7 +28,107 @@ namespace CCU.Patches.Agents
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.AgentLateUpdate), argumentTypes: new Type[0] { })]
+		#region Agent Info Logging
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
+		public static void Interact_Prefix(Agent __instance)
+		{
+			bool logAgent = true;
+			bool logInteractingAgent = true;
+
+			if (logAgent)
+				logger.LogDebug(Environment.NewLine
+					+ "||||||||||| AGENT INFO DUMP: " + __instance.agentRealName + " " + "".PadRight(24, '|') + Environment.NewLine
+					+ LogAppearance(__instance) + Environment.NewLine
+					+ LogInventory(__instance) + Environment.NewLine
+					+ LogShopInventory(__instance) + Environment.NewLine
+					+ LogTraitsDesigner(__instance) + Environment.NewLine
+					+ LogTraitsPlayer(__instance) + Environment.NewLine
+					);
+
+			if (logInteractingAgent)
+			{
+				Agent interactingAgent = __instance.interactingAgent;
+				if (interactingAgent is null)
+					return;
+
+				logger.LogDebug(Environment.NewLine
+					+ "||||||||||| AGENT INFO DUMP: " + interactingAgent.agentRealName + " " + "".PadRight(24, '|') + Environment.NewLine
+					+ LogAppearance(interactingAgent) + Environment.NewLine
+					+ LogInventory(interactingAgent) + Environment.NewLine
+					+ LogShopInventory(interactingAgent) + Environment.NewLine
+					+ LogTraitsDesigner(interactingAgent) + Environment.NewLine
+					+ LogTraitsPlayer(interactingAgent) + Environment.NewLine
+					);
+			}
+		}
+		public static string LogAppearance(Agent agent)
+		{
+			AgentHitbox agentHitbox = agent.tr.GetChild(0).transform.GetChild(0).GetComponent<AgentHitbox>();
+
+			string log = "======= Appearance ==============="
+				+ "\n\t- Accessory  :\t" + agent.inventory.startingHeadPiece
+				+ "\n\t- Body Color :\t" + agentHitbox.bodyColor.ToString()
+				+ "\n\t- Body Type  :\t" + agent.objectMult.bodyType  // dw
+				+ "\n\t- Eye Color  :\t" + agentHitbox.eyesColor.ToString()
+				+ "\n\t- Eye Type   :\t" + agentHitbox.eyesStrings[1]
+				+ "\n\t- Facial Hair:\t" + agentHitbox.facialHairType
+				+ "\n\t- FH Position:\t" + agentHitbox.facialHairPos
+				+ "\n\t- Hair Color :\t" + agentHitbox.hairColorName
+				+ "\n\t- Hair Style :\t" + agentHitbox.hairType
+				+ "\n\t- Legs Color :\t" + agentHitbox.legsColor.ToString()
+				+ "\n\t- Skin Color :\t" + agentHitbox.skinColorName;
+
+			return log;
+		}
+		private static string LogInventory(Agent agent)
+		{
+			string log = "======= Inventory ===============";
+
+			foreach (InvItem ii in agent.inventory.InvItemList.Where(i => !(i.invItemName is null) && i.invItemName != ""))
+			{
+				log += "\n\t- " + ii.invItemName.PadRight(20) + "(" + ii.invItemCount.ToString().PadLeft(3) + " / " + ii.maxAmmo.ToString().PadLeft(3) + ")";
+				foreach (string mod in ii.contents) // Includes special abilities like DR I guess
+					log += "\n\t\t- " + mod;
+			}
+
+			return log;
+		}
+		private static string LogShopInventory(Agent agent)
+		{
+			string log = "";
+
+			if (agent.specialInvDatabase?.InvItemList.Any() ?? false)
+			{
+				log += "======= Shop Inventory ==========";
+
+				// Name check prevents bug that breaks shops. Purchased items are not removed from the list but their name is nulled.
+				foreach (InvItem ii in agent.specialInvDatabase.InvItemList.Where(i => !(i.invItemName is null))) 
+					log += "\n\t- " + ii.invItemName.PadRight(20) + "* " + ii.invItemCount;
+			}
+
+			return log;
+		}
+		public static string LogTraitsDesigner(Agent agent)
+		{
+			string log = "======= Traits (Designer) =======";
+
+			foreach (Trait trait in T_CCU.DesignerTraitList(agent.statusEffects.TraitList))
+				log += "\n\t- " + trait.traitName;
+
+			return log;
+		}
+		public static string LogTraitsPlayer(Agent agent)
+		{
+			string log = "======= Traits (Player) =========";
+
+			foreach (Trait trait in T_CCU.PlayerTraitList(agent.statusEffects.TraitList))
+				log += "\n\t- " + trait.traitName;
+
+			return log;
+		}
+		#endregion
+
+		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.AgentLateUpdate), argumentTypes: new Type[0] { })]
 		private static IEnumerable<CodeInstruction> AgentLateUpdate_LimitWaterDamageToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -69,17 +169,6 @@ namespace CCU.Patches.Agents
 			}
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanUnderstandEachOther))]
-		public static void CanUnderstandEachOther_Postfix(Agent __instance, Agent otherAgent, ref bool __result)
-		{
-			if (__result is false && 
-				!__instance.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
-                !otherAgent.statusEffects.hasStatusEffect(VStatusEffect.HearingBlocked) &&
-				Language.SharedLanguages(__instance, otherAgent).Any())
-				__result = true;
-
-			return;
-		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.FindSpeed))]
 		public static bool FindSpeed_Prefix(Agent __instance, ref int __result)
@@ -144,31 +233,6 @@ namespace CCU.Patches.Agents
 			return false;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
-		public static void Interact_Prefix(Agent otherAgent, Agent __instance)
-		{
-			TraitManager.LogTraitList(__instance);
-
-			logger.LogDebug("------- Inventory");
-			foreach (InvItem ii in __instance.inventory.InvItemList.Where(i => !(i.invItemName is null) && i.invItemName != ""))
-			{
-				logger.LogDebug(ii.invItemName + " (" + ii.invItemCount + " / " + ii.maxAmmo + ")");
-
-				foreach (string mod in ii.contents) // Includes special abilities like DR I guess
-					logger.LogDebug("\t+ " + mod);
-			}
-
-			if (!(__instance.specialInvDatabase is null))
-            {
-				logger.LogDebug("------- Shop Inventory:");
-				foreach (InvItem ii in __instance.specialInvDatabase.InvItemList)
-					logger.LogDebug(ii.invItemName + "(" + ii.invItemCount + ")");
-			}
-
-			if (Core.debugMode && __instance.agentName == VanillaAgents.CustomCharacter)
-				AppearanceTools.LogAppearance(__instance);
-        } 
-
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
 		public static bool ObjectAction_Prefix(string myAction, string extraString, float extraFloat, Agent causerAgent, PlayfieldObject extraObject, Agent __instance, ref bool ___noMoreObjectActions)
 		{
@@ -204,16 +268,6 @@ namespace CCU.Patches.Agents
 
 			return true;
         }
-
-        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SayDialogue), argumentTypes: new Type[] { typeof(bool), typeof(string), typeof(bool), typeof(NetworkInstanceId) })]
-		public static bool SayDialogue_PrefixLogging(Agent __instance, string type)
-        {
-			logger.LogDebug("SayDialogue_Prefix");
-			logger.LogDebug("AgentName: " + __instance.agentName);
-			logger.LogDebug("Type: " + type);
-
-			return true;	
-        }		
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetBrainActive))]
 		public static bool SetBrainActive_Prefix(Agent __instance, ref bool isActive)
@@ -300,7 +354,7 @@ namespace CCU.Patches.Agents
 			if (!__instance.GetTraits<T_GibType>().Any())
 				__instance.AddTrait<Meat_Chunks>();
 
-			T_Language.SetupAgent(__instance);
+			T_Language.SetupLanguages(__instance);
 
 			// Negatives allow traits to take precedence over mutators.
 			if ((GC.challenges.Contains(nameof(Homesickness_Disabled))  && !__instance.HasTrait<Homesickly>()) ||

@@ -44,40 +44,6 @@ namespace CCU.Traits.App
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static void LogAppearance(Agent agent)
-        {
-			AgentHitbox agentHitbox = agent.tr.GetChild(0).transform.GetChild(0).GetComponent<AgentHitbox>();
-			logger.LogDebug("======= APPEARANCE (" + agent.agentRealName + ")");
-			logger.LogDebug("\tAccessory  :\t" + agent.inventory.startingHeadPiece);
-			logger.LogDebug("\tBody Color :\t" + agentHitbox.bodyColor.ToString());
-			logger.LogDebug("\tBody Type  :\t" + agent.oma.bodyType);  // dw
-			logger.LogDebug("\tEye Color  :\t" + agentHitbox.eyesColor.ToString());
-			logger.LogDebug("\tEye Type   :\t" + agentHitbox.eyesStrings[1]);
-			logger.LogDebug("\tFacial Hair:\t" + agentHitbox.facialHairType);
-			logger.LogDebug("\tFH Position:\t" + agentHitbox.facialHairPos);
-			logger.LogDebug("\tHair Color :\t" + agentHitbox.hairColorName);
-			logger.LogDebug("\tHair Style :\t" + agentHitbox.hairType);
-			logger.LogDebug("\tLegs Color :\t" + agentHitbox.legsColor.ToString());
-			logger.LogDebug("\tSkin Color :\t" + agentHitbox.skinColorName);
-			
-			//logger.LogDebug("\n--- EYE TYPE");
-			//logger.LogDebug("Hook         :\t" + agent.GetOrAddHook<H_Agent>().eyesType); // Blank
-			//logger.LogDebug("CustomCharSD :\t" + agent.customCharacterData.eyesType);
-			//logger.LogDebug("OMA          :\t" + agent.oma.eyesType); // int
-			//logger.LogDebug("EyesStrings  :");
-
-			//foreach (string str in agentHitbox.eyesStrings)
-			//	logger.LogDebug("\t" + str);
-			//logger.LogDebug("EyesDeadStr :");
-			//foreach (string str in agentHitbox.eyesDeadStrings)
-			//	logger.LogDebug("\t" + str);
-			//logger.LogDebug("EyesNarrowStr :");
-			//foreach (string str in agentHitbox.eyesNarrowStrings)
-			//	logger.LogDebug("\t" + str);
-			//logger.LogDebug("EyesWideStrings :");
-			//foreach (string str in agentHitbox.eyesWideStrings)
-			//	logger.LogDebug("\t" + str);
-		}
 		public static void SetupAppearance(AgentHitbox agentHitbox)
 		{
 			Agent agent = agentHitbox.agent;
@@ -236,16 +202,10 @@ namespace CCU.Traits.App
 					break;
 			}
 
-			//logger.LogDebug("Printing pool for (" + typeof(T) + ")");
-			//foreach (string str in pool)
-				//logger.LogDebug(pool.IndexOf(str) + ".\t" + str);
-
 			if (pool.Count() is 0)
 				return null;
 
 			string result = pool[CoreTools.random.Next(pool.Count())]; // TODO: Shouldn't this throw an off by one error?
-			//logger.LogDebug("RESULT: " + result);
-
 			return result;
 		}
 		public static void RollAccessory(AgentHitbox agentHitbox)

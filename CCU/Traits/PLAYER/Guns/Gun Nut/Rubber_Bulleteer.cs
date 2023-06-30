@@ -2,6 +2,8 @@
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Items;
 using CCU.Localization;
+using CCU.Traits.Behavior;
+using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -40,7 +42,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 			PostProcess = RogueLibs.CreateCustomTrait<Rubber_Bulleteer>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Agent applies a Rubber Bullets Mod to all traditional firearms in inventory. If rubber bullet damage reduces an NPC's health to 10% or lower, they are knocked out. If they go below -10%, they are killed... but less lethally! Rubber Bullet guns are usable by Pacifists."
+					[LanguageCode.English] = "Applies a Rubber Bullets Mod to all traditional firearms in inventory."
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -85,36 +87,31 @@ namespace CCU.Traits.Loadout_Gun_Nut
 		{
 			Agent agent = __instance.agent ?? null;
 
-			if (agent is null || damagerObject is null ||
-				!(damagerObject.isBullet && damagerObject.playfieldObjectBullet.rubber) ||
-					// Copy of Vanilla exceptions follow
-				(agent.teleporting && !agent.skillPoints.justGainedLevel) ||
-				(agent.ghost && agent.skillPoints.justGainedLevel) ||
-				(agent.dead && agent.skillPoints.justGainedLevel && !agent.teleporting && !agent.suicided && !agent.finishedLevel && !agent.finishedLevelImmediate && !agent.finishedLevelImmediateMult && !agent.finishedLevelRealMult && !agent.oma.finishedLevel) ||
-				((agent.finishedLevel || agent.finishedLevelImmediate || agent.finishedLevelImmediateMult || agent.finishedLevelRealMult || agent.oma.finishedLevel) && !agent.suicided && healthNum < 0f) ||
-				(agent.butlerBot || agent.hologram || (agent.mechEmpty && healthNum < 0f)) ||
-				(GC.cinematic && GC.loadLevel.LevelContainsMayor()))
+			if (agent is null || damagerObject is null
+				|| agent.HasTrait(VanillaTraits.Electronic) || agent.hologram || agent.HasTrait<Brainless>() || agent.HasTrait<Not_Vincible>()
+				|| !(damagerObject.isBullet && damagerObject.playfieldObjectBullet.rubber)
+				// Copy of Vanilla exceptions follow
+				|| (agent.teleporting && !agent.skillPoints.justGainedLevel) 
+				|| (agent.ghost && agent.skillPoints.justGainedLevel) 
+				|| (agent.dead && agent.skillPoints.justGainedLevel && !agent.teleporting && !agent.suicided && !agent.finishedLevel && !agent.finishedLevelImmediate && !agent.finishedLevelImmediateMult && !agent.finishedLevelRealMult && !agent.oma.finishedLevel) 
+				|| ((agent.finishedLevel || agent.finishedLevelImmediate || agent.finishedLevelImmediateMult || agent.finishedLevelRealMult || agent.oma.finishedLevel) && !agent.suicided && healthNum < 0f) 
+				|| (agent.butlerBot || agent.hologram || (agent.mechEmpty && healthNum < 0f)) 
+				|| (GC.cinematic && GC.loadLevel.LevelContainsMayor()))
 				return true;
 
 			float knockoutThreshold = agent.healthMax / 10; //  10%
 			float deathThreshold = -knockoutThreshold; // 10%
 			float netHealth = agent.health + healthNum ; // Damage is negative
 
-			logger.LogDebug("RubberBulletsDamage: " + agent.agentRealName + " (" + agent.health + "/" + agent.healthMax + ") taking " + healthNum + " damage");
-			logger.LogDebug("NetHealth <= Knockout?:\t" + netHealth + " <= " + knockoutThreshold + " ? " + (netHealth <= knockoutThreshold));
-			logger.LogDebug("NetHealth <= Death?   :\t" + netHealth + " <= " + deathThreshold + " ? " + (netHealth <= deathThreshold));
-
 			if (netHealth <= deathThreshold)
 			{
-				logger.LogDebug("Rubber Bullet death threshold passed");
 				damagerObject.playfieldObjectBullet.rubber = false;
 				
-				if (GC.percentChance(33))
+				if (agent.HasTrait(VanillaTraits.TheLaw) && GC.percentChance(33))
 					RubberBulletsMod.ByTheBook(damagerObject.playfieldObjectBullet.agent);
 			}
 			else if (netHealth <= knockoutThreshold)
 			{
-				logger.LogDebug("Rubber Bullet knockout threshold passed");
 				agent.healthBeforeKnockout = agent.health + healthNum;
 				agent.health += healthNum; // Bypassed for rubber knockout in vanilla code
 				agent.knockedOut = true;
@@ -150,7 +147,6 @@ namespace CCU.Traits.Loadout_Gun_Nut
 		}
 		private static float ScaleDeathThreshold(Agent agent)
 		{
-			logger.LogDebug("ScaledDeathThreshold: " + agent.agentRealName + ", at " + agent.healthMax / -10f + "/" + agent.healthMax);
 			return agent.healthMax / -10f;
 		}
 

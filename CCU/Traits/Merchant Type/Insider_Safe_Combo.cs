@@ -1,28 +1,28 @@
 ﻿using RogueLibsCore;
-using CCU.Localization;
 using System;
+using System.Collections.Generic;
 
-namespace CCU.Traits.Interaction
+namespace CCU.Traits.Merchant_Type
 {
-    public class Influence_Election : T_Interaction
+	public class Insider_Safe_Combo : T_MerchantType
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.InfluenceElection;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => VDetermineMoneyCost.BribeElection;
+        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>( vItem.SafeCombination, 1),
+        };
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Influence_Election>()
+            PostProcess = RogueLibs.CreateCustomTrait<Insider_Safe_Combo>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can be paid to sway the vote."),
+                    [LanguageCode.English] = String.Format("Sells Safe Combo in shop. Not so safe now!"),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Influence_Election)),
+                    [LanguageCode.English] = DesignerName(typeof(Insider_Safe_Combo), "Insider (Safe Combo)"),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU

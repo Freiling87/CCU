@@ -5,6 +5,8 @@
 		public const string
 			HirePermanentExpert = "HackerAssist_Permanent",
 			HirePermanentMuscle = "SoldierHire_Permanent",
+			TeachLanguageEnglish = "TeachLanguageEnglish",
+			TeachLanguageOther = "TeachLanguageOther",
 
 			z = "";
     }

@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Bloodsuckers_Bazaar : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BloodBag, 6),
             new KeyValuePair<string, int>( vItem.Cologne, 1),

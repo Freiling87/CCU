@@ -6,7 +6,7 @@ namespace CCU.Traits.Hack
 {
     public class Explode : T_Hack
     {
-        public override string ButtonText => VButtonText.Hack_Haywire;
+        public override string ButtonText => CButtonText.Hack_Explode;
 
         //[RLSetup]
         public static void Setup()

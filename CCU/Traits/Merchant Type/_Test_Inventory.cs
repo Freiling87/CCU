@@ -6,15 +6,21 @@ namespace CCU.Traits.Merchant_Type
 {
     public class _Test_Inventory : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
         {
-            new KeyValuePair<string, int>( vItem.WaterPistol, 12),
+            new KeyValuePair<string, int>( vItem.BaseballBat, 1),
+            new KeyValuePair<string, int>( vItem.FoodProcessor, 1),
+            new KeyValuePair<string, int>( vItem.GasMask, 1),
+            new KeyValuePair<string, int>( vItem.HardHat, 1),
+            new KeyValuePair<string, int>( vItem.MiniFridge, 1),
+            new KeyValuePair<string, int>( vItem.Pistol, 1),
+            new KeyValuePair<string, int>( vItem.WalkieTalkie, 1),
         };
 
         [RLSetup]
         public static void Setup()
         {
-            if (Core.developerEdition)
+            if (Core.debugMode)
                 PostProcess = RogueLibs.CreateCustomTrait<_Test_Inventory>()
                     .WithDescription(new CustomNameInfo
                     {

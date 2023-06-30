@@ -54,12 +54,6 @@ namespace CCU.Patches.AgentRelationships
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Relationships.SetupRelationshipOriginal), argumentTypes: new[] { typeof(Agent) })]
         public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{
-            bool logging = ___agent.HasTrait(VanillaTraits.BlahdBasher) || ___agent.HasTrait(VanillaTraits.CrepeCrusher)
-                || otherAgent.HasTrait(VanillaTraits.BlahdBasher) || otherAgent.HasTrait(VanillaTraits.CrepeCrusher);
-
-            if (logging)
-                logger.LogDebug(string.Format("SetupRelationshipOriginal_Postfix: {0} / {1}", ___agent.agentRealName, otherAgent.agentRealName));
-
             if (GC.levelType == "HomeBase")
                 return;
 

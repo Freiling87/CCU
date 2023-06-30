@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using BTHarmonyUtils;
 using UnityEngine;
+using System.Linq;
 
 namespace CCU
 {
@@ -22,7 +23,6 @@ namespace CCU
 		public const string pluginVersion = "1.1.1";
 		public const string subVersion = "b";
 		
-		public const bool developerEdition = true; // For in-game development tools like Debugulizer
 		public const bool designerEdition = true;
 		public const bool debugMode = true;
 
@@ -54,17 +54,25 @@ namespace CCU
 			return (T)Activator.CreateInstance(typeof(T), callFrom, ptr);
 		}
 
-		public static string GetRandomMember(List<string> list)
+		public static string GetRandomMember(List<string> list) =>
+			list[random.Next(0, list.Count - 1)];
+
+		public static List<TBase> AllClassesOfType<TBase>() where TBase : class
 		{
-			try
+			List<TBase> list = new List<TBase>();
+			var derivedTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(TBase)));
+
+			foreach (var type in derivedTypes)
 			{
-				return list[random.Next(0, list.Count)];
+				var instance = Activator.CreateInstance(type) as TBase;
+				list.Add(instance);
 			}
-			catch
-			{
-				return null;
-			}
+
+			return list;
 		}
+
+		public static bool ContainsAll<T>(List<T> containingList, List<T> containedList) =>
+			!containedList.Except(containingList).Any();
 	}
 
 	public static class CCULogger

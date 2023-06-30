@@ -18,17 +18,6 @@ namespace CCU.Patches
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), argumentTypes: new[] { typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
-        public static bool Spawn_Prefix(string objectType)
-        {
-            logger.LogDebug("Spawn_Prefix");
-
-            if (objectType == "CustomFloorDecal")
-                logger.LogDebug("Caught");
-
-            return true;
-        }
-
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnStatusText), argumentTypes: new Type[] { typeof(PlayfieldObject), typeof(string), typeof(string), typeof(string), typeof(NetworkInstanceId), typeof(string), typeof(string) })]
         public static bool SpawnStatusText_GateAV(PlayfieldObject myPlayfieldObject)
 		{

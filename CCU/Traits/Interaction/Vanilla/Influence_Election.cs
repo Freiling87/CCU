@@ -4,25 +4,25 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Administer_Blood_Bag : T_Interaction
+    public class Influence_Election : T_Interaction
     {
         public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.AdministerBloodBag;
-        public override bool ExtraTextCostOnly => true;
-        public override string DetermineMoneyCost => VDetermineMoneyCost.HP_20;
+        public override string ButtonID => VButtonText.InfluenceElection;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => VDetermineMoneyCost.BribeElection;
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Administer_Blood_Bag>()
+            PostProcess = RogueLibs.CreateCustomTrait<Influence_Election>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can give you a blood bag, at the cost of 20 HP."),
-                     
+                    [LanguageCode.English] = String.Format("This character can be paid to sway the vote."),
+                    
                 })
-                .WithName(new CustomNameInfo 
+                .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Administer_Blood_Bag)),
+                    [LanguageCode.English] = DesignerName(typeof(Influence_Election)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU
@@ -31,7 +31,7 @@ namespace CCU.Traits.Interaction
                     CharacterCreationCost = 0,
                     IsAvailable = false,
                     IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0, 
+                    UnlockCost = 0,
                 });
         }
         public override void OnAdded() { }

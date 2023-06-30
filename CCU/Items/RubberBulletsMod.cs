@@ -16,8 +16,14 @@ namespace CCU.Items
         public static void Setup()
         {
             ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<RubberBulletsMod>()
-                .WithName(new CustomNameInfo("Rubber Bullets Mod"))
-                .WithDescription(new CustomNameInfo("If the attached weapon reduces a target's health to 20% or lower, they are knocked out. If they go below -10%, they are killed... but less lethally! Rubber Bullet guns are usable by Pacifists."))
+                .WithName(new CustomNameInfo 
+                {
+					[LanguageCode.English] = "Rubber Bullets Mod"
+                })
+                .WithDescription(new CustomNameInfo
+                {
+					[LanguageCode.English] = "Knocks out targets... usually."
+                })
                 .WithSprite(Properties.Resources.RubberBulletsMod)
                 .WithUnlock(new ItemUnlock
                 {
@@ -29,16 +35,46 @@ namespace CCU.Items
 
             string t = NameTypes.Dialogue;
 
-            RogueLibs.CreateCustomName("LessLethalCollateral_00", t, new CustomNameInfo("When you die, you die poor. It really makes you think."));
-            RogueLibs.CreateCustomName("LessLethalCollateral_01", t, new CustomNameInfo("Should have just complied!"));
-            RogueLibs.CreateCustomName("LessLethalCollateral_02", t, new CustomNameInfo("Oh, *now* you stop resisting."));
-            RogueLibs.CreateCustomName("LessLethalCollateral_03", t, new CustomNameInfo("That's for making me slightly tired!"));
-            RogueLibs.CreateCustomName("LessLethalCollateral_04", t, new CustomNameInfo("Better sprinkle some \"Sugar\" on that one."));
-            RogueLibs.CreateCustomName("LessLethalCollateral_05", t, new CustomNameInfo("Another situation de-escalated!"));
-            RogueLibs.CreateCustomName("LessLethalCollateral_06", t, new CustomNameInfo("Some damages are more collateral than others."));
-            RogueLibs.CreateCustomName("LessLethalCollateral_07", t, new CustomNameInfo("At least they can't sue the department if they're dead."));
-            RogueLibs.CreateCustomName("LessLethalCollateral_08", t, new CustomNameInfo("All Collaterals Are Bad!"));
-            RogueLibs.CreateCustomName("LessLethalCollateral_09", t, new CustomNameInfo("Ugh, now I have to fill out a form."));
+            RogueLibs.CreateCustomName("LessLethalCollateral_00", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "When you die, you die poor. It really makes you think."
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_01", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "Should have just complied!"
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_02", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "Oh, now you stop resisting."
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_03", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "That's for making me slightly tired!"
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_04", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "Better sprinkle some \"Sugar\" on that one."
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_05", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "Another situation de-escalated!"
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_06", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "Some damages are more collateral than others."
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_07", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "At least they can't sue the department if they're dead."
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_08", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "All Collaterals Are Bad!"
+            });
+            RogueLibs.CreateCustomName("LessLethalCollateral_09", t, new CustomNameInfo
+            {
+                [LanguageCode.English] = "Ugh, now I have to fill out a form. WHYYYYY?!"
+            });
         }
 
         public override void SetupDetails()

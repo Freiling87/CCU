@@ -90,7 +90,6 @@ namespace CCU.Items
             Item.invInterface.HideTarget();
             Owner.gc.audioHandler.Play(Owner, "ClassAWare_Use");
             Owner.gc.spawnerMain.SpawnStateIndicator(agent, "HighVolume");
-            //CCULogger.GetLogger().LogDebug(MainText(agent, newClass, Owner));
             Owner.mainGUI.ShowBigImage(MainText(agent, newClass, Owner), "", null, target);
 
             return true;

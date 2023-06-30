@@ -27,7 +27,7 @@ namespace CCU.Traits.Merchant_Stock
                 });
         }
         public override void OnAdded() { }
-        public override void OnAddItem(ref InvItem invItem)
+        internal override void OnAddItem(ref InvItem invItem)
         {
             if (QuantityTypes.Contains(invItem.itemType))
                 invItem.invItemCount *= 3;

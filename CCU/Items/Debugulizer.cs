@@ -16,7 +16,7 @@ namespace CCU.Items
         [RLSetup]
         public static void Setup()
         {
-            if (Core.developerEdition)
+            if (Core.debugMode)
             {
                 ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<Debugulizer>()
                 .WithName(new CustomNameInfo

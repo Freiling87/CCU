@@ -12,7 +12,7 @@ namespace CCU.Traits.Player.Language
             VanillaAgents.WerewolfTransformed 
         };
 
-		public override string[] LanguageNames => new string[] { "Werewelsh" };
+		public override string[] LanguageNames => new string[] { Language.Werewelsh };
 
 		[RLSetup]
         public static void Setup()
@@ -20,7 +20,7 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Werewelsh>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Werewolves (both forms), and anyone else with this trait."),
+                    [LanguageCode.English] = String.Format("Lunatic raving interspersed with adorable doggy noises! Agent can bypass Vocally Challenged when speaking to Werewolves (both forms), and anyone else with this trait."),
                 })
                 .WithName(new CustomNameInfo
                 {

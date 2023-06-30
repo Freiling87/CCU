@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Pacifist_Provisioner : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BananaPeel, 2),
             new KeyValuePair<string, int>( vItem.HologramBigfoot, 1),

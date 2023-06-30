@@ -4,25 +4,25 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Bribe_Cops : T_Interaction
+    public class Identify : T_Interaction
     {
         public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.BribeCops;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => VDetermineMoneyCost.BribeCops;
+        public override string ButtonID => VButtonText.Identify;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => VDetermineMoneyCost.IdentifySyringe;
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Bribe_Cops>()
+            PostProcess = RogueLibs.CreateCustomTrait<Identify>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will accept cash to bribe law enforcement."),
+                    [LanguageCode.English] = String.Format("This character can identify objects for money."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Bribe_Cops)),
+                    [LanguageCode.English] = DesignerName(typeof(Identify)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU

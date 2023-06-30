@@ -4,25 +4,26 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Use_Blood_Bag : T_Interaction
+    public class Pay_Debt : T_Interaction
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.UseBloodBag;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => null;
+        public override bool AllowUntrusted => true;
+        public override string ButtonID => VButtonText.PayDebt;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null;
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Use_Blood_Bag>()
+            PostProcess = RogueLibs.CreateCustomTrait<Pay_Debt>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can help the player use a Blood Bag in their inventory."),
+                    [LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" +
+                    "Note: If you want them to lend money as well, use {0} too.\n\nBypasses Untrusting traits.", LongishDocumentationName(typeof(Borrow_Money))),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Use_Blood_Bag)),
+                    [LanguageCode.English] = DesignerName(typeof(Pay_Debt)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU

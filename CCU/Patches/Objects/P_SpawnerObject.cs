@@ -9,15 +9,5 @@ namespace CCU.Patches.Objects
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        //[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerObject.spawn))]
-        public static bool Spawn_Prefix(string objectRealName)
-        {
-            logger.LogDebug("Spawn_Prefix");
-
-            if (objectRealName == "CustomFloorDecal")
-                logger.LogDebug("Caught");
-
-            return true;
-        }
     }
 }

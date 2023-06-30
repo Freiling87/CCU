@@ -7,9 +7,9 @@ namespace CCU.Traits.Interaction
     public class Manage_Chunk : T_Interaction
     {
         public override bool AllowUntrusted => false;
-        public override string ButtonText => "";
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => null;
+        public override string ButtonID => "";
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null;
 
         [RLSetup]
         public static void Setup()

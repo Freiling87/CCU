@@ -3,6 +3,8 @@
 	public static class CButtonText
     {
 		public const string
+			Container_Open = "ContainerOpen",
+			Hack_Explode = "Hack_Explode",
 			Hire_Expert_Permanent = "AssistMe_Permanent",
 			Hire_Expert_Permanent_Voucher = "AssistMe_Permanent_Voucher",
 			Hire_Expert_Voucher = "AssistMe_Voucher", // Name differentiation required to avoid button confusion in RL
@@ -10,8 +12,15 @@
 			Hire_Muscle_Permanent_Voucher = "HireAsProtection_Permanent_Voucher",
 			Hire_Muscle_Voucher = "HireAsProtection_Voucher", // Name differentiation required to avoid button confusion in RL
 			Investigate = "Investigate",
-			OpenContainer = "OpenContainer",
 			Ransack = "Ransack",
+			Teach_Language = "Teach_Language",
+			Teach_Binary = "Teach_Binary",
+			Teach_Chthonic = "Teach_Chthonic",
+			Teach_English = "Teach_English",
+			Teach_ErSdtAdt = "Teach_ErSdtAdt",
+			Teach_Foreign = "Teach_Foreign",
+			Teach_Goryllian = "Teach_Goryllian",
+			Teach_Werewelsh = "Teach_Werewelsh",
 
 			z = "";
     }

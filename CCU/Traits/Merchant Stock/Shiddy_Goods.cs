@@ -29,10 +29,10 @@ namespace CCU.Traits.Merchant_Stock
                 });
         }
         public override void OnAdded() { }
-        public override void OnAddItem(ref InvItem invItem)
+        internal override void OnAddItem(ref InvItem invItem)
         {
             if (DurabilityTypes.Contains(invItem.itemType))
-                invItem.invItemCount = (int)Math.Max(0, (invItem.invItemCount / 3f));
+                invItem.invItemCount = (int)Math.Max(1, invItem.invItemCount / 3f);
         }
         public override void OnRemoved() { }
     }

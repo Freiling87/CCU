@@ -133,6 +133,7 @@
     <Compile Include="Items\I_CCU.cs" />
     <Compile Include="Localization\CAgentGroup.cs" />
     <Compile Include="Localization\OperatingBarText.cs" />
+    <Compile Include="Localization\VItemType.cs" />
     <Compile Include="Localization\VMapDirection.cs" />
     <Compile Include="Localization\VTraitCategory.cs" />
     <Compile Include="Mutators\C_CCU.cs" />
@@ -149,7 +150,6 @@
     <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
     <Compile Include="Patches\Goals\P_GoalFlee.cs" />
     <Compile Include="Patches\Interface\P_CharacterCreation.cs" />
-    <Compile Include="Patches\Interface\P_ObjectSprite.cs" />
     <Compile Include="Patches\Inventory\P_InvItem.cs" />
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ComputerShutdown.cs" />
@@ -590,11 +590,15 @@
     <Compile Include="Traits\Hire Duration\Homesickly.cs" />
     <Compile Include="Traits\Hire Duration\Homesickless.cs" />
     <Compile Include="Traits\IModifyItems.cs" />
+    <Compile Include="Traits\IMutatorConditionalTrait.cs" />
+    <Compile Include="Traits\Interaction\IBranchInteractionMenu.cs" />
     <Compile Include="Traits\Inventory\Infinite_Ammo.cs" />
     <Compile Include="Traits\Inventory\Infinite_Armor.cs" />
     <Compile Include="Traits\Inventory\Infinite_Melee.cs" />
     <Compile Include="Traits\Loadout\Loader\T_LoadoutLoader.cs" />
     <Compile Include="Traits\Combat\Toughness\T_Toughness.cs" />
+    <Compile Include="Traits\Merchant Type\Insider_Safe_Combo.cs" />
+    <Compile Include="Traits\Merchant Type\Insider_Key.cs" />
     <Compile Include="Traits\Merchant Type\_Test_Inventory.cs" />
     <Compile Include="Traits\Passive\Indomitable.cs" />
     <Compile Include="Traits\Passive\Suppress_Status_Text.cs" />
@@ -694,28 +698,30 @@
     <Compile Include="Traits\Interaction Gate\Insularer.cs" />
     <Compile Include="Traits\Interaction Gate\Untrustingest.cs" />
     <Compile Include="Traits\Interaction Gate\Untrusting.cs" />
-    <Compile Include="Traits\Interaction\Administer_Blood_Bag.cs" />
-    <Compile Include="Traits\Interaction\Borrow_Money.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Administer_Blood_Bag.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Borrow_Money.cs" />
     <Compile Include="Traits\Hack\T_Hack.cs" />
     <Compile Include="Traits\Interaction\T_Interaction.cs" />
-    <Compile Include="Traits\Interaction\Play_Bad_Music.cs" />
-    <Compile Include="Traits\Interaction\Pay_Debt.cs" />
-    <Compile Include="Traits\Interaction\Manage_Chunk.cs" />
-    <Compile Include="Traits\Interaction\Bribe_for_Entry_Alcohol.cs" />
-    <Compile Include="Traits\Interaction\Bribe_Cops.cs" />
-    <Compile Include="Traits\Interaction\Pay_Entrance_Fee.cs" />
-    <Compile Include="Traits\Interaction\Buy_Round.cs" />
-    <Compile Include="Traits\Interaction\Buy_Slave.cs" />
-    <Compile Include="Traits\Interaction\Give_Blood.cs" />
-    <Compile Include="Traits\Interaction\Heal_Player.cs" />
-    <Compile Include="Traits\Interaction\Leave_Weapons_Behind.cs" />
-    <Compile Include="Traits\Interaction\Influence_Election.cs" />
-    <Compile Include="Traits\Interaction\Use_Blood_Bag.cs" />
-    <Compile Include="Traits\Interaction\Offer_Motivation.cs" />
-    <Compile Include="Traits\Interaction\Identify.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Play_Bad_Music.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Pay_Debt.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Manage_Chunk.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Bribe_for_Entry_Alcohol.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Bribe_Cops.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Pay_Entrance_Fee.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Buy_Round.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Buy_Slave.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Give_Blood.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Heal_Player.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Leave_Weapons_Behind.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Influence_Election.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Use_Blood_Bag.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Offer_Motivation.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Identify.cs" />
+    <Compile Include="Traits\PLAYER\Social\Language\Speaks_English.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Speaks_ErSdtAdt.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Speaks_Foreign.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Polyglot.cs" />
+    <Compile Include="Traits\PLAYER\Social\Language\Speaks_Undercant.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Speaks_Werewelsh.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Speaks_Chthonic.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Speaks_High_Goryllian.cs" />
@@ -744,7 +750,7 @@
     <Compile Include="Traits\Cost Scale\Less.cs" />
     <Compile Include="Traits\Cost Scale\More.cs" />
     <Compile Include="Traits\Passive\Extortable.cs" />
-    <Compile Include="Traits\Interaction\Borrow_Money_Moocher.cs" />
+    <Compile Include="Traits\Interaction\Vanilla\Borrow_Money_Moocher.cs" />
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
     <Compile Include="Traits\PLAYER\Melee\Knockback_Peon.cs" />
@@ -785,6 +791,8 @@
     <Compile Include="Traits\Senses\Hearing\Keenest_Ears.cs" />
     <Compile Include="Traits\Senses\Hearing\Keen_Ears.cs" />
     <Compile Include="Traits\Senses\T_Senses.cs" />
+    <Compile Include="Traits\Interaction\Teacher\Language_Teacher.cs" />
+    <Compile Include="Traits\Interaction\Teacher\T_Teacher.cs" />
     <Compile Include="Traits\Trait Gate\Specistist.cs" />
     <Compile Include="Traits\Trait Gate\Slayable.cs" />
     <Compile Include="Traits\Trait Gate\Suspecter.cs" />
@@ -854,7 +862,6 @@
     <Compile Include="Traits\MapMarker\MapMarker_Pilot.cs" />
     <Compile Include="Traits\Bodyguarded\Bodyguarded_Pilot.cs" />
     <Compile Include="Traits\Trait Gate\T_TraitGate.cs" />
-    <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\Trait Gate\Honorable_Thief.cs" />
     <Compile Include="Traits\Merchant Type\Intruders_Outlet.cs" />
     <Compile Include="Traits\Appearance\Facial Hair\Long_Beard.cs" />
@@ -899,9 +906,7 @@
     <None Include="Resources\Image\RubberBulletsMod.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Systems\Language\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\Appearance_Examples.png" />
     <Content Include="Images\CCScreenshotExample.jpg" />

@@ -9,7 +9,6 @@
 			Movement = "Movement",
 			Social = "Social",
 			Stealth = "Stealth",
-			Trade = "Trade",
-			Withdrawal = "Withdrawal";
+			Trade = "Trade";
 	}
 }

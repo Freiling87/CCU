@@ -5,10 +5,6 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-##			Pre-release checks
-- Notify translators
-  - TBB
-  - Guoxin
 ##			v. 1.1.1 Changelog
 - Compatibility
   - Verified compatibility with SOR v98 
@@ -32,6 +28,9 @@ Listed in order of Parent tier summary symbol priority:
     - Appearance
       - Dynamic Player Appearance: Allows appearance variation when using the class as a player. Currently, appearance is only rerolled on starting a new run, but I plan to add a little more control over this in the future.
       - Fleshy Follicles: Matches hair color to skin color.
+    - Cost Scale
+      - Less-Ish: -25% on all costs
+      - Little Steep: +25% on all costs
     - Behavior
       - Accident-Prone: Extended behavior to walk into Killer Plants & Laser Emitters
     - Combat
@@ -39,6 +38,8 @@ Listed in order of Parent tier summary symbol priority:
       - Mag Dumper: Agent uses rapid fire for longer.
       - Melee skill traits: Modify frequency of attacks in combat.
       - Gun skill traits: Modify frequency of attacks in combat.
+    - Interaction
+      - Teach Languages: Teaches any language they know, for a cost.
     - Passive
       - Crusty: Will now use Alarm Button when fleeing from combat.
       - Indomitable: Immune to mind control
@@ -54,68 +55,69 @@ Listed in order of Parent tier summary symbol priority:
       - Rubber Bulleteer
       - Silencerist
     - Knockback Peon: Reduces knockback, making followup attacks easier.
-  - Language System: Added some dialogue regarding various language gaps.
-##			Translator Notes Draft
-- The easiest way to do this would be to clone the project from Visual Studio/Github. 
-  - Then search for CustomNameInfo, which is the method that interfaces with the translation system.
-  - Anytime you see a CustomNameInfo that lacks a translation for your
+    - Speaks Undercant: A language for subterranean outcasts and criminal networks. Thieves and Cannibals speak it by default.
+  - Language System: Added some dialogue regarding various language gaps. I plan to do a lot more work on this system to flesh it out, and gate it behind a Mutator.
+##Pre-release checks
+###			Project modes
+- Disable Developer mode
+- Make Player & Designer editions
+  - Maybe this can be passed as an argument when running the build event?
 ##			Bugs
 Except crickets. Crickets are fine.
-###			H	Big Quest for Faction traits
-Count Blahd-aligned as Blahd, e.g.
-###			T	Scene Setter Breakage
+##			Bug Archive
+###         H   Scene Setter Breakage
 https://discord.com/channels/187414758536773632/991046848536006678/1122856007706607656
 Spawning with visible hostiles is confirmed to interrupt it inconsistently
-###			H	Normal (EOD) in Shop Inventory
+Not able to replicate
+###         H   Merchant Stock Price issues
+Two symptoms of the same issue. Abbysssal pointed out the solution, but this is not an important enough bug to delay release for.
+
+- Gas Mask is consistently $30 too expensive by formula.
+  - Abby found the issue:
+        === MoneyCostDurabilityAmmo_Logging: (GasMask)
+        MoneyAmt:      70
+        MoneyAmtFloat: 53.33334
+    This example for low durability, net price should have been 23
+- Melee Weapons under 100 are underpriced.
+    Item		Wrong	Right	Ratio1	Ratio2
+    Knife		$5		$10		0.50	2.000
+    BaseballBat $10		$17		0.58	1.700
+    Crowbar		$8		$13		0.62	1.625
+    Wrench		$8		$13		0.62	1.625
+  - Abby found the issue:
+        === MoneyCostDurabilityAmmo_Logging: (Wrench)
+        MoneyAmt:      13
+        MoneyAmtFloat: 8.58
+####			C	Low-Qty Melee too Cheap
+Melee weapons with low Durability are cheaper than they should be.
+Below, Baseball bat at 66 Qty (200/3) is $10 but should be $17.
+
+
+###         H   Normal (EOD) in Shop Inventory
 https://discord.com/channels/187414758536773632/1003391847902740561/1121962031235477524
 No clue how to replicate this.
-###			H	Identical Shop Inventories
-Copies of Test Dummy A all have the same shop rolls
-Not bothering unless people complain!
-##			Bug Archive
-###				H	Scene Setters Activate Chunk
+###         H   Scene Setters Activate Chunk
 Scene setters may cause events that the designer wished the player to witness to play out too early for them to see. Normally the trigger for activating the chunk is by player proximity.
 Unfortunately, I think this fix will be a bit too complex for this project.
-###				H	Hidden Bomb Spawned in Vent off map
+###         H   Hidden Bomb Spawned in Vent off map
 https://discord.com/channels/187414758536773632/187414758536773632/1093294336109727845
 You might be able to replace the != Wastebasket string with a special validity detector.
 So far I've been unable to replicate this bug. Took place on a standard Park map that did not lack other containers for the bomb.
-###				H	Equipment noise spam
+###         H   Equipment noise spam
 Still occuring, even with vanillas.
 For now, just disabling the noise if they switch to Fist.
-###				H	Dismissed Perm Hire prevents Temp Hire
-Can't temp hire after dismissing perm hire. 
-This is MINOR, I don't care.
-###				H	CCU Trait section in Load Character screen
+###         H   CCU Trait section in Load Character screen
 Shows outdated traits when choosing
 Don't really care yet.
-###				H	Johnny Stabbs
-Hold - Unable to replicate
-
-Has Fac Blahd Aligned (replaced by Legacy)
-
-On attempt Load from stored chars list, get error and no load:
-
-	[Debug  :CCU_Legacy] Caught Legacy trait: Faction_Blahd_Aligned
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	MenuGUI.TextChangedCharacterDescription () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	UnityEngine.Events.InvokableCall.Invoke () (at <a5d0703505154901897ebf80e8784beb>:0)
-	UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <a5d0703505154901897ebf80e8784beb>:0)
-	UnityEngine.UI.InputField.SendOnValueChanged () (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
-	UnityEngine.UI.InputField.SetText (System.String value, System.Boolean sendCallback) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
-	UnityEngine.UI.InputField.set_text (System.String value) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
-	CharacterCreation.LoadCharacter2 (System.String characterName, System.Boolean secondTry, System.Boolean foundFile, System.Object mySaveObject) (at <3d326b8e9c744e5faf3a706691682c89>:0) 
-	...
-###				H	Clone changing appearance
+###         H   Clone changing appearance
 Shelving this because I simply don't care enough to fix it yet. This is super-niche.
 Buddy Cop Loneliness killer
 The one that showed up on level 2 was identical to me
 The one that came from level 1 rerolled appearance
-###				H	Unidentified Eyes Strings error message
+###         H   Unidentified Eyes Strings error message
 Between Accessory & Body Type, current logs are uninterrupted
 Shelved - no apparent effect for this error.
-###				H	Unidentified Loadout error message
+###         H   Unidentified Loadout error message
 Consistently, the Crepe Heavy has this error.
 	[Info   : Unity Log] SETUPMORE4_7
 	[Debug  :CCU_LoadoutTools] Custom Loadout: Custom(Crepe Heavy)
@@ -123,10 +125,9 @@ Consistently, the Crepe Heavy has this error.
 
 This error is from LoadLevel.SetupMore.
 But since there doesn't appear to be any actual repercussion on gameplay, I'm shelving it until it is an issue.
-###				H	Upper Crusty Busybody 
-Polices pickup and destruction of 0-Owner ID items and objects, and no others.
-After reloading, was unable to replicate this.
-###				H	Jukebox Hacks
+
+I want to say I later fixed this. Verify if the messages still come up.
+###         H   Jukebox Hacks
 Possibly RogueLibs, wait for confirmation.
 
 Mambo:
@@ -149,46 +150,30 @@ Bladder:
 	Stack trace:
 	Turntables+<BadMusicPlayTime>d__31.MoveNext () (at <7fd7dd1709b64c98aabccc051a37ae28>:0)
 	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-###				H	$0 in container
+###         H   $0 in container
 https://discord.com/channels/187414758536773632/1003391847902740561/1007975536607383574
 Maxior - Shelf w/ $0 as container, but not Trash Can
 So far, unable to replicate
-###				√	NPC Free Ammo
-Complete. Tested items added via Loadout as well as via editor.
-###				√	Partisan Concealed Carry
+###         √   Partisan Concealed Carry
 Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117896939837587517
 Issue was Loadout Money without a Loader trait.
-###				√	Error on select empty slot
-####				C	Issue
-On selecting empty character slot:
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	AgentHitbox.SetupBodyStrings () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	CCU.Traits.App.AppearanceTools.RollEyeType (AgentHitbox agentHitbox) (at <6991a84d0f8f42f4bcade340f697d8d1>:0)
-	CCU.Traits.App.AppearanceTools.SetupAppearance (AgentHitbox agentHitbox) (at <6991a84d0f8f42f4bcade340f697d8d1>:0)
-	AgentHitbox.SetupFeatures () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	CharacterCreation.ShowSlotAgent () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	CharacterCreation.OpenCharacterCreation (System.Boolean resetting) (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	CharacterCreation.OpenCharacterCreation () (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	MainGUI.ShowCharacterCreation (PlayfieldObject otherObject, Agent myAgent, System.Int32 slotNumber) (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	InvSlot.ClickInvBox (UnityEngine.EventSystems.PointerEventData data, System.Boolean rightClicked) (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	InvSlot.OnPointerDown (UnityEngine.EventSystems.PointerEventData data) (at <3d326b8e9c744e5faf3a706691682c89>:0)
-	UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerDownHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
-	UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at <d5bb9c19c2a7429db6c6658c41074b11>:0)
-	UnityEngine.EventSystems.ExecuteEvents:ExecuteHierarchy(GameObject, BaseEventData, EventFunction`1)
-	Rewired.Integration.UnityUI.RewiredStandaloneInputModule:ProcessMousePress(MouseButtonEventData)
-	Rewired.Integration.UnityUI.RewiredStandaloneInputModule:ProcessMouseEvent(Int32, Int32)
-	Rewired.Integration.UnityUI.RewiredStandaloneInputModule:ProcessMouseEvents()
-	Rewired.Integration.UnityUI.RewiredStandaloneInputModule:Process()
-	UnityEngine.EventSystems.EventSystem:Update()
-####				C	Fix
-Was rolling appearance without checking for CustomCharacterData. Added early return.
-##			Features
+##			Feature Dump
+Apparently I want to type these without any forethought, so this will be a dump to be periodically assorted.
+###			C	Interaction - Teach Language
+Notes from Abby: https://discord.com/channels/187414758536773632/433748059172896769/1123587639698800731
+Create hook variable for conversation status.
+If menu button is pressed, set variable and restart interaction
+###			C	Translator Instructions in Documentation
+- The easiest way to do this would be to clone the project from Visual Studio/Github. 
+  - Then search for CustomNameInfo, which is the method that interfaces with the translation system.
+  - Anytime you see a CustomNameInfo that lacks a translation for your
+###			C	Big Quest for Faction traits
+Count Blahd-aligned as Blahd for Crepe Quest, e.g.
+###			C	Quest Scale Mutators
+Multiply/Divide the number of targets for a mission
+This could also work as a trait, multiplying the XP reward? But need to balance spawns.
 ###			C	Interaction - Buy Intel
 Maps unmapped safes and chests, scaled to number or repeatable
-###			C	Add Less-ISh
-75% cost
-
 ###			C	Vanillize Item Qty on load
 Editor-added items give full ammo, should be semi-random and scaled to NPC level as Loadout items are
 ###			C	Hide Appearance Traits Button

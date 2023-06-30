@@ -13,16 +13,18 @@ namespace CCU.Hooks
 
 		public bool vanillaLongerRapidFire;
 		public bool vanillaRapidFire;
-		public bool initialSetup = false;
+		public bool initialSetupComplete = false;
+		public int vanillaItemValue;
 
 		protected override void Initialize()
 		{
-			if (!initialSetup)
+			if (!initialSetupComplete)
 			{
 				vanillaLongerRapidFire = Instance.longerRapidFire;
 				vanillaRapidFire = Instance.rapidFire;
+				vanillaItemValue = Instance.itemValue;
 
-				initialSetup = true;
+				initialSetupComplete = true;
 			}
 		}
 

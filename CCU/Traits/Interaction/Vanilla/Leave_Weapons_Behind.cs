@@ -4,28 +4,27 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Give_Blood : T_Interaction
+    public class Leave_Weapons_Behind : T_Interaction
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.DonateBlood;
-        public override bool ExtraTextCostOnly => true;
-        public override string DetermineMoneyCost =>
-            GameController.gameController.challenges.Contains("LowHealth")
-                ? VDetermineMoneyCost.GiveBloodLowHealth
-                : VDetermineMoneyCost.GiveBlood;
+        public override bool AllowUntrusted => true;
+        public override string ButtonID => VButtonText.LeaveWeaponsBehind;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null;
+
+        // Should include FollowersLeaveWeaponsBehind
 
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Give_Blood>()
+            PostProcess = RogueLibs.CreateCustomTrait<Leave_Weapons_Behind>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character can help donate blood for cash."),
+                    [LanguageCode.English] = String.Format("This character can be interacted with to drop all weapons in the Player's inventory.\n\nBypasses Untrusting traits."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Give_Blood)),
+                    [LanguageCode.English] = DesignerName(typeof(Leave_Weapons_Behind)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU

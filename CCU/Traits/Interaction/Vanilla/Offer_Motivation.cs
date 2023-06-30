@@ -4,25 +4,25 @@ using System;
 
 namespace CCU.Traits.Interaction
 {
-    public class Buy_Slave : T_Interaction
+    public class Offer_Motivation : T_Interaction
     {
-        public override bool AllowUntrusted => false;
-        public override string ButtonText => VButtonText.PurchaseSlave;
-        public override bool ExtraTextCostOnly => false;
-        public override string DetermineMoneyCost => null; // Determined in code
+        public override bool AllowUntrusted => true;
+        public override string ButtonID => VButtonText.OfferMotivation;
+        public override bool HideCostInButton => false;
+        public override string DetermineMoneyCostID => null;
 
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Buy_Slave>()
+            PostProcess = RogueLibs.CreateCustomTrait<Offer_Motivation>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If this character owns any Slaves, they will sell them."),
+                    [LanguageCode.English] = String.Format("This character can be given small items, and will become Friendly.\n\nBypasses Untrusting traits."),
                     
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Buy_Slave)),
+                    [LanguageCode.English] = DesignerName(typeof(Offer_Motivation)),
                     
                 })
                 .WithUnlock(new TraitUnlock_CCU
