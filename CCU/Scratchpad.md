@@ -5,62 +5,12 @@ Listed in order of Parent tier summary symbol priority:
 	C, T = Code this, Test this
 	H = Hold, usually pending resolution of a separate or grouped issue
 	√ = Fully implemented feature or group of features
-##			v. 1.1.1 Changelog
-- Compatibility
-  - Verified compatibility with SOR v98 
-- Bugfixes & Tweaks
-  - Character Select no longer freezes when clicking an empty slot.
-  - Vendor Cart "Operating" sound effect now plays for the correct duration.
-  - Fixed Investigateable text showing hidden string ("investigateable-message:::").
-  - Shops with Shoddy/Shiddy Goods no longer set Tasers to -1 quantity.
-  - Ammo-related traits now give free ammo to NPCs with items added in the editor, rather than just items added through the Loadout system.
-  - Indestructible now compatible with vanilla (Meat) Gib Type.
-  - Permanent Hires no longer occupy a hire slot after death.
-  - Tubes are now only valid containers for Hidden Bombs if they are within a Computer or Power Box's shutdown range.
-  - Melee Maniac + now improves melee attack speed by 48.5% instead of 50%. This prevents the animation from clipping through targets.
-  - Containers holding Money now generate correct quantities.
-  - Scene Setters restore correct Owner ID to agents after taking effect. This bug had mainly manifested with Yellow agent names after Random Teleportation.
-  - Item-modfying traits now correctly apply their affect when gained mid-game.
-  - Accident-Prone: Extended behavior to walk into Killer Plants & Laser Emitters
-  - Crusty: Will now use Alarm Button when fleeing from combat.
-- New Features
-  - Items
-    - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
-  - Designer Traits
-    - Appearance
-      - Dynamic Player Appearance: Allows appearance variation when using the class as a player. Currently, appearance is only rerolled on starting a new run, but I plan to add a little more control over this in the future.
-      - Fleshy Follicles: Matches hair color to skin color.
-    - Cost Scale
-      - Less-Ish: -25% on all costs
-      - Little Steep: +25% on all costs
-    - Combat
-      - Toughness traits: Modify NPC willingness to fight tough odds.
-      - Mag Dumper: Agent uses rapid fire for longer.
-      - Melee skill traits: Modify attack frequency.
-      - Gun skill traits: Modify attack frequency.
-    - Interaction
-      - Teach Languages: Teaches any language they know, for a cost.
-    - Passive
-      - Indomitable: Immune to mind control
-      - Suppress Status Text: No Status Effect text popups.
-    - Senses
-      - Keen Ears traits: Various traits that determine how sensitive the NPC is to sound, and how they react to it.
-  - Player Traits
-    - Trait Categories: There's a hidden system in the game which chooses your trait options on level up based on your existing character. I've added Trait Categories to all Player Traits to hook into this system. You should get more relevant trait options from now on.
-    - Gun Nut: Agent automatically applies a mod to all eligible guns.
-      - Accuracy Modder
-      - Ammo Stocker
-      - Rate of Fire Modder
-      - Rubber Bulleteer
-      - Silencerist
-    - Knockback Peon: Reduces knockback, making followup attacks easier.
-    - Speaks Undercant: A language for subterranean outcasts and criminal networks. Thieves and Cannibals speak it by default.
-  - Language System: Added some dialogue regarding various language gaps. I plan to do a lot more work on this system to flesh it out, and gate it behind a Mutator.
-##Pre-release checks
+##		Change Log
+##		Pre-release checks
 ###			Project modes
 - Disable Developer mode
 - Make Player & Designer editions
-  - Maybe this can be passed as an argument when running the build event?
+  - Maybe this can be automated in build event?
 ##			Bugs
 Except crickets. Crickets are fine.
 ##			Bug Archive
