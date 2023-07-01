@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-    public class Suppress_Status_Text : T_PlayerTrait
+    public class Suppress_Status_Text : T_CCU
     {
         [RLSetup]
         public static void Setup()

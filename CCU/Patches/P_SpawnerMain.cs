@@ -19,9 +19,10 @@ namespace CCU.Patches
         public static GameController GC => GameController.gameController;
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnStatusText), argumentTypes: new Type[] { typeof(PlayfieldObject), typeof(string), typeof(string), typeof(string), typeof(NetworkInstanceId), typeof(string), typeof(string) })]
-        public static bool SpawnStatusText_GateAV(PlayfieldObject myPlayfieldObject)
+        public static bool SpawnStatusText_GateAV(PlayfieldObject myPlayfieldObject, string textType)
 		{
-            if (myPlayfieldObject is Agent agent
+            if (textType == "Buff"
+                && myPlayfieldObject is Agent agent
                 && agent.HasTrait<Suppress_Status_Text>())
                 return false;
 
