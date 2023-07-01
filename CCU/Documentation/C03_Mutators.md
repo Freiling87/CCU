@@ -9,10 +9,12 @@ Mutators
 </h1>
 <br><br>
 
+Mutators. What can I say about mutators? Not a whole lot. But this space looks odd without a little bit of text. 
+
+This has been the introduction.
+
 ##			Followers
 |Mutator											|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Homesickness Disabled[^1]							|- Followers no longer leave the party at the end of the level<br>- Homesickness Killer removed from trait choice pool
-|Homesickness Mandatory[^1]							|- Followers *always* leave at the end of the level<br>- Homesickness Killer removed from trait choice pool
-
-[^1]: This is a Player feature. This means it will be accessible by players, and won't have all the [CCU] name prefixes that Designer-only content has. It also costs Nuggets to unlock, because CCU is a scam to get your precious nuggets. Sucker!
+|Homesickness Disabled								|- Followers no longer leave the party at the end of the level<br>- Homesickness Killer removed from trait choice pool
+|Homesickness Mandatory								|- Followers *always* leave at the end of the level<br>- Homesickness Killer removed from trait choice pool

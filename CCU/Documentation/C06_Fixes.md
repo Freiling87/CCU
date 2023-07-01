@@ -11,14 +11,23 @@ Gameplay Fixes
 
 Frequently-requested fixes to vanilla bugs, or tweaks that are obviously in favor of the spirit of the original game.
 
-##		Combat Effectiveness
+##		Combat Skills
+*Many thanks to **BlazingTwist**, who submitted this fix!*
 
-NPCs have fields named `modGunSkill` and `modMeleeSkill`, NPCs with higher skill:
+NPCs have hidden stats named `modGunSkill` and `modMeleeSkill`, which range from 0 to 2.
+
+NPCs with higher combat skill:
 * Are less likely to run when carrying the corresponding weapon type.
 * Are more likely to attack with the corresponding weapon type.
 * Spend less time idling between attacks.
 
-In vanilla SoR you cannot change these fields, but in CCU you can!  
-Custom Characters gain melee- and gunSkill with higher 'Melee' and 'Firearms' attributes, up to an attribute level of **3**.
+Vanilla SoR leaves these values at 0 for all custom NPCs. CCU introduces a fix that scales the stat to 'Melee' or 'Firearms' attribute. 
 
-*Fix submitted by **BlazingTwist**. Thanks!*
+Here's an explicit breakdown of how the attributes convert. It's identical for Melee.
+
+|Firearms	|modGunSkill - Vanilla	|modGunSkill - CCU	|
+|:---------:|:---------------------:|:-----------------:|
+|1			|0						|0
+|2			|0						|1
+|3			|0						|2
+|4			|0						|2

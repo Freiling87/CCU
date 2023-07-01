@@ -21,18 +21,23 @@ CCU aims to address these limitations, giving more power to content creators, wh
 #		Mod Content
 CCU adds the following:
 
-- 6 [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md)
-- 1 [Item](/CCU/Documentation/C02_Items.md)
-- 2 [Mutators](/CCU/Documentation/C03_Mutators.md)
-- 2 (or 28, depending how you count it) [Object Modifications](/CCU/Documentation/C04_Objects.md)
-- 541 [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
-- 11 [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
-- 1 [Gameplay Fix](/CCU/Documentation/C06_Fixes.md)
+- [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md)
+- [Item](/CCU/Documentation/C02_Items.md)
+- [Mutators](/CCU/Documentation/C03_Mutators.md)
+- [Object Modifications](/CCU/Documentation/C04_Objects.md)
+- [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
+- [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
+- [Gameplay Fixes](/CCU/Documentation/C06_Fixes.md)
 
 #		How to use it
 - [Installation](/CCU/Documentation/M01_Installation.md)
 - [Best Practices for Designers](/CCU/Documentation/M02_BestPractices.md)
 - [Change Log](/CCU/Documentation/M03_ChangeLog.md)
+
+#		Links
+- [CCU Showcase](https://steamcommunity.com/sharedfiles/filedetails/?id=2852074522) - A Steam collection of CCU-enhanced Chunk Packs and Campaigns
+- [Bugtesting Discord Thread](https://discord.com/channels/187414758536773632/1003391847902740561) - For bug reports
+- [Development Discord Thread](https://discord.com/channels/187414758536773632/991046848536006678) - For live updates, feature requests, and questions
 
 #		Special Thanks
 
@@ -40,8 +45,12 @@ CCU adds the following:
 |--------------------------------------:|:------|
 |**Abbysssal#2020**<br>**BlazingTwist#4559**|Saintlike patience in teaching an absolute dumb-dumb how to code
 |**Cyan_Light#1438**|Endless SOR mechanic knowledge, bugtesting, content creator nonpareil
-|**Cheese Wizard#6914**<br>**GenEric#1897**<br>**Maxior06#0804**<br>**TheShadowHat#1437**<br>**uwumacaronitwo#7556**|Feedback, feature ideas
-|Romeo Kaleikau (FreeSound.org)			|Class-A-Ware sound effect
+|**Cheese Wizard#6914**<br>**GenEric#1897**<br>**Maxior06#0804**<br>**TheShadowHat#1437**<br>**uwumacaronitwo#7556**|Feedback, feature ideas, bug reports
+|**Guoxin_**|Chinese translation (incoming)
+|**TBB**|Russian translation (incoming)
+|**GenEric**|Spanish translation (incoming)
+|Romeo Kaleikau (FreeSound.org)|Class-A-Ware sound effect
 
 #		HALP
-If you know basic C#, you already have enough knowledge to help out if you want. Contact me on Discord at **Ted Bunny#4546**
+Programming: If you know basic C#, you already have enough knowledge to help out if you want. Contact me on Discord at **Ted Bunny#4546**
+Translation: 

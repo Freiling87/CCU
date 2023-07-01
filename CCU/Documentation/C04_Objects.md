@@ -10,11 +10,13 @@ Objects
 <br>
 <br>
 
+Objects! They are the things we know and have opinions about, and sometimes they are neither of those things. It's all a matter of perspective, maybe. I don't care. But this introduction isn't empty anymore.
+
 ##			Containers
-Some objects can now contain Items. See the [Object Variables list](https://github.com/Freiling87/CCU/edit/master/CCU/Documentation/C03_Objects.md#object-variables) for specifics.
+Some objects can now contain Items. See the Object Variables list below for specifics.
 
 ##			Investigation
-You can now write and read text with several objects as if they were Signs. The player views this text with the "Investigate" interaction (wording intended to be as broad as possible). See the Object Variables list for specifics.
+You can now write and read text with several objects as if they were Signs. The player views this text with the "Investigate" interaction (wording intended to be as broad as possible). See the Object Variables list below for specifics.
 
 ##			Object Variables
 The full list of modifiable variables added to all Objects. **(V)** indicates the variable slot is already occupied by Vanilla content. Or... are those the Vegan options? I forget.
@@ -89,10 +91,10 @@ The full list of modifiable variables added to all Objects. **(V)** indicates th
 |Toilet								|Container Item			|						|						|
 |Trash Can							|Container Item			|						|						|
 |Tree								|						|						|						|
-|Tube								|Container Item			|						|						|- Factory operation prevents container access.
+|Tube								|Container Item			|						|						|- Factory operation prevents container access. Shut it down with a Computer or Power Box to reach inside.
 |Turntables							|						|						|						|
 |Turret								|						|						|						|
-|Vendor Stand						|Container Item			|						|						|- Interact to Ransack. Causes noise and annoys owner. Works with Sneaky/Nimble Fingers.
+|Vendor Stand						|Container Item			|						|						|- Interact to Ransack. Causes noise and angers owner. Works with Sneaky/Nimble Fingers.
 |Water Pump							|Container Item			|						|						|
 |Well								|Container Item			|						|						|
 |Window								|Investigation Text		|						|						|

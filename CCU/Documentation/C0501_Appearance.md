@@ -116,11 +116,12 @@ The color of -- hey, you get it! Wow, you're really, really, really, really smar
 
 |Trait								|Effects								|
 |:----------------------------------|:--------------------------------------|
+|Fleshy Follicles					|Hair color matches skin color. Gross.
 |Matched Masks						|If a mask is rolled, matches its color to Body Color
 |Uncolored Masks						|If a mask is rolled, it won't be colored
 
 ##			HS1: Hairstyle
-You're really gonna hate the names in this group, because they don't sound like what they look like. But I copied vanilla, and that's my excuse!
+You're really gonna hate the names in this group, because a lot of them aren't terribly descriptive. But I used the game's names for them, so that's my excuse!
 
 ##			HS2: Hairstyle Grouped
 
@@ -168,7 +169,7 @@ You're really gonna hate the names in this group, because they don't sound like 
 |Masks 50%							|If the hairstyle pool contains any Masks, raises their likelihood of being drawn to 50%.
 
 ##			LC1: Legs Color
-These rectangles do a lot of work. Legs, pants, shoes, all depending on context. Give it up for the rectangles, folks! 👏👏👏
+These rectangles do a lot of work. Legs, pants, shoes, all depending on how you squint at them. Give it up for rectangles, folks! 👏 👏 👏
 
 ##			LC3: Legs Color Special
 
@@ -178,7 +179,7 @@ These rectangles do a lot of work. Legs, pants, shoes, all depending on context.
 |Pantsless							|Legs color matches skin color
 
 ##			SC1: Skin Color
-All skin color options
+Hoo boy. No jokes here. Just notes!
 
 ##			SC2: Skin Color Grouped
 

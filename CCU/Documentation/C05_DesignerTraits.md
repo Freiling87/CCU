@@ -1,12 +1,18 @@
-﻿</p>
+﻿<p align="left">
+<img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
+</p>
 
 <h1 align="center">
 <br>
 Designer Traits
 </h1>
-<br><br>
+<br>
+<br>
 
-Designer Traits are hidden from players entirely. For Player Traits, go [here](/CCU/Documentation/C0503_PlayerTraits.md).
+Designer Traits are hidden from players entirely. Generally, they affect both player and non-player characters.
+
+For Player Traits, go [here](/CCU/Documentation/C0503_PlayerTraits.md).
 
 ##			Appearance
 
@@ -16,38 +22,54 @@ The Appearance system allows you to give NPCs variable appearances. Its document
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Accident-Prone										|- Won't path around Crushers, Fire Spewers & Sawblades<br>- Might extend this to the other traps.
+|Accident-Prone										|- Won't path around Crushers, Fire Spewers, Killer Plants, Laser Emitters & Sawblades
 |Brainless											|- Heavy Reddit user
 |Concealed Carrier									|- Hides weapon when not in combat
 |Eat Corpses										|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
-|Grab Alcohol										|- Grab Alcohol, like me<br>- Don't do drinks, kids
+|Grab Alcohol										|- Grab Alcohol, like me<br>- Don't drink, kids
 |Grab Drugs											|- Grab Drugs, like me also<br>- Don't do drugs, kids
 |Grab Everything									|- Grab Everything, like a toddler<br>- Don't have kids, kids<br>- Grabs traps with Accident-Prone
 |Grab Food											|- Grab Food, like your mom
 |Grab Money											|- Grab Money, like Slum Dweller
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
-|Seek & Destroy										|- Stalk & attack players, like Killer Robot
+|Seek & Destroy										|- Stalk & attack players, like Killer Robot<br>- Not compatible with Drug Warrior traits
 |Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite
 
 ##			Combat
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Brave												|- More willing to enter & stay in combat, like Bartender, Blahd/Crepe, & Firefighter.
+|Braver												|- More willing to enter & stay in combat, like Cannibal, Gorilla & Soldier.
+|Bravest											|- More willing to enter & stay in combat, like Killer Robot & Zombie.
 |Coward												|- Always flees from combat
 |Fearless											|- Never flees from combat
+|Gun Adept *										|- More frequent ranged attacks, like Killer Robot, Soldier & Supercop.<br>- `modGunSkill` = 2
+|Gun Competent *									|- Average ranged attacks, like Cop & Gangster.<br>- `modGunSkill` = 1
+|Gun Shy *											|- Rare ranged attacks, like Doctor & Scientist.<br>- `modGunSkill` = 0
+|Mag Dumper											|- When agent uses Rapid Fire, they hold the trigger down for longer. Much longer.
+|Melee Adept *										|- More frequent melee attacks, like Gorilla, Supercop & Werewolf.<br>- `modMeleeSkill` = 2
+|Melee Competent *									|- Average melee attacks, like Cannibal, Cop & Firefighter.<br>- `modMeleeSkill` = 1
+|Melee Shy *										|- Rare melee attacks, like Comedia, Hacker & Zombie.<br>- `modMeleeSkill` = 0
+
+* These overwrite the `modGunSkill` and `modMeleeSkill` values already automatically affected by the Combat Skill [Gameplay Fix](/CCU/Documentation/C06_Fixes.md).
 
 ##			Cost Scale
 This affects all costs from the agent's interactions, except bribery for Quest Items.
 
-|Trait												|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
-|Less												|- Costs reduced by 50%
-|More												|- Costs increased by 50%
-|Much More											|- Costs increased by 100%
-|Zero												|- Costs reduced by 100%
+|Trait												|Cost change											|
+|:--------------------------------------------------|------------------------------------------------------:|
+|Less												|- 50 %
+|Less-ish											|- 25 %
+|Little Steep										|+ 25 %
+|More												|+ 50%
+|Much More											|+ 100%
+|Zero												|- 100%
 
 ##			Drug Warrior
 Upon entering combat, the agent will apply a status effect to themselves, similarly to how the Drug Dealer acts in vanilla.
+
+*Note: Not compatible with Behavior - Seek & Destroy.*
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -160,22 +182,25 @@ Agents default to Meat Chunks if they have no Gib trait.
 |Heal Player										|- Pay to heal self
 |Identify											|- Pay to identify items
 |Influence Election									|- Pay to influence election
-|Leave Weapons Behind								|- Drop all weapons
+|Leave Weapons Behind *								|- Drop all weapons
 |Manage Chunk										|- Manage Arena, Deportation Center, or Hotel<br>- Hotel management requires Key added with Loadout trait below
-|Offer Motivation									|- Give small item to make Friendly
-|Pay Debt											|- Pay off Debt
-|Pay Entrance Fee									|- Pay to make owners Friendly
+|Offer Motivation *									|- Give small item to make Friendly
+|Pay Debt *											|- Pay off Debt
+|Pay Entrance Fee *									|- Pay to make owners Friendly
 |Play Bad Music										|- Pay to break someone's achy breaky heart, despite their protests<br>- Also works with Mayor Evidence
 |Start Election										|- Interact to start Election
+|Teach Language										|- Pay to learn a language.<br>- English - $600<br>- Others - $200
 |Use Blood Bag										|- Give Blood Bag to heal for 20HP
+
+* These traits allow interaction even if the interacting agent does not meet the minimum relationship requirements for the **Interaction Gate - Untrusting/er/est** group.
 
 ##			Interaction Gate
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Untrusting											|- Will only interact with Agents Friendly or better
-|Untrustinger										|- Will only interact with Agents Loyal or better
-|Untrustingest										|- Will only interact with Agents Aligned
+|Untrusting	*										|- Will only interact with Agents who are Friendly or better
+|Untrustinger *										|- Will only interact with Agents who are Loyal or better
+|Untrustingest *									|- Will only interact with Agents who are Aligned
 
 ***Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
 
@@ -282,11 +307,13 @@ Traits in this category are multiplicative.
 |Extortable											|- Valid target for Extortionist
 |Guilty												|- Valid target for Cop Big Quest
 |Indestructible										|- Can be killed, but body can't be destroyed
+|Indomitable										|- Immune to mind control
 |Immovable											|- Receives zero knockback
 |Innocent											|- Gets away with murder
 |Not Vincible										|- Had to change name for reasons
 |Possessed											|- Has Shapeshifter
 |Status Effect-Immune								|- Guess, genius
+|Suppress Status Text								|- No Status Effect text popups
 |Z-Infected											|- Zombifies on death
 
 ##			Relationships - Faction
@@ -330,6 +357,13 @@ Traits in this category are multiplicative.
 |Player-Loyal										|- Loyal to Players
 |Player-Neutral										|- Neutral to Players (For overriding other relationship traits)
 |Player-Submissive									|- Submissive to Players
+
+##			Senses
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Keen Ears											|- Reacts to sound like Shopkeeper, Slavemaster & Soldier.
+|Keener Ears										|- Reacts to sound like Bartender, Bouncer, Cannibal & Goon.
+|Keenest Ears										|- Reacts to sound like Supercop.
 
 ##			Trait Gate
 |Trait												|Effect													|

@@ -21,7 +21,9 @@ Listed in order of Parent tier summary symbol priority:
   - Containers holding Money now generate correct quantities.
   - Scene Setters restore correct Owner ID to agents after taking effect. This bug had mainly manifested with Yellow agent names after Random Teleportation.
   - Item-modfying traits now correctly apply their affect when gained mid-game.
-- Feature additions
+  - Accident-Prone: Extended behavior to walk into Killer Plants & Laser Emitters
+  - Crusty: Will now use Alarm Button when fleeing from combat.
+- New Features
   - Items
     - Rubber Bullets Mod: Knocks out targets at 10% HP, kills at -10%. Pacifists can use Rubber Bullet guns. Not balanced!
   - Designer Traits
@@ -31,17 +33,14 @@ Listed in order of Parent tier summary symbol priority:
     - Cost Scale
       - Less-Ish: -25% on all costs
       - Little Steep: +25% on all costs
-    - Behavior
-      - Accident-Prone: Extended behavior to walk into Killer Plants & Laser Emitters
     - Combat
       - Toughness traits: Modify NPC willingness to fight tough odds.
       - Mag Dumper: Agent uses rapid fire for longer.
-      - Melee skill traits: Modify frequency of attacks in combat.
-      - Gun skill traits: Modify frequency of attacks in combat.
+      - Melee skill traits: Modify attack frequency.
+      - Gun skill traits: Modify attack frequency.
     - Interaction
       - Teach Languages: Teaches any language they know, for a cost.
     - Passive
-      - Crusty: Will now use Alarm Button when fleeing from combat.
       - Indomitable: Immune to mind control
       - Suppress Status Text: No Status Effect text popups.
     - Senses
@@ -159,10 +158,6 @@ Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117
 Issue was Loadout Money without a Loader trait.
 ##			Feature Dump
 Apparently I want to type these without any forethought, so this will be a dump to be periodically assorted.
-###			C	Interaction - Teach Language
-Notes from Abby: https://discord.com/channels/187414758536773632/433748059172896769/1123587639698800731
-Create hook variable for conversation status.
-If menu button is pressed, set variable and restart interaction
 ###			C	Translator Instructions in Documentation
 - The easiest way to do this would be to clone the project from Visual Studio/Github. 
   - Then search for CustomNameInfo, which is the method that interfaces with the translation system.

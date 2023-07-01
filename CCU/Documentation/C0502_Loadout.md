@@ -9,17 +9,24 @@ Loadout System
 </h1>
 <br><br>
 
-This system makes use of the items you add in the character editor. You control the generation of the inventory through a series of traits.
-
-#		Terms Used
-* **<u>Pockets</u>** - All inventory not put into an equipment Slot. 
-* **<u>Pool</u>** - All items added to a character for a particular Slot.
-* **<u>Slot</u>** - Equipment slot. Slots: Headgear, Body armor, Ranged Weapon, Melee Weapon, Thrown Weapon, Pocket.
+The Loadout system allows you to vary the items generated in NPC inventories. This lets you generate vanilla-ish loot and equipment pools.
 
 #		How to use the system
-First, pick your items. Add them through the Character Creator as you normally would for a player character.
+First, add items to the character on the Items page of the Character Creator. This system does *not* use the items added in the Chunk Editor.
 
-Then, select a Loader trait. Without one, items will not be generated on your character.
+Then, select a Loader trait. **Not using a Loader trait will cause bugs**. See the notes on Loaders below to see how they behave.
+
+When a chunk is loaded, any NPC with Items and a Loader trait in its saved character data will vary its generated inventory accordingly.
+
+#		Important Terms
+* **<u>Slot</u>** - All items fall into one of the following categories:
+  * Headgear
+  * Body Armor
+  * Ranged Weapon
+  * Melee Weapon
+  * Thrown Weapon
+  * Pockets: Anything that doesn't equip to one of the above slots.
+* **<u>Pool</u>** - All items added to a character for one particular slot. Each slot has a separate pool.
 
 #	Traits 
 
@@ -30,20 +37,11 @@ Then, select a Loader trait. Without one, items will not be generated on your ch
 |Chunk Key											|- Starts with the chunk's Key
 |Chunk Safe Combo									|- Starts with the chunk's Safe Combo
 
-##		Gun Nut
-
-|Trait												|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
-|Accuracy Mod										|- Applies mod to all applicable weapons in inventory
-|Ammo Stock											|"
-|Rate of Fire Mod									|"
-|Silencer											|"
-
 ##		Loader
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Flat Distribution									|- Pulls a random item for each Slot from its Pool. All items have an equal chance. "No item" is given an equal chance to all items in the Pool.
+|Flat Distribution									|- Picks one random item from the pool for each Slot. All items have an equal chance to generate. "No item" is given an equal chance to all items in the Pool.
 |Scaled Distribution								|- Each item in a Slot's Pool is assigned a chance to generate, inverse to its cost - this means cheaper items are more likely to generate. Rolls an attempt to generate each item. If all chance rolls fail, no item is generated for that Slot.
 |Upscaled Distribution								|Identical to the Scaled Distribution Loader, except the chance for an item to generate is proportional to its cost. This causes the most expensive items selected to be more likely.
 

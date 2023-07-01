@@ -9,7 +9,12 @@ Best Practices
 </h1>
 <br><br>
 
-##			Steam Upload
+##			Content Management
+
+###				Character Templates
+There are a ton of Designer traits. If you use certain sets of them a lot, consider saving a "Template character" to be loaded and renamed. It can save you a lot of time navigating through the trait menu.
+
+##			Steam Uploads
 You can upload Custom Characters, Chunk Packs, and Campaigns with CCU content. Players need at least one version of CCU installed for your content to work correctly. 
 
 ###				Naming
@@ -26,4 +31,4 @@ If you want, you can add a layer to your image thumbnail. This will increase att
 |<img src="../Images/CCU_16x16.png">|<img src="../Images/CCU_64x64.png">|<img src="../Images/CCU_160x160.png">|<img src="../Images/CCU_Blue.png">|<img src="../Images/CharacterFrame.png">
 
 ##			Suggestions?
-Best Practices are generally discovered by the people using a mod, not the one writing it. If you have any ideas for advice or warnings for this page, please get in touch.
+Best Practices are generally discovered by the people using a tool, not the one making it. If you have any ideas for advice or warnings for this page, please get in touch.

@@ -26,10 +26,24 @@ Just normal SOR traits, accessible by players. Cost Nuggets to unlock, because C
 |Myrmicapo											|5		|- Armor damage reduced by 1/3
 |Myrmidon											|7		|- Armor damage reduced by 2/3
 
-##			Language
-Note that these have limited utility in vanilla chunks. They are more useful in custom content where the designer has made use of the language system.
+##			Gun Nut
+|Trait												|CCPV	|Effect													|
+|:--------------------------------------------------|------:|:------------------------------------------------------|
+|Accuracy Modder									|5		|- Agent applies an Accuracy Mod to all eligible ranged weapons in inventory.
+|Ammo Stocker										|5		|- ", Ammo Stock 
+|Rate of Fire Modder								|5		|- ", Rate of Fire Mod 
+|Rubber Bulleteer *									|10		|- ", Rubber Bullets Mod. Knocks out targets at 10% HP, kills at -10% HP. Pacifists can use rubber bullet guns.
+|Silencerist										|5		|- ", Silencer
 
-|Trait												|CCPV	|Effect											|
+**\* Rubber Bullet rules** 
+- If rubber bullet damage reduces an NPC's health to 10% or lower, they are knocked out. This counts as if you had used Chloroform or a Tranquilizer gun on them.
+- If they go below -10%, they are killed... but less lethally! Rubber Bullet guns are usable by Pacifists.
+- Electronic characters are not vulnerable
+
+##			Language
+Note that these have limited utility in vanilla chunks. They are more useful in custom content where the designer has made use of the language system. Check out Cyan_Light's Vendor Variety chunkpack if you want to try these out: https://steamcommunity.com/sharedfiles/filedetails/?id=2851981424
+
+|Trait												|CCPV	|Effect													|
 |:--------------------------------------------------|------:|:------------------------------------------------------|
 |Polyglot											|2		|- Speak all languages.
 |Speaks Binary										|1		|- Bypass Vocally Challenged with Robots, Hackers and anyone else with this trait
@@ -43,6 +57,7 @@ Note that these have limited utility in vanilla chunks. They are more useful in 
 
 |Trait												|CCPV	|Effect													|
 |:--------------------------------------------------|------:|:------------------------------------------------------|
+|Knockback Peon										|5		|- Knockback heavily reduced.
 |Melee Maniac										|3		|- Melee attack speed increased by 20%. 
 |Melee Maniac +										|5		|- Melee attack speed increased by 40%.
 |Remise Beast										|5		|- All Melee weapons have rapid fire.

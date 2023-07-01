@@ -31,7 +31,8 @@ namespace CCU.Items
                 .WithUnlock(new ItemUnlock
                 {
                     CharacterCreationCost = 0,
-                    IsAvailable = Core.debugMode,
+                    IsAvailable = false,
+                    IsAvailableInCC = Core.debugMode,
                     LoadoutCost = 0,
                     UnlockCost = 0,
                 });

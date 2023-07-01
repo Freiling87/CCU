@@ -36,7 +36,7 @@ namespace CCU.Traits.Merchant_Type
                         Cancellations = { },
                         CharacterCreationCost = 0,
                         IsAvailable = false,
-                        IsAvailableInCC = Core.designerEdition,
+                        IsAvailableInCC = Core.debugMode,
                         UnlockCost = 0,
                     });
         }

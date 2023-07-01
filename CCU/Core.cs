@@ -20,11 +20,11 @@ namespace CCU
 	{
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
 		public const string pluginName = "CCU " + (designerEdition ? "[D]" : "[P]"); 
-		public const string pluginVersion = "1.1.1";
-		public const string subVersion = "b";
+		public const string pluginVersion = "1.2.0";
+		public const string subVersion = "";
 		
 		public const bool designerEdition = true;
-		public const bool debugMode = true;
+		public const bool debugMode = false;
 
 		public static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
