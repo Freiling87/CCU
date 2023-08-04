@@ -1,6 +1,6 @@
 ﻿<p align="left">
-<img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
-<img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
+<img src="../Resources/Image/CCU/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="../Resources/Image/CCU/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
@@ -9,7 +9,7 @@ Appearance System
 </h1>
 <br><br>
 
-<img src="../Images/Appearance_Examples.png" align="right" width="400">
+<img src="../Resources/Image/CCU/Appearance_Examples.png" align="right" width="400">
 
 
 There are a *lot* of traits in this category, but the system is very simple. 

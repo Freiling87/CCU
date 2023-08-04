@@ -1,6 +1,6 @@
 ﻿<p align="left">
-<img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
-<img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
+<img src="../Resources/Image/CCU/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="../Resources/Image/CCU/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
@@ -9,7 +9,10 @@ Gameplay Fixes
 </h1>
 <br><br>
 
-Frequently-requested fixes to vanilla bugs, or tweaks that are obviously in favor of the spirit of the original game.
+Frequently-requested fixes to vanilla bugs, or tweaks that are obviously in favor of the spirit of the original game. This page is only important if you're really into details.
+
+##		Broken Drops
+Occasionally, broken objects dropped weird bugged items with "E_" in the name. This fix just prevents those from dropping.
 
 ##		Combat Skills
 *Many thanks to **BlazingTwist**, who submitted this fix!*

@@ -40,16 +40,29 @@ CCU adds the following:
 - [Development Discord Thread](https://discord.com/channels/187414758536773632/991046848536006678) - For live updates, feature requests, and questions
 
 #		Special Thanks
+I was keeping this list pretty detailed, but it's getting too long. You all rule, thanks.
 
-|Homie(s)								|Thanks	|
-|--------------------------------------:|:------|
-|**Abbysssal#2020**<br>**BlazingTwist#4559**|Saintlike patience in teaching an absolute dumb-dumb how to code
-|**Cyan_Light#1438**|Endless SOR mechanic knowledge, bugtesting, content creator nonpareil
-|**Cheese Wizard#6914**<br>**GenEric#1897**<br>**Maxior06#0804**<br>**TheShadowHat#1437**<br>**uwumacaronitwo#7556**|Feedback, feature ideas, bug reports
-|**Guoxin_**|Chinese translation (incoming)
-|**TBB**|Russian translation (incoming)
-|**GenEric**|Spanish translation (incoming)
-|Romeo Kaleikau (FreeSound.org)|Class-A-Ware sound effect
+- **Abbysssal**
+- **BlazingTwist**
+- **Cyan_Light**
+- **GenEric**		
+- **Maxior**
+- **uwumacaronitwo**
+- **Cheese Wizard**
+- **TheShadowHat**
+- **Guoxin_**
+- **TBB**
+- **AMeanPineapple**
+- **Romeo Kaleikau(FreeSound.org)**
+
+##			Content Attributions
+
+|Contributor							|Content	|
+|:-------------------------------------:|:----------|
+|AMeanPineapple							|- ExplodingBarrel sprites
+GenEric - Spanish translation, Accent audio
+Romeo Kaleikau (FreeSound.org) - Class-A-Ware audio clip
+uwuMacaroniTime - ExplodingBarrel sprites
 
 #		HALP
 Programming: If you know basic C#, you already have enough knowledge to help out if you want. Contact me on Discord at **Ted Bunny#4546**

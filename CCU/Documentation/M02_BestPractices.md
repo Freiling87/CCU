@@ -1,6 +1,6 @@
 ﻿<p align="left">
-<img src="../Images/CCU_160x160.png" alt="CCU Logo" align="left">
-<img src="../Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
+<img src="../Resources/Image/CCU/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="../Resources/Image/CCU/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
 </p>
 
 <h1 align="center">
@@ -28,7 +28,7 @@ If you want, you can add a layer to your image thumbnail. This will increase att
 
 |16x16  |64x64  |160x160  |400x400  |Character Frame  |
 |:-----:|:-----:|:-------:|:-------:|:---------------:|
-|<img src="../Images/CCU_16x16.png">|<img src="../Images/CCU_64x64.png">|<img src="../Images/CCU_160x160.png">|<img src="../Images/CCU_Blue.png">|<img src="../Images/CharacterFrame.png">
+|<img src="../Resources/Image/CCU/CCU_16x16.png">|<img src="../Resources/Image/CCU/CCU_64x64.png">|<img src="../Resources/Image/CCU/CCU_160x160.png">|<img src="../Resources/Image/CCU/CCU_Blue.png">|<img src="../Resources/Image/CCU/CharacterFrame.png">
 
 ##			Suggestions?
 Best Practices are generally discovered by the people using a tool, not the one making it. If you have any ideas for advice or warnings for this page, please get in touch.

@@ -460,6 +460,18 @@ Pending pilot
 ###			C	Roamer Level Feature
 New
 ##		C	Appearance
+###			C	Size Traits
+These might be tricky - they should be Player Traits, since they will have gameplay effects. But they should also be usable for the Appearance system, bypassing the player-side trait conflict. Not sure how to swing that.
+
+|Trait			|Intimidate	|Melee	|Endurance	|Speed	|Guns	|Operating	|WindowDmg	|Crit%	|Toughness	|HP		|+Loud%	|BlendsIn	|Slippery	|CCPV	|
+|:-------------:|----------:|------:|----------:|------:|------:|----------:|----------:|------:|----------:|------:|------:|----------:|----------:|------:|
+|Short
+|Thin
+|Tiny (= " + ")
+|Broad
+|Tall
+|Huge (= " + ")
+
 ###			C	Custom Randomizer
 Basically, configure Randomize Appearance button to give accurate preview.
 The issue is that the CC doesn't build a character until you save and close. Accessing it from the main menu has GC.PlayerAgent as a Slum Dweller by default. And since you can't be assured that a typed name will match a save file, the only way to do this will be with a bunch of string-matching from List<Unlock> CharacterCreation.TraitsChosen.
@@ -2024,11 +2036,44 @@ Doctor, Firefighter
 ####		C	Custom Trait List Config
 When you click it, it brings you to the Trait Config menu, where you can write, save or load presets. The chosen Trait Config applies only to that level. 
 Now, does this create a new and reusable mutator? e.g. "Force Trait Config: [TraitConfigName]". Or should the user be forced to re-choose the trait config each time, so as not to clutter the trait menu?
-#		CT	Objects
+#		CT	Object Variables
+After refactor, new types:
+//	AttackMode,
+//	Container,
+//	Durability,
+//	ExplosionType,
+//	Investigation,
+//	SpriteChoice,
+##			C	Alternate Object
+###				C	Elevator
+Lots of ideas from TheShadowHat
+####				C	Bed
+Sleeby
+####				C	Computer
+Why not
+####				C	Gravestone
+For ghostening
+####				C	Manhole
+If entry, pops open and people jump out
+####				C	Mine Cart
+Woooo
+####				C	Toilet
+Requires ensmallening
+####				C	Train
+Moves when enter/exit
+####				C	Trap Door
+Custom sprite, or the triggered vanilla one?
+####				C	Police Box
+May require hack?
+####				C	Portal (Custom Sprite)
+A particle effect would be cool
+####				C	Tube
+Yes Tube
+####				C	Well
+Underdaaaaank
 ##			C	Traps
 Chest, Door, Window
 Dart, Taser, Flame, Explosion, Slime, etc.
-##
 ##			C	Slime Barrel
 ###				C	Barrel of Monke
 New
@@ -2213,6 +2258,10 @@ When text is *closed*
 ##			C	Air Conditioner
 Enable "Fumigating" w/ staff in gas masks as option
 GasVent.fumigationSelected
+##			C	Power Box
+- Set default On/Off
+- Power On function
+- Overload grid w tech expert, but not remotely
 ##			C	Fire Hydrant
 Ability to be already shooting water according to direction
 ##			C	Investigateables
