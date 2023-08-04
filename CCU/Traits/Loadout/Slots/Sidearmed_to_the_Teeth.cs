@@ -12,11 +12,13 @@ namespace CCU.Traits.Loadout_Slots
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Allows any number of equippable items within the same slot to be generated in inventory.",
-				})
+                    [LanguageCode.Spanish] = "Permite que un numero inlimitado de items equipables en el mismo espacio de inventario.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Sidearmed_to_the_Teeth)),
-				})
+                    [LanguageCode.Spanish] = "Recontra Armado Hasta Los Dientes",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

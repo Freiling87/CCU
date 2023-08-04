@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Junk_Dealer : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BananaPeel, 8),
             new KeyValuePair<string, int>( vItem.BaseballBat, 3),
@@ -25,12 +25,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells junk."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende basura.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Junk_Dealer)),
-                    
+                    [LanguageCode.Spanish] = "Cartonista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

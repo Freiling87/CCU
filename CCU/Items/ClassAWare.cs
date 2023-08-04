@@ -24,10 +24,12 @@ namespace CCU.Items
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Class-A-Ware",
+                    [LanguageCode.Spanish] = "Clasista-Inador",
                 })
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Shows a full stat readout of a target NPC. Gives bonus XP for each new NPC scanned. Free use on previously scanned classes.",
+                    [LanguageCode.Spanish] = "Muestra toda la información de un NPC, da un poco de experiencia al detectar NPCs por la primera ves y no pierde usos en NPCs repetidos.",
                 })
                 .WithSprite(Properties.Resources.ClassAWare)
                 .WithUnlock(new ItemUnlock
@@ -56,10 +58,12 @@ namespace CCU.Items
         internal static CustomNameInfo targetingText = new CustomNameInfo
 		{
             [LanguageCode.English] = "Seeking scan target...",
+            [LanguageCode.Spanish] = "Buscando NPC elegible...",
         };
         internal static CustomNameInfo validTargetText = new CustomNameInfo
         {
             [LanguageCode.English] = "Valid target found:",
+            [LanguageCode.Spanish] = "NPC valido encontrado:",
         };
         public CustomTooltip TargetCursorText(PlayfieldObject target)
         {
@@ -99,35 +103,42 @@ namespace CCU.Items
         static CustomName headerText1 = RogueLibs.CreateCustomName("headerText1", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Scan complete. File saved:",
+            [LanguageCode.Spanish] = "Escaneo completado. Archivo guardado:",
         });
         static CustomName headerText2 = RogueLibs.CreateCustomName("headerText2", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Loading scan from memory:",
+            [LanguageCode.Spanish] = "Cargando escaneo guardado:",
         });
         // "Memory / Capacity"
         static CustomName headerText3 = RogueLibs.CreateCustomName("headerText3", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "MEM/CAP",
+            [LanguageCode.Spanish] = "MEM/CAP",
         });
         #endregion
         #region Health
         static CustomName healthText1 = RogueLibs.CreateCustomName("healthText1", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "HEALTH",
+            [LanguageCode.Spanish] = "SALUD",
         });
         static CustomName healthTextDead = RogueLibs.CreateCustomName("healthTextDead", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "ERROR CODE 69707 - Target may be dead.",
+            [LanguageCode.Spanish] = "ERROR 33413 - Es posible que este muerto.",
         });
         #endregion
         #region Special Ability
         static CustomName abilityText1 = RogueLibs.CreateCustomName("abilityText1", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "ABILITY",
+            [LanguageCode.Spanish] = "ABILIDAD",
         });
         static CustomName abilityNoneFound = RogueLibs.CreateCustomName("abilityNoneFound", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "ERROR CODE 8008135 - Target has no talent. SAD!",
+            [LanguageCode.Spanish] = "ERROR 518008 - Talento no encontrado. Normie.",
         });
         #endregion
         #region Attributes
@@ -135,51 +146,62 @@ namespace CCU.Items
         static CustomName attributeHeader = RogueLibs.CreateCustomName("attributeHeader", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "VITALS",
+            [LanguageCode.Spanish] = "VITALES",
         });
         static CustomName attributeName1 = RogueLibs.CreateCustomName("attributeName1", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Endurance\t\t\t\t",
+            [LanguageCode.Spanish] = "Resistencia\t\t\t\t",
         });
         static CustomName attributeName2 = RogueLibs.CreateCustomName("attributeName2", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Speed\t\t\t\t\t\t",
+            [LanguageCode.Spanish] = "Velocidad\t\t\t\t\t\t",
         });
         static CustomName attributeName3 = RogueLibs.CreateCustomName("attributeName3", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Melee\t\t\t\t\t\t",
+            [LanguageCode.Spanish] = "Fuerza\t\t\t\t\t\t",
         });
         static CustomName attributeName4 = RogueLibs.CreateCustomName("attributeName4", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Firearms\t\t\t\t\t",
+            [LanguageCode.Spanish] = "Puntería\t\t\t\t\t\t",
         });
         #endregion
         #region Traits
         static CustomName traitsHeader = RogueLibs.CreateCustomName("traitsHeader", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "TRAITS",
+            [LanguageCode.Spanish] = "RASGOS",
         });
         static CustomName noTraitsText = RogueLibs.CreateCustomName("noTraitsText", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "ERROR CODE 0000 - No identifiable traits. LOSER ALERT!",
+            [LanguageCode.Spanish] = "ERROR 1107 - Ningun rasgo detectado, Que diseño MEDIOCRE",
         });
         #endregion
         #region Footer
         static CustomName footerText1 = RogueLibs.CreateCustomName("footerText1", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "Class-A-Ware MxII, v4.2.0",
+            [LanguageCode.Spanish] = "Clasistator MarxII v1.98.4",
         });
         // The following 3 strings are all part of the same text block.
         static CustomName footerText2 = RogueLibs.CreateCustomName("footerText2", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "By Cachet Biopharm, Copyright 2069. This device is not designed to",
+            [LanguageCode.Spanish] = "Por Mixen Vanilla, Derechos Reservados 1944, No usar en",
         });
         static CustomName footerText3 = RogueLibs.CreateCustomName("footerText3", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "diagnose or treat medical conditions. Contains materials known in",
+            [LanguageCode.Spanish] = "diagnosticos medicos o turismo. Contiene quimicos no aptos para",
         });
         static CustomName footerText4 = RogueLibs.CreateCustomName("footerText4", "Interface", new CustomNameInfo
         {
             [LanguageCode.English] = "the state of Neo-Cyber-California to cause Space Cancer.",
+            [LanguageCode.English] = "consumo infantil de prejudicios o conocimiento real.",
         });
         #endregion
 

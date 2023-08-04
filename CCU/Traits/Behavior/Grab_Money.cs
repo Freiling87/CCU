@@ -15,10 +15,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will grab money if they see it."),
+                    [LanguageCode.Spanish] = "Este NPC agarra el dinero facil como todo un oportunista inversor.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Grab_Money)),
+                    [LanguageCode.Spanish] = "Colleciona Dinero",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

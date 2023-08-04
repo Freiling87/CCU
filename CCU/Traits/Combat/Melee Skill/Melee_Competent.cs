@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Average attack frequency, like Cannibal, Cop & Firefighter."),
+                    [LanguageCode.Spanish] = "Frequencia de ataque standard, como Canibal, Policía o Bombero.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Melee_Competent)),
+                    [LanguageCode.Spanish] = "Facil al Garrote",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

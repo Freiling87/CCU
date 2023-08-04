@@ -13,6 +13,6 @@ namespace CCU.Traits.Merchant_Type
             agent.SetupSpecialInvDatabase();
         }
 
-        public abstract List<KeyValuePair<string, int>> weightedItemPool { get; }
+        public abstract List<KeyValuePair<string, int>> MerchantInventory { get; }
     }
 }

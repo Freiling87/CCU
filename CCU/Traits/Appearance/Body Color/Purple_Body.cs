@@ -13,11 +13,13 @@ namespace CCU.Traits.App_BC1
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Purple_Body)),
-				})
+                    [LanguageCode.Spanish] = "Cuerpo Morado",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

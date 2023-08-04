@@ -13,11 +13,13 @@ namespace CCU.Traits.App_HC1
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este color de pelo a los que el personaje puede usar, tarada, bronceada, aburrida.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Blonde_Hair)),
-				})
+                    [LanguageCode.Spanish] = "Pelo Rubio",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -11,12 +11,14 @@ namespace CCU.Traits.Hire_Duration
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent will join any player who comes within sight.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC se unira con el primer jugador que vea",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Join_on_Sight)),
-                    
+                    [LanguageCode.Spanish] = "Union  a Primera Vista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

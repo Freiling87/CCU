@@ -15,12 +15,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character explodes. About 1 Slave's worth."),
-                    
+                    [LanguageCode.Spanish] = "Al morir, este NPC explota como un esclavo.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Normal)),
-                    
+                    [LanguageCode.Spanish] = "Normal",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

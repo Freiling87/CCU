@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Loud on entering combat. They probably still bite, though."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se pone muy ruidoso al entrar en combate, porque actual como un perro es la cosa cool ahora no sabias?",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Some_Bark)),
-                    
+                    [LanguageCode.Spanish] = "Ladrador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

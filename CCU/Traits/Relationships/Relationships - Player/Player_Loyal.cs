@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Loyal to Players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC es Leal al jugador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Loyal)),
-                    
+                    [LanguageCode.Spanish] = "Leal al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Home_Fortress_Outlet : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BananaPeel, 3),
             new KeyValuePair<string, int>( vItem.Beartrap, 4),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells traps."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende trampas.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Home_Fortress_Outlet)),
-                    
+                    [LanguageCode.Spanish] = "Contrapista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -16,23 +16,25 @@ namespace CCU.Items
         [RLSetup]
         public static void Setup()
         {
-            if (Core.debugMode)
+            if (Core.developerEdition)
             {
                 ItemBuilder itemBuilder = RogueLibs.CreateCustomItem<Debugulizer>()
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Debugulizer",
+                    [LanguageCode.Spanish] = "I SEE YOU BUNNE, YOU BITCH",
                 })
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Developer tool.",
+                    [LanguageCode.Spanish] = "IM DONE WITH YA, I WILL BECOME BACK MY MONEY AND KICK YO ASS, HEARD ME BUNNE? YOU TURDRUG.",
                 })
                 .WithSprite(Properties.Resources.Debugulizer)
                 .WithUnlock(new ItemUnlock
                 {
                     CharacterCreationCost = 0,
                     IsAvailable = false,
-                    IsAvailableInCC = Core.debugMode,
+                    IsAvailableInCC = Core.developerEdition,
                     LoadoutCost = 0,
                     UnlockCost = 0,
                 });

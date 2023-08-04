@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character will ambush Players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC se volvera hostil caundo el jugador se acerque.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Secret_Hate)),
-                    
+                    [LanguageCode.Spanish] = "Secretamente Hostil al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

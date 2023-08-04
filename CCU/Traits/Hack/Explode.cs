@@ -6,7 +6,7 @@ namespace CCU.Traits.Hack
 {
     public class Explode : T_Hack
     {
-        public override string ButtonText => CButtonText.Hack_Explode;
+        public override string ButtonText => VButtonText.Hack_Haywire;
 
         //[RLSetup]
         public static void Setup()
@@ -16,12 +16,14 @@ namespace CCU.Traits.Hack
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to Explode.\n\n" + 
                     "<color=red>Requires:</color> Electronic"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser hackeado para que explote.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Explode)),
-                    
+                    [LanguageCode.Spanish] = "Explotar",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -15,10 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Hostile to Blahds and anyone with the Aligned to Blahd trait.",
+                    [LanguageCode.Spanish] = "Este Personaje es Hostil a los Blahds y todo quien sea Aliado de los Blahd.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Blahd_Hostile)),
+                    [LanguageCode.Spanish] = "Hostil a los Blahd",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

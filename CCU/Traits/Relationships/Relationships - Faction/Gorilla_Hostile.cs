@@ -15,12 +15,14 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is hostile to Gorillas and anyone with the Aligned to Gorilla trait.",
+                    [LanguageCode.Spanish] = "Este personaje es Hostil a los Gorilas y de todo quien sea Aliado de los Gorilas.",
                     
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gorilla_Hostile)),
-                    
+                    [LanguageCode.Spanish] = "Hostil a los Gorilas",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

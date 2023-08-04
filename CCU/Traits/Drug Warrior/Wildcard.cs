@@ -14,12 +14,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will use a random syringe upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC usa una jeringa aleatoria al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Wildcard)),
-                    
+                    [LanguageCode.Spanish] = "Liquidos Locos",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

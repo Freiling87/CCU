@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has a can-do attitude about everything, including whether they can kill you with one hit of a thrown item for a limited time upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC gana un brazo derecho muy bueno al entrar en combate, por lo que puede matarte con una sola piedra.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Sure_I_Can), "Sure I Can!"),
-                    
+                    [LanguageCode.Spanish] = "Mastirador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is more willing to enter and stay in combat, like Cannibal, Gorilla & Soldier."),
+                    [LanguageCode.Spanish] = "Este NPC es aun MAS determinado a entrar y seguir en combate, como un Canibal, Gorila o soldado.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Tougher)),
+                    [LanguageCode.Spanish] = "Rudisimo",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

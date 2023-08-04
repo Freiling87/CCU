@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character smokes a cigarette right when they get into a fight. How fuckin' cool are they??"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se fuma uno antes del combate, demostrando lo genial que es el cancer de pulmon en el cine.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(The_Last_Whiff)),
-                    
+                    [LanguageCode.Spanish] = "Infumable",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

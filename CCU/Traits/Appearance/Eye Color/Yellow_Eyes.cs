@@ -13,11 +13,13 @@ namespace CCU.Traits.App_EC1
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este color de ojos a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Yellow_Eyes)),
-				})
+                    [LanguageCode.Spanish] = "Ojos Amarillos",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

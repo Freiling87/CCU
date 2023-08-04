@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is designated Guilty for The Law."),
+                    [LanguageCode.Spanish] = "Este NPC siempre sera culpable",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Guilty)),
+                    [LanguageCode.Spanish] = "Culpable",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

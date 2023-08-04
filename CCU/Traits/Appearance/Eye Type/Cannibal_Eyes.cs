@@ -13,11 +13,13 @@ namespace CCU.Traits.App_ET1
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este par de ojos a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Cannibal_Eyes)),
-				})
+                    [LanguageCode.Spanish] = "Ojos de Canibal",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Mining_Gear : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BombProcessor, 1),
             new KeyValuePair<string, int>( vItem.Fud, 3),
@@ -25,12 +25,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells mining gear. Now accepting payments not in company scrip!"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas para mineros.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Mining_Gear)),
-                    
+                    [LanguageCode.Spanish] = "Minero",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

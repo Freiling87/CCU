@@ -16,12 +16,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character splashes burning oil everywhere. What did they eat?!"),
-                    
+                    [LanguageCode.Spanish] = "Al morir, Este NPC explota en llamas, esto es una condicion real la cual te podria suceder con 200 casos este siglo y contando.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Firebomb)),
-                    
+                    [LanguageCode.Spanish] = "Fuegooo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

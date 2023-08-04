@@ -13,11 +13,13 @@ namespace CCU.Traits.App_BT1
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Drug_Dealer_Body)),
-				})
+                    [LanguageCode.Spanish] = "Cuerpo de Traficante de Drogas",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -11,12 +11,14 @@ namespace CCU.Traits.Cost_Currency
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to uh... bites of flesh.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC usa (Quotes)Pedacitos de Ti(Quotes) como moneda, solo pedacitos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Shylock)),
-                    
+                    [LanguageCode.Spanish] = "Filetero",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

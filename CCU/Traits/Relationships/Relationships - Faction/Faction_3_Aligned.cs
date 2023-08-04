@@ -15,12 +15,14 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned with all characters who share the trait.",
-                    
+                    [LanguageCode.Spanish] = "Este personaje es aliado de todos los que tengan este rasgo.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Faction_3_Aligned)),
-                    
+                    [LanguageCode.Spanish] = "Aliado de la Facción 3",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

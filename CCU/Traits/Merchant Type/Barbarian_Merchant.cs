@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Barbarian_Merchant : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Axe, 3),
             new KeyValuePair<string, int>( vItem.BaconCheeseburger, 2),
@@ -24,12 +24,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Ale, meat & a sharp blade. All that is best in life!"),
-                    
+                    [LanguageCode.Spanish] = "Ale, carne y cuchilla, Este NPC vende todas las herramientas de un bravo barbaro, barba y musculatura no incluida.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Barbarian_Merchant)),
-                    
+                    [LanguageCode.Spanish] = "Bar-Barbaro",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -17,10 +17,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will pickpocket like the Thief.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.StickyGlove),
+                    [LanguageCode.Spanish] = "Este NPC le robara a otros como un Ladron.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Pick_Pockets)),
+                    [LanguageCode.Spanish] = "Carterista",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

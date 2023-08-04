@@ -12,10 +12,12 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Agent is a valid target for Specists. I think they must be prejudiced against them or something."),
+                    [LanguageCode.Spanish] = "Este personaje es conciderado rival de personajes con el rasgo Aborrecedor del Gorila. El racismo nunca esta bien!",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Specistist)),
+                    [LanguageCode.Spanish] = "Aborrecedor del Aborrecedor del Gorila",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Generally reluctant to use guns."),
+                    [LanguageCode.Spanish] = "Este NPC trata de no usar armas de fuego.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gun_Shy)),
+                    [LanguageCode.Spanish] = "Inepto al Gatillo",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

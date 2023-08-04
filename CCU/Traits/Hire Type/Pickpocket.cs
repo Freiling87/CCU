@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to pick someone's pockets.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para revisar bolsillos ajenos, solo confia que no toque los tuyos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Pickpocket)),
-                    
+                    [LanguageCode.Spanish] = "Carterista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

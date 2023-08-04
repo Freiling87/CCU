@@ -14,11 +14,13 @@ namespace CCU.Traits.App_BT2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Doctor_Body_Greyscale)),
-				})
+                    [LanguageCode.Spanish] = "Cuerpo de Médico Gris",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

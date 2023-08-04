@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to tamper with machinery and electronics.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para manipular maquineria.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Saboteur)),
-                    
+                    [LanguageCode.Spanish] = "Saboteador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

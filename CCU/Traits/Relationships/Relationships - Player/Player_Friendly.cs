@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Friendly to Players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC es Amistoso al Jugador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Friendly)),
-                    
+                    [LanguageCode.Spanish] = "Amistoso al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

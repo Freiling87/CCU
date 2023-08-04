@@ -11,11 +11,13 @@ namespace CCU.Traits.Hire_Duration
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent will never follow the player between levels.",
+                    [LanguageCode.Spanish] = "Este NPC siempre te dejara al abandonar el piso.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Homesickly)),
-                    
+                    [LanguageCode.Spanish] = "Sedentario",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

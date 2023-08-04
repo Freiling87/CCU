@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Highest attack frequency, like Gorilla, Supercop & Werewolf."),
+                    [LanguageCode.Spanish] = "Mayor frequencia de ataque, como Gorila, Superpolicía o Hombre Lobo.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Melee_Adept)),
+                    [LanguageCode.Spanish] = "Adepto al Garrote",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

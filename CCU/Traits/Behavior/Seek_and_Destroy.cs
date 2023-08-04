@@ -14,10 +14,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will follow and attack the player like the Killer Robot."),
+                    [LanguageCode.Spanish] = "Este NPC buscara al jugador para atacarlo no importe donde este como si fuera el Robot Asesino.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Seek_and_Destroy), "Seek & Destroy"),
+                    [LanguageCode.Spanish] = "Buscar y Destruir",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

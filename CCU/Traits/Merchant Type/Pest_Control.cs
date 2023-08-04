@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Pest_Control : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Antidote, 3),
             new KeyValuePair<string, int>( vItem.Beartrap, 3),
@@ -25,12 +25,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells chemicals and tools for exterminating or subduing pests."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas para exterminar todo tipo de pestes, incluyendo la chusma.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Pest_Control)),
-                    
+                    [LanguageCode.Spanish] = "Controls de Peste",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

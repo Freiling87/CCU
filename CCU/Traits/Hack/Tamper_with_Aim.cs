@@ -16,12 +16,14 @@ namespace CCU.Traits.Hack
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to tamper with their ranged weapon aim.\n\n" +
                     "<color=red>Requires:</color> Electronic"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser hackeado para manipular su apunteria, para bien o para mal depende.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Tamper_with_Aim)),
-                    
+                    [LanguageCode.Spanish] = "Manipular la Mira",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

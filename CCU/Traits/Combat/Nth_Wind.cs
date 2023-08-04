@@ -18,12 +18,14 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Refreshes certain flags after combat ends, e.g. Drug Warrior, allowing them to be used across multiple combats."),
-                    
+                    [LanguageCode.Spanish] = "Refresca ciertas abilidades al terminar el combate, como effectos de Drogladiador Permitiendo que se usen en multiples combates.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Nth_Wind)),
-                    
+                    [LanguageCode.Spanish] = "Quintacillima Dosis",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -14,11 +14,13 @@ namespace CCU.Traits.Player.Melee_Combat
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "All melee weapons have rapid fire.",
-				})
+                    [LanguageCode.Spanish] = "Todo ataque Cuerpo a Cuerpo es ahora automatico!",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Remise_Beast))
-				})
+                     [LanguageCode.Spanish] = "Bestia Agitada",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 5,

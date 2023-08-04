@@ -27,11 +27,13 @@ namespace CCU.Traits.Loadout_Gun_Nut
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent applies a Silencer to all ranged weapons in inventory.",
-				})
+                    [LanguageCode.Spanish] = "Todas tus armas estan silenciadas.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Silencerist)),
-				})
+                    [LanguageCode.Spanish] = "Silencioso y Letal",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 5,

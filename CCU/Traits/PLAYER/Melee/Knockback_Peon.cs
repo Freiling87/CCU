@@ -13,10 +13,12 @@ namespace CCU.Traits.Player.Melee_Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Cause people you hit to be knocked back less. Makes followup attacks easier."),
+                    [LanguageCode.Spanish] = "Reduce el retroceso de tus golpes, facilitando combos rapidos.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Knockback_Peon)),
+                    [LanguageCode.Spanish] = "Peon del Retroceso",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

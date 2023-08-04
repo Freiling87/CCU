@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Firefighter_Five_and_Dime : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Axe, 3),
             new KeyValuePair<string, int>( vItem.Crowbar, 2),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells whatever a Firefighter could need... legally."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende todo lo que un bombero necesita.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Firefighter_Five_and_Dime), "Firefighter Five & Dime"),
-                    
+                    [LanguageCode.Spanish] = "Bombereo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

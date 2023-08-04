@@ -15,10 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Hostile to Soldiers and anyone with the Aligned to Soldier trait.",
+                    [LanguageCode.Spanish] = "Este personaje es hostil a los Soldados y todo aliado de los soldados.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Soldier_Hostile)),
+                    [LanguageCode.Spanish] = "Hostil a los Soldados",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

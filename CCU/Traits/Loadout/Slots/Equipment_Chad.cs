@@ -12,11 +12,13 @@ namespace CCU.Traits.Loadout_Slots
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent will never fail to generate an equippable item in a slot, if there are any added to their item pool. Including the Stacy slot! REEEEEEEEEEEEE",
-				})
+                    [LanguageCode.Spanish] = "Este NPC siempre generara un item equipable en un espacio si tiene uno.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Equipment_Chad)),
-				})
+                    [LanguageCode.Spanish] = "Equipaddicto",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

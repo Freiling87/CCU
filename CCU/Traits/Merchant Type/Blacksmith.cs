@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Blacksmith : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Axe, 3),
             new KeyValuePair<string, int>( vItem.BraceletofStrength, 1),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells melee weapons and uh, related stuff."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende armas de cuerpo a cuerpo y accesorios.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Blacksmith), "Blacksmith, Ye Olde"),
-                    
+                    [LanguageCode.Spanish] = "Eh Herrero",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

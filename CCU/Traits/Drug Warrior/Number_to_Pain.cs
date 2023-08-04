@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains a 33% damage resistance upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC tiene una resistencia de 33% contra todo daño al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Number_to_Pain)),
-                    
+                    [LanguageCode.Spanish] = "Entumecido al Dolor",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

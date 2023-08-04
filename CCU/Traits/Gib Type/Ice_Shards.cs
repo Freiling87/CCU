@@ -19,12 +19,14 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's body explodes into shards of ice."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC esta construido con hielo super convincente! casi parece tener emociones!",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Ice_Shards)),
-                    
+                    [LanguageCode.Spanish] = "Hielo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Convenience_Store : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Banana, 1),
             new KeyValuePair<string, int>( vItem.Beer, 5),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells stuff you might find in a corner store or bodega."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende items simples, lo que encontras en una bodega o una esquina.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Convenience_Store)),
-                    
+                    [LanguageCode.Spanish] = "Dispensa",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

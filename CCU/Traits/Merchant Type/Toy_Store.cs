@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Toy_Store : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BananaPeel, 4),
             new KeyValuePair<string, int>( vItem.Blindenizer, 1),
@@ -24,12 +24,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells toys. Not adult toys."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende juguetes. tecnicamente para adultos pero no digamos eso.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Toy_Store)),
-                    
+                    [LanguageCode.Spanish] = "Jugueteria",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

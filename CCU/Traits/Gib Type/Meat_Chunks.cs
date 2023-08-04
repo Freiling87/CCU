@@ -23,12 +23,14 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is made of meat. Delicious meat."),
-                    
+                    [LanguageCode.Spanish] = "Los trocitos de carne clasicos, no se porque necesitas este rasgo si es el default pero bueno.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Meat_Chunks)),
-                    
+                    [LanguageCode.Spanish] = "Trocitos de Carne",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

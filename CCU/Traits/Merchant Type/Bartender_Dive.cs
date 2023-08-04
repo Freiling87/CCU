@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Bartender_Dive : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Beer, 6),
             new KeyValuePair<string, int>( vItem.HotFud, 2),
@@ -21,12 +21,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells alcohol in a cheap, seedy place."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende alcohol del barato y menos confiable.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Bartender_Dive), "Bartender (Dive)"),
-                    
+                    [LanguageCode.Spanish] = "Cantinero (Clandestino)",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

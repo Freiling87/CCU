@@ -18,11 +18,18 @@ namespace CCU.Traits.Player.Ranged_Combat
 						? "Fire rate cooldown decreased by 20%."
 						: "Fire rate cooldown decreased by 20 %.\n\n" +
 							"<color=yellow>NPCs:</color> Firing interval decreased by 20%",
-				})
+                    [LanguageCode.Spanish] =
+                    Core.designerEdition
+                        ? "Velocidad de fuego aumentada por 20%."
+                        : "Velocidad de fuego aumentada por 20 %.\n\n" +
+                            "<color=yellow>NPCs:</color> Intervalo entre disparos reducido por 20%",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Trigger_Happy))
-				})
+                    [LanguageCode.Spanish] = "Gatillo Facil",
+
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 5,

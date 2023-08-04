@@ -11,10 +11,12 @@ namespace CCU.Traits.Senses
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Reacts to sound like Shopkeeper, Slavemaster & Soldier.",
+                    [LanguageCode.Spanish] = "Este NPC Reacciona al sonido como un Tendero, Amo de los Esclavos o Soldado.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Keen_Ears)),
+                    [LanguageCode.Spanish] = "Oído Agudo",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

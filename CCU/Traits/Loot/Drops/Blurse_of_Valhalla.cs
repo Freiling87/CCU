@@ -12,11 +12,14 @@ namespace CCU.Traits.Loot_Drops
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When agent is neutralized, they do not drop weapons or armor.",
-				})
+                    [LanguageCode.Spanish] = "Al ser neutralizado, este NPC nunca soltara sus armas o armadura.",
+
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Blurse_of_Valhalla)),
-				})
+                    [LanguageCode.Spanish] = "Maldición de Valhalla",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

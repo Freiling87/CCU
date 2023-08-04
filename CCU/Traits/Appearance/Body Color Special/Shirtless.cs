@@ -14,11 +14,13 @@ namespace CCU.Traits.App_BC3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Causes body to match skin color.",
-				})
+                    [LanguageCode.Spanish] = "Hace que el color de cuerpo sea el mismo que el color de piel, como el Luchador.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Shirtless)),
-				})
+                    [LanguageCode.Spanish] = "Al Desnudo",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

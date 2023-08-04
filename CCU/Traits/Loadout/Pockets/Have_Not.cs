@@ -12,11 +12,13 @@ namespace CCU.Traits.Loadout_Pockets
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "50% chance to not generate with any Pocket items. For Scaled / Upscaled loaders, items must still roll their chance successfully to generate.\n\n",
-				})
+                    [LanguageCode.Spanish] = "Chance de 50% de no generar un item de bolsillo. Para Distribucion Escalada items tienen una chance menor de aparecer.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Have_Not)),
-				})
+                    [LanguageCode.Spanish] = "A Veces no Tiene",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

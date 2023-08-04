@@ -15,12 +15,13 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will gain a *temporary* Strength buff upon entering combat.\n\n<color=red>Remember, kids: Don't maintain? Lose your gains!</color>"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC gana un *buff temporal* de fuerza al entrar en combate.\n\n<color=red>Recuerden niños!: Tu tienes el poder! hasta la proxima chicos!</color>"),
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(The_Impermanent_Hunk)),
-                    
+                    [LanguageCode.Spanish] = "El Impotente Hunk",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

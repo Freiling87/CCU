@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Riot_Inc : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BaseballBat, 3),
             new KeyValuePair<string, int>( vItem.CigaretteLighter, 1),
@@ -25,12 +25,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells anything a rioter could want."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas de destrucion livianas perfectas para la revolucion de tu ideologia completamente apta!",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Riot_Inc), "Riot, Inc."),
-                    
+                    [LanguageCode.Spanish] = "Alboroto, Disturbios y Asociados",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

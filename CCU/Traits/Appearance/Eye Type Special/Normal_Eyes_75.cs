@@ -18,7 +18,8 @@ namespace CCU.Traits.App_ET3
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Normal_Eyes_75), "Normal Eyes 75%"),
-				})
+                    [LanguageCode.Spanish] = "Ojos Normales 75%",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

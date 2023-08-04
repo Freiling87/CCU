@@ -12,13 +12,15 @@ namespace CCU.Traits.Loadout_Chunk_Items
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Key Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
-					
-				})
+                    [LanguageCode.Spanish] = "Este NPC se le asignara la llave del edificio del cual sea dueño, En caso de multiples NPCs con este rasgo, se eligira uno aleatoriamente. Normalmete la llave se asigna a los Empleados.",
+
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Chunk_Key)),
-					
-				})
+                    [LanguageCode.Spanish] = "Llave del Edificio",
+
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

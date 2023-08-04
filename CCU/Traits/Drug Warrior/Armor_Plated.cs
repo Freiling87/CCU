@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains a layer of bullet resistance when entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se vuelve un poquito apruba de balas al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Armor_Plated), "Armor-Plated"),
-                    
+                    [LanguageCode.Spanish] = "Chaletado",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

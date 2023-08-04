@@ -15,12 +15,14 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Hostile to all characters aligned with Faction 4.",
-                    
+                    [LanguageCode.Spanish] = "Este personaje es hostil a todo quien sea Aliado de La Facción 4.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Faction_4_Hostile)),
-                    
+                    [LanguageCode.Spanish] = "Hostil a la Facción 4",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

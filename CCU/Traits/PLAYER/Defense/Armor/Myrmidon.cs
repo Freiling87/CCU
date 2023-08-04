@@ -14,11 +14,13 @@ namespace CCU.Traits.Player.Armor
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Armor damage reduced by 2/3.",
-				})
+                    [LanguageCode.Spanish] = "Reduce el daño a la armadura por 2/3.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Myrmidon)),
-				})
+                    [LanguageCode.Spanish] = "Myrmidon",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					Cancellations = { nameof(Myrmicapo) },

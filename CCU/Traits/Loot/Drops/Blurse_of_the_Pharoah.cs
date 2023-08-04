@@ -12,11 +12,13 @@ namespace CCU.Traits.Loot_Drops
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When agent is neutralized, they do not drop their inventory items. Important items like keys and quest items are still dropped.",
-				})
+                    [LanguageCode.Spanish] = "Al ser neutralizado, este NPC nunca soltara los items en su inventario. Items importantes seran sueltos normalmente.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Blurse_of_the_Pharoah)),
-				})
+                    [LanguageCode.Spanish] = "Maldición de el Pharoah",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

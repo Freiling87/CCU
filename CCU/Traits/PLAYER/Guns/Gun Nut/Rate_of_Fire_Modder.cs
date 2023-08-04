@@ -22,11 +22,13 @@ namespace CCU.Traits.Loadout_Gun_Nut
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent applies a Rate of Fire Mod to all eligible ranged weapons in inventory.",
-				})
+                    [LanguageCode.Spanish] = "Aplica el Modificador de Velocidad de Fuego a tus armas, siempre odie a ese nombre tan poco creativo.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Rate_of_Fire_Modder)),
-				})
+                    [LanguageCode.Spanish] = "Modificador de Armas",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 5,

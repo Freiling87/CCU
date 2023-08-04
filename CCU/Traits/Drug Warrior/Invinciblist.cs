@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Invincible upon entering combat. And yes, it's spelled right."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se volvera Invencible al entrar en combate, olvidate del daño inoportuno",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Invincibilist)),
-                    
+                    [LanguageCode.Spanish] = "Invensiblelista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

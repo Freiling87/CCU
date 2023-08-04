@@ -14,10 +14,13 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will eat corpses like the Cannibal.\n\n<color=red>Requires:</color> {0}", vSpecialAbility.Cannibalize),
+                    [LanguageCode.Spanish] = "Este NPC se pasara a los cadaveres que vea por los dientes! \n\n<color=red>Requiere:</color> {0}\" Cannibalizar",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Eat_Corpses)),
+                    [LanguageCode.Spanish] = "Come-Cadaveres",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

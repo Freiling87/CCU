@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to break into safes up-close and silently.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para abrir cajas fuertes.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Safecracker)),
-                    
+                    [LanguageCode.Spanish] = "Abrecajas",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

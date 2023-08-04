@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will gain Stable System upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC obtiene un Sistema Estable al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Recoverist)),
-                    
+                    [LanguageCode.Spanish] = "Preventivo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

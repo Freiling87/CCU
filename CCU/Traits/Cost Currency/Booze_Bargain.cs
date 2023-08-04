@@ -11,12 +11,14 @@ namespace CCU.Traits.Cost_Currency
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to Alcohol.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC acepta un trago como paga, como todo buen trabajador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Booze_Bargain)),
-                    
+                    [LanguageCode.Spanish] = "Alcoholinista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

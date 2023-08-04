@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Highest shooting frequency, like Killer Robot, Soldier & Supercop."),
+                    [LanguageCode.Spanish] = "Este NPC dispara armas con maxima frequencia, como un Robot Asesino, Soldado o Superpolícia.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gun_Adept)),
+                    [LanguageCode.Spanish] = "Adepto en Gatillo",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

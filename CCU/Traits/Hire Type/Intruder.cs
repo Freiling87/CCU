@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to break into windows or doors.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para forzar ventanas o puertas.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Intruder)),
-                    
+                    [LanguageCode.Spanish] = "Intruso",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -13,11 +13,13 @@ namespace CCU.Traits.Loadout_Money
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent spawns with $1 to $6.",
-				})
+                    [LanguageCode.Spanish] = "NPC spawnea con $1 hasta $6.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Broke)),
-				})
+                    [LanguageCode.Spanish] = "Seco",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -20,7 +20,8 @@ namespace CCU.Traits.Rel_Faction
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Crepe_Hostile)),
-                    
+                    [LanguageCode.Spanish] = "Hostil a los Crepes",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

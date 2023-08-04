@@ -13,7 +13,7 @@ namespace CCU.Traits.Player.Language
             VanillaAgents.Vampire,
             VanillaAgents.Zombie 
         };
-        public override string[] LanguageNames => new string[] { Language.Chthonic };
+        public override string[] LanguageNames => new string[] { "Chthonic" };
 
         [RLSetup]
         public static void Setup()
@@ -21,11 +21,13 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Chthonic>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("If I even describe this language I could summon something, and I don't have insurance... so figure it out. Bypass Vocally Challenged with Ghosts, Shapeshifters, Vampires, Zombies, and anyone with this trait."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Ghosts, Shapeshifters, Vampires, Zombies, and anyone else with this trait."),
+                    [LanguageCode.Spanish] = "Este personaje ignora Dificultad al Hablar cuando interactua con Fantasmas, Cambiaformas, Vampiros, Zombies y todos quienes tengan este rasgo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_Chthonic)),
+                    [LanguageCode.Spanish] = "Habla Cataclisan",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

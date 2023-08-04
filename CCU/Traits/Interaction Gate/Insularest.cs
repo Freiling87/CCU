@@ -13,13 +13,15 @@ namespace CCU.Traits.Interaction_Gate
             PostProcess = RogueLibs.CreateCustomTrait<Insularest>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This character will not interact with anyone who has a relationship with their faction at Loyal or worse."),
-                    
+                    [LanguageCode.English] = String.Format("This character will not interact with anyone who has a relationship with their faction at Allied or worse."),
+                    [LanguageCode.Spanish] = "Este NPC no interactuara con quien sea aliado o peor.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Insularest)),
-                    
+                    [LanguageCode.Spanish] = "Insulado",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

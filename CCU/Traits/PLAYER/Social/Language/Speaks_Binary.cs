@@ -14,7 +14,7 @@ namespace CCU.Traits.Player.Language
             VanillaAgents.KillerRobot, 
             VanillaAgents.Robot 
         };
-        public override string[] LanguageNames => new string[] { Language.Binary };
+        public override string[] LanguageNames => new string[] { "Binary" };
 
         [RLSetup]
         public static void Setup()
@@ -22,11 +22,13 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Binary>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Literal actual beeping and booping, literally actually. Bypass Vocally Challenged with Robots, Hackers, and anyone with this trait."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to vanilla robots, Hackers, and anyone else with this trait."),
+                    [LanguageCode.Spanish] = "Este personaje ignora Dificultad al Hablar cuando interactua con Robots, Hackers y todos quienes tengan este rasgo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_Binary)),
+                    [LanguageCode.Spanish] = "Habla Binario",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

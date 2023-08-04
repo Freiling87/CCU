@@ -12,12 +12,14 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will never flee from combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC nunca intentara escapar del combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Fearless)),
-                    
+                    [LanguageCode.Spanish] = "Agalludo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

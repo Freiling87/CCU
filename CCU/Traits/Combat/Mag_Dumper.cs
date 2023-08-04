@@ -17,11 +17,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("When this character uses rapid fire, they hold the trigger down for much longer. What a mook."),
+                    [LanguageCode.Spanish] = "Este NPC usa balas de mas al usar armas automaticas. Como todo un rambo o pelotu-.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Mag_Dumper)),
+                    [LanguageCode.Spanish] = "Descarga-Balas",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

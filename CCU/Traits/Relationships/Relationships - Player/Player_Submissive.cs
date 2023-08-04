@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Submissive to Players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC es Sumiso al jugador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Submissive)),
-                    
+                    [LanguageCode.Spanish] = "Sumiso al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

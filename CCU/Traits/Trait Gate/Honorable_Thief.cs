@@ -15,12 +15,17 @@ namespace CCU.Traits.Trait_Gate
                     "<color=green>Interactions</color>\n" +
                     "- Will not target the player with Pickpocketing if they have Honor Among Thieves.\n" +
                     "- Will not sell items unless player has Honor Among Thieves."),
-                    
+                    [LanguageCode.English] = String.Format("El comportamiento de este NPC cambiara si el jugador tiene el rasgo Honor entre Ladrones.\n\n" +
+                    "<color=green>Interaciones</color>\n" +
+                    "- No robara del jugador si tienen Honor entre Ladrones.\n" +
+                    "- No le vendera al jugador almenos que tenga Honor entre Ladrones."),
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Honorable_Thief)),
-                    
+                    [LanguageCode.Spanish] = "Ladron Honorable",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

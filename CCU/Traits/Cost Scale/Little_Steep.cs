@@ -13,12 +13,14 @@ namespace CCU.Traits.Cost_Scale
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are increased by 25%.",
-                    
+                    [LanguageCode.Spanish] = "Los Precios de este NPC son Aumentados por 25%.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Little_Steep)),
-                    
+                    [LanguageCode.Spanish] = "Un Poco Aumentado",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

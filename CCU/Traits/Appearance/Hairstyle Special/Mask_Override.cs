@@ -31,11 +31,13 @@ namespace CCU.Traits.App_HS3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Normally, masks deactivate most accessories except eyewear. This disables that function.",
-				})
+                    [LanguageCode.Spanish] = "Normalmente la mayoria de no-peinados desactivan el uso de accesorios, con esto esta funcion se ignora.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Mask_Override)),
-				})
+                    [LanguageCode.Spanish] = "Máscaras Compatibles",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

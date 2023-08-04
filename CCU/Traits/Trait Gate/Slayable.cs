@@ -12,12 +12,14 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC is hostile and provides an XP bonus to Scientist Slayers."),
-                    
+                    [LanguageCode.Spanish] = "Este personaje es conciderado rival de personajes con el rasgo Aborrecedor del Cientifico.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Slayable)),
-                    
+                    [LanguageCode.Spanish] = "Aborrecedor del Aborrecedor del Cientifico",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Neutral to players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC es Neutral al jugador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Neutral)),
-                    
+                    [LanguageCode.Spanish] = "Neutral al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

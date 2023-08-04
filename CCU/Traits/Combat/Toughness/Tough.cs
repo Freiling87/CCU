@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is more willing to enter and stay in combat, like Bartender, Blahd/Crepe & Firefighter."),
+                    [LanguageCode.Spanish] = "Este NPC esta mas determinado a entrar y seguir en combate, como un Cartinero, Gangster o Bombero.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Tough)),
+                    [LanguageCode.Spanish] = "Rudo",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

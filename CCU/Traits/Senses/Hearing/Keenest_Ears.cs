@@ -11,10 +11,12 @@ namespace CCU.Traits.Senses
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Reacts to sound like Supercop.",
+                    [LanguageCode.Spanish] = "Este NPC Reacciona al sonido como un Superpolicía",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Keenest_Ears)),
+                    [LanguageCode.Spanish] = "Oídos Aun Más Agudos",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -14,10 +14,12 @@ namespace CCU.Traits.Player.Ranged_Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "You totally don't have to shit, you *swear*, but you're really in a hurry so you need to shoot all these guys real quick. All your weapons have autofire. Good luck in there.",
+                    [LanguageCode.Spanish] = "No hay tiempo que perder, *SI HAY* balas que perder, todas tus armas son automaticas!",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Pants_on_Autofire)),
+                    [LanguageCode.Spanish] = "Fuego Automatizado",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -16,10 +16,13 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Aligned to Blahds and anyone else with this trait. They are also a valid target for Blahd Basher and the Blahd Super Special Ability.",
+                    [LanguageCode.Spanish] = "Este personaje es aliado de los Blahds y de todos que tengan este rasgo. Tambien son rivales de los que tengan Demolidor de Blahds y son afectados por la Abilidad Super Especial del Gangster.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Blahd_Aligned)),
+                    [LanguageCode.Spanish] = "Aliado de los Crepes",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

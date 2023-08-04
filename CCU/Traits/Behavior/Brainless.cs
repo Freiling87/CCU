@@ -15,10 +15,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent won't react to anything."),
+                    [LanguageCode.Spanish] = "Este NPC no reacciona a nada, pero le gusta ver youtubers de drama de ves en cuando",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Brainless)),
+                    [LanguageCode.Spanish] = "Descerebrado",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

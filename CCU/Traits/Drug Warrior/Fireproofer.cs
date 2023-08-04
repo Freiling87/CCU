@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains a layer of fire resistance when entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se da un pequeño spray de anti-fuego al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Fireproofer)),
-                    
+                    [LanguageCode.Spanish] = "Apruebandose de Fuego",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

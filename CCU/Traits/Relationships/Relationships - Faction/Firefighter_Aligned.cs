@@ -15,10 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Aligned to Firefighters and anyone else with this trait. They are hostile to Arsonists.",
+                    [LanguageCode.Spanish] = "Este personaje es aliado de los Bomberos y de todos que tengan este rasgo. Tambien son hostiles a los Incendiarios.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Firefighter_Aligned)),
+                    [LanguageCode.Spanish] = "Aliado de los Bomberos",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

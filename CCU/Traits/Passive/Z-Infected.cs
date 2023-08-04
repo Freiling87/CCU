@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is infected with the Z-Virus. They are not a zombie yet, but will become one when killed."),
+                    [LanguageCode.Spanish] = "Este NPC esta infectado por el Virus Z, asi que al morir se pintan de verde y se ponen a matar gente, lo usual.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Z_Infected),("Z-Infected")),
+                    [LanguageCode.Spanish] = "Infectado Z",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

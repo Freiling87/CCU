@@ -14,10 +14,12 @@ namespace CCU.Traits.Explosion_Timer
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format($"Multiplies explosion timer by 4. Multiplier compounds with other Fuse traits. Vanilla fuse is 1.5 seconds."),
+                    [LanguageCode.Spanish] = "Multiplica el tiempo que este NPC tarda en explotar por 4, Normalmente es 1.5 segundos.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Longest_Fuse)),
+                    [LanguageCode.Spanish] = "Mecha Prolongada",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Burger_Joint : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BaconCheeseburger, 8),
             new KeyValuePair<string, int>( vItem.Beer, 5),
@@ -19,10 +19,12 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Burgers & beer, get 'em here!"),
+                    [LanguageCode.Spanish] = "'burgesas y cervesa, este NPC vende los sueños de todo buen americano.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Burger_Joint)),
+                    [LanguageCode.Spanish] = "Hamburgeseria",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

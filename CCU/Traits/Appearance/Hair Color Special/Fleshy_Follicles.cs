@@ -14,11 +14,13 @@ namespace CCU.Traits.App_HC3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Matches hair color to skin color.",
-				})
+                    [LanguageCode.Spanish] = "Hace que el color de pelo y el color de piel sean iguales.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Fleshy_Follicles)),
-				})
+                    [LanguageCode.Spanish] = "Pelado Peinado",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

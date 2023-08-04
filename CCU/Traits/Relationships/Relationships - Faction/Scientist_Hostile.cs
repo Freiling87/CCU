@@ -15,12 +15,14 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Hostile to Scientists.",
-                    
+                    [LanguageCode.Spanish] = "Este personaje es Hostil a los Cientificos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Scientist_Hostile)),
-                    
+                    [LanguageCode.Spanish] = "Hostil a los Cientificos",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

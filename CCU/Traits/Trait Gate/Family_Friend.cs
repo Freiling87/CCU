@@ -12,12 +12,14 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC will be Aligned to all players with Friend of the Family, as well as all Mobsters."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC es aliado del jugador si este tiene el rasgo Amigo de la Familia, Tanbien esta aliado con todos los Mafiosos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Family_Friend)),
-                    
+                    [LanguageCode.Spanish] = "Amigo Familiar",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

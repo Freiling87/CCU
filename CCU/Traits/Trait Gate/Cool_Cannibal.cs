@@ -12,12 +12,14 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC's behaviors will react to the player's Cool with Cannibals trait."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC cambiara su comportamiento si el jugador tiene el rasgo Amigo de los Canibales, volviendose neutral.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Cool_Cannibal)),
-                    
+                    [LanguageCode.Spanish] = "Amigo Canibalisoso",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

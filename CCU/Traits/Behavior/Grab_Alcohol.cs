@@ -15,10 +15,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will grab alcohol if they see it."),
+                    [LanguageCode.Spanish] = "Este NPC agarra todo el alcohol suelto que encuentre en el suelo, como tu padre o tio de confianza.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Grab_Alcohol)),
+                    [LanguageCode.Spanish] = "Colleciona Alcohol",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

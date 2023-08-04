@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Tranquilized upon entering combat. Shoulda done cardio."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se tranquiliza al entrar en combate. a mimir.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Fainting_Goat_Warrior)),
-                    
+                    [LanguageCode.Spanish] = "Bestia de la Siesta",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

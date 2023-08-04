@@ -10,7 +10,7 @@ namespace CCU.Traits.Player.Language
         { 
             VanillaAgents.Alien 
         };
-        public override string[] LanguageNames => new string[] { Language.ErSdtAdt };
+        public override string[] LanguageNames => new string[] { "ErSdtAdt" };
 
         [RLSetup]
         public static void Setup()
@@ -18,11 +18,13 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_ErSdtAdt>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("The lingua franca of the galaxy... you illiterate bumpkin. Bypass Vocally Challenged with Aliens, and anyone with this trait."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Aliens, and anyone else with this trait."),
+                    [LanguageCode.Spanish] = "Este personaje ignora Dificultad al Hablar cuando interactua con Aliens y todos quienes tengan este rasgo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_ErSdtAdt)),
+                    [LanguageCode.Spanish] = "Habla ErTngAo",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

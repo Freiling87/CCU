@@ -11,12 +11,14 @@ namespace CCU.Traits.Hire_Duration
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent will join the player who frees them from Prison.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC se unira al jugador al liberarse",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Join_on_Release)),
-                    
+                    [LanguageCode.Spanish] = "Union a la Libertad",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -14,11 +14,13 @@ namespace CCU.Traits.App_BC1
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool. Gorilla is a color now.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar, Los Gorilas son mi color favorito",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Gorilla_Colored_Body)),
-				})
+                    [LanguageCode.Spanish] = "Cuerpo Color Gorila",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

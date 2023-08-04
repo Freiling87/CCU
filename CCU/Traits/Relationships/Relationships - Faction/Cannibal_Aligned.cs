@@ -15,10 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Aligned to Cannibals and anyone else with this trait.",
+                    [LanguageCode.Spanish] = "Este personaje es aliado de los Canibales y de todos que tengan este rasgo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Cannibal_Aligned)),
+                    [LanguageCode.Spanish] = "Aliado de los Canibales",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

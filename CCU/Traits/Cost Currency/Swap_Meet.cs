@@ -11,12 +11,14 @@ namespace CCU.Traits.Cost_Currency
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character doesn't accept money. Instead, you have to give them an item of equal or greater value than the cost of the good or service. The ratio of acceptable items improves with vanilla bargaining traits.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC no acepta dinero y en su lugar acepta intercambiar items que tengas el mismo o mas valor que el item o servicio, Se puede negociar mejores precios con respectivos rasgos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Swap_Meet)),
-                    
+                    [LanguageCode.Spanish] = "De Trueque",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

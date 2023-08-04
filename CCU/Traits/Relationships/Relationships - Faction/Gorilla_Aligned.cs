@@ -15,10 +15,12 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Aligned to Gorillas and anyone else with this trait.",
+                    [LanguageCode.Spanish] = "Este personaje es aliado de los soldados y de todos que tengan este rasgo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gorilla_Aligned)),
+                    [LanguageCode.Spanish] = "Aliado de los Gorilas",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

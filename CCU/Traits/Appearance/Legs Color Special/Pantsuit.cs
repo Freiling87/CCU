@@ -14,11 +14,13 @@ namespace CCU.Traits.App_LC3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Causes legs to match body color.",
-				})
+                    [LanguageCode.Spanish] = "Evita que el color de las piernas sea el mismo que el del cuerpo.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Pantsuit)),
-				})
+                    [LanguageCode.Spanish] = "De Pijama",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

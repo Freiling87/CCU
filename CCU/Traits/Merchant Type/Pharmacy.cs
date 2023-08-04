@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Pharmacy : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Antidote, 3),
             new KeyValuePair<string, int>( vItem.FirstAidKit, 3),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells medicine."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende medicamentos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Pharmacy)),
-                    
+                    [LanguageCode.Spanish] = "Farmacia",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

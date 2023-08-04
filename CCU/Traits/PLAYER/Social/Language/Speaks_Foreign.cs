@@ -10,7 +10,7 @@ namespace CCU.Traits.Player.Language
         { 
             VanillaAgents.Assassin 
         };
-        public override string[] LanguageNames => new string[] { Language.Foreign };
+        public override string[] LanguageNames => new string[] { "Foreign" };
 
         [RLSetup]
         public static void Setup()
@@ -18,11 +18,13 @@ namespace CCU.Traits.Player.Language
             PostProcess = RogueLibs.CreateCustomTrait<Speaks_Foreign>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Pick up some phrases if you ever visit Foreignia, the Otherlands, or Farnce. Bypass Vocally Challenged with Assassins and anyone with this trait."),
+                    [LanguageCode.English] = String.Format("Agent can bypass Vocally Challenged when speaking to Assassins and anyone else with this trait."),
+                    [LanguageCode.Spanish] = "Este personaje ignora Dificultad al Hablar cuando interactua con Asesinos y todos quienes tengan este rasgo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Speaks_Foreign)),
+                    [LanguageCode.Spanish] = "Habla Extranjero",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

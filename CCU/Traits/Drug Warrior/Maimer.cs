@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will use a Critter-Upper upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC saca todos los criticos al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Maimer)),
-                    
+                    [LanguageCode.Spanish] = "Critico y Histerico",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

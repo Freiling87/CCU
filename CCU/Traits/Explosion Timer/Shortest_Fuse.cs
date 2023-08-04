@@ -14,10 +14,12 @@ namespace CCU.Traits.Explosion_Timer
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format($"Makes explosion timer instantaneous. Vanilla fuse is 1.5 seconds."),
+                    [LanguageCode.Spanish] = "Multiplica el tiempo que este NPC tarda en explotar por 60, Normalmente es 1.5 segundos.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Shortest_Fuse)),
+                    [LanguageCode.Spanish] = "Sin Mecha",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

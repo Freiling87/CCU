@@ -19,10 +19,12 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character explodes into chunks of stone when killed. The chunks remain sad about it. Golems have feelings too."),
+                    [LanguageCode.Spanish] = "Este NPC esta echo de piedras pero aun asi probablemente no tiene problemas en tirartelas, que cruel es la evolucion...",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Golemite)),
+                    [LanguageCode.Spanish] = "Golem",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

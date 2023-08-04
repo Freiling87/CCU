@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("You feel lucky, punk? I do."),
-                    
+                    [LanguageCode.Spanish] = "Que suerte tener a alguein que use este mod en español, ah si el NPC tiene suerte, esto afecta ataques criticos y ciertos rasgos.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gambler)),
-                    
+                    [LanguageCode.Spanish] = "Apostador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

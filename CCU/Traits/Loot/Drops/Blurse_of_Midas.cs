@@ -11,11 +11,13 @@ namespace CCU.Traits.Loot_Drops
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When agent is neutralized, they do not drop their Money. It can still be acquired through other means (Mugging, pickpocketing).",
-				})
+                    [LanguageCode.Spanish] = "Al ser neutralizado, este NPC nunca soltara dinero, pero aun puede perderlo a traves de otros metodos (Atracando, cartereando).",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Blurse_of_Midas)),
-				})
+                    [LanguageCode.Spanish] = "Maldición de Midas",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

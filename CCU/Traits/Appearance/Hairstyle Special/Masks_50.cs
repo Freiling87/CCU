@@ -18,7 +18,8 @@ namespace CCU.Traits.App_HS3
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Masks_50), "Masks 50%"),
-				})
+                    [LanguageCode.Spanish] = "Máscaras 50%",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -17,11 +17,13 @@ namespace CCU.Traits.App_SC2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega varios colores de piel a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Human_Skin)),
-				})
+                    [LanguageCode.Spanish] = "Piel Humana",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

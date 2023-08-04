@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired as a bodyguard.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para pelear por ti.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Muscle)),
-                    
+                    [LanguageCode.Spanish] = "Mercenario",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

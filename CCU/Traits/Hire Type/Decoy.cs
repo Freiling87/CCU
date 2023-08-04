@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to cause a distraction, or a Ruckus, if you will.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para hacer un ruidoso alboroto y despues abandonarte, una buena inversion!",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Decoy)),
-                    
+                    [LanguageCode.Spanish] = "Distracion",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -16,11 +16,13 @@ namespace CCU.Traits.Player.Melee_Combat
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Melee attack speed increased by 48.5%.\n\nUh yeah, that's the fastest it can go without the animation clipping through targets.",
-				})
+                    [LanguageCode.Spanish] = "Aumenta la velocidad de ataques Cuerpo a Cuerpo en 48.5%.\n\nPorque ese es el limite antes que el juego se buggee.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Melee_Maniac_2))
-				})
+                    [LanguageCode.Spanish] = "Violentatico +",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 5,

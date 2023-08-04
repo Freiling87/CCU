@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will start regenerating health upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC lentamente regenera salud al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Stimpacker)),
-                    
+                    [LanguageCode.Spanish] = "Sobremedicado",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

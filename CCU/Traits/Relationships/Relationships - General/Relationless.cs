@@ -12,10 +12,12 @@ namespace CCU.Traits.Rel_General
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is always Neutral, like Butler Bot. What a lonely life.",
+                    [LanguageCode.Spanish] = "Este NPC esta siempre neutral no importe lo que pase, como el Robomayordomo, Los tibios nunca van al cielo.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Relationless)),
+                    [LanguageCode.Spanish] = "Siempre Neutral",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

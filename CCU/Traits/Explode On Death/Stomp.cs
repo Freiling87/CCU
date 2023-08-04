@@ -16,12 +16,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character stuns everyone nearby. Bad gas?"),
-                    
+                    [LanguageCode.Spanish] = "Al morir, este NPC aturde a los NPCs alrededor suyo, un poco redundante pero se entiende.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Stomp)),
-                    
+                    [LanguageCode.Spanish] = "Pisoton",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Hypnotist : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Cologne, 2),
             new KeyValuePair<string, int>( vItem.Haterator, 3),
@@ -22,12 +22,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells hypnotist's tools."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas de hynotismo.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Hypnotist)),
-                    
+                    [LanguageCode.Spanish] = "Hypnotista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

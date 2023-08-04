@@ -15,12 +15,14 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Agent is Aligned to Soldiers and anyone else with this trait.",
-                    
+                    [LanguageCode.Spanish] = "Este personaje es aliado de los Soldados y de todos que tengan este rasgo.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Soldier_Aligned)),
-                    
+                    [LanguageCode.Spanish] = "Aliado de los Soldados",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

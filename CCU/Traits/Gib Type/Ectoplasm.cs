@@ -20,7 +20,8 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's body explodes into chunks of... ghost? Probably not vegan, if you were wondering."),
-                    
+                    [LanguageCode.Spanish] = "El cuerpo de este NPC esta echo de pedacitos de fantasma, los cuales van bien con un poco de ensalada y una soda.",
+
                 })
                 .WithName(new CustomNameInfo
                 {

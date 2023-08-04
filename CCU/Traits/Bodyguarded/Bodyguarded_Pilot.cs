@@ -14,11 +14,13 @@ namespace CCU.Traits.Bodyguarded
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character should spawn with bodyguards. Let's see what happens!",
-				})
+                    [LanguageCode.Spanish] = "Este NPC es el chelero.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Bodyguarded_Pilot)),
-				})
+                    [LanguageCode.Spanish] = "LLEGO EL LECHEROOOOOOOO!!!",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -14,11 +14,13 @@ namespace CCU.Traits.App_HS2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega varios peinado a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Long_Styles)),
-				})
+                    [LanguageCode.Spanish] = "Peinados Largos",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

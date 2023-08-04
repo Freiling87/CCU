@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Teleportationist : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.AmmoStealer, 3),
             new KeyValuePair<string, int>( vItem.BodySwapper, 3),
@@ -22,12 +22,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells teleportation tools. Get them before they're gone!"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende tecnologia de teletransporte, Compra antes que se desaparesca!",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Teleportationist)),
-                    
+                    [LanguageCode.Spanish] = "Teleportacionista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

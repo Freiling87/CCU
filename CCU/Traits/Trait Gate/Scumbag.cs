@@ -12,10 +12,12 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This Agent is a valid target for Scumbag Slaughterer, and will be hostile to them."),
+                    [LanguageCode.Spanish] = "Este personaje es afectado por Aplastascoria, por lo que sera hostil y tendra mejores armas al tener la Gran Misión del Mecarobot.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Scumbag)),
+                    [LanguageCode.Spanish] = "Escoria",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

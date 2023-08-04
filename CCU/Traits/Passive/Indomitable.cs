@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Immune to mind control."),
+                    [LanguageCode.Spanish] = "Este NPC es inmune al control mental.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Indomitable)),
+                    [LanguageCode.Spanish] = "Indominable",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

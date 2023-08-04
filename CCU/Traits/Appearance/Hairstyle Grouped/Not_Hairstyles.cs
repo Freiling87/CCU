@@ -16,11 +16,13 @@ namespace CCU.Traits.App_HS2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool. I mean, you can use it but... what the hell are you making?",
-				})
+                    [LanguageCode.Spanish] = "Agrega varios no-peinado a los que el personaje puede usar. Que se te esta occuriendo ahi?",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Not_Hairstyles)),
-				})
+                    [LanguageCode.Spanish] = "No-Peinados",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

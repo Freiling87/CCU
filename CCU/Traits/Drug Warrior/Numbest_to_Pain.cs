@@ -20,7 +20,8 @@ namespace CCU.Traits.Drug_Warrior
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Numbest_to_Pain)),
-                    
+                    [LanguageCode.Spanish] = "Entumecidicimo al Dolor",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

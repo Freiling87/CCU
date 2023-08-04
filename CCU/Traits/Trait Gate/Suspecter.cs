@@ -11,12 +11,14 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Annoyed at characters with the Suspicious trait.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC se vuelve Irritado con personajes que tengan el rasgo Sospechoso",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Suspecter)),
-                    
+                    [LanguageCode.Spanish] = "Sospechante",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

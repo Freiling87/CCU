@@ -19,12 +19,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character makes anyone nearby dizzy. I can't think of any possible reason for this."),
-                    
+                    [LanguageCode.Spanish] = "Al morir, este NPC explota como una granada aturdidora, Hay una razon para esto pero uhhhhhh, digamos que me olvide.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Dizzy_EOD), "Dizzy"),
-                    
+                    [LanguageCode.Spanish] = "Aturdidor",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

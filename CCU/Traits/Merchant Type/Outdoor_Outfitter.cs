@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Outdoor_Outfitter : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Axe, 1),
             new KeyValuePair<string, int>( vItem.Beer, 1),
@@ -28,12 +28,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells traps & wilderness gear. And fireworks, because yee-haw!"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas para sobrevivir el exterior, y fuegos artificiales, viva el patriotismo y muerte a los bosques!",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Outdoor_Outfitter)),
-                    
+                    [LanguageCode.Spanish] = "Sobrevivencia al Externo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

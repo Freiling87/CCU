@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Invisible upon entering combat. And yes, it's spelled right."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se vuelve invisible al entrar en combate, olvidate de las miradas inoportunas.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Invisibilist)),
-                    
+                    [LanguageCode.Spanish] = "Invisiblelista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

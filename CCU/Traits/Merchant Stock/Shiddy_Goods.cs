@@ -12,12 +12,13 @@ namespace CCU.Traits.Merchant_Stock
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent sells items at 1/3 durability."),
-                    
+                    [LanguageCode.Spanish] = "Los items que este NPC vende tienen un 1/3 de durabilidad.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Shiddy_Goods)),
-                    
+                    [LanguageCode.Spanish] = "Bienes de Presupuesto",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -29,10 +30,10 @@ namespace CCU.Traits.Merchant_Stock
                 });
         }
         public override void OnAdded() { }
-        internal override void OnAddItem(ref InvItem invItem)
+        public override void OnAddItem(ref InvItem invItem)
         {
             if (DurabilityTypes.Contains(invItem.itemType))
-                invItem.invItemCount = (int)Math.Max(1, invItem.invItemCount / 3f);
+                invItem.invItemCount = (int)Math.Max(0, (invItem.invItemCount / 3f));
         }
         public override void OnRemoved() { }
     }

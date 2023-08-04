@@ -12,10 +12,12 @@ namespace CCU.Traits.Merchant_Stock
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Enables duplicate items to be drawn from inventory lists."),
+                    [LanguageCode.Spanish] = "Permite que items duplicados sean elegidos en la tienda de inventario.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Clearancer)),
+                    [LanguageCode.Spanish] = "Vendedor Acreditado",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -27,10 +29,7 @@ namespace CCU.Traits.Merchant_Stock
                 });
         }
         public override void OnAdded() { }
-        internal override void OnAddItem(ref InvItem invItem) 
-        {
-            invItem.canRepeatInShop = true;
-        }
+        public override void OnAddItem(ref InvItem invItem) { }
         public override void OnRemoved() { }
     }
 }

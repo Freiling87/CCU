@@ -16,12 +16,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character releases The Ooze. They say that's the first thing that happens."),
-                    
+                    [LanguageCode.Spanish] = "Al morir, este NPC suelta EL FLUIDOOOO, que miedo, y que asco",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Ooze)),
-                    
+                    [LanguageCode.Spanish] = "FLuido",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

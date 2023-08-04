@@ -12,12 +12,14 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will always flee from combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC le tiene miedo al conflicto y siempre saldra corriendo al volverse hostil.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Coward)),
-                    
+                    [LanguageCode.Spanish] = "Cobarde",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

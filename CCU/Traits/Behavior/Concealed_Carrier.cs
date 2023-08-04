@@ -15,10 +15,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent knows their rights, and declines your request for them to shut up about it. They'll hide their weapon when not in combat."),
+                    [LanguageCode.Spanish] = "Este NPC habla tranquilo pero trae fierro, Las armas que lleven no se prodran ver hasta que entren en combate.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Concealed_Carrier)),
+                    [LanguageCode.Spanish] = "Portador Oculto",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

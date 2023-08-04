@@ -16,12 +16,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character releases an EMP."),
-                    
+                    [LanguageCode.Spanish] = "Al morir, Este NPC explota como una granada de EMP, comerte los imanes de la heladera es peligroso y no te dara poderes dice el gobierno...",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(EMP)),
-                    
+                    [LanguageCode.Spanish] = "EMP",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

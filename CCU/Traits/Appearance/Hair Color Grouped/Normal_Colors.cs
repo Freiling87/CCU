@@ -16,11 +16,13 @@ namespace CCU.Traits.App_HC2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds normal human hair colors to the pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega varios colores comunes de pelo a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Normal_Colors)),
-				})
+                    [LanguageCode.Spanish] = "Colores Normales",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

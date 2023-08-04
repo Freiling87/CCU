@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Resistance_Commissary : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.FreeItemVoucher, 6),
             new KeyValuePair<string, int>( vItem.HiringVoucher, 6),
@@ -20,12 +20,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character distributes resources for the Resistance."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende recursos por parte de la resistencia.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Resistance_Commissary)),
-                    
+                    [LanguageCode.Spanish] = "Comisaria de la Resistencia",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

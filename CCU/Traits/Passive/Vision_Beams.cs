@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character's vision is visually indicated, as with Cop Bot."),
+                    [LanguageCode.Spanish] = "La vision de este personaje esta resaltada como si fueran un Robopoli.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Vision_Beams)),
+                    [LanguageCode.Spanish] = "Rayo de Vision",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

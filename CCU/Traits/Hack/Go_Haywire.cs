@@ -16,7 +16,8 @@ namespace CCU.Traits.Hack
                 {
                     [LanguageCode.English] = String.Format("This character can be hacked to go Haywire.\n\n" + 
                     "<color=red>Requires:</color> Electronic"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC se puede hackear para enloquecer.",
+
                 })
                 .WithName(new CustomNameInfo
                 {

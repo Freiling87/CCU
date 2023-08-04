@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Army_Quartermaster : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.MachineGun, 3),
             new KeyValuePair<string, int>( vItem.Revolver, 3),
@@ -27,12 +27,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells military hardware."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende tecnología militar de alto rendimiento.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Army_Quartermaster)),
-                    
+                    [LanguageCode.Spanish] = "Oficial Intendente",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

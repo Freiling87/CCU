@@ -12,12 +12,14 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This NPC will be Loyal to a player with Friend of the Common Folk."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC es leal a cualquier personaje que tenga el rasgo Amigo de la Gente Común.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Common_Folk)),
-                    
+                    [LanguageCode.Spanish] = "Amigo Común",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

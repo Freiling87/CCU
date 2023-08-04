@@ -12,10 +12,12 @@ namespace CCU.Traits.Drug_Warrior_Modifier
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Drug warrior status effect lasts forever. Expectant mothers should not use this drug, as the effects on the unborn are as yet untested. But it might be cool."),
+                    [LanguageCode.Spanish] = "Effectos de Drogladiador duran para siempre, No recomendado para embarazadas o pestes infectuosas.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Eternal_Release)),
+                    [LanguageCode.Spanish] = "Eternodosis",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

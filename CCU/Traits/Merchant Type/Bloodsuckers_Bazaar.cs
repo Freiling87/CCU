@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Bloodsuckers_Bazaar : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BloodBag, 6),
             new KeyValuePair<string, int>( vItem.Cologne, 1),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells anything a Vampire could need."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas para chupasangres con patas.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Bloodsuckers_Bazaar), "Bloodsuckers' Bazaar"),
-                    
+                    [LanguageCode.Spanish] = "Bazar de Sanguijuelas",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

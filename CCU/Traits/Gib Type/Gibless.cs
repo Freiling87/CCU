@@ -19,10 +19,12 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("You should count your blessings. Not everyone is so lucky as to explode into meat chunks when they die. Those poor Cop Bots, there's nothing left for the family to bury."),
+                    [LanguageCode.Spanish] = "El cuerpo de este NPC es solo un plato de aire con un lado de oxigeno, justo como los de que mi madre preparaba...",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gibless)),
+                    [LanguageCode.Spanish] = "Sin Trocitos",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

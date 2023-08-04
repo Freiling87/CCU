@@ -12,11 +12,13 @@ namespace CCU.Traits.Loadout_Money
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "25% chance to spawn without Money.",
-				})
+                    [LanguageCode.Spanish] = "chance de 25% de spawnear sin dinero.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Bankrupt_25), "Bankrupt 25%"),
-				})
+                    [LanguageCode.Spanish] = "Bancarrota 25%",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

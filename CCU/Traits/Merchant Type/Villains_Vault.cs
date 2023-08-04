@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Villains_Vault : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.CyanidePill, 2),
             new KeyValuePair<string, int>( vItem.Explodevice, 2),
@@ -24,12 +24,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells things that are dastardly to use. If they have a mustache, they will twirl it deviously."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende items altamente destructivos, perfectos para un maligno pierre nodoyuna.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Villains_Vault), "Villains' Vault"),
-                    
+                    [LanguageCode.Spanish] = "La Vobeda Villanesca",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

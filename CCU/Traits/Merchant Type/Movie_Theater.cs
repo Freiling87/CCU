@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Movie_Theater : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Banana, 3),
             new KeyValuePair<string, int>( vItem.BaconCheeseburger, 6),
@@ -21,12 +21,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells obnoxiously overpriced food. \"Just doing my job,\" isn't an excuse!"),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende comida muy pero muy cara,",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Movie_Theater)),
-                    
+                    [LanguageCode.Spanish] = "Teatro de Peliculas",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -19,10 +19,12 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is some kind of crystalline lifeform. More of a carbon-based guy myself, but I respect their lifestyle choice of being born that way."),
+                    [LanguageCode.Spanish] = "Este NPC esta echo de vidrio por lo que no te recomiendo probarlo, recuerda que el plato no se come!!!",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Glass_Shards)),
+                    [LanguageCode.Spanish] = "Vidrio",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

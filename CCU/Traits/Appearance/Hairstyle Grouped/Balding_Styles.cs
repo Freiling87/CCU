@@ -14,11 +14,13 @@ namespace CCU.Traits.App_HS2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple hairstyles to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega varios peinado a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Balding_Styles)),
-				})
+                    [LanguageCode.Spanish] = "Peinados con Calvicie",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

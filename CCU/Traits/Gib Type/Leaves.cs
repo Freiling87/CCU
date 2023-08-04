@@ -19,12 +19,14 @@ namespace CCU.Traits.Gib_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is made of plant. Un-delicious plant."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC es perfecto para los veganos en la audiencia, exepto que tiene sabor a pasto.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Leaves)),
-                    
+                    [LanguageCode.Spanish] = "Hojas",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

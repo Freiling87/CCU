@@ -14,10 +14,12 @@ namespace CCU.Traits.App_BT2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-				})
+                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Demolitionist_Body_Greyscale)),
+                    [LanguageCode.Spanish] = "Cuerpo de Demoledor Gris",
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{

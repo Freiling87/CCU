@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Annoyed at players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC es Iritado al jugador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Annoyed)),
-                    
+                    [LanguageCode.Spanish] = "Iritado al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

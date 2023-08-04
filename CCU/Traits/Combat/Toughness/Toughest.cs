@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is more willing to enter and stay in combat, like Killer Robot or Zombie."),
+                    [LanguageCode.Spanish] = "Este NPC esta SUPER DUPER DETERMINADO a entrar y seguir en combate! Como el Robot Asesino o un zombie!",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Toughest)),
+                    [LanguageCode.Spanish] = "Rudisisisisimo",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

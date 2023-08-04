@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has the privileges of the upper class."),
+                    [LanguageCode.Spanish] = "Este personaje tiene todos los beneficios de la clase alta.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Crusty)),
+                    [LanguageCode.Spanish] = "Rico",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

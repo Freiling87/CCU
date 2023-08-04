@@ -13,10 +13,12 @@ namespace CCU.Traits.Player.Movement
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("When damaged, instantly teleports to a random nearby spot."),
+                    [LanguageCode.Spanish] = "Al sufrir daño, este NPC se teletransporta instantaneamente a un lugar cercano.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = PlayerName(typeof(Blinker)),
+                    [LanguageCode.Spanish] = "Teleportivo",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -23,11 +23,18 @@ namespace CCU.Traits.App_HC2
 					"- 15% Blonde\n" +
 					"- 5% Orange\n\n" +
 					"This trait adds 20 items to the pool, so it's also a good way to make dyed or white hair less common if you add them to to the pool.",
-				})
+                    [LanguageCode.Spanish] = "\"Agrega múltiples colores de cabello a los que el personaje puede usar, seleccionados para parecerse con mayor precisión a las tendencias demográficas:\n" +
+                    "- 50% Negro\n" +
+                    "- 30% Moreno\n" +
+                    "- 15% Rubio\n" +
+                    "- 5% Pelirrojo\n\n" +
+                    "Este rasgo agrega 20 colores a la lista, asi que sirve para hacer los colores que adreges mas raros.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Demographic_Colors)),
-				})
+                    [LanguageCode.Spanish] = "Colores Demograficos",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

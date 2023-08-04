@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Lowest attack frequency, like Comedian, Hacker & Zombie."),
+                    [LanguageCode.Spanish] = "Frequencia de ataque mas baja, como Comediante, Hacker o Zombie.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Melee_Shy)),
+                    [LanguageCode.Spanish] = "Lento al Garrote",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will gain a Resurrection status upon entering combat."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC resucitara al entrar en combate.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Immortalish)),
-                    
+                    [LanguageCode.Spanish] = "Semi-Mortal",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

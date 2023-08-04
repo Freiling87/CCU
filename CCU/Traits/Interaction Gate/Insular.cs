@@ -14,12 +14,14 @@ namespace CCU.Traits.Interaction_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will not interact with anyone who has a relationship with their faction at Neutral or worse."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC no interactuara con quien sea neutral o peor.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Insular)),
-                    
+                    [LanguageCode.Spanish] = "Insular",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -12,10 +12,12 @@ namespace CCU.Traits.Merchant_Stock
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This agent sells items at 3x the normal quantity."),
+                    [LanguageCode.Spanish] = "Los items que este NPC vende estan agrupados y multiplicados por 3.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Wholesalerer)),
+                    [LanguageCode.Spanish] = "Al Por Mayorista",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -27,7 +29,7 @@ namespace CCU.Traits.Merchant_Stock
                 });
         }
         public override void OnAdded() { }
-        internal override void OnAddItem(ref InvItem invItem)
+        public override void OnAddItem(ref InvItem invItem)
         {
             if (QuantityTypes.Contains(invItem.itemType))
                 invItem.invItemCount *= 3;

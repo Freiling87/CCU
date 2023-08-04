@@ -13,12 +13,14 @@ namespace CCU.Traits.Cost_Scale
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are reduced to zero.",
-                    
+                    [LanguageCode.Spanish] = "Los Precios de este NPC son Reducidos por 100%, lo barato es magico, y lo gratis lo es aun mas.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Zero)),
-                    
+                    [LanguageCode.Spanish] = "Gratis",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -12,12 +12,14 @@ namespace CCU.Traits.Trait_Gate
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Will not sell to the player if they don't have The Law."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC no le vendera al jugador al menos que tengan el rasgo La Ley",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Cop_Access)),
-                    
+                    [LanguageCode.Spanish] = "Acceso Policial",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

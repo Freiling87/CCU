@@ -14,11 +14,13 @@ namespace CCU.Traits.Player.Ammo
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Ammo capacity increased by 40%.",
-				})
+                    [LanguageCode.Spanish] = "Aumenta la capacidad de munición por 40%.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Ammo_Amateur))
-				})
+                    [LanguageCode.Spanish] = "Amateur de la Munición",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					Cancellations = { nameof(Ammo_Artiste), nameof(Ammo_Auteur) },

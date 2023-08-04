@@ -14,11 +14,13 @@ namespace CCU.Traits.App_EC3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Matches Eye Color to Skin Color.",
-				})
+                    [LanguageCode.Spanish] = "Hace que el color de los ojos coincida con el color de la piel.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Beady_Eyed), "Beady-Eyed"),
-				})
+                    [LanguageCode.Spanish] = "Ojitos Chiquitos",
+                })
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

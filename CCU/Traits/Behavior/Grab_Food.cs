@@ -15,10 +15,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will grab food if they see it."),
+                    [LanguageCode.Spanish] = "Este NPC agarra toda comida en el suelo que vea. porque es un cochino, UN COCHINO!!!.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Grab_Food)),
+                    [LanguageCode.Spanish] = "Colleciona Comida",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

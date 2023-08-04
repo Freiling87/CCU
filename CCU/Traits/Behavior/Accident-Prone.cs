@@ -15,11 +15,12 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format($"This character will not path around Crushers, Fire Spewers, Killer Plants, Laser Emitters & Sawblades.\n" +
-                        "<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(Grab_Everything))),
+                        "<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(Grab_Everything))), 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Accident_Prone), "Accident-Prone"),
+                    [LanguageCode.Spanish] = "Accidentado-Compulsivo",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

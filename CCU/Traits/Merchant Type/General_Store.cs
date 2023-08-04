@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class General_Store : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( "Food", 10),
             new KeyValuePair<string, int>( "Medical2", 5),
@@ -31,12 +31,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells miscellaneous stuff. A real retail slut. This is the vanilla Shopkeeper inventory."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC maneja un almacen, que talves es una pantalla!... para ocultar otro almacen.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(General_Store)),
-                    
+                    [LanguageCode.Spanish] = "Almacen",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

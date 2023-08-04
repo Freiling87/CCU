@@ -17,11 +17,13 @@ namespace CCU.Mutators.Laws
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Brandishing a weapon in public is a minor crime. Equip your fists or a non-weapon to keep the cops off your back.",
-				})
+                    [LanguageCode.Spanish] = "Tener tu pistolita afuera es un crimen indecente. Manten tus manos limpias o lleva un arma blanca para que la poli te ignore.",
+                })
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(No_Open_Carry)),
-				});
+                    [LanguageCode.Spanish] = "Porte Abierto Prohibido",
+                });
 		}
 
 		private static List<string> PublicWeaponsOkay = new List<string>()

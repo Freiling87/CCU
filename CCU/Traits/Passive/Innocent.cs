@@ -12,12 +12,14 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will never be designated Guilty."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC no puede volverse nunca culpable.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Innocent)),
-                    
+                    [LanguageCode.Spanish] = "Inocente",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

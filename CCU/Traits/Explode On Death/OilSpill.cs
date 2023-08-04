@@ -16,12 +16,14 @@ namespace CCU.Traits.Explode_On_Death
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("On death, this character splashes oil everywhere. Don't worry, it's inflammable."),
-                    
+                    [LanguageCode.Spanish] = "Al morir, este NPC explota en un charco de petroleo combustible. Menos mal que no fuman.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Oil_Spill)),
-                    
+                    [LanguageCode.Spanish] = "Petroleo",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

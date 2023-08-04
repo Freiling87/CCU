@@ -13,10 +13,12 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has a Walkie Talkie, and will call for Police backup when they enter combat. They should probably eat more fiber."),
+                    [LanguageCode.Spanish] = "Este NPC tiene un Walkie Talkie que se activa al entrar en combate llamando a los polis cercanos. Como tipica chusma.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Backed_Up)),
+                    [LanguageCode.Spanish] = "Llama-refuerzos",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

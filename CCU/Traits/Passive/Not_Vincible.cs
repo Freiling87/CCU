@@ -13,10 +13,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Go ahead, try to vince them. They simply can't be vinced."),
+                    [LanguageCode.Spanish] = "Este NPC no puede ser vencido por un ser tan debil. Nota: jugar con este personaje puede causar bugs extraños no esperados.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Not_Vincible)),
+                    [LanguageCode.Spanish] = "No Vencible",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

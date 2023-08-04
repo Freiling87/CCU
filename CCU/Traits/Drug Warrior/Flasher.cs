@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will become Fast upon entering combat... like The Flash. They absolutely do *not* reveal themselves to people, and we are working on getting the name changed."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC es muy rapido en todo! no pregunten de su club de fans, nunca pregunten sobre su pasado.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Flasher)),
-                    
+                    [LanguageCode.Spanish] = "Flashista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

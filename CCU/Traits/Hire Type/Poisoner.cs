@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to poison an air vent or water pump.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para envenenar la ventilacion o el agua de un edificio.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Poisoner)),
-                    
+                    [LanguageCode.Spanish] = "Envenenador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

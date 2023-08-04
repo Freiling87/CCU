@@ -13,12 +13,14 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Agent ignores any laws applied by Mutators."),
-                    
+                    [LanguageCode.Spanish] = "Este personaje ignora las leyes impuestas por modificadores.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Outlaw)),
-                    
+                    [LanguageCode.Spanish] = "Sin Leyes",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

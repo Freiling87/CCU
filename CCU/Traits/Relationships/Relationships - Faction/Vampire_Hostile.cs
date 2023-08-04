@@ -16,12 +16,14 @@ namespace CCU.Traits.Rel_Faction
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Hostile to Vampires and anyone with the Suck Blood trait.",
-                    
+                    [LanguageCode.Spanish] = "Este personaje es Hostil a los Vampiros y todo quien chupe Sangre.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Vampire_Hostile)),
-                    
+                    [LanguageCode.Spanish] = "Hostil a los Vampiros",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

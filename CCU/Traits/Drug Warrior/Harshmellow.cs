@@ -15,12 +15,14 @@ namespace CCU.Traits.Drug_Warrior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character gains Withdrawal when they enter combat. Bummer."),
-                    
+                    [LanguageCode.Spanish] = "A este NPC le quitas a vibra a golpes, como cualquier hippie se lo merece no te preoqupes.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Harshmellow)),
-                    
+                    [LanguageCode.Spanish] = "Quemado",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

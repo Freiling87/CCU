@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character is immune to all status effects... but they still have feelings."),
+                    [LanguageCode.Spanish] = "Este NPC es inmune a todo estatus, se imaginan como se aburre en las fiestas.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Status_Effect_Immune)),
+                    [LanguageCode.Spanish] = "Inmune a los Efectos",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

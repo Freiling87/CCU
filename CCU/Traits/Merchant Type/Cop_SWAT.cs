@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Cop_SWAT : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.BulletproofVest, 4),
             new KeyValuePair<string, int>( vItem.DizzyGrenade, 4),
@@ -29,12 +29,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells gear for Doorkickers."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende herramientas para rompepurtas, rompebunkers y rompebo-",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Cop_SWAT), "Cop (SWAT)"),
-                    
+                    [LanguageCode.Spanish] = "Poliswat",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

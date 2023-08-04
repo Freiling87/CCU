@@ -14,6 +14,7 @@ namespace CCU.Traits.Behavior
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = string.Format("This character will suck blood like the Vampire. Agents with Hostile to Vampire will be hostile. \n\n<color=red>Requires:</color> {0}", vSpecialAbility.Bite),
+                    [LanguageCode.Spanish] = "Este NPC chupa gente, de manera sangrienta. NPCs y Jugadores que son hostil contra Vampiros tambien seran hostiles a este rasgo.  \n\n<color=red>Require:</color>",
                 })
                 .WithName(new CustomNameInfo
                 {

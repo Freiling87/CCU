@@ -11,12 +11,14 @@ namespace CCU.Traits.Cost_Currency
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character's costs are converted to Bananas.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC usa Bananas como moneda.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Banana_Barter)),
-                    
+                    [LanguageCode.Spanish] = "Bananarista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

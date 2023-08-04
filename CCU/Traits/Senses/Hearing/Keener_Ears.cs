@@ -11,10 +11,12 @@ namespace CCU.Traits.Senses
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "Reacts to sound like Bartender, Bouncer, Cannibal & Goon.",
+                    [LanguageCode.Spanish] = "Este NPC Reacciona al sonido como un Cantinero, Seguridad, Canibal o Maton.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Keener_Ears)),
+                    [LanguageCode.Spanish] = "Oídos Más Agudos",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -12,10 +12,12 @@ namespace CCU.Traits.Passive
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character has an inhuman psychopath firmly lodged up their ass, controlling their every action. Except this one doesn't even pay them wages in return."),
+                    [LanguageCode.Spanish] = "Este NPC tiene un Cambiaformas metido adentro, medio incomodo y es mejor no preguntar como va al baño.",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Possessed)),
+                    [LanguageCode.Spanish] = "Poseído",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

@@ -1,8 +1,11 @@
 ﻿using BepInEx.Logging;
+using CCU.Hooks;
 using HarmonyLib;
 using RogueLibsCore;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace CCU.Traits
 {
@@ -21,6 +24,15 @@ namespace CCU.Traits
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+
+		//[HarmonyPriority(Priority.First)]
+		//[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItem), argumentTypes: new[] { typeof(string), typeof(int), typeof(List<string>), typeof(List<int>), typeof(List<int>), typeof(int), typeof(bool), typeof(bool), typeof(int), typeof(int), typeof(bool), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(bool) })]
+		//public static void AddItem_Postfix(InvDatabase __instance, ref InvItem __result)
+		//{
+		//	CCULogger.GetLogger().LogDebug("AddItem (A): " + (__instance.agent?.agentRealName ?? "(Null)") + ", " + __result.invItemName);
+		//	ModifyItemHelper.SetupItem(__instance.agent, __result);
+		//}
+		//// → C
 
 		[HarmonyPriority(Priority.First)]
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.AddItemAtEmptySlot), argumentTypes: new[] { typeof(InvItem), typeof(bool), typeof(bool), typeof(int), typeof(int) })]

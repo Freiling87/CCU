@@ -14,11 +14,13 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Average shooting frequency, like a Cop or gangster."),
+                    [LanguageCode.Spanish] = "Este NPC dispara armas con frequencia, como un Policía o Gangster.",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gun_Competent)),
+                    [LanguageCode.Spanish] = "Facil al Gatillo",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

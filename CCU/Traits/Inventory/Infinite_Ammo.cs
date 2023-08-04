@@ -12,11 +12,13 @@ namespace CCU.Traits.Inventory
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("Guess, smartypants."),
+                    [LanguageCode.Spanish] = "Adivina",
 
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Infinite_Ammo)),
+                    [LanguageCode.Spanish] = "Municion Infinita",
 
                 })
                 .WithUnlock(new TraitUnlock_CCU

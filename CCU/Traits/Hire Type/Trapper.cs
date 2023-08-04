@@ -16,12 +16,14 @@ namespace CCU.Traits.Hire_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character can be hired to disarm a trap.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC puede ser contratado para desarmar una trampa.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Trapper)),
-                    
+                    [LanguageCode.Spanish] = "Trapista",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

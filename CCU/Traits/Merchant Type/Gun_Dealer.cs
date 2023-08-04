@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Gun_Dealer : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.AmmoProcessor, 2),
             new KeyValuePair<string, int>( vItem.KillAmmunizer, 1),
@@ -23,12 +23,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells guns."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende armas comunes.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Gun_Dealer)),
-                    
+                    [LanguageCode.Spanish] = "Armamentos",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

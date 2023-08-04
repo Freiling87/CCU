@@ -14,12 +14,14 @@ namespace CCU.Traits.Rel_Player
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = "This character is Aligned to players.",
-                    
+                    [LanguageCode.Spanish] = "Este NPC es Aliado al jugador.",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Player_Aligned)),
-                    
+                    [LanguageCode.Spanish] = "Aliado al Jugador",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

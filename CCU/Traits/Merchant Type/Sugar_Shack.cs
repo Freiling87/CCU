@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
     public class Sugar_Shack : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Sugar, 12),
         };
@@ -18,12 +18,14 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells Sugar, and only Sugar."),
-                    
+                    [LanguageCode.Spanish] = "Este NPC vende polvo blanco, y mas polvo blanco, y mas polvo blanco y mas polvoblancoymaspolvoblancoymas",
+
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Sugar_Shack)),
-                    
+                    [LanguageCode.Spanish] = "Polvitos Magicos",
+
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {

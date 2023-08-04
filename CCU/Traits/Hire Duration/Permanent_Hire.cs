@@ -14,10 +14,15 @@ namespace CCU.Traits.Hire_Duration
                         "Adds a 'Hire Permanently' interaction option at 8x the normal rate.\n\n" + 
                         "Permanent Hires can use their Expert ability unlimited times, and will ignore Homesickness.\n\n" + 
                         "<color=red>Requires:</color> Any Hire Type trait",
+                    [LanguageCode.Spanish] =
+                        "Agrega la opcion de 'Contratar Permanentemente' a un NPC al 8x del costo normal.\n\n" +
+                        "NPCs contratadors permanentemente pueden usar sus abilidades sin limites y siempre te seguiran.\n\n" +
+                        "<color=red>Require:</color> Cualquier Rasgo de Empleo",
                 })
                 .WithName(new CustomNameInfo
                 {
                     [LanguageCode.English] = DesignerName(typeof(Permanent_Hire)),
+                    [LanguageCode.Spanish] = "Contrato Permanente",
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
