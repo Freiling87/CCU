@@ -2,21 +2,19 @@
 
 namespace CCU.Traits.Senses
 {
-	public class Keener_Ears : T_Senses, ISetupAgentStats
+    public class Visually_Disabled : T_Senses, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Keener_Ears>()
+            PostProcess = RogueLibs.CreateCustomTrait<Visually_Disabled>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Reacts to sound like Bartender, Bouncer, Cannibal & Goon.",
-                    [LanguageCode.Spanish] = "Este NPC Reacciona al sonido como un Cantinero, Seguridad, Canibal o Maton.",
+                    [LanguageCode.English] = "Line of Sight range set to 1.68 (Vanilla value = 13.44).",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Keener_Ears)),
-                    [LanguageCode.Spanish] = "Oídos Más Agudos",
+                    [LanguageCode.English] = DesignerName(typeof(Visually_Disabled)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -32,7 +30,8 @@ namespace CCU.Traits.Senses
 
         public void SetupAgentStats(Agent agent)
         {
-            agent.modVigilant = 2;
+            // Vanilla 13.44f
+            agent.LOSRange = 1.68f;
         }
     }
 }
