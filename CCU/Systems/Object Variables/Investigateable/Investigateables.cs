@@ -26,28 +26,28 @@ namespace CCU.Systems.Investigateables
 		// There is currently no overlap between Investigateables and Containers. If you change that, do it carefully.
 		internal static List<string> InvestigateableObjects_Slot1 = new List<string>()
 		{
-			vObject.Altar,
-			vObject.ArcadeGame,
-			vObject.Boulder,
-			vObject.Computer,
-			// vObject.Counter,		// Really needs a sprite change
-			vObject.Gravestone,
-			vObject.Jukebox,
-			// vObject.MovieScreen, // Didn't work yet, see notes
-			vObject.Podium,
-			vObject.Speaker,
-			vObject.Television,
-			vObject.Window,
+			VanillaObjects.Altar,
+			VanillaObjects.ArcadeGame,
+			VanillaObjects.Boulder,
+			VanillaObjects.Computer,
+			// VanillaObjects.Counter,		// Really needs a sprite change
+			VanillaObjects.Gravestone,
+			VanillaObjects.Jukebox,
+			// VanillaObjects.MovieScreen, // Didn't work yet, see notes
+			VanillaObjects.Podium,
+			VanillaObjects.Speaker,
+			VanillaObjects.Television,
+			VanillaObjects.Window,
 		};
 		internal static List<string> InvestigateableObjects_Slot2 = new List<string>()
 		{
-			//vObject.Door,
-			//vObject.Shelf,
+			//VanillaObjects.Door,
+			//VanillaObjects.Shelf,
 		};
 
 		internal static string MagicObjectName(string originalName) =>
 			IsInvestigateable(originalName)
-				? vObject.Sign
+				? VanillaObjects.Sign
 				: originalName;
 
 		internal static bool IsInvestigateable(PlayfieldObject playfieldObject) =>
@@ -253,13 +253,13 @@ namespace CCU.Systems.Investigateables
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_1),
-					new CodeInstruction(OpCodes.Ldstr, vObject.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
 					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if investigateable, or real name if not
-					new CodeInstruction(OpCodes.Ldstr, vObject.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -279,14 +279,14 @@ namespace CCU.Systems.Investigateables
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
-					new CodeInstruction(OpCodes.Ldstr, vObject.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
 					new CodeInstruction(OpCodes.Call, magicObjectName),
-					new CodeInstruction(OpCodes.Ldstr, vObject.Sign)
+					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign)
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -314,13 +314,13 @@ namespace CCU.Systems.Investigateables
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_S, 34),
-					new CodeInstruction(OpCodes.Ldstr, vObject.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_S, 34),				//	Object real name
 					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if investigateable, or real name if not
-					new CodeInstruction(OpCodes.Ldstr, vObject.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
 				});
 
 			patch.ApplySafe(instructions, logger);

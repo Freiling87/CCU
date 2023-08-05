@@ -213,10 +213,9 @@
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Patches\Level\P_LoadLevel.cs" />
     <Compile Include="Systems\Agent Goals\CustomGoals.cs" />
-    <Compile Include="Systems\Object Buttons\Button Types\Contained_Item.cs" />
-    <Compile Include="Systems\Object Buttons\Button Types\Vanilla_Feature.cs" />
-    <Compile Include="Systems\Object Buttons\Button Types\Investigation_Text.cs" />
-    <Compile Include="Systems\Object Buttons\ObjectButtonType.cs" />
+    <Compile Include="Systems\Object Variables\Container\Containers.cs" />
+    <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
+    <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
     <Compile Include="Traits\Ambient Audio\Cop_Bot_Sound.cs" />
     <Compile Include="Traits\Ambient Audio\Powering_Noises.cs" />
     <Compile Include="Traits\Ambient Audio\T_AmbientAudio.cs" />
@@ -958,7 +957,9 @@
     <None Include="Resources\Image\RubberBulletsMod.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Systems\Object Buttons\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Appearance_Examples.png" />
     <Content Include="Images\CCScreenshotExample.jpg" />
