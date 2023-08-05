@@ -8,7 +8,8 @@ Listed in order of Parent tier summary symbol priority:
 	√ = Fully implemented feature or group of features
 ##		Change Log
 - **Bug Fixes**
-  - Content here
+  - Previously fixed vanilla bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name
+  - Agents spawned via FriendPhone will now re-roll their appearance, since they're not clones.
 - **Feature Additions**
   - Player Traits
 	- Permanent Status Effects
