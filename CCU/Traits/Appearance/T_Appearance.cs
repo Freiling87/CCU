@@ -422,4 +422,20 @@ namespace CCU.Traits.App
 			agent.customCharacterData.skinColorName = roll;
 		}
 	}
+
+	[HarmonyPatch(typeof(SpawnerMain))]
+	internal class P_SpawnerMain_Appearance
+	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPostfix, HarmonyPatch("ActionsAfterAgentSpawn")]
+		internal static void RollAppearanceFriendPhone(Agent myAgent, string spawnType)
+		{
+			if (spawnType == vItem.FriendPhone)
+			{
+				AppearanceTools.SetupAppearance(myAgent.agentHitboxScript);
+			}
+		}
+	}
 }

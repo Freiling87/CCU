@@ -2,6 +2,7 @@
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Hooks;
 using CCU.Localization;
+using CCU.Status_Effects;
 using HarmonyLib;
 using RogueLibsCore;
 using System.Collections;
@@ -32,6 +33,13 @@ namespace CCU.Systems.CustomGoals
             Teleport_Prison = "Random Teleport (Private + Prison)",
             Zombified = "Zombified",
 
+            //  Permanent Status Effects
+            Electrocuted = "Electrocuted",
+            Electrocuted_Permanent = "Electrocuted (Permanent)",
+            Frozen = "Frozen",
+            Frozen_Fragile = "Frozen (Fragile)",
+            Frozen_Permanent = "Frozen (Permanent)",
+
             //  Other Customs
             Panic = "Panic",
             WanderAgents = "Wander Between Agents",
@@ -55,6 +63,11 @@ namespace CCU.Systems.CustomGoals
             Arrested,
             Burned,
             Dead,
+            Electrocuted,
+            Electrocuted_Permanent,
+            Frozen,
+            Frozen_Fragile,
+            Frozen_Permanent,
             Gibbed,
             KnockedOut,
             // RandomTeleport, // Legacy
@@ -66,6 +79,11 @@ namespace CCU.Systems.CustomGoals
             Arrested,
             Burned,
             Dead,
+            Electrocuted,
+            Electrocuted_Permanent,
+            Frozen,
+            Frozen_Fragile,
+            Frozen_Permanent,
             Gibbed,
             KnockedOut,
             Random_Patrol_Chunk,
@@ -131,20 +149,43 @@ namespace CCU.Systems.CustomGoals
                     agent.StopInteraction();
                     break;
 
-                case Dead:
-                    KillEmSoftly(agent);
-                    break;
-
                 case Burned:
                     agent.deathMethod = "Fire";
                     KillEmSoftly(agent);
                     break;
 
+                case Dead:
+                    agent.deathMethod = "Killed to Death";
+                    KillEmSoftly(agent);
+                    break;
+
+                case Electrocuted:
+                    agent.statusEffects.AddStatusEffect(VanillaEffects.Electrocuted, 9999);
+                    break;
+
+                case Electrocuted_Permanent:
+                    agent.AddEffect<Electrocuted_Permanent>(9999);
+                    break;
+
+                case Frozen:
+                    agent.statusEffects.AddStatusEffect(VanillaEffects.Frozen, 9999);
+                    break;
+
+                case Frozen_Fragile:
+                    agent.AddEffect<Frozen_Fragile>(9999);
+                    break;
+
+                case Frozen_Permanent:
+                    agent.AddEffect<Frozen_Permanent>(9999);
+                    break;
+
                 case Gibbed:
+                    agent.deathMethod = "Killed to Death";
                     agent.statusEffects.ChangeHealth(-200f);
                     break;
 
                 case KnockedOut:
+                    agent.deathMethod = "Sleeby";
                     agent.statusEffects.AddStatusEffect(VStatusEffect.Tranquilized);
                     agent.tranqTime = 1000;
                     break;

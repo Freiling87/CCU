@@ -27,7 +27,7 @@ namespace CCU.Traits.Player.Melee_Combat
                     IsAvailable = true,
                     IsAvailableInCC = true,
                     IsPlayerTrait = true,
-                    UnlockCost = 7,
+                    UnlockCost = 10,
                     Unlock =
                     {
                         categories = { VTraitCategory.Melee },

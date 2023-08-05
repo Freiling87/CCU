@@ -1,14 +1,10 @@
 ﻿using BepInEx.Logging;
-using BTHarmonyUtils.TranspilerUtils;
-using CCU.Localization;
 using CCU.Mutators.Laws;
 using CCU.Traits;
 using CCU.Traits.Behavior;
 using CCU.Traits.Inventory;
 using CCU.Traits.Loadout;
-using CCU.Traits.Loadout_Chunk_Items;
 using CCU.Traits.Loadout_Money;
-using CCU.Traits.Merchant_Stock;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Passive;
 using CCU.Traits.Player.Armor;
@@ -16,10 +12,8 @@ using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
 using UnityEngine;
 
 namespace CCU.Patches.Inventory
@@ -199,41 +193,6 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
-		private static IEnumerable<CodeInstruction> FillAgent_LoadoutBadge(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo mayorBadgeMagicString = AccessTools.DeclaredMethod(typeof(P_InvDatabase), nameof(P_InvDatabase.MayorBadgeMagicString));
-			FieldInfo wontFlee = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.wontFlee));
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Stfld, wontFlee),
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld),
-				},
-				targetInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Callvirt),
-				},
-				postfixInstructionSequence: new List<CodeInstruction>
-                {
-					new CodeInstruction(OpCodes.Ldstr, "Clerk"),
-                },
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Call, mayorBadgeMagicString)
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-		private static string MayorBadgeMagicString(Agent agent) =>
-			agent.HasTrait<Chunk_Mayor_Badge>()
-				? "Clerk"
-				: agent.name;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
 		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)

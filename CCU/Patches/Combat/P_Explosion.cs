@@ -99,30 +99,29 @@ namespace CCU.Patches.P_Combat
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo explosionType = AccessTools.DeclaredField(typeof(Explosion), nameof(Explosion.explosionType));
-			MethodInfo ExplosionTypeMagicStringMatcher = AccessTools.DeclaredMethod(typeof(P_Explosion_SpillLiquidLate), nameof(P_Explosion_SpillLiquidLate.ExplosionTypeMagicStringMatcher));
+			MethodInfo ExplosionTypeSoftcode = AccessTools.DeclaredMethod(typeof(P_Explosion_SpillLiquidLate), nameof(P_Explosion_SpillLiquidLate.ExplosionTypeSoftcode));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldfld, explosionType),
-					new CodeInstruction(OpCodes.Ldstr, "Water"),
+					new CodeInstruction(OpCodes.Ldstr, VExplosionType.Water),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldfld, explosionType),
-					new CodeInstruction(OpCodes.Ldstr, "Water"),
-					new CodeInstruction(OpCodes.Call, ExplosionTypeMagicStringMatcher), 
+					new CodeInstruction(OpCodes.Ldstr, VExplosionType.Water),
+					new CodeInstruction(OpCodes.Call, ExplosionTypeSoftcode), 
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
 
-		// Magic string match
-		public static string ExplosionTypeMagicStringMatcher(string vanilla) =>
+		public static string ExplosionTypeSoftcode(string vanilla) =>
 			CExplosionType.Types.Contains(vanilla)
-				? "Water"
+				? VExplosionType.Water
 				: vanilla;
 
 		[HarmonyTranspiler, UsedImplicitly]
@@ -135,7 +134,7 @@ namespace CCU.Patches.P_Combat
 				expectedMatches: 1,
 				targetInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldstr, "Water"),
+					new CodeInstruction(OpCodes.Ldstr, VExplosionType.Water),
 					new CodeInstruction(OpCodes.Ldc_I4_1),
 				},
 				insertInstructionSequence: new List<CodeInstruction>

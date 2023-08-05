@@ -25,7 +25,7 @@ namespace CCU.Traits.Player.Ammo
 				{
 					Cancellations = { nameof(Ammo_Amateur), nameof(Ammo_Auteur) },
 					CharacterCreationCost = 5,
-					IsAvailable = true,
+					IsAvailable = false,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
 					UnlockCost = 7,

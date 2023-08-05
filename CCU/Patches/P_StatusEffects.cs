@@ -257,35 +257,6 @@ namespace CCU.Patches
 			return instructions;
 		}
 
-        // This section slated for elimination once GibItAShot is working correctly.
-
-        //      [HarmonyTranspiler, UsedImplicitly]
-        //      private static IEnumerable<CodeInstruction> DisappearBody(IEnumerable<CodeInstruction> codeInstructions)
-        //      {
-        //          List<CodeInstruction> instructions = codeInstructions.ToList();
-        //          FieldInfo copBot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.copBot));
-        //          MethodInfo magicBool = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(MagicBool));
-
-        //          CodeReplacementPatch patch = new CodeReplacementPatch(
-        //              expectedMatches: 1,
-        //              targetInstructionSequence: new List<CodeInstruction>
-        //              {
-        //                  new CodeInstruction(OpCodes.Ldfld, copBot)
-        //              },
-        //              insertInstructionSequence: new List<CodeInstruction>
-        //              {
-        //                  new CodeInstruction(OpCodes.Call, magicBool),
-        //              });
-
-        //          patch.ApplySafe(instructions, logger);
-        //          return instructions;
-        //      }
-
-        //// Matt made me do it
-        //      private static bool MagicBool(Agent agent) =>
-        //          agent.copBot ||
-        //          agent.GetTraits<T_ExplodeOnDeath>().Any();
-
         [HarmonyTranspiler, UsedImplicitly]
         private static IEnumerable<CodeInstruction> GibBody(IEnumerable<CodeInstruction> codeInstructions)
         {

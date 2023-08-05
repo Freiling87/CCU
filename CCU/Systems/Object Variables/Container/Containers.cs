@@ -21,34 +21,34 @@ namespace CCU.Systems.Containers
 		internal static List<string> ContainerObjects_Slot1 = new List<string>()
 		{
 			// NOTE: Before adding any, ensure that you've accounted for Hidden Bombs, since they'll all become eligible.
-			vObject.Barbecue,
-			vObject.Bathtub,
-			vObject.Bed,
-			// vObject.Crate,	Likely has special rules that will need attention
-			vObject.Desk,
-			vObject.Fireplace,
-			vObject.FlamingBarrel,
-			vObject.GasVent,	// Require screwdriver
-			//vObject.Manhole,	// Need SORCE's code here
-			vObject.Plant,
-			// vObject.Podium,	Investigateable
-			vObject.PoolTable,
-			vObject.Refrigerator,
-			vObject.Shelf,
-			//vObject.SlimeBarrel,	Poison looter
-			vObject.Stove,
-			vObject.Toilet,
-			vObject.TrashCan, 
-			vObject.Tube,
-			vObject.VendorCart,
-			vObject.WaterPump,
-			vObject.Well,
+			VanillaObjects.Barbecue,
+			VanillaObjects.Bathtub,
+			VanillaObjects.Bed,
+			// VanillaObjects.Crate,	Likely has special rules that will need attention
+			VanillaObjects.Desk,
+			VanillaObjects.Fireplace,
+			VanillaObjects.FlamingBarrel,
+			VanillaObjects.GasVent,	// Require screwdriver
+			//VanillaObjects.Manhole,	// Need SORCE's code here
+			VanillaObjects.Plant,
+			// VanillaObjects.Podium,	Investigateable
+			VanillaObjects.PoolTable,
+			VanillaObjects.Refrigerator,
+			VanillaObjects.Shelf,
+			//VanillaObjects.SlimeBarrel,	Poison looter
+			VanillaObjects.Stove,
+			VanillaObjects.Toilet,
+			VanillaObjects.TrashCan, 
+			VanillaObjects.Tube,
+			VanillaObjects.VendorCart,
+			VanillaObjects.WaterPump,
+			VanillaObjects.Well,
 		};
 		internal static List<string> FireParticleEffectObjects = new List<string>()
 		{
-			vObject.Barbecue,
-			vObject.Fireplace,
-			vObject.FlamingBarrel,
+			VanillaObjects.Barbecue,
+			VanillaObjects.Fireplace,
+			VanillaObjects.FlamingBarrel,
 		};
 
 		internal enum ContainerValues
@@ -66,7 +66,7 @@ namespace CCU.Systems.Containers
 
 		internal static string MagicObjectName(string originalName) =>
 			IsContainer(originalName)
-				? vObject.ChestBasic
+				? VanillaObjects.Chest
 				: originalName;
 
 		[RLSetup]

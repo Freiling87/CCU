@@ -107,6 +107,9 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>..\Libraries\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\..\..\..\..\Downloads\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
@@ -123,7 +126,6 @@
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
     <None Include="Documentation\C09_CampaignBranching.md" />
-    <Compile Include="Extensions\E_Agent.cs" />
     <Compile Include="Hooks\H_InvItem.cs" />
     <Compile Include="Hooks\H_Agent.cs" />
     <Compile Include="Hooks\H_ObjectReal.cs" />
@@ -131,7 +133,6 @@
     <Compile Include="Items\RubberBulletsMod.cs" />
     <Compile Include="Items\ClassAWare.cs" />
     <Compile Include="Items\I_CCU.cs" />
-    <Compile Include="Localization\CAgentGroup.cs" />
     <Compile Include="Localization\OperatingBarText.cs" />
     <Compile Include="Localization\VItemType.cs" />
     <Compile Include="Localization\VMapDirection.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ComputerShutdown.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
+    <Compile Include="Fixes\No_More_Bad_Drops.cs" />
     <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
     <Compile Include="Patches\Objects\P_SpawnerObject.cs" />
     <Compile Include="Patches\P_Melee.cs" />
@@ -167,6 +169,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertyLogger.cs" />
+    <Compile Include="Status Effects\Frozen_Fragile.cs" />
+    <Compile Include="Status Effects\Frozen_Permanent.cs" />
+    <Compile Include="Status Effects\Electrocuted_Permanent.cs" />
+    <Compile Include="Status Effects\StatusEffectManager.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
     <Compile Include="Localization\VChunkType.cs" />
     <Compile Include="Localization\DetermineMoneyCostText.cs" />
@@ -176,7 +182,6 @@
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Localization\StatusEffectText.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
-    <Compile Include="Mutators\Branching\C_Branching.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
     <Compile Include="Mutators\Followers\Homesickness_Disabled.cs" />
     <Compile Include="Mutators\Followers\Homesickness_Mandatory.cs" />
@@ -210,6 +215,23 @@
     <Compile Include="Systems\Object Variables\Container\Containers.cs" />
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
+    <Compile Include="Traits\Ambient Audio\Cop_Bot_Sound.cs" />
+    <Compile Include="Traits\Ambient Audio\Powering_Noises.cs" />
+    <Compile Include="Traits\Ambient Audio\T_AmbientAudio.cs" />
+    <Compile Include="Traits\Ambient Audio\Fire_Noises.cs" />
+    <Compile Include="Traits\Ambient Audio\Computation_Noises.cs" />
+    <Compile Include="Traits\Ambient Audio\Conveying_Noises.cs" />
+    <Compile Include="Traits\Ambient Audio\Wummmmmm.cs" />
+    <Compile Include="Traits\Ambient Audio\Squeakitations.cs" />
+    <Compile Include="Traits\Ambient Audio\Movie_Screen_Sounds.cs" />
+    <Compile Include="Traits\Ambient Audio\Sawblade_Sound.cs" />
+    <Compile Include="Traits\Ambient Audio\Choochootations.cs" />
+    <Compile Include="Traits\Ambient Audio\Zzzzzzzzzzzz.cs" />
+    <Compile Include="Traits\Ambient Audio\Woof.cs" />
+    <Compile Include="Traits\Ambient Audio\Ventulations.cs" />
+    <Compile Include="Traits\Ambient Audio\Generating_Sounds.cs" />
+    <Compile Include="Traits\Ambient Audio\Generating_Overclocked_Sounds.cs" />
+    <Compile Include="Traits\Ambient Audio\Whhhhhhhh.cs" />
     <Compile Include="Traits\Appearance\Body Type\Alien_Body.cs" />
     <Compile Include="Traits\Appearance\Eye Color Special\Beady_Eyed.cs" />
     <Compile Include="Traits\Appearance\Eye Type Special\Normal_Eyes_50.cs" />
@@ -595,6 +617,8 @@
     <Compile Include="Traits\Inventory\Infinite_Ammo.cs" />
     <Compile Include="Traits\Inventory\Infinite_Armor.cs" />
     <Compile Include="Traits\Inventory\Infinite_Melee.cs" />
+    <Compile Include="Traits\IRefreshAtLevelEnd.cs" />
+    <Compile Include="Traits\IRefreshAtLevelStart.cs" />
     <Compile Include="Traits\Loadout\Loader\T_LoadoutLoader.cs" />
     <Compile Include="Traits\Combat\Toughness\T_Toughness.cs" />
     <Compile Include="Traits\Merchant Type\Insider_Safe_Combo.cs" />
@@ -625,10 +649,10 @@
     <Compile Include="Traits\Loadout\Pockets\Have_Mostly.cs" />
     <Compile Include="Traits\Loadout\Pockets\Have_Not.cs" />
     <Compile Include="Traits\Loadout\Slots\Sidearmed_but_on_Both_Sides.cs" />
-    <Compile Include="Traits\Loot\Drops\Blurse_of_Midas.cs" />
-    <Compile Include="Traits\Loot\Drops\Blurse_of_Valhalla.cs" />
-    <Compile Include="Traits\Loot\Drops\Blurse_of_Softlock.cs" />
-    <Compile Include="Traits\Loot\Drops\T_LootDrop.cs" />
+    <Compile Include="Traits\Loot\Blurses\Blurse_of_Midas.cs" />
+    <Compile Include="Traits\Loot\Blurses\Blurse_of_Valhalla.cs" />
+    <Compile Include="Traits\Loot\Blurses\Blurse_of_Softlock.cs" />
+    <Compile Include="Traits\Loot\Blurses\T_LootDrop.cs" />
     <Compile Include="Traits\PLAYER\Guns\Ammo Cap\Ammo_Artiste.cs" />
     <Compile Include="Traits\PLAYER\Guns\Ammo Cap\Ammo_Auteur.cs" />
     <Compile Include="Traits\PLAYER\Guns\Ammo Cap\Ammo_Amateur.cs" />
@@ -646,7 +670,7 @@
     <Compile Include="Traits\Loadout\Slots\Sidearmed_to_the_Teeth.cs" />
     <Compile Include="Traits\Loadout\Chunk Items\Chunk_Stash_Hint.cs" />
     <Compile Include="Traits\Loadout\Slots\Sidearmed.cs" />
-    <Compile Include="Traits\Loot\Drops\Blurse_of_the_Pharoah.cs" />
+    <Compile Include="Traits\Loot\Blurses\Blurse_of_the_Pharoah.cs" />
     <Compile Include="Traits\Merchant Stock\Clearancer.cs" />
     <Compile Include="Traits\Merchant Type\Burger_Joint.cs" />
     <Compile Include="Traits\Merchant Type\Sugar_Shack.cs" />
@@ -762,6 +786,31 @@
     <Compile Include="Traits\PLAYER\Guns\Rate of Fire\Trigger_Junkie.cs" />
     <Compile Include="Traits\PLAYER\Guns\Rate of Fire\Trigger_Happy.cs" />
     <Compile Include="Traits\PLAYER\Guns\Rate of Fire\T_RateOfFire.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Thickester_Skin.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Dying.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Regenerationist.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Thicker_Skin.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Thickest_Skin.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Thick_Skin.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Critter_Hitter.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Conductive.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Enfastened.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Lucky_Duck.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Unlucky_Duck.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\LyCANthrope.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Undying.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Desecondive.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Slothful.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Strong_Immune_System.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Enstrongened.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Bulletproofish.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\The_Invincibility_Gambit.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Ragestart.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Killer_Throwerer.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Invisibility_Enjoyer.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Above_the_Laws.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Gigantic.cs" />
+    <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\T_PermanentStatusEffect.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Aligned.cs" />
@@ -772,6 +821,7 @@
     <Compile Include="Traits\Relationships\Relationships - Faction\Gorilla_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Gorilla_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Scientist_Hostile.cs" />
+    <Compile Include="Traits\Relationships\Relationships - Faction\Slavemaster_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Soldier_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\T_Rel_Faction.cs" />
@@ -787,10 +837,9 @@
     <Compile Include="Traits\Relationships\Relationships - Player\Player_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Player\T_Rel_Player.cs" />
     <Compile Include="Traits\Relationships\T_Relationships.cs" />
-    <Compile Include="Traits\Senses\Hearing\Keener_Ears.cs" />
-    <Compile Include="Traits\Senses\Hearing\Keenest_Ears.cs" />
-    <Compile Include="Traits\Senses\Hearing\Keen_Ears.cs" />
-    <Compile Include="Traits\Senses\T_Senses.cs" />
+    <Compile Include="Traits\Behavior\Vigilance\Vigilanter.cs" />
+    <Compile Include="Traits\Behavior\Vigilance\Vigilantest.cs" />
+    <Compile Include="Traits\Behavior\Vigilance\Vigilant.cs" />
     <Compile Include="Traits\Interaction\Teacher\Language_Teacher.cs" />
     <Compile Include="Traits\Interaction\Teacher\T_Teacher.cs" />
     <Compile Include="Traits\Trait Gate\Specistist.cs" />
@@ -880,7 +929,7 @@
     <Compile Include="Traits\ISetupAgentStats.cs" />
     <Compile Include="Traits\TraitUnlock_CCU.cs" />
     <Compile Include="Traits\T_CCU.cs" />
-    <Compile Include="Traits\T_PlayerTrait.cs" />
+    <Compile Include="Traits\PLAYER\T_PlayerTrait.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
@@ -898,6 +947,7 @@
     <None Include="Documentation\C03_Mutators.md" />
     <None Include="Documentation\C04_Objects.md" />
     <None Include="Documentation\C05_DesignerTraits.md" />
+    <None Include="Hooks\Note.md" />
     <None Include="Resources\Audio\ClassAware_Use.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -906,7 +956,9 @@
     <None Include="Resources\Image\RubberBulletsMod.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Systems\Object Buttons\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Appearance_Examples.png" />
     <Content Include="Images\CCScreenshotExample.jpg" />
@@ -916,6 +968,35 @@
     <Content Include="Images\CCU_Blue.png" />
     <Content Include="Images\CCU_Large.png" />
     <Content Include="Images\CharacterFrame.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Barrel.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Black.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_BlueGreen.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Brown.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_BW.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Caution.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Cyan.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_DarkBlue.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_ForestGreen.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Ice.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Incendiary.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_LightGrey.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Magenta.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Normal.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Olive.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Orange.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Pink.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Purple.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_RadioactiveGreen.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Red.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Rusted.png" />
+    <Content Include="Images\ExplodingBarrel\ExplodingBarrel_Water.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by AMeanPineapple\Barrels_01.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by AMeanPineapple\Barrels_02.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by AMeanPineapple\Barrels_03.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by AMeanPineapple\Barrels_04.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by uwuMacaroniTime\ExplodingBarrel_Water.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by uwuMacaroniTime\ExplodingBarrel_Water1.png" />
+    <Content Include="Images\ExplodingBarrel\Originals by uwuMacaroniTime\ExplodingBarrel_Water2.png" />
     <Content Include="Systems\Custom Localization\LocalizationConfigMockup.xml" />
   </ItemGroup>
   <ItemGroup>

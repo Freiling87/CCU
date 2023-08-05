@@ -2,7 +2,7 @@
 
 namespace CCU.Challenges.Followers
 {
-    class Homesickness_Disabled : C_Followers
+	class Homesickness_Disabled : C_Followers
 	{
 		[RLSetup]
 		static void Start()

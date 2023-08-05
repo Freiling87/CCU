@@ -18,26 +18,24 @@ namespace CCU
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
 	public class Core : BaseUnityPlugin
 	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static GameController GC => GameController.gameController;
+
 		public const string pluginGUID = "Freiling87.streetsofrogue.CCU";
 		public const string pluginName = "CCU " + (designerEdition ? "[D]" : "[P]"); 
-		public const string pluginVersion = "1.2.0";
-		public const string subVersion = "";
+		public const string pluginVersion = "1.3.0";
+		public const string subVersion = "a";
 		
 		public const bool designerEdition = true;
-		public const bool debugMode = false;
-
-		public static readonly ManualLogSource logger = CCULogger.GetLogger();
-		public static GameController GC => GameController.gameController;
+		public const bool debugMode = true;
 
 		public void Awake()
 		{
-			LogMethodCall();
-
 			Harmony harmony = new Harmony(pluginGUID);
 			harmony.PatchAll();
 			PatcherUtils.PatchAll(harmony);
 			RogueLibs.LoadFromAssembly();
-			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion + subVersion); 
+			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion + subVersion);
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");
@@ -45,6 +43,9 @@ namespace CCU
 
 	public static class CoreTools
 	{
+		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static GameController GC => GameController.gameController;
+
 		public static readonly System.Random random = new System.Random();
 
 		public static T GetMethodWithoutOverrides<T>(this MethodInfo method, object callFrom)
@@ -73,6 +74,24 @@ namespace CCU
 
 		public static bool ContainsAll<T>(List<T> containingList, List<T> containedList) =>
 			!containedList.Except(containingList).Any();
+
+		// TODO: Works. This can be a lambda
+		public static List<string> GetAllStringConstants(Type type)
+		{
+			var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+			var stringConstants = new List<string>();
+
+			foreach (var field in fields)
+			{
+				if (field.IsLiteral && field.FieldType == typeof(string))
+				{
+					string value = field.GetValue(null) as string;
+					stringConstants.Add(value);
+				}
+			}
+
+			return stringConstants;
+		}
 	}
 
 	public static class CCULogger
@@ -535,16 +554,6 @@ namespace CCU
 			Sword
 		};
 
-		public static List<string> tools = new List<string>()
-		{
-			Crowbar,
-			Wrench,
-		};
-
-		public static List<string> RLists = new List<string>()
-		{
-
-		};
 	}
 	public static class vMutator // Vanilla Mutators
 	{
@@ -581,136 +590,6 @@ namespace CCU
 			TimeLimitQuestsGiveMoreTime = "TimeLimitQuestsGiveMoreTime",
 			ZombieMutator = "ZombieMutator",
 			ZombiesWelcome = "ZombiesWelcome";
-
-		public static List<string> VanillaMutators = new List<string>()
-		{
-			AssassinsEveryLevel,
-			BigKnockbackForAll,
-			CannibalsDontAttack,
-			DoctorsMoreImportant,
-			EveryoneHatesYou,
-			ExplodingBodies,
-			FullHealth,
-			GorillaTown,
-			HalfHealth,
-			HighCost,
-			InfiniteAmmo,
-			InfiniteAmmoNormalWeapons,
-			InfiniteMeleeDurability,
-			LowHealth,
-			ManyWerewolf,
-			MixedUpLevels,
-			MoneyRewards,
-			NoCops,
-			NoCowards,
-			NoGuns,
-			NoLimits,
-			NoMelee,
-			RocketLaunchers,
-			RogueVision,
-			SlowDown,
-			SpeedUp,
-			SupercopsReplaceCops,
-			TimeLimit,
-			TimeLimit2,
-			TimeLimitQuestsGiveMoreTime,
-			ZombieMutator,
-			ZombiesWelcome,
-		};
-	}
-	public static class vObject // Vanilla Objects
-	{
-		public const string
-				AirConditioner = "AirConditioner",
-				AlarmButton = "AlarmButton",
-				Altar = "Altar",
-				AmmoDispenser = "AmmoDispenser",
-				ArcadeGame = "ArcadeGame",
-				ATMMachine = "ATMMachine",
-				AugmentationBooth = "AugmentationBooth",
-				Barbecue = "Barbecue",
-				BarStool = "BarStool",
-				Bathtub = "Bathtub",
-				Bed = "Bed",
-				Boulder = "Boulder",
-				BoulderSmall = "BoulderSmall",
-				Bush = "Bush",
-				CapsuleMachine = "CapsuleMachine",
-				Chair = "Chair",
-				Chair2 = "Chair2",
-				ChestBasic = "ChestBasic",
-				CloneMachine = "CloneMachine",
-				Computer = "Computer",
-				Counter = "Counter",
-				Crate = "Crate",
-				Desk = "Desk",
-				Door = "Door",
-				Elevator = "Elevator",
-				EventTriggerFloor = "EventTriggerFloor",
-				ExplodingBarrel = "ExplodingBarrel",
-				FireHydrant = "FireHydrant",
-				Fireplace = "Fireplace",
-				FireSpewer = "FireSpewer",
-				FlameGrate = "FlameGrate",
-				FlamingBarrel = "FlamingBarrel",
-				GasVent = "GasVent",
-				Generator = "Generator",
-				Generator2 = "Generator2",
-				Gravestone = "Gravestone",
-				Jukebox = "Jukebox",
-				KillerPlant = "KillerPlant",
-				Lamp = "Lamp",
-				LaserEmitter = "LaserEmitter",
-				LoadoutMachine = "LoadoutMachine",
-				Manhole = "Manhole",
-				Mine = "Mine",
-				MovieScreen = "MovieScreen",
-				SellOMatic = "PawnShopMachine",
-				Plant = "Plant",
-				Podium = "Podium",
-				PoliceBox = "PoliceBox",
-				PoolTable = "PoolTable",
-				PowerBox = "PowerBox",
-				Refrigerator = "Refrigerator",
-				Safe = "Safe",
-				SatelliteDish = "SatelliteDish",
-				SecurityCam = "SecurityCam",
-				Shelf = "Shelf",
-				Sign = "Sign",
-				SlimeBarrel = "SlimeBarrel",
-				SlimePuddle = "SlimePuddle",
-				SlotMachine = "SlotMachine",
-				Speaker = "Speaker",
-				Stove = "Stove",
-				SwitchBasic = "SwitchBasic",
-				SwitchFloor = "SwitchFloor",
-				Table = "Table",
-				TableBig = "TableBig",
-				Television = "Television",
-				Toilet = "Toilet",
-				TrashCan = "TrashCan",
-				Tree = "Tree",
-				Tube = "Tube",
-				Turntables = "Turntables",
-				Turret = "Turret",
-				VendorCart = "VendorCart",
-				WaterPump = "WaterPump",
-				Well = "Well",
-				Window = "Window";
-
-		public static List<string> TamperableObjects = new List<string>() // TODO: Add compatibility with BunnyMod tampering
-		{
-			vObject.AlarmButton,
-			vObject.Crate,
-			vObject.Door,
-			vObject.Generator,
-			vObject.Generator2,
-			vObject.LaserEmitter,
-			vObject.PoliceBox,
-			vObject.PowerBox,
-			vObject.SatelliteDish,
-			vObject.SecurityCam,
-		};
 	}
 	public static class vSpecialAbility // Vanilla Special Abilities
 	{
