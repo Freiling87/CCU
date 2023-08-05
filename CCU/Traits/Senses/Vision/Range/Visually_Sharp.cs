@@ -2,19 +2,19 @@
 
 namespace CCU.Traits.Senses
 {
-	public class Keenest_Ears : T_Senses, ISetupAgentStats
+    public class Visually_Sharp : T_Senses, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Keenest_Ears>()
+            PostProcess = RogueLibs.CreateCustomTrait<Visually_Sharp>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Reacts to sound like Supercop.",
+                    [LanguageCode.English] = "Line of Sight range set to 20.16 (Vanilla value = 13.44).",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Keenest_Ears)),
+                    [LanguageCode.English] = DesignerName(typeof(Visually_Sharp)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -30,7 +30,8 @@ namespace CCU.Traits.Senses
 
         public void SetupAgentStats(Agent agent)
         {
-            agent.modVigilant = 3;
+            // Vanilla 13.44f
+            agent.LOSRange = 20.16f;
         }
     }
 }

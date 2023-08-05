@@ -43,13 +43,15 @@ CCU adds the following:
 
 |Homie(s)								|Thanks	|
 |--------------------------------------:|:------|
-|**Abbysssal#2020**<br>**BlazingTwist#4559**|Saintlike patience in teaching an absolute dumb-dumb how to code
-|**Cyan_Light#1438**|Endless SOR mechanic knowledge, bugtesting, content creator nonpareil
-|**Cheese Wizard#6914**<br>**GenEric#1897**<br>**Maxior06#0804**<br>**TheShadowHat#1437**<br>**uwumacaronitwo#7556**|Feedback, feature ideas, bug reports
+|**Abbysssal**<br>**BlazingTwist**|Saintlike patience in teaching an absolute dumb-dumb how to code
+|**Cyan_Light**|Endless SOR mechanic knowledge, bugtesting, content creator nonpareil
+|**Maxior**|Lots of feedback and bug testing
+|**Cheese Wizard**<br>**GenEric**br>**TheShadowHat**<br>**uwumacaronitwo**|Feedback, feature ideas, bug reports
 |**Guoxin_**|Chinese translation (incoming)
 |**TBB**|Russian translation (incoming)
 |**GenEric**|Spanish translation (incoming)
-|Romeo Kaleikau (FreeSound.org)|Class-A-Ware sound effect
+|**AMeanPineapple**|Explosive Barrel Sprites
+|**Romeo Kaleikau** (FreeSound.org)|Class-A-Ware sound effect
 
 #		HALP
 Programming: If you know basic C#, you already have enough knowledge to help out if you want. Contact me on Discord at **Ted Bunny#4546**

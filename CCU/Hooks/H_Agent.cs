@@ -30,12 +30,6 @@ namespace CCU.Hooks
 
 		protected override void Initialize()
 		{
-			Agent agent = (Agent)Instance;
-
-			mustRollAppearance = 
-				agent.HasTrait<Dynamic_Player_Appearance>()
-				|| agent.isPlayer == 0;
-
 			GrabAppearance();
 
 			interactionState = InteractionState.Default;
@@ -44,6 +38,11 @@ namespace CCU.Hooks
 		public void GrabAppearance()
 		{
 			Agent agent = (Agent)Instance;
+
+			mustRollAppearance =
+				agent.HasTrait<Dynamic_Player_Appearance>()
+				|| agent.isPlayer == 0;
+
 			SaveCharacterData save = agent.customCharacterData;
 			bodyColor = save.bodyColorName;
 			bodyType = save.bodyType;

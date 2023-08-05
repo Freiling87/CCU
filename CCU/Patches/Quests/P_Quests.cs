@@ -4,7 +4,6 @@ using CCU.Challenges.Progression;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -23,7 +22,7 @@ namespace CCU.Patches.AgentQuests
 		private static IEnumerable<CodeInstruction> MakeScumbag(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo scumbagMagicString = AccessTools.DeclaredMethod(typeof(P_Quests), nameof(P_Quests.ScumbagMagicString));
+			MethodInfo scumbagSoftcode = AccessTools.DeclaredMethod(typeof(P_Quests), nameof(P_Quests.ScumbagSoftcode));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -43,13 +42,13 @@ namespace CCU.Patches.AgentQuests
                 },
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Call, scumbagMagicString)
+					new CodeInstruction(OpCodes.Call, scumbagSoftcode)
 				});
 			 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		private static bool ScumbagMagicString(PlayfieldObject playfieldObject) =>
+		private static bool ScumbagSoftcode(PlayfieldObject playfieldObject) =>
 			playfieldObject.CompareTag("Agent")
 				? ((Agent)playfieldObject).HasTrait<Scumbag>() || playfieldObject.objectName == VanillaAgents.GangsterCrepe
 				: false;

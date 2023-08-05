@@ -3,16 +3,11 @@ using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace CCU.Patches
 {
-    [HarmonyPatch(declaringType: typeof(SpawnerMain))]
+	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
     public static class P_SpawnerMain
     {
         private static readonly ManualLogSource logger = CCULogger.GetLogger();
@@ -28,5 +23,5 @@ namespace CCU.Patches
 
             return true;
 		}
-    }
+	}
 }

@@ -364,7 +364,7 @@ namespace CCU.Patches.Agents
 									{
 										ObjectReal objectReal = agent.gc.objectRealList[i];
 
-										if (objectReal.startingChunk == agent.startingChunk && objectReal.objectName == vObject.EventTriggerFloor)
+										if (objectReal.startingChunk == agent.startingChunk && objectReal.objectName == VanillaObjects.EventTriggerFloor)
 										{
 											EventTriggerFloor eventTriggerFloor = (EventTriggerFloor)objectReal;
 
@@ -477,7 +477,7 @@ namespace CCU.Patches.Agents
 							{
 								ObjectReal objectReal = agent.gc.objectRealList[i];
 
-								if (objectReal.objectName == vObject.Turntables && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
+								if (objectReal.objectName == "Turntables"/*VanillaObjects.Turntables*/ && objectReal.startingChunk == agent.startingChunk && !objectReal.destroyed && objectReal.functional && Vector2.Distance(objectReal.tr.position, agent.tr.position) < 1.28f)
 								{
 									Turntables turntables = (Turntables)objectReal;
 

@@ -2,19 +2,19 @@
 
 namespace CCU.Traits.Senses
 {
-	public class Keen_Ears : T_Senses, ISetupAgentStats
+    public class Visually_Vigilant : T_Senses, ISetupAgentStats
     {
         [RLSetup]
         public static void Setup()
         {
-            PostProcess = RogueLibs.CreateCustomTrait<Keen_Ears>()
+            PostProcess = RogueLibs.CreateCustomTrait<Visually_Vigilant>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Reacts to sound like Shopkeeper, Slavemaster & Soldier.",
+                    [LanguageCode.English] = "Line of Sight range set to 26.88 (Vanilla value = 13.44).",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = DesignerName(typeof(Keen_Ears)),
+                    [LanguageCode.English] = DesignerName(typeof(Visually_Vigilant)),
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
@@ -30,7 +30,8 @@ namespace CCU.Traits.Senses
 
         public void SetupAgentStats(Agent agent)
         {
-            agent.modVigilant = 1;
+            // Vanilla 13.44f
+            agent.LOSRange = 26.88f;
         }
     }
 }

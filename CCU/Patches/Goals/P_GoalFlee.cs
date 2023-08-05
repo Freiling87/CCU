@@ -3,13 +3,10 @@ using BTHarmonyUtils.TranspilerUtils;
 using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCU.Patches.Goals
 {
@@ -24,7 +21,7 @@ namespace CCU.Patches.Goals
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo agent = AccessTools.DeclaredField(typeof(Goal), nameof(Goal.agent));
-			MethodInfo upperCrusterMagicString = AccessTools.DeclaredMethod(typeof(P_GoalFlee), nameof(P_GoalFlee.UpperCrusterMagicString));
+			MethodInfo upperCrusterSoftcode = AccessTools.DeclaredMethod(typeof(P_GoalFlee), nameof(P_GoalFlee.UpperCrusterSoftcode));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -38,21 +35,19 @@ namespace CCU.Patches.Goals
 				{
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldfld, agent),
-					new CodeInstruction(OpCodes.Call, upperCrusterMagicString),
+					new CodeInstruction(OpCodes.Call, upperCrusterSoftcode),
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldstr, "UpperCruster")
+					new CodeInstruction(OpCodes.Ldstr, VanillaAgents.UpperCruster)
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		private static string UpperCrusterMagicString(Agent agent) =>
-			agent.agentName == VanillaAgents.UpperCruster
-			|| agent.HasTrait<Crusty>()
-				? "UpperCruster"
-				: "Nope";
-
+		private static string UpperCrusterSoftcode(Agent agent) =>
+			agent.HasTrait<Crusty>()
+				? VanillaAgents.UpperCruster
+				: agent.agentName;
 	}
 }

@@ -2,16 +2,11 @@
 using BTHarmonyUtils.InstructionSearch;
 using BTHarmonyUtils.MidFixPatch;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Challenges.Followers;
 using CCU.Hooks;
 using CCU.Localization;
 using CCU.Traits;
-using CCU.Traits.App;
 using CCU.Traits.Behavior;
-using CCU.Traits.Gib_Type;
-using CCU.Traits.Hire_Duration;
 using CCU.Traits.Passive;
-using CCU.Traits.Player.Language;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -22,6 +17,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Agents
 {
+	// TODO: Move to BunnyLib
 	[HarmonyPatch(declaringType: typeof(Agent))]
 	public class P_Agent
 	{
@@ -36,14 +32,7 @@ namespace CCU.Patches.Agents
 			bool logInteractingAgent = true;
 
 			if (logAgent)
-				logger.LogDebug(Environment.NewLine
-					+ "||||||||||| AGENT INFO DUMP: " + __instance.agentRealName + " " + "".PadRight(24, '|') + Environment.NewLine
-					+ LogAppearance(__instance) + Environment.NewLine
-					+ LogInventory(__instance) + Environment.NewLine
-					+ LogShopInventory(__instance) + Environment.NewLine
-					+ LogTraitsDesigner(__instance) + Environment.NewLine
-					+ LogTraitsPlayer(__instance) + Environment.NewLine
-					);
+				DoAllLogging(__instance);
 
 			if (logInteractingAgent)
 			{
@@ -51,15 +40,20 @@ namespace CCU.Patches.Agents
 				if (interactingAgent is null)
 					return;
 
-				logger.LogDebug(Environment.NewLine
-					+ "||||||||||| AGENT INFO DUMP: " + interactingAgent.agentRealName + " " + "".PadRight(24, '|') + Environment.NewLine
-					+ LogAppearance(interactingAgent) + Environment.NewLine
-					+ LogInventory(interactingAgent) + Environment.NewLine
-					+ LogShopInventory(interactingAgent) + Environment.NewLine
-					+ LogTraitsDesigner(interactingAgent) + Environment.NewLine
-					+ LogTraitsPlayer(interactingAgent) + Environment.NewLine
-					);
+				DoAllLogging(interactingAgent);
 			}
+		}
+		public static void DoAllLogging(Agent agent)
+		{
+			logger.LogDebug(Environment.NewLine
+					+ "||||||||||| AGENT INFO DUMP: " + agent.agentRealName + " " + " (" + agent.agentID + ") ".PadRight(24, '|') + Environment.NewLine
+					+ LogAppearance(agent) + Environment.NewLine
+					+ LogInventory(agent) + Environment.NewLine
+					+ LogShopInventory(agent) + Environment.NewLine
+					+ LogTraitsDesigner(agent) + Environment.NewLine
+					+ LogTraitsPlayer(agent) + Environment.NewLine
+					+ LogStatusEffects(agent) + Environment.NewLine
+					);
 		}
 		public static string LogAppearance(Agent agent)
 		{
@@ -126,6 +120,15 @@ namespace CCU.Patches.Agents
 
 			return log;
 		}
+		public static string LogStatusEffects(Agent agent)
+		{
+			string log = "======= Status  Effects =========";
+
+			foreach (StatusEffect se in agent.statusEffects.StatusEffectList)
+				log += "\n\t- " + se.statusEffectName;
+
+			return log;
+		}
 		#endregion
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.AgentLateUpdate), argumentTypes: new Type[0] { })]
@@ -168,7 +171,6 @@ namespace CCU.Patches.Agents
 						__result = false;
 			}
 		}
-
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.FindSpeed))]
 		public static bool FindSpeed_Prefix(Agent __instance, ref int __result)
@@ -343,26 +345,6 @@ namespace CCU.Patches.Agents
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
-		}
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
-		public static void SetupAgentStats_Postfix(string transformationType, Agent __instance)
-		{
-			foreach (ISetupAgentStats trait in __instance.GetTraits<ISetupAgentStats>())
-				trait.SetupAgentStats(__instance);
-
-			if (!__instance.GetTraits<T_GibType>().Any())
-				__instance.AddTrait<Meat_Chunks>();
-
-			T_Language.SetupLanguages(__instance);
-
-			// Negatives allow traits to take precedence over mutators.
-			if ((GC.challenges.Contains(nameof(Homesickness_Disabled))  && !__instance.HasTrait<Homesickly>()) ||
-				__instance.HasTrait<Homesickless>())
-				__instance.canGoBetweenLevels = true;
-			else if ((GC.challenges.Contains(nameof(Homesickness_Mandatory)) && !__instance.HasTrait<Homesickless>()) ||
-				__instance.HasTrait<Homesickly>())
-				__instance.canGoBetweenLevels = false;
 		}
 
 		[BTHarmonyMidFix(nameof(SetupAgentStats_InitCustomCharacter_Matcher))]

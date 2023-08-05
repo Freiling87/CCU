@@ -55,7 +55,7 @@ namespace CCU.Traits
 		private static IEnumerator DelayedRecalc(Agent agent)
 		{
 			yield return null;
-			ModifyItemHelper.SetupInventory(agent);
+			SetupInventory(agent);
 		}
 		public static void SetupItem(Agent agent, InvItem invItem)
 		{
