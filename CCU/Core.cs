@@ -31,13 +31,11 @@ namespace CCU
 
 		public void Awake()
 		{
-			LogMethodCall();
-
 			Harmony harmony = new Harmony(pluginGUID);
 			harmony.PatchAll();
 			PatcherUtils.PatchAll(harmony);
 			RogueLibs.LoadFromAssembly();
-			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion + subVersion); 
+			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion + subVersion);
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");

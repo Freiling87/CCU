@@ -6,30 +6,21 @@ Listed in order of Parent tier summary symbol priority:
 	H = Hold, usually pending resolution of a separate or grouped issue
 	D = Document
 	√ = Fully implemented feature or group of features
-##		Change Log
+##			Change Log
 - **Bug Fixes**
   - Previously fixed vanilla bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name
   - Agents spawned via FriendPhone will now re-roll their appearance, since they're not clones.
 - **Feature Additions**
   - Player Traits
 	- Permanent Status Effects
-##		Pre-release checks
-###			Quality Review
-Review all implemented features and fixes:
-- Does this need to be gated for Home Base?
-- Are both NPCs and PCs addressed?
-- Have you confirmed that Hooks are used as minimally as possible?
-###			Project modes
-- Disable Developer mode
-- Make Player & Designer editions
-  - Maybe this can be automated in build event?
-###			Designer Traits
-Notes here
-###			Player Traits
-Upgrades: IsAvailable = false
-	Keeps from showing in levelup
+  - Designer Traits
+    - Vigilance: Determines how the agent reacts to sound, in regards to investigation and property.
 ##			Bugs
 Except crickets. Crickets are fine.
+###			C	Prison interrupts Dead SS
+https://discord.com/channels/187414758536773632/991046848536006678/1137189897808117860
+###			C	Undercant strings
+Deleted WIPs, not much to save
 ###			T	Friend Phone Clone
 Appearance patch is ready to go
 ###				Cyber Nuke by Proxy
@@ -169,26 +160,33 @@ So far, unable to replicate
 ###		 √   Partisan Concealed Carry
 Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117896939837587517
 Issue was Loadout Money without a Loader trait.
-##		Feature Scope
-###			Hearing Traits
-###			Make Class Alignment Traits Player Traits
-###			Object Button System
-Only bug so far is button label incorrect and possible string contamination.
+##			Feature Scope
+###			P	Pre-release checks
+####			Quality Review
+Review all implemented features and fixes:
+- Does this need to be gated for Home Base?
+- Are both NPCs and PCs addressed?
+- Have you confirmed that Hooks are used as minimally as possible?
+####			Project modes
+- Disable Developer mode
+- Make Player & Designer editions
+  - Maybe this can be automated in build event?
+####			Designer Traits
+Notes here
+####			Player Traits
+Upgrades: IsAvailable = false
+	Keeps from showing in levelup
+###			T	Behavior - Vigilant
 
-###			Attribute Decay
-uwumac:
-	Crippled Firearmer: NPC's firearms stat is scaled based on base speed and health, where 100% hp is 100% base speed and 0% hp is 25% firearms.
-	Crippled Fighter: NPC's melee stat is scaled based on base speed and health, where 100% hp is 100% base speed and 0% hp is 25% melee. 
-	Crippled Runner: NPC's speed stat is scaled based on base speed and health, where 100% hp is 100% base speed and 0% hp is 25% speed.
-	Intense Crippling: NPC's cripples scale from 100%-0% instead of 100%-25%.
-###			Cutscene
-Use Patrol Points to move characters. Add ExtraVarString to determine action when they reach patrol point. A text box that shows their dialogue. Equally-numbered points act simultaneously, for the most part.
-Vars:
-	Move Agent To & Talk
-	Move Agent To & Action
-	Pan Camera
-	Teleport Agent, etc.
-	Hack Action on same-tile object
+####		D	Notes stash
+|Vigilant											|- Reacts to sound like Shopkeeper, Slavemaster & Soldier.
+|Vigilanter											|- Reacts to sound like Bartender, Bouncer, Cannibal & Goon.
+|Vigilantest										|- Reacts to sound like Supercop.
+###			C	T_CCU bools
+affectsPC
+affectsNPC
+###			C	Make Class Alignment Traits Player Traits
+New
 ###			C	I think the PostProcess thing for traits is pointless
 These can all be set with
 Unlock = 
@@ -203,12 +201,12 @@ Check for:
 	Duplicate key allocation
 	No keys allocated
 	Normal allocation taking place
-###			C	Hidden Relationship
-CL - a trait that hides NPC relationship status until you "interact" (including them initiating combat, so kinda like how bounty NPCs read as neutral until they draw their gun), it's pretty hard to surprise the player sometimes when the space bar reveals so much information about people.
-###			C	No pre-combat callout
-Why would you alert someone you're attacking
+###			C	New Scene Setters
+Need tester feedback
+Need a note saying classes don't cover all the bases here, some are just strings
 ###			C	Permanent Status Effects
-####			C	Player documentation
+I think this should be moved to ResistanceHR.
+####			D	Player documentation
 
 //##			Permanent Status Effect
 
@@ -239,8 +237,7 @@ Why would you alert someone you're attacking
 |Thickester Skin									|48		|- Numb to Pain<br>- Damage divided by 3
 |Undying											|100	|- Resurrection
 |Unlucky Duck										|-1		|- Feelin' Unlucky
-
-####			C   General Issues
+####			C	General Issues
 #####				C	Clone didn't keep SE
 Elevator level transition
 Clone Machine, Friend Phone and Loneliness Killer all lose Invisibility on moving to next level.
@@ -265,7 +262,7 @@ Works I guess
 #####				C	Block Equip Bulletproof Vest
 Might be automatic
 ####			C   Conductive
-
+New
 ####			C   Critter Hitter
 Rename Literally Critler
 ####			C   Dying
@@ -306,9 +303,32 @@ Test
 Seems to work
 ####			C   Unlucky Duck
 Verify numerically
-##			Feature Dump
+##			Idea Dump
 Apparently I want to type these without any forethought, so this will be a dump to be periodically assorted.
-
+###			H	Object Button System
+Looks pretty good but probably out of scope for now, since branching is slated.
+Only bug so far is button label incorrect and possible string contamination.
+###			Attribute Decay
+uwumac:
+	Crippled Firearmer: NPC's firearms stat is scaled based on base speed and health, where 100% hp is 100% base speed and 0% hp is 25% firearms.
+	Crippled Fighter: NPC's melee stat is scaled based on base speed and health, where 100% hp is 100% base speed and 0% hp is 25% melee. 
+	Crippled Runner: NPC's speed stat is scaled based on base speed and health, where 100% hp is 100% base speed and 0% hp is 25% speed.
+	Intense Crippling: NPC's cripples scale from 100%-0% instead of 100%-25%.
+###			Cutscene
+Use Patrol Points to move characters. Add ExtraVarString to determine action when they reach patrol point. A text box that shows their dialogue. Equally-numbered points act simultaneously, for the most part.
+Vars:
+	Move Agent To & Talk
+	Move Agent To & Action
+	Pan Camera
+	Teleport Agent, etc.
+	Hack Action on same-tile object
+###			C	Hidden Relationship
+CL - a trait that hides NPC relationship status until you "interact" (including them initiating combat, so kinda like how bounty NPCs read as neutral until they draw their gun), it's pretty hard to surprise the player sometimes when the space bar reveals so much information about people.
+###			C	No pre-combat callout
+Why would you alert someone you're attacking
+###			C	Scene Setter requests
+Seek & Destroy
+Dead (No Drops)
 ###			C	Namespace Organization
 CCU.Appearance.HairColor
 Main

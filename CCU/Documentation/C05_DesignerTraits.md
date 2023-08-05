@@ -33,7 +33,7 @@ The Appearance system allows you to give NPCs variable appearances. Its document
 |Grab Money											|- Grab Money, like Slum Dweller
 |Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
 |Seek & Destroy										|- Stalk & attack players, like Killer Robot<br>- Not compatible with Drug Warrior traits
-|Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite
+|Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite 
 
 ##			Combat
 
@@ -357,13 +357,6 @@ Traits in this category are multiplicative.
 |Player-Loyal										|- Loyal to Players
 |Player-Neutral										|- Neutral to Players (For overriding other relationship traits)
 |Player-Submissive									|- Submissive to Players
-
-##			Senses
-|Trait												|Effect													|
-|:--------------------------------------------------|:------------------------------------------------------|
-|Keen Ears											|- Reacts to sound like Shopkeeper, Slavemaster & Soldier.
-|Keener Ears										|- Reacts to sound like Bartender, Bouncer, Cannibal & Goon.
-|Keenest Ears										|- Reacts to sound like Supercop.
 
 ##			Trait Gate
 |Trait												|Effect													|

@@ -182,7 +182,6 @@
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Localization\StatusEffectText.cs" />
     <Compile Include="Localization\VStatusEffect.cs" />
-    <Compile Include="Systems\Campaign Branching\C_Branching.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
     <Compile Include="Mutators\Followers\Homesickness_Disabled.cs" />
     <Compile Include="Mutators\Followers\Homesickness_Mandatory.cs" />
