@@ -28,6 +28,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
+					Cancellations = { VanillaTraits.StubbyFingers, VanillaTraits.Pacifist }, // More?
 					CharacterCreationCost = 5,
 					IsAvailable = true,
 					IsAvailableInCC = true,

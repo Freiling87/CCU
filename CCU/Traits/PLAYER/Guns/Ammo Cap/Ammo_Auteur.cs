@@ -26,7 +26,7 @@ namespace CCU.Traits.Player.Ammo
 						nameof(Ammo_Artiste) 
 					},
 					CharacterCreationCost = 7,
-					IsAvailable = true,
+					IsAvailable = false,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
 					UnlockCost = 9,

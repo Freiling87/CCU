@@ -25,8 +25,7 @@ namespace CCU.Traits.Player.Language
                 })
                 .WithUnlock(new TraitUnlock_CCU
                 {
-                    Cancellations = { },
-                    CharacterCreationCost = 1,
+                    Cancellations = { VanillaTraits.VocallyChallenged },
                     IsAvailable = false,
                     IsAvailableInCC = false,
                     IsPlayerTrait = false,

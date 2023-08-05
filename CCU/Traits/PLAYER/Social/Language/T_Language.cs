@@ -253,6 +253,33 @@ namespace CCU.Traits.Player.Language
 				[LanguageCode.Russian] = "...",
 			});
 
+
+			RogueLibs.CreateCustomName("Undercant01_NonEnglish", t, new CustomNameInfo
+			{
+				// 
+				[LanguageCode.English] = "Warts da yabberin, y'mook?"
+			});
+			RogueLibs.CreateCustomName("Undercant02_NonEnglish", t, new CustomNameInfo
+			{
+				// 
+				[LanguageCode.English] = ""
+			});
+			RogueLibs.CreateCustomName("Undercant03_NonEnglish", t, new CustomNameInfo
+			{
+				[LanguageCode.English] = "Float on, Upsoider."
+			});
+			RogueLibs.CreateCustomName("Undercant04_NonEnglish", t, new CustomNameInfo
+			{
+				// Upside is mad bright, and all. My eyes are hurting all day.
+				[LanguageCode.English] = "Upsoide mad broit, nall. M'glimpses aalde ertin."
+			});
+			RogueLibs.CreateCustomName("Undercant05_NonEnglish", t, new CustomNameInfo
+			{
+				// 
+				[LanguageCode.English] = "Tip yer toes. De "
+			});
+
+
 			RogueLibs.CreateCustomName("Werewelsh01_NonEnglish", t, new CustomNameInfo
 			{
 				[LanguageCode.English] = "GRRRRRRRR!!!"

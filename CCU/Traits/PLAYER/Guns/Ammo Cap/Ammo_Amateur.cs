@@ -23,7 +23,7 @@ namespace CCU.Traits.Player.Ammo
 				{
 					Cancellations = { nameof(Ammo_Artiste), nameof(Ammo_Auteur) },
 					CharacterCreationCost = 3,
-					IsAvailable = false,
+					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
 					UnlockCost = 5,

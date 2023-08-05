@@ -22,7 +22,7 @@ namespace CCU.Traits.Player.Movement
                 {
                     Cancellations = { },
                     CharacterCreationCost = 5,
-                    IsAvailable = true,
+                    IsAvailable = false,
                     IsAvailableInCC = true,
                     IsPlayerTrait = true,
                     UnlockCost = 7,
