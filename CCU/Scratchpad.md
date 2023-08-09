@@ -17,6 +17,10 @@ Listed in order of Parent tier summary symbol priority:
     - Vigilance: Determines how the agent reacts to sound, in regards to investigation and property.
 ##			Bugs
 Except crickets. Crickets are fine.
+###			C	Indestructible Corpse Explosions
+GenEric: https://discord.com/channels/187414758536773632/991046848536006678/1138250512752459857
+If a corpse is indestructible and has explode on death, they will explode repeatedly.
+This is cancelled by Electronic.
 ###			C	Prison interrupts Dead SS
 https://discord.com/channels/187414758536773632/991046848536006678/1137189897808117860
 ###			C	Undercant strings
@@ -161,6 +165,40 @@ So far, unable to replicate
 Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117896939837587517
 Issue was Loadout Money without a Loader trait.
 ##			Feature Scope
+###			H	Appearance-less
+All work great, but Eyeless copies over to Friend Phone Clone
+Also, seems like anything will turn them back on, like teleporting. So I think deactivating the game object rather than simply its animator might work.
+###			C	Campaign Branching
+Will need tools to:
+- Construct Mutator from options
+- Decompile options from Mutator (name only)
+- Detect Workshop content with specific prefix, destroy broken mutators and make new ones from the data.
+####			C	Mutator Configurator
+
+####			C	Agent Switches
+New
+####			C	Agent Triggers
+Two big ready-made systems you can catch:
+	Quests.AddBigQuestPoints
+	SkillPoints.AddPoints
+		- These are 
+####			C	Level Gates
+New
+####			C	Level Gate Conditions
+####			C	Level Switches
+Track countables via 
+	Quests.AddBigQuestPoints
+	SkillPoints.AddPoints
+	Stats.AddToStat
+####			C	Interface issues
+#####				C	Hide Mutators in Player version
+New
+#####				C	Hide Mutators in Pause Screen
+Also see if you can make the list more legible.
+#####				C	Hide Mutators in Home Base
+Hide the mutators except when in leveleditor.
+####			H	Object Switches
+Pending Object Button refactor
 ###			P	Pre-release checks
 ####			Quality Review
 Review all implemented features and fixes:
@@ -176,6 +214,10 @@ Notes here
 ####			Player Traits
 Upgrades: IsAvailable = false
 	Keeps from showing in levelup
+###			C	CCU Character Creation Page
+Might not be impossible. See CharacterCreation.Awake.
+Try COPYING something like TraitsMenu in CharacterCreation.Awake and see if you can repurpose it.
+Just search Trait in that method, and do everything he does there.
 ###			T	Behavior - Vigilant
 
 ####		D	Notes stash
@@ -303,8 +345,33 @@ Test
 Seems to work
 ####			C   Unlucky Duck
 Verify numerically
+###			C	Check out PlayControl.Update
+Has some debug tools that can be the basis for a bit of interesting content
+###			C	OnAdded/OnRemoved Overrides
+If you override these in an abstract class, you don't need to waste the space on the subclasses.
 ##			Idea Dump
 Apparently I want to type these without any forethought, so this will be a dump to be periodically assorted.
+###				Custom MapGen
+####				Subway Network
+Generate a map separated into strips separated by Holes. The player has to figure out a way to get access to the Subway train for each strip of the level, which will take him to a random or designated next station.
+
+For every Chunk Y % 2 && Y < 8, assuming chunks are 1-8,
+	Generate a Hole- and wall-separated subway track as needed to minimize interaction between subway-separated districts. This will allow reusing trains in a nonsensical but flexible way. I believe the track generation gives a Y-area of 4, which should be enough to work with.
+
+Check out TileInfo.PlaceTracks for map gen basis.
+
+Trains:
+	Now stop at designated station stops. Maybe sprite changes when it's interactable. Could use light and sound cues too.
+	Require a Train Ticket:
+		- Semi-common loot, carried by some NPCs
+		- Interaction - Sell Subway Tickets
+		- Hack train or same-chunk computer
+		- Threaten, Mug, Extort, good stuff
+		- Custom vending machine someday never
+####				C	Elevator Sublevels
+Similar to Subway network, but separated by Elevators.
+###				Flee X
+CL: "Behavior - Flee X: X seconds after initiating combat with the player, this agent will despawn." Could just have one trait with a reasonable set value or a couple options like 10, 30 and 60 seconds. It would be a great way to fix my lootbots (since you didn't want to do the item despawn death explosion), could just lower their endurance but give you limited time to pop them once you make your move. It would also be cool for stuff like fighting overpowered enemies that you basically just need to survive against, just gotta dodge the speed 10 melee 50 immortal supermonster for 10 seconds and then it'll poof away on its own.
 ###			H	Object Button System
 Looks pretty good but probably out of scope for now, since branching is slated.
 Only bug so far is button label incorrect and possible string contamination.

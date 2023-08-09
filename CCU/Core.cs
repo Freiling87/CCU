@@ -27,6 +27,7 @@ namespace CCU
 		public const string subVersion = "a";
 		
 		public const bool designerEdition = true;
+		public const bool developerEdition = true;
 		public const bool debugMode = true;
 
 		public void Awake()

@@ -18,7 +18,7 @@ namespace CCU.Traits.Player.Melee_Combat
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Melee_Maniac))
+					[LanguageCode.English] = PlayerName(typeof(Melee_Maniac)),
                     [LanguageCode.Spanish] = "Violentatico",
                 })
 				.WithUnlock(new TraitUnlock_CCU

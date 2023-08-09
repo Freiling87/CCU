@@ -5,8 +5,8 @@
         public T_Interaction() : base() { }
 
         public abstract bool AllowUntrusted { get; }
-        public abstract string ButtonText { get; }
-        public abstract bool ExtraTextCostOnly { get; }
-        public abstract string DetermineMoneyCost { get; }
+        public abstract string ButtonID { get; }
+        public abstract bool HideCostInButton { get; }
+        public abstract string DetermineMoneyCostID { get; }
     }
 }

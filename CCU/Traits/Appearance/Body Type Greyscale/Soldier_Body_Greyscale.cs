@@ -18,7 +18,7 @@ namespace CCU.Traits.App_BT2
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Soldier_Body_Greyscale))
+					[LanguageCode.English] = DesignerName(typeof(Soldier_Body_Greyscale)),
                     [LanguageCode.Spanish] = "Cuerpo de Soldado Gris",
                 })
 				.WithUnlock(new TraitUnlock_CCU

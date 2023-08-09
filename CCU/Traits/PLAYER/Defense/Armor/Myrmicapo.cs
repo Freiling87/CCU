@@ -18,7 +18,7 @@ namespace CCU.Traits.Player.Armor
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Myrmicapo))
+					[LanguageCode.English] = PlayerName(typeof(Myrmicapo)),
                     [LanguageCode.Spanish] = "Myrmicapo",
                 })
 				.WithUnlock(new TraitUnlock_CCU

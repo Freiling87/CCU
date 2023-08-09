@@ -26,7 +26,7 @@ namespace CCU.Traits.Player.Ranged_Combat
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Trigger_Happy))
+					[LanguageCode.English] = PlayerName(typeof(Trigger_Happy)),
                     [LanguageCode.Spanish] = "Gatillo Facil",
 
                 })

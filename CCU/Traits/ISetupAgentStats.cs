@@ -29,7 +29,7 @@ namespace CCU.Traits
 			if (!__instance.GetTraits<T_GibType>().Any())
 				__instance.AddTrait<Meat_Chunks>();
 
-			T_Language.SetupLanguages(__instance);
+			T_Language.SetupAgent(__instance);
 
 			// Negatives allow traits to take precedence over mutators.
 			if ((GC.challenges.Contains(nameof(Homesickness_Disabled)) && !__instance.HasTrait<Homesickly>()) ||

@@ -22,7 +22,7 @@ namespace CCU.Traits.Merchant_Type
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character sells gear for slaves.\n\nOh, you wanted the Slave Shop? Yeah, we don't get many customers."),
-                    [LanguageCode.Spanish] = "Este NPC vende items que pueden ayudar a esclavos.\n\nSi la verdad no tenemos muchos clientes.")
+                    [LanguageCode.Spanish] = "Este NPC vende items que pueden ayudar a esclavos.\n\nSi la verdad no tenemos muchos clientes.",
 
                 })
                 .WithName(new CustomNameInfo

@@ -1,34 +1,34 @@
 <p align="left">
-<img src="CCU/Images/CCU_160x160.png" alt="CCU Logo" align="left">
-<img src="CCU/Images/CCU_160x160.png" alt="Yeah there are two, so what" align="right">
+<img src="CCU/Resources/Image/CCU/CCU_160x160.png" alt="CCU Logo" align="left">
+<img src="CCU/Resources/Image/CCU/CCU_160x160.png" alt="CCU Logo" align="right">
 </p>
 
 <h1 align="center">
-Streets of Rogue
+<b>Custom Content Utilities</b>
 <br>
-Custom Content Utilities
-</h1>
+A Streets of Rogue mod</h2>
 <br><br>
 
 SOR gives you a LOT of options for creating custom content, but with some limitations. Here are a few things that are currently impossible with the Vanilla version:
-- Aligning Custom NPCs in different chunks
-- Variable Custom NPC appearances
-- Giving Custom NPCs behaviors like pickpocketing, hiring, selling items, etc.
-- Campaign level branching and event triggers
+- Aligning NPCs to factions
+- Variable NPC appearances
+- Custom NPC behaviors (pickpocketing, hiring, shops, etc.)
+- Campaign branching and event triggers
 
 CCU aims to address these limitations, giving more power to content creators, while keeping the player's experience un-cluttered with designer tools.
 
 #		Mod Content
 CCU adds the following:
-
+<b>
 - [Agent Default Goals](/CCU/Documentation/C01_AgentDefaultGoals.md)
 - [Item](/CCU/Documentation/C02_Items.md)
 - [Mutators](/CCU/Documentation/C03_Mutators.md)
 - [Object Modifications](/CCU/Documentation/C04_Objects.md)
-- [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
-- [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
+- Traits:
+  - [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
+  - [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
 - [Gameplay Fixes](/CCU/Documentation/C06_Fixes.md)
-
+</b>
 #		How to use it
 - [Installation](/CCU/Documentation/M01_Installation.md)
 - [Best Practices for Designers](/CCU/Documentation/M02_BestPractices.md)
@@ -57,12 +57,12 @@ I was keeping this list pretty detailed, but it's getting too long. You all rule
 
 ##			Content Attributions
 
-|Contributor							|Content	|
-|:-------------------------------------:|:----------|
-|AMeanPineapple							|- ExplodingBarrel sprites
-GenEric - Spanish translation, Accent audio
-Romeo Kaleikau (FreeSound.org) - Class-A-Ware audio clip
-uwuMacaroniTime - ExplodingBarrel sprites
+|Homie(s)								|Thanks	|
+|--------------------------------------:|:------|
+|**Guoxin_**|Chinese translation (incoming)
+|**TBB**|Russian translation (incoming)
+|**GenEric**|Spanish translation
+|**Romeo Kaleikau** (FreeSound.org)|Class-A-Ware sound effect
 
 #		HALP
 Programming: If you know basic C#, you already have enough knowledge to help out if you want. Contact me on Discord at **Ted Bunny#4546**

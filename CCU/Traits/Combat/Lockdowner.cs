@@ -12,7 +12,7 @@ namespace CCU.Traits.Combat
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = String.Format("This character will activate a Lockdown when they enter combat. \n\n<color=red>Requires:</color> Lockdown Walls on level"),
-                    [LanguageCode.Spanish] = "Este NPC inicia un Bloqueo Policial al entrar en combate. \n\n<color=red>Require:</color>" "Paredes de bloqueo en el piso,
+                    [LanguageCode.Spanish] = "Este NPC inicia un Bloqueo Policial al entrar en combate. \n\n<color=red>Require:</color> Paredes de bloqueo en el piso",
 
                 })
                 .WithName(new CustomNameInfo

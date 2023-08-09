@@ -284,30 +284,40 @@ namespace CCU.Traits.Player.Language
 
 			RogueLibs.CreateCustomName("Werewelsh01_NonEnglish", t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "GRRRRRRRR!!!"
+				[LanguageCode.English] = "GRRRRRRRR!!!",
                 [LanguageCode.Spanish] = "Grrrrr GRRRRRR!!!",
             });
 			RogueLibs.CreateCustomName("Werewelsh02_NonEnglish", t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "Groof! Groof!"
+				[LanguageCode.English] = "Groof! Groof!",
                 [LanguageCode.Spanish] = "GUAU!!! GUAU!!! GUAU!!!",
             });
 			RogueLibs.CreateCustomName("Werewelsh03_NonEnglish", t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "*Excited, confused panting*"
+				[LanguageCode.English] = "*Excited, confused panting*",
                 [LanguageCode.Spanish] = "*Woof*",
             });
 			RogueLibs.CreateCustomName("Werewelsh04_NonEnglish", t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "*Idiotic head tilt*"
+				[LanguageCode.English] = "*Idiotic head tilt*",
                 [LanguageCode.Spanish] = "0-0?",
             });
 			RogueLibs.CreateCustomName("Werewelsh05_NonEnglish", t, new CustomNameInfo
 			{
-				[LanguageCode.English] = "Woof woof, woof."
+				[LanguageCode.English] = "Woof woof, woof.",
                 [LanguageCode.Spanish] = "Roff Roff Roff, Roff Roff",
             });
 		}
+
+		public const string
+			Binary = "Binary",
+			Chthonic = "Chthonic",
+			English = "English",
+			ErSdtAdt = "ErSdtAdt",
+			Foreign = "Foreign",
+			Goryllian = "Goryllian",
+			Undercant = "Undercant",
+			Werewelsh = "Werewelsh";
 
 		internal static string LanguageDialogueName(Agent agent)
 		{
@@ -321,6 +331,19 @@ namespace CCU.Traits.Player.Language
 			}
 
 			return agent.agentName;
+		}
+
+		public static List<string> LanguagesKnown(Agent agent, bool countTranslator)
+		{
+			if (countTranslator && agent.inventory.HasItem(vItem.Translator))
+				return Polyglot.LanguagesStatic.ToList();
+
+			List<string> languages = agent.GetTraits<T_Language>().SelectMany(t => t.LanguageNames).ToList();
+
+			if (!agent.HasTrait(VanillaTraits.VocallyChallenged))
+				languages.Add("English");
+
+			return languages;
 		}
 
 		internal static void SayGibberish(Agent agent)

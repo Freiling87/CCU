@@ -18,8 +18,8 @@ namespace CCU.Traits.Player.Melee_Combat
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Remise_Beast))
-                     [LanguageCode.Spanish] = "Bestia Agitada",
+					[LanguageCode.English] = PlayerName(typeof(Remise_Beast)),
+                    [LanguageCode.Spanish] = "Bestia Agitada",
                 })
 				.WithUnlock(new TraitUnlock_CCU
 				{

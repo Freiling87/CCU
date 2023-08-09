@@ -26,7 +26,7 @@ namespace CCU.Traits.Player.Ranged_Combat
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Trigger_Junkie))
+					[LanguageCode.English] = PlayerName(typeof(Trigger_Junkie)),
                     [LanguageCode.Spanish] = "Addicto al Gatillo",
                 })
 				.WithUnlock(new TraitUnlock_CCU

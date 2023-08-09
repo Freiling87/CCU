@@ -18,7 +18,7 @@ namespace CCU.Traits.App_BT2
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = DesignerName(typeof(Vampire_Body_Greyscale))
+					[LanguageCode.English] = DesignerName(typeof(Vampire_Body_Greyscale)),
                     [LanguageCode.Spanish] = "Cuerpo de Vampiro Gris",
                 })
 				.WithUnlock(new TraitUnlock_CCU

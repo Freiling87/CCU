@@ -40,7 +40,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 			PostProcess = RogueLibs.CreateCustomTrait<Rubber_Bulleteer>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Agent applies a Rubber Bullets Mod to all traditional firearms in inventory. If rubber bullet damage reduces an NPC's health to 10% or lower, they are knocked out. If they go below -10%, they are killed... but less lethally! Rubber Bullet guns are usable by Pacifists."
+					[LanguageCode.English] = "Agent applies a Rubber Bullets Mod to all traditional firearms in inventory. If rubber bullet damage reduces an NPC's health to 10% or lower, they are knocked out. If they go below -10%, they are killed... but less lethally! Rubber Bullet guns are usable by Pacifists.",
                     [LanguageCode.Spanish] = "Aplica Balas de Goma a todas las armas tradicionales. Recuerda que esto hace que las armas noqueen a los NPCs cuando estan pordebajo de 10% de salud, pero si de alguna manera te pasas de eso mueren menos letalmente, pacifistas pueden usar estas armas.",
                 })
 				.WithName(new CustomNameInfo

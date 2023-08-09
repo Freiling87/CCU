@@ -6,7 +6,7 @@ namespace CCU.Traits.Merchant_Type
 {
 	public class Insider_Key : T_MerchantType
     {
-        public override List<KeyValuePair<string, int>> weightedItemPool => new List<KeyValuePair<string, int>>()
+        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>( vItem.Key, 1),
         };
@@ -17,7 +17,7 @@ namespace CCU.Traits.Merchant_Type
             PostProcess = RogueLibs.CreateCustomTrait<Insider_Key>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("This fucking rat will sell you a key! THE key!"),
+                    [LanguageCode.English] = String.Format("This fucking rat will sell you a key! Like, <i>THE</i> key!"),
                     
                 })
                 .WithName(new CustomNameInfo

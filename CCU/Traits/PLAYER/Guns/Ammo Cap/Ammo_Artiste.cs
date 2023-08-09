@@ -18,7 +18,7 @@ namespace CCU.Traits.Player.Ammo
                 })
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = PlayerName(typeof(Ammo_Artiste))
+					[LanguageCode.English] = PlayerName(typeof(Ammo_Artiste)),
                     [LanguageCode.Spanish] = "Artiste de la Munición",
                 })
 				.WithUnlock(new TraitUnlock_CCU

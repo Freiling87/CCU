@@ -18,7 +18,7 @@ namespace CCU.Traits.Merchant_Type
             PostProcess = RogueLibs.CreateCustomTrait<Banana_Boutique>()
                 .WithDescription(new CustomNameInfo
                 {
-                    [LanguageCode.English] = String.Format("Yes, that is a banana in their pocket. But yes, they're still happy to see you."),1
+                    [LanguageCode.English] = String.Format("Yes, that is a banana in their pocket. But yes, they're still happy to see you."),
                     [LanguageCode.Spanish] = "Este NPC vende bananas, eso es todo.",
 
                 })
