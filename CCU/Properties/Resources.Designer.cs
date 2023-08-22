@@ -63,6 +63,16 @@ namespace CCU.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] CCU_160x160 {
+            get {
+                object obj = ResourceManager.GetObject("CCU_160x160", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] ClassAWare {
             get {
                 object obj = ResourceManager.GetObject("ClassAWare", resourceCulture);
