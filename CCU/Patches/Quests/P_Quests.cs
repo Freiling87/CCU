@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Challenges.Progression;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
@@ -52,16 +51,6 @@ namespace CCU.Patches.AgentQuests
 			playfieldObject.CompareTag("Agent")
 				? ((Agent)playfieldObject).HasTrait<Scumbag>() || playfieldObject.objectName == VanillaAgents.GangsterCrepe
 				: false;
-
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Quests.SpawnBigQuestFailedText2))]
-		private static void MandatoryBigQuest()
-		{
-			if (GC.challenges.Contains(nameof(Big_Quest_Mandatory)))
-			{
-				foreach (Agent player in GC.playerAgentList)
-					player.StartCoroutine("SuicideWhenPossible");
-			}
-		}
 
 		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Quests.setupQuests))]
 		private static IEnumerable<CodeInstruction> ScreenContainersForBombDisaster(IEnumerable<CodeInstruction> codeInstructions)

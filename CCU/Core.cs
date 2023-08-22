@@ -25,7 +25,8 @@ namespace CCU
 		public const string pluginName = "CCU " + (designerEdition ? "[D]" : "[P]"); 
 		public const string pluginVersion = "1.3.0";
 		public const string subVersion = "a";
-		
+		public static Sprite CCULogoSprite;
+
 		public const bool designerEdition = true;
 		public const bool developerEdition = true;
 		public const bool debugMode = true;
@@ -37,9 +38,15 @@ namespace CCU
 			PatcherUtils.PatchAll(harmony);
 			RogueLibs.LoadFromAssembly();
 			RogueLibs.CreateVersionText(pluginGUID, pluginName + " v" + pluginVersion + subVersion);
+			CCULogoSprite = RogueLibs.CreateCustomSprite(nameof(Properties.Resources.CCU_160x160), SpriteScope.Interface, Properties.Resources.CCU_160x160).Sprite;
 		}
 		public static void LogMethodCall([CallerMemberName] string callerName = "") =>
 			logger.LogInfo(callerName + ": Method Call");
+
+		public const string 
+			CCUBlockTag = "[CCU]",
+
+			z = "";
 	}
 
 	public static class CoreTools
@@ -145,121 +152,6 @@ namespace CCU
 			TamperSomething = "[CCU] Job - TamperSomething",
 			TamperSomethingReal = "[CCU] Job - TamperSomethingReal";
 	}
-	public static class CMutators
-	{
-		public const string
-		#region Interface Themes
-			//		BACKGROUND			TEXT COLOR			FONT
-			InterfaceTheme_BloodMoon = "[CCU] Interface Theme - Blood Moon",                    //	Burgundy			Moon White			Gothic
-			InterfaceTheme_Cyberpunk = "[CCU] Interface Theme - Cyberpunk",                 //	Black				Pink or Cyan		
-			InterfaceTheme_Drone = "[CCU] Interface Theme - Drone",                     //	Post-It Yellow		Pencil Black		Boring
-			InterfaceTheme_GovernmentIssue = "[CCU] Interface Theme - Government Issue",                //	OD Green			White				Stenciled
-			InterfaceTheme_McFuds = "[CCU] Interface Theme - McFud's",                      //	Firetruck Red		Yellow				Something LOUD
-			InterfaceTheme_Mojave = "[CCU] Interface Theme - Mojave",                       //	Orange-ish Black	Amber				Monospace
-			InterfaceTheme_Parchment = "[CCU] Interface Theme - Parchment",                 //	Parchment			Charcoal Black		Something scripty
-			InterfaceTheme_Radioactive = "[CCU] Interface Theme - Radioactive",                 //	Yello				Black				Stenciled
-		#endregion
-		#region Level Branching
-			Level_Alpha = "[CCU] Level Alpha",
-			Level_Beta = "[CCU] Level Beta",
-			Level_Gamma = "[CCU] Level Gamma",
-			Level_Delta = "[CCU] Level Delta",
-			LevelExit_Alpha = "[CCU] Level Exit Alpha",
-			LevelExit_Beta = "[CCU] Level Exit Beta",
-			LevelExit_Gamma = "[CCU] Level Exit Gamma",
-			LevelExit_Delta = "[CCU] Level Exit Delta",
-			LevelExit_Plus1 = "[CCU] Level Exit +1",
-			LevelExit_Plus2 = "[CCU] Level Exit +2",
-			LevelExit_Plus3 = "[CCU] Level Exit +3",
-			LevelExit_Plus4 = "[CCU] Level Exit +4",
-			Require_False_A = "[CCU] Require False: A",
-			Require_False_B = "[CCU] Require False: B",
-			Require_False_C = "[CCU] Require False: C",
-			Require_False_D = "[CCU] Require False: D",
-			Require_True_A = "[CCU] Require True: A",
-			Require_True_B = "[CCU] Require True: B",
-			Require_True_C = "[CCU] Require True: C",
-			Require_True_D = "[CCU] Require True: D",
-			Set_False_A = "[CCU] Set False: A",
-			Set_False_B = "[CCU] Set False: B",
-			Set_False_C = "[CCU] Set False: C",
-			Set_False_D = "[CCU] Set False: D",
-			Set_True_A = "[CCU] Set True: A",
-			Set_True_B = "[CCU] Set True: B",
-			Set_True_C = "[CCU] Set True: C",
-			Set_True_D = "[CCU] Set True: D";
-		#endregion
-	}
-	public static class CTrait
-	{
-		public const string
-		#region Agent Group
-			AgentGroup_AffectVanilla = "[CCU] Agent Group - Affect Vanilla", // Toggles use in campaign or vanilla gameplay 
-			AgentGroup_AffectCampaign = "[CCU] Agent Group - Affect Campaign", // Will need an "Agent Lists Extended" mutator that can be added to vanilla or campaign to prevent affecting non-modded campaigns
-
-			AgentGroup_AllTypes = "[CCU] Agent Group - All Types",
-			AgentGroup_AllTypesNoFactions = "[CCU] Agent Group - All Types (No Factions)",
-			AgentGroup_ApeTown = "[CCU] Agent Group - Ape Town",
-			AgentGroup_ArenaBattler = "[CCU] Agent Group - Arena Battler",
-			AgentGroup_Blahd = "[CCU] Agent Group - Blahd",
-			AgentGroup_BlueCollars = "[CCU] Agent Group - Blue-Collars",
-			AgentGroup_BusinessOwners = "[CCU] Agent Group - Business Owners",
-			AgentGroup_Cannibal = "[CCU] Agent Group - Cannibal",
-			AgentGroup_CaveAgent = "[CCU] Agent Group - Cave",
-			AgentGroup_Creatures = "[CCU] Agent Group - Creatures",
-			AgentGroup_Crepe = "[CCU] Agent Group - Crepe",
-			AgentGroup_DowntownAgent = "[CCU] Agent Group - Downtown",
-			AgentGroup_Entertainers = "[CCU] Agent Group - Entertainers",
-			AgentGroup_Fighters = "[CCU] Agent Group - Fighters",
-			AgentGroup_GangbangerType = "[CCU] Agent Group - Gangbangers",
-			AgentGroup_GuardType = "[CCU] Agent Group - Guards",
-			AgentGroup_HideoutAgent = "[CCU] Agent Group - Hideout",
-			AgentGroup_HideoutAgentIndustrial = "[CCU] Agent Group - Hideout (Industrial)",
-			AgentGroup_Hooligans = "[CCU] Agent Group - Hooligans",
-			AgentGroup_HooligansNoGangbangers = "[CCU] Agent Group - Hooligans (No Gangbangers)",
-			AgentGroup_Kidnapped = "[CCU] Agent Group - Kidnapped",
-			AgentGroup_LawWorkers = "[CCU] Agent Group - Law Enforcers",
-			AgentGroup_Magicians = "[CCU] Agent Group - Magicians",
-			AgentGroup_ParkAgent = "[CCU] Agent Group - Park",
-			AgentGroup_ParkHomeAgent = "[CCU] Agent Group - Park (Home)",
-			AgentGroup_Poverty = "[CCU] Agent Group - Poverty",
-			AgentGroup_Resistance = "[CCU] Agent Group - Resistance",
-			AgentGroup_Sewers = "[CCU] Agent Group - Sewers",
-			AgentGroup_SlumsAgent = "[CCU] Agent Group - Slums",
-			AgentGroup_UndeadFeral = "[CCU] Agent Group - Undead (Feral)",
-			AgentGroup_UndeadSentient = "[CCU] Agent Group - Undead (Sentient)",
-			AgentGroup_Underdark = "[CCU] Agent Group - Underdark",
-			AgentGroup_Unique = "[CCU] Agent Group - Unique",
-			AgentGroup_UptownAgent = "[CCU] Agent Group - Uptown",
-			AgentGroup_UptownHomeAgent = "[CCU] Agent Group - Uptown (Home)",
-			AgentGroup_UptownNoGangs = "[CCU] Agent Group - Uptown (No Gangs)",
-			AgentGroup_Vampire = "[CCU] Agent Group - Vampire",
-			AgentGroup_WhiteCollars = "[CCU] Agent Group - White-Collars",
-		#endregion
-		#region Map Marker
-			MapMarker_Bartender = "[CCU] Map Marker: Bartender",
-			MapMarker_DrugDealer = "[CCU] Map Marker: DrugDealer",
-			MapMarker_Face = "[CCU] Map Marker: Face",
-			MapMarker_KillerRobot = "[CCU] Map Marker: KillerRobot",
-			MapMarker_Pilot = "[CCU] Map Marker: Pilot",
-			MapMarker_QuestionMark = "[CCU] Map Marker: QuestionMark",
-			MapMarker_Shopkeeper = "[CCU] Map Marker: Shopkeeper",
-        #endregion
-		#region Spawn
-			HideInObject = "[CCU] Spawn: Hide In Bush",
-			Spawn_RoamingGang = "[CCU] Spawn: Roaming Gangs",
-			Spawn_SlaveOwned = "[CCU] Spawn: Slave", // Should these be in Relationships instead?
-			Spawn_SlaveOwner = "[CCU] Spawn: Slave Owner",
-		#endregion
-			NoMoreSemiColons = "lol";
-	}
-	public static class cItem
-    {
-		public const string
-			StashHint = "StashHint",
-
-			z = "z";
-    }
 
 	public static class vItem // Vanilla Items
 	{

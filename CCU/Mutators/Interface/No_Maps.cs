@@ -5,6 +5,8 @@ namespace CCU.Mutators.Interface
 {
 	internal class No_Maps : C_CCU
 	{
+		public override bool RollInDailyRun => true;
+
 		//[RLSetup]
 		static void Start()
 		{

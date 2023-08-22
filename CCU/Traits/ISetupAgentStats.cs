@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Challenges.Followers;
+using CCU.Mutators.Followers;
 using CCU.Traits.Gib_Type;
 using CCU.Traits.Hire_Duration;
 using CCU.Traits.Player.Language;

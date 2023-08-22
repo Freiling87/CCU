@@ -1,13 +1,15 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Challenges.Followers
+namespace CCU.Mutators.Followers
 {
-	class Homesickness_Disabled : C_Followers
+	class Homesickness_Disabled : M_Followers
 	{
+		public Homesickness_Disabled(string v1, bool v2) : base(v1, v2) { }
+
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(Homesickness_Disabled), true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new Homesickness_Disabled(nameof(Homesickness_Disabled), true)) 
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Followers act as if their employer had Homesickness Killer. Homesickness Killer is removed from the trait choice pool.",

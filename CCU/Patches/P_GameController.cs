@@ -16,14 +16,14 @@ namespace CCU.Patches
         {
             List<string> removals = new List<string>();
 
-            foreach (string challenge in GC.sessionDataBig.challenges)
-                if (Legacy.ChallengeConversions.ContainsKey(challenge))
-                    removals.Add(challenge);
+            foreach (string mutator in GC.sessionDataBig.challenges)
+                if (Legacy.MutatorConversions.ContainsKey(mutator))
+                    removals.Add(mutator);
 
             foreach (string removal in removals)
             {
                 GC.sessionDataBig.challenges.Remove(removal);
-                string replacement = Legacy.ChallengeConversions[removal].Name;
+                string replacement = Legacy.MutatorConversions[removal].Name;
                 GC.sessionDataBig.challenges.Add(replacement);
             }
         }

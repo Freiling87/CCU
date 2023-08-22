@@ -5,15 +5,18 @@ using UnityEngine;
 
 namespace CCU.Mutators.Laws
 {
-    internal class No_Open_Carry : C_Law
+	internal class No_Open_Carry : M_Law
 	{
 		private static readonly ManualLogSource logger = CCULogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public override bool RollInDailyRun => true;
+		public override bool ShowInLevelMutatorList => true;
+
 		//[RLSetup]
 		static void Start()
 		{
-			PostProcess = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(No_Open_Carry), true))
+			RogueLibs.CreateCustomUnlock(new M_CCU(nameof(No_Open_Carry), true))
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Brandishing a weapon in public is a minor crime. Equip your fists or a non-weapon to keep the cops off your back.",

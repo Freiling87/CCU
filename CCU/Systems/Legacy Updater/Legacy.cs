@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Challenges.Followers;
+using CCU.Mutators.Followers;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Loadout_Chunk_Items;
 using CCU.Traits.Merchant_Type;
@@ -19,7 +19,7 @@ namespace CCU.Localization
 
 		//	Use CLASS name, not display name!
 
-		public static Dictionary<string, Type> ChallengeConversions = new Dictionary<string, Type>()
+		public static Dictionary<string, Type> MutatorConversions = new Dictionary<string, Type>()
 		{
 			//	0.1.1
 			//		Update to standard format, elimination of CMutator lists
