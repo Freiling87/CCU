@@ -1,8 +1,8 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,13 +10,13 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Objects
 {
-	[HarmonyPatch(declaringType: typeof(Door))]
+	[HarmonyPatch(typeof(Door))]
 	public static class P_Door
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Door.ObjectCollide), argumentTypes: new[] { typeof(PlayfieldObject), typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Door.ObjectCollide), argumentTypes: new[] { typeof(PlayfieldObject), typeof(bool) })]
 		private static IEnumerable<CodeInstruction> ObjectCollide_LimitWalkthroughToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

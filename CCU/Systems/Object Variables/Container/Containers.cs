@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Localization;
+using BunnyLibs;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -15,10 +15,10 @@ namespace CCU.Systems.Containers
 {
 	class Containers
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		internal static List<string> ContainerObjects_Slot1 = new List<string>()
+		public static List<string> ContainerObjects_Slot1 = new List<string>()
 		{
 			// NOTE: Before adding any, ensure that you've accounted for Hidden Bombs, since they'll all become eligible.
 			VanillaObjects.Barbecue,
@@ -38,21 +38,21 @@ namespace CCU.Systems.Containers
 			//VanillaObjects.SlimeBarrel,	Poison looter
 			VanillaObjects.Stove,
 			VanillaObjects.Toilet,
-			VanillaObjects.TrashCan, 
+			VanillaObjects.TrashCan,
 			VanillaObjects.Tube,
 			VanillaObjects.VendorCart,
 			VanillaObjects.WaterPump,
 			VanillaObjects.Well,
 		};
-		internal static List<string> FireParticleEffectObjects = new List<string>()
+		public static List<string> FireParticleEffectObjects = new List<string>()
 		{
 			VanillaObjects.Barbecue,
 			VanillaObjects.Fireplace,
 			VanillaObjects.FlamingBarrel,
 		};
 
-		internal enum ContainerValues
-        {
+		public enum ContainerValues
+		{
 			Hidden,
 			// Desk is only lockable of the above. These are mostly pointless.
 			//Hidden_Locked,
@@ -62,19 +62,19 @@ namespace CCU.Systems.Containers
 			//Locked_Keycoded,
 			//Keycoded,
 			None
-        }
+		}
 
-		internal static string MagicObjectName(string originalName) =>
+		public static string MagicObjectName(string originalName) =>
 			IsContainer(originalName)
 				? VanillaObjects.Chest
 				: originalName;
 
 		[RLSetup]
-		internal static void Setup()
+		public static void Setup()
 		{
 			SetupText();
 
-			RogueInteractions.CreateProvider(h => 
+			RogueInteractions.CreateProvider(h =>
 			{
 				if (IsContainer(h.Object.objectName) && !h.Helper.interactingFar && !h.Object.objectInvDatabase.isEmpty())
 				{
@@ -109,7 +109,7 @@ namespace CCU.Systems.Containers
 
 			NoMoreSemicolon = "";
 
-		internal static void SetupText()
+		public static void SetupText()
 		{
 			string t = NameTypes.Interface;
 			RogueLibs.CreateCustomName(CButtonText.Container_Open, t, new CustomNameInfo
@@ -156,7 +156,7 @@ namespace CCU.Systems.Containers
 			});
 		}
 
-		internal static void TryOpenChest(PlayfieldObject playfieldObject, Agent agent)
+		public static void TryOpenChest(PlayfieldObject playfieldObject, Agent agent)
 		{
 			bool isHot =
 				(FireParticleEffectObjects.Contains(playfieldObject.objectName) && playfieldObject.ora.hasParticleEffect) ||
@@ -180,22 +180,22 @@ namespace CCU.Systems.Containers
 			playfieldObject.ShowChest();
 		}
 
-		internal static bool IsContainer(string objectName) =>
+		public static bool IsContainer(string objectName) =>
 			!(objectName is null) &&
 			ContainerObjects_Slot1.Contains(objectName);
 
-		internal static bool IsContainer(ObjectReal objectReal) =>
+		public static bool IsContainer(ObjectReal objectReal) =>
 			IsContainer(objectReal.objectName);
 	}
 
-	[HarmonyPatch(declaringType: typeof(InvDatabase))]
-	internal static class P_InvDatabase
+	[HarmonyPatch(typeof(InvDatabase))]
+	public static class P_InvDatabase
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: "Awake")]
-		internal static bool Awake_Prefix(InvDatabase __instance)
+		[HarmonyPrefix, HarmonyPatch("Awake")]
+		public static bool Awake_Prefix(InvDatabase __instance)
 		{
 			string objectName = __instance.GetComponent<ObjectReal>()?.objectName ?? null;
 
@@ -205,13 +205,13 @@ namespace CCU.Systems.Containers
 			return true;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new Type[] { typeof(bool) })]
+		[HarmonyPostfix, HarmonyPatch(nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
 		private static void FillChest_Money(InvDatabase __instance)
 		{
 			if (!(__instance.objectReal is null)
 				&& Containers.IsContainer(__instance.objectReal))
 			{
-				InvItem money = __instance.FindItem(vItem.Money);
+				InvItem money = __instance.FindItem(VItemName.Money);
 
 				if (!(money is null) && money.invItemCount == 0)
 				{
@@ -222,15 +222,15 @@ namespace CCU.Systems.Containers
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(LevelEditor))]
-	internal static class P_LevelEditor
+	[HarmonyPatch(typeof(LevelEditor))]
+	public static class P_LevelEditor
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		// Pulls up ScrollingList when you click EVS field.
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
-		internal static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EnableContainerControls(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Containers), nameof(Containers.MagicObjectName));
@@ -253,8 +253,8 @@ namespace CCU.Systems.Containers
 			return instructions;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedScrollingMenuButton), new[] { typeof(ButtonHelper) })]
-		internal static IEnumerable<CodeInstruction> PressedScrollingMenuButton_OnChoice_ShowCustomInterface(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.PressedScrollingMenuButton), new[] { typeof(ButtonHelper) })]
+		public static IEnumerable<CodeInstruction> PressedScrollingMenuButton_OnChoice_ShowCustomInterface(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo deactivateLoadMenu = AccessTools.DeclaredMethod(typeof(LevelEditor), nameof(LevelEditor.DeactivateLoadMenu));
@@ -288,7 +288,7 @@ namespace CCU.Systems.Containers
 			return instructions;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> UpdateInterface_OnSelect_ShowCustomInterface(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -335,7 +335,7 @@ namespace CCU.Systems.Containers
 			}
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> ShowExtraVarStringsForContainers(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -360,14 +360,14 @@ namespace CCU.Systems.Containers
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(ObjectReal))]
-	internal static class P_ObjectReal
+	[HarmonyPatch(typeof(ObjectReal))]
+	public static class P_ObjectReal
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(ObjectReal.FinishedOperating))]
-		internal static void FinishedOperating_Postfix(ObjectReal __instance)
+		[HarmonyPostfix, HarmonyPatch(nameof(ObjectReal.FinishedOperating))]
+		public static void FinishedOperating_Postfix(ObjectReal __instance)
 		{
 			if (!__instance.interactingAgent.interactionHelper.interactingFar)
 			{
@@ -376,8 +376,8 @@ namespace CCU.Systems.Containers
 			}
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: "Start", argumentTypes: new Type[0] { })]
-		internal static bool Start_SetupInvDatabasesForContainers(ObjectReal __instance)
+		[HarmonyPrefix, HarmonyPatch("Start", argumentTypes: new Type[0] { })]
+		public static bool Start_SetupInvDatabasesForContainers(ObjectReal __instance)
 		{
 			if (Containers.IsContainer(__instance.objectName))
 			{

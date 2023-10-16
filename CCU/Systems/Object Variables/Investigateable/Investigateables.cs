@@ -1,8 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Localization;
-using CCU.Patches;
+using BunnyLibs;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
@@ -16,15 +15,15 @@ using UnityEngine.UI;
 
 namespace CCU.Systems.Investigateables
 {
-    internal static class Investigateables
+	public static class Investigateables
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		internal static string InvestigateableStringPrefix = "investigateable-message:::";
+		public static string InvestigateableStringPrefix = "investigateable-message:::";
 
 		// There is currently no overlap between Investigateables and Containers. If you change that, do it carefully.
-		internal static List<string> InvestigateableObjects_Slot1 = new List<string>()
+		public static List<string> InvestigateableObjects_Slot1 = new List<string>()
 		{
 			VanillaObjects.Altar,
 			VanillaObjects.ArcadeGame,
@@ -39,50 +38,50 @@ namespace CCU.Systems.Investigateables
 			VanillaObjects.Television,
 			VanillaObjects.Window,
 		};
-		internal static List<string> InvestigateableObjects_Slot2 = new List<string>()
+		public static List<string> InvestigateableObjects_Slot2 = new List<string>()
 		{
 			//VanillaObjects.Door,
 			//VanillaObjects.Shelf,
 		};
 
-		internal static string MagicObjectName(string originalName) =>
+		public static string MagicObjectName(string originalName) =>
 			IsInvestigateable(originalName)
 				? VanillaObjects.Sign
 				: originalName;
 
-		internal static bool IsInvestigateable(PlayfieldObject playfieldObject) =>
+		public static bool IsInvestigateable(PlayfieldObject playfieldObject) =>
 			IsInvestigateable(playfieldObject.objectName);
-		internal static bool IsInvestigateable(string name) =>
+		public static bool IsInvestigateable(string name) =>
 			InvestigateableObjects_Slot1.Contains(name) ||
 			InvestigateableObjects_Slot2.Contains(name);
 
-		internal static bool IsInvestigationString(string name) =>
+		public static bool IsInvestigationString(string name) =>
 			name?.Contains(InvestigateableStringPrefix) ?? false;
 
-		internal static string PlayerDisplayInvestigationText(string vanilla) =>
+		public static string PlayerDisplayInvestigationText(string vanilla) =>
 			vanilla?.Replace(InvestigateableStringPrefix, "") ?? "";
 
-		internal static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
+		public static List<InvSlot> FilteredSlots(InvDatabase invDatabase) =>
 			invDatabase.agent.mainGUI.invInterface.Slots
 				.Where(slot => !IsInvestigationString(slot.itemNameText.text)).ToList();
 
-		internal static InvDatabase InvDatabaseWithoutInvText(InvDatabase invDatabase)
+		public static InvDatabase InvDatabaseWithoutInvText(InvDatabase invDatabase)
 		{
 			invDatabase.InvItemList = FilteredInvItemList(invDatabase.InvItemList);
 			return invDatabase;
 		}
 
-		internal static List<InvItem> FilteredInvItemList(List<InvItem> invItemList) =>
-			invItemList.Where(invItem => 
-				!IsInvestigationString(invItem.invItemName) && 
+		public static List<InvItem> FilteredInvItemList(List<InvItem> invItemList) =>
+			invItemList.Where(invItem =>
+				!IsInvestigationString(invItem.invItemName) &&
 				IsActualItem(invItem)
 			).ToList();
 
-		internal static bool IsActualItem(InvItem invItem) =>
+		public static bool IsActualItem(InvItem invItem) =>
 			!invItem.invItemName?.Contains("E_") ?? false;
 
 		[RLSetup]
-		internal static void Setup()
+		public static void Setup()
 		{
 			string t = NameTypes.Interface;
 			RogueLibs.CreateCustomName(CButtonText.Investigate, t, new CustomNameInfo(CButtonText.Investigate));
@@ -110,14 +109,14 @@ namespace CCU.Systems.Investigateables
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(BasicObject))]
-	internal static class P_BasicObject
+	[HarmonyPatch(typeof(BasicObject))]
+	public static class P_BasicObject
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(BasicObject.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
-		internal static IEnumerable<CodeInstruction> Spawn_SetupReadables(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(nameof(BasicObject.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
+		public static IEnumerable<CodeInstruction> Spawn_SetupReadables(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.MagicObjectName));
@@ -142,12 +141,12 @@ namespace CCU.Systems.Investigateables
 	}
 
 	[HarmonyPatch(typeof(InvDatabase))]
-	internal static class P_InvDatabase
+	public static class P_InvDatabase
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -168,12 +167,12 @@ namespace CCU.Systems.Investigateables
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-		internal static string MagicVarString(string vanilla) =>
+		public static string MagicVarString(string vanilla) =>
 			Investigateables.IsInvestigationString(vanilla)
 				? ""
 				: vanilla;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InvDatabase.TakeAll))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(InvDatabase.TakeAll))]
 		private static IEnumerable<CodeInstruction> TakeAll_ExcludeNotes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -201,14 +200,14 @@ namespace CCU.Systems.Investigateables
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(LevelEditor))]
-	internal static class P_LevelEditor
+	[HarmonyPatch(typeof(LevelEditor))]
+	public static class P_LevelEditor
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.OpenLongDescription))]
-		internal static IEnumerable<CodeInstruction> OpenLongDescription_RemoveSpecialStrings(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.OpenLongDescription))]
+		public static IEnumerable<CodeInstruction> OpenLongDescription_RemoveSpecialStrings(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo extraVarStringObject = AccessTools.DeclaredField(typeof(LevelEditor), "extraVarStringObject");
@@ -231,7 +230,7 @@ namespace CCU.Systems.Investigateables
 			return instructions;
 		}
 
-		internal static string LongDescriptionWithoutSpecialStrings(string vanilla)
+		public static string LongDescriptionWithoutSpecialStrings(string vanilla)
 		{
 			if (vanilla is null || vanilla == "")
 				return vanilla;
@@ -242,8 +241,8 @@ namespace CCU.Systems.Investigateables
 			return vanilla;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
-		internal static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EditTextBox(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.PressedLoadExtraVarStringList), new Type[0] { })]
+		public static IEnumerable<CodeInstruction> PressedLoadExtraVarStringList_EditTextBox(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo magicObjectName = AccessTools.DeclaredMethod(typeof(Investigateables), nameof(Investigateables.MagicObjectName));
@@ -266,8 +265,8 @@ namespace CCU.Systems.Investigateables
 			return instructions;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.PressedScrollingMenuButton), new[] { typeof(ButtonHelper) })]
-		internal static IEnumerable<CodeInstruction> PressedScrollingMenuButton_TextBoxValid(IEnumerable<CodeInstruction> codeInstructions)
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.PressedScrollingMenuButton), new[] { typeof(ButtonHelper) })]
+		public static IEnumerable<CodeInstruction> PressedScrollingMenuButton_TextBoxValid(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo scrollingButtonType = AccessTools.DeclaredField(typeof(ButtonHelper), nameof(ButtonHelper.scrollingButtonType));
@@ -293,8 +292,8 @@ namespace CCU.Systems.Investigateables
 			return instructions;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LevelEditor.SetExtraVarString))]
-		internal static void SetExtraVarString_FormatInvestigateableText(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
+		[HarmonyPostfix, HarmonyPatch(nameof(LevelEditor.SetExtraVarString))]
+		public static void SetExtraVarString_FormatInvestigateableText(LevelEditor __instance, InputField ___tileNameObject, InputField ___extraVarStringObject)
 		{
 			if (__instance.currentInterface == "Objects")
 				if (Investigateables.IsInvestigateable(___tileNameObject.text) &&
@@ -303,7 +302,7 @@ namespace CCU.Systems.Investigateables
 					___extraVarStringObject.text = Investigateables.InvestigateableStringPrefix + ___extraVarStringObject.text;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.UpdateInterface), new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> UpdateInterface_ShowTextBoxForInvestigateables(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -328,11 +327,11 @@ namespace CCU.Systems.Investigateables
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(ObjectReal))]
+	[HarmonyPatch(typeof(ObjectReal))]
 	static class P_ObjectReal_DestroyMe2
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		[HarmonyTargetMethod, UsedImplicitly]
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
@@ -363,13 +362,13 @@ namespace CCU.Systems.Investigateables
 	}
 
 	[HarmonyPatch(typeof(WorldSpaceGUI))]
-	internal static class P_WorldSpaceGUI
+	public static class P_WorldSpaceGUI
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
-		internal static GameController GC => GameController.gameController;
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		// I think this was for when I had some overlap between Investigateables and Containers. I culled those lists of any intersects to avoid special issues, so I'm not 100% if this patch even works if reactivated.
-		//[HarmonyTranspiler, HarmonyPatch(methodName: nameof(WorldSpaceGUI.ShowChest), new[] { typeof(GameObject), typeof(InvDatabase), typeof(Agent) })]
+		//[HarmonyTranspiler, HarmonyPatch(nameof(WorldSpaceGUI.ShowChest), new[] { typeof(GameObject), typeof(InvDatabase), typeof(Agent) })]
 		private static IEnumerable<CodeInstruction> ShowChest_FilterNotes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

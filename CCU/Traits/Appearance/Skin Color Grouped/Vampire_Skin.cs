@@ -5,7 +5,7 @@ namespace CCU.Traits.App_SC2
 {
 	public class Vampire_Skin : T_SkinColor
 	{
-		public override string[] Rolls => 
+		public override string[] Rolls =>
 			new string[] { "SuperPaleSkin", "BlackSkin" };
 
 		[RLSetup]
@@ -15,13 +15,13 @@ namespace CCU.Traits.App_SC2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega varios colores de piel a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega varios colores de piel a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Vampire_Skin)),
-                    [LanguageCode.Spanish] = "Piel de Vampiro",
-                })
+					[LanguageCode.Spanish] = "Piel de Vampiro",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

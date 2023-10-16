@@ -1,50 +1,51 @@
-﻿using RogueLibsCore;
+﻿using BunnyLibs;
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Type
 {
-    public class Occultist : T_MerchantType
-    {
-        public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
-        {
-            new KeyValuePair<string, int>( vItem.BloodBag, 4),
-            new KeyValuePair<string, int>( vItem.BooUrn, 1),
-            new KeyValuePair<string, int>( vItem.Cologne, 1),
-            new KeyValuePair<string, int>( vItem.CubeOfLampey, 1),
-            new KeyValuePair<string, int>( vItem.GhostGibber, 1),
-            new KeyValuePair<string, int>( vItem.Knife, 1),
-            new KeyValuePair<string, int>( vItem.Necronomicon, 1),
-            new KeyValuePair<string, int>( vItem.ResurrectionShampoo, 1),
-            new KeyValuePair<string, int>( vItem.Sword, 1),        
-        };
+	public class Occultist : T_MerchantType
+	{
+		public override List<KeyValuePair<string, int>> MerchantInventory => new List<KeyValuePair<string, int>>()
+		{
+			new KeyValuePair<string, int>( VItemName.BloodBag, 4),
+			new KeyValuePair<string, int>( VItemName.BooUrn, 1),
+			new KeyValuePair<string, int>( VItemName.Cologne, 1),
+			new KeyValuePair<string, int>( VItemName.CubeOfLampey, 1),
+			new KeyValuePair<string, int>( VItemName.GhostGibber, 1),
+			new KeyValuePair<string, int>( VItemName.Knife, 1),
+			new KeyValuePair<string, int>( VItemName.Necronomicon, 1),
+			new KeyValuePair<string, int>( VItemName.ResurrectionShampoo, 1),
+			new KeyValuePair<string, int>( VItemName.Sword, 1),
+		};
 
-        [RLSetup]
-        public static void Setup()
-        {
-            PostProcess = RogueLibs.CreateCustomTrait<Occultist>()
-                .WithDescription(new CustomNameInfo
-                {
-                    [LanguageCode.English] = String.Format("This character sells occult-related items."),
-                    [LanguageCode.Spanish] = "Este NPC vence items sobrenaturales.",
+		[RLSetup]
+		public static void Setup()
+		{
+			PostProcess = RogueLibs.CreateCustomTrait<Occultist>()
+				.WithDescription(new CustomNameInfo
+				{
+					[LanguageCode.English] = String.Format("This character sells occult-related items."),
+					[LanguageCode.Spanish] = "Este NPC vence items sobrenaturales.",
 
-                })
-                .WithName(new CustomNameInfo
-                {
-                    [LanguageCode.English] = DesignerName(typeof(Occultist)),
-                    [LanguageCode.Spanish] = "Ocultista",
+				})
+				.WithName(new CustomNameInfo
+				{
+					[LanguageCode.English] = DesignerName(typeof(Occultist)),
+					[LanguageCode.Spanish] = "Ocultista",
 
-                })
-                .WithUnlock(new TraitUnlock_CCU
-                {
-                    Cancellations = { },
-                    CharacterCreationCost = 0,
-                    IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
-                });
-        }
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
-    }
+				})
+				.WithUnlock(new TraitUnlock_CCU
+				{
+					Cancellations = { },
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = Core.designerEdition,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
 }

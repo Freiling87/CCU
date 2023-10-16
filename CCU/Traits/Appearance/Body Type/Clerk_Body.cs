@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_BT1
 {
 	public class Clerk_Body : T_BodyType
-    {
+	{
 		public override string[] Rolls => new string[] { VanillaAgents.Clerk };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Clerk_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Clerk_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo de Empleado",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Empleado",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

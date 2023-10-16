@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Objects
 {
-	[HarmonyPatch(declaringType: typeof(Computer))]
+	[HarmonyPatch(typeof(Computer))]
 	public static class P_ComputerShutdown
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPriority(1000)]
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Computer.MakeNonFunctional))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Computer.MakeNonFunctional))]
 		private static IEnumerable<CodeInstruction> ShutdownObjects(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -44,13 +45,13 @@ namespace CCU.Patches.Objects
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(ObjectReal))]
+	[HarmonyPatch(typeof(ObjectReal))]
 	public static class P_ObjectReal_SwitchLinkOperate
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(ObjectReal.SwitchLinkOperate))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(ObjectReal.SwitchLinkOperate))]
 		private static IEnumerable<CodeInstruction> ShutdownObjects(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -80,7 +81,7 @@ namespace CCU.Patches.Objects
 		{
 			if (type == "Tubes"
 				&& otherObject is Tube tube
-				&& (tube.startingChunk == instance.startingChunk 
+				&& (tube.startingChunk == instance.startingChunk
 					|| (tube.startingSector == instance.startingSector && instance.startingSector != 0)))
 			{
 				if (state == null)

@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Spiky : T_Hairstyle
+	public class Spiky : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "Spiky" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Spiky>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Spiky)),
-                    [LanguageCode.Spanish] = "Puntiagudo",
-                })
+					[LanguageCode.Spanish] = "Puntiagudo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

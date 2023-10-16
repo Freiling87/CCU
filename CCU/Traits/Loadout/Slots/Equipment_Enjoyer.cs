@@ -3,7 +3,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Slots
 {
-	internal class Equipment_Enjoyer : T_Loadout
+	public class Equipment_Enjoyer : T_Loadout
 	{
 		[RLSetup]
 		public static void Setup()
@@ -12,13 +12,13 @@ namespace CCU.Traits.Loadout_Slots
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "25% chance to not generate with an item in any given Slot. For Scaled/Upscaled loaders, items must still roll their chance successfully to generate.",
-                    [LanguageCode.Spanish] = "Chance del 25% de no generarce con un Item en cualquier espacio, Distribucion Escalada reduce la chance.",
-                })
+					[LanguageCode.Spanish] = "Chance del 25% de no generarce con un Item en cualquier espacio, Distribucion Escalada reduce la chance.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Equipment_Enjoyer)),
-                    [LanguageCode.Spanish] = "Fanatico del Equipamiento",
-                })
+					[LanguageCode.Spanish] = "Fanatico del Equipamiento",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

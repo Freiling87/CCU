@@ -1,0 +1,1 @@
+﻿// Without even needing a trait, you can: Mug, Extort, make Submissive. Split this into three

@@ -6,20 +6,20 @@ namespace CCU.Traits.App_ET1
 	{
 		public override string[] Rolls => new string[] { "EyesDead" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Dead_Eyes>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este par de ojos a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este par de ojos a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Dead_Eyes)),
-                    [LanguageCode.Spanish] = "Ojos de Cadaver",
-                })
+					[LanguageCode.Spanish] = "Ojos de Cadaver",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

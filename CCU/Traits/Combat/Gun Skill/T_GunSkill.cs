@@ -1,8 +1,10 @@
-﻿namespace CCU.Traits.Combat
+﻿using BunnyLibs;
+
+namespace CCU.Traits.CombatGeneric
 {
-	internal abstract class T_GunSkill : T_CCU, ISetupAgentStats
+	public abstract class T_GunSkill : T_CCU, ISetupAgentStats
 	{
-		internal abstract int GunSkill { get; }
+		public abstract int GunSkill { get; }
 
 		public void SetupAgentStats(Agent agent)
 		{

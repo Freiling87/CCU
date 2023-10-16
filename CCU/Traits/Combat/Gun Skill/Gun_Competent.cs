@@ -1,38 +1,38 @@
 ﻿using RogueLibsCore;
 using System;
 
-namespace CCU.Traits.Combat
+namespace CCU.Traits.CombatGeneric
 {
-	internal class Gun_Competent : T_GunSkill
+	public class Gun_Competent : T_GunSkill
 	{
-		internal override int GunSkill => 1;
+		public override int GunSkill => 1;
 
 		[RLSetup]
-        public static void Setup()
-        {
-            PostProcess = RogueLibs.CreateCustomTrait<Gun_Competent>()
-                .WithDescription(new CustomNameInfo
-                {
-                    [LanguageCode.English] = String.Format("Average shooting frequency, like a Cop or gangster."),
-                    [LanguageCode.Spanish] = "Este NPC dispara armas con frequencia, como un Policía o Gangster.",
+		public static void Setup()
+		{
+			PostProcess = RogueLibs.CreateCustomTrait<Gun_Competent>()
+				.WithDescription(new CustomNameInfo
+				{
+					[LanguageCode.English] = String.Format("Average shooting frequency, like a Cop or gangster."),
+					[LanguageCode.Spanish] = "Este NPC dispara armas con frequencia, como un Policía o Gangster.",
 
-                })
-                .WithName(new CustomNameInfo
-                {
-                    [LanguageCode.English] = DesignerName(typeof(Gun_Competent)),
-                    [LanguageCode.Spanish] = "Facil al Gatillo",
+				})
+				.WithName(new CustomNameInfo
+				{
+					[LanguageCode.English] = DesignerName(typeof(Gun_Competent)),
+					[LanguageCode.Spanish] = "Facil al Gatillo",
 
-                })
-                .WithUnlock(new TraitUnlock_CCU
-                {
-                    Cancellations = { },
-                    CharacterCreationCost = 0,
-                    IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
-                });
-        }
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
-    }
+				})
+				.WithUnlock(new TraitUnlock_CCU
+				{
+					Cancellations = { },
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = Core.designerEdition,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
 }

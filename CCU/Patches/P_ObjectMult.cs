@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using HarmonyLib;
 using System;
@@ -10,13 +11,13 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches
 {
-    [HarmonyPatch(declaringType: typeof(ObjectMult))]
+	[HarmonyPatch(typeof(ObjectMult))]
 	public static class P_ObjectMult
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(ObjectMult.UpdateObjectMult), argumentTypes: new Type[0] { })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(ObjectMult.UpdateObjectMult), argumentTypes: new Type[0] { })]
 		private static IEnumerable<CodeInstruction> UpdateObjectMult_LimitHealthChangeToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

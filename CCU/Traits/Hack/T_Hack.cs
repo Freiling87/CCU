@@ -1,14 +1,16 @@
-﻿namespace CCU.Traits.Hack
+﻿using BunnyLibs;
+
+namespace CCU.Traits.Hack
 {
-    public abstract class T_Hack : T_CCU, ISetupAgentStats
-    {
-        public T_Hack() : base() { }
+	public abstract class T_Hack : T_CCU, ISetupAgentStats
+	{
+		public T_Hack() : base() { }
 
-        public abstract string ButtonText { get; }
+		public abstract string ButtonText { get; }
 
-        public void SetupAgentStats(Agent agent)
-        {
-            agent.hackable = true;
-        }
-    }
-}  
+		public void SetupAgentStats(Agent agent)
+		{
+			agent.hackable = true;
+		}
+	}
+}

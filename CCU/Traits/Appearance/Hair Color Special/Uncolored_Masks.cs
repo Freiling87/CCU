@@ -14,13 +14,13 @@ namespace CCU.Traits.App_HC3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "If a Mask is rolled, a color is not applied to it.",
-                    [LanguageCode.Spanish] = "Si se elige un no-peinado (Gorila, Alien, etc.), no se le aplicara color.",
-                })
+					[LanguageCode.Spanish] = "Si se elige un no-peinado (Gorila, Alien, etc.), no se le aplicara color.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Uncolored_Masks)),
-                    [LanguageCode.Spanish] = "Máscaras Simples",
-                })
+					[LanguageCode.Spanish] = "Máscaras Simples",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

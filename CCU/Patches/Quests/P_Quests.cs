@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
@@ -11,13 +12,13 @@ using UnityEngine;
 
 namespace CCU.Patches.AgentQuests
 {
-	[HarmonyPatch(declaringType: typeof(Quests))]
-    public static class P_Quests
-    {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
+	[HarmonyPatch(typeof(Quests))]
+	public static class P_Quests
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(Quests.CheckIfBigQuestObject))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Quests.CheckIfBigQuestObject))]
 		private static IEnumerable<CodeInstruction> MakeScumbag(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -38,12 +39,12 @@ namespace CCU.Patches.AgentQuests
 				postfixInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Brtrue),
-                },
+				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Call, scumbagSoftcode)
 				});
-			 
+
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
@@ -52,7 +53,7 @@ namespace CCU.Patches.AgentQuests
 				? ((Agent)playfieldObject).HasTrait<Scumbag>() || playfieldObject.objectName == VanillaAgents.GangsterCrepe
 				: false;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Quests.setupQuests))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Quests.setupQuests))]
 		private static IEnumerable<CodeInstruction> ScreenContainersForBombDisaster(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -76,7 +77,7 @@ namespace CCU.Patches.AgentQuests
 
 		private static Dictionary<int, ObjectReal> FilteredChestDic(Dictionary<int, ObjectReal> original)
 		{
-			Dictionary<int, ObjectReal> final = 
+			Dictionary<int, ObjectReal> final =
 				original
 				.Where(pair => IsValidBombContainer(pair.Value))
 				.ToDictionary(pair => pair.Key, pair => pair.Value);
@@ -98,7 +99,7 @@ namespace CCU.Patches.AgentQuests
 
 				return false;
 			}
-			
+
 			return true;
 		}
 		// Adapted from PowerBox.ShutDown & PowerBox.AddAffectedChunk

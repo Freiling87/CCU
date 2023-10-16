@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_EC1
 {
 	public class Brown_Eyes : T_EyeColor
-    {
+	{
 		public override string[] Rolls => new string[] { "Brown" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Brown_Eyes>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de ojos a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de ojos a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Brown_Eyes)),
-                    [LanguageCode.Spanish] = "Ojos Marrones",
-                })
+					[LanguageCode.Spanish] = "Ojos Marrones",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

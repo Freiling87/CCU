@@ -66,6 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\BTHarmonyUtils.dll</HintPath>
     </Reference>
+    <Reference Include="BunnyLibs">
+      <HintPath>..\..\BunnyLibs\MyAwesomeMod\bin\Debug\net48\BunnyLibs.dll</HintPath>
+    </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\netstandard.dll</HintPath>
@@ -130,24 +133,21 @@
     <Compile Include="CCUNames.cs" />
     <None Include="Documentation\C09_CampaignBranching.md" />
     <None Include="Documentation\S02_Configurator.md" />
+    <Compile Include="Hooks\H_AgentInteractions.cs" />
+    <Compile Include="Hooks\H_Appearance.cs" />
     <Compile Include="Hooks\H_InvItem.cs" />
-    <Compile Include="Hooks\H_Agent.cs" />
     <Compile Include="Hooks\H_ObjectReal.cs" />
-    <Compile Include="Items\Debugulizer.cs" />
-    <Compile Include="Items\RubberBulletsMod.cs" />
-    <Compile Include="Items\ClassAWare.cs" />
-    <Compile Include="Items\I_CCU.cs" />
-    <Compile Include="Localization\OperatingBarText.cs" />
-    <Compile Include="Localization\VItemType.cs" />
-    <Compile Include="Localization\VMapDirection.cs" />
-    <Compile Include="Localization\VTraitCategory.cs" />
+    <Compile Include="Systems\Designer Tools\Items\Debugulizer.cs" />
+    <Compile Include="Systems\Knockout\Items\RubberBulletsMod.cs" />
+    <Compile Include="Systems\Designer Tools\Items\ClassAWare.cs" />
+    <Compile Include="Systems\Designer Tools\Items\I_CCU.cs" />
+    <Compile Include="Mutators\Game Loop\Infinite_Continues.cs" />
     <Compile Include="Mutators\Laws\M_Law.cs" />
     <Compile Include="Mutators\Laws\No_Open_Carry.cs" />
     <Compile Include="Mutators\M_CCU.cs" />
     <Compile Include="Mutators\Followers\M_Followers.cs" />
-    <Compile Include="Extensions\E_GoalDetails.cs" />
-    <Compile Include="Content\GoalSafecrackSafe.cs" />
-    <Compile Include="Content\GoalSafecrackSafeReal.cs" />
+    <Compile Include="Mutators\Quest Gen\Client_Network.cs" />
+    <Compile Include="Mutators\Quest Gen\M_QuestGen.cs" />
     <Compile Include="Patches\Agents\P_InteractionHelper.cs" />
     <Compile Include="Patches\Agents\P_ObjectMultAgent.cs" />
     <Compile Include="Patches\Appearance\P_AgentHitbox.cs" />
@@ -157,12 +157,11 @@
     <Compile Include="Patches\Inventory\P_InvSlot.cs" />
     <Compile Include="Patches\Objects\P_ComputerShutdown.cs" />
     <Compile Include="Patches\Objects\P_ObjectMultObject.cs" />
-    <Compile Include="Fixes\No_More_Bad_Drops.cs" />
+    <Compile Include="Systems\Vanilla Fixes\Combat_Skills_Scaled.cs" />
+    <Compile Include="Systems\Object Variables\Investigateable\No_More_Bad_Drops.cs" />
     <Compile Include="Patches\Objects\P_SlimeBarrel.cs" />
     <Compile Include="Patches\Objects\P_SpawnerObject.cs" />
-    <Compile Include="Patches\P_Melee.cs" />
     <Compile Include="Patches\P_Gun.cs" />
-    <Compile Include="Patches\P_Movement.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\Quests\P_Quests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -171,33 +170,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="PropertyLogger.cs" />
-    <Compile Include="Status Effects\Frozen_Fragile.cs" />
-    <Compile Include="Status Effects\Frozen_Permanent.cs" />
-    <Compile Include="Status Effects\Electrocuted_Permanent.cs" />
-    <Compile Include="Status Effects\StatusEffectManager.cs" />
-    <Compile Include="Systems\Tools\BoolTools.cs" />
-    <Compile Include="Systems\Campaign Branching\CampaignManager.cs" />
-    <Compile Include="Systems\Campaign Branching\Mutators\M_LevelGate.cs" />
-    <Compile Include="Systems\Mutator Configurator\MutatorConfigurator.cs" />
-    <Compile Include="Systems\Campaign Branching\Mutators\LevelGateMenuHead.cs" />
-    <Compile Include="Systems\Campaign Branching\Traits\T_Switch.cs" />
-    <Compile Include="Systems\Campaign Branching\Traits\T_SwitchLogic.cs" />
-    <Compile Include="Systems\Campaign Branching\Traits\T_Trigger.cs" />
-    <Compile Include="Systems\Campaign Branching\Traits\T_CampaignBranching.cs" />
-    <Compile Include="Systems\Mutator Configurator\M_MenuHead.cs" />
-    <Compile Include="Systems\Mutator Configurator\StringMonster.cs" />
-    <Compile Include="Systems\Mutator Configurator\Submenus\ChoiceList.cs" />
-    <Compile Include="Systems\Mutator Configurator\Submenus\SubMenu.cs" />
-    <Compile Include="Systems\Mutator Configurator\Submenus\DefineInteger.cs" />
+    <Compile Include="Systems\Acquired Traits\T_Acquired.cs" />
+    <Compile Include="Systems\Knockout\Knockout.cs" />
+    <Compile Include="Systems\Custom Status Effects\Frozen_Fragile.cs" />
+    <Compile Include="Systems\Custom Status Effects\Frozen_Permanent.cs" />
+    <Compile Include="Systems\Custom Status Effects\Electrocuted_Permanent.cs" />
+    <Compile Include="Systems\Custom Status Effects\StatusEffectManager.cs" />
+    <Compile Include="Tools\BoolTools.cs" />
     <Compile Include="Systems\Legacy Updater\Legacy.cs" />
-    <Compile Include="Localization\VChunkType.cs" />
-    <Compile Include="Localization\DetermineMoneyCostText.cs" />
-    <Compile Include="Localization\ButtonText.cs" />
-    <Compile Include="Localization\VExplosionType.cs" />
-    <Compile Include="Localization\VItemCategory.cs" />
-    <Compile Include="Localization\VRelationship.cs" />
-    <Compile Include="Localization\StatusEffectText.cs" />
-    <Compile Include="Localization\VStatusEffect.cs" />
     <Compile Include="Mutators\MutatorManager.cs" />
     <Compile Include="Mutators\Followers\Homesickness_Disabled.cs" />
     <Compile Include="Mutators\Followers\Homesickness_Mandatory.cs" />
@@ -210,7 +190,6 @@
     <Compile Include="Patches\Combat\P_Melee.cs" />
     <Compile Include="Patches\Goals\P_GoalBattle.cs" />
     <Compile Include="Patches\Goals\P_GoalCombatEngage.cs" />
-    <Compile Include="Patches\Goals\P_GoalDoJob.cs" />
     <Compile Include="Patches\Interface\P_ButtonHelper.cs" />
     <Compile Include="Patches\Interface\P_QuestMarker.cs" />
     <Compile Include="Patches\Interface\P_StatusEffectDisplay.cs" />
@@ -223,13 +202,12 @@
     <Compile Include="Patches\P_GameController.cs" />
     <Compile Include="Patches\P_NameDB.cs" />
     <Compile Include="Patches\P_ObjectMult.cs" />
-    <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Systems\Agent Goals\CustomGoals.cs" />
     <Compile Include="Systems\Object Variables\Container\Containers.cs" />
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
-    <Compile Include="Systems\Tools\StringTools.cs" />
+    <Compile Include="Tools\StringTools.cs" />
     <Compile Include="Traits\Ambient Audio\Cop_Bot_Sound.cs" />
     <Compile Include="Traits\Ambient Audio\Powering_Noises.cs" />
     <Compile Include="Traits\Ambient Audio\T_AmbientAudio.cs" />
@@ -539,6 +517,7 @@
     <Compile Include="Traits\Behavior\Grab_Money.cs" />
     <Compile Include="Traits\Behavior\Pick_Pockets.cs" />
     <Compile Include="Traits\Behavior\Seek_and_Destroy.cs" />
+    <Compile Include="Traits\Behavior\Snitch.cs" />
     <Compile Include="Traits\Behavior\Suck_Blood.cs" />
     <Compile Include="Traits\Behavior\T_Behavior.cs" />
     <Compile Include="Traits\Bodyguarded\T_Bodyguarded.cs" />
@@ -557,7 +536,7 @@
     <Compile Include="Traits\Combat\Melee Skill\T_MeleeSkill.cs" />
     <Compile Include="Traits\Combat\Gun Skill\T_GunSkill.cs" />
     <Compile Include="Traits\Cost Currency\Swap_Meet.cs" />
-    <Compile Include="Traits\Cost Currency\Shylock.cs" />
+    <Compile Include="Traits\Cost Currency\Pound_of_Flesh.cs" />
     <Compile Include="Traits\Cost Currency\Blood_Covenant.cs" />
     <Compile Include="Traits\Cost Currency\T_CostCurrency.cs" />
     <Compile Include="Traits\Cost Scale\Less_ish.cs" />
@@ -626,14 +605,10 @@
     <Compile Include="Traits\Explosion Timer\T_ExplosionTimer.cs" />
     <Compile Include="Traits\Hire Duration\Homesickly.cs" />
     <Compile Include="Traits\Hire Duration\Homesickless.cs" />
-    <Compile Include="Traits\IModifyItems.cs" />
-    <Compile Include="Traits\IMutatorConditionalTrait.cs" />
     <Compile Include="Traits\Interaction\IBranchInteractionMenu.cs" />
     <Compile Include="Traits\Inventory\Infinite_Ammo.cs" />
     <Compile Include="Traits\Inventory\Infinite_Armor.cs" />
     <Compile Include="Traits\Inventory\Infinite_Melee.cs" />
-    <Compile Include="Traits\IRefreshAtLevelEnd.cs" />
-    <Compile Include="Traits\IRefreshAtLevelStart.cs" />
     <Compile Include="Traits\Loadout\Loader\T_LoadoutLoader.cs" />
     <Compile Include="Traits\Combat\Toughness\T_Toughness.cs" />
     <Compile Include="Traits\Merchant Type\Insider_Safe_Combo.cs" />
@@ -641,11 +616,15 @@
     <Compile Include="Traits\Merchant Type\_Test_Inventory.cs" />
     <Compile Include="Traits\Passive\Ghost.cs" />
     <Compile Include="Traits\Passive\Indomitable.cs" />
+    <Compile Include="Traits\Passive\Muggable.cs" />
     <Compile Include="Traits\Passive\Suppress_Status_Text.cs" />
+    <Compile Include="Traits\PLAYER\Melee\Melee Speed\Punch_Drunk.cs" />
+    <Compile Include="Traits\PLAYER\Melee\Melee Speed\Punch_Drunk_2.cs" />
+    <Compile Include="Traits\PLAYER\Melee\Rapid Fire\Speedbagger.cs" />
     <Compile Include="Traits\PLAYER\Social\Language\Speaks_Binary.cs" />
     <Compile Include="Traits\PLAYER\Guns\Gun Nut\Accuracy_Modder.cs" />
     <Compile Include="Traits\PLAYER\Guns\Gun Nut\Rate_of_Fire_Modder.cs" />
-    <Compile Include="Traits\PLAYER\Guns\Gun Nut\Rubber_Bulleteer.cs" />
+    <Compile Include="Systems\Knockout\Traits\Rubber_Bulleteer.cs" />
     <Compile Include="Traits\PLAYER\Guns\Gun Nut\Silencerist.cs" />
     <Compile Include="Traits\PLAYER\Guns\Gun Nut\Ammo_Stocker.cs" />
     <Compile Include="Traits\PLAYER\Guns\Gun Nut\T_GunNut.cs" />
@@ -794,10 +773,9 @@
     <Compile Include="Traits\Hack\Go_Haywire.cs" />
     <Compile Include="Traits\Hack\Tamper_with_Aim.cs" />
     <Compile Include="Traits\PLAYER\Melee\Knockback_Peon.cs" />
-    <Compile Include="Traits\PLAYER\Melee\Melee_Maniac_2.cs" />
-    <Compile Include="Traits\PLAYER\Melee\Melee_Maniac.cs" />
-    <Compile Include="Traits\PLAYER\Melee\Remise_Beast.cs" />
-    <Compile Include="Traits\PLAYER\Melee\T_MeleeSpeed.cs" />
+    <Compile Include="Traits\PLAYER\Melee\Melee Speed\Melee_Maniac_2.cs" />
+    <Compile Include="Traits\PLAYER\Melee\Melee Speed\Melee_Maniac.cs" />
+    <Compile Include="Traits\PLAYER\Melee\Rapid Fire\Remise_Beast.cs" />
     <Compile Include="Traits\PLAYER\Guns\Pants_on_Autofire.cs" />
     <Compile Include="Traits\PLAYER\Guns\Rate of Fire\Trigger_Junkie.cs" />
     <Compile Include="Traits\PLAYER\Guns\Rate of Fire\Trigger_Happy.cs" />
@@ -827,6 +805,8 @@
     <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Above_the_Laws.cs" />
     <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\Gigantic.cs" />
     <Compile Include="Traits\PLAYER\Status Effect\Permanent SE\T_PermanentStatusEffect.cs" />
+    <Compile Include="Traits\Quests\Quest_Giver.cs" />
+    <Compile Include="Traits\Quests\T_Quest.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Blahd_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Cannibal_Aligned.cs" />
@@ -948,10 +928,10 @@
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_3_Hostile.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Aligned.cs" />
     <Compile Include="Traits\Relationships\Relationships - Faction\Faction_4_Hostile.cs" />
-    <Compile Include="Traits\ISetupAgentStats.cs" />
     <Compile Include="Traits\TraitUnlock_CCU.cs" />
     <Compile Include="Traits\T_CCU.cs" />
     <Compile Include="Traits\PLAYER\T_PlayerTrait.cs" />
+    <None Include="Systems\Vanilla Fixes\Bugs.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">
@@ -962,7 +942,7 @@
     <None Include="Documentation\C0503_PlayerTraits.md" />
     <None Include="Documentation\C0502_Loadout.md" />
     <None Include="Documentation\C0501_Appearance.md" />
-    <None Include="Documentation\C06_Fixes.md" />
+    <None Include="Systems\Vanilla Fixes\C06_Fixes.md" />
     <None Include="Documentation\M02_BestPractices.md" />
     <None Include="Documentation\M03_ChangeLog.md" />
     <None Include="Documentation\M01_Installation.md" />
@@ -977,7 +957,9 @@
     <None Include="Resources\Image\Items\RubberBulletsMod.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Traits\PLAYER\Unarmed\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Audio\Accents\ErSdtAdtAnnoyed.wav" />
     <Content Include="Resources\Audio\Accents\ErSdtAdtTalk1.wav" />
@@ -1038,28 +1020,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>START /min cmd.exe /c C:\Users\Owner\source\repos\Freiling87\CCU\Postbuild.bat</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>REM    This script copies mod files currently used by the game into your repository's Libraries folder. This means you only need to update dependencies in one place rather than having to do it for each mod you work on.
-ECHO "======= PRE-BUILD"
-
-ECHO "    --- Defining directories"
-SET dirBepinex="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\"
-SET dirCore="%25dirBepinex%25core\"
-SET dirPatchers="%25dirBepinex%25patchers\"
-SET dirPlugins="%25dirBepinex%25plugins\"
-CD /D "..\..\..\Libraries"
-SET dirLibraries=%25cd%25\
-
-ECHO "    --- Defining series"
-SET importsCore=BTHarmonyUtils.dll
-SET importsPatchers=RogueLibsPatcher.dll
-SET importsPlugins=RogueLibsCore.dll
-
-ECHO "    --- Copying files"
-FOR %25%25a IN (%25importsCore%25) DO (XCOPY /s /y "%25dirCore%25%25%25~a" %25dirLibraries%25)
-FOR %25%25a IN (%25importsPatchers%25) DO (XCOPY /s /y "%25dirPatchers%25%25%25~a" %25dirLibraries%25)
-FOR %25%25a IN (%25importsPlugins%25) DO (XCOPY /s /y "%25dirPlugins%25%25%25~a" %25dirLibraries%25)</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

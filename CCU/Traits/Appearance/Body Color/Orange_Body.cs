@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_BC1
 {
 	public class Orange_Body : T_BodyColor
-    {
+	{
 		public override string[] Rolls => new string[] { "Orange" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Orange_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Orange_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo Naranja",
-                })
+					[LanguageCode.Spanish] = "Cuerpo Naranja",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

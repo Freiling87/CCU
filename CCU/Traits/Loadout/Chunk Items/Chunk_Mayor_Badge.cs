@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Loadout;
 using HarmonyLib;
 using RogueLibsCore;
@@ -12,22 +13,22 @@ namespace CCU.Traits.Loadout_Chunk_Items
 {
 	public class Chunk_Mayor_Badge : T_Loadout
 	{
-        //[RLSetup]
-        public static void Setup()
+		//[RLSetup]
+		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Mayor_Badge>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Badge Holder. If multiple characters have this trait, one will be chosen randomly. This will override default behaviors that assign keys to Clerks, etc.",
-                    [LanguageCode.Spanish] = "Este NPC se le asignara la Placa de Visitante del Alcalde, En caso de multiples NPCs con este rasgo, se eligira uno aleatoriamente. Normalmete la placa se asigna a el Empleado Central.",
+					[LanguageCode.Spanish] = "Este NPC se le asignara la Placa de Visitante del Alcalde, En caso de multiples NPCs con este rasgo, se eligira uno aleatoriamente. Normalmete la placa se asigna a el Empleado Central.",
 
-                })
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Chunk_Mayor_Badge)),
-                    [LanguageCode.Spanish] = "Placa de Visitante",
+					[LanguageCode.Spanish] = "Placa de Visitante",
 
-                })
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
@@ -40,14 +41,15 @@ namespace CCU.Traits.Loadout_Chunk_Items
 		public override void OnRemoved() { }
 	}
 
+	// TODO: IModInventory
 	[HarmonyPatch(typeof(InvDatabase))]
-	internal class P_InvDatabase_MayorBadge
+	public class P_InvDatabase_MayorBadge
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		private static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(nameof(InvDatabase.FillAgent))]
-		internal static IEnumerable<CodeInstruction> FillAgent_LoadoutBadge(IEnumerable<CodeInstruction> codeInstructions)
+		public static IEnumerable<CodeInstruction> FillAgent_LoadoutBadge(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo mayorBadgeSoftcode = AccessTools.DeclaredMethod(typeof(P_InvDatabase_MayorBadge), nameof(P_InvDatabase_MayorBadge.MayorBadgeSoftcode));
@@ -79,7 +81,7 @@ namespace CCU.Traits.Loadout_Chunk_Items
 			return instructions;
 		}
 
-		internal static string MayorBadgeSoftcode(Agent agent) =>
+		public static string MayorBadgeSoftcode(Agent agent) =>
 			agent.HasTrait<Chunk_Mayor_Badge>()
 				? VanillaAgents.Clerk
 				: agent.name;

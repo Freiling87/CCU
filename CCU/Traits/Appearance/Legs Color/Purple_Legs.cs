@@ -6,20 +6,20 @@ namespace CCU.Traits.App_LC1
 	{
 		public override string[] Rolls => new string[] { "Purple" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Purple_Legs>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Purple_Legs)),
-                    [LanguageCode.Spanish] = "Piernas Moradas",
-                })
+					[LanguageCode.Spanish] = "Piernas Moradas",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

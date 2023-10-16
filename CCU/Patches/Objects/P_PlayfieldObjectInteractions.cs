@@ -1,16 +1,17 @@
 ﻿using BepInEx.Logging;
+using BunnyLibs;
 using HarmonyLib;
 using UnityEngine;
 
 namespace CCU.Patches.Objects
 {
-	[HarmonyPatch(declaringType:typeof(PlayfieldObjectInteractions))]
+	[HarmonyPatch(typeof(PlayfieldObjectInteractions))]
 	public static class P_PlayfieldObjectInteractions
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName:nameof(PlayfieldObjectInteractions.TargetObject), argumentTypes: new[] 
+		[HarmonyPrefix, HarmonyPatch(nameof(PlayfieldObjectInteractions.TargetObject), argumentTypes: new[]
 			{ typeof(PlayfieldObject), typeof(Agent), typeof(PlayfieldObject), typeof(string) })]
 		public static bool TargetObject_Prefix(PlayfieldObject playfieldObject, Agent interactingAgent, PlayfieldObject otherObject, string combineType, PlayfieldObjectInteractions __instance, ref bool __result)
 		{

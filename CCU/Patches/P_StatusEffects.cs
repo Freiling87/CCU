@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using CCU.Traits.Drug_Warrior;
 using CCU.Traits.Explode_On_Death;
@@ -9,7 +10,6 @@ using CCU.Traits.Gib_Type;
 using CCU.Traits.Loot_Drops;
 using CCU.Traits.Passive;
 using CCU.Traits.Player.Movement;
-using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -26,13 +26,13 @@ using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Patches
 {
-	[HarmonyPatch(declaringType: typeof(StatusEffects))]
+	[HarmonyPatch(typeof(StatusEffects))]
 	class P_StatusEffects
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(StatusEffects.AddStatusEffect), 
+		[HarmonyTranspiler, HarmonyPatch(nameof(StatusEffects.AddStatusEffect),
 			argumentTypes: new[] { typeof(string), typeof(bool), typeof(Agent), typeof(NetworkInstanceId), typeof(bool), typeof(int) })]
 		private static IEnumerable<CodeInstruction> AddStatusEffect_ExtendedRelease(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -42,9 +42,9 @@ namespace CCU.Patches
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
-                {
+				{
 					new CodeInstruction(OpCodes.Ldloc_0)
-                },
+				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Call, extendedReleaseCheck),
@@ -63,7 +63,7 @@ namespace CCU.Patches
 				: vanilla;
 
 		// Strictly for Rival XP allocation.
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.AgentIsRival), 
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.AgentIsRival),
 		argumentTypes: new[] { typeof(Agent) })]
 		public static bool AgentIsRival_Prefix(Agent myAgent, StatusEffects __instance, ref bool __result)
 		{
@@ -72,7 +72,7 @@ namespace CCU.Patches
 			if
 			(
 				(agent.HasTrait(VanillaTraits.BlahdBasher) && AlignmentUtils.CountsAsBlahd(myAgent)) ||
-				(agent.HasTrait(VanillaTraits.CrepeCrusher) && AlignmentUtils.CountsAsCrepe(myAgent)) || 
+				(agent.HasTrait(VanillaTraits.CrepeCrusher) && AlignmentUtils.CountsAsCrepe(myAgent)) ||
 				(agent.HasTrait("HatesScientist") && myAgent.HasTrait<Slayable>()) ||
 				(agent.HasTrait(VanillaTraits.Specist) && myAgent.HasTrait<Specistist>()))
 			{
@@ -83,47 +83,47 @@ namespace CCU.Patches
 			return true;
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChangeHealth), 
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.ChangeHealth),
 			argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
 		public static bool ChangeHealth_Prefix(StatusEffects __instance, ref float healthNum)
-        {
+		{
 			if (__instance.agent.HasTrait<Not_Vincible>() && healthNum < 0f)
 				healthNum = 0f;
 
 			return true;
-        }
+		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect), 
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.ChooseRandomDrugDealerStatusEffect),
 			argumentTypes: new Type[0] { })]
 		public static bool ChooseRandomDrugDealerStatusEffect_Prefix(StatusEffects __instance, ref string __result)
-        {
+		{
 			T_DrugWarrior trait = __instance.agent.GetTrait<T_DrugWarrior>();
-			
+
 			if (trait is null || trait is Wildcard)
 				return true;
 
 			__result = trait.DrugEffect;
 			return false;
-        }
+		}
 
 		/// <summary>
 		/// Circumvent hardcoded explode on death behavior for agent.killerRobot
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), 
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.ExplodeAfterDeathChecks),
 			argumentTypes: new Type[0] { })]
 		public static bool ExplodeAfterDeathChecks_Prefix(StatusEffects __instance)
-        {
+		{
 			// Explode on Death is hardcoded into the agent.killerRobot variable. This is to filter that for custom agents.
 			if (__instance.agent.HasTrait<Seek_and_Destroy>() &&
 				!__instance.agent.HasTrait<T_ExplodeOnDeath>())
 				return false;
 
 			return true;
-        }
+		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(StatusEffects.ExplodeAfterDeathChecks), 
+		[HarmonyPostfix, HarmonyPatch(nameof(StatusEffects.ExplodeAfterDeathChecks),
 			argumentTypes: new Type[0] { })]
 		public static void ExplodeAfterDeathChecks_Postfix(StatusEffects __instance)
 		{
@@ -137,7 +137,7 @@ namespace CCU.Patches
 			}
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.IsInnocent), 
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.IsInnocent),
 			argumentTypes: new[] { typeof(Agent) })]
 		public static bool IsInnocent_Prefix(Agent playerGettingPoints, StatusEffects __instance, ref bool __result)
 		{
@@ -146,11 +146,16 @@ namespace CCU.Patches
 				__result = true;
 				return false;
 			}
+			else if (__instance.agent.HasTrait<Guilty>())
+			{
+				__result = false;
+				return false;
+			}
 
 			return true;
-        }
+		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.NormalGib))]
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.NormalGib))]
 		public static bool NormalGib_Redirect(StatusEffects __instance)
 		{
 			if (__instance.agent.HasTrait<Indestructible>())
@@ -164,7 +169,7 @@ namespace CCU.Patches
 			return false;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.SetupDeath), argumentTypes: new[] { typeof(PlayfieldObject), typeof(bool), typeof(bool) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.SetupDeath), argumentTypes: new[] { typeof(PlayfieldObject), typeof(bool), typeof(bool) })]
 		public static bool SetupDeath_FilterSpillables(StatusEffects __instance)
 		{
 			Agent agent = __instance.agent;
@@ -180,11 +185,11 @@ namespace CCU.Patches
 			}
 
 			return true;
-        }
+		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(StatusEffects.UseQuickEscapeTeleporter))]
+		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.UseQuickEscapeTeleporter))]
 		public static bool UseQuickEscapeTeleporter_Blinker(bool isEndOfFrame, StatusEffects __instance)
-        {
+		{
 			// Thought this was broken, but it was QET + No Teleports
 
 			try
@@ -215,18 +220,18 @@ namespace CCU.Patches
 			catch { }
 
 			return true;
-        }
+		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(StatusEffects))]
+	[HarmonyPatch(typeof(StatusEffects))]
 	static class P_StatusEffects_ExplodeBody
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTargetMethod, UsedImplicitly]
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
-			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(StatusEffects), "ExplodeBody", new Type[] { }));
+			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(StatusEffects), "ExplodeBody"));
 
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> CustomizeExplosion(IEnumerable<CodeInstruction> codeInstructions)
@@ -242,14 +247,14 @@ namespace CCU.Patches
 					new CodeInstruction(OpCodes.Ldstr, "Normal")
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
-                {
+				{
 					new CodeInstruction(OpCodes.Ldc_I4_0),
 					new CodeInstruction(OpCodes.Ldc_I4_M1)
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_1), 
-					new CodeInstruction(OpCodes.Ldfld, agent), 
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld, agent),
 					new CodeInstruction(OpCodes.Call, ExplosionType)
 				});
 
@@ -257,31 +262,31 @@ namespace CCU.Patches
 			return instructions;
 		}
 
-        [HarmonyTranspiler, UsedImplicitly]
-        private static IEnumerable<CodeInstruction> GibBody(IEnumerable<CodeInstruction> codeInstructions)
-        {
-            List<CodeInstruction> instructions = codeInstructions.ToList();
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> GibBody(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo agent = AccessTools.Field(typeof(StatusEffects), nameof(StatusEffects.agent));
 			FieldInfo copBot = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.copBot));
 			MethodInfo explodeOnDeathCustomGibs = AccessTools.DeclaredMethod(typeof(P_StatusEffects_ExplodeBody), nameof(EOD_CustomGibs));
 
-            CodeReplacementPatch patch = new CodeReplacementPatch(
-                expectedMatches: 1,
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_1),								
-					new CodeInstruction(OpCodes.Call, explodeOnDeathCustomGibs),						
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Call, explodeOnDeathCustomGibs),
 				},
 				postfixInstructionSequence: new List<CodeInstruction>
-                {
+				{
 					new CodeInstruction(OpCodes.Ldloc_1),
 					new CodeInstruction(OpCodes.Ldfld),
 					new CodeInstruction(OpCodes.Ldfld, copBot),
-                });
+				});
 
-            patch.ApplySafe(instructions, logger);
-            return instructions;
-        }
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
 
 		private static void EOD_CustomGibs(StatusEffects __instance)
 		{
@@ -289,7 +294,7 @@ namespace CCU.Patches
 			// Cannot check for GibType here since vanilla means normal Gibs.
 			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().Any() &&
 				!__instance.agent.HasTrait<Indestructible>())
-				CustomGib(__instance); 
+				CustomGib(__instance);
 		}
 
 		// Largely a modified copy of vanilla
@@ -298,7 +303,7 @@ namespace CCU.Patches
 			Agent agent = statusEffects.agent;
 			T_GibType gibTrait = agent.GetTraits<T_GibType>().FirstOrDefault();
 
-            if (statusEffects.slaveHelmetGonnaBlow)
+			if (statusEffects.slaveHelmetGonnaBlow)
 			{
 				MethodInfo slaveHelmetBlow = AccessTools.DeclaredMethod(typeof(StatusEffects), "SlaveHelmetBlow");
 				slaveHelmetBlow.GetMethodWithoutOverrides<Action>(statusEffects).Invoke();
@@ -316,7 +321,7 @@ namespace CCU.Patches
 				if (GC.bloodEnabled)
 				{
 					if ((!statusEffects.agent.overHole || statusEffects.agent.underWater) && (!statusEffects.agent.warZoneAgent || !statusEffects.agent.underWater))
-					{ 
+					{
 						InvItem invItem = new InvItem();
 						invItem.invItemName = "Giblet";
 						invItem.SetupDetails(false);
@@ -380,17 +385,17 @@ namespace CCU.Patches
 		}
 	}
 
-    [HarmonyPatch(declaringType: typeof(StatusEffects))]
+	[HarmonyPatch(typeof(StatusEffects))]
 	static class P_StatusEffects_UpdateStatusEffect
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTargetMethod, UsedImplicitly]
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
 			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(StatusEffects), "UpdateStatusEffect"));
 
-        [HarmonyTranspiler, UsedImplicitly]
+		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> UpdateStatusEffect_WithdrawalForNPC(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

@@ -6,20 +6,20 @@ namespace CCU.Traits.App_LC1
 	{
 		public override string[] Rolls => new string[] { "PinkSkin" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Skintone_Pink_Legs>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Skintone_Pink_Legs)),
-                    [LanguageCode.Spanish] = "Piernas Color Piel Rosada",
-                })
+					[LanguageCode.Spanish] = "Piernas Color Piel Rosada",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

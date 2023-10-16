@@ -1,6 +1,6 @@
 ﻿using RogueLibsCore;
 
-namespace CCU.Hooks
+namespace CCU
 {
 	public class H_ObjectReal : HookBase<ObjectReal>
 	{

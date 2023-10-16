@@ -6,20 +6,20 @@ namespace CCU.Traits.App_SC1
 	{
 		public override string[] Rolls => new string[] { "Black" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Black_Skin>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de piel a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de piel a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Black_Skin)),
-                    [LanguageCode.Spanish] = "Piel Negra",
-                })
+					[LanguageCode.Spanish] = "Piel Negra",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

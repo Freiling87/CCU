@@ -1,57 +1,54 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Localization;
-using CCU.Patches.Agents;
-using CCU.Traits;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace CCU.Patches.Inventory
 {
-    [HarmonyPatch(declaringType: typeof(CharacterCreation))]
+	[HarmonyPatch(typeof(CharacterCreation))]
 	public static class P_CharacterCreation
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		// Filters trait list on character sheet to Player Traits
 		// This method transpiles before Sorquol.P_CharacterCreation.CreatePointTallyText_AutoSortTraitsChosen. Changes here must be reflected in its criteria.
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
-        private static IEnumerable<CodeInstruction> CreatePointTallyText_FilterCCPCount(IEnumerable<CodeInstruction> codeInstructions)
-        {
-            List<CodeInstruction> instructions = codeInstructions.ToList();
-            FieldInfo traitsChosen = AccessTools.DeclaredField(typeof(CharacterCreation), nameof(CharacterCreation.traitsChosen));
-            MethodInfo playerUnlockList = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerUnlockList), parameters: new Type[] { typeof(List<Unlock>) });
+		[HarmonyTranspiler, HarmonyPatch(nameof(CharacterCreation.CreatePointTallyText))]
+		private static IEnumerable<CodeInstruction> CreatePointTallyText_FilterCCPCount(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo traitsChosen = AccessTools.DeclaredField(typeof(CharacterCreation), nameof(CharacterCreation.traitsChosen));
+			MethodInfo playerUnlockList = AccessTools.DeclaredMethod(typeof(T_CCU), nameof(T_CCU.PlayerUnlockList), new[] { typeof(List<Unlock>) });
 
-            CodeReplacementPatch patch = new CodeReplacementPatch(
-                expectedMatches: 2,
-                prefixInstructionSequence: new List<CodeInstruction>
-                {
-                    new CodeInstruction(OpCodes.Ldarg_0),
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 2,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldfld, traitsChosen)
 				},
-                targetInstructionSequence: new List<CodeInstruction>
-                {
+				targetInstructionSequence: new List<CodeInstruction>
+				{
 				},
-                insertInstructionSequence: new List<CodeInstruction>
+				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Call, playerUnlockList),
-                },
-                postfixInstructionSequence: new List<CodeInstruction>
-                {
-                    new CodeInstruction(OpCodes.Call),
-                    new CodeInstruction(OpCodes.Stloc_S, 12),
-                });
+				},
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call),
+					new CodeInstruction(OpCodes.Stloc_S, 12),
+				});
 
-            patch.ApplySafe(instructions, logger);
-            return instructions;
-        }
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
 
 		/// <summary>
 		/// Custom CCU Trait list section on character sheet
@@ -59,7 +56,7 @@ namespace CCU.Patches.Inventory
 		/// </summary>
 		/// <param name="codeInstructions"></param>
 		/// <returns></returns>
-        [HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.CreatePointTallyText))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(CharacterCreation.CreatePointTallyText))]
 		private static IEnumerable<CodeInstruction> CreatePointTallyText_CustomCCUSection(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -93,10 +90,10 @@ namespace CCU.Patches.Inventory
 			return instructions;
 		}
 		public static void PrintTraitList(CharacterCreation CC)
-        {
+		{
 			if (Core.designerEdition &&
 				T_CCU.DesignerUnlockList(CC.traitsChosen).Any())
-            {
+			{
 				CC.pointTallyText.text += "\n<color=yellow>- CCU TRAITS -</color>\n";
 				foreach (Unlock unlock in T_CCU.SortUnlocksByName(T_CCU.DesignerUnlockList(CC.traitsChosen).Where(u => !T_CCU.IsPlayerUnlock(u)).ToList()))
 				{
@@ -107,7 +104,7 @@ namespace CCU.Patches.Inventory
 			}
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterCreation.LoadCharacter2))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(CharacterCreation.LoadCharacter2))]
 		private static IEnumerable<CodeInstruction> LoadCharacter2_LegacyTraits(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -129,4 +126,4 @@ namespace CCU.Patches.Inventory
 			return instructions;
 		}
 	}
-} 
+}

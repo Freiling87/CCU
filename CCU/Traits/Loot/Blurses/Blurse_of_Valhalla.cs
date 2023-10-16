@@ -3,8 +3,8 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loot_Drops
 {
-    internal class Blurse_of_Valhalla : T_LootDrop
-    {
+	public class Blurse_of_Valhalla : T_LootDrop
+	{
 		[RLSetup]
 		public static void Setup()
 		{
@@ -12,14 +12,14 @@ namespace CCU.Traits.Loot_Drops
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When agent is neutralized, they do not drop weapons or armor.",
-                    [LanguageCode.Spanish] = "Al ser neutralizado, este NPC nunca soltara sus armas o armadura.",
+					[LanguageCode.Spanish] = "Al ser neutralizado, este NPC nunca soltara sus armas o armadura.",
 
-                })
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Blurse_of_Valhalla)),
-                    [LanguageCode.Spanish] = "Maldición de Valhalla",
-                })
+					[LanguageCode.Spanish] = "Maldición de Valhalla",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
@@ -29,9 +29,9 @@ namespace CCU.Traits.Loot_Drops
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
+		public override void OnRemoved() { }
 
 		public override bool IsUnspillable(InvItem invItem) =>
 			LoadoutTools.GetSlotFromItem(invItem) != LoadoutTools.Slots.Pockets;
-    }
+	}
 }

@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_BT1
 {
 	public class Upper_Cruster_Body : T_BodyType
-    {
+	{
 		public override string[] Rolls => new string[] { VanillaAgents.UpperCruster };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Upper_Cruster_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Upper_Cruster_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo de Rico",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Rico",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

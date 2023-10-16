@@ -1,11 +1,10 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Localization;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using HarmonyLib;
 using JetBrains.Annotations;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,13 +13,13 @@ using UnityEngine;
 
 namespace CCU.Patches.P_Combat
 {
-	[HarmonyPatch(declaringType: typeof(Explosion))]
+	[HarmonyPatch(typeof(Explosion))]
 	public static class P_Explosion
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Explosion.SetupExplosion))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Explosion.SetupExplosion))]
 		private static IEnumerable<CodeInstruction> SetupExplosion_CustomExplosions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -49,19 +48,20 @@ namespace CCU.Patches.P_Combat
 		{
 			switch (explosion.explosionType)
 			{
-				case CExplosionType.OilSpill:
-					explosion.StartCoroutine(explosion.SpawnNoiseLate());
-					explosion.StartCoroutine(explosion.PlaySoundAfterTick());
-					explosion.circleCollider2D.enabled = true;
-					explosion.circleCollider2D.radius = 1.28f;
-					explosion.gc.spawnerMain.SpawnParticleEffect("WaterExplosion", explosion.tr.position, 0f);
-					explosion.StartCoroutine("SpillLiquidLate");
+				// Category iced for now
+				//case CExplosionType.OilSpill:
+				//	explosion.StartCoroutine(explosion.SpawnNoiseLate());
+				//	explosion.StartCoroutine(explosion.PlaySoundAfterTick());
+				//	explosion.circleCollider2D.enabled = true;
+				//	explosion.circleCollider2D.radius = 1.28f;
+				//	explosion.gc.spawnerMain.SpawnParticleEffect("WaterExplosion", explosion.tr.position, 0f);
+				//	explosion.StartCoroutine("SpillLiquidLate");
 
-					break;
+				//	break;
 			}
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Explosion.ExplosionHit), argumentTypes: new[] { typeof(GameObject), typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Explosion.ExplosionHit), argumentTypes: new[] { typeof(GameObject), typeof(bool) })]
 		private static IEnumerable<CodeInstruction> ExplosionHit_LimitEMPtoVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -84,10 +84,10 @@ namespace CCU.Patches.P_Combat
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(Explosion))]
+	[HarmonyPatch(typeof(Explosion))]
 	static class P_Explosion_SpillLiquidLate
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTargetMethod, UsedImplicitly]
@@ -112,17 +112,18 @@ namespace CCU.Patches.P_Combat
 				{
 					new CodeInstruction(OpCodes.Ldfld, explosionType),
 					new CodeInstruction(OpCodes.Ldstr, VExplosionType.Water),
-					new CodeInstruction(OpCodes.Call, ExplosionTypeSoftcode), 
+					new CodeInstruction(OpCodes.Call, ExplosionTypeSoftcode),
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
 
-		public static string ExplosionTypeSoftcode(string vanilla) =>
-			CExplosionType.Types.Contains(vanilla)
-				? VExplosionType.Water
-				: vanilla;
+		// Feature iced
+		public static string ExplosionTypeSoftcode(string vanilla) => vanilla;
+		//CExplosionType.Types.Contains(vanilla)
+		//	? VExplosionType.Water
+		//	: vanilla;
 
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SpillLiquidLate_SendExplosionTypes(IEnumerable<CodeInstruction> codeInstructions)

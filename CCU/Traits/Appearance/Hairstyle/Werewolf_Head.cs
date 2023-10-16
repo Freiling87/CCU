@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Werewolf_Head : T_Hairstyle
+	public class Werewolf_Head : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "WerewolfHead" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Werewolf_Head>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este no-peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este no-peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Werewolf_Head)),
-                    [LanguageCode.Spanish] = "Cabeza de Hombre Lobo",
-                })
+					[LanguageCode.Spanish] = "Cabeza de Hombre Lobo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

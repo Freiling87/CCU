@@ -1,10 +1,10 @@
-﻿using CCU.Localization;
+﻿using BunnyLibs;
 using RogueLibsCore;
 
 namespace CCU.Traits.Player.Ammo
 {
-    internal class Ammo_Artiste : T_AmmoCap
-    {
+	public class Ammo_Artiste : T_AmmoCap
+	{
 		public override float AmmoCapMultiplier => 1.8f;
 
 		[RLSetup]
@@ -14,13 +14,13 @@ namespace CCU.Traits.Player.Ammo
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Ammo capacity increased by 80%.",
-                    [LanguageCode.Spanish] = "Aumenta la capacidad de munición por 80%.",
-                })
+					[LanguageCode.Spanish] = "Aumenta la capacidad de munición por 80%.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Ammo_Artiste)),
-                    [LanguageCode.Spanish] = "Artiste de la Munición",
-                })
+					[LanguageCode.Spanish] = "Artiste de la Munición",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					Cancellations = { nameof(Ammo_Amateur), nameof(Ammo_Auteur) },

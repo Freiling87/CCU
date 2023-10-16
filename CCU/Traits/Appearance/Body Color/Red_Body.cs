@@ -4,22 +4,22 @@ namespace CCU.Traits.App_BC1
 {
 	public class Red_Body : T_BodyColor
 	{
-        public override string[] Rolls => new string[] { "Red" };
+		public override string[] Rolls => new string[] { "Red" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Red_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Red_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo Rojo",
-                })
+					[LanguageCode.Spanish] = "Cuerpo Rojo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

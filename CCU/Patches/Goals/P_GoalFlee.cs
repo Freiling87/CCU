@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Passive;
 using HarmonyLib;
 using RogueLibsCore;
@@ -10,13 +11,13 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Goals
 {
-	[HarmonyPatch(declaringType: typeof(GoalFlee))]
+	[HarmonyPatch(typeof(GoalFlee))]
 	public static class P_GoalFlee
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalFlee.Activate))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(GoalFlee.Activate))]
 		private static IEnumerable<CodeInstruction> GoalFlee_CrustyTattle(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

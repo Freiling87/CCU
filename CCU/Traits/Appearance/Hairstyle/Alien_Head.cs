@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Alien_Head : T_Hairstyle
+	public class Alien_Head : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "AlienHead" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Alien_Head>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este no-peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este no-peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Alien_Head)),
-                    [LanguageCode.Spanish] = "Cabeza de Alien",
-                })
+					[LanguageCode.Spanish] = "Cabeza de Alien",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

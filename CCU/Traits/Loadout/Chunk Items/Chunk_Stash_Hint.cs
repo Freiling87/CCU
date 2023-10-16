@@ -3,22 +3,22 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Chunk_Items
 {
-    public class Chunk_Stash_Hint : T_Loadout
+	public class Chunk_Stash_Hint : T_Loadout
 	{
-        //[RLSetup]
-        public static void Setup()
+		//[RLSetup]
+		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Chunk_Stash_Hint>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "When placed in a chunk, this character will by default be the Stash Hint Holder. If multiple characters have this trait, one will be chosen randomly.",
-                    [LanguageCode.Spanish] = "Este NPC se le asignara la (quotes)Pista(quotes) del edificio del cual sea dueño, En caso de multiples NPCs con este rasgo, se eligira uno aleatoriamente. Que significa esto? lo revisare despues porque ni el desarollador lo sabe.",
-                })
+					[LanguageCode.Spanish] = "Este NPC se le asignara la (quotes)Pista(quotes) del edificio del cual sea dueño, En caso de multiples NPCs con este rasgo, se eligira uno aleatoriamente. Que significa esto? lo revisare despues porque ni el desarollador lo sabe.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Chunk_Stash_Hint)),
-                    [LanguageCode.Spanish] = "Pista del Edificio",
-                })
+					[LanguageCode.Spanish] = "Pista del Edificio",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

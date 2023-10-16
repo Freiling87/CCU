@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Traits;
+using BunnyLibs;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,13 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Interface
 {
-    [HarmonyPatch(declaringType: typeof(CharacterSelect))]
+	[HarmonyPatch(typeof(CharacterSelect))]
 	public static class P_CharacterSelect
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(CharacterSelect.SetupSlotAgent))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(CharacterSelect.SetupSlotAgent))]
 		private static IEnumerable<CodeInstruction> SetupSlotAgent_HideCCUTraits(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -34,8 +34,8 @@ namespace CCU.Patches.Interface
 					new CodeInstruction(OpCodes.Ldfld, traitList),
 				},
 				targetInstructionSequence: new List<CodeInstruction>
-                {
-                },
+				{
+				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Call, displayableTraits),

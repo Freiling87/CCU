@@ -4,22 +4,22 @@ namespace CCU.Traits.App_LC1
 {
 	public class Zombie_Legs_2 : T_LegsColor
 	{
-        public override string[] Rolls => new string[] { "ZombieSkin2" };
+		public override string[] Rolls => new string[] { "ZombieSkin2" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Zombie_Legs_2>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Zombie_Legs_2)),
-                    [LanguageCode.Spanish] = "Piernas de Zombie 2",
-                })
+					[LanguageCode.Spanish] = "Piernas de Zombie 2",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
@@ -32,4 +32,3 @@ namespace CCU.Traits.App_LC1
 		public override void OnRemoved() { }
 	}
 }
- 

@@ -13,16 +13,16 @@ namespace CCU.Traits.App_HC3
 			PostProcess = RogueLibs.CreateCustomTrait<Matched_Masks>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "If a non-hair hairstyle (Hoodie, Gorilla, etc.) is rolled, matches its color to Body Color.\n\n" + 
+					[LanguageCode.English] = "If a non-hair hairstyle (Hoodie, Gorilla, etc.) is rolled, matches its color to Body Color.\n\n" +
 					"<color=red>Note:</color> Requires at least one Hair Color trait, or else hair will be randomized among body colors.",
-                    [LanguageCode.Spanish] = "Si se elige un no-peinado (Capucha, Gorila, etc.), este tendra el mismo color que el cuerpo.\n\n" +
-                    "<color=red>Note:</color> Requiere al menos un rasgo de color de pelo, o si no el color sera aleatorio.",
-                })
+					[LanguageCode.Spanish] = "Si se elige un no-peinado (Capucha, Gorila, etc.), este tendra el mismo color que el cuerpo.\n\n" +
+					"<color=red>Note:</color> Requiere al menos un rasgo de color de pelo, o si no el color sera aleatorio.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Matched_Masks)),
-                    [LanguageCode.Spanish] = "Set de Botarga",
-                })
+					[LanguageCode.Spanish] = "Set de Botarga",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

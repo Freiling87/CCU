@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_BT1
 {
 	public class Scientist_Body : T_BodyType
-    {
+	{
 		public override string[] Rolls => new string[] { VanillaAgents.Scientist };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Scientist_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Scientist_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo de Cientifico",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Cientifico",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

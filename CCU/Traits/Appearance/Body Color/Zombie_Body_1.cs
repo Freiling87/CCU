@@ -6,20 +6,20 @@ namespace CCU.Traits.App_BC1
 	{
 		public override string[] Rolls => new string[] { "ZombieSkin1" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Zombie_Body_1>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Zombie_Body_1)),
-                    [LanguageCode.Spanish] = "Cuerpo Color Zombie",
-                })
+					[LanguageCode.Spanish] = "Cuerpo Color Zombie",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Curtains : T_Hairstyle
+	public class Curtains : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "Curtains" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Curtains>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Curtains)),
-                    [LanguageCode.Spanish] = "Cortinas",
-                })
+					[LanguageCode.Spanish] = "Cortinas",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

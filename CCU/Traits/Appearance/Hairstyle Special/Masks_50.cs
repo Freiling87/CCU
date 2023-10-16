@@ -3,11 +3,11 @@ using RogueLibsCore;
 
 namespace CCU.Traits.App_HS3
 {
-    public class Masks_50 : T_Hairstyle
+	public class Masks_50 : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Masks_50>()
@@ -18,8 +18,8 @@ namespace CCU.Traits.App_HS3
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Masks_50), "Masks 50%"),
-                    [LanguageCode.Spanish] = "Máscaras 50%",
-                })
+					[LanguageCode.Spanish] = "Máscaras 50%",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

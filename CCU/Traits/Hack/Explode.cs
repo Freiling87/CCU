@@ -1,40 +1,40 @@
-﻿using RogueLibsCore;
-using CCU.Localization;
+﻿using BunnyLibs;
+using RogueLibsCore;
 using System;
 
 namespace CCU.Traits.Hack
 {
-    public class Explode : T_Hack
-    {
-        public override string ButtonText => VButtonText.Hack_Haywire;
+	public class Explode : T_Hack
+	{
+		public override string ButtonText => VButtonText.Hack_Haywire;
 
-        //[RLSetup]
-        public static void Setup()
-        {
-            PostProcess = RogueLibs.CreateCustomTrait<Explode>()
-                .WithDescription(new CustomNameInfo
-                {
-                    [LanguageCode.English] = String.Format("This character can be hacked to Explode.\n\n" + 
-                    "<color=red>Requires:</color> Electronic"),
-                    [LanguageCode.Spanish] = "Este NPC puede ser hackeado para que explote.",
+		//[RLSetup]
+		public static void Setup()
+		{
+			PostProcess = RogueLibs.CreateCustomTrait<Explode>()
+				.WithDescription(new CustomNameInfo
+				{
+					[LanguageCode.English] = String.Format("This character can be hacked to Explode.\n\n" +
+					"<color=red>Requires:</color> Electronic"),
+					[LanguageCode.Spanish] = "Este NPC puede ser hackeado para que explote.",
 
-                })
-                .WithName(new CustomNameInfo
-                {
-                    [LanguageCode.English] = DesignerName(typeof(Explode)),
-                    [LanguageCode.Spanish] = "Explotar",
+				})
+				.WithName(new CustomNameInfo
+				{
+					[LanguageCode.English] = DesignerName(typeof(Explode)),
+					[LanguageCode.Spanish] = "Explotar",
 
-                })
-                .WithUnlock(new TraitUnlock_CCU
-                {
-                    Cancellations = { },
-                    CharacterCreationCost = 0,
-                    IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
-                });
-        }
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
-    }
+				})
+				.WithUnlock(new TraitUnlock_CCU
+				{
+					Cancellations = { },
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = Core.designerEdition,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
 }

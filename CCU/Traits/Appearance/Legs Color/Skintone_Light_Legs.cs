@@ -6,20 +6,20 @@ namespace CCU.Traits.App_LC1
 	{
 		public override string[] Rolls => new string[] { "PaleSkin" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Skintone_Light_Legs>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de piernas a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Skintone_Light_Legs)),
-                    [LanguageCode.Spanish] = "Piernas Color Piel Clara",
-                })
+					[LanguageCode.Spanish] = "Piernas Color Piel Clara",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

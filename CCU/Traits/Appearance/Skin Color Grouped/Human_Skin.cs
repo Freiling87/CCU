@@ -7,7 +7,7 @@ namespace CCU.Traits.App_SC2
 	{
 		// The double-presence of the WhiteSkin string is to mirror the vanilla code.
 		// I'm not a huge fan of it, but complaints go to Matt, not to me.
-		public override string[] Rolls => 
+		public override string[] Rolls =>
 			new string[] { "BlackSkin", "GoldSkin", "LightBlackSkin", "MixedSkin", "PaleSkin", "PinkSkin", "WhiteSkin", "WhiteSkin" };
 
 		[RLSetup]
@@ -17,13 +17,13 @@ namespace CCU.Traits.App_SC2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega varios colores de piel a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega varios colores de piel a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Human_Skin)),
-                    [LanguageCode.Spanish] = "Piel Humana",
-                })
+					[LanguageCode.Spanish] = "Piel Humana",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

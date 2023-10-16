@@ -1,14 +1,14 @@
 ﻿using BepInEx.Logging;
-using CCU.Localization;
+using BunnyLibs;
 using RogueLibsCore;
 
-namespace CCU.Hooks
+namespace CCU
 {
 	public class H_InvItem : HookBase<InvItem>
 	{
 		// Instance = host InvItem
 
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		public bool vanillaLongerRapidFire;
@@ -34,10 +34,10 @@ namespace CCU.Hooks
 
 			switch (weaponMod)
 			{
-				case vItem.AmmoCapacityMod:
+				case VItemName.AmmoCapacityMod:
 					Instance.maxAmmo = (int)(Instance.maxAmmo * 1.4f);
 					break;
-				case vItem.RubberBulletsMod:
+				case VItemName.RubberBulletsMod:
 					Instance.Categories.Add(VItemCategory.NonViolent);
 					Instance.Categories.Add(VItemCategory.NotRealWeapons);
 					break;

@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.Loadout_Money
 {
-    internal class Prosperous : T_PocketMoney
+	public class Prosperous : T_PocketMoney
 	{
-        public override int MoneyAmount => UnityEngine.Random.Range(26, 41);
+		public override int MoneyAmount => UnityEngine.Random.Range(26, 41);
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Prosperous>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent spawns with $26 to $41.",
-                    [LanguageCode.Spanish] = "NPC spawnea con $26 hasta $41.",
-                })
+					[LanguageCode.Spanish] = "NPC spawnea con $26 hasta $41.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Prosperous)),
-                    [LanguageCode.Spanish] = "Prospero",
-                })
+					[LanguageCode.Spanish] = "Prospero",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

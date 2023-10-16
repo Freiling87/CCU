@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Localization;
-using CCU.Traits.Relationships;
+using BunnyLibs;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -9,126 +8,126 @@ using UnityEngine;
 
 namespace CCU.Traits.Rel_Faction
 {
-    public abstract class T_Rel_Faction : T_Relationships
-    {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
+	public abstract class T_Rel_Faction : T_Relationships
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 
-        public T_Rel_Faction() : base() { }
+		public T_Rel_Faction() : base() { }
 
-        public abstract int Faction { get; }
-        public abstract Alignment FactionAlignment { get; }
+		public abstract int Faction { get; }
+		public abstract Alignment FactionAlignment { get; }
 
-        public enum Alignment
-        {
-            Aligned,
-            Annoyed,
-            Friendly,
-            Hateful,
-            Loyal,
-            Neutral,
-            Submissive
-        }
+		public enum Alignment
+		{
+			Aligned,
+			Annoyed,
+			Friendly,
+			Hateful,
+			Loyal,
+			Neutral,
+			Submissive
+		}
 
-        public static string GetFactionRelationship(Agent agent, int faction) =>
-            agent.GetTraits<T_Rel_Faction>().FirstOrDefault(t => t.Faction == faction)?.FactionAlignment.ToString() ?? VRelationship.Neutral;
+		public static string GetFactionRelationship(Agent agent, int faction) =>
+			agent.GetTraits<T_Rel_Faction>().FirstOrDefault(t => t.Faction == faction)?.FactionAlignment.ToString() ?? VRelationship.Neutral;
 
-        public static Alignment? GetFactionAlignment(Agent agent, int faction) =>
-            agent.GetTraits<T_Rel_Faction>().FirstOrDefault(t => t.Faction == faction)?.FactionAlignment ?? Alignment.Neutral;
-        
-        public static class AlignmentUtils
-        {
-            public static bool CountsAsBlahd(Agent agent) =>
-                agent.agentName == VanillaAgents.GangsterBlahd
-                || agent.HasTrait<Blahd_Aligned>();
+		public static Alignment? GetFactionAlignment(Agent agent, int faction) =>
+			agent.GetTraits<T_Rel_Faction>().FirstOrDefault(t => t.Faction == faction)?.FactionAlignment ?? Alignment.Neutral;
 
-            public static bool CountsAsCrepe(Agent agent) =>
-                agent.agentName == VanillaAgents.GangsterCrepe
-                || agent.HasTrait<Crepe_Aligned>();
+		public static class AlignmentUtils
+		{
+			public static bool CountsAsBlahd(Agent agent) =>
+				agent.agentName == VanillaAgents.GangsterBlahd
+				|| agent.HasTrait<Blahd_Aligned>();
 
-            public static Alignment FromString(string alignmentString) =>
-                Enum.TryParse(alignmentString, true, out Alignment alignment)
-                    ? alignment
-                    : Alignment.Neutral;
+			public static bool CountsAsCrepe(Agent agent) =>
+				agent.agentName == VanillaAgents.GangsterCrepe
+				|| agent.HasTrait<Crepe_Aligned>();
 
-            // i.e. how much do I care about your opinion, if my opinion is {X}
-            public static Dictionary<Alignment, float> alignmentWeights = new Dictionary<Alignment, float>() {
+			public static Alignment FromString(string alignmentString) =>
+				Enum.TryParse(alignmentString, true, out Alignment alignment)
+					? alignment
+					: Alignment.Neutral;
 
-                    { Alignment.Hateful,    -1.00f },
-                    { Alignment.Annoyed,    -0.25f },
-                    { Alignment.Neutral,     0.00f },
-                    { Alignment.Friendly,    0.25f },
-                    { Alignment.Loyal,       0.50f },
-                    { Alignment.Aligned,     1.00f },
-                };
+			// i.e. how much do I care about your opinion, if my opinion is {X}
+			public static Dictionary<Alignment, float> alignmentWeights = new Dictionary<Alignment, float>() {
 
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="self"></param>
-            /// <param name="other"></param>
-            /// <returns>
-            /// Float between [-1, +1] | -1 being strong disagreement, +1 strong agreement
-            /// </returns>
-            public static float GetAgreementStrength(Alignment self, Alignment other)
-            {
-                //  TryGet returns only a bool. The out is assigning the actual dict value to self/otherWeight.
-                float selfWeight = alignmentWeights.TryGetValue(self, out selfWeight) ? selfWeight : 0;
-                float otherWeight = alignmentWeights.TryGetValue(other, out otherWeight) ? otherWeight : 0;
+					{ Alignment.Hateful,    -1.00f },
+					{ Alignment.Annoyed,    -0.25f },
+					{ Alignment.Neutral,     0.00f },
+					{ Alignment.Friendly,    0.25f },
+					{ Alignment.Loyal,       0.50f },
+					{ Alignment.Aligned,     1.00f },
+				};
 
-                if (selfWeight < 0 && otherWeight < 0)
-                    return 0;
+			/// <summary>
+			/// 
+			/// </summary>
+			/// <param name="self"></param>
+			/// <param name="other"></param>
+			/// <returns>
+			/// Float between [-1, +1] | -1 being strong disagreement, +1 strong agreement
+			/// </returns>
+			public static float GetAgreementStrength(Alignment self, Alignment other)
+			{
+				//  TryGet returns only a bool. The out is assigning the actual dict value to self/otherWeight.
+				float selfWeight = alignmentWeights.TryGetValue(self, out selfWeight) ? selfWeight : 0;
+				float otherWeight = alignmentWeights.TryGetValue(other, out otherWeight) ? otherWeight : 0;
 
-                return selfWeight * otherWeight;
-            }
+				if (selfWeight < 0 && otherWeight < 0)
+					return 0;
 
-            public static Alignment GetAlignmentFromAgreement(float agreement)
-            {
-                float alignmentStrength = Mathf.Clamp01(Mathf.Abs(agreement));
-                Alignment[] alignmentsOrderedAscending;
+				return selfWeight * otherWeight;
+			}
 
-                if (agreement > 0)
-                    alignmentsOrderedAscending = new[] 
-                    {
-                        Alignment.Neutral,
-                        Alignment.Friendly,
-                        Alignment.Loyal,
-                        Alignment.Aligned
-                    };
-                else
-                    alignmentsOrderedAscending = new[] 
-                    {
-                        Alignment.Neutral,
-                        Alignment.Annoyed,
-                        Alignment.Hateful
-                    };
+			public static Alignment GetAlignmentFromAgreement(float agreement)
+			{
+				float alignmentStrength = Mathf.Clamp01(Mathf.Abs(agreement));
+				Alignment[] alignmentsOrderedAscending;
 
-                int alignmentIndex = Mathf.RoundToInt((alignmentsOrderedAscending.Length - 1) * alignmentStrength);
+				if (agreement > 0)
+					alignmentsOrderedAscending = new[]
+					{
+						Alignment.Neutral,
+						Alignment.Friendly,
+						Alignment.Loyal,
+						Alignment.Aligned
+					};
+				else
+					alignmentsOrderedAscending = new[]
+					{
+						Alignment.Neutral,
+						Alignment.Annoyed,
+						Alignment.Hateful
+					};
 
-                return alignmentsOrderedAscending[alignmentIndex];
-            }
+				int alignmentIndex = Mathf.RoundToInt((alignmentsOrderedAscending.Length - 1) * alignmentStrength);
 
-            public static Alignment GetAverageAlignment(Agent thisAgent, Agent otherAgent)
-            {
-                try
-                {
-                    float averageAgreementStrength =
-                        Enumerable.Range(1, 4)
-                        .Select(faction => new
-                        {
-                            thisAlignment = GetFactionAlignment(thisAgent, faction),
-                            otherAlignment = GetFactionAlignment(otherAgent, faction)
-                        })
-                        .Where(alignments => alignments.thisAlignment != Alignment.Neutral || alignments.otherAlignment != Alignment.Neutral) // May be 0
-                        .Select(alignments => GetAgreementStrength(alignments.thisAlignment.Value, alignments.otherAlignment.Value))
-                        .Average();
+				return alignmentsOrderedAscending[alignmentIndex];
+			}
 
-                    return GetAlignmentFromAgreement(averageAgreementStrength);
-                }
-                catch
-                {
-                    return Alignment.Neutral;
-                }
-            }
-        }
-    }
+			public static Alignment GetAverageAlignment(Agent thisAgent, Agent otherAgent)
+			{
+				try
+				{
+					float averageAgreementStrength =
+						Enumerable.Range(1, 4)
+						.Select(faction => new
+						{
+							thisAlignment = GetFactionAlignment(thisAgent, faction),
+							otherAlignment = GetFactionAlignment(otherAgent, faction)
+						})
+						.Where(alignments => alignments.thisAlignment != Alignment.Neutral || alignments.otherAlignment != Alignment.Neutral) // May be 0
+						.Select(alignments => GetAgreementStrength(alignments.thisAlignment.Value, alignments.otherAlignment.Value))
+						.Average();
+
+					return GetAlignmentFromAgreement(averageAgreementStrength);
+				}
+				catch
+				{
+					return Alignment.Neutral;
+				}
+			}
+		}
+	}
 }

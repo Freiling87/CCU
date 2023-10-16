@@ -1,6 +1,4 @@
-﻿using CCU.Hooks;
-
-namespace CCU.Traits.Interaction
+﻿namespace CCU.Traits.Interaction
 {
 	public interface IBranchInteractionMenu
 	{
@@ -21,5 +19,4 @@ namespace CCU.Traits.Interaction
 		TeachTraits_Stealth,
 		TeachTraits_Trade,
 	}
-
 }

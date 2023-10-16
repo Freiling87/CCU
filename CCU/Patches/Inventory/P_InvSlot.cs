@@ -1,18 +1,19 @@
 ﻿using BepInEx.Logging;
+using BunnyLibs;
 using HarmonyLib;
 
 namespace CCU.Patches.Inventory
 {
-    [HarmonyPatch(declaringType: typeof(InvSlot))]
-    public static class P_InvSlot
-    {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
+	[HarmonyPatch(typeof(InvSlot))]
+	public static class P_InvSlot
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(InvSlot.MoveFromChestToInventory))]
-        public static void MoveFromChestToInventory_Postfix(InvSlot __instance)
-        {
-            __instance.item.SetupDetails(true);
-        }
-    }
-} 
+		[HarmonyPostfix, HarmonyPatch(nameof(InvSlot.MoveFromChestToInventory))]
+		public static void MoveFromChestToInventory_Postfix(InvSlot __instance)
+		{
+			__instance.item.SetupDetails(true);
+		}
+	}
+}

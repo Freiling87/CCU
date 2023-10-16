@@ -1,18 +1,18 @@
-﻿using CCU.Localization;
+﻿using BunnyLibs;
 using RogueLibsCore;
 using System.Collections.Generic;
 
 namespace CCU.Traits.Loadout_Gun_Nut
 {
-    internal class Ammo_Stocker : T_GunNut
-    {
+	public class Ammo_Stocker : T_GunNut
+	{
 		public override string GunMod => VanillaItems.AmmoCapacityMod;
 		public override List<string> ExcludedItems => new List<string>()
 		{
-			vItem.OilContainer,
-			vItem.ResearchGun,
-			vItem.Taser,
-			vItem.WaterPistol,
+			VItemName.OilContainer,
+			VItemName.ResearchGun,
+			VItemName.Taser,
+			VItemName.WaterPistol,
 		};
 
 		[RLSetup]
@@ -22,13 +22,13 @@ namespace CCU.Traits.Loadout_Gun_Nut
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent applies an Ammo Stock to all eligible ranged weapons in inventory. Only gives free ammo on start to NPCs.",
-                    [LanguageCode.Spanish] = "Aplica el Stock de Munición a todas tus armas, NPCs con este rasgo obtienen un poco de munición gratis.",
-                })
+					[LanguageCode.Spanish] = "Aplica el Stock de Munición a todas tus armas, NPCs con este rasgo obtienen un poco de munición gratis.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Ammo_Stocker)),
-                    [LanguageCode.Spanish] = "Restocker de Munición",
-                })
+					[LanguageCode.Spanish] = "Restocker de Munición",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 5,

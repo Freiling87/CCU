@@ -11,15 +11,15 @@ namespace CCU.Traits.Map_Marker
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "This character should spawn with a Map Marker. Let's see what happens!",
-                    [LanguageCode.Spanish] = "Racism Code Enabler",
+					[LanguageCode.Spanish] = "Racism Code Enabler",
 
-                })
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(MapMarker_Pilot)),
-                    [LanguageCode.Spanish] = "E_Sex",
+					[LanguageCode.Spanish] = "E_Sex",
 
-                })
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

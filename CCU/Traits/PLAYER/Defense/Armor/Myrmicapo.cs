@@ -1,26 +1,26 @@
-﻿using CCU.Localization;
+﻿using BunnyLibs;
 using RogueLibsCore;
 
 namespace CCU.Traits.Player.Armor
 {
-    internal class Myrmicapo : T_Myrmicosanostra
-    {
-        public override float ArmorDurabilityChangeMultiplier => 0.66f;
+	public class Myrmicapo : T_Myrmicosanostra
+	{
+		public override float ArmorDurabilityChangeMultiplier => 0.66f;
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Myrmicapo>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Armor damage reduced by 1/3.",
-                    [LanguageCode.Spanish] = "Reduce el daño a la armadura por 1/3.",
-                })
+					[LanguageCode.Spanish] = "Reduce el daño a la armadura por 1/3.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Myrmicapo)),
-                    [LanguageCode.Spanish] = "Myrmicapo",
-                })
+					[LanguageCode.Spanish] = "Myrmicapo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					Cancellations = { nameof(Myrmidon) },
@@ -37,6 +37,6 @@ namespace CCU.Traits.Player.Armor
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
-    }
+		public override void OnRemoved() { }
+	}
 }

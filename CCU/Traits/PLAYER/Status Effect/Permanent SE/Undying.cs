@@ -1,10 +1,11 @@
-﻿using HarmonyLib;
+﻿using BunnyLibs;
+using HarmonyLib;
 using RogueLibsCore;
 
 namespace CCU.Traits.Player.Status_Effect
 {
-	internal class Undying : T_PermanentStatusEffect_P, ISetupAgentStats
-    {
+	public class Undying : T_PermanentStatusEffect_P, ISetupAgentStats
+	{
 		public override string statusEffectName => VanillaEffects.Resurrection;
 
 		[RLSetup]
@@ -21,7 +22,7 @@ namespace CCU.Traits.Player.Status_Effect
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					Cancellations = {  },
+					Cancellations = { },
 					CharacterCreationCost = 100,
 					IsAvailable = false,
 					IsAvailableInCC = true,
@@ -36,13 +37,13 @@ namespace CCU.Traits.Player.Status_Effect
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
+		public override void OnRemoved() { }
 	}
 
 	[HarmonyPatch(typeof(StatusEffects))]
-	internal class P_StatusEffects_Undying
+	public class P_StatusEffects_Undying
 	{
-		[HarmonyPostfix,HarmonyPatch(nameof(StatusEffects.Resurrect))]
+		[HarmonyPostfix, HarmonyPatch(nameof(StatusEffects.Resurrect))]
 		public static void Resurrect_Undying(StatusEffects __instance)
 		{
 			if (__instance.agent.HasTrait<Undying>()

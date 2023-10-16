@@ -6,20 +6,20 @@ namespace CCU.Traits.App_BC1
 	{
 		public override string[] Rolls => new string[] { "SuperPaleSkin" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Skintone_Lighter_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Skintone_Lighter_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo de Piel Mas Clara",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Piel Mas Clara",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

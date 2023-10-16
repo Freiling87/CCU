@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Puffy_Long : T_Hairstyle
+	public class Puffy_Long : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "PuffyLong" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Puffy_Long>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Puffy_Long)),
-                    [LanguageCode.Spanish] = "Inchado Largo",
-                })
+					[LanguageCode.Spanish] = "Inchado Largo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

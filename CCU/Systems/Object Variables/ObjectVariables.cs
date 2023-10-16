@@ -1,20 +1,19 @@
-﻿using CCU.Localization;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System.Collections.Generic;
 
 namespace CCU.Systems.Object_Variables
 {
-    class ObjectVariables
+	class ObjectVariables
 	{
 		public enum SlotType
-        {
+		{
 			AttackMode,
 			Container,
 			Durability,
 			ExplosionType,
 			Investigation,
 			None
-        }
+		}
 
 		public static Dictionary<string, SlotType[]> ObjectVariableSlots = new Dictionary<string, SlotType[]>()
 		{

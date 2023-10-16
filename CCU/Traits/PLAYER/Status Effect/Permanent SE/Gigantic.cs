@@ -1,9 +1,10 @@
-﻿using RogueLibsCore;
+﻿using BunnyLibs;
+using RogueLibsCore;
 
 namespace CCU.Traits.Player.Status_Effect
 {
-	internal class Gigantic : T_PermanentStatusEffect_P, ISetupAgentStats
-    {
+	public class Gigantic : T_PermanentStatusEffect_P, ISetupAgentStats
+	{
 		public override string statusEffectName => VanillaEffects.Giant;
 
 		[RLSetup]
@@ -35,6 +36,6 @@ namespace CCU.Traits.Player.Status_Effect
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
+		public override void OnRemoved() { }
 	}
 }

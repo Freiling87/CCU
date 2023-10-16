@@ -1,9 +1,10 @@
-﻿using RogueLibsCore;
+﻿using BunnyLibs;
+using RogueLibsCore;
 
 namespace CCU.Traits.Player.Status_Effect
 {
-	internal class Slothful : T_PermanentStatusEffect_P, ISetupAgentStats
-    {
+	public class Slothful : T_PermanentStatusEffect_P, ISetupAgentStats
+	{
 		public override string statusEffectName => VanillaEffects.Slow;
 
 		[RLSetup]
@@ -35,6 +36,6 @@ namespace CCU.Traits.Player.Status_Effect
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
+		public override void OnRemoved() { }
 	}
 }

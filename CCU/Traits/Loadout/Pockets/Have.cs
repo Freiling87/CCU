@@ -3,7 +3,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Pockets
 {
-    internal class Have : T_Loadout
+	public class Have : T_Loadout
 	{
 		[RLSetup]
 		public static void Setup()
@@ -12,13 +12,13 @@ namespace CCU.Traits.Loadout_Pockets
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent will never fail to generate a pocket item, if there are any added to their item pool.",
-                    [LanguageCode.Spanish] = "NPC siempre tendra un item de bolsillo, si tiene uno en la lista.",
-                })
+					[LanguageCode.Spanish] = "NPC siempre tendra un item de bolsillo, si tiene uno en la lista.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Have)),
-                    [LanguageCode.Spanish] = "Tiene",
-                })
+					[LanguageCode.Spanish] = "Tiene",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

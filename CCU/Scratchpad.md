@@ -7,16 +7,36 @@ Listed in order of Parent tier summary symbol priority:
 	D = Document
 	√ = Fully implemented feature or group of features
 ##			Change Log
-- **Bug Fixes**
-  - Previously fixed vanilla bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name
-  - Agents spawned via FriendPhone will now re-roll their appearance, since they're not clones.
 - **Feature Additions**
   - Player Traits
 	- Permanent Status Effects
   - Designer Traits
     - Vigilance: Determines how the agent reacts to sound, in regards to investigation and property.
+- **Tweaks**
+  - Agents spawned via Friend Phone will now re-roll their appearance if they have the traits for it, since they're not clones.
+  - Scumbags are no longer automatically Guilty.
+- **Bug Fixes**
+  - Previously fixed vanilla bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name.
 ##			Bugs
 Except crickets. Crickets are fine.
+###			C	
+###			C	Consumable rapid-use
+This is technically SORCE, but Melee Maniac seems to interact with it. Could be a good hint.
+###			C	Language broke AGAIN
+Can't speak to gorilla, have Speaks High Goryllian
+###			C	Exempt Scene Setter NPCs from possession
+Spawns shapeshifter on death
+###			C	Grab Everything
+Doesn't pick up safe combo
+Do we want them to though?
+Maybe a Grab Special would be appropriate
+###			C	Shops are empty
+Per CL, but this was with a test version.
+###			C	Dual Alignment freeze
+https://discord.com/channels/187414758536773632/1003391847902740561/1140063406997651469
+BT's alignment methods should handle this... test it
+###			C	Electronic blocks status effects
+Giant robot! Giant robot! Giant robot!
 ###			C	Indestructible Corpse Explosions
 GenEric: https://discord.com/channels/187414758536773632/991046848536006678/1138250512752459857
 If a corpse is indestructible and has explode on death, they will explode repeatedly.
@@ -165,16 +185,9 @@ So far, unable to replicate
 Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117896939837587517
 Issue was Loadout Money without a Loader trait.
 ##			Feature Scope
-###			H	Appearance-less
-All work great, but Eyeless copies over to Friend Phone Clone
-Also, seems like anything will turn them back on, like teleporting. So I think deactivating the game object rather than simply its animator might work.
-###			C	Campaign Branching
-Will need tools to:
-- Construct Mutator from options
-- Decompile options from Mutator (name only)
-- Detect Workshop content with specific prefix, destroy broken mutators and make new ones from the data.
-####			C	Mutator Configurator
-
+###			C	Mutator Configurator
+####			C	Load
+See P_GameController_SetupConfigurator
 ####			C	Agent Switches
 New
 ####			C	Agent Triggers
@@ -199,6 +212,38 @@ Also see if you can make the list more legible.
 Hide the mutators except when in leveleditor.
 ####			H	Object Switches
 Pending Object Button refactor
+###			C	Laser Emitter modes 
+Persistent - stays lit even after activation
+One that annoys instead of making hostile when activated.
+###			C	Scene Setters
+Dead (No Drops)
+###			C	Decal Objects
+Blood pool (or as scene setter)
+Bullet holes
+###			C	Weak Walls
+New door types. 
+
+Below are Strength requirements to break open weak walls. Strength status effect adds 1 to your strength check.
+
+|Wall Type		|Axe		|Crowbar	|Detonator	|Sledgehammer	|Wrench		|Wire Cutters	|
+|:--------------|:---------:|:---------:|:---------:|:-------------:|:---------:|:-------------:|
+|Barbed Wire	|2			|			|0			|1				|			|0 (Silent)
+|Bars			|			|4			|0			|3				|4			|4 (Silent)
+|Border/Concrete|			|			|0			|5				|			|			
+|Brick			|			|5			|0			|3				|			|
+|Cave			|			|4			|0			|3				|			|
+|Glass			|			|			|0			|3				|			|
+|Hedge			|2			|			|0			|4				|			|
+|Steel			|			|5			|0			|4				|			|
+|Wood			|3			|3			|0			|2				|			|
+###			H	Appearance-less
+All work great, but Eyeless copies over to Friend Phone Clone
+Also, seems like anything will turn them back on, like teleporting. So I think deactivating the game object rather than simply its animator might work.
+###			C	Campaign Branching
+Will need tools to:
+- Construct Mutator from options
+- Decompile options from Mutator (name only)
+- Detect Workshop content with specific prefix, destroy broken mutators and make new ones from the data.
 ###			P	Pre-release checks
 ####			Quality Review
 Review all implemented features and fixes:
@@ -351,6 +396,73 @@ Has some debug tools that can be the basis for a bit of interesting content
 If you override these in an abstract class, you don't need to waste the space on the subclasses.
 ##			Idea Dump
 Apparently I want to type these without any forethought, so this will be a dump to be periodically assorted.
+###				Vote Weight traits
+Antivoter -			-1x
+Disenfranchised -	 0x
+Activist -			 2x
+Councilmember -		 3x
+Elector -			 4x
+UwuMac's ideas:
+	Semidisenfranchised: 50% chance to apply ×0 multiplier to agent elect power. (applies on spawn).
+	Straw polls: apply a random integer multiplier to elect power from 1× to 3× (inclusive, applies on spawn)
+	Status symbol (mutator...?): shows vote power in NPC name as a postfix, eg: "Slum Dweller (×4 Voter)". 
+	Poltertician: this NPC dying does not remove it's elect power from your electability score. 
+	Poltertician +: also, this NPC becomes a ghost when it dies that retains ownership, opinions and (ideally) clothing and loses this trait (so it won't respawn infinitely). 
+###				Aligned to Same Class
+Not same as Class Solidarity (Makes Loyal and adds No-Infighting effect)
+###				Self-proclaimed hero
+Acts as law enforcer without The Law
+###				Same as ID for Agents
+Should just be reactivating a field
+###				Gib type Wooden
+Per Cheese
+###				NPC Door Link trait
+Neutralizing NPC is only way to open the door
+###				Broken Object
+Spawn object as wreckage
+Per CL, could use direction field since they're exclusive to each other.
+###				Squad ID
+Only unused field for agents is "Same as Agent" or whatever. Might be able to use that as a starting-behavior modifier.
+###				Vent Spewing
+Per-object or as chunk mutator? 
+Either way, offer various status types
+###				Demographic Skin
+Did it for hair, why not for skin?
+###				Chunk Mutators
+Chunk-wide mutators
+	Localized Disasters
+	Faction Palette Swaps
+###				Status Traits
+Just a proper name for the alignment/skill etc. temp traits you designed
+###				Subclass Traits
+####				uwuMac's ideas
+Subclass Residency traits:
+by default a subclass can spawn in any enviroment. but will only spawn in these enviroments if one or more Subclasss Residency category traits are selected. EG: a char with SCR | Bar and SCR | Arena can only spawn in bars and arenas but on every floor, but SCR | Bar and SCR | Park allows them to only spawn on bars in park.
+[Chunk Descriptor or Chunk Special]: character can only spawn in these chunks.
+[District]: character can only spawn in these districts.
+[Default Goal]: character can only spawn if the NPC has this default goal.
+
+Subclass Owning traits:
+these follow the same "additive" principal as residency traits.
+Ownful: character can only spawn if they are an owner and not a guard.
+Ownless: character can only spawn if they don't own anything.
+Apprentice Owner: character can only spawn as a guard.
+Master Owner: character can only spawn if they are the chunk owner.
+
+Misc traits:
+Disastrous: character can only spawn on floors with disasters.
+Deep District Dweller: character can only spawn on floors x-2 or x-3.
+Groupie: replace every class of the type this character spawned as in a chunk as long as they meet the restrictions.
+Special Delivery: character can replace agents summoned after the level loads (eg: supercop booth, summoning ghosts by breaking gravestones)
+####				Class Rotation
+Vanilla agents become Agent Groups with any Superclassed customs, and replaced by a random selection therein.
+MultiVar trait? Other filters to add to Class Rotation: District, Chunk Type, Difficulty, special tags that are triggered by Chunk Mutators
+###				Modularize Zombiism trait
+New
+###				Modularize Electronic trait
+New
+###				Modularize Ghost trait
+New
 ###				Custom MapGen
 ####				Subway Network
 Generate a map separated into strips separated by Holes. The player has to figure out a way to get access to the Subway train for each strip of the level, which will take him to a random or designated next station.
@@ -604,3 +716,5 @@ To cancel illegibly tiny text on right panel
 ###			C	CharacterSelect.CharacterLoaded
 This is a bool array that might be easier than checking for nulls on charsavedata. 
 Slots 32-48 are custom characters, and it's true
+###			C	Flammable trait
+Use lighter to explode an NPC

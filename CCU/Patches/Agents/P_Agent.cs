@@ -2,9 +2,9 @@
 using BTHarmonyUtils.InstructionSearch;
 using BTHarmonyUtils.MidFixPatch;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Hooks;
+using BunnyLibs;
+
 using CCU.Localization;
-using CCU.Traits;
 using CCU.Traits.Behavior;
 using CCU.Traits.Passive;
 using HarmonyLib;
@@ -18,14 +18,14 @@ using System.Reflection.Emit;
 namespace CCU.Patches.Agents
 {
 	// TODO: Move to BunnyLib
-	[HarmonyPatch(declaringType: typeof(Agent))]
+	[HarmonyPatch(typeof(Agent))]
 	public class P_Agent
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		#region Agent Info Logging
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.Interact), argumentTypes: new[] { typeof(Agent) })]
+		[HarmonyPostfix, HarmonyPatch(nameof(Agent.Interact), new[] { typeof(Agent) })]
 		public static void Interact_Prefix(Agent __instance)
 		{
 			bool logAgent = true;
@@ -96,7 +96,7 @@ namespace CCU.Patches.Agents
 				log += "======= Shop Inventory ==========";
 
 				// Name check prevents bug that breaks shops. Purchased items are not removed from the list but their name is nulled.
-				foreach (InvItem ii in agent.specialInvDatabase.InvItemList.Where(i => !(i.invItemName is null))) 
+				foreach (InvItem ii in agent.specialInvDatabase.InvItemList.Where(i => !(i.invItemName is null)))
 					log += "\n\t- " + ii.invItemName.PadRight(20) + "* " + ii.invItemCount;
 			}
 
@@ -131,7 +131,7 @@ namespace CCU.Patches.Agents
 		}
 		#endregion
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.AgentLateUpdate), argumentTypes: new Type[0] { })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Agent.AgentLateUpdate), new Type[0] { })]
 		private static IEnumerable<CodeInstruction> AgentLateUpdate_LimitWaterDamageToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -153,11 +153,11 @@ namespace CCU.Patches.Agents
 			return instructions;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Agent.CanShakeDown))]
+		[HarmonyPostfix, HarmonyPatch(nameof(Agent.CanShakeDown))]
 		public static void CanShakeDown_Postfix(Agent __instance, ref bool __result)
 		{
 			if (__instance.HasTrait<Extortable>())
-            {
+			{
 				if (__instance.oma.shookDown || GC.loadLevel.LevelContainsMayor())
 				{
 					__result = false;
@@ -172,17 +172,18 @@ namespace CCU.Patches.Agents
 			}
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.FindSpeed))]
+		// TODO: IModMovement
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.FindSpeed))]
 		public static bool FindSpeed_Prefix(Agent __instance, ref int __result)
-        {
+		{
 			if (__instance.HasTrait<Immobile>())
-            {
+			{
 				__result = 0;
 				return false;
-            }
+			}
 
 			return true;
-        }
+		}
 
 		/// <summary>
 		/// Extend Job Type Pseudo-enum 
@@ -191,7 +192,7 @@ namespace CCU.Patches.Agents
 		/// <param name="jobInt"></param>
 		/// <param name="__result"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetCodeFromJob), argumentTypes: new[] { typeof(int) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.GetCodeFromJob), new[] { typeof(int) })]
 		public static bool GetCodeFromJob_Prefix(int jobInt, ref string __result)
 		{
 			switch (jobInt)
@@ -215,7 +216,7 @@ namespace CCU.Patches.Agents
 		/// <param name="jobString"></param>
 		/// <param name="__result"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.GetJobCode), argumentTypes: new[] { typeof(string) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.GetJobCode), new[] { typeof(string) })]
 		public static bool GetJobCode_Prefix(string jobString, ref jobType __result)
 		{
 			// No idea how to extend an actual enum, and the advice I've gotten has been worrying.
@@ -235,7 +236,7 @@ namespace CCU.Patches.Agents
 			return false;
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.ObjectAction), argumentTypes: new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.ObjectAction), new[] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) })]
 		public static bool ObjectAction_Prefix(string myAction, string extraString, float extraFloat, Agent causerAgent, PlayfieldObject extraObject, Agent __instance, ref bool ___noMoreObjectActions)
 		{
 			Core.LogMethodCall();
@@ -262,34 +263,34 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.Say), argumentTypes: new Type[] { typeof(string), typeof(bool) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.Say), new[] { typeof(string), typeof(bool) })]
 		public static bool Say_Prefix(ref string myMessage)
-        {
+		{
 			if (myMessage == "E_CantHeal")
 				myMessage = "Doctor_CantHeal";
 
 			return true;
-        }
+		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetBrainActive))]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetBrainActive))]
 		public static bool SetBrainActive_Prefix(Agent __instance, ref bool isActive)
-        {
+		{
 			if (__instance.HasTrait<Brainless>())
-            {
+			{
 				isActive = false;
 				__instance.brain.active = false;
 				__instance.interactable = false;
 			}
 
 			return true;
-        }
+		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetEmployer))]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetEmployer))]
 		public static bool SetEmployer_Prefix(Agent __instance, ref Agent myEmployer)
 		{
-			if (__instance.GetOrAddHook<H_Agent>().HiredPermanently &&
+			if (__instance.GetOrAddHook<H_AgentInteractions>().HiredPermanently &&
 				!(__instance.employer is null) && myEmployer is null)
-            {
+			{
 				myEmployer = __instance.employer;
 				__instance.job = "Follow";
 				__instance.jobCode = jobType.Follow;
@@ -298,14 +299,14 @@ namespace CCU.Patches.Agents
 			}
 
 			return true;
-        }
+		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetFollowing))]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetFollowing))]
 		public static bool SetFollowing_Prefix(Agent __instance, ref Agent myFollowing)
 		{
-			if (__instance.GetOrAddHook<H_Agent>().HiredPermanently &&
+			if (__instance.GetOrAddHook<H_AgentInteractions>().HiredPermanently &&
 				!(__instance.following is null) && myFollowing is null)
-            {
+			{
 				myFollowing = __instance.employer;
 				__instance.job = "Follow";
 				__instance.jobCode = jobType.Follow;
@@ -316,7 +317,7 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Agent.SetTraversable))]
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetTraversable))]
 		public static bool SetTraversable_AccidentProne(Agent __instance, ref string type)
 		{
 			if (__instance.HasTrait<Accident_Prone>())
@@ -325,7 +326,7 @@ namespace CCU.Patches.Agents
 			return true;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Agent.SetupAgentStats))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Agent.SetupAgentStats))]
 		private static IEnumerable<CodeInstruction> SetupAgentStats_LegacyUpdater(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -345,41 +346,6 @@ namespace CCU.Patches.Agents
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
-		}
-
-		[BTHarmonyMidFix(nameof(SetupAgentStats_InitCustomCharacter_Matcher))]
-		[HarmonyPatch(methodName: nameof(Agent.SetupAgentStats), argumentTypes: new[] { typeof(string) })]
-		private static void SetupAgentStats_InitCustomCharacter_MidFix(Agent __instance) {
-			// melee- and gunSkill control:
-			// - how frequently the agent performs actions,
-			// - how likely he is to attack,
-			// - how aggressively he performs in combat
-			__instance.modGunSkill = Math.Min(2, __instance.customCharacterData.accuracy); // max supported gunSkill is 2
-			__instance.modMeleeSkill = Math.Min(2, __instance.customCharacterData.strength); // max supported meleeSkill is 2
-		}
-
-		private static MidFixInstructionMatcher SetupAgentStats_InitCustomCharacter_Matcher() {
-			FieldInfo field_customCharacterData = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.customCharacterData));
-			FieldInfo field_strength = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.strength));
-
-			return new MidFixInstructionMatcher(
-					expectedMatches: 1,
-					postfixInstructionSequence: new[] {
-							InstructionMask.MatchOpCode(OpCodes.Ldarg_0),
-							InstructionMask.MatchOpCode(OpCodes.Ldarg_0),
-							InstructionMask.MatchInstruction(OpCodes.Ldfld, field_customCharacterData),
-							InstructionMask.MatchInstruction(OpCodes.Ldfld, field_strength),
-							InstructionMask.MatchOpCode(OpCodes.Call),
-					}
-			);
-		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: "Start")]
-		public static bool Start_CreateHook(Agent __instance)
-		{
-			__instance.GetOrAddHook<H_Agent>().Reset();
-
-			return true;
 		}
 	}
 }

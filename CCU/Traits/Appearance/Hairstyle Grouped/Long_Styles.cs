@@ -3,24 +3,24 @@ using RogueLibsCore;
 
 namespace CCU.Traits.App_HS2
 {
-    public class Long_Styles : T_Hairstyle
+	public class Long_Styles : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "BangsLong", "BangsMedium", "FlatLong", "MessyLong", "Wave", "PuffyLong" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Long_Styles>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds multiple items to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega varios peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega varios peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Long_Styles)),
-                    [LanguageCode.Spanish] = "Peinados Largos",
-                })
+					[LanguageCode.Spanish] = "Peinados Largos",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

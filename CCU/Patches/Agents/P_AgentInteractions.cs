@@ -1,8 +1,8 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Hooks;
-using CCU.Localization;
+using BunnyLibs;
+
 using CCU.Traits.Behavior;
 using CCU.Traits.Cost_Scale;
 using CCU.Traits.Hire_Duration;
@@ -24,16 +24,16 @@ using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Patches.Agents
 {
-	[HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	[HarmonyPatch(typeof(AgentInteractions))]
 	static class P_AgentInteractions
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		// TODO: Refactor
 		[RLSetup]
 		private static void Setup()
-        {
+		{
 			RogueInteractions.CreateProvider<Agent>(h =>
 			{
 				Agent agent = h.Object;
@@ -41,8 +41,8 @@ namespace CCU.Patches.Agents
 				if (agent.agentName != VanillaAgents.CustomCharacter)
 					return;
 
-				H_Agent hook = agent.GetOrAddHook<H_Agent>();
 				AgentInteractions agentInteractions = agent.agentInteractions;
+				H_AgentInteractions agentInteractionsHook = agent.GetOrAddHook<H_AgentInteractions>();
 				Agent interactingAgent = h.Agent;
 				string relationship = agent.relationships.GetRel(interactingAgent);
 				int relationshipLevel = VRelationship.GetRelationshipLevel(relationship);
@@ -52,7 +52,7 @@ namespace CCU.Patches.Agents
 				//	foreach (T_Hack hack in agent.GetTraits<T_Hack>())
 				//		agentInteractions.AddButton(hack.ButtonText);
 
-				if (hook.interactionState is InteractionState.Default)
+				if (agentInteractionsHook.interactionState is InteractionState.Default)
 				{
 					// Language check
 					if (!agent.CanUnderstandEachOther(interactingAgent, true, true))
@@ -100,7 +100,7 @@ namespace CCU.Patches.Agents
 
 								if (!agent.HasTrait<Permanent_Hire_Only>()) // Normal Hire
 								{
-									if (interactingAgent.inventory.HasItem(vItem.HiringVoucher))
+									if (interactingAgent.inventory.HasItem(VItemName.HiringVoucher))
 										h.AddButton(hireButtonText + "_Voucher", 6666, m =>
 										{
 											m.Agent.agentInteractions.QualifyHireAsProtection(agent, interactingAgent, 6666);
@@ -114,7 +114,7 @@ namespace CCU.Patches.Agents
 
 								if (agent.HasTrait<Permanent_Hire_Only>() || agent.HasTrait<Permanent_Hire>())
 								{
-									//if (interactingAgent.inventory.HasItem(vItem.HiringVoucher /*Add Gold Version*/))
+									//if (interactingAgent.inventory.HasItem(VItemName.HiringVoucher /*Add Gold Version*/))
 									//	h.AddButton(hireButtonText + "_Permanent_Voucher", 6667, m =>
 									//	{
 									//		//m.Object.agentInteractions.PressedButton(m.Object, interactingAgent, hireButtonText, 6667);
@@ -127,7 +127,7 @@ namespace CCU.Patches.Agents
 
 										if (agent.followingNum == interactingAgent.agentID)
 										{
-											agent.GetOrAddHook<H_Agent>().HiredPermanently = true;
+											agentInteractionsHook.HiredPermanently = true;
 											agent.canGoBetweenLevels = true;
 										}
 									});
@@ -153,7 +153,7 @@ namespace CCU.Patches.Agents
 							(trait is Pay_Debt && !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt1)
 													&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt2)
 													&& !interactingAgent.statusEffects.hasStatusEffect(VanillaEffects.InDebt3)) ||
-							(trait is Use_Blood_Bag && !interactingAgent.inventory.HasItem(vItem.BloodBag)))
+							(trait is Use_Blood_Bag && !interactingAgent.inventory.HasItem(VItemName.BloodBag)))
 							continue;
 						#endregion
 						#region Vanilla ad hoc exceptions
@@ -258,15 +258,15 @@ namespace CCU.Patches.Agents
 									agent.SayDialogue("WontJoinA");
 								else if (trait is Bribe_for_Entry_Alcohol)
 								{
-									if (interactingAgent.inventory.HasItem(vItem.Beer))
+									if (interactingAgent.inventory.HasItem(VItemName.Beer))
 										h.AddButton(VButtonText.BribeForEntryBeer, m =>
 										{
-											agentInteractions.Bribe(m.Object, interactingAgent, vItem.Beer, 0);
+											agentInteractions.Bribe(m.Object, interactingAgent, VItemName.Beer, 0);
 										});
-									else if (interactingAgent.inventory.HasItem(vItem.Whiskey))
+									else if (interactingAgent.inventory.HasItem(VItemName.Whiskey))
 										h.AddButton(VButtonText.BribeForEntryWhiskey, m =>
 										{
-											agentInteractions.Bribe(m.Object, interactingAgent, vItem.Whiskey, 0);
+											agentInteractions.Bribe(m.Object, interactingAgent, VItemName.Whiskey, 0);
 										});
 								}
 								else if (trait is Pay_Entrance_Fee)
@@ -281,7 +281,7 @@ namespace CCU.Patches.Agents
 
 									h.AddButton(buttonText, agent.determineMoneyCost(VDetermineMoneyCost.Bribe), m =>
 									{
-										agentInteractions.Bribe(m.Object, interactingAgent, vItem.Money, m.Object.determineMoneyCost(VDetermineMoneyCost.Bribe));
+										agentInteractions.Bribe(m.Object, interactingAgent, VItemName.Money, m.Object.determineMoneyCost(VDetermineMoneyCost.Bribe));
 									});
 								}
 							}
@@ -427,7 +427,7 @@ namespace CCU.Patches.Agents
 									{
 										h.AddButton(VButtonText.BribeDeportation, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation), m =>
 										{
-											agentInteractions.Bribe(m.Object, interactingAgent, vItem.Money, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
+											agentInteractions.Bribe(m.Object, interactingAgent, VItemName.Money, agent.determineMoneyCost(VDetermineMoneyCost.BribeDeportation));
 										});
 										h.AddButton(VButtonText.BribeDeportationItem, m =>
 										{
@@ -436,7 +436,7 @@ namespace CCU.Patches.Agents
 									}
 									break;
 								case VChunkType.Hotel:
-									if (agent.inventory.HasItem(vItem.Key))
+									if (agent.inventory.HasItem(VItemName.Key))
 										h.AddButton(VButtonText.BuyKeyHotel, agent.determineMoneyCost(VDetermineMoneyCost.BuyKey), m =>
 										{
 											if (!interactingAgent.inventory.hasEmptySlot())
@@ -483,7 +483,7 @@ namespace CCU.Patches.Agents
 
 									if (turntables.SpeakersFunctional() && !turntables.badMusicPlaying)
 									{
-										if (interactingAgent.inventory.HasItem(vItem.RecordofEvidence))
+										if (interactingAgent.inventory.HasItem(VItemName.RecordofEvidence))
 											h.AddButton(VButtonText.PlayMayorEvidence, agent.determineMoneyCost(VDetermineMoneyCost.PlayMayorEvidence), m =>
 											{
 												if (!m.Object.moneySuccess(m.Object.determineMoneyCost(VDetermineMoneyCost.PlayMayorEvidence)))
@@ -511,14 +511,14 @@ namespace CCU.Patches.Agents
 							}
 						}
 						#endregion
-						else 
+						else
 						{
 							if (trait is IBranchInteractionMenu branchTrait) // Assuming no cost to talk
 							{
 								if (branchTrait.ButtonCanShow(agent))
 									h.AddButton(trait.ButtonID, m =>
 									{
-										hook.interactionState = branchTrait.interactionState;
+										agentInteractionsHook.interactionState = branchTrait.interactionState;
 									});
 							}
 							else if (trait.DetermineMoneyCostID is null)
@@ -555,7 +555,7 @@ namespace CCU.Patches.Agents
 								agent.ShowNPCChest();
 							});
 
-							if (interactingAgent.inventory.HasItem(vItem.FreeItemVoucher))
+							if (interactingAgent.inventory.HasItem(VItemName.FreeItemVoucher))
 								h.AddButton(VButtonText.UseVoucher, m =>
 								{
 									m.Object.ShowNPCChest();
@@ -564,7 +564,7 @@ namespace CCU.Patches.Agents
 						}
 					}
 				}
-				else if (hook.interactionState is InteractionState.TeachTraits_Language)
+				else if (agentInteractionsHook.interactionState is InteractionState.TeachTraits_Language)
 				{
 					List<T_Language> traits = new List<T_Language>();
 					List<T_Language> assemblyTraits = CoreTools.AllClassesOfType<T_Language>();
@@ -601,9 +601,9 @@ namespace CCU.Patches.Agents
 					}
 				}
 			});
-        }
+		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentInteractions.FinishedOperating), 
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentInteractions.FinishedOperating),
 			argumentTypes: new[] { typeof(Agent) })]
 		private static IEnumerable<CodeInstruction> FinishedOperating_LimitHackToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -626,22 +626,22 @@ namespace CCU.Patches.Agents
 			return instructions;
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentInteractions.LetGo), 
+		[HarmonyPrefix, HarmonyPatch(nameof(AgentInteractions.LetGo),
 			argumentTypes: new[] { typeof(Agent), typeof(Agent) })]
 		public static bool LetGo_Prefix(Agent agent)
-        {
-			agent.GetOrAddHook<H_Agent>().HiredPermanently = false;
+		{
+			agent.GetOrAddHook<H_AgentInteractions>().HiredPermanently = false;
 
 			return true;
-        }
+		}
 
-		[HarmonyPrefix, HarmonyPatch (methodName: nameof(AgentInteractions.UseItemOnObject), 
+		[HarmonyPrefix, HarmonyPatch(nameof(AgentInteractions.UseItemOnObject),
 			argumentTypes: new[] { typeof(Agent), typeof(Agent), typeof(InvItem), typeof(int), typeof(string), typeof(string) })]
 		public static bool UseItemOnObject_Prefix(Agent agent, Agent interactingAgent, InvItem item, string combineType, string useOnType, ref bool __result)
-        {
+		{
 			if (useOnType == VButtonText.Identify && agent.agentName == VanillaAgents.CustomCharacter)
 			{
-				if (item.invItemName == vItem.Syringe)
+				if (item.invItemName == VItemName.Syringe)
 				{
 					if (combineType == "Combine")
 					{
@@ -752,22 +752,22 @@ namespace CCU.Patches.Agents
 			//
 			agent.SetChangeElectionPoints(interactingAgent);
 			agent.StopInteraction();
-			agent.GetOrAddHook<H_Agent>().HiredPermanently = true;
+			agent.GetOrAddHook<H_AgentInteractions>().HiredPermanently = true;
 			agent.canGoBetweenLevels = true;
 
 			return;
 		}
 	}
 
-    [HarmonyPatch(declaringType: typeof(AgentInteractions))]
+	[HarmonyPatch(typeof(AgentInteractions))]
 	static class P_AgentInteractions_UseExplosiveStimulator
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTargetMethod, UsedImplicitly]
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
-			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(AgentInteractions), nameof(AgentInteractions.UseExplosiveStimulator), 
+			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(AgentInteractions), nameof(AgentInteractions.UseExplosiveStimulator),
 				new[] { typeof(Agent), typeof(List<PlayfieldObject>) }));
 
 		[HarmonyTranspiler, UsedImplicitly]

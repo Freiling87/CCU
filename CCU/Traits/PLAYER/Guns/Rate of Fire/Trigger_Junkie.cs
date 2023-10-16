@@ -1,9 +1,9 @@
-﻿using CCU.Localization;
+﻿using BunnyLibs;
 using RogueLibsCore;
 
 namespace CCU.Traits.Player.Ranged_Combat
 {
-    internal class Trigger_Junkie : T_RateOfFire
+	public class Trigger_Junkie : T_RateOfFire
 	{
 		public override float CooldownMultiplier => 0.6f;
 
@@ -18,17 +18,17 @@ namespace CCU.Traits.Player.Ranged_Combat
 						? "Fire rate cooldown decreased by 40%."
 						: "Fire rate cooldown decreased by 40 %.\n\n" +
 							"<color=yellow>NPCs:</color> Firing interval decreased by 40%",
-                    [LanguageCode.Spanish] =
-                    Core.designerEdition
-                        ? "Velocidad de fuego aumentada por 40%."
-                        : "Velocidad de fuego aumentada por 40 %.\n\n" +
-                            "<color=yellow>NPCs:</color> Intervalo entre disparos reducido por 40%",
-                })
+					[LanguageCode.Spanish] =
+					Core.designerEdition
+						? "Velocidad de fuego aumentada por 40%."
+						: "Velocidad de fuego aumentada por 40 %.\n\n" +
+							"<color=yellow>NPCs:</color> Intervalo entre disparos reducido por 40%",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = PlayerName(typeof(Trigger_Junkie)),
-                    [LanguageCode.Spanish] = "Addicto al Gatillo",
-                })
+					[LanguageCode.Spanish] = "Addicto al Gatillo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 7,
@@ -37,13 +37,13 @@ namespace CCU.Traits.Player.Ranged_Combat
 					IsPlayerTrait = true,
 					UnlockCost = 10,
 					Unlock =
-                    {
+					{
 						categories = { VTraitCategory.Guns },
 						isUpgrade = true,
-                    }
+					}
 				});
 		}
 		public override void OnAdded() { }
 		public override void OnRemoved() { }
 	}
-} 
+}

@@ -4,22 +4,22 @@ namespace CCU.Traits.App_FH1
 {
 	public class Curly_Mustache : T_FacialHair
 	{
-        public override string[] Rolls => new string[] { "MustacheCircus" };
+		public override string[] Rolls => new string[] { "MustacheCircus" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Curly_Mustache>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este vello facial a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este vello facial a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Curly_Mustache)),
-                    [LanguageCode.Spanish] = "Bigote",
-                })
+					[LanguageCode.Spanish] = "Bigote",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

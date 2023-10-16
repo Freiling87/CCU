@@ -3,8 +3,8 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Pockets
 {
-    internal class FunnyPack : T_Loadout
-    {
+	public class FunnyPack : T_Loadout
+	{
 		[RLSetup]
 		public static void Setup()
 		{
@@ -12,13 +12,13 @@ namespace CCU.Traits.Loadout_Pockets
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent can spawn with an additional Pocket item.",
-                    [LanguageCode.Spanish] = "NPC puede spawnear con un item de bolsillo addicional.",
-                })
+					[LanguageCode.Spanish] = "NPC puede spawnear con un item de bolsillo addicional.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(FunnyPack)),
-                    [LanguageCode.Spanish] = "Riñonero",
-                })
+					[LanguageCode.Spanish] = "Riñonero",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

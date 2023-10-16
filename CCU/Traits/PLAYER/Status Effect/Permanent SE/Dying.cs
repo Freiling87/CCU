@@ -1,9 +1,10 @@
-﻿using RogueLibsCore;
+﻿using BunnyLibs;
+using RogueLibsCore;
 
 namespace CCU.Traits.Player.Status_Effect
 {
-	internal class Dying : T_PermanentStatusEffect_P, ISetupAgentStats
-    {
+	public class Dying : T_PermanentStatusEffect_P, ISetupAgentStats
+	{
 		public override string statusEffectName => VanillaEffects.Poisoned;
 
 		[RLSetup]
@@ -20,7 +21,7 @@ namespace CCU.Traits.Player.Status_Effect
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					Cancellations = {  },
+					Cancellations = { },
 					CharacterCreationCost = -32,
 					IsAvailable = false,
 					IsAvailableInCC = true,
@@ -35,6 +36,6 @@ namespace CCU.Traits.Player.Status_Effect
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
+		public override void OnRemoved() { }
 	}
 }

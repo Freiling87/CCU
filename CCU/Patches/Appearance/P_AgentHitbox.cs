@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Hooks;
+using BunnyLibs;
+
 using CCU.Traits.App;
 using HarmonyLib;
 using RogueLibsCore;
@@ -12,23 +13,23 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Appearance
 {
-	[HarmonyPatch(declaringType: typeof(AgentHitbox))]
+	[HarmonyPatch(typeof(AgentHitbox))]
 	public static class P_AgentHitbox
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		// This prevents custom appearance being wiped out.
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(AgentHitbox.chooseFacialHairType))]
+		[HarmonyPrefix, HarmonyPatch(nameof(AgentHitbox.chooseFacialHairType))]
 		private static bool ChooseFacialHairType_SkipCustoms(string agentName)
-        {
+		{
 			if (agentName == VanillaAgents.CustomCharacter)
 				return false;
 
 			return true;
-        }
+		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupBodyStrings))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentHitbox.SetupBodyStrings))]
 		private static IEnumerable<CodeInstruction> SetupBodyStrings(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -53,12 +54,12 @@ namespace CCU.Patches.Appearance
 			return instructions;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetupFeatures))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentHitbox.SetupFeatures))]
 		private static IEnumerable<CodeInstruction> SetupFeatures_Custom(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo hasSetup = AccessTools.DeclaredField(typeof(AgentHitbox), nameof(AgentHitbox.hasSetup));
-			MethodInfo setupAppearance = AccessTools.DeclaredMethod(typeof(AppearanceTools), nameof(AppearanceTools.SetupAppearance), parameters: new Type[] { typeof(AgentHitbox) });
+			MethodInfo setupAppearance = AccessTools.DeclaredMethod(typeof(AppearanceTools), nameof(AppearanceTools.SetupAppearance), new[] { typeof(AgentHitbox) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -79,7 +80,7 @@ namespace CCU.Patches.Appearance
 		}
 
 		// Causes sprite updates to pull from the spawned character rather than the saved custom character.
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetWBSprites))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentHitbox.SetWBSprites))]
 		private static IEnumerable<CodeInstruction> SetWBSprites_FixBody_01(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -111,7 +112,7 @@ namespace CCU.Patches.Appearance
 			return instructions;
 		}
 		// Causes sprite updates to pull from the spawned character rather than the saved custom character.
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetWBSprites))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentHitbox.SetWBSprites))]
 		private static IEnumerable<CodeInstruction> SetWBSprites_FixEyes_01(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -145,7 +146,7 @@ namespace CCU.Patches.Appearance
 			return instructions;
 		}
 		// Causes sprite updates to pull from the spawned character rather than the saved custom character.
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentHitbox.SetWBSprites))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentHitbox.SetWBSprites))]
 		private static IEnumerable<CodeInstruction> SetWBSprites_FixEyes_02(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -177,8 +178,8 @@ namespace CCU.Patches.Appearance
 		}
 
 		private static string GetAgentBodyType(Agent agent) =>
-			agent.GetOrAddHook<H_Agent>().bodyType;
+			agent.GetOrAddHook<H_Appearance>().bodyType;
 		private static string GetAgentEyesType(Agent agent) =>
-			agent.GetOrAddHook<H_Agent>().eyesType;
+			agent.GetOrAddHook<H_Appearance>().eyesType;
 	}
 }

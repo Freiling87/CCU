@@ -1,19 +1,18 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine.Networking;
 
 namespace CCU.Traits.Player.Status_Effect
 {
-	public abstract class T_PermanentStatusEffect_P : T_PlayerTrait, ISetupAgentStats, IRefreshAtLevelStart
+	public abstract class T_PermanentStatusEffect_P : T_PlayerTrait, ISetupAgentStats, IRefreshAtEndOfLevelStart
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		public T_PermanentStatusEffect_P() : base() { }
@@ -22,10 +21,10 @@ namespace CCU.Traits.Player.Status_Effect
 
 		public void SetupAgentStats(Agent agent)
 		{
-			RefreshAtLevelStart(agent);
+			Refresh(agent);
 		}
-
-		public void RefreshAtLevelStart(Agent agent)
+		public void Refresh() { }
+		public void Refresh(Agent agent)
 		{
 			agent.statusEffects.RemoveStatusEffect(statusEffectName);
 			agent.statusEffects.AddStatusEffect(statusEffectName, 9999);
@@ -40,15 +39,16 @@ namespace CCU.Traits.Player.Status_Effect
 			statusEffectObject.dontRemoveOnDeath = true;
 			statusEffectObject.infiniteTime = true;
 		}
+		public bool RunThisLevel() => true;
 	}
 
 	[HarmonyPatch(typeof(StatusEffects))]
 	public static class P_StatusEffects_PermanentSE
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(StatusEffects.RemoveAllStatusEffects), typeof(bool))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(StatusEffects.RemoveAllStatusEffects), typeof(bool))]
 		private static IEnumerable<CodeInstruction> BlockSERemoval_1(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -71,7 +71,7 @@ namespace CCU.Traits.Player.Status_Effect
 			return instructions;
 		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(StatusEffects.RemoveAllStatusEffectsNotBetweenLevels))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(StatusEffects.RemoveAllStatusEffectsNotBetweenLevels))]
 		private static IEnumerable<CodeInstruction> BlockSERemoval_2(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -94,7 +94,7 @@ namespace CCU.Traits.Player.Status_Effect
 			return instructions;
 		}
 
-		internal static List<StatusEffect> FilteredStatusEffectList(List<StatusEffect> original, StatusEffects instance)
+		public static List<StatusEffect> FilteredStatusEffectList(List<StatusEffect> original, StatusEffects instance)
 		{
 			if (instance.agent is null)
 				return original;
@@ -108,10 +108,10 @@ namespace CCU.Traits.Player.Status_Effect
 	[HarmonyPatch(typeof(Toilet))]
 	public static class P_Toilet_PermanentSE
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Toilet.isStatusEffectPurgeable))]
+		[HarmonyPostfix, HarmonyPatch(nameof(Toilet.isStatusEffectPurgeable))]
 		public static void FilterPermanentSE(Toilet __instance, string statusEffectName, ref bool __result)
 		{
 			if (__result)

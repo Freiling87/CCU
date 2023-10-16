@@ -1,9 +1,10 @@
-﻿using RogueLibsCore;
+﻿using BunnyLibs;
+using RogueLibsCore;
 
 namespace CCU.Traits.Player.Status_Effect
 {
-	internal class Above_the_Laws : T_PermanentStatusEffect_P, ISetupAgentStats
-    {
+	public class Above_the_Laws : T_PermanentStatusEffect_P, ISetupAgentStats
+	{
 		public override string statusEffectName => VanillaEffects.AbovetheLaw;
 
 		[RLSetup]
@@ -20,16 +21,16 @@ namespace CCU.Traits.Player.Status_Effect
 				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
-					Cancellations = { 
-						VanillaTraits.CorruptionCosts, 
-						VanillaTraits.TheLaw, 
+					Cancellations = {
+						VanillaTraits.CorruptionCosts,
+						VanillaTraits.TheLaw,
 						VanillaTraits.Wanted
 					},
-					CharacterCreationCost = 16,
+					CharacterCreationCost = 10,
 					IsAvailable = false,
 					IsAvailableInCC = true,
 					IsPlayerTrait = true,
-					UnlockCost = 0,
+					UnlockCost = 25,
 					Upgrade = null,
 					Unlock =
 					{
@@ -39,6 +40,6 @@ namespace CCU.Traits.Player.Status_Effect
 				});
 		}
 		public override void OnAdded() { }
-        public override void OnRemoved() { }
+		public override void OnRemoved() { }
 	}
 }

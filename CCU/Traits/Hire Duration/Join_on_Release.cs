@@ -2,34 +2,34 @@
 
 namespace CCU.Traits.Hire_Duration
 {
-    public class Join_on_Release : T_HireDuration
-    {
-        //[RLSetup]
-        public static void Setup()
-        {
-            PostProcess = RogueLibs.CreateCustomTrait<Join_on_Release>()
-                .WithDescription(new CustomNameInfo
-                {
-                    [LanguageCode.English] = "Agent will join the player who frees them from Prison.",
-                    [LanguageCode.Spanish] = "Este NPC se unira al jugador al liberarse",
+	public class Join_on_Release : T_HireDuration
+	{
+		//[RLSetup]
+		public static void Setup()
+		{
+			PostProcess = RogueLibs.CreateCustomTrait<Join_on_Release>()
+				.WithDescription(new CustomNameInfo
+				{
+					[LanguageCode.English] = "Agent will join the player who frees them from Prison.",
+					[LanguageCode.Spanish] = "Este NPC se unira al jugador al liberarse",
 
-                })
-                .WithName(new CustomNameInfo
-                {
-                    [LanguageCode.English] = DesignerName(typeof(Join_on_Release)),
-                    [LanguageCode.Spanish] = "Union a la Libertad",
+				})
+				.WithName(new CustomNameInfo
+				{
+					[LanguageCode.English] = DesignerName(typeof(Join_on_Release)),
+					[LanguageCode.Spanish] = "Union a la Libertad",
 
-                })
-                .WithUnlock(new TraitUnlock_CCU
-                {
-                    Cancellations = { },
-                    CharacterCreationCost = 0,
-                    IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
-                });
-        }
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
-    }
+				})
+				.WithUnlock(new TraitUnlock_CCU
+				{
+					Cancellations = { },
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = Core.designerEdition,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
 }

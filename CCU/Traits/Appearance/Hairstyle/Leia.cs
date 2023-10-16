@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Leia : T_Hairstyle
+	public class Leia : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "Leia" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Leia>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Leia)),
-                    [LanguageCode.Spanish] = "Leia",
-                })
+					[LanguageCode.Spanish] = "Leia",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

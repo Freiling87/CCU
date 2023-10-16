@@ -1,7 +1,8 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using CCU.Hooks;
-using CCU.Traits.Combat;
+using BunnyLibs;
+
+using CCU.Traits.CombatGeneric;
 using CCU.Traits.Drug_Warrior_Modifier;
 using HarmonyLib;
 using RogueLibsCore;
@@ -12,13 +13,13 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Goals
 {
-	[HarmonyPatch(declaringType: typeof(GoalBattle))]
+	[HarmonyPatch(typeof(GoalBattle))]
 	public static class P_GoalBattle
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(GoalBattle.Process))]
 		private static IEnumerable<CodeInstruction> Process_StartCombatActions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -29,10 +30,10 @@ namespace CCU.Patches.Goals
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
-                {
+				{
 					new CodeInstruction(OpCodes.Ldc_I4_1),
 					new CodeInstruction(OpCodes.Stloc_0),
-                },
+				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_0),
@@ -51,15 +52,15 @@ namespace CCU.Patches.Goals
 			return instructions;
 		}
 		private static void StartCombatActions(Agent agent)
-        {
-			if (agent.HasTrait<Backed_Up>() && !agent.GetOrAddHook<H_Agent>().WalkieTalkieUsed)
-            {
+		{
+			if (agent.HasTrait<Backed_Up>() && !agent.GetOrAddHook<H_AgentInteractions>().WalkieTalkieUsed)
+			{
 				agent.agentInteractions.UseWalkieTalkie(agent, agent.opponent); // Might be reversed, hard to tell
-				agent.GetOrAddHook<H_Agent>().WalkieTalkieUsed = true;
-            }
-        }
+				agent.GetOrAddHook<H_AgentInteractions>().WalkieTalkieUsed = true;
+			}
+		}
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(GoalBattle.Process))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(GoalBattle.Process))]
 		private static IEnumerable<CodeInstruction> Process_GateDrugWarriorAV(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -102,18 +103,18 @@ namespace CCU.Patches.Goals
 			return instructions;
 		}
 		private static void GateDrugWarriorAV(Agent agent)
-        {
+		{
 			if (agent.HasTrait<Suppress_Syringe_AV>())
 				return;
-		
-			GC.spawnerMain.SpawnStatusText(agent, "UseItem", vItem.Syringe, "Item");
-			GC.audioHandler.Play(agent, VanillaAudio.UseSyringe);
-        }
 
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(GoalBattle.Terminate))]
+			GC.spawnerMain.SpawnStatusText(agent, "UseItem", VItemName.Syringe, "Item");
+			GC.audioHandler.Play(agent, VanillaAudio.UseSyringe);
+		}
+
+		[HarmonyPostfix, HarmonyPatch(nameof(GoalBattle.Terminate))]
 		private static void Terminate_Postfix(Agent ___agent)
-        {
+		{
 			___agent.agentInvDatabase.ChooseWeapon();
-        }
+		}
 	}
 }

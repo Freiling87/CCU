@@ -4,23 +4,23 @@ using RogueLibsCore;
 namespace CCU.Traits.App_BT2
 {
 	public class Mech_Pilot_Body_Greyscale : T_BodyType
-    {
+	{
 		public override string[] Rolls => new string[] { "G_" + VanillaAgents.MechPilot };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Mech_Pilot_Body_Greyscale>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Mech_Pilot_Body_Greyscale)),
-                    [LanguageCode.Spanish] = "Cuerpo de Piloto de Mecarobot Gris",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Piloto de Mecarobot Gris",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

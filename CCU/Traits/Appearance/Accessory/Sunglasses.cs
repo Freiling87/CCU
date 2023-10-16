@@ -6,20 +6,20 @@ namespace CCU.Traits.App_AC1
 	{
 		public override string[] Rolls => new string[] { "Sunglasses" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Sunglasses>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este accesorio a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este accesorio a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Sunglasses)),
-                    [LanguageCode.Spanish] = "Lentes de Sol",
-                })
+					[LanguageCode.Spanish] = "Lentes de Sol",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -6,20 +6,20 @@ namespace CCU.Traits.App_SC1
 	{
 		public override string[] Rolls => new string[] { "GoldSkin" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Human_Gold_Skin>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de piel a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de piel a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Human_Gold_Skin)),
-                    [LanguageCode.Spanish] = "Piel Natural Dorada",
-                })
+					[LanguageCode.Spanish] = "Piel Natural Dorada",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

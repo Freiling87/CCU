@@ -7,7 +7,7 @@ namespace CCU.Traits.App_FH3
 	{
 		public override string[] Rolls => new string[] { };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<No_Facial_Hair_75>()
@@ -18,8 +18,8 @@ namespace CCU.Traits.App_FH3
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(No_Facial_Hair_75), "No Facial Hair 75%"),
-                    [LanguageCode.Spanish] = "Sin Vello Facial 75%",
-                })
+					[LanguageCode.Spanish] = "Sin Vello Facial 75%",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

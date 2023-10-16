@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CCU.Traits.App_HC2
 {
-    public class Normal_Colors : T_HairColor
+	public class Normal_Colors : T_HairColor
 	{
 		public override string[] Rolls => StaticList.ToArray();
 		public static List<string> StaticList = new List<string>() { "Brown", "Black", "Blonde", "Orange", "Grey" };
@@ -16,13 +16,13 @@ namespace CCU.Traits.App_HC2
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds normal human hair colors to the pool.",
-                    [LanguageCode.Spanish] = "Agrega varios colores comunes de pelo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega varios colores comunes de pelo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Normal_Colors)),
-                    [LanguageCode.Spanish] = "Colores Normales",
-                })
+					[LanguageCode.Spanish] = "Colores Normales",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

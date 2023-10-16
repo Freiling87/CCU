@@ -1,4 +1,5 @@
-﻿using CCU.Hooks;
+﻿using BunnyLibs;
+
 using RogueLibsCore;
 
 namespace CCU.Traits.App
@@ -12,14 +13,14 @@ namespace CCU.Traits.App
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Activates the Appearance System for player versions of this character.",
-                    [LanguageCode.Spanish] = "Activa el sistema cosmético de rasgos para la versión jugable del personaje.",
-                })
+					[LanguageCode.Spanish] = "Activa el sistema cosmético de rasgos para la versión jugable del personaje.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Dynamic_Player_Appearance)),
-                    [LanguageCode.Spanish] = "Apariencia Dinámica",
+					[LanguageCode.Spanish] = "Apariencia Dinámica",
 
-                })
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,
@@ -34,7 +35,7 @@ namespace CCU.Traits.App
 		public void SetupAgentStats(Agent agent)
 		{
 			if (!agent.clonedAgent)
-				agent.GetOrAddHook<H_Agent>().mustRollAppearance = true;
+				agent.GetOrAddHook<H_Appearance>().mustRollAppearance = true;
 		}
 	}
 }

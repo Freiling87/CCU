@@ -1,23 +1,22 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine;
 
 namespace CCU.Patches.Inventory
 {
-	[HarmonyPatch(declaringType: typeof(ItemFunctions))]
+	[HarmonyPatch(typeof(ItemFunctions))]
 	public static class P_ItemFunctions
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(ItemFunctions.TargetObject), argumentTypes: new[] { typeof(InvItem), typeof(Agent), typeof(PlayfieldObject), typeof(string) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(ItemFunctions.TargetObject), argumentTypes: new[] { typeof(InvItem), typeof(Agent), typeof(PlayfieldObject), typeof(string) })]
 		private static IEnumerable<CodeInstruction> TargetObject_LimitHackToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

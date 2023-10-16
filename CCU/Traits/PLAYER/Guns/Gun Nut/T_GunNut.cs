@@ -1,13 +1,13 @@
-﻿using CCU.Hooks;
-using CCU.Traits.Loadout;
+﻿using BunnyLibs;
+
 using RogueLibsCore;
 using System.Collections.Generic;
 
 namespace CCU.Traits.Loadout_Gun_Nut
 {
 	public abstract class T_GunNut : T_PlayerTrait, IModifyItems
-    {
-        public T_GunNut() : base() { }
+	{
+		public T_GunNut() : base() { }
 
 		public abstract string GunMod { get; }
 

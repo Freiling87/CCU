@@ -4,22 +4,22 @@ namespace CCU.Traits.App_BC1
 {
 	public class Neutral_Body : T_BodyColor
 	{
-        public override string[] Rolls => new string[] { "White" };
+		public override string[] Rolls => new string[] { "White" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Neutral_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Neutral_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo Neutral",
-                })
+					[LanguageCode.Spanish] = "Cuerpo Neutral",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

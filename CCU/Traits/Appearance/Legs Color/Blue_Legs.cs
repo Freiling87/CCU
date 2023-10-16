@@ -6,7 +6,7 @@ namespace CCU.Traits.App_LC1
 	{
 		public override string[] Rolls => new string[] { "Blue" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Blue_Legs>()
@@ -18,8 +18,8 @@ namespace CCU.Traits.App_LC1
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Blue_Legs)),
-                    [LanguageCode.Spanish] = "Piernas Azules",
-                })
+					[LanguageCode.Spanish] = "Piernas Azules",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

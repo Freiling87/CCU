@@ -1,11 +1,10 @@
-﻿using CCU.Traits.Loadout;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 namespace CCU.Traits.Loadout_Money
 {
-    internal class Poor : T_PocketMoney
+	public class Poor : T_PocketMoney
 	{
-        public override int MoneyAmount => UnityEngine.Random.Range(11, 26);
+		public override int MoneyAmount => UnityEngine.Random.Range(11, 26);
 
 		[RLSetup]
 		public static void Setup()
@@ -14,13 +13,13 @@ namespace CCU.Traits.Loadout_Money
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent spawns with $11 to $26.",
-                    [LanguageCode.Spanish] = "NPC spawnea con $11 hasta $26.",
-                })
+					[LanguageCode.Spanish] = "NPC spawnea con $11 hasta $26.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Poor)),
-                    [LanguageCode.Spanish] = "Pobre",
-                })
+					[LanguageCode.Spanish] = "Pobre",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

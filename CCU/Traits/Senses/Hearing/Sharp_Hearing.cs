@@ -28,7 +28,7 @@ namespace CCU.Traits.Senses
         public override void OnAdded() { }
         public override void OnRemoved() { }
 
-        public void SetupAgentStats(Agent agent)
+        public void SetupAgentStats(Agent agent) 
 		{
 		}
 	}

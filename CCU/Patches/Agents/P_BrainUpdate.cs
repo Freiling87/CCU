@@ -1,11 +1,9 @@
 ﻿using BepInEx.Logging;
-using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
-using CCU.Traits.Passive;
 using CCU.Traits.Trait_Gate;
 using HarmonyLib;
-using JetBrains.Annotations;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -16,11 +14,11 @@ using UnityEngine;
 
 namespace CCU.Patches.Agents
 {
-    [HarmonyPatch(declaringType: typeof(BrainUpdate))]
-    public static class P_BrainUpdate_MyUpdate
-    {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
+	[HarmonyPatch(typeof(BrainUpdate))]
+	public static class P_BrainUpdate_MyUpdate
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(typeof(BrainUpdate), nameof(BrainUpdate.MyUpdate))]
 		private static IEnumerable<CodeInstruction> CallCustomLOSChecks(IEnumerable<CodeInstruction> codeInstructions)
@@ -54,21 +52,21 @@ namespace CCU.Patches.Agents
 		}
 
 		private static void CustomLOSChecks(Agent LOSagent)
-        {
-			if (LOSagent.agentName != VanillaAgents.CustomCharacter || 
+		{
+			if (LOSagent.agentName != VanillaAgents.CustomCharacter ||
 				LOSagent.losCheckAtIntervalsTime < 7)
 				return;
 
 			List<string> pickupCategories = null;
 
 			try
-            {
-				 pickupCategories = LOSagent.GetTraits<T_Behavior>().Where(t => !(t.GrabItemCategories is null)).SelectMany(t => t.GrabItemCategories).ToList();
+			{
+				pickupCategories = LOSagent.GetTraits<T_Behavior>().Where(t => !(t.GrabItemCategories is null)).SelectMany(t => t.GrabItemCategories).ToList();
 			}
-            catch (Exception message)
-            {
+			catch (Exception message)
+			{
 				logger.LogDebug("Error: " + message);
-            }
+			}
 
 			LOSagent.losCheckAtIntervalsTime = 0;
 
@@ -98,7 +96,7 @@ namespace CCU.Patches.Agents
 			}
 
 			//	LOS Actions
-			if (LOSagent.specialAbility == vSpecialAbility.Cannibalize && LOSagent.HasTrait<Eat_Corpses>())
+			if (LOSagent.specialAbility == VanillaAbilities.Cannibalize && LOSagent.HasTrait<Eat_Corpses>())
 			{
 				if (!LOSagent.hasEmployer || LOSagent.health <= 15f)
 				{
@@ -129,7 +127,7 @@ namespace CCU.Patches.Agents
 					}
 				}
 			}
-			if (LOSagent.specialAbility == vSpecialAbility.StickyGlove && LOSagent.HasTrait<Pick_Pockets>() && !LOSagent.brainUpdate.thiefNoSteal)
+			if (LOSagent.specialAbility == VanillaAbilities.StickyGlove && LOSagent.HasTrait<Pick_Pockets>() && !LOSagent.brainUpdate.thiefNoSteal)
 			{
 				if (!LOSagent.hasEmployer)
 				{
@@ -141,13 +139,13 @@ namespace CCU.Patches.Agents
 						Relationship relationship = LOSagent.relationships.GetRelationship(targetAgent);
 
 						bool honorFlag = LOSagent.HasTrait<Honorable_Thief>() &&
-							(targetAgent.statusEffects.hasTrait(VanillaTraits.HonorAmongThieves) || 
+							(targetAgent.statusEffects.hasTrait(VanillaTraits.HonorAmongThieves) ||
 							targetAgent.statusEffects.hasTrait("HonorAmongThieves2"));
 
-						if (relationship.distance < 4f && !honorFlag && !targetAgent.mechEmpty && !targetAgent.objectAgent && 
+						if (relationship.distance < 4f && !honorFlag && !targetAgent.mechEmpty && !targetAgent.objectAgent &&
 							(relationship.relTypeCode == relStatus.Neutral || relationship.relTypeCode == relStatus.Annoyed) &&
-							LOSagent.slaveOwners.Count == 0 && LOSagent.prisoner == targetAgent.prisoner && !targetAgent.invisible && !targetAgent.disappeared && 
-							(LOSagent.prisoner <= 0 || LOSagent.curTileData.chunkID == targetAgent.curTileData.chunkID) && 
+							LOSagent.slaveOwners.Count == 0 && LOSagent.prisoner == targetAgent.prisoner && !targetAgent.invisible && !targetAgent.disappeared &&
+							(LOSagent.prisoner <= 0 || LOSagent.curTileData.chunkID == targetAgent.curTileData.chunkID) &&
 							!targetAgent.hasGettingArrestedByAgent && !LOSagent.hectoredAgents.Contains(targetAgent.agentID) && !GC.tileInfo.DifferentLockdownZones(LOSagent.curTileData, targetAgent.curTileData))
 						{
 							LOSagent.SetDefaultGoal("Steal");
@@ -161,7 +159,7 @@ namespace CCU.Patches.Agents
 					}
 				}
 			}
-			if (LOSagent.specialAbility == vSpecialAbility.Bite && LOSagent.HasTrait<Suck_Blood>())
+			if (LOSagent.specialAbility == VanillaAbilities.Bite && LOSagent.HasTrait<Suck_Blood>())
 			{
 				if (!LOSagent.hasEmployer || LOSagent.health <= 15f)
 				{
@@ -189,13 +187,13 @@ namespace CCU.Patches.Agents
 			}
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(BrainUpdate.MyUpdate))]
+		[HarmonyPrefix, HarmonyPatch(nameof(BrainUpdate.MyUpdate))]
 		public static bool MyUpdate_Prefix(Agent ___agent)
-        {
+		{
 			if (___agent.HasTrait<Brainless>())
 				return false;
 
 			return true;
-        }
+		}
 	}
-} 
+}

@@ -2,24 +2,24 @@
 
 namespace CCU.Traits.App_HS1
 {
-    public class Slavemaster_Mask : T_Hairstyle
+	public class Slavemaster_Mask : T_Hairstyle
 	{
 		public override string[] Rolls => new string[] { "SlavemasterMask" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Slavemaster_Mask>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este no-peinado a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este no-peinado a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Slavemaster_Mask)),
-                    [LanguageCode.Spanish] = "Máscara de Amo",
-                })
+					[LanguageCode.Spanish] = "Máscara de Amo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -1,8 +1,10 @@
-﻿namespace CCU.Traits.Combat
+﻿using BunnyLibs;
+
+namespace CCU.Traits.CombatGeneric
 {
-	internal abstract class T_Toughness : T_CCU, ISetupAgentStats
+	public abstract class T_Toughness : T_CCU, ISetupAgentStats
 	{
-		internal abstract int Toughness { get; }
+		public abstract int Toughness { get; }
 
 		public void SetupAgentStats(Agent agent)
 		{

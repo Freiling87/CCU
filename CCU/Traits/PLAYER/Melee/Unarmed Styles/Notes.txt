@@ -1,0 +1,7 @@
+﻿Something akin to Favored Weapon traits
+- + Rapid-fire, Mobility		- Damage
+- + Cooldown, Damage, Lunge		- Mobility 
+- + Lunge, Mobility, Backstab	- Damage Resistance
+- + Dodge, Critical, Mobility	- 
+- +								- No Lunge or Knockback
+- Boxing style: Copy Gun rapid fire to get punch triplets

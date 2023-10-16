@@ -7,20 +7,20 @@ namespace CCU.Traits.App_LC3
 	{
 		public override string[] Rolls => new string[] { };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Pantsless>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Causes legs to match skin color.",
-                    [LanguageCode.Spanish] = "Hace que el color de las piernas sea el mismo que el de la piel.",
-                })
+					[LanguageCode.Spanish] = "Hace que el color de las piernas sea el mismo que el de la piel.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Pantsless)),
-                    [LanguageCode.Spanish] = "De Patas",
-                })
+					[LanguageCode.Spanish] = "De Patas",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

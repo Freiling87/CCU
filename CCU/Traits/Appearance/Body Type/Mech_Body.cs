@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_BT1
 {
 	public class Mech_Body : T_BodyType
-    {
+	{
 		public override string[] Rolls => new string[] { "Mech" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Mech_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Mech_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo de Mecarobot",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Mecarobot",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

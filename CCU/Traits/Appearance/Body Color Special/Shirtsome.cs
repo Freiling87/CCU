@@ -7,20 +7,20 @@ namespace CCU.Traits.App_BC3
 	{
 		public override string[] Rolls => new string[] { };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Shirtsome>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Prevents body from matching skin color.",
-                    [LanguageCode.Spanish] = "Evita que el color de cuerpo sea el mismo que el color de piel.",
-                })
+					[LanguageCode.Spanish] = "Evita que el color de cuerpo sea el mismo que el color de piel.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Shirtsome)),
-                    [LanguageCode.Spanish] = "Al Des-Desnudo",
-                })
+					[LanguageCode.Spanish] = "Al Des-Desnudo",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

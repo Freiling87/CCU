@@ -1,8 +1,10 @@
-﻿using RogueLibsCore;
+﻿using BunnyLibs;
+using CCU.Traits.Hire_Duration;
+using RogueLibsCore;
 
 namespace CCU.Mutators.Followers
 {
-    class Homesickness_Mandatory : M_Followers
+	class Homesickness_Mandatory : M_Followers, ISetupAgentStats
 	{
 		public Homesickness_Mandatory(string v1, bool v2) : base(v1, v2) { }
 
@@ -20,6 +22,12 @@ namespace CCU.Mutators.Followers
 					[LanguageCode.English] = PlayerName(typeof(Homesickness_Mandatory)),
 					[LanguageCode.Spanish] = "Acompañamento Desactivado",
 				});
+		}
+
+		public void SetupAgentStats(Agent agent)
+		{
+			if (!agent.HasTrait<Homesickless>())
+				agent.canGoBetweenLevels = false;
 		}
 	}
 }

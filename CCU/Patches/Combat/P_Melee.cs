@@ -1,23 +1,22 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine;
 
 namespace CCU.Patches.P_Combat
 {
-	[HarmonyPatch(declaringType: typeof(Melee))]
+	[HarmonyPatch(typeof(Melee))]
 	public static class P_Melee
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(Melee.Attack), argumentTypes: new[] { typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Melee.Attack), argumentTypes: new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> Attack_LimitKnockbackBonusToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

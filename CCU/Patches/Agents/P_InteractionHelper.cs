@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using CCU.Traits.Player.Language;
 using HarmonyLib;
@@ -11,23 +12,23 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.Agents
 {
-    [HarmonyPatch(declaringType: typeof(InteractionHelper))]
-    public static class P_InteractionHelper
-    {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
+	[HarmonyPatch(typeof(InteractionHelper))]
+	public static class P_InteractionHelper
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InteractionHelper.CanInteractWithAgent))]
-        public static bool CanInteractWithAgent_Prefix(Agent otherAgent, ref bool __result)
-        {
-            __result = !otherAgent.HasTrait<Brainless>();
+		[HarmonyPrefix, HarmonyPatch(nameof(InteractionHelper.CanInteractWithAgent))]
+		public static bool CanInteractWithAgent_Prefix(Agent otherAgent, ref bool __result)
+		{
+			__result = !otherAgent.HasTrait<Brainless>();
 
-            return __result;
-        }
+			return __result;
+		}
 
 
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(InteractionHelper.CanInteractWithAgent))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(InteractionHelper.CanInteractWithAgent))]
 		private static IEnumerable<CodeInstruction> SetupAgentStats_LegacyUpdater(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

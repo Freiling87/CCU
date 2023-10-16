@@ -5,23 +5,23 @@ using RogueLibsCore;
 
 namespace CCU.Patches
 {
-    [HarmonyPatch(declaringType: typeof(Gun))]
+	[HarmonyPatch(typeof(Gun))]
 	public static class P_Gun
 	{
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Gun.SetWeaponCooldown))]
-        public static void SetWeaponCooldown_Postfix(Gun __instance)
-        {
-            foreach (T_RateOfFire trait in __instance.agent.GetTraits<T_RateOfFire>())
-                __instance.agent.weaponCooldown *= trait.CooldownMultiplier;
-        }
+		[HarmonyPostfix, HarmonyPatch(nameof(Gun.SetWeaponCooldown))]
+		public static void SetWeaponCooldown_Postfix(Gun __instance)
+		{
+			foreach (T_RateOfFire trait in __instance.agent.GetTraits<T_RateOfFire>())
+				__instance.agent.weaponCooldown *= trait.CooldownMultiplier;
+		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Gun.SubtractBullets))]
-        public static bool SubtractBullets_Prefix(Gun __instance)
-        {
-            if (__instance.agent.HasTrait<Infinite_Ammo>())
-                return false;
+		[HarmonyPrefix, HarmonyPatch(nameof(Gun.SubtractBullets))]
+		public static bool SubtractBullets_Prefix(Gun __instance)
+		{
+			if (__instance.agent.HasTrait<Infinite_Ammo>())
+				return false;
 
-            return true;
-        }
+			return true;
+		}
 	}
 }

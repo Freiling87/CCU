@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using CCU.Traits.Behavior;
 using HarmonyLib;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ using System.Reflection.Emit;
 
 namespace CCU.Patches.P_Combat
 {
-    [HarmonyPatch(declaringType: typeof(BulletHitbox))]
-    public static class P_BulletHitbox
-    {
-        private static readonly ManualLogSource logger = CCULogger.GetLogger();
-        public static GameController GC => GameController.gameController;
+	[HarmonyPatch(typeof(BulletHitbox))]
+	public static class P_BulletHitbox
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(BulletHitbox.HitAftermath), argumentTypes: new[] { typeof(Agent), typeof(int), typeof(bool), typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(BulletHitbox.HitAftermath), argumentTypes: new[] { typeof(Agent), typeof(int), typeof(bool), typeof(bool) })]
 		private static IEnumerable<CodeInstruction> HitAftermath_LimitWaterDamageToVanillaKillerRobot(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -26,11 +27,11 @@ namespace CCU.Patches.P_Combat
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 2,
 				prefixInstructionSequence: new List<CodeInstruction>
-                {
+				{
 					new CodeInstruction(OpCodes.Ldfld, copBot),
 					new CodeInstruction(OpCodes.Brtrue_S),
 					new CodeInstruction(OpCodes.Ldarg_1),
-                },
+				},
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldfld, killerRobot),

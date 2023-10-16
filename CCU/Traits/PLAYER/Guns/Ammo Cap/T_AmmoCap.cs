@@ -1,12 +1,13 @@
 ﻿using BepInEx.Logging;
+using BunnyLibs;
 using RogueLibsCore;
 using System.Collections.Generic;
 
 namespace CCU.Traits.Player.Ammo
 {
-    public abstract class T_AmmoCap : T_PlayerTrait, IModifyItems
+	public abstract class T_AmmoCap : T_PlayerTrait, IModifyItems
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 
 		public T_AmmoCap() : base() { }
 
@@ -29,7 +30,7 @@ namespace CCU.Traits.Player.Ammo
 		{
 			float ammoCap = invItem.initCount;
 
-			if (invItem.contents.Contains(vItem.AmmoCapacityMod))
+			if (invItem.contents.Contains(VItemName.AmmoCapacityMod))
 				ammoCap *= 1.4f;
 
 			invItem.maxAmmo = (int)ammoCap;
@@ -39,7 +40,7 @@ namespace CCU.Traits.Player.Ammo
 		{
 			float ammoCap = invItem.initCount;
 
-			if (invItem.contents.Contains(vItem.AmmoCapacityMod))
+			if (invItem.contents.Contains(VItemName.AmmoCapacityMod))
 				ammoCap *= 1.4f;
 
 			foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())

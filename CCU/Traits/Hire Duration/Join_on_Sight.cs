@@ -2,34 +2,34 @@
 
 namespace CCU.Traits.Hire_Duration
 {
-    public class Join_on_Sight : T_HireDuration
-    {
-        //[RLSetup]
-        public static void Setup()
-        {
-            PostProcess = RogueLibs.CreateCustomTrait<Join_on_Sight>()
-                .WithDescription(new CustomNameInfo
-                {
-                    [LanguageCode.English] = "Agent will join any player who comes within sight.",
-                    [LanguageCode.Spanish] = "Este NPC se unira con el primer jugador que vea",
+	public class Join_on_Sight : T_HireDuration
+	{
+		//[RLSetup]
+		public static void Setup()
+		{
+			PostProcess = RogueLibs.CreateCustomTrait<Join_on_Sight>()
+				.WithDescription(new CustomNameInfo
+				{
+					[LanguageCode.English] = "Agent will join any player who comes within sight.",
+					[LanguageCode.Spanish] = "Este NPC se unira con el primer jugador que vea",
 
-                })
-                .WithName(new CustomNameInfo
-                {
-                    [LanguageCode.English] = DesignerName(typeof(Join_on_Sight)),
-                    [LanguageCode.Spanish] = "Union  a Primera Vista",
+				})
+				.WithName(new CustomNameInfo
+				{
+					[LanguageCode.English] = DesignerName(typeof(Join_on_Sight)),
+					[LanguageCode.Spanish] = "Union  a Primera Vista",
 
-                })
-                .WithUnlock(new TraitUnlock_CCU
-                {
-                    Cancellations = { },
-                    CharacterCreationCost = 0,
-                    IsAvailable = false,
-                    IsAvailableInCC = Core.designerEdition,
-                    UnlockCost = 0,
-                });
-        }
-        public override void OnAdded() { }
-        public override void OnRemoved() { }
-    }
+				})
+				.WithUnlock(new TraitUnlock_CCU
+				{
+					Cancellations = { },
+					CharacterCreationCost = 0,
+					IsAvailable = false,
+					IsAvailableInCC = Core.designerEdition,
+					UnlockCost = 0,
+				});
+		}
+		public override void OnAdded() { }
+		public override void OnRemoved() { }
+	}
 }

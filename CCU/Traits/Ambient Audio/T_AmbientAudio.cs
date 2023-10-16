@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using HarmonyLib;
 using RogueLibsCore;
 using System.Collections.Generic;
@@ -9,29 +10,27 @@ using System.Reflection.Emit;
 
 namespace CCU.Traits.Ambient_Audio
 {
-	internal abstract class T_AmbientAudio : T_CCU, ISetupAgentStats, IRefreshAtLevelStart
+	public abstract class T_AmbientAudio : T_CCU, ISetupAgentStats, IRefreshAtEndOfLevelStart
 	{
-		internal abstract string ambientAudioClipName { get; }
+		public abstract string ambientAudioClipName { get; }
 
-		public void RefreshAtLevelStart(Agent agent)
-		{
-			SetupAgentStats(agent);
-		}
-
-		public void SetupAgentStats(Agent agent)
+		public void Refresh() { }
+		public bool RunThisLevel() => true;
+		public void Refresh(Agent agent)
 		{
 			agent.ambientAudio = ambientAudioClipName;
 			agent.StartCoroutine(agent.WaitToStartAmbientAudio()); // Ensure this isn't accruing
 		}
+		public void SetupAgentStats(Agent agent) => Refresh(agent);
 	}
 
 	[HarmonyPatch(typeof(AgentSecurityBeams))]
-	internal static class P_AgentSecurityBeams_AmbientAudio
+	public static class P_AgentSecurityBeams_AmbientAudio
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		private static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(methodName: nameof(AgentSecurityBeams.SpawnParticles))]
+		[HarmonyTranspiler, HarmonyPatch(nameof(AgentSecurityBeams.SpawnParticles))]
 		private static IEnumerable<CodeInstruction> GateAmbientAudio(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

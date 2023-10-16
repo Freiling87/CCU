@@ -6,20 +6,20 @@ namespace CCU.Traits.App_FH1
 	{
 		public override string[] Rolls => new string[] { "None" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<No_Facial_Hair>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este vello facial a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este vello facial a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(No_Facial_Hair)),
-                    [LanguageCode.Spanish] = "Sin Vello Facial",
-                })
+					[LanguageCode.Spanish] = "Sin Vello Facial",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

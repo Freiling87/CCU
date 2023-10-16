@@ -6,20 +6,20 @@ namespace CCU.Traits.App_FH1
 	{
 		public override string[] Rolls => new string[] { "Mustache" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Pencil_Mustache>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este vello facial a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este vello facial a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Pencil_Mustache)),
-                    [LanguageCode.Spanish] = "Bigote de Lapíz",
-                })
+					[LanguageCode.Spanish] = "Bigote de Lapíz",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

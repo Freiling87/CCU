@@ -14,13 +14,13 @@ namespace CCU.Traits.App_HC3
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Normally, darker skin colors will turn hair black automatically. This disables that feature.",
-                    [LanguageCode.Spanish] = "Permite que el personaje pueda tener cualquier color de pelo no importe su tono de piel.",
-                })
+					[LanguageCode.Spanish] = "Permite que el personaje pueda tener cualquier color de pelo no importe su tono de piel.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Melanin_Mashup)),
-                    [LanguageCode.Spanish] = "Melanina Revuelta",
-                })
+					[LanguageCode.Spanish] = "Melanina Revuelta",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

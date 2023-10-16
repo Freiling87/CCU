@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_EC1
 {
 	public class Orange_Eyes : T_EyeColor
-    {
+	{
 		public override string[] Rolls => new string[] { "Orange" };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Orange_Eyes>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este color de ojos a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este color de ojos a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Orange_Eyes)),
-                    [LanguageCode.Spanish] = "Ojos Naranjas",
-                })
+					[LanguageCode.Spanish] = "Ojos Naranjas",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

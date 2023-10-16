@@ -3,23 +3,23 @@
 namespace CCU.Traits.App_BT1
 {
 	public class Cannibal_Body : T_BodyType
-    {
+	{
 		public override string[] Rolls => new string[] { VanillaAgents.Cannibal };
 
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Cannibal_Body>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Adds this item to the appearance pool.",
-                    [LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
-                })
+					[LanguageCode.Spanish] = "Agrega este cuerpo a los que el personaje puede usar.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Cannibal_Body)),
-                    [LanguageCode.Spanish] = "Cuerpo de Canibal",
-                })
+					[LanguageCode.Spanish] = "Cuerpo de Canibal",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using BunnyLibs;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -12,7 +13,7 @@ namespace CCU.Mutators
 {
 	public static class MutatorManager
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		public static string ActiveMutatorNameFromList(List<Type> mutators)
@@ -66,10 +67,10 @@ namespace CCU.Mutators
 		}
 	}
 
-	[HarmonyPatch(declaringType: typeof(LevelEditor))]
+	[HarmonyPatch(typeof(LevelEditor))]
 	public static class P_LevelEditor_MutatorManager
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(nameof(LevelEditor.CreateMutatorListLevel))]
@@ -124,8 +125,29 @@ namespace CCU.Mutators
 			return instructions;
 		}
 
+		//	Caused an error on proceeding to level 2 in Mayor Village Voyage
+		//[Info   : Unity Log] Show Scrolling Menu Traits
+		//[Info: Unity Log] Playerr(Agent) - Stealth - 4
+		//[Info: Unity Log] Playerr(Agent) - Social - 3
+		//[Info: Unity Log] Playerr(Agent) - Trade - 3
+		//[Info: Unity Log] CATEGORIES: Playerr(Agent)(2) - Stealth - Social - Trade
+		//[Info   : Unity Log] TRAITNUM(Normal): 0
+		//[Error: Unity Log] NullReferenceException: Object reference not set to an instance of an object
+		//Stack trace:
+		//CCU.Mutators.P_ScrollingMenu_MutatorManager.FilterTraitCancellations(Unlock myUnlock, System.Boolean& __result) (at<5860ef8c738c4dc4a3284e520ed7dfb2>:0)
+		//ScrollingMenu.CanHaveTrait(Unlock myUnlock) (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//ScrollingMenu.TraitOK(Unlock myTrait) (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//ScrollingMenu.FindTrait(System.Int32 traitNum) (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//ScrollingMenu.OpenScrollingMenu() (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//MainGUI.ShowScrollingMenu(System.String type, PlayfieldObject otherObject, Agent myAgent) (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//StatsScreen.NextStep() (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//StatsScreen.Continue() (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		//PlayerControl.Update() (at<c91d003c54a541caabaa8c305d5e31e5>:0)
+		// Tried with different character (Diplomat) but the bug didn't happen. Issue might be specific to Francois character trait list.
+
 		private static List<string> FilterMutatorList(List<string> vanilla)
 		{
+			logger.LogDebug("===FilterMutatorList");
 			if (GC.levelEditing)
 			{
 				switch (GC.levelEditor.scrollingMenuType)
@@ -142,7 +164,7 @@ namespace CCU.Mutators
 							else
 								try { vanilla.Remove(unlock.unlockName); } catch { }
 						}
-						
+
 						break;
 
 					case "LoadMutatorsCampaign":
@@ -169,7 +191,7 @@ namespace CCU.Mutators
 	[HarmonyPatch(typeof(ScrollingMenu))]
 	public static class P_ScrollingMenu_MutatorManager
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPostfix, HarmonyPatch(nameof(ScrollingMenu.SortUnlocks))]

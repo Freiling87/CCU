@@ -1,15 +1,15 @@
 ﻿using BepInEx.Logging;
+using BunnyLibs;
 using CCU.Localization;
-using CCU.Traits;
 using HarmonyLib;
 using System;
 
 namespace CCU.Patches
 {
-    [HarmonyPatch(declaringType: typeof(NameDB))]
+	[HarmonyPatch(typeof(NameDB))]
 	public static class P_NameDB
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		/// <summary>
@@ -20,21 +20,21 @@ namespace CCU.Patches
 		/// <param name="myName"></param>
 		/// <param name="type"></param>
 		/// <param name="__result"></param>
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(NameDB.GetName))]
+		[HarmonyPostfix, HarmonyPatch(nameof(NameDB.GetName))]
 		public static void GetName_Postfix(string myName, string type, ref string __result)
-        {
+		{
 			// TODO: Make this iterate with a while loop to be able to rename multiple generations of releases.
 			if (type != "StatusEffect" || !__result.Contains("E_"))
 				return;
 
 			foreach (Type[] traitOutput in Legacy.TraitConversions.Values)
-            {
+			{
 				foreach (Type trait in traitOutput)
 				{
 					string traitName = T_CCU.DesignerName(trait);
 
 					if (__result == "E_" + traitName)
-                    {
+					{
 						__result = __result.Remove(0, 2);
 						return;
 					}

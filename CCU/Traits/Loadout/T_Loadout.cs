@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using CCU.Traits.Loadout_Gun_Nut;
+using BunnyLibs;
 using CCU.Traits.Loadout_Loader;
 using CCU.Traits.Loadout_Money;
 using CCU.Traits.Loadout_Pockets;
@@ -10,18 +10,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace CCU.Traits.Loadout
 {
-    public abstract class T_Loadout : T_CCU
+	public abstract class T_Loadout : T_CCU
 	{
+		public bool AlwaysApply => false;
 		public T_Loadout() : base() { }
 	}
 
 	public static class LoadoutTools
 	{
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		public enum Slots
@@ -37,7 +37,7 @@ namespace CCU.Traits.Loadout
 		// TODO: You'll just end up rewriting the original trait logic here, unless you refactor the system.
 		// This is an untested WIP, not scoped for 0.1.0
 		public static string LoadoutTable(Agent agent)
-        {
+		{
 			string output = "Loadout Roll Chances: ";
 			List<KeyValuePair<string, int>> table = new List<KeyValuePair<string, int>>();
 			List<string> baseItemList = agent.customCharacterData.items;
@@ -84,7 +84,7 @@ namespace CCU.Traits.Loadout
 		{
 			Agent agent = invDatabase.agent;
 
-            if (agent.agentName != VanillaAgents.CustomCharacter ||
+			if (agent.agentName != VanillaAgents.CustomCharacter ||
 				!agent.GetTraits<T_LoadoutLoader>().Any() ||
 				agent.isPlayer != 0)
 				return;
@@ -100,7 +100,7 @@ namespace CCU.Traits.Loadout
 		}
 
 		// TODO: set invDatabase to a static value, defined on entering this system.
-		//	Then it can be called internally without having to pass it around.
+		//	Then it can be called publicly without having to pass it around.
 		private static void LoadCustomInventory(InvDatabase invDatabase)
 		{
 			Agent agent = invDatabase.agent;
@@ -126,14 +126,14 @@ namespace CCU.Traits.Loadout
 						(agent.HasTrait<Equipment_Enjoyer>() && GC.percentChance(25)) ||
 						(agent.HasTrait<Equipment_Virgin>() && GC.percentChance(50)))))
 					continue;
-				
-				List<InvItem> itemBagForSlot = 
+
+				List<InvItem> itemBagForSlot =
 					invItemsFromCC
 						.Where(ii => GetSlotFromItem(ii) == currentInvSlot)
 						.OrderBy(c => CoreTools.random.Next(0, 100))
 						.ToList();
 
-				while (ItemsInSlot(agent.agentInvDatabase.InvItemList, currentInvSlot) < maximum && 
+				while (ItemsInSlot(agent.agentInvDatabase.InvItemList, currentInvSlot) < maximum &&
 					itemBagForSlot.Count() > 0)
 				{
 					InvItem pickedItem = null;
@@ -146,7 +146,7 @@ namespace CCU.Traits.Loadout
 
 						// By default, a 1/(N+1)% chance to generate no item for the slot.
 						int chance = (int)(100f / (itemBagForSlot.Count() + 1f));
-						if (GC.percentChance(chance) &&  
+						if (GC.percentChance(chance) &&
 								((pockets && !agent.HasTrait<Have>()) ||
 								(!pockets && !agent.HasTrait<Equipment_Chad>())))
 							break;
@@ -157,11 +157,11 @@ namespace CCU.Traits.Loadout
 					{
 						pickedItem = itemBagForSlot[0];
 
-						int chance = 
+						int chance =
 							agent.HasTrait<Scaled_Distribution>()
 								? Mathf.Clamp((int)((125f - pickedItem.itemValue) / 2.0f), 1, 100)
 							: agent.HasTrait<Upscaled_Distribution>()
-								? Mathf.Clamp((int)(pickedItem.itemValue / 3.0f), 1, 100) 
+								? Mathf.Clamp((int)(pickedItem.itemValue / 3.0f), 1, 100)
 									: 0;
 						logger.LogDebug("Chance: " + chance + "%");
 
@@ -175,7 +175,7 @@ namespace CCU.Traits.Loadout
 					string invItemName = pickedItem.invItemName;
 					itemBagForSlot.Remove(pickedItem);
 
-					if (!addItem || 
+					if (!addItem ||
 						agent.inventory.InvItemList.Select(ii => ii.invItemName).Contains(invItemName))
 						continue;
 
@@ -218,7 +218,7 @@ namespace CCU.Traits.Loadout
 
 					if (agent.isPlayer == 0) // Free starting ammo for NPCs
 					{
-						if (final.contents.Contains(vItem.AmmoCapacityMod))
+						if (final.contents.Contains(VItemName.AmmoCapacityMod))
 							final.invItemCount = (int)(final.invItemCount * 1.4f);
 
 						foreach (T_AmmoCap trait in agent.GetTraits<T_AmmoCap>())
@@ -253,7 +253,7 @@ namespace CCU.Traits.Loadout
 				else if (invItem.itemType is "WeaponThrown" || invItem.weaponCode is weaponType.WeaponThrown)
 					return Slots.WeaponThrown;
 			}
-			
+
 			return Slots.Pockets;
 		}
 		private static int GetSlotMax(Agent agent, Slots slot)
@@ -287,13 +287,13 @@ namespace CCU.Traits.Loadout
 		}
 		private static List<string> ExemptSlotItems = new List<string>()
 		{
-			vItem.ChloroformHankie,
-			vItem.Fist,
-			vItem.LaserGun,
-			vItem.Money,
-			vItem.ResearchGun,
-			vItem.StickyGlove,
-			vItem.WaterCannon,
+			VItemName.ChloroformHankie,
+			VItemName.Fist,
+			VItemName.LaserGun,
+			VItemName.Money,
+			VItemName.ResearchGun,
+			VItemName.StickyGlove,
+			VItemName.WaterCannon,
 		};
 		private static int ItemsInSlot(List<InvItem> list, Slots slot) =>
 			list.Where(ii => GetSlotFromItem(ii) == slot && ii.invItemName != "" && !(ii.invItemName is null) && !ExemptSlotItems.Contains(ii.invItemName)).Count();

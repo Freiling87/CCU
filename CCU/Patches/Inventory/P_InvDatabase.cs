@@ -1,29 +1,27 @@
 ﻿using BepInEx.Logging;
-using CCU.Mutators.Laws;
-using CCU.Traits;
-using CCU.Traits.Behavior;
+using BunnyLibs;
 using CCU.Traits.Inventory;
 using CCU.Traits.Loadout;
 using CCU.Traits.Loadout_Money;
+using CCU.Traits.Merchant_Stock;
 using CCU.Traits.Merchant_Type;
-using CCU.Traits.Passive;
 using CCU.Traits.Player.Armor;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
 namespace CCU.Patches.Inventory
 {
-	[HarmonyPatch(declaringType:typeof(InvDatabase))]
+	[HarmonyPatch(typeof(InvDatabase))]
 	public static class P_InvDatabase
 	{
 		// TODO: AddItemReal is private and used in AddRandItem as well as fillAgent
 
-		private static readonly ManualLogSource logger = CCULogger.GetLogger();
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		public static FieldInfo nameProviderField = AccessTools.Field(typeof(RogueLibs), "NameProvider");
@@ -34,12 +32,12 @@ namespace CCU.Patches.Inventory
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <param name="__result"></param>
-		[HarmonyPostfix, HarmonyPatch(methodName: "AddItemReal")]
+		[HarmonyPostfix, HarmonyPatch("AddItemReal")]
 		public static void AddItemReal_InitSetup(InvDatabase __instance, ref InvItem __result)
 		{
 			if (__instance.agent is null)
 				return;
-			
+
 			ModifyItemHelper.SetupItem(__instance.agent, __result);
 
 			// Free NPC ammo
@@ -50,7 +48,7 @@ namespace CCU.Patches.Inventory
 			}
 		}
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.AddRandItem), argumentTypes: new[] { typeof(string) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.AddRandItem), new[] { typeof(string) })]
 		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
 		{
 			if (__instance.agent is null)
@@ -111,35 +109,9 @@ namespace CCU.Patches.Inventory
 			return true;
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.ChooseWeapon), argumentTypes: new[] { typeof(bool) })]
-		public static bool ChooseWeapon_Prefix(InvDatabase __instance)
-        {
-			__instance.StartCoroutine(ConcealWeapon(__instance));
-			return true;
-        }
-		public static IEnumerator ConcealWeapon(InvDatabase invDatabase)
-		{
-			Agent agent = invDatabase.agent;
-
-			if (agent.isPlayer == 0 &&
-				!agent.inCombat &&
-					(agent.HasTrait<Concealed_Carrier>() ||
-					(GC.challenges.Contains(nameof(No_Open_Carry)) && !agent.HasTrait<Outlaw>())))
-			{
-				if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
-					yield return new WaitForSeconds(1.00f);
-				else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
-					yield return new WaitForSeconds(3.00f);
-				else
-					yield return new WaitForSeconds(2.00f);
-
-				invDatabase.EquipWeapon(invDatabase.fist);
-			}
-		}
-
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.DepleteArmor))]
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.DepleteArmor))]
 		public static bool DepleteArmor_Modify(InvDatabase __instance, ref int amount)
-        {
+		{
 			if (__instance.agent.HasTrait<Infinite_Armor>())
 				return false;
 
@@ -150,55 +122,139 @@ namespace CCU.Patches.Inventory
 
 			amount = (int)Mathf.Max(1f, amt);
 			return true;
-        }
+		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.DepleteMelee), argumentTypes: new[] { typeof(int), typeof(InvItem) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.DepleteMelee), new[] { typeof(int), typeof(InvItem) })]
 		public static bool DepleteMelee_Prefix(InvDatabase __instance, int amount)
-        {
+		{
 			if (__instance.agent.HasTrait<Infinite_Melee>())
 				return false;
 
 			return true;
-        }
+		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.EquipWeapon), argumentTypes: new[] { typeof(InvItem), typeof(bool) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.EquipWeapon), new[] { typeof(InvItem), typeof(bool) })]
 		public static bool EquipWeapon_Prefix(InvDatabase __instance, InvItem item, ref bool sfx)
-        {
-			if (__instance.agent.isPlayer == 0 && item.invItemName == vItem.Fist)
+		{
+			if (__instance.agent.isPlayer == 0 && item.invItemName == VItemName.Fist)
 				sfx = false;
 
 			return true;
-        }
+		}
 
 		// TODO: Move to T_Loadout
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(InvDatabase.FillAgent))]
+		[HarmonyPostfix, HarmonyPatch(nameof(InvDatabase.FillAgent))]
 		private static void FillAgent_Loadout(InvDatabase __instance)
 		{
 			LoadoutTools.SetupLoadout(__instance);
 		}
 
-        [HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.FindMoneyAmt))]
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.FindMoneyAmt))]
 		private static bool FindMoneyAmount_Prefix(InvDatabase __instance, ref int __result)
-        {
+		{
 			if (__instance.CompareTag("Agent") && (
-				__instance.agent.GetTraits<T_PocketMoney>().Any() || 
+				__instance.agent.GetTraits<T_PocketMoney>().Any() ||
 				(__instance.agent.HasTrait<Bankrupt_25>() && GC.percentChance(25)) ||
 				(__instance.agent.HasTrait<Bankrupt_50>() && GC.percentChance(50)) ||
 				(__instance.agent.HasTrait<Bankrupt_75>() && GC.percentChance(75))))
 			{
 				__result = 0;
 				return false;
-            }
+			}
 
 			return true;
 		}
 
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.FillSpecialInv))]
+		public static bool FillSpecialInv_Prefix(InvDatabase __instance)
+		{
+			// WARNING: // This was accidentally deleted at some point (Commit d02c7cde, 06/30/2023). It might have been for a good reason.
+			Agent agent = __instance.agent;
+			List<string> potentialItems = new List<string>();
+			List<string> rolledItems = new List<string>();
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(InvDatabase.isEmpty))]
+			if (agent is null || agent.agentName != VanillaAgents.CustomCharacter || __instance.filledSpecialInv)
+				return true;
+
+			List<T_MerchantType> traits = agent.GetTraits<T_MerchantType>().ToList();
+
+			foreach (T_MerchantType trait in traits)
+				foreach (KeyValuePair<string, int> item in trait.MerchantInventory)
+				{
+					// Gives priority to Insider traits
+					if (trait.MerchantInventory.Count == 1)
+						rolledItems.Add(trait.MerchantInventory[0].Key);
+					else
+					{
+						for (int i = 0; i < item.Value; i++) // Qty
+							potentialItems.Add(__instance.SwapWeaponTypes(item.Key)); // Name
+					}
+				}
+
+			int attempts = 0;
+			bool forceDuplicates = false;
+
+		redo: // Yeah why don't you "redo" this whole damn thing or more like "undo" or like "redon't" or or or
+			while (potentialItems.Any() && rolledItems.Count < 5 && attempts < 100)
+			{
+				attempts++;
+
+				int bagPickedIndex = CoreTools.random.Next(0, Math.Max(0, potentialItems.Count - 1));
+				string bagPickedItem = potentialItems[bagPickedIndex];
+
+				if (forceDuplicates || !rolledItems.Contains(bagPickedItem) || agent.HasTrait<Clearancer>())
+				{
+					rolledItems.Add(bagPickedItem);
+					potentialItems.RemoveAt(bagPickedIndex);
+					attempts = 0;
+				}
+			}
+
+			if (potentialItems.Any() && rolledItems.Count < 5)
+			{
+				forceDuplicates = true;
+				attempts = 0;
+				goto redo;
+			}
+
+			foreach (string item in rolledItems)
+			{
+				MethodInfo AddItemReal = AccessTools.DeclaredMethod(typeof(InvDatabase), "AddItemReal");
+				InvItem invItem = null;
+
+				try
+				{
+					string rListItem = __instance.rnd.RandomSelect(item, "Items");
+					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(rListItem);
+
+					if (agent.HasTrait<Clearancer>())
+						invItem.canRepeatInShop = true;
+				}
+				catch
+				{
+					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(item);
+
+					if (agent.HasTrait<Clearancer>())
+						invItem.canRepeatInShop = true;
+				}
+
+				if (T_MerchantStock.ExceptionItems.Contains(invItem.invItemName))
+					invItem.invItemCount = 0;
+
+				// This is apparently done automatically for Durability items
+				if (T_MerchantStock.QuantityTypes.Contains(invItem.itemType))
+					T_MerchantStock.ShopPrice(ref invItem);
+			}
+
+			__instance.filledSpecialInv = true;
+			return false;
+		}
+
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.isEmpty))]
 		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
-        {
+		{
 			for (int i = 0; i < __instance.InvItemList.Count; i++)
-            {
+			{
 				InvItem invItem = __instance.InvItemList[i];
 
 				if (!GC.nameDB.GetName(invItem.invItemName, "Item").Contains("E_"))

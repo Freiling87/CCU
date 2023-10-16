@@ -4,20 +4,20 @@ namespace CCU.Traits.Loadout_Loader
 {
 	public class Flat_Distribution : T_LoadoutLoader
 	{
-        [RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess = RogueLibs.CreateCustomTrait<Flat_Distribution>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Randomly selects an item for each pool (including pockets), with a (1/N+1)% chance to generate no item, where N is the number of items in the pool.",
-                    [LanguageCode.Spanish] = "Elige aleatoriamente un item de cada lista (incluyendo bolsillos), con una chance de (1/N+1)% de no generar un item, N siendo el numero de items en la lista.",
-                })
+					[LanguageCode.Spanish] = "Elige aleatoriamente un item de cada lista (incluyendo bolsillos), con una chance de (1/N+1)% de no generar un item, N siendo el numero de items en la lista.",
+				})
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = DesignerName(typeof(Flat_Distribution)),
-                    [LanguageCode.Spanish] = "Distribucion Plana",
-                })
+					[LanguageCode.Spanish] = "Distribucion Plana",
+				})
 				.WithUnlock(new TraitUnlock_CCU
 				{
 					CharacterCreationCost = 0,

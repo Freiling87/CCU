@@ -1,11 +1,8 @@
-﻿using CCU.Traits.Map_Marker;
-using HarmonyLib;
-using RogueLibsCore;
-using System.Linq;
+﻿using HarmonyLib;
 
 namespace CCU.Patches.Interface
 {
-    [HarmonyPatch(declaringType: typeof(QuestMarker))]
+	[HarmonyPatch(typeof(QuestMarker))]
 	class P_QuestMarker
 	{
 
