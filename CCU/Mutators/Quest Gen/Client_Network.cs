@@ -7,12 +7,12 @@ namespace CCU.Mutators.Quest_Gen
 
 		// MOVE TO RESISTANCE HR
 
-		public Client_Network(string v1, bool v2) : base(v1, v2) { }
+		public Client_Network() : base(nameof(Client_Network), true) { }
 
 		[RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new Client_Network(nameof(Client_Network), true))
+			RogueLibs.CreateCustomUnlock(new Client_Network())
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "More NPC types are able to assign special quests.",

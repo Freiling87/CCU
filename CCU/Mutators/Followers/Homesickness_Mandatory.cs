@@ -6,12 +6,12 @@ namespace CCU.Mutators.Followers
 {
 	class Homesickness_Mandatory : M_Followers, ISetupAgentStats
 	{
-		public Homesickness_Mandatory(string v1, bool v2) : base(v1, v2) { }
+		public Homesickness_Mandatory() : base(nameof(Homesickness_Mandatory), true) { }
 
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new Homesickness_Mandatory(nameof(Homesickness_Mandatory), true))
+			RogueLibs.CreateCustomUnlock(new Homesickness_Mandatory())
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Followers will stay behind when the level is completed, overriding Homesickness Killer. Homesickness Killer is removed from the trait choice pool.",
@@ -24,7 +24,8 @@ namespace CCU.Mutators.Followers
 				});
 		}
 
-		public void SetupAgentStats(Agent agent)
+		public bool BypassUnlockChecks => false;
+		public void SetupAgent(Agent agent)
 		{
 			if (!agent.HasTrait<Homesickless>())
 				agent.canGoBetweenLevels = false;

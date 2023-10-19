@@ -6,12 +6,12 @@ namespace CCU.Mutators.Followers
 {
 	class Homesickness_Disabled : M_Followers, ISetupAgentStats
 	{
-		public Homesickness_Disabled(string v1, bool v2) : base(v1, v2) { }
+		public Homesickness_Disabled() : base(nameof(Homesickness_Disabled), true) { }
 
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new Homesickness_Disabled(nameof(Homesickness_Disabled), true))
+			RogueLibs.CreateCustomUnlock(new Homesickness_Disabled())
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Followers act as if their employer had Homesickness Killer. Homesickness Killer is removed from the trait choice pool.",
@@ -24,7 +24,8 @@ namespace CCU.Mutators.Followers
 				});
 		}
 
-		public void SetupAgentStats(Agent agent)
+		public bool BypassUnlockChecks => false;
+		public void SetupAgent(Agent agent)
 		{
 			if (!agent.HasTrait<Homesickly>())
 				agent.canGoBetweenLevels = true;

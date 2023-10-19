@@ -14,10 +14,12 @@ namespace CCU.Mutators.Laws
 		public override bool RollInDailyRun => true;
 		public override bool ShowInLevelMutatorList => true;
 
+		public No_Open_Carry() : base(nameof(No_Open_Carry), true) { }
+
 		//[RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new No_Open_Carry(nameof(No_Open_Carry), true))
+			RogueLibs.CreateCustomUnlock(new No_Open_Carry())
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Brandishing a weapon in public is a minor crime. Equip your fists or a non-weapon to keep the cops off your back.",
@@ -48,7 +50,6 @@ namespace CCU.Mutators.Laws
 			VItemName.Rock,
 		};
 
-		public No_Open_Carry(string name, bool unlockedFromStart) : base(name, unlockedFromStart) { }
 
 		public override bool IsViolating(Agent agent)
 		{
