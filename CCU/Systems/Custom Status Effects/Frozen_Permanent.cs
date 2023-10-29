@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
 using RogueLibsCore;
 
 namespace CCU.Status_Effects

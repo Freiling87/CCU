@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
 using CCU.Traits.Player.Ammo;
 using RogueLibsCore;
 using System.Collections.Generic;
@@ -22,12 +21,10 @@ namespace CCU.Items
 				.WithName(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Debugulizer",
-					[LanguageCode.Spanish] = "I SEE YOU BUNNE, YOU BITCH",
 				})
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Developer tool.",
-					[LanguageCode.Spanish] = "IM DONE WITH YA, I WILL BECOME BACK MY MONEY AND KICK YO ASS, HEARD ME BUNNE? YOU TURDRUG.",
 				})
 				.WithSprite(Properties.Resources.Debugulizer)
 				.WithUnlock(new ItemUnlock
@@ -84,7 +81,7 @@ namespace CCU.Items
 
 		public static void DebugActions(Agent agent)
 		{
-			agent.AddTrait<Ammo_Auteur>();
+			agent.agentInvDatabase.AddItem(VanillaItems.Translator, 1);
 		}
 	}
 }

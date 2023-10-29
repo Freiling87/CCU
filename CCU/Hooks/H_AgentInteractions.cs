@@ -9,7 +9,6 @@ namespace CCU
 	{
 		public bool HiredPermanently;
 		public InteractionState interactionState;
-		public List<string> languages = new List<string> { };
 
 		//	H_AgentSomething
 		public bool SceneSetterFinished;

@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using BunnyLibs;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
@@ -25,28 +24,28 @@ namespace CCU.Systems.Investigateables
 		// There is currently no overlap between Investigateables and Containers. If you change that, do it carefully.
 		public static List<string> InvestigateableObjects_Slot1 = new List<string>()
 		{
-			VanillaObjects.Altar,
-			VanillaObjects.ArcadeGame,
-			VanillaObjects.Boulder,
-			VanillaObjects.Computer,
-			// VanillaObjects.Counter,		// Really needs a sprite change
-			VanillaObjects.Gravestone,
-			VanillaObjects.Jukebox,
-			// VanillaObjects.MovieScreen, // Didn't work yet, see notes
-			VanillaObjects.Podium,
-			VanillaObjects.Speaker,
-			VanillaObjects.Television,
-			VanillaObjects.Window,
+			VObjectReal.Altar,
+			VObjectReal.ArcadeGame,
+			VObjectReal.Boulder,
+			VObjectReal.Computer,
+			// VObjectReal.Counter,		// Really needs a sprite change
+			VObjectReal.Gravestone,
+			VObjectReal.Jukebox,
+			// VObjectReal.MovieScreen, // Didn't work yet, see notes
+			VObjectReal.Podium,
+			VObjectReal.Speaker,
+			VObjectReal.Television,
+			VObjectReal.Window,
 		};
 		public static List<string> InvestigateableObjects_Slot2 = new List<string>()
 		{
-			//VanillaObjects.Door,
-			//VanillaObjects.Shelf,
+			//VObjectReal.Door,
+			//VObjectReal.Shelf,
 		};
 
 		public static string MagicObjectName(string originalName) =>
 			IsInvestigateable(originalName)
-				? VanillaObjects.Sign
+				? VObjectReal.Sign
 				: originalName;
 
 		public static bool IsInvestigateable(PlayfieldObject playfieldObject) =>
@@ -146,7 +145,7 @@ namespace CCU.Systems.Investigateables
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyTranspiler, HarmonyPatch(nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
+		[HarmonyTranspiler, HarmonyPatch(nameof(InvDatabase.FillChest), new[] { typeof(bool) })]
 		private static IEnumerable<CodeInstruction> FillChest_FilterNotes_EVS(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -252,13 +251,13 @@ namespace CCU.Systems.Investigateables
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_1),
-					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VObjectReal.Sign),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_1),					//	Object real name
 					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if investigateable, or real name if not
-					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VObjectReal.Sign),
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -278,14 +277,14 @@ namespace CCU.Systems.Investigateables
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
-					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VObjectReal.Sign),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldarg_1),
 					new CodeInstruction(OpCodes.Ldfld, scrollingButtonType),
 					new CodeInstruction(OpCodes.Call, magicObjectName),
-					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign)
+					new CodeInstruction(OpCodes.Ldstr, VObjectReal.Sign)
 				});
 
 			patch.ApplySafe(instructions, logger);
@@ -313,13 +312,13 @@ namespace CCU.Systems.Investigateables
 				targetInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_S, 34),
-					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VObjectReal.Sign),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					new CodeInstruction(OpCodes.Ldloc_S, 34),				//	Object real name
 					new CodeInstruction(OpCodes.Call, magicObjectName),		//	"Sign" if investigateable, or real name if not
-					new CodeInstruction(OpCodes.Ldstr, VanillaObjects.Sign),
+					new CodeInstruction(OpCodes.Ldstr, VObjectReal.Sign),
 				});
 
 			patch.ApplySafe(instructions, logger);

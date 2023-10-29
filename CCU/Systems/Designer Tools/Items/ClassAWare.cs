@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
-using CCU.Patches.Agents;
+using CCU.Tools;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -94,9 +93,7 @@ namespace CCU.Items
 			Owner.gc.audioHandler.Play(Owner, "ClassAWare_Use");
 			Owner.gc.spawnerMain.SpawnStateIndicator(agent, "HighVolume");
 			Owner.mainGUI.ShowBigImage(MainText(agent, newClass, Owner), "", null, target);
-
-			P_Agent.DoAllLogging(agent);
-
+			Logging.DoAllLogging(agent);
 			return true;
 		}
 

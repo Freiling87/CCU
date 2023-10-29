@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
 using RogueLibsCore;
 using System.Collections.Generic;
 
@@ -9,6 +8,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 
+		public override string[] AddedItemCategories => new string[] { VItemCategory.NonViolent };
 		public override string GunMod => VItemName.RubberBulletsMod;
 		public override List<string> ExcludedItems => new List<string>()
 		{
@@ -29,7 +29,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess = RogueLibs.CreateCustomTrait<Rubber_Bulleteer>()
+			PostProcess_PlayerTrait = RogueLibs.CreateCustomTrait<Rubber_Bulleteer>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Agent applies a Rubber Bullets Mod to all traditional firearms in inventory. If rubber bullet damage reduces an NPC's health to 10% or lower, they are knocked out. If they go below -10%, they are killed... but less lethally! Rubber Bullet guns are usable by Pacifists.",
@@ -40,12 +40,11 @@ namespace CCU.Traits.Loadout_Gun_Nut
 					[LanguageCode.English] = PlayerName(typeof(Rubber_Bulleteer)),
 					[LanguageCode.Spanish] = "El Pacificador",
 				})
-				.WithUnlock(new TraitUnlock_CCU
+				.WithUnlock(new TU_PlayerUnlock
 				{
 					CharacterCreationCost = 10,
 					IsAvailable = true,
 					IsAvailableInCC = true,
-					IsPlayerTrait = true,
 					UnlockCost = 16,
 					Unlock =
 					{

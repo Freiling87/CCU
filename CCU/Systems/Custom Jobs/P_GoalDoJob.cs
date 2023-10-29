@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BunnyLibs;
+using CCU.Content;
 using HarmonyLib;
 
 namespace CCU.Patches.Goals

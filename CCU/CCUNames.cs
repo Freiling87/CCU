@@ -1,6 +1,4 @@
-﻿using BunnyLibs;
-using CCU;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 
 
 // Distribute and eliminate this file
@@ -34,8 +32,8 @@ internal static class CDetermineMoneyCost
 	public const string
 		HirePermanentExpert = "HackerAssist_Permanent",
 		HirePermanentMuscle = "SoldierHire_Permanent",
-		TeachLanguageEnglish = "TeachLanguageEnglish",
-		TeachLanguageOther = "TeachLanguageOther";
+		LearnLanguageEnglish = "LearnLanguageEnglish",
+		LearnLanguageOther = "LearnLanguageOther";
 }
 internal static class CButtonText
 {
@@ -48,15 +46,6 @@ internal static class CButtonText
 		Hire_Muscle_Permanent = "HireAsProtection_Permanent",
 		Hire_Muscle_Permanent_Voucher = "HireAsProtection_Permanent_Voucher",
 		Hire_Muscle_Voucher = "HireAsProtection_Voucher", // Name differentiation required to avoid button confusion in RL
-		Teach_Language = "Teach_Language",
-		Teach_Binary = "Teach_Binary",
-		Teach_Chthonic = "Teach_Chthonic",
-		Teach_English = "Teach_English",
-		Teach_ErSdtAdt = "Teach_ErSdtAdt",
-		Teach_Foreign = "Teach_Foreign",
-		Teach_Goryllian = "Teach_Goryllian",
-		Teach_Undercant = "Teach_Undercant",
-		Teach_Werewelsh = "Teach_Werewelsh",
 
 		//	Object Interactions
 		Container_Open = "ContainerOpen",

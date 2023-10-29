@@ -1,5 +1,4 @@
-﻿using RogueLibsCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CCU.Systems.Object_Variables
 {
@@ -17,7 +16,7 @@ namespace CCU.Systems.Object_Variables
 
 		public static Dictionary<string, SlotType[]> ObjectVariableSlots = new Dictionary<string, SlotType[]>()
 		{
-			{ VanillaObjects.Door, new SlotType[] { SlotType.Investigation, SlotType.None, SlotType.None } }
+			{ VObjectReal.Door, new SlotType[] { SlotType.Investigation, SlotType.None, SlotType.None } }
 		};
 
 		public static List<string> CustomObjects = new List<string>()

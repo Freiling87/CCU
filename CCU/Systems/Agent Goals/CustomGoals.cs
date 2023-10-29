@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using BunnyLibs;
 using CCU.Status_Effects;
 using HarmonyLib;
 using RogueLibsCore;
@@ -25,11 +24,11 @@ namespace CCU.Systems.CustomGoals
 			Dead = "Dead",
 			Gibbed = "Gibbed",
 			KnockedOut = "Knocked Out",
-			Random_Patrol_Chunk = "Random Patrol (Chunk)", // New
-			Random_Patrol_Map = "Random Patrol (Map)", // New
+			//Random_Patrol_Chunk = "Random Patrol (Chunk)",
+			//Random_Patrol_Map = "Random Patrol (Map)",
 			Teleport_Public = "Random Teleport (Public)",
-			Teleport_Private = "Random Teleport (Private)",
-			Teleport_Prison = "Random Teleport (Private + Prison)",
+			//Teleport_Private = "Random Teleport (Private)",
+			//Teleport_Prison = "Random Teleport (Private + Prison)",
 			Zombified = "Zombified",
 
 			//  Permanent Status Effects
@@ -40,12 +39,12 @@ namespace CCU.Systems.CustomGoals
 			Frozen_Permanent = "Frozen (Permanent)",
 
 			//  Other Customs
-			Panic = "Panic",
-			WanderAgents = "Wander Between Agents",
-			WanderAgentsNonOwners = "Wander Between Agents (Non-Owner)",
-			WanderAgentsOwners = "Wander Between Agents (Owner)",
-			WanderObjects = "Wander Between Objects (Non-Owner)",
-			WanderObjectsOwned = "Wander Between Objects (Owner)",
+			//Panic = "Panic",
+			//WanderAgents = "Wander Between Agents",
+			//WanderAgentsNonOwners = "Wander Between Agents (Non-Owner)",
+			//WanderAgentsOwners = "Wander Between Agents (Owner)",
+			//WanderObjects = "Wander Between Objects (Non-Owner)",
+			//WanderObjectsOwned = "Wander Between Objects (Owner)",
 
 			//  Vanilla Unlocked
 			CommitArson = "Commit Arson",
@@ -85,8 +84,8 @@ namespace CCU.Systems.CustomGoals
 			Frozen_Permanent,
 			Gibbed,
 			KnockedOut,
-			Random_Patrol_Chunk,
-			Random_Patrol_Map,
+			//Random_Patrol_Chunk,
+			//Random_Patrol_Map,
 			RandomTeleport, // Legacy
             Teleport_Public,
 			Zombified,

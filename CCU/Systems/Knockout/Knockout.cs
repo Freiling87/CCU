@@ -1,11 +1,9 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
-using BunnyLibs;
 using CCU.Items;
 //using CCU.Systems.Knockout.Traits;
 using HarmonyLib;
 using RogueLibsCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -22,7 +20,7 @@ namespace CCU.Knockout
 		{
 			if (__instance.agent.HasTrait(VanillaTraits.Pacifist)
 				&& (item.contents.Contains(VItemName.RubberBulletsMod)))
-				//|| (item.invItemName == VanillaItems.PoliceBaton && (__instance.agent.HasTrait<Always_Baton_Red>() || __instance.agent.HasTrait<Always_Baton_Red_2>()))))
+			//|| (item.invItemName == VanillaItems.PoliceBaton && (__instance.agent.HasTrait<Always_Baton_Red>() || __instance.agent.HasTrait<Always_Baton_Red_2>()))))
 			{
 				__result = true;
 				return false;
@@ -51,10 +49,10 @@ namespace CCU.Knockout
 			Agent agent = __instance.agent ?? null;
 			Agent hitterAgent = agent?.lastHitByAgent ?? null;
 			bool isRubberBullet = !(damagerObject is null) && damagerObject.isBullet && damagerObject.playfieldObjectBullet.rubber;
-			bool isKnockoutPunch = !(hitterAgent is null) && hitterAgent.agentInvDatabase.equippedWeapon.invItemName == VanillaItems.Fist;
-			//&& hitterAgent.HasTrait<Knocker_Out>();
-			bool isBaton = !(hitterAgent is null) && hitterAgent.agentInvDatabase.equippedWeapon.invItemName == VanillaItems.PoliceBaton;
-			//&& hitterAgent.HasTrait<Always_Baton_Red>();
+			bool isKnockoutPunch = false // Shelved
+				&& !(hitterAgent is null) && hitterAgent.agentInvDatabase.equippedWeapon.invItemName == VanillaItems.Fist; //&& hitterAgent.HasTrait<Knocker_Out>();
+			bool isBaton = false && // Shelved
+				!(hitterAgent is null) && hitterAgent.agentInvDatabase.equippedWeapon.invItemName == VanillaItems.PoliceBaton; //&& hitterAgent.HasTrait<Always_Baton_Red>();
 
 			if (agent is null || damagerObject is null ||
 				(!isRubberBullet && !isKnockoutPunch && !isBaton) ||
@@ -67,19 +65,21 @@ namespace CCU.Knockout
 				(GC.cinematic && GC.loadLevel.LevelContainsMayor()))
 				return true;
 
-			float knockoutThreshold = agent.healthMax / 10; //  10%
+			float knockoutThreshold = agent.healthMax / 10;
 			float deathThreshold = -knockoutThreshold; // 10%
 			float netHealth = agent.health + healthNum; // Damage is negative
 
-			if (netHealth <= deathThreshold)
+			if (netHealth <= deathThreshold) // Accidental kill()
 			{
 				if (isRubberBullet)
 					damagerObject.playfieldObjectBullet.rubber = false;
 
-				if (GC.percentChance(33))
+				if (!agent.knockedOut && !agent.knockedOutLocal
+						&& (hitterAgent.HasTrait(VanillaTraits.TheLaw) || agent.enforcer)
+						&& GC.percentChance(10))
 					RubberBulletsMod.SayDialogue(hitterAgent);
 			}
-			else if (netHealth <= knockoutThreshold)
+			else if (netHealth <= knockoutThreshold) // Knockout()
 			{
 				agent.healthBeforeKnockout = agent.health + healthNum;
 				agent.health += healthNum; // Bypassed for rubber knockout in vanilla code
@@ -120,7 +120,8 @@ namespace CCU.Knockout
 			return agent.healthMax / -10f;
 		}
 
-		//[HarmonyTranspiler, HarmonyPatch(nameof(StatusEffects.ChangeHealth), argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
+		// TEST: Should be obsolete due to patch above
+		//[HarmonyTranspiler, HarmonyPatch(nameof(StatusEffects.ChangeHealth), new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
 		private static IEnumerable<CodeInstruction> RubberBullets_AccidentalKillThreshold(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();

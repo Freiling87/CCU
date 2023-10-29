@@ -1,15 +1,18 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
+using BTHarmonyUtils.TranspilerUtils;
 using CCU.Mutators.Followers;
 using CCU.Traits.Hire_Type;
 using CCU.Traits.Loadout_Chunk_Items;
 using CCU.Traits.Merchant_Type;
 using CCU.Traits.Rel_Faction;
 using CCU.Traits.Trait_Gate;
+using HarmonyLib;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 
 namespace CCU.Localization
 {
@@ -77,7 +80,6 @@ namespace CCU.Localization
 		// Refactored to recursion by BlazingTwist
 		public static List<string> UpdateTraitList(List<string> traits) =>
 			traits.SelectMany(UpdateTrait).ToList();
-
 		private static List<string> UpdateTrait(string trait)
 		{
 			string ccuTraitName = trait.StartsWith("E_")
@@ -90,6 +92,126 @@ namespace CCU.Localization
 			return TraitConversions[ccuTraitName]
 					.SelectMany(type => UpdateTrait(type.Name))
 					.ToList();
+		}
+	}
+
+	[HarmonyPatch(typeof(Agent))]
+	internal static class P_Agent
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		//	TODO: ISetupAgentStats
+		[HarmonyTranspiler, HarmonyPatch(nameof(Agent.SetupAgentStats))]
+		private static IEnumerable<CodeInstruction> SetupAgentStats_LegacyUpdater(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo traits = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.traits));
+			MethodInfo updateTraitList = AccessTools.DeclaredMethod(typeof(Legacy), nameof(Legacy.UpdateTraitList));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, traits),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, updateTraitList),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+	}
+
+	[HarmonyPatch(typeof(CharacterCreation))]
+	public static class P_CharacterCreation
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTranspiler, HarmonyPatch(nameof(CharacterCreation.LoadCharacter2))]
+		private static IEnumerable<CodeInstruction> ReplaceLegacyTraits(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo traits = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.traits));
+			MethodInfo updateTraitList = AccessTools.DeclaredMethod(typeof(Legacy), nameof(Legacy.UpdateTraitList));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, traits),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, updateTraitList),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+	}
+
+	[HarmonyPatch(typeof(GameController))]
+	public static class P_GameController
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPostfix, HarmonyPatch("Awake")]
+		public static void Awake_Postfix()
+		{
+			List<string> removals = new List<string>();
+
+			foreach (string mutator in GC.sessionDataBig.challenges)
+				if (Legacy.MutatorConversions.ContainsKey(mutator))
+					removals.Add(mutator);
+
+			foreach (string removal in removals)
+			{
+				GC.sessionDataBig.challenges.Remove(removal);
+				string replacement = Legacy.MutatorConversions[removal].Name;
+				GC.sessionDataBig.challenges.Add(replacement);
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(NameDB))]
+	public static class P_NameDB
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		/// <summary>
+		/// This is a hacky way of displaying outdated traits correctly in character selection. 
+		/// Since they're no longer in the assembly, they'll show as E_TraitName in the list.
+		/// Once they open the character in the editor, the traits are replaced as described in the Legacy Trait Updater.
+		/// </summary>
+		/// <param name="myName"></param>
+		/// <param name="type"></param>
+		/// <param name="__result"></param>
+		[HarmonyPostfix, HarmonyPatch(nameof(NameDB.GetName))]
+		public static void GetName_Postfix(string myName, string type, ref string __result)
+		{
+			// TODO: Make this iterate with a while loop to be able to rename multiple generations of releases.
+			if (type != "StatusEffect" || !__result.Contains("E_"))
+				return;
+
+			foreach (Type[] traitOutput in Legacy.TraitConversions.Values)
+			{
+				foreach (Type trait in traitOutput)
+				{
+					string traitName = T_CCU.DesignerName(trait);
+
+					if (__result == "E_" + traitName)
+					{
+						__result = __result.Remove(0, 2);
+						return;
+					}
+				}
+			}
 		}
 	}
 }

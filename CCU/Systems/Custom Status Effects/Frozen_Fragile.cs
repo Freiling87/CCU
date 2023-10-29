@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
 using HarmonyLib;
 using RogueLibsCore;
 using UnityEngine.Networking;
@@ -60,7 +59,7 @@ namespace CCU.Status_Effects
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPostfix, HarmonyPatch(nameof(StatusEffects.ChangeHealth),
-			argumentTypes: new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
+			new[] { typeof(float), typeof(PlayfieldObject), typeof(NetworkInstanceId), typeof(float), typeof(string), typeof(byte) })]
 		public static void ChangeHealth_FrozenFragile(StatusEffects __instance)
 		{
 			if (__instance.agent.HasEffect<Frozen_Fragile>())

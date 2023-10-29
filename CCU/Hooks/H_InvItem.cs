@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using BunnyLibs;
 using RogueLibsCore;
 
 namespace CCU
@@ -11,10 +10,11 @@ namespace CCU
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public bool initialSetupComplete = false;
+
+		public int vanillaItemValue;
 		public bool vanillaLongerRapidFire;
 		public bool vanillaRapidFire;
-		public bool initialSetupComplete = false;
-		public int vanillaItemValue;
 
 		protected override void Initialize()
 		{
@@ -28,14 +28,25 @@ namespace CCU
 			}
 		}
 
-		public void AddWeaponMod(string weaponMod)
+		public void TryModWeapon(string weaponMod)
 		{
+			Agent agent = Instance.agent;
+			logger.LogDebug("AddWeaponMod: " + weaponMod);
+
+			if (Instance.contents.Contains(weaponMod))
+			{
+				logger.LogDebug("Aborted TryModWeapon: Item already has mod");
+				return;
+			}
+
 			Instance.contents.Add(weaponMod);
 
+			//	TODO: Eliminate this. For now, CombineItems doesn't work reliably.
 			switch (weaponMod)
 			{
 				case VItemName.AmmoCapacityMod:
 					Instance.maxAmmo = (int)(Instance.maxAmmo * 1.4f);
+					Instance.itemValue = (int)(Instance.itemValue * 1.4f);
 					break;
 				case VItemName.RubberBulletsMod:
 					Instance.Categories.Add(VItemCategory.NonViolent);

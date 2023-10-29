@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
-using BunnyLibs;
 using HarmonyLib;
 using JetBrains.Annotations;
 using System.Collections.Generic;
@@ -12,10 +11,10 @@ using System.Reflection.Emit;
 namespace CCU.Fixes
 {
 	/// <summary>
-	/// Prevents spilling items with E_ in the name. Conveniently, this also fixes a number of issues caused by Investigation_Text.
+	/// This is redundant to the Community Fixes patch, but leave it since Investigateables can cause this bug.
 	/// </summary>
 	[HarmonyPatch(typeof(ObjectReal))]
-	static class No_More_Bad_Drops
+	static class NoMoreBadDrops_DestroyMe2
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		private static GameController GC => GameController.gameController;
@@ -29,7 +28,7 @@ namespace CCU.Fixes
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo invItemList = AccessTools.DeclaredField(typeof(InvDatabase), nameof(InvDatabase.InvItemList));
-			MethodInfo filteredList = AccessTools.DeclaredMethod(typeof(No_More_Bad_Drops), nameof(No_More_Bad_Drops.FilteredInvItemList));
+			MethodInfo filteredList = AccessTools.DeclaredMethod(typeof(NoMoreBadDrops_DestroyMe2), nameof(NoMoreBadDrops_DestroyMe2.FilteredInvItemList));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,

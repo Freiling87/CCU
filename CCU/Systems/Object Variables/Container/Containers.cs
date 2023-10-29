@@ -21,34 +21,34 @@ namespace CCU.Systems.Containers
 		public static List<string> ContainerObjects_Slot1 = new List<string>()
 		{
 			// NOTE: Before adding any, ensure that you've accounted for Hidden Bombs, since they'll all become eligible.
-			VanillaObjects.Barbecue,
-			VanillaObjects.Bathtub,
-			VanillaObjects.Bed,
-			// VanillaObjects.Crate,	Likely has special rules that will need attention
-			VanillaObjects.Desk,
-			VanillaObjects.Fireplace,
-			VanillaObjects.FlamingBarrel,
-			VanillaObjects.GasVent,	// Require screwdriver
-			//VanillaObjects.Manhole,	// Need SORCE's code here
-			VanillaObjects.Plant,
-			// VanillaObjects.Podium,	Investigateable
-			VanillaObjects.PoolTable,
-			VanillaObjects.Refrigerator,
-			VanillaObjects.Shelf,
-			//VanillaObjects.SlimeBarrel,	Poison looter
-			VanillaObjects.Stove,
-			VanillaObjects.Toilet,
-			VanillaObjects.TrashCan,
-			VanillaObjects.Tube,
-			VanillaObjects.VendorCart,
-			VanillaObjects.WaterPump,
-			VanillaObjects.Well,
+			VObjectReal.Barbecue,
+			VObjectReal.Bathtub,
+			VObjectReal.Bed,
+			// VObjectReal.Crate,	Likely has special rules that will need attention
+			VObjectReal.Desk,
+			VObjectReal.Fireplace,
+			VObjectReal.FlamingBarrel,
+			VObjectReal.GasVent,	// Require screwdriver
+			//VObjectReal.Manhole,	// Need SORCE's code here
+			VObjectReal.Plant,
+			// VObjectReal.Podium,	Investigateable
+			VObjectReal.PoolTable,
+			VObjectReal.Refrigerator,
+			VObjectReal.Shelf,
+			//VObjectReal.SlimeBarrel,	Poison looter
+			VObjectReal.Stove,
+			VObjectReal.Toilet,
+			VObjectReal.TrashCan,
+			VObjectReal.Tube,
+			VObjectReal.VendorCart,
+			VObjectReal.WaterPump,
+			VObjectReal.Well,
 		};
 		public static List<string> FireParticleEffectObjects = new List<string>()
 		{
-			VanillaObjects.Barbecue,
-			VanillaObjects.Fireplace,
-			VanillaObjects.FlamingBarrel,
+			VObjectReal.Barbecue,
+			VObjectReal.Fireplace,
+			VObjectReal.FlamingBarrel,
 		};
 
 		public enum ContainerValues
@@ -66,7 +66,7 @@ namespace CCU.Systems.Containers
 
 		public static string MagicObjectName(string originalName) =>
 			IsContainer(originalName)
-				? VanillaObjects.Chest
+				? VObjectReal.ChestBasic
 				: originalName;
 
 		[RLSetup]
@@ -188,6 +188,42 @@ namespace CCU.Systems.Containers
 			IsContainer(objectReal.objectName);
 	}
 
+	[HarmonyPatch(typeof(Computer))]
+	public static class P_ComputerShutdown
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPriority(1000)]
+		[HarmonyTranspiler, HarmonyPatch(nameof(Computer.MakeNonFunctional))]
+		private static IEnumerable<CodeInstruction> ShutdownTube(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo interactingAgent = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.interactingAgent));
+			MethodInfo switchLinkOperate = AccessTools.DeclaredMethod(typeof(ObjectReal), nameof(ObjectReal.SwitchLinkOperate));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldstr, "FlameGrates"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldstr, "Tubes"),
+					new CodeInstruction(OpCodes.Ldstr, "Off"),
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld, interactingAgent),
+					new CodeInstruction(OpCodes.Call, switchLinkOperate),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+	}
+
 	[HarmonyPatch(typeof(InvDatabase))]
 	public static class P_InvDatabase
 	{
@@ -205,7 +241,7 @@ namespace CCU.Systems.Containers
 			return true;
 		}
 
-		[HarmonyPostfix, HarmonyPatch(nameof(InvDatabase.FillChest), argumentTypes: new[] { typeof(bool) })]
+		[HarmonyPostfix, HarmonyPatch(nameof(InvDatabase.FillChest), new[] { typeof(bool) })]
 		private static void FillChest_Money(InvDatabase __instance)
 		{
 			if (!(__instance.objectReal is null)
@@ -219,6 +255,38 @@ namespace CCU.Systems.Containers
 					money.invItemCount = __instance.FindMoneyAmt(true);
 				}
 			}
+		}
+
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.isEmpty))]
+		public static bool IsEmpty_Replacement(InvDatabase __instance, ref bool __result)
+		{
+			for (int i = 0; i < __instance.InvItemList.Count; i++)
+			{
+				InvItem invItem = __instance.InvItemList[i];
+
+				if (!GC.nameDB.GetName(invItem.invItemName, "Item").Contains("E_"))
+				{
+					__result = false;
+					return false;
+				}
+			}
+
+			__result = true;
+			return false;
+		}
+	}
+
+	[HarmonyPatch(typeof(InvSlot))]
+	public static class P_InvSlot
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPostfix, HarmonyPatch(nameof(InvSlot.MoveFromChestToInventory))]
+		public static void MoveFromChestToInventory_Postfix(InvSlot __instance)
+		{
+			// TODO: What's this about? Shouldn't they already be setup? Not even sure which system this is supposed to tie into.
+			__instance.item.SetupDetails(true);
 		}
 	}
 
@@ -361,7 +429,7 @@ namespace CCU.Systems.Containers
 	}
 
 	[HarmonyPatch(typeof(ObjectReal))]
-	public static class P_ObjectReal
+	public static class P_ObjectReal_Containers
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -376,7 +444,7 @@ namespace CCU.Systems.Containers
 			}
 		}
 
-		[HarmonyPrefix, HarmonyPatch("Start", argumentTypes: new Type[0] { })]
+		[HarmonyPrefix, HarmonyPatch("Start", new Type[0] { })]
 		public static bool Start_SetupInvDatabasesForContainers(ObjectReal __instance)
 		{
 			if (Containers.IsContainer(__instance.objectName))
@@ -388,6 +456,154 @@ namespace CCU.Systems.Containers
 			}
 
 			return true;
+		}
+
+		[HarmonyTranspiler, HarmonyPatch(nameof(ObjectReal.SwitchLinkOperate))]
+		private static IEnumerable<CodeInstruction> ShutdownObjects(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo switchOffObject = AccessTools.DeclaredMethod(typeof(P_ObjectReal_Containers), nameof(P_ObjectReal_Containers.SwitchOffObject));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Stloc_1),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldarg_1),
+					new CodeInstruction(OpCodes.Ldarg_2),
+					new CodeInstruction(OpCodes.Ldarg_3),
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Call, switchOffObject),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		private static void SwitchOffObject(ObjectReal instance, string type, string state, Agent myAgent, ObjectReal otherObject)
+		{
+			if (type == "Tubes"
+				&& otherObject is Tube tube
+				&& (tube.startingChunk == instance.startingChunk
+					|| (tube.startingSector == instance.startingSector && instance.startingSector != 0)))
+			{
+				if (state == null)
+					tube.ToggleFunctional();
+				else if (state == "On")
+					tube.MakeFunctional();
+				else if (state == "Off")
+					tube.MakeNonFunctional(null);
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(ObjectMultObject))]
+	public static class P_ObjectMultObject
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPostfix, HarmonyPatch(nameof(ObjectMultObject.OnDeserialize))]
+		public static void OnDeserialize_Postfix(ObjectMultObject __instance)
+		{
+			MethodInfo getName = AccessTools.DeclaredMethod(typeof(ObjectMultObject), "GetName");
+
+			try { getName.GetMethodWithoutOverrides<Action<string, string>>(__instance).Invoke(__instance.chestItem1, "Item"); }
+			catch { __instance.chestItem1 = ""; }
+
+			try { getName.GetMethodWithoutOverrides<Action<string, string>>(__instance).Invoke(__instance.chestItem2, "Item"); }
+			catch { __instance.chestItem2 = ""; }
+
+			try { getName.GetMethodWithoutOverrides<Action<string, string>>(__instance).Invoke(__instance.chestItem3, "Item"); }
+			catch { __instance.chestItem3 = ""; }
+		}
+	}
+
+	[HarmonyPatch(typeof(Quests))]
+	public static class P_Quests
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		//	TODO: Sure this works? I don't remember it working
+		[HarmonyTranspiler, HarmonyPatch(nameof(Quests.setupQuests))]
+		private static IEnumerable<CodeInstruction> ScreenContainersForBombDisaster(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo chestDic = AccessTools.DeclaredField(typeof(GameController), nameof(GameController.chestDic));
+			MethodInfo filteredChestDic = AccessTools.DeclaredMethod(typeof(P_Quests), nameof(P_Quests.FilteredChestDic));
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 3,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldfld, chestDic),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Call, filteredChestDic),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		private static Dictionary<int, ObjectReal> FilteredChestDic(Dictionary<int, ObjectReal> original)
+		{
+			Dictionary<int, ObjectReal> final =
+				original
+				.Where(pair => IsValidBombContainer(pair.Value))
+				.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+			return final;
+		}
+		private static bool IsValidBombContainer(ObjectReal bombContainer)
+		{
+			if (bombContainer is Tube tube)
+			{
+				foreach (ObjectReal powerObject in GC.objectRealList)
+					if ((powerObject is Computer computer
+							&& (computer.startingChunk == tube.startingChunk
+								|| (computer.startingSector == tube.startingSector && computer.startingSector != 0)))
+						|| (powerObject is PowerBox powerBox
+							&& AffectedChunks(powerBox).Contains(tube.startingChunk)))
+						return true;
+
+				return false;
+			}
+
+			return true;
+		}
+		// Adapted from PowerBox.ShutDown & PowerBox.AddAffectedChunk
+		private static List<int> AffectedChunks(PowerBox powerBox)
+		{
+			float num = 10.24f;
+			List<int> chunks = new List<int>();
+			List<Vector2> ChunkNeighbors = new List<Vector2>()
+			{
+				new Vector2(powerBox.tr.position.x, powerBox.tr.position.y),
+				new Vector2(powerBox.tr.position.x + num, powerBox.tr.position.y + num),
+				new Vector2(powerBox.tr.position.x + num, powerBox.tr.position.y - num),
+				new Vector2(powerBox.tr.position.x + num, powerBox.tr.position.y),
+				new Vector2(powerBox.tr.position.x - num, powerBox.tr.position.y + num),
+				new Vector2(powerBox.tr.position.x - num, powerBox.tr.position.y - num),
+				new Vector2(powerBox.tr.position.x - num, powerBox.tr.position.y),
+				new Vector2(powerBox.tr.position.x, powerBox.tr.position.y + num),
+				new Vector2(powerBox.tr.position.x, powerBox.tr.position.y - num)
+			};
+
+			foreach (Vector2 vector2 in ChunkNeighbors)
+			{
+				int chunkID = powerBox.gc.tileInfo.GetTileData(new Vector2(vector2.x, vector2.y)).chunkID;
+
+				if (!chunks.Contains(chunkID) && chunkID != 0)
+					chunks.Add(chunkID);
+			}
+
+			return chunks;
 		}
 	}
 }
