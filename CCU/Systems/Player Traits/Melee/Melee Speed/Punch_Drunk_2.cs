@@ -39,6 +39,7 @@ namespace CCU.Traits.Player.Melee_Combat
 					Unlock =
 					{
 						categories = { CTraitCategory.Unarmed },
+						isUpgrade = true,
 					}
 				});
 		}

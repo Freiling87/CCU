@@ -31,7 +31,8 @@ namespace CCU.Traits.Player.Status_Effect
 					Unlock =
 					{
 						removal = false,
-						categories = { }
+						categories = { },
+						isUpgrade = true,
 					}
 				});
 		}

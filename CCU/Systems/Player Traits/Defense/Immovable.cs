@@ -4,9 +4,9 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Immovable : T_CCU, IModResistances
+	public class Immovable : T_PlayerTrait, IModResistances
 	{
-		public float ResistKnockback => 0.0f;
+		public float ResistKnockback => 99.00f;
 		public float ResistBullets => 1.0f;
 		public float ResistExplosion => 1.0f;
 		public float ResistFire => 1.0f;
@@ -27,23 +27,24 @@ namespace CCU.Traits.Passive
 					[LanguageCode.English] = PlayerName(typeof(Immovable)),
 					[LanguageCode.Spanish] = "Inmovible",
 				})
-				.WithUnlock(new TU_DesignerUnlock
+				.WithUnlock(new TU_PlayerUnlock
 				{
 					Cancellations = {
 						VanillaTraits.SkinnyNerdlinger,
 						"KnockbackLess",
 					},
-					CharacterCreationCost = 3,
+					CharacterCreationCost = 7,
 					IsAvailable = true,
 					IsAvailableInCC = true,
 					IsUnlocked = Core.debugMode,
-					UnlockCost = 5,
+					UnlockCost = 15,
 					Unlock =
 					{
 						cantLose = false,
 						cantSwap = false,
 						categories = {
 							VTraitCategory.Defense,
+							VTraitCategory.Movement,
 						},
 						isUpgrade = false,
 						upgrade = null,

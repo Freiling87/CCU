@@ -13,7 +13,7 @@ namespace CCU.Traits.Player.Status_Effect
 			PostProcess_PlayerTrait = RogueLibs.CreateCustomTrait<Regenerationist>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Permanently shrunken.",
+					[LanguageCode.English] = "Permanently regenerating.",
 				})
 				.WithName(new CustomNameInfo
 				{

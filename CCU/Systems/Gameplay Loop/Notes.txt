@@ -1,0 +1,4 @@
+﻿Shift gamestyle to arcadey, RPG-like, etc.
+
+- Score-counting, high-score, etc.
+- Change money distribution to favor heists, etc.

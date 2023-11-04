@@ -113,10 +113,7 @@ namespace CCU.Traits.Explode_On_Death
 		}
 		private static void EOD_CustomGibs(StatusEffects __instance)
 		{
-			// Checks for EOD to detect custom characters.
-			// Cannot check for GibType here since vanilla means normal Gibs.
-			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().Any() &&
-				!__instance.agent.HasTrait<Indestructible>())
+			if (__instance.agent.GetTraits<T_ExplodeOnDeath>().Any())
 				T_GibType.CustomGib(__instance);
 		}
 	}

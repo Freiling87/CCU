@@ -13,9 +13,9 @@ namespace CCU.Status_Effects
 		[HarmonyPrefix, HarmonyPatch(nameof(StatusEffects.IsAntidoteEffect))]
 		public static bool AllowAntidote(StatusEffects __instance, string statusEffectName, ref bool __result)
 		{
-			if (statusEffectName == CustomGoals.Electrocuted_Permanent
-				|| statusEffectName == CustomGoals.Frozen_Fragile
-				|| statusEffectName == CustomGoals.Frozen_Permanent)
+			if (statusEffectName == SceneSetters.Electrocuted_Permanent
+				|| statusEffectName == SceneSetters.Frozen_Fragile
+				|| statusEffectName == SceneSetters.Frozen_Permanent)
 			{
 				__result = true;
 				return false;

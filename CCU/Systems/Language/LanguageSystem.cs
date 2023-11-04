@@ -272,13 +272,9 @@ namespace CCU.Systems.Language
 		}
 
 		// Tested, works
-		public static bool HaveSharedLanguage(Agent agent, Agent otherAgent)
-		{
-			foreach (string lang in KnownLanguagesWithoutTranslator(agent, false).Intersect(KnownLanguagesWithoutTranslator(otherAgent, false)).ToList())
-				logger.LogDebug("Shared Language : " + lang);
-
-			return KnownLanguagesWithoutTranslator(agent, false).Intersect(KnownLanguagesWithoutTranslator(otherAgent, false)).ToList().Any();
-		}
+		public static bool HaveSharedLanguage(Agent agent, Agent otherAgent) =>
+			GC.levelType == VLevelType.HomeBase
+			|| KnownLanguagesWithoutTranslator(agent, false).Intersect(KnownLanguagesWithoutTranslator(otherAgent, false)).ToList().Any();
 
 		public static string LanguageDialogueName(Agent agent)
 		{

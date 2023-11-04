@@ -30,7 +30,8 @@ namespace CCU.Traits.Player.Armor
 					UnlockCost = 12,
 					Unlock =
 					{
-						categories = { VTraitCategory.Defense }
+						categories = { VTraitCategory.Defense },
+						isUpgrade = true,
 					}
 				});
 		}

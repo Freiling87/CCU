@@ -33,7 +33,8 @@ namespace CCU.Traits.Player.Ammo
 					UnlockCost = 9,
 					Unlock =
 					{
-						categories = { VTraitCategory.Guns }
+						categories = { VTraitCategory.Guns },
+						isUpgrade = true,
 					}
 				});
 		}

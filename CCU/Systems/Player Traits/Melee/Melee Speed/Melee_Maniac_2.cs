@@ -40,6 +40,7 @@ namespace CCU.Traits.Player.Melee_Combat
 					Unlock =
 					{
 						categories = { VTraitCategory.Melee },
+						isUpgrade = true,
 					}
 				});
 		}

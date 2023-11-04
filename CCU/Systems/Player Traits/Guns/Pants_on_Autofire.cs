@@ -27,7 +27,6 @@ namespace CCU.Traits.Player.Ranged_Combat
 					CharacterCreationCost = 5,
 					IsAvailable = true,
 					IsAvailableInCC = true,
-					
 					UnlockCost = 15,
 					Unlock =
 					{

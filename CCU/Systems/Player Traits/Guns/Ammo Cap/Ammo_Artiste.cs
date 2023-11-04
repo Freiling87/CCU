@@ -31,7 +31,8 @@ namespace CCU.Traits.Player.Ammo
 					Upgrade = nameof(Ammo_Auteur),
 					Unlock =
 					{
-						categories = { VTraitCategory.Guns }
+						categories = { VTraitCategory.Guns },
+						isUpgrade = true,
 					}
 				});
 		}

@@ -196,4 +196,12 @@ namespace CCU.Systems.Appearance
 		}
 	}
 
+	[HarmonyPatch(typeof(Relationships))]
+	internal static class P_Relationships_Appearance
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		// TODO: Fix CopyLooks so it pulls from the rolled appearance
+	}
 }

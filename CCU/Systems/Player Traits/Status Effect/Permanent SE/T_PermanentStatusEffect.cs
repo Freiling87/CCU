@@ -29,6 +29,8 @@ namespace CCU.Traits.Player.Status_Effect
 		public void Refresh() { }
 		public void Refresh(Agent agent)
 		{
+			bool vanillaPreventStatusEffects = agent.preventStatusEffects;
+			agent.preventStatusEffects = false;
 			agent.statusEffects.RemoveStatusEffect(StatusEffectName);
 			agent.statusEffects.AddStatusEffect(StatusEffectName, 9999);
 
@@ -41,6 +43,7 @@ namespace CCU.Traits.Player.Status_Effect
 			statusEffectObject.removeOnKnockout = false;
 			statusEffectObject.dontRemoveOnDeath = true;
 			statusEffectObject.infiniteTime = true;
+			agent.preventStatusEffects = vanillaPreventStatusEffects;
 		}
 		public bool RunThisLevel() => true;
 	}

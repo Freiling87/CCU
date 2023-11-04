@@ -141,11 +141,11 @@
     <Compile Include="Debug\ForceTraitChoice.cs" />
     <Compile Include="Debug\CheckBackCompatibility.cs" />
     <Compile Include="Hooks\H_AgentInteractions.cs" />
+    <None Include="Notes\ChangeLog.md" />
     <Compile Include="Systems\Appearance\Appearance.cs" />
     <Compile Include="Systems\Appearance\H_Appearance.cs" />
     <Compile Include="Hooks\H_InvItem.cs" />
     <Compile Include="Systems\Designer Tools\Items\Debugulizer.cs" />
-    <Compile Include="Systems\Designer Traits\Class1.cs" />
     <Compile Include="Systems\Knockout\Items\RubberBulletsMod.cs" />
     <Compile Include="Systems\Designer Tools\Items\ClassAWare.cs" />
     <Compile Include="Systems\Designer Tools\Items\I_CCU.cs" />
@@ -174,7 +174,7 @@
     <Compile Include="Systems\Hires\Traits\Designer\Homesickness_Disabled.cs" />
     <Compile Include="Systems\Hires\Traits\Designer\Homesickness_Mandatory.cs" />
     <Compile Include="Systems\Custom Costs\CustomCosts.cs" />
-    <Compile Include="Systems\Agent Goals\CustomGoals.cs" />
+    <Compile Include="Systems\Scene Setters\SceneSetters.cs" />
     <Compile Include="Systems\Object Variables\Container\Containers.cs" />
     <Compile Include="Systems\Object Variables\Investigateable\Investigateables.cs" />
     <Compile Include="Systems\Object Variables\ObjectVariables.cs" />
@@ -481,7 +481,6 @@
     <Compile Include="Systems\Appearance\Traits\Skin Color\Human_Black_Skin.cs" />
     <Compile Include="Systems\Appearance\Traits\Skin Color\T_SkinColor.cs" />
     <Compile Include="Systems\Appearance\Traits\T_Appearance.cs" />
-    <Compile Include="Systems\Designer Traits\Behavior\Extralegal.cs" />
     <Compile Include="Systems\LOS Behaviors\Designer Traits\Agent\Eat_Corpses.cs" />
     <Compile Include="Systems\LOS Behaviors\Designer Traits\Item\Grab_Everything.cs" />
     <Compile Include="Systems\LOS Behaviors\Designer Traits\Item\Grab_Drugs.cs" />
@@ -644,7 +643,7 @@
     <Compile Include="Systems\Designer Traits\Behavior\Concealed_Carrier.cs" />
     <Compile Include="Systems\Player Traits\Defense\Armor\T_Myrmicosanostra.cs" />
     <Compile Include="Systems\Player Traits\Movement\Blinker.cs" />
-    <Compile Include="Systems\Designer Traits\Passive\Immovable.cs" />
+    <Compile Include="Systems\Player Traits\Defense\Immovable.cs" />
     <Compile Include="Systems\Designer Traits\Passive\Not_Vincible.cs" />
     <Compile Include="Systems\Designer Traits\Passive\Indestructible.cs" />
     <Compile Include="Systems\Designer Traits\Gib Type\Glass_Shards.cs" />
@@ -898,7 +897,6 @@
     <None Include="Notes\Scope.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Systems\Gameplay Loop\Mutators\" />
     <Folder Include="Systems\Player Traits\Unarmed\" />
   </ItemGroup>
   <ItemGroup>

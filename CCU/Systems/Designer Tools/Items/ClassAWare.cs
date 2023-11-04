@@ -199,7 +199,7 @@ namespace CCU.Items
 		static CustomName footerText4 = RogueLibs.CreateCustomName("footerText4", "Interface", new CustomNameInfo
 		{
 			[LanguageCode.English] = "the state of Neo-Cyber-California to cause Space Cancer.",
-			[LanguageCode.English] = "consumo infantil de prejudicios o conocimiento real.",
+			[LanguageCode.Spanish] = "consumo infantil de prejudicios o conocimiento real.",
 		});
 		#endregion
 

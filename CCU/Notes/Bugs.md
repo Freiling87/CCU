@@ -1,58 +1,28 @@
 ﻿##			Bugs
 Except crickets. Crickets are fine.
-###			H	Broken Namespaces
-Requested help from testers to verify if everything is loading properly
-###			C	Language broke AGAIN
-Can't speak to gorilla, have Speaks High Goryllian
-###			C	Exempt Scene Setter NPCs from possession
-Spawns shapeshifter on death
-###			C	Grab Everything
-Doesn't pick up safe combo
-Do we want them to though?
-Maybe a Grab Special would be appropriate
-###			C	Shops are empty
-Per CL, but this was with a test version.
-###			C	Dual Alignment freeze
-https://discord.com/channels/187414758536773632/1003391847902740561/1140063406997651469
-BT's alignment methods should handle this... test it
-###			C	Electronic blocks status effects
-Giant robot! Giant robot! Giant robot!
-###			C	Indestructible Corpse Explosions
-GenEric: https://discord.com/channels/187414758536773632/991046848536006678/1138250512752459857
-If a corpse is indestructible and has explode on death, they will explode repeatedly.
-This is cancelled by Electronic.
-###			C	Prison interrupts Dead SS
-https://discord.com/channels/187414758536773632/991046848536006678/1137189897808117860
-###			C	Undercant strings
-Deleted WIPs, not much to save
-###			T	Friend Phone Clone
-Appearance patch is ready to go
-###			C	Cyber Nuke by Proxy
-This is POSSIBLY an old Roguelibs bug.
-Hired Cyber Nuke doesn't show option.
-"HacksBlowUpObjects"
-First detect who the actual interactingAgent is when using a hacker hire
-###			C	Editor String Copying
-I think it's JUST containers → Signs now
-Select Vanilla or Modded Container, choose contained item. Then switch to Draw, and select Altar. Item text will be in EVS1. 
-I think I found where this bug is from: 
-	P_LevelEditor_ObjectButtonType
-Located bug:
-	LevelEditor.SetExtraVarString() last branch
+###			C	Speaks English
+This shows up in player trait list
+###			T	Language System
+Tested, should all work. But need to do a run with a non-Eng char to be sure
+###			C	Move features to RHR
+Perm Stat Effects
+Extralegal
+###			T	Player/Designer Trait designation broken
+See Character sheet, all Designer traits visible
+Actually, this might have been when loading from a save, so could have been hook regeneration.
+###			T	Exempt Scene Setter NPCs from possession
+Attempted
 ###			C	Z-Infected Appearance
-https://discord.com/channels/187414758536773632/1003391847902740561/1127403137100161074
-	Pretty weird one, if you mix randomized appearance with Z Infected then the resulting zombies will not just re-randomize but they'll also all become identical. Like if you randomize bodies and have a mix of hacker, clerk, bartender and goon then killing a crowd and raising them as zombies will make them all come back in clerk uniforms or whatever. It's not consistent so the thing they turn into is random each time (it's not just like it's reverting to the neutral pre-randomized appearance, alphabetical order or anything like that), but once the "zombie form" is randomized it seems like every member of the class will turn into that on death.
-	And yes, I did somehow pivot from updating old NPCs to messing around with new zombie plague victim designs. This is why the Vendor Variety update and SoV Remaster are never getting released, it's physically impossible to spend more than an hour in the character editor with this mod without starting a completely new project.
-###			C	Various Shop Inventory Reports
-I think these have been addressed but verify:
+Custom agent with random appearance, Z-Infected
+When multiple of them die, they all use the same rolls for their appearance.
+Relationships.CopyLooks appears to be the culprit
+###			C	0-Count items in Shop
 https://discord.com/channels/187414758536773632/1003391847902740561/1126283884959629312
-###			C	Deaf NPCs speak Polyglottal Gibberish
-Good god
-https://discord.com/channels/187414758536773632/991046848536006678/1127299576366383165
+Demo Depot/ Mining Gear has 0-qty Bomb processor
 ###			C	Random Teleport to Entry Elevator
 Make a distance buffer from entry to minimise the cheesening
-###			C	Gun Nut traits only apply on start??
-I thought this was fixedddd
+###			C	Pay Debt
+CL - Speaking of which though, that reminds me that the "pay debt" behavior doesn't include payments for the slum dweller BQ unlike the vanilla clerk thing. Or maybe you want to keep it modular but even then I'd like that as a behavior too then. 90% of the reason behind Penny's interactions was to make that quest more consistent in case of ATM issues but currently she can't do that.
 ###			C	Concealed Carry Sitting
 CL https://discord.com/channels/187414758536773632/1003391847902740561/1126306577008316508
 	Concealed carrier still doesn't work with sitting NPCs until something briefly updates their behavior (like a noise making them stand up and look, then sit back down).
@@ -66,15 +36,12 @@ For mismatched language
 ###			C	Upgrading traits doesnt' remove base trait
 Melee Maniac + in upgrade machine, kept both traits
 I guess do an OnAdded, frame-delayed, from T_CCU. This would be a good contribution to Roguelibs as well, if you can find out how.
-###			C	Ammo Traits offered on same level
-Ammo Auteur and Artiste
-###			C	Gate Language for Home Base
-Allow interact with all
-Chaos at Home Base is through Werewolf interaction, for example
+###			C	Upgrading trait doesn't remove downgrade
+Do this in T_CCU OnAdded
+I think I might have just been forgetting to do isUpgrade?
 ##			Bug Archive
-###		 H   Scene Setter Breakage
+###		 H   Scene Setter Breaks when hostiles visible
 https://discord.com/channels/187414758536773632/991046848536006678/1122856007706607656
-Spawning with visible hostiles is confirmed to interrupt it inconsistently
 Not able to replicate
 ###		 H   Merchant Stock Price issues
 Two symptoms of the same issue. Abbysssal pointed out the solution, but this is not an important enough bug to delay release for.
@@ -164,3 +131,11 @@ So far, unable to replicate
 ###		 √   Partisan Concealed Carry
 Winnie - https://discord.com/channels/187414758536773632/646853913273696257/1117896939837587517
 Issue was Loadout Money without a Loader trait.
+###			H	Editor String Copying
+This is a vanilla bug so I'm shelving for now.
+I think it's JUST containers → Signs now
+Select Vanilla or Modded Container, choose contained item. Then switch to Draw, and select Altar. Item text will be in EVS1. 
+I think I found where this bug is from: 
+	P_LevelEditor_ObjectButtonType
+Located bug:
+	LevelEditor.SetExtraVarString() last branch 

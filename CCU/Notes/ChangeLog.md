@@ -1,0 +1,28 @@
+﻿#       Change Log: v1.4.0
+- **Dependencies**
+  - BunnyLibs: 0.1.0 (Added) - This is a set of features I use in all my mods, so they'll likely all require it going forward.
+  - RogueLibs: 4.0.0 (Updated)
+- **Feature Additions**
+  - Agent Default Goals: 
+    - Electrocuted
+    - Electrocuted (Permanent)
+    - Frozen
+    - Frozen (Fragile)
+    - Frozen (Permanent)
+  - Player Traits
+	- Permanent Status Effects (Lots, go see the documentation)
+  - Designer Traits
+    - Behavior
+      - Vigilance (group): Determines how the agent reacts to sound, in regards to investigation and property.
+    - Passive
+      - Plot-Critical: Players explode if this agent is neutralized.
+- **Tweaks**
+  - Immovable is now a Player Trait.
+  - Agents spawned via Friend Phone will now re-roll their appearance if they have the traits for it, since they're not clones.
+  - Scumbags are no longer automatically Guilty.
+  - LOS Behaviors: Eat Corpses & Suck Blood no longer require a Special Ability. Pick Pockets still does.
+- **Bug Fixes**
+  - Previously fixed vanilla bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name.
+  - Indestructible NPCs with Explode on Death now properly gib when they explode.
+  - Agents with a Scene Setter applied are now ineligible for secret Shapeshifter uh... insertion.
+  - Language system no longer blocks interaction in Home Base. As far as I'm aware, all this did was cause a conflict with the Chaos At Home Base mod.

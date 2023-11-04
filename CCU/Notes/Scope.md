@@ -1,33 +1,4 @@
-﻿##			Change Log
-- **Dependencies**
-  - BunnyLibs: 0.1.0 (Added)
-  - RogueLibs: 4.0.0 (Updated)
-- **Feature Additions**
-  - Agent Default Goals
-    - Electrocuted
-    - Electrocuted (Permanent)
-    - Frozen
-    - Frozen (Fragile)
-    - Frozen (Permanent)
-  - Player Traits
-	- Permanent Status Effects
-  - Designer Traits
-    - Behavior
-      - Extralegal: Agent won't alert cops when attacked.
-      - Vigilance: Determines how the agent reacts to sound, in regards to investigation and property.
-    - Passive
-      - Plot-Critial: Players lose if this agent is neutralized.
-    - Quests
-      - Quest Giver: Agent can assign the level's fourth quest.
-  - Mutators
-    - Client Network: More NPC types can give quests.
-- **Tweaks**
-  - Agents spawned via Friend Phone will now re-roll their appearance if they have the traits for it, since they're not clones.
-  - Scumbags are no longer automatically Guilty.
-  - LOS Behaviors: Eat Corpses & Suck Blood no longer require a Special Ability. Pick Pockets still does.
-- **Bug Fixes**
-  - Previously fixed vanilla-swirl bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name.
-##			Feature Scope
+﻿##			Feature Scope
 ###			P	Pre-release checks
 ####			BunnyLibs
 - Ensure that ALL your mods work with it before releasing any. 

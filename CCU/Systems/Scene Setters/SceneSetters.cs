@@ -1,7 +1,10 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Status_Effects;
+using CCU.Traits.Passive;
 using HarmonyLib;
+using JetBrains.Annotations;
 using RogueLibsCore;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +15,10 @@ using UnityEngine;
 
 namespace CCU.Systems.CustomGoals
 {
-	class CustomGoals
+	class SceneSetters
 	{
+		// If you want a class for other custom goals, do it separately or branch this
+
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
@@ -68,28 +73,14 @@ namespace CCU.Systems.CustomGoals
 			Frozen_Permanent,
 			Gibbed,
 			KnockedOut,
-            // RandomTeleport, // Legacy
             Teleport_Public,
 			Zombified,
 		};
-		public static List<string> SceneSetters_All = new List<string>()
+		public static List<string> SceneSetters_Legacy = new List<string>()
 		{
-			Arrested,
-			Burned,
-			Dead,
-			Electrocuted,
-			Electrocuted_Permanent,
-			Frozen,
-			Frozen_Fragile,
-			Frozen_Permanent,
-			Gibbed,
-			KnockedOut,
-			//Random_Patrol_Chunk,
-			//Random_Patrol_Map,
-			RandomTeleport, // Legacy
-            Teleport_Public,
-			Zombified,
+			RandomTeleport,
 		};
+
 		public static List<string> ActualGoals_Active = new List<string>()
 		{
 			//      Custom
@@ -112,7 +103,8 @@ namespace CCU.Systems.CustomGoals
 
 			foreach (Agent agent in sceneSetterList)
 			{
-				if (!SceneSetters_All.Contains(agent.defaultGoal) || agent.GetOrAddHook<H_AgentInteractions>().SceneSetterFinished)
+				if (agent.GetHook<H_AgentInteractions>().SceneSetterFinished
+					|| (!SceneSetters_Active.Contains(agent.defaultGoal) && !SceneSetters_Legacy.Contains(agent.defaultGoal)))
 					continue;
 
 				GC.StartCoroutine(DoSceneSetter(agent));
@@ -249,7 +241,7 @@ namespace CCU.Systems.CustomGoals
 		private static IEnumerable<CodeInstruction> CreateGoalList_ShowExtendedOptions(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo updateList = AccessTools.DeclaredMethod(typeof(CustomGoals), nameof(CustomGoals.CustomGoalList));
+			MethodInfo updateList = AccessTools.DeclaredMethod(typeof(SceneSetters), nameof(SceneSetters.CustomGoalList));
 			MethodInfo activateLoadMenu = AccessTools.DeclaredMethod(typeof(LevelEditor), nameof(LevelEditor.ActivateLoadMenu));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -286,7 +278,55 @@ namespace CCU.Systems.CustomGoals
 		[HarmonyPostfix, HarmonyPatch(nameof(LoadLevel.SetupMore5))]
 		public static void SetupMore5_Postfix()
 		{
-			CustomGoals.RunSceneSetters();
+			SceneSetters.RunSceneSetters();
 		}
+	}
+
+	[HarmonyPatch(typeof(LoadLevel))]
+	public static class P_LoadLevel_SetupMore4_2
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTargetMethod, UsedImplicitly]
+		private static MethodInfo Find_MoveNext_MethodInfo() =>
+			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore4_2"));
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> PreventShapeshifterOnSceneSetters(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo customMethod = AccessTools.DeclaredMethod(typeof(P_LoadLevel_SetupMore4_2), nameof(P_LoadLevel_SetupMore4_2.CanBeShapeshifter));
+			FieldInfo gc = AccessTools.DeclaredField(typeof(LoadLevel), "gc");
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				pullNextLabelUp: false,
+				expectedMatches: 1,
+				prefixInstructions: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld, gc),
+					new CodeInstruction(OpCodes.Ldc_I4_1),
+					new CodeInstruction(OpCodes.Callvirt),
+				},
+				targetInstructions: new List<CodeInstruction>
+				{
+				},
+				insertInstructions: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S, 32),	//	agent11
+					new CodeInstruction(OpCodes.Call, customMethod),
+				},
+				postfixInstructions: new List<CodeInstruction>
+				{
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+		private static bool CanBeShapeshifter(bool vanilla, Agent agent) =>
+			vanilla 
+				&& (agent.HasTrait<Possessed>() 
+				|| (!SceneSetters.SceneSetters_Active.Contains(agent.defaultGoal) && !SceneSetters.SceneSetters_Legacy.Contains(agent.defaultGoal)));
 	}
 }
