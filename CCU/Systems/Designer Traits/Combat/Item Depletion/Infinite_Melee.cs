@@ -5,7 +5,7 @@ using System;
 
 namespace CCU.Traits.Inventory
 {
-	public class Infinite_Melee : T_CCU
+	public class Infinite_Melee : T_DesignerTrait
 	{
 		[RLSetup]
 		public static void Setup()
@@ -32,8 +32,8 @@ namespace CCU.Traits.Inventory
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(InvDatabase))]

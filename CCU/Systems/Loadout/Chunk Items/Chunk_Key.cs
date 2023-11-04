@@ -60,7 +60,7 @@ namespace CCU.Traits.Loadout_Chunk_Items
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

@@ -4,7 +4,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Status_Effect_Immune : T_CCU, ISetupAgentStats
+	public class Status_Effect_Immune : T_DesignerTrait, ISetupAgentStats
 	{
 		[RLSetup]
 		public static void Setup()
@@ -29,8 +29,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

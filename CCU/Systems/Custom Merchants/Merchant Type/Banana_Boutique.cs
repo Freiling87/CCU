@@ -37,7 +37,7 @@ namespace CCU.Traits.Merchant_Type
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

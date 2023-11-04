@@ -4,7 +4,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Vision_Beams : T_CCU, ISetupAgentStats
+	public class Vision_Beams : T_DesignerTrait, ISetupAgentStats
 	{
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)
@@ -35,7 +35,7 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

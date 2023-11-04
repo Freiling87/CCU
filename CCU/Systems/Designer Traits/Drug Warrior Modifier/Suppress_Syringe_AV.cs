@@ -38,8 +38,8 @@ namespace CCU.Traits.Drug_Warrior_Modifier
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(GoalBattle))]

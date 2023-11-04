@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.LOS_Behavior
 {
-	public abstract class T_LOSBehavior : T_CCU, ISetupAgentStats, ICheckAgentLOS
+	public abstract class T_LOSBehavior : T_DesignerTrait, ISetupAgentStats, ICheckAgentLOS
 	{
 		//	ICheckAgentLOS
 		public abstract int LOSInterval { get; }
@@ -16,7 +16,7 @@ namespace CCU.Traits.LOS_Behavior
 			agent.losCheckAtIntervals = true;
 		}
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

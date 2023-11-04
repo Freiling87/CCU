@@ -9,7 +9,7 @@ using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Traits
 {
-	public abstract class T_Relationships : T_CCU
+	public abstract class T_Relationships : T_DesignerTrait
 	{
 		public T_Relationships() : base() { }
 

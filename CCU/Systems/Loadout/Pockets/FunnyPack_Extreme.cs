@@ -29,7 +29,7 @@ namespace CCU.Traits.Loadout_Pockets
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

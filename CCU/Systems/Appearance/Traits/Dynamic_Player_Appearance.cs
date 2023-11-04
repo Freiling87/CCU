@@ -4,7 +4,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.App
 {
-	public class Dynamic_Player_Appearance : T_CCU, ISetupAgentStats
+	public class Dynamic_Player_Appearance : T_DesignerTrait, ISetupAgentStats
 	{
 		[RLSetup]
 		public static void Setup()
@@ -21,16 +21,10 @@ namespace CCU.Traits.App
 					[LanguageCode.Spanish] = "Apariencia Dinámica",
 
 				})
-				.WithUnlock(new TU_DesignerUnlock
-				{
-					CharacterCreationCost = 0,
-					IsAvailable = false,
-					IsAvailableInCC = Core.designerEdition,
-					UnlockCost = 0,
-				});
+				.WithUnlock(new TU_DesignerUnlock { });
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

@@ -32,7 +32,7 @@ using System.Linq;
 
 namespace CCU.Traits.App
 {
-	public abstract class T_Appearance : T_CCU
+	public abstract class T_Appearance : T_DesignerTrait
 	{
 		public T_Appearance() : base() { }
 

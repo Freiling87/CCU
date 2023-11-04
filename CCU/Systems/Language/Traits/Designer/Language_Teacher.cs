@@ -62,7 +62,7 @@ namespace CCU.Systems.Language
 		}
 
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

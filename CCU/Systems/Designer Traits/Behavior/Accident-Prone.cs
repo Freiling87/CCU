@@ -20,7 +20,7 @@ namespace CCU.Traits.Behavior
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format($"This character will not path around Crushers, Fire Spewers, Killer Plants, Laser Emitters & Sawblades.\n" +
-						"<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(LOS_Behavior.Grab_Everything))),
+						"<color=green>{0}</color>: Will try to pick up armed traps.", DocumentationName(typeof(LOS_Behavior.Grab_Everything))),
 				})
 				.WithName(new CustomNameInfo
 				{

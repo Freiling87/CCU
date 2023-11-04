@@ -32,7 +32,7 @@ namespace CCU.Traits.Drug_Warrior
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

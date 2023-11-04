@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Combat_
 {
-	public abstract class T_GunSkill : T_CCU, ISetupAgentStats
+	public abstract class T_GunSkill : T_DesignerTrait, ISetupAgentStats
 	{
 		public abstract int GunSkill { get; }
 
@@ -12,7 +12,7 @@ namespace CCU.Traits.Combat_
 			agent.modGunSkill = GunSkill;
 		}
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

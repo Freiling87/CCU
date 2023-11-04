@@ -28,8 +28,8 @@ namespace CCU.Traits.Merchant_Stock
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
+		
 		public override void OnAddItem(ref InvItem invItem) { }
-		public override void OnRemoved() { }
+		
 	}
 }

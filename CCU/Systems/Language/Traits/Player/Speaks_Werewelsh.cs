@@ -35,7 +35,7 @@ namespace CCU.Systems.Language
 					//Unlock = { upgrade = nameof(Polyglot) }
 					Unlock =
 					{
-						categories = { VTraitCategory.Social },
+						categories = { /*None, since most characters will have one or more.*/ },
 					}
 				});
 		}

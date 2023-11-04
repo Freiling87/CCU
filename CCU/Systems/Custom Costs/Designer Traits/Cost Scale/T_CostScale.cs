@@ -4,7 +4,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Cost_Scale
 {
-	public abstract class T_CostScale : T_CCU
+	public abstract class T_CostScale : T_DesignerTrait
 	{
 		public T_CostScale() : base() { }
 

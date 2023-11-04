@@ -5,7 +5,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Extortable : T_CCU
+	public class Extortable : T_DesignerTrait
 	{
 		[RLSetup]
 		public static void Setup()
@@ -32,8 +32,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(Agent))]

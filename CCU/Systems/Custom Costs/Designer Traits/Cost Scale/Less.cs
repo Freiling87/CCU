@@ -30,7 +30,7 @@ namespace CCU.Traits.Cost_Scale
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

@@ -32,7 +32,7 @@ namespace CCU.Traits.Rel_Player
 				});
 		}
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

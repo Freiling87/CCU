@@ -16,7 +16,7 @@ namespace CCU.Traits.Passive
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess_DesignerTrait = RogueLibs.CreateCustomTrait<Immovable>()
+			PostProcess_PlayerTrait = RogueLibs.CreateCustomTrait<Immovable>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format("Immune to Knockback."),
@@ -51,7 +51,7 @@ namespace CCU.Traits.Passive
 					}
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

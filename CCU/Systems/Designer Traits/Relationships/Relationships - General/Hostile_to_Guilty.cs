@@ -34,7 +34,7 @@ namespace CCU.Traits.Rel_General
 				? VRelationship.Hostile
 				: null;
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

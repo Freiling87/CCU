@@ -37,7 +37,7 @@ namespace CCU.Traits.Rel_Faction
 			agent.HasTrait<Faction_4_Aligned>()
 				? VRelationship.Aligned
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

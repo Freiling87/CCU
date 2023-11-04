@@ -38,7 +38,7 @@ namespace CCU.Traits.Rel_Faction
 			agent.HasTrait<Gorilla_Aligned>()
 				? VRelationship.Hostile
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

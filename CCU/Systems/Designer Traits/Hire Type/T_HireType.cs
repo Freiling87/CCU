@@ -1,6 +1,6 @@
 ﻿namespace CCU.Traits.Hire_Type
 {
-	public abstract class T_HireType : T_CCU
+	public abstract class T_HireType : T_DesignerTrait
 	{
 		public T_HireType() : base() { }
 

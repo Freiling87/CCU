@@ -1,17 +1,14 @@
-﻿using CCU.Traits.Player.Armor;
-using RogueLibsCore;
+﻿using RogueLibsCore;
 using System;
 
 namespace CCU.Traits.Inventory
 {
-	public class Infinite_Armor : T_Myrmicosanostra // TODO: IModArmorDepletion
+	public class Infinite_Armor : T_DesignerTrait
 	{
-		public override float ArmorDurabilityChangeMultiplier => 0f;
-
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess_PlayerTrait = RogueLibs.CreateCustomTrait<Infinite_Armor>()
+			PostProcess_DesignerTrait = RogueLibs.CreateCustomTrait<Infinite_Armor>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format("Guess, smartypants."),
@@ -33,7 +30,7 @@ namespace CCU.Traits.Inventory
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

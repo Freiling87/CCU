@@ -17,7 +17,7 @@ namespace CCU.Traits.Interaction
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format("This character can accept debt payments.\n\n" +
-					"Note: If you want them to lend money as well, use {0} too.\n\nBypasses Untrusting traits.", LongishDocumentationName(typeof(Borrow_Money))),
+					"Note: If you want them to lend money as well, use {0} too.\n\nBypasses Untrusting traits.", DocumentationName(typeof(Borrow_Money))),
 
 				})
 				.WithName(new CustomNameInfo
@@ -34,7 +34,7 @@ namespace CCU.Traits.Interaction
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

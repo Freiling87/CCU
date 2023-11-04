@@ -35,7 +35,7 @@ namespace CCU.Traits.Player.Status_Effect
 					}
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

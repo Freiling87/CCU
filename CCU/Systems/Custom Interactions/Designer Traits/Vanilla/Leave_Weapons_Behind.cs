@@ -35,7 +35,7 @@ namespace CCU.Traits.Interaction
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

@@ -203,7 +203,7 @@ namespace CCU.Localization
 			{
 				foreach (Type trait in traitOutput)
 				{
-					string traitName = T_CCU.DesignerName(trait);
+					string traitName = T_DesignerTrait.DesignerName(trait);
 
 					if (__result == "E_" + traitName)
 					{

@@ -41,8 +41,8 @@ namespace CCU.Traits.Combat_
 			EligibleItemTypes.Contains(invItem.itemType) &&
 			!ExcludedItems.Contains(invItem.invItemName);
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public void OnDrop(Agent agent, InvItem invItem)
 		{

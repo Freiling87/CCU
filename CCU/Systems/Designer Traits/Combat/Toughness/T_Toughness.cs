@@ -2,7 +2,7 @@
 
 namespace CCU.Traits.Combat_
 {
-	public abstract class T_Toughness : T_CCU, ISetupAgentStats
+	public abstract class T_Toughness : T_DesignerTrait, ISetupAgentStats
 	{
 		public abstract int Toughness { get; }
 

@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 namespace CCU.Traits.Passive
 {
 	// Named because adding a trait with the same name as a status effect will just give you the status effect. Code you can smell before you even see it!
-	public class Not_Vincible : T_CCU
+	public class Not_Vincible : T_DesignerTrait
 	{
 		[RLSetup]
 		public static void Setup()
@@ -31,8 +31,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(StatusEffects))]

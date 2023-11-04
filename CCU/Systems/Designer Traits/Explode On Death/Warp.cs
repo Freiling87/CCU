@@ -32,7 +32,7 @@ namespace CCU.Traits.Explode_On_Death
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

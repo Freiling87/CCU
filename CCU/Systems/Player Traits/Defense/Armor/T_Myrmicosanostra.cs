@@ -1,16 +1,17 @@
 ﻿using BepInEx.Logging;
+using CCU.Traits.Inventory;
 using HarmonyLib;
 using RogueLibsCore;
 using UnityEngine;
 
 namespace CCU.Traits.Player.Armor
 {
-	public abstract class T_Myrmicosanostra : T_PlayerTrait
+	public abstract class T_Myrmicosanostra : T_PlayerTrait // TODO: IModArmorDepletion, BunnyLibs
 	{
 		public T_Myrmicosanostra() : base() { }
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public abstract float ArmorDurabilityChangeMultiplier { get; }
 	}
@@ -26,10 +27,16 @@ namespace CCU.Traits.Player.Armor
 		{
 			float amt = amount;
 
-			foreach (T_Myrmicosanostra trait in __instance.agent.GetTraits<T_Myrmicosanostra>())
-				amt *= trait.ArmorDurabilityChangeMultiplier;
+			if (__instance.agent.HasTrait<Infinite_Armor>())
+				amount = 0;
+			else
+			{
+				foreach (T_Myrmicosanostra trait in __instance.agent.GetTraits<T_Myrmicosanostra>())
+					amt *= trait.ArmorDurabilityChangeMultiplier;
 
-			amount = (int)Mathf.Max(1f, amt);
+				amount = (int)Mathf.Max(1f, amt);
+			}
+
 			return true;
 		}
 	}

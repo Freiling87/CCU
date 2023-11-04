@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Explosion_Modifier
 {
-	public abstract class T_ExplosionTimer : T_CCU
+	public abstract class T_ExplosionTimer : T_DesignerTrait
 	{
 		public T_ExplosionTimer() : base() { }
 

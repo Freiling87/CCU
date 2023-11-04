@@ -35,7 +35,7 @@ namespace CCU.Traits.Rel_Faction
 			agent.agentName == VanillaAgents.WerewolfTransformed
 				? VRelationship.Hostile
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

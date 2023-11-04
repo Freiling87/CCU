@@ -135,8 +135,9 @@
   <ItemGroup>
     <Compile Include="CCUNames.cs" />
     <None Include="Documentation\C09_CampaignBranching.md" />
-    <Compile Include="Core\Trait Unlocks\TU_CCU.cs" />
+    <Compile Include="Core\Trait Unlocks\TraitUnlockManager.cs" />
     <Compile Include="Core\Trait Unlocks\TU_PlayerUnlock.cs" />
+    <Compile Include="Core\Traits\TraitManager.cs" />
     <Compile Include="Debug\InterfaceLogging.cs" />
     <Compile Include="Debug\ForceTraitChoice.cs" />
     <Compile Include="Debug\CheckBackCompatibility.cs" />
@@ -149,11 +150,11 @@
     <Compile Include="Systems\Knockout\Items\RubberBulletsMod.cs" />
     <Compile Include="Systems\Designer Tools\Items\ClassAWare.cs" />
     <Compile Include="Systems\Designer Tools\Items\I_CCU.cs" />
-    <Compile Include="Systems\Laws\Mutators\M_Law.cs" />
-    <Compile Include="Systems\Laws\Mutators\No_Open_Carry.cs" />
     <Compile Include="Core\Mutators\M_CCU.cs" />
     <Compile Include="Systems\Hires\Traits\Designer\M_Followers.cs" />
     <Compile Include="Systems\Language\LanguageSystem.cs" />
+    <Compile Include="Systems\Laws\Mutators\M_Law.cs" />
+    <Compile Include="Systems\Laws\Mutators\No_Open_Carry.cs" />
     <Compile Include="Systems\Object Variables\Investigateable\No_More_Bad_Drops.cs" />
     <Compile Include="Systems\Object Variables\Slime Barrel\P_SlimeBarrel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -640,7 +641,7 @@
     <Compile Include="Systems\Custom Merchants\Merchant Stock\Wholesalerer.cs" />
     <Compile Include="Systems\Custom Merchants\Merchant Stock\Wholesaler.cs" />
     <Compile Include="Systems\Designer Traits\Behavior\Brainless.cs" />
-    <Compile Include="Systems\Designer Traits\Behavior\Concealed_Carrier.cs" />
+    <Compile Include="Systems\Laws\Designer Traits\Concealed_Carrier.cs" />
     <Compile Include="Systems\Player Traits\Defense\Armor\T_Myrmicosanostra.cs" />
     <Compile Include="Systems\Player Traits\Movement\Blinker.cs" />
     <Compile Include="Systems\Player Traits\Defense\Immovable.cs" />
@@ -687,7 +688,6 @@
     <Compile Include="Systems\Custom Interactions\Designer Traits\Vanilla\Use_Blood_Bag.cs" />
     <Compile Include="Systems\Custom Interactions\Designer Traits\Vanilla\Offer_Motivation.cs" />
     <Compile Include="Systems\Custom Interactions\Designer Traits\Vanilla\Identify.cs" />
-    <Compile Include="Systems\Language\Traits\Designer\Speaks_English.cs" />
     <Compile Include="Systems\Language\Traits\Player\Speaks_ErSdtAdt.cs" />
     <Compile Include="Systems\Language\Traits\Player\Speaks_Foreign.cs" />
     <Compile Include="Systems\Language\Traits\Player\Polyglot.cs" />
@@ -869,7 +869,7 @@
     <Compile Include="Systems\Designer Traits\Relationships\Relationships - Faction\Faction_4_Aligned.cs" />
     <Compile Include="Systems\Designer Traits\Relationships\Relationships - Faction\Faction_4_Hostile.cs" />
     <Compile Include="Core\Trait Unlocks\TU_DesignerUnlock.cs" />
-    <Compile Include="Core\Traits\T_CCU.cs" />
+    <Compile Include="Core\Traits\T_DesignerTrait.cs" />
     <Compile Include="Core\Traits\T_PlayerTrait.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -896,9 +896,7 @@
     <None Include="Resources\Image\Items\RubberBulletsMod.bin" />
     <None Include="Notes\Scope.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Systems\Player Traits\Unarmed\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\Audio\Accents\ErSdtAdtAnnoyed.wav" />
     <Content Include="Resources\Audio\Accents\ErSdtAdtTalk1.wav" />

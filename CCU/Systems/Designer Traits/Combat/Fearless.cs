@@ -31,8 +31,8 @@ namespace CCU.Traits.Combat_
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

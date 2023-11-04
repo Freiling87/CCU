@@ -16,7 +16,7 @@ using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Traits.Interaction
 {
-	public abstract class T_Interaction : T_CCU
+	public abstract class T_Interaction : T_DesignerTrait
 	{
 		public T_Interaction() : base() { }
 
@@ -580,7 +580,6 @@ namespace CCU.Traits.Interaction
 								if (language == LanguageSystem.English)
 								{
 									interactingAgent.statusEffects.RemoveTrait(VanillaTraits.VocallyChallenged);
-									interactingAgent.AddTrait<Speaks_English>();
 								}
 								else
 								{

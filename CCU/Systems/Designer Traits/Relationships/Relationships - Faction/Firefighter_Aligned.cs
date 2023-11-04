@@ -38,7 +38,7 @@ namespace CCU.Traits.Rel_Faction
 				: agent.arsonist || agent.activeArsonist
 					? VRelationship.Hostile
 					: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

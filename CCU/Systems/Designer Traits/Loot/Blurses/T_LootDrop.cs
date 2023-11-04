@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace CCU.Traits.Loot_Drops
 {
-	public abstract class T_LootDrop : T_CCU
+	public abstract class T_LootDrop : T_DesignerTrait
 	{
 		public T_LootDrop() : base() { }
 
 		public abstract bool IsUnspillable(InvItem invItem);
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public static List<string> SoftLockItems = new List<string>()
 		{

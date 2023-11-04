@@ -30,7 +30,7 @@ namespace CCU.Traits.Explosion_Timer
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

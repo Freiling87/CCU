@@ -37,7 +37,7 @@ namespace CCU.Traits.Rel_Faction
 			agent.agentName == VanillaAgents.Scientist
 				? VRelationship.Hostile
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

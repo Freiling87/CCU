@@ -24,9 +24,6 @@ namespace CCU.Traits.LOS_Behavior
 
 		public override void LOSAction()
 		{
-			logger.LogDebug($"=== LOSAction ({Owner.agentRealName}): {PlayerName(GetType())}");
-			logger.LogDebug($"    invdatabase: {Owner.agentInvDatabase}");
-
 			if (!Owner.agentInvDatabase.hasEmptySlot())
 				Owner.losCheckAtIntervalsTime = 50;
 			else if (!Owner.hasEmployer) // Might want a way to bypass this
@@ -53,7 +50,8 @@ namespace CCU.Traits.LOS_Behavior
 					}
 					catch (Exception e)
 					{
-						logger.LogDebug($"+++ Caught Exception for {item.itemName}:\n\t{e}");
+						logger.LogError($"+++ Caught Exception for {item.itemName}:\n\t{e}");
+						logger.LogError($"Categories: {item.invItem.Categories.Any()}");
 					}
 
 					//	Reset only if no valid items seen. This allows agent to pick up a group of items without delay in between, but without wasting cycles afterward.

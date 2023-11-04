@@ -14,8 +14,8 @@ namespace CCU.Traits.Loadout_Money
 
 		public abstract int MoneyAmount { get; }
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public static void AddMoney(Agent agent)
 		{

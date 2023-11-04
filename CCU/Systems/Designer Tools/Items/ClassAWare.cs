@@ -15,6 +15,8 @@ namespace CCU.Items
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		//	TODO: Set up an HTML markup manager. E.g., ColoredText(texthere, yellow), which outputs with enclosing brackets
+
 		[RLSetup]
 		public static void Setup()
 		{
@@ -263,9 +265,9 @@ namespace CCU.Items
 			#endregion
 
 			#region Traits
-			List<Trait> traitList = T_CCU.PlayerTraitList(agent.statusEffects.TraitList).OrderBy(t => agent.gc.nameDB.GetName(t.traitName, "StatusEffect")).ToList();
+			List<Trait> playerTraitList = agent.statusEffects.TraitList.Where(t => !TraitManager.IsDesignerTrait(t)).OrderBy(t => agent.gc.nameDB.GetName(t.traitName, NameTypes.StatusEffect)).ToList();
 
-			if (traitList.Count() == 0)
+			if (playerTraitList.Count() == 0)
 			{
 				output +=
 					"╠═══○ " + GC.nameDB.GetName(nameof(traitsHeader), "Interface") + "\n" +
@@ -276,9 +278,9 @@ namespace CCU.Items
 				output +=
 					"╠╤══○ " + GC.nameDB.GetName(nameof(traitsHeader), "Interface") + "\n";
 
-				foreach (Trait trait in traitList)
+				foreach (Trait trait in playerTraitList)
 				{
-					if (trait != traitList[traitList.Count - 1]) output +=
+					if (trait != playerTraitList[playerTraitList.Count - 1]) output +=
 						"║├• </color>" + agent.gc.nameDB.GetName(trait.traitName, "StatusEffect") + "<color=yellow>\n";
 					else output +=
 						"║└• </color>" + agent.gc.nameDB.GetName(trait.traitName, "StatusEffect") + "<color=yellow>\n";

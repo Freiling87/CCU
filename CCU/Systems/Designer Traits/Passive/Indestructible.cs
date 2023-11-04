@@ -3,7 +3,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Indestructible : T_CCU
+	public class Indestructible : T_DesignerTrait
 	{
 		[RLSetup]
 		public static void Setup()
@@ -27,7 +27,7 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

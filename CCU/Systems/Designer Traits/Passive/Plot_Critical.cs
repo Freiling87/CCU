@@ -5,7 +5,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Plot_Critical : T_CCU
+	public class Plot_Critical : T_DesignerTrait
 	{
 		[RLSetup]
 		public static void Setup()
@@ -29,8 +29,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(StatusEffects))]

@@ -15,9 +15,9 @@ namespace CCU.Traits.LOS_Behavior
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format($"This character will grab any item they see.\n\n" +
-						"<color=green>{0}</color>: Will try to pick up armed traps.", LongishDocumentationName(typeof(Accident_Prone))),
+						"<color=green>{0}</color>: Will try to pick up armed traps.", DocumentationName(typeof(Accident_Prone))),
 					[LanguageCode.Spanish] = String.Format($"Este NPC agarra TODO lo que encuentre, no voy a hacer un chiste facil aca.\n\n" +
-					  "<color=green>{0}</color>: Intentaran agarrar trampas armadas.", LongishDocumentationName(typeof(Accident_Prone))),
+					  "<color=green>{0}</color>: Intentaran agarrar trampas armadas.", DocumentationName(typeof(Accident_Prone))),
 				})
 				.WithName(new CustomNameInfo
 				{

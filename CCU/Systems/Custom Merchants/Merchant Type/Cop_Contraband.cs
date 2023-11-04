@@ -31,9 +31,9 @@ namespace CCU.Traits.Merchant_Type
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format("Stuff confiscated from the City's Ne'er- and/or Rarely-Do-Wells.\n\n" +
-						"<color=green>{0}</color> = Player needs The Law to access shop", LongishDocumentationName(typeof(Cop_Access))),
+						"<color=green>{0}</color> = Player needs The Law to access shop", DocumentationName(typeof(Cop_Access))),
 					[LanguageCode.Spanish] = String.Format("Este NPC vende cosas confiscadas de personas malas, que posiblemente eran mejor que tu.\n\n" +
-						"<color=green>{0}</color> = Jugador necesita el rasgo La Ley para acceder a la tienda", LongishDocumentationName(typeof(Cop_Access))),
+						"<color=green>{0}</color> = Jugador necesita el rasgo La Ley para acceder a la tienda", DocumentationName(typeof(Cop_Access))),
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -50,7 +50,7 @@ namespace CCU.Traits.Merchant_Type
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

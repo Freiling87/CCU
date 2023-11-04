@@ -33,21 +33,15 @@ namespace CCU.Systems.Language
 		public bool BypassUnlockChecks => true;
 		public void SetupAgent(Agent agent)
 		{
-			logger.LogDebug("SetupAgent Language: " + agent.agentRealName);
-
 			foreach (T_Language trait in CoreTools.AllClassesOfType<T_Language>())
 			{
-
 				if (trait.VanillaSpeakers.Contains(agent.agentName))
 					agent.AddTrait(trait.GetType());
 			}
-
-			if (!agent.HasTrait(VanillaTraits.VocallyChallenged))
-				agent.AddTrait<Speaks_English>();
 		}
 
 		[RLSetup]
-		private static void Setup()
+		private static void SetupNames()
 		{
 			// Translators: These are meant to sound like foreign gibberish to an English speaker, for the various non-english languages in the game.
 			string t = NameTypes.Dialogue;

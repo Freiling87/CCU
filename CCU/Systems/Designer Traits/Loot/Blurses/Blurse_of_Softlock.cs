@@ -28,8 +28,8 @@ namespace CCU.Traits.Loot_Drops
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public override bool IsUnspillable(InvItem invItem) =>
 			invItem.questItem ||

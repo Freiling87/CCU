@@ -39,7 +39,7 @@ namespace CCU.Traits.Rel_Faction
 			agent.HasTrait<Suck_Blood>()
 				? VRelationship.Hostile
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

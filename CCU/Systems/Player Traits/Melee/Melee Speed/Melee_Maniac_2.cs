@@ -45,7 +45,7 @@ namespace CCU.Traits.Player.Melee_Combat
 				});
 		}
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

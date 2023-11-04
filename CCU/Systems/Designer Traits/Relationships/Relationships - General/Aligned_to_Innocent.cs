@@ -33,7 +33,7 @@ namespace CCU.Traits.Rel_General
 				? VRelationship.Aligned
 				: null;
 
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

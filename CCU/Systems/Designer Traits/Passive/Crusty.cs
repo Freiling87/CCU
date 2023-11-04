@@ -11,7 +11,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Traits.Passive
 {
-	public class Crusty : T_CCU, ISetupAgentStats
+	public class Crusty : T_DesignerTrait, ISetupAgentStats
 	{
 		[RLSetup]
 		public static void Setup()
@@ -36,8 +36,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

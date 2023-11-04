@@ -21,7 +21,7 @@ namespace CCU.Traits.Interaction
 					"- Arena\n" +
 					"- Deportation Center\n" +
 					"- Hotel *\n\n" +
-					"*<color=red>Requires</color>: {0}", LongishDocumentationName(typeof(Chunk_Key))),
+					"*<color=red>Requires</color>: {0}", DocumentationName(typeof(Chunk_Key))),
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -37,7 +37,7 @@ namespace CCU.Traits.Interaction
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

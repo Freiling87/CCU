@@ -29,7 +29,7 @@ namespace CCU.Traits.App_LC3
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

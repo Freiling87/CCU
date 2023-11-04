@@ -28,12 +28,12 @@ namespace CCU.Traits.Merchant_Stock
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
+		
 		public override void OnAddItem(ref InvItem invItem)
 		{
 			if (QuantityTypes.Contains(invItem.itemType))
 				invItem.invItemCount *= 3;
 		}
-		public override void OnRemoved() { }
+		
 	}
 }

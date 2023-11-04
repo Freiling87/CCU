@@ -67,9 +67,10 @@ namespace CCU.Tools
 
 			foreach (InvItem ii in agent.inventory.InvItemList.Where(i => !(i.invItemName is null) && i.invItemName != ""))
 			{
-				log += "\n\t- " + ii.invItemName.PadRight(20) + "(" + ii.invItemCount.ToString().PadLeft(3) + " / " + ii.maxAmmo.ToString().PadLeft(3) + ")";
+				log += $"\n\t- {ii.invItemName, 20} ({ii.invItemCount, 3}  / {ii.maxAmmo, 3})";
+
 				foreach (string mod in ii.contents) // Includes special abilities like DR I guess
-					log += "\n\t\t- " + mod;
+					log += $"\n\t\t- {mod}";
 			}
 
 			return log;
@@ -84,7 +85,7 @@ namespace CCU.Tools
 
 				// Name check prevents bug that breaks shops. Purchased items are not removed from the list but their name is nulled.
 				foreach (InvItem ii in agent.specialInvDatabase.InvItemList.Where(i => !(i.invItemName is null)))
-					log += "\n\t- " + ii.invItemName.PadRight(20) + "* " + ii.invItemCount;
+					log += $"\n\t- {ii.invItemName.PadRight(20)}\t*\t{ii.invItemCount}";
 			}
 
 			return log;
@@ -93,8 +94,8 @@ namespace CCU.Tools
 		{
 			string log = "======= Traits (Designer) =======";
 
-			foreach (Trait trait in T_CCU.DesignerTraitList(agent.statusEffects.TraitList))
-				log += "\n\t- " + trait.traitName;
+			foreach (Trait trait in agent.statusEffects.TraitList.Where(t => TraitManager.IsDesignerTrait(t)))
+				log += $"\n\t- {trait.traitName}";
 
 			return log;
 		}
@@ -102,8 +103,8 @@ namespace CCU.Tools
 		{
 			string log = "======= Traits (Player) =========";
 
-			foreach (Trait trait in T_CCU.PlayerTraitList(agent.statusEffects.TraitList))
-				log += "\n\t- " + trait.traitName;
+			foreach (Trait trait in agent.statusEffects.TraitList.Where(t => !TraitManager.IsDesignerTrait(t)))
+				log += $"\n\t- {trait.traitName}";
 
 			return log;
 		}
@@ -112,7 +113,7 @@ namespace CCU.Tools
 			string log = "======= Status  Effects =========";
 
 			foreach (StatusEffect se in agent.statusEffects.StatusEffectList)
-				log += "\n\t- " + se.statusEffectName;
+				log += $"\n\t- {se.statusEffectName}";
 
 			return log;
 		}

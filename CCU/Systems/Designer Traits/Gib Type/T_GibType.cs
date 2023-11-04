@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace CCU.Traits.Gib_Type
 {
-	public abstract class T_GibType : T_CCU
+	public abstract class T_GibType : T_DesignerTrait
 	{
 		public T_GibType() : base() { }
 

@@ -6,7 +6,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Innocent : T_CCU, ISetupAgentStats
+	public class Innocent : T_DesignerTrait, ISetupAgentStats
 	{
 		[RLSetup]
 		public static void Setup()
@@ -32,8 +32,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

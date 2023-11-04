@@ -36,7 +36,7 @@ namespace CCU.Traits.Rel_General
 		}
 
 		public override string GetRelationshipTo(Agent agent) => VRelationship.Neutral;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

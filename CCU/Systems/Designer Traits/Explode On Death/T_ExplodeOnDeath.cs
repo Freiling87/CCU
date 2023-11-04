@@ -15,7 +15,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Traits.Explode_On_Death
 {
-	public abstract class T_ExplodeOnDeath : T_CCU
+	public abstract class T_ExplodeOnDeath : T_DesignerTrait
 	{
 		public T_ExplodeOnDeath() : base() { }
 

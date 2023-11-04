@@ -28,7 +28,7 @@ namespace CCU.Traits.App_ET3
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

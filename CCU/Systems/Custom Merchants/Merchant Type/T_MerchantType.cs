@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace CCU.Traits.Merchant_Type
 {
-	public abstract class T_MerchantType : T_CCU, ISetupAgentStats
+	public abstract class T_MerchantType : T_DesignerTrait, ISetupAgentStats
 	{
 		public T_MerchantType() : base() { }
 

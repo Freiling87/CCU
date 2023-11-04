@@ -10,7 +10,7 @@ using System.Reflection.Emit;
 
 namespace CCU.Traits.Ambient_Audio
 {
-	public abstract class T_AmbientAudio : T_CCU, ISetupAgentStats, IRefreshAtEndOfLevelStart
+	public abstract class T_AmbientAudio : T_DesignerTrait, ISetupAgentStats, IRefreshAtEndOfLevelStart
 	{
 		public abstract string ambientAudioClipName { get; }
 

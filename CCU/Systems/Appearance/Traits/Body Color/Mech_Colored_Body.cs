@@ -29,7 +29,7 @@ namespace CCU.Traits.App_BC1
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

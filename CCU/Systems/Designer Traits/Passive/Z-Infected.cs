@@ -4,7 +4,7 @@ using System;
 
 namespace CCU.Traits.Passive
 {
-	public class Z_Infected : T_CCU, ISetupAgentStats
+	public class Z_Infected : T_DesignerTrait, ISetupAgentStats
 	{
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

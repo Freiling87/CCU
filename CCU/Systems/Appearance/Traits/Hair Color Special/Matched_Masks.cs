@@ -31,7 +31,7 @@ namespace CCU.Traits.App_HC3
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

@@ -36,7 +36,7 @@ namespace CCU.Traits.Rel_Faction
 			|| agent.HasTrait(VanillaTraits.CrepeCrusher)
 				? VRelationship.Hostile
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

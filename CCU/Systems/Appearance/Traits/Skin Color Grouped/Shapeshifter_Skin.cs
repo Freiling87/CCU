@@ -32,7 +32,7 @@ namespace CCU.Traits.App_SC2
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

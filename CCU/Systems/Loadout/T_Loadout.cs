@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace CCU.Traits.Loadout
 {
-	public abstract class T_Loadout : T_CCU
+	public abstract class T_Loadout : T_DesignerTrait
 	{
 		public bool AlwaysApply => false;
 		public T_Loadout() : base() { }

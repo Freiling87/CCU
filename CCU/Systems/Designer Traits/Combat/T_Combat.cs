@@ -4,7 +4,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Combat_
 {
-	public abstract class T_Combat : T_CCU
+	public abstract class T_Combat : T_DesignerTrait
 	{
 		public T_Combat() : base() { }
 	}

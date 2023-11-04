@@ -4,6 +4,8 @@ Except crickets. Crickets are fine.
 This shows up in player trait list
 ###			T	Language System
 Tested, should all work. But need to do a run with a non-Eng char to be sure
+###			C	"Agent" references
+Players don't know what an Agent is. Use clearer langauge, at least for player traits.
 ###			C	Move features to RHR
 Perm Stat Effects
 Extralegal

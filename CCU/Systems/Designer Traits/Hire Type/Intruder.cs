@@ -33,7 +33,7 @@ namespace CCU.Traits.Hire_Type
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

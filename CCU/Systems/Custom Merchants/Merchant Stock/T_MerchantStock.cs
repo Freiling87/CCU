@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Stock
 {
-	public abstract class T_MerchantStock : T_CCU
+	public abstract class T_MerchantStock : T_DesignerTrait
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 

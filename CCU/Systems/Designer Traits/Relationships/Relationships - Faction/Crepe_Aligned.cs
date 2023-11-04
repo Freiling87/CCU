@@ -35,7 +35,7 @@ namespace CCU.Traits.Rel_Faction
 			AlignmentUtils.CountsAsCrepe(agent)
 				? VRelationship.Aligned
 				: null;
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

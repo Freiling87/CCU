@@ -6,12 +6,12 @@ using UnityEngine.Networking;
 
 namespace CCU.Traits.Passive
 {
-	public class Suppress_Status_Text : T_PlayerTrait
+	public class Suppress_Status_Text : T_DesignerTrait
 	{
 		[RLSetup]
 		public static void Setup()
 		{
-			PostProcess_PlayerTrait = RogueLibs.CreateCustomTrait<Suppress_Status_Text>()
+			PostProcess_DesignerTrait = RogueLibs.CreateCustomTrait<Suppress_Status_Text>()
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = String.Format("Prevents Status Effect text popup when the agent receives a new status effect."),
@@ -33,8 +33,8 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(SpawnerMain))]

@@ -34,7 +34,7 @@ namespace CCU.Traits.Gib_Type
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

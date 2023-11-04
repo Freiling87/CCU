@@ -36,8 +36,8 @@ namespace CCU.Traits.Player.Movement
 					}
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 
 	[HarmonyPatch(typeof(StatusEffects))]

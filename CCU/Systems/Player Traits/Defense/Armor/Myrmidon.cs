@@ -35,7 +35,7 @@ namespace CCU.Traits.Player.Armor
 					}
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 	}
 }

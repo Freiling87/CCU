@@ -5,7 +5,7 @@ using RogueLibsCore;
 
 namespace CCU.Traits.Drug_Warrior
 {
-	public abstract class T_DrugWarrior : T_CCU, ISetupAgentStats
+	public abstract class T_DrugWarrior : T_DesignerTrait, ISetupAgentStats
 	{
 		public T_DrugWarrior() : base() { }
 

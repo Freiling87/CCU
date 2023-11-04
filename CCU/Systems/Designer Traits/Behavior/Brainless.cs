@@ -30,8 +30,8 @@ namespace CCU.Traits.Behavior
 					UnlockCost = 0,
 				});
 		}
-		public override void OnAdded() { }
-		public override void OnRemoved() { }
+		
+		
 
 		public override void SetupAgent(Agent agent) { }
 	}
