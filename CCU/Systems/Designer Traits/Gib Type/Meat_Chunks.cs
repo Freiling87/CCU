@@ -14,7 +14,7 @@ namespace CCU.Traits.Gib_Type
 		public override int gibQuantity => 5;
 		public override int gibSpriteIteratorLimit => 5;
 		public override GibSpriteNameStem gibType => GibSpriteNameStem.GibletNormal;
-		public override string particleEffect => "BloodExplosion";
+		public override string particleEffect => VParticleEffect.ExplosionBlood;
 
 		[RLSetup]
 		public static void Setup()
@@ -40,7 +40,5 @@ namespace CCU.Traits.Gib_Type
 					UnlockCost = 0,
 				});
 		}
-		
-		
 	}
 }

@@ -25,8 +25,7 @@ namespace CCU.Traits.Player.Armor
 					Cancellations = { nameof(Myrmicapo) },
 					CharacterCreationCost = 7,
 					IsAvailable = false,
-					IsAvailableInCC = true,
-					
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 12,
 					Unlock =
 					{

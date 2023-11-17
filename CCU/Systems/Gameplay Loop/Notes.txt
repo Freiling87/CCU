@@ -2,3 +2,6 @@
 
 - Score-counting, high-score, etc.
 - Change money distribution to favor heists, etc.
+- Continues:
+	Various counts
+	Buy with Nuggets

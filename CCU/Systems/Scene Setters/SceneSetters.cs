@@ -200,6 +200,7 @@ namespace CCU.Systems.CustomGoals
 		private static void DoRandomTeleport(Agent agent, bool allowPrivate, bool allowPublic)
 		{
 			Vector3 targetLoc;
+			Vector3 entryElevatorLoc = GC.elevatorDown.tr.position;
 			int attempts = 0;
 
 			do
@@ -207,7 +208,10 @@ namespace CCU.Systems.CustomGoals
 				targetLoc = GC.tileInfo.FindRandLocation(agent, allowPrivate, true);
 				attempts++;
 			}
-			while (Vector2.Distance(targetLoc, agent.tr.position) < 8f && attempts < 50);
+			while (
+				Vector2.Distance(targetLoc, agent.tr.position) < 16f 
+				&& Vector2.Distance(targetLoc, entryElevatorLoc) < 32f // For some reason in practice it seems to accept >~20f but that was about my goal anyway.
+				&& attempts < 50);
 
 			if (targetLoc == Vector3.zero)
 				targetLoc = agent.tr.position;

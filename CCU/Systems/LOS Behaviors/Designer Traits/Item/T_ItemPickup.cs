@@ -50,8 +50,7 @@ namespace CCU.Traits.LOS_Behavior
 					}
 					catch (Exception e)
 					{
-						logger.LogError($"+++ Caught Exception for {item.itemName}:\n\t{e}");
-						logger.LogError($"Categories: {item.invItem.Categories.Any()}");
+						//logger.LogError($"+++ Caught Exception for {item.itemName}:\n\t{e}");
 					}
 
 					//	Reset only if no valid items seen. This allows agent to pick up a group of items without delay in between, but without wasting cycles afterward.

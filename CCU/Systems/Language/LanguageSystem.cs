@@ -228,13 +228,11 @@ namespace CCU.Systems.Language
 			});
 			RogueLibs.CreateCustomName("Undercant04_NonEnglish", t, new CustomNameInfo
 			{
-				// Upside is mad bright, and all. My eyes are hurting all day.
 				[LanguageCode.English] = "Upsoide mad broit, nall. M'glimpsies aalde ertin."
 			});
 			RogueLibs.CreateCustomName("Undercant05_NonEnglish", t, new CustomNameInfo
 			{
-				// 
-				[LanguageCode.English] = "Make bes fer tip y'toes. D'Ungries moitcan fine y'smell."
+				[LanguageCode.English] = "Gabber teysnacker!"
 			});
 
 

@@ -32,8 +32,7 @@ namespace CCU.Traits.Player.Ranged_Combat
 				{
 					CharacterCreationCost = 7,
 					IsAvailable = false,
-					IsAvailableInCC = true,
-					
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 10,
 					Unlock =
 					{
@@ -42,7 +41,5 @@ namespace CCU.Traits.Player.Ranged_Combat
 					}
 				});
 		}
-		
-		
 	}
 }

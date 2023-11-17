@@ -1,5 +1,8 @@
 ﻿#		Idea Dump
 Moved, so tier changed. Distribute these
+##			C	Pay Debt
+Reclassifying this as a feature request rather than bug report
+CL - Speaking of which though, that reminds me that the "pay debt" behavior doesn't include payments for the slum dweller BQ unlike the vanilla clerk thing. Or maybe you want to keep it modular but even then I'd like that as a behavior too then. 90% of the reason behind Penny's interactions was to make that quest more consistent in case of ATM issues but currently she can't do that.
 ##			C	"Look For Trouble" Scene Setter
 CL - NPC has heightened awareness and will turn to face different directions while idle upon spawning, lasts for like 10 seconds (ideally from the time the player actually loads them in fully by getting close enough) and then they switch to the normal "wander around the floor" behavior. Might be too difficult to implement but the idea would be to simplify NPC fight setups, right now the options are pretty much idle or wander but the former looks dumb when the fight is over and the latter has a high failure rate since NPCs load at different times and often wander away from one another.
 Might not need them to spin around, just detect what's in visual range and set to engage.

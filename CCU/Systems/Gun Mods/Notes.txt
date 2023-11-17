@@ -1,0 +1,2 @@
+﻿Bullet Splitter (shotgun might already have scattershot implemented)
+Rapid Fire Mod

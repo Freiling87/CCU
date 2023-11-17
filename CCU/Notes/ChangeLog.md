@@ -9,20 +9,22 @@
     - Frozen
     - Frozen (Fragile)
     - Frozen (Permanent)
-  - Player Traits
-	- Permanent Status Effects (Lots, go see the documentation)
   - Designer Traits
     - Behavior
       - Vigilance (group): Determines how the agent reacts to sound, in regards to investigation and property.
     - Passive
       - Plot-Critical: Players explode if this agent is neutralized.
 - **Tweaks**
+  - Second-tier player traits are no longer available in the character creator. The game + RogueLibs are not designed to accommodate those as an option properly.
   - Immovable is now a Player Trait.
   - Agents spawned via Friend Phone will now re-roll their appearance if they have the traits for it, since they're not clones.
   - Scumbags are no longer automatically Guilty.
   - LOS Behaviors: Eat Corpses & Suck Blood no longer require a Special Ability. Pick Pockets still does.
+  - Random Teleport Scene Setter will no longer place NPCs close to the starting elevator. 
 - **Bug Fixes**
+  - Upgrading traits no longer leaves the base trait.
   - Previously fixed vanilla bug but now documenting: Broken objects should no longer drop bugged items with "E_" in the name.
   - Indestructible NPCs with Explode on Death now properly gib when they explode.
   - Agents with a Scene Setter applied are now ineligible for secret Shapeshifter uh... insertion.
   - Language system no longer blocks interaction in Home Base. As far as I'm aware, all this did was cause a conflict with the Chaos At Home Base mod.
+  - Language Teacher interactions should work properly now.

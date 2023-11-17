@@ -1,4 +1,10 @@
 ﻿##			Feature Scope
+###			C	Improve Branching Interaction
+If non-default branch:
+- Clear all interactions before adding buttons
+  - Because Learn Language menu included "Offer drink"
+- Add "Back" button
+  - Because Done just exits the interaction fully.
 ###			P	Pre-release checks
 ####			BunnyLibs
 - Ensure that ALL your mods work with it before releasing any. 
@@ -22,7 +28,10 @@ Might not be impossible. See CharacterCreation.Awake.
 Try COPYING something like TraitsMenu in CharacterCreation.Awake and see if you can repurpose it.
 Just search Trait in that method, and do everything he does there.
 ###			T	Behavior - Vigilant
-
+New
+###			H	Collapsible Menus at last?
+https://sugarbarrel.github.io/RogueLibs/docs/dev/unlocks/configuring-unlocks
+See bottom examples, "Categories"
 ###			C	T_CCU bools
 affectsPC
 affectsNPC

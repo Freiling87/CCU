@@ -9,6 +9,7 @@ using static CCU.Traits.Rel_Faction.T_Rel_Faction;
 
 namespace CCU.Traits
 {
+	// TODO: BunnyLibs.ISetupRelationshipOriginal
 	public abstract class T_Relationships : T_DesignerTrait
 	{
 		public T_Relationships() : base() { }
@@ -22,7 +23,6 @@ namespace CCU.Traits
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		//  TODO: Refactor. Consider an Interface along the lines of ISetupAgentStats
 		[HarmonyPostfix, HarmonyPatch(nameof(Relationships.SetupRelationshipOriginal))]
 		public static void SetupRelationshipOriginal_Postfix(Agent otherAgent, Relationships __instance, Agent ___agent)
 		{

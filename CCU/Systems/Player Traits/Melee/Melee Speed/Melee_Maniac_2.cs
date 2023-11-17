@@ -34,8 +34,7 @@ namespace CCU.Traits.Player.Melee_Combat
 				{
 					CharacterCreationCost = 5,
 					IsAvailable = false,
-					IsAvailableInCC = true,
-					
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 10,
 					Unlock =
 					{

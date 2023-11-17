@@ -29,6 +29,8 @@ namespace CCU
 		public string GetPlayerName => PlayerName(GetType());
 
 		private static string DoSpaces(string input) =>
-			input.Replace('_', ' ').Trim();
+			input
+				.Replace('_', ' ')
+				.Trim();
 	}
 }

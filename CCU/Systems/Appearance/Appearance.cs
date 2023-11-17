@@ -10,10 +10,8 @@ using System.Reflection.Emit;
 
 namespace CCU.Systems.Appearance
 {
-	internal class Appearance { }
-
 	[HarmonyPatch(typeof(AgentHitbox))]
-	public static class P_AgentHitbox
+	public static class P_AgentHitbox_Appearance
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -35,7 +33,7 @@ namespace CCU.Systems.Appearance
 			FieldInfo agent = AccessTools.DeclaredField(typeof(AgentHitbox), nameof(AgentHitbox.agent));
 			FieldInfo customCharacterData = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.customCharacterData));
 			FieldInfo eyesType = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.eyesType));
-			MethodInfo getAgentEyesType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox), nameof(P_AgentHitbox.GetAgentEyesType));
+			MethodInfo getAgentEyesType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox_Appearance), nameof(P_AgentHitbox_Appearance.GetAgentEyesType));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -88,7 +86,7 @@ namespace CCU.Systems.Appearance
 			FieldInfo customCharacterData = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.customCharacterData));
 			FieldInfo bodyType = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.bodyType));
 			MethodInfo eyesType2_get = AccessTools.PropertyGetter(typeof(ObjectMultAgent), nameof(ObjectMultAgent.eyesType));
-			MethodInfo getAgentBodyType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox), nameof(P_AgentHitbox.GetAgentBodyType));
+			MethodInfo getAgentBodyType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox_Appearance), nameof(P_AgentHitbox_Appearance.GetAgentBodyType));
 			FieldInfo oma = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.oma));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -110,6 +108,10 @@ namespace CCU.Systems.Appearance
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
+
+		internal static string GetAgentBodyType(Agent agent) =>
+			agent.GetOrAddHook<H_Appearance>().bodyType;
+
 		// Causes sprite updates to pull from the spawned character rather than the saved custom character.
 		[HarmonyTranspiler, HarmonyPatch(nameof(AgentHitbox.SetWBSprites))]
 		private static IEnumerable<CodeInstruction> SetWBSprites_FixEyes_01(IEnumerable<CodeInstruction> codeInstructions)
@@ -120,7 +122,7 @@ namespace CCU.Systems.Appearance
 			FieldInfo customCharacterData = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.customCharacterData));
 			FieldInfo eyesType = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.eyesType));
 			MethodInfo eyesType2_get = AccessTools.PropertyGetter(typeof(ObjectMultAgent), nameof(ObjectMultAgent.eyesType));
-			MethodInfo getAgentEyesType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox), nameof(P_AgentHitbox.GetAgentEyesType));
+			MethodInfo getAgentEyesType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox_Appearance), nameof(P_AgentHitbox_Appearance.GetAgentEyesType));
 			FieldInfo oma = AccessTools.DeclaredField(typeof(PlayfieldObject), nameof(PlayfieldObject.oma));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -152,7 +154,7 @@ namespace CCU.Systems.Appearance
 			FieldInfo agent = AccessTools.DeclaredField(typeof(AgentHitbox), nameof(AgentHitbox.agent));
 			FieldInfo customCharacterData = AccessTools.DeclaredField(typeof(Agent), nameof(Agent.customCharacterData));
 			FieldInfo eyesType = AccessTools.DeclaredField(typeof(SaveCharacterData), nameof(SaveCharacterData.eyesType));
-			MethodInfo getAgentEyesType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox), nameof(P_AgentHitbox.GetAgentEyesType));
+			MethodInfo getAgentEyesType = AccessTools.DeclaredMethod(typeof(P_AgentHitbox_Appearance), nameof(P_AgentHitbox_Appearance.GetAgentEyesType));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -176,14 +178,12 @@ namespace CCU.Systems.Appearance
 			return instructions;
 		}
 
-		private static string GetAgentBodyType(Agent agent) =>
-			agent.GetOrAddHook<H_Appearance>().bodyType;
-		private static string GetAgentEyesType(Agent agent) =>
+		internal static string GetAgentEyesType(Agent agent) =>
 			agent.GetOrAddHook<H_Appearance>().eyesType;
 	}
 
 	[HarmonyPatch(typeof(ObjectMultAgent))]
-	public static class P_ObjectMultAgent
+	public static class P_ObjectMultAgent_Appearance
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -194,14 +194,5 @@ namespace CCU.Systems.Appearance
 			if (!(__instance.agent.GetOrAddHook<H_Appearance>().eyesType is null))
 				__result = __instance.convertEyesTypeToInt(__instance.agent.GetOrAddHook<H_Appearance>().eyesType);
 		}
-	}
-
-	[HarmonyPatch(typeof(Relationships))]
-	internal static class P_Relationships_Appearance
-	{
-		private static readonly ManualLogSource logger = BLLogger.GetLogger();
-		public static GameController GC => GameController.gameController;
-
-		// TODO: Fix CopyLooks so it pulls from the rolled appearance
 	}
 }
