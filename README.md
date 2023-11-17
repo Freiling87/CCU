@@ -27,12 +27,14 @@ CCU adds the following:
 - Traits:
   - [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
   - [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
-- [Gameplay Fixes](/CCU/Documentation/C06_Fixes.md)
 </b>
-#		How to use it
+#		Other notes:
+These POS links break unless there's text right here (yes, this text):
+<b>
 - [Installation](/CCU/Documentation/M01_Installation.md)
 - [Best Practices for Designers](/CCU/Documentation/M02_BestPractices.md)
 - [Change Log](/CCU/Documentation/M03_ChangeLog.md)
+</b>
 
 #		Links
 - [CCU Showcase](https://steamcommunity.com/sharedfiles/filedetails/?id=2852074522) - A Steam collection of CCU-enhanced Chunk Packs and Campaigns
