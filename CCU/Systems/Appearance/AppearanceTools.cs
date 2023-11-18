@@ -122,7 +122,7 @@ namespace CCU.Systems.Appearance
 
 				case var _ when type.IsAssignableFrom(typeof(T_BodyColor)):
 					if (agent.HasTrait<Shirtless>())
-						return agent.GetOrAddHook<H_Appearance>().skinColor;
+						return agent.agentHitboxScript.skinColorName;
 
 					if ((agent.HasTrait<Neutral_Body_50>() && GC.percentChance(50)) ||
 						(agent.HasTrait<Neutral_Body_75>() && GC.percentChance(75)))
@@ -133,9 +133,9 @@ namespace CCU.Systems.Appearance
 
 					if (agent.HasTrait<Shirtsome>())
 					{
-						string roll = agent.GetOrAddHook<H_Appearance>().skinColor;
+						string roll = agent.agentHitboxScript.skinColorName;
 
-						while (roll == agent.GetOrAddHook<H_Appearance>().skinColor)
+						while (roll == agent.agentHitboxScript.skinColorName)
 							roll = pool[CoreTools.random.Next(pool.Count())];
 
 						return roll;
@@ -150,7 +150,7 @@ namespace CCU.Systems.Appearance
 				case var _ when type.IsAssignableFrom(typeof(T_EyeColor)):
 
 					if (agent.HasTrait<Beady_Eyed>())
-						return agent.GetOrAddHook<H_Appearance>().skinColor;
+						return agent.agentHitboxScript.skinColorName;
 
 					if (pool.Count() is 0)
 						return "White";
@@ -178,12 +178,12 @@ namespace CCU.Systems.Appearance
 					if (Not_Hairstyles.StaticList.Contains(agentHitbox.hairType))
 					{
 						if (agent.HasTrait<Matched_Masks>())
-							return agent.GetOrAddHook<H_Appearance>().bodyColor;
+							return agent.GetOrAddHook<H_Appearance>().bodyColorName;
 						else if (agent.HasTrait<Uncolored_Masks>())
 							return "White";
 					}
 					else if (agent.HasTrait<Fleshy_Follicles>())
-						return agent.GetOrAddHook<H_Appearance>().skinColor;
+						return agent.agentHitboxScript.skinColorName;
 
 					if (pool.Count() is 0)
 						return agentHitbox.hairColorName;
@@ -192,19 +192,19 @@ namespace CCU.Systems.Appearance
 
 				case var _ when type.IsAssignableFrom(typeof(T_LegsColor)):
 					if (agent.HasTrait<Pantsless>())
-						return agent.GetOrAddHook<H_Appearance>().skinColor;
+						return agent.agentHitboxScript.skinColorName;
 
 					if (agent.HasTrait<Pantsuit>())
-						return agent.GetOrAddHook<H_Appearance>().bodyColor;
+						return agent.GetOrAddHook<H_Appearance>().bodyColorName;
 
 					if (pool.Count() is 0)
 						return "Black";
 
 					if (agent.HasTrait<Pantiful>())
 					{
-						string roll = agent.GetOrAddHook<H_Appearance>().skinColor;
+						string roll = agent.agentHitboxScript.skinColorName;
 
-						while (roll == agent.GetOrAddHook<H_Appearance>().skinColor)
+						while (roll == agent.agentHitboxScript.skinColorName)
 							roll = pool[CoreTools.random.Next(pool.Count())];
 
 						return roll;
@@ -256,14 +256,14 @@ namespace CCU.Systems.Appearance
 		public static void RollBodyColor(AgentHitbox agentHitbox)
 		{
 			Agent agent = agentHitbox.agent;
-			try { agent.GetOrAddHook<H_Appearance>().bodyColor = agent.customCharacterData.bodyColorName; }
+			try { agent.GetOrAddHook<H_Appearance>().bodyColorName = agent.customCharacterData.bodyColorName; }
 			catch { }
 
 			if (!agent.GetTraits<T_BodyColor>().Any())
 				return;
 
 			string roll = GetRoll<T_BodyColor>(agentHitbox);
-			agent.GetOrAddHook<H_Appearance>().bodyColor = roll;
+			agent.GetOrAddHook<H_Appearance>().bodyColorName = roll;
 			agentHitbox.GetColorFromString(roll, "Body");
 			agent.customCharacterData.bodyColorName = roll;
 		}
@@ -414,7 +414,7 @@ namespace CCU.Systems.Appearance
 				return;
 
 			string roll = GetRoll<T_SkinColor>(agentHitbox);
-			agent.GetOrAddHook<H_Appearance>().skinColor = roll;
+			agent.agentHitboxScript.skinColorName = roll;
 			AccessTools.DeclaredField(typeof(AgentHitbox), "skinColorChoice").SetValue(agentHitbox, roll);
 			agentHitbox.GetColorFromString(roll, "Skin");
 			agentHitbox.skinColorName = roll;

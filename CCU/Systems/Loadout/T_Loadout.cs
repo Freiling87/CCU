@@ -90,7 +90,6 @@ namespace CCU.Traits.Loadout
 				agent.isPlayer != 0)
 				return;
 
-			logger.LogDebug("SetupLoadout: " + agent.agentName + " (" + agent.agentRealName + ")");
 			invDatabase.DontPlayPickupSounds(true);
 			T_PocketMoney.AddMoney(agent);
 			LoadCustomInventory(invDatabase);
@@ -164,7 +163,6 @@ namespace CCU.Traits.Loadout
 							: agent.HasTrait<Upscaled_Distribution>()
 								? Mathf.Clamp((int)(pickedItem.itemValue / 3.0f), 1, 100)
 									: 0;
-						logger.LogDebug("Chance: " + chance + "%");
 
 						if (GC.percentChance(chance) ||
 							(pockets && agent.HasTrait<Have>() && itemBagForSlot.Count() is 1) ||

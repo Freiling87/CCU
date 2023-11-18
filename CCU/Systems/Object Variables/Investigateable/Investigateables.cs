@@ -40,6 +40,7 @@ namespace CCU.Systems.Investigateables
 		public static List<string> InvestigateableObjects_Slot2 = new List<string>()
 		{
 			//VObjectReal.Door,
+			//VObjectReal.Elevator, // Level Start/End text
 			//VObjectReal.Shelf,
 		};
 

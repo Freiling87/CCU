@@ -9,10 +9,9 @@ namespace CCU
 		// NOTE: Instance = host Agent
 
 		public bool mustRollAppearance;
-		public string bodyColor;
+		public string bodyColorName;
 		public string bodyType;
 		public string eyesType;
-		public string skinColor;
 
 		//	Called by H_Agent
 		protected override void Initialize()
@@ -31,10 +30,9 @@ namespace CCU
 				|| agent.isPlayer == 0;
 
 			SaveCharacterData save = agent.customCharacterData;
-			bodyColor = save.bodyColorName;
+			bodyColorName = save.bodyColorName;
 			bodyType = save.bodyType;
 			eyesType = save.eyesType;
-			skinColor = save.skinColorName;
 		}
 	}
 
