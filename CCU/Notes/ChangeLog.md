@@ -28,3 +28,5 @@
   - Agents with a Scene Setter applied are now ineligible for secret Shapeshifter uh... insertion.
   - Language system no longer blocks interaction in Home Base. As far as I'm aware, all this did was cause a conflict with the Chaos At Home Base mod.
   - Language Teacher interactions should work properly now.
+  - Zombified characters now properly copy appearances.
+  - Shapeshifter will no longer spawn in NPCs that have a Scene Setter default behavior.

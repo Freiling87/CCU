@@ -1,4 +1,7 @@
 ﻿##			Feature Scope
+###			C	Elevator Text
+Pop up before and after entry/exit of level
+Button 2
 ###			C	Improve Branching Interaction
 If non-default branch:
 - Clear all interactions before adding buttons

@@ -311,7 +311,7 @@ namespace CCU.Systems.CustomGoals
 					new CodeInstruction(OpCodes.Ldloc_1),
 					new CodeInstruction(OpCodes.Ldfld, gc),
 					new CodeInstruction(OpCodes.Ldc_I4_1),
-					new CodeInstruction(OpCodes.Callvirt),
+					new CodeInstruction(OpCodes.Callvirt),		//	percentChance
 				},
 				targetInstructions: new List<CodeInstruction>
 				{
@@ -329,8 +329,8 @@ namespace CCU.Systems.CustomGoals
 			return instructions;
 		}
 		private static bool CanBeShapeshifter(bool vanilla, Agent agent) =>
-			vanilla 
-				&& (agent.HasTrait<Possessed>() 
-				|| (!SceneSetters.SceneSetters_Active.Contains(agent.defaultGoal) && !SceneSetters.SceneSetters_Legacy.Contains(agent.defaultGoal)));
+			vanilla
+				&& (agent.HasTrait<Possessed>()
+					|| (!SceneSetters.SceneSetters_Active.Contains(agent.defaultGoal) && !SceneSetters.SceneSetters_Legacy.Contains(agent.defaultGoal)));
 	}
 }
