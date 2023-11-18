@@ -35,7 +35,7 @@ namespace CCU.Traits.Merchant_Type
 		public static CustomNameProvider nameProvider = (CustomNameProvider)nameProviderField.GetValue(null);
 
 		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.AddRandItem), new[] { typeof(string) })]
-		public static bool AddRandItem_Prefix(string itemNum, InvDatabase __instance, ref InvItem __result)
+		public static bool AddRandItem_Prefix(InvDatabase __instance, ref InvItem __result)
 		{
 			if (__instance.agent is null)
 				return true;
@@ -155,7 +155,7 @@ namespace CCU.Traits.Merchant_Type
 				try
 				{
 					string rListItem = __instance.rnd.RandomSelect(item, "Items");
-					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(rListItem);
+					invItem = AddItemReal.GetMethodWithoutOverrides<Func<string, InvItem>>(__instance).Invoke(rListItem); // Not how to invoke!
 
 					if (agent.HasTrait<Clearancer>())
 						invItem.canRepeatInShop = true;
@@ -168,12 +168,16 @@ namespace CCU.Traits.Merchant_Type
 						invItem.canRepeatInShop = true;
 				}
 
-				if (T_MerchantStock.ExceptionItems.Contains(invItem.invItemName))
+				if (T_MerchantStock.ZeroQtyItems.Contains(invItem.invItemName))
 					invItem.invItemCount = 0;
 
 				// This is apparently done automatically for Durability items
 				if (T_MerchantStock.QuantityTypes.Contains(invItem.itemType))
 					T_MerchantStock.ShopPrice(ref invItem);
+
+				// Ad hoc for now
+				if (invItem.invItemName == VanillaItems.BombProcessor)
+					invItem.itemValue = 2000; // Yes really, it ends up as 200
 			}
 
 			__instance.filledSpecialInv = true;

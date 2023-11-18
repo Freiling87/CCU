@@ -30,3 +30,4 @@
   - Language Teacher interactions should work properly now.
   - Zombified characters now properly copy appearances.
   - Shapeshifter will no longer spawn in NPCs that have a Scene Setter default behavior.
+  - Bomb Processor & Watergun now have proper prices in custom shops.

@@ -14,7 +14,7 @@ namespace CCU.Traits.Merchant_Type
 			new KeyValuePair<string, int>( VItemName.Grenade, 3),
 			new KeyValuePair<string, int>( VItemName.LandMine, 3),
 			new KeyValuePair<string, int>( VItemName.RemoteBomb, 3),
-			new KeyValuePair<string, int>( VItemName.RemoteBombTrigger, 1),
+			// new KeyValuePair<string, int>( VItemName.RemoteBombTrigger, 1), // Can't sell
 			new KeyValuePair<string, int>( VItemName.RocketLauncher, 1),
 			new KeyValuePair<string, int>( VItemName.TimeBomb, 3),
 		};

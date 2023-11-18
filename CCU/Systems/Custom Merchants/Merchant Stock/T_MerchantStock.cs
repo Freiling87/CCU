@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using RogueLibsCore;
 using System.Collections.Generic;
 
 namespace CCU.Traits.Merchant_Stock
@@ -10,27 +11,29 @@ namespace CCU.Traits.Merchant_Stock
 		public T_MerchantStock() : base() { }
 
 		public abstract void OnAddItem(ref InvItem invItem);
-		public static List<string> ExceptionItems = new List<string>()
+		public static List<string> ZeroQtyItems = new List<string>()
 		{
+			VItemName.BombProcessor,
 			VItemName.Taser,
 			VItemName.WaterPistol,
 		};
 		public List<string> DurabilityTypes = new List<string>()
 		{
-			"WeaponMelee",
-			"WeaponProjectile",
-			"Wearable",
+			VItemType.WeaponMelee,
+			VItemType.WeaponProjectile,
+			VItemType.Wearable,
 		};
 		public static List<string> QuantityTypes = new List<string>()
 		{
-			"Consumable",
-			"Food",
-			"Tool",
-			"WeaponThrown"
+			VItemType.Consumable,
+			VItemType.Food,
+			VItemType.Tool,
+			VItemType.WeaponThrown,
 		};
 		public static void ShopPrice(ref InvItem invItem)
 		{
-			invItem.itemValue = (int)((float)invItem.itemValue * ((float)invItem.invItemCount / (float)invItem.initCount));
+			logger.LogDebug($"ShopPrice: {invItem.invItemName}");
+			invItem.itemValue = (int)(invItem.itemValue * ((float)invItem.invItemCount / (float)invItem.initCount));
 		}
 	}
 }
