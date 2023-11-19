@@ -23,7 +23,9 @@ namespace CCU.Systems.Appearance.Fixes
 			
 			try
 			{
-				__instance.agent.customCharacterData.bodyType = __instance.agent.GetOrAddHook<H_Appearance>().bodyType;
+				if (__instance.agent.isPlayer == 0
+					&& __instance.agent.GetOrAddHook<H_Appearance>().bodyType.Length > 1)
+					__instance.agent.customCharacterData.bodyType = __instance.agent.GetOrAddHook<H_Appearance>().bodyType;
 			}
 			catch { }	//	Can cause NRE with player spawn
 			return true;
