@@ -15,11 +15,11 @@
     - Passive
       - Plot-Critical: Players explode if this agent is neutralized.
 - **Tweaks**
-  - Second-tier player traits are no longer available in the character creator. The game + RogueLibs are not designed to accommodate those as an option properly.
+  - Second-tier traits ("+ traits") are now only available in the character creator in the Designer Edition. The game + RogueLibs are not designed to accommodate those as an option properly.
   - Immovable is now a Player Trait.
   - Agents spawned via Friend Phone will now re-roll their appearance if they have the traits for it, since they're not clones.
   - Scumbags are no longer automatically Guilty.
-  - LOS Behaviors: Eat Corpses & Suck Blood no longer require a Special Ability. Pick Pockets still does.
+  - LOS Behaviors: Eat Corpses & Suck Blood no longer require a matching Special Ability. Pick Pockets still does.
   - Random Teleport Scene Setter will no longer place NPCs close to the starting elevator. 
 - **Bug Fixes**
   - Upgrading traits no longer leaves the base trait.
@@ -28,6 +28,8 @@
   - Agents with a Scene Setter applied are now ineligible for secret Shapeshifter uh... insertion.
   - Language system no longer blocks interaction in Home Base. As far as I'm aware, all this did was cause a conflict with the Chaos At Home Base mod.
   - Language Teacher interactions should work properly now.
-  - Zombified characters now properly copy appearances.
-  - Shapeshifter will no longer spawn in NPCs that have a Scene Setter default behavior.
+  - Zombified characters now properly copy appearances. Previously they would copy their appearance from the saved version of a custom NPC, causing appearance-rolled NPCs to suddenly match appearances when they become zombies.
   - Bomb Processor & Watergun now have proper prices in custom shops.
+  - Shelved bugs (haven't figured them out yet):
+    - Concealed Carry works inconsistently with NPCs Sitting/Sleeping/Dancing.
+    - Using "Continue" on a game can cause Designer chunks to show up on the character sheet. This might be a Roguelibs bug.

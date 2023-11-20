@@ -144,6 +144,7 @@
     <Compile Include="Hooks\H_AgentInteractions.cs" />
     <None Include="Notes\ChangeLog.md" />
     <None Include="Notes\BugArchive.md" />
+    <None Include="Notes\IdeaDump.md" />
     <Compile Include="Systems\Appearance\Appearance.cs" />
     <Compile Include="Systems\Appearance\AppearanceTools.cs" />
     <Compile Include="Systems\Appearance\Fixes\ZombieCopyLooks.cs" />
@@ -846,6 +847,7 @@
     <Compile Include="Core\Trait Unlocks\TU_DesignerUnlock.cs" />
     <Compile Include="Core\Traits\T_DesignerTrait.cs" />
     <Compile Include="Core\Traits\T_PlayerTrait.cs" />
+    <None Include="Systems\Knockout\Status Effects\Notes.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">

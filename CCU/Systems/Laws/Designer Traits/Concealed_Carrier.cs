@@ -37,51 +37,8 @@ namespace CCU.Traits.Behavior
 		public bool BypassUnlockChecks => false;
 		public override void SetupAgent(Agent agent) { }
 	}
-
-	[HarmonyPatch(typeof(InvDatabase))]
-	class P_InvDatabase_OpenCarry
-	{
-		private static readonly ManualLogSource logger = BLLogger.GetLogger();
-		public static GameController GC => GameController.gameController;
-
-		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.ChooseWeapon), new[] { typeof(bool) })]
-		public static bool ChooseWeapon_Prefix(InvDatabase __instance)
-		{
-			__instance.StartCoroutine(ConcealWeapon(__instance));
-			return true;
-		}
-		public static IEnumerator ConcealWeapon(InvDatabase invDatabase)
-		{
-			Agent agent = invDatabase.agent;
-
-			if (agent.isPlayer == 0 &&
-				!agent.inCombat &&
-					(agent.HasTrait<Concealed_Carrier>() ||
-					(GC.challenges.Contains(nameof(No_Open_Carry))))) /*&& !agent.HasTrait<Outlaw>())))*/
-			{
-				if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
-					yield return new WaitForSeconds(1.00f);
-				else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
-					yield return new WaitForSeconds(3.00f);
-				else
-					yield return new WaitForSeconds(2.00f);
-
-				invDatabase.EquipWeapon(invDatabase.fist);
-			}
-		}
-
-		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.EquipWeapon), new[] { typeof(InvItem), typeof(bool) })]
-		public static bool EquipWeapon_Prefix(InvDatabase __instance, InvItem item, ref bool sfx)
-		{
-			if (__instance.agent.isPlayer == 0 && item.invItemName == VItemName.Fist)
-				sfx = false;
-
-			return true;
-		}
-	}
-
 	[HarmonyPatch(typeof(GoalBattle))]
-	public static class P_GoalBattle
+	class P_GoalBattle
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -94,7 +51,7 @@ namespace CCU.Traits.Behavior
 	}
 
 	[HarmonyPatch(typeof(GoalCombatEngage))]
-	public static class P_GoalCombatEngage
+	class P_GoalCombatEngage
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -109,7 +66,57 @@ namespace CCU.Traits.Behavior
 		[HarmonyPostfix, HarmonyPatch(nameof(GoalCombatEngage.Terminate))]
 		public static void Terminate_Postfix(GoalCombatEngage __instance)
 		{
-			__instance.agent.agentInvDatabase.StartCoroutine(P_InvDatabase_OpenCarry.ConcealWeapon(__instance.agent.agentInvDatabase));
+			__instance.agent.agentInvDatabase.StartCoroutine(P_InvDatabase_OpenCarry.ConcealWeapon(__instance.agent.agentInvDatabase, true));
 		}
 	}
+
+	[HarmonyPatch(typeof(InvDatabase))]
+	class P_InvDatabase_OpenCarry
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.ChooseWeapon), new[] { typeof(bool) })]
+		public static bool ChooseWeapon_Prefix(InvDatabase __instance)
+		{
+			__instance.StartCoroutine(ConcealWeapon(__instance, true));
+			return true;
+		}
+		public static IEnumerator ConcealWeapon(InvDatabase invDatabase, bool delay)
+		{
+			Agent agent = invDatabase.agent;
+
+			if (agent.isPlayer == 0 
+				&& !agent.inCombat
+				// && agent.brain.Goals[0].goalCode != goalType.Flee // dw
+				&& (agent.HasTrait<Concealed_Carrier>() 
+					|| (GC.challenges.Contains(nameof(No_Open_Carry))))) /*&& !agent.HasTrait<Outlaw>())))*/
+			{
+				float delayDuration = 0f;
+
+				if (delay)
+				{
+					if (invDatabase.agent.HasTrait(VanillaTraits.NimbleFingers))
+						delayDuration = 1.00f;
+					else if (invDatabase.agent.HasTrait(VanillaTraits.PoorHandEyeCoordination))
+						delayDuration = 3.00f;
+					else
+						delayDuration = 2.00f;
+				}
+
+				yield return new WaitForSeconds(delayDuration);
+				invDatabase.EquipWeapon(invDatabase.fist);
+			}
+		}
+
+		[HarmonyPrefix, HarmonyPatch(nameof(InvDatabase.EquipWeapon), new[] { typeof(InvItem), typeof(bool) })]
+		public static bool EquipWeapon_Prefix(InvDatabase __instance, InvItem item, ref bool sfx)
+		{
+			if (__instance.agent.isPlayer == 0 && item.invItemName == VItemName.Fist)
+				sfx = false;
+
+			return true;
+		}
+	}
+
 }
