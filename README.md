@@ -28,7 +28,9 @@ CCU adds the following:
   - [Designer Traits](/CCU/Documentation/C05_DesignerTraits.md)
   - [Player Traits](/CCU/Documentation/C0503_PlayerTraits.md)
 </b>
-#		Other notes:
+
+#   Others
+
 - [Installation](/CCU/Documentation/M01_Installation.md)
 - [Best Practices for Designers](/CCU/Documentation/M02_BestPractices.md)
 - [Change Log](/CCU/Documentation/M03_ChangeLog.md)
