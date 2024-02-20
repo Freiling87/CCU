@@ -27,7 +27,7 @@ namespace CCU.Traits.Player.Movement
 					Cancellations = { },
 					CharacterCreationCost = 5,
 					IsAvailable = false,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					
 					UnlockCost = 7,
 					Unlock =

@@ -29,8 +29,6 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		
-		
 	}
 
 	[HarmonyPatch(typeof(StatusEffects))]

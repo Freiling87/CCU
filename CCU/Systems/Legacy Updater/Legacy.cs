@@ -52,7 +52,6 @@ namespace CCU.Localization
 			//		Renames
 			{ "Manager_Safe_Combo",                 new[] { typeof(Chunk_Safe_Combo) } },
 			{ "Manager_Key",                        new[] { typeof(Chunk_Key) } },
-			{ "Manager_Mayor_Badge",                new[] { typeof(Chunk_Mayor_Badge) } },
 
 
 			//	1.1.0

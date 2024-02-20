@@ -1,6 +1,8 @@
 ﻿using BepInEx.Logging;
 using BunnyLibs;
+using CCU.Interactions;
 using CCU.Traits.Merchant_Stock;
+using CCU.Traits.Trait_Gate;
 using HarmonyLib;
 using RogueLibsCore;
 using System;
@@ -10,18 +12,41 @@ using System.Reflection;
 
 namespace CCU.Traits.Merchant_Type
 {
-	public abstract class T_MerchantType : T_DesignerTrait, ISetupAgentStats
+	public abstract class T_MerchantType : T_InteractionNPC, ISetupAgentStats
 	{
 		public T_MerchantType() : base() { }
 
-		public string DisplayName => DesignerName(GetType());
+		public override void AddInteraction(SimpleInteractionProvider<Agent> h)
+		{
+			Agent agent = h.Object;
+			Agent interactingAgent = h.Agent;
 
+			h.AddButton(VButtonText.Buy, m =>
+			{
+				agent.ShowNPCChest();
+			});
+
+			if (interactingAgent.inventory.HasItem(VItemName.FreeItemVoucher))
+				h.AddButton(VButtonText.UseVoucher, m =>
+				{
+					agent.ShowNPCChest();
+					interactingAgent.usingVoucher = true;
+				});
+		}
+		public override bool InteractionAllowed(Agent interactingAgent) =>
+			base.InteractionAllowed(interactingAgent)
+			&& Owner.hasSpecialInvDatabase
+			&& !(Owner.HasTrait<Cop_Access>() && !Cop_Access.CountsAsPolice(interactingAgent))
+			&& !(Owner.HasTrait<Honorable_Thief>() && !Honorable_Thief.CountsAsThief(interactingAgent));
+
+		//	ISetupAgentStats
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)
 		{
 			agent.SetupSpecialInvDatabase();
 		}
 
+		public string DisplayName => DesignerName(GetType());
 		public abstract List<KeyValuePair<string, int>> MerchantInventory { get; }
 	}
 
@@ -70,7 +95,7 @@ namespace CCU.Traits.Merchant_Type
 							if (invItem.invItemName == itemName && !invItem.canRepeatInShop)
 								foundItem = false;
 
-						if (itemName == "FreeItemVoucher")
+						if (itemName == VanillaItems.FreeItemVoucher)
 							foundItem = false;
 
 						num++;

@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using RogueLibsCore;
 using System;
+using System.Linq;
 
 namespace CCU
 {
@@ -11,6 +12,7 @@ namespace CCU
 
 		public static TraitBuilder PostProcess_DesignerTrait
 		{
+			// Applies default values after creating the trait.
 			set
 			{
 				value.Unlock.CharacterCreationCost = 0;
@@ -18,6 +20,7 @@ namespace CCU
 				value.Unlock.IsAvailableInCC = Core.designerEdition;
 				value.Unlock.UnlockCost = 0;
 
+				//	So you can unlock your unlock, yo
 				value.Unlock.Unlock.cantLose = true;
 				value.Unlock.Unlock.cantSwap = true;
 				value.Unlock.Unlock.upgrade = null;
@@ -32,13 +35,14 @@ namespace CCU
 
 		// TODO: Eliminate this. Make an abstract group name string field to be filled out per group.
 		public static string GroupFromNamespace(Type type) =>
-			Prettify(type.Namespace.Split('.')[2]);
+			Prettify(type.Namespace.Split('.').Last());
 
 		public static string Prettify(string original) =>
 			original
 				.Replace('_', ' ')
 				.Trim();
 
+		//	So far just to prevent from needing these in child classes.
 		public override void OnAdded() { }
 		public override void OnRemoved() { }
 	}

@@ -26,7 +26,7 @@ namespace CCU.Traits.Player.Ranged_Combat
 					Cancellations = { },
 					CharacterCreationCost = 5,
 					IsAvailable = true,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 15,
 					Unlock =
 					{

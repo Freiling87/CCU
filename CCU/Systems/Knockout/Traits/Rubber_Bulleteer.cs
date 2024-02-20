@@ -44,7 +44,7 @@ namespace CCU.Traits.Loadout_Gun_Nut
 				{
 					CharacterCreationCost = 10,
 					IsAvailable = true,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 16,
 					Unlock =
 					{

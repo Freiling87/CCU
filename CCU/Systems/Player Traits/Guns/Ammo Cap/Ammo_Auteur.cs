@@ -28,7 +28,7 @@ namespace CCU.Traits.Player.Ammo
 					},
 					CharacterCreationCost = 7,
 					IsAvailable = false,
-					IsAvailableInCC = true,
+					IsAvailableInCC = false,
 					
 					UnlockCost = 9,
 					Unlock =

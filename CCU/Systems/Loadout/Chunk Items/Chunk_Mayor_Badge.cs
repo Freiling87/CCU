@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
+using CCU.Interactions;
 using CCU.Traits.Loadout;
 using HarmonyLib;
 using RogueLibsCore;
@@ -12,7 +13,7 @@ namespace CCU.Traits.Loadout_Chunk_Items
 {
 	public class Chunk_Mayor_Badge : T_Loadout
 	{
-		//[RLSetup]
+		[RLSetup]
 		public static void Setup()
 		{
 			PostProcess_DesignerTrait = RogueLibs.CreateCustomTrait<Chunk_Mayor_Badge>()
@@ -34,13 +35,15 @@ namespace CCU.Traits.Loadout_Chunk_Items
 					IsAvailable = false,
 					IsAvailableInCC = Core.designerEdition,
 					UnlockCost = 0,
+
+
+					Recommendations = new List<string> { nameof(Election_Badge) },
 				});
 		}
 		
 		
 	}
 
-	// TODO: IModInventory
 	[HarmonyPatch(typeof(InvDatabase))]
 	public class P_InvDatabase_MayorBadge
 	{

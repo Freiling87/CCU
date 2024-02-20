@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using CCU.Interactions;
 using RogueLibsCore;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,11 @@ namespace CCU.Traits.Rel_Faction
 			public static bool CountsAsCrepe(Agent agent) =>
 				agent.agentName == VanillaAgents.GangsterCrepe
 				|| agent.HasTrait<Crepe_Aligned>();
+
+			public static bool CountsAsDoorman(Agent agent) =>
+				agent.agentName == VanillaAgents.Bouncer
+				|| agent.HasTrait<Bribe_for_Entry_Alcohol>()
+				|| agent.HasTrait<Pay_Entrance_Fee>();
 
 			public static Alignment FromString(string alignmentString) =>
 				Enum.TryParse(alignmentString, true, out Alignment alignment)

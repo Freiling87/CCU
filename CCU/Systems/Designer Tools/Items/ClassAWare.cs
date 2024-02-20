@@ -36,6 +36,8 @@ namespace CCU.Items
 				{
 					CharacterCreationCost = 1,
 					IsAvailable = true,
+					IsAvailableInItemTeleporter = true,
+					IsEnabled = true, // Show up as quest reward?
 					LoadoutCost = 1,
 					UnlockCost = 10,
 				});

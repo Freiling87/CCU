@@ -19,7 +19,12 @@ Scene Setters are for ambience. They trigger immediately when the level loads. N
 |Arrested							|- Agent starts out arrested
 |Burned								|- Agent starts out dead & burning
 |Dead								|- Agent starts out dead
+|Electrocuted						|- Agent starts out with the vanilla Electrocuted effect, without a timer.
+|Electrocuted (Permanent)			|- Agent is Electrocuted and will stay that way even if hit.
+|Frozen								|- Agent starts out with the vanilla Frozen effect, without a timer.
+|Frozen (Fragile)					|- Agent is Frozen and will shatter if they take any damage.
+|Frozen (Permanent)					|- Agent is Frozen and will stay that way even if hit.
 |Gibbed								|- Agent starts out gibbed
 |Knocked Out						|- Agent starts out unconscious
 |Teleport (Public)					|- Agent starts out in a random public spot in the level
-|Zombified							|- Agent starts out dead...
+|Zombified							|- Agent starts out dead...?

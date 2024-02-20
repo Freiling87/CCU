@@ -1,0 +1,2 @@
+﻿KNOWN BUG:
+- Mute agents of the same class can still communicate. This is hardcoded in the last portion of the CanUnderstandEachOther check (see "Custom"). Leaving it for now since it's so niche.

@@ -1,4 +1,8 @@
 ﻿##			Feature Scope
+##			C	Attempt
+Superclass
+Special Spawns (arcade style?)
+Supernatural trait splitup group
 ###			P	Pre-release checks
 ####			BunnyLibs
 - Ensure that ALL your mods work with it before releasing any. 
@@ -17,6 +21,9 @@ Notes here
 ####			Player Traits
 Upgrades: IsAvailable = false
 	Keeps from showing in levelup
+###			C	Permanent Status Effects
+The people clamor for them.
+These are designer though, don't make player traits so RHR is still intact.
 ###			C	CCU Character Creation Page
 Might not be impossible. See CharacterCreation.Awake.
 Try COPYING something like TraitsMenu in CharacterCreation.Awake and see if you can repurpose it.

@@ -36,8 +36,6 @@ namespace CCU.Traits.Passive
 					UnlockCost = 0,
 				});
 		}
-		
-		
 
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)

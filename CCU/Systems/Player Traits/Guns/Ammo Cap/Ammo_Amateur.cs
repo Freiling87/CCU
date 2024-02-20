@@ -25,7 +25,7 @@ namespace CCU.Traits.Player.Ammo
 					Cancellations = { nameof(Ammo_Artiste), nameof(Ammo_Auteur) },
 					CharacterCreationCost = 3,
 					IsAvailable = true,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					
 					UnlockCost = 5,
 					Upgrade = nameof(Ammo_Artiste),

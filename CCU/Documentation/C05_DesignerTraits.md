@@ -16,7 +16,7 @@ For Player Traits, go [here](/CCU/Documentation/C0503_PlayerTraits.md).
 
 ##			Appearance
 
-The Appearance system allows you to give NPCs variable appearances. Its documentation is [here](/CCU/Documentation/C0501_Appearance.md). 
+The Appearance system allows you to give characters variable appearances. Its documentation is [here](/CCU/Documentation/C0501_Appearance.md). 
 
 ##			Behavior
 
@@ -25,34 +25,32 @@ The Appearance system allows you to give NPCs variable appearances. Its document
 |Accident-Prone										|- Won't path around Crushers, Fire Spewers, Killer Plants, Laser Emitters & Sawblades
 |Brainless											|- Heavy Reddit user
 |Concealed Carrier									|- Hides weapon when not in combat
-|Eat Corpses										|- Eat corpses, like Cannibal<br>- Requires: Cannibalize
 |Grab Alcohol										|- Grab Alcohol, like me<br>- Don't drink, kids
 |Grab Drugs											|- Grab Drugs, like me also<br>- Don't do drugs, kids
 |Grab Everything									|- Grab Everything, like a toddler<br>- Don't have kids, kids<br>- Grabs traps with Accident-Prone
 |Grab Food											|- Grab Food, like your mom
 |Grab Money											|- Grab Money, like Slum Dweller
-|Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
 |Seek & Destroy										|- Stalk & attack players, like Killer Robot<br>- Not compatible with Drug Warrior traits
-|Suck Blood											|- Suck blood, like Vampire<br>- Requires: Bite 
+|Vigilant											|- Reacts to sound like Shopkeeper, Slavemaster & Soldier.
+|Vigilanter											|- Reacts to sound like Bartender, Bouncer, Cannibal & Goon.
+|Vigilantest										|- Reacts to sound like Supercop.
 
 ##			Combat
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Brave												|- More willing to enter & stay in combat, like Bartender, Blahd/Crepe, & Firefighter.
-|Braver												|- More willing to enter & stay in combat, like Cannibal, Gorilla & Soldier.
-|Bravest											|- More willing to enter & stay in combat, like Killer Robot & Zombie.
 |Coward												|- Always flees from combat
 |Fearless											|- Never flees from combat
-|Gun Adept *										|- More frequent ranged attacks, like Killer Robot, Soldier & Supercop.<br>- `modGunSkill` = 2
-|Gun Competent *									|- Average ranged attacks, like Cop & Gangster.<br>- `modGunSkill` = 1
-|Gun Shy *											|- Rare ranged attacks, like Doctor & Scientist.<br>- `modGunSkill` = 0
+|Gun Adept 											|- Frequent ranged attacks, like Killer Robot, Soldier & Supercop.
+|Gun Competent 										|- Average ranged attacks, like Cop & Gangster.
+|Gun Shy 											|- Rare ranged attacks, like Doctor & Scientist.
 |Mag Dumper											|- When agent uses Rapid Fire, they hold the trigger down for longer. Much longer.
-|Melee Adept *										|- More frequent melee attacks, like Gorilla, Supercop & Werewolf.<br>- `modMeleeSkill` = 2
-|Melee Competent *									|- Average melee attacks, like Cannibal, Cop & Firefighter.<br>- `modMeleeSkill` = 1
-|Melee Shy *										|- Rare melee attacks, like Comedia, Hacker & Zombie.<br>- `modMeleeSkill` = 0
-
-* These overwrite the `modGunSkill` and `modMeleeSkill` values already automatically affected by the Combat Skill [Gameplay Fix](/CCU/Documentation/C06_Fixes.md).
+|Melee Adept 										|- Frequent melee attacks, like Gorilla, Supercop & Werewolf.
+|Melee Competent 									|- Average melee attacks, like Cannibal, Cop & Firefighter.
+|Melee Shy											|- Rare melee attacks, like Comedia, Hacker & Zombie.
+|Tough												|- More willing to enter & stay in combat, like Bartender, Blahd/Crepe, & Firefighter.
+|Tougher											|- More willing to enter & stay in combat, like Cannibal, Gorilla & Soldier.
+|Toughest											|- More willing to enter & stay in combat, like Killer Robot & Zombie.
 
 ##			Cost Scale
 This affects all costs from the agent's interactions, except bribery for Quest Items.
@@ -185,11 +183,11 @@ Agents default to Meat Chunks if they have no Gib trait.
 |Leave Weapons Behind *								|- Drop all weapons
 |Manage Chunk										|- Manage Arena, Deportation Center, or Hotel<br>- Hotel management requires Key added with Loadout trait below
 |Offer Motivation *									|- Give small item to make Friendly
+|Pay Big Quest *									|- Make payment for Slum Dweller Big Quest
 |Pay Debt *											|- Pay off Debt
 |Pay Entrance Fee *									|- Pay to make owners Friendly
 |Play Bad Music										|- Pay to break someone's achy breaky heart, despite their protests<br>- Also works with Mayor Evidence
-|Start Election										|- Interact to start Election
-|Teach Language										|- Pay to learn a language.<br>- English - $600<br>- Others - $200
+|Teach Languages									|- Pay to learn a language.<br>- English - $600<br>- Others - $200
 |Use Blood Bag										|- Give Blood Bag to heal for 20HP
 
 * These traits allow interaction even if the interacting agent does not meet the minimum relationship requirements for the **Interaction Gate - Untrusting/er/est** group.
@@ -198,9 +196,9 @@ Agents default to Meat Chunks if they have no Gib trait.
 
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Untrusting	*										|- Will only interact with Agents who are Friendly or better
-|Untrustinger *										|- Will only interact with Agents who are Loyal or better
-|Untrustingest *									|- Will only interact with Agents who are Aligned
+|Untrusting											|- Will only interact with Agents who are Friendly or better
+|Untrustinger										|- Will only interact with Agents who are Loyal or better
+|Untrustingest										|- Will only interact with Agents who are Aligned
 
 ***Exceptions**: Leave Weapons Behind, Offer Motivation, Pay Debt, Pay Entrance Fee*
 
@@ -226,8 +224,18 @@ The Loadout system allows you to set up an inventory generator for NPCs. Its doc
 |Blurse of the Pharoah								|- Agent does not drop non-equippable items on being neutralized
 |Blurse of Valhalla									|- Agent does not drop equippable items on being neutralized
 
+##			LOS Behaviors
+
+|Trait												|Effect													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Eat Corpses										|- Eat corpses, like Cannibal
+|Pick Pockets										|- Pick pockets, like Thief<br>- Requires: Sticky Glove
+|Suck Blood											|- Suck blood, like Vampire 
+
 ##			Merchant Type
 For a detailed list of merchant inventories and item frequency weights, go [here](https://github.com/Freiling87/CCU/tree/master/CCU/Traits/Merchant%20Type).
+
+As of v1.1.0, you can select multiple merchant types to combine their inventory pools.
 
 |Trait												|Inventory												|
 |:--------------------------------------------------|:------------------------------------------------------|
@@ -308,13 +316,16 @@ Traits in this category are multiplicative.
 |Guilty												|- Valid target for Cop Big Quest
 |Indestructible										|- Can be killed, but body can't be destroyed
 |Indomitable										|- Immune to mind control
-|Immovable											|- Receives zero knockback
 |Innocent											|- Gets away with murder
 |Not Vincible										|- Had to change name for reasons
+|Plot-Critical										|- If this agent is neutralized, players explode
 |Possessed											|- Has Shapeshifter
 |Status Effect-Immune								|- Guess, genius
 |Suppress Status Text								|- No Status Effect text popups
 |Z-Infected											|- Zombifies on death
+
+##			PSE (Permanent Status Effects)
+These match to the vanilla status effects. Do we really need a long table for this? They do what they sound like they do, and the status can't be removed. Now let's enjoy the time we just saved.
 
 ##			Relationships - Faction
 |Trait												|Effect													|
@@ -323,6 +334,7 @@ Traits in this category are multiplicative.
 |Blahd Hostile										|- Hostile to Blahd
 |Cannibal Aligned									|- Aligned to Cannibal
 |Cannibal Hostile									|- Hostile to Cannibal
+|Common Folk Hostile								|- Hostile to Common Folk
 |Crepe Aligned										|- Aligned to Crepe
 |Crepe Hostile										|- Hostile to Crepe
 |Faction 1 Aligned									|- Aligned with same trait
@@ -336,15 +348,20 @@ Traits in this category are multiplicative.
 |Firefighter Aligned								|- Aligned to Firefighter
 |Gorilla Aligned									|- Aligned to Gorilla
 |Gorilla Hostile									|- Hostile to Gorilla
+|Mafia Hostile										|- Hostile to Mafia
 |Scientist Hostile									|- Hostile to Scientist
 |Soldier Aligned									|- Aligned to Soldier
 |Soldier Hostile									|- Hostile to Soldier
+|Upper Cruster Hostile								|- Hostile to Upper Crusters & those with Crusty trait
 |Vampire Hostile									|- Hostile to Vampire
 |Werewolf Hostile									|- Hostile to Werewolf
 
 ##			Relationships - General
 |Trait												|Effect													|
 |:--------------------------------------------------|:------------------------------------------------------|
+|Aligned to Innocent								|
+|Hostile to Guilty									|
+|Hostile to Scumbag									|
 |Relationless										|- Permanently Neutral to all other Agents
 
 ##			Relationships - Player

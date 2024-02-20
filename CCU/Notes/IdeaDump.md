@@ -1,5 +1,5 @@
 ﻿# Idea Dump
-Apparently I want to type these without any forethought, so this will be a dump to be periodically assorted.
+"Dump" shouldn't imply these are bad ideas, they're just ones I haven't bothered to sort yet.
 ##			C	Elevator Text
 Pop up before and after entry/exit of level
 Button 2

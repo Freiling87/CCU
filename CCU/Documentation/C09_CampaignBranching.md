@@ -9,61 +9,46 @@ Campaign Branching System
 </h1>
 <br><br>
 
-THIS IS A DRAFT. THIS SYSTEM IS NOT IMPLEMENTED YET.
+The Campaign Branching system uses <b>[Custom Mutators](/CCU/Documentation/S02_Configurator.md)</b>. ~~Crossed out~~ entries indicate planned content.
 
-##		Terminology
-  - ***Flag*** - A boolean (true/false) value tracked within the current level. The value is changed by meeting the conditions of various Switches.
-  - ***Switch*** - An Agent Trait or Object Variable that can change the value of a Flag.
-  - ***Gate*** - A label for a level that determines how it interacts with Flags and Switches.
+##		Important Terms
+- Label - An arbitrary integer value that labels mutators, traits, etc. Only content that shares a Label will interact.
+- Switch - A True/False value based on certain conditions. 
+  - E.g., an Agent may have a Switch that flips to True if they are rescued.
 
-##		Example
-Here is an example of how to use this system. 
+###			Level Gate
+Level Gates prevent entry to a level unless their conditions are met.
 
-You're making a campaign. In this level, there is a Witness in prison who wants to testify against a mob boss. The mob boss has bribed the prison's Warden to fast-track the Witness for execution so he can't testify against him. The player's options are:
-  - To free the witnesses by getting them to the Elevator.
-  - To kill the Warden and bribe his Assistant to keep his mouth shut about it. 
+|Element				|Values						|Notes													|
+|:----------------------|:--------------------------|:------------------------------------------------------|
+|Type					|Entry, ~~Exit~~			|- Determines whether this mutator gates entry to the level, or exiting from it. Logic is applied at Exit Elevators, for now.
+|Label					|1 or more Integers			|- Gate logic applies only to Switches with selected labels.
+|Switch					|Agent, ~~Level, Object~~	|- Gate logic applies only to Switches of the selected types.
+|Logic					|AND, NAND, NOR, OR, XNOR, XOR|- Applies boolean logic to all Switches with the same label. 
 
-If the player succeeds, they get to exit to the Good Courtroom level, where the witnesses save the day. If they fail, they go to the Bad Courtroom where bad things happen. Now, how do we do that?
+<!--
+WIP NOTES
 
-1. Give the Good Courtroom level the following mutators: 
-
-2. Give the Bad Courtroom level the following mutators:
-
-3. Assign traits:
-	- Witness
-	- Warden
-	- Warden's Assistant
-
-4. Configure the Elevator's exits:
-
-##		Level Mutators
-
-###			Exit Gates
+###			Level Gate Switch Triggers
 
 |Mutator											|Notes													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Exit [A/B/C/D]: [AND/NOT/OR/XOR]					|- Level unlocked when its Switch conditions are met. If no Switches are present on the preceding level, it is unlocked by default.<br>To be clear, there are effectively sixteen mutators to manage here.
+|Alien Summoned
+|All [class] neutralized
+|Computer Hacked
+|Happy Waves
 
-##		Elevator Variables
-[These will have to be multi-option Scrolling Button Lists that allow adding a whole list of variables to ExtraVarString]
+###			Tracked Variables
+Track countable events throughout the campaign for freer branching.
 
-|Variable											|Notes													|
-|:--------------------------------------------------|:------------------------------------------------------|
-|Exit [A/B/C/D]										|- Gives option to exit into the tagged level, if that level's Gate conditions are met.
-|Exit [-4 to 4]										|- Gives option to skip back/on itself/ahead in level list by the given number. Levels accessed this way are not subject to Gate/Switch logic.
-|Exit Progression                                   |- When using "Exit Level" vanilla interaction, index of the target level increases every time this level is entered. If this is level 1, elevator will exit to level 2 the first time, 3 the second, etc. This is one way to create a Hub level.
-|Disable Vanilla									|- Disables vanilla "Exit Level" option
+##         Object Variables
 
-##		Switches
-Switches are simply mechanisms to change the value of Flags. They can take multiple forms.
+###			Object Switches
 
-###         Object Variables
-
-|Variable                               |Notes						|
-|:--------------------------------------|:--------------------------|
-|Link [Gate A/B/C/D]                    |- Links this object's Switch to Gate A/B/C/D
-|Switch [AND/OR/NOT/XOR]				|
-|If [Switch Trigger] then [True/False]	|
+|Variable											|Notes						|
+|:--------------------------------------------------|:--------------------------|
+|Switch [A/B/C/D]									|
+|Switch Modifiers [OR/NOT/XOR]						|- Default behavior: OR
 
 ####			Object Switch Triggers
 
@@ -75,25 +60,37 @@ Switches are simply mechanisms to change the value of Flags. They can take multi
 |Powered
 |Tampered
 
-###         Traits
+###			Elevator Variables
+[These will have to be multi-option Scrolling Button Lists that allow adding a whole list of variables to ExtraVarString]
+
+|Variable											|Notes													|
+|:--------------------------------------------------|:------------------------------------------------------|
+|Exit [A/B/C/D]										|- Gives option to exit into the tagged level, if that level's Gate conditions are met.
+|Exit [-4 to 4]										|- Gives option to skip back/on itself/ahead in level list by the given number. Levels accessed this way are not subject to Gate/Switch logic.
+|Exit Progression                                   |- When using "Exit Level" vanilla interaction, index of the target level increases every time this level is entered. If this is level 1, elevator will exit to level 2 the first time, 3 the second, etc. This is one way to create a Hub level.
+|Disable Vanilla									|- Disables vanilla "Exit Level" option
+
+##		Traits
 
 |Trait												|Notes													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Link [Gate A/B/C/D]						        |- Attaches this agent's Switch to Gate A/B/C/D 
-|Switch [AND/NOT/OR/XOR]							|
-|If [Switch Trigger] then [True/False]				|- See Trigger table below
+|Switch [A/B/C/D]									|- If Switch Triggers are true, flips this Switch to true, contributing to access to Gate.
+|Switch Modifiers [AND/OR/XOR]						|- Default behavior: OR
 
-####			Agent Switch Triggers
+###			Agent Switch Triggers
 
 |Trigger											|Notes													|
 |:--------------------------------------------------|:------------------------------------------------------|
-|Freed												|- Free from Prison
-|Gibbed												|-
-|Hired												|-
-|Hired Permanently									|-
-|Holed												|- Gibbing doesn't count
-|Killed												|-
-|[Relationship]										|- To any player
-|Neutralized										|- Any method 
-|Exit Level											|- 
-|Paid												|- Paid $1000
+|Dismissed											|
+|Freed												|
+|Gibbed												| 
+|Hired												|
+|Hired Permanently									|
+|Holed												|
+|Killed												|
+|[Relationship]	to Player							|
+|Neutralized										|
+|Exit Level											| 
+|Paid $1000											|
+
+--!>

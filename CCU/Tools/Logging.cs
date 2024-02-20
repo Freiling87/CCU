@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
+using RogueLibsCore;
 using System;
 using System.Linq;
 
@@ -40,6 +41,8 @@ namespace CCU.Tools
 					+ LogTraitsPlayer(agent) + Environment.NewLine
 					+ LogStatusEffects(agent) + Environment.NewLine
 					);
+
+
 		}
 
 		public static string LogAppearance(Agent agent)

@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using CCU.Traits.Player.Ammo;
 using RogueLibsCore;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,7 +60,7 @@ namespace CCU.Items
 		}
 
 		public bool TargetFilter(PlayfieldObject target) =>
-			target is Agent agent;
+			target is Agent;
 
 		public bool TargetObject(PlayfieldObject target)
 		{
@@ -81,7 +80,7 @@ namespace CCU.Items
 
 		public static void DebugActions(Agent agent)
 		{
-			agent.agentInvDatabase.AddItem(VanillaItems.Translator, 1);
+			agent.Suicide();
 		}
 	}
 }

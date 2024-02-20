@@ -6,59 +6,17 @@ using RogueLibsCore;
 
 namespace CCU.Systems.PermanentHire
 {
-	internal class PermanentHire { }
-
-	[HarmonyPatch(typeof(Agent))]
-	public class P_Agent
+	/// <summary>
+	/// - Agent completes task
+	///		- Agent.SetEmployer(null);
+	///		- Agent.SetFollowing(null);
+	/// - Agent is dismissed
+	///		- AgentInteractions.LetGo(employer, employee);
+	/// </summary>
+	/// 
+	internal static class PermanentHire
 	{
-		private static readonly ManualLogSource logger = BLLogger.GetLogger();
-		public static GameController GC => GameController.gameController;
-
-		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetEmployer))]
-		public static bool SetEmployer_Prefix(Agent __instance, ref Agent myEmployer)
-		{
-			if (__instance.GetOrAddHook<H_AgentInteractions>().HiredPermanently &&
-				!(__instance.employer is null) && myEmployer is null)
-			{
-				myEmployer = __instance.employer;
-				__instance.job = "Follow";
-				__instance.jobCode = jobType.Follow;
-				__instance.StartCoroutine(__instance.ChangeJobBig(""));
-				__instance.oma.cantDoMoreTasks = false;
-			}
-
-			return true;
-		}
-
-		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetFollowing))]
-		public static bool SetFollowing_Prefix(Agent __instance, ref Agent myFollowing)
-		{
-			if (__instance.GetOrAddHook<H_AgentInteractions>().HiredPermanently &&
-				!(__instance.following is null) && myFollowing is null)
-			{
-				myFollowing = __instance.employer;
-				__instance.job = "Follow";
-				__instance.jobCode = jobType.Follow;
-				__instance.StartCoroutine(__instance.ChangeJobBig(""));
-				__instance.oma.cantDoMoreTasks = false;
-			}
-
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(AgentInteractions))]
-	static class P_AgentInteractions
-	{
-		private static readonly ManualLogSource logger = BLLogger.GetLogger();
-		public static GameController GC => GameController.gameController;
-
-		[HarmonyPrefix, HarmonyPatch(nameof(AgentInteractions.LetGo))]
-		public static bool LetGo_Prefix(Agent agent)
-		{
-			agent.GetOrAddHook<H_AgentInteractions>().HiredPermanently = false;
-			return true;
-		}
+		// I don't see that this is called anywhere!
 
 		// Based on AgentInteractions.QualifyHireAsProtection
 		public static void HirePermanently(Agent agent, Agent interactingAgent, int buttonPrice)
@@ -72,7 +30,7 @@ namespace CCU.Systems.PermanentHire
 			else if (interactingAgent.statusEffects.hasTrait(VanillaTraits.Malodorous) &&
 				!interactingAgent.statusEffects.hasTrait(VanillaTraits.Charismatic) &&
 				!interactingAgent.statusEffects.hasTrait("Likeable2") &&
-				!interactingAgent.statusEffects.hasTrait("NiceSmelling"))
+				!interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.NiceSmelling))
 			{
 				agent.SayDialogue("WontJoinA");
 				agent.StopInteraction();
@@ -113,8 +71,68 @@ namespace CCU.Systems.PermanentHire
 		}
 	}
 
+	[HarmonyPatch(typeof(Agent))]
+	public class P_Agent_PermanentHire
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetEmployer))]
+		public static bool SetEmployer_Prefix(Agent __instance, ref Agent myEmployer)
+		{
+			logger.LogDebug($"SetEmployer");
+
+			if (myEmployer is null 
+				&& !(__instance.employer is null)
+				&& __instance.GetOrAddHook<H_AgentInteractions>().HiredPermanently)
+			{
+				myEmployer = __instance.employer;
+				__instance.job = "Follow";
+				__instance.jobCode = jobType.Follow;
+				__instance.StartCoroutine(__instance.ChangeJobBig(""));
+				__instance.oma.cantDoMoreTasks = false;
+			}
+
+			return true;
+		}
+
+		[HarmonyPrefix, HarmonyPatch(nameof(Agent.SetFollowing))]
+		public static bool SetFollowing_Prefix(Agent __instance, ref Agent myFollowing)
+		{
+			logger.LogDebug($"SetFollowing");
+
+			if (myFollowing is null
+				&& !(__instance.following is null)
+				&& __instance.GetOrAddHook<H_AgentInteractions>().HiredPermanently)
+			{
+				myFollowing = __instance.employer;
+				__instance.job = "Follow";
+				__instance.jobCode = jobType.Follow;
+				__instance.StartCoroutine(__instance.ChangeJobBig(""));
+				__instance.oma.cantDoMoreTasks = false;
+			}
+
+			return true;
+		}
+	}
+
+	[HarmonyPatch(typeof(AgentInteractions))]
+	static class P_AgentInteractions_PermanentHire
+	{
+		private static readonly ManualLogSource logger = BLLogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyPrefix, HarmonyPatch(nameof(AgentInteractions.LetGo))]
+		public static bool LetGo_Prefix(Agent agent)
+		{
+			agent.GetOrAddHook<H_AgentInteractions>().HiredPermanently = false;
+			return true;
+		}
+
+	}
+
 	[HarmonyPatch(typeof(ExitPoint))]
-	class P_ExitPoint
+	class P_ExitPoint_PermanentHire
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -164,13 +182,13 @@ namespace CCU.Systems.PermanentHire
 	}
 
 	[HarmonyPatch(typeof(ObjectMultAgent))]
-	public static class P_ObjectMultAgent
+	public static class P_ObjectMultAgent_PermanentHire
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(nameof(ObjectMultAgent.cantDoMoreTasks), MethodType.Setter)]
-		public static bool cantDoMoreTasks_Setter_Prefix(ref bool value, ObjectMultAgent __instance)
+		public static bool KeepEmployed(ref bool value, ObjectMultAgent __instance)
 		{
 			if (__instance.agent.HasTrait<Permanent_Hire>() || __instance.agent.HasTrait<Permanent_Hire_Only>())
 				value = false;

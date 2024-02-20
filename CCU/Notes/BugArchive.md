@@ -1,5 +1,18 @@
 ﻿
 ##			Bug Archive
+###			H	Concealed Carry Sitting
+CL https://discord.com/channels/187414758536773632/1003391847902740561/1126306577008316508
+	Concealed carrier still doesn't work with sitting NPCs until something briefly updates their behavior (like a noise making them stand up and look, then sit back down).
+Attempted:
+	AgentHitbox
+		.UpdateAnim		Prefix
+	GoalSleepReal
+		.Activate		Prefix
+		.Process		Prefix
+	GoalSitReal
+		.Activate		Prefix
+###			H	Vanilla Appearance Randomization
+The Character Select screen says you can press Ctrl to randomize appearance. This is broken, for obvious reasons. 
 ###		 H   Scene Setter Breaks when hostiles visible
 https://discord.com/channels/187414758536773632/991046848536006678/1122856007706607656
 Not able to replicate
@@ -25,8 +38,6 @@ Two symptoms of the same issue. Abbysssal pointed out the solution, but this is 
 ####			C	Low-Qty Melee too Cheap
 Melee weapons with low Durability are cheaper than they should be.
 Below, Baseball bat at 66 Qty (200/3) is $10 but should be $17.
-
-
 ###		 H   Normal (EOD) in Shop Inventory
 https://discord.com/channels/187414758536773632/1003391847902740561/1121962031235477524
 No clue how to replicate this.

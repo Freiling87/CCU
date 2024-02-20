@@ -25,7 +25,7 @@ namespace CCU.Traits.Player.Armor
 					Cancellations = { nameof(Myrmidon) },
 					CharacterCreationCost = 5,
 					IsAvailable = true,
-					IsAvailableInCC = true,
+					IsAvailableInCC = Core.designerEdition,
 					
 					UnlockCost = 7,
 					Upgrade = nameof(Myrmidon),

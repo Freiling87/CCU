@@ -34,35 +34,27 @@ CCU adds the following:
 - [Change Log](/CCU/Documentation/M03_ChangeLog.md)
 
 #		Links
-- [CCU Showcase](https://steamcommunity.com/sharedfiles/filedetails/?id=2852074522) - A Steam collection of CCU-enhanced Chunk Packs and Campaigns
-- [Bugtesting Discord Thread](https://discord.com/channels/187414758536773632/1003391847902740561) - For bug reports
-- [Development Discord Thread](https://discord.com/channels/187414758536773632/991046848536006678) - For live updates, feature requests, and questions
+- [CCU Showcase](https://steamcommunity.com/sharedfiles/filedetails/?id=2852074522) - A Steam collection of Chunk Packs and Campaigns with CCU content
+- [Development Discord Thread](https://discord.com/channels/187414758536773632/991046848536006678) - For development updates, feature requests, questions, bug reports
 
 #		Special Thanks
 I was keeping this list pretty detailed, but it's getting too long. You all rule, thanks.
 
 - **Abbysssal**
+- **AMeanPineapple**
 - **BlazingTwist**
+- **Cheese Wizard**
 - **Cyan_Light**
 - **GenEric**		
+- **Guoxin_**
 - **Maxior**
 - **uwumacaronitwo**
-- **Cheese Wizard**
+- **TBB[z]**
 - **TheShadowHat**
-- **Guoxin_**
-- **TBB**
-- **AMeanPineapple**
-- **Romeo Kaleikau(FreeSound.org)**
 
 ##			Content Attributions
 
 |Homie(s)								|Thanks	|
 |--------------------------------------:|:------|
-|**Guoxin_**|Chinese translation (incoming)
-|**TBB**|Russian translation (incoming)
 |**GenEric**|Spanish translation
 |**Romeo Kaleikau** (FreeSound.org)|Class-A-Ware sound effect
-
-#		HALP
-Programming: If you know basic C#, you already have enough knowledge to help out if you want. Contact me on Discord at **Ted Bunny#4546**
-Translation: 
