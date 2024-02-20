@@ -49,13 +49,13 @@ namespace CCU.Traits.Player.Movement
 	}
 
 	[HarmonyPatch(typeof(Agent))]
-	internal static class P_Agent
+	internal static class P_Agent_Hydrosensitive
 	{
 		public static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, HarmonyPatch(nameof(Agent.AgentLateUpdate))]
-		private static IEnumerable<CodeInstruction> SoftcodeWaterDamage(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> SoftcodeWaterTerrainDamage(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 
@@ -76,7 +76,7 @@ namespace CCU.Traits.Player.Movement
 	}
 
 	[HarmonyPatch(typeof(BulletHitbox))]
-	internal static class P_BulletHitbox
+	internal static class P_BulletHitbox_Hydrosensitive
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
 		public static GameController GC => GameController.gameController;

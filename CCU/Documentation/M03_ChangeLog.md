@@ -9,6 +9,9 @@ Change Log
 </h1>
 <br><br>
 
+##      v 1.3.0
+For sale: shitty code, never used.
+
 ##      v 1.2.0
 - **Compatibility**
   - Verified compatibility with SOR v98 
@@ -45,8 +48,10 @@ Change Log
     - Interaction
       - Teach Languages: Teaches any language they know, for a cost.
     - Passive
+      - Ghostbustable: Vulnerable to Ghost Gibber
       - Indomitable: Immune to mind control
       - Suppress Status Text: No Status Effect text popups.
+      - Z-Infectious: Infects hit agents with Z-Virus. Won't zombify on their own unless infected by someone else.
     - Senses
       - Keen Ears traits: Various traits that determine how sensitive the NPC is to sound, and how they react to it.
   - Player Traits

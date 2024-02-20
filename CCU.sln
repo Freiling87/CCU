@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nircmd.exe = nircmd.exe
 		Postbuild.bat = Postbuild.bat
 		README.md = README.md
-		CCU\Notes\Sandbox.cs = CCU\Notes\Sandbox.cs
+		Sandbox.cs = Sandbox.cs
 	EndProjectSection
 EndProject
 Global

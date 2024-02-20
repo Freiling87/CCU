@@ -18,7 +18,7 @@ namespace CCU.Traits.Passive
 			PostProcess_DesignerTrait = RogueLibs.CreateCustomTrait<Z_Infected>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = String.Format("This character is infected with the Z-Virus. They are not a zombie yet, but will become one when killed."),
+					[LanguageCode.English] = String.Format("This character has a dormant and non-contagious form of the Z-Virus. They will zombify when killed."),
 					[LanguageCode.Spanish] = "Este NPC esta infectado por el Virus Z, asi que al morir se pintan de verde y se ponen a matar gente, lo usual.",
 				})
 				.WithName(new CustomNameInfo
