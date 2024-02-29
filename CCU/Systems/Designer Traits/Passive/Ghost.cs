@@ -12,7 +12,8 @@ namespace CCU.Traits.Passive
 			PostProcess_DesignerTrait = RogueLibs.CreateCustomTrait<Ghost>()
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = String.Format("This character is a spooky, spooky ghost.\nNote: Doesn't work for Player characters."),
+					[LanguageCode.English] = String.Format("This character is a spooky, spooky ghost.\nNote: Doesn't work for Player characters." +
+					"\n\nBug: Won't path through walls."),
 				})
 				.WithName(new CustomNameInfo
 				{
@@ -24,16 +25,19 @@ namespace CCU.Traits.Passive
 					CharacterCreationCost = 0,
 					IsAvailable = false,
 					IsAvailableInCC = Core.designerEdition,
+					Recommendations = { nameof(Ghostbustable) },
 					UnlockCost = 0,
 				});
 		}
 		
-		
-
 		public bool BypassUnlockChecks => false;
 		public void SetupAgent(Agent agent)
 		{
 			agent.ghost = true;
+			agent.oma.ghost = true;
+			agent.oma._ghost = true;
+			agent.objectSprite.agentColorDirty = true;
+			agent.agentItemColliderTr.gameObject.SetActive(false);
 		}
 	}
 }
