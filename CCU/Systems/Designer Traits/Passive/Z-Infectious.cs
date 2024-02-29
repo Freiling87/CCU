@@ -34,7 +34,8 @@ namespace CCU.Traits.Passive
 		}
 
 		internal static bool IsZInfectious(Agent agent) =>
-			agent.zombified || agent.HasTrait<Z_Infectious>();
+			agent.zombified || 
+			(agent.HasTrait<Z_Infectious>() && agent.inventory.equippedWeapon.invItemName == VanillaItems.Fist);
 	}
 
 	[HarmonyPatch(typeof(MeleeHitbox))]
