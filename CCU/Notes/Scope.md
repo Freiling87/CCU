@@ -1,5 +1,10 @@
 ﻿##			Feature Scope
+###			C	Pareto Attempts
+####			C	Mugging interactions
+
 ###			P	Pre-release checks
+####			C	Permanent Status Effects
+Apparently there are still a few kinks to work out. I guess I can work on them in RHR and port over any fixes here.
 ####			BunnyLibs
 - Ensure that ALL your mods work with it before releasing any.
 - If library needs a re-release, check other mods for back-compatibility and re-release those if necessary.

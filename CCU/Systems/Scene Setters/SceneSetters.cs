@@ -2,6 +2,7 @@
 using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using CCU.Status_Effects;
+using CCU.Systems.Appearance;
 using CCU.Traits.Passive;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -31,6 +32,8 @@ namespace CCU.Systems.CustomGoals
 			KnockedOut = "Knocked Out",
 			//Random_Patrol_Chunk = "Random Patrol (Chunk)",
 			//Random_Patrol_Map = "Random Patrol (Map)",
+			Teleport_Duo = "Random Teleport (Duo)",
+			Teleport_Gang = "Random Teleport (Gang)",
 			Teleport_Public = "Random Teleport (Public)",
 			//Teleport_Private = "Random Teleport (Private)",
 			//Teleport_Prison = "Random Teleport (Private + Prison)",
@@ -73,7 +76,9 @@ namespace CCU.Systems.CustomGoals
 			Frozen_Permanent,
 			Gibbed,
 			KnockedOut,
-            Teleport_Public,
+			Teleport_Duo,
+			Teleport_Gang,
+			Teleport_Public,
 			Zombified,
 		};
 		public static List<string> SceneSetters_Legacy = new List<string>()
@@ -183,6 +188,18 @@ namespace CCU.Systems.CustomGoals
 				case RandomTeleport: // Legacy, Pre-Release
 					goto case Teleport_Public;
 
+				case Teleport_Duo:
+					Vector2 newLocation = DoRandomTeleport(agent, false, true);
+					SpawnGang(agent, 1, newLocation);
+
+					break;
+
+				case Teleport_Gang:
+					Vector2 newLocation2 = DoRandomTeleport(agent, false, true);
+					SpawnGang(agent, 3, newLocation2);
+
+					break;
+
 				case Teleport_Public:
 					DoRandomTeleport(agent, false, true);
 					agent.SetDefaultGoal("WanderFar");
@@ -197,7 +214,41 @@ namespace CCU.Systems.CustomGoals
 			agent.ownerID = originalOwnerID;
 		}
 
-		private static void DoRandomTeleport(Agent agent, bool allowPrivate, bool allowPublic)
+		private static void SpawnGang(Agent leader, int followers, Vector2 location)
+		{
+			if (location == Vector2.zero)
+				location = leader.curPosition;
+
+			leader.gangLeader = true;
+			Agent.gangCount++;
+			List<Agent> gang = new List<Agent>() { leader };
+
+			for (int i = 0; i < followers; i++)
+			{
+				Vector2 newPos = location + new Vector2(Random.Range(-0.32f, 0.32f), Random.Range(-0.32f, 0.32f));
+				Agent follower = GC.spawnerMain.SpawnAgent(newPos, null, VanillaAgents.CustomCharacter, "", leader);
+				AppearanceTools.SetupAppearance(follower.agentHitboxScript);
+				gang.Add(follower);
+				leader.gangMembers.Add(follower);
+			}
+
+			foreach (Agent member in gang)
+			{
+				member.SetDefaultGoal(VAgentGoal.WanderFar);
+				member.gang = Agent.gangCount;
+				member.modLeashes = 0;
+				member.agentActive = true;
+
+				foreach (Agent otherMember in gang.Where(om => om != member))
+				{
+					member.relationships.SetRelInitial(otherMember, nameof(relStatus.Aligned));
+					otherMember.relationships.SetRelInitial(member, nameof(relStatus.Aligned));
+
+				}
+			}
+		}
+
+		private static Vector3 DoRandomTeleport(Agent agent, bool allowPrivate, bool allowPublic)
 		{
 			Vector3 targetLoc;
 			Vector3 entryElevatorLoc = GC.elevatorDown.tr.position;
@@ -219,6 +270,8 @@ namespace CCU.Systems.CustomGoals
 			agent.Teleport(targetLoc, false, true);
 			try { agent.agentCamera.fastLerpTime = 1f; }
 			catch { }
+
+			return targetLoc;
 		}
 
 		private static void KillEmSoftly(Agent agent)

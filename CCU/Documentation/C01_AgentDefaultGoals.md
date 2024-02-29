@@ -26,5 +26,7 @@ Scene Setters are for ambience. They trigger immediately when the level loads. N
 |Frozen (Permanent)					|- Agent is Frozen and will stay that way even if hit.
 |Gibbed								|- Agent starts out gibbed
 |Knocked Out						|- Agent starts out unconscious
+|Teleport (Duo)						|- Agent starts out in a random public spot in the level, with one gang follower
+|Teleport (Gang)					|- Agent starts out in a random public spot in the level, with 3 gang followers
 |Teleport (Public)					|- Agent starts out in a random public spot in the level
 |Zombified							|- Agent starts out dead...?

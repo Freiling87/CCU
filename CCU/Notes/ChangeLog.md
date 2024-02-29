@@ -10,6 +10,8 @@
     - Frozen
     - Frozen (Fragile)
     - Frozen (Permanent)
+    - Random Teleport (Duo)
+    - Random Teleport (Gang)
   - Designer Traits
     - Behavior
       - Vigilance (group): Determines how the agent reacts to sound, in regards to investigation and property.

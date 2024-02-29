@@ -300,8 +300,6 @@ When you get near them, they get a camera pan and zoom that follows them for a l
 ####			C	Quick Escape Teleporter
 "Blinks in the face of danger"
 Need all Item Usage traits tbh
-####			C	Mugger
-Mug player, grab SORCE code
 ####			C   Phobia
 Corpse, Fire, etc. You could incorporate Cowardly and Fearless into this category.
 ####			C   Hidey Holer

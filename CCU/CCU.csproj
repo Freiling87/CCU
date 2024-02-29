@@ -141,6 +141,7 @@
     <Compile Include="Debug\InterfaceLogging.cs" />
     <Compile Include="Debug\ForceTraitChoice.cs" />
     <Compile Include="Debug\CheckBackCompatibility.cs" />
+    <Compile Include="Systems\Designer Traits\Passive\Ghost.cs" />
     <Compile Include="Systems\Designer Traits\Passive\Z-Infectious.cs" />
     <Compile Include="Systems\NPC Interactions\Designer Traits\Vanilla\Pay_Big_Quest.cs" />
     <Compile Include="Systems\NPC Interactions\H_AgentInteractions.cs" />
@@ -178,7 +179,6 @@
     <Compile Include="Systems\Custom Status Effects\StatusEffectManager.cs" />
     <Compile Include="Systems\Hiring\PermanentHire.cs" />
     <Compile Include="Systems\Designer Traits\Passive\Ghostbustable.cs" />
-    <Compile Include="Systems\Player Traits\Passive\Hydrosensitive.cs" />
     <Compile Include="Systems\Designer Traits\Permanent SE\Above_the_Law_d.cs" />
     <Compile Include="Systems\Designer Traits\Permanent SE\Bulletproofish_d.cs" />
     <Compile Include="Systems\Designer Traits\Permanent SE\Conductive_d.cs" />
