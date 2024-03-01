@@ -15,8 +15,5 @@ namespace CCU.Traits.LOS_Behavior
 		{
 			agent.losCheckAtIntervals = true;
 		}
-
-		
-		
 	}
 }

@@ -60,3 +60,13 @@ I was keeping this list pretty detailed, but it's getting too long. You all rule
 |--------------------------------------:|:------|
 |**GenEric**|Spanish translation
 |**Romeo Kaleikau** (FreeSound.org)|Class-A-Ware sound effect
+
+##			The future of CCU
+Version 1.4.0 will likely be the last version of CCU. This is for a few reasons.
+- Streets of Rogue 2 is slated to come out this year, and will use much of the content of the first game, so there's a very good chance that SOR1 will become obsolete in many respects. If the second installment absolutely sucks I might consider continuing with this project.
+- This was one of my first programming projects. I've never really made anything else that I got working that wasn't from a tutorial or dead-simple. Often, the way I went about things was severely limited by my technical knowledge. So there's a lot of bad code and bad organization here that even major refactors haven't been able to root out. I'm looking forward to a fresh start someday if this is continued in SOR 2.
+- The playerbase for the game is already small, and the mod's audience is further narrowed to PC users who are willing to use mods and use the tedious game editors to make content. This audience will likely shrink further when the second game comes out. I love the SOR community, but it's not very motivating to do weeks of work and only hear from one or two people that actually use it. While there are a few Designers making a ton of really quality content, even their work is tragically under-exposed due to a small audience.
+- I have other mods to publish. Like, a ton of content is already complete. I just need to finish it up. Keep an eye out for this laughably optimistic timeline: 
+  - Resistance HR: Player Traits - Summer 2024?
+  - Resistance IT (Formerly SORCE): Mutators - Autumn 2024?
+  - Resistance R&D: Items - lol never
