@@ -45,12 +45,14 @@ I was keeping this list pretty detailed, but it's getting too long. You all rule
 - **Abbysssal**
 - **AMeanPineapple**
 - **BlazingTwist**
+- **BOTOutlaw**
 - **Cheese Wizard**
+- **ChillyConMor**
 - **Cyan_Light**
 - **GenEric**		
 - **Guoxin_**
 - **Maxior**
-- **uwumacaronitwo**
+- **uwumacaronitime**
 - **TBB[z]**
 - **TheShadowHat**
 
