@@ -51,7 +51,6 @@ I was keeping this list pretty detailed, but it's getting too long. You all rule
 - **Cyan_Light**
 - **GenEric**		
 - **Guoxin_**
-- **Maxior**
 - **uwumacaronitime**
 - **TBB[z]**
 - **TheShadowHat**
