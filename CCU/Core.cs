@@ -10,6 +10,7 @@ namespace CCU
 {
 	[BepInPlugin(pluginGUID, pluginName, pluginVersion)]
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
+    [BepInDependency(BTHarmonyUtilsPlugin.pluginGuid, BTHarmonyUtilsPlugin.minCompatibleVersion)]
 	public class Core : BaseUnityPlugin
 	{
 		private static readonly ManualLogSource logger = BLLogger.GetLogger();
